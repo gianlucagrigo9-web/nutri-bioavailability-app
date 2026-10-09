@@ -3,7 +3,7 @@
 Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RAE,
 microbiota, cottura, LCA) riscritti secondo il contratto `SourcedValue`
 definito in `PRD.md` (v2.0), con test reali eseguiti in
-`tests/engines.test.ts` (58 test: 55 PASS, 0 FAIL, 3 "limite noto"
+`tests/engines.test.ts` (71 test: 68 PASS, 0 FAIL, 3 "limite noto"
 dichiarati e quantificati, non nascosti).
 
 ## Regole d'ingaggio (vincolanti, definite dall'utente)
@@ -35,8 +35,10 @@ dichiarati e quantificati, non nascosti).
   fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
   Doniec 2022 per le crucifere).
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
-  dati, regole d'ingaggio, §4.0-4.3 per le decisioni su B12/folati/
-  vitamina A/crucifere prese in autonomia il 2026-10-09).
+  dati, regole d'ingaggio, §4.0-4.4 per le decisioni su B12/folati/
+  vitamina A/crucifere prese il 2026-10-09, alcune in autonomia e
+  alcune per istruzione esplicita dell'utente — Livny §4.2 e
+  bioaccessibilità zinco cavoletti §4.4).
 - `computationalNutritionEngine_criteri_e_test.md` — criteri di
   accettazione e proposta di test per il motore di nutrizione,
   approvata prima della scrittura del codice.
@@ -53,9 +55,17 @@ dichiarati e quantificati, non nascosti).
 - B12: la curva di saturazione non è fittata da un paper (solo i due
   estremi — ceiling e via passiva — sono sourced); sovrastima
   l'assorbimento reale del 30-60% a dosi 5-25µg (vedi PRD.md §4.1).
-- Vitamina A: solo la conversione media RAE (NNR2023), non distingue
-  crudo/cotto nonostante esista un dato reale (Livny 2003) non ancora
-  integrato per rischio di doppio conteggio (vedi PRD.md §4.2).
+- Vitamina A: distingue crudo/cotto (Livny 2003, integrato il
+  2026-10-09 su richiesta esplicita dell'utente), ma il fattore 9.44:1
+  per lo stato crudo è una ricombinazione di due fonti non
+  co-pubblicate (NNR2023 + Livny), non un singolo numero da un paper —
+  rischio di doppio conteggio accettato esplicitamente dall'utente,
+  reversibile (vedi PRD.md §4.2).
+- Zinco: la deratazione per bioaccessibilità post-cottura (Doniec 2022)
+  copre ESCLUSIVAMENTE i cavoletti di Bruxelles (bolliti/a vapore) — il
+  paper stesso non generalizza ad altre crucifere. L'allocazione
+  proporzionale della quota di zinco deratata in un pasto misto è una
+  semplificazione dichiarata, non una misura diretta (vedi PRD.md §4.4).
 - Golden Set di alimenti e relativi fattori di ritenzione: Legumi/Tuberi
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due

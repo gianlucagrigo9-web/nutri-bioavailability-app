@@ -36,15 +36,51 @@ import { SourcedValue, Meal, DailyDiet, FoodItem, isDailyDiet, flattenFoods, cre
 export class ComputationalNutritionEngine {
 
   // --- ZINCO (Miller, Krebs & Hambidge, J Nutr 2007;137(1):135-141, DOI 10.1093/jn/137.1.135) ---
+  //
+  // Terzo strato aggiunto il 2026-10-09 (decisione esplicita dell'utente):
+  // bioaccessibilità post-cottura per i cavoletti di Bruxelles, da Doniec
+  // et al. 2022 (Molecules 27(6):1861, Tabella 5, digestione in vitro
+  // simulata): crudo 17.02%, bollito 6.57%, vapore 6.83% dello zinco
+  // totale è "dializzabile" (chimicamente disponibile).
+  //
+  // SCOPO: ESCLUSIVAMENTE cavoletti di Bruxelles (vedi zinc_bioaccessibility_
+  // bucket in types.ts) -- il paper stesso non generalizza ad altre
+  // crucifere, anzi nota differenze di specie come possibile causa di
+  // discrepanze con altri studi. Nessuna estensione a "crucifere" in generale.
+  //
+  // PERCHÉ APPLICATO DOPO L'EQUAZIONE DI MILLER, NON PRIMA: la bioaccessibilità
+  // in vitro e il modello di Miller (calibrato su dati di assorbimento IN
+  // VIVO, usando come input il contenuto totale di zinco dietetico come
+  // normalmente misurato, non una frazione "pre-filtrata" per bioaccessibilità)
+  // sono due paradigmi di misura diversi. Dare in input a Miller una massa
+  // già scontata per bioaccessibilità rischierebbe di applicare due volte
+  // lo stesso tipo di sconto (il modello di Miller include già, nella sua
+  // costante AMAX fittata su dati reali, qualunque bioaccessibilità media
+  // fosse presente nei 21 studi usati per calibrarlo). Trattiamo quindi la
+  // bioaccessibilità dei cavoletti come una correzione EMPIRICA AGGIUNTIVA,
+  // separata e dichiarata, applicata in proporzione alla quota di zinco che
+  // i cavoletti rappresentano sul totale del pasto/giornata -- non dentro
+  // l'equazione di Miller.
+  //
+  // Limite dichiarato: l'allocazione proporzionale (quanto dell'assorbito
+  // aggregato "appartiene" ai cavoletti) è una nostra semplificazione, non
+  // una misura — ragionevole perché Miller non scompone per alimento, ma va
+  // detto. evidenceLevel scende quando questa correzione si applica
+  // (eredita il livello più debole tra le evidenze coinvolte, come da
+  // PRD.md §6).
   public calculateBioavailableZinc(context: Meal | DailyDiet): SourcedValue {
     const foods = flattenFoods(context);
     const daily = isDailyDiet(context);
 
     let totalZincMg = 0;
     let totalPhytatesMg = 0;
+    let boiledSproutsZincMg = 0;
+    let steamedSproutsZincMg = 0;
     foods.forEach(f => {
       totalZincMg += f.zinc_mg;
       totalPhytatesMg += f.phytates_mg;
+      if (f.zinc_bioaccessibility_bucket === "brussels_sprouts_boiled") boiledSproutsZincMg += f.zinc_mg;
+      if (f.zinc_bioaccessibility_bucket === "brussels_sprouts_steamed") steamedSproutsZincMg += f.zinc_mg;
     });
 
     if (totalZincMg === 0) return { ...createZeroValue(["MILLER_2007_JNUTR"]), bioavailabilityAdjusted: true };
@@ -68,16 +104,40 @@ export class ComputationalNutritionEngine {
     const tazLow = faz(AMAX_CI95_LOW, TDZ, TDP) * 65.38;
     const tazHigh = faz(AMAX_CI95_HIGH, TDZ, TDP) * 65.38;
 
+    // Bioaccessibilità cavoletti: media pesata fra la quota "normale" (1.0,
+    // nessuno sconto aggiuntivo) e la quota cavoletti (rapporto cotto/crudo
+    // misurato da Doniec), proporzionale alla composizione del pasto.
+    const BIOACCESS_RAW = 17.02;
+    const BIOACCESS_BOILED = 6.57;
+    const BIOACCESS_STEAMED = 6.83;
+    const boiledShare = boiledSproutsZincMg / totalZincMg;
+    const steamedShare = steamedSproutsZincMg / totalZincMg;
+    const normalShare = 1 - boiledShare - steamedShare;
+    const effectiveRetainedFraction =
+      normalShare * 1.0 +
+      boiledShare * (BIOACCESS_BOILED / BIOACCESS_RAW) +
+      steamedShare * (BIOACCESS_STEAMED / BIOACCESS_RAW);
+    const usedBioaccessibilityDerating = boiledShare > 0 || steamedShare > 0;
+
+    const finalValue = taz * effectiveRetainedFraction;
+    const finalLow = Math.min(tazLow, tazHigh) * effectiveRetainedFraction;
+    const finalHigh = Math.max(tazLow, tazHigh) * effectiveRetainedFraction;
+
     // Il modello di Miller è validato SOLO sul totale giornaliero (TDZ/TDP
     // = mmol/die). Applicato a un singolo pasto è un'estrapolazione fuori
     // dal dominio di validazione: evidenceLevel piu basso, draft.
     return {
-      value: +taz.toFixed(2),
-      confidenceLow: +Math.min(tazLow, tazHigh).toFixed(2),
-      confidenceHigh: +Math.max(tazLow, tazHigh).toFixed(2),
-      evidenceLevel: daily ? 1 : 2,
-      sourceIds: ["MILLER_2007_JNUTR"],
-      verificationStatus: daily ? "verified" : "draft",
+      value: +finalValue.toFixed(2),
+      confidenceLow: +finalLow.toFixed(2),
+      confidenceHigh: +finalHigh.toFixed(2),
+      // eredita il livello più debole tra le evidenze coinvolte (PRD.md §6):
+      // la correzione di bioaccessibilità (studio singolo, n=3, in vitro) è
+      // più debole sia del Miller giornaliero (1) che di quello per pasto (2).
+      evidenceLevel: usedBioaccessibilityDerating ? 3 : (daily ? 1 : 2),
+      sourceIds: usedBioaccessibilityDerating
+        ? ["MILLER_2007_JNUTR", "DONIEC_2022_MOLECULES"]
+        : ["MILLER_2007_JNUTR"],
+      verificationStatus: usedBioaccessibilityDerating ? "draft" : (daily ? "verified" : "draft"),
       bioavailabilityAdjusted: true // vedi PRD.md §4.0: equazione di Miller 2007 realmente applicata
     };
   }

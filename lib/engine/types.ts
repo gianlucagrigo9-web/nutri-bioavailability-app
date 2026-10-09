@@ -63,6 +63,16 @@ export interface FoodItem {
   // other_provitamin_a_carotenoids_mcg: Livny ha misurato solo beta-carotene
   // da carote.
   carotenoid_matrix_state: "raw_intact" | "cooked_or_disrupted";
+
+  // Bioaccessibilità dello zinco post-cottura (aggiunto 2026-10-09, vedi
+  // PRD.md §4.4). SCOPO VOLUTAMENTE RISTRETTO: Doniec et al. 2022 hanno
+  // misurato SOLO cavoletti di Bruxelles, e nel paper stesso gli autori
+  // non generalizzano ad altre crucifere (anzi notano che le differenze
+  // con altri studi "possono essere dovute proprio alla differenza di
+  // specie") -- quindi questo campo NON si chiama "crucifere_cotte" ma
+  // nomina esplicitamente l'unico alimento misurato. "none" per tutto il
+  // resto (default), incluse tutte le altre crucifere.
+  zinc_bioaccessibility_bucket: "none" | "brussels_sprouts_boiled" | "brussels_sprouts_steamed";
 }
 
 export interface Meal {

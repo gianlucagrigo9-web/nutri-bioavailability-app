@@ -107,6 +107,7 @@ function makeFood(overrides: Partial<FoodItem> = {}): FoodItem {
     beta_carotene_mcg: 0,
     other_provitamin_a_carotenoids_mcg: 0,
     carotenoid_matrix_state: "cooked_or_disrupted", // default: mantiene 6:1 invariato nei test preesistenti
+    zinc_bioaccessibility_bucket: "none", // default: nessuna deratazione, mantiene Miller invariato nei test preesistenti
     ...overrides
   };
 }
@@ -193,6 +194,83 @@ describe("calculateBioavailableZinc — Livello C (calibrazione Miller 2007, Eq.
   it("TDZ=9.81mg, fitati=990mg (rapporto molare fitato:zinco=10) -> assorbimento ≈ 2.75mg (FAZ ≈ 28.1%)", () => {
     const meal = mealWith({ zinc_mg: 9.81, phytates_mg: 990 });
     expect(nutritionEngine.calculateBioavailableZinc(meal).value).toBeCloseTo(2.75, 1);
+  });
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Zinco: terzo strato, bioaccessibilità
+// post-cottura cavoletti di Bruxelles (Doniec et al. 2022, Molecules)
+//
+// SCOPO: questo strato si applica ESCLUSIVAMENTE a food item con
+// zinc_bioaccessibility_bucket diverso da "none" (cioè solo cavoletti di
+// Bruxelles bolliti/al vapore). Verificato nel paper stesso (PMC8951108):
+// gli autori NON generalizzano ad altre crucifere -- vedi PRD.md §4.4.
+// Placement: DOPO l'equazione di Miller 2007 (non come input), perché
+// Miller è calibrata su dato in vivo (zinco dietetico totale, non
+// pre-filtrato per bioaccessibilità in vitro) -- applicarlo prima
+// rischierebbe un doppio conteggio della stessa perdita di disponibilità.
+// =============================================================================
+describe("calculateBioavailableZinc — Livello A (difensivo, bioaccessibilità crucifere)", () => {
+  it("bucket='none' (default) -> risultato identico al solo Miller, nessuna deratazione", () => {
+    const withoutBucket = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" }));
+    expect(withoutBucket.value).toBeCloseTo(4.00, 1);
+  });
+  it("entrambi i bucket (bollito+vapore) nello stesso pasto -> nessuna eccezione, valore finito", () => {
+    const meal: Meal = { foods: [
+      makeFood({ id: "b1", zinc_mg: 4.905, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }),
+      makeFood({ id: "b2", zinc_mg: 4.905, zinc_bioaccessibility_bucket: "brussels_sprouts_steamed" })
+    ]};
+    const v = nutritionEngine.calculateBioavailableZinc(meal).value;
+    expect(Number.isFinite(v)).toBe(true);
+    expect(v).toBeGreaterThan(0);
+  });
+});
+
+describe("calculateBioavailableZinc — Livello B (proprietà, bioaccessibilità crucifere)", () => {
+  it("a parità di zinco/fitati totali, la presenza del bucket 'bollito' riduce sempre il risultato rispetto a 'none'", () => {
+    const base = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" }));
+    const boiled = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }));
+    expect(boiled.value).toBeLessThan(base.value);
+  });
+  it("a parità di zinco/fitati totali, la presenza del bucket 'vapore' riduce sempre il risultato rispetto a 'none'", () => {
+    const base = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" }));
+    const steamed = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_steamed" }));
+    expect(steamed.value).toBeLessThan(base.value);
+  });
+  it("un pasto misto (metà zinco da cavoletti bolliti, metà da altro alimento) produce un risultato intermedio fra 'tutto bollito' e 'niente bucket'", () => {
+    const allNormal = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" }));
+    const allBoiled = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }));
+    const mixed: Meal = { foods: [
+      makeFood({ id: "m1", zinc_mg: 4.905, zinc_bioaccessibility_bucket: "none" }),
+      makeFood({ id: "m2", zinc_mg: 4.905, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" })
+    ]};
+    const mixedResult = nutritionEngine.calculateBioavailableZinc(mixed);
+    expect(mixedResult.value).toBeLessThan(allNormal.value);
+    expect(mixedResult.value).toBeGreaterThan(allBoiled.value);
+  });
+  it("quando il bucket è usato, evidenceLevel scende a 3 (eredita l'evidenza più debole fra Miller 2007 e Doniec 2022, come da PRD.md §6)", () => {
+    const withBucket = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }));
+    expect(withBucket.evidenceLevel).toBe(3);
+    if (withBucket.sourceIds.indexOf("DONIEC_2022_MOLECULES") === -1) throw new Error("sourceIds deve includere DONIEC_2022_MOLECULES quando il bucket è usato");
+  });
+  it("bioavailabilityAdjusted resta true anche con la deratazione per bioaccessibilità (è ancora un vero modello di assorbimento, solo più conservativo)", () => {
+    const withBucket = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }));
+    expect(withBucket.bioavailabilityAdjusted).toBe(true);
+  });
+});
+
+describe("calculateBioavailableZinc — Livello C (calibrazione Doniec 2022: 6.57%/17.02% bollito, 6.83%/17.02% vapore)", () => {
+  it("meal interamente da cavoletti bolliti -> fattore di deratazione esatto 6.57/17.02 ≈ 0.386 applicato al risultato Miller", () => {
+    const base = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" })).value;
+    const boiled = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" })).value;
+    const expectedFactor = 6.57 / 17.02;
+    expect(boiled).toBeCloseTo(base * expectedFactor, 1);
+  });
+  it("meal interamente da cavoletti al vapore -> fattore di deratazione esatto 6.83/17.02 ≈ 0.401 applicato al risultato Miller", () => {
+    const base = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "none" })).value;
+    const steamed = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_steamed" })).value;
+    const expectedFactor = 6.83 / 17.02;
+    expect(steamed).toBeCloseTo(base * expectedFactor, 1);
   });
 });
 
