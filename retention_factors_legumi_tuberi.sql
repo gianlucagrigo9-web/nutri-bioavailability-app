@@ -79,16 +79,47 @@ ON CONFLICT DO NOTHING;
 --   colonne Ca Fe Mg P K Na Zn Cu VitC ... = 95 95 95 95 90 95 95 95 75 ...
 --   -> Ferro = 95%, Zinco = 95%, Vitamina C = 75%
 -- Riga "3308  POTATOES,BOILED(PARED)DRAIN" (pagina 8, sbucciate prima di
---   bollire, acqua scolata): stessi valori Fe/Zn/VitC della riga 3307.
+--   bollire, acqua scolata): valori IDENTICI (Fe/Zn/VitC = 95/95/75) alla
+--   riga 3307 -- quindi NON creiamo una riga/valore enum separato
+--   'boiled_pared': non ci sarebbe nessun dato realmente diverso da
+--   rappresentare, solo un'etichetta duplicata. La distinzione resta
+--   documentata qui nel commento della fonte.
 -- ----------------------------------------------------------------------------
 
 INSERT INTO retention_factors (matrix_id, cooking_method, nutrient, value, source_id)
 VALUES
-  ('tubers', 'boiled_in_skin', 'iron',      0.95, 'USDA_RETN06'), -- Release 6, p.8, riga 3307, colonna Fe
-  ('tubers', 'boiled_in_skin', 'zinc',      0.95, 'USDA_RETN06'), -- Release 6, p.8, riga 3307, colonna Zn
-  ('tubers', 'boiled_in_skin', 'vitamin_c', 0.75, 'USDA_RETN06'), -- Release 6, p.8, riga 3307, colonna VitC
-
-  ('tubers', 'boiled_pared', 'iron',      0.95, 'USDA_RETN06'), -- Release 6, p.8, riga 3308, colonna Fe
-  ('tubers', 'boiled_pared', 'zinc',      0.95, 'USDA_RETN06'), -- Release 6, p.8, riga 3308, colonna Zn
-  ('tubers', 'boiled_pared', 'vitamin_c', 0.75, 'USDA_RETN06')  -- Release 6, p.8, riga 3308, colonna VitC
+  ('tubers', 'boiled_in_skin', 'iron',      0.95, 'USDA_RETN06'), -- Release 6, p.8, righe 3307 e 3308 (identiche), colonna Fe
+  ('tubers', 'boiled_in_skin', 'zinc',      0.95, 'USDA_RETN06'), -- Release 6, p.8, righe 3307 e 3308 (identiche), colonna Zn
+  ('tubers', 'boiled_in_skin', 'vitamin_c', 0.75, 'USDA_RETN06')  -- Release 6, p.8, righe 3307 e 3308 (identiche), colonna VitC
 ON CONFLICT DO NOTHING;
+
+-- ============================================================================
+-- FIX (2026-10-09, prima esecuzione reale contro il DB live): questo file non
+-- era mai stato eseguito contro Supabase prima d'ora. L'esecuzione e' fallita
+-- con "ERROR: 22P02: invalid input value for enum cooking_method_enum:
+-- boiled_quick_15_20min" -- rollback completo e pulito, 0 righe toccate.
+--
+-- cooking_method_enum dal vivo conteneva solo: raw, boiled, steamed,
+-- roasted, fried, microwaved, baked -- nessuno dei tre valori granulari
+-- originali di questo file ('boiled_quick_15_20min', 'boiled_in_skin',
+-- 'boiled_pared') esisteva.
+--
+-- Decisione (confermata dall'utente): preservare la distinzione dove il
+-- dato USDA e' realmente diverso, non dove e' solo un'etichetta diversa:
+--   - 'boiled_quick_15_20min' (legumi, cottura rapida): AGGIUNTO
+--     all'enum via extend_cooking_method_enum.sql, perche' Fe 85% vs 80%
+--     della cottura lunga ('boiled' generico, gia' valido) e' una
+--     differenza reale, non rumore.
+--   - 'boiled_in_skin' (patate): AGGIUNTO all'enum, perche' e' il valore
+--     usato per rappresentare la riga USDA 3307.
+--   - 'boiled_pared': NON aggiunto. La riga USDA 3308 (patate sbucciate
+--     prima di bollire) riporta valori Fe/Zn/VitC IDENTICI alla riga 3307
+--     -- quindi non esiste un dato distinto da rappresentare, e creare un
+--     valore enum separato sarebbe stato un'etichetta vuota. Le tre righe
+--     'boiled_pared' sono state rimosse dal blocco tuberi sopra (erano
+--     duplicati esatti delle righe 'boiled_in_skin').
+--
+-- extend_cooking_method_enum.sql deve essere eseguito PRIMA di questo file,
+-- in una query separata (limite Postgres: un valore enum appena aggiunto
+-- non e' utilizzabile nella stessa transazione/batch in cui viene creato).
+-- ============================================================================
