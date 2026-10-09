@@ -25,13 +25,19 @@
 -- sarebbero >1.0 per puro rumore statistico su n=3). Lo zinco invece mostra
 -- una perdita statisticamente significativa.
 
-insert into sources (id, citation, url, source_type, retrieved_date) values
+insert into sources (id, citation, url_or_doi, source_type, retrieved_date) values
   ('DONIEC_2022_MOLECULES',
    'Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.',
    'https://doi.org/10.3390/molecules27061861',
-   'peer_reviewed_journal',
+   'peer_reviewed_study',
    current_date)
 on conflict (id) do nothing;
+
+-- Matrice mancante: nessun file precedente la creava (gap scoperto durante
+-- l'esecuzione reale contro il DB live del 2026-10-09 -- vedi fondo file).
+insert into food_matrices_master (matrix_id, description_it)
+values ('crucifere_cavoletti_bruxelles', 'Cavoletti di Bruxelles')
+on conflict (matrix_id) do nothing;
 
 -- Ferro: nessuna variazione significativa -> fattore 1.00 per entrambi i metodi
 insert into retention_factors (matrix_id, cooking_method, nutrient, value, confidence_low, confidence_high, source_id, verification_status) values
@@ -64,4 +70,20 @@ on conflict (matrix_id, cooking_method, nutrient) do update set
 -- non un bug: implementarlo richiederebbe un nuovo campo/meccanismo e una
 -- decisione esplicita, non una scelta unilaterale stanotte.
 -- Fonte della nota: stesso paper, Tabella 5.
+-- ============================================================================
+
+-- ============================================================================
+-- FIX (2026-10-09, prima esecuzione reale contro il DB live): questo file non
+-- era mai stato eseguito contro Supabase prima d'ora. Confrontandolo con lo
+-- schema reale sono emersi due bug che lo avrebbero fatto fallire:
+--   1. 'url' non e' una colonna di `sources` (si chiama `url_or_doi`) --
+--      corretto sopra.
+--   2. 'peer_reviewed_journal' non e' un valore valido di `source_type_enum`
+--      (i valori reali sono: official_database, peer_reviewed_study,
+--      preprint, institutional_report, internal_estimate) -- corretto in
+--      'peer_reviewed_study'.
+--   3. la matrice 'crucifere_cavoletti_bruxelles', referenziata dalle righe
+--      retention_factors sopra, non veniva mai creata in nessun file
+--      (ne' qui ne' altrove) -- foreign key altrimenti violata. Aggiunta
+--      sopra, prima dell'INSERT in retention_factors.
 -- ============================================================================

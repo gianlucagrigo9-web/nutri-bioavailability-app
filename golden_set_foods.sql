@@ -21,6 +21,17 @@
 -- 'verified' dopo un controllo a campione -- anche se i valori sono stati
 -- letti da una fonte ufficiale, non e' stato ancora fatto quel secondo
 -- controllo da parte dell'utente/esperto di dominio).
+--
+-- FIX (2026-10-09, prima esecuzione reale contro il DB live): questo file
+-- era stato scritto senza mai aver letto lo schema reale (nessun accesso al
+-- DB durante la sessione fino ad ora). Confrontandolo con lo schema live
+-- e' emerso un bug: l'INSERT INTO sources usava la colonna 'url', che non
+-- esiste -- la colonna reale si chiama 'url_or_doi'. Corretto sotto. Vedi
+-- anche: prima di questo file vanno eseguiti admin_data_entry_setup.sql,
+-- fix_sources_e_retention_factors.sql, retention_factors_legumi_tuberi.sql
+-- e retention_factors_crucifere.sql (creano le matrici 'leafy_greens',
+-- 'legumes', 'tubers', 'crucifere_cavoletti_bruxelles' che questo file
+-- referenzia via foods_raw.matrix_id ma non crea lui stesso).
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
@@ -44,12 +55,12 @@ ON CONFLICT (matrix_id) DO NOTHING;
 -- generico usato dall'engine per magnesio/rame/selenio/iodio/vit.K, vedi
 -- docs/PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)
 -- ----------------------------------------------------------------------------
-INSERT INTO sources (id, citation, url) VALUES
+INSERT INTO sources (id, citation, url_or_doi) VALUES
   ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov'),
   ('NOONAN_SAVAGE_1999_APJCN', 'Noonan SC, Savage GP. Oxalate content of foods and its effect on humans. Asia Pac J Clin Nutr. 1999;8(1):64-74. [spinaci crude: range 320-1260 mg/100g, media 970 mg/100g peso fresco, ossalato totale]', 'https://apjcn.qdu.edu.cn/8_1_5.pdf'),
   ('ERDOGAN_ONAR_2012_JFDA', 'Erdogan BY, Onar AN. Determination of nitrates, nitrites and oxalates in kale and sultana pea by capillary electrophoresis. J Food Drug Anal. 2012;20(2):14. [kale: 2970+/-672 mg/kg = 297+/-67.2 mg/100g, conversione aritmetica kg->100g]', 'https://doi.org/10.6227/jfda.2012200215'),
   ('ZIA_UR_REHMAN_2002_PJSIR', 'Zia-ur-Rehman, Salariya AM, Zafar SI. Effect of different soaking and cooking methods on physical characteristics, phytic acid content and protein digestibility of red kidney beans. Pak J Sci Ind Res. 2002;45(1):41-45. [fagioli rossi: crudo 1084 mg/100g, bollito (cottura ordinaria) 805 mg/100g]', 'https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257')
-ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url = EXCLUDED.url;
+ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;
 
 -- ----------------------------------------------------------------------------
 -- ALTER TABLE: colonne categoriche aggiunte al modello dati dopo la prima
