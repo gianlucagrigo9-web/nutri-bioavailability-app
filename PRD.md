@@ -301,7 +301,7 @@ Questo contratto sarà il primo criterio di accettazione da validare quando risc
 1. **Schema & provenienza** (questa settimana): migrazioni SQL per le tabelle del §5.
 2. **Un motore alla volta, test-first:** per ciascuno dei tre motori ammessi, Claude propone criteri di accettazione e test; solo dopo approvazione viene riscritto secondo il contratto §6. Ordine proposto: nutrizionale → microbiota → LCA.
 3. **Golden Set verificato:** 20 alimenti popolati e promossi a `verified` (§4.6) dopo cross-check meccanico indipendente e decisione esplicita dell'utente; 3 righe da letteratura specifica restano `draft`.
-4. **Prototipo UI** sui 20 alimenti verificati, incluso il pannello "Perché questo numero?".
+4. **Prototipo UI** sui 20 alimenti verificati, incluso il pannello "Perché questo numero?" — `app/page.tsx` riscritto il 2026-10-09 (nessuna simulazione di cottura: ogni card è una riga reale misurata; pannello "Perché questo numero?" con fonte/evidenceLevel/confidenza/stato per ogni valore calcolato). Aggiunto anche lo scaffold Next.js vero e proprio (package.json/tsconfig/next.config/Tailwind), mancante da sempre in questo repo — vedi README.md "Come avviare il progetto". **Non ancora eseguito end-to-end** (network del sandbox non raggiunge registry.npmjs.org, `npm install` non completato qui): il collaudo reale (visivo, con dati Supabase veri) resta da fare sul tuo PC.
 5. **Espansione dati** oltre i 20 alimenti solo dopo che il processo di verifica a batch è collaudato (non prima).
 
 ---

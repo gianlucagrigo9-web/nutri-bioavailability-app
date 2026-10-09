@@ -5,7 +5,43 @@ magnesio/rame/selenio/iodio/vitamina K (composizione grezza, senza
 modello di assorbimento), microbiota, cottura, LCA) riscritti secondo il
 contratto `SourcedValue` definito in `PRD.md` (v2.0), con test reali
 eseguiti in `tests/engines.test.ts` (78 test: 75 PASS, 0 FAIL, 3 "limite
-noto" dichiarati e quantificati, non nascosti).
+noto" dichiarati e quantificati, non nascosti). Golden Set: 20/20
+alimenti popolati e promossi a `verified` (§4.6). Prototipo UI
+(`app/page.tsx`, roadmap §9 punto 4) riscritto sui 20 alimenti reali con
+il pannello "Perché questo numero?" — **non ancora eseguito end-to-end**
+in questo ambiente (vedi "Come avviare il progetto" sotto per il perché).
+
+## Come avviare il progetto
+
+Questo repository non conteneva, prima del 2026-10-09, i file di scaffold
+di un progetto Next.js vero (`package.json`, `tsconfig.json`,
+`next.config.js`, config Tailwind) — solo il codice dei motori e del
+pannello admin, scritto assumendo che un progetto li ospitasse. È lo
+stesso problema di workflow descritto in `audit_gemini_post_pdf.md`
+(copia-incolla manuale tra chat e VS Code, mai una vera sincronizzazione
+disco↔chat): questi file di scaffold ora esistono in questo stesso repo,
+per chiudere quel gap una volta per tutte. Se hai già un progetto Next.js
+reale altrove (sul tuo PC) con questi stessi file, quelli vincono — questi
+sono ridondanti e puoi ignorarli o sovrascriverli.
+
+```bash
+npm install
+cp .env.local.example .env.local   # poi riempi le chiavi Supabase/password
+npm run dev                        # http://localhost:3000 — Golden Set
+                                    # http://localhost:3000/admin/data-entry
+npm run typecheck                  # tsc --noEmit
+npm test                           # tsx tests/engines.test.ts (nessuna dipendenza)
+```
+
+**Non sono riuscito a eseguire `npm install` in questo sandbox**: la rete
+di questo ambiente non risolve `registry.npmjs.org` (DNS fallisce anche
+passando esplicitamente dal proxy configurato — non è un blocco di
+policy, sembra un problema di rete di questa sessione specifica, diverso
+da quello che blocca deliberatamente altri host). `app/page.tsx` e i file
+di scaffold sono stati scritti e rivisti a mano con attenzione (import,
+nomi di metodo e firme dei tipi controllati contro il codice reale dei
+motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
+`npm run dev` con credenziali Supabase vere) lo farai tu sul tuo PC.
 
 ## Regole d'ingaggio (vincolanti, definite dall'utente)
 
@@ -24,8 +60,21 @@ noto" dichiarati e quantificati, non nascosti).
 
 ## Struttura
 
+- `package.json`, `tsconfig.json`, `next.config.js`, `tailwind.config.ts`,
+  `postcss.config.js`, `app/layout.tsx`, `app/globals.css` — scaffold del
+  progetto Next.js 14 + TypeScript + Tailwind, aggiunto il 2026-10-09
+  (vedi "Come avviare il progetto" sopra per il perché mancava).
 - `lib/engine/` — i 4 motori core (TypeScript, nessuna dipendenza esterna)
   e `types.ts` con l'interfaccia `FoodItem`/`SourcedValue` condivisa.
+- `lib/supabaseClient.ts` — client Supabase con chiave pubblica "anon"
+  (rispetta la RLS, solo lettura), per qualunque componente che finisce
+  nel browser. Diverso da `lib/supabaseAdmin.ts` (service role, solo
+  Server Actions) — non scambiare i due.
+- `app/page.tsx` — prototipo UI sui 20 alimenti verificati del Golden Set
+  (roadmap §9 punto 4): ogni card è una riga reale e misurata (mai una
+  simulazione di cottura — vedi commento in testa al file sul perché),
+  con un pannello "Perché questo numero?" per ogni valore calcolato
+  (fonte, livello di evidenza, intervallo di confidenza, stato).
 - `tests/engines.test.ts` — suite di test reale, eseguibile con `tsx`,
   nessuna dipendenza (vitest/jest non installati in questo ambiente).
 - `app/admin/data-entry/` — pannello Human-in-the-Loop per l'inserimento
