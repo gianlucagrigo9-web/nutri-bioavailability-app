@@ -42,6 +42,13 @@ noto" dichiarati e quantificati, non nascosti).
   verità: per aggiungere un alimento, si modifica lo script e si
   rigenera il file, non il contrario). Vedi PRD.md §4.6 per i gap
   qualitativi ancora dichiarati (nessuno bloccante per il conteggio).
+- `golden_set_promote_verified.sql` — promuove a `verified` i 20
+  alimenti e i loro valori USDA FDC, dopo un cross-check meccanico
+  indipendente (ri-fetch da zero di ogni FDC ID, confrontato cifra per
+  cifra, 0 discrepanze) e decisione esplicita dell'utente di accettarlo
+  come base per la promozione. Le 3 righe da letteratura (ossalati/
+  fitati) restano deliberatamente `draft`, non essendo state
+  ri-controllate in questo giro — vedi PRD.md §4.6.
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
   dati, regole d'ingaggio, §4.0-4.6 per le decisioni su B12/folati/
   vitamina A/crucifere/micronutrienti senza modello/Golden Set prese il
@@ -86,10 +93,12 @@ noto" dichiarati e quantificati, non nascosti).
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due
   tentativi di ricerca.
-- Golden Set (`golden_set_foods.sql`): 20/20 alimenti popolati (target
-  MVP raggiunto), tutti sourced, tutti ancora `draft` in attesa di
-  revisione umana a campione (vedi PRD.md §4.6). Gap qualitativi ancora
-  dichiarati (non bloccanti per il conteggio): la controparte "cotta" dei
+- Golden Set (`golden_set_foods.sql` + `golden_set_promote_verified.sql`):
+  20/20 alimenti popolati (target MVP raggiunto) e promossi a `verified`
+  dopo cross-check meccanico indipendente (vedi PRD.md §4.6); le 3 righe
+  da letteratura (ossalati/fitati) restano `draft`, non ri-controllate in
+  questo giro. Gap qualitativi ancora dichiarati (non bloccanti per il
+  conteggio o la promozione): la controparte "cotta" dei
   broccoli (FDC ID non trovato dopo due tentativi sbagliati); alcuni
   campi non recuperati per kale/latte (fetch troncato, non assenti per
   certo dalla fonte); una riga reale per i cavoletti di Bruxelles "al
