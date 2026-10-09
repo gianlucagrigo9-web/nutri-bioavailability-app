@@ -108,6 +108,11 @@ function makeFood(overrides: Partial<FoodItem> = {}): FoodItem {
     other_provitamin_a_carotenoids_mcg: 0,
     carotenoid_matrix_state: "cooked_or_disrupted", // default: mantiene 6:1 invariato nei test preesistenti
     zinc_bioaccessibility_bucket: "none", // default: nessuna deratazione, mantiene Miller invariato nei test preesistenti
+    magnesium_mg: 0,
+    copper_mg: 0,
+    selenium_mcg: 0,
+    iodine_mcg: 0,
+    vitamin_k_mcg: 0,
     ...overrides
   };
 }
@@ -533,6 +538,70 @@ describe("calculateVitaminARAE — integrazione Livny 2003 (crudo vs cotto, deci
     if (nutritionEngine.calculateVitaminARAE(meal).bioavailabilityAdjusted !== true) {
       throw new Error("bioavailabilityAdjusted dovrebbe essere true: lo stato della matrice ora cambia davvero il risultato");
     }
+  });
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Micronutrienti senza modello di
+// biodisponibilità pubblicato (magnesio, rame, selenio, iodio, vitamina K)
+//
+// Vedi PRD.md §4.0 e §4.5: nessuna equazione di assorbimento disponibile
+// per questi nutrienti, quindi la composizione grezza viene mostrata
+// comunque, marcata bioavailabilityAdjusted=false ("info sommarie"), per
+// decisione esplicita dell'utente ("le info non implementabili per
+// assenza di paper comunque andranno inserite a valori standard").
+// =============================================================================
+describe("calculateMagnesium / calculateCopper / calculateSelenium / calculateIodine / calculateVitaminK — Livello A (difensivo)", () => {
+  it("pasto vuoto -> 0 per tutti e cinque, nessuna eccezione", () => {
+    expect(nutritionEngine.calculateMagnesium({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateCopper({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateSelenium({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateIodine({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateVitaminK({ foods: [] }).value).toBe(0);
+  });
+  it("nutriente = 0 nell'unico alimento -> 0, non negativo", () => {
+    const meal = mealWith({ magnesium_mg: 0 });
+    expect(nutritionEngine.calculateMagnesium(meal).value).toBe(0);
+  });
+});
+
+describe("calculateMagnesium / calculateCopper / calculateSelenium / calculateIodine / calculateVitaminK — Livello B (somma, nessun modello)", () => {
+  it("due alimenti nello stesso pasto -> i valori si sommano esattamente (nessuna interazione fra alimenti)", () => {
+    const meal: Meal = { foods: [
+      makeFood({ id: "m1", magnesium_mg: 50 }),
+      makeFood({ id: "m2", magnesium_mg: 30 })
+    ]};
+    expect(nutritionEngine.calculateMagnesium(meal).value).toBeCloseTo(80, 2);
+  });
+  it("ognuno dei cinque è indipendente dagli altri quattro (nessuna fusione fra nutrienti diversi)", () => {
+    const meal = mealWith({ magnesium_mg: 50, copper_mg: 0.5, selenium_mcg: 20, iodine_mcg: 60, vitamin_k_mcg: 40 });
+    expect(nutritionEngine.calculateMagnesium(meal).value).toBeCloseTo(50, 2);
+    expect(nutritionEngine.calculateCopper(meal).value).toBeCloseTo(0.5, 2);
+    expect(nutritionEngine.calculateSelenium(meal).value).toBeCloseTo(20, 2);
+    expect(nutritionEngine.calculateIodine(meal).value).toBeCloseTo(60, 2);
+    expect(nutritionEngine.calculateVitaminK(meal).value).toBeCloseTo(40, 2);
+  });
+});
+
+describe("calculateMagnesium / calculateCopper / calculateSelenium / calculateIodine / calculateVitaminK — contratto bioavailabilityAdjusted (PRD §4.0/§4.5)", () => {
+  it("nessun modello di assorbimento esiste per questi nutrienti -> bioavailabilityAdjusted = false, sempre", () => {
+    const meal = mealWith({ magnesium_mg: 50, copper_mg: 0.5, selenium_mcg: 20, iodine_mcg: 60, vitamin_k_mcg: 40 });
+    if (nutritionEngine.calculateMagnesium(meal).bioavailabilityAdjusted !== false) throw new Error("magnesio: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateCopper(meal).bioavailabilityAdjusted !== false) throw new Error("rame: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateSelenium(meal).bioavailabilityAdjusted !== false) throw new Error("selenio: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateIodine(meal).bioavailabilityAdjusted !== false) throw new Error("iodio: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateVitaminK(meal).bioavailabilityAdjusted !== false) throw new Error("vitamina K: deve restare bioavailabilityAdjusted=false (nessun modello)");
+  });
+  it("nessuna fascia di confidenza inventata: confidenceLow/High restano null (nessun modello da cui propagarle)", () => {
+    const meal = mealWith({ magnesium_mg: 50 });
+    const r = nutritionEngine.calculateMagnesium(meal);
+    expect(r.confidenceLow === null ? 1 : 0).toBe(1);
+    expect(r.confidenceHigh === null ? 1 : 0).toBe(1);
+  });
+  it("sourceIds traccia comunque la fonte di composizione (USDA FDC) anche senza un modello di assorbimento", () => {
+    const meal = mealWith({ magnesium_mg: 50 });
+    const r = nutritionEngine.calculateMagnesium(meal);
+    if (r.sourceIds.indexOf("USDA_FDC") === -1) throw new Error("sourceIds deve comunque tracciare la fonte di composizione, anche in assenza di un modello");
   });
 });
 

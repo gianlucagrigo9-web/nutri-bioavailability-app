@@ -39,7 +39,12 @@ const NUTRIENT_FIELD_MAP: Partial<Record<string, keyof FoodItem>> = {
   polyphenols: "polyphenols_mg",
   macs: "macs_mg",
   vitamin_b12: "vitamin_b12_mcg",
-  folate: "folate_mcg"
+  folate: "folate_mcg",
+  magnesium: "magnesium_mg",
+  copper: "copper_mg",
+  selenium: "selenium_mcg",
+  iodine: "iodine_mcg",
+  vitamin_k: "vitamin_k_mcg"
 };
 
 export class CookingTransformationEngine {

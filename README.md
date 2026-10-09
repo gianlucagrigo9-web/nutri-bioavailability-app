@@ -1,10 +1,11 @@
 # App nutrizione — biodisponibilità, cottura, microbiota, impatto ambientale
 
 Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RAE,
-microbiota, cottura, LCA) riscritti secondo il contratto `SourcedValue`
-definito in `PRD.md` (v2.0), con test reali eseguiti in
-`tests/engines.test.ts` (71 test: 68 PASS, 0 FAIL, 3 "limite noto"
-dichiarati e quantificati, non nascosti).
+magnesio/rame/selenio/iodio/vitamina K (composizione grezza, senza
+modello di assorbimento), microbiota, cottura, LCA) riscritti secondo il
+contratto `SourcedValue` definito in `PRD.md` (v2.0), con test reali
+eseguiti in `tests/engines.test.ts` (78 test: 75 PASS, 0 FAIL, 3 "limite
+noto" dichiarati e quantificati, non nascosti).
 
 ## Regole d'ingaggio (vincolanti, definite dall'utente)
 
@@ -35,10 +36,11 @@ dichiarati e quantificati, non nascosti).
   fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
   Doniec 2022 per le crucifere).
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
-  dati, regole d'ingaggio, §4.0-4.4 per le decisioni su B12/folati/
-  vitamina A/crucifere prese il 2026-10-09, alcune in autonomia e
-  alcune per istruzione esplicita dell'utente — Livny §4.2 e
-  bioaccessibilità zinco cavoletti §4.4).
+  dati, regole d'ingaggio, §4.0-4.5 per le decisioni su B12/folati/
+  vitamina A/crucifere/micronutrienti senza modello prese il 2026-10-09,
+  alcune in autonomia e alcune per istruzione esplicita dell'utente —
+  Livny §4.2, bioaccessibilità zinco cavoletti §4.4, magnesio/rame/
+  selenio/iodio/vitamina K come composizione grezza §4.5).
 - `computationalNutritionEngine_criteri_e_test.md` — criteri di
   accettazione e proposta di test per il motore di nutrizione,
   approvata prima della scrittura del codice.
@@ -66,6 +68,12 @@ dichiarati e quantificati, non nascosti).
   paper stesso non generalizza ad altre crucifere. L'allocazione
   proporzionale della quota di zinco deratata in un pasto misto è una
   semplificazione dichiarata, non una misura diretta (vedi PRD.md §4.4).
+- Magnesio/rame/selenio/iodio/vitamina K: nessun modello di assorbimento
+  trovato in letteratura finora — mostrati come somma della composizione
+  grezza (placeholder sourceIds `USDA_FDC`, da sostituire riga per riga
+  quando il Golden Set verrà popolato), marcati `bioavailabilityAdjusted:
+  false` così la UI può distinguerli come "info sommarie" (vedi PRD.md
+  §4.0 e §4.5).
 - Golden Set di alimenti e relativi fattori di ritenzione: Legumi/Tuberi
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due

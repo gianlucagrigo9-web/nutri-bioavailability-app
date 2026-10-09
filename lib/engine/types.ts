@@ -73,6 +73,20 @@ export interface FoodItem {
   // nomina esplicitamente l'unico alimento misurato. "none" per tutto il
   // resto (default), incluse tutte le altre crucifere.
   zinc_bioaccessibility_bucket: "none" | "brussels_sprouts_boiled" | "brussels_sprouts_steamed";
+
+  // Micronutrienti "senza modello di biodisponibilità pubblicato" (aggiunti
+  // 2026-10-09, vedi PRD.md §4.0 e §4.5). Per questi non esiste, nella
+  // letteratura recuperata finora, un'equazione di assorbimento citabile
+  // come per ferro/zinco/calcio/B12: vengono quindi mostrati come
+  // composizione grezza (sourced a un database di composizione, es. USDA
+  // FDC), con bioavailabilityAdjusted=false -- "info sommarie" per usare
+  // le parole dell'utente, distinguibili in UI da quelle con un vero
+  // modello. Elenco scelto fra quelli già citati come esempio in §4.0.
+  magnesium_mg: number;
+  copper_mg: number;
+  selenium_mcg: number;
+  iodine_mcg: number;
+  vitamin_k_mcg: number; // fillochinone (K1); non distingue K1/K2, limitazione dichiarata
 }
 
 export interface Meal {

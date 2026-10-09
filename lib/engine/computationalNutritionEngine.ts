@@ -448,4 +448,75 @@ export class ComputationalNutritionEngine {
       bioavailabilityAdjusted: true // ora sì: un aggiustamento per stato della matrice è realmente applicato al beta-carotene
     };
   }
+
+  // --- MICRONUTRIENTI SENZA MODELLO DI BIODISPONIBILITÀ PUBBLICATO
+  // (magnesio, rame, selenio, iodio, vitamina K) ---
+  //
+  // Vedi PRD.md §4.0 e §4.5. A differenza di ferro/zinco/calcio/B12/folati/
+  // vitamina A, per questi nutrienti non abbiamo recuperato in letteratura
+  // un'equazione o un fattore di conversione che modelli l'ASSORBIMENTO
+  // (quanto viene davvero captato dall'organismo, a seconda della matrice/
+  // inibitori/stato nutrizionale). Decisione dell'utente (sessione
+  // precedente): questi nutrienti NON vanno lasciati vuoti -- vanno
+  // comunque mostrati, usando il valore di composizione standard (es.
+  // USDA FoodData Central) così com'è, ma marcati esplicitamente come
+  // "non passati per un modello" tramite bioavailabilityAdjusted=false,
+  // cosi' che la UI possa distinguerli visivamente (es. colore diverso)
+  // come "info sommarie" dai nutrienti con un vero modello di assorbimento.
+  //
+  // Questo e' deliberatamente UNA SOMMA, non un modello: nessuna
+  // interazione fra nutrienti, nessuna saturazione, nessun effetto
+  // matrice. E' la stessa semplicita' architetturale del "pass-through"
+  // gia' usato per Folati -> DFE prima della conversione (qui non c'e'
+  // nemmeno la conversione), applicata qui a cinque nutrienti diversi
+  // tramite un unico helper privato per evitare di duplicare la logica
+  // (stesso pattern, stesso contratto, un solo punto da correggere se la
+  // policy cambia).
+  private sumRawNutrient(
+    context: Meal | DailyDiet,
+    selector: (f: FoodItem) => number,
+    sourceIds: string[]
+  ): SourcedValue {
+    const foods = flattenFoods(context);
+    let total = 0;
+    let anyFood = false;
+    foods.forEach(f => {
+      const v = selector(f);
+      if (v > 0) { anyFood = true; total += v; }
+    });
+
+    if (!anyFood) {
+      return { ...createZeroValue(sourceIds), bioavailabilityAdjusted: false };
+    }
+
+    return {
+      value: +total.toFixed(3),
+      confidenceLow: null,  // nessun modello di assorbimento: nessuna fascia da propagare
+      confidenceHigh: null,
+      evidenceLevel: 5, // database di composizione, non uno studio di assorbimento (vedi PRD.md §4.0)
+      sourceIds,
+      verificationStatus: "draft", // non ancora verificato riga per riga nel Golden Set
+      bioavailabilityAdjusted: false // composizione grezza: nessun modello esiste ancora, vedi PRD.md §4.0
+    };
+  }
+
+  public calculateMagnesium(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.magnesium_mg, ["USDA_FDC"]);
+  }
+
+  public calculateCopper(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.copper_mg, ["USDA_FDC"]);
+  }
+
+  public calculateSelenium(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.selenium_mcg, ["USDA_FDC"]);
+  }
+
+  public calculateIodine(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.iodine_mcg, ["USDA_FDC"]);
+  }
+
+  public calculateVitaminK(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.vitamin_k_mcg, ["USDA_FDC"]);
+  }
 }
