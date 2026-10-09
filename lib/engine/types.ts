@@ -56,6 +56,13 @@ export interface FoodItem {
   // non ha ancora un campo per quello, limitazione dichiarata.
   beta_carotene_mcg: number;
   other_provitamin_a_carotenoids_mcg: number; // alfa-carotene, beta-criptoxantina
+  // Stato della matrice per il beta-carotene (vedi PRD.md §4.2 — Livny 2003
+  // integrato il 2026-10-09 su richiesta esplicita dell'utente, che accetta
+  // il rischio di doppio conteggio col fattore RAE medio ("al massimo lo
+  // togliamo più avanti come dato")). NON si applica a
+  // other_provitamin_a_carotenoids_mcg: Livny ha misurato solo beta-carotene
+  // da carote.
+  carotenoid_matrix_state: "raw_intact" | "cooked_or_disrupted";
 }
 
 export interface Meal {

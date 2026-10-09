@@ -106,6 +106,7 @@ function makeFood(overrides: Partial<FoodItem> = {}): FoodItem {
     is_fortified_folate: false,
     beta_carotene_mcg: 0,
     other_provitamin_a_carotenoids_mcg: 0,
+    carotenoid_matrix_state: "cooked_or_disrupted", // default: mantiene 6:1 invariato nei test preesistenti
     ...overrides
   };
 }
@@ -427,10 +428,32 @@ describe("calculateVitaminARAE — Livello C (conversione adottata NNR2023)", ()
     const meal = mealWith({ other_provitamin_a_carotenoids_mcg: 1200 });
     expect(nutritionEngine.calculateVitaminARAE(meal).value).toBeCloseTo(100, 2); // 1200/12=100
   });
-  it("bioavailabilityAdjusted=false: non distingue crudo da cotto (limite dichiarato, Livny 2003 non ancora integrato)", () => {
-    const meal = mealWith({ beta_carotene_mcg: 600 });
-    if (nutritionEngine.calculateVitaminARAE(meal).bioavailabilityAdjusted !== false) {
-      throw new Error("bioavailabilityAdjusted dovrebbe essere false: è una conversione media, non un modello crudo/cotto");
+  it("stato cooked_or_disrupted (default) -> fattore 6:1 invariato", () => {
+    const meal = mealWith({ beta_carotene_mcg: 600, carotenoid_matrix_state: "cooked_or_disrupted" });
+    expect(nutritionEngine.calculateVitaminARAE(meal).value).toBeCloseTo(100, 2); // 600/6
+  });
+});
+
+describe("calculateVitaminARAE — integrazione Livny 2003 (crudo vs cotto, decisione esplicita 2026-10-09)", () => {
+  it("stato raw_intact -> fattore derivato ≈9.44:1 (6 x 65.1/41.4), NON 6:1", () => {
+    const meal = mealWith({ beta_carotene_mcg: 944, carotenoid_matrix_state: "raw_intact" });
+    // 944 / 9.4348... ≈ 100.1
+    expect(nutritionEngine.calculateVitaminARAE(meal).value).toBeCloseTo(100.1, 0);
+  });
+  it("stesso contenuto di beta-carotene: raw_intact produce SEMPRE meno RAE di cooked_or_disrupted", () => {
+    const raw = nutritionEngine.calculateVitaminARAE(mealWith({ beta_carotene_mcg: 600, carotenoid_matrix_state: "raw_intact" }));
+    const cooked = nutritionEngine.calculateVitaminARAE(mealWith({ beta_carotene_mcg: 600, carotenoid_matrix_state: "cooked_or_disrupted" }));
+    expect(raw.value).toBeLessThan(cooked.value);
+  });
+  it("other_provitamin_a_carotenoids NON è aggiustato per stato (Livny ha misurato solo beta-carotene da carote)", () => {
+    const rawState = nutritionEngine.calculateVitaminARAE(mealWith({ other_provitamin_a_carotenoids_mcg: 1200, carotenoid_matrix_state: "raw_intact" }));
+    const cookedState = nutritionEngine.calculateVitaminARAE(mealWith({ other_provitamin_a_carotenoids_mcg: 1200, carotenoid_matrix_state: "cooked_or_disrupted" }));
+    expect(rawState.value).toBeCloseTo(cookedState.value, 2); // identico: 1200/12=100 in entrambi i casi
+  });
+  it("bioavailabilityAdjusted=true ora: un aggiustamento per matrice è realmente applicato", () => {
+    const meal = mealWith({ beta_carotene_mcg: 600, carotenoid_matrix_state: "raw_intact" });
+    if (nutritionEngine.calculateVitaminARAE(meal).bioavailabilityAdjusted !== true) {
+      throw new Error("bioavailabilityAdjusted dovrebbe essere true: lo stato della matrice ora cambia davvero il risultato");
     }
   });
 });

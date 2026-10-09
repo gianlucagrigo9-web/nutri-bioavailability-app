@@ -315,55 +315,77 @@ export class ComputationalNutritionEngine {
   // --- VITAMINA A (da carotenoidi provitaminici) -> Retinol Activity
   // Equivalents (RAE) ---
   //
-  // Fonte: Olsen T, Lerner UH. "Vitamin A - a scoping review for Nordic
-  // Nutrition Recommendations 2023." Food Nutr Res. 2023;67:10229.
-  // Fattori ADOTTATI per NNR2023: 6:1 per beta-carotene alimentare, 12:1
-  // per altri carotenoidi provitaminici alimentari (alfa-carotene,
-  // beta-criptoxantina).
+  // Fonte base: Olsen T, Lerner UH. "Vitamin A - a scoping review for
+  // Nordic Nutrition Recommendations 2023." Food Nutr Res. 2023;67:10229.
+  // Fattore ADOTTATO per NNR2023 per beta-carotene alimentare: 6:1. La
+  // fonte stessa dice "the evidence does not yet allow a precise factor"
+  // e non cita una fonte specifica per questo numero -- e' una convenzione,
+  // non un risultato di uno studio dedicato.
   //
-  // LIMITE DICHIARATO E IMPORTANTE (non implementato qui, deliberatamente):
-  // la fonte stessa dice esplicitamente "the evidence does not yet allow
-  // a precise factor" e non cita una fonte specifica per questi due
-  // numeri -- sono una convenzione adottata per coerenza con la normativa
-  // UE, non un risultato di uno studio dedicato. Per questo evidenceLevel
-  // e' basso (5) nonostante la fonte sia autorevole.
+  // Fonte per la differenza crudo/cotto: Livny O, et al. "Beta-carotene
+  // bioavailability from differently processed carrot meals in human
+  // ileostomy volunteers." Eur J Nutr. 2003;42(6):338-45. Misura DIRETTA
+  // di assorbimento intestinale (non plasma): 65.1+/-7.4% da carote
+  // cotte/pureed vs 41.4+/-7.4% da carote crude tritate (stesso pasto,
+  // stesso contenuto di olio in entrambe le condizioni).
   //
-  // NON implementiamo ancora la differenza crudo/cotto (trovata e reale:
-  // Livny et al. 2003, Eur J Nutr 42(6):338-45, studio su volontari con
-  // ileostomia, misura diretta di assorbimento intestinale: 65.1+/-7.4%
-  // da carote cotte/pureed vs 41.4+/-7.4% da carote crude tritate, stesso
-  // pasto con 40g di olio in entrambe le condizioni) perche' non sappiamo
-  // come il fattore 6:1 "medio" della fonte NNR2023 si relaziona a questo
-  // specifico rapporto crudo/cotto -- combinarli senza quella informazione
-  // rischierebbe un doppio conteggio dell'effetto cottura. Vedi PRD.md
-  // §4.3 per la decisione aperta. Preformed retinol (fonti animali) non
-  // e' ancora un campo dell'app: limitazione dichiarata, non silenziosa.
+  // INTEGRAZIONE (decisione esplicita dell'utente, 2026-10-09, accettando
+  // il rischio sotto): trattiamo il 6:1 di NNR2023 come il fattore per lo
+  // stato "cooked_or_disrupted" (le revisioni citate da NNR2023 si basano
+  // in buona parte su diete con verdure cotte/processate), e deriviamo il
+  // fattore per "raw_intact" scalando 6:1 per il rapporto di assorbimento
+  // Livny (cotto/crudo = 65.1/41.4 = 1.573): 6 x 1.573 = 9.44:1 circa.
+  //
+  // RISCHIO DICHIARATO (non nascosto, accettato esplicitamente
+  // dall'utente): questa combinazione è una nostra ricombinazione di due
+  // fonti che non si citano a vicenda, non un numero che compare in un
+  // singolo paper. Se il 6:1 di NNR2023 incorpora GIA' una miscela
+  // implicita crudo/cotto nella popolazione di riferimento, il fattore
+  // derivato per "raw_intact" (9.44:1) rischia di contare l'effetto
+  // cottura una seconda volta. evidenceLevel riflette questo (piu' basso
+  // di entrambe le fonti prese singolarmente). Rimovibile: se smentito,
+  // si torna al 6:1 flat (vedi PRD.md §4.2).
+  //
+  // other_provitamin_a_carotenoids_mcg (alfa-carotene, beta-criptoxantina):
+  // Livny ha misurato solo beta-carotene da carote -- nessun aggiustamento
+  // crudo/cotto per questo bucket, resta 12:1 flat (NNR2023).
+  // Preformed retinol (fonti animali) non e' ancora un campo dell'app:
+  // limitazione dichiarata, non silenziosa.
   public calculateVitaminARAE(context: Meal | DailyDiet): SourcedValue {
     const foods = flattenFoods(context);
-    let totalBetaCaroteneMcg = 0;
-    let totalOtherCarotenoidsMcg = 0;
+
+    const RAE_FACTOR_COOKED = 6;
+    const LIVNY_COOKED_FRACTION = 0.651;
+    const LIVNY_RAW_FRACTION = 0.414;
+    const RAE_FACTOR_RAW = RAE_FACTOR_COOKED * (LIVNY_COOKED_FRACTION / LIVNY_RAW_FRACTION); // ≈9.44:1, derivato, non pubblicato così
+
+    let raeMcg = 0;
+    let anyFood = false;
+
     foods.forEach(f => {
-      totalBetaCaroteneMcg += f.beta_carotene_mcg;
-      totalOtherCarotenoidsMcg += f.other_provitamin_a_carotenoids_mcg;
+      if (f.beta_carotene_mcg > 0) {
+        anyFood = true;
+        const factor = f.carotenoid_matrix_state === "raw_intact" ? RAE_FACTOR_RAW : RAE_FACTOR_COOKED;
+        raeMcg += f.beta_carotene_mcg / factor;
+      }
+      if (f.other_provitamin_a_carotenoids_mcg > 0) {
+        anyFood = true;
+        raeMcg += f.other_provitamin_a_carotenoids_mcg / 12; // non aggiustato, vedi commento sopra
+      }
     });
 
-    if (totalBetaCaroteneMcg === 0 && totalOtherCarotenoidsMcg === 0) {
+    if (!anyFood) {
       return { ...createZeroValue(["NNR2023_OLSEN_LERNER_FNR"]), bioavailabilityAdjusted: false };
     }
 
-    const raeMcg = totalBetaCaroteneMcg / 6 + totalOtherCarotenoidsMcg / 12;
-
     return {
       value: +raeMcg.toFixed(2),
-      confidenceLow: null, // la fonte stessa non da' un intervallo per questi fattori adottati
+      confidenceLow: null, // nessuna delle due fonti pubblica un intervallo per la combinazione
       confidenceHigh: null,
-      evidenceLevel: 5, // convenzione adottata, non uno studio dedicato (vedi commento sopra)
-      sourceIds: ["NNR2023_OLSEN_LERNER_FNR"],
+      evidenceLevel: 4, // ricombinazione nostra di due fonti non co-pubblicate (vedi commento sopra)
+      sourceIds: ["NNR2023_OLSEN_LERNER_FNR", "LIVNY_2003_EURJNUTR"],
       verificationStatus: "draft",
-      // false: e' una conversione di unita' stechiometrica media, non un
-      // modello di assorbimento specifico per matrice/cottura (quello
-      // esiste in letteratura, Livny 2003, ma non e' ancora integrato).
-      bioavailabilityAdjusted: false
+      bioavailabilityAdjusted: true // ora sì: un aggiustamento per stato della matrice è realmente applicato al beta-carotene
     };
   }
 }
