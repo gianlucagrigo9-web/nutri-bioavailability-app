@@ -264,6 +264,122 @@ FOODS = [
             "vitamin_k_mcg": 1.2, "vitamin_b12_mcg": 2.64, "folate_mcg": 9,
         },
     },
+    {
+        # Controparte "cotta" (Broccoli, cooked, boiled, drained, without
+        # salt) NON inserita: due FDC ID tentati (170380 = frozen, non
+        # fresco; 170378 = un alimento completamente diverso, fave) si sono
+        # rivelati sbagliati; l'NDB legacy 11091 (trovato via web search,
+        # citato su recipal.com) non e' stato mappato a un FDC ID
+        # verificabile in questa sessione. Resta solo la riga "cruda" --
+        # gap dichiarato, vedi sezione finale.
+        "food_id": "food_broccoli_raw",
+        "name_it": "Broccoli, crudi",
+        "matrix_id": "broccoli",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Brassicaceae",
+        "carotenoid_matrix_state": "raw_intact",
+        "fdc_id": 170379,
+        "fdc_name": "Broccoli, raw",
+        "values": {
+            "iron_mg": 0.73, "zinc_mg": 0.41, "calcium_mg": 47, "vitamin_c_mg": 89.2,
+            "magnesium_mg": 21.0, "copper_mg": 0.049, "selenium_mcg": 2.5,
+            "vitamin_k_mcg": 102, "vitamin_b12_mcg": 0.00, "folate_mcg": 63,
+            "beta_carotene_mcg": 361, "other_provitamin_a_carotenoids_mcg": 26,  # alpha=25, crypto=1
+        },
+    },
+    {
+        "food_id": "food_almonds",
+        "name_it": "Mandorle, secche, non salate",
+        "matrix_id": "nuts_almonds",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        # Botanicamente le mandorle (Prunus dulcis) sono Rosaceae, non
+        # Fabaceae -- nonostante il nome comune "nut", non sono un legume.
+        "botanical_family": "Rosaceae",
+        "fdc_id": 170567,
+        "fdc_name": "Nuts, almonds",
+        "values": {
+            "iron_mg": 3.71, "zinc_mg": 3.12, "calcium_mg": 269, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 270.0, "copper_mg": 1.03, "selenium_mcg": 4.1,
+            "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 44,
+        },
+    },
+    {
+        "food_id": "food_oranges_raw",
+        "name_it": "Arance, crude, tutte le varieta' commerciali",
+        "matrix_id": "citrus_oranges",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Rutaceae",
+        "carotenoid_matrix_state": "raw_intact",
+        "fdc_id": 169097,
+        "fdc_name": "Oranges, raw, all commercial varieties",
+        "values": {
+            "iron_mg": 0.10, "zinc_mg": 0.07, "calcium_mg": 40, "vitamin_c_mg": 53.2,
+            "magnesium_mg": 10.0, "copper_mg": 0.045, "selenium_mcg": 0.5,
+            "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 30,
+            "beta_carotene_mcg": 71, "other_provitamin_a_carotenoids_mcg": 127,  # alpha=11, crypto=116
+        },
+    },
+    {
+        "food_id": "food_egg_hard_boiled",
+        "name_it": "Uovo, intero, cotto (sodo)",
+        "matrix_id": "eggs",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        "fdc_id": 173424,
+        "fdc_name": "Egg, whole, cooked, hard-boiled",
+        "values": {
+            "iron_mg": 1.19, "zinc_mg": 1.05, "calcium_mg": 50, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 10.0, "copper_mg": 0.013, "selenium_mcg": 30.8,
+            "vitamin_k_mcg": 0.3, "vitamin_b12_mcg": 1.11, "folate_mcg": 44,
+        },
+    },
+    {
+        # is_heme_iron = True per coerenza con la convenzione gia' usata per
+        # fegato/manzo macinato in questo Golden Set (ferro di tessuto
+        # muscolare animale = eme), non una misura diretta della quota
+        # eme/non-eme specifica di questo FDC ID.
+        "food_id": "food_salmon_cooked",
+        "name_it": "Salmone atlantico, allevato, cotto (calore secco)",
+        "matrix_id": "salmon_fish",
+        "is_heme_iron": True,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        "fdc_id": 175168,
+        "fdc_name": "Fish, salmon, Atlantic, farmed, cooked, dry heat",
+        "values": {
+            "iron_mg": 0.34, "zinc_mg": 0.43, "calcium_mg": 15, "vitamin_c_mg": 3.7,
+            "magnesium_mg": 30.0, "copper_mg": 0.049, "selenium_mcg": 41.4,
+            "vitamin_k_mcg": 0.1, "vitamin_b12_mcg": 2.80, "folate_mcg": 34,
+        },
+    },
+    {
+        # vitamin_b12_mcg: il record FDC riporta 0.00 ma con 0 data points
+        # ("il valore e' presente, ma non e' una misura affidabile" --
+        # diverso dal B12=0.00 "assumed zero" degli altri alimenti vegetali
+        # di questo set, che hanno invece data points reali a supporto
+        # dello zero). Inserito comunque come 0.00/USDA_FDC per coerenza
+        # con gli altri alimenti vegetali (un legume non contiene B12 per
+        # ragioni biologiche note, indipendentemente da questo limite
+        # metodologico del singolo record FDC), ma il limite e' dichiarato
+        # qui e nella sezione gap finale, non nascosto.
+        "food_id": "food_chickpeas_boiled",
+        "name_it": "Ceci, semi maturi, bolliti, senza sale",
+        "matrix_id": "legumes",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Fabaceae",
+        "fdc_id": 173757,
+        "fdc_name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt",
+        "values": {
+            "iron_mg": 2.89, "zinc_mg": 1.53, "calcium_mg": 49, "vitamin_c_mg": 1.3,
+            "magnesium_mg": 48.0, "copper_mg": 0.352, "selenium_mcg": 3.7,
+            "vitamin_k_mcg": 4.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 172,
+        },
+    },
 ]
 
 MATRICES_NEEDED_NEW = [
@@ -271,6 +387,11 @@ MATRICES_NEEDED_NEW = [
     ("carrots", "Carote"),
     ("beef_liver", "Fegato di manzo"),
     ("beef_ground_meat", "Manzo macinato"),
+    ("broccoli", "Broccoli"),
+    ("nuts_almonds", "Mandorle"),
+    ("citrus_oranges", "Arance"),
+    ("eggs", "Uova"),
+    ("salmon_fish", "Salmone"),
 ]
 
 SOURCES_NEW = [
@@ -301,7 +422,7 @@ lines.append("-- ===============================================================
 lines.append("-- Golden Set: primi alimenti reali, sourced riga per riga (2026-10-09)")
 lines.append("-- ============================================================================")
 lines.append("--")
-lines.append("-- 13 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA")
+lines.append(f"-- {len(FOODS)} alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA")
 lines.append("-- FoodData Central (endpoint fdc.nal.usda.gov/portal-data/external/<FDC_ID>,")
 lines.append("-- stesso dataset della pagina food-details ufficiale, usato perche' la SPA")
 lines.append("-- Angular delle pagine food-details non e' fetchable direttamente da questo")
@@ -455,9 +576,20 @@ lines.append("-- - macs_mg, polyphenols_mg: non ricercati in questo giro per nes
 lines.append("--   alimenti (richiederebbero rispettivamente dati tipo Sonnenburg 2016 o un")
 lines.append("--   database come Phenol-Explorer, non ancora consultati per questi alimenti")
 lines.append("--   specifici) -- gap preesistente, non introdotto ora.")
-lines.append("-- - iodine_mcg: non trovato per NESSUNO dei 13 alimenti (USDA FDC non riporta")
+lines.append("-- - iodine_mcg: non trovato per NESSUNO dei 19 alimenti (USDA FDC non riporta")
 lines.append("--   lo iodio per la maggior parte delle voci standard) -- confirma il gap gia'")
 lines.append("--   dichiarato in PRD.md §4.0/§4.5.")
+lines.append("-- - food_broccoli_raw: manca la controparte 'cotta' (Broccoli, cooked, boiled,")
+lines.append("--   drained, without salt, FRESCO non surgelato). Due FDC ID tentati in questa")
+lines.append("--   sessione erano sbagliati (170380 = la versione SURGELATA dello stesso")
+lines.append("--   piatto, non quella fresca; 170378 = Broadbeans/fave, un alimento diverso).")
+lines.append("--   L'NDB legacy 11091 (citato su recipal.com) non e' stato mappato a un FDC ID")
+lines.append("--   verificabile via web search in questa sessione -- da ri-tentare.")
+lines.append("-- - food_chickpeas_boiled.vitamin_b12_mcg: il record FDC segnala esplicitamente")
+lines.append("--   0 data points per questo campo (diverso dal B12=0.00 con dati reali a")
+lines.append("--   supporto degli altri alimenti vegetali di questo set) -- inserito comunque")
+lines.append("--   come 0.00/USDA_FDC per coerenza biologica (i legumi non contengono B12),")
+lines.append("--   ma il limite metodologico specifico di questo record resta dichiarato qui.")
 lines.append("")
 
 sql_text = "\n".join(lines)

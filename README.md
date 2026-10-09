@@ -35,7 +35,7 @@ noto" dichiarati e quantificati, non nascosti).
 - `*.sql` — migrazioni/fix per lo schema Supabase (RLS, source IDs,
   fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
   Doniec 2022 per le crucifere).
-- `golden_set_foods.sql` — 13 dei 20 alimenti target del Golden Set MVP,
+- `golden_set_foods.sql` — 19 dei 20 alimenti target del Golden Set MVP,
   ogni valore sourced (USDA FoodData Central, o letteratura specifica per
   ossalati/fitati), generato da `scripts/generate_golden_set_foods.py`
   (quest'ultimo è la fonte di verità: per aggiungere un alimento, si
@@ -85,14 +85,15 @@ noto" dichiarati e quantificati, non nascosti).
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due
   tentativi di ricerca.
-- Golden Set (`golden_set_foods.sql`): 13/20 alimenti popolati, tutti
-  sourced (vedi PRD.md §4.6). Mancano ancora: i restanti ~7 alimenti,
-  un esempio di alimento fortificato con acido folico (per esercitare
+- Golden Set (`golden_set_foods.sql`): 19/20 alimenti popolati, tutti
+  sourced (vedi PRD.md §4.6). Mancano ancora: l'ultimo alimento (un
+  esempio fortificato con acido folico, per esercitare
   `is_fortified_folate` su un dato reale, oggi solo su dati sintetici),
-  alcuni campi non recuperati per kale/latte in questa sessione (fetch
-  troncato, non assenti per certo dalla fonte), e una riga reale per i
-  cavoletti di Bruxelles "al vapore" (nessuna misura FDC diretta esiste
-  per quello stato — derivarla avrebbe mischiato dato misurato e
-  simulato nella stessa riga, scelto di non farlo: vedi PRD.md §4.6 per
-  il punto architetturale che questo rivela su
-  `CookingTransformationEngine`).
+  la controparte "cotta" dei broccoli (FDC ID non trovato in questa
+  sessione dopo due tentativi sbagliati — vedi PRD.md §4.6), alcuni campi
+  non recuperati per kale/latte in questa sessione (fetch troncato, non
+  assenti per certo dalla fonte), e una riga reale per i cavoletti di
+  Bruxelles "al vapore" (nessuna misura FDC diretta esiste per quello
+  stato — derivarla avrebbe mischiato dato misurato e simulato nella
+  stessa riga, scelto di non farlo: vedi PRD.md §4.6 per il punto
+  architetturale che questo rivela su `CookingTransformationEngine`).
