@@ -96,6 +96,15 @@ async function resolveSourceId(
 const NUTRIENT_FIELDS = [
   'iron_mg', 'zinc_mg', 'calcium_mg', 'vitamin_c_mg',
   'phytates_mg', 'oxalates_mg', 'polyphenols_mg', 'macs_mg',
+  // Aggiunti 2026-10-09 (vedi PRD.md §4.1/§4.2/§4.5 e types.ts): questa
+  // lista DEVE restare sincronizzata con NUTRIENT_OPTIONS in
+  // DataEntryDashboard.tsx (per i codici brevi usati da retention_factors)
+  // e con NUTRIENT_FIELD_MAP in lib/engine/cookingTransformationEngine.ts
+  // -- lo stesso disallineamento gia' successo una volta in questo
+  // progetto (vedi commento in DataEntryDashboard.tsx).
+  'vitamin_b12_mcg', 'folate_mcg',
+  'beta_carotene_mcg', 'other_provitamin_a_carotenoids_mcg',
+  'magnesium_mg', 'copper_mg', 'selenium_mcg', 'iodine_mcg', 'vitamin_k_mcg',
 ] as const;
 
 export async function createFood(_prevState: FormState, formData: FormData): Promise<FormState> {
@@ -107,6 +116,13 @@ export async function createFood(_prevState: FormState, formData: FormData): Pro
   const isHemeIron = formData.get('is_heme_iron') === 'on';
   const calciumCategory = (formData.get('matrix_category_calcium') as string) || null;
   const botanicalFamily = (formData.get('botanical_family') as string)?.trim() || null;
+  // Aggiunti 2026-10-09 (vedi PRD.md §4.2/§4.4/§4.5, types.ts): attributi
+  // categorici per-alimento-nello-stato-di-cottura, non nutrient_values
+  // (coerenti con is_heme_iron/matrix_category_calcium/botanical_family
+  // sopra, non con i campi numerici in NUTRIENT_FIELDS).
+  const carotenoidMatrixState = (formData.get('carotenoid_matrix_state') as string) || null;
+  const zincBioaccessibilityBucket = (formData.get('zinc_bioaccessibility_bucket') as string) || 'none';
+  const isFortifiedFolate = formData.get('is_fortified_folate') === 'on';
 
   if (!foodId || !nameIt || !matrixId) {
     return { error: 'food_id, nome e matrice sono obbligatori.' };
@@ -124,6 +140,9 @@ export async function createFood(_prevState: FormState, formData: FormData): Pro
     is_heme_iron: isHemeIron,
     matrix_category_calcium: calciumCategory,
     botanical_family: botanicalFamily,
+    carotenoid_matrix_state: carotenoidMatrixState,
+    zinc_bioaccessibility_bucket: zincBioaccessibilityBucket,
+    is_fortified_folate: isFortifiedFolate,
     verification_status: 'draft',
   });
   if (foodError) return { error: `Errore foods_raw: ${foodError.message}` };

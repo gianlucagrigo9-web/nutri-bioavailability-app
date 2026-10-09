@@ -25,6 +25,16 @@ const NUTRIENT_OPTIONS = [
   { code: 'oxalates', label: 'Ossalati' },
   { code: 'polyphenols', label: 'Polifenoli' },
   { code: 'macs', label: 'MACs' },
+  // Aggiunti 2026-10-09: DEVONO restare sincronizzati con NUTRIENT_FIELDS
+  // in actions.ts e con NUTRIENT_FIELD_MAP in
+  // lib/engine/cookingTransformationEngine.ts.
+  { code: 'vitamin_b12', label: 'Vitamina B12' },
+  { code: 'folate', label: 'Folati' },
+  { code: 'magnesium', label: 'Magnesio' },
+  { code: 'copper', label: 'Rame' },
+  { code: 'selenium', label: 'Selenio' },
+  { code: 'iodine', label: 'Iodio' },
+  { code: 'vitamin_k', label: 'Vitamina K' },
 ] as const;
 // Questi codici DEVONO coincidere con le chiavi di NUTRIENT_FIELD_MAP in
 // lib/engine/cookingTransformationEngine.ts. Se aggiungi un nutriente qui,
@@ -165,6 +175,33 @@ function FoodForm({ matrices, sources }: { matrices: Matrix[]; sources: SourceRo
         Il ferro di questo alimento è eme (matrice animale)
       </label>
 
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+            Stato matrice carotenoidi (vitamina A, PRD §4.2)
+          </label>
+          <select name="carotenoid_matrix_state" className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white">
+            <option value="">— non applicabile —</option>
+            <option value="raw_intact">Crudo/intatto (es. carota cruda)</option>
+            <option value="cooked_or_disrupted">Cotto/distrutto (default implicito altrove)</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">
+            Bioaccessibilità zinco (PRD §4.4 — SOLO cavoletti di Bruxelles)
+          </label>
+          <select name="zinc_bioaccessibility_bucket" className="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm bg-white">
+            <option value="none">Nessuna (default — incluse tutte le altre crucifere)</option>
+            <option value="brussels_sprouts_boiled">Cavoletti di Bruxelles, bolliti</option>
+            <option value="brussels_sprouts_steamed">Cavoletti di Bruxelles, al vapore</option>
+          </select>
+        </div>
+        <label className="flex items-center gap-2 text-sm text-slate-700 md:pt-7">
+          <input type="checkbox" name="is_fortified_folate" className="rounded border-slate-300" />
+          Folato da fortificazione (acido folico aggiunto, non naturale)
+        </label>
+      </div>
+
       <div>
         <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
           Valori per 100g (lascia vuoto ciò che non hai — non viene inventato nulla)
@@ -175,6 +212,11 @@ function FoodForm({ matrices, sources }: { matrices: Matrix[]; sources: SourceRo
             ['calcium_mg', 'Calcio (mg)'], ['vitamin_c_mg', 'Vitamina C (mg)'],
             ['phytates_mg', 'Fitati (mg)'], ['oxalates_mg', 'Ossalati (mg)'],
             ['polyphenols_mg', 'Polifenoli (mg)'], ['macs_mg', 'MACs (mg)'],
+            ['vitamin_b12_mcg', 'Vitamina B12 (µg)'], ['folate_mcg', 'Folati (µg)'],
+            ['beta_carotene_mcg', 'Beta-carotene (µg)'], ['other_provitamin_a_carotenoids_mcg', 'Altri caroten. provit.A (µg)'],
+            ['magnesium_mg', 'Magnesio (mg)'], ['copper_mg', 'Rame (mg)'],
+            ['selenium_mcg', 'Selenio (µg)'], ['iodine_mcg', 'Iodio (µg)'],
+            ['vitamin_k_mcg', 'Vitamina K (µg)'],
           ].map(([field, label]) => (
             <div key={field}>
               <label className="block text-xs text-slate-500 mb-1">{label}</label>

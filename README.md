@@ -35,12 +35,19 @@ noto" dichiarati e quantificati, non nascosti).
 - `*.sql` — migrazioni/fix per lo schema Supabase (RLS, source IDs,
   fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
   Doniec 2022 per le crucifere).
+- `golden_set_foods.sql` — 13 dei 20 alimenti target del Golden Set MVP,
+  ogni valore sourced (USDA FoodData Central, o letteratura specifica per
+  ossalati/fitati), generato da `scripts/generate_golden_set_foods.py`
+  (quest'ultimo è la fonte di verità: per aggiungere un alimento, si
+  modifica lo script e si rigenera il file, non il contrario). Vedi
+  PRD.md §4.6 per i gap dichiarati.
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
-  dati, regole d'ingaggio, §4.0-4.5 per le decisioni su B12/folati/
-  vitamina A/crucifere/micronutrienti senza modello prese il 2026-10-09,
-  alcune in autonomia e alcune per istruzione esplicita dell'utente —
-  Livny §4.2, bioaccessibilità zinco cavoletti §4.4, magnesio/rame/
-  selenio/iodio/vitamina K come composizione grezza §4.5).
+  dati, regole d'ingaggio, §4.0-4.6 per le decisioni su B12/folati/
+  vitamina A/crucifere/micronutrienti senza modello/Golden Set prese il
+  2026-10-09, alcune in autonomia e alcune per istruzione esplicita
+  dell'utente — Livny §4.2, bioaccessibilità zinco cavoletti §4.4,
+  magnesio/rame/selenio/iodio/vitamina K come composizione grezza §4.5,
+  popolamento Golden Set §4.6).
 - `computationalNutritionEngine_criteri_e_test.md` — criteri di
   accettazione e proposta di test per il motore di nutrizione,
   approvata prima della scrittura del codice.
@@ -77,5 +84,15 @@ noto" dichiarati e quantificati, non nascosti).
 - Golden Set di alimenti e relativi fattori di ritenzione: Legumi/Tuberi
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due
-  tentativi di ricerca — il resto del dataset va popolato riga per riga
-  tramite il pannello admin.
+  tentativi di ricerca.
+- Golden Set (`golden_set_foods.sql`): 13/20 alimenti popolati, tutti
+  sourced (vedi PRD.md §4.6). Mancano ancora: i restanti ~7 alimenti,
+  un esempio di alimento fortificato con acido folico (per esercitare
+  `is_fortified_folate` su un dato reale, oggi solo su dati sintetici),
+  alcuni campi non recuperati per kale/latte in questa sessione (fetch
+  troncato, non assenti per certo dalla fonte), e una riga reale per i
+  cavoletti di Bruxelles "al vapore" (nessuna misura FDC diretta esiste
+  per quello stato — derivarla avrebbe mischiato dato misurato e
+  simulato nella stessa riga, scelto di non farlo: vedi PRD.md §4.6 per
+  il punto architetturale che questo rivela su
+  `CookingTransformationEngine`).

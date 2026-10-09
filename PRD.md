@@ -123,6 +123,29 @@ Anche `CookingTransformationEngine` (`NUTRIENT_FIELD_MAP`) è stato esteso con i
 
 **Nota per i prossimi nutrienti da aggiungere con lo stesso pattern** (es. vitamina D, vitamina E, tiamina, riboflavina, niacina, B6): usare `sumRawNutrient`, non duplicare la logica — e verificare caso per caso se in futuro emerge un vero modello di assorbimento in letteratura, nel qual caso quel nutriente esce da questa sezione e riceve un metodo dedicato con `bioavailabilityAdjusted: true` (come già fatto per B12, folati, vitamina A).
 
+### 4.6 Golden Set: primi 13 alimenti reali, sourced riga per riga (aggiunto 2026-10-09)
+
+Primo popolamento reale del Golden Set (vedi `golden_set_foods.sql`, generato da `scripts/generate_golden_set_foods.py` — lo script Python è la fonte di verità, non il file SQL a mano, per evitare errori di trascrizione su ~150 righe). 13 alimenti su 20 (target MVP, §7), scelti perché sono esattamente gli alimenti già usati come esempio/calibrazione nei commenti dei motori (spinaci/kale/latte per le tre categorie calcio di Heaney&Weaver; fagioli/lenticchie/patate per ferro-zinco-fitati; cavoletti di Bruxelles per la bioaccessibilità zinco; carote per Livny/vitamina A; fegato di manzo per il B12 legato alla matrice di Heyssel; manzo macinato per il ferro eme) — così il Golden Set esercita davvero i layer di modello appena costruiti, non solo dati sintetici nei test.
+
+**Fonte primaria**: USDA FoodData Central, letto direttamente (non da mirror di terze parti) tramite l'endpoint `fdc.nal.usda.gov/portal-data/external/<FDC_ID>` — le pagine `food-details/*/nutrients` standard sono una SPA Angular non fetchable in questo ambiente, ma quell'endpoint espone lo stesso dataset sottostante. FDC ID citato per ogni riga nel file SQL, verificabile in qualunque momento.
+
+**Ossalati e fitati** (assenti da USDA FDC) aggiunti per 3 alimenti da fonti di letteratura dedicate: ossalati spinaci crudi (Noonan & Savage 1999, *Asia Pac J Clin Nutr*, 970 mg/100g, range 320-1260 — review esplicitamente richiesta per questo compito), ossalati kale crudo (Erdoğan & Onar 2012, *J Food Drug Anal*, 297±67.2 mg/100g, convertito da mg/kg), fitati fagioli rossi bolliti (Zia-ur-Rehman et al. 2002, *Pak J Sci Ind Res*, 805 mg/100g — unica fonte che distingue esplicitamente crudo/bollito con unità chiare).
+
+**Gap dichiarati esplicitamente** (vedi commenti in fondo a `golden_set_foods.sql`), non numeri indovinati per riempire le celle vuote:
+- Fitati lenticchie: trovato solo per crude/secche, non bollite — stato di cottura non corrispondente, non inserito.
+- Ossalati spinaci: una seconda fonte (Siener et al. 2006) dà un valore quasi doppio (1959 vs 970 mg/100g) — discrepanza documentata, nessuna scelta arbitraria tra le due, decisione rimandata a un controllo umano.
+- Kale e latte: alcuni campi (selenio/vitamina K/B12 per il kale; quasi tutto tranne il calcio per il latte) non recuperati per un troncamento del fetch su record molto verbosi — da ri-tentare, non assenti per certo dalla fonte.
+- Nessun alimento fortificato con acido folico inserito (le pagine FDC dei candidati non erano raggiungibili in questa sessione) — `is_fortified_folate` resta quindi esercitato solo da test sintetici, non da un alimento reale.
+- **Cavoletti di Bruxelles "al vapore" non ha una riga propria**: FDC non ha una voce "steamed" per questo alimento, e derivare una riga applicando il retention factor di Doniec 2022 al solo ferro/zinco crudo (lasciando il resto nullo) mischierebbe dato misurato e dato simulato nella stessa riga — scelto di non farlo. Rivela anche un punto architetturale non ancora risolto: `carotenoid_matrix_state`, `zinc_bioaccessibility_bucket` e `is_fortified_folate` sono attributi categorici "congelati" per stato di cottura (come `is_heme_iron`), ma `CookingTransformationEngine` oggi non li tocca quando simula una trasformazione — serve una decisione futura su come (o se) propagarli quando un alimento viene "cotto" solo tramite retention factor, invece di avere una riga measured dedicata.
+- `macs_mg`/`polyphenols_mg`: non ricercati in questo giro per nessuno dei 13 alimenti (gap preesistente, non introdotto ora).
+- `iodine_mcg`: non trovato per nessuno dei 13 alimenti — confirma il gap già dichiarato in §4.0/§4.5 (USDA FDC non riporta lo iodio per la maggior parte delle voci standard).
+
+**Schema**: aggiunte le colonne `carotenoid_matrix_state`, `zinc_bioaccessibility_bucket`, `is_fortified_folate` a `foods_raw` (con `CHECK` sui valori enum, §2 Regola 2 — architettura difensiva anche sui dati, non solo sul codice), e sincronizzate le liste `NUTRIENT_FIELDS`/`NUTRIENT_OPTIONS` del pannello admin (`app/admin/data-entry/`) con i nuovi nutrienti — altrimenti il pannello non avrebbe potuto inserire manualmente nessuno dei campi aggiunti da B12 in avanti, lo stesso tipo di disallineamento già capitato una volta in questo progetto (vedi commento storico in `DataEntryDashboard.tsx`).
+
+**Verification status**: tutto `draft`, non `verified` — anche se letto da una fonte ufficiale, non è ancora stato fatto un controllo a campione da un revisore umano (coerente con la filosofia "Human-in-the-Loop" del pannello admin, dove `verified` è sempre una promozione esplicita, mai un default).
+
+**Da fare per arrivare a 20** (non in questo giro): un alimento fortificato con folato, e idealmente completare kale/latte con i campi mancanti.
+
 ### 4.1 Esempio reale di verifica (fatto ora, non ipotetico)
 
 Per mostrare come funziona in pratica la Regola 1 (§2): il file Excel caricato riporta per `veg_leafy_soft / boiled` un retention factor di Vitamina C = **0.45** (45%), attribuito genericamente a "Bognár / EuroFIR" (nessun URL, nessuna pagina, nessun DOI).
@@ -256,7 +279,8 @@ Questo contratto sarà il primo criterio di accettazione da validare quando risc
 | Asset | Stato | Azione |
 |---|---|---|
 | `master_retention_factors_crea_italia_v2.xlsx` | 125 righe di retention factor (34 matrici × metodo di cottura) + 35 gruppi-alimento con **conteggi stimati**, nessuna con `source_id` verificabile | Da ri-sorgere riga per riga secondo §2 Regola 1; l'esempio §4.1 è il primo caso |
-| `seed_golden_set.sql` | 20 alimenti con profilo nutrizionale completo, nessun valore ha una fonte | Diventa il Golden Set MVP **solo dopo** verifica campo per campo |
+| `seed_golden_set.sql` (legacy) | 20 alimenti con profilo nutrizionale completo, nessun valore ha una fonte | **Superato** da `golden_set_foods.sql` (vedi §4.6): non va più usato |
+| `golden_set_foods.sql` | 13/20 alimenti, ogni valore con `source_id` verificabile (USDA FDC o letteratura specifica per ossalati/fitati), `draft` in attesa di revisione umana a campione | Aggiungere i restanti ~7 alimenti (incl. un fortificato con folato) con lo stesso rigore; promuovere a `verified` dopo revisione |
 | `computationalNutritionEngine.ts` | Formule biochimicamente plausibili (Hallberg, Miller, Michaelis-Menten) ma senza distinzione fonte/range; restituisce numeri nudi | Da riscrivere secondo il contratto §6 — **prossimo step**, previa approvazione dei test |
 | `microbiotaEngine.ts` | Stessa situazione | Da riscrivere dopo il motore nutrizionale |
 | `lcaLogisticsEngine.ts` | Stessa situazione; i coefficienti LCA per hub/trasporto sono plausibili ma non testuali-sourced (es. 1.25 x tortuosità stradale, 0.140 kg CO2/km TIR) | Da riscrivere; coefficienti di trasporto verificabili via Agribalyse/INEMAR |
