@@ -42,7 +42,7 @@ ON CONFLICT (matrix_id) DO NOTHING;
 -- ----------------------------------------------------------------------------
 -- Nuove fonti di letteratura (ossalati/fitati; USDA_FDC e' gia' un placeholder
 -- generico usato dall'engine per magnesio/rame/selenio/iodio/vit.K, vedi
--- PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)
+-- docs/PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)
 -- ----------------------------------------------------------------------------
 INSERT INTO sources (id, citation, url) VALUES
   ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov'),
@@ -660,7 +660,7 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 --   specifici) -- gap preesistente, non introdotto ora.
 -- - iodine_mcg: non trovato per NESSUNO dei 19 alimenti (USDA FDC non riporta
 --   lo iodio per la maggior parte delle voci standard) -- confirma il gap gia'
---   dichiarato in PRD.md §4.0/§4.5.
+--   dichiarato in docs/PRD.md §4.0/§4.5.
 -- - food_broccoli_raw: manca la controparte 'cotta' (Broccoli, cooked, boiled,
 --   drained, without salt, FRESCO non surgelato). Due FDC ID tentati in questa
 --   sessione erano sbagliati (170380 = la versione SURGELATA dello stesso

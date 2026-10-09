@@ -3,7 +3,7 @@
 Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RAE,
 magnesio/rame/selenio/iodio/vitamina K (composizione grezza, senza
 modello di assorbimento), microbiota, cottura, LCA) riscritti secondo il
-contratto `SourcedValue` definito in `PRD.md` (v2.0), con test reali
+contratto `SourcedValue` definito in `docs/PRD.md` (v2.0), con test reali
 eseguiti in `tests/engines.test.ts` (78 test: 75 PASS, 0 FAIL, 3 "limite
 noto" dichiarati e quantificati, non nascosti). Golden Set: 20/20
 alimenti popolati e promossi a `verified` (§4.6). Prototipo UI
@@ -17,7 +17,7 @@ Questo repository non conteneva, prima del 2026-10-09, i file di scaffold
 di un progetto Next.js vero (`package.json`, `tsconfig.json`,
 `next.config.js`, config Tailwind) — solo il codice dei motori e del
 pannello admin, scritto assumendo che un progetto li ospitasse. È lo
-stesso problema di workflow descritto in `audit_gemini_post_pdf.md`
+stesso problema di workflow descritto in `docs/audit_gemini_post_pdf.md`
 (copia-incolla manuale tra chat e VS Code, mai una vera sincronizzazione
 disco↔chat): questi file di scaffold ora esistono in questo stesso repo,
 per chiudere quel gap una volta per tutte. Se hai già un progetto Next.js
@@ -89,7 +89,7 @@ motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
   letteratura specifica per ossalati/fitati), generato da
   `scripts/generate_golden_set_foods.py` (quest'ultimo è la fonte di
   verità: per aggiungere un alimento, si modifica lo script e si
-  rigenera il file, non il contrario). Vedi PRD.md §4.6 per i gap
+  rigenera il file, non il contrario). Vedi docs/PRD.md §4.6 per i gap
   qualitativi ancora dichiarati (nessuno bloccante per il conteggio).
 - `golden_set_promote_verified.sql` — promuove a `verified` i 20
   alimenti e i loro valori USDA FDC, dopo un cross-check meccanico
@@ -97,20 +97,29 @@ motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
   cifra, 0 discrepanze) e decisione esplicita dell'utente di accettarlo
   come base per la promozione. Le 3 righe da letteratura (ossalati/
   fitati) restano deliberatamente `draft`, non essendo state
-  ri-controllate in questo giro — vedi PRD.md §4.6.
-- `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
-  dati, regole d'ingaggio, §4.0-4.6 per le decisioni su B12/folati/
-  vitamina A/crucifere/micronutrienti senza modello/Golden Set prese il
-  2026-10-09, alcune in autonomia e alcune per istruzione esplicita
-  dell'utente — Livny §4.2, bioaccessibilità zinco cavoletti §4.4,
-  magnesio/rame/selenio/iodio/vitamina K come composizione grezza §4.5,
-  popolamento Golden Set §4.6).
-- `computationalNutritionEngine_criteri_e_test.md` — criteri di
-  accettazione e proposta di test per il motore di nutrizione,
-  approvata prima della scrittura del codice.
-- `docs/workflow_retrieval_letteratura.md` — procedura ripetibile per
-  cercare/verificare letteratura su nuovi nutrienti (WebSearch+WebFetch,
-  non uno script autonomo: la rete della shell è bloccata da policy).
+  ri-controllate in questo giro — vedi docs/PRD.md §4.6.
+- `docs/` — tutta la documentazione di progetto, raccolta qui il
+  2026-10-09 (prima erano sparsi nella radice del repo):
+  - `docs/PRD.md` — product requirements document v2.0 (perimetro MVP,
+    schema dati, regole d'ingaggio, §4.0-4.6 per le decisioni su
+    B12/folati/vitamina A/crucifere/micronutrienti senza modello/Golden
+    Set prese il 2026-10-09, alcune in autonomia e alcune per istruzione
+    esplicita dell'utente — Livny §4.2, bioaccessibilità zinco cavoletti
+    §4.4, magnesio/rame/selenio/iodio/vitamina K come composizione
+    grezza §4.5, popolamento Golden Set §4.6).
+  - `docs/computationalNutritionEngine_criteri_e_test.md` — criteri di
+    accettazione e proposta di test per il motore di nutrizione,
+    approvata prima della scrittura del codice.
+  - `docs/workflow_retrieval_letteratura.md` — procedura ripetibile per
+    cercare/verificare letteratura su nuovi nutrienti (WebSearch+WebFetch,
+    non uno script autonomo: la rete della shell è bloccata da policy).
+  - `docs/analisi_sessione_gemini.md`, `docs/audit_gemini_post_pdf.md` —
+    analisi della sessione di lavoro precedente con Gemini (il problema
+    del copia-incolla manuale chat↔VS Code, mai risolto fino allo
+    scaffold Next.js aggiunto in questa sessione — vedi "Come avviare il
+    progetto" sopra).
+  `README.md` resta invece nella radice del repo: è lì che GitHub lo
+  mostra automaticamente quando apri il repository.
 
 ## Limiti noti (dichiarati, non nascosti)
 
@@ -120,23 +129,23 @@ motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
   piccolo (~+3%) documentato in `tests/engines.test.ts`.
 - B12: la curva di saturazione non è fittata da un paper (solo i due
   estremi — ceiling e via passiva — sono sourced); sovrastima
-  l'assorbimento reale del 30-60% a dosi 5-25µg (vedi PRD.md §4.1).
+  l'assorbimento reale del 30-60% a dosi 5-25µg (vedi docs/PRD.md §4.1).
 - Vitamina A: distingue crudo/cotto (Livny 2003, integrato il
   2026-10-09 su richiesta esplicita dell'utente), ma il fattore 9.44:1
   per lo stato crudo è una ricombinazione di due fonti non
   co-pubblicate (NNR2023 + Livny), non un singolo numero da un paper —
   rischio di doppio conteggio accettato esplicitamente dall'utente,
-  reversibile (vedi PRD.md §4.2).
+  reversibile (vedi docs/PRD.md §4.2).
 - Zinco: la deratazione per bioaccessibilità post-cottura (Doniec 2022)
   copre ESCLUSIVAMENTE i cavoletti di Bruxelles (bolliti/a vapore) — il
   paper stesso non generalizza ad altre crucifere. L'allocazione
   proporzionale della quota di zinco deratata in un pasto misto è una
-  semplificazione dichiarata, non una misura diretta (vedi PRD.md §4.4).
+  semplificazione dichiarata, non una misura diretta (vedi docs/PRD.md §4.4).
 - Magnesio/rame/selenio/iodio/vitamina K: nessun modello di assorbimento
   trovato in letteratura finora — mostrati come somma della composizione
   grezza (placeholder sourceIds `USDA_FDC`, da sostituire riga per riga
   quando il Golden Set verrà popolato), marcati `bioavailabilityAdjusted:
-  false` così la UI può distinguerli come "info sommarie" (vedi PRD.md
+  false` così la UI può distinguerli come "info sommarie" (vedi docs/PRD.md
   §4.0 e §4.5).
 - Golden Set di alimenti e relativi fattori di ritenzione: Legumi/Tuberi
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
@@ -144,7 +153,7 @@ motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
   tentativi di ricerca.
 - Golden Set (`golden_set_foods.sql` + `golden_set_promote_verified.sql`):
   20/20 alimenti popolati (target MVP raggiunto) e promossi a `verified`
-  dopo cross-check meccanico indipendente (vedi PRD.md §4.6); le 3 righe
+  dopo cross-check meccanico indipendente (vedi docs/PRD.md §4.6); le 3 righe
   da letteratura (ossalati/fitati) restano `draft`, non ri-controllate in
   questo giro. Gap qualitativi ancora dichiarati (non bloccanti per il
   conteggio o la promozione): la controparte "cotta" dei
@@ -153,9 +162,9 @@ motori, non indovinati), ma il primo collaudo end-to-end (`npm install` +
   certo dalla fonte); una riga reale per i cavoletti di Bruxelles "al
   vapore" (nessuna misura FDC diretta esiste per quello stato — derivarla
   avrebbe mischiato dato misurato e simulato nella stessa riga, scelto di
-  non farlo: vedi PRD.md §4.6 per il punto architetturale che questo
+  non farlo: vedi docs/PRD.md §4.6 per il punto architetturale che questo
   rivela su `CookingTransformationEngine`); e per la pasta arricchita
   (l'alimento fortificato), il campo `folate_mcg` contiene solo l'acido
   folico (66 µg) e non la quota di folato naturale (7 µg), per i limiti
   dello schema a singolo campo usato da `calculateFolateDFE` (vedi
-  PRD.md §4.6).
+  docs/PRD.md §4.6).

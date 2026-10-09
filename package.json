@@ -2,7 +2,7 @@
   "name": "nutri-bioavailability-app",
   "version": "0.1.0",
   "private": true,
-  "description": "App nutrizione: biodisponibilita', cottura, microbiota, impatto ambientale. Vedi PRD.md e README.md per il contesto completo prima di modificare.",
+  "description": "App nutrizione: biodisponibilita', cottura, microbiota, impatto ambientale. Vedi docs/PRD.md e README.md per il contesto completo prima di modificare.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

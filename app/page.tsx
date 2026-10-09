@@ -2,7 +2,7 @@
 
 // app/page.tsx
 //
-// Prototipo UI sui 20 alimenti VERIFICATI del Golden Set (PRD.md §4.6,
+// Prototipo UI sui 20 alimenti VERIFICATI del Golden Set (docs/PRD.md §4.6,
 // roadmap §9 punto 4: "Prototipo UI sui 20 alimenti verificati, incluso
 // il pannello 'Perché questo numero?'").
 //
@@ -22,7 +22,7 @@
 // trasforma solo i campi NUMERICI, non i flag categorici
 // (carotenoid_matrix_state, zinc_bioaccessibility_bucket) -- simulare
 // "bollitura" su un alimento crudo lascerebbe quei flag congelati allo
-// stato crudo, con lo stesso tipo di errore già documentato in PRD.md §4.6
+// stato crudo, con lo stesso tipo di errore già documentato in docs/PRD.md §4.6
 // per i cavoletti di Bruxelles "al vapore". Il Golden Set ha già righe
 // MISURATE separate per crudo/cotto quando esistono entrambe (spinaci,
 // carote, cavoletti di Bruxelles): qui si vede ogni riga reale come una
@@ -108,7 +108,7 @@ function foodRowToFoodItem(row: FoodRow): FoodItem {
 
 // ----------------------------------------------------------------------------
 // "Perché questo numero?" -- pannello di trasparenza per OGNI valore
-// calcolato (PRD.md §1 Regola 1/4: nessun numero senza una fonte visibile).
+// calcolato (docs/PRD.md §1 Regola 1/4: nessun numero senza una fonte visibile).
 // ----------------------------------------------------------------------------
 function MetricRow({
   label,
@@ -159,7 +159,7 @@ function MetricRow({
           <div>
             <span className="text-indigo-400">Modello di assorbimento:</span>{' '}
             {result.bioavailabilityAdjusted === false
-              ? 'nessuno — valore di composizione grezza (vedi PRD.md §4.0/§4.5)'
+              ? 'nessuno — valore di composizione grezza (vedi docs/PRD.md §4.0/§4.5)'
               : 'applicato'}
           </div>
           <div>
@@ -181,7 +181,7 @@ function MetricRow({
                       <>
                         {sid}{' '}
                         <span className="text-indigo-400">
-                          (citazione completa in PRD.md / nei commenti del motore, non ancora in tabella sources)
+                          (citazione completa in docs/PRD.md / nei commenti del motore, non ancora in tabella sources)
                         </span>
                       </>
                     )}
@@ -211,7 +211,7 @@ export default function Home() {
       // Motivo: 3 righe (ossalati spinaci/kale, fitati fagioli rossi) sono
       // state lette direttamente dal paper citato in una sessione
       // precedente ma restano 'draft' perché non ri-controllate nel
-      // cross-check di oggi (vedi PRD.md §4.6) -- NON perché sospette.
+      // cross-check di oggi (vedi docs/PRD.md §4.6) -- NON perché sospette.
       // Escluderle qui (es. con un filtro .eq su nutrient_values.verification_status)
       // azzererebbe silenziosamente l'effetto inibitorio di fitati/ossalati
       // nel calcolo di ferro/calcio sotto, SOVRASTIMANDO l'assorbimento
@@ -329,7 +329,7 @@ export default function Home() {
                         <span
                           title={`Da letteratura, non ancora cross-checkata oggi: ${draftNutrients
                             .map((n) => n.nutrient_code)
-                            .join(', ')} (vedi PRD.md §4.6)`}
+                            .join(', ')} (vedi docs/PRD.md §4.6)`}
                           className="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 border border-slate-200 rounded-full px-2 py-1 cursor-help"
                         >
                           {draftNutrients.length} valore{draftNutrients.length > 1 ? 'i' : ''} draft

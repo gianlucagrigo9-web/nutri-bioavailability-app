@@ -14,7 +14,7 @@ export interface SourcedValue {
   evidenceLevel: 1 | 2 | 3 | 4 | 5;
   sourceIds: string[];
   verificationStatus: "draft" | "verified";
-  // Vedi PRD.md §4.0. true = il valore riflette un vero modello di
+  // Vedi docs/PRD.md §4.0. true = il valore riflette un vero modello di
   // assorbimento/biodisponibilità (equazione o fattore di conversione
   // sourced), anche se evidenceLevel e' basso. false/assente = valore di
   // composizione grezza (es. USDA FDC), perche' per questo nutriente non
@@ -46,17 +46,17 @@ export interface FoodItem {
   macs_mg: number;
   botanical_family: string | null;
 
-  // Vitamina B12 e Folati (aggiunti 2026-10-09, vedi PRD.md §4.0 e §4.2)
+  // Vitamina B12 e Folati (aggiunti 2026-10-09, vedi docs/PRD.md §4.0 e §4.2)
   vitamin_b12_mcg: number;
   folate_mcg: number;          // folato alimentare "naturale" (non da fortificazione)
   is_fortified_folate: boolean; // true solo per alimenti fortificati con acido folico sintetico
 
-  // Vitamina A / carotenoidi provitaminici (aggiunti 2026-10-09, vedi PRD.md §4.3)
+  // Vitamina A / carotenoidi provitaminici (aggiunti 2026-10-09, vedi docs/PRD.md §4.3)
   // NON includiamo ancora il retinolo preformato (fonti animali): l'app
   // non ha ancora un campo per quello, limitazione dichiarata.
   beta_carotene_mcg: number;
   other_provitamin_a_carotenoids_mcg: number; // alfa-carotene, beta-criptoxantina
-  // Stato della matrice per il beta-carotene (vedi PRD.md §4.2 — Livny 2003
+  // Stato della matrice per il beta-carotene (vedi docs/PRD.md §4.2 — Livny 2003
   // integrato il 2026-10-09 su richiesta esplicita dell'utente, che accetta
   // il rischio di doppio conteggio col fattore RAE medio ("al massimo lo
   // togliamo più avanti come dato")). NON si applica a
@@ -65,7 +65,7 @@ export interface FoodItem {
   carotenoid_matrix_state: "raw_intact" | "cooked_or_disrupted";
 
   // Bioaccessibilità dello zinco post-cottura (aggiunto 2026-10-09, vedi
-  // PRD.md §4.4). SCOPO VOLUTAMENTE RISTRETTO: Doniec et al. 2022 hanno
+  // docs/PRD.md §4.4). SCOPO VOLUTAMENTE RISTRETTO: Doniec et al. 2022 hanno
   // misurato SOLO cavoletti di Bruxelles, e nel paper stesso gli autori
   // non generalizzano ad altre crucifere (anzi notano che le differenze
   // con altri studi "possono essere dovute proprio alla differenza di
@@ -75,7 +75,7 @@ export interface FoodItem {
   zinc_bioaccessibility_bucket: "none" | "brussels_sprouts_boiled" | "brussels_sprouts_steamed";
 
   // Micronutrienti "senza modello di biodisponibilità pubblicato" (aggiunti
-  // 2026-10-09, vedi PRD.md §4.0 e §4.5). Per questi non esiste, nella
+  // 2026-10-09, vedi docs/PRD.md §4.0 e §4.5). Per questi non esiste, nella
   // letteratura recuperata finora, un'equazione di assorbimento citabile
   // come per ferro/zinco/calcio/B12: vengono quindi mostrati come
   // composizione grezza (sourced a un database di composizione, es. USDA

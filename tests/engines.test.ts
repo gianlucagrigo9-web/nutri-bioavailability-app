@@ -209,7 +209,7 @@ describe("calculateBioavailableZinc — Livello C (calibrazione Miller 2007, Eq.
 // SCOPO: questo strato si applica ESCLUSIVAMENTE a food item con
 // zinc_bioaccessibility_bucket diverso da "none" (cioè solo cavoletti di
 // Bruxelles bolliti/al vapore). Verificato nel paper stesso (PMC8951108):
-// gli autori NON generalizzano ad altre crucifere -- vedi PRD.md §4.4.
+// gli autori NON generalizzano ad altre crucifere -- vedi docs/PRD.md §4.4.
 // Placement: DOPO l'equazione di Miller 2007 (non come input), perché
 // Miller è calibrata su dato in vivo (zinco dietetico totale, non
 // pre-filtrato per bioaccessibilità in vitro) -- applicarlo prima
@@ -253,7 +253,7 @@ describe("calculateBioavailableZinc — Livello B (proprietà, bioaccessibilità
     expect(mixedResult.value).toBeLessThan(allNormal.value);
     expect(mixedResult.value).toBeGreaterThan(allBoiled.value);
   });
-  it("quando il bucket è usato, evidenceLevel scende a 3 (eredita l'evidenza più debole fra Miller 2007 e Doniec 2022, come da PRD.md §6)", () => {
+  it("quando il bucket è usato, evidenceLevel scende a 3 (eredita l'evidenza più debole fra Miller 2007 e Doniec 2022, come da docs/PRD.md §6)", () => {
     const withBucket = nutritionEngine.calculateBioavailableZinc(mealWith({ zinc_mg: 9.81, phytates_mg: 0, zinc_bioaccessibility_bucket: "brussels_sprouts_boiled" }));
     expect(withBucket.evidenceLevel).toBe(3);
     if (withBucket.sourceIds.indexOf("DONIEC_2022_MOLECULES") === -1) throw new Error("sourceIds deve includere DONIEC_2022_MOLECULES quando il bucket è usato");
@@ -545,7 +545,7 @@ describe("calculateVitaminARAE — integrazione Livny 2003 (crudo vs cotto, deci
 // COMPUTATIONAL NUTRITION ENGINE — Micronutrienti senza modello di
 // biodisponibilità pubblicato (magnesio, rame, selenio, iodio, vitamina K)
 //
-// Vedi PRD.md §4.0 e §4.5: nessuna equazione di assorbimento disponibile
+// Vedi docs/PRD.md §4.0 e §4.5: nessuna equazione di assorbimento disponibile
 // per questi nutrienti, quindi la composizione grezza viene mostrata
 // comunque, marcata bioavailabilityAdjusted=false ("info sommarie"), per
 // decisione esplicita dell'utente ("le info non implementabili per

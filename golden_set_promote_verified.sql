@@ -7,7 +7,7 @@
 -- (app/admin/data-entry/actions.ts) forza sempre verification_status='draft'
 -- su qualunque inserimento, per disegno: 'verified' e' volutamente una
 -- promozione umana esplicita, mai un default -- la filosofia
--- "Human-in-the-Loop" di questo progetto (vedi PRD.md §4.6 e il commento
+-- "Human-in-the-Loop" di questo progetto (vedi docs/PRD.md §4.6 e il commento
 -- storico in DataEntryDashboard.tsx). Questo file e' quella promozione
 -- esplicita, richiesta direttamente dall'utente il 2026-10-09 dopo aver
 -- ricevuto il risultato di un cross-check meccanico indipendente: ogni

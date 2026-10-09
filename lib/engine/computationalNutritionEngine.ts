@@ -67,7 +67,7 @@ export class ComputationalNutritionEngine {
   // una misura — ragionevole perché Miller non scompone per alimento, ma va
   // detto. evidenceLevel scende quando questa correzione si applica
   // (eredita il livello più debole tra le evidenze coinvolte, come da
-  // PRD.md §6).
+  // docs/PRD.md §6).
   public calculateBioavailableZinc(context: Meal | DailyDiet): SourcedValue {
     const foods = flattenFoods(context);
     const daily = isDailyDiet(context);
@@ -130,7 +130,7 @@ export class ComputationalNutritionEngine {
       value: +finalValue.toFixed(2),
       confidenceLow: +finalLow.toFixed(2),
       confidenceHigh: +finalHigh.toFixed(2),
-      // eredita il livello più debole tra le evidenze coinvolte (PRD.md §6):
+      // eredita il livello più debole tra le evidenze coinvolte (docs/PRD.md §6):
       // la correzione di bioaccessibilità (studio singolo, n=3, in vitro) è
       // più debole sia del Miller giornaliero (1) che di quello per pasto (2).
       evidenceLevel: usedBioaccessibilityDerating ? 3 : (daily ? 1 : 2),
@@ -138,7 +138,7 @@ export class ComputationalNutritionEngine {
         ? ["MILLER_2007_JNUTR", "DONIEC_2022_MOLECULES"]
         : ["MILLER_2007_JNUTR"],
       verificationStatus: usedBioaccessibilityDerating ? "draft" : (daily ? "verified" : "draft"),
-      bioavailabilityAdjusted: true // vedi PRD.md §4.0: equazione di Miller 2007 realmente applicata
+      bioavailabilityAdjusted: true // vedi docs/PRD.md §4.0: equazione di Miller 2007 realmente applicata
     };
   }
 
@@ -184,7 +184,7 @@ export class ComputationalNutritionEngine {
       evidenceLevel: 2,
       sourceIds: ["HEANEY_WEAVER_RECKER_1988_AJCN", "HEANEY_WEAVER_1990_AJCN"],
       verificationStatus: anyLowOxalate ? "verified" : "draft",
-      bioavailabilityAdjusted: true // vedi PRD.md §4.0: modello a 3 categorie Heaney&Weaver realmente applicato
+      bioavailabilityAdjusted: true // vedi docs/PRD.md §4.0: modello a 3 categorie Heaney&Weaver realmente applicato
     };
   }
 
@@ -264,7 +264,7 @@ export class ComputationalNutritionEngine {
       // "draft": il termine polifenoli e il fattore carne mancante restano
       // non verificati contro la letteratura primaria completa.
       verificationStatus: "draft",
-      bioavailabilityAdjusted: true // vedi PRD.md §4.0: Eq.2 di Hallberg 2000 realmente applicata
+      bioavailabilityAdjusted: true // vedi docs/PRD.md §4.0: Eq.2 di Hallberg 2000 realmente applicata
     };
   }
 
@@ -404,7 +404,7 @@ export class ComputationalNutritionEngine {
   // derivato per "raw_intact" (9.44:1) rischia di contare l'effetto
   // cottura una seconda volta. evidenceLevel riflette questo (piu' basso
   // di entrambe le fonti prese singolarmente). Rimovibile: se smentito,
-  // si torna al 6:1 flat (vedi PRD.md §4.2).
+  // si torna al 6:1 flat (vedi docs/PRD.md §4.2).
   //
   // other_provitamin_a_carotenoids_mcg (alfa-carotene, beta-criptoxantina):
   // Livny ha misurato solo beta-carotene da carote -- nessun aggiustamento
@@ -452,7 +452,7 @@ export class ComputationalNutritionEngine {
   // --- MICRONUTRIENTI SENZA MODELLO DI BIODISPONIBILITÀ PUBBLICATO
   // (magnesio, rame, selenio, iodio, vitamina K) ---
   //
-  // Vedi PRD.md §4.0 e §4.5. A differenza di ferro/zinco/calcio/B12/folati/
+  // Vedi docs/PRD.md §4.0 e §4.5. A differenza di ferro/zinco/calcio/B12/folati/
   // vitamina A, per questi nutrienti non abbiamo recuperato in letteratura
   // un'equazione o un fattore di conversione che modelli l'ASSORBIMENTO
   // (quanto viene davvero captato dall'organismo, a seconda della matrice/
@@ -493,10 +493,10 @@ export class ComputationalNutritionEngine {
       value: +total.toFixed(3),
       confidenceLow: null,  // nessun modello di assorbimento: nessuna fascia da propagare
       confidenceHigh: null,
-      evidenceLevel: 5, // database di composizione, non uno studio di assorbimento (vedi PRD.md §4.0)
+      evidenceLevel: 5, // database di composizione, non uno studio di assorbimento (vedi docs/PRD.md §4.0)
       sourceIds,
       verificationStatus: "draft", // non ancora verificato riga per riga nel Golden Set
-      bioavailabilityAdjusted: false // composizione grezza: nessun modello esiste ancora, vedi PRD.md §4.0
+      bioavailabilityAdjusted: false // composizione grezza: nessun modello esiste ancora, vedi docs/PRD.md §4.0
     };
   }
 

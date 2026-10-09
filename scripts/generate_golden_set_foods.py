@@ -382,7 +382,7 @@ FOODS = [
     },
     {
         # 20mo alimento: l'esempio fortificato richiesto per esercitare
-        # is_fortified_folate su un dato reale (vedi PRD.md §4.6). Non e'
+        # is_fortified_folate su un dato reale (vedi docs/PRD.md §4.6). Non e'
         # un cereale da colazione (Kellogg's Corn Flakes, provato in una
         # sessione precedente, non era raggiungibile), ma una voce SR
         # Legacy generica USDA: la pasta arricchita negli USA e' soggetta
@@ -424,7 +424,7 @@ FOODS = [
             # Vitamina K: il record FDC riporta separatamente fillochinone
             # (K1) = 0.0 µg e diidro-fillochinone = 0.5 µg; inserito solo
             # il fillochinone (K1), coerente con quanto l'engine modella
-            # (vedi PRD.md §4.5: "non distingue K1/K2" -- il
+            # (vedi docs/PRD.md §4.5: "non distingue K1/K2" -- il
             # diidro-fillochinone non e' K2 e non e' trattato qui).
             "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00,
             "folate_mcg": 66,  # acido folico, non folato totale -- vedi nota sopra
@@ -507,7 +507,7 @@ lines.append("")
 lines.append("-- ----------------------------------------------------------------------------")
 lines.append("-- Nuove fonti di letteratura (ossalati/fitati; USDA_FDC e' gia' un placeholder")
 lines.append("-- generico usato dall'engine per magnesio/rame/selenio/iodio/vit.K, vedi")
-lines.append("-- PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)")
+lines.append("-- docs/PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)")
 lines.append("-- ----------------------------------------------------------------------------")
 lines.append("INSERT INTO sources (id, citation, url) VALUES")
 lines.append("  ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov'),")
@@ -634,7 +634,7 @@ lines.append("--   database come Phenol-Explorer, non ancora consultati per ques
 lines.append("--   specifici) -- gap preesistente, non introdotto ora.")
 lines.append("-- - iodine_mcg: non trovato per NESSUNO dei 19 alimenti (USDA FDC non riporta")
 lines.append("--   lo iodio per la maggior parte delle voci standard) -- confirma il gap gia'")
-lines.append("--   dichiarato in PRD.md §4.0/§4.5.")
+lines.append("--   dichiarato in docs/PRD.md §4.0/§4.5.")
 lines.append("-- - food_broccoli_raw: manca la controparte 'cotta' (Broccoli, cooked, boiled,")
 lines.append("--   drained, without salt, FRESCO non surgelato). Due FDC ID tentati in questa")
 lines.append("--   sessione erano sbagliati (170380 = la versione SURGELATA dello stesso")
