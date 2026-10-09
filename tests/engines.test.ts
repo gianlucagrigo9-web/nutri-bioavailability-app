@@ -101,6 +101,11 @@ function makeFood(overrides: Partial<FoodItem> = {}): FoodItem {
     matrix_category_calcium: "medium_oxalate",
     macs_mg: 0,
     botanical_family: null,
+    vitamin_b12_mcg: 0,
+    folate_mcg: 0,
+    is_fortified_folate: false,
+    beta_carotene_mcg: 0,
+    other_provitamin_a_carotenoids_mcg: 0,
     ...overrides
   };
 }
@@ -309,6 +314,125 @@ describe("calculateBioavailableIron — LIMITE NOTO del modello primario (Eq.2 H
       expect(biasPercent).toBeLessThan(5); // piccolo, ma monitorato: se cresce, va rivisto
     }
   );
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Vitamina B12 (IOM 1998 DRI)
+// =============================================================================
+describe("calculateBioavailableB12 — Livello A (difensivo)", () => {
+  it("pasto vuoto -> 0, nessuna eccezione", () => {
+    expect(nutritionEngine.calculateBioavailableB12({ foods: [] }).value).toBe(0);
+  });
+  it("B12 dietetica = 0 -> assorbimento 0 (niente divisione per zero, KM>0 comunque)", () => {
+    const meal = mealWith({ vitamin_b12_mcg: 0 });
+    expect(nutritionEngine.calculateBioavailableB12(meal).value).toBe(0);
+  });
+});
+
+describe("calculateBioavailableB12 — Livello B (proprietà fisiologiche)", () => {
+  it("l'assorbito non supera mai la dose ingerita (vincolo fisico, non solo fisiologico)", () => {
+    const r = nutritionEngine.calculateBioavailableB12(mealWith({ vitamin_b12_mcg: 50 }));
+    expect(r.value).toBeLessThanOrEqual(50);
+  });
+  it("l'assorbito aumenta sempre con la dose (monotono), ma la FRAZIONE assorbita diminuisce (saturazione)", () => {
+    const low = nutritionEngine.calculateBioavailableB12(mealWith({ vitamin_b12_mcg: 1 }));
+    const high = nutritionEngine.calculateBioavailableB12(mealWith({ vitamin_b12_mcg: 10 }));
+    expect(high.value).toBeGreaterThan(low.value);
+    expect(high.value / 10).toBeLessThan(low.value / 1);
+  });
+});
+
+describe("calculateBioavailableB12 — Livello C (calibrazione sul punto Adams 1971 a dose=1µg)", () => {
+  it("dose=1µg -> assorbito ≈ 0.51µg (il Km è calibrato esattamente su questo punto, Adams et al. 1971)", () => {
+    const meal = mealWith({ vitamin_b12_mcg: 1 });
+    expect(nutritionEngine.calculateBioavailableB12(meal).value).toBeCloseTo(0.51, 1);
+  });
+});
+
+describe("calculateBioavailableB12 — LIMITE NOTO (mismatch del modello alle dosi più alte)", () => {
+  itKnownLimitation(
+    "a dose=5µg e dose=25µg il modello (calibrato sul punto a 1µg) sovrastima l'assorbimento reale riportato da Adams et al. 1971 del 30-60% — non è nascosto, è quantificato qui",
+    () => {
+      const d5 = nutritionEngine.calculateBioavailableB12(mealWith({ vitamin_b12_mcg: 5 })).value;
+      const d25 = nutritionEngine.calculateBioavailableB12(mealWith({ vitamin_b12_mcg: 25 })).value;
+      const real5 = 1.0;  // Adams 1971: ~20% di 5µg
+      const real25 = 1.25; // Adams 1971: "poco più del 5%" di 25µg
+      const overshoot5 = (d5 / real5 - 1) * 100;
+      const overshoot25 = (d25 / real25 - 1) * 100;
+      expect(overshoot5).toBeGreaterThan(20); // confermiamo che il mismatch è reale e di questa grandezza
+      expect(overshoot25).toBeGreaterThan(50);
+    }
+  );
+  itKnownLimitation(
+    "il modello non distingue B12 cristallina (Adams 1971, su cui è calibrato) da B12 legata alla matrice alimentare (Heyssel 1966, pasta di fegato: 38µg -> 4.1µg/11% assorbiti, MOLTO più di quanto il modello predica qui) — direzione OPPOSTA al mismatch sopra, limite strutturale del modello non di un solo segno",
+    () => {
+      const meal = mealWith({ vitamin_b12_mcg: 38 });
+      const predicted = nutritionEngine.calculateBioavailableB12(meal).value;
+      const realHeyssel = 4.1;
+      expect(predicted).toBeLessThan(realHeyssel); // il modello SOTTOstima qui, mentre SOVRAstima a dosi crystalline più alte
+    }
+  );
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Folati -> DFE (FNB / NIH ODS)
+// =============================================================================
+describe("calculateFolateDFE — Livello A (difensivo)", () => {
+  it("pasto vuoto -> 0", () => {
+    expect(nutritionEngine.calculateFolateDFE({ foods: [] }).value).toBe(0);
+  });
+  it("folato = 0 -> 0, non negativo", () => {
+    const meal = mealWith({ folate_mcg: 0 });
+    expect(nutritionEngine.calculateFolateDFE(meal).value).toBe(0);
+  });
+});
+
+describe("calculateFolateDFE — Livello C (conversione ufficiale FNB)", () => {
+  it("folato alimentare non fortificato -> 1 DFE = 1µg esatto (fattore 1.0)", () => {
+    const meal = mealWith({ folate_mcg: 100, is_fortified_folate: false });
+    expect(nutritionEngine.calculateFolateDFE(meal).value).toBeCloseTo(100, 2);
+  });
+  it("acido folico fortificato -> DFE = µg / 0.6 esatto (= µg x 1.7, formula FDA equivalente)", () => {
+    const meal = mealWith({ folate_mcg: 60, is_fortified_folate: true });
+    expect(nutritionEngine.calculateFolateDFE(meal).value).toBeCloseTo(100, 1); // 60/0.6 = 100
+  });
+  it("nessuna fascia di confidenza inventata: è una convenzione normativa, non una misura con SD", () => {
+    const meal = mealWith({ folate_mcg: 100 });
+    const r = nutritionEngine.calculateFolateDFE(meal);
+    expect(r.confidenceLow === null ? 1 : 0).toBe(1);
+    expect(r.confidenceHigh === null ? 1 : 0).toBe(1);
+  });
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Vitamina A -> RAE (NNR2023)
+// =============================================================================
+describe("calculateVitaminARAE — Livello A (difensivo)", () => {
+  it("pasto vuoto -> 0", () => {
+    expect(nutritionEngine.calculateVitaminARAE({ foods: [] }).value).toBe(0);
+  });
+  it("nessun carotenoide -> 0, non negativo, bioavailabilityAdjusted=false (è una conversione, non un modello)", () => {
+    const meal = mealWith({ beta_carotene_mcg: 0, other_provitamin_a_carotenoids_mcg: 0 });
+    const r = nutritionEngine.calculateVitaminARAE(meal);
+    expect(r.value).toBe(0);
+  });
+});
+
+describe("calculateVitaminARAE — Livello C (conversione adottata NNR2023)", () => {
+  it("beta-carotene alimentare -> RAE = µg / 6 esatto", () => {
+    const meal = mealWith({ beta_carotene_mcg: 600 });
+    expect(nutritionEngine.calculateVitaminARAE(meal).value).toBeCloseTo(100, 2); // 600/6=100
+  });
+  it("altri carotenoidi provitaminici -> RAE = µg / 12 esatto", () => {
+    const meal = mealWith({ other_provitamin_a_carotenoids_mcg: 1200 });
+    expect(nutritionEngine.calculateVitaminARAE(meal).value).toBeCloseTo(100, 2); // 1200/12=100
+  });
+  it("bioavailabilityAdjusted=false: non distingue crudo da cotto (limite dichiarato, Livny 2003 non ancora integrato)", () => {
+    const meal = mealWith({ beta_carotene_mcg: 600 });
+    if (nutritionEngine.calculateVitaminARAE(meal).bioavailabilityAdjusted !== false) {
+      throw new Error("bioavailabilityAdjusted dovrebbe essere false: è una conversione media, non un modello crudo/cotto");
+    }
+  });
 });
 
 // =============================================================================

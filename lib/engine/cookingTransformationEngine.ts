@@ -37,7 +37,9 @@ const NUTRIENT_FIELD_MAP: Partial<Record<string, keyof FoodItem>> = {
   phytates: "phytates_mg",
   oxalates: "oxalates_mg",
   polyphenols: "polyphenols_mg",
-  macs: "macs_mg"
+  macs: "macs_mg",
+  vitamin_b12: "vitamin_b12_mcg",
+  folate: "folate_mcg"
 };
 
 export class CookingTransformationEngine {

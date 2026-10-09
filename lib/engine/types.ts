@@ -45,6 +45,17 @@ export interface FoodItem {
   // Microbiota
   macs_mg: number;
   botanical_family: string | null;
+
+  // Vitamina B12 e Folati (aggiunti 2026-10-09, vedi PRD.md §4.0 e §4.2)
+  vitamin_b12_mcg: number;
+  folate_mcg: number;          // folato alimentare "naturale" (non da fortificazione)
+  is_fortified_folate: boolean; // true solo per alimenti fortificati con acido folico sintetico
+
+  // Vitamina A / carotenoidi provitaminici (aggiunti 2026-10-09, vedi PRD.md §4.3)
+  // NON includiamo ancora il retinolo preformato (fonti animali): l'app
+  // non ha ancora un campo per quello, limitazione dichiarata.
+  beta_carotene_mcg: number;
+  other_provitamin_a_carotenoids_mcg: number; // alfa-carotene, beta-criptoxantina
 }
 
 export interface Meal {

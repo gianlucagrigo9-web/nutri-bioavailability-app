@@ -86,6 +86,23 @@ Questo si implementa con un campo booleano aggiuntivo nel contratto `SourcedValu
 
 La UI (non ancora disegnata, ma il contratto dati è già pronto per questo) userà `bioavailabilityAdjusted` — non `evidenceLevel` da solo — per decidere il trattamento visivo (es. colore/badge "stima di composizione" vs "biodisponibilità calcolata"): sono due assi diversi (qualità della fonte vs presenza stessa di un modello di assorbimento) e tenerli distinti evita di dover sovraccaricare `evidenceLevel` con un significato che non gli appartiene.
 
+### 4.1 Vitamina B12 e Folati (aggiunti 2026-10-09)
+
+- **B12** (`calculateBioavailableB12`): due componenti sourced separatamente (via attiva saturabile 1.5-2.5µg/pasto, Scott 1997; via passiva ~1%, Berlin 1968/Doscherholmen&Hagen 1957), combinate con una curva Michaelis-Menten la cui forma (Km) NON è fittata da un paper ma calibrata a occhio sul punto a dose=1µg (Adams 1971) — limite dichiarato e quantificato nei test ("LIMITE NOTO"): il modello sovrastima l'assorbimento reale del 30-60% a dosi 5-25µg, e non distingue B12 cristallina da B12 legata alla matrice alimentare (dove Heyssel 1966 su pasta di fegato mostra l'opposto: assorbimento reale più alto di quanto il modello preveda). `evidenceLevel: 3`, `draft`.
+- **Folati -> DFE** (`calculateFolateDFE`): conversione ufficiale FNB/NIH-ODS, non un'equazione di assorbimento. `evidenceLevel: 2`, `verified` (la conversione stessa non è in discussione), nessuna fascia di confidenza (la fonte non ne pubblica una).
+
+### 4.2 Vitamina A (aggiunta 2026-10-09) — decisione aperta, non ancora chiusa
+
+`calculateVitaminARAE` implementa SOLO la conversione media adottata da NNR2023 (Olsen & Lerner 2023, Food Nutr Res 67:10229): 6:1 per beta-carotene alimentare, 12:1 per altri carotenoidi provitaminici. La fonte stessa dichiara di non avere un'evidenza che permetta un fattore preciso — per questo `evidenceLevel: 5`, `bioavailabilityAdjusted: false` (è una conversione stechiometrica media, non un modello di assorbimento specifico).
+
+**Trovato ma NON integrato**: Livny et al. 2003 (*Eur J Nutr* 42(6):338-45, studio su ileostomia, misura diretta) mostra 65.1±7.4% di beta-carotene assorbito da carote cotte/pureed vs 41.4±7.4% da carote crude tritate (stesso pasto, stesso contenuto di olio in entrambe le condizioni). Non l'ho combinato con il fattore 6:1 di NNR2023 perché non sappiamo se/come il 6:1 "medio" incorpora già una miscela implicita di preparazioni crudo/cotto nella popolazione — combinarli alla cieca rischierebbe un doppio conteggio dell'effetto cottura (ridurre due volte per lo stesso motivo). **Decisione da prendere insieme**: (a) ignorare Livny e restare sul fattore medio NNR2023 finché non troviamo una fonte che scompone il 6:1 per matrice, oppure (b) sostituire il 6:1 con un fattore categoriale crudo/cotto nostro, dichiarando esplicitamente che è una ricombinazione non pubblicata di due fonti diverse (evidenceLevel più basso di entrambe le fonti originali).
+
+### 4.3 Crucifere: fattori di ritenzione trovati (aggiunto 2026-10-09)
+
+Colmato uno dei buchi espliciti di `retention_factors_legumi_tuberi.sql`: Doniec et al. 2022 (*Molecules* 27(6):1861) su cavoletti di Bruxelles bolliti/a vapore — vedi `retention_factors_crucifere.sql`. Trovata anche una misura di **bioaccessibilità dello zinco** (non solo ritenzione di massa) che scende da 17.0% (crudo) a 6.6-6.8% (cotto) — un calo molto più grande del semplice fattore di ritenzione di massa (0.78-0.81). Questo suggerisce che `CookingTransformationEngine` oggi, applicando solo fattori di ritenzione di massa, possa sottostimare l'impatto reale della cottura sulla biodisponibilità per alcuni nutrienti/matrici. Non implementato stanotte (richiede un nuovo meccanismo, decisione esplicita rimandata).
+
+**Fitati**: ricercati di nuovo stanotte (secondo tentativo, dopo quello della sessione precedente), ancora nessun fattore di ritenzione citabile trovato per cottura di legumi/crucifere. Resta assente per decisione, non per dimenticanza.
+
 ### 4.1 Esempio reale di verifica (fatto ora, non ipotetico)
 
 Per mostrare come funziona in pratica la Regola 1 (§2): il file Excel caricato riporta per `veg_leafy_soft / boiled` un retention factor di Vitamina C = **0.45** (45%), attribuito genericamente a "Bognár / EuroFIR" (nessun URL, nessuna pagina, nessun DOI).

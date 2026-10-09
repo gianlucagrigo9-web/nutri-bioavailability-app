@@ -1,8 +1,10 @@
 # App nutrizione — biodisponibilità, cottura, microbiota, impatto ambientale
 
-Stato: motori core (ferro/zinco/calcio, microbiota, cottura, LCA) riscritti
-secondo il contratto `SourcedValue` definito in `PRD.md` (v2.0), con test
-reali eseguiti in `tests/engines.test.ts`.
+Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RAE,
+microbiota, cottura, LCA) riscritti secondo il contratto `SourcedValue`
+definito in `PRD.md` (v2.0), con test reali eseguiti in
+`tests/engines.test.ts` (58 test: 55 PASS, 0 FAIL, 3 "limite noto"
+dichiarati e quantificati, non nascosti).
 
 ## Regole d'ingaggio (vincolanti, definite dall'utente)
 
@@ -30,12 +32,17 @@ reali eseguiti in `tests/engines.test.ts`.
   password, con `verification_status` forzato a `draft` finché non
   revisionato.
 - `*.sql` — migrazioni/fix per lo schema Supabase (RLS, source IDs,
-  fattori di ritenzione verificati su USDA Release 6 / Bognár 2002).
+  fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
+  Doniec 2022 per le crucifere).
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
-  dati, regole d'ingaggio).
+  dati, regole d'ingaggio, §4.0-4.3 per le decisioni su B12/folati/
+  vitamina A/crucifere prese in autonomia il 2026-10-09).
 - `computationalNutritionEngine_criteri_e_test.md` — criteri di
   accettazione e proposta di test per il motore di nutrizione,
   approvata prima della scrittura del codice.
+- `docs/workflow_retrieval_letteratura.md` — procedura ripetibile per
+  cercare/verificare letteratura su nuovi nutrienti (WebSearch+WebFetch,
+  non uno script autonomo: la rete della shell è bloccata da policy).
 
 ## Limiti noti (dichiarati, non nascosti)
 
@@ -43,6 +50,14 @@ reali eseguiti in `tests/engines.test.ts`.
   completo di Hallberg (solo vit.C, fitati, polifenoli implementati); il
   termine fitato dell'Equazione 2 pubblicata ha un bias strutturale
   piccolo (~+3%) documentato in `tests/engines.test.ts`.
-- Golden Set di alimenti e relativi fattori di ritenzione: solo
-  Legumi/Tuberi (USDA Release 6, boiled) sono sourced finora; il resto
-  del dataset va popolato riga per riga tramite il pannello admin.
+- B12: la curva di saturazione non è fittata da un paper (solo i due
+  estremi — ceiling e via passiva — sono sourced); sovrastima
+  l'assorbimento reale del 30-60% a dosi 5-25µg (vedi PRD.md §4.1).
+- Vitamina A: solo la conversione media RAE (NNR2023), non distingue
+  crudo/cotto nonostante esista un dato reale (Livny 2003) non ancora
+  integrato per rischio di doppio conteggio (vedi PRD.md §4.2).
+- Golden Set di alimenti e relativi fattori di ritenzione: Legumi/Tuberi
+  (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
+  sourced; fitati e cottura a vapore per legumi restano assenti dopo due
+  tentativi di ricerca — il resto del dataset va popolato riga per riga
+  tramite il pannello admin.
