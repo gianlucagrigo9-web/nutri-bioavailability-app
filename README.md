@@ -35,12 +35,13 @@ noto" dichiarati e quantificati, non nascosti).
 - `*.sql` — migrazioni/fix per lo schema Supabase (RLS, source IDs,
   fattori di ritenzione verificati su USDA Release 6 / Bognár 2002 /
   Doniec 2022 per le crucifere).
-- `golden_set_foods.sql` — 19 dei 20 alimenti target del Golden Set MVP,
-  ogni valore sourced (USDA FoodData Central, o letteratura specifica per
-  ossalati/fitati), generato da `scripts/generate_golden_set_foods.py`
-  (quest'ultimo è la fonte di verità: per aggiungere un alimento, si
-  modifica lo script e si rigenera il file, non il contrario). Vedi
-  PRD.md §4.6 per i gap dichiarati.
+- `golden_set_foods.sql` — tutti i 20 alimenti target del Golden Set MVP
+  (traguardo raggiunto), ogni valore sourced (USDA FoodData Central, o
+  letteratura specifica per ossalati/fitati), generato da
+  `scripts/generate_golden_set_foods.py` (quest'ultimo è la fonte di
+  verità: per aggiungere un alimento, si modifica lo script e si
+  rigenera il file, non il contrario). Vedi PRD.md §4.6 per i gap
+  qualitativi ancora dichiarati (nessuno bloccante per il conteggio).
 - `PRD.md` — product requirements document v2.0 (perimetro MVP, schema
   dati, regole d'ingaggio, §4.0-4.6 per le decisioni su B12/folati/
   vitamina A/crucifere/micronutrienti senza modello/Golden Set prese il
@@ -85,15 +86,18 @@ noto" dichiarati e quantificati, non nascosti).
   (USDA Release 6) e Crucifere/cavoletti di Bruxelles (Doniec 2022) sono
   sourced; fitati e cottura a vapore per legumi restano assenti dopo due
   tentativi di ricerca.
-- Golden Set (`golden_set_foods.sql`): 19/20 alimenti popolati, tutti
-  sourced (vedi PRD.md §4.6). Mancano ancora: l'ultimo alimento (un
-  esempio fortificato con acido folico, per esercitare
-  `is_fortified_folate` su un dato reale, oggi solo su dati sintetici),
-  la controparte "cotta" dei broccoli (FDC ID non trovato in questa
-  sessione dopo due tentativi sbagliati — vedi PRD.md §4.6), alcuni campi
-  non recuperati per kale/latte in questa sessione (fetch troncato, non
-  assenti per certo dalla fonte), e una riga reale per i cavoletti di
-  Bruxelles "al vapore" (nessuna misura FDC diretta esiste per quello
-  stato — derivarla avrebbe mischiato dato misurato e simulato nella
-  stessa riga, scelto di non farlo: vedi PRD.md §4.6 per il punto
-  architetturale che questo rivela su `CookingTransformationEngine`).
+- Golden Set (`golden_set_foods.sql`): 20/20 alimenti popolati (target
+  MVP raggiunto), tutti sourced, tutti ancora `draft` in attesa di
+  revisione umana a campione (vedi PRD.md §4.6). Gap qualitativi ancora
+  dichiarati (non bloccanti per il conteggio): la controparte "cotta" dei
+  broccoli (FDC ID non trovato dopo due tentativi sbagliati); alcuni
+  campi non recuperati per kale/latte (fetch troncato, non assenti per
+  certo dalla fonte); una riga reale per i cavoletti di Bruxelles "al
+  vapore" (nessuna misura FDC diretta esiste per quello stato — derivarla
+  avrebbe mischiato dato misurato e simulato nella stessa riga, scelto di
+  non farlo: vedi PRD.md §4.6 per il punto architetturale che questo
+  rivela su `CookingTransformationEngine`); e per la pasta arricchita
+  (l'alimento fortificato), il campo `folate_mcg` contiene solo l'acido
+  folico (66 µg) e non la quota di folato naturale (7 µg), per i limiti
+  dello schema a singolo campo usato da `calculateFolateDFE` (vedi
+  PRD.md §4.6).

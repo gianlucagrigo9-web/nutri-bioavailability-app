@@ -380,6 +380,57 @@ FOODS = [
             "vitamin_k_mcg": 4.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 172,
         },
     },
+    {
+        # 20mo alimento: l'esempio fortificato richiesto per esercitare
+        # is_fortified_folate su un dato reale (vedi PRD.md §4.6). Non e'
+        # un cereale da colazione (Kellogg's Corn Flakes, provato in una
+        # sessione precedente, non era raggiungibile), ma una voce SR
+        # Legacy generica USDA: la pasta arricchita negli USA e' soggetta
+        # alla fortificazione obbligatoria FDA con acido folico dal 1998
+        # (farina enriched), quindi e' un esempio reale e non un cereale
+        # "a scelta" per convenienza.
+        #
+        # ATTENZIONE al significato del campo folate_mcg per questa riga:
+        # types.ts documenta folate_mcg come "folato alimentare naturale",
+        # ma calculateFolateDFE (vedi computationalNutritionEngine.ts:355)
+        # usa UN SOLO campo numerico con doppio significato a seconda del
+        # flag: se is_fortified_folate=false, folate_mcg è il folato
+        # alimentare naturale (DFE = valore x1); se true, il valore viene
+        # diviso per 0.6 (= x1.7, conversione FNB per acido folico da
+        # fortificazione) -- quindi per un alimento fortificato il campo
+        # deve contenere la quota di ACIDO FOLICO sintetico, non il folato
+        # totale. Il record FDC per questa pasta riporta tre numeri
+        # distinti (folato totale 73 µg, acido folico 66 µg, folato
+        # alimentare "naturale" 7 µg): inserito qui SOLO l'acido folico
+        # (66 µg), coerente con la semantica a singolo-campo già
+        # implementata e testata (tests/engines.test.ts, "acido folico
+        # fortificato"). La quota di folato naturale (7 µg) resta quindi
+        # non rappresentata in questa riga -- limite preesistente dello
+        # schema a un solo campo folate_mcg, non introdotto ora, ma
+        # dichiarato qui perché e' il primo alimento reale che lo rende
+        # visibile (prima esercitato solo da dati sintetici nei test).
+        "food_id": "food_pasta_enriched_cooked",
+        "name_it": "Pasta, cotta, arricchita (enriched), senza sale aggiunto",
+        "matrix_id": "pasta_enriched_wheat",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Poaceae",
+        "is_fortified_folate": True,
+        "fdc_id": 169737,
+        "fdc_name": "Pasta, cooked, enriched, without added salt",
+        "values": {
+            "iron_mg": 1.28, "zinc_mg": 0.51, "calcium_mg": 7, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 18.0, "copper_mg": 0.100, "selenium_mcg": 26.4,
+            # Vitamina K: il record FDC riporta separatamente fillochinone
+            # (K1) = 0.0 µg e diidro-fillochinone = 0.5 µg; inserito solo
+            # il fillochinone (K1), coerente con quanto l'engine modella
+            # (vedi PRD.md §4.5: "non distingue K1/K2" -- il
+            # diidro-fillochinone non e' K2 e non e' trattato qui).
+            "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00,
+            "folate_mcg": 66,  # acido folico, non folato totale -- vedi nota sopra
+            "beta_carotene_mcg": 0, "other_provitamin_a_carotenoids_mcg": 0,
+        },
+    },
 ]
 
 MATRICES_NEEDED_NEW = [
@@ -392,6 +443,7 @@ MATRICES_NEEDED_NEW = [
     ("citrus_oranges", "Arance"),
     ("eggs", "Uova"),
     ("salmon_fish", "Salmone"),
+    ("pasta_enriched_wheat", "Pasta di grano, arricchita (enriched)"),
 ]
 
 SOURCES_NEW = [
@@ -517,6 +569,9 @@ for food in FOODS:
     if "zinc_bioaccessibility_bucket" in food:
         cols.append("zinc_bioaccessibility_bucket")
         vals.append(sql_str(food["zinc_bioaccessibility_bucket"]))
+    if "is_fortified_folate" in food:
+        cols.append("is_fortified_folate")
+        vals.append(str(food["is_fortified_folate"]).lower())
     lines.append(f"INSERT INTO foods_raw ({', '.join(cols)}) VALUES")
     lines.append(f"  ({', '.join(vals)})")
     lines.append(f"ON CONFLICT (food_id) DO UPDATE SET")
@@ -526,6 +581,7 @@ for food in FOODS:
     lines.append(f"  botanical_family = EXCLUDED.botanical_family" +
                  (",\n  carotenoid_matrix_state = EXCLUDED.carotenoid_matrix_state" if "carotenoid_matrix_state" in food else "") +
                  (",\n  zinc_bioaccessibility_bucket = EXCLUDED.zinc_bioaccessibility_bucket" if "zinc_bioaccessibility_bucket" in food else "") +
+                 (",\n  is_fortified_folate = EXCLUDED.is_fortified_folate" if "is_fortified_folate" in food else "") +
                  ";")
     lines.append("")
 
@@ -590,6 +646,13 @@ lines.append("--   0 data points per questo campo (diverso dal B12=0.00 con dati
 lines.append("--   supporto degli altri alimenti vegetali di questo set) -- inserito comunque")
 lines.append("--   come 0.00/USDA_FDC per coerenza biologica (i legumi non contengono B12),")
 lines.append("--   ma il limite metodologico specifico di questo record resta dichiarato qui.")
+lines.append("-- - food_pasta_enriched_cooked.folate_mcg: contiene SOLO la quota di acido")
+lines.append("--   folico sintetico (66 µg), non il folato totale (73 µg) né la quota di")
+lines.append("--   folato alimentare naturale (7 µg) riportati entrambi dal record FDC --")
+lines.append("--   coerente con la semantica a singolo-campo di calculateFolateDFE (vedi")
+lines.append("--   commento Python in FOODS), ma la quota naturale resta cosi' non")
+lines.append("--   rappresentata in questa riga. Primo alimento reale a rendere visibile")
+lines.append("--   questo limite preesistente dello schema (prima solo su dati sintetici).")
 lines.append("")
 
 sql_text = "\n".join(lines)

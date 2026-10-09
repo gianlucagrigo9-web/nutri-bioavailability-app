@@ -2,7 +2,7 @@
 -- Golden Set: primi alimenti reali, sourced riga per riga (2026-10-09)
 -- ============================================================================
 --
--- 19 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
+-- 20 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
 -- FoodData Central (endpoint fdc.nal.usda.gov/portal-data/external/<FDC_ID>,
 -- stesso dataset della pagina food-details ufficiale, usato perche' la SPA
 -- Angular delle pagine food-details non e' fetchable direttamente da questo
@@ -35,7 +35,8 @@ INSERT INTO food_matrices_master (matrix_id, description_it) VALUES
   ('nuts_almonds', 'Mandorle'),
   ('citrus_oranges', 'Arance'),
   ('eggs', 'Uova'),
-  ('salmon_fish', 'Salmone')
+  ('salmon_fish', 'Salmone'),
+  ('pasta_enriched_wheat', 'Pasta di grano, arricchita (enriched)')
 ON CONFLICT (matrix_id) DO NOTHING;
 
 -- ----------------------------------------------------------------------------
@@ -599,6 +600,35 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
   verification_status = EXCLUDED.verification_status;
 
+-- Pasta, cotta, arricchita (enriched), senza sale aggiunto  |  FDC: Pasta, cooked, enriched, without added salt (FDC ID 169737)
+-- https://fdc.nal.usda.gov/food-details/169737/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, is_fortified_folate) VALUES
+  ('food_pasta_enriched_cooked', 'Pasta, cotta, arricchita (enriched), senza sale aggiunto', 'pasta_enriched_wheat', false, NULL, 'Poaceae', 'draft', true)
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family,
+  is_fortified_folate = EXCLUDED.is_fortified_folate;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_pasta_enriched_cooked', 'iron_mg', 1.28, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'zinc_mg', 0.51, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'calcium_mg', 7, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'vitamin_c_mg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'magnesium_mg', 18.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'copper_mg', 0.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'selenium_mcg', 26.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'vitamin_k_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'folate_mcg', 66, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'beta_carotene_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
 -- ----------------------------------------------------------------------------
 -- Gap dichiarati in questo giro di popolamento (NON inseriti, per onesta'):
 -- ----------------------------------------------------------------------------
@@ -642,3 +672,10 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 --   supporto degli altri alimenti vegetali di questo set) -- inserito comunque
 --   come 0.00/USDA_FDC per coerenza biologica (i legumi non contengono B12),
 --   ma il limite metodologico specifico di questo record resta dichiarato qui.
+-- - food_pasta_enriched_cooked.folate_mcg: contiene SOLO la quota di acido
+--   folico sintetico (66 µg), non il folato totale (73 µg) né la quota di
+--   folato alimentare naturale (7 µg) riportati entrambi dal record FDC --
+--   coerente con la semantica a singolo-campo di calculateFolateDFE (vedi
+--   commento Python in FOODS), ma la quota naturale resta cosi' non
+--   rappresentata in questa riga. Primo alimento reale a rendere visibile
+--   questo limite preesistente dello schema (prima solo su dati sintetici).
