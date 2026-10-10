@@ -1,0 +1,31 @@
+-- ============================================================================
+-- Completa la promozione draft -> verified di food_oranges_raw (foods_raw)
+-- ============================================================================
+--
+-- golden_set_promote_verified.sql nomina esplicitamente food_oranges_raw
+-- tra i 20 food_id promossi il 2026-10-09, dopo il cross-check meccanico
+-- indipendente contro FDC descritto in quel file. Verificato il 2026-10-10
+-- (durante la fusione di baseline_cooking_state nel generatore) che
+-- foods_raw.verification_status per questo food_id era rimasto 'draft' sul
+-- DB live, mentre gli altri 19 risultavano correttamente 'verified' --
+-- causa non accertata (probabile timing fra l'UPDATE originale e un
+-- reinsert/aggiornamento successivo di questa riga specifica).
+--
+-- Questo file completa quella promozione già autorizzata, non ne introduce
+-- una nuova: nessun nuovo giudizio su food_oranges_raw è stato fatto qui,
+-- solo l'esecuzione mancata dell'UPDATE già approvato il 2026-10-09.
+--
+-- Le righe nutrient_values di food_oranges_raw restano correttamente miste
+-- (verified per i campi cross-checkati nel 2026-10-09, draft per i 5
+-- macronutrienti aggiunti solo il 2026-10-10, mai passati da quel
+-- cross-check) -- questo file tocca solo foods_raw.verification_status,
+-- non nutrient_values.
+--
+-- Primo tentativo (2026-10-10) negato dal sistema di permessi della sessione
+-- come scrittura su risorsa di produzione; eseguito dopo approvazione
+-- esplicita dell'utente ("approvo"). Eseguito e verificato contro il DB
+-- live (2026-10-10): food_oranges_raw ora verification_status='verified',
+-- baseline_cooking_state='raw' -- 20/20 alimenti del Golden Set promossi.
+-- ============================================================================
+
+UPDATE foods_raw SET verification_status = 'verified' WHERE food_id = 'food_oranges_raw';

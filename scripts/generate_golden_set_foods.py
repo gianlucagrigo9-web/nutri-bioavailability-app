@@ -85,21 +85,19 @@
 #   - cleanup_is_heme_iron_cruft.sql: applicato (0 righe
 #     nutrient_code='is_heme_iron' rimaste).
 #   - cleanup_chickpeas_raw_cruft.sql: applicato (vedi terzo giro sopra).
-#   - golden_set_promote_verified.sql: applicato per 19 dei 20 alimenti --
-#     food_oranges_raw.verification_status e' VERIFICATO RESTARE 'draft' su
-#     foods_raw contro il DB live (causa non accertata: probabile esecuzione
-#     del file precedente all'inserimento/ultima reinsert di quella riga
-#     specifica). Le righe nutrient_values di oranges sono invece
-#     correttamente miste (verified per i campi gia' presenti al momento
-#     della promozione, draft per i 5 macronutrienti aggiunti SOLO il
-#     2026-10-10 -- quindi mai passati dal cross-check del 2026-10-09: draft
-#     e' lo stato corretto per quelli, non un'anomalia). L'UPDATE che
-#     completerebbe la promozione di food_oranges_raw (gia' autorizzata dall
-#     'utente il 2026-10-09, che nominava esplicitamente questo food_id tra
-#     i 20) e' stato tentato il 2026-10-10 e negato dal sistema di permessi
-#     della sessione (scrittura su risorsa condivisa/produzione) -- NON
-#     eseguito. food_oranges_raw resta quindi 'draft' su foods_raw finche'
-#     l'utente non lo esegue lui stesso o approva esplicitamente il retry.
+#   - golden_set_promote_verified.sql: applicato per 19 dei 20 alimenti al
+#     primo giro -- food_oranges_raw.verification_status era rimasto
+#     'draft' su foods_raw (causa non accertata: probabile esecuzione del
+#     file precedente all'inserimento/ultima reinsert di quella riga
+#     specifica). Completato il 2026-10-10 con fix_oranges_promote_verified.sql
+#     (UPDATE eseguito a parte, non in questo script, dopo approvazione
+#     esplicita dell'utente -- un primo tentativo era stato negato dal
+#     sistema di permessi della sessione come scrittura su risorsa di
+#     produzione) -- ora 20/20 alimenti promossi. Le righe nutrient_values
+#     di oranges restano correttamente miste (verified per i campi
+#     cross-checkati nel 2026-10-09, draft per i 5 macronutrienti aggiunti
+#     SOLO il 2026-10-10, mai passati da quel cross-check: draft e' lo
+#     stato corretto per quelli, non un'anomalia).
 #
 # Questi 5 file restano VOLUTAMENTE fuori da questo generatore, non per
 # debito da ripagare ma per differenza di natura: generate_golden_set_foods.py
