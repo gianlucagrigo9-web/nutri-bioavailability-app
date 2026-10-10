@@ -401,13 +401,12 @@ FOODS = [
         },
     },
     {
-        # Controparte "cotta" (Broccoli, cooked, boiled, drained, without
-        # salt) NON inserita: due FDC ID tentati (170380 = frozen, non
-        # fresco; 170378 = un alimento completamente diverso, fave) si sono
-        # rivelati sbagliati; l'NDB legacy 11091 (trovato via web search,
-        # citato su recipal.com) non e' stato mappato a un FDC ID
-        # verificabile in questa sessione. Resta solo la riga "cruda" --
-        # gap dichiarato, vedi sezione finale.
+        # Controparte "cotta" (FDC 169967): vedi food_broccoli_boiled poco
+        # sotto. Il selettore "Cottura" in UI applica il fattore di
+        # ritenzione DERIVATO dal rapporto fra questa riga e quella --
+        # vedi RETENTION_FACTORS/DERIVED_FDC_RAW_COOKED_RATIO. La riga
+        # food_broccoli_boiled stessa resta draft/non promossa: serve solo
+        # da base di calcolo, non va mostrata come alimento separato.
         "food_id": "food_broccoli_raw",
         "name_it": "Broccoli, crudi",
         "matrix_id": "broccoli",
@@ -427,14 +426,18 @@ FOODS = [
         },
     },
     {
-        # Controparte "cotta" di food_broccoli_raw -- gap dichiarato nelle
-        # sessioni precedenti (due FDC ID tentati erano sbagliati: 170380 e'
-        # la versione SURGELATA, 170378 sono fave). Trovato oggi (2026-10-10)
-        # FDC ID 169967, confermato FRESCO (non surgelato): il nome del
-        # record non contiene "frozen", a differenza delle voci surgelate
-        # che lo dichiarano esplicitamente nel nome (es. "Broccoli, frozen,
-        # spears, cooked, boiled, drained, without salt", FDC ID diverso) --
-        # letto direttamente dal JSON fdc.nal.usda.gov/portal-data/external/169967.
+        # Controparte "cotta" di food_broccoli_raw. FDC ID 169967, confermato
+        # FRESCO (non surgelato): il nome del record non contiene "frozen",
+        # a differenza delle voci surgelate che lo dichiarano esplicitamente
+        # nel nome -- letto direttamente dal JSON
+        # fdc.nal.usda.gov/portal-data/external/169967.
+        #
+        # AGGIORNAMENTO 2026-10-10 (quarto giro): questa riga ora serve SOLO
+        # da base di calcolo per il fattore di ritenzione derivato
+        # (RETENTION_FACTORS, broccoli/boiled) -- resta intenzionalmente
+        # 'draft' e non va promossa a 'verified'/mostrata nella Dispensa,
+        # altrimenti comparirebbero due vie per lo stesso "broccolo cotto"
+        # (questa riga + il selettore "Cottura" su food_broccoli_raw).
         "food_id": "food_broccoli_boiled",
         "name_it": "Broccoli, bolliti e scolati",
         "matrix_id": "broccoli",
@@ -887,6 +890,26 @@ SOURCES_NEW = [
     ("SIENER_2006_FOODCHEM",
      "Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]",
      "https://doi.org/10.1016/j.foodchem.2005.05.079"),
+    # Aggiunta 2026-10-10 (quarto giro): NON una citazione di letteratura --
+    # un metodo. Decisione esplicita dell'utente (chat, 2026-10-10): dove
+    # non esiste un fattore di ritenzione pubblicato per una matrice, MA
+    # abbiamo due alimenti del Golden Set misurati indipendentemente da USDA
+    # FDC per la stessa matrice (uno crudo, uno già cotto con lo stesso
+    # metodo), il fattore di ritenzione si DERIVA come
+    # valore_cotto_per_100g / valore_crudo_per_100g -- non e' un numero
+    # scelto da Claude, e' il rapporto fra due misure reali, citate, lette
+    # da fonte primaria (stesso standard del resto del Golden Set). Resta
+    # "draft" (non "verified" come i fattori di Doniec 2022) perche' nessun
+    # paper ha validato questo SPECIFICO rapporto come fattore di ritenzione
+    # -- e perche' il metodo ignora la variazione di resa/massa fra crudo e
+    # cotto (vedi nota nel commento di RETENTION_FACTORS). Esclude
+    # esplicitamente beta-carotene/altri carotenoidi provitaminici A: quel
+    # contenuto e' già gestito da carotenoid_matrix_state (Livny 2003),
+    # applicarci sopra anche questo rapporto conterebbe due volte lo stesso
+    # effetto di disgregazione della matrice.
+    ("DERIVED_FDC_RAW_COOKED_RATIO",
+     "Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).",
+     None),
 ]
 
 # ---------------------------------------------------------------------------
@@ -975,6 +998,90 @@ RETENTION_FACTORS = [
      "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
     {"matrix_id": "tubers", "cooking_method": "fried", "nutrient": "vitamin_c",
      "value": 0.80, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    # Broccoli e carote -- fattori DERIVATI (non da letteratura di
+    # ritenzione), vedi DERIVED_FDC_RAW_COOKED_RATIO sopra. Decisione
+    # esplicita dell'utente (chat, 2026-10-10): dove manca un fattore
+    # pubblicato ma abbiamo due misure USDA FDC indipendenti (crudo/cotto)
+    # per la stessa matrice, calcoliamo noi il rapporto invece di lasciare
+    # "solo crudo" nel selettore di cottura. food_broccoli_boiled e
+    # food_carrots_boiled restano nel Golden Set (draft, non promossi) solo
+    # come base di calcolo tracciabile di questi rapporti -- non vanno
+    # promossi a 'verified' ne' mostrati come voci a se' nella Dispensa,
+    # altrimenti l'utente vedrebbe due vie per lo stesso "broccolo cotto"
+    # (voce separata + selettore). beta_carotene/other_provitamin_a_
+    # carotenoids_mcg ESCLUSI apposta (vedi nota sopra sul doppio conteggio
+    # con carotenoid_matrix_state, corretto in cookingTransformationEngine.ts
+    # per flippare lo stato quando un fattore di ritenzione reale si applica).
+    #
+    # Broccoli: FDC 170379 (crudo) -> FDC 169967 (bolliti e scolati).
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 0.92, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 1.10, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "calcium",
+     "value": 0.85, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "vitamin_c",
+     "value": 0.73, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "magnesium",
+     "value": 1.00, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "copper",
+     "value": 1.24, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "selenium",
+     "value": 0.64, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "vitamin_k",
+     "value": 1.38, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # folate ESCLUSO: 108/63 = 1.71, fuori dal range [0.0, 1.5] del sanity
+    # check sotto (RETENTION_FACTORS assert). Un aumento del 71% per un
+    # nutriente che la letteratura generale descrive come termolabile/
+    # degradato dalla bollitura non e' plausibile come vero effetto di
+    # cottura -- piu' probabile varianza fra campioni USDA diversi che
+    # biologia reale. Gap dichiarato: selezionare "Bollito" per i broccoli
+    # non altera folate_mcg (resta il valore crudo), invece di propagare
+    # un numero implausibile.
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "energy",
+     "value": 1.03, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "protein",
+     "value": 0.84, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "fat",
+     "value": 1.11, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "carbohydrates",
+     "value": 1.08, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "broccoli", "cooking_method": "boiled", "nutrient": "fiber",
+     "value": 1.27, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # Carote: FDC 170393 (crude) -> FDC 170394 (bollite e scolate).
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 1.13, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 0.83, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "calcium",
+     "value": 0.91, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "vitamin_c",
+     "value": 0.61, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "magnesium",
+     "value": 0.83, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "copper",
+     "value": 0.38, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # selenium ESCLUSO: 0.7/0.1 = 7.00, fuori dal range [0.0, 1.5] del
+    # sanity check sotto (RETENTION_FACTORS assert) -- di molto. Entrambi i
+    # valori sono vicini al limite di rilevabilita' (sub-microgrammo), un
+    # rapporto 7x su valori-traccia riflette quasi certamente rumore di
+    # misura, non una vera concentrazione fisiologica. Gap dichiarato:
+    # selezionare "Bollito" per le carote non altera selenium_mcg (resta
+    # il valore crudo), invece di propagare un numero implausibile.
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "vitamin_k",
+     "value": 1.04, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "folate",
+     "value": 0.74, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "energy",
+     "value": 0.85, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "protein",
+     "value": 0.82, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "fat",
+     "value": 0.75, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "carbohydrates",
+     "value": 0.86, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "fiber",
+     "value": 1.07, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
 ]
 
 # Sanity check difensivo: nessun duplicato (matrix_id, cooking_method, nutrient)
@@ -1238,24 +1345,23 @@ lines.append("--   B12, dove food_chickpeas_boiled accetta gia' questa stessa am
 lines.append("--   coerenza biologica).")
 lines.append("-- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per")
 lines.append("--   questo FDC ID.")
-lines.append("-- - carote, broccoli, mandorle: ri-controllato 2026-10-10, stessa conclusione.")
-lines.append("--   Letto di persona USDA Retention Factors Release 6: nessuna riga")
-lines.append("--   food-specifica per carote/broccoli/mandorle, solo categorie generiche")
-lines.append("--   cross-alimento ('VEG,ROOTS,ETC', 'VEG,OTHER', 'NUTS' -- coprono decine di")
-lines.append("--   alimenti diversi ciascuna, troppo larghe per lo standard di questo Golden")
-lines.append("--   Set, a differenza di '16 LEGUMES'/'11 POTATOES' usate altrove, che sono")
-lines.append("--   gia' specifiche per famiglia di alimento). Cercata anche letteratura")
-lines.append("--   dedicata (es. Masrizal et al. 1997 su 5 verdure, Viroli et al. 2023 su")
-lines.append("--   broccoli) -- nessuna dava un fattore boiled-specifico utilizzabile senza")
-lines.append("--   accesso al testo completo. NON E' PERO' UN BLOCCO: le controparti 'cotte'")
-lines.append("--   gia' in questo file (food_carrots_boiled, food_broccoli_boiled) hanno")
-lines.append("--   valori misurati DIRETTAMENTE da USDA FDC per quello stato di cottura, non")
-lines.append("--   derivati da un fattore di ritenzione -- l'utente ottiene dati accurati")
-lines.append("--   aggiungendo quella riga al pasto, non serve il selettore 'Cottura' sulla")
-lines.append("--   versione cruda. Le mandorle restano senza controparte cotta per scelta")
-lines.append("--   (non e' un alimento tipicamente bollito). Non gestito da questo script")
-lines.append("--   (vedi nota in testa al file sui fattori di ritenzione, ancora fuori")
-lines.append("--   dall'invariante 'un solo generatore').")
+lines.append("-- - carote, broccoli: RISOLTO 2026-10-10 (quarto giro). Nessuna riga")
+lines.append("--   food-specifica in USDA Retention Factors Release 6 ne' in letteratura")
+lines.append("--   dedicata (vedi ricerca precedente, Masrizal 1997/Viroli 2023 non")
+lines.append("--   utilizzabili). Decisione esplicita dell'utente (chat, 2026-10-10): dove")
+lines.append("--   manca un fattore pubblicato ma esistono due alimenti Golden Set misurati")
+lines.append("--   indipendentemente da USDA FDC per la stessa matrice (crudo + gia' cotto),")
+lines.append("--   il fattore di ritenzione si DERIVA come rapporto fra le due misure reali")
+lines.append("--   (vedi DERIVED_FDC_RAW_COOKED_RATIO in SOURCES_NEW e le righe 'broccoli'/")
+lines.append("--   'carrots' in RETENTION_FACTORS) invece di lasciare solo 'Crudo' nel")
+lines.append("--   selettore di cottura. food_carrots_boiled e food_broccoli_boiled restano")
+lines.append("--   nel Golden Set (draft, non promossi, non mostrati nella Dispensa) solo")
+lines.append("--   come base di calcolo tracciabile di questi rapporti. Non copre")
+lines.append("--   beta-carotene/altri carotenoidi provitaminici A (gestiti da")
+lines.append("--   carotenoid_matrix_state, vedi fix nel motore -- applicarci sopra anche")
+lines.append("--   questo rapporto conterebbe due volte lo stesso effetto). Le mandorle")
+lines.append("--   restano senza controparte cotta per scelta (non e' un alimento")
+lines.append("--   tipicamente bollito) -- nessun gap da risolvere per quella matrice.")
 lines.append("")
 
 sql_text = "\n".join(lines)

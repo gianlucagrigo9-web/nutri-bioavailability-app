@@ -811,6 +811,21 @@ describe("applyCookingTransformation — Livello C (calibrazione sul fattore app
     expect(result.zinc_mg).toBeCloseTo(3.40, 2);
     expect(result.vitamin_c_mg).toBeCloseTo(13.00, 2);
   });
+  it("un fattore di ritenzione realmente applicato flippa carotenoid_matrix_state da raw_intact a cooked_or_disrupted (2026-10-10: bug latente corretto, nessun alimento del Golden Set esercitava ancora questo percorso -- vedi broccoli/carote)", () => {
+    const raw = makeFood({ iron_mg: 10, beta_carotene_mcg: 500, carotenoid_matrix_state: "raw_intact" });
+    const factors: RetentionFactorRecord[] = [{ matrix_id: "broccoli", cooking_method: "boiled", nutrient: "iron", value: 0.92 }];
+    const result = cookingEngine.applyCookingTransformation(raw, "broccoli", "boiled", factors);
+    expect(result.carotenoid_matrix_state).toBe("cooked_or_disrupted");
+    // il contenuto di beta-carotene stesso NON va scalato qui -- solo lo
+    // stato della matrice cambia, per evitare un doppio conteggio con la
+    // conversione RAE a valle (vedi DERIVED_FDC_RAW_COOKED_RATIO).
+    expect(result.beta_carotene_mcg).toBe(500);
+  });
+  it("nessun fattore di ritenzione applicabile (matrice/metodo senza righe) -> carotenoid_matrix_state resta invariato", () => {
+    const raw = makeFood({ iron_mg: 10, carotenoid_matrix_state: "raw_intact" });
+    const result = cookingEngine.applyCookingTransformation(raw, "broccoli", "boiled", []);
+    expect(result.carotenoid_matrix_state).toBe("raw_intact");
+  });
 });
 
 describe("scaleFoodItemToGrams — Livello A (difensivo)", () => {

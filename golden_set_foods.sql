@@ -55,7 +55,8 @@ INSERT INTO sources (id, citation, url_or_doi) VALUES
   ('ZIA_UR_REHMAN_2002_PJSIR', 'Zia-ur-Rehman, Salariya AM, Zafar SI. Effect of different soaking and cooking methods on physical characteristics, phytic acid content and protein digestibility of red kidney beans. Pak J Sci Ind Res. 2002;45(1):41-45. [fagioli rossi: crudo 1084 mg/100g, bollito (cottura ordinaria) 805 mg/100g]', 'https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257'),
   ('USDA_RETN06', 'USDA Table of Nutrient Retention Factors, Release 6 (2007). Pubblico dominio (CC0). DOI 10.15482/USDA.ADC/1409034', 'https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf'),
   ('DONIEC_2022_MOLECULES', 'Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.', 'https://doi.org/10.3390/molecules27061861'),
-  ('SIENER_2006_FOODCHEM', 'Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]', 'https://doi.org/10.1016/j.foodchem.2005.05.079')
+  ('SIENER_2006_FOODCHEM', 'Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]', 'https://doi.org/10.1016/j.foodchem.2005.05.079'),
+  ('DERIVED_FDC_RAW_COOKED_RATIO', 'Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).', NULL)
 ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;
 
 -- ----------------------------------------------------------------------------
@@ -1117,7 +1118,33 @@ INSERT INTO retention_factors (matrix_id, cooking_method, nutrient, value, confi
   ('tubers', 'boiled_in_skin', 'vitamin_c', 0.75, NULL, NULL, 'USDA_RETN06', 'draft'),
   ('tubers', 'fried', 'iron', 1.0, NULL, NULL, 'USDA_RETN06', 'draft'),
   ('tubers', 'fried', 'zinc', 1.0, NULL, NULL, 'USDA_RETN06', 'draft'),
-  ('tubers', 'fried', 'vitamin_c', 0.8, NULL, NULL, 'USDA_RETN06', 'draft')
+  ('tubers', 'fried', 'vitamin_c', 0.8, NULL, NULL, 'USDA_RETN06', 'draft'),
+  ('broccoli', 'boiled', 'iron', 0.92, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'zinc', 1.1, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'calcium', 0.85, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'vitamin_c', 0.73, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'magnesium', 1.0, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'copper', 1.24, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'selenium', 0.64, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'vitamin_k', 1.38, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'energy', 1.03, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'protein', 0.84, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'fat', 1.11, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'carbohydrates', 1.08, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('broccoli', 'boiled', 'fiber', 1.27, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'iron', 1.13, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'zinc', 0.83, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'calcium', 0.91, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'vitamin_c', 0.61, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'magnesium', 0.83, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'copper', 0.38, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'vitamin_k', 1.04, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'folate', 0.74, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'energy', 0.85, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'protein', 0.82, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'fat', 0.75, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'carbohydrates', 0.86, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('carrots', 'boiled', 'fiber', 1.07, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft')
 ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -1193,21 +1220,20 @@ ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
 --   coerenza biologica).
 -- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per
 --   questo FDC ID.
--- - carote, broccoli, mandorle: ri-controllato 2026-10-10, stessa conclusione.
---   Letto di persona USDA Retention Factors Release 6: nessuna riga
---   food-specifica per carote/broccoli/mandorle, solo categorie generiche
---   cross-alimento ('VEG,ROOTS,ETC', 'VEG,OTHER', 'NUTS' -- coprono decine di
---   alimenti diversi ciascuna, troppo larghe per lo standard di questo Golden
---   Set, a differenza di '16 LEGUMES'/'11 POTATOES' usate altrove, che sono
---   gia' specifiche per famiglia di alimento). Cercata anche letteratura
---   dedicata (es. Masrizal et al. 1997 su 5 verdure, Viroli et al. 2023 su
---   broccoli) -- nessuna dava un fattore boiled-specifico utilizzabile senza
---   accesso al testo completo. NON E' PERO' UN BLOCCO: le controparti 'cotte'
---   gia' in questo file (food_carrots_boiled, food_broccoli_boiled) hanno
---   valori misurati DIRETTAMENTE da USDA FDC per quello stato di cottura, non
---   derivati da un fattore di ritenzione -- l'utente ottiene dati accurati
---   aggiungendo quella riga al pasto, non serve il selettore 'Cottura' sulla
---   versione cruda. Le mandorle restano senza controparte cotta per scelta
---   (non e' un alimento tipicamente bollito). Non gestito da questo script
---   (vedi nota in testa al file sui fattori di ritenzione, ancora fuori
---   dall'invariante 'un solo generatore').
+-- - carote, broccoli: RISOLTO 2026-10-10 (quarto giro). Nessuna riga
+--   food-specifica in USDA Retention Factors Release 6 ne' in letteratura
+--   dedicata (vedi ricerca precedente, Masrizal 1997/Viroli 2023 non
+--   utilizzabili). Decisione esplicita dell'utente (chat, 2026-10-10): dove
+--   manca un fattore pubblicato ma esistono due alimenti Golden Set misurati
+--   indipendentemente da USDA FDC per la stessa matrice (crudo + gia' cotto),
+--   il fattore di ritenzione si DERIVA come rapporto fra le due misure reali
+--   (vedi DERIVED_FDC_RAW_COOKED_RATIO in SOURCES_NEW e le righe 'broccoli'/
+--   'carrots' in RETENTION_FACTORS) invece di lasciare solo 'Crudo' nel
+--   selettore di cottura. food_carrots_boiled e food_broccoli_boiled restano
+--   nel Golden Set (draft, non promossi, non mostrati nella Dispensa) solo
+--   come base di calcolo tracciabile di questi rapporti. Non copre
+--   beta-carotene/altri carotenoidi provitaminici A (gestiti da
+--   carotenoid_matrix_state, vedi fix nel motore -- applicarci sopra anche
+--   questo rapporto conterebbe due volte lo stesso effetto). Le mandorle
+--   restano senza controparte cotta per scelta (non e' un alimento
+--   tipicamente bollito) -- nessun gap da risolvere per quella matrice.

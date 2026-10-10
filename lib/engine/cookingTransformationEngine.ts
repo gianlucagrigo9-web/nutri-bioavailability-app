@@ -86,6 +86,20 @@ export class CookingTransformationEngine {
       }
     });
 
+    // Correzione 2026-10-10: finche' nessun cibo del Golden Set aveva SIA
+    // un fattore di ritenzione reale SIA beta_carotene_mcg > 0, questo
+    // bug restava latente. carotenoid_matrix_state descrive se la matrice
+    // e' fisicamente intatta (Livny 2003) -- qualunque cottura REALMENTE
+    // applicata (cioe' per cui esiste almeno un fattore di ritenzione,
+    // come appena verificato sopra) la disgrega, quindi non puo' restare
+    // 'raw_intact' nel risultato. Il contenuto di beta-carotene stesso
+    // NON viene scalato qui da nessun fattore di ritenzione (vedi
+    // NUTRIENT_FIELD_MAP e DERIVED_FDC_RAW_COOKED_RATIO in
+    // generate_golden_set_foods.py): lo fa gia' questo flip, a valle, nel
+    // motore di conversione RAE -- scalarlo anche qui conterebbe due
+    // volte lo stesso effetto di disgregazione.
+    cookedFood.carotenoid_matrix_state = "cooked_or_disrupted";
+
     return cookedFood;
   }
 }
