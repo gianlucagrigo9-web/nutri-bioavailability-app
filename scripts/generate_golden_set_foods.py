@@ -509,10 +509,10 @@ lines.append("-- Nuove fonti di letteratura (ossalati/fitati; USDA_FDC e' gia' u
 lines.append("-- generico usato dall'engine per magnesio/rame/selenio/iodio/vit.K, vedi")
 lines.append("-- docs/PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)")
 lines.append("-- ----------------------------------------------------------------------------")
-lines.append("INSERT INTO sources (id, citation, url) VALUES")
+lines.append("INSERT INTO sources (id, citation, url_or_doi) VALUES")
 lines.append("  ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov'),")
 lines.append(",\n".join(f"  ({sql_str(sid)}, {sql_str(cit)}, {sql_str(url)})" for sid, cit, url in SOURCES_NEW) + "")
-lines.append("ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url = EXCLUDED.url;")
+lines.append("ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;")
 lines.append("")
 
 lines.append("-- ----------------------------------------------------------------------------")

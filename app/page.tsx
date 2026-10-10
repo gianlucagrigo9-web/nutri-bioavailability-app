@@ -58,7 +58,7 @@ type FoodRow = {
   nutrient_values: NutrientRow[] | null;
 };
 
-type SourceRow = { id: string; citation: string; url: string | null };
+type SourceRow = { id: string; citation: string; url_or_doi: string | null };
 
 function nutrientValue(nutrients: NutrientRow[], code: string): number {
   return nutrients.find((n) => n.nutrient_code === code)?.value ?? 0;
@@ -170,8 +170,8 @@ function MetricRow({
                 return (
                   <li key={sid}>
                     {src ? (
-                      src.url ? (
-                        <a href={src.url} target="_blank" rel="noreferrer" className="underline">
+                      src.url_or_doi ? (
+                        <a href={src.url_or_doi} target="_blank" rel="noreferrer" className="underline">
                           {src.citation}
                         </a>
                       ) : (
@@ -239,7 +239,7 @@ export default function Home() {
 
       const { data: sourcesData, error: sourcesError } = await supabase
         .from('sources')
-        .select('id, citation, url');
+        .select('id, citation, url_or_doi');
       if (!sourcesError && sourcesData) {
         const map: Record<string, SourceRow> = {};
         for (const s of sourcesData as SourceRow[]) map[s.id] = s;
