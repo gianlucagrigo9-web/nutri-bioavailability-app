@@ -2,7 +2,7 @@
 -- Golden Set: primi alimenti reali, sourced riga per riga (2026-10-09)
 -- ============================================================================
 --
--- 29 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
+-- 30 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
 -- FoodData Central (endpoint fdc.nal.usda.gov/portal-data/external/<FDC_ID>,
 -- stesso dataset della pagina food-details ufficiale, usato perche' la SPA
 -- Angular delle pagine food-details non e' fetchable direttamente da questo
@@ -552,6 +552,41 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_broccoli_raw', 'fat_g', 0.37, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_broccoli_raw', 'carbohydrates_g', 6.64, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_broccoli_raw', 'fiber_g', 2.6, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Broccoli, bolliti e scolati  |  FDC: Broccoli, cooked, boiled, drained, without salt (FDC ID 169967)
+-- https://fdc.nal.usda.gov/food-details/169967/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
+  ('food_broccoli_boiled', 'Broccoli, bolliti e scolati', 'broccoli', 'boiled', false, NULL, 'Brassicaceae', 'draft', 'cooked_or_disrupted')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family,
+  carotenoid_matrix_state = EXCLUDED.carotenoid_matrix_state;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_broccoli_boiled', 'iron_mg', 0.67, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'zinc_mg', 0.45, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'calcium_mg', 40, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'vitamin_c_mg', 64.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'magnesium_mg', 21.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'copper_mg', 0.061, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'selenium_mcg', 1.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'vitamin_k_mcg', 141, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'folate_mcg', 108, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'beta_carotene_mcg', 929, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'energy_kcal', 35.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'protein_g', 2.38, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'fat_g', 0.41, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'carbohydrates_g', 7.18, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_boiled', 'fiber_g', 3.3, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -1120,12 +1155,10 @@ ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
 -- - iodine_mcg: non trovato per NESSUNO dei 19 alimenti (USDA FDC non riporta
 --   lo iodio per la maggior parte delle voci standard) -- confirma il gap gia'
 --   dichiarato in docs/PRD.md §4.0/§4.5.
--- - food_broccoli_raw: manca la controparte 'cotta' (Broccoli, cooked, boiled,
---   drained, without salt, FRESCO non surgelato). Due FDC ID tentati in questa
---   sessione erano sbagliati (170380 = la versione SURGELATA dello stesso
---   piatto, non quella fresca; 170378 = Broadbeans/fave, un alimento diverso).
---   L'NDB legacy 11091 (citato su recipal.com) non e' stato mappato a un FDC ID
---   verificabile via web search in questa sessione -- da ri-tentare.
+-- - food_broccoli_boiled: RISOLTO 2026-10-10 -- trovato FDC ID 169967
+--   (confermato fresco, non surgelato: il nome del record non contiene
+--   'frozen', a differenza delle voci surgelate che lo dichiarano
+--   esplicitamente). Vedi la scheda FOODS sopra.
 -- - food_chickpeas_boiled.vitamin_b12_mcg: il record FDC segnala esplicitamente
 --   0 data points per questo campo (diverso dal B12=0.00 con dati reali a
 --   supporto degli altri alimenti vegetali di questo set) -- inserito comunque
@@ -1160,8 +1193,21 @@ ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
 --   coerenza biologica).
 -- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per
 --   questo FDC ID.
--- - carote, broccoli, mandorle: nessun fattore di ritenzione di cottura
---   food-specifico trovato (solo categorie USDA generiche cross-alimento) --
---   gap dichiarato e discusso con l'utente, lasciato intenzionalmente cosi'.
---   Non gestito da questo script (vedi nota in testa al file sui fattori di
---   ritenzione, ancora fuori dall'invariante 'un solo generatore').
+-- - carote, broccoli, mandorle: ri-controllato 2026-10-10, stessa conclusione.
+--   Letto di persona USDA Retention Factors Release 6: nessuna riga
+--   food-specifica per carote/broccoli/mandorle, solo categorie generiche
+--   cross-alimento ('VEG,ROOTS,ETC', 'VEG,OTHER', 'NUTS' -- coprono decine di
+--   alimenti diversi ciascuna, troppo larghe per lo standard di questo Golden
+--   Set, a differenza di '16 LEGUMES'/'11 POTATOES' usate altrove, che sono
+--   gia' specifiche per famiglia di alimento). Cercata anche letteratura
+--   dedicata (es. Masrizal et al. 1997 su 5 verdure, Viroli et al. 2023 su
+--   broccoli) -- nessuna dava un fattore boiled-specifico utilizzabile senza
+--   accesso al testo completo. NON E' PERO' UN BLOCCO: le controparti 'cotte'
+--   gia' in questo file (food_carrots_boiled, food_broccoli_boiled) hanno
+--   valori misurati DIRETTAMENTE da USDA FDC per quello stato di cottura, non
+--   derivati da un fattore di ritenzione -- l'utente ottiene dati accurati
+--   aggiungendo quella riga al pasto, non serve il selettore 'Cottura' sulla
+--   versione cruda. Le mandorle restano senza controparte cotta per scelta
+--   (non e' un alimento tipicamente bollito). Non gestito da questo script
+--   (vedi nota in testa al file sui fattori di ritenzione, ancora fuori
+--   dall'invariante 'un solo generatore').

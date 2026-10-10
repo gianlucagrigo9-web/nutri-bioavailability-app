@@ -427,6 +427,33 @@ FOODS = [
         },
     },
     {
+        # Controparte "cotta" di food_broccoli_raw -- gap dichiarato nelle
+        # sessioni precedenti (due FDC ID tentati erano sbagliati: 170380 e'
+        # la versione SURGELATA, 170378 sono fave). Trovato oggi (2026-10-10)
+        # FDC ID 169967, confermato FRESCO (non surgelato): il nome del
+        # record non contiene "frozen", a differenza delle voci surgelate
+        # che lo dichiarano esplicitamente nel nome (es. "Broccoli, frozen,
+        # spears, cooked, boiled, drained, without salt", FDC ID diverso) --
+        # letto direttamente dal JSON fdc.nal.usda.gov/portal-data/external/169967.
+        "food_id": "food_broccoli_boiled",
+        "name_it": "Broccoli, bolliti e scolati",
+        "matrix_id": "broccoli",
+        "baseline_cooking_state": "boiled",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Brassicaceae",
+        "carotenoid_matrix_state": "cooked_or_disrupted",
+        "fdc_id": 169967,
+        "fdc_name": "Broccoli, cooked, boiled, drained, without salt",
+        "values": {
+            "iron_mg": 0.67, "zinc_mg": 0.45, "calcium_mg": 40, "vitamin_c_mg": 64.9,
+            "magnesium_mg": 21.0, "copper_mg": 0.061, "selenium_mcg": 1.6,
+            "vitamin_k_mcg": 141, "vitamin_b12_mcg": 0.00, "folate_mcg": 108,
+            "beta_carotene_mcg": 929, "other_provitamin_a_carotenoids_mcg": 0,  # alpha=0, crypto=0
+            "energy_kcal": 35.0, "protein_g": 2.38, "fat_g": 0.41, "carbohydrates_g": 7.18, "fiber_g": 3.30,
+        },
+    },
+    {
         "food_id": "food_almonds",
         "name_it": "Mandorle, secche, non salate",
         "matrix_id": "nuts_almonds",
@@ -1173,12 +1200,10 @@ lines.append("--   specifici) -- gap preesistente, non introdotto ora.")
 lines.append("-- - iodine_mcg: non trovato per NESSUNO dei 19 alimenti (USDA FDC non riporta")
 lines.append("--   lo iodio per la maggior parte delle voci standard) -- confirma il gap gia'")
 lines.append("--   dichiarato in docs/PRD.md §4.0/§4.5.")
-lines.append("-- - food_broccoli_raw: manca la controparte 'cotta' (Broccoli, cooked, boiled,")
-lines.append("--   drained, without salt, FRESCO non surgelato). Due FDC ID tentati in questa")
-lines.append("--   sessione erano sbagliati (170380 = la versione SURGELATA dello stesso")
-lines.append("--   piatto, non quella fresca; 170378 = Broadbeans/fave, un alimento diverso).")
-lines.append("--   L'NDB legacy 11091 (citato su recipal.com) non e' stato mappato a un FDC ID")
-lines.append("--   verificabile via web search in questa sessione -- da ri-tentare.")
+lines.append("-- - food_broccoli_boiled: RISOLTO 2026-10-10 -- trovato FDC ID 169967")
+lines.append("--   (confermato fresco, non surgelato: il nome del record non contiene")
+lines.append("--   'frozen', a differenza delle voci surgelate che lo dichiarano")
+lines.append("--   esplicitamente). Vedi la scheda FOODS sopra.")
 lines.append("-- - food_chickpeas_boiled.vitamin_b12_mcg: il record FDC segnala esplicitamente")
 lines.append("--   0 data points per questo campo (diverso dal B12=0.00 con dati reali a")
 lines.append("--   supporto degli altri alimenti vegetali di questo set) -- inserito comunque")
@@ -1213,11 +1238,24 @@ lines.append("--   B12, dove food_chickpeas_boiled accetta gia' questa stessa am
 lines.append("--   coerenza biologica).")
 lines.append("-- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per")
 lines.append("--   questo FDC ID.")
-lines.append("-- - carote, broccoli, mandorle: nessun fattore di ritenzione di cottura")
-lines.append("--   food-specifico trovato (solo categorie USDA generiche cross-alimento) --")
-lines.append("--   gap dichiarato e discusso con l'utente, lasciato intenzionalmente cosi'.")
-lines.append("--   Non gestito da questo script (vedi nota in testa al file sui fattori di")
-lines.append("--   ritenzione, ancora fuori dall'invariante 'un solo generatore').")
+lines.append("-- - carote, broccoli, mandorle: ri-controllato 2026-10-10, stessa conclusione.")
+lines.append("--   Letto di persona USDA Retention Factors Release 6: nessuna riga")
+lines.append("--   food-specifica per carote/broccoli/mandorle, solo categorie generiche")
+lines.append("--   cross-alimento ('VEG,ROOTS,ETC', 'VEG,OTHER', 'NUTS' -- coprono decine di")
+lines.append("--   alimenti diversi ciascuna, troppo larghe per lo standard di questo Golden")
+lines.append("--   Set, a differenza di '16 LEGUMES'/'11 POTATOES' usate altrove, che sono")
+lines.append("--   gia' specifiche per famiglia di alimento). Cercata anche letteratura")
+lines.append("--   dedicata (es. Masrizal et al. 1997 su 5 verdure, Viroli et al. 2023 su")
+lines.append("--   broccoli) -- nessuna dava un fattore boiled-specifico utilizzabile senza")
+lines.append("--   accesso al testo completo. NON E' PERO' UN BLOCCO: le controparti 'cotte'")
+lines.append("--   gia' in questo file (food_carrots_boiled, food_broccoli_boiled) hanno")
+lines.append("--   valori misurati DIRETTAMENTE da USDA FDC per quello stato di cottura, non")
+lines.append("--   derivati da un fattore di ritenzione -- l'utente ottiene dati accurati")
+lines.append("--   aggiungendo quella riga al pasto, non serve il selettore 'Cottura' sulla")
+lines.append("--   versione cruda. Le mandorle restano senza controparte cotta per scelta")
+lines.append("--   (non e' un alimento tipicamente bollito). Non gestito da questo script")
+lines.append("--   (vedi nota in testa al file sui fattori di ritenzione, ancora fuori")
+lines.append("--   dall'invariante 'un solo generatore').")
 lines.append("")
 
 sql_text = "\n".join(lines)
