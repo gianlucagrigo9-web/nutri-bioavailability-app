@@ -1,0 +1,21 @@
+-- ============================================================================
+-- Correzione: food_oranges_raw.baseline_cooking_state rimasta 'unknown'
+-- ============================================================================
+--
+-- Scoperto durante la fusione di baseline_cooking_state nel generatore
+-- (scripts/generate_golden_set_foods.py, 2026-10-10): il backfill originale
+-- in fix_baseline_cooking_state.sql aggiornava esplicitamente 19 dei 20
+-- alimenti del Golden Set, dimenticando food_oranges_raw per una svista
+-- (elenco VALUES con 19 righe, non 20). Il valore sul DB live era quindi
+-- rimasto al default difensivo 'unknown' invece di 'raw'.
+--
+-- Non era un bug pericoloso (la matrice 'citrus_oranges' non ha alcun
+-- fattore di ritenzione di cottura, quindi nessun rischio di sconto
+-- doppio), ma un'etichetta scorretta: la UI avrebbe mostrato "Stato di
+-- cottura non ancora classificato" per un alimento che è in realtà
+-- genuinamente crudo (FDC 169097 "Oranges, raw, all commercial varieties").
+--
+-- Eseguito e verificato contro il DB live (2026-10-10).
+-- ============================================================================
+
+UPDATE foods_raw SET baseline_cooking_state = 'raw' WHERE food_id = 'food_oranges_raw';
