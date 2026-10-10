@@ -35,6 +35,8 @@ import { MicrobiotaEngine } from '@/lib/engine/microbiotaEngine';
 import { ComputationalNutritionEngine } from '@/lib/engine/computationalNutritionEngine';
 import { CookingTransformationEngine, RetentionFactorRecord } from '@/lib/engine/cookingTransformationEngine';
 import { FoodItem, SourcedValue, OxalateCategory, Meal, scaleFoodItemToGrams } from '@/lib/engine/types';
+import { fetchOffProduct, buildApproximatedFood, ApproximatedFood } from '@/lib/openFoodFacts';
+import BarcodeScanner from '@/components/BarcodeScanner';
 
 const nutritionEngine = new ComputationalNutritionEngine();
 const microbiotaEngine = new MicrobiotaEngine();
@@ -70,6 +72,13 @@ interface MealItem {
   foodId: string;
   cookingMethod: string;
   grams: number; // quantità reale nel piatto; i valori in DB sono per 100g (vedi scaleFoodItemToGrams)
+  // Presente SOLO per alimenti aggiunti via scanner barcode (Open Food
+  // Facts, vedi lib/openFoodFacts.ts) -- porta il FoodItem già costruito
+  // invece di un riferimento a `foods` (quegli alimenti non sono MAI
+  // scritti nel DB, vedi PRD "Dati prodotti confezionati": consultazione
+  // live, mai unione col dataset proprietario per gli obblighi ODbL).
+  // undefined per gli alimenti del Golden Set, dove foodId punta a `foods`.
+  scannedFood?: ApproximatedFood;
 }
 
 // Etichette italiane per i valori di cooking_method_enum attualmente nel DB
@@ -273,6 +282,14 @@ export default function Home() {
   const [mealItems, setMealItems] = useState<MealItem[]>([]);
   const [showFullBreakdown, setShowFullBreakdown] = useState(false);
 
+  // Stato per lo scanner barcode (Open Food Facts, vedi lib/openFoodFacts.ts).
+  const [scannerOpen, setScannerOpen] = useState(false);
+  const [scanStatus, setScanStatus] = useState<'idle' | 'loading' | 'error'>('idle');
+  const [scanErrorMsg, setScanErrorMsg] = useState<string | null>(null);
+  // Prodotto trovato, in attesa di conferma dell'utente prima di entrare
+  // nel piatto (mostra nome/marca/badge di fiducia prima dell'aggiunta).
+  const [pendingScan, setPendingScan] = useState<ApproximatedFood | null>(null);
+
   useEffect(() => {
     async function fetchAllData() {
       // Solo foods_raw con verification_status='verified' -- gli stessi 20
@@ -357,6 +374,45 @@ export default function Home() {
     );
   };
 
+  // --- Scanner barcode (Open Food Facts) ---------------------------------
+
+  async function handleBarcodeDetected(barcode: string) {
+    setScannerOpen(false);
+    setScanStatus('loading');
+    setScanErrorMsg(null);
+    const result = await fetchOffProduct(barcode);
+    if (!result.ok) {
+      setScanStatus('error');
+      setScanErrorMsg(
+        result.error.kind === 'not_found'
+          ? `Nessun prodotto trovato su Open Food Facts per il codice ${barcode}.`
+          : `Errore nella ricerca del prodotto: ${result.error.message}`
+      );
+      return;
+    }
+    setPendingScan(buildApproximatedFood(result.product));
+    setScanStatus('idle');
+  }
+
+  function confirmAddScannedFood() {
+    if (!pendingScan) return;
+    setMealItems((prev) => [
+      ...prev,
+      {
+        instanceId: `${pendingScan.item.id}-${Date.now()}`,
+        foodId: pendingScan.item.id,
+        cookingMethod: 'raw',
+        grams: 100,
+        scannedFood: pendingScan,
+      },
+    ]);
+    setPendingScan(null);
+  }
+
+  function cancelPendingScan() {
+    setPendingScan(null);
+  }
+
   // Metodi di cottura disponibili per una data matrice: SOLO quelli per cui
   // esiste davvero un fattore di ritenzione sourced in DB (+ 'raw', sempre
   // disponibile) -- non mostriamo un'opzione che non cambierebbe nulla,
@@ -373,6 +429,14 @@ export default function Home() {
 
   const currentMealFoods: FoodItem[] = mealItems
     .map((item) => {
+      // Alimenti da scanner barcode (Open Food Facts): il FoodItem è già
+      // costruito (vedi confirmAddScannedFood), niente lookup in `foods`
+      // (non ci sono, per design -- mai scritti nel DB) né trasformazione
+      // di cottura (un prodotto confezionato è "com'è", non ha un fattore
+      // di ritenzione sourced per nessuna matrice).
+      if (item.scannedFood) {
+        return scaleFoodItemToGrams(item.scannedFood.item, item.grams);
+      }
       const dbFood = foods.find((f) => f.food_id === item.foodId);
       if (!dbFood) return null;
       const rawFoodItem = foodRowToFoodItem(dbFood);
@@ -394,6 +458,22 @@ export default function Home() {
     .filter((f): f is FoodItem => f !== null);
 
   const mealContext: Meal = { foods: currentMealFoods };
+
+  // Vedi lib/openFoodFacts.ts: i prodotti scansionati entrano in
+  // currentMealFoods con un profilo inibitori/promotori parzialmente
+  // approssimato o assente (vedi ApproximatedFood.approximatedFields /
+  // .unavailableFields). I motori sotto NON sanno nulla di questa
+  // provenienza -- il loro verificationStatus riflette solo il rigore
+  // del modello di assorbimento (es. derating zinco, categoria ossalati
+  // per il calcio), non la qualità del dato alimentare in ingresso. Un
+  // pasto con un prodotto scansionato può quindi mostrare "Verified" sul
+  // badge anche se uno dei suoi input (es. fitati=0 perché non misurati
+  // da Open Food Facts, non perché genuinamente assenti) è approssimato.
+  // "Trasparenza": segnaliamo questo scollamento con un avviso dedicato
+  // vicino ai badge, invece di toccare il motore per fargli conoscere
+  // OFF (vedi PRD "Dati prodotti confezionati": mai unito al dataset
+  // proprietario).
+  const hasScannedItems = mealItems.some((item) => item.scannedFood !== undefined);
 
   const ironScore = nutritionEngine.calculateBioavailableIron(mealContext);
   const zincScore = nutritionEngine.calculateBioavailableZinc(mealContext);
@@ -451,6 +531,13 @@ export default function Home() {
               <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">
                 Assorbimento Reale (Pasto Totale)
               </h4>
+              {hasScannedItems && (
+                <p className="text-[10px] text-amber-600 font-medium -mt-3 mb-3 leading-snug">
+                  ⚠️ Il pasto contiene un prodotto scansionato (vedi legenda sotto): il badge Verified/Draft
+                  qui sopra riguarda solo il modello di assorbimento, non la qualità del dato del prodotto —
+                  i punteggi possono quindi essere meno accurati di quanto indicato.
+                </p>
+              )}
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-indigo-950 p-4 rounded-xl">
                   <span className="text-xs text-indigo-200 block mb-1">Ferro (Eq.2 H&H)</span>
@@ -602,7 +689,30 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* COLONNA SINISTRA: Dispensa */}
           <div className="lg:col-span-1">
-            <h3 className="text-lg font-bold text-slate-800 mb-4">Dispensa Alimenti</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-slate-800">Dispensa Alimenti</h3>
+              <button
+                onClick={() => {
+                  setScanErrorMsg(null);
+                  setScannerOpen(true);
+                }}
+                className="bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors"
+                title="Scansiona un codice a barre (Open Food Facts)"
+              >
+                📷 Scansiona
+              </button>
+            </div>
+            {scanStatus === 'loading' && (
+              <div className="bg-amber-50 text-amber-700 text-xs rounded-xl p-3 mb-3">
+                Ricerca del prodotto su Open Food Facts…
+              </div>
+            )}
+            {scanErrorMsg && (
+              <div className="bg-red-50 text-red-600 text-xs rounded-xl p-3 mb-3 flex justify-between items-start gap-2">
+                <span>{scanErrorMsg}</span>
+                <button onClick={() => setScanErrorMsg(null)} className="shrink-0 font-bold">✕</button>
+              </div>
+            )}
             <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2">
               {foods.map((food) => {
                 const hasDraft = (food.nutrient_values ?? []).some((n) => n.verification_status === 'draft');
@@ -639,7 +749,83 @@ export default function Home() {
               </div>
             ) : (
               <div className="space-y-4">
+                {mealItems.some((i) => i.scannedFood) && (
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-500 flex flex-wrap gap-x-4 gap-y-1">
+                    <span className="font-semibold text-slate-600">Legenda prodotti scansionati:</span>
+                    <span><span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1" />misurato (etichetta prodotto)</span>
+                    <span><span className="inline-block w-2 h-2 rounded-full bg-amber-400 mr-1" />stimato dalla categoria</span>
+                    <span><span className="inline-block w-2 h-2 rounded-full bg-slate-300 mr-1" />non disponibile</span>
+                  </div>
+                )}
                 {mealItems.map((item) => {
+                  if (item.scannedFood) {
+                    const sf = item.scannedFood;
+                    return (
+                      <div
+                        key={item.instanceId}
+                        className="bg-white p-5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+                      >
+                        <div>
+                          <h4 className="font-bold text-slate-800 text-lg">{sf.productName}</h4>
+                          {sf.brand && <span className="text-xs text-slate-400 block">{sf.brand}</span>}
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[9px] text-amber-600 uppercase tracking-widest font-semibold">
+                              Prodotto confezionato — dati approssimativi
+                            </span>
+                            <a
+                              href={sf.productUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[9px] text-slate-400 underline hover:text-slate-600"
+                            >
+                              © Open Food Facts contributors
+                            </a>
+                          </div>
+                          <div className="flex gap-1 mt-2">
+                            <span
+                              className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"
+                              title={`Misurati: ${sf.measuredFields.join(', ')}`}
+                            />
+                            <span
+                              className="inline-block w-2.5 h-2.5 rounded-full bg-amber-400"
+                              title={`Stimati: ${sf.approximatedFields.join(', ')}`}
+                            />
+                            <span
+                              className="inline-block w-2.5 h-2.5 rounded-full bg-slate-300"
+                              title={`Non disponibili: ${sf.unavailableFields.join(', ')}`}
+                            />
+                            <span className="text-[9px] text-slate-400 ml-1">
+                              i valori di ferro/zinco/calcio entrano nel calcolo del pasto, ma il profilo fitati/ossalati/ferro-eme di questo prodotto è stimato o assente (vedi legenda) — il punteggio del pasto può essere meno accurato
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-4 w-full sm:w-auto">
+                          <div className="flex flex-col flex-grow sm:flex-grow-0">
+                            <label className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-1">
+                              Quantità (g)
+                            </label>
+                            <input
+                              type="number"
+                              min="0"
+                              step="1"
+                              value={item.grams}
+                              onChange={(e) => updateGrams(item.instanceId, e.target.value)}
+                              className="bg-emerald-50 border-none text-emerald-700 text-sm rounded-xl px-3 py-2 w-24 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-semibold"
+                            />
+                          </div>
+                          <button
+                            onClick={() => removeFromMeal(item.instanceId)}
+                            className="bg-red-50 hover:bg-red-100 text-red-500 h-10 w-10 rounded-xl flex items-center justify-center font-bold transition-colors mt-4 sm:mt-0"
+                            title="Rimuovi dal piatto"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+
                   const dbFood = foods.find((f) => f.food_id === item.foodId);
                   if (!dbFood) return null;
                   const hasRawBaseline = dbFood.baseline_cooking_state === 'raw';
@@ -734,6 +920,57 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {scannerOpen && (
+        <BarcodeScanner
+          onScan={handleBarcodeDetected}
+          onClose={() => setScannerOpen(false)}
+          onError={(msg) => {
+            setScanStatus('error');
+            setScanErrorMsg(msg);
+          }}
+        />
+      )}
+
+      {pendingScan && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full">
+            <h3 className="font-bold text-slate-800 text-lg">{pendingScan.productName}</h3>
+            {pendingScan.brand && <span className="text-sm text-slate-400 block mb-2">{pendingScan.brand}</span>}
+            <p className="text-xs text-amber-700 bg-amber-50 rounded-xl p-3 my-3">
+              Prodotto confezionato da Open Food Facts: i macronutrienti sono quelli dichiarati in etichetta
+              (non verificati da Claude come il Golden Set). Ferro/zinco/calcio/ecc. ENTRANO nel calcolo di
+              biodisponibilità del pasto, ma {pendingScan.approximatedFields.length} campi di questo prodotto
+              (es. se il ferro è eme, categoria ossalati) sono <strong>stimati</strong> dalla categoria del
+              prodotto, non misurati, e {pendingScan.unavailableFields.length} campi non sono disponibili per
+              un prodotto confezionato generico (es. fitati, ossalati, MACs) — restano a zero. Il punteggio di
+              biodisponibilità del pasto può quindi risultare più o meno accurato di quanto sembri.
+            </p>
+            <a
+              href={pendingScan.productUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[10px] text-slate-400 underline hover:text-slate-600"
+            >
+              © Open Food Facts contributors — vedi scheda prodotto
+            </a>
+            <div className="flex justify-end gap-3 mt-5">
+              <button
+                onClick={cancelPendingScan}
+                className="px-4 py-2 rounded-xl text-slate-500 hover:bg-slate-100 font-semibold text-sm"
+              >
+                Annulla
+              </button>
+              <button
+                onClick={confirmAddScannedFood}
+                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-sm"
+              >
+                Aggiungi al piatto
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
