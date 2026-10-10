@@ -53,7 +53,7 @@
 // l'etichetta reale e confronta il valore mostrato in app con quello
 // stampato sulla confezione.
 
-import { FoodItem, OxalateCategory } from "./types";
+import { FoodItem, OxalateCategory } from "./engine/types";
 
 export interface OffProduct {
   code: string;
