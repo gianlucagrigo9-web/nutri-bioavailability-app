@@ -34,7 +34,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { MicrobiotaEngine } from '@/lib/engine/microbiotaEngine';
 import { ComputationalNutritionEngine } from '@/lib/engine/computationalNutritionEngine';
 import { CookingTransformationEngine, RetentionFactorRecord } from '@/lib/engine/cookingTransformationEngine';
-import { FoodItem, SourcedValue, OxalateCategory, Meal } from '@/lib/engine/types';
+import { FoodItem, SourcedValue, OxalateCategory, Meal, scaleFoodItemToGrams } from '@/lib/engine/types';
 
 const nutritionEngine = new ComputationalNutritionEngine();
 const microbiotaEngine = new MicrobiotaEngine();
@@ -69,6 +69,7 @@ interface MealItem {
   instanceId: string; // permette di aggiungere lo stesso alimento più volte
   foodId: string;
   cookingMethod: string;
+  grams: number; // quantità reale nel piatto; i valori in DB sono per 100g (vedi scaleFoodItemToGrams)
 }
 
 // Etichette italiane per i valori di cooking_method_enum attualmente nel DB
@@ -329,7 +330,11 @@ export default function Home() {
   }
 
   const addToMeal = (foodId: string) => {
-    setMealItems((prev) => [...prev, { instanceId: `${foodId}-${Date.now()}`, foodId, cookingMethod: 'raw' }]);
+    // 100g di default: i valori in DB sono per 100g (convenzione USDA), quindi
+    // 100g è la porzione che corrisponde esattamente al dato grezzo -- non è
+    // una "porzione tipica" inventata, è il default che non altera nulla finché
+    // l'utente non lo modifica (vedi scaleFoodItemToGrams in lib/engine/types.ts).
+    setMealItems((prev) => [...prev, { instanceId: `${foodId}-${Date.now()}`, foodId, cookingMethod: 'raw', grams: 100 }]);
   };
   const removeFromMeal = (instanceId: string) => {
     setMealItems((prev) => prev.filter((item) => item.instanceId !== instanceId));
@@ -337,6 +342,18 @@ export default function Home() {
   const updateCookingMethod = (instanceId: string, method: string) => {
     setMealItems((prev) =>
       prev.map((item) => (item.instanceId === instanceId ? { ...item, cookingMethod: method } : item))
+    );
+  };
+  // Architettura difensiva: l'input del campo numerico può arrivare come
+  // stringa vuota (utente che cancella per riscrivere) o testo non numerico.
+  // Number("") è 0, non NaN -- gestito comunque correttamente da
+  // scaleFoodItemToGrams (0g valido). Qualunque altro input non interpretabile
+  // diventa NaN qui, e scaleFoodItemToGrams lo tratta come 0g, mai un valore
+  // inventato o un crash silenzioso a valle nei motori.
+  const updateGrams = (instanceId: string, rawValue: string) => {
+    const grams = Number(rawValue);
+    setMealItems((prev) =>
+      prev.map((item) => (item.instanceId === instanceId ? { ...item, grams } : item))
     );
   };
 
@@ -367,7 +384,12 @@ export default function Home() {
       // cotto specifico. La UI non offre più il selettore in questo caso
       // (vedi sotto), ma questo guard resta anche se in futuro cambiasse.
       const effectiveCookingMethod = dbFood.baseline_cooking_state === 'raw' ? item.cookingMethod : 'raw';
-      return cookingEngine.applyCookingTransformation(rawFoodItem, dbFood.matrix_id, effectiveCookingMethod, retentionFactors);
+      const cookedFoodItem = cookingEngine.applyCookingTransformation(rawFoodItem, dbFood.matrix_id, effectiveCookingMethod, retentionFactors);
+      // Scala DOPO la trasformazione di cottura: i fattori di ritenzione sono
+      // percentuali (indipendenti dalla grammatura), quindi l'ordine è
+      // matematicamente equivalente, ma logicamente più chiaro così --
+      // "crudo per 100g" -> "cotto per 100g" -> "cotto per la porzione reale".
+      return scaleFoodItemToGrams(cookedFoodItem, item.grams);
     })
     .filter((f): f is FoodItem => f !== null);
 
@@ -634,6 +656,29 @@ export default function Home() {
                       </div>
 
                       <div className="flex items-center gap-4 w-full sm:w-auto">
+                        <div className="flex flex-col flex-grow sm:flex-grow-0">
+                          <label className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 mb-1">
+                            Quantità (g)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            step="1"
+                            value={item.grams}
+                            onChange={(e) => updateGrams(item.instanceId, e.target.value)}
+                            className="bg-emerald-50 border-none text-emerald-700 text-sm rounded-xl px-3 py-2 w-24 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-semibold"
+                          />
+                          {/* I valori nutrienti sono per 100g (convenzione USDA, vedi
+                              lib/engine/types.ts): questo campo scala linearmente ogni
+                              calcolo a valle. 0 o negativo -> trattato come porzione
+                              assente (0g), mai un valore inventato -- vedi scaleFoodItemToGrams. */}
+                          {(!Number.isFinite(item.grams) || item.grams <= 0) && (
+                            <span className="text-[9px] text-amber-600 mt-1">
+                              quantità non valida: trattata come 0g (porzione assente)
+                            </span>
+                          )}
+                        </div>
+
                         <div className="flex flex-col flex-grow sm:flex-grow-0">
                           <label className="text-[10px] font-bold uppercase tracking-wider text-indigo-500 mb-1">
                             Cottura

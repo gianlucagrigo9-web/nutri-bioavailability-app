@@ -120,6 +120,43 @@ export function flattenFoods(context: Meal | DailyDiet): FoodItem[] {
   return isDailyDiet(context) ? context.meals.flatMap(m => m.foods) : context.foods;
 }
 
+// Campi di FoodItem che rappresentano una quantità di nutriente per 100g
+// (tutti i valori salvati in nutrient_values seguono la convenzione USDA
+// "per 100g"). Scalati linearmente dalla grammatura reale della porzione.
+// ESCLUSI deliberatamente: id, name (identità, non quantità), is_heme_iron/
+// matrix_category_calcium/botanical_family/is_fortified_folate/
+// carotenoid_matrix_state/zinc_bioaccessibility_bucket (categorici/booleani:
+// restano gli stessi indipendentemente da quanto l'alimento viene mangiato —
+// scalarli non avrebbe senso fisico, es. "mezzo booleano").
+const SCALABLE_NUTRIENT_FIELDS = [
+  "iron_mg", "zinc_mg", "calcium_mg", "vitamin_c_mg", "phytates_mg",
+  "oxalates_mg", "polyphenols_mg", "macs_mg", "vitamin_b12_mcg",
+  "folate_mcg", "beta_carotene_mcg", "other_provitamin_a_carotenoids_mcg",
+  "magnesium_mg", "copper_mg", "selenium_mcg", "iodine_mcg", "vitamin_k_mcg",
+  "energy_kcal", "protein_g", "carbohydrates_g", "fat_g", "fiber_g",
+] as const satisfies readonly (keyof FoodItem)[];
+
+/**
+ * Scala un FoodItem (i cui valori nutrienti sono sempre per 100g, convenzione
+ * USDA) alla grammatura REALE della porzione nel piatto. Pura funzione di
+ * moltiplicazione lineare: non introduce alcun modello nuovo, non tocca i
+ * campi categorici (vedi SCALABLE_NUTRIENT_FIELDS sopra).
+ *
+ * Architettura difensiva: un input non fisico (grammi negativi, NaN, non
+ * finito) non produce mai NaN/Infinity propagato silenziosamente nel resto
+ * della UI -- viene trattato come 0g (porzione assente), il comportamento
+ * più sicuro quando l'input non è interpretabile, mai un valore inventato.
+ */
+export function scaleFoodItemToGrams(food: FoodItem, grams: number): FoodItem {
+  const safeGrams = Number.isFinite(grams) && grams > 0 ? grams : 0;
+  const factor = safeGrams / 100;
+  const scaled: FoodItem = { ...food };
+  for (const field of SCALABLE_NUTRIENT_FIELDS) {
+    (scaled[field] as number) = food[field] * factor;
+  }
+  return scaled;
+}
+
 export function createZeroValue(sources: string[]): SourcedValue {
   return {
     value: 0,

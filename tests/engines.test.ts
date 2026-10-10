@@ -17,7 +17,7 @@ import { ComputationalNutritionEngine } from "../lib/engine/computationalNutriti
 import { MicrobiotaEngine } from "../lib/engine/microbiotaEngine";
 import { LCALogisticsEngine, FoodItemLCA, MealLCA } from "../lib/engine/lcaLogisticsEngine";
 import { CookingTransformationEngine, RetentionFactorRecord } from "../lib/engine/cookingTransformationEngine";
-import { FoodItem, Meal, DailyDiet } from "../lib/engine/types";
+import { FoodItem, Meal, DailyDiet, scaleFoodItemToGrams } from "../lib/engine/types";
 
 // ---------------------------------------------------------------------------
 // Micro test runner
@@ -810,6 +810,84 @@ describe("applyCookingTransformation — Livello C (calibrazione sul fattore app
     expect(result.iron_mg).toBeCloseTo(8.50, 2);
     expect(result.zinc_mg).toBeCloseTo(3.40, 2);
     expect(result.vitamin_c_mg).toBeCloseTo(13.00, 2);
+  });
+});
+
+describe("scaleFoodItemToGrams — Livello A (difensivo)", () => {
+  it("grammi = 100 -> valori nutrienti invariati (factor = 1)", () => {
+    const food = makeFood({ iron_mg: 7.2, energy_kcal: 150 });
+    const result = scaleFoodItemToGrams(food, 100);
+    expect(result.iron_mg).toBeCloseTo(7.2, 5);
+    expect(result.energy_kcal).toBeCloseTo(150, 5);
+  });
+  it("grammi = 0 -> tutti i campi nutrienti diventano 0, non NaN/negativo", () => {
+    const food = makeFood({ iron_mg: 7.2, zinc_mg: 3, energy_kcal: 150 });
+    const result = scaleFoodItemToGrams(food, 0);
+    expect(result.iron_mg).toBe(0);
+    expect(result.zinc_mg).toBe(0);
+    expect(result.energy_kcal).toBe(0);
+  });
+  it("grammi negativi -> trattati come 0 (porzione assente), mai un valore negativo propagato", () => {
+    const food = makeFood({ iron_mg: 7.2 });
+    const result = scaleFoodItemToGrams(food, -50);
+    expect(result.iron_mg).toBe(0);
+  });
+  it("grammi = NaN -> trattati come 0, mai NaN propagato silenziosamente nella UI", () => {
+    const food = makeFood({ iron_mg: 7.2 });
+    const result = scaleFoodItemToGrams(food, NaN);
+    expect(result.iron_mg).toBe(0);
+  });
+  it("grammi = Infinity -> trattati come 0, non Infinity propagato", () => {
+    const food = makeFood({ iron_mg: 7.2 });
+    const result = scaleFoodItemToGrams(food, Infinity);
+    expect(result.iron_mg).toBe(0);
+  });
+  it("i campi categorici (is_heme_iron, botanical_family, matrix_category_calcium, carotenoid_matrix_state, zinc_bioaccessibility_bucket, is_fortified_folate) non vengono MAI scalati, qualunque sia la grammatura", () => {
+    const food = makeFood({
+      is_heme_iron: true,
+      botanical_family: "Fabaceae",
+      matrix_category_calcium: "high_oxalate",
+      carotenoid_matrix_state: "raw_intact",
+      zinc_bioaccessibility_bucket: "brussels_sprouts_boiled",
+      is_fortified_folate: true,
+    });
+    const result = scaleFoodItemToGrams(food, 250);
+    expect(result.is_heme_iron).toBe(true);
+    expect(result.botanical_family).toBe("Fabaceae");
+    expect(result.matrix_category_calcium).toBe("high_oxalate");
+    expect(result.carotenoid_matrix_state).toBe("raw_intact");
+    expect(result.zinc_bioaccessibility_bucket).toBe("brussels_sprouts_boiled");
+    expect(result.is_fortified_folate).toBe(true);
+  });
+  it("id e name restano invariati", () => {
+    const food = makeFood({ id: "food_test", name: "Test" });
+    const result = scaleFoodItemToGrams(food, 250);
+    expect(result.id).toBe("food_test");
+    expect(result.name).toBe("Test");
+  });
+});
+
+describe("scaleFoodItemToGrams — Livello B (proprietà: scaling lineare)", () => {
+  it("grammi = 200 -> ogni campo nutriente esattamente raddoppiato", () => {
+    const food = makeFood({ iron_mg: 7.2, zinc_mg: 3, energy_kcal: 150, protein_g: 10 });
+    const result = scaleFoodItemToGrams(food, 200);
+    expect(result.iron_mg).toBeCloseTo(14.4, 5);
+    expect(result.zinc_mg).toBeCloseTo(6, 5);
+    expect(result.energy_kcal).toBeCloseTo(300, 5);
+    expect(result.protein_g).toBeCloseTo(20, 5);
+  });
+  it("grammi = 50 -> ogni campo nutriente esattamente dimezzato", () => {
+    const food = makeFood({ iron_mg: 7.2, energy_kcal: 150 });
+    const result = scaleFoodItemToGrams(food, 50);
+    expect(result.iron_mg).toBeCloseTo(3.6, 5);
+    expect(result.energy_kcal).toBeCloseTo(75, 5);
+  });
+  it("scalare poi sommare due porzioni dello stesso alimento equivale a un'unica porzione della somma dei grammi (additività)", () => {
+    const food = makeFood({ iron_mg: 8 });
+    const a = scaleFoodItemToGrams(food, 30).iron_mg;
+    const b = scaleFoodItemToGrams(food, 70).iron_mg;
+    const whole = scaleFoodItemToGrams(food, 100).iron_mg;
+    expect(a + b).toBeCloseTo(whole, 5);
   });
 });
 
