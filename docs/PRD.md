@@ -315,6 +315,7 @@ Prima di espandere la copertura, onorare "zero dati inventati" sui 20 alimenti c
 6. Le 3 righe `nutrient_values` rimaste `draft` in attesa di un cross-check dedicato (ossalati spinaci crudi, ossalati kale, fitati fagioli rossi bolliti — fonti già lette, da ri-verificare).
 7. Fattori di ritenzione dichiarati mancanti (carote/broccoli/mandorle) — restano `draft`/assenti finché non emerge una fonte legittima; non è un blocco, solo un promemoria a non dimenticarli.
 8. Controllo periodico più approfondito sui 20 alimenti promossi (dichiarato in `golden_set_promote_verified.sql`, mai ancora programmato).
+8b. **MACs: nessun alimento del Golden Set ha più un valore sourced** (scoperto durante il collaudo UI del 2026-10-10, segnalato dall'utente — "i MAC vengono modificati da pochissime pietanze"). Controllo riga per riga: 18 righe `macs_mg` esistevano nel DB, ma solo 2 corrispondevano a food_id del Golden Set attuale (broccoli e spinaci crudi), ed entrambe erano cruft non sourced dal vecchio seed demo (`source_id NULL`) — stesso schema già pulito per i ceci. Rimosse (`cleanup_macs_cruft.sql`). Effetto netto: il punteggio MACs nel Meal Builder ora è onestamente 0 per qualunque alimento, finché non si trova una fonte vera (USDA / letteratura su fibra fermentabile, amido resistente, inulina) per almeno alcuni dei 29 alimenti — **gap di dati reale, non ancora colmato, priorità da stabilire**.
 
 ### Fase 2 — Irrobustire prima di esporre al pubblico
 Il DB è già in produzione (etichettato "PRODUCTION" su Supabase) ma finora ci abbiamo scritto solo noi due dalla dashboard SQL. Nessuno di questi punti è urgente finché l'app non è raggiungibile da altri, ma vanno chiusi prima che lo sia.
@@ -324,25 +325,26 @@ Il DB è già in produzione (etichettato "PRODUCTION" su Supabase) ma finora ci 
 
 ### Fase 3 — Completare la superficie UI del perimetro MVP (§7)
 Cosa manca ancora rispetto a quello che il PRD dichiara "dentro" la v1.
-12. Scanner barcode via Open Food Facts — dichiarato "dentro v1" in §7, non ancora implementato in `app/page.tsx`.
-13. Meal Builder — esiste come scaffold, da verificare/rifinire dopo la Fase 0 (collaudo visivo reale).
+12. **Quantità/grammatura per alimento nel Meal Builder — priorità alta, scoperto mancante durante il collaudo UI del 2026-10-10.** `addToMeal` in `app/page.tsx` aggiunge ogni alimento senza mai chiedere una porzione: i valori di `nutrient_values` sono per 100g (convenzione USDA) e vengono usati così come sono, quindi ogni alimento nel piatto conta sempre come "100g fissi" indipendentemente da quanto l'utente ne mangerebbe davvero. Senza questo campo il Meal Builder non produce numeri realistici — va prima di molte altre voci di questa fase, non dopo.
+13. Scanner barcode via Open Food Facts — dichiarato "dentro v1" in §7, non ancora implementato in `app/page.tsx`.
+14. Meal Builder — rifinitura generale dopo il primo collaudo visivo riuscito (Fase 0 punto 2).
 
 ### Fase 4 — Scalare oltre i 20 alimenti
 Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
-14. Disegnare un processo di verifica **a batch** (non più un alimento alla volta a mano) — criterio esplicito di cosa rende una riga promuovibile a `verified`, ripetibile.
-15. Espandere la copertura alimenti usando quel processo, dando priorità a ciò che serve davvero ai primi utenti (non ai ~1.100 alimenti tutti insieme).
+15. Disegnare un processo di verifica **a batch** (non più un alimento alla volta a mano) — criterio esplicito di cosa rende una riga promuovibile a `verified`, ripetibile.
+16. Espandere la copertura alimenti usando quel processo, dando priorità a ciò che serve davvero ai primi utenti (non ai ~1.100 alimenti tutti insieme).
 
 ### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)
 Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (vedi §7, nota 2026-10-10). Nessun ordine imposto fra questi — da prioritizzare quando ci si arriva.
-16. Pipeline evidenze scientifiche (scraping PubMed + estrazione parametri + livello di evidenza + review umana) — coerente con §2 regola 3 e §4; rafforzerebbe le fonti dei motori già ammessi, utile anche prima della Fase 4.
-17. AI Recipe Co-Pilot (parsing ricette da voce/testo).
-18. Database integratori e crononutrizione.
-19. Mappa globale di popolazione (FAOSTAT/GDD).
-20. Integrazione wearable (HealthKit/Health Connect) — richiede app nativa, non PWA: decisione architetturale a sé.
+17. Pipeline evidenze scientifiche (scraping PubMed + estrazione parametri + livello di evidenza + review umana) — coerente con §2 regola 3 e §4; rafforzerebbe le fonti dei motori già ammessi, utile anche prima della Fase 4.
+18. AI Recipe Co-Pilot (parsing ricette da voce/testo).
+19. Database integratori e crononutrizione.
+20. Mappa globale di popolazione (FAOSTAT/GDD).
+21. Integrazione wearable (HealthKit/Health Connect) — richiede app nativa, non PWA: decisione architetturale a sé.
 
 ### Fase 6 — Intenzionalmente parcheggiato (non "dopo", ma "da ridiscutere se e quando")
-21. Modulo clinico (ontologia eziologica, alberi decisionali per patologia) — fuori perimetro per motivi legali/regolatori (§1.1), si rivaluta a MVP completo.
-22. Integrazione CGM — stesso livello di cautela del modulo clinico (§7, nota 2026-10-10), non una voce di backlog ordinaria.
+22. Modulo clinico (ontologia eziologica, alberi decisionali per patologia) — fuori perimetro per motivi legali/regolatori (§1.1), si rivaluta a MVP completo.
+23. Integrazione CGM — stesso livello di cautela del modulo clinico (§7, nota 2026-10-10), non una voce di backlog ordinaria.
 
 ---
 
