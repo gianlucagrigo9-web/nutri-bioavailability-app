@@ -71,10 +71,15 @@ interface MealItem {
 }
 
 // Etichette italiane per i valori di cooking_method_enum attualmente nel DB
-// (vedi extend_cooking_method_enum.sql). "padella" non è ancora qui: non
-// esiste ancora un fattore di ritenzione sourced per quel metodo (vedi
-// retention_factors_*.sql) -- aggiungerlo come opzione senza un dato dietro
-// violerebbe la regola "zero dati inventati".
+// (vedi extend_cooking_method_enum.sql). "Fritto" rappresenta anche la
+// "padella" (scottatura senza acqua) richiesta dall'utente: i dati sourced
+// per cooking_method='fried' esistono oggi SOLO per le matrici 'tubers' e
+// 'legumes' (USDA Release 6, vedi retention_factors_padella.sql, status
+// 'draft' con riserve documentate nei commenti SQL). Per le altre matrici
+// (carote, crucifere, broccoli, verdure a foglia) 'fried' resta un gap
+// dichiarato -- non esiste ancora una fonte reale, quindi per quegli
+// alimenti availableCookingMethods() sotto non lo mostra come opzione
+// (coerente con "zero dati inventati": nessun fattore stimato).
 const COOKING_METHOD_LABELS: Record<string, string> = {
   raw: 'Crudo',
   boiled: 'Bollitura',
