@@ -14,14 +14,16 @@
 //   riga specifica di Agribalyse 3.1.1: evidenceLevel piu' basso per
 //   questo singolo fattore rispetto al resto del calcolo.
 
-export interface SourcedValue {
-  value: number;
-  confidenceLow: number | null;
-  confidenceHigh: number | null;
-  evidenceLevel: 1 | 2 | 3 | 4 | 5;
-  sourceIds: string[];
-  verificationStatus: "draft" | "verified";
-}
+// FIX (2026-10-10, review del codice): questo file definiva una propria
+// interfaccia SourcedValue locale, duplicata rispetto a quella di
+// lib/engine/types.ts -- in contraddizione con lo scopo dichiarato nel
+// commento di intestazione di types.ts stesso ("un'unica interfaccia
+// elimina... la possibilità che un campo richiesto da un motore manchi
+// silenziosamente quando arriva da un altro"). Le due definizioni erano
+// identiche tranne per il campo opzionale `bioavailabilityAdjusted`, non
+// usato da questo motore (dominio LCA, non nutrizione) -- quindi importare
+// quella condivisa è un cambio compatibile, nessun valore qui ne risente.
+import { SourcedValue } from "./types";
 
 export interface FoodItemLCA {
   id: string;
