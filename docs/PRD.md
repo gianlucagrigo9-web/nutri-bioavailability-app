@@ -278,6 +278,9 @@ Questo contratto sarà il primo criterio di accettazione da validare quando risc
 - Database integratori e crononutrizione.
 - AI Recipe Co-Pilot conversazionale.
 - Copertura completa dei ~1.100 alimenti italiani.
+- Integrazione CGM (curve glicemiche in continuo) — **non è una semplice feature rimandata**: va trattata con la stessa cautela del modulo clinico (§1.1) quando arriverà il suo turno, non come le voci sopra. Motivo: la glicemia continua è dato sanitario GDPR Art. 9, e "suggerire combinazioni correttive" in base alla curva post-prandiale è già un consiglio personalizzato legato a un dato fisiologico individuale, non una semplice informazione nutrizionale generica. Nessuna decisione presa qui — solo un promemoria a non farla scivolare dentro come se fosse equivalente a, es., la mappa globale.
+
+**Nota sulla roadmap estesa (2026-10-10):** l'utente ha condiviso un documento di visione a 7 step (PROGETTO: COMPUTATIONAL BIO-NUTRITION APP) che include, oltre alle voci sopra, un modulo di ontologia clinica eziologica con alberi decisionali per patologia (ictus ischemico/emorragico, sottotipi di demenza, stadiazione eGFR) — di fatto il modulo clinico già escluso in §1.1, nella sua versione più estesa (con contraindicazioni esplicite su supplementi). Decisione esplicita dell'utente: il documento resta valido come **visione a lungo termine/bussola** verso cui tendere, non come piano operativo da seguire in ordine da ora. Il modulo clinico resta fuori perimetro **per ora**; si rivaluterà se/come implementarlo **dopo che l'app attuale (perimetro MVP sopra) sarà completa**, non prima. Questa nota esiste per non dover riproporre la stessa domanda in una sessione futura.
 
 ---
 
