@@ -70,12 +70,50 @@
 # UPDATE già in uso, le altre 3 non hanno sostituto e vanno solo rimosse
 # (DELETE eseguito a parte, non in questo script).
 #
-# NON ancora fuso qui (resta fuori dall'invariante "un solo generatore",
-# debito dichiarato): la promozione draft->verified
-# (golden_set_promote_verified.sql), il pannello admin
-# (admin_data_entry_setup.sql), l'enum cooking_method
-# (extend_cooking_method_enum.sql) e le pulizie di cruft legacy
-# (cleanup_is_heme_iron_cruft.sql, cleanup_chickpeas_raw_cruft.sql).
+# AGGIORNAMENTO 2026-10-10 (quarto giro): verificato uno per uno, contro il
+# DB live, lo stato dei 5 file elencati come "debito" qui sotto (approvato
+# dall'utente con "procedi"). Risultato: NESSUNO dei 5 e' in sospeso --
+# sono tutti gia' stati eseguiti live, con una sola eccezione corretta in
+# questo giro:
+#   - admin_data_entry_setup.sql: applicato (get_enum_values() esiste,
+#     retention_factors.confidence_low/high e foods_raw.botanical_family
+#     gia' presenti).
+#   - extend_cooking_method_enum.sql: applicato (implicito: le righe
+#     RETENTION_FACTORS con cooking_method='boiled_quick_15_20min' e
+#     'boiled_in_skin' sono inserite con successo sul DB live, impossibile
+#     se l'enum non avesse questi valori).
+#   - cleanup_is_heme_iron_cruft.sql: applicato (0 righe
+#     nutrient_code='is_heme_iron' rimaste).
+#   - cleanup_chickpeas_raw_cruft.sql: applicato (vedi terzo giro sopra).
+#   - golden_set_promote_verified.sql: applicato per 19 dei 20 alimenti --
+#     food_oranges_raw.verification_status e' VERIFICATO RESTARE 'draft' su
+#     foods_raw contro il DB live (causa non accertata: probabile esecuzione
+#     del file precedente all'inserimento/ultima reinsert di quella riga
+#     specifica). Le righe nutrient_values di oranges sono invece
+#     correttamente miste (verified per i campi gia' presenti al momento
+#     della promozione, draft per i 5 macronutrienti aggiunti SOLO il
+#     2026-10-10 -- quindi mai passati dal cross-check del 2026-10-09: draft
+#     e' lo stato corretto per quelli, non un'anomalia). L'UPDATE che
+#     completerebbe la promozione di food_oranges_raw (gia' autorizzata dall
+#     'utente il 2026-10-09, che nominava esplicitamente questo food_id tra
+#     i 20) e' stato tentato il 2026-10-10 e negato dal sistema di permessi
+#     della sessione (scrittura su risorsa condivisa/produzione) -- NON
+#     eseguito. food_oranges_raw resta quindi 'draft' su foods_raw finche'
+#     l'utente non lo esegue lui stesso o approva esplicitamente il retry.
+#
+# Questi 5 file restano VOLUTAMENTE fuori da questo generatore, non per
+# debito da ripagare ma per differenza di natura: generate_golden_set_foods.py
+# produce righe di DATI (foods_raw/nutrient_values/retention_factors) in
+# modo idempotente e ripetibile; i 5 file sono invece (a) migrazioni di
+# schema one-shot (extend_cooking_method_enum.sql, admin_data_entry_setup.sql),
+# (b) pulizie di cruft legacy one-shot ormai concluse (cleanup_is_heme_iron_
+# cruft.sql, cleanup_chickpeas_raw_cruft.sql), o (c) una promozione umana
+# esplicita draft->verified che per design (vedi PRD §4.6, "Human-in-the-
+# Loop") NON deve MAI essere un default automatico o rieseguita ad ogni
+# rigenerazione -- fonderla qui dentro violerebbe quel principio, non lo
+# rispetterebbe. Restano quindi come file SQL singoli, gia' eseguiti ed
+# eseguiti una sola volta, tenuti per la cronologia/trasparenza.
+#
 # Questo script genera SOLO golden_set_foods.sql (foods_raw +
 # nutrient_values + retention_factors del Golden Set), non l'intero stato
 # del DB.
