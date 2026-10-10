@@ -137,14 +137,22 @@ FOODS = [
             "energy_kcal": 23.0, "protein_g": 2.86, "fat_g": 0.39, "carbohydrates_g": 3.63, "fiber_g": 2.20,
         },
         "extra": {
-            # Ossalati: due fonti discordanti trovate, nessuna scelta
-            # arbitraria -- uso la review esplicitamente richiesta (Noonan &
-            # Savage 1999), range reale come confidence bounds, media come
-            # valore centrale. Siener et al. 2006 (totale 1959, solubile
-            # 1029 mg/100g) e' discordante e NON inserito come riga
-            # separata (vincolo UNIQUE food_id+nutrient_code): documentato
-            # solo come commento SQL per trasparenza.
-            "oxalates_mg": {"value": 970, "confidence_low": 320, "confidence_high": 1260, "source_id": "NOONAN_SAVAGE_1999_APJCN"},
+            # Ossalati: DECISIONE PRESA 2026-10-10 (vedi
+            # fix_literature_sources_recheck.sql per il dettaglio completo).
+            # Due fonti discordanti: Noonan & Savage 1999 (review, media
+            # 970 mg/100g sintetizzata da altre 3 fonti, usata qui fino al
+            # 2026-10-10) vs Siener et al. 2006 (studio primario dedicato
+            # sulla famiglia botanica degli spinaci, 1959 mg/100g totale).
+            # L'utente ha scelto esplicitamente la fonte piu' recente E piu'
+            # "di prima mano" (studio primario vs review di sintesi) ->
+            # Siener. Nessun confidence_low/high: nessuna delle fonti
+            # disponibili riporta un range per questo singolo valore.
+            # verification_status resta 'draft' nonostante il cambio: il
+            # testo completo di Siener 2006 e' a pagamento (ScienceDirect),
+            # non letto direttamente da Claude -- il numero e' di seconda
+            # mano (dalla nota che era gia' nel PRD), non confermato di
+            # persona come per kale/fagioli sotto.
+            "oxalates_mg": {"value": 1959, "confidence_low": None, "confidence_high": None, "source_id": "SIENER_2006_FOODCHEM"},
         }
     },
     {
@@ -844,6 +852,14 @@ SOURCES_NEW = [
     ("DONIEC_2022_MOLECULES",
      "Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.",
      "https://doi.org/10.3390/molecules27061861"),
+    # Aggiunta 2026-10-10 (ri-verifica Fase 1 punto 6, vedi
+    # fix_literature_sources_recheck.sql): sostituisce NOONAN_SAVAGE_1999_APJCN
+    # come fonte per food_spinach_raw.oxalates_mg, per decisione esplicita
+    # dell'utente (fonte piu' recente e primaria vs review di sintesi).
+    # Citazione di seconda mano: testo completo non letto da Claude (paywall).
+    ("SIENER_2006_FOODCHEM",
+     "Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]",
+     "https://doi.org/10.1016/j.foodchem.2005.05.079"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -1132,13 +1148,13 @@ lines.append("-- - food_lentils_boiled.phytates_mg: trovato un valore SOLO per l
 lines.append("--   CRUDE/secche (233.04 mg/100g, Fouad AA, Rehab FMA. Acta Sci Pol Technol")
 lines.append("--   Aliment. 2015;14(3):233-246), non per bollite -- stato di cottura non")
 lines.append("--   corrispondente al food_id di questa riga. Non inserito.")
-lines.append("-- - food_spinach_raw.oxalates_mg: Siener R et al. Food Chemistry 2006;98:220-224")
-lines.append("--   riporta un valore discordante (totale 1959 mg/100g, solubile 1029 mg/100g)")
-lines.append("--   rispetto a Noonan & Savage 1999 (970 mg/100g, usato qui). Non e' stata")
-lines.append("--   fatta una scelta tra le due: il vincolo UNIQUE(food_id,nutrient_code) non")
-lines.append("--   permette di inserire entrambe come righe separate. Decisione rimandata a")
-lines.append("--   un controllo umano (es. verificare quale metodica analitica e' piu'")
-lines.append("--   comparabile al resto del Golden Set).")
+lines.append("-- - food_spinach_raw.oxalates_mg: RISOLTO 2026-10-10 (vedi")
+lines.append("--   fix_literature_sources_recheck.sql). Due fonti discordanti --")
+lines.append("--   Noonan & Savage 1999 (review, 970 mg/100g) vs Siener et al. 2006")
+lines.append("--   (studio primario dedicato, 1959 mg/100g) -- l'utente ha scelto")
+lines.append("--   esplicitamente Siener (piu' recente, studio primario vs review).")
+lines.append("--   Resta 'draft': il testo completo di Siener e' a pagamento, non letto")
+lines.append("--   direttamente da Claude (citazione di seconda mano).")
 lines.append("-- - food_kale_raw: selenium_mcg, vitamin_k_mcg, vitamin_b12_mcg non recuperati")
 lines.append("--   (fetch troncato in questa sessione, non necessariamente assenti dalla")
 lines.append("--   fonte) -- da ri-tentare in una sessione futura.")

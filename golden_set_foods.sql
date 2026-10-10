@@ -54,7 +54,8 @@ INSERT INTO sources (id, citation, url_or_doi) VALUES
   ('ERDOGAN_ONAR_2012_JFDA', 'Erdogan BY, Onar AN. Determination of nitrates, nitrites and oxalates in kale and sultana pea by capillary electrophoresis. J Food Drug Anal. 2012;20(2):14. [kale: 2970+/-672 mg/kg = 297+/-67.2 mg/100g, conversione aritmetica kg->100g]', 'https://doi.org/10.6227/jfda.2012200215'),
   ('ZIA_UR_REHMAN_2002_PJSIR', 'Zia-ur-Rehman, Salariya AM, Zafar SI. Effect of different soaking and cooking methods on physical characteristics, phytic acid content and protein digestibility of red kidney beans. Pak J Sci Ind Res. 2002;45(1):41-45. [fagioli rossi: crudo 1084 mg/100g, bollito (cottura ordinaria) 805 mg/100g]', 'https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257'),
   ('USDA_RETN06', 'USDA Table of Nutrient Retention Factors, Release 6 (2007). Pubblico dominio (CC0). DOI 10.15482/USDA.ADC/1409034', 'https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf'),
-  ('DONIEC_2022_MOLECULES', 'Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.', 'https://doi.org/10.3390/molecules27061861')
+  ('DONIEC_2022_MOLECULES', 'Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.', 'https://doi.org/10.3390/molecules27061861'),
+  ('SIENER_2006_FOODCHEM', 'Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]', 'https://doi.org/10.1016/j.foodchem.2005.05.079')
 ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;
 
 -- ----------------------------------------------------------------------------
@@ -125,7 +126,7 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_spinach_raw', 'fat_g', 0.39, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_raw', 'carbohydrates_g', 3.63, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_raw', 'fiber_g', 2.2, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_spinach_raw', 'oxalates_mg', 970, 320, 1260, 'NOONAN_SAVAGE_1999_APJCN', 'draft')
+  ('food_spinach_raw', 'oxalates_mg', 1959, NULL, NULL, 'SIENER_2006_FOODCHEM', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -1094,13 +1095,13 @@ ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
 --   CRUDE/secche (233.04 mg/100g, Fouad AA, Rehab FMA. Acta Sci Pol Technol
 --   Aliment. 2015;14(3):233-246), non per bollite -- stato di cottura non
 --   corrispondente al food_id di questa riga. Non inserito.
--- - food_spinach_raw.oxalates_mg: Siener R et al. Food Chemistry 2006;98:220-224
---   riporta un valore discordante (totale 1959 mg/100g, solubile 1029 mg/100g)
---   rispetto a Noonan & Savage 1999 (970 mg/100g, usato qui). Non e' stata
---   fatta una scelta tra le due: il vincolo UNIQUE(food_id,nutrient_code) non
---   permette di inserire entrambe come righe separate. Decisione rimandata a
---   un controllo umano (es. verificare quale metodica analitica e' piu'
---   comparabile al resto del Golden Set).
+-- - food_spinach_raw.oxalates_mg: RISOLTO 2026-10-10 (vedi
+--   fix_literature_sources_recheck.sql). Due fonti discordanti --
+--   Noonan & Savage 1999 (review, 970 mg/100g) vs Siener et al. 2006
+--   (studio primario dedicato, 1959 mg/100g) -- l'utente ha scelto
+--   esplicitamente Siener (piu' recente, studio primario vs review).
+--   Resta 'draft': il testo completo di Siener e' a pagamento, non letto
+--   direttamente da Claude (citazione di seconda mano).
 -- - food_kale_raw: selenium_mcg, vitamin_k_mcg, vitamin_b12_mcg non recuperati
 --   (fetch troncato in questa sessione, non necessariamente assenti dalla
 --   fonte) -- da ri-tentare in una sessione futura.
