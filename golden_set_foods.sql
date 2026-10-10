@@ -21,17 +21,6 @@
 -- 'verified' dopo un controllo a campione -- anche se i valori sono stati
 -- letti da una fonte ufficiale, non e' stato ancora fatto quel secondo
 -- controllo da parte dell'utente/esperto di dominio).
---
--- FIX (2026-10-09, prima esecuzione reale contro il DB live): questo file
--- era stato scritto senza mai aver letto lo schema reale (nessun accesso al
--- DB durante la sessione fino ad ora). Confrontandolo con lo schema live
--- e' emerso un bug: l'INSERT INTO sources usava la colonna 'url', che non
--- esiste -- la colonna reale si chiama 'url_or_doi'. Corretto sotto. Vedi
--- anche: prima di questo file vanno eseguiti admin_data_entry_setup.sql,
--- fix_sources_e_retention_factors.sql, retention_factors_legumi_tuberi.sql
--- e retention_factors_crucifere.sql (creano le matrici 'leafy_greens',
--- 'legumes', 'tubers', 'crucifere_cavoletti_bruxelles' che questo file
--- referenzia via foods_raw.matrix_id ma non crea lui stesso).
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
@@ -124,6 +113,11 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_spinach_raw', 'folate_mcg', 194, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_raw', 'beta_carotene_mcg', 5630, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_raw', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_raw', 'energy_kcal', 23.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_raw', 'protein_g', 2.86, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_raw', 'fat_g', 0.39, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_raw', 'carbohydrates_g', 3.63, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_raw', 'fiber_g', 2.2, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_raw', 'oxalates_mg', 970, 320, 1260, 'NOONAN_SAVAGE_1999_APJCN', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
@@ -152,7 +146,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_spinach_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_boiled', 'folate_mcg', 146, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_spinach_boiled', 'beta_carotene_mcg', 6290, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_spinach_boiled', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_spinach_boiled', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_boiled', 'energy_kcal', 23.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_boiled', 'protein_g', 2.97, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_boiled', 'fat_g', 0.26, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_boiled', 'carbohydrates_g', 3.75, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_spinach_boiled', 'fiber_g', 2.4, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -178,6 +177,11 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_kale_raw', 'folate_mcg', 62, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kale_raw', 'beta_carotene_mcg', 2870, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kale_raw', 'other_provitamin_a_carotenoids_mcg', 27, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kale_raw', 'energy_kcal', 35.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kale_raw', 'protein_g', 2.92, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kale_raw', 'fat_g', 1.49, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kale_raw', 'carbohydrates_g', 4.42, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kale_raw', 'fiber_g', 4.1, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kale_raw', 'oxalates_mg', 297, 229.8, 364.2, 'ERDOGAN_ONAR_2012_JFDA', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
@@ -195,7 +199,11 @@ ON CONFLICT (food_id) DO UPDATE SET
   botanical_family = EXCLUDED.botanical_family;
 
 INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
-  ('food_milk_whole', 'calcium_mg', 123, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_milk_whole', 'calcium_mg', 123, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_milk_whole', 'energy_kcal', 60.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_milk_whole', 'protein_g', 3.28, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_milk_whole', 'fat_g', 3.2, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_milk_whole', 'carbohydrates_g', 4.67, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -222,6 +230,11 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_kidney_beans_boiled', 'vitamin_k_mcg', 8.4, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kidney_beans_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kidney_beans_boiled', 'folate_mcg', 130, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_boiled', 'energy_kcal', 127, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_boiled', 'protein_g', 8.67, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_boiled', 'fat_g', 0.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_boiled', 'carbohydrates_g', 22.8, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_boiled', 'fiber_g', 7.4, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_kidney_beans_boiled', 'phytates_mg', 805, NULL, NULL, 'ZIA_UR_REHMAN_2002_PJSIR', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
@@ -248,7 +261,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_lentils_boiled', 'selenium_mcg', 2.8, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_lentils_boiled', 'vitamin_k_mcg', 1.7, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_lentils_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_lentils_boiled', 'folate_mcg', 181, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_lentils_boiled', 'folate_mcg', 181, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_boiled', 'energy_kcal', 116, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_boiled', 'protein_g', 9.02, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_boiled', 'fat_g', 0.38, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_boiled', 'carbohydrates_g', 20.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_boiled', 'fiber_g', 7.9, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -276,7 +294,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_potato_boiled_in_skin', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_potato_boiled_in_skin', 'folate_mcg', 10, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_potato_boiled_in_skin', 'beta_carotene_mcg', 2, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_potato_boiled_in_skin', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_potato_boiled_in_skin', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_boiled_in_skin', 'energy_kcal', 87.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_boiled_in_skin', 'protein_g', 1.87, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_boiled_in_skin', 'fat_g', 0.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_boiled_in_skin', 'carbohydrates_g', 20.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_boiled_in_skin', 'fiber_g', 1.8, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -305,7 +328,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_carrots_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_carrots_raw', 'folate_mcg', 19, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_carrots_raw', 'beta_carotene_mcg', 8280, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_carrots_raw', 'other_provitamin_a_carotenoids_mcg', 3480, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_carrots_raw', 'other_provitamin_a_carotenoids_mcg', 3480, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_raw', 'energy_kcal', 41.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_raw', 'protein_g', 0.93, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_raw', 'fat_g', 0.24, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_raw', 'carbohydrates_g', 9.58, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_raw', 'fiber_g', 2.8, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -334,7 +362,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_carrots_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_carrots_boiled', 'folate_mcg', 14, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_carrots_boiled', 'beta_carotene_mcg', 8330, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_carrots_boiled', 'other_provitamin_a_carotenoids_mcg', 3780, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_carrots_boiled', 'other_provitamin_a_carotenoids_mcg', 3780, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_boiled', 'energy_kcal', 35.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_boiled', 'protein_g', 0.76, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_boiled', 'fat_g', 0.18, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_boiled', 'carbohydrates_g', 8.22, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_carrots_boiled', 'fiber_g', 3.0, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -363,7 +396,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_brussels_sprouts_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_brussels_sprouts_raw', 'folate_mcg', 61, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_brussels_sprouts_raw', 'beta_carotene_mcg', 450, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_brussels_sprouts_raw', 'other_provitamin_a_carotenoids_mcg', 6, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_brussels_sprouts_raw', 'other_provitamin_a_carotenoids_mcg', 6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_raw', 'energy_kcal', 43.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_raw', 'protein_g', 3.38, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_raw', 'fat_g', 0.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_raw', 'carbohydrates_g', 8.95, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_raw', 'fiber_g', 3.8, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -390,7 +428,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_brussels_sprouts_boiled', 'selenium_mcg', 1.5, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_brussels_sprouts_boiled', 'vitamin_k_mcg', 140, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_brussels_sprouts_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_brussels_sprouts_boiled', 'folate_mcg', 60, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_brussels_sprouts_boiled', 'folate_mcg', 60, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_boiled', 'energy_kcal', 36.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_boiled', 'protein_g', 2.55, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_boiled', 'fat_g', 0.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_boiled', 'carbohydrates_g', 7.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_brussels_sprouts_boiled', 'fiber_g', 2.6, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -417,7 +460,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_beef_liver_cooked', 'vitamin_k_mcg', 3.3, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_beef_liver_cooked', 'vitamin_b12_mcg', 70.6, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_beef_liver_cooked', 'folate_mcg', 253, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_beef_liver_cooked', 'beta_carotene_mcg', 162, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_beef_liver_cooked', 'beta_carotene_mcg', 162, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_cooked', 'energy_kcal', 191, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_cooked', 'protein_g', 29.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_cooked', 'fat_g', 5.26, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_cooked', 'carbohydrates_g', 5.13, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_cooked', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -443,7 +491,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_beef_ground_cooked', 'selenium_mcg', 21.5, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_beef_ground_cooked', 'vitamin_k_mcg', 1.2, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_beef_ground_cooked', 'vitamin_b12_mcg', 2.64, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_beef_ground_cooked', 'folate_mcg', 9, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_beef_ground_cooked', 'folate_mcg', 9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_cooked', 'energy_kcal', 250, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_cooked', 'protein_g', 25.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_cooked', 'fat_g', 15.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_cooked', 'carbohydrates_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_cooked', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -472,7 +525,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_broccoli_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_broccoli_raw', 'folate_mcg', 63, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_broccoli_raw', 'beta_carotene_mcg', 361, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_broccoli_raw', 'other_provitamin_a_carotenoids_mcg', 26, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_broccoli_raw', 'other_provitamin_a_carotenoids_mcg', 26, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_raw', 'energy_kcal', 34.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_raw', 'protein_g', 2.82, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_raw', 'fat_g', 0.37, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_raw', 'carbohydrates_g', 6.64, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_broccoli_raw', 'fiber_g', 2.6, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -498,7 +556,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_almonds', 'selenium_mcg', 4.1, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_almonds', 'vitamin_k_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_almonds', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_almonds', 'folate_mcg', 44, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_almonds', 'folate_mcg', 44, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_almonds', 'energy_kcal', 579, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_almonds', 'protein_g', 21.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_almonds', 'fat_g', 49.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_almonds', 'carbohydrates_g', 21.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_almonds', 'fiber_g', 12.5, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -527,7 +590,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_oranges_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_oranges_raw', 'folate_mcg', 30, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_oranges_raw', 'beta_carotene_mcg', 71, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_oranges_raw', 'other_provitamin_a_carotenoids_mcg', 127, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_oranges_raw', 'other_provitamin_a_carotenoids_mcg', 127, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_oranges_raw', 'energy_kcal', 47.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_oranges_raw', 'protein_g', 0.94, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_oranges_raw', 'fat_g', 0.12, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_oranges_raw', 'carbohydrates_g', 11.8, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_oranges_raw', 'fiber_g', 2.4, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -553,7 +621,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_egg_hard_boiled', 'selenium_mcg', 30.8, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_egg_hard_boiled', 'vitamin_k_mcg', 0.3, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_egg_hard_boiled', 'vitamin_b12_mcg', 1.11, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_egg_hard_boiled', 'folate_mcg', 44, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_egg_hard_boiled', 'folate_mcg', 44, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_hard_boiled', 'energy_kcal', 155, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_hard_boiled', 'protein_g', 12.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_hard_boiled', 'fat_g', 10.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_hard_boiled', 'carbohydrates_g', 1.12, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_hard_boiled', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -579,7 +652,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_salmon_cooked', 'selenium_mcg', 41.4, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_salmon_cooked', 'vitamin_k_mcg', 0.1, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_salmon_cooked', 'vitamin_b12_mcg', 2.8, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_salmon_cooked', 'folate_mcg', 34, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_salmon_cooked', 'folate_mcg', 34, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_cooked', 'energy_kcal', 206, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_cooked', 'protein_g', 22.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_cooked', 'fat_g', 12.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_cooked', 'carbohydrates_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_cooked', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -605,7 +683,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_chickpeas_boiled', 'selenium_mcg', 3.7, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_chickpeas_boiled', 'vitamin_k_mcg', 4.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_chickpeas_boiled', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_chickpeas_boiled', 'folate_mcg', 172, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_chickpeas_boiled', 'folate_mcg', 172, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_boiled', 'energy_kcal', 164, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_boiled', 'protein_g', 8.86, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_boiled', 'fat_g', 2.59, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_boiled', 'carbohydrates_g', 27.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_boiled', 'fiber_g', 7.6, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -634,7 +717,12 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_pasta_enriched_cooked', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_pasta_enriched_cooked', 'folate_mcg', 66, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_pasta_enriched_cooked', 'beta_carotene_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
-  ('food_pasta_enriched_cooked', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft')
+  ('food_pasta_enriched_cooked', 'other_provitamin_a_carotenoids_mcg', 0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'energy_kcal', 158, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'protein_g', 5.8, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'fat_g', 0.93, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'carbohydrates_g', 30.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_cooked', 'fiber_g', 1.8, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -683,6 +771,14 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 --   supporto degli altri alimenti vegetali di questo set) -- inserito comunque
 --   come 0.00/USDA_FDC per coerenza biologica (i legumi non contengono B12),
 --   ma il limite metodologico specifico di questo record resta dichiarato qui.
+-- - food_milk_whole.fiber_g: fonte verificata per lo stesso FDC ID 322892
+--   internamente contraddittoria sulla fibra (etichetta "not declared" / riquadro
+--   "0g" / nessuna riga "Fiber" nella tabella nutrienti completa) -- non inserito,
+--   anche se biologicamente il latte ha fibra ~0. Aggiunto 2026-10-10 insieme
+--   agli altri macronutrienti (energy_kcal/protein_g/fat_g/carbohydrates_g),
+--   verificati via getfoodfacts.com (mirror USDA FDC con stesso FDC ID citato
+--   esplicitamente in pagina) perché fdc.nal.usda.gov non era raggiungibile
+--   direttamente in questa sessione.
 -- - food_pasta_enriched_cooked.folate_mcg: contiene SOLO la quota di acido
 --   folico sintetico (66 µg), non il folato totale (73 µg) né la quota di
 --   folato alimentare naturale (7 µg) riportati entrambi dal record FDC --

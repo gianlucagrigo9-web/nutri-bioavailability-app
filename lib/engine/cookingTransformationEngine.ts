@@ -44,7 +44,18 @@ const NUTRIENT_FIELD_MAP: Partial<Record<string, keyof FoodItem>> = {
   copper: "copper_mg",
   selenium: "selenium_mcg",
   iodine: "iodine_mcg",
-  vitamin_k: "vitamin_k_mcg"
+  vitamin_k: "vitamin_k_mcg",
+  // Aggiunti 2026-10-10 insieme ai macronutrienti in FoodItem. Nessuna riga
+  // retention_factors usa ancora questi codici (nessun dato sourced
+  // raccolto finora per le perdite di macro in cottura, es. USDA Release 6
+  // le avrebbe per proteine/grassi/carboidrati/fibra ma non sono state
+  // ancora trascritte) -- la mappatura esiste già per quando arriveranno,
+  // coerente con la convenzione "un solo punto che traduce i codici".
+  energy: "energy_kcal",
+  protein: "protein_g",
+  carbohydrates: "carbohydrates_g",
+  fat: "fat_g",
+  fiber: "fiber_g"
 };
 
 export class CookingTransformationEngine {

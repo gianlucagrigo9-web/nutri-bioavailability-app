@@ -19,6 +19,18 @@
 # (rigenera ../golden_set_foods.sql da questo file; se aggiungi un nuovo
 # alimento al Golden Set, aggiungilo a FOODS qui sotto, non direttamente
 # nel file .sql, cosi' il dict resta la fonte di verita' unica.)
+#
+# AGGIORNAMENTO 2026-10-10: aggiunti i macronutrienti (energy_kcal,
+# protein_g, fat_g, carbohydrates_g, fiber_g) richiesti esplicitamente
+# dall'utente. fdc.nal.usda.gov non era raggiungibile direttamente in
+# questa sessione (pagina SPA Angular + un endpoint alternativo che ha
+# richiesto un permesso non concedibile in autonomia) -- i valori sono
+# stati letti da getfoodfacts.com, un mirror che cita esplicitamente lo
+# stesso FDC ID per ogni record, verificato riga per riga PRIMA di
+# accettare i numeri (non un record "simile" di altra cultivar/prep.).
+# Per gli alimenti di origine animale, fiber_g=0.0 è un valore dichiarato
+# esplicitamente dalla fonte per quello specifico FDC ID, non
+# un'assunzione biologica non verificata.
 
 import os
 
@@ -37,6 +49,7 @@ FOODS = [
             "magnesium_mg": 79.0, "copper_mg": 0.130, "selenium_mcg": 1.0,
             "vitamin_k_mcg": 483, "vitamin_b12_mcg": 0.00, "folate_mcg": 194,
             "beta_carotene_mcg": 5630, "other_provitamin_a_carotenoids_mcg": 0,  # alpha=0, crypto=0
+            "energy_kcal": 23.0, "protein_g": 2.86, "fat_g": 0.39, "carbohydrates_g": 3.63, "fiber_g": 2.20,
         },
         "extra": {
             # Ossalati: due fonti discordanti trovate, nessuna scelta
@@ -63,6 +76,7 @@ FOODS = [
             "magnesium_mg": 87.0, "copper_mg": 0.174, "selenium_mcg": 1.5,
             "vitamin_k_mcg": 494, "vitamin_b12_mcg": 0.00, "folate_mcg": 146,
             "beta_carotene_mcg": 6290, "other_provitamin_a_carotenoids_mcg": 0,
+            "energy_kcal": 23.0, "protein_g": 2.97, "fat_g": 0.26, "carbohydrates_g": 3.75, "fiber_g": 2.40,
         },
     },
     {
@@ -81,6 +95,7 @@ FOODS = [
             "iron_mg": 1.60, "zinc_mg": 0.39, "calcium_mg": 254, "vitamin_c_mg": 93.4,
             "magnesium_mg": 32.7, "copper_mg": 0.053, "folate_mcg": 62,
             "beta_carotene_mcg": 2870, "other_provitamin_a_carotenoids_mcg": 27,  # alpha=0, crypto=27
+            "energy_kcal": 35.0, "protein_g": 2.92, "fat_g": 1.49, "carbohydrates_g": 4.42, "fiber_g": 4.10,
         },
         "extra": {
             "oxalates_mg": {"value": 297, "confidence_low": 229.8, "confidence_high": 364.2, "source_id": "ERDOGAN_ONAR_2012_JFDA"},
@@ -102,6 +117,13 @@ FOODS = [
             # calcio anche a offset diversi) -- tutti gli altri campi
             # restano assenti per onestà, non impostati a NOT_FOUND/0.
             "calcium_mg": 123,
+            # Macronutrienti aggiunti 2026-10-10 (fonte verificata separatamente,
+            # stesso FDC ID 322892). fiber_g ASSENTE DI PROPOSITO: la fonte
+            # verificata per questo stesso FDC ID è internamente contraddittoria
+            # sulla fibra (etichetta "not declared" / riquadro "0g" / nessuna riga
+            # "Fiber" nella tabella nutrienti completa) -- non si assume 0 senza
+            # una dichiarazione esplicita, anche se biologicamente plausibile.
+            "energy_kcal": 60.0, "protein_g": 3.28, "fat_g": 3.20, "carbohydrates_g": 4.67,
         },
     },
     {
@@ -117,6 +139,7 @@ FOODS = [
             "iron_mg": 2.94, "zinc_mg": 1.07, "calcium_mg": 28, "vitamin_c_mg": 1.2,
             "magnesium_mg": 45.0, "copper_mg": 0.242, "selenium_mcg": 1.2,
             "vitamin_k_mcg": 8.4, "vitamin_b12_mcg": 0.00, "folate_mcg": 130,
+            "energy_kcal": 127, "protein_g": 8.67, "fat_g": 0.50, "carbohydrates_g": 22.8, "fiber_g": 7.40,
         },
         "extra": {
             "phytates_mg": {"value": 805, "confidence_low": None, "confidence_high": None, "source_id": "ZIA_UR_REHMAN_2002_PJSIR"},
@@ -135,6 +158,7 @@ FOODS = [
             "iron_mg": 3.33, "zinc_mg": 1.27, "calcium_mg": 19, "vitamin_c_mg": 1.5,
             "magnesium_mg": 36.0, "copper_mg": 0.251, "selenium_mcg": 2.8,
             "vitamin_k_mcg": 1.7, "vitamin_b12_mcg": 0.00, "folate_mcg": 181,
+            "energy_kcal": 116, "protein_g": 9.02, "fat_g": 0.38, "carbohydrates_g": 20.1, "fiber_g": 7.90,
         },
         # Fitati: trovato SOLO per lenticchie crude/secche (233.04 mg/100g,
         # Fouad & Rehab 2015), non per lenticchie bollite -- stato
@@ -156,6 +180,7 @@ FOODS = [
             "magnesium_mg": 22.0, "copper_mg": 0.188, "selenium_mcg": 0.3,
             "vitamin_k_mcg": 2.2, "vitamin_b12_mcg": 0.00, "folate_mcg": 10,
             "beta_carotene_mcg": 2, "other_provitamin_a_carotenoids_mcg": 0,
+            "energy_kcal": 87.0, "protein_g": 1.87, "fat_g": 0.10, "carbohydrates_g": 20.1, "fiber_g": 1.80,
         },
     },
     {
@@ -173,6 +198,7 @@ FOODS = [
             "magnesium_mg": 12.0, "copper_mg": 0.045, "selenium_mcg": 0.1,
             "vitamin_k_mcg": 13.2, "vitamin_b12_mcg": 0.00, "folate_mcg": 19,
             "beta_carotene_mcg": 8280, "other_provitamin_a_carotenoids_mcg": 3480,  # alpha=3480, crypto=0
+            "energy_kcal": 41.0, "protein_g": 0.93, "fat_g": 0.24, "carbohydrates_g": 9.58, "fiber_g": 2.80,
         },
     },
     {
@@ -190,6 +216,7 @@ FOODS = [
             "magnesium_mg": 10.0, "copper_mg": 0.017, "selenium_mcg": 0.7,
             "vitamin_k_mcg": 13.7, "vitamin_b12_mcg": 0.00, "folate_mcg": 14,
             "beta_carotene_mcg": 8330, "other_provitamin_a_carotenoids_mcg": 3780,  # alpha=3780, crypto=0
+            "energy_kcal": 35.0, "protein_g": 0.76, "fat_g": 0.18, "carbohydrates_g": 8.22, "fiber_g": 3.00,
         },
     },
     {
@@ -207,6 +234,7 @@ FOODS = [
             "magnesium_mg": 23.0, "copper_mg": 0.070, "selenium_mcg": 1.6,
             "vitamin_k_mcg": 177, "vitamin_b12_mcg": 0.00, "folate_mcg": 61,
             "beta_carotene_mcg": 450, "other_provitamin_a_carotenoids_mcg": 6,  # alpha=6, crypto=0
+            "energy_kcal": 43.0, "protein_g": 3.38, "fat_g": 0.30, "carbohydrates_g": 8.95, "fiber_g": 3.80,
         },
     },
     {
@@ -226,6 +254,7 @@ FOODS = [
             "iron_mg": 1.20, "zinc_mg": 0.33, "calcium_mg": 36, "vitamin_c_mg": 62.0,
             "magnesium_mg": 20.0, "copper_mg": 0.083, "selenium_mcg": 1.5,
             "vitamin_k_mcg": 140, "vitamin_b12_mcg": 0.00, "folate_mcg": 60,
+            "energy_kcal": 36.0, "protein_g": 2.55, "fat_g": 0.50, "carbohydrates_g": 7.10, "fiber_g": 2.60,
         },
     },
     {
@@ -247,6 +276,7 @@ FOODS = [
             # preesistente in calculateVitaminARAE). Inserito comunque il
             # dato reale di beta-carotene, senza inventare un retinolo.
             "beta_carotene_mcg": 162,
+            "energy_kcal": 191, "protein_g": 29.1, "fat_g": 5.26, "carbohydrates_g": 5.13, "fiber_g": 0.0,
         },
     },
     {
@@ -262,6 +292,7 @@ FOODS = [
             "iron_mg": 2.60, "zinc_mg": 6.31, "calcium_mg": 18, "vitamin_c_mg": 0.0,
             "magnesium_mg": 21.0, "copper_mg": 0.085, "selenium_mcg": 21.5,
             "vitamin_k_mcg": 1.2, "vitamin_b12_mcg": 2.64, "folate_mcg": 9,
+            "energy_kcal": 250, "protein_g": 25.9, "fat_g": 15.4, "carbohydrates_g": 0.0, "fiber_g": 0.0,
         },
     },
     {
@@ -286,6 +317,7 @@ FOODS = [
             "magnesium_mg": 21.0, "copper_mg": 0.049, "selenium_mcg": 2.5,
             "vitamin_k_mcg": 102, "vitamin_b12_mcg": 0.00, "folate_mcg": 63,
             "beta_carotene_mcg": 361, "other_provitamin_a_carotenoids_mcg": 26,  # alpha=25, crypto=1
+            "energy_kcal": 34.0, "protein_g": 2.82, "fat_g": 0.37, "carbohydrates_g": 6.64, "fiber_g": 2.60,
         },
     },
     {
@@ -303,6 +335,7 @@ FOODS = [
             "iron_mg": 3.71, "zinc_mg": 3.12, "calcium_mg": 269, "vitamin_c_mg": 0.0,
             "magnesium_mg": 270.0, "copper_mg": 1.03, "selenium_mcg": 4.1,
             "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 44,
+            "energy_kcal": 579, "protein_g": 21.1, "fat_g": 49.9, "carbohydrates_g": 21.6, "fiber_g": 12.5,
         },
     },
     {
@@ -320,6 +353,7 @@ FOODS = [
             "magnesium_mg": 10.0, "copper_mg": 0.045, "selenium_mcg": 0.5,
             "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 30,
             "beta_carotene_mcg": 71, "other_provitamin_a_carotenoids_mcg": 127,  # alpha=11, crypto=116
+            "energy_kcal": 47.0, "protein_g": 0.94, "fat_g": 0.12, "carbohydrates_g": 11.8, "fiber_g": 2.40,
         },
     },
     {
@@ -335,6 +369,7 @@ FOODS = [
             "iron_mg": 1.19, "zinc_mg": 1.05, "calcium_mg": 50, "vitamin_c_mg": 0.0,
             "magnesium_mg": 10.0, "copper_mg": 0.013, "selenium_mcg": 30.8,
             "vitamin_k_mcg": 0.3, "vitamin_b12_mcg": 1.11, "folate_mcg": 44,
+            "energy_kcal": 155, "protein_g": 12.6, "fat_g": 10.6, "carbohydrates_g": 1.12, "fiber_g": 0.0,
         },
     },
     {
@@ -354,6 +389,7 @@ FOODS = [
             "iron_mg": 0.34, "zinc_mg": 0.43, "calcium_mg": 15, "vitamin_c_mg": 3.7,
             "magnesium_mg": 30.0, "copper_mg": 0.049, "selenium_mcg": 41.4,
             "vitamin_k_mcg": 0.1, "vitamin_b12_mcg": 2.80, "folate_mcg": 34,
+            "energy_kcal": 206, "protein_g": 22.1, "fat_g": 12.3, "carbohydrates_g": 0.0, "fiber_g": 0.0,
         },
     },
     {
@@ -378,6 +414,7 @@ FOODS = [
             "iron_mg": 2.89, "zinc_mg": 1.53, "calcium_mg": 49, "vitamin_c_mg": 1.3,
             "magnesium_mg": 48.0, "copper_mg": 0.352, "selenium_mcg": 3.7,
             "vitamin_k_mcg": 4.0, "vitamin_b12_mcg": 0.00, "folate_mcg": 172,
+            "energy_kcal": 164, "protein_g": 8.86, "fat_g": 2.59, "carbohydrates_g": 27.4, "fiber_g": 7.60,
         },
     },
     {
@@ -429,6 +466,7 @@ FOODS = [
             "vitamin_k_mcg": 0.0, "vitamin_b12_mcg": 0.00,
             "folate_mcg": 66,  # acido folico, non folato totale -- vedi nota sopra
             "beta_carotene_mcg": 0, "other_provitamin_a_carotenoids_mcg": 0,
+            "energy_kcal": 158, "protein_g": 5.80, "fat_g": 0.93, "carbohydrates_g": 30.9, "fiber_g": 1.80,
         },
     },
 ]
@@ -646,6 +684,14 @@ lines.append("--   0 data points per questo campo (diverso dal B12=0.00 con dati
 lines.append("--   supporto degli altri alimenti vegetali di questo set) -- inserito comunque")
 lines.append("--   come 0.00/USDA_FDC per coerenza biologica (i legumi non contengono B12),")
 lines.append("--   ma il limite metodologico specifico di questo record resta dichiarato qui.")
+lines.append("-- - food_milk_whole.fiber_g: fonte verificata per lo stesso FDC ID 322892")
+lines.append("--   internamente contraddittoria sulla fibra (etichetta \"not declared\" / riquadro")
+lines.append("--   \"0g\" / nessuna riga \"Fiber\" nella tabella nutrienti completa) -- non inserito,")
+lines.append("--   anche se biologicamente il latte ha fibra ~0. Aggiunto 2026-10-10 insieme")
+lines.append("--   agli altri macronutrienti (energy_kcal/protein_g/fat_g/carbohydrates_g),")
+lines.append("--   verificati via getfoodfacts.com (mirror USDA FDC con stesso FDC ID citato")
+lines.append("--   esplicitamente in pagina) perché fdc.nal.usda.gov non era raggiungibile")
+lines.append("--   direttamente in questa sessione.")
 lines.append("-- - food_pasta_enriched_cooked.folate_mcg: contiene SOLO la quota di acido")
 lines.append("--   folico sintetico (66 µg), non il folato totale (73 µg) né la quota di")
 lines.append("--   folato alimentare naturale (7 µg) riportati entrambi dal record FDC --")

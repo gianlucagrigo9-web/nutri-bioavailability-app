@@ -519,4 +519,29 @@ export class ComputationalNutritionEngine {
   public calculateVitaminK(context: Meal | DailyDiet): SourcedValue {
     return this.sumRawNutrient(context, f => f.vitamin_k_mcg, ["USDA_FDC"]);
   }
+
+  // --- MACRONUTRIENTI (aggiunti 2026-10-10) ---
+  // Stesso helper sumRawNutrient di magnesio/rame/selenio/iodio/vitK:
+  // composizione grezza USDA FDC, nessun modello di assorbimento (la
+  // digeribilità proteica non è implementata -- vedi nota in types.ts).
+
+  public calculateEnergy(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.energy_kcal, ["USDA_FDC"]);
+  }
+
+  public calculateProtein(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.protein_g, ["USDA_FDC"]);
+  }
+
+  public calculateCarbohydrates(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.carbohydrates_g, ["USDA_FDC"]);
+  }
+
+  public calculateFat(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.fat_g, ["USDA_FDC"]);
+  }
+
+  public calculateFiber(context: Meal | DailyDiet): SourcedValue {
+    return this.sumRawNutrient(context, f => f.fiber_g, ["USDA_FDC"]);
+  }
 }

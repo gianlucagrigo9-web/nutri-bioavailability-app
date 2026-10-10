@@ -113,6 +113,11 @@ function makeFood(overrides: Partial<FoodItem> = {}): FoodItem {
     selenium_mcg: 0,
     iodine_mcg: 0,
     vitamin_k_mcg: 0,
+    energy_kcal: 0,
+    protein_g: 0,
+    carbohydrates_g: 0,
+    fat_g: 0,
+    fiber_g: 0,
     ...overrides
   };
 }
@@ -602,6 +607,57 @@ describe("calculateMagnesium / calculateCopper / calculateSelenium / calculateIo
     const meal = mealWith({ magnesium_mg: 50 });
     const r = nutritionEngine.calculateMagnesium(meal);
     if (r.sourceIds.indexOf("USDA_FDC") === -1) throw new Error("sourceIds deve comunque tracciare la fonte di composizione, anche in assenza di un modello");
+  });
+});
+
+// =============================================================================
+// COMPUTATIONAL NUTRITION ENGINE — Macronutrienti (aggiunti 2026-10-10)
+// =============================================================================
+describe("calculateEnergy / calculateProtein / calculateCarbohydrates / calculateFat / calculateFiber — Livello A (difensivo)", () => {
+  it("pasto vuoto -> 0 per tutti e cinque, nessuna eccezione", () => {
+    expect(nutritionEngine.calculateEnergy({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateProtein({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateCarbohydrates({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateFat({ foods: [] }).value).toBe(0);
+    expect(nutritionEngine.calculateFiber({ foods: [] }).value).toBe(0);
+  });
+  it("nutriente = 0 nell'unico alimento -> 0, non negativo", () => {
+    const meal = mealWith({ protein_g: 0 });
+    expect(nutritionEngine.calculateProtein(meal).value).toBe(0);
+  });
+});
+
+describe("calculateEnergy / calculateProtein / calculateCarbohydrates / calculateFat / calculateFiber — Livello B (somma, nessun modello)", () => {
+  it("due alimenti nello stesso pasto -> i valori si sommano esattamente (nessuna interazione fra alimenti)", () => {
+    const meal: Meal = { foods: [
+      makeFood({ id: "m1", energy_kcal: 150 }),
+      makeFood({ id: "m2", energy_kcal: 80 })
+    ]};
+    expect(nutritionEngine.calculateEnergy(meal).value).toBeCloseTo(230, 2);
+  });
+  it("ognuno dei cinque è indipendente dagli altri quattro (nessuna fusione fra macronutrienti)", () => {
+    const meal = mealWith({ energy_kcal: 200, protein_g: 10, carbohydrates_g: 25, fat_g: 7, fiber_g: 4 });
+    expect(nutritionEngine.calculateEnergy(meal).value).toBeCloseTo(200, 2);
+    expect(nutritionEngine.calculateProtein(meal).value).toBeCloseTo(10, 2);
+    expect(nutritionEngine.calculateCarbohydrates(meal).value).toBeCloseTo(25, 2);
+    expect(nutritionEngine.calculateFat(meal).value).toBeCloseTo(7, 2);
+    expect(nutritionEngine.calculateFiber(meal).value).toBeCloseTo(4, 2);
+  });
+});
+
+describe("calculateEnergy / calculateProtein / calculateCarbohydrates / calculateFat / calculateFiber — contratto bioavailabilityAdjusted", () => {
+  it("nessun modello di assorbimento/digeribilità esiste per questi -> bioavailabilityAdjusted = false, sempre", () => {
+    const meal = mealWith({ energy_kcal: 200, protein_g: 10, carbohydrates_g: 25, fat_g: 7, fiber_g: 4 });
+    if (nutritionEngine.calculateEnergy(meal).bioavailabilityAdjusted !== false) throw new Error("energia: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateProtein(meal).bioavailabilityAdjusted !== false) throw new Error("proteine: deve restare bioavailabilityAdjusted=false (nessuna digeribilità modellata)");
+    if (nutritionEngine.calculateCarbohydrates(meal).bioavailabilityAdjusted !== false) throw new Error("carboidrati: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateFat(meal).bioavailabilityAdjusted !== false) throw new Error("grassi: deve restare bioavailabilityAdjusted=false (nessun modello)");
+    if (nutritionEngine.calculateFiber(meal).bioavailabilityAdjusted !== false) throw new Error("fibra: deve restare bioavailabilityAdjusted=false (nessun modello)");
+  });
+  it("sourceIds traccia comunque la fonte di composizione (USDA FDC)", () => {
+    const meal = mealWith({ protein_g: 10 });
+    const r = nutritionEngine.calculateProtein(meal);
+    if (r.sourceIds.indexOf("USDA_FDC") === -1) throw new Error("sourceIds deve tracciare la fonte di composizione");
   });
 });
 

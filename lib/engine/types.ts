@@ -87,6 +87,21 @@ export interface FoodItem {
   selenium_mcg: number;
   iodine_mcg: number;
   vitamin_k_mcg: number; // fillochinone (K1); non distingue K1/K2, limitazione dichiarata
+
+  // Macronutrienti (aggiunti 2026-10-10, richiesta esplicita dell'utente:
+  // "non abbiamo da nessuna parte i macro"). Stesso trattamento di
+  // magnesio/rame/selenio/iodio/vitamina K: nessun modello di
+  // biodisponibilità pubblicato applicato qui (la digeribilità proteica
+  // tipo PDCAAS/DIAAS esiste in letteratura ma non è implementata --
+  // limite dichiarato, non introdotto ora), quindi composizione grezza,
+  // bioavailabilityAdjusted=false. energy_kcal è energia totale (Atwater),
+  // non "energia netta disponibile" -- nessuna correzione per fibra/
+  // alcol zuccheri applicata.
+  energy_kcal: number;
+  protein_g: number;
+  carbohydrates_g: number;
+  fat_g: number;
+  fiber_g: number;
 }
 
 export interface Meal {
