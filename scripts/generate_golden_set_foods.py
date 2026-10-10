@@ -31,6 +31,39 @@
 # Per gli alimenti di origine animale, fiber_g=0.0 è un valore dichiarato
 # esplicitamente dalla fonte per quello specifico FDC ID, non
 # un'assunzione biologica non verificata.
+#
+# AGGIORNAMENTO 2026-10-10 (secondo giro): fusi dentro FOODS anche
+#   (a) baseline_cooking_state per tutti i 20 alimenti già presenti,
+#       backfillato da fix_baseline_cooking_state.sql -- registra lo stato
+#       di cottura REALE del valore salvato (vedi commento sulla colonna
+#       stessa in quel file: 'raw' è l'unico stato da cui
+#       CookingTransformationEngine può applicare in sicurezza un fattore
+#       di ritenzione; qualunque altro valore blocca il selettore in UI
+#       per evitare uno sconto doppio su un dato già cotto). Correzione
+#       inclusa qui: food_oranges_raw era rimasto 'unknown' per una svista
+#       nel backfill originale (19 righe aggiornate su 20 alimenti) --
+#       ora 'raw', coerente con l'FDC "Oranges, raw, all commercial
+#       varieties".
+#   (b) i 9 nuovi alimenti crudi di golden_set_raw_baselines.sql (patate,
+#       fagioli rossi, lenticchie, ceci, fegato di manzo, manzo macinato,
+#       uova, salmone, pasta secca arricchita) -- baseline reale per le 7
+#       matrici che avevano SOLO un valore già cotto salvato, nessun punto
+#       di partenza da cui applicare i fattori di ritenzione di cottura.
+#       food_lentils_raw sostituisce qui una vecchia riga cruft con fonti
+#       NULL (stesso food_id, già rimossa dal DB live in
+#       golden_set_raw_baselines.sql insieme al suo food_id gemello).
+#
+# NON ancora fuso qui (resta fuori dall'invariante "un solo generatore",
+# debito dichiarato): i fattori di ritenzione di cottura (sparsi su
+# retention_factors_padella.sql, retention_factors_legumi_tuberi.sql,
+# retention_factors_crucifere.sql, fix_sources_e_retention_factors.sql e
+# il fattore latte in golden_set_raw_baselines.sql), la promozione
+# draft->verified (golden_set_promote_verified.sql), il pannello admin
+# (admin_data_entry_setup.sql), l'enum cooking_method
+# (extend_cooking_method_enum.sql) e le pulizie di cruft legacy
+# (cleanup_is_heme_iron_cruft.sql, cleanup_chickpeas_raw_cruft.sql).
+# Questo script genera SOLO golden_set_foods.sql (foods_raw +
+# nutrient_values del Golden Set), non l'intero stato del DB.
 
 import os
 
@@ -39,6 +72,7 @@ FOODS = [
         "food_id": "food_spinach_raw",
         "name_it": "Spinaci, crudi",
         "matrix_id": "leafy_greens",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": "high_oxalate",
         "botanical_family": "Amaranthaceae",
@@ -66,6 +100,7 @@ FOODS = [
         "food_id": "food_spinach_boiled",
         "name_it": "Spinaci, bolliti e scolati",
         "matrix_id": "leafy_greens",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": "high_oxalate",
         "botanical_family": "Amaranthaceae",
@@ -83,6 +118,7 @@ FOODS = [
         "food_id": "food_kale_raw",
         "name_it": "Cavolo kale, crudo",
         "matrix_id": "leafy_greens",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": "low_oxalate",
         "botanical_family": "Brassicaceae",
@@ -105,6 +141,7 @@ FOODS = [
         "food_id": "food_milk_whole",
         "name_it": "Latte vaccino intero (3.25% grassi, vitamina D aggiunta)",
         "matrix_id": "dairy_milk",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": "medium_oxalate",
         "botanical_family": None,
@@ -130,6 +167,7 @@ FOODS = [
         "food_id": "food_kidney_beans_boiled",
         "name_it": "Fagioli rossi (kidney), bolliti",
         "matrix_id": "legumes",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Fabaceae",
@@ -149,6 +187,7 @@ FOODS = [
         "food_id": "food_lentils_boiled",
         "name_it": "Lenticchie, bollite",
         "matrix_id": "legumes",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Fabaceae",
@@ -170,6 +209,7 @@ FOODS = [
         "food_id": "food_potato_boiled_in_skin",
         "name_it": "Patate, bollite con la buccia",
         "matrix_id": "tubers",
+        "baseline_cooking_state": "boiled_in_skin",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Solanaceae",
@@ -187,6 +227,7 @@ FOODS = [
         "food_id": "food_carrots_raw",
         "name_it": "Carote, crude",
         "matrix_id": "carrots",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Apiaceae",
@@ -205,6 +246,7 @@ FOODS = [
         "food_id": "food_carrots_boiled",
         "name_it": "Carote, bollite e scolate",
         "matrix_id": "carrots",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Apiaceae",
@@ -223,6 +265,7 @@ FOODS = [
         "food_id": "food_brussels_sprouts_raw",
         "name_it": "Cavoletti di Bruxelles, crudi",
         "matrix_id": "crucifere_cavoletti_bruxelles",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Brassicaceae",
@@ -241,6 +284,7 @@ FOODS = [
         "food_id": "food_brussels_sprouts_boiled",
         "name_it": "Cavoletti di Bruxelles, bolliti e scolati",
         "matrix_id": "crucifere_cavoletti_bruxelles",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Brassicaceae",
@@ -261,6 +305,7 @@ FOODS = [
         "food_id": "food_beef_liver_cooked",
         "name_it": "Fegato di manzo, cotto (brasato)",
         "matrix_id": "beef_liver",
+        "baseline_cooking_state": "braised",
         "is_heme_iron": True,
         "matrix_category_calcium": None,
         "botanical_family": None,
@@ -283,6 +328,7 @@ FOODS = [
         "food_id": "food_beef_ground_cooked",
         "name_it": "Manzo macinato (85% magro), cotto alla griglia",
         "matrix_id": "beef_ground_meat",
+        "baseline_cooking_state": "grilled",
         "is_heme_iron": True,
         "matrix_category_calcium": None,
         "botanical_family": None,
@@ -306,6 +352,7 @@ FOODS = [
         "food_id": "food_broccoli_raw",
         "name_it": "Broccoli, crudi",
         "matrix_id": "broccoli",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Brassicaceae",
@@ -324,6 +371,7 @@ FOODS = [
         "food_id": "food_almonds",
         "name_it": "Mandorle, secche, non salate",
         "matrix_id": "nuts_almonds",
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         # Botanicamente le mandorle (Prunus dulcis) sono Rosaceae, non
@@ -342,6 +390,12 @@ FOODS = [
         "food_id": "food_oranges_raw",
         "name_it": "Arance, crude, tutte le varieta' commerciali",
         "matrix_id": "citrus_oranges",
+        # NOTA 2026-10-10: questo alimento era rimasto fuori dal backfill
+        # originale di fix_baseline_cooking_state.sql (svista: 19 righe
+        # aggiornate su 20 alimenti del Golden Set, 'food_oranges_raw'
+        # dimenticata) -- restava 'unknown' sul DB live. Corretto qui e
+        # nel DB live (2026-10-10, stessa sessione).
+        "baseline_cooking_state": "raw",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Rutaceae",
@@ -360,6 +414,7 @@ FOODS = [
         "food_id": "food_egg_hard_boiled",
         "name_it": "Uovo, intero, cotto (sodo)",
         "matrix_id": "eggs",
+        "baseline_cooking_state": "hard_boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": None,
@@ -380,6 +435,7 @@ FOODS = [
         "food_id": "food_salmon_cooked",
         "name_it": "Salmone atlantico, allevato, cotto (calore secco)",
         "matrix_id": "salmon_fish",
+        "baseline_cooking_state": "dry_heat_cooked",
         "is_heme_iron": True,
         "matrix_category_calcium": None,
         "botanical_family": None,
@@ -405,6 +461,7 @@ FOODS = [
         "food_id": "food_chickpeas_boiled",
         "name_it": "Ceci, semi maturi, bolliti, senza sale",
         "matrix_id": "legumes",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Fabaceae",
@@ -449,6 +506,7 @@ FOODS = [
         "food_id": "food_pasta_enriched_cooked",
         "name_it": "Pasta, cotta, arricchita (enriched), senza sale aggiunto",
         "matrix_id": "pasta_enriched_wheat",
+        "baseline_cooking_state": "boiled",
         "is_heme_iron": False,
         "matrix_category_calcium": None,
         "botanical_family": "Poaceae",
@@ -467,6 +525,229 @@ FOODS = [
             "folate_mcg": 66,  # acido folico, non folato totale -- vedi nota sopra
             "beta_carotene_mcg": 0, "other_provitamin_a_carotenoids_mcg": 0,
             "energy_kcal": 158, "protein_g": 5.80, "fat_g": 0.93, "carbohydrates_g": 30.9, "fiber_g": 1.80,
+        },
+    },
+    # ------------------------------------------------------------------
+    # AGGIUNTI 2026-10-10 (secondo giro): 9 baseline crudi reali, sourced
+    # USDA FDC, per le 7 matrici che avevano SOLO un valore già cotto
+    # salvato (vedi fix_baseline_cooking_state.sql) -- nessun punto di
+    # partenza da cui CookingTransformationEngine potesse applicare un
+    # fattore di ritenzione senza rischiare uno sconto doppio. Ricerca
+    # delegata a 3 subagent paralleli con l'istruzione esplicita "zero
+    # dati inventati"; fdc.nal.usda.gov non raggiungibile direttamente in
+    # questa sessione -> dati estratti via getfoodfacts.com (mirror che
+    # cita esplicitamente l'FDC ID in pagina) e verificati contro l'FDC ID
+    # citato. Vedi golden_set_raw_baselines.sql per il dettaglio completo
+    # (incluso il fattore di ritenzione dairy_milk+boiled, non gestito da
+    # questo script -- vedi nota in testa al file).
+    # ------------------------------------------------------------------
+    {
+        "food_id": "food_potato_raw",
+        "name_it": "Patate, crude, con la buccia",
+        "matrix_id": "tubers",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Solanaceae",
+        "fdc_id": 170026,
+        "fdc_name": "Potatoes, flesh and skin, raw",
+        "values": {
+            "iron_mg": 0.81, "zinc_mg": 0.30, "calcium_mg": 12, "vitamin_c_mg": 19.7,
+            "magnesium_mg": 23.0, "copper_mg": 0.11, "selenium_mcg": 0.40,
+            "vitamin_k_mcg": 2.00,  # fillochinone
+            "vitamin_b12_mcg": 0.0,  # coerenza biologica (vegetale); zero non confermato come "zero con dati" nel record originale, stesso limite già accettato per food_chickpeas_boiled
+            "folate_mcg": 15.0,
+            "energy_kcal": 77.0, "protein_g": 2.05, "fat_g": 0.090, "carbohydrates_g": 17.5, "fiber_g": 2.10,
+        },
+        # Gap dichiarati: phytates_mg, oxalates_mg (non nel profilo SR Legacy standard consultato).
+    },
+    {
+        "food_id": "food_kidney_beans_raw",
+        "name_it": "Fagioli rossi (kidney), crudi, secchi",
+        "matrix_id": "legumes",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Fabaceae",
+        # NOTA: esiste anche una voce più specifica "red kidney beans" (NDB
+        # 16032) con valori leggermente diversi, ma il subagent non ha
+        # potuto confermarne l'FDC ID da una fonte che lo citi
+        # esplicitamente -- usata la voce "all types" il cui FDC ID 175193
+        # è confermato su 2 fonti indipendenti.
+        "fdc_id": 175193,
+        "fdc_name": "Beans, kidney, all types, mature seeds, raw",
+        "values": {
+            "iron_mg": 8.20, "zinc_mg": 2.79, "calcium_mg": 143, "vitamin_c_mg": 4.50,
+            "magnesium_mg": 140, "copper_mg": 0.96, "selenium_mcg": 3.20,
+            "vitamin_k_mcg": 19.0, "vitamin_b12_mcg": 0.0, "folate_mcg": 394,
+            "energy_kcal": 333, "protein_g": 23.6, "fat_g": 0.83, "carbohydrates_g": 60.0, "fiber_g": 24.9,
+        },
+        # Gap dichiarati: phytates_mg, oxalates_mg.
+    },
+    {
+        # Sostituisce una vecchia riga cruft dello stesso food_id (fonti
+        # NULL, residuo pre-Golden-Set già declassato a 'draft' in
+        # fix_baseline_cooking_state.sql) -- già rimossa dal DB live in
+        # golden_set_raw_baselines.sql (DELETE esplicito prima di questo
+        # INSERT, dato che ON CONFLICT da solo avrebbe lasciato intatte le
+        # vecchie righe nutrient_values non presenti in questo dict).
+        "food_id": "food_lentils_raw",
+        "name_it": "Lenticchie, crude, secche",
+        "matrix_id": "legumes",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Fabaceae",
+        "fdc_id": 172420,
+        "fdc_name": "Lentils, raw",
+        "values": {
+            "iron_mg": 6.51, "zinc_mg": 3.27, "calcium_mg": 35.0, "vitamin_c_mg": 4.50,
+            "magnesium_mg": 47.0, "copper_mg": 0.75, "selenium_mcg": 0.10,
+            "vitamin_k_mcg": 5.00, "vitamin_b12_mcg": 0.0, "folate_mcg": 479,
+            "energy_kcal": 352, "protein_g": 24.6, "fat_g": 1.06, "carbohydrates_g": 63.4, "fiber_g": 10.7,
+        },
+        # Gap dichiarati: phytates_mg, oxalates_mg.
+    },
+    {
+        # ATTENZIONE: questo food_id era GIA' presente nel DB (uno dei 19
+        # alimenti demo pre-Golden-Set, già 'draft'/invisibile in UI, vedi
+        # fix_baseline_cooking_state.sql). Il generatore lo aggiorna
+        # tramite ON CONFLICT DO UPDATE su foods_raw e nutrient_values, ma
+        # 4 righe del vecchio seed (macs_mg, oxalates_mg, phytates_mg,
+        # polyphenols_mg, tutte source_id NULL) NON fanno parte di questo
+        # dict e sono state rimosse a parte sul DB live
+        # (cleanup_chickpeas_raw_cruft.sql) -- questo script da solo non
+        # le avrebbe toccate (ON CONFLICT aggiorna solo i nutrient_code
+        # elencati qui, non cancella righe extra).
+        "food_id": "food_chickpeas_raw",
+        "name_it": "Ceci, crudi, secchi",
+        "matrix_id": "legumes",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Fabaceae",
+        "fdc_id": 173756,
+        "fdc_name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+        "values": {
+            "iron_mg": 4.31, "zinc_mg": 2.76, "calcium_mg": 57.0, "vitamin_c_mg": 4.00,
+            "magnesium_mg": 79.0, "copper_mg": 0.66,
+            "vitamin_k_mcg": 9.00, "vitamin_b12_mcg": 0.0, "folate_mcg": 557,
+            "energy_kcal": 378, "protein_g": 20.5, "fat_g": 6.04, "carbohydrates_g": 63.0, "fiber_g": 12.2,
+        },
+        # Gap dichiarati: phytates_mg, oxalates_mg, selenium_mcg (fonte
+        # mostra 0 µg ma il subagent non è riuscito a confermarlo come
+        # zero dichiarato con dati a supporto piuttosto che campo assente
+        # -- per cautela NON inserito, diversamente dal B12 dove il
+        # precedente food_chickpeas_boiled già accetta questa stessa
+        # ambiguità per coerenza biologica).
+    },
+    {
+        "food_id": "food_beef_liver_raw",
+        "name_it": "Fegato di manzo, crudo",
+        "matrix_id": "beef_liver",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": True,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        "fdc_id": 169451,
+        "fdc_name": "Beef, variety meats and by-products, liver, raw",
+        "values": {
+            "iron_mg": 4.90,  # ferro totale, la fonte SR Legacy non scompone eme/non-eme
+            "zinc_mg": 4.00, "calcium_mg": 5.00, "vitamin_c_mg": 1.30,
+            "magnesium_mg": 18.0, "copper_mg": 9.76, "selenium_mcg": 39.7,
+            "vitamin_k_mcg": 3.10,  # fillochinone, non "vitamina K totale" aggregata
+            "vitamin_b12_mcg": 59.3, "folate_mcg": 290,
+            "energy_kcal": 135, "protein_g": 20.4, "fat_g": 3.63, "carbohydrates_g": 3.89, "fiber_g": 0.0,
+        },
+    },
+    {
+        "food_id": "food_beef_ground_raw",
+        "name_it": "Manzo macinato (85% magro), crudo",
+        "matrix_id": "beef_ground_meat",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": True,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        "fdc_id": 171796,
+        "fdc_name": "Beef, ground, 85% lean meat / 15% fat, raw",
+        "values": {
+            "iron_mg": 2.09,  # ferro totale, fonte non scompone eme/non-eme
+            "zinc_mg": 4.48, "calcium_mg": 15.0, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 18.0, "copper_mg": 0.067, "selenium_mcg": 15.8,
+            "vitamin_k_mcg": 1.30,  # fillochinone
+            "vitamin_b12_mcg": 2.17, "folate_mcg": 6.00,
+            "energy_kcal": 215, "protein_g": 18.6, "fat_g": 15.0, "carbohydrates_g": 0.0, "fiber_g": 0.0,
+        },
+    },
+    {
+        "food_id": "food_egg_raw",
+        "name_it": "Uovo, intero, crudo",
+        "matrix_id": "eggs",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        "fdc_id": 171287,
+        "fdc_name": "Egg, whole, raw, fresh",
+        "values": {
+            "iron_mg": 1.75, "zinc_mg": 1.29, "calcium_mg": 56.0, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 12.0, "copper_mg": 0.072, "selenium_mcg": 30.7,
+            "vitamin_k_mcg": 0.30,  # fillochinone
+            "vitamin_b12_mcg": 0.89, "folate_mcg": 47.0,
+            "energy_kcal": 143, "protein_g": 12.6, "fat_g": 9.51, "carbohydrates_g": 0.72, "fiber_g": 0.0,
+        },
+    },
+    {
+        # is_heme_iron = True per coerenza con la convenzione già usata per
+        # la controparte cotta di questo stesso alimento in questo Golden
+        # Set, non una misura diretta della quota eme/non-eme specifica di
+        # questo FDC ID (stessa nota già presente su food_salmon_cooked).
+        "food_id": "food_salmon_raw",
+        "name_it": "Salmone atlantico, allevato, crudo",
+        "matrix_id": "salmon_fish",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": True,
+        "matrix_category_calcium": None,
+        "botanical_family": None,
+        # SR Legacy, stessa serie/metodologia della voce cotta già in DB
+        # (FDC 175168) -- scelta deliberata per coerenza nel calcolo di
+        # ritenzione, invece della voce Foundation Foods più recente ma
+        # metodologicamente diversa e meno completa (FDC 2684441).
+        "fdc_id": 175167,
+        "fdc_name": "Fish, salmon, Atlantic, farmed, raw",
+        "values": {
+            "iron_mg": 0.34, "zinc_mg": 0.36, "calcium_mg": 9.00, "vitamin_c_mg": 3.90,
+            "magnesium_mg": 27.0, "copper_mg": 0.045, "selenium_mcg": 24.0,
+            "vitamin_k_mcg": 0.50, "vitamin_b12_mcg": 3.23,
+            "energy_kcal": 208, "protein_g": 20.4, "fat_g": 13.4, "carbohydrates_g": 0.0, "fiber_g": 0.0,
+        },
+        # Gap dichiarato: folate_mcg non riportato dalla fonte per questa voce.
+    },
+    {
+        "food_id": "food_pasta_enriched_dry",
+        "name_it": "Pasta, secca, arricchita (enriched), non cotta",
+        "matrix_id": "pasta_enriched_wheat",
+        "baseline_cooking_state": "raw",
+        "is_heme_iron": False,
+        "matrix_category_calcium": None,
+        "botanical_family": "Poaceae",
+        "is_fortified_folate": True,
+        # Stessa serie della voce cotta già in DB (FDC 169737).
+        "fdc_id": 169736,
+        "fdc_name": "Pasta, dry, enriched",
+        "values": {
+            "iron_mg": 3.30, "zinc_mg": 1.41, "calcium_mg": 21.0, "vitamin_c_mg": 0.0,
+            "magnesium_mg": 53.0, "copper_mg": 0.29, "selenium_mcg": 63.2,
+            "vitamin_k_mcg": 0.10, "vitamin_b12_mcg": 0.0,
+            # Folato totale 237 µg, di cui 219 µg acido folico SINTETICO
+            # aggiunto e solo 18 µg folato alimentare naturale -- stesso
+            # problema già documentato per la versione cotta
+            # (food_pasta_enriched_cooked sopra): la quota sintetica
+            # domina anche nella versione secca, non è un effetto della
+            # cottura. Qui si usa "total" per coerenza con
+            # calculateFolateDFE a singolo campo, stesso limite.
+            "folate_mcg": 237,
+            "energy_kcal": 371, "protein_g": 13.0, "fat_g": 1.51, "carbohydrates_g": 74.7, "fiber_g": 3.20,
         },
     },
 ]
@@ -597,8 +878,15 @@ lines.append("-- ---------------------------------------------------------------
 for food in FOODS:
     lines.append(f"-- {food['name_it']}  |  FDC: {food['fdc_name']} (FDC ID {food['fdc_id']})")
     lines.append(f"-- https://fdc.nal.usda.gov/food-details/{food['fdc_id']}/nutrients")
-    cols = ["food_id", "name_it", "matrix_id", "is_heme_iron", "matrix_category_calcium", "botanical_family", "verification_status"]
+    assert "baseline_cooking_state" in food, (
+        f"{food['food_id']}: baseline_cooking_state mancante -- campo obbligatorio dal "
+        f"2026-10-10 (vedi fix_baseline_cooking_state.sql), mai lasciato implicito/default "
+        f"per coerenza con 'architettura difensiva' (il default DB 'unknown' e' un fail-safe, "
+        f"non una scorciatoia per non dichiarare lo stato reale)."
+    )
+    cols = ["food_id", "name_it", "matrix_id", "baseline_cooking_state", "is_heme_iron", "matrix_category_calcium", "botanical_family", "verification_status"]
     vals = [sql_str(food["food_id"]), sql_str(food["name_it"]), sql_str(food["matrix_id"]),
+            sql_str(food["baseline_cooking_state"]),
             str(food["is_heme_iron"]).lower(), sql_str(food.get("matrix_category_calcium")),
             sql_str(food.get("botanical_family")), sql_str("draft")]
     if "carotenoid_matrix_state" in food:
@@ -614,6 +902,7 @@ for food in FOODS:
     lines.append(f"  ({', '.join(vals)})")
     lines.append(f"ON CONFLICT (food_id) DO UPDATE SET")
     lines.append(f"  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,")
+    lines.append(f"  baseline_cooking_state = EXCLUDED.baseline_cooking_state,")
     lines.append(f"  is_heme_iron = EXCLUDED.is_heme_iron,")
     lines.append(f"  matrix_category_calcium = EXCLUDED.matrix_category_calcium,")
     lines.append(f"  botanical_family = EXCLUDED.botanical_family" +
@@ -699,6 +988,25 @@ lines.append("--   coerente con la semantica a singolo-campo di calculateFolateD
 lines.append("--   commento Python in FOODS), ma la quota naturale resta cosi' non")
 lines.append("--   rappresentata in questa riga. Primo alimento reale a rendere visibile")
 lines.append("--   questo limite preesistente dello schema (prima solo su dati sintetici).")
+lines.append("--")
+lines.append("-- Gap dichiarati aggiunti 2026-10-10 (secondo giro, i 9 nuovi baseline crudi):")
+lines.append("-- - food_potato_raw, food_kidney_beans_raw, food_lentils_raw,")
+lines.append("--   food_chickpeas_raw: phytates_mg, oxalates_mg non nel profilo SR Legacy")
+lines.append("--   standard consultato per questi FDC ID -- non ricercati da fonti di")
+lines.append("--   letteratura dedicate in questo giro (diversamente da spinaci/kale/fagioli")
+lines.append("--   rossi bolliti sopra), da fare in una sessione futura se servono.")
+lines.append("-- - food_chickpeas_raw.selenium_mcg: la fonte mostra 0 µg ma il subagent non")
+lines.append("--   e' riuscito a confermarlo come zero dichiarato con dati a supporto")
+lines.append("--   piuttosto che campo assente -- per cautela NON inserito (diversamente dal")
+lines.append("--   B12, dove food_chickpeas_boiled accetta gia' questa stessa ambiguita' per")
+lines.append("--   coerenza biologica).")
+lines.append("-- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per")
+lines.append("--   questo FDC ID.")
+lines.append("-- - carote, broccoli, mandorle: nessun fattore di ritenzione di cottura")
+lines.append("--   food-specifico trovato (solo categorie USDA generiche cross-alimento) --")
+lines.append("--   gap dichiarato e discusso con l'utente, lasciato intenzionalmente cosi'.")
+lines.append("--   Non gestito da questo script (vedi nota in testa al file sui fattori di")
+lines.append("--   ritenzione, ancora fuori dall'invariante 'un solo generatore').")
 lines.append("")
 
 sql_text = "\n".join(lines)

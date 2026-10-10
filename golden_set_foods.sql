@@ -2,7 +2,7 @@
 -- Golden Set: primi alimenti reali, sourced riga per riga (2026-10-09)
 -- ============================================================================
 --
--- 20 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
+-- 29 alimenti, ciascuno con composizione letta DIRETTAMENTE da USDA
 -- FoodData Central (endpoint fdc.nal.usda.gov/portal-data/external/<FDC_ID>,
 -- stesso dataset della pagina food-details ufficiale, usato perche' la SPA
 -- Angular delle pagine food-details non e' fetchable direttamente da questo
@@ -92,10 +92,11 @@ END $$;
 -- ----------------------------------------------------------------------------
 -- Spinaci, crudi  |  FDC: Spinach, raw (FDC ID 168462)
 -- https://fdc.nal.usda.gov/food-details/168462/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_spinach_raw', 'Spinaci, crudi', 'leafy_greens', false, 'high_oxalate', 'Amaranthaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_spinach_raw', 'Spinaci, crudi', 'leafy_greens', 'raw', false, 'high_oxalate', 'Amaranthaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -126,10 +127,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Spinaci, bolliti e scolati  |  FDC: Spinach, cooked, boiled, drained, without salt (FDC ID 168463)
 -- https://fdc.nal.usda.gov/food-details/168463/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_spinach_boiled', 'Spinaci, bolliti e scolati', 'leafy_greens', false, 'high_oxalate', 'Amaranthaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_spinach_boiled', 'Spinaci, bolliti e scolati', 'leafy_greens', 'boiled', false, 'high_oxalate', 'Amaranthaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -159,10 +161,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Cavolo kale, crudo  |  FDC: Kale, raw (FDC ID 323505)
 -- https://fdc.nal.usda.gov/food-details/323505/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_kale_raw', 'Cavolo kale, crudo', 'leafy_greens', false, 'low_oxalate', 'Brassicaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_kale_raw', 'Cavolo kale, crudo', 'leafy_greens', 'raw', false, 'low_oxalate', 'Brassicaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -190,10 +193,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Latte vaccino intero (3.25% grassi, vitamina D aggiunta)  |  FDC: Milk, whole, 3.25% milkfat, with added vitamin D (FDC ID 322892)
 -- https://fdc.nal.usda.gov/food-details/322892/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_milk_whole', 'Latte vaccino intero (3.25% grassi, vitamina D aggiunta)', 'dairy_milk', false, 'medium_oxalate', NULL, 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_milk_whole', 'Latte vaccino intero (3.25% grassi, vitamina D aggiunta)', 'dairy_milk', 'raw', false, 'medium_oxalate', NULL, 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -211,10 +215,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Fagioli rossi (kidney), bolliti  |  FDC: Beans, kidney, red, mature seeds, cooked, boiled, without salt (FDC ID 175194)
 -- https://fdc.nal.usda.gov/food-details/175194/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_kidney_beans_boiled', 'Fagioli rossi (kidney), bolliti', 'legumes', false, NULL, 'Fabaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_kidney_beans_boiled', 'Fagioli rossi (kidney), bolliti', 'legumes', 'boiled', false, NULL, 'Fabaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -243,10 +248,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Lenticchie, bollite  |  FDC: Lentils, mature seeds, cooked, boiled, without salt (FDC ID 172421)
 -- https://fdc.nal.usda.gov/food-details/172421/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_lentils_boiled', 'Lenticchie, bollite', 'legumes', false, NULL, 'Fabaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_lentils_boiled', 'Lenticchie, bollite', 'legumes', 'boiled', false, NULL, 'Fabaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -274,10 +280,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Patate, bollite con la buccia  |  FDC: Potatoes, boiled, cooked in skin, flesh, without salt (FDC ID 170438)
 -- https://fdc.nal.usda.gov/food-details/170438/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_potato_boiled_in_skin', 'Patate, bollite con la buccia', 'tubers', false, NULL, 'Solanaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_potato_boiled_in_skin', 'Patate, bollite con la buccia', 'tubers', 'boiled_in_skin', false, NULL, 'Solanaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -307,10 +314,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Carote, crude  |  FDC: Carrots, raw (FDC ID 170393)
 -- https://fdc.nal.usda.gov/food-details/170393/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
-  ('food_carrots_raw', 'Carote, crude', 'carrots', false, NULL, 'Apiaceae', 'draft', 'raw_intact')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
+  ('food_carrots_raw', 'Carote, crude', 'carrots', 'raw', false, NULL, 'Apiaceae', 'draft', 'raw_intact')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -341,10 +349,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Carote, bollite e scolate  |  FDC: Carrots, cooked, boiled, drained, without salt (FDC ID 170394)
 -- https://fdc.nal.usda.gov/food-details/170394/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
-  ('food_carrots_boiled', 'Carote, bollite e scolate', 'carrots', false, NULL, 'Apiaceae', 'draft', 'cooked_or_disrupted')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
+  ('food_carrots_boiled', 'Carote, bollite e scolate', 'carrots', 'boiled', false, NULL, 'Apiaceae', 'draft', 'cooked_or_disrupted')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -375,10 +384,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Cavoletti di Bruxelles, crudi  |  FDC: Brussels sprouts, raw (FDC ID 170383)
 -- https://fdc.nal.usda.gov/food-details/170383/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, zinc_bioaccessibility_bucket) VALUES
-  ('food_brussels_sprouts_raw', 'Cavoletti di Bruxelles, crudi', 'crucifere_cavoletti_bruxelles', false, NULL, 'Brassicaceae', 'draft', 'none')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, zinc_bioaccessibility_bucket) VALUES
+  ('food_brussels_sprouts_raw', 'Cavoletti di Bruxelles, crudi', 'crucifere_cavoletti_bruxelles', 'raw', false, NULL, 'Brassicaceae', 'draft', 'none')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -409,10 +419,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Cavoletti di Bruxelles, bolliti e scolati  |  FDC: Brussels sprouts, cooked, boiled, drained, without salt (FDC ID 169971)
 -- https://fdc.nal.usda.gov/food-details/169971/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, zinc_bioaccessibility_bucket) VALUES
-  ('food_brussels_sprouts_boiled', 'Cavoletti di Bruxelles, bolliti e scolati', 'crucifere_cavoletti_bruxelles', false, NULL, 'Brassicaceae', 'draft', 'brussels_sprouts_boiled')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, zinc_bioaccessibility_bucket) VALUES
+  ('food_brussels_sprouts_boiled', 'Cavoletti di Bruxelles, bolliti e scolati', 'crucifere_cavoletti_bruxelles', 'boiled', false, NULL, 'Brassicaceae', 'draft', 'brussels_sprouts_boiled')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -441,10 +452,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Fegato di manzo, cotto (brasato)  |  FDC: Beef, variety meats and by-products, liver, cooked, braised (FDC ID 168626)
 -- https://fdc.nal.usda.gov/food-details/168626/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_beef_liver_cooked', 'Fegato di manzo, cotto (brasato)', 'beef_liver', true, NULL, NULL, 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_beef_liver_cooked', 'Fegato di manzo, cotto (brasato)', 'beef_liver', 'braised', true, NULL, NULL, 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -473,10 +485,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Manzo macinato (85% magro), cotto alla griglia  |  FDC: Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled (FDC ID 174032)
 -- https://fdc.nal.usda.gov/food-details/174032/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_beef_ground_cooked', 'Manzo macinato (85% magro), cotto alla griglia', 'beef_ground_meat', true, NULL, NULL, 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_beef_ground_cooked', 'Manzo macinato (85% magro), cotto alla griglia', 'beef_ground_meat', 'grilled', true, NULL, NULL, 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -504,10 +517,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Broccoli, crudi  |  FDC: Broccoli, raw (FDC ID 170379)
 -- https://fdc.nal.usda.gov/food-details/170379/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
-  ('food_broccoli_raw', 'Broccoli, crudi', 'broccoli', false, NULL, 'Brassicaceae', 'draft', 'raw_intact')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
+  ('food_broccoli_raw', 'Broccoli, crudi', 'broccoli', 'raw', false, NULL, 'Brassicaceae', 'draft', 'raw_intact')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -538,10 +552,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Mandorle, secche, non salate  |  FDC: Nuts, almonds (FDC ID 170567)
 -- https://fdc.nal.usda.gov/food-details/170567/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_almonds', 'Mandorle, secche, non salate', 'nuts_almonds', false, NULL, 'Rosaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_almonds', 'Mandorle, secche, non salate', 'nuts_almonds', 'raw', false, NULL, 'Rosaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -569,10 +584,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Arance, crude, tutte le varieta' commerciali  |  FDC: Oranges, raw, all commercial varieties (FDC ID 169097)
 -- https://fdc.nal.usda.gov/food-details/169097/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
-  ('food_oranges_raw', 'Arance, crude, tutte le varieta'' commerciali', 'citrus_oranges', false, NULL, 'Rutaceae', 'draft', 'raw_intact')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, carotenoid_matrix_state) VALUES
+  ('food_oranges_raw', 'Arance, crude, tutte le varieta'' commerciali', 'citrus_oranges', 'raw', false, NULL, 'Rutaceae', 'draft', 'raw_intact')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -603,10 +619,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Uovo, intero, cotto (sodo)  |  FDC: Egg, whole, cooked, hard-boiled (FDC ID 173424)
 -- https://fdc.nal.usda.gov/food-details/173424/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_egg_hard_boiled', 'Uovo, intero, cotto (sodo)', 'eggs', false, NULL, NULL, 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_egg_hard_boiled', 'Uovo, intero, cotto (sodo)', 'eggs', 'hard_boiled', false, NULL, NULL, 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -634,10 +651,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Salmone atlantico, allevato, cotto (calore secco)  |  FDC: Fish, salmon, Atlantic, farmed, cooked, dry heat (FDC ID 175168)
 -- https://fdc.nal.usda.gov/food-details/175168/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_salmon_cooked', 'Salmone atlantico, allevato, cotto (calore secco)', 'salmon_fish', true, NULL, NULL, 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_salmon_cooked', 'Salmone atlantico, allevato, cotto (calore secco)', 'salmon_fish', 'dry_heat_cooked', true, NULL, NULL, 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -665,10 +683,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Ceci, semi maturi, bolliti, senza sale  |  FDC: Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt (FDC ID 173757)
 -- https://fdc.nal.usda.gov/food-details/173757/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
-  ('food_chickpeas_boiled', 'Ceci, semi maturi, bolliti, senza sale', 'legumes', false, NULL, 'Fabaceae', 'draft')
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_chickpeas_boiled', 'Ceci, semi maturi, bolliti, senza sale', 'legumes', 'boiled', false, NULL, 'Fabaceae', 'draft')
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family;
@@ -696,10 +715,11 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 
 -- Pasta, cotta, arricchita (enriched), senza sale aggiunto  |  FDC: Pasta, cooked, enriched, without added salt (FDC ID 169737)
 -- https://fdc.nal.usda.gov/food-details/169737/nutrients
-INSERT INTO foods_raw (food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, is_fortified_folate) VALUES
-  ('food_pasta_enriched_cooked', 'Pasta, cotta, arricchita (enriched), senza sale aggiunto', 'pasta_enriched_wheat', false, NULL, 'Poaceae', 'draft', true)
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, is_fortified_folate) VALUES
+  ('food_pasta_enriched_cooked', 'Pasta, cotta, arricchita (enriched), senza sale aggiunto', 'pasta_enriched_wheat', 'boiled', false, NULL, 'Poaceae', 'draft', true)
 ON CONFLICT (food_id) DO UPDATE SET
   name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
   is_heme_iron = EXCLUDED.is_heme_iron,
   matrix_category_calcium = EXCLUDED.matrix_category_calcium,
   botanical_family = EXCLUDED.botanical_family,
@@ -723,6 +743,293 @@ INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, conf
   ('food_pasta_enriched_cooked', 'fat_g', 0.93, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_pasta_enriched_cooked', 'carbohydrates_g', 30.9, NULL, NULL, 'USDA_FDC', 'draft'),
   ('food_pasta_enriched_cooked', 'fiber_g', 1.8, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Patate, crude, con la buccia  |  FDC: Potatoes, flesh and skin, raw (FDC ID 170026)
+-- https://fdc.nal.usda.gov/food-details/170026/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_potato_raw', 'Patate, crude, con la buccia', 'tubers', 'raw', false, NULL, 'Solanaceae', 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_potato_raw', 'iron_mg', 0.81, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'zinc_mg', 0.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'calcium_mg', 12, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'vitamin_c_mg', 19.7, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'magnesium_mg', 23.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'copper_mg', 0.11, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'selenium_mcg', 0.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'vitamin_k_mcg', 2.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'folate_mcg', 15.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'energy_kcal', 77.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'protein_g', 2.05, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'fat_g', 0.09, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'carbohydrates_g', 17.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_potato_raw', 'fiber_g', 2.1, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Fagioli rossi (kidney), crudi, secchi  |  FDC: Beans, kidney, all types, mature seeds, raw (FDC ID 175193)
+-- https://fdc.nal.usda.gov/food-details/175193/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_kidney_beans_raw', 'Fagioli rossi (kidney), crudi, secchi', 'legumes', 'raw', false, NULL, 'Fabaceae', 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_kidney_beans_raw', 'iron_mg', 8.2, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'zinc_mg', 2.79, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'calcium_mg', 143, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'vitamin_c_mg', 4.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'magnesium_mg', 140, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'copper_mg', 0.96, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'selenium_mcg', 3.2, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'vitamin_k_mcg', 19.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'folate_mcg', 394, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'energy_kcal', 333, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'protein_g', 23.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'fat_g', 0.83, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'carbohydrates_g', 60.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_kidney_beans_raw', 'fiber_g', 24.9, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Lenticchie, crude, secche  |  FDC: Lentils, raw (FDC ID 172420)
+-- https://fdc.nal.usda.gov/food-details/172420/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_lentils_raw', 'Lenticchie, crude, secche', 'legumes', 'raw', false, NULL, 'Fabaceae', 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_lentils_raw', 'iron_mg', 6.51, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'zinc_mg', 3.27, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'calcium_mg', 35.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'vitamin_c_mg', 4.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'magnesium_mg', 47.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'copper_mg', 0.75, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'selenium_mcg', 0.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'vitamin_k_mcg', 5.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'folate_mcg', 479, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'energy_kcal', 352, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'protein_g', 24.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'fat_g', 1.06, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'carbohydrates_g', 63.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_lentils_raw', 'fiber_g', 10.7, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Ceci, crudi, secchi  |  FDC: Chickpeas (garbanzo beans, bengal gram), mature seeds, raw (FDC ID 173756)
+-- https://fdc.nal.usda.gov/food-details/173756/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_chickpeas_raw', 'Ceci, crudi, secchi', 'legumes', 'raw', false, NULL, 'Fabaceae', 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_chickpeas_raw', 'iron_mg', 4.31, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'zinc_mg', 2.76, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'calcium_mg', 57.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'vitamin_c_mg', 4.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'magnesium_mg', 79.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'copper_mg', 0.66, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'vitamin_k_mcg', 9.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'folate_mcg', 557, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'energy_kcal', 378, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'protein_g', 20.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'fat_g', 6.04, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'carbohydrates_g', 63.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_chickpeas_raw', 'fiber_g', 12.2, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Fegato di manzo, crudo  |  FDC: Beef, variety meats and by-products, liver, raw (FDC ID 169451)
+-- https://fdc.nal.usda.gov/food-details/169451/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_beef_liver_raw', 'Fegato di manzo, crudo', 'beef_liver', 'raw', true, NULL, NULL, 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_beef_liver_raw', 'iron_mg', 4.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'zinc_mg', 4.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'calcium_mg', 5.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'vitamin_c_mg', 1.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'magnesium_mg', 18.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'copper_mg', 9.76, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'selenium_mcg', 39.7, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'vitamin_k_mcg', 3.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'vitamin_b12_mcg', 59.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'folate_mcg', 290, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'energy_kcal', 135, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'protein_g', 20.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'fat_g', 3.63, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'carbohydrates_g', 3.89, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_liver_raw', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Manzo macinato (85% magro), crudo  |  FDC: Beef, ground, 85% lean meat / 15% fat, raw (FDC ID 171796)
+-- https://fdc.nal.usda.gov/food-details/171796/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_beef_ground_raw', 'Manzo macinato (85% magro), crudo', 'beef_ground_meat', 'raw', true, NULL, NULL, 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_beef_ground_raw', 'iron_mg', 2.09, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'zinc_mg', 4.48, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'calcium_mg', 15.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'vitamin_c_mg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'magnesium_mg', 18.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'copper_mg', 0.067, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'selenium_mcg', 15.8, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'vitamin_k_mcg', 1.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'vitamin_b12_mcg', 2.17, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'folate_mcg', 6.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'energy_kcal', 215, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'protein_g', 18.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'fat_g', 15.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'carbohydrates_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_beef_ground_raw', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Uovo, intero, crudo  |  FDC: Egg, whole, raw, fresh (FDC ID 171287)
+-- https://fdc.nal.usda.gov/food-details/171287/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_egg_raw', 'Uovo, intero, crudo', 'eggs', 'raw', false, NULL, NULL, 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_egg_raw', 'iron_mg', 1.75, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'zinc_mg', 1.29, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'calcium_mg', 56.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'vitamin_c_mg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'magnesium_mg', 12.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'copper_mg', 0.072, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'selenium_mcg', 30.7, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'vitamin_k_mcg', 0.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'vitamin_b12_mcg', 0.89, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'folate_mcg', 47.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'energy_kcal', 143, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'protein_g', 12.6, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'fat_g', 9.51, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'carbohydrates_g', 0.72, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_egg_raw', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Salmone atlantico, allevato, crudo  |  FDC: Fish, salmon, Atlantic, farmed, raw (FDC ID 175167)
+-- https://fdc.nal.usda.gov/food-details/175167/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status) VALUES
+  ('food_salmon_raw', 'Salmone atlantico, allevato, crudo', 'salmon_fish', 'raw', true, NULL, NULL, 'draft')
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_salmon_raw', 'iron_mg', 0.34, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'zinc_mg', 0.36, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'calcium_mg', 9.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'vitamin_c_mg', 3.9, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'magnesium_mg', 27.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'copper_mg', 0.045, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'selenium_mcg', 24.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'vitamin_k_mcg', 0.5, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'vitamin_b12_mcg', 3.23, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'energy_kcal', 208, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'protein_g', 20.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'fat_g', 13.4, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'carbohydrates_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_salmon_raw', 'fiber_g', 0.0, NULL, NULL, 'USDA_FDC', 'draft')
+ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
+  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
+  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
+  verification_status = EXCLUDED.verification_status;
+
+-- Pasta, secca, arricchita (enriched), non cotta  |  FDC: Pasta, dry, enriched (FDC ID 169736)
+-- https://fdc.nal.usda.gov/food-details/169736/nutrients
+INSERT INTO foods_raw (food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium, botanical_family, verification_status, is_fortified_folate) VALUES
+  ('food_pasta_enriched_dry', 'Pasta, secca, arricchita (enriched), non cotta', 'pasta_enriched_wheat', 'raw', false, NULL, 'Poaceae', 'draft', true)
+ON CONFLICT (food_id) DO UPDATE SET
+  name_it = EXCLUDED.name_it, matrix_id = EXCLUDED.matrix_id,
+  baseline_cooking_state = EXCLUDED.baseline_cooking_state,
+  is_heme_iron = EXCLUDED.is_heme_iron,
+  matrix_category_calcium = EXCLUDED.matrix_category_calcium,
+  botanical_family = EXCLUDED.botanical_family,
+  is_fortified_folate = EXCLUDED.is_fortified_folate;
+
+INSERT INTO nutrient_values (food_id, nutrient_code, value, confidence_low, confidence_high, source_id, verification_status) VALUES
+  ('food_pasta_enriched_dry', 'iron_mg', 3.3, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'zinc_mg', 1.41, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'calcium_mg', 21.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'vitamin_c_mg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'magnesium_mg', 53.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'copper_mg', 0.29, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'selenium_mcg', 63.2, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'vitamin_k_mcg', 0.1, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'vitamin_b12_mcg', 0.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'folate_mcg', 237, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'energy_kcal', 371, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'protein_g', 13.0, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'fat_g', 1.51, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'carbohydrates_g', 74.7, NULL, NULL, 'USDA_FDC', 'draft'),
+  ('food_pasta_enriched_dry', 'fiber_g', 3.2, NULL, NULL, 'USDA_FDC', 'draft')
 ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -786,3 +1093,22 @@ ON CONFLICT (food_id, nutrient_code) DO UPDATE SET
 --   commento Python in FOODS), ma la quota naturale resta cosi' non
 --   rappresentata in questa riga. Primo alimento reale a rendere visibile
 --   questo limite preesistente dello schema (prima solo su dati sintetici).
+--
+-- Gap dichiarati aggiunti 2026-10-10 (secondo giro, i 9 nuovi baseline crudi):
+-- - food_potato_raw, food_kidney_beans_raw, food_lentils_raw,
+--   food_chickpeas_raw: phytates_mg, oxalates_mg non nel profilo SR Legacy
+--   standard consultato per questi FDC ID -- non ricercati da fonti di
+--   letteratura dedicate in questo giro (diversamente da spinaci/kale/fagioli
+--   rossi bolliti sopra), da fare in una sessione futura se servono.
+-- - food_chickpeas_raw.selenium_mcg: la fonte mostra 0 µg ma il subagent non
+--   e' riuscito a confermarlo come zero dichiarato con dati a supporto
+--   piuttosto che campo assente -- per cautela NON inserito (diversamente dal
+--   B12, dove food_chickpeas_boiled accetta gia' questa stessa ambiguita' per
+--   coerenza biologica).
+-- - food_salmon_raw.folate_mcg: non riportato dalla fonte (FDC 175167) per
+--   questo FDC ID.
+-- - carote, broccoli, mandorle: nessun fattore di ritenzione di cottura
+--   food-specifico trovato (solo categorie USDA generiche cross-alimento) --
+--   gap dichiarato e discusso con l'utente, lasciato intenzionalmente cosi'.
+--   Non gestito da questo script (vedi nota in testa al file sui fattori di
+--   ritenzione, ancora fuori dall'invariante 'un solo generatore').
