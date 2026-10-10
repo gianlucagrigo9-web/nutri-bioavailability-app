@@ -826,6 +826,30 @@ describe("applyCookingTransformation — Livello C (calibrazione sul fattore app
     const result = cookingEngine.applyCookingTransformation(raw, "broccoli", "boiled", []);
     expect(result.carotenoid_matrix_state).toBe("raw_intact");
   });
+  it("cavoletti di Bruxelles bolliti flippano zinc_bioaccessibility_bucket da 'none' a 'brussels_sprouts_boiled' (2026-10-10: stesso bug latente di carotenoid_matrix_state, scoperto estendendo la fusione crudo/cotto a questa matrice -- vedi calculateBioavailableZinc)", () => {
+    const raw = makeFood({ zinc_mg: 0.42, zinc_bioaccessibility_bucket: "none" });
+    const factors: RetentionFactorRecord[] = [
+      { matrix_id: "crucifere_cavoletti_bruxelles", cooking_method: "boiled", nutrient: "zinc", value: 0.78 }
+    ];
+    const result = cookingEngine.applyCookingTransformation(raw, "crucifere_cavoletti_bruxelles", "boiled", factors);
+    expect(result.zinc_bioaccessibility_bucket).toBe("brussels_sprouts_boiled");
+  });
+  it("cavoletti di Bruxelles al vapore flippano zinc_bioaccessibility_bucket da 'none' a 'brussels_sprouts_steamed'", () => {
+    const raw = makeFood({ zinc_mg: 0.42, zinc_bioaccessibility_bucket: "none" });
+    const factors: RetentionFactorRecord[] = [
+      { matrix_id: "crucifere_cavoletti_bruxelles", cooking_method: "steamed", nutrient: "zinc", value: 0.81 }
+    ];
+    const result = cookingEngine.applyCookingTransformation(raw, "crucifere_cavoletti_bruxelles", "steamed", factors);
+    expect(result.zinc_bioaccessibility_bucket).toBe("brussels_sprouts_steamed");
+  });
+  it("il flip di zinc_bioaccessibility_bucket NON generalizza ad altre matrici (Doniec et al. 2022 hanno misurato SOLO cavoletti di Bruxelles, vedi types.ts) -- broccoli bolliti restano 'none'", () => {
+    const raw = makeFood({ iron_mg: 10, zinc_bioaccessibility_bucket: "none" });
+    const factors: RetentionFactorRecord[] = [
+      { matrix_id: "broccoli", cooking_method: "boiled", nutrient: "iron", value: 0.92 }
+    ];
+    const result = cookingEngine.applyCookingTransformation(raw, "broccoli", "boiled", factors);
+    expect(result.zinc_bioaccessibility_bucket).toBe("none");
+  });
 });
 
 describe("scaleFoodItemToGrams — Livello A (difensivo)", () => {

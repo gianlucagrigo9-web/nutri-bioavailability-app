@@ -908,7 +908,7 @@ SOURCES_NEW = [
     # applicarci sopra anche questo rapporto conterebbe due volte lo stesso
     # effetto di disgregazione della matrice.
     ("DERIVED_FDC_RAW_COOKED_RATIO",
-     "Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).",
+     "Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite), spinaci (FDC 168462 crudi / 168463 bolliti), cavoletti di Bruxelles (FDC 170383 crudi / 169971 bolliti). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).",
      None),
 ]
 
@@ -1082,6 +1082,91 @@ RETENTION_FACTORS = [
      "value": 0.86, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
     {"matrix_id": "carrots", "cooking_method": "boiled", "nutrient": "fiber",
      "value": 1.07, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # Spinaci e cavoletti di Bruxelles -- stessa decisione/metodo di
+    # broccoli e carote sopra (chat 2026-10-10, istruzione dell'utente
+    # "d'ora in avanti accorpa sempre": qualunque alimento del Golden Set
+    # con crudo+cotto misurati indipendentemente da USDA FDC per la stessa
+    # matrice va fuso in UNA voce Dispensa col selettore di cottura,
+    # derivando il fattore mancante come rapporto cotto/crudo invece di
+    # lasciare due voci separate). beta_carotene/other_provitamin_a_
+    # carotenoids_mcg ESCLUSI per lo stesso motivo (carotenoid_matrix_state
+    # gestisce già quell'effetto, vedi cookingTransformationEngine.ts).
+    #
+    # Spinaci: FDC 168462 (crudi) -> FDC 168463 (bolliti e scolati).
+    # vitamin_c ESCLUSO apposta: esiste già un fattore di letteratura
+    # (leafy_greens/boiled/vitamin_c = 0.58, USDA_RETN06 sopra) che ha
+    # priorità su un rapporto derivato per lo stesso matrix_id/metodo/
+    # nutriente -- scriverlo qui lo sovrascriverebbe silenziosamente
+    # tramite l'ON CONFLICT DO UPDATE in fase di INSERT.
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 1.32, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 1.43, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "calcium",
+     "value": 1.37, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "magnesium",
+     "value": 1.10, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "copper",
+     "value": 1.34, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "selenium",
+     "value": 1.50, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "vitamin_k",
+     "value": 1.02, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "folate",
+     "value": 0.75, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "energy",
+     "value": 1.00, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "protein",
+     "value": 1.04, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "fat",
+     "value": 0.67, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "carbohydrates",
+     "value": 1.03, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "fiber",
+     "value": 1.09, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # (oxalates_mg non affrontato: food_spinach_boiled non ha una misura di
+    # ossalati da cotto nel Golden Set, nessun rapporto calcolabile -- gap
+    # dichiarato, non un numero indovinato.)
+    #
+    # Cavoletti di Bruxelles: FDC 170383 (crudi) -> FDC 169971 (bolliti e
+    # scolati). iron/zinc ESCLUSI apposta: esistono già fattori di
+    # letteratura verificati (Doniec et al. 2022, sopra) per questa stessa
+    # matrice/metodo/nutriente -- un rapporto derivato qui li
+    # sovrascriverebbe silenziosamente tramite l'ON CONFLICT DO UPDATE.
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "calcium",
+     "value": 0.86, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "vitamin_c",
+     "value": 0.73, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "magnesium",
+     "value": 0.87, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "copper",
+     "value": 1.19, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "selenium",
+     "value": 0.94, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "vitamin_k",
+     "value": 0.79, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "folate",
+     "value": 0.98, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "energy",
+     "value": 0.84, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "protein",
+     "value": 0.75, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # fat ESCLUSO: 0.50/0.30 = 1.67, fuori dal range [0.0, 1.5] del sanity
+    # check sotto (RETENTION_FACTORS assert). Entrambi i valori sono bassi
+    # (sub-grammo), un aumento del 67% su un macronutriente in bollitura
+    # (dove ci si aspetterebbe piuttosto una leggera diluizione/perdita,
+    # non un aumento) non è plausibile come vero effetto di cottura -- più
+    # probabile varianza fra campioni USDA diversi. Gap dichiarato:
+    # selezionare "Bollito" per i cavoletti di Bruxelles non altera
+    # fat_g (resta il valore crudo), invece di propagare un numero
+    # implausibile.
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "carbohydrates",
+     "value": 0.79, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "fiber",
+     "value": 0.68, "source_id": "DERIVED_FDC_RAW_COOKED_RATIO", "verification_status": "draft"},
+    # (nessuna misura di beta_carotene_mcg per food_brussels_sprouts_boiled
+    # nel Golden Set -- nessun rapporto calcolabile comunque, e sarebbe
+    # stato escluso a prescindere per il motivo spiegato sopra.)
 ]
 
 # Sanity check difensivo: nessun duplicato (matrix_id, cooking_method, nutrient)
@@ -1362,6 +1447,24 @@ lines.append("--   carotenoid_matrix_state, vedi fix nel motore -- applicarci so
 lines.append("--   questo rapporto conterebbe due volte lo stesso effetto). Le mandorle")
 lines.append("--   restano senza controparte cotta per scelta (non e' un alimento")
 lines.append("--   tipicamente bollito) -- nessun gap da risolvere per quella matrice.")
+lines.append("-- - spinaci, cavoletti di Bruxelles: RISOLTO 2026-10-10 (quinto giro), stessa")
+lines.append("--   decisione/metodo di carote/broccoli sopra -- l'utente ha reso questa una")
+lines.append("--   policy permanente ('d'ora in avanti accorpa sempre i cibi quando sono lo")
+lines.append("--   stesso; se distinti per mancanza di retention factor, lo si deduce")
+lines.append("--   matematicamente'). Spinaci: FDC 168462 crudi / 168463 bolliti, vitamin_c")
+lines.append("--   ESCLUSO (fattore di letteratura USDA_RETN06=0.58 ha priorita'), oxalates_mg")
+lines.append("--   non affrontato (nessuna misura cotta nel Golden Set). Cavoletti di")
+lines.append("--   Bruxelles: FDC 170383 crudi / 169971 bolliti, iron/zinc ESCLUSI (fattori")
+lines.append("--   verificati Doniec et al. 2022 hanno priorita'), fat ESCLUSO (1.67, fuori")
+lines.append("--   dal range [0.0, 1.5] del sanity check). Per i cavoletti di Bruxelles e'")
+lines.append("--   stato corretto anche un secondo bug latente analogo a quello di")
+lines.append("--   carotenoid_matrix_state: zinc_bioaccessibility_bucket (usato da")
+lines.append("--   calculateBioavailableZinc per il derating Doniec specifico di questa")
+lines.append("--   matrice) non veniva flippato da 'none' a 'brussels_sprouts_boiled'/")
+lines.append("--   'brussels_sprouts_steamed' quando si selezionava la cottura -- vedi fix in")
+lines.append("--   cookingTransformationEngine.ts, scoped esplicitamente a questa matrice")
+lines.append("--   (il commento in types.ts e' chiaro: la misura Doniec NON generalizza ad")
+lines.append("--   altre crucifere).")
 lines.append("")
 
 sql_text = "\n".join(lines)

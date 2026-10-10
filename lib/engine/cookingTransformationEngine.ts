@@ -100,6 +100,35 @@ export class CookingTransformationEngine {
     // volte lo stesso effetto di disgregazione.
     cookedFood.carotenoid_matrix_state = "cooked_or_disrupted";
 
+    // Correzione 2026-10-10 (stesso bug latente del flip sopra, scoperto
+    // estendendo la stessa policy a cavoletti di Bruxelles/spinaci):
+    // zinc_bioaccessibility_bucket alimenta calculateBioavailableZinc in
+    // computationalNutritionEngine.ts, che applica il derating di
+    // biodisponibilita' zinco misurato da Doniec et al. 2022 SOLO per i
+    // bucket 'brussels_sprouts_boiled'/'brussels_sprouts_steamed'. Senza
+    // questo flip, selezionare "Bollito"/"Vapore" per i cavoletti di
+    // Bruxelles scalava gia' correttamente zinc_mg tramite i fattori di
+    // ritenzione (verified, sopra) ma NON attivava il derating aggiuntivo
+    // di biodisponibilita' -- un secondo bug della stessa famiglia del
+    // carotenoid_matrix_state, rimasto latente per lo stesso motivo (nessun
+    // cibo del Golden Set esercitava ancora questo percorso).
+    //
+    // A differenza del flip di carotenoid_matrix_state (generico, valido
+    // per qualunque matrice/cottura con un fattore di ritenzione reale),
+    // questo flip NON puo' essere generico: il commento in types.ts e'
+    // esplicito sul fatto che Doniec et al. 2022 hanno misurato SOLO
+    // cavoletti di Bruxelles e che il risultato non generalizza ad altre
+    // crucifere. Va quindi scoped esplicitamente a questa matrice e a
+    // questi due metodi di cottura, non triggerato da "matrixId esiste
+    // nei fattori di ritenzione" come il flip sopra.
+    if (matrixId === "crucifere_cavoletti_bruxelles") {
+      if (cookingMethod === "boiled") {
+        cookedFood.zinc_bioaccessibility_bucket = "brussels_sprouts_boiled";
+      } else if (cookingMethod === "steamed") {
+        cookedFood.zinc_bioaccessibility_bucket = "brussels_sprouts_steamed";
+      }
+    }
+
     return cookedFood;
   }
 }

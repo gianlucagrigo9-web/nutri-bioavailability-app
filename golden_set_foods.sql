@@ -56,7 +56,7 @@ INSERT INTO sources (id, citation, url_or_doi) VALUES
   ('USDA_RETN06', 'USDA Table of Nutrient Retention Factors, Release 6 (2007). Pubblico dominio (CC0). DOI 10.15482/USDA.ADC/1409034', 'https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf'),
   ('DONIEC_2022_MOLECULES', 'Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.', 'https://doi.org/10.3390/molecules27061861'),
   ('SIENER_2006_FOODCHEM', 'Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]', 'https://doi.org/10.1016/j.foodchem.2005.05.079'),
-  ('DERIVED_FDC_RAW_COOKED_RATIO', 'Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).', NULL)
+  ('DERIVED_FDC_RAW_COOKED_RATIO', 'Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite), spinaci (FDC 168462 crudi / 168463 bolliti), cavoletti di Bruxelles (FDC 170383 crudi / 169971 bolliti). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).', NULL)
 ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;
 
 -- ----------------------------------------------------------------------------
@@ -1144,7 +1144,31 @@ INSERT INTO retention_factors (matrix_id, cooking_method, nutrient, value, confi
   ('carrots', 'boiled', 'protein', 0.82, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
   ('carrots', 'boiled', 'fat', 0.75, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
   ('carrots', 'boiled', 'carbohydrates', 0.86, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
-  ('carrots', 'boiled', 'fiber', 1.07, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft')
+  ('carrots', 'boiled', 'fiber', 1.07, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'iron', 1.32, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'zinc', 1.43, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'calcium', 1.37, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'magnesium', 1.1, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'copper', 1.34, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'selenium', 1.5, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'vitamin_k', 1.02, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'folate', 0.75, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'energy', 1.0, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'protein', 1.04, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'fat', 0.67, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'carbohydrates', 1.03, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('leafy_greens', 'boiled', 'fiber', 1.09, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'calcium', 0.86, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'vitamin_c', 0.73, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'magnesium', 0.87, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'copper', 1.19, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'selenium', 0.94, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'vitamin_k', 0.79, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'folate', 0.98, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'energy', 0.84, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'protein', 0.75, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'carbohydrates', 0.79, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft'),
+  ('crucifere_cavoletti_bruxelles', 'boiled', 'fiber', 0.68, NULL, NULL, 'DERIVED_FDC_RAW_COOKED_RATIO', 'draft')
 ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
   value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,
   confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,
@@ -1237,3 +1261,21 @@ ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET
 --   questo rapporto conterebbe due volte lo stesso effetto). Le mandorle
 --   restano senza controparte cotta per scelta (non e' un alimento
 --   tipicamente bollito) -- nessun gap da risolvere per quella matrice.
+-- - spinaci, cavoletti di Bruxelles: RISOLTO 2026-10-10 (quinto giro), stessa
+--   decisione/metodo di carote/broccoli sopra -- l'utente ha reso questa una
+--   policy permanente ('d'ora in avanti accorpa sempre i cibi quando sono lo
+--   stesso; se distinti per mancanza di retention factor, lo si deduce
+--   matematicamente'). Spinaci: FDC 168462 crudi / 168463 bolliti, vitamin_c
+--   ESCLUSO (fattore di letteratura USDA_RETN06=0.58 ha priorita'), oxalates_mg
+--   non affrontato (nessuna misura cotta nel Golden Set). Cavoletti di
+--   Bruxelles: FDC 170383 crudi / 169971 bolliti, iron/zinc ESCLUSI (fattori
+--   verificati Doniec et al. 2022 hanno priorita'), fat ESCLUSO (1.67, fuori
+--   dal range [0.0, 1.5] del sanity check). Per i cavoletti di Bruxelles e'
+--   stato corretto anche un secondo bug latente analogo a quello di
+--   carotenoid_matrix_state: zinc_bioaccessibility_bucket (usato da
+--   calculateBioavailableZinc per il derating Doniec specifico di questa
+--   matrice) non veniva flippato da 'none' a 'brussels_sprouts_boiled'/
+--   'brussels_sprouts_steamed' quando si selezionava la cottura -- vedi fix in
+--   cookingTransformationEngine.ts, scoped esplicitamente a questa matrice
+--   (il commento in types.ts e' chiaro: la misura Doniec NON generalizza ad
+--   altre crucifere).
