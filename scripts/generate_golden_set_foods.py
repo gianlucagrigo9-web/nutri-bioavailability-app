@@ -53,17 +53,32 @@
 #       NULL (stesso food_id, già rimossa dal DB live in
 #       golden_set_raw_baselines.sql insieme al suo food_id gemello).
 #
+# AGGIORNAMENTO 2026-10-10 (terzo giro): fusa anche la struttura
+# RETENTION_FACTORS (vedi sotto, dopo SOURCES_NEW) -- 23 fattori di
+# ritenzione di cottura, prima sparsi su 4 file (retention_factors_
+# legumi_tuberi.sql, retention_factors_crucifere.sql,
+# retention_factors_padella.sql, fix_sources_e_retention_factors.sql) più
+# il fattore latte di golden_set_raw_baselines.sql. Durante questa fusione
+# un controllo incrociato contro il DB live ha trovato 4 righe senza fonte
+# (source_id NULL) mai presenti in nessun file versionato -- tra cui una
+# (leafy_greens/boiled/vitamin_c) in conflitto diretto col valore dichiarato
+# in fix_sources_e_retention_factors.sql (0.50 senza fonte sul DB live
+# contro 0.58/USDA_RETN06 nel file). Confermato con l'utente come cruft non
+# suo, non un'edit intenzionale. Le 4 righe sono dettagliate nel commento
+# sopra RETENTION_FACTORS; questo generatore corregge quella con un
+# sostituto sourced (leafy_greens/boiled/vitamin_c) tramite l'ON CONFLICT DO
+# UPDATE già in uso, le altre 3 non hanno sostituto e vanno solo rimosse
+# (DELETE eseguito a parte, non in questo script).
+#
 # NON ancora fuso qui (resta fuori dall'invariante "un solo generatore",
-# debito dichiarato): i fattori di ritenzione di cottura (sparsi su
-# retention_factors_padella.sql, retention_factors_legumi_tuberi.sql,
-# retention_factors_crucifere.sql, fix_sources_e_retention_factors.sql e
-# il fattore latte in golden_set_raw_baselines.sql), la promozione
-# draft->verified (golden_set_promote_verified.sql), il pannello admin
+# debito dichiarato): la promozione draft->verified
+# (golden_set_promote_verified.sql), il pannello admin
 # (admin_data_entry_setup.sql), l'enum cooking_method
 # (extend_cooking_method_enum.sql) e le pulizie di cruft legacy
 # (cleanup_is_heme_iron_cruft.sql, cleanup_chickpeas_raw_cruft.sql).
 # Questo script genera SOLO golden_set_foods.sql (foods_raw +
-# nutrient_values del Golden Set), non l'intero stato del DB.
+# nutrient_values + retention_factors del Golden Set), non l'intero stato
+# del DB.
 
 import os
 
@@ -763,6 +778,16 @@ MATRICES_NEEDED_NEW = [
     ("eggs", "Uova"),
     ("salmon_fish", "Salmone"),
     ("pasta_enriched_wheat", "Pasta di grano, arricchita (enriched)"),
+    # Aggiunte 2026-10-10 (terzo giro, fusione fattori di ritenzione): queste
+    # 4 matrici erano create solo da file SQL sparsi (retention_factors_
+    # legumi_tuberi.sql, fix_sources_e_retention_factors.sql,
+    # retention_factors_crucifere.sql), non dal generatore -- nonostante
+    # fossero già referenziate da alimenti FOODS sopra. ON CONFLICT DO NOTHING
+    # le rende innocue da ri-eseguire.
+    ("leafy_greens", "Verdure a foglia verde"),
+    ("legumes", "Legumi secchi (fagioli, lenticchie, piselli, ceci)"),
+    ("tubers", "Tuberi (patate)"),
+    ("crucifere_cavoletti_bruxelles", "Cavoletti di Bruxelles"),
 ]
 
 SOURCES_NEW = [
@@ -775,7 +800,109 @@ SOURCES_NEW = [
     ("ZIA_UR_REHMAN_2002_PJSIR",
      "Zia-ur-Rehman, Salariya AM, Zafar SI. Effect of different soaking and cooking methods on physical characteristics, phytic acid content and protein digestibility of red kidney beans. Pak J Sci Ind Res. 2002;45(1):41-45. [fagioli rossi: crudo 1084 mg/100g, bollito (cottura ordinaria) 805 mg/100g]",
      "https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257"),
+    # Aggiunte 2026-10-10 (terzo giro): fonti usate dai fattori di ritenzione
+    # di cottura, finora dichiarate solo nei singoli file SQL sparsi.
+    ("USDA_RETN06",
+     "USDA Table of Nutrient Retention Factors, Release 6 (2007). Pubblico dominio (CC0). DOI 10.15482/USDA.ADC/1409034",
+     "https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf"),
+    ("DONIEC_2022_MOLECULES",
+     "Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.",
+     "https://doi.org/10.3390/molecules27061861"),
 ]
+
+# ---------------------------------------------------------------------------
+# RETENTION_FACTORS: fattori di ritenzione di cottura, aggiunti al
+# generatore 2026-10-10 (terzo giro) -- fondono in FOODS/scripts quanto
+# prima era sparso su 4 file (retention_factors_legumi_tuberi.sql,
+# retention_factors_crucifere.sql, retention_factors_padella.sql,
+# fix_sources_e_retention_factors.sql) più il fattore latte di
+# golden_set_raw_baselines.sql. Stessi valori, stesse fonti, stesso
+# verification_status di quei file -- nessun numero nuovo introdotto qui.
+#
+# ATTENZIONE -- leafy_greens/boiled/vitamin_c: il valore CORRETTO e
+# sourced e' 0.58 (USDA Release 6, confidence 0.55-0.60), come dichiarato
+# in fix_sources_e_retention_factors.sql. Verificando il DB live durante
+# questa fusione (2026-10-10) e' emerso che quella riga porta invece il
+# valore 0.50 con source_id NULL -- un dato senza fonte, diverso da quanto
+# dichiarato nel file versionato, segnalato e confermato come cruft
+# dall'utente. L'ON CONFLICT DO UPDATE sotto, una volta eseguito contro il
+# DB live, corregge questa riga al valore giusto (0.58/USDA_RETN06).
+# Analogamente trovate e confermate come cruft (non presenti qui, da
+# rimuovere a parte, non da "aggiustare" con un valore sostitutivo perché
+# non esiste una fonte per loro): leafy_greens/steamed/vitamin_c=0.85,
+# legumes/boiled/phytates=0.40, pome_fruits/steamed/polyphenols=0.80 --
+# tutte source_id NULL, nessuna delle 3 presente in nessun file versionato.
+# ---------------------------------------------------------------------------
+RETENTION_FACTORS = [
+    # Crucifere (cavoletti di Bruxelles) -- Doniec et al. 2022, verified
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 1.00, "source_id": "DONIEC_2022_MOLECULES", "verification_status": "verified"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 0.78, "source_id": "DONIEC_2022_MOLECULES", "verification_status": "verified"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "steamed", "nutrient": "iron",
+     "value": 1.00, "source_id": "DONIEC_2022_MOLECULES", "verification_status": "verified"},
+    {"matrix_id": "crucifere_cavoletti_bruxelles", "cooking_method": "steamed", "nutrient": "zinc",
+     "value": 0.81, "source_id": "DONIEC_2022_MOLECULES", "verification_status": "verified"},
+    # Latte -- USDA Release 6 (ferro/zinco/calcio identici in tutte le
+    # varianti di durata, vedi golden_set_raw_baselines.sql per la nota
+    # sull'ambiguità di durata non inserita per B12/folato/vitamina C).
+    {"matrix_id": "dairy_milk", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "dairy_milk", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "dairy_milk", "cooking_method": "boiled", "nutrient": "calcium",
+     "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    # Verdure a foglia (spinaci/kale) -- USDA Release 6, categoria "verdure
+    # a foglia verde, bollite, poca acqua scolata" (vedi nota di matrice in
+    # fix_sources_e_retention_factors.sql: il range reale 0.55-0.60 copre
+    # le varianti "poca acqua"/"molta acqua" scolate).
+    {"matrix_id": "leafy_greens", "cooking_method": "boiled", "nutrient": "vitamin_c",
+     "value": 0.58, "confidence_low": 0.55, "confidence_high": 0.60,
+     "source_id": "USDA_RETN06", "verification_status": "draft"},
+    # Legumi -- USDA Release 6, "16 LEGUMES". 'boiled' = cottura lunga
+    # (45-75min, riga 0521/0525); 'boiled_quick_15_20min' = cottura rapida
+    # tipo lenticchie (riga 0501); 'fried' = bollito+fritto in padella,
+    # stessa fascia 45-75min per coerenza con 'boiled' (vedi limite
+    # dichiarato in retention_factors_padella.sql: una semplificazione nota,
+    # lenticchie/ceci userebbero in teoria righe diverse).
+    {"matrix_id": "legumes", "cooking_method": "boiled", "nutrient": "iron",
+     "value": 0.80, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "boiled", "nutrient": "zinc",
+     "value": 0.85, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "boiled", "nutrient": "vitamin_c",
+     "value": 0.65, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "boiled_quick_15_20min", "nutrient": "iron",
+     "value": 0.85, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "boiled_quick_15_20min", "nutrient": "zinc",
+     "value": 0.85, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "boiled_quick_15_20min", "nutrient": "vitamin_c",
+     "value": 0.65, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "fried", "nutrient": "iron",
+     "value": 0.80, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "fried", "nutrient": "zinc",
+     "value": 0.85, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "legumes", "cooking_method": "fried", "nutrient": "vitamin_c",
+     "value": 0.60, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    # Tuberi (patate) -- USDA Release 6, "11 POTATOES".
+    {"matrix_id": "tubers", "cooking_method": "boiled_in_skin", "nutrient": "iron",
+     "value": 0.95, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "tubers", "cooking_method": "boiled_in_skin", "nutrient": "zinc",
+     "value": 0.95, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "tubers", "cooking_method": "boiled_in_skin", "nutrient": "vitamin_c",
+     "value": 0.75, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "tubers", "cooking_method": "fried", "nutrient": "iron",
+     "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "tubers", "cooking_method": "fried", "nutrient": "zinc",
+     "value": 1.00, "source_id": "USDA_RETN06", "verification_status": "draft"},
+    {"matrix_id": "tubers", "cooking_method": "fried", "nutrient": "vitamin_c",
+     "value": 0.80, "source_id": "USDA_RETN06", "verification_status": "draft"},
+]
+
+# Sanity check difensivo: nessun duplicato (matrix_id, cooking_method, nutrient)
+_rf_keys = [(r["matrix_id"], r["cooking_method"], r["nutrient"]) for r in RETENTION_FACTORS]
+assert len(_rf_keys) == len(set(_rf_keys)), "RETENTION_FACTORS: chiave duplicata trovata!"
+for _r in RETENTION_FACTORS:
+    assert 0.0 <= _r["value"] <= 1.5, f"{_r}: value fuori range plausibile per un fattore di ritenzione"
 
 # ---------------------------------------------------------------------------
 def sql_str(s):
@@ -929,6 +1056,38 @@ for food in FOODS:
     lines.append("  verification_status = EXCLUDED.verification_status;")
     lines.append("")
 
+lines.append("-- ----------------------------------------------------------------------------")
+lines.append("-- Fattori di ritenzione di cottura (retention_factors)")
+lines.append("--")
+lines.append("-- Fusi qui 2026-10-10 da 4 file sparsi (retention_factors_legumi_tuberi.sql,")
+lines.append("-- retention_factors_crucifere.sql, retention_factors_padella.sql,")
+lines.append("-- fix_sources_e_retention_factors.sql) + il fattore latte di")
+lines.append("-- golden_set_raw_baselines.sql -- stessi valori, stesse fonti, stesso")
+lines.append("-- verification_status di quei file, nessun numero nuovo. L'ON CONFLICT DO")
+lines.append("-- UPDATE qui sotto corregge anche una riga live che un controllo incrociato")
+lines.append("-- ha trovato senza fonte (leafy_greens/boiled/vitamin_c = 0.50/NULL invece")
+lines.append("-- di 0.58/USDA_RETN06 -- vedi commento su RETENTION_FACTORS in questo script")
+lines.append("-- per il dettaglio completo). Altre 3 righe trovate live senza fonte in")
+lines.append("-- quello stesso controllo (leafy_greens/steamed/vitamin_c,")
+lines.append("-- legumes/boiled/phytates, pome_fruits/steamed/polyphenols) NON hanno un")
+lines.append("-- sostituto sourced e vanno rimosse a parte (DELETE, non INSERT con un")
+lines.append("-- valore indovinato) -- non presenti qui.")
+lines.append("-- ----------------------------------------------------------------------------")
+lines.append("INSERT INTO retention_factors (matrix_id, cooking_method, nutrient, value, confidence_low, confidence_high, source_id, verification_status) VALUES")
+rf_rows = []
+for rf in RETENTION_FACTORS:
+    rf_rows.append(
+        f"  ({sql_str(rf['matrix_id'])}, {sql_str(rf['cooking_method'])}, {sql_str(rf['nutrient'])}, "
+        f"{sql_num(rf['value'])}, {sql_num(rf.get('confidence_low'))}, {sql_num(rf.get('confidence_high'))}, "
+        f"{sql_str(rf['source_id'])}, {sql_str(rf['verification_status'])})"
+    )
+lines.append(",\n".join(rf_rows))
+lines.append("ON CONFLICT (matrix_id, cooking_method, nutrient) DO UPDATE SET")
+lines.append("  value = EXCLUDED.value, confidence_low = EXCLUDED.confidence_low,")
+lines.append("  confidence_high = EXCLUDED.confidence_high, source_id = EXCLUDED.source_id,")
+lines.append("  verification_status = EXCLUDED.verification_status;")
+lines.append("")
+
 # Explicit documented gaps (no SQL effect, just comments for the record)
 lines.append("-- ----------------------------------------------------------------------------")
 lines.append("-- Gap dichiarati in questo giro di popolamento (NON inseriti, per onesta'):")
@@ -1016,6 +1175,7 @@ with open(out_path, "w") as f:
 
 print(f"Scritte {len(FOODS)} schede alimento.")
 print(f"Totale righe nutrient_values: {sum(len(f['values']) + len(f.get('extra', {})) for f in FOODS)}")
+print(f"Totale righe retention_factors: {len(RETENTION_FACTORS)}")
 # Sanity checks difensivi
 for food in FOODS:
     for code, val in food["values"].items():
