@@ -65,7 +65,18 @@ type FoodRow = {
   nutrient_values: NutrientRow[] | null;
 };
 
-type SourceRow = { id: string; citation: string; url_or_doi: string | null };
+// source_type attiva una colonna dello schema gia' presente nel DB live
+// (vedi docs/PRD.md §4.7, 2026-10-11) ma finora mai letta da qui: quando
+// vale 'internal_estimate', il valore non e' una misura diretta citata in
+// letteratura/database ufficiale, ma un numero derivato con un metodo
+// nostro (es. DERIVED_FDC_RAW_COOKED_RATIO) -- la UI lo segnala con un
+// badge "Stima", sullo stesso modello gia' usato per i prodotti scansionati
+// via barcode (Misurato/Stimato/Non disponibile, vedi BarcodeScanner.tsx).
+// null = non ancora classificata (righe storiche non ancora passate dalla
+// migrazione di backfill): trattata come non-estimate, mai come se fosse
+// certamente "misurata" -- vedi commento dove viene letta.
+type SourceType = 'official_database' | 'peer_reviewed_study' | 'preprint' | 'institutional_report' | 'internal_estimate' | null;
+type SourceRow = { id: string; citation: string; url_or_doi: string | null; source_type: SourceType };
 
 interface MealItem {
   instanceId: string; // permette di aggiungere lo stesso alimento più volte
@@ -244,8 +255,18 @@ function MetricRow({
             <ul className="list-disc list-inside">
               {result.sourceIds.map((sid) => {
                 const src = sourcesMap[sid];
+                // Badge "Stima" SOLO quando source_type e' esplicitamente
+                // 'internal_estimate' -- mai per null/altro valore, per non
+                // etichettare come stima una fonte semplicemente non ancora
+                // classificata (vedi nota sul tipo SourceType sopra).
+                const isEstimate = src?.source_type === 'internal_estimate';
                 return (
                   <li key={sid}>
+                    {isEstimate && (
+                      <span className="inline-block bg-amber-500/20 text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded mr-1 align-middle">
+                        STIMA
+                      </span>
+                    )}
                     {src ? (
                       src.url_or_doi ? (
                         <a href={src.url_or_doi} target="_blank" rel="noreferrer" className="underline">
@@ -326,7 +347,7 @@ export default function Home() {
 
       const { data: sourcesData, error: sourcesError } = await supabase
         .from('sources')
-        .select('id, citation, url_or_doi');
+        .select('id, citation, url_or_doi, source_type');
       if (!sourcesError && sourcesData) {
         const map: Record<string, SourceRow> = {};
         for (const s of sourcesData as SourceRow[]) map[s.id] = s;
@@ -716,6 +737,23 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2">
               {foods.map((food) => {
                 const hasDraft = (food.nutrient_values ?? []).some((n) => n.verification_status === 'draft');
+                // "Stima": almeno un fattore di ritenzione applicabile a questa
+                // matrice (qualunque metodo di cottura, non solo quello
+                // eventualmente selezionato ora) cita una fonte classificata
+                // internal_estimate -- oggi solo DERIVED_FDC_RAW_COOKED_RATIO
+                // (vedi docs/PRD.md §4.7). Questo e' il punto di integrazione
+                // corretto per il badge "stima": il MetricRow in basso legge
+                // result.sourceIds, che per i punteggi calcolati e' la lista
+                // fissa delle fonti del MODELLO di assorbimento/punteggio
+                // (es. HALLBERG_2000_SCANDJNUTR), non il source_id del singolo
+                // retention_factor/nutrient_value usato -- quindi non si
+                // illuminerebbe mai per questo caso reale. sourcesMap[id] puo'
+                // non esistere ancora (riga 'sources' non sincronizzata): in
+                // quel caso optional chaining restituisce undefined, trattato
+                // come non-estimate, mai come se fosse certamente misurato.
+                const hasEstimatedRetention = retentionFactors.some(
+                  (rf) => rf.matrix_id === food.matrix_id && rf.source_id && sourcesMap[rf.source_id]?.source_type === 'internal_estimate'
+                );
                 return (
                   <div
                     key={food.food_id}
@@ -726,6 +764,11 @@ export default function Home() {
                       <span className="text-[10px] text-slate-400 uppercase">
                         {food.botanical_family || 'Animale'}
                         {hasDraft && <span className="text-amber-500"> · contiene dati draft</span>}
+                        {hasEstimatedRetention && (
+                          <span className="text-amber-500" title="Il fattore di ritenzione da crudo a cotto per questo alimento e' stimato (derivato dal rapporto USDA crudo/cotto), non misurato da uno studio dedicato.">
+                            {' '}· cottura stimata
+                          </span>
+                        )}
                       </span>
                     </div>
                     <button

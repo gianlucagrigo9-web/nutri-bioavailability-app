@@ -864,24 +864,38 @@ MATRICES_NEEDED_NEW = [
     ("crucifere_cavoletti_bruxelles", "Cavoletti di Bruxelles"),
 ]
 
+# Ogni tupla e' ora (id, citazione, url_or_doi, source_type) -- il quarto
+# campo attiva la colonna sources.source_type, gia' presente nello schema
+# live (vedi §5 PRD, enum source_type_enum) ma mai popolata finora dal
+# generatore: ogni riga restava NULL silenziosamente, nessun modo
+# interrogabile per distinguere "misurato/da letteratura" da "stimato con
+# un metodo interno" (vedi §4.7 PRD per la decisione completa, 2026-10-11).
+# Valori ammessi (controllati dall'assert sotto, stesso stile degli altri
+# sanity check di questo file): 'official_database' (USDA FDC/retention
+# factors, Agribalyse), 'peer_reviewed_study' (articolo su rivista con
+# peer review), 'preprint', 'institutional_report' (standard/dataset di
+# un ente non peer-reviewed in senso stretto, es. DEFRA, WULCA, IOM/NIH),
+# 'internal_estimate' (metodo nostro, non una misura diretta citata).
+SOURCE_TYPES_VALID = {"official_database", "peer_reviewed_study", "preprint", "institutional_report", "internal_estimate"}
+
 SOURCES_NEW = [
     ("NOONAN_SAVAGE_1999_APJCN",
      "Noonan SC, Savage GP. Oxalate content of foods and its effect on humans. Asia Pac J Clin Nutr. 1999;8(1):64-74. [spinaci crude: range 320-1260 mg/100g, media 970 mg/100g peso fresco, ossalato totale]",
-     "https://apjcn.qdu.edu.cn/8_1_5.pdf"),
+     "https://apjcn.qdu.edu.cn/8_1_5.pdf", "peer_reviewed_study"),
     ("ERDOGAN_ONAR_2012_JFDA",
      "Erdogan BY, Onar AN. Determination of nitrates, nitrites and oxalates in kale and sultana pea by capillary electrophoresis. J Food Drug Anal. 2012;20(2):14. [kale: 2970+/-672 mg/kg = 297+/-67.2 mg/100g, conversione aritmetica kg->100g]",
-     "https://doi.org/10.6227/jfda.2012200215"),
+     "https://doi.org/10.6227/jfda.2012200215", "peer_reviewed_study"),
     ("ZIA_UR_REHMAN_2002_PJSIR",
      "Zia-ur-Rehman, Salariya AM, Zafar SI. Effect of different soaking and cooking methods on physical characteristics, phytic acid content and protein digestibility of red kidney beans. Pak J Sci Ind Res. 2002;45(1):41-45. [fagioli rossi: crudo 1084 mg/100g, bollito (cottura ordinaria) 805 mg/100g]",
-     "https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257"),
+     "https://v2.pjsir.org/index.php/biological-sciences/article/download/1741/1075/2257", "peer_reviewed_study"),
     # Aggiunte 2026-10-10 (terzo giro): fonti usate dai fattori di ritenzione
     # di cottura, finora dichiarate solo nei singoli file SQL sparsi.
     ("USDA_RETN06",
      "USDA Table of Nutrient Retention Factors, Release 6 (2007). Pubblico dominio (CC0). DOI 10.15482/USDA.ADC/1409034",
-     "https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf"),
+     "https://www.ars.usda.gov/ARSUserFiles/80400535/Data/retn/retn06.pdf", "official_database"),
     ("DONIEC_2022_MOLECULES",
      "Doniec J, Florkiewicz A, Duliński R, Filipiak-Florkiewicz A. Impact of Hydrothermal Treatments on Nutritional Value and Mineral Bioaccessibility of Brussels Sprouts (Brassica oleracea var. gemmifera). Molecules. 2022;27(6):1861.",
-     "https://doi.org/10.3390/molecules27061861"),
+     "https://doi.org/10.3390/molecules27061861", "peer_reviewed_study"),
     # Aggiunta 2026-10-10 (ri-verifica Fase 1 punto 6, vedi
     # fix_literature_sources_recheck.sql): sostituisce NOONAN_SAVAGE_1999_APJCN
     # come fonte per food_spinach_raw.oxalates_mg, per decisione esplicita
@@ -889,7 +903,7 @@ SOURCES_NEW = [
     # Citazione di seconda mano: testo completo non letto da Claude (paywall).
     ("SIENER_2006_FOODCHEM",
      "Siener R, Hönow R, Seidler A, Voss S, Hesse A. Oxalate contents of species of the Polygonaceae, Amaranthaceae and Chenopodiaceae families. Food Chemistry. 2006;98(2):220-224. [spinaci: ossalato totale 1959 mg/100g, solubile 1029 mg/100g -- citazione di seconda mano, testo completo non letto direttamente per paywall]",
-     "https://doi.org/10.1016/j.foodchem.2005.05.079"),
+     "https://doi.org/10.1016/j.foodchem.2005.05.079", "peer_reviewed_study"),
     # Aggiunta 2026-10-10 (quarto giro): NON una citazione di letteratura --
     # un metodo. Decisione esplicita dell'utente (chat, 2026-10-10): dove
     # non esiste un fattore di ritenzione pubblicato per una matrice, MA
@@ -909,8 +923,14 @@ SOURCES_NEW = [
     # effetto di disgregazione della matrice.
     ("DERIVED_FDC_RAW_COOKED_RATIO",
      "Metodo interno (non letteratura): fattore di ritenzione = valore_cotto_per_100g / valore_crudo_per_100g, da coppie di alimenti Golden Set misurati indipendentemente da USDA FoodData Central con lo stesso metodo di cottura. Coppie usate finora: broccoli (FDC 170379 crudo / 169967 bolliti), carote (FDC 170393 crude / 170394 bollite), spinaci (FDC 168462 crudi / 168463 bolliti), cavoletti di Bruxelles (FDC 170383 crudi / 169971 bolliti). Non copre beta-carotene/altri carotenoidi provitaminici A (vedi carotenoid_matrix_state).",
-     None),
+     None, "internal_estimate"),
 ]
+
+# Sanity check difensivo (stesso stile delle altre assert di questo file):
+# ogni fonte deve dichiarare un source_type valido -- altrimenti torna il
+# problema di stanotte, una riga 'sources' con provenienza indeterminata.
+for _s in SOURCES_NEW:
+    assert _s[3] in SOURCE_TYPES_VALID, f"{_s[0]}: source_type '{_s[3]}' non valido (atteso uno fra {SOURCE_TYPES_VALID})"
 
 # ---------------------------------------------------------------------------
 # RETENTION_FACTORS: fattori di ritenzione di cottura, aggiunti al
@@ -1226,10 +1246,10 @@ lines.append("-- Nuove fonti di letteratura (ossalati/fitati; USDA_FDC e' gia' u
 lines.append("-- generico usato dall'engine per magnesio/rame/selenio/iodio/vit.K, vedi")
 lines.append("-- docs/PRD.md §4.5 -- qui lo aggiungiamo anche alla tabella sources se non c'era)")
 lines.append("-- ----------------------------------------------------------------------------")
-lines.append("INSERT INTO sources (id, citation, url_or_doi) VALUES")
-lines.append("  ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov'),")
-lines.append(",\n".join(f"  ({sql_str(sid)}, {sql_str(cit)}, {sql_str(url)})" for sid, cit, url in SOURCES_NEW) + "")
-lines.append("ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi;")
+lines.append("INSERT INTO sources (id, citation, url_or_doi, source_type) VALUES")
+lines.append("  ('USDA_FDC', 'USDA FoodData Central (fdc.nal.usda.gov), U.S. Department of Agriculture, Agricultural Research Service.', 'https://fdc.nal.usda.gov', 'official_database'),")
+lines.append(",\n".join(f"  ({sql_str(sid)}, {sql_str(cit)}, {sql_str(url)}, {sql_str(stype)})" for sid, cit, url, stype in SOURCES_NEW) + "")
+lines.append("ON CONFLICT (id) DO UPDATE SET citation = EXCLUDED.citation, url_or_doi = EXCLUDED.url_or_doi, source_type = EXCLUDED.source_type;")
 lines.append("")
 
 lines.append("-- ----------------------------------------------------------------------------")

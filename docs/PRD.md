@@ -169,6 +169,35 @@ Il valore dell'Excel (45%) non corrisponde a nessuna di queste tre varianti uffi
 
 Questo è esattamente il meccanismo che il §2 Regola 1 e la tabella `sources` (§5) devono applicare sistematicamente a tutte le ~125 righe del file Excel e, in futuro, ai dati dei singoli alimenti.
 
+### 4.7 "Stima dichiarata": attivazione di `sources.source_type` come livello di trasparenza generale (aggiunto 2026-10-11)
+
+**Il problema che questa sezione risolve.** Durante la ricerca di fonti reali per i MACs (vedi Fase 1 punto 8b in §9) è emerso che, per molti nutrienti/alimenti, non esiste e non esisterà a breve una misura diretta citabile — non solo per i MACs. L'utente ha posto il problema in generale: *"dovremo [...] trovare il modo per fornire agli utenti anche i dati dei quali non siamo sicuri, perché finirebbe per essere veramente una proposta completa solo per pochi cibi [...] bisogna trovare un metodo per poter stimare i valori e poi far sapere al cliente che quella è solo una stima e non un valore ufficiale come per tutti gli altri."* Questa sezione documenta il meccanismo scelto per farlo, senza violare "zero dati inventati": una stima resta ammissibile solo se è dichiarata come tale ovunque arrivi all'utente, mai presentata con lo stesso peso visivo di un dato misurato.
+
+**Scoperta, non invenzione, di un meccanismo già esistente.** Interrogando lo schema live (`information_schema.columns`, `pg_enum`/`pg_type` via SQL editor Supabase) è emerso che `sources.source_type` esiste **già** in produzione, con esattamente l'enum che il §5 di questo PRD documentava in modo aspirazionale da tempo senza che nessuno script l'avesse mai popolato:
+
+```
+source_type_enum: official_database | peer_reviewed_study | preprint | institutional_report | internal_estimate
+```
+
+Quasi tutte le righe erano NULL (nessuna distinzione interrogabile fra "misurato/da letteratura" e "stimato con metodo interno"). Si è scelto di **attivare questa colonna già esistente** come meccanismo per la "stima dichiarata", invece di aggiungere una nuova colonna o una nuova tabella — stesso dato, stesso schema, solo finalmente popolato e letto.
+
+**Cosa significa `internal_estimate` qui.** Un source_id con `source_type = 'internal_estimate'` non cita una misura diretta in letteratura o in un database ufficiale: è un numero derivato con un metodo nostro, dichiarato nel commento della fonte stessa. Il primo caso reale è `DERIVED_FDC_RAW_COOKED_RATIO` (vedi §4.6 e i commenti in `scripts/generate_golden_set_foods.py`): il fattore di ritenzione di cottura per broccoli, carote, spinaci e cavoletti di Bruxelles, calcolato come rapporto valore_cotto/valore_crudo fra due misure USDA FDC indipendenti della stessa matrice — un numero reale, non inventato, ma non lo stesso tipo di evidenza di un fattore pubblicato (es. USDA Retention Factors Release 6, Doniec et al. 2022).
+
+**Implementazione, in due parti.**
+
+1. `scripts/generate_golden_set_foods.py`: `SOURCES_NEW` è ora una lista di 4-tuple `(id, citazione, url, source_type)`, con un `SOURCE_TYPES_VALID` e un `assert` difensivo (stesso stile dei sanity check già presenti nel file) che blocca la generazione se un source_type non è uno dei cinque validi. L'INSERT in `sources` scrive la colonna e la aggiorna con `ON CONFLICT (id) DO UPDATE`.
+2. `fix_backfill_source_type.sql` (nuovo file, stesso pattern dei precedenti `fix_*.sql`): backfill una tantum per le righe **già live** in produzione che il generatore da solo non avrebbe corretto in questa sessione (richiederebbe ri-eseguire l'intero `golden_set_foods.sql` contro il DB, non fatto qui per disciplina di scope) — sia gli id di `SOURCES_NEW`, sia gli id citati **solo** dai motori (`HALLBERG_2000_SCANDJNUTR`, `SONNENBURG_2016_CELL`, `AGRIBALYSE_3.1.1`, ecc.: liste fisse in `computationalNutritionEngine.ts`/`lcaLogisticsEngine.ts`/`microbiotaEngine.ts`, mai scritte dal generatore). Il file include una query di verifica che segnala (non silenzia) qualunque id atteso risultato assente o ancora NULL dopo l'esecuzione.
+
+**UI: badge "Stima" — due punti di integrazione, non equivalenti.**
+
+- `MetricRow` (in `app/page.tsx`, pannello "Perché questo numero?"): mostra un badge ambra "STIMA" accanto a qualunque fonte con `source_type = 'internal_estimate'` nella lista `result.sourceIds`. **Limite scoperto durante l'implementazione**: `result.sourceIds` per i punteggi calcolati (es. `calculateBioavailableIron`, `calculateMicrobiotaImpactScore`) è una lista **fissa**, hardcoded per metodo — cita le fonti del MODELLO di assorbimento/punteggio stesso (es. Hallberg & Young per il ferro), non il `source_id` del singolo `nutrient_value`/`retention_factor` usato per quel food specifico. Questo badge quindi **non si illumina mai**, nella pratica odierna, per il caso reale che dovrebbe segnalare (il fattore di ritenzione derivato di broccoli/carote/spinaci/cavoletti). Resta comunque corretto per il giorno in cui un source_id di modello verrà classificato `internal_estimate`.
+- Dispensa (lista alimenti, stesso componente): esteso il badge già esistente "· contiene dati draft" (`hasDraft`, basato su `nutrient_values[].verification_status`) con un secondo badge, sullo stesso alimento, "· cottura stimata" — acceso quando **almeno uno** dei `retention_factors` applicabili alla matrice dell'alimento (qualunque metodo di cottura, non solo quello eventualmente selezionato) cita una fonte `internal_estimate`. Questo è il punto di integrazione che effettivamente copre il caso reale, perché legge il `source_id` del dato grezzo (via `retentionFactors` + `sourcesMap`), non la lista fissa del modello.
+
+**Deliberatamente non toccato in questa sessione (debito tecnico dichiarato, non nascosto):**
+- Cruft di righe duplicate/quasi-duplicate in `sources` (es. `USDA_FDC` vs `USDA_FDC_SR`, `SONNENBURG_2016` vs `SONNENBURG_2016_CELL`, tre varianti `HEANEY_WEAVER_*`): stesso pattern già pulito una volta per `macs_mg`/ceci, lasciato stare qui per non allargare lo scope della sola attivazione di `source_type`.
+- Il gap architetturale appena descritto (`SourcedValue.sourceIds` fisso per metodo, non dinamico per food) non è stato risolto: servirebbe che ogni funzione di calcolo propagasse i `source_id` reali dei `nutrient_values`/`retention_factors` effettivamente usati per quel food/pasto, invece della lista fissa del modello. Rimandato: è un cambiamento più ampio del contratto `SourcedValue` (§6), da affrontare come task a sé.
+- Estensione di "stima dichiarata" a **tutto** ciò che l'app traccia (richiesta esplicita dell'utente, non solo MACs): questa sessione attiva il meccanismo e lo collega al primo caso reale esistente (i fattori di ritenzione derivati); non audita/retrofitta ancora ogni altro output del motore per verificare se meriti la stessa etichetta.
+
 ---
 
 ## 5. Architettura dati con provenienza
