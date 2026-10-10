@@ -301,11 +301,49 @@ Questo contratto sarà il primo criterio di accettazione da validare quando risc
 
 ## 9. Roadmap
 
-1. **Schema & provenienza** (questa settimana): migrazioni SQL per le tabelle del §5.
-2. **Un motore alla volta, test-first:** per ciascuno dei tre motori ammessi, Claude propone criteri di accettazione e test; solo dopo approvazione viene riscritto secondo il contratto §6. Ordine proposto: nutrizionale → microbiota → LCA.
-3. **Golden Set verificato:** 20 alimenti popolati e promossi a `verified` (§4.6) dopo cross-check meccanico indipendente e decisione esplicita dell'utente; 3 righe da letteratura specifica restano `draft`.
-4. **Prototipo UI** sui 20 alimenti verificati, incluso il pannello "Perché questo numero?" — `app/page.tsx` riscritto il 2026-10-09 (nessuna simulazione di cottura: ogni card è una riga reale misurata; pannello "Perché questo numero?" con fonte/evidenceLevel/confidenza/stato per ogni valore calcolato). Aggiunto anche lo scaffold Next.js vero e proprio (package.json/tsconfig/next.config/Tailwind), mancante da sempre in questo repo — vedi README.md "Come avviare il progetto". **Non ancora eseguito end-to-end** (network del sandbox non raggiunge registry.npmjs.org, `npm install` non completato qui): il collaudo reale (visivo, con dati Supabase veri) resta da fare sul tuo PC.
-5. **Espansione dati** oltre i 20 alimenti solo dopo che il processo di verifica a batch è collaudato (non prima).
+**Stato (2026-10-10):** i punti 1-3 della versione precedente di questa roadmap sono completi (schema, 3 motori riscritti secondo il contratto §6, Golden Set 20/20 `verified`). Quanto segue è la scaletta completa dal punto attuale al completamento dell'app, riordinata per **dipendenza tecnica reale** (cosa deve reggere prima di cosa), non per importanza percepita. Il modulo clinico e il CGM (§7, nota 2026-10-10) restano intenzionalmente fuori da questa lista.
+
+### Fase 0 — Collaudare quello che esiste già (prima di costruire altro)
+Nessuno di questi punti è mai stato eseguito end-to-end in nessun ambiente — né qui (la sandbox non raggiunge `registry.npmjs.org`), né, a quanto risulta, sul tuo PC. Finché non è fatto, non sappiamo con certezza che il codice scritto funzioni davvero.
+1. `npm install` + `.env.local` con le chiavi Supabase reali, sul tuo PC.
+2. `npm run dev` — primo collaudo visivo: la pagina del Golden Set carica, il pannello "Perché questo numero?" mostra fonte/evidenza/stato, lo switch Conservativo/Esplorativo funziona.
+3. `npm run typecheck` (`tsc --noEmit`) — non è mai stato eseguito su tutto il progetto; `tests/engines.test.ts` gira con `tsx`, che transpila ma non type-checka a fondo, quindi `app/page.tsx` e il pannello admin potrebbero nascondere errori di tipo non ancora visti.
+4. `npm run build` — build di produzione, mai tentata.
+5. Login admin (`/admin/data-entry`) con `ADMIN_PASSWORD` reale — collaudo del pannello di data-entry.
+
+### Fase 1 — Chiudere i gap dichiarati sul Golden Set attuale
+Prima di espandere la copertura, onorare "zero dati inventati" sui 20 alimenti che già ci sono.
+6. Le 3 righe `nutrient_values` rimaste `draft` in attesa di un cross-check dedicato (ossalati spinaci crudi, ossalati kale, fitati fagioli rossi bolliti — fonti già lette, da ri-verificare).
+7. Fattori di ritenzione dichiarati mancanti (carote/broccoli/mandorle) — restano `draft`/assenti finché non emerge una fonte legittima; non è un blocco, solo un promemoria a non dimenticarli.
+8. Controllo periodico più approfondito sui 20 alimenti promossi (dichiarato in `golden_set_promote_verified.sql`, mai ancora programmato).
+
+### Fase 2 — Irrobustire prima di esporre al pubblico
+Il DB è già in produzione (etichettato "PRODUCTION" su Supabase) ma finora ci abbiamo scritto solo noi due dalla dashboard SQL. Nessuno di questi punti è urgente finché l'app non è raggiungibile da altri, ma vanno chiusi prima che lo sia.
+9. **Row Level Security su Supabase** — verificato oggi: nessuna policy RLS esiste su nessuna tabella. Se la chiave `anon` usata dal client va in produzione senza RLS, chiunque può potenzialmente leggere/scrivere a seconda dei permessi di default. Va definita esplicitamente: lettura pubblica solo su tabelle `verified`, scrittura solo tramite le server actions con service-role key (il pannello admin sembra già usare questo pattern — da confermare).
+10. Audit variabili d'ambiente — confermare che `SUPABASE_SERVICE_ROLE_KEY` non sia mai esposta lato client, solo in server actions.
+11. Pipeline di deployment (Vercel) — repository non ancora collegato a nessun progetto Vercel; primo deploy reale, variabili d'ambiente configurate lì.
+
+### Fase 3 — Completare la superficie UI del perimetro MVP (§7)
+Cosa manca ancora rispetto a quello che il PRD dichiara "dentro" la v1.
+12. Scanner barcode via Open Food Facts — dichiarato "dentro v1" in §7, non ancora implementato in `app/page.tsx`.
+13. Meal Builder — esiste come scaffold, da verificare/rifinire dopo la Fase 0 (collaudo visivo reale).
+
+### Fase 4 — Scalare oltre i 20 alimenti
+Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
+14. Disegnare un processo di verifica **a batch** (non più un alimento alla volta a mano) — criterio esplicito di cosa rende una riga promuovibile a `verified`, ripetibile.
+15. Espandere la copertura alimenti usando quel processo, dando priorità a ciò che serve davvero ai primi utenti (non ai ~1.100 alimenti tutti insieme).
+
+### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)
+Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (vedi §7, nota 2026-10-10). Nessun ordine imposto fra questi — da prioritizzare quando ci si arriva.
+16. Pipeline evidenze scientifiche (scraping PubMed + estrazione parametri + livello di evidenza + review umana) — coerente con §2 regola 3 e §4; rafforzerebbe le fonti dei motori già ammessi, utile anche prima della Fase 4.
+17. AI Recipe Co-Pilot (parsing ricette da voce/testo).
+18. Database integratori e crononutrizione.
+19. Mappa globale di popolazione (FAOSTAT/GDD).
+20. Integrazione wearable (HealthKit/Health Connect) — richiede app nativa, non PWA: decisione architetturale a sé.
+
+### Fase 6 — Intenzionalmente parcheggiato (non "dopo", ma "da ridiscutere se e quando")
+21. Modulo clinico (ontologia eziologica, alberi decisionali per patologia) — fuori perimetro per motivi legali/regolatori (§1.1), si rivaluta a MVP completo.
+22. Integrazione CGM — stesso livello di cautela del modulo clinico (§7, nota 2026-10-10), non una voce di backlog ordinaria.
 
 ---
 
