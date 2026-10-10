@@ -53,6 +53,7 @@ type FoodRow = {
   food_id: string;
   name_it: string;
   matrix_id: string;
+  baseline_cooking_state: string;
   is_heme_iron: boolean;
   matrix_category_calcium: OxalateCategory | null;
   botanical_family: string | null;
@@ -102,6 +103,35 @@ const COOKING_METHOD_ORDER = [
   'fried',
   'microwaved',
 ];
+
+// Bug trovato il 2026-10-10 (segnalato dall'utente): CookingTransformationEngine
+// presuppone che i nutrient_values salvati per un food_id siano lo stato
+// CRUDO dell'alimento. Per 7 alimenti del Golden Set non è così -- i
+// valori sono già di una preparazione cotta (patate bollite, legumi
+// bolliti, fegato brasato, manzo alla griglia, uovo sodo, salmone,
+// pasta). Se la UI avesse comunque offerto il menu di cottura per questi
+// (indicizzato per matrice, non per singolo food_id), selezionare un
+// metodo con dati reali avrebbe applicato lo sconto di ritenzione una
+// SECONDA volta su un valore già scontato dalla cottura vera. Vedi
+// fix_baseline_cooking_state.sql per i dettagli e foods_raw.baseline_cooking_state
+// per lo stato reale di ogni riga (default difensivo 'unknown', mai 'raw',
+// per qualunque alimento futuro non ancora classificato).
+//
+// Etichette per gli stati non-crudo che NON hanno un cooking_method_enum
+// corrispondente (nessun fattore di ritenzione "da crudo a qui" esiste
+// ancora per questi): usate solo per mostrare un badge statico, mai per
+// popolare il selettore di cottura.
+const BASELINE_STATE_LABELS: Record<string, string> = {
+  braised: 'Brasato',
+  grilled: 'Alla griglia',
+  dry_heat_cooked: 'Cotto (calore secco)',
+  hard_boiled: 'Sodo',
+  unknown: 'Stato di cottura non ancora classificato',
+};
+
+function baselineStateLabel(state: string): string {
+  return COOKING_METHOD_LABELS[state] ?? BASELINE_STATE_LABELS[state] ?? state;
+}
 
 function nutrientValue(nutrients: NutrientRow[], code: string): number {
   return nutrients.find((n) => n.nutrient_code === code)?.value ?? 0;
@@ -254,7 +284,7 @@ export default function Home() {
       const { data: foodsData, error: foodsError } = await supabase
         .from('foods_raw')
         .select(
-          `food_id, name_it, matrix_id, is_heme_iron, matrix_category_calcium,
+          `food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium,
            botanical_family, carotenoid_matrix_state, zinc_bioaccessibility_bucket,
            is_fortified_folate,
            nutrient_values ( nutrient_code, value, confidence_low, confidence_high, source_id, verification_status )`
@@ -329,7 +359,15 @@ export default function Home() {
       const dbFood = foods.find((f) => f.food_id === item.foodId);
       if (!dbFood) return null;
       const rawFoodItem = foodRowToFoodItem(dbFood);
-      return cookingEngine.applyCookingTransformation(rawFoodItem, dbFood.matrix_id, item.cookingMethod, retentionFactors);
+      // Difensivo (vedi fix_baseline_cooking_state.sql): se il valore
+      // salvato per questo alimento non è genuinamente crudo, ignoriamo
+      // qualunque cookingMethod memorizzato e forziamo 'raw' -- che per
+      // CookingTransformationEngine significa "nessuna trasformazione",
+      // l'unico comportamento corretto quando il dato è già di uno stato
+      // cotto specifico. La UI non offre più il selettore in questo caso
+      // (vedi sotto), ma questo guard resta anche se in futuro cambiasse.
+      const effectiveCookingMethod = dbFood.baseline_cooking_state === 'raw' ? item.cookingMethod : 'raw';
+      return cookingEngine.applyCookingTransformation(rawFoodItem, dbFood.matrix_id, effectiveCookingMethod, retentionFactors);
     })
     .filter((f): f is FoodItem => f !== null);
 
@@ -582,6 +620,7 @@ export default function Home() {
                 {mealItems.map((item) => {
                   const dbFood = foods.find((f) => f.food_id === item.foodId);
                   if (!dbFood) return null;
+                  const hasRawBaseline = dbFood.baseline_cooking_state === 'raw';
                   const methods = availableCookingMethods(dbFood.matrix_id);
 
                   return (
@@ -599,21 +638,38 @@ export default function Home() {
                           <label className="text-[10px] font-bold uppercase tracking-wider text-indigo-500 mb-1">
                             Cottura
                           </label>
-                          <select
-                            value={item.cookingMethod}
-                            onChange={(e) => updateCookingMethod(item.instanceId, e.target.value)}
-                            className="bg-indigo-50 border-none text-indigo-700 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold cursor-pointer"
-                          >
-                            {methods.map((m) => (
-                              <option key={m} value={m}>
-                                {COOKING_METHOD_LABELS[m] ?? m}
-                              </option>
-                            ))}
-                          </select>
-                          {methods.length === 1 && (
-                            <span className="text-[9px] text-slate-400 mt-1">
-                              nessun fattore di ritenzione sourced per questa matrice: solo crudo
-                            </span>
+                          {hasRawBaseline ? (
+                            <>
+                              <select
+                                value={item.cookingMethod}
+                                onChange={(e) => updateCookingMethod(item.instanceId, e.target.value)}
+                                className="bg-indigo-50 border-none text-indigo-700 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-semibold cursor-pointer"
+                              >
+                                {methods.map((m) => (
+                                  <option key={m} value={m}>
+                                    {COOKING_METHOD_LABELS[m] ?? m}
+                                  </option>
+                                ))}
+                              </select>
+                              {methods.length === 1 && (
+                                <span className="text-[9px] text-slate-400 mt-1">
+                                  nessun fattore di ritenzione sourced per questa matrice: solo crudo
+                                </span>
+                              )}
+                            </>
+                          ) : (
+                            // Il valore salvato per questo alimento è GIA' di uno stato
+                            // cotto specifico (vedi fix_baseline_cooking_state.sql):
+                            // nessun selettore, per non permettere di applicare un
+                            // fattore di ritenzione due volte sullo stesso dato.
+                            <>
+                              <span className="bg-slate-100 text-slate-600 text-sm rounded-xl px-3 py-2 font-semibold">
+                                {baselineStateLabel(dbFood.baseline_cooking_state)}
+                              </span>
+                              <span className="text-[9px] text-slate-400 mt-1">
+                                dato già di questa preparazione: nessun altro metodo disponibile
+                              </span>
+                            </>
                           )}
                         </div>
 

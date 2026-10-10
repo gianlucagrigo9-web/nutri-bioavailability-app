@@ -765,6 +765,14 @@ describe("applyCookingTransformation — Livello A (difensivo)", () => {
     expect(result.iron_mg).toBe(5);
     expect(result === raw).toBe(false);
   });
+  it("metodo 'raw' ignora SEMPRE i fattori di ritenzione anche se esistono per la matrice (contratto su cui si basa il guard baseline_cooking_state di app/page.tsx, vedi fix_baseline_cooking_state.sql — 2026-10-10)", () => {
+    const raw = makeFood({ iron_mg: 5 });
+    const factors: RetentionFactorRecord[] = [
+      { matrix_id: "legumi", cooking_method: "raw", nutrient: "iron", value: 0.5 },
+    ];
+    const result = cookingEngine.applyCookingTransformation(raw, "legumi", "raw", factors);
+    expect(result.iron_mg).toBe(5);
+  });
   it("nessun fattore di ritenzione corrispondente in DB -> ritorna l'alimento invariato (non indovina un valore)", () => {
     const raw = makeFood({ iron_mg: 5 });
     const result = cookingEngine.applyCookingTransformation(raw, "legumi", "boiled", []);
