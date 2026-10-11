@@ -481,6 +481,22 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     **Prerequisito ancora da fare dall'utente, non confermato fatto**: chiave personale `USDA_FDC_API_KEY` in `.env.local` (gratuita, fdc.nal.usda.gov/api-key-signup.html — la `DEMO_KEY` va in 429 troppo presto per un batch). Comando: `npm run verify:golden-set` (dry-run) poi `npm run verify:golden-set -- --apply`.
 16. Espandere la copertura alimenti usando quel processo, dando priorità a ciò che serve davvero ai primi utenti (non ai ~1.100 alimenti tutti insieme).
 
+    **Obiettivo dichiarato dall'utente (2026-10-11)**: l'app non va lanciata finché non copre almeno il panel alimentare italiano comune (alimenti base + processati), con l'ambizione successiva di coprire anche mercato europeo e USA. Scala enorme rispetto ai 30 alimenti attuali — gestita come **coda ampliabile nel tempo**, non come lista chiusa da esaurire in un colpo. Un task pianificato (lato utente, ogni ~3 ore durante il giorno, vedi §9.x sotto) lavora la coda un alimento alla volta, commit+push automatico, fermandosi e segnalando (mai indovinando) quando un alimento non ha un buon match FDC o non rientra nelle euristiche di categorizzazione già stabilite per i 30 alimenti esistenti.
+
+    **Limite dichiarato**: FDC è una banca dati USA — per prodotti tipicamente italiani (formaggi, salumi, piatti tradizionali) spesso manca un corrispettivo preciso. Usato comunque come fonte primaria per ora (unica pipeline meccanica collaudata); l'integrazione di CREA (banca dati ufficiale italiana) come fonte parallela resta un lavoro futuro non ancora iniziato.
+
+    **Coda — primo lotto (2026-10-11), NON esaustivo, da ampliare**. Un alimento alla volta, nell'ordine; ogni riga va aggiornata dal task con l'esito (✅ aggiunto come draft + food_id, oppure ⚠ + motivo se richiede revisione umana) e la data:
+
+    - Cereali/pane/pasta: pane comune, pane integrale, riso bianco, riso integrale, polenta (farina di mais), orzo perlato, farro
+    - Legumi: fave, piselli, fagioli borlotti, fagioli cannellini
+    - Verdura: zucchine, melanzane, pomodori, cipolle, aglio, peperoni, lattuga, zucca, finocchi, funghi champignon
+    - Frutta: mele, banane, pere, uva, limoni, fragole, pesche, kiwi, fichi
+    - Carne: petto di pollo, coscia di pollo, carne di maiale (lonza), tacchino, prosciutto cotto, prosciutto crudo, bresaola
+    - Pesce: tonno (fresco e in scatola sott'olio), merluzzo/nasello, acciughe, cozze, vongole, gamberi
+    - Latticini/formaggi: parmigiano reggiano, mozzarella, ricotta, yogurt bianco intero, yogurt greco
+    - Grassi/condimenti: olio extravergine d'oliva, burro
+    - Alimenti processati comuni: pane confezionato in cassetta, biscotti secchi, fette biscottate, pasta di semola comune (non arricchita — diversa da `food_pasta_enriched_cooked` già presente, che è USA-style enriched), cioccolato fondente, miele, zucchero bianco
+
 ### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)
 Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (vedi §7, nota 2026-10-10). Nessun ordine imposto fra questi — da prioritizzare quando ci si arriva.
 17. Pipeline evidenze scientifiche (scraping PubMed + estrazione parametri + livello di evidenza + review umana) — coerente con §2 regola 3 e §4; rafforzerebbe le fonti dei motori già ammessi, utile anche prima della Fase 4.
