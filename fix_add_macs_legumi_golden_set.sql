@@ -41,10 +41,15 @@
 --   food_kidney_beans_boiled FDC 175194  acqua 66.94% -> DM 33.06%
 --   food_lentils_boiled      FDC 172421  acqua 69.64% -> DM 30.36%
 --
---   macs_mg (per 100g come consumato) = %RS_dwb(H1) * DM_fraction * 10
---   Cece:    4.8 * 0.3979 * 10 = 1909.9 -> 1910
---   Kidney:  4.3 * 0.3306 * 10 = 1421.6 -> 1422
---   Lentil:  5.0 * 0.3036 * 10 = 1518.0 -> 1518
+--   macs_mg (per 100g come consumato) = %RS_dwb(H1) * DM_fraction * 1000
+--   (DM_fraction qui e' una frazione 0-1, es. 0.3979 per 39.79%; refuso
+--   corretto 2026-10-11 -- la prima stesura di questo commento scriveva
+--   erroneamente "* 10", un errore di sola documentazione: i valori
+--   effettivamente scritti sotto e nel DB erano gia' calcolati con "* 1000"
+--   e sono quindi corretti, solo il commento non lo rifletteva)
+--   Cece:    4.8 * 0.3979 * 1000 = 1909.9 -> 1910
+--   Kidney:  4.3 * 0.3306 * 1000 = 1421.6 -> 1422
+--   Lentil:  5.0 * 0.3036 * 1000 = 1518.0 -> 1518
 --
 -- Ordine di grandezza plausibile: 1.4-1.9 g RS/100g come consumato rientra
 -- nel range tipico riportato in letteratura per legumi cotti (es. revisione
