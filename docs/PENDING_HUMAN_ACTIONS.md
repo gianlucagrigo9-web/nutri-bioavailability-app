@@ -14,6 +14,7 @@
 
 ## In attesa
 
+- [2026-10-11, sessione interattiva] Eseguire `add_diet_compatibility_golden_set.sql` (root del repo) sul DB reale via SQL editor Supabase o sul PC — aggiunge 3 colonne (`diet_compat_vegetarian/vegan/fruitarian`) a `foods_raw` e classifica i 30 alimenti del Golden Set (docs/PRD.md §4.9, filtro tipo-dieta). Motivo: questo sandbox non ha rete diretta verso Supabase. SHA-256 del file al momento della scrittura (verificare prima di eseguire): `d86cd50d6463e456e6cb84c116cdb103c06db80826b5309cd9b8992567ebb315`. Il blocco `DO $$` in fondo al file RAISE un'eccezione se qualcosa non torna (food_id mancante, classificazione incompleta, incoerenza logica vegano/vegetariano o fruttariano/vegano) — atteso un semplice NOTICE "30/30/30/0". **Nota**: la stessa classificazione esiste già come mappa TypeScript in `lib/engine/goldenSetDietCompatibility.ts` (testata, usabile subito in sviluppo/test) — questo file SQL serve solo a portarla sul DB reale per quando `app/page.tsx` verrà wired a leggerla da lì.
 - [2026-10-11, sessione interattiva] Eseguire `add_dish_templates.sql` (root del repo) sul DB reale via SQL editor Supabase o sul PC — crea `dish_templates`/`dish_components` (Fase 4.16b, design §4.8, approvato). Motivo: questo sandbox non ha rete diretta verso Supabase. Leggere la query di verifica in fondo al file dopo l'esecuzione (attesi: 2 tabelle create, RLS attiva su entrambe).
 
 ## Risolte (archivio breve, ultime 10)
