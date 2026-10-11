@@ -202,6 +202,23 @@ Quasi tutte le righe erano NULL (nessuna distinzione interrogabile fra "misurato
 
 **Risolto** (`fix_backfill_source_type_missing_rows.sql`, stessa sessione): inserite tutte e 6 le righe. 4 con citazione completa verificata: `LIVNY_2003_EURJNUTR` e `NNR2023_OLSEN_LERNER_FNR` (già note da §4.1/§4.2), `IOM_1998_DRI_B_VITAMINS` e `NIH_ODS_FOLATE_FACT_SHEET` (lette direttamente via fetch, URL confermati attivi). Per le altre 2 (`ADAMS_1971`, `HEYSSEL_1966`) la citazione resta **dichiaratamente incompleta**: confermato con un fetch diretto del capitolo 9 di IOM 1998 (NCBI Bookshelf NBK114302) che il report cita davvero "Adams and colleagues (1971)" (ancora `#ch9.r4`) e "Heyssel et al., 1966" (ancora `#ch9.r68`) per esattamente le affermazioni già descritte nei commenti del motore, ma la sezione References del capitolo non è stata raggiungibile in questa sessione (il fetch si tronca prima) — rivista/volume/pagine non verificati, dichiarato esplicitamente nel campo `citation` stesso invece di essere completato a memoria. Stesso standard di trasparenza già usato per `SIENER_2006_FOODCHEM` (§4.6): citazione di seconda mano accettata, mai presentata come se fosse stata letta per intero.
 
+**Verifica del gap architetturale `sourceIds` dinamico (2026-10-11, stessa sessione, prima di scrivere codice): il gap è reale, ma oggi senza un solo caso reale su cui si manifesti.** Prima di toccare le ~16 funzioni di calcolo in `computationalNutritionEngine.ts`/`microbiotaEngine.ts` (un refactor non verificabile in locale in questa sandbox — vedi limite rete sotto), si è interrogato il DB live per capire quante righe, **sulle 4 tabelle con FK verso `sources`**, citano oggi una fonte `internal_estimate`:
+
+```sql
+-- nutrient_values (461 righe totali)
+SELECT s.source_type, count(*) FROM nutrient_values nv JOIN sources s ON s.id = nv.source_id GROUP BY 1;
+--  official_database: 458, peer_reviewed_study: 3, internal_estimate: 0
+
+-- food_matrices_master + scientific_evidence_library
+SELECT 'food_matrices_master', s.source_type, count(*) FROM food_matrices_master f JOIN sources s ON s.id=f.source_id GROUP BY 1,2
+UNION ALL SELECT 'scientific_evidence_library', s.source_type, count(*) FROM scientific_evidence_library e JOIN sources s ON s.id=e.source_id GROUP BY 1,2;
+--  food_matrices_master: 4 righe, tutte official_database. scientific_evidence_library: 0 righe.
+```
+
+Risultato: **zero** righe `internal_estimate` in `nutrient_values`, `food_matrices_master` o `scientific_evidence_library`. L'unica fonte `internal_estimate` esistente in tutto il DB (`DERIVED_FDC_RAW_COOKED_RATIO`) è citata **esclusivamente** da `retention_factors` — caso già coperto dal badge "· cottura stimata" in Dispensa (vedi sopra). Il badge "STIMA" di `MetricRow`, quindi, non solo non si illumina mai per un limite di design (lista `sourceIds` fissa per metodo) — oggi non avrebbe comunque **nulla da mostrare**, perché nessun dato grezzo reale è etichettato come stima a livello di singolo nutriente/food.
+
+**Decisione, non silenziata**: non si procede ora con il refactor dei motori per rendere `sourceIds` dinamico. Riscrivere ~16 funzioni di calcolo (il cuore della logica di bioavailabilità del progetto) senza poter eseguire `npm run test` in questa sandbox, per coprire un caso che oggi non esiste in nessuna riga del DB, va contro "architettura difensiva" tanto quanto ignorare un edge case reale: si rischierebbe una regressione non verificabile per zero beneficio osservabile. Il gap resta documentato come **noto e aperto**, da riprendere quando esisterà una prima riga `nutrient_values`/`food_matrices_master` reale con `source_type='internal_estimate'` da cui vedere effettivamente il badge accendersi (criterio di accettazione concreto, non ipotetico). Schizzo del fix già pronto per quel momento: estendere `FoodItem` (in `lib/engine/types.ts`) con un campo opzionale `nutrientSourceIds?: Partial<Record<nome-campo, string>>`, popolato in `app/page.tsx` dagli stessi `nutrient_values`/`sourcesMap` già caricati per `retentionFactors`, propagato invariato (campo categorico, non scalato) da `scaleFoodItemToGrams`, e letto da ciascuna `calculate*` per aggiungere ai `sourceIds` restituiti — in aggiunta, non in sostituzione — gli id reali dei campi di input effettivamente usati, quando presenti.
+
 ---
 
 ## 5. Architettura dati con provenienza
