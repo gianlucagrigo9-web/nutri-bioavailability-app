@@ -138,6 +138,22 @@ export interface FoodItem {
   // pronta, wiring in app/page.tsx rimandato a quando esiste un primo
   // dish_template reale).
   compositeDishSourceId?: string;
+
+  // Compatibilita' con tipo di dieta (aggiunto 2026-10-11, vedi
+  // docs/PRD.md §4.9 -- richiesta dell'utente: "prima cosa che si offre a
+  // cliente è selezionare se vuole dieta onnivora, carnivora, vegana,
+  // fruttariana"). Omnivora non ha un proprio flag: nessun filtro,
+  // sempre compatibile. Opzionale perche' NON ancora popolato per il
+  // Golden Set esistente -- classificazione editoriale dichiarata (vedi
+  // lib/engine/dietTypeFilter.ts), non derivabile automaticamente da un
+  // singolo campo esistente (es. is_heme_iron/botanical_family non
+  // bastano: un alimento non-heme puo' comunque essere di origine
+  // animale, es. latticini).
+  dietCompatibility?: {
+    vegetarian: boolean;
+    vegan: boolean;
+    fruitarian: boolean;
+  };
 }
 
 export interface Meal {
