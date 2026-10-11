@@ -121,6 +121,23 @@ export interface FoodItem {
   // lo passa invariato tramite lo spread {...food} già presente lì,
   // nessuna modifica necessaria a quella funzione.
   nutrientSourceIds?: Partial<Record<NutrientFieldName, string>>;
+
+  // Piatti compositi/tradizionali (aggiunto 2026-10-11, design approvato
+  // dall'utente in docs/PRD.md §4.8). true quando questo FoodItem non è
+  // stato scelto a mano nel Meal Builder ma generato espandendo un
+  // dish_template (vedi lib/engine/dishComposition.ts) -- aziona il badge
+  // UI dedicato "Ricetta stimata", indipendentemente da quanto sia
+  // verified il food componente stesso: è la ricetta (proporzioni, grado
+  // di cottura assunto) l'approssimazione aggiuntiva da segnalare, non il
+  // dato nutrizionale del singolo componente.
+  isCompositeDish?: boolean;
+  // source_id del dish_template stesso (sources.id, source_type =
+  // 'internal_estimate'), per audit/tracciabilità -- NON ancora propagato
+  // dentro i sourceIds dei SourcedValue calcolati (stesso tipo di gap
+  // dichiarato esplicitamente per nutrientSourceIds in §4.7: infrastruttura
+  // pronta, wiring in app/page.tsx rimandato a quando esiste un primo
+  // dish_template reale).
+  compositeDishSourceId?: string;
 }
 
 export interface Meal {

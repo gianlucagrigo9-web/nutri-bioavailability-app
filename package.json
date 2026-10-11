@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx tests/engines.test.ts && tsx tests/fdcVerification.test.ts",
+    "test": "tsx tests/engines.test.ts && tsx tests/fdcVerification.test.ts && tsx tests/dishComposition.test.ts",
     "verify:golden-set": "tsx scripts/verify_golden_set_batch.ts",
     "add-food": "tsx scripts/add_food_from_fdc.ts"
   },
