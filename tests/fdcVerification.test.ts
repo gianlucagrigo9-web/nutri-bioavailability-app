@@ -103,6 +103,13 @@ describe("lookupFdcComponent — ricerca di un singolo componente", () => {
     const r = lookupFdcComponent(fakeLowercase, { fdcNumber: "317", fdcName: "Selenium, Se", unit: "UG" });
     expect(r.status).toBe("FOUND");
   });
+
+  it("REGRESSIONE (2026-10-11): riconosce il vero segno di micro 'µg' (U+00B5) usato davvero da FDC, non solo 'ug' minuscolo ASCII -- il primo dry-run reale dell'utente ha scoperto che .toUpperCase() trasforma 'µ' nella lettera greca Mu e rompe il confronto", () => {
+    const fakeRealFdc: FdcFoodNutrient[] = [fdcNutrient("418", "Vitamin B-12", "µg", 1.2)];
+    const r = lookupFdcComponent(fakeRealFdc, { fdcNumber: "418", fdcName: "Vitamin B-12", unit: "UG" });
+    expect(r.status).toBe("FOUND");
+    if (r.status === "FOUND") expect(r.amount).toBe(1.2);
+  });
 });
 
 describe("getMappedFdcValue — risoluzione di un intero nutrient_code", () => {

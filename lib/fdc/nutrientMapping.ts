@@ -115,13 +115,25 @@ export const KNOWN_UNMAPPED_NUTRIENT_CODES = [
   "macs_mg",
 ] as const;
 
+/**
+ * BUG CORRETTO (2026-10-11, trovato nel primo dry-run reale dell'utente --
+ * 40/249 righe, tutte e sole quelle in µg, classificate UNIT_MISMATCH
+ * anche se il valore numerico sarebbe stato corretto): la versione
+ * precedente faceva `.toUpperCase()` prima del confronto. Il segno di
+ * "micro" (µ, U+00B5) in JavaScript si maiuscolizza nella lettera greca
+ * Mu (Μ, U+039C), NON resta "µ" -- quindi "µg".toUpperCase() diventa
+ * "ΜG" (Mu greca + G), che non combaciava con il letterale "µG" nel
+ * codice (quello sì scritto con U+00B5). Confronto ora fatto in
+ * minuscolo: toLowerCase() lascia µ (U+00B5) invariato, quindi il
+ * confronto funziona indipendentemente da come FDC scrive l'unità.
+ */
 function normalizeFdcUnit(raw: string | undefined | null): FdcUnit | null {
   if (!raw) return null;
-  const u = raw.trim().toUpperCase();
-  if (u === "G") return "G";
-  if (u === "MG") return "MG";
-  if (u === "UG" || u === "µG" || u === "MCG") return "UG";
-  if (u === "KCAL") return "KCAL";
+  const u = raw.trim().toLowerCase();
+  if (u === "g") return "G";
+  if (u === "mg") return "MG";
+  if (u === "ug" || u === "µg" || u === "μg" /* Mu greca minuscola, U+03BC */ || u === "mcg") return "UG";
+  if (u === "kcal") return "KCAL";
   return null;
 }
 
