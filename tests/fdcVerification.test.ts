@@ -18,6 +18,7 @@ import {
   getMappedFdcValue,
   lookupFdcComponent,
   compareWithTolerance,
+  extractAllMappedNutrients,
   TOLERANCE_ABS,
   type FdcFoodNutrient,
 } from "../lib/fdc/nutrientMapping";
@@ -185,6 +186,47 @@ describe("compareWithTolerance — soglia dichiarata per il confronto DB vs FDC"
   it("per valori grandi una diff oltre la tolleranza relativa è MISMATCH", () => {
     const r = compareWithTolerance(3480, 3000);
     expect(r.classification).toBe("MISMATCH");
+  });
+});
+
+describe("extractAllMappedNutrients — estrazione per un alimento NUOVO (scripts/add_food_from_fdc.ts)", () => {
+  it("estrae tutti i nutrienti a singolo componente presenti", () => {
+    const r = extractAllMappedNutrients(CARROTS_RAW_FAKE);
+    expect(r.values["calcium_mg"]).toBe(33);
+    expect(r.values["protein_g"]).toBe(0.93);
+    expect(r.values["energy_kcal"]).toBe(41);
+  });
+
+  it("NON include other_provitamin_a_carotenoids_mcg se manca un componente (mai una somma parziale)", () => {
+    const r = extractAllMappedNutrients(CARROTS_RAW_FAKE);
+    if ("other_provitamin_a_carotenoids_mcg" in r.values) {
+      throw new Error("other_provitamin_a_carotenoids_mcg non doveva comparire in values (manca cryptoxanthin nella fixture)");
+    }
+    if (!r.notFoundInFdc.includes("other_provitamin_a_carotenoids_mcg")) {
+      throw new Error("other_provitamin_a_carotenoids_mcg doveva comparire in notFoundInFdc");
+    }
+  });
+
+  it("riporta correttamente i nutrient_code assenti dalla risposta FDC senza farli comparire in values", () => {
+    const r = extractAllMappedNutrients(CARROTS_RAW_FAKE);
+    // CARROTS_RAW_FAKE non ha selenio (317), folato (417), B12 (418), vitamina K (430), rame già c'è? -- copper non è nella fixture
+    if ("selenium_mcg" in r.values) throw new Error("selenium_mcg non doveva essere estratto (assente dalla fixture)");
+    if (!r.notFoundInFdc.includes("selenium_mcg")) throw new Error("selenium_mcg doveva comparire in notFoundInFdc");
+  });
+
+  it("un alimento con TUTTI i componenti presenti estrae anche il nutriente composito", () => {
+    const complete: FdcFoodNutrient[] = [
+      fdcNutrient("322", "Carotene, alpha", "UG", 100),
+      fdcNutrient("334", "Cryptoxanthin, beta", "UG", 5),
+    ];
+    const r = extractAllMappedNutrients(complete);
+    expect(r.values["other_provitamin_a_carotenoids_mcg"]).toBe(105);
+  });
+
+  it("una risposta FDC vuota non estrae nulla e riporta tutti i 17 come non trovati (mai un crash, mai un valore a caso)", () => {
+    const r = extractAllMappedNutrients([]);
+    if (Object.keys(r.values).length !== 0) throw new Error("values doveva essere vuoto");
+    if (r.notFoundInFdc.length !== 17) throw new Error(`attesi 17 nutrient_code non trovati, ricevuti ${r.notFoundInFdc.length}`);
   });
 });
 

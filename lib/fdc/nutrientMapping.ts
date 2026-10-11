@@ -238,3 +238,42 @@ export function compareWithTolerance(dbValue: number, fdcValue: number): Compari
     toleranceUsed,
   };
 }
+
+export interface ExtractedNutrients {
+  /** nutrient_code -> valore estratto, solo per quelli trovati per intero (tutti i componenti presenti, unità corrette). */
+  values: Record<string, number>;
+  /** nutrient_code mappati ma con almeno un componente assente dalla risposta FDC -- MAI inseriti come 0, solo riportati. */
+  notFoundInFdc: string[];
+  /** nutrient_code mappati ma con un'unità FDC diversa da quella attesa -- MAI inseriti, solo riportati. */
+  unitMismatch: string[];
+}
+
+/**
+ * Estrae TUTTI i 17 nutrient_code mappati da una risposta FDC, per
+ * l'inserimento di un alimento NUOVO (a differenza di getMappedFdcValue,
+ * usata dal batch di verifica per un confronto riga-per-riga contro un
+ * valore già in DB, questa funzione serve a scripts/add_food_from_fdc.ts
+ * per creare le righe nutrient_values di un food_id che non esiste ancora).
+ * Un nutrient_code con componenti mancanti o unità inattesa NON compare
+ * in `values` -- mai un valore indovinato o messo a zero per un alimento
+ * nuovo, coerente con "zero dati inventati".
+ */
+export function extractAllMappedNutrients(foodNutrients: FdcFoodNutrient[] | undefined): ExtractedNutrients {
+  const values: Record<string, number> = {};
+  const notFoundInFdc: string[] = [];
+  const unitMismatch: string[] = [];
+
+  for (const nutrientCode of Object.keys(FDC_NUTRIENT_MAP)) {
+    const mapped = getMappedFdcValue(foodNutrients, nutrientCode);
+    if (mapped.status === "OK") {
+      values[nutrientCode] = mapped.value;
+    } else if (mapped.status === "NOT_FOUND_IN_FDC") {
+      notFoundInFdc.push(nutrientCode);
+    } else if (mapped.status === "UNIT_MISMATCH") {
+      unitMismatch.push(nutrientCode);
+    }
+    // "NOT_MAPPED" non può succedere qui: stiamo iterando le chiavi di FDC_NUTRIENT_MAP stesso.
+  }
+
+  return { values, notFoundInFdc, unitMismatch };
+}

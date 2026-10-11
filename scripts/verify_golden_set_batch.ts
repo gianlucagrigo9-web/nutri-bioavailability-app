@@ -67,8 +67,6 @@
 //
 // ============================================================================
 
-import { existsSync, readFileSync } from "fs";
-import { resolve } from "path";
 import { createClient } from "@supabase/supabase-js";
 import {
   FDC_NUTRIENT_MAP,
@@ -76,57 +74,20 @@ import {
   compareWithTolerance,
   type FdcFoodDetail,
 } from "../lib/fdc/nutrientMapping";
+import { loadEnvLocal, requireEnv } from "../lib/loadEnvLocal";
 
-// Questo script gira standalone via `tsx`, NON dentro Next.js -- quindi,
-// a differenza di `npm run dev`/`next build`, NESSUNO carica .env.local
-// automaticamente (quel caricamento è una feature di Next, non di Node).
-// Parser minimo e deliberatamente semplice (niente dipendenza da dotenv,
-// non serve per un file KEY=VALUE semplice come il nostro
-// .env.local.example): variabili già presenti in process.env (es. impostate
-// a mano nella shell) hanno sempre la precedenza sul file.
-function loadEnvLocal() {
-  for (const filename of [".env.local", ".env"]) {
-    const filePath = resolve(process.cwd(), filename);
-    if (!existsSync(filePath)) continue;
-    const content = readFileSync(filePath, "utf-8");
-    for (const rawLine of content.split("\n")) {
-      const line = rawLine.trim();
-      if (!line || line.startsWith("#")) continue;
-      const eq = line.indexOf("=");
-      if (eq === -1) continue;
-      const key = line.slice(0, eq).trim();
-      let value = line.slice(eq + 1).trim();
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      if (process.env[key] === undefined) {
-        process.env[key] = value;
-      }
-    }
-  }
-}
 loadEnvLocal();
 
 const APPLY = process.argv.includes("--apply");
 const FOOD_ID_FILTER = process.argv.find((a) => a.startsWith("--food-id="))?.split("=")[1] ?? null;
 const DELAY_MS_BETWEEN_FOODS = 1100; // margine prudente, anche con chiave personale (limite USDA: 1000 req/ora)
 
-function requireEnv(name: string): string {
-  const v = process.env[name];
-  if (!v) {
-    throw new Error(
-      `Variabile d'ambiente ${name} mancante. Controlla .env.local ` +
-        (name === "USDA_FDC_API_KEY"
-          ? "(chiave personale gratuita: fdc.nal.usda.gov/api-key-signup.html -- la DEMO_KEY non basta per un batch, va in 429 quasi subito)."
-          : "(stessa variabile già usata da lib/supabaseAdmin.ts per il pannello admin).")
-    );
-  }
-  return v;
-}
-
-const SUPABASE_URL = requireEnv("SUPABASE_URL");
-const SUPABASE_SERVICE_ROLE_KEY = requireEnv("SUPABASE_SERVICE_ROLE_KEY");
-const USDA_FDC_API_KEY = requireEnv("USDA_FDC_API_KEY");
+const SUPABASE_URL = requireEnv("SUPABASE_URL", "stessa variabile già usata da lib/supabaseAdmin.ts per il pannello admin");
+const SUPABASE_SERVICE_ROLE_KEY = requireEnv("SUPABASE_SERVICE_ROLE_KEY", "stessa variabile già usata da lib/supabaseAdmin.ts per il pannello admin");
+const USDA_FDC_API_KEY = requireEnv(
+  "USDA_FDC_API_KEY",
+  "chiave personale gratuita: fdc.nal.usda.gov/api-key-signup.html -- la DEMO_KEY non basta per un batch, va in 429 quasi subito"
+);
 
 const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
   auth: { persistSession: false },
