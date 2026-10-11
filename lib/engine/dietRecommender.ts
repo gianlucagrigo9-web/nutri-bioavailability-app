@@ -1,18 +1,35 @@
 // lib/engine/dietRecommender.ts
 //
-// Recommender "Pareto-superiore" (Fase pre-5, docs/PRD.md §4.9 -- design
-// chiuso il 2026-10-11): dato il piano attuale dell'utente, trova fino a
-// 4 sostituzioni che lo migliorano, confrontando SOLO alimenti dello
-// stesso contesto d'uso (mai una bistecca con verdure contro pane e
-// Nutella -- esempio esplicito dell'utente).
+// Recommender "Pareto-superiore" (Fase pre-5, docs/PRD.md §4.9): dato
+// il piano attuale dell'utente, trova fino a 4 sostituzioni che lo
+// migliorano, confrontando SOLO alimenti dello stesso contesto d'uso
+// (mai una bistecca con verdure contro pane e Nutella -- esempio
+// esplicito dell'utente).
 //
-// Ricerca GREEDY a passi, non una vera ricerca esaustiva su tutte le
-// combinazioni (dichiarato, non nascosto): ad ogni passo si valuta ogni
-// possibile sostituzione singola e si scegli quella col maggior
-// guadagno di MAR. Questo riproduce la priorità richiesta dall'utente
-// ("un alimento mangiato in grandi quantità pesa più di uno mangiato in
-// piccole quantità") come proprietà emergente della formula d'intake
-// (grams/100 * valore), non come un ordinamento esplicito per grammi.
+// **RIAPERTO/PARCHEGGIATO il 2026-10-11, DOPO questa prima
+// implementazione** -- l'utente ha segnalato che il modello di
+// "contesto" qui sotto (una stringa fissa tipo "colazione"/"pranzo") e
+// la regola "un alimento sostituito non puo' essere sostituito di nuovo"
+// (`touchedIndices`) sono entrambe semplificazioni non ancora
+// validate, non un design chiuso:
+// - uno stesso alimento puo' avere flessibilita' di contesto diversa
+//   (le uova si possono mangiare anche a colazione; uno stufato no) --
+//   un contesto binario "stesso slot pasto o niente" non lo rappresenta.
+// - cambiare un cereale a pranzo potrebbe avere senso guardando anche
+//   agli altri pasti della giornata (es. se la colazione ha già un
+//   cereale migliore), non solo al pool dello stesso contesto isolato.
+// - la regola che impedisce di ri-toccare un indice già sostituito non
+//   ha una giustificazione data all'utente (era solo una scelta di
+//   semplicità per limitare la ricerca) ed è stata esplicitamente
+//   contestata ("per me puoi anche cambiare un alimento che hai già
+//   cambiato, non ho capito quella regola").
+// L'utente ha inoltre chiarito che questa intera feature (max 3-4
+// alimenti da cambiare) e' SECONDARIA e rimandabile: "possiamo
+// pensarci più avanti e andare avanti col resto". Il codice sotto
+// RESTA com'era (compila, passa i test scritti per QUESTA versione
+// semplificata) ma non va considerato un design approvato da estendere
+// o da cui derivare altro finché non si torna su questo punto --
+// vedi docs/PRD.md §4.9 per lo stato aggiornato.
 
 import { FoodItem, NutrientFieldName } from "./types";
 import { calculateMAR, NutrientRequirement } from "./dietAdequacy";

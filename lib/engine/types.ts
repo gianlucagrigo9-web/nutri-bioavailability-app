@@ -154,6 +154,33 @@ export interface FoodItem {
     vegan: boolean;
     fruitarian: boolean;
   };
+
+  // Indice glicemico (aggiunto 2026-10-11, vedi docs/PRD.md §4.10 --
+  // PROPOSTA approvata dall'utente nella stessa sessione, "andare avanti
+  // col resto" dopo aver parcheggiato solo il punto 5 del recommender).
+  // SourcedValue normale (stesso contratto di ogni altro dato scientifico
+  // in questo progetto, §5-6): value = IG su scala glucosio=100,
+  // evidenceLevel 2 (studio clinico misurato, es. Scazzina et al. 2016)
+  // o 4 (stima da categoria/composizione, non misurata). Opzionale e,
+  // per ogni alimento del Golden Set oggi, sempre assente -- nessun
+  // valore IG e' stato ancora sourced in questa sessione, solo
+  // l'infrastruttura. NON scalato da scaleFoodItemToGrams (l'IG e' una
+  // proprieta' intrinseca dell'alimento, indipendente dalla porzione --
+  // stesso principio di is_heme_iron, mai nella lista SCALABLE_NUTRIENT_FIELDS).
+  glycemicIndex?: SourcedValue;
+  // Asse ORTOGONALE a evidenceLevel (stesso pattern di bioavailabilityAdjusted,
+  // vedi commento su SourcedValue sopra: qualita' della fonte vs tipo di
+  // assegnazione, due cose diverse). "measured" = valore misurato per
+  // quell'alimento esatto; "equivalent_food" = preso in prestito da un
+  // alimento molto simile (va dichiarato altrove quale e perche', es. in
+  // nutrientSourceIds o in una nota editoriale non ancora schematizzata);
+  // "category_estimate" = stimato da composizione/categoria, mai misurato.
+  // Deliberatamente NON esiste un valore equivalente al "livello 5" della
+  // metodologia DIOGENES (un IG nominale di 70 come ultima risorsa): dove
+  // nessuno dei tre tipi sopra e' assegnabile con una base reale, il campo
+  // glycemicIndex resta assente/null, mai un numero plausibile senza fonte
+  // (Regola 1) -- vedi docs/PRD.md §4.10 per la motivazione completa.
+  giAssignmentType?: "measured" | "equivalent_food" | "category_estimate";
 }
 
 export interface Meal {
