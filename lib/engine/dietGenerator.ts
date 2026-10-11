@@ -25,10 +25,84 @@
 
 import { FoodItem, NutrientFieldName } from "./types";
 import { calculateMAR, findBottleneckNutrient, NutrientRequirement } from "./dietAdequacy";
+import { ADULT_NUTRIENT_REFERENCE_VALUES, getNutrientReferenceValue, Sex, TargetNutrientKey } from "./nutrientTargets";
 
 export interface DietNutrientTarget {
   nutrientCode: NutrientFieldName;
   target: number; // LARN/EFSA o AMDR -- NON popolato con valori reali in questo file, responsabilita' del chiamante
+}
+
+// ---------------------------------------------------------------------------
+// Adattatore nutrientTargets.ts -> DietNutrientTarget[] (2026-10-11,
+// docs/PRD.md §4.9 "Target numerici LARN/EFSA per micronutrienti").
+//
+// nutrientTargets.ts dichiara esplicitamente, per ciascuno dei 12
+// micronutrienti sourced, se il target va confrontato con un campo
+// GREZZO di FoodItem (mapsToRawFoodItemField: true) o con l'OUTPUT di un
+// motore bioavailability-adjusted non ancora wired in questo file
+// (ferro/zinco/folati/vitamina A -- mapsToRawFoodItemField: false).
+// generateDiet qui sopra opera SOLO su composizione grezza (vedi
+// commento di testa al file): wireare ferro/zinco/folati/vitamina A
+// come se fossero campi grezzi produrrebbe un NAR falsamente ottimista
+// (la composizione grezza sovrastima sempre l'assunzione reale rispetto
+// al valore bioavailability-adjusted) -- Regola 4, nessun fallimento
+// silenzioso che sembri un successo. Questo adattatore quindi:
+// - include SOLO gli 8 nutrienti con mapsToRawFoodItemField=true;
+// - restituisce esplicitamente quali nutrienti sono stati omessi e
+//   perché, cosi' il chiamante (o un futuro sviluppatore) non scopre il
+//   gap solo leggendo il codice sorgente.
+const RAW_FIELD_MAPPING: Partial<Record<TargetNutrientKey, NutrientFieldName>> = {
+  vitamin_c: "vitamin_c_mg",
+  vitamin_b12: "vitamin_b12_mcg",
+  magnesium: "magnesium_mg",
+  copper: "copper_mg",
+  selenium: "selenium_mcg",
+  iodine: "iodine_mcg",
+  vitamin_k: "vitamin_k_mcg",
+  calcium: "calcium_mg",
+};
+
+export interface OmittedNutrientTarget {
+  nutrientKey: TargetNutrientKey;
+  reason: string;
+}
+
+export interface BuildDietNutrientTargetsResult {
+  targets: DietNutrientTarget[];
+  omittedNutrients: OmittedNutrientTarget[]; // mai silenziato -- Regola 6
+}
+
+/**
+ * Costruisce i `DietNutrientTarget[]` reali (LARN/EFSA, lib/engine/
+ * nutrientTargets.ts) per `generateDiet`/`findBestSwaps`, limitati ai
+ * nutrienti confrontabili con un campo grezzo di FoodItem. Ferro, zinco,
+ * folati e vitamina A restano fuori (vedi commento sopra) ed elencati in
+ * `omittedNutrients` con il motivo -- MAI aggiunti con un campo grezzo
+ * come approssimazione silenziosa.
+ *
+ * Difensivo: età non fisica (negativa/NaN/infinita) non lancia
+ * un'eccezione -- `getNutrientReferenceValue` ricade sul valore di
+ * default per quel sesso, senza applicare override indebiti.
+ */
+export function buildDietNutrientTargets(sex: Sex, ageYears: number): BuildDietNutrientTargetsResult {
+  const targets: DietNutrientTarget[] = [];
+  const omittedNutrients: OmittedNutrientTarget[] = [];
+
+  const allKeys = Object.keys(ADULT_NUTRIENT_REFERENCE_VALUES[sex]) as TargetNutrientKey[];
+  for (const key of allKeys) {
+    const ref = getNutrientReferenceValue(key, sex, ageYears);
+    const rawField = RAW_FIELD_MAPPING[key];
+    if (!ref.mapsToRawFoodItemField || !rawField) {
+      omittedNutrients.push({
+        nutrientKey: key,
+        reason: ref.engineOutputNote ?? `"${key}" non mappa a un campo grezzo di FoodItem (gap dichiarato, vedi lib/engine/nutrientTargets.ts).`,
+      });
+      continue;
+    }
+    targets.push({ nutrientCode: rawField, target: ref.value });
+  }
+
+  return { targets, omittedNutrients };
 }
 
 export interface DietGeneratorOptions {

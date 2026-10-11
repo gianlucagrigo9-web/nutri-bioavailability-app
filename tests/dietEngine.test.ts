@@ -9,7 +9,7 @@
 
 import { calculateNAR, calculateMAR, findBottleneckNutrient } from "../lib/engine/dietAdequacy";
 import { filterFoodsByDietType, DietType } from "../lib/engine/dietTypeFilter";
-import { generateDiet, DietNutrientTarget } from "../lib/engine/dietGenerator";
+import { generateDiet, DietNutrientTarget, buildDietNutrientTargets } from "../lib/engine/dietGenerator";
 import { findBestSwaps, DietItem } from "../lib/engine/dietRecommender";
 import { FoodItem } from "../lib/engine/types";
 
@@ -304,6 +304,40 @@ describe("findBestSwaps — Livello B (proprietà)", () => {
       1
     );
     expect(result.swaps.length).toBeLessThanOrEqual(1);
+  });
+});
+
+describe("buildDietNutrientTargets — adattatore nutrientTargets.ts -> DietNutrientTarget[] (docs/PRD.md §4.9)", () => {
+  it("include esattamente gli 8 nutrienti con mapsToRawFoodItemField=true (vitamina C, B12, magnesio, rame, selenio, iodio, vitamina K, calcio)", () => {
+    const { targets } = buildDietNutrientTargets("male", 30);
+    const codes = targets.map((t) => t.nutrientCode).sort();
+    const attesi = ["calcium_mg", "copper_mg", "iodine_mcg", "magnesium_mg", "selenium_mcg", "vitamin_b12_mcg", "vitamin_c_mg", "vitamin_k_mcg"].sort();
+    expect(JSON.stringify(codes)).toBe(JSON.stringify(attesi));
+  });
+
+  it("omette esplicitamente ferro, zinco, folati e vitamina A con un motivo (mai silenziato, mai wired su un campo grezzo sbagliato)", () => {
+    const { omittedNutrients } = buildDietNutrientTargets("male", 30);
+    const omittedKeys = omittedNutrients.map((o) => o.nutrientKey).sort();
+    expect(JSON.stringify(omittedKeys)).toBe(JSON.stringify(["folate_dfe", "iron", "vitamin_a_rae", "zinc"].sort()));
+    for (const o of omittedNutrients) {
+      if (!o.reason || o.reason.length === 0) throw new Error(`${o.nutrientKey}: nessun motivo dichiarato per l'omissione`);
+    }
+  });
+
+  it("il target del calcio riflette l'override di eta' (uomo 65+ -> 1100mg, non 950mg)", () => {
+    const sotto = buildDietNutrientTargets("male", 64).targets.find((t) => t.nutrientCode === "calcium_mg");
+    const sopra = buildDietNutrientTargets("male", 65).targets.find((t) => t.nutrientCode === "calcium_mg");
+    if (!sotto || !sopra) throw new Error("target calcio non trovato");
+    expect(sotto.target).toBe(950);
+    expect(sopra.target).toBe(1100);
+  });
+
+  it("i valori generati sono utilizzabili direttamente da generateDiet (stesso NutrientFieldName, nessuna conversione necessaria)", () => {
+    const { targets } = buildDietNutrientTargets("female", 30);
+    const food = makeFood({ id: "test_food", energy_kcal: 100, calcium_mg: 100, vitamin_c_mg: 10 });
+    const result = generateDiet([food], targets, 500, { maxGramsPerFood: 500 });
+    // Non deve lanciare eccezioni e deve produrre un MAR valido (0..1)
+    if (result.mar < 0 || result.mar > 1) throw new Error(`MAR fuori range: ${result.mar}`);
   });
 });
 
