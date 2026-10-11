@@ -67,6 +67,8 @@
 //
 // ============================================================================
 
+import { existsSync, readFileSync } from "fs";
+import { resolve } from "path";
 import { createClient } from "@supabase/supabase-js";
 import {
   FDC_NUTRIENT_MAP,
@@ -74,6 +76,36 @@ import {
   compareWithTolerance,
   type FdcFoodDetail,
 } from "../lib/fdc/nutrientMapping";
+
+// Questo script gira standalone via `tsx`, NON dentro Next.js -- quindi,
+// a differenza di `npm run dev`/`next build`, NESSUNO carica .env.local
+// automaticamente (quel caricamento è una feature di Next, non di Node).
+// Parser minimo e deliberatamente semplice (niente dipendenza da dotenv,
+// non serve per un file KEY=VALUE semplice come il nostro
+// .env.local.example): variabili già presenti in process.env (es. impostate
+// a mano nella shell) hanno sempre la precedenza sul file.
+function loadEnvLocal() {
+  for (const filename of [".env.local", ".env"]) {
+    const filePath = resolve(process.cwd(), filename);
+    if (!existsSync(filePath)) continue;
+    const content = readFileSync(filePath, "utf-8");
+    for (const rawLine of content.split("\n")) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("#")) continue;
+      const eq = line.indexOf("=");
+      if (eq === -1) continue;
+      const key = line.slice(0, eq).trim();
+      let value = line.slice(eq + 1).trim();
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      if (process.env[key] === undefined) {
+        process.env[key] = value;
+      }
+    }
+  }
+}
+loadEnvLocal();
 
 const APPLY = process.argv.includes("--apply");
 const FOOD_ID_FILTER = process.argv.find((a) => a.startsWith("--food-id="))?.split("=")[1] ?? null;
