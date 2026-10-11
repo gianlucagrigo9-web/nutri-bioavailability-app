@@ -1,0 +1,47 @@
+-- ============================================================================
+-- Pulizia del cruft in `sources`, deferita durante l'attivazione di
+-- source_type (vedi docs/PRD.md §4.7) ed eseguita ora su richiesta
+-- esplicita dell'utente (2026-10-11).
+--
+-- Scoperta durante la verifica: dei 31 id allora presenti in `sources`,
+-- solo 25 sono effettivamente citati dal codice (lib/engine/*.ts o
+-- scripts/generate_golden_set_foods.py). I restanti 6 non erano tutti
+-- "innocui": un controllo sulle 4 tabelle con FK verso sources
+-- (nutrient_values, retention_factors, food_matrices_master,
+-- scientific_evidence_library) ha mostrato che 4 erano davvero orfani
+-- ovunque, ma 2 (USDA_FDC_SR, SONNENBURG_2016) erano citati da righe
+-- nutrient_values reali -- non invenzione dell'utente, dato vero da
+-- verificare riga per riga prima di cancellare qualunque cosa.
+--
+-- QUESTO FILE E' UN REGISTRO DI QUELLO GIA' ESEGUITO (via SQL editor
+-- Supabase), non va ri-eseguito automaticamente: gli ID citati qui
+-- sotto in buona parte non esistono piu'.
+-- ============================================================================
+
+-- --- Gruppo 1: righe sources orfane ovunque (0 riferimenti in tutte le 4
+-- tabelle con FK, 0 citazioni nel codice). Cancellazione diretta, nessun
+-- effetto collaterale possibile. ---
+-- DELETE FROM sources WHERE id IN
+--   ('ALEA_NOEL_2007', 'HALLBERG_HULTHEN_2000_SCAND', 'HEANEY_WEAVER_1988', 'HEANEY_WEAVER_1988_AJCN');
+
+-- --- Gruppo 2: USDA_FDC_SR (4 righe nutrient_values) e SONNENBURG_2016
+-- (1 riga) erano citati da due alimenti -- food_apple_raw, food_beef_raw
+-- -- che NON fanno parte dei 30 del Golden Set attuale
+-- (scripts/generate_golden_set_foods.py), restavano 'draft' (invisibili
+-- in UI: app/page.tsx filtra solo verification_status='verified'), e
+-- contenevano citazioni gia' sbagliate secondo gli standard di oggi:
+-- food_apple_raw.macs_mg = 2400.0 attribuito a SONNENBURG_2016, un paper
+-- che (vedi Fase 1 punto 8b in PRD §9) NON pubblica valori MACs per
+-- singolo alimento -- quel numero non puo' essere stato letto da quella
+-- fonte. Stesso problema per macs_mg attribuito a USDA_FDC_SR (USDA FDC
+-- non misura i MACs). Scarti di una fase del progetto precedente alla
+-- disciplina "zero dati inventati" attuale, confermato con l'utente
+-- prima di cancellare (mostrato il contenuto completo delle 5 righe). ---
+-- DELETE FROM nutrient_values WHERE food_id IN ('food_apple_raw','food_beef_raw');
+-- DELETE FROM foods_raw WHERE food_id IN ('food_apple_raw','food_beef_raw');
+-- DELETE FROM sources WHERE id IN ('USDA_FDC_SR','SONNENBURG_2016');
+
+-- Verificato dopo l'esecuzione: sources ha esattamente 25 righe (= i 25
+-- id citati dal codice, tutti con source_type non-NULL), 0 righe
+-- foods_raw/nutrient_values residue per food_apple_raw/food_beef_raw,
+-- 0 righe sources residue per USDA_FDC_SR/SONNENBURG_2016.
