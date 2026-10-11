@@ -466,6 +466,17 @@ Cosa manca ancora rispetto a quello che il PRD dichiara "dentro" la v1.
 ### Fase 4 — Scalare oltre i 20 alimenti
 Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
 15. Disegnare un processo di verifica **a batch** (non più un alimento alla volta a mano) — criterio esplicito di cosa rende una riga promuovibile a `verified`, ripetibile.
+
+    **Scritto (2026-10-11), NON ANCORA ESEGUITO sul DB reale** — questo sandbox non ha accesso di rete diretto né a Supabase né a `api.nal.usda.gov` (confermato via `curl`, vedi commit `dd8ca8a`), quindi lo script va eseguito e collaudato sul PC dell'utente.
+
+    Criterio esplicito approvato ("Sì, procedi a scrivere lo script"), a **tre livelli per `source_type`/`source_id`**, coerente col precedente umano di `golden_set_promote_verified.sql`:
+    - `source_id = 'USDA_FDC'` → **automatizzato qui**: `scripts/verify_golden_set_batch.ts` ri-scarica il record FDC via `foods_raw.fdc_id` (prerequisito aggiunto in `dd8ca8a`) e confronta meccanicamente ogni nutriente mappato in `lib/fdc/nutrientMapping.ts` (17 `nutrient_code`, mappati ai "nutrient number" ufficiali USDA — calcio=301, ferro=303, ecc. — metadati di catalogo pubblici, non un dato per-alimento, quindi non in conflitto con "zero dati inventati"). Promozione a `verified` **riga per riga**, solo se `|DB - FDC| <= tolleranza dichiarata` (max tra 0.05 assoluto e 0.5% relativo, per assorbire solo l'arrotondamento già presente nei dati trascritti, non vere discrepanze). Se anche un solo componente di un nutriente composito (es. `other_provitamin_a_carotenoids_mcg` = alfa-carotene + beta-criptoxantina) manca dalla risposta FDC, il nutriente NON viene promosso (mai assunto zero per un valore assente — FDC spesso omette le tracce invece di riportare 0).
+    - `source_type = 'official_database'` ma `source_id != 'USDA_FDC'` (es. `COFID_2021_PHE`) → fuori scope per questo script (nessuna API live, solo il file xlsx caricato una volta) — deferred esplicitamente, non ignorato: andrebbe confrontato contro una copia locale del file, non una fetch.
+    - `source_type = 'peer_reviewed_study'` → mai automatizzabile: richiede il giudizio umano di dominio già usato il 2026-10-09 (checklist fissa, non un re-fetch).
+
+    Lo script (default **dry-run**, richiede `--apply` esplicito per scrivere) non promuove mai in base a "non trovato"/"non mappato"/"irraggiungibile" — solo un MATCH esplicito promuove una riga; `foods_raw` viene promossa solo se TUTTE le sue righe USDA_FDC sono MATCH. Logica pura (mappatura nutrienti, tolleranza, gestione componenti mancanti) testata in questo sandbox senza rete in `tests/fdcVerification.test.ts` (14/14 PASS) — lo script stesso (fetch reali) no.
+
+    **Prerequisito ancora da fare dall'utente, non confermato fatto**: chiave personale `USDA_FDC_API_KEY` in `.env.local` (gratuita, fdc.nal.usda.gov/api-key-signup.html — la `DEMO_KEY` va in 429 troppo presto per un batch). Comando: `npm run verify:golden-set` (dry-run) poi `npm run verify:golden-set -- --apply`.
 16. Espandere la copertura alimenti usando quel processo, dando priorità a ciò che serve davvero ai primi utenti (non ai ~1.100 alimenti tutti insieme).
 
 ### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)

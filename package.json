@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx tests/engines.test.ts"
+    "test": "tsx tests/engines.test.ts && tsx tests/fdcVerification.test.ts",
+    "verify:golden-set": "tsx scripts/verify_golden_set_batch.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
