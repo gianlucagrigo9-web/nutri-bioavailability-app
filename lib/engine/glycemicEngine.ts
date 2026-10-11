@@ -38,6 +38,95 @@
 
 import { FoodItem } from "./types";
 
+// Variazione diurna della tolleranza glicemica (aggiunta 2026-10-11,
+// richiesta esplicita dell'utente: "capire se c'è maggior tolleranza
+// la mattina [...] o se l'arco di tutta la giornata non cambia").
+// Ricerca fatta (non a memoria): la direzione è confermata da più
+// fonti indipendenti, ma la GRANDEZZA non è consolidata in un singolo
+// numero applicabile in generale -- quindi qui c'è SOLO un indicatore
+// qualitativo di tendenza, nessun fattore numerico che alteri cmgiNaive
+// o adjustedCmgi altrove in questo file (Regola 1: mai un coefficiente
+// senza una base solida e generalizzabile).
+//
+// Fonti:
+// - Egli L, Haldar S, Carvalho Dias De Castro, et al. "Diurnal
+//   variations in glycaemic response to a low and high glycaemic
+//   index meal in elderly Chinese Singaporeans." BMJ Open Diabetes
+//   Research & Care. 2020;8(1):e001099. (DOI non confermato in questa
+//   sessione -- non indovinato). Risposta glicemica (iAUC) alla cena
+//   superiore del 55% (pasto a basso IG) e 59% (alto IG) rispetto alla
+//   colazione, stesso pasto identico (p<0.0001). Popolazione: adulti
+//   cinesi-singaporiani 50-70 anni, n=34 -- NON generalizzabile senza
+//   cautela a una popolazione sana e più giovane.
+// - Takahashi M, Ozaki M, Kang MI, et al. "Effects of Meal Timing on
+//   Postprandial Glucose Metabolism and Blood Metabolites in Healthy
+//   Adults." Nutrients. 2018;10(11):1763. doi:10.3390/nu10111763.
+//   Stessa direzione (glicemia più alta a 120min dopo pasto serale,
+//   p=0.030) ma su 19 uomini giovani sani (21-30 anni) -- QUI l'iAUC
+//   di glucosio/insulina NON differisce significativamente fra
+//   mattina e sera: effetto reale ma molto più debole/incerto che in
+//   Egli et al. 2020, popolazione diversa (giovani sani vs anziani a
+//   rischio).
+// - Leung GKW, Huggins CE, Ware RS, Bonham MP. "Time of day
+//   difference in postprandial glucose and insulin responses:
+//   systematic review and meta-analysis of acute postprandial
+//   studies." Chronobiology International. 2020;37(3):311-326.
+//   Revisione sistematica che conferma l'esistenza del fenomeno come
+//   argomento di ricerca consolidato -- testo completo non accessibile
+//   in questa sessione (embargo), quindi NON abbiamo un numero pooled
+//   da citare, solo la conferma che la direzione è un fenomeno reale
+//   e studiato, non un'invenzione.
+//
+// GAP dichiarato: tutte le fonti trovate confrontano SOLO mattina
+// (colazione) vs sera (cena) -- nessuna fonte trovata isola
+// specificamente il pranzo/mezzogiorno. "pranzo" resta quindi
+// "non_determinato", mai assunto uguale a mattina o a sera per
+// interpolazione (Regola 1).
+export type MealTimeContext = "colazione" | "pranzo" | "cena" | string;
+
+export interface TimeOfDayGlycemicNote {
+  tendency: "migliore_tolleranza" | "peggiore_tolleranza" | "non_determinato";
+  evidenceLevel: 1 | null; // Livello 1 solo per la DIREZIONE (confermata da una revisione sistematica, Leung et al. 2020) -- non per una grandezza, che non forniamo
+  sourceIds: string[];
+  note: string;
+}
+
+const TIME_OF_DAY_SOURCES = ["EGLI_2020_BMJDRC", "TAKAHASHI_2018_NUTRIENTS", "LEUNG_2020_CHRONOBIOL_INT"];
+
+/**
+ * Nota qualitativa sulla tendenza nota in letteratura per la tolleranza
+ * glicemica in funzione del momento della giornata. NON altera alcun
+ * valore numerico di IG/CG calcolato altrove in questo file -- è
+ * un'informazione da mostrare accanto al numero (pannello "Perché
+ * questo numero?"), non un fattore moltiplicativo (gap dichiarato: la
+ * grandezza dell'effetto varia troppo tra le fonti trovate per essere
+ * tradotta in un coefficiente unico e onesto).
+ */
+export function getTimeOfDayGlycemicNote(mealContext: MealTimeContext): TimeOfDayGlycemicNote {
+  if (mealContext === "colazione") {
+    return {
+      tendency: "migliore_tolleranza",
+      evidenceLevel: 1,
+      sourceIds: TIME_OF_DAY_SOURCES,
+      note: "Più fonti indipendenti riportano una risposta glicemica tipicamente più bassa al mattino rispetto alla sera per lo stesso pasto. L'entità dell'effetto varia molto tra gli studi (da marcata in adulti più anziani a non significativa su alcuni indicatori in giovani sani) -- qui è riportata solo la tendenza, nessun numero applicato al calcolo.",
+    };
+  }
+  if (mealContext === "cena") {
+    return {
+      tendency: "peggiore_tolleranza",
+      evidenceLevel: 1,
+      sourceIds: TIME_OF_DAY_SOURCES,
+      note: "Più fonti indipendenti riportano una risposta glicemica tipicamente più alta alla sera rispetto al mattino per lo stesso pasto. L'entità dell'effetto varia molto tra gli studi -- qui è riportata solo la tendenza, nessun numero applicato al calcolo.",
+    };
+  }
+  return {
+    tendency: "non_determinato",
+    evidenceLevel: null,
+    sourceIds: [],
+    note: `Nessuna fonte trovata finora isola specificamente la tolleranza glicemica per "${String(mealContext)}" (es. pranzo/metà giornata) rispetto a mattina/sera: mai assunta per interpolazione, resta non determinata.`,
+  };
+}
+
 // Carico glicemico: null se IG o carboidrati non validi, mai un NaN
 // propagato silenziosamente.
 export function calculateGL(availableCarbG: number, gi: number | null | undefined): number | null {

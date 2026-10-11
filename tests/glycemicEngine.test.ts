@@ -6,7 +6,7 @@
 // coinvolta. Stesso micro test runner autosufficiente degli altri
 // file di test.
 
-import { calculateGL, classifyGI, classifyGL, calculateMixedMealGI, MealComponent } from "../lib/engine/glycemicEngine";
+import { calculateGL, classifyGI, classifyGL, calculateMixedMealGI, MealComponent, getTimeOfDayGlycemicNote } from "../lib/engine/glycemicEngine";
 import { FoodItem, SourcedValue } from "../lib/engine/types";
 
 // ---------------------------------------------------------------------------
@@ -243,6 +243,37 @@ describe("calculateMixedMealGI — Wolever/Jenkins + aggiustamento Ballance et a
     ];
     const result = calculateMixedMealGI(components);
     expect(result.cmgiNaive).toBeCloseTo(75, 3);
+  });
+});
+
+// =============================================================================
+// getTimeOfDayGlycemicNote — tendenza qualitativa, mai un numero inventato
+// =============================================================================
+describe("getTimeOfDayGlycemicNote — Egli 2020 / Takahashi 2018 / Leung 2020 (direzione, non grandezza)", () => {
+  it("colazione -> tendenza migliore_tolleranza, evidenceLevel 1, fonti presenti", () => {
+    const result = getTimeOfDayGlycemicNote("colazione");
+    expect(result.tendency).toBe("migliore_tolleranza");
+    expect(result.evidenceLevel).toBe(1);
+    if (result.sourceIds.length === 0) throw new Error("ci si aspettano fonti per colazione");
+  });
+
+  it("cena -> tendenza peggiore_tolleranza, evidenceLevel 1, fonti presenti", () => {
+    const result = getTimeOfDayGlycemicNote("cena");
+    expect(result.tendency).toBe("peggiore_tolleranza");
+    expect(result.evidenceLevel).toBe(1);
+    if (result.sourceIds.length === 0) throw new Error("ci si aspettano fonti per cena");
+  });
+
+  it("pranzo -> non_determinato, nessuna fonte, mai interpolato fra mattina e sera", () => {
+    const result = getTimeOfDayGlycemicNote("pranzo");
+    expect(result.tendency).toBe("non_determinato");
+    expect(result.evidenceLevel).toBeNull();
+    expect(result.sourceIds.length).toBe(0);
+  });
+
+  it("contesto sconosciuto/arbitrario -> non_determinato, mai un'eccezione", () => {
+    const result = getTimeOfDayGlycemicNote("spuntino_notturno_3am");
+    expect(result.tendency).toBe("non_determinato");
   });
 });
 
