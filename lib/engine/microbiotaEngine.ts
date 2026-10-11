@@ -21,7 +21,7 @@
 //   tipo di MAC (da ~3.75g/d per l'alginato a ~25g/d per la fibra di soia),
 //   quindi una soglia unica per "i MACs" e' una semplificazione dichiarata.
 
-import { SourcedValue, Meal, DailyDiet, FoodItem, isDailyDiet, flattenFoods, createZeroValue } from "./types";
+import { SourcedValue, Meal, DailyDiet, FoodItem, isDailyDiet, flattenFoods, createZeroValue, mergeSourceIds } from "./types";
 
 export interface MicrobiotaScores {
   macsScore: SourcedValue;
@@ -80,7 +80,11 @@ export class MicrobiotaEngine {
         confidenceLow: null,
         confidenceHigh: null,
         evidenceLevel: 3, // concetto da Sonnenburg (modelli animali) + soglia da Grabitske&Slavin (umani, ma soglia approssimata)
-        sourceIds: ["SONNENBURG_2016_CELL", "GRABITSKE_SLAVIN_2008_CRFSN", "MCDONALD_2018_MSYSTEMS"],
+        sourceIds: mergeSourceIds(
+          ["SONNENBURG_2016_CELL", "GRABITSKE_SLAVIN_2008_CRFSN", "MCDONALD_2018_MSYSTEMS"],
+          foods,
+          ["macs_mg"]
+        ),
         verificationStatus: "draft"
       },
       polyphenolsScore: {
@@ -88,7 +92,7 @@ export class MicrobiotaEngine {
         confidenceLow: null,
         confidenceHigh: null,
         evidenceLevel: 4, // meccanicistico: nessuna fonte quantitativa dedicata trovata finora
-        sourceIds: ["SONNENBURG_2016_CELL"],
+        sourceIds: mergeSourceIds(["SONNENBURG_2016_CELL"], foods, ["polyphenols_mg"]),
         verificationStatus: "draft"
       }
     };

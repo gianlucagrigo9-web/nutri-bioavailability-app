@@ -17,7 +17,7 @@ import { ComputationalNutritionEngine } from "../lib/engine/computationalNutriti
 import { MicrobiotaEngine } from "../lib/engine/microbiotaEngine";
 import { LCALogisticsEngine, FoodItemLCA, MealLCA } from "../lib/engine/lcaLogisticsEngine";
 import { CookingTransformationEngine, RetentionFactorRecord } from "../lib/engine/cookingTransformationEngine";
-import { FoodItem, Meal, DailyDiet, scaleFoodItemToGrams } from "../lib/engine/types";
+import { FoodItem, Meal, DailyDiet, scaleFoodItemToGrams, mergeSourceIds } from "../lib/engine/types";
 
 // ---------------------------------------------------------------------------
 // Micro test runner
@@ -927,6 +927,98 @@ describe("scaleFoodItemToGrams — Livello B (proprietà: scaling lineare)", () 
     const b = scaleFoodItemToGrams(food, 70).iron_mg;
     const whole = scaleFoodItemToGrams(food, 100).iron_mg;
     expect(a + b).toBeCloseTo(whole, 5);
+  });
+});
+
+// =============================================================================
+// mergeSourceIds / FoodItem.nutrientSourceIds — infrastruttura per sourceIds
+// dinamico (aggiunta 2026-10-11, vedi docs/PRD.md §4.7). PREMESSA VERIFICATA
+// sul DB live, stessa sessione, PRIMA di scrivere questo codice: oggi 0 righe
+// su 461 in nutrient_values (e 0 in food_matrices_master/scientific_evidence_
+// library) citano una fonte internal_estimate -- quindi in produzione
+// nutrientSourceIds è sempre assente e questi test ne verificano sia il
+// comportamento "a riposo" (Livello A: nessun cambiamento rispetto a prima)
+// sia il comportamento quando un domani un dato reale lo popolerà (Livello B
+// e integrazione: con fixture SINTETICHE, "TEST_ESTIMATE_SOURCE" non è un
+// source_id reale del progetto, nessuna riga simile esiste oggi in sources).
+// =============================================================================
+describe("mergeSourceIds — Livello A (difensivo, comportamento a riposo)", () => {
+  it("nessun food ha nutrientSourceIds -> restituisce la lista model, stesso contenuto stesso ordine (0 cambiamento rispetto a prima di questa modifica)", () => {
+    const foods = [makeFood({ iron_mg: 5 }), makeFood({ id: "f2", iron_mg: 3 })];
+    const result = mergeSourceIds(["MODEL_A", "MODEL_B"], foods, ["iron_mg"]);
+    expect(result.length).toBe(2);
+    expect(result[0]).toBe("MODEL_A");
+    expect(result[1]).toBe("MODEL_B");
+  });
+  it("array foods vuoto -> restituisce la lista model invariata", () => {
+    const result = mergeSourceIds(["MODEL_A"], [], ["iron_mg"]);
+    expect(result.length).toBe(1);
+    expect(result[0]).toBe("MODEL_A");
+  });
+  it("fields vuoto -> restituisce la lista model invariata anche se nutrientSourceIds è popolato per altri campi", () => {
+    const foods = [makeFood({ iron_mg: 5, nutrientSourceIds: { zinc_mg: "TEST_ESTIMATE_SOURCE" } })];
+    const result = mergeSourceIds(["MODEL_A"], foods, []);
+    expect(result.length).toBe(1);
+  });
+});
+
+describe("mergeSourceIds — Livello B (proprietà, con fixture sintetiche)", () => {
+  it("un source_id reale presente per il campo tracciato viene aggiunto in coda, senza rimuovere le citazioni fisse del modello", () => {
+    const foods = [makeFood({ iron_mg: 5, nutrientSourceIds: { iron_mg: "TEST_ESTIMATE_SOURCE" } })];
+    const result = mergeSourceIds(["MODEL_A"], foods, ["iron_mg"]);
+    expect(result.length).toBe(2);
+    if (result.indexOf("TEST_ESTIMATE_SOURCE") === -1) throw new Error("deve includere il source_id reale");
+    if (result.indexOf("MODEL_A") === -1) throw new Error("non deve mai rimuovere le citazioni fisse del modello");
+  });
+  it("lo stesso source_id reale su più food per lo stesso campo non viene duplicato", () => {
+    const foods = [
+      makeFood({ id: "f1", iron_mg: 5, nutrientSourceIds: { iron_mg: "TEST_ESTIMATE_SOURCE" } }),
+      makeFood({ id: "f2", iron_mg: 3, nutrientSourceIds: { iron_mg: "TEST_ESTIMATE_SOURCE" } })
+    ];
+    const result = mergeSourceIds(["MODEL_A"], foods, ["iron_mg"]);
+    expect(result.filter(id => id === "TEST_ESTIMATE_SOURCE").length).toBe(1);
+  });
+  it("un source_id reale che coincide con una citazione già presente in model non viene duplicato", () => {
+    const foods = [makeFood({ iron_mg: 5, nutrientSourceIds: { iron_mg: "MODEL_A" } })];
+    const result = mergeSourceIds(["MODEL_A"], foods, ["iron_mg"]);
+    expect(result.length).toBe(1);
+  });
+  it("un source_id reale su un campo NON incluso in fields (non usato da questa funzione di calcolo) non viene aggiunto", () => {
+    const foods = [makeFood({ iron_mg: 5, nutrientSourceIds: { zinc_mg: "TEST_ESTIMATE_SOURCE" } })];
+    const result = mergeSourceIds(["MODEL_A"], foods, ["iron_mg"]);
+    expect(result.length).toBe(1);
+  });
+});
+
+describe("calculateBioavailableIron — integrazione sourceIds dinamico (2026-10-11)", () => {
+  it("nutrientSourceIds.iron_mg di un food del pasto compare nei sourceIds restituiti, in aggiunta alle citazioni fisse Hallberg/Young", () => {
+    const meal: Meal = { foods: [makeFood({ iron_mg: 5, is_heme_iron: false, nutrientSourceIds: { iron_mg: "TEST_ESTIMATE_SOURCE" } })] };
+    const result = nutritionEngine.calculateBioavailableIron(meal);
+    if (result.sourceIds.indexOf("TEST_ESTIMATE_SOURCE") === -1) throw new Error("sourceIds deve includere il source_id reale del ferro di input");
+    if (result.sourceIds.indexOf("HALLBERG_2000_SCANDJNUTR") === -1) throw new Error("le citazioni fisse del modello devono restare presenti");
+  });
+  it("nutrientSourceIds su un campo non usato dal ferro (es. calcium_mg) non compare nei sourceIds del ferro", () => {
+    const meal: Meal = { foods: [makeFood({ iron_mg: 5, is_heme_iron: false, calcium_mg: 100, nutrientSourceIds: { calcium_mg: "TEST_ESTIMATE_SOURCE" } })] };
+    const result = nutritionEngine.calculateBioavailableIron(meal);
+    if (result.sourceIds.indexOf("TEST_ESTIMATE_SOURCE") !== -1) throw new Error("non deve propagare provenienza di un campo che questa funzione non usa");
+  });
+});
+
+describe("calculateMagnesium — integrazione sourceIds dinamico via sumRawNutrient (2026-10-11)", () => {
+  it("nutrientSourceIds.magnesium_mg compare nei sourceIds restituiti, accanto a USDA_FDC", () => {
+    const meal: Meal = { foods: [makeFood({ magnesium_mg: 50, nutrientSourceIds: { magnesium_mg: "TEST_ESTIMATE_SOURCE" } })] };
+    const result = nutritionEngine.calculateMagnesium(meal);
+    if (result.sourceIds.indexOf("TEST_ESTIMATE_SOURCE") === -1) throw new Error("sourceIds deve includere il source_id reale del magnesio di input");
+    if (result.sourceIds.indexOf("USDA_FDC") === -1) throw new Error("la fonte di composizione fissa deve restare presente");
+  });
+});
+
+describe("calculateMicrobiotaImpactScore — integrazione sourceIds dinamico (2026-10-11)", () => {
+  it("nutrientSourceIds.macs_mg compare in macsScore.sourceIds ma non in polyphenolsScore.sourceIds (campi diversi, non vanno fusi)", () => {
+    const meal: Meal = { foods: [makeFood({ macs_mg: 3000, nutrientSourceIds: { macs_mg: "TEST_ESTIMATE_SOURCE" } })] };
+    const result = microbiotaEngine.calculateMicrobiotaImpactScore(meal);
+    if (result.macsScore.sourceIds.indexOf("TEST_ESTIMATE_SOURCE") === -1) throw new Error("macsScore deve includere il source_id reale dei MACs di input");
+    if (result.polyphenolsScore.sourceIds.indexOf("TEST_ESTIMATE_SOURCE") !== -1) throw new Error("polyphenolsScore non deve ereditare la provenienza di un campo diverso (macs_mg)");
   });
 });
 

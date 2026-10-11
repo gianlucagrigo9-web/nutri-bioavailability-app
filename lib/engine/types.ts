@@ -102,6 +102,25 @@ export interface FoodItem {
   carbohydrates_g: number;
   fat_g: number;
   fiber_g: number;
+
+  // Provenienza REALE per singolo campo nutriente (aggiunto 2026-10-11,
+  // vedi docs/PRD.md §4.7). Opzionale e, per i dati oggi in produzione,
+  // SEMPRE assente: verificato sul DB live lo stesso giorno che 0 righe
+  // su 461 in nutrient_values (e 0 in food_matrices_master/scientific_
+  // evidence_library) citano una fonte internal_estimate -- questo campo
+  // è quindi infrastruttura pronta per il primo caso reale, non introduce
+  // un caso oggi. Quando popolato (da app/page.tsx, leggendo il
+  // source_id reale del nutrient_value usato), permette a ciascuna
+  // calculate* di aggiungere ai propri sourceIds restituiti (mai in
+  // sostituzione della lista fissa di citazioni del modello, vedi
+  // mergeSourceIds sotto) l'evidenza reale del dato di INPUT usato per
+  // quello specifico food, non solo la citazione dell'equazione.
+  // Chiave: nome del campo (solo quelli elencati in NutrientFieldName,
+  // sotto); valore: sources.id. Campo categorico rispetto alla
+  // grammatura (non è una quantità, è provenienza): scaleFoodItemToGrams
+  // lo passa invariato tramite lo spread {...food} già presente lì,
+  // nessuna modifica necessaria a quella funzione.
+  nutrientSourceIds?: Partial<Record<NutrientFieldName, string>>;
 }
 
 export interface Meal {
@@ -136,6 +155,13 @@ const SCALABLE_NUTRIENT_FIELDS = [
   "energy_kcal", "protein_g", "carbohydrates_g", "fat_g", "fiber_g",
 ] as const satisfies readonly (keyof FoodItem)[];
 
+// Nomi dei campi nutriente quantitativi di FoodItem (stessa lista di
+// SCALABLE_NUTRIENT_FIELDS sopra, derivata da essa e non duplicata a
+// mano: ogni nuovo campo scalabile diventa automaticamente anche un
+// campo tracciabile in nutrientSourceIds, senza dover aggiornare due
+// liste separate e rischiare che vadano fuori sincrono).
+export type NutrientFieldName = (typeof SCALABLE_NUTRIENT_FIELDS)[number];
+
 /**
  * Scala un FoodItem (i cui valori nutrienti sono sempre per 100g, convenzione
  * USDA) alla grammatura REALE della porzione nel piatto. Pura funzione di
@@ -166,4 +192,33 @@ export function createZeroValue(sources: string[]): SourcedValue {
     sourceIds: sources,
     verificationStatus: "verified"
   };
+}
+
+/**
+ * Costruisce la lista sourceIds finale di un SourcedValue, vedi
+ * docs/PRD.md §4.7: `model` (le citazioni FISSE dell'equazione/modello,
+ * sempre presenti, nell'ordine dato) più, in coda e deduplicati,
+ * eventuali source_id REALI presi da FoodItem.nutrientSourceIds dei
+ * `fields` che la funzione chiamante ha effettivamente usato come
+ * input, per i `foods` effettivamente processati.
+ *
+ * IMPORTANTE (difensivo, non un dettaglio): se nessun food ha
+ * nutrientSourceIds impostato per quei campi -- il caso di OGNI riga
+ * oggi in produzione, verificato sul DB live il 2026-10-11 -- questa
+ * funzione restituisce una copia di `model` con lo stesso contenuto,
+ * nello stesso ordine: zero cambiamento di comportamento osservabile
+ * finché un primo dato reale internal_estimate non esisterà. Non
+ * rimuove né riordina mai un id già in `model`.
+ */
+export function mergeSourceIds(model: string[], foods: FoodItem[], fields: NutrientFieldName[]): string[] {
+  const combined = [...model];
+  for (const food of foods) {
+    const map = food.nutrientSourceIds;
+    if (!map) continue;
+    for (const field of fields) {
+      const id = map[field];
+      if (id && !combined.includes(id)) combined.push(id);
+    }
+  }
+  return combined;
 }

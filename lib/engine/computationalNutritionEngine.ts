@@ -31,7 +31,7 @@
 // - Il fattore carne (MFP) non è implementato: un pasto con carne e ferro
 //   non-eme viene sottostimato rispetto alla realtà.
 
-import { SourcedValue, Meal, DailyDiet, FoodItem, isDailyDiet, flattenFoods, createZeroValue } from "./types";
+import { SourcedValue, Meal, DailyDiet, FoodItem, NutrientFieldName, isDailyDiet, flattenFoods, createZeroValue, mergeSourceIds } from "./types";
 
 export class ComputationalNutritionEngine {
 
@@ -134,9 +134,13 @@ export class ComputationalNutritionEngine {
       // la correzione di bioaccessibilità (studio singolo, n=3, in vitro) è
       // più debole sia del Miller giornaliero (1) che di quello per pasto (2).
       evidenceLevel: usedBioaccessibilityDerating ? 3 : (daily ? 1 : 2),
-      sourceIds: usedBioaccessibilityDerating
-        ? ["MILLER_2007_JNUTR", "DONIEC_2022_MOLECULES"]
-        : ["MILLER_2007_JNUTR"],
+      sourceIds: mergeSourceIds(
+        usedBioaccessibilityDerating
+          ? ["MILLER_2007_JNUTR", "DONIEC_2022_MOLECULES"]
+          : ["MILLER_2007_JNUTR"],
+        foods,
+        ["zinc_mg", "phytates_mg"]
+      ),
       verificationStatus: usedBioaccessibilityDerating ? "draft" : (daily ? "verified" : "draft"),
       bioavailabilityAdjusted: true // vedi docs/PRD.md §4.0: equazione di Miller 2007 realmente applicata
     };
@@ -182,7 +186,7 @@ export class ComputationalNutritionEngine {
       confidenceLow: anyLowOxalate ? +lowMg.toFixed(2) : null,
       confidenceHigh: anyLowOxalate ? +highMg.toFixed(2) : null,
       evidenceLevel: 2,
-      sourceIds: ["HEANEY_WEAVER_RECKER_1988_AJCN", "HEANEY_WEAVER_1990_AJCN"],
+      sourceIds: mergeSourceIds(["HEANEY_WEAVER_RECKER_1988_AJCN", "HEANEY_WEAVER_1990_AJCN"], meal.foods, ["calcium_mg"]),
       verificationStatus: anyLowOxalate ? "verified" : "draft",
       bioavailabilityAdjusted: true // vedi docs/PRD.md §4.0: modello a 3 categorie Heaney&Weaver realmente applicato
     };
@@ -260,7 +264,11 @@ export class ComputationalNutritionEngine {
       confidenceLow: +(totalAbsorbed * 0.90).toFixed(2), // margine difensivo minimo, non da una fonte specifica
       confidenceHigh: +(totalAbsorbed * 2.5).toFixed(2), // sourced: Young et al. 2007
       evidenceLevel: 2,
-      sourceIds: ["HALLBERG_2000_SCANDJNUTR", "YOUNG_2007_JNUTR"],
+      sourceIds: mergeSourceIds(
+        ["HALLBERG_2000_SCANDJNUTR", "YOUNG_2007_JNUTR"],
+        meal.foods,
+        ["iron_mg", "vitamin_c_mg", "phytates_mg", "polyphenols_mg"]
+      ),
       // "draft": il termine polifenoli e il fattore carne mancante restano
       // non verificati contro la letteratura primaria completa.
       verificationStatus: "draft",
@@ -328,7 +336,7 @@ export class ComputationalNutritionEngine {
       confidenceLow: +Math.min(low, high).toFixed(3),
       confidenceHigh: +Math.max(low, high).toFixed(3),
       evidenceLevel: 3, // via attiva + passiva sourced, ma Km della curva non fittato (vedi commento)
-      sourceIds: ["IOM_1998_DRI_B_VITAMINS", "ADAMS_1971", "HEYSSEL_1966"],
+      sourceIds: mergeSourceIds(["IOM_1998_DRI_B_VITAMINS", "ADAMS_1971", "HEYSSEL_1966"], foods, ["vitamin_b12_mcg"]),
       verificationStatus: "draft",
       bioavailabilityAdjusted: true
     };
@@ -366,7 +374,7 @@ export class ComputationalNutritionEngine {
       confidenceLow: null, // nessuna SD pubblicata: convenzione normativa, non misura
       confidenceHigh: null,
       evidenceLevel: 2, // conversione ufficiale FNB, ma non una meta-analisi/studio continuo
-      sourceIds: ["NIH_ODS_FOLATE_FACT_SHEET"],
+      sourceIds: mergeSourceIds(["NIH_ODS_FOLATE_FACT_SHEET"], foods, ["folate_mcg"]),
       verificationStatus: "verified", // la conversione stessa è pacifica/ufficiale, non in discussione
       bioavailabilityAdjusted: true
     };
@@ -443,7 +451,11 @@ export class ComputationalNutritionEngine {
       confidenceLow: null, // nessuna delle due fonti pubblica un intervallo per la combinazione
       confidenceHigh: null,
       evidenceLevel: 4, // ricombinazione nostra di due fonti non co-pubblicate (vedi commento sopra)
-      sourceIds: ["NNR2023_OLSEN_LERNER_FNR", "LIVNY_2003_EURJNUTR"],
+      sourceIds: mergeSourceIds(
+        ["NNR2023_OLSEN_LERNER_FNR", "LIVNY_2003_EURJNUTR"],
+        foods,
+        ["beta_carotene_mcg", "other_provitamin_a_carotenoids_mcg"]
+      ),
       verificationStatus: "draft",
       bioavailabilityAdjusted: true // ora sì: un aggiustamento per stato della matrice è realmente applicato al beta-carotene
     };
@@ -475,7 +487,8 @@ export class ComputationalNutritionEngine {
   private sumRawNutrient(
     context: Meal | DailyDiet,
     selector: (f: FoodItem) => number,
-    sourceIds: string[]
+    sourceIds: string[],
+    fieldName: NutrientFieldName
   ): SourcedValue {
     const foods = flattenFoods(context);
     let total = 0;
@@ -494,30 +507,30 @@ export class ComputationalNutritionEngine {
       confidenceLow: null,  // nessun modello di assorbimento: nessuna fascia da propagare
       confidenceHigh: null,
       evidenceLevel: 5, // database di composizione, non uno studio di assorbimento (vedi docs/PRD.md §4.0)
-      sourceIds,
+      sourceIds: mergeSourceIds(sourceIds, foods, [fieldName]),
       verificationStatus: "draft", // non ancora verificato riga per riga nel Golden Set
       bioavailabilityAdjusted: false // composizione grezza: nessun modello esiste ancora, vedi docs/PRD.md §4.0
     };
   }
 
   public calculateMagnesium(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.magnesium_mg, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.magnesium_mg, ["USDA_FDC"], "magnesium_mg");
   }
 
   public calculateCopper(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.copper_mg, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.copper_mg, ["USDA_FDC"], "copper_mg");
   }
 
   public calculateSelenium(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.selenium_mcg, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.selenium_mcg, ["USDA_FDC"], "selenium_mcg");
   }
 
   public calculateIodine(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.iodine_mcg, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.iodine_mcg, ["USDA_FDC"], "iodine_mcg");
   }
 
   public calculateVitaminK(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.vitamin_k_mcg, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.vitamin_k_mcg, ["USDA_FDC"], "vitamin_k_mcg");
   }
 
   // --- MACRONUTRIENTI (aggiunti 2026-10-10) ---
@@ -526,22 +539,22 @@ export class ComputationalNutritionEngine {
   // digeribilità proteica non è implementata -- vedi nota in types.ts).
 
   public calculateEnergy(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.energy_kcal, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.energy_kcal, ["USDA_FDC"], "energy_kcal");
   }
 
   public calculateProtein(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.protein_g, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.protein_g, ["USDA_FDC"], "protein_g");
   }
 
   public calculateCarbohydrates(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.carbohydrates_g, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.carbohydrates_g, ["USDA_FDC"], "carbohydrates_g");
   }
 
   public calculateFat(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.fat_g, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.fat_g, ["USDA_FDC"], "fat_g");
   }
 
   public calculateFiber(context: Meal | DailyDiet): SourcedValue {
-    return this.sumRawNutrient(context, f => f.fiber_g, ["USDA_FDC"]);
+    return this.sumRawNutrient(context, f => f.fiber_g, ["USDA_FDC"], "fiber_g");
   }
 }
