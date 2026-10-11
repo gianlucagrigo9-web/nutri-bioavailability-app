@@ -38,6 +38,8 @@ import { FoodItem, SourcedValue, OxalateCategory, Meal, scaleFoodItemToGrams } f
 import { fetchOffProduct, buildApproximatedFood, ApproximatedFood } from '@/lib/openFoodFacts';
 import BarcodeScanner from '@/components/BarcodeScanner';
 import { DietType, filterFoodsByDietType } from '@/lib/engine/dietTypeFilter';
+import { buildDietNutrientTargets, generateDiet, DietGeneratorResult, OmittedNutrientTarget } from '@/lib/engine/dietGenerator';
+import { Sex } from '@/lib/engine/nutrientTargets';
 
 const nutritionEngine = new ComputationalNutritionEngine();
 const microbiotaEngine = new MicrobiotaEngine();
@@ -159,6 +161,36 @@ const BASELINE_STATE_LABELS: Record<string, string> = {
   dry_heat_cooked: 'Cotto (calore secco)',
   hard_boiled: 'Sodo',
   unknown: 'Stato di cottura non ancora classificato',
+};
+
+// Label italiane per "Genera un piano alimentare" (2026-10-11, docs/PRD.md
+// §4.9) -- due mappe distinte perché generateDiet lavora su NutrientFieldName
+// (campo grezzo di FoodItem, es. 'vitamin_c_mg') mentre buildDietNutrientTargets
+// segnala gli omessi per TargetNutrientKey (es. 'vitamin_c'), due vocabolari
+// diversi dello stesso file (vedi lib/engine/nutrientTargets.ts).
+const DIET_TARGET_NUTRIENT_LABELS: Record<string, string> = {
+  vitamin_c_mg: 'Vitamina C',
+  vitamin_b12_mcg: 'Vitamina B12',
+  magnesium_mg: 'Magnesio',
+  copper_mg: 'Rame',
+  selenium_mcg: 'Selenio',
+  iodine_mcg: 'Iodio',
+  vitamin_k_mcg: 'Vitamina K',
+  calcium_mg: 'Calcio',
+};
+const TARGET_NUTRIENT_KEY_LABELS: Record<string, string> = {
+  iron: 'Ferro',
+  zinc: 'Zinco',
+  calcium: 'Calcio',
+  vitamin_c: 'Vitamina C',
+  vitamin_b12: 'Vitamina B12',
+  folate_dfe: 'Folati (DFE)',
+  magnesium: 'Magnesio',
+  copper: 'Rame',
+  selenium: 'Selenio',
+  iodine: 'Iodio',
+  vitamin_k: 'Vitamina K',
+  vitamin_a_rae: 'Vitamina A (RAE)',
 };
 
 function baselineStateLabel(state: string): string {
@@ -331,6 +363,19 @@ export default function Home() {
   // alimenti già aggiunti al piatto se l'utente cambia idea a metà.
   const [dietType, setDietType] = useState<DietType>('omnivore');
 
+  // "Genera un piano alimentare" (docs/PRD.md §4.9) -- età/sesso servono
+  // SOLO a buildDietNutrientTargets (target LARN/EFSA di micronutrienti),
+  // non a un calcolo del fabbisogno energetico: quello resta un input
+  // diretto dell'utente (dietGenTargetKcal), scelta esplicita dell'utente
+  // il 2026-10-11 ("togliamo il calcolo del fabbisogno, mettiamo solo
+  // l'opzione di settare le kcal") -- vedi commento di testa a
+  // lib/engine/dietGenerator.ts.
+  const [dietGenAge, setDietGenAge] = useState(30);
+  const [dietGenSex, setDietGenSex] = useState<Sex>('female');
+  const [dietGenTargetKcal, setDietGenTargetKcal] = useState(2000);
+  const [dietGenResult, setDietGenResult] = useState<DietGeneratorResult | null>(null);
+  const [dietGenOmitted, setDietGenOmitted] = useState<OmittedNutrientTarget[]>([]);
+
   // Stato per lo scanner barcode (Open Food Facts, vedi lib/openFoodFacts.ts).
   const [scannerOpen, setScannerOpen] = useState(false);
   const [scanStatus, setScanStatus] = useState<'idle' | 'loading' | 'error'>('idle');
@@ -403,6 +448,37 @@ export default function Home() {
   const visibleFoodIds = new Set(
     filterFoodsByDietType(foods.map(foodRowToFoodItem), dietType).map((f) => f.id)
   );
+
+  // Genera un piano con l'euristica generateDiet, sui soli alimenti
+  // compatibili col tipo di dieta selezionato sopra (visibleFoodIds) --
+  // mai sugli alimenti scansionati via barcode (dati stimati, non adatti
+  // come candidati di un generatore algoritmico).
+  function runDietGenerator() {
+    const { targets, omittedNutrients } = buildDietNutrientTargets(dietGenSex, dietGenAge);
+    const candidateFoods = foods
+      .filter((food) => visibleFoodIds.has(food.food_id))
+      .map(foodRowToFoodItem);
+    const result = generateDiet(candidateFoods, targets, dietGenTargetKcal);
+    setDietGenResult(result);
+    setDietGenOmitted(omittedNutrients);
+  }
+
+  // Sostituisce il piatto corrente col piano generato -- azione esplicita
+  // dell'utente (un bottone dedicato, mai automatico), coerente con
+  // "genera un piano" come alternativa alla composizione manuale, non
+  // un'aggiunta silenziosa a un piatto già in corso.
+  function loadGeneratedDietIntoMeal() {
+    if (!dietGenResult) return;
+    setMealItems(
+      dietGenResult.foods.map(({ food, grams }, index) => ({
+        instanceId: `${food.id}-gen-${Date.now()}-${index}`,
+        foodId: food.id,
+        cookingMethod: 'raw',
+        grams,
+      }))
+    );
+    setDietGenResult(null);
+  }
 
   const addToMeal = (foodId: string) => {
     // 100g di default: i valori in DB sono per 100g (convenzione USDA), quindi
@@ -741,6 +817,120 @@ export default function Home() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* GENERA UN PIANO ALIMENTARE (2026-10-11, docs/PRD.md §4.9) --
+            generateDiet + buildDietNutrientTargets, sui soli alimenti
+            compatibili col tipo di dieta selezionato sotto. Euristica
+            golosa dichiarata (non un ottimo LP/MILP garantito), opera
+            SOLO su composizione grezza -- vedi i warning del motore,
+            mostrati sempre, mai silenziati (Regola 6). */}
+        <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 mb-10">
+          <h3 className="text-lg font-bold text-slate-800 mb-1">Genera un piano alimentare</h3>
+          <p className="text-xs text-slate-400 mb-4">
+            Euristica &quot;weakest-link first&quot; sui {visibleFoodIds.size} alimenti compatibili con il tipo di
+            dieta selezionato qui sotto — non è un ottimo globale garantito (nessun solver LP/MILP, vedi
+            commento di testa a lib/engine/dietGenerator.ts). Età e sesso servono solo ai target di
+            micronutrienti LARN/EFSA, non calcolano il fabbisogno energetico — quello lo imposti tu.
+          </p>
+          <div className="flex flex-wrap items-end gap-4 mb-4">
+            <label className="text-xs text-slate-500">
+              Età
+              <input
+                type="number"
+                min={0}
+                value={dietGenAge}
+                onChange={(e) => setDietGenAge(Number(e.target.value))}
+                className="block w-20 mt-1 px-2 py-1.5 rounded-lg border border-slate-200 text-sm"
+              />
+            </label>
+            <label className="text-xs text-slate-500">
+              Sesso
+              <select
+                value={dietGenSex}
+                onChange={(e) => setDietGenSex(e.target.value as Sex)}
+                className="block w-28 mt-1 px-2 py-1.5 rounded-lg border border-slate-200 text-sm"
+              >
+                <option value="female">Donna</option>
+                <option value="male">Uomo</option>
+              </select>
+            </label>
+            <label className="text-xs text-slate-500">
+              Target energetico
+              <input
+                type="number"
+                min={0}
+                value={dietGenTargetKcal}
+                onChange={(e) => setDietGenTargetKcal(Number(e.target.value))}
+                className="block w-28 mt-1 px-2 py-1.5 rounded-lg border border-slate-200 text-sm"
+              />
+              <span className="block text-[10px] text-slate-400 mt-0.5">kcal/giorno, input diretto</span>
+            </label>
+            <button
+              type="button"
+              onClick={runDietGenerator}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-xl"
+            >
+              Genera
+            </button>
+          </div>
+
+          {dietGenResult && (
+            <div className="border-t border-slate-100 pt-4">
+              {dietGenResult.warnings.length > 0 && (
+                <div className="bg-amber-50 text-amber-700 text-xs rounded-xl p-3 mb-4 space-y-1">
+                  {dietGenResult.warnings.map((w, i) => (
+                    <div key={i}>⚠ {w}</div>
+                  ))}
+                </div>
+              )}
+              {dietGenOmitted.length > 0 && (
+                <div className="bg-slate-50 text-slate-500 text-xs rounded-xl p-3 mb-4">
+                  <span className="font-semibold text-slate-600">Nutrienti non ancora inclusi in questo piano</span>{' '}
+                  (richiederebbero i valori bioavailability-adjusted dei motori esistenti, non ancora integrati
+                  in generateDiet — gap dichiarato, docs/PRD.md §4.9):{' '}
+                  {dietGenOmitted.map((o) => TARGET_NUTRIENT_KEY_LABELS[o.nutrientKey] ?? o.nutrientKey).join(', ')}.
+                </div>
+              )}
+
+              {dietGenResult.foods.length === 0 ? (
+                <p className="text-slate-400 text-sm">Nessun piano generato — vedi i warning sopra.</p>
+              ) : (
+                <>
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                    <span className="text-sm font-semibold text-slate-700">
+                      MAR: {(dietGenResult.mar * 100).toFixed(0)}% (media dei NAR sui nutrienti target inclusi)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={loadGeneratedDietIntoMeal}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 rounded-xl"
+                    >
+                      Sostituisci il piatto con questo piano
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                    {dietGenResult.foods.map(({ food, grams }) => (
+                      <div key={food.id} className="flex justify-between bg-slate-50 rounded-lg px-3 py-2 text-sm">
+                        <span className="text-slate-600">{food.name}</span>
+                        <span className="font-semibold text-slate-700">{grams}g</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {(Object.entries(dietGenResult.narByNutrient) as [string, number][]).map(([code, nar]) => (
+                      <div key={code} className="bg-slate-50 rounded-lg p-2 text-center">
+                        <span className="text-[10px] text-slate-500 block">
+                          {DIET_TARGET_NUTRIENT_LABELS[code] ?? code}
+                        </span>
+                        <span className="text-sm font-bold text-slate-700">{(nar * 100).toFixed(0)}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         {/* WORKSPACE DIVISO: DISPENSA vs PIATTO */}
