@@ -37,6 +37,7 @@ import { CookingTransformationEngine, RetentionFactorRecord } from '@/lib/engine
 import { FoodItem, SourcedValue, OxalateCategory, Meal, scaleFoodItemToGrams } from '@/lib/engine/types';
 import { fetchOffProduct, buildApproximatedFood, ApproximatedFood } from '@/lib/openFoodFacts';
 import BarcodeScanner from '@/components/BarcodeScanner';
+import { DietType, filterFoodsByDietType } from '@/lib/engine/dietTypeFilter';
 
 const nutritionEngine = new ComputationalNutritionEngine();
 const microbiotaEngine = new MicrobiotaEngine();
@@ -63,6 +64,16 @@ type FoodRow = {
   zinc_bioaccessibility_bucket: FoodItem['zinc_bioaccessibility_bucket'] | null;
   is_fortified_folate: boolean | null;
   nutrient_values: NutrientRow[] | null;
+  // Popolate da add_diet_compatibility_golden_set.sql (eseguito sul DB
+  // reale il 2026-10-11, vedi docs/PRD.md §4.9). null = non ancora
+  // classificato per quell'asse (o per nessuno, se la riga non è stata
+  // toccata dalla migrazione) -- MAI trattato come "compatibile" di
+  // default, vedi dietTypeFilter.ts: un alimento non classificato viene
+  // escluso da qualunque filtro diverso da "onnivora", mai assunto
+  // compatibile (rischio di proporre carne a un utente vegano).
+  diet_compat_vegetarian: boolean | null;
+  diet_compat_vegan: boolean | null;
+  diet_compat_fruitarian: boolean | null;
 };
 
 // source_type attiva una colonna dello schema gia' presente nel DB live
@@ -191,6 +202,17 @@ function foodRowToFoodItem(row: FoodRow): FoodItem {
     carbohydrates_g: nutrientValue(nutrients, 'carbohydrates_g'),
     fat_g: nutrientValue(nutrients, 'fat_g'),
     fiber_g: nutrientValue(nutrients, 'fiber_g'),
+    // Popolato SOLO se tutti e 3 gli assi sono classificati nel DB (mai
+    // parzialmente, per non far passare un filtro su un asse non
+    // verificato) -- vedi commento su FoodRow sopra e dietTypeFilter.ts.
+    dietCompatibility:
+      row.diet_compat_vegetarian !== null && row.diet_compat_vegan !== null && row.diet_compat_fruitarian !== null
+        ? {
+            vegetarian: row.diet_compat_vegetarian,
+            vegan: row.diet_compat_vegan,
+            fruitarian: row.diet_compat_fruitarian,
+          }
+        : undefined,
   };
 }
 
@@ -302,6 +324,12 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [mealItems, setMealItems] = useState<MealItem[]>([]);
   const [showFullBreakdown, setShowFullBreakdown] = useState(false);
+  // Filtro tipo di dieta (docs/PRD.md §4.9: "ovviamente prima cosa che si
+  // offre a cliente è selezionare se vuole dieta onnivora, carnivora,
+  // vegana, fruttariana"). Agisce solo sulla Dispensa (cosa si può
+  // aggiungere al piatto da ora in poi) -- non rimuove retroattivamente
+  // alimenti già aggiunti al piatto se l'utente cambia idea a metà.
+  const [dietType, setDietType] = useState<DietType>('omnivore');
 
   // Stato per lo scanner barcode (Open Food Facts, vedi lib/openFoodFacts.ts).
   const [scannerOpen, setScannerOpen] = useState(false);
@@ -325,7 +353,7 @@ export default function Home() {
         .select(
           `food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium,
            botanical_family, carotenoid_matrix_state, zinc_bioaccessibility_bucket,
-           is_fortified_folate,
+           is_fortified_folate, diet_compat_vegetarian, diet_compat_vegan, diet_compat_fruitarian,
            nutrient_values ( nutrient_code, value, confidence_low, confidence_high, source_id, verification_status )`
         )
         .eq('verification_status', 'verified')
@@ -366,6 +394,15 @@ export default function Home() {
   if (error) {
     return <div className="p-10 text-rose-600 font-sans">{error}</div>;
   }
+
+  // Alimenti ammessi nella Dispensa per il tipo di dieta selezionato.
+  // Riusa filterFoodsByDietType (stessa funzione del motore/engine, non
+  // una riscrittura locale della regola "non classificato -> escluso")
+  // sui FoodItem derivati dai FoodRow, poi riporta il risultato a un
+  // Set di food_id per filtrare la lista FoodRow da rendere sotto.
+  const visibleFoodIds = new Set(
+    filterFoodsByDietType(foods.map(foodRowToFoodItem), dietType).map((f) => f.id)
+  );
 
   const addToMeal = (foodId: string) => {
     // 100g di default: i valori in DB sono per 100g (convenzione USDA), quindi
@@ -723,6 +760,35 @@ export default function Home() {
                 📷 Scansiona
               </button>
             </div>
+            {/* Selettore tipo di dieta (docs/PRD.md §4.9) -- filtra solo cosa
+                si può aggiungere da qui in avanti, vedi commento su
+                dietType sopra. */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              {([
+                ['omnivore', 'Onnivora'],
+                ['vegetarian', 'Vegetariana'],
+                ['vegan', 'Vegana'],
+                ['fruitarian', 'Fruttariana'],
+              ] as [DietType, string][]).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => setDietType(value)}
+                  className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
+                    dietType === value
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            {dietType !== 'omnivore' && visibleFoodIds.size === 0 && (
+              <div className="bg-slate-50 text-slate-500 text-xs rounded-xl p-3 mb-3">
+                Nessun alimento del Golden Set è ancora classificato come compatibile con questo tipo di dieta (o la classificazione non è ancora stata sincronizzata da questa sessione).
+              </div>
+            )}
             {scanStatus === 'loading' && (
               <div className="bg-amber-50 text-amber-700 text-xs rounded-xl p-3 mb-3">
                 Ricerca del prodotto su Open Food Facts…
@@ -735,7 +801,7 @@ export default function Home() {
               </div>
             )}
             <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2">
-              {foods.map((food) => {
+              {foods.filter((food) => visibleFoodIds.has(food.food_id)).map((food) => {
                 const hasDraft = (food.nutrient_values ?? []).some((n) => n.verification_status === 'draft');
                 // "Stima": almeno un fattore di ritenzione applicabile a questa
                 // matrice (qualunque metodo di cottura, non solo quello
