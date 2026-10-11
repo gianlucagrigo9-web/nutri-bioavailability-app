@@ -230,6 +230,28 @@ Risultato: **zero** righe `internal_estimate` in `nutrient_values`, `food_matric
 - `tsc --noEmit --strict` (stessi flag del `tsconfig.json` del progetto: target ES2017, lib dom/dom.iterable/esnext) su tutti e 5 i file di `lib/engine/`: **0 errori**.
 - Resta da fare da parte dell'utente solo `npm run typecheck`/`npm run test` sul **resto** dell'app (`app/page.tsx` e tutto ciò che dipende da `next`/`react`, non verificabile qui per mancanza di quei pacchetti) — non più l'intero motore, come inizialmente comunicato in questa sessione.
 
+### 4.8 Proposta: piatti compositi/tradizionali e una terza fascia di accuratezza (2026-10-11) — **IN ATTESA DI APPROVAZIONE, nessun codice/schema scritto**
+
+**Il problema.** L'utente ha chiesto come trattare piatti tradizionali composti (es. "pasta al pomodoro", "minestrone", "parmigiana di melanzane") che non esistono come voce singola in USDA FDC né altrove: *"per piatti tradizionali bisogna guardare ai singoli componenti, a come e quanto cuociono e dedurre da lì i nostri valori, in ogni caso saranno ancora meno precisi dei cibi processati presumo e quindi potremmo fare una terza categoria di accuratezza."* Questa sezione propone un design, da approvare prima di scrivere una riga di codice o di schema (Regola 5).
+
+**Osservazione chiave: non serve una quarta/terza tabella di "livelli di accuratezza" nuova — il meccanismo esiste già, in due pezzi che vanno solo collegati.**
+1. Il Meal Builder **già** soma più `FoodItem` scalati a grammatura reale (`scaleFoodItemToGrams`, Fase 3 punto 12) per ottenere i totali di un pasto. Un "piatto composito" è esattamente questo — un meal pre-assemblato e salvato come template, non un oggetto concettualmente nuovo.
+2. `sources.source_type = 'internal_estimate'` (§4.7) è già il meccanismo generale per "valore derivato con metodo nostro, non misurato direttamente" — `DERIVED_FDC_RAW_COOKED_RATIO` è già un precedente reale di un numero calcolato (non misurato) a partire da altri dati verificati.
+
+**Design proposto.**
+- **Nessuna riga statica in `nutrient_values` per il piatto.** Scrivere oggi un numero "pasta al pomodoro = X mg ferro" e lasciarlo lì violerebbe silenziosamente la Regola 1 il giorno in cui corrggiamo il dato sorgente di uno dei componenti (es. il pomodoro): il piatto resterebbe sbagliato finché qualcuno non se ne accorge a mano. Il valore del piatto va invece **calcolato a runtime** dai componenti, sempre, esattamente come già avviene per un pasto assemblato a mano — nessun nuovo dato "nudo" da mantenere sincronizzato.
+- **Due tabelle nuove, leggere**: `dish_templates` (`dish_id`, `name_it`, `description_it`, `source_id` → nuova riga `sources` con `source_type='internal_estimate'`, citazione = descrizione testuale della ricetta di riferimento usata) e `dish_components` (`dish_id`, `food_id` componente, `grams_per_serving`, `cooking_state_assumed` — crudo/cotto, per scegliere quale riga/fattore di ritenzione usare). Nessun numero nutrizionale scritto a mano in nessuna delle due: solo grammi e riferimenti a `food_id` già esistenti.
+- **Calcolo**: al momento dell'uso, per ciascun componente si applica la stessa pipeline già testata (cottura → `cookingTransformationEngine`, poi `scaleFoodItemToGrams`), si somma, e il risultato eredita i `sourceIds` reali di ogni componente via `mergeSourceIds` (meccanismo già costruito in §4.7) — **nessuna logica di calcolo nuova**, solo composizione di pezzi esistenti.
+- **La "terza fascia" richiesta dall'utente non è un nuovo campo DB ma un badge UI dedicato**, propagato come `isCompositeDish: boolean` sul `FoodItem` risultante (stesso pattern di `hasDraft` in Dispensa, Fase 3 punto 13): un colore/etichetta distinto da "Misurato" (verde, Golden Set) e da "Stimato" (ambra, singolo nutriente/prodotto scansionato) — proposta: **"Ricetta stimata"** (viola/blu), per non confondersi visivamente con gli altri due. Si attiva ogni volta che il pasto contiene un `dish_template`, indipendentemente dal fatto che i singoli componenti siano `verified`: la ricetta stessa (proporzioni, presenza/assenza di un ingrediente, grado di cottura assunto) è un'approssimazione che un'etichetta "Verified" sui componenti non comunicherebbe.
+- **Range di confidenza (Regola 2), senza inventare nulla di nuovo**: se un componente ha un range dichiarato, il range del piatto è la somma dei minimi e la somma dei massimi dei componenti che ne hanno uno (propagazione lineare attraverso l'addizione, matematicamente esatta); se nessun componente ha un range, il piatto resta `range_available: false` — mai un range fabbricato solo perché il piatto "sembra" dover essere più incerto.
+
+**Perché non una quarta colonna/enum invece che riuso di `internal_estimate`**: ogni piatto composito avrebbe comunque bisogno di un `source_id` che descriva *quella specifica* combinazione di componenti e grammature (per la Regola 6 — tracciabilità) — un solo valore enum in più non lo sostituirebbe, mentre una riga `sources` dedicata per `dish_id` (stesso pattern già in uso per `DERIVED_FDC_RAW_COOKED_RATIO`) lo fa gratis.
+
+**Cosa resta deliberatamente non deciso in questa proposta, da discutere se approvata:**
+- Come scegliere le **grammature standard** per porzione di un piatto tradizionale (fonte: una ricetta di riferimento dichiarata esplicitamente, non una media "a sensazione" — es. CREA/LARN per le porzioni standard italiane, se disponibile).
+- Se/come gestire la **perdita di peso in cottura aggregata** (es. l'acqua che evapora da un sugo) separatamente dai fattori di ritenzione per-nutriente già esistenti, che assumono grammatura del singolo alimento, non del piatto intero.
+- Priorità: quali piatti tradizionali entrano nella coda Fase 4 punto 16 (§9) e in che ordine, una volta che questo design è approvato.
+
 ---
 
 ## 5. Architettura dati con provenienza
@@ -497,6 +519,8 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Grassi/condimenti: olio extravergine d'oliva, burro
     - Alimenti processati comuni: pane confezionato in cassetta, biscotti secchi, fette biscottate, pasta di semola comune (non arricchita — diversa da `food_pasta_enriched_cooked` già presente, che è USA-style enriched), cioccolato fondente, miele, zucchero bianco
 
+16b. **Piatti tradizionali/compositi** (pasta al pomodoro, minestrone, parmigiana, ecc.) — richiesti dall'utente il 2026-10-11 come parte della copertura del panel italiano, perché un panel "alimenti base + processati" senza i piatti composti reali che la gente mangia resterebbe incompleto. **PROPOSTA DI DESIGN in attesa di approvazione esplicita, vedi §4.8** — nessuna tabella/codice scritto. Non delegabile al task diurno automatico finché il design non è approvato (Regola 5: criteri prima del codice).
+
 ### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)
 Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (vedi §7, nota 2026-10-10). Nessun ordine imposto fra questi — da prioritizzare quando ci si arriva.
 17. Pipeline evidenze scientifiche (scraping PubMed + estrazione parametri + livello di evidenza + review umana) — coerente con §2 regola 3 e §4; rafforzerebbe le fonti dei motori già ammessi, utile anche prima della Fase 4.
@@ -508,6 +532,22 @@ Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (ved
 ### Fase 6 — Intenzionalmente parcheggiato (non "dopo", ma "da ridiscutere se e quando")
 22. Modulo clinico (ontologia eziologica, alberi decisionali per patologia) — fuori perimetro per motivi legali/regolatori (§1.1), si rivaluta a MVP completo.
 23. Integrazione CGM — stesso livello di cautela del modulo clinico (§7, nota 2026-10-10), non una voce di backlog ordinaria.
+
+### 9.1 Scaletta prioritaria sintetizzata, dal punto attuale al lancio (sintesi richiesta dall'utente, 2026-10-11)
+
+Stessi punti di sopra, solo riordinati in un'unica lista di priorità verso il lancio IT→EU→USA, con accanto chi può eseguirli: 🤖 = lavoro meccanico/verificabile, adatto al task pianificato autonomo esistente (o a uno analogo, una volta scoperto); 👤 = richiede una sessione con l'utente prima di scrivere codice (nuova funzionalità, nuova metodologia, o un'azione che solo l'utente può fare — Regola 5).
+
+1. 🤖 **Fase 4.16 — Espansione panel alimenti italiani** (in corso, task diurno attivo).
+2. 👤 **Fase 4.16b — Piatti compositi/tradizionali**: approvare il design §4.8, poi la coda di piatti diventa anch'essa lavorabile 🤖.
+3. 👤 **Fase 3.13 (limite aperto)** — scansionare un prodotto reale con l'app e confrontarlo con l'etichetta stampata: azione fisica sul telefono dell'utente, non delegabile.
+4. 👤 **Fase 3.14 — Meal Builder, rifinitura generale**: serve prima capire cosa non va bene a livello di UX/prodotto (sessione con l'utente), poi l'implementazione puntuale può tornare 🤖/👤 a seconda della portata.
+5. 👤 **Fase 2.11 — Collegare Vercel**: richiede l'account Vercel dell'utente (login, scelta dominio) — preparo io i file di configurazione, ma il collegamento stesso è un'azione umana.
+6. 👤 **Fase 1.8 — Controllo periodico più approfondito sui 30 alimenti promossi**: va prima definito un criterio/checklist esplicito (oggi non esiste) — una volta approvato, l'esecuzione ricorrente diventa 🤖.
+7. 👤 **Integrazione CREA** (dati italiani ufficiali, oggi solo dichiarata come gap) — nuova fonte dati, nuova pipeline, serve una sessione di design come per FDC.
+8. 👤 **Fase 5 (17-21)**: pipeline evidenze PubMed, AI Recipe Co-Pilot, integratori/crononutrizione, mappa popolazione, wearable — post-MVP, ciascuno da scoprire quando ci si arriva, nessuno ancora scoping-ato.
+9. **Fase 6 (22-23)**: modulo clinico, CGM — intenzionalmente fuori da questa lista, cancello legale/regolatorio non ancora passato (§1.1, §7).
+
+**Nota sul "fare tutto in autonomia" (richiesta dell'utente, 2026-10-11)**: il task diurno pianificato resta scoped al punto 1 (e, una volta approvati i rispettivi design, ai punti che diventano 🤖 sopra) perché quel lavoro è meccanico e ogni singolo output è verificabile a posteriori senza ambiguità (un alimento FDC esiste o non esiste, un valore combacia o non combacia). I punti 👤 richiedono invece un giudizio che la Regola 5 riserva esplicitamente a una sessione con criteri approvati PRIMA del codice, o un'azione che solo l'utente può fisicamente fare (login Vercel, scansione di un prodotto reale). Non è una decisione contro l'autonomia in sé — è la stessa distinzione già in vigore stasera tra "il task diurno scrive ed esegue" e "io propongo, tu approvi, poi si scrive".
 
 ---
 
