@@ -94,9 +94,14 @@
   ```
   npm run add-food -- --fdc-id=170420 --food-id=food_piselli_bolliti --name-it="Piselli, verdi, cotti, bolliti, scolati, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae --apply
   ```
-- **Piano B**: non necessario, il record FDC 170420 è pulito e completo (17/17). Se in futuro si vuole anche una variante "surgelati" distinta, FDC 170105 (senza sale, frozen) è già stato individuato e può essere proposto come voce separata.
-
 ## Eseguiti (archivio, ultimi 10)
+
+### Piselli, verdi, cotti, bolliti, scolati, senza sale — ✅ eseguito 2026-10-12
+
+- **food_id**: `food_piselli_bolliti`. FDC ID 170420 (SR Legacy, "Peas, green, cooked, boiled, drained, without salt").
+- **Dry-run verificato per screenshot** (17/17 nutrienti, descrizione FDC combaciante) prima dell'`--apply`. **L'esito dell'`--apply` stesso è confermato dall'utente a voce in chat** ("piselli andato"), non da un log/screenshot rivisto riga per riga come per gli altri alimenti di oggi — livello di confidenza leggermente diverso, dichiarato qui per trasparenza, non un dato nascosto o inventato.
+- **Analogia usata**: `food_chickpeas_boiled` (stessa famiglia botanica Fabaceae, stesso matrix_id `legumes`), con `is_fortified_folate=false`.
+- **Piano B non usato** (scartato, non serviva): il record FDC 170420 era pulito e completo (17/17). Se in futuro si vuole anche una variante "surgelati" distinta, FDC 170105 (senza sale, frozen) è già stato individuato e può essere proposto come voce separata.
 
 ### Fave, semi maturi, bollite, senza sale — ✅ eseguito 2026-10-12
 

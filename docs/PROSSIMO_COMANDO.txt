@@ -1,9 +1,9 @@
-PROSSIMO ALIMENTO DA AGGIUNGERE: Piselli, verdi, cotti, bolliti, scolati, senza sale
+PROSSIMO ALIMENTO DA AGGIUNGERE: Melanzane, crude
 
 == PASSO 1 — copia e incolla questa riga nel terminale, poi premi Invio ==
 == (DRY RUN: è solo una prova, non scrive nulla sul database) ==
 
-npm run add-food -- --fdc-id=170420 --food-id=food_piselli_bolliti --name-it="Piselli, verdi, cotti, bolliti, scolati, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae
+npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae
 
 
 == PASSO 2 — manda il risultato a Claude in chat (screenshot o testo) ==
@@ -12,15 +12,14 @@ npm run add-food -- --fdc-id=170420 --food-id=food_piselli_bolliti --name-it="Pi
 == PASSO 3 — SOLO dopo l'OK di Claude, copia e incolla questa riga ==
 == (questa scrive davvero sul database) ==
 
-npm run add-food -- --fdc-id=170420 --food-id=food_piselli_bolliti --name-it="Piselli, verdi, cotti, bolliti, scolati, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae --apply
+npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae --apply
 
 
 == PASSO 4 — manda anche questo risultato a Claude ==
 
 ---
-Nota: questo è l'ultimo dei 4 alimenti preparati dal task di ricerca nel
-giro di oggi — dopo questo la coda "Pronti" sarà di nuovo vuota, finché il
-prossimo giro (gira ogni ora, 8-20) non ne trova altri. Questo file contiene
+Nota: dopo le melanzane, in coda ci sono già pronti anche zucchine, fagioli
+cannellini e fagioli borlotti (tutti 17/17 o quasi). Questo file contiene
 sempre e solo il PROSSIMO comando da eseguire (uno alla volta). Dopo che lo
 esegui e lo confermi in chat, Claude lo aggiorna. I dettagli completi
 restano in docs/GOLDEN_SET_READY_TO_RUN.md.
