@@ -12,27 +12,14 @@
 
 ## Pronti
 
-### Riso bianco, crudo, non arricchito (2026-10-12)
-
-- **FDC ID**: 169756, dataType **SR Legacy** — "Rice, white, long-grain, regular, raw, unenriched".
-- **Nutrienti attesi**: 17/17, nessun componente mancante atteso. Verifica indiretta (questo sandbox non ha rete verso `api.nal.usda.gov`): i dati "per cup" di un aggregatore (uhhospitals.org), convertiti a 100g con il peso standard FDC di 185g/cup (dedotto dall'energia: 675.25 kcal/cup ÷ 185g × 100 = 365.0 kcal/100g, identico al record gemello sotto), combaciano quasi al centesimo con TUTTI i nutrienti non soggetti ad arricchimento del record gemello arricchito (FDC 168877, stesso riso ma "enriched", dataType SR Legacy confermato via fetch diretto): zinco 1,09mg, calcio 28,0mg, magnesio 25,0mg, rame 0,22mg, selenio 15,1µg, vitamina K 0,10µg, fibra 1,30g, energia 365kcal, proteine 7,13g, grassi 0,66g, carboidrati 80,0g — tutti identici o quasi fra le due versioni, come ci si aspetta (l'arricchimento USA per legge riguarda solo ferro/tiamina/riboflavina/niacina/acido folico, non questi altri nutrienti). I due nutrienti che infatti differiscono sono esattamente quelli soggetti a fortificazione: ferro (0,80mg/100g qui, derivato dalla stessa conversione, vs 4,31mg/100g nel record arricchito — ~5x) e folato (qui 8,0µg totale, tutto "folato alimentare", acido folico 0 — vs 231µg totale di cui 223µg acido folico nel record arricchito). Nota metodologica onesta: un secondo aggregatore (triagemethod.com) riportava per questo stesso FDC ID alcuni valori per-100g incoerenti con questo cross-check (es. ferro 0,14mg, fibra 0,15g) — scartati come probabile errore di scraping di quella pagina, non usati. Tutti i valori sopra restano da confermare col fetch reale dell'endpoint FDC al momento dell'esecuzione (è lo script stesso a farlo, non questa ricerca).
-- **Perché NON si è usato il record arricchito (FDC 168877) invece**: mostra la stessa firma di arricchimento in stile USA già scartata per "pane comune" nella coda del PRD (acido folico 223µg/100g riportato separatamente dal folato alimentare, ferro 4,31mg/100g anomalo) — non rappresenterebbe il riso bianco comune italiano, non arricchito per legge in UE/Italia.
-- **Analogia dichiarata**: `food_pasta_enriched_dry` — unico cereale già presente nel Golden Set: stessa famiglia botanica (Poaceae), stesso tipo di matrice (cereale secco/crudo), `matrix_category_calcium` NULL/non applicabile, `is_heme_iron=false`. Differenza dichiarata rispetto all'analogia: a differenza di `food_pasta_enriched_dry`, questo record è **non arricchito** — `is_fortified_folate` resta `false` (default, omesso dal comando), scelta indipendente dall'analogia e basata sul dato FDC stesso (acido folico assente in questo record), non per analogia.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --apply
-  ```
-
-**Piano B (ricerca interattiva precedente, 2026-10-12, stesso giorno)** — un record FDC diverso per lo stesso alimento, trovato in chat prima che esistesse questo file: **FDC 2512381, dataType Foundation Foods**, "Rice, white, long grain, unenriched, raw" — letto direttamente (non per cross-validazione indiretta), 11/17 nutrienti riportati nella fonte consultata (mancano vitamina C/K/B12/folato/carotenoidi — non assunti zero, semplicemente non verificati in quella lettura). Usare SOLO se il dry-run sopra (FDC 169756) dà un riepilogo sospetto o la fetch fallisce — non lanciare entrambi, sono lo stesso alimento concettuale, creerebbero due righe duplicate nel Golden Set:
-  ```
-  npm run add-food -- --fdc-id=2512381 --food-id=food_rice_white_raw --name-it="Riso bianco a grani lunghi, crudo, non arricchito" --matrix-id=rice_white --matrix-description-it="Riso bianco a grani lunghi" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
-  ```
-  (aggiungere `--apply` solo dopo dry-run pulito, stesso schema)
+*(nessuna voce al momento — il task pianificato le aggiunge qui quando trova un match solido)*
 
 ## Eseguiti (archivio, ultimi 10)
 
-*(nessuno ancora)*
+### Riso bianco, crudo, non arricchito — ✅ eseguito 2026-10-12
+
+- **food_id**: `food_riso_bianco_raw`. FDC ID 169756 (SR Legacy, "Rice, white, long-grain, regular, raw, unenriched").
+- **Esito reale** (dal log dell'utente, comando `--apply` lanciato sul suo PC): `food_matrices_master "riso_bianco" creata`, `foods_raw "food_riso_bianco_raw" creato (draft)`, `nutrient_values: 17 righe inserite (draft)`, verifica difensiva post-scrittura passata (17/17 nutrienti rilette, tutto coerente). FDC description confermata al momento della scrittura reale: "Rice, white, long-grain, regular, raw, unenriched" — combacia con quanto previsto in fase di ricerca.
+- **Analogia usata**: `food_pasta_enriched_dry` (stessa famiglia botanica Poaceae), con `is_fortified_folate=false` perché questo record è esplicitamente non arricchito.
+- Resta `verification_status='draft'` finché `scripts/verify_golden_set_batch.ts` (o una revisione umana) non lo promuove esplicitamente — non ancora fatto.
+- **Piano B non usato** (scartato, non serviva): FDC 2512381 (Foundation Foods, stesso alimento concettuale, 11/17 nutrienti) — era pronto come riserva ma il piano A ha dato 17/17 pulito, quindi non è mai stato lanciato. Nessuna azione necessaria su di esso.
