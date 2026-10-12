@@ -744,7 +744,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
 
     **Coda — primo lotto (2026-10-11), NON esaustivo, da ampliare**. Un alimento alla volta, nell'ordine; ogni riga va aggiornata dal task con l'esito (✅ aggiunto come draft + food_id, oppure ⚠ + motivo se richiede revisione umana) e la data:
 
-    - Cereali/pane/pasta: pane comune, pane integrale, riso bianco, riso integrale, polenta (farina di mais), orzo perlato, farro
+    - Cereali/pane/pasta: ⚠ pane comune (nessun match FDC Foundation/SR Legacy convincente per pane italiano non arricchito — l'unico record SR Legacy generico, "Bread, Italian" FDC 174913, riporta 18µg/100g di acido folico separato dal folato alimentare e 105mg/100g di calcio, firma analitica di farina arricchita in stile USA — stesso limite già dichiarato sopra per "pasta di semola comune non arricchita"; i record Branded disponibili sono troppo incompleti, <10/17 nutrienti, es. FDC 1859632; serve CREA o altra fonte italiana, non ancora integrata), pane integrale, riso bianco, riso integrale, polenta (farina di mais), orzo perlato, farro
     - Legumi: fave, piselli, fagioli borlotti, fagioli cannellini
     - Verdura: zucchine, melanzane, pomodori, cipolle, aglio, peperoni, lattuga, zucca, finocchi, funghi champignon
     - Frutta: mele, banane, pere, uva, limoni, fragole, pesche, kiwi, fichi
