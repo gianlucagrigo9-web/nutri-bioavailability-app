@@ -27,6 +27,12 @@
   npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --apply
   ```
 
+**Piano B (ricerca interattiva precedente, 2026-10-12, stesso giorno)** — un record FDC diverso per lo stesso alimento, trovato in chat prima che esistesse questo file: **FDC 2512381, dataType Foundation Foods**, "Rice, white, long grain, unenriched, raw" — letto direttamente (non per cross-validazione indiretta), 11/17 nutrienti riportati nella fonte consultata (mancano vitamina C/K/B12/folato/carotenoidi — non assunti zero, semplicemente non verificati in quella lettura). Usare SOLO se il dry-run sopra (FDC 169756) dà un riepilogo sospetto o la fetch fallisce — non lanciare entrambi, sono lo stesso alimento concettuale, creerebbero due righe duplicate nel Golden Set:
+  ```
+  npm run add-food -- --fdc-id=2512381 --food-id=food_rice_white_raw --name-it="Riso bianco a grani lunghi, crudo, non arricchito" --matrix-id=rice_white --matrix-description-it="Riso bianco a grani lunghi" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
+  ```
+  (aggiungere `--apply` solo dopo dry-run pulito, stesso schema)
+
 ## Eseguiti (archivio, ultimi 10)
 
 *(nessuno ancora)*
