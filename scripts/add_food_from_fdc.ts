@@ -162,11 +162,11 @@ async function main() {
 
   const { data: sourceRow, error: sourceErr } = await supabaseAdmin
     .from("sources")
-    .select("source_id")
-    .eq("source_id", "USDA_FDC")
+    .select("id")
+    .eq("id", "USDA_FDC")
     .maybeSingle();
   if (sourceErr) fail(`Query sources fallita: ${sourceErr.message}`);
-  if (!sourceRow) fail(`source_id "USDA_FDC" non esiste in sources -- non dovrebbe succedere, da indagare prima di proseguire (non lo creo qui, non è compito di questo script).`);
+  if (!sourceRow) fail(`source "USDA_FDC" non esiste in sources (colonna id) -- non dovrebbe succedere, da indagare prima di proseguire (non lo creo qui, non è compito di questo script).`);
 
   // --- 2. Fetch FDC reale ---
   const url = `https://api.nal.usda.gov/fdc/v1/food/${fdcId}?api_key=${encodeURIComponent(USDA_FDC_API_KEY)}`;
