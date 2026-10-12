@@ -1,28 +1,34 @@
-PROSSIMO ALIMENTO DA AGGIUNGERE: Orzo perlato, crudo, non arricchito
+PROSSIMO ALIMENTO DA AGGIUNGERE: Farro perlato, secco, crudo
+
+ATTENZIONE — questo è diverso dagli altri finora: il record trovato ha solo
+10 nutrienti su 17 (mancano vitamina C, selenio, vitamina K, B12, folato,
+acido folico, i 3 carotenoidi — non per un errore, è il record ufficiale
+USDA stesso che per questo alimento specifico è ancora incompleto). Fai
+comunque il PASSO 1 come al solito, ma al PASSO 2 aspetta la mia conferma
+esplicita prima di passare al PASSO 3 (--apply), così controlliamo insieme
+che vada bene scriverlo comunque con questo gap dichiarato.
 
 == PASSO 1 — copia e incolla questa riga nel terminale, poi premi Invio ==
 == (DRY RUN: è solo una prova, non scrive nulla sul database) ==
 
-npm run add-food -- --fdc-id=170284 --food-id=food_orzo_perlato_raw --name-it="Orzo perlato, crudo, non arricchito" --matrix-id=orzo_perlato --matrix-description-it="Orzo perlato" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae
+npm run add-food -- --fdc-id=2710828 --food-id=food_farro_raw --name-it="Farro perlato, secco, crudo" --matrix-id=farro --matrix-description-it="Farro" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae
 
 
 == PASSO 2 — manda il risultato a Claude in chat (screenshot o testo) ==
+== QUESTA VOLTA: aspetta la risposta di Claude prima del Passo 3 ==
 
 
-== PASSO 3 — SOLO dopo l'OK di Claude, copia e incolla questa riga ==
+== PASSO 3 — SOLO dopo l'OK esplicito di Claude, copia e incolla questa riga ==
 == (questa scrive davvero sul database) ==
 
-npm run add-food -- --fdc-id=170284 --food-id=food_orzo_perlato_raw --name-it="Orzo perlato, crudo, non arricchito" --matrix-id=orzo_perlato --matrix-description-it="Orzo perlato" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae --apply
+npm run add-food -- --fdc-id=2710828 --food-id=food_farro_raw --name-it="Farro perlato, secco, crudo" --matrix-id=farro --matrix-description-it="Farro" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae --apply
 
 
 == PASSO 4 — manda anche questo risultato a Claude ==
 
 ---
-Nota: la ricerca automatica è ora più veloce (fino a 4 alimenti per ciclo, una
-volta all'ora) — in coda in GOLDEN_SET_READY_TO_RUN.md ci sono già pronti
-anche "farro" (attenzione: solo 10/17 nutrienti, gap dichiarato), "fave" e
-"piselli". Questo file contiene sempre e solo il PROSSIMO comando da
-eseguire (uno alla volta). Dopo che lo esegui e lo confermi in chat, Claude
-lo aggiorna con il successivo. I dettagli completi (perché questo alimento,
-fonti, alternative) restano in docs/GOLDEN_SET_READY_TO_RUN.md, se mai
-volessi guardarli — ma per usare il sistema ogni giorno basta questo file.
+Nota: dopo il farro, in coda ci sono già pronti anche "fave" e "piselli"
+(questi due puliti, 17/17 come al solito). Questo file contiene sempre e
+solo il PROSSIMO comando da eseguire (uno alla volta). Dopo che lo esegui e
+lo confermi in chat, Claude lo aggiorna con il successivo. I dettagli
+completi restano in docs/GOLDEN_SET_READY_TO_RUN.md.

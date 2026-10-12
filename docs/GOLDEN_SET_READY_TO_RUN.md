@@ -14,22 +14,6 @@
 
 ## Pronti
 
-### Orzo perlato, crudo, non arricchito (2026-10-12)
-
-- **FDC ID**: 170284, dataType **SR Legacy** — "Barley, pearled, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori letti dalla pagina aggregatore (getfoodfacts.com), che per questo FDC ID mostra l'intero pannello scaricato da FDC: energia 352kcal, proteine 9,91g, grassi 1,16g, carboidrati 77,7g, fibra 15,6g, ferro 2,50mg, zinco 2,13mg, calcio 29,0mg, vitamina C 0mg, magnesio 79,0mg, rame 0,42mg, selenio 37,7µg, vitamina K 2,20µg, vitamina B12 0µg, folato totale 23,0µg (= folato da alimenti = folato DFE), **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 13,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi riportati esplicitamente, quindi `other_provitamin_a_carotenoids_mcg` = 0 da due componenti noti, non un componente mancante).
-- **Perché questo record rappresenta bene l'orzo perlato comune italiano, non arricchito**: nessuna firma di arricchimento in stile USA — acido folico esplicitamente 0µg separato dal folato alimentare, calcio 29mg/100g nella norma per l'orzo (valore biologicamente plausibile per questo cereale specifico, non un'anomalia da conservante come nei casi di pane scartati altrove in questa coda). Record generico SR Legacy, non un prodotto Branded.
-- **Analogia dichiarata**: `food_riso_integrale_raw` (già reale nel DB, aggiunto in questa stessa coda il 2026-10-12) — stessa famiglia botanica Poaceae, stesso tipo di matrice (cereale secco/crudo, non arricchito), `matrix_category_calcium` NULL/non applicabile, `is_heme_iron=false`. `is_fortified_folate` resta `false` (default, omesso dal comando) in base al dato FDC stesso (acido folico=0µg), non per analogia.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170284 --food-id=food_orzo_perlato_raw --name-it="Orzo perlato, crudo, non arricchito" --matrix-id=orzo_perlato --matrix-description-it="Orzo perlato" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170284 --food-id=food_orzo_perlato_raw --name-it="Orzo perlato, crudo, non arricchito" --matrix-id=orzo_perlato --matrix-description-it="Orzo perlato" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae --apply
-  ```
-- **Piano B**: non necessario, il record FDC 170284 è pulito e completo (17/17).
-
 ### Farro perlato, secco, crudo (2026-10-12) — nutrienti incompleti, gap dichiarato
 
 - **FDC ID**: 2710828, dataType **Foundation Foods** — "Farro, pearled, dry, raw".
@@ -82,6 +66,14 @@
 - **Piano B**: non necessario, il record FDC 170420 è pulito e completo (17/17). Se in futuro si vuole anche una variante "surgelati" distinta, FDC 170105 (senza sale, frozen) è già stato individuato e può essere proposto come voce separata.
 
 ## Eseguiti (archivio, ultimi 10)
+
+### Orzo perlato, crudo, non arricchito — ✅ eseguito 2026-10-12
+
+- **food_id**: `food_orzo_perlato_raw`. FDC ID 170284 (SR Legacy, "Barley, pearled, raw").
+- **Esito reale** (dal log dell'utente, comando `--apply` lanciato sul suo PC): `food_matrices_master "orzo_perlato" creata`, `foods_raw "food_orzo_perlato_raw" creato (draft)`, `nutrient_values: 17 righe inserite (draft)`, verifica difensiva post-scrittura passata (17/17 nutrienti rilette, tutto draft come atteso). FDC description confermata al momento della scrittura reale: "Barley, pearled, raw" — combacia con quanto previsto in fase di ricerca.
+- **Analogia usata**: `food_riso_integrale_raw` (stessa famiglia botanica Poaceae, già reale nel DB), con `is_fortified_folate=false` — nessuna firma di arricchimento USA nel record (acido folico 0µg riportato esplicitamente separato dal folato alimentare, calcio 29mg/100g nella norma per l'orzo).
+- Resta `verification_status='draft'` finché `scripts/verify_golden_set_batch.ts` (o una revisione umana) non lo promuove esplicitamente — non ancora fatto.
+- **Piano B**: non serviva, il record FDC 170284 era pulito e completo (17/17).
 
 ### Farina di mais (per polenta), integrale, gialla, cruda, non arricchita — ✅ eseguito 2026-10-12
 
