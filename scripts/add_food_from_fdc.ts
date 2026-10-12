@@ -12,6 +12,7 @@
 // La scelta di QUALE alimento aggiungere, QUALE record FDC rappresenta
 // meglio quell'alimento (ricerca per nome, scelta fra più risultati), e
 // gli attributi categorici (is_heme_iron, matrix_category_calcium, ecc.)
+// e la categoria di compatibilita' dieta (--diet-category, vedi sotto)
 // NON sono decisi da questo script -- sono tutti argomenti a riga di
 // comando che chi lo lancia (sessione umana o agente con ragionamento,
 // MAI uno script rigido) deve aver già deciso, idealmente per analogia
@@ -51,15 +52,26 @@
 //     nutrient_values appena inserite, confrontando con quanto atteso.
 //
 // USO:
-//   npm run add-food -- --fdc-id=170457 --food-id=food_zucchine_raw \
-//     --name-it="Zucchine, crude" --matrix-id=zucchine \
+//   npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw \
+//     --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine \
 //     --matrix-description-it="Zucchine" --baseline-cooking-state=raw \
-//     --analogy-food-id=food_carrots_raw --zinc-bioaccessibility-bucket=none
+//     --analogy-food-id=food_carrots_raw --diet-category=plant_non_fruit \
+//     --botanical-family=Cucurbitaceae
 //   (dry-run di default; aggiungere --apply per scrivere davvero)
+//
+// --diet-category (OBBLIGATORIO, aggiunto 2026-10-12): meat_fish | egg_dairy |
+//   fresh_fruit | plant_non_fruit. Scrive foods_raw.diet_compat_vegetarian/
+//   vegan/fruitarian. Senza, l'alimento resterebbe NULL = "non classificato" e
+//   il filtro per tipo di dieta (lib/engine/dietTypeFilter.ts) lo escluderebbe
+//   da vegetariana/vegana/fruttariana -- vedi lib/fdc/dietCategory.ts.
+//   (L'esempio qui sopra citava in origine FDC 170457, che e' il POMODORO,
+//   non la zucchina: corretto con 169291, "Squash, summer, zucchini,
+//   includes skin, raw".)
 // ============================================================================
 
 import { createClient } from "@supabase/supabase-js";
 import { extractAllMappedNutrients, type FdcFoodDetail } from "../lib/fdc/nutrientMapping";
+import { dietFlagsToColumns, parseDietCategory } from "../lib/fdc/dietCategory";
 import { loadEnvLocal, requireEnv } from "../lib/loadEnvLocal";
 
 loadEnvLocal();
@@ -128,6 +140,13 @@ async function main() {
     fail(`--zinc-bioaccessibility-bucket non valido: "${zincBioaccessibilityBucket}" -- atteso uno fra ${VALID_ZINC_BUCKET.join(", ")}`);
   }
 
+  // Categoria dieta: validata PRIMA di qualunque rete/scrittura. Obbligatoria,
+  // nessun default (vedi lib/fdc/dietCategory.ts).
+  const dietParsed = parseDietCategory(argValue("diet-category"));
+  if (!dietParsed.ok) fail(dietParsed.error);
+  const dietCategory = dietParsed.category;
+  const dietColumns = dietFlagsToColumns(dietParsed.flags);
+
   console.log("=== Aggiunta alimento da FDC (Fase 4 punto 16) ===");
   console.log(`Modalità: ${APPLY ? "APPLY (scrive sul DB)" : "DRY RUN (nessuna scrittura -- passa --apply per scrivere davvero)"}`);
   console.log(`food_id=${foodId}  fdc_id=${fdcId}  matrix_id=${matrixId}  analogia dichiarata=${analogyFoodId}\n`);
@@ -194,7 +213,7 @@ async function main() {
 
   console.log("\n=== Riepilogo scrittura prevista ===");
   if (matrixNeedsInsert) console.log(`+ food_matrices_master: ${matrixId} ("${matrixDescriptionIt}")`);
-  console.log(`+ foods_raw: ${foodId} ("${nameIt}", matrix=${matrixId}, cooking_state=${baselineCookingState}, is_heme_iron=${isHemeIron}, matrix_category_calcium=${matrixCategoryCalcium ?? "NULL"}, carotenoid_matrix_state=${carotenoidMatrixState ?? "NULL"}, zinc_bioaccessibility_bucket=${zincBioaccessibilityBucket}, is_fortified_folate=${isFortifiedFolate}, botanical_family=${botanicalFamily ?? "NULL"}, fdc_id=${fdcId}, fdc_name="${fdcFood.description}", verification_status=draft) -- attributi categorici per analogia dichiarata con ${analogyFoodId}`);
+  console.log(`+ foods_raw: ${foodId} ("${nameIt}", matrix=${matrixId}, cooking_state=${baselineCookingState}, is_heme_iron=${isHemeIron}, matrix_category_calcium=${matrixCategoryCalcium ?? "NULL"}, carotenoid_matrix_state=${carotenoidMatrixState ?? "NULL"}, zinc_bioaccessibility_bucket=${zincBioaccessibilityBucket}, is_fortified_folate=${isFortifiedFolate}, botanical_family=${botanicalFamily ?? "NULL"}, diet=${dietCategory} (vegetarian=${dietColumns.diet_compat_vegetarian}, vegan=${dietColumns.diet_compat_vegan}, fruitarian=${dietColumns.diet_compat_fruitarian}), fdc_id=${fdcId}, fdc_name="${fdcFood.description}", verification_status=draft) -- attributi categorici per analogia dichiarata con ${analogyFoodId}`);
   console.log(`+ nutrient_values: ${nutrientCodes.length} righe (source_id=USDA_FDC, verification_status=draft)`);
 
   if (!APPLY) {
@@ -220,6 +239,7 @@ async function main() {
     zinc_bioaccessibility_bucket: zincBioaccessibilityBucket,
     is_fortified_folate: isFortifiedFolate,
     botanical_family: botanicalFamily,
+    ...dietColumns,
     fdc_id: fdcId,
     fdc_name: fdcFood.description ?? null,
     verification_status: "draft",
@@ -243,10 +263,17 @@ async function main() {
   // --- 5. Verifica difensiva finale: ri-leggi e confronta ---
   const { data: verifyFood, error: verifyFoodErr } = await supabaseAdmin
     .from("foods_raw")
-    .select("food_id, fdc_id, verification_status")
+    .select("food_id, fdc_id, verification_status, diet_compat_vegetarian, diet_compat_vegan, diet_compat_fruitarian")
     .eq("food_id", foodId)
     .maybeSingle();
   if (verifyFoodErr || !verifyFood) fail(`Verifica post-scrittura fallita: foods_raw non rilegge "${foodId}" (${verifyFoodErr?.message ?? "nessuna riga"})`);
+  if (
+    verifyFood.diet_compat_vegetarian !== dietColumns.diet_compat_vegetarian ||
+    verifyFood.diet_compat_vegan !== dietColumns.diet_compat_vegan ||
+    verifyFood.diet_compat_fruitarian !== dietColumns.diet_compat_fruitarian
+  ) {
+    fail(`Verifica post-scrittura: compatibilita' dieta di "${foodId}" non corrisponde a quanto scritto (veg=${verifyFood.diet_compat_vegetarian}, vegan=${verifyFood.diet_compat_vegan}, fruit=${verifyFood.diet_compat_fruitarian}, atteso categoria ${dietCategory})`);
+  }
   if (verifyFood.fdc_id !== fdcId || verifyFood.verification_status !== "draft") {
     fail(`Verifica post-scrittura: foods_raw per "${foodId}" ha valori inattesi (fdc_id=${verifyFood.fdc_id}, status=${verifyFood.verification_status})`);
   }
@@ -261,7 +288,7 @@ async function main() {
     fail(`Verifica post-scrittura: attese ${nutrientRows.length} righe nutrient_values per "${foodId}", trovate ${verifyCount}.`);
   }
 
-  console.log(`\n✓ Verifica difensiva passata: "${foodId}" presente con ${verifyCount} righe nutrient_values, tutto draft come atteso.`);
+  console.log(`\n✓ Verifica difensiva passata: "${foodId}" presente con ${verifyCount} righe nutrient_values, tutto draft come atteso, classificato dieta=${dietCategory}.`);
   console.log("Ricorda: resta 'draft' finché scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.");
 }
 

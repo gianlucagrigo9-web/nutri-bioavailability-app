@@ -33,14 +33,14 @@ export interface DietCompatibilityFlags {
 }
 
 // Carne/pesce/pollame: false su tutti e tre gli assi.
-const MEAT_FISH: DietCompatibilityFlags = { vegetarian: false, vegan: false, fruitarian: false };
+export const MEAT_FISH: DietCompatibilityFlags = { vegetarian: false, vegan: false, fruitarian: false };
 // Uova/latticini: vegetariano sì, vegano no, fruttariano no.
-const EGG_DAIRY: DietCompatibilityFlags = { vegetarian: true, vegan: false, fruitarian: false };
+export const EGG_DAIRY: DietCompatibilityFlags = { vegetarian: true, vegan: false, fruitarian: false };
 // Frutta fresca: compatibile su tutti e tre gli assi.
-const FRESH_FRUIT: DietCompatibilityFlags = { vegetarian: true, vegan: true, fruitarian: true };
+export const FRESH_FRUIT: DietCompatibilityFlags = { vegetarian: true, vegan: true, fruitarian: true };
 // Verdure/legumi/frutta secca/pasta di semola: vegetariano e vegano sì,
 // fruttariano no (definizione restrittiva dichiarata nel PRD).
-const PLANT_NON_FRUIT: DietCompatibilityFlags = { vegetarian: true, vegan: true, fruitarian: false };
+export const PLANT_NON_FRUIT: DietCompatibilityFlags = { vegetarian: true, vegan: true, fruitarian: false };
 
 export const GOLDEN_SET_DIET_COMPATIBILITY: Readonly<Record<string, DietCompatibilityFlags>> = {
   food_beef_ground_cooked: MEAT_FISH,

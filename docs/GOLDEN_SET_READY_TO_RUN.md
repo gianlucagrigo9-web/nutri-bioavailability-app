@@ -6,11 +6,111 @@
 - Una voce per alimento, più recenti in cima.
 - Ogni voce ha: alimento, FDC ID + dataType, quanti nutrienti su 17 trovati, l'analogia dichiarata, i due comandi (dry-run e apply).
 - Quando esegui un comando da qui e confermi l'esito (dal log reale, non a sensazione), la voce va spostata in "Eseguiti" con la data ed eventualmente la riga nella coda di `docs/PRD.md` va marcata `✅` — questo lavoro di chiusura lo fa una sessione interattiva (questa chat), non il task pianificato stesso (che prepara soltanto, non segue mai l'esito di un comando che non ha eseguito lui).
+- **Dal 2026-10-12 sera ogni comando richiede `--diet-category` (meat_fish | egg_dairy | fresh_fruit | plant_non_fruit)**: senza, lo script si ferma prima di scrivere. Motivo: gli alimenti senza classificazione dieta venivano esclusi in silenzio dai filtri vegetariano/vegano/fruttariano (vedi `lib/fdc/dietCategory.ts` e `docs/PRD.md` §9 Fase 4.16).
 - Se un comando qui elencato fallisce o dà un riepilogo diverso da quanto previsto, dimmelo in chat: la voce resta qui finché non si chiarisce, non va rimossa automaticamente.
 
 ---
 
 ## Pronti
+
+### Lotto 19 alimenti vegetali — verdura e frutta (2026-10-12, sera, sessione interattiva)
+
+**Come e' stato preparato.** Ogni FDC ID e' stato verificato aprendo il record `fdc.nal.usda.gov/portal-data/external/<id>` (WebFetch, che il 2026-10-12 sera risulta raggiungibile da questo ambiente — la nota precedente sul blocco riguardava `api.nal.usda.gov`) e controllando che la descrizione coincida con l'alimento voluto. Due ID che avevo in mente a memoria erano sbagliati e sono stati scartati dopo il controllo (uva americana invece di europea; ananas invece di fichi). Per tutti i 19 i valori letti mostrano 17/17 nutrienti presenti e acido folico = 0 (nessuna firma di arricchimento tipo USA). **Questi valori sono stati letti tramite un riepilogo automatico della pagina: valgono come controllo di plausibilita', non come prova. La prova e' il dry-run dello script, che ri-scarica il record vero.**
+
+**Cosa guardare nel dry-run**: (1) la riga `FDC description:` deve coincidere con la descrizione attesa in tabella; (2) `Nutrienti estratti (17/17)` — se e' meno di 17, NON applicare quell'alimento e dimmelo; (3) nessuna riga `ERRORE`.
+
+**Attributi comuni (decisi per analogia, tutti dichiarati, nessuno indovinato):** `is_heme_iron=false` (omesso = false), `matrix_category_calcium` NULL (stesso trattamento di carote/broccoli/patate: le categorie ossalati esistono solo per spinaci/kale/latte), `--carotenoid-matrix-state=raw_intact` per tutti i crudi vegetali (se non lo si passa, il motore tratta il beta-carotene come "cotto" e lo sovrastima del ~57%, vedi `docs/PENDING_HUMAN_ACTIONS.md`), `is_fortified_folate=false`, `zinc_bioaccessibility_bucket=none`. Ogni alimento ha una **matrice propria** (non riusa `leafy_greens`/`legumes`): cosi' non eredita i fattori di ritenzione derivati da spinaci/legumi, che sarebbero sbagliati per lui. Contropartita: nessun fattore di ritenzione finche' non si aggiunge la riga cotta — oggi questi 19 compaiono solo "Crudo".
+
+| # | food_id | FDC ID | Descrizione FDC attesa (la stampa il dry-run) | Dieta |
+|---|---|---|---|---|
+| 1 | `food_tomato_raw` | 170457 | Tomatoes, red, ripe, raw, year round average | plant_non_fruit |
+| 2 | `food_eggplant_raw` | 169228 | Eggplant, raw | plant_non_fruit |
+| 3 | `food_onion_raw` | 170000 | Onions, raw | plant_non_fruit |
+| 4 | `food_garlic_raw` | 169230 | Garlic, raw | plant_non_fruit |
+| 5 | `food_pepper_red_raw` | 170108 | Peppers, sweet, red, raw | plant_non_fruit |
+| 6 | `food_lettuce_romaine_raw` | 169247 | Lettuce, cos or romaine, raw | plant_non_fruit |
+| 7 | `food_pumpkin_raw` | 168448 | Pumpkin, raw | plant_non_fruit |
+| 8 | `food_fennel_raw` | 169385 | Fennel, bulb, raw | plant_non_fruit |
+| 9 | `food_mushroom_white_raw` | 169251 | Mushrooms, white, raw | plant_non_fruit |
+| 10 | `food_apple_with_skin_raw` | 171688 | Apples, raw, with skin (Includes foods for USDA's Food Distribution Program) | fresh_fruit |
+| 11 | `food_banana_raw` | 173944 | Bananas, raw | fresh_fruit |
+| 12 | `food_pear_raw` | 169118 | Pears, raw | fresh_fruit |
+| 13 | `food_grapes_european_raw` | 174683 | Grapes, red or green (European type, such as Thompson seedless), raw | fresh_fruit |
+| 14 | `food_lemon_peeled_raw` | 167746 | Lemons, raw, without peel | fresh_fruit |
+| 15 | `food_strawberry_raw` | 167762 | Strawberries, raw | fresh_fruit |
+| 16 | `food_peach_yellow_raw` | 169928 | Peaches, yellow, raw | fresh_fruit |
+| 17 | `food_kiwi_green_raw` | 168153 | Kiwifruit, green, raw | fresh_fruit |
+| 18 | `food_fig_raw` | 173021 | Figs, raw | fresh_fruit |
+| 19 | `food_peas_green_raw` | 170419 | Peas, green, raw | plant_non_fruit |
+
+**Note per alimento (solo dove serve):**
+- **Pomodori rossi, crudi** (`food_tomato_raw`): Ortaggio botanicamente frutto: per il PRD resta plant_non_fruit (non fruttariano).
+- **Aglio, crudo** (`food_garlic_raw`): Condimento: i valori per 100g sono molto diversi da un'abituale porzione (pochi grammi).
+- **Peperoni rossi, crudi** (`food_pepper_red_raw`): Solo il rosso: verde e giallo hanno composizione diversa (non ancora in coda).
+- **Lattuga romana, cruda** (`food_lettuce_romaine_raw`): Scelta mia fra le varianti di lattuga FDC (romaine, green leaf, iceberg, butterhead): nome esplicito 'romana' per non spacciarla per 'lattuga' generica. Se preferisci un'altra variante, dimmelo prima di applicare.
+- **Zucca, cruda** (`food_pumpkin_raw`): Il record FDC non ha il campo dataType (c'e' foodType SR Legacy): non e' un problema, solo una stranezza di formato. Alfa-carotene 4020 ug/100g finisce in other_provitamin_a_carotenoids_mcg.
+- **Funghi champignon, crudi** (`food_mushroom_white_raw`): Funghi: non piante, quindi nessuna famiglia botanica (stesso trattamento dei cibi animali nel contatore di diversita'); nessun --carotenoid-matrix-state perche' beta-carotene = 0.
+- **Mele, crude (con buccia)** (`food_apple_with_skin_raw`): Id diverso da food_apple_raw: quell'id esiste gia' nel DB (riga demo legacy fuori dal Golden Set) e lo script si fermerebbe.
+- **Uva (tipo europeo), cruda** (`food_grapes_european_raw`): ATTENZIONE: l'ID 174682 e' l'uva AMERICANA (slip skin), non quella italiana: usare 174683.
+- **Limoni, crudi (senza buccia)** (`food_lemon_peeled_raw`): Senza buccia: non rappresenta il limone intero ne' la scorza.
+- **Pesche gialle, crude** (`food_peach_yellow_raw`): Solo pesca gialla (la bianca e' un record FDC diverso, non in coda).
+- **Fichi, crudi** (`food_fig_raw`): Fichi freschi (non secchi).
+- **Piselli freschi, crudi** (`food_peas_green_raw`): Piselli freschi crudi: non coprono surgelati ne' in scatola (record diversi). Zinco/fitati: i fitati non sono in FDC (gap gia' noto per i legumi).
+
+**1) Dry-run di tutti e 19** (incolla l'intero blocco in PowerShell dalla cartella del progetto; il filtro mostra solo le righe che servono, 2-3 per alimento):
+```
+npm run add-food -- --fdc-id=170457 --food-id=food_tomato_raw --name-it="Pomodori rossi, crudi" --matrix-id=pomodori --matrix-description-it="Pomodori" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169228 --food-id=food_eggplant_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=170000 --food-id=food_onion_raw --name-it="Cipolle, crude" --matrix-id=cipolle --matrix-description-it="Cipolle" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169230 --food-id=food_garlic_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=170108 --food-id=food_pepper_red_raw --name-it="Peperoni rossi, crudi" --matrix-id=peperoni_rossi --matrix-description-it="Peperoni rossi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169247 --food-id=food_lettuce_romaine_raw --name-it="Lattuga romana, cruda" --matrix-id=lattuga_romana --matrix-description-it="Lattuga romana" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=168448 --food-id=food_pumpkin_raw --name-it="Zucca, cruda" --matrix-id=zucca --matrix-description-it="Zucca" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169385 --food-id=food_fennel_raw --name-it="Finocchi, crudi (bulbo)" --matrix-id=finocchi --matrix-description-it="Finocchi (bulbo)" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169251 --food-id=food_mushroom_white_raw --name-it="Funghi champignon, crudi" --matrix-id=funghi_champignon --matrix-description-it="Funghi champignon" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=171688 --food-id=food_apple_with_skin_raw --name-it="Mele, crude (con buccia)" --matrix-id=mele --matrix-description-it="Mele" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=173944 --food-id=food_banana_raw --name-it="Banane, crude" --matrix-id=banane --matrix-description-it="Banane" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169118 --food-id=food_pear_raw --name-it="Pere, crude" --matrix-id=pere --matrix-description-it="Pere" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=174683 --food-id=food_grapes_european_raw --name-it="Uva (tipo europeo), cruda" --matrix-id=uva --matrix-description-it="Uva" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Vitaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=167746 --food-id=food_lemon_peeled_raw --name-it="Limoni, crudi (senza buccia)" --matrix-id=limoni --matrix-description-it="Limoni (senza buccia)" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=167762 --food-id=food_strawberry_raw --name-it="Fragole, crude" --matrix-id=fragole --matrix-description-it="Fragole" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169928 --food-id=food_peach_yellow_raw --name-it="Pesche gialle, crude" --matrix-id=pesche --matrix-description-it="Pesche gialle" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=168153 --food-id=food_kiwi_green_raw --name-it="Kiwi verde, crudo" --matrix-id=kiwi --matrix-description-it="Kiwi verde" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=173021 --food-id=food_fig_raw --name-it="Fichi, crudi" --matrix-id=fichi --matrix-description-it="Fichi" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Moraceae --diet-category=fresh_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Piselli freschi, crudi" --matrix-id=piselli --matrix-description-it="Piselli freschi" --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+```
+
+**2) Apply** (solo per gli alimenti il cui dry-run e' pulito; per applicarli tutti, incolla l'intero blocco — lo script si ferma da solo e senza scrivere se un food_id esiste gia'):
+```
+npm run add-food -- --fdc-id=170457 --food-id=food_tomato_raw --name-it="Pomodori rossi, crudi" --matrix-id=pomodori --matrix-description-it="Pomodori" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169228 --food-id=food_eggplant_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=170000 --food-id=food_onion_raw --name-it="Cipolle, crude" --matrix-id=cipolle --matrix-description-it="Cipolle" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169230 --food-id=food_garlic_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=170108 --food-id=food_pepper_red_raw --name-it="Peperoni rossi, crudi" --matrix-id=peperoni_rossi --matrix-description-it="Peperoni rossi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169247 --food-id=food_lettuce_romaine_raw --name-it="Lattuga romana, cruda" --matrix-id=lattuga_romana --matrix-description-it="Lattuga romana" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=168448 --food-id=food_pumpkin_raw --name-it="Zucca, cruda" --matrix-id=zucca --matrix-description-it="Zucca" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169385 --food-id=food_fennel_raw --name-it="Finocchi, crudi (bulbo)" --matrix-id=finocchi --matrix-description-it="Finocchi (bulbo)" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169251 --food-id=food_mushroom_white_raw --name-it="Funghi champignon, crudi" --matrix-id=funghi_champignon --matrix-description-it="Funghi champignon" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=171688 --food-id=food_apple_with_skin_raw --name-it="Mele, crude (con buccia)" --matrix-id=mele --matrix-description-it="Mele" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=173944 --food-id=food_banana_raw --name-it="Banane, crude" --matrix-id=banane --matrix-description-it="Banane" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=169118 --food-id=food_pear_raw --name-it="Pere, crude" --matrix-id=pere --matrix-description-it="Pere" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=174683 --food-id=food_grapes_european_raw --name-it="Uva (tipo europeo), cruda" --matrix-id=uva --matrix-description-it="Uva" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Vitaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=167746 --food-id=food_lemon_peeled_raw --name-it="Limoni, crudi (senza buccia)" --matrix-id=limoni --matrix-description-it="Limoni (senza buccia)" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=167762 --food-id=food_strawberry_raw --name-it="Fragole, crude" --matrix-id=fragole --matrix-description-it="Fragole" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=169928 --food-id=food_peach_yellow_raw --name-it="Pesche gialle, crude" --matrix-id=pesche --matrix-description-it="Pesche gialle" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=168153 --food-id=food_kiwi_green_raw --name-it="Kiwi verde, crudo" --matrix-id=kiwi --matrix-description-it="Kiwi verde" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=173021 --food-id=food_fig_raw --name-it="Fichi, crudi" --matrix-id=fichi --matrix-description-it="Fichi" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Moraceae --diet-category=fresh_fruit --apply
+npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Piselli freschi, crudi" --matrix-id=piselli --matrix-description-it="Piselli freschi" --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucchine, crude (con buccia) (2026-10-12)
+
+- **FDC ID**: 169291, "Squash, summer, zucchini, includes skin, raw", 17/17 nutrienti. Analogia: `food_carrots_raw`. **Dry-run eseguito dall'utente il 2026-10-12: esito pulito.** Esito dell'`--apply` NON ancora confermato in chat.
+- Comando con `--apply` (aggiornato: ora richiede `--diet-category`):
+  ```
+  npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+  ```
+- Se l'`--apply` e' gia' stato lanciato con la versione VECCHIA dello script (senza `--diet-category`): non rifarlo (fallirebbe, l'alimento esiste), esegui invece `fix_diet_compat_zucchine.sql` nell'editor SQL di Supabase.
 
 ### Riso bianco, crudo, non arricchito (2026-10-12)
 
@@ -20,16 +120,16 @@
 - **Analogia dichiarata**: `food_pasta_enriched_dry` — unico cereale già presente nel Golden Set: stessa famiglia botanica (Poaceae), stesso tipo di matrice (cereale secco/crudo), `matrix_category_calcium` NULL/non applicabile, `is_heme_iron=false`. Differenza dichiarata rispetto all'analogia: a differenza di `food_pasta_enriched_dry`, questo record è **non arricchito** — `is_fortified_folate` resta `false` (default, omesso dal comando), scelta indipendente dall'analogia e basata sul dato FDC stesso (acido folico assente in questo record), non per analogia.
 - **Comando dry-run**:
   ```
-  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
+  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --diet-category=plant_non_fruit
   ```
 - **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
   ```
-  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --apply
+  npm run add-food -- --fdc-id=169756 --food-id=food_riso_bianco_raw --name-it="Riso bianco, crudo, non arricchito" --matrix-id=riso_bianco --matrix-description-it="Riso bianco" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
   ```
 
 **Piano B (ricerca interattiva precedente, 2026-10-12, stesso giorno)** — un record FDC diverso per lo stesso alimento, trovato in chat prima che esistesse questo file: **FDC 2512381, dataType Foundation Foods**, "Rice, white, long grain, unenriched, raw" — letto direttamente (non per cross-validazione indiretta), 11/17 nutrienti riportati nella fonte consultata (mancano vitamina C/K/B12/folato/carotenoidi — non assunti zero, semplicemente non verificati in quella lettura). Usare SOLO se il dry-run sopra (FDC 169756) dà un riepilogo sospetto o la fetch fallisce — non lanciare entrambi, sono lo stesso alimento concettuale, creerebbero due righe duplicate nel Golden Set:
   ```
-  npm run add-food -- --fdc-id=2512381 --food-id=food_rice_white_raw --name-it="Riso bianco a grani lunghi, crudo, non arricchito" --matrix-id=rice_white --matrix-description-it="Riso bianco a grani lunghi" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
+  npm run add-food -- --fdc-id=2512381 --food-id=food_rice_white_raw --name-it="Riso bianco a grani lunghi, crudo, non arricchito" --matrix-id=rice_white --matrix-description-it="Riso bianco a grani lunghi" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --diet-category=plant_non_fruit
   ```
   (aggiungere `--apply` solo dopo dry-run pulito, stesso schema)
 
