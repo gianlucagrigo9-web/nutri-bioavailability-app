@@ -1,25 +1,13 @@
-PROSSIMO ALIMENTO DA AGGIUNGERE: Farina di mais (per polenta), integrale, gialla, cruda, non arricchita
+NESSUN COMANDO PRONTO IN QUESTO MOMENTO
 
-== PASSO 1 — copia e incolla questa riga nel terminale, poi premi Invio ==
-== (DRY RUN: è solo una prova, non scrive nulla sul database) ==
+Hai appena aggiunto "farina di mais (polenta)" — ottimo lavoro, sono 3 alimenti
+reali aggiunti oggi (riso bianco, riso integrale, farina di mais).
 
-npm run add-food -- --fdc-id=169697 --food-id=food_farina_di_mais_raw --name-it="Farina di mais, integrale, gialla, cruda, non arricchita" --matrix-id=farina_di_mais --matrix-description-it="Farina di mais (per polenta)" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
+Il prossimo in coda è "orzo perlato" o "farro", ma il task di ricerca
+automatico (gira da solo ogni poche ore) non ha ancora trovato un match FDC
+abbastanza buono da proporre qui. Non devi fare nulla adesso: quando la
+ricerca è pronta, questo file verrà aggiornato con il prossimo comando da
+copiare, esattamente come le altre volte.
 
-
-== PASSO 2 — manda il risultato a Claude in chat (screenshot o testo) ==
-
-
-== PASSO 3 — SOLO dopo l'OK di Claude, copia e incolla questa riga ==
-== (questa scrive davvero sul database) ==
-
-npm run add-food -- --fdc-id=169697 --food-id=food_farina_di_mais_raw --name-it="Farina di mais, integrale, gialla, cruda, non arricchita" --matrix-id=farina_di_mais --matrix-description-it="Farina di mais (per polenta)" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --apply
-
-
-== PASSO 4 — manda anche questo risultato a Claude ==
-
----
-Nota: questo file contiene sempre e solo il PROSSIMO comando da eseguire (uno alla
-volta). Dopo che lo esegui e lo confermi in chat, Claude lo aggiorna con il
-successivo. I dettagli completi (perché questo alimento, fonti, alternative)
-restano in docs/GOLDEN_SET_READY_TO_RUN.md, se mai volessi guardarli — ma per
-usare il sistema ogni giorno basta questo file.
+Se vuoi controllare tu stesso a che punto è la ricerca, i dettagli completi
+restano in docs/GOLDEN_SET_READY_TO_RUN.md (sezione "Pronti").
