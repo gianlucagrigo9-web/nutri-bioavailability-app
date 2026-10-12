@@ -14,22 +14,6 @@
 
 ## Pronti
 
-### Melanzane, crude (2026-10-12)
-
-- **FDC ID**: 169228, dataType **SR Legacy** — "Eggplant, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, che riporta esplicitamente FDC ID 169228 come SR Legacy): energia 25,0kcal, proteine 0,98g, grassi 0,18g, carboidrati 5,88g, fibra 3,00g, calcio 9,00mg, ferro 0,23mg, zinco 0,16mg, magnesio 14,0mg, rame 0,081mg, selenio 0,30µg, vitamina C 2,20mg, vitamina K 3,50µg, vitamina B12 0µg, folato totale 22,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 14,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
-- **Perché questo record rappresenta bene le melanzane comuni italiane**: nessuna firma di arricchimento in stile USA, calcio basso (9mg/100g) coerente con una verdura cruda non trattata. Record generico SR Legacy, non Branded. Scartato un secondo candidato, Foundation Foods FDC 2685577 ("Eggplant, raw"): meno completo sulla pagina consultata (selenio, vitamina K, B12, acido folico e tutti i carotenoidi non riportati) e con l'energia incoerente fra le sezioni della stessa pagina (20 vs 22,4 vs 22 kcal) — segnale di dato meno pulito del record SR Legacy scelto.
-- **Analogia dichiarata**: `food_potato_boiled_in_skin` — stessa famiglia botanica Solanaceae (unica già presente nel Golden Set per questa famiglia), `matrix_category_calcium` NULL, `is_heme_iron=false`. Il beta-carotene della melanzana è trascurabile (14µg/100g, ordini di grandezza sotto le carote) e la patata, stessa famiglia, non ha `carotenoid_matrix_state` impostato nel Golden Set esistente: per coerenza con questa analogia, `carotenoid_matrix_state` resta NULL anche per la melanzana, invece di forzare una classificazione raw_intact/cooked_or_disrupted pensata per alimenti dove i carotenoidi provitaminici A sono un contributo nutrizionale rilevante.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae --apply
-  ```
-- **Piano B**: non necessario, il record FDC 169228 è pulito e completo (17/17).
-
 ### Zucchine, crude (con buccia) (2026-10-12)
 
 - **FDC ID**: 169291, dataType **SR Legacy** — "Squash, summer, zucchini, includes skin, raw".
@@ -95,6 +79,14 @@
   npm run add-food -- --fdc-id=170420 --food-id=food_piselli_bolliti --name-it="Piselli, verdi, cotti, bolliti, scolati, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae --apply
   ```
 ## Eseguiti (archivio, ultimi 10)
+
+### Melanzane, crude — ✅ eseguito 2026-10-12
+
+- **food_id**: `food_melanzane_raw`. FDC ID 169228 (SR Legacy, "Eggplant, raw").
+- **Esito reale** (dal log dell'utente, dry-run poi `--apply` sul suo PC): dry-run 17/17 nutrienti estratti, FDC description "Eggplant, raw" combaciante con quanto previsto in fase di ricerca, nessun gap. Riepilogo scrittura prevista mostrato: `food_matrices_master` nuova riga `melanzane`, `foods_raw` nuova riga `food_melanzane_raw` (draft), `nutrient_values` 17 righe (draft, source_id=USDA_FDC). Utente ha poi confermato il comando `--apply`.
+- **Analogia usata**: `food_potato_boiled_in_skin` (stessa famiglia botanica Solanaceae), `carotenoid_matrix_state` lasciato NULL per coerenza con l'analogia (beta-carotene trascurabile, 14µg/100g).
+- Resta `verification_status='draft'` finché una revisione umana o meccanica non lo promuove esplicitamente — non ancora fatto.
+- **Piano B non usato** (scartato, non serviva): il record FDC 169228 era pulito e completo (17/17), lo scarto del secondo candidato Foundation Foods era già deciso in fase di ricerca.
 
 ### Piselli, verdi, cotti, bolliti, scolati, senza sale — ✅ eseguito 2026-10-12
 
