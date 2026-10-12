@@ -1,9 +1,9 @@
-PROSSIMO ALIMENTO DA AGGIUNGERE: Zucchine, crude (con buccia)
+PROSSIMO ALIMENTO DA AGGIUNGERE: Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale
 
 == PASSO 1 — copia e incolla questa riga nel terminale, poi premi Invio ==
 == (DRY RUN: è solo una prova, non scrive nulla sul database) ==
 
-npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit
 
 
 == PASSO 2 — manda il risultato a Claude in chat (screenshot o testo) ==
@@ -12,15 +12,14 @@ npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucch
 == PASSO 3 — SOLO dopo l'OK di Claude, copia e incolla questa riga ==
 == (questa scrive davvero sul database) ==
 
-npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
 
 
 == PASSO 4 — manda anche questo risultato a Claude ==
 
 ---
-Nota: dopo le zucchine, in coda ci sono già pronti anche fagioli cannellini
-e fagioli borlotti (entrambi 17/17 o quasi), più un lotto di 18 alimenti
-(verdura e frutta). Questo file contiene
+Nota: dopo i cannellini, in coda ci sono già pronti anche i fagioli borlotti
+e un lotto di 18 alimenti (verdura e frutta). Questo file contiene
 sempre e solo il PROSSIMO comando da eseguire (uno alla volta). Dopo che lo
 esegui e lo confermi in chat, Claude lo aggiorna. I dettagli completi
 restano in docs/GOLDEN_SET_READY_TO_RUN.md.
