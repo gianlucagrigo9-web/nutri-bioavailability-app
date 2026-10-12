@@ -14,6 +14,71 @@
 
 ## Pronti
 
+### Melanzane, crude (2026-10-12)
+
+- **FDC ID**: 169228, dataType **SR Legacy** — "Eggplant, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, che riporta esplicitamente FDC ID 169228 come SR Legacy): energia 25,0kcal, proteine 0,98g, grassi 0,18g, carboidrati 5,88g, fibra 3,00g, calcio 9,00mg, ferro 0,23mg, zinco 0,16mg, magnesio 14,0mg, rame 0,081mg, selenio 0,30µg, vitamina C 2,20mg, vitamina K 3,50µg, vitamina B12 0µg, folato totale 22,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 14,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
+- **Perché questo record rappresenta bene le melanzane comuni italiane**: nessuna firma di arricchimento in stile USA, calcio basso (9mg/100g) coerente con una verdura cruda non trattata. Record generico SR Legacy, non Branded. Scartato un secondo candidato, Foundation Foods FDC 2685577 ("Eggplant, raw"): meno completo sulla pagina consultata (selenio, vitamina K, B12, acido folico e tutti i carotenoidi non riportati) e con l'energia incoerente fra le sezioni della stessa pagina (20 vs 22,4 vs 22 kcal) — segnale di dato meno pulito del record SR Legacy scelto.
+- **Analogia dichiarata**: `food_potato_boiled_in_skin` — stessa famiglia botanica Solanaceae (unica già presente nel Golden Set per questa famiglia), `matrix_category_calcium` NULL, `is_heme_iron=false`. Il beta-carotene della melanzana è trascurabile (14µg/100g, ordini di grandezza sotto le carote) e la patata, stessa famiglia, non ha `carotenoid_matrix_state` impostato nel Golden Set esistente: per coerenza con questa analogia, `carotenoid_matrix_state` resta NULL anche per la melanzana, invece di forzare una classificazione raw_intact/cooked_or_disrupted pensata per alimenti dove i carotenoidi provitaminici A sono un contributo nutrizionale rilevante.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169228 --food-id=food_melanzane_raw --name-it="Melanzane, crude" --matrix-id=melanzane --matrix-description-it="Melanzane" --baseline-cooking-state=raw --analogy-food-id=food_potato_boiled_in_skin --botanical-family=Solanaceae --apply
+  ```
+- **Piano B**: non necessario, il record FDC 169228 è pulito e completo (17/17).
+
+### Zucchine, crude (con buccia) (2026-10-12)
+
+- **FDC ID**: 169291, dataType **SR Legacy** — "Squash, summer, zucchini, includes skin, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, tabella nutrienti completa per FDC ID 169291, SR Legacy): energia 17,0kcal, proteine 1,21g, grassi 0,32g, carboidrati 3,11g, fibra 1,00g, calcio 16,0mg, ferro 0,37mg, zinco 0,32mg, magnesio 18,0mg, rame 0,053mg, selenio 0,20µg, vitamina C 17,9mg, vitamina K 4,30µg, vitamina B12 0µg, folato totale 24,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 120µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
+- **Perché questo record rappresenta bene le zucchine comuni italiane**: nessuna firma di arricchimento in stile USA, valori coerenti con una verdura cruda non trattata. Record generico SR Legacy, non Branded.
+- **Analogia dichiarata**: `food_carrots_raw` — NON la stessa famiglia botanica (zucchine=Cucurbitaceae, carote=Apiaceae; nessun alimento Cucurbitaceae è ancora presente nel Golden Set, quindi un'analogia di famiglia non è disponibile), ma è l'unico alimento già classificato nel Golden Set con un contenuto di beta-carotene nutrizionalmente rilevante e una distinzione `raw_intact`/`cooked_or_disrupted` già usata per lo stesso motivo (modello di assorbimento vitamina A) — analogia dichiarata per funzione del campo, non per parentela botanica (quest'ultima è dichiarata separatamente via `--botanical-family=Cucurbitaceae`, fatto botanico diretto, non analogico). `matrix_category_calcium` NULL (come le carote), `is_heme_iron=false`, `carotenoid_matrix_state=raw_intact` (stato crudo).
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --apply
+  ```
+- **Piano B**: non necessario, il record FDC 169291 è pulito e completo (17/17).
+
+### Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale (2026-10-12)
+
+- **FDC ID**: 175203, dataType **SR Legacy** — "Beans, white, mature seeds, cooked, boiled, without salt".
+- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, tabella nutrienti completa per FDC ID 175203, SR Legacy): energia 139kcal, proteine 9,73g, grassi 0,35g, carboidrati 25,1g, fibra 6,30g, calcio 90,0mg, ferro 3,70mg, zinco 1,38mg, magnesio 63,0mg, rame 0,29mg, selenio 1,30µg, vitamina C 0mg, vitamina K 3,50µg, vitamina B12 0µg, folato totale 81,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
+- **Nota sulla scelta del record**: FDC non ha una voce "cannellini" dedicata (solo prodotti Branded di marca, troppo generici/incompleti per questo uso) — "Beans, white, mature seeds" (fagioli bianchi) è la voce generica SR Legacy più diretta per rappresentare i fagioli cannellini (varietà a seme bianco di Phaseolus vulgaris), stesso approccio già usato per fave/piselli in questo file (preferenza per il record generico SR Legacy sulla variante branded specifica).
+- **Perché questo record rappresenta bene i cannellini comuni italiani**: nessuna firma di arricchimento (acido folico 0µg esplicito, separato dal folato totale). Il calcio (90mg/100g) è più alto dei fagioli rossi kidney già nel Golden Set (28mg/100g), ma è una differenza varietale nota fra legumi comuni (i fagioli bianchi riportano tipicamente più calcio dei fagioli rossi nelle tabelle di composizione), non un segnale di arricchimento — quest'ultimo richiederebbe acido folico non-zero, qui assente.
+- **Analogia dichiarata**: `food_kidney_beans_boiled` — stessa specie botanica *Phaseolus vulgaris* (famiglia Fabaceae), stesso matrix_id `legumes` (già esistente in `food_matrices_master`, non serve quindi `--matrix-description-it`), stesso stato "semi maturi, bolliti, senza sale", `matrix_category_calcium` NULL, `is_heme_iron=false`.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --apply
+  ```
+- **Piano B**: non necessario, il record FDC 175203 è pulito e completo (17/17).
+
+### Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale (2026-10-12)
+
+- **FDC ID**: 173736, dataType **SR Legacy** — "Beans, cranberry (roman), mature seeds, cooked, boiled, without salt".
+- **Nutrienti attesi**: almeno 14/17 confermati dalla pagina aggregatore consultata (getfoodfacts.com, che riporta esplicitamente FDC ID 173736 come SR Legacy): energia 136kcal, proteine 9,34g, grassi 0,46g, carboidrati 24,5g, fibra 8,60g, calcio 50,0mg, ferro 2,09mg, zinco 1,14mg, magnesio 50,0mg, rame 0,23mg, selenio 1,30µg, vitamina C 0mg, vitamina B12 0µg, folato totale 207µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione). **Non riportati dalla pagina aggregatore consultata** (ma non necessariamente assenti dal record FDC reale — lo script, al momento dell'esecuzione, farà un fetch diretto che potrà trovarne un numero diverso): vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Perché questo record rappresenta bene i fagioli borlotti comuni italiani**: nessuna firma di arricchimento (acido folico 0µg esplicito), valori coerenti con un legume bollito senza trattamenti industriali. Record generico SR Legacy, non Branded. FDC non ha una voce "borlotti" dedicata, ma "cranberry (roman) beans" è il nome USDA standard per la stessa varietà screziata di *Phaseolus vulgaris* nota in Italia come borlotto — stesso alimento, nome diverso, non un prodotto diverso.
+- **Analogia dichiarata**: `food_kidney_beans_boiled` — stessa specie botanica *Phaseolus vulgaris* (famiglia Fabaceae), stesso matrix_id `legumes` (già esistente, non serve `--matrix-description-it`), stesso stato "semi maturi, bolliti, senza sale", `matrix_category_calcium` NULL, `is_heme_iron=false`.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=173736 --food-id=food_fagioli_borlotti_bolliti --name-it="Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=173736 --food-id=food_fagioli_borlotti_bolliti --name-it="Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --apply
+  ```
+- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata). Attenzione in fase di esecuzione reale: se il fetch diretto dello script trova meno di ~10/17 nutrienti effettivi (molto sotto i 14/17 già confermati qui da fonte aggregata), il match risulterebbe più debole di quanto stimato in questa ricerca — in quel caso fermarsi e segnalarlo invece di considerare l'alimento comunque pronto per la promozione futura a `verified`.
+
 ### Fave, semi maturi, bollite, senza sale (2026-10-12)
 
 - **FDC ID**: 173753, dataType **SR Legacy** — "Broadbeans (fava beans), mature seeds, cooked, boiled, without salt".
