@@ -139,14 +139,15 @@ npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Pis
 
 ## Eseguiti (archivio, ultimi 10)
 
-> **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Furono inseriti con la versione di `add-food` precedente alla correzione `--diet-category`, quindi con le tre colonne `diet_compat_*` a NULL ("non classificato": esclusi dai filtri vegetariano/vegano/fruttariano). Il 2026-10-13 `fix_diet_compat_pipeline_foods.sql` e' stato eseguito sul DB reale: per la zucchina l'esito e' **verificato direttamente** (query su Supabase: vegetarian=true, vegan=true, fruitarian=false); per gli altri alimenti l'esecuzione e il controllo finale sono **confermati a voce dall'utente** ("per supabase conferma io"), senza uno screenshot rivisto da questa sessione — stesso livello di confidenza gia' dichiarato per i piselli. Per gli alimenti eseguiti da qui in poi non serve nessun fix: lo script scrive la classificazione da solo.
+> **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Dalla melanzana in giù in questa lista, sono stati inseriti con la versione di `add-food` precedente alla correzione `--diet-category`: le loro tre colonne `diet_compat_*` risultano quindi NULL ("non classificato", escluse dai filtri vegetariano/vegano/fruttariano) finche' non si esegue `fix_diet_compat_pipeline_foods.sql` — vedi `docs/PENDING_HUMAN_ACTIONS.md`. **Le zucchine, appena sotto, sono il primo alimento eseguito già con `--diet-category` incluso dall'inizio** (diet=plant_non_fruit scritto direttamente, verificato nel riepilogo di scrittura): non serve alcun fix per loro.
 
-### Zucchine, crude (con buccia) — ✅ gia' presente nel DB reale (rilevato 2026-10-13)
+### Zucchine, crude (con buccia) — ✅ eseguito 2026-10-13
 
 - **food_id**: `food_zucchine_raw`. FDC ID 169291 (SR Legacy, "Squash, summer, zucchini, includes skin, raw").
-- **Come e' emerso**: il dry-run del 2026-10-13 (con `--diet-category`) si e' fermato con l'errore dello script "food_id esiste gia' in foods_raw" — il controllo anti-doppioni ha funzionato. L'alimento era quindi stato applicato prima, con ogni probabilita' con la versione vecchia di `add-food`. **Data ed esito di quell'`--apply` non sono documentati qui** (il log non e' stato rivisto in chat): c'e' solo lo stato risultante, verificato sotto.
-- **Stato verificato sul DB reale** (query su Supabase eseguita dall'utente, screenshot del 2026-10-13): `fdc_id`=169291, `verification_status`=draft, `carotenoid_matrix_state`=raw_intact, 17 righe `nutrient_values` (source USDA_FDC), classificazione dieta vegetarian=true / vegan=true / fruitarian=false (scritta da `fix_diet_compat_pipeline_foods.sql`). Analogia (`food_carrots_raw`) e famiglia botanica (Cucurbitaceae) sono quelle del comando preparato; non sono state rilette dal DB in quella query.
-- Resta `verification_status='draft'` finche' una revisione umana o meccanica non lo promuove esplicitamente — non ancora fatto.
+- **Esito reale** (dal log dell'utente, dry-run poi `--apply --diet-category=plant_non_fruit` sul suo PC): dry-run 17/17 nutrienti, FDC description combaciante. Riepilogo scrittura `--apply` mostrato e confermato: `food_matrices_master "zucchine" creata`, `foods_raw "food_zucchine_raw" creato (draft, diet=plant_non_fruit → vegetarian=true, vegan=true, fruitarian=false)`, `nutrient_values: 17 righe inserite (draft)`, verifica difensiva post-scrittura passata.
+- **Analogia usata**: `food_carrots_raw` (per funzione del campo beta-carotene, non parentela botanica — famiglia reale Cucurbitaceae dichiarata separatamente), `carotenoid_matrix_state=raw_intact`.
+- Resta `verification_status='draft'` finché una revisione umana o meccanica non lo promuove esplicitamente — non ancora fatto.
+- **Piano B non usato** (scartato, non serviva): il record FDC 169291 era pulito e completo (17/17).
 
 ### Melanzane, crude — ✅ eseguito 2026-10-12
 

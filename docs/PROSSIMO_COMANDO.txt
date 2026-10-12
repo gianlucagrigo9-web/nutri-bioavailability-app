@@ -18,8 +18,12 @@ npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --
 == PASSO 4 — manda anche questo risultato a Claude ==
 
 ---
-Nota: dopo i cannellini, in coda ci sono già pronti anche i fagioli borlotti
-e un lotto di 18 alimenti (verdura e frutta). Questo file contiene
-sempre e solo il PROSSIMO comando da eseguire (uno alla volta). Dopo che lo
-esegui e lo confermi in chat, Claude lo aggiorna. I dettagli completi
-restano in docs/GOLDEN_SET_READY_TO_RUN.md.
+Nota: dopo i fagioli cannellini, in coda ci sono già pronti anche fagioli
+borlotti e un lotto di 18 alimenti (verdura e frutta) in blocco unico.
+Questo file contiene sempre e solo il PROSSIMO comando da eseguire (uno
+alla volta). Dopo che lo esegui e lo confermi in chat, Claude lo
+aggiorna. I dettagli completi restano in docs/GOLDEN_SET_READY_TO_RUN.md.
+
+Promemoria: c'è anche un'azione pendente in docs/PENDING_HUMAN_ACTIONS.md
+(fix_diet_compat_pipeline_foods.sql, da eseguire su Supabase) che non
+blocca questa coda ma conviene fare presto.
