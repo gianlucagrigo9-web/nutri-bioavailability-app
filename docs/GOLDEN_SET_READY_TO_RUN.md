@@ -15,22 +15,6 @@
 
 ## Pronti
 
-### Zucchine, crude (con buccia) (2026-10-12)
-
-- **FDC ID**: 169291, dataType **SR Legacy** — "Squash, summer, zucchini, includes skin, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, tabella nutrienti completa per FDC ID 169291, SR Legacy): energia 17,0kcal, proteine 1,21g, grassi 0,32g, carboidrati 3,11g, fibra 1,00g, calcio 16,0mg, ferro 0,37mg, zinco 0,32mg, magnesio 18,0mg, rame 0,053mg, selenio 0,20µg, vitamina C 17,9mg, vitamina K 4,30µg, vitamina B12 0µg, folato totale 24,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 120µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
-- **Perché questo record rappresenta bene le zucchine comuni italiane**: nessuna firma di arricchimento in stile USA, valori coerenti con una verdura cruda non trattata. Record generico SR Legacy, non Branded.
-- **Analogia dichiarata**: `food_carrots_raw` — NON la stessa famiglia botanica (zucchine=Cucurbitaceae, carote=Apiaceae; nessun alimento Cucurbitaceae è ancora presente nel Golden Set, quindi un'analogia di famiglia non è disponibile), ma è l'unico alimento già classificato nel Golden Set con un contenuto di beta-carotene nutrizionalmente rilevante e una distinzione `raw_intact`/`cooked_or_disrupted` già usata per lo stesso motivo (modello di assorbimento vitamina A) — analogia dichiarata per funzione del campo, non per parentela botanica (quest'ultima è dichiarata separatamente via `--botanical-family=Cucurbitaceae`, fatto botanico diretto, non analogico). `matrix_category_calcium` NULL (come le carote), `is_heme_iron=false`, `carotenoid_matrix_state=raw_intact` (stato crudo).
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169291 --food-id=food_zucchine_raw --name-it="Zucchine, crude (con buccia)" --matrix-id=zucchine --matrix-description-it="Zucchine" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non necessario, il record FDC 169291 è pulito e completo (17/17).
-
 ### Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale (2026-10-12)
 
 - **FDC ID**: 175203, dataType **SR Legacy** — "Beans, white, mature seeds, cooked, boiled, without salt".
@@ -155,7 +139,15 @@ npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Pis
 
 ## Eseguiti (archivio, ultimi 10)
 
-> **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Sono stati inseriti con la versione di `add-food` precedente alla correzione `--diet-category`: le loro tre colonne `diet_compat_*` risultano quindi NULL ("non classificato", escluse dai filtri vegetariano/vegano/fruttariano) finche' non si esegue `fix_diet_compat_pipeline_foods.sql` — vedi `docs/PENDING_HUMAN_ACTIONS.md`. Per gli alimenti eseguiti da qui in poi non serve: lo script scrive la classificazione da solo.
+> **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Dalla melanzana in giù in questa lista, sono stati inseriti con la versione di `add-food` precedente alla correzione `--diet-category`: le loro tre colonne `diet_compat_*` risultano quindi NULL ("non classificato", escluse dai filtri vegetariano/vegano/fruttariano) finche' non si esegue `fix_diet_compat_pipeline_foods.sql` — vedi `docs/PENDING_HUMAN_ACTIONS.md`. **Le zucchine, appena sotto, sono il primo alimento eseguito già con `--diet-category` incluso dall'inizio** (diet=plant_non_fruit scritto direttamente, verificato nel riepilogo di scrittura): non serve alcun fix per loro.
+
+### Zucchine, crude (con buccia) — ✅ eseguito 2026-10-13
+
+- **food_id**: `food_zucchine_raw`. FDC ID 169291 (SR Legacy, "Squash, summer, zucchini, includes skin, raw").
+- **Esito reale** (dal log dell'utente, dry-run poi `--apply --diet-category=plant_non_fruit` sul suo PC): dry-run 17/17 nutrienti, FDC description combaciante. Riepilogo scrittura `--apply` mostrato e confermato: `food_matrices_master "zucchine" creata`, `foods_raw "food_zucchine_raw" creato (draft, diet=plant_non_fruit → vegetarian=true, vegan=true, fruitarian=false)`, `nutrient_values: 17 righe inserite (draft)`, verifica difensiva post-scrittura passata.
+- **Analogia usata**: `food_carrots_raw` (per funzione del campo beta-carotene, non parentela botanica — famiglia reale Cucurbitaceae dichiarata separatamente), `carotenoid_matrix_state=raw_intact`.
+- Resta `verification_status='draft'` finché una revisione umana o meccanica non lo promuove esplicitamente — non ancora fatto.
+- **Piano B non usato** (scartato, non serviva): il record FDC 169291 era pulito e completo (17/17).
 
 ### Melanzane, crude — ✅ eseguito 2026-10-12
 
