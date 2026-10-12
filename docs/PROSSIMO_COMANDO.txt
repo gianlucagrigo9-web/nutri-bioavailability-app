@@ -1,0 +1,25 @@
+PROSSIMO ALIMENTO DA AGGIUNGERE: Riso integrale, crudo, non arricchito
+
+== PASSO 1 — copia e incolla questa riga nel terminale, poi premi Invio ==
+== (DRY RUN: è solo una prova, non scrive nulla sul database) ==
+
+npm run add-food -- --fdc-id=169703 --food-id=food_riso_integrale_raw --name-it="Riso integrale, crudo, non arricchito" --matrix-id=riso_integrale --matrix-description-it="Riso integrale" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae
+
+
+== PASSO 2 — manda il risultato a Claude in chat (screenshot o testo) ==
+
+
+== PASSO 3 — SOLO dopo l'OK di Claude, copia e incolla questa riga ==
+== (questa scrive davvero sul database) ==
+
+npm run add-food -- --fdc-id=169703 --food-id=food_riso_integrale_raw --name-it="Riso integrale, crudo, non arricchito" --matrix-id=riso_integrale --matrix-description-it="Riso integrale" --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry --botanical-family=Poaceae --apply
+
+
+== PASSO 4 — manda anche questo risultato a Claude ==
+
+---
+Nota: questo file contiene sempre e solo il PROSSIMO comando da eseguire (uno alla
+volta). Dopo che lo esegui e lo confermi in chat, Claude lo aggiorna con il
+successivo. I dettagli completi (perché questo alimento, fonti, alternative)
+restano in docs/GOLDEN_SET_READY_TO_RUN.md, se mai volessi guardarli — ma per
+usare il sistema ogni giorno basta questo file.
