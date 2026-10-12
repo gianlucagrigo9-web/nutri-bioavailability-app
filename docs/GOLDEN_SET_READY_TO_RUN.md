@@ -14,24 +14,6 @@
 
 ## Pronti
 
-### Farro perlato, secco, crudo (2026-10-12) — nutrienti incompleti, gap dichiarato
-
-- **FDC ID**: 2710828, dataType **Foundation Foods** — "Farro, pearled, dry, raw".
-- **Nutrienti trovati: 10/17** (energia, proteine, grassi, carboidrati, fibra, ferro, zinco, calcio, magnesio, rame). **Mancanti dal record stesso** (verificato chiedendo l'elenco letterale e completo della tabella nutrienti della pagina, non un troncamento del fetch): vitamina C, selenio, vitamina K, vitamina B12, folato (totale e acido folico), beta-carotene, alfa-carotene, beta-criptoxantina. La pagina dichiara esplicitamente "23 nutrients" totali per questo record, di cui nessuno dei 7 mancanti compare nella tabella — non è quindi un'omissione della pagina aggregatore, ma un pannello di analisi FDC ancora parziale per questo specifico record Foundation (relativamente recente).
-- **Valori dei 10 nutrienti trovati** (per 100g): energia 340kcal (etichetta)/344kcal (confronto USDA), proteine 12,6g, grassi 3,10g, carboidrati 72,1g, fibra 7,31g, ferro 3,19mg, zinco 3,97mg, calcio 25,9mg, magnesio 119mg, rame 0,47mg.
-- **Valutazione del match (soglia ~10/17 dichiarata nel compito)**: il record è esattamente al limite (10/17). Non è però un segnale di alimento sbagliato: è un record **Foundation Foods** (tipo preferito, non Branded), il nome corrisponde esattamente a "farro perlato" (la forma di farro più comune in vendita anche in Italia, non una forzatura), nessuna firma di arricchimento (nessun campo acido folico anomalo, calcio 25,9mg/100g nella norma, nessuna parola "enriched" nella descrizione). La scarsità è quindi attribuita a un pannello nutrienti FDC ancora incompleto per questo record specifico, non a un match debole sul prodotto — stesso tipo di gap già accettato nel Golden Set originale per latte e kale (§4.6 del PRD), dichiarato esplicitamente invece di essere nascosto o riempito con un valore stimato.
-- **Nessun record alternativo migliore trovato**: cercati sia altri FDC SR Legacy/Foundation per "farro"/"emmer wheat" sia fonti di cross-check (nutritionvalue.org non raggiungibile, torrinomedica.it non è FDC quindi non utilizzabile per questo script) — solo risultati Branded (incompleti, <10/17) oltre a questo. FDC 2710828 resta la scelta migliore disponibile.
-- **Analogia dichiarata**: `food_riso_integrale_raw` — stessa famiglia botanica Poaceae, cereale secco/crudo non arricchito, `matrix_category_calcium` NULL, `is_heme_iron=false`. `is_fortified_folate` resta `false` (default) — qui per assenza di segnali di fortificazione nel record, non perché il campo folato sia verificabile (è assente).
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=2710828 --food-id=food_farro_raw --name-it="Farro perlato, secco, crudo" --matrix-id=farro --matrix-description-it="Farro" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run — ricontrollare che lo script riporti davvero 10 nutrienti estratti, non un numero diverso, prima di procedere con --apply):
-  ```
-  npm run add-food -- --fdc-id=2710828 --food-id=food_farro_raw --name-it="Farro perlato, secco, crudo" --matrix-id=farro --matrix-description-it="Farro" --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae --apply
-  ```
-- **Piano B**: nessuno trovato (vedi sopra). Se dopo l'esecuzione si preferisce non avere una riga con solo 10/17 nutrienti, l'alternativa è rimandare "farro" e aspettare che FDC pubblichi un pannello più completo per questo record, o integrare CREA in futuro (gap già noto, §9 Fase 4 punto 16 del PRD).
-
 ### Fave, semi maturi, bollite, senza sale (2026-10-12)
 
 - **FDC ID**: 173753, dataType **SR Legacy** — "Broadbeans (fava beans), mature seeds, cooked, boiled, without salt".
@@ -66,6 +48,15 @@
 - **Piano B**: non necessario, il record FDC 170420 è pulito e completo (17/17). Se in futuro si vuole anche una variante "surgelati" distinta, FDC 170105 (senza sale, frozen) è già stato individuato e può essere proposto come voce separata.
 
 ## Eseguiti (archivio, ultimi 10)
+
+### Farro perlato, secco, crudo — ✅ eseguito 2026-10-12, con gap dichiarato (manca l'energia)
+
+- **food_id**: `food_farro_raw`. FDC ID 2710828 (Foundation Foods, "Farro, pearled, dry, raw").
+- **Esito reale** (dal log dell'utente, comando `--apply` lanciato sul suo PC): `food_matrices_master "farro" creata`, `foods_raw "food_farro_raw" creato (draft)`, `nutrient_values: 9 righe inserite (draft)` — NON 17 come gli altri alimenti, e NON i 10 stimati in fase di ricerca. Il fetch reale dall'endpoint FDC ha trovato solo 9 nutrienti: protein_g, fat_g, carbohydrates_g, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg. **Mancano, confermati `NULL` e non stimati**: `energy_kcal`, `selenium_mcg`, `beta_carotene_mcg`, `vitamin_c_mg`, `folate_mcg`, `vitamin_b12_mcg`, `vitamin_k_mcg`, `other_provitamin_a_carotenoids_mcg`. Verifica difensiva post-scrittura passata (9/9 righe effettivamente inserite rilette, tutto draft come atteso — coerente con quanto scritto, solo un numero di righe più basso del solito).
+- **Perché solo 9 e non 10 come previsto in ricerca**: la ricerca preparatoria aveva letto l'energia (340kcal) da un'etichetta su una pagina aggregatore, non dal dato strutturato FDC — il fetch diretto dal record FDC ufficiale (fatto dallo script al momento dell'esecuzione, non dalla ricerca) non riporta `energy_kcal` come campo per questo record specifico. Discrepanza reale tra ricerca preparatoria e dato vero, non un errore dello script.
+- **Decisione (utente, 2026-10-12)**: inserire comunque come draft con i campi mancanti `NULL`, invece di scartare l'alimento. **Attenzione per chiunque lavori sul motore dieta**: `food_farro_raw` non va usato per calcolare diete reali finché `energy_kcal` non viene integrato da un'altra fonte — vedi `docs/PRD.md` §4.6 per il dettaglio completo di questo gap.
+- **Analogia usata**: `food_riso_integrale_raw` (stessa famiglia botanica Poaceae), `is_fortified_folate=false` (nessun segnale di fortificazione nei campi presenti, anche se il campo folato stesso è assente quindi non direttamente verificabile su questo record).
+- Resta `verification_status='draft'` — non promuovibile a `verified` con questo gap, in ogni caso.
 
 ### Orzo perlato, crudo, non arricchito — ✅ eseguito 2026-10-12
 
