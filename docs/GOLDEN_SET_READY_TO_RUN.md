@@ -79,22 +79,6 @@
   ```
 - **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata). Attenzione in fase di esecuzione reale: se il fetch diretto dello script trova meno di ~10/17 nutrienti effettivi (molto sotto i 14/17 già confermati qui da fonte aggregata), il match risulterebbe più debole di quanto stimato in questa ricerca — in quel caso fermarsi e segnalarlo invece di considerare l'alimento comunque pronto per la promozione futura a `verified`.
 
-### Fave, semi maturi, bollite, senza sale (2026-10-12)
-
-- **FDC ID**: 173753, dataType **SR Legacy** — "Broadbeans (fava beans), mature seeds, cooked, boiled, without salt".
-- **Nutrienti attesi**: 17/17. Valori confermati da due fonti indipendenti che si corroborano a vicenda dopo conversione a 100g: myfooddata.com (FDC ID citato esplicitamente, valori per 100g: energia 110kcal, proteine 7,6g, grassi 0,4g, carboidrati 19,6g, fibra 5,4g, ferro 1,5mg, zinco 1,0mg, calcio 36,0mg, vitamina C 0,3mg, magnesio 43,0mg, rame 0,26mg, selenio 2,6µg, vitamina K 2,9µg, vitamina B12 0µg, folato totale 104,0µg DFE, acido folico 0µg, beta-carotene 9,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg) e bodbot.com (stesso alimento via NDB 16053, valori per 1 cup/170g che convertiti a 100g combaciano: ferro 2,55/1,7≈1,5mg, zinco 1,72/1,7≈1,01mg, calcio 61,2/1,7≈36,0mg — stesso ordine di grandezza su tutti i campi confrontabili, nessuna discrepanza grossa).
-- **Perché questo record rappresenta bene le fave comuni italiane**: nessuna firma di arricchimento (acido folico 0µg esplicito su entrambe le fonti), valori nutrizionali coerenti con un legume bollito senza trattamenti industriali. Record generico SR Legacy ("mature seeds" = fave secche, la forma più comunemente bollita/cucinata, coerente con le altre voci "legumi" già nel Golden Set che sono tutte semi maturi bolliti), non un prodotto Branded.
-- **Analogia dichiarata**: `food_chickpeas_boiled` — stessa famiglia botanica Fabaceae, stesso matrix_id `legumes` (già esistente in `food_matrices_master`, descritto esplicitamente come "Legumi secchi (fagioli, lenticchie, piselli, ceci)" — non serve quindi `--matrix-description-it`), stesso stato "semi maturi, bolliti, senza sale", `matrix_category_calcium` NULL, `is_heme_iron=false`.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=173753 --food-id=food_fave_bollite --name-it="Fave, semi maturi, bollite, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=173753 --food-id=food_fave_bollite --name-it="Fave, semi maturi, bollite, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled --botanical-family=Fabaceae --apply
-  ```
-- **Piano B**: non necessario, il record FDC 173753 è pulito e completo (17/17), corroborato da due fonti indipendenti.
-
 ### Piselli, verdi, cotti, bolliti, scolati, senza sale (2026-10-12)
 
 - **FDC ID**: 170420, dataType **SR Legacy** — "Peas, green, cooked, boiled, drained, without salt".
@@ -113,6 +97,14 @@
 - **Piano B**: non necessario, il record FDC 170420 è pulito e completo (17/17). Se in futuro si vuole anche una variante "surgelati" distinta, FDC 170105 (senza sale, frozen) è già stato individuato e può essere proposto come voce separata.
 
 ## Eseguiti (archivio, ultimi 10)
+
+### Fave, semi maturi, bollite, senza sale — ✅ eseguito 2026-10-12
+
+- **food_id**: `food_fave_bollite`. FDC ID 173753 (SR Legacy, "Broadbeans (fava beans), mature seeds, cooked, boiled, without salt").
+- **Esito reale** (dal log dell'utente, comando `--apply` lanciato sul suo PC): `foods_raw "food_fave_bollite" creato (draft)` (nessuna nuova `food_matrices_master`, la matrice `legumes` esisteva già), `nutrient_values: 17 righe inserite (draft)`, verifica difensiva post-scrittura passata (17/17 nutrienti rilette, tutto draft come atteso). FDC description confermata al momento della scrittura reale: "Broadbeans (fava beans), mature seeds, cooked, boiled, without salt" — combacia con quanto previsto in fase di ricerca.
+- **Analogia usata**: `food_chickpeas_boiled` (stessa famiglia botanica Fabaceae, stesso matrix_id `legumes`), con `is_fortified_folate=false` — nessuna firma di arricchimento nel record.
+- Resta `verification_status='draft'` finché `scripts/verify_golden_set_batch.ts` (o una revisione umana) non lo promuove esplicitamente — non ancora fatto.
+- **Piano B non usato** (scartato, non serviva): il record FDC 173753 era pulito e completo (17/17), corroborato da due fonti indipendenti in fase di ricerca.
 
 ### Farro perlato, secco, crudo — ✅ eseguito 2026-10-12, con gap dichiarato (manca l'energia)
 
