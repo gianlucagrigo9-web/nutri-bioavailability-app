@@ -742,6 +742,8 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
 
     **Limite dichiarato**: FDC è una banca dati USA — per prodotti tipicamente italiani (formaggi, salumi, piatti tradizionali) spesso manca un corrispettivo preciso. Usato comunque come fonte primaria per ora (unica pipeline meccanica collaudata); l'integrazione di CREA (banca dati ufficiale italiana) come fonte parallela resta un lavoro futuro non ancora iniziato.
 
+    **Comandi pronti in attesa di esecuzione**: vedi `docs/GOLDEN_SET_READY_TO_RUN.md` (nuovo 2026-10-12) — un task pianificato cloud (senza device-link, solo git + ricerca web, mai scrittura sul DB) ricerca e prepara lì i comandi `npm run add-food` pronti da incollare, così l'esecuzione reale (che resta un'azione umana, serve rete Supabase/FDC + shell vera) richiede solo copia-incolla invece di ricerca da zero.
+
     **Coda — primo lotto (2026-10-11), NON esaustivo, da ampliare**. Un alimento alla volta, nell'ordine; ogni riga va aggiornata dal task con l'esito (✅ aggiunto come draft + food_id, oppure ⚠ + motivo se richiede revisione umana) e la data:
 
     - Cereali/pane/pasta: ⚠ pane comune (nessun match FDC Foundation/SR Legacy convincente per pane italiano non arricchito — l'unico record SR Legacy generico, "Bread, Italian" FDC 174913, riporta 18µg/100g di acido folico separato dal folato alimentare e 105mg/100g di calcio, firma analitica di farina arricchita in stile USA — stesso limite già dichiarato sopra per "pasta di semola comune non arricchita"; i record Branded disponibili sono troppo incompleti, <10/17 nutrienti, es. FDC 1859632; serve CREA o altra fonte italiana, non ancora integrata), pane integrale, riso bianco, riso integrale, polenta (farina di mais), orzo perlato, farro
