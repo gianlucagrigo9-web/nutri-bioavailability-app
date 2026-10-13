@@ -15,6 +15,42 @@
 
 ## Pronti
 
+### Tonno fresco (pinna gialla), crudo (2026-10-13)
+
+- **FDC ID**: 175159, dataType **SR Legacy** — "Fish, tuna, fresh, yellowfin, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: pagine aggregatore che riportano il record SR Legacy letteralmente — accurateclinic.com — corroborate su grassi e vitamina K da una seconda fonte indipendente, triagemethod.com; fetch diretto su api.nal.usda.gov non tentato da questa sessione, nessuna rete diretta disponibile — vedi CLAUDE.md). Valori per 100g: energia 109kcal, proteine 24,4g, grassi 0,49g, carboidrati 0g, fibra 0g, calcio 4,0mg, ferro 0,77mg, zinco 0,37mg, magnesio 35,0mg, rame 0,036mg, selenio 90,6µg, vitamina C 0mg, vitamina K 0,1µg, vitamina B12 2,08µg, folato totale (food) 2,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un pesce fresco non trattato.
+- **Perché questo record rappresenta bene il tonno fresco comune italiano**: pinna gialla (yellowfin/ahi) è la specie di tonno fresco più diffusa in pescheria, a differenza del pinna blu (di nicchia/pregiato, FDC 173706, scartato per rappresentatività) o dello skipjack (più tipico del tonno in scatola che del filetto fresco, FDC 175156, copertura nutrienti inferiore nella fonte consultata, ~15/17). Record "raw" semplice, nessun segno di marinatura/trattamento.
+- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`, stesso attributo già usato per il salmone nel Golden Set), nessuna famiglia botanica (alimento animale), matrice propria.
+- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=175159 --food-id=food_tonno_fresco_raw --name-it="Tonno fresco (pinna gialla), crudo" --matrix-id=tonno --matrix-description-it="Tonno" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=175159 --food-id=food_tonno_fresco_raw --name-it="Tonno fresco (pinna gialla), crudo" --matrix-id=tonno --matrix-description-it="Tonno" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: FDC 173706 ("Fish, tuna, fresh, bluefin, raw", SR Legacy, 17/17 anch'esso) se il dry-run reale di 175159 risultasse incompleto — non necessario a priori, nessun'altra alternativa generica migliore trovata per "tonno fresco comune".
+- **Nota sulla coda**: questa voce completa solo la parte "fresco" dell'item "tonno (fresco e in scatola sott'olio)" di `docs/PRD.md` — il tonno in scatola sott'olio è un prodotto composito (olio aggiunto) e resta da ricercare separatamente, non lavorato in questo run.
+
+### Prosciutto cotto (2026-10-13)
+
+- **FDC ID**: 167872, dataType **SR Legacy** — "Pork, cured, ham, boneless, regular (approximately 11% fat), roasted".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com/recipal.com, mirror dei dati SR Legacy; fetch diretto su api.nal.usda.gov non tentato da questa sessione — la prova resta il dry-run dello script). Valori per 100g: energia 178kcal, proteine 22,6g, grassi 9,02g, carboidrati 0g, fibra 0g, calcio 8,00mg, ferro 1,34mg, zinco 2,47mg, magnesio 22,0mg, rame 0,14mg, selenio 19,8µg, vitamina C 0mg, vitamina K non riportata come totale (solo fillochinone=0µg — normale per SR Legacy su questi tagli, non una lacuna specifica di questo record), vitamina B12 0,70µg, folato totale (food) 3,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento stile USA.
+- **Nota di trasparenza (sodio, non uno dei 17 nutrienti mappati da questo progetto ma rilevante per onestà sulla rappresentatività)**: il record riporta 1.500mg sodio/100g, più alto del range tipico di un prosciutto cotto italiano (circa 1000-1200mg/100g) — segno di una salagione in stile USA più salata. Non blocca l'inserimento (il sodio non è tra i 17 nutrienti tracciati da `lib/fdc/nutrientMapping.ts`), ma va dichiarato qui per trasparenza; un dato sodio più fedele andrebbe eventualmente integrato da una fonte italiana (CREA), non stimato.
+- **Perché questo record rappresenta bene il prosciutto cotto comune italiano**: "boneless, regular (~11% fat), roasted" — prodotto cotto, non affumicato, non "water added" (scartata la variante FDC 168349 "Pork, cured, ham -- water added..." per lo stesso motivo per cui si scartano le carni fresche con soluzione iniettata già viste in questo file), non "extra lean" irrealistico. Candidato alternativo valutato: FDC 168359 "Pork, cured, ham, slice, bone-in, separable lean and fat, heated, pan-broil" (17/17, sodio 852mg — sotto il range italiano invece che sopra) — profilo nutrizionale molto simile, non usato come primario solo perché la preparazione "bone-in, slice, pan-broil" rappresenta meno bene un prosciutto cotto intero affettato.
+- **Analogia dichiarata**: `food_beef_ground_cooked` — stessa categoria concettuale "carne muscolare COTTA con ferro eme" (`is_heme_iron=true`; scelta la variante cotta, a differenza delle carni fresche crude già in coda, perché il prosciutto cotto è un prodotto già cotto), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — carne di maiale lavorata: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=167872 --food-id=food_prosciutto_cotto --name-it="Prosciutto cotto" --matrix-id=prosciutto_cotto --matrix-description-it="Prosciutto cotto" --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=167872 --food-id=food_prosciutto_cotto --name-it="Prosciutto cotto" --matrix-id=prosciutto_cotto --matrix-description-it="Prosciutto cotto" --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: FDC 168359 (sopra) se il dry-run reale di 167872 risultasse sotto 17/17 o mostrasse un'anomalia non prevista qui.
+
 ### Petto di pollo, crudo (senza pelle, senza osso) (2026-10-13)
 
 - **FDC ID**: 171077, dataType **SR Legacy** — "Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw".
