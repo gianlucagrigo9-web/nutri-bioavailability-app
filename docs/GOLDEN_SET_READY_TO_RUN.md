@@ -15,6 +15,77 @@
 
 ## Pronti
 
+### Vongole, crude (2026-10-13)
+
+- **FDC ID**: 174214, dataType **SR Legacy** — "Mollusks, clam, mixed species, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 14,7g, grassi 0,96g, carboidrati 3,57g, fibra 0g, calcio 39,0mg, ferro 1,62mg, zinco 0,51mg, magnesio 19,0mg, rame 0,053mg, selenio 30,6µg, vitamina C 0mg, vitamina K 0,20µg, vitamina B12 11,3µg, folato totale (food) 5,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un mollusco fresco non trattato.
+- **Nota sui carboidrati non-zero (3,57g/100g)**: a differenza del pesce (sempre 0g in questo Golden Set), le vongole — come i molluschi bivalvi in genere — riportano un contenuto di glicogeno non trascurabile; non è un'anomalia né segno di trattamento industriale, è una caratteristica nota di questa categoria (vedi anche le cozze sotto, 3,69g/100g, stesso ordine di grandezza).
+- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "alimento animale acquatico con ferro eme" (`is_heme_iron=true`; i molluschi bivalvi sono una fonte nota di ferro eme pur non essendo muscolo come il pesce), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — frutti di mare (mollusco): vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=174214 --food-id=food_vongole_raw --name-it="Vongole, crude" --matrix-id=vongole --matrix-description-it="Vongole" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=174214 --food-id=food_vongole_raw --name-it="Vongole, crude" --matrix-id=vongole --matrix-description-it="Vongole" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario, il record FDC 174214 è pulito e completo (17/17), letto direttamente dalla pagina con FDC ID e dataType citati.
+
+### Cozze, crude (2026-10-13)
+
+- **FDC ID**: 174216, dataType **SR Legacy** — "Mollusks, mussel, blue, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 11,9g, grassi 2,24g, carboidrati 3,69g, fibra 0g, calcio 26,0mg, ferro 3,95mg, zinco 1,60mg, magnesio 34,0mg, rame 0,094mg, selenio 44,8µg, vitamina C 8,00mg, vitamina K 0,10µg, vitamina B12 12,0µg, folato totale (food) 42,0µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
+- **Nota sui carboidrati non-zero (3,69g/100g)**: vedi nota identica sotto "Vongole" sopra — caratteristica nota dei molluschi bivalvi (glicogeno), non un'anomalia.
+- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "alimento animale acquatico con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — frutti di mare (mollusco): vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=174216 --food-id=food_cozze_raw --name-it="Cozze, crude" --matrix-id=cozze --matrix-description-it="Cozze" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=174216 --food-id=food_cozze_raw --name-it="Cozze, crude" --matrix-id=cozze --matrix-description-it="Cozze" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario, il record FDC 174216 è pulito e completo (17/17), letto direttamente dalla pagina con FDC ID e dataType citati.
+
+### Acciughe (alici), crude (2026-10-13)
+
+- **FDC ID**: 174182 (identificato indirettamente — vedi nota sotto sul livello di confidenza), dataType **SR Legacy** — "Fish, anchovy, european, raw" (NDB legacy 15001).
+- **Nota sulla fonte (diversa dagli altri 3 alimenti di questo lotto, confidenza più bassa)**: il fetch diretto della pagina getfoodfacts.com per questo FDC ID non è riuscito in questa sessione (l'URL non era apparso di per sé in un risultato di ricerca — solo incluso dentro l'URL di una pagina di confronto getfoodfacts.com/compare, dove compare letteralmente lo slug "fish-anchovy-european-raw-174182"). I valori per 100g sono stati quindi ricostruiti da due aggregatori indipendenti letti con successo, scalati alla loro rispettiva porzione: **recipal.com** (porzione 85g: proteine 20,35g, grassi 4,84g, calcio 141,2mg, ferro 3,29mg, zinco 1,76mg, magnesio 41,2mg, selenio 36,5µg, B12 0,588µg, folato 11,76µg) e **bodbot.com** (porzione 1oz=28,35g: energia 130,5kcal, proteine 20,35g, grassi 4,83g, calcio 146,9mg, ferro 3,25mg, zinco 1,73mg, magnesio 41,0mg, rame 0,212mg, selenio 36,5µg, vitamina K 0,106µg, B12 0,635µg, folato 9,0µg, acido folico 0). Le due fonti, scalate indipendentemente l'una dall'altra, combaciano entro ~5% su quasi tutti i valori (proteine identiche, grassi/selenio quasi identici) — corroborate anche da **triagemethod.com**, che etichetta esplicitamente come SR Legacy un sottoinsieme di valori (grassi 4,8g, rame 0,21mg, vitamina K 0,10µg, acido folico 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg), tutti coerenti con le due fonti scalate. Carboidrati 0g, fibra 0g, vitamina C 0mg, beta-carotene 0µg coerenti su tutte le fonti.
+- **Scartati esplicitamente**: triagemethod.com riporta anche, sotto lo stesso nome alimento, un secondo gruppo di valori (calcio 20,0mg, ferro 0,50mg, zinco 1,6mg, selenio 6,5µg, B12 3,0µg, folato 15,0µg) etichettati **AFCD** (Australian Food Composition Database) — non sono USDA, non corroborano né contraddicono il record FDC: sono una banca dati nazionale diversa per un prodotto non necessariamente identico, non usata.
+- **Nessuna firma di arricchimento**: acido folico 0µg riportato esplicitamente separato dal folato alimentare (fonte: triagemethod SR + bodbot) — atteso per un pesce fresco non trattato.
+- **Attenzione in fase di esecuzione reale (confidenza FDC ID più bassa degli altri 3)**: l'FDC ID 174182 non è stato confermato aprendo direttamente la pagina del record — solo dedotto dalla URL di una pagina di confronto e dalla numerazione sequenziale con il prodotto "in scatola" FDC 174183 (quest'ultimo confermato direttamente in fase di ricerca). Il dry-run dello script è quindi l'unica verifica reale per questo alimento: **se la descrizione FDC stampata non è esattamente "Fish, anchovy, european, raw" o i nutrienti estratti sono sensibilmente diversi dai valori sopra, fermarsi e segnalarlo invece di procedere con l'apply.**
+- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=174182 --food-id=food_acciughe_raw --name-it="Acciughe (alici), crude" --matrix-id=acciughe --matrix-description-it="Acciughe" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run — vedi attenzione sopra):
+  ```
+  npm run add-food -- --fdc-id=174182 --food-id=food_acciughe_raw --name-it="Acciughe (alici), crude" --matrix-id=acciughe --matrix-description-it="Acciughe" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: nessuno individuato in fase di ricerca; se il dry-run reale mostra una descrizione FDC diversa da "Fish, anchovy, european, raw" o un numero di nutrienti sensibilmente inferiore a 17, fermarsi prima di procedere con l'apply.
+
+### Merluzzo, crudo (2026-10-13)
+
+- **FDC ID**: 171955, dataType **SR Legacy** — "Fish, cod, Atlantic, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 82,0kcal, proteine 17,8g, grassi 0,67g, carboidrati 0g, fibra 0g, calcio 16,0mg, ferro 0,38mg, zinco 0,45mg, magnesio 32,0mg, rame 0,028mg, selenio 33,1µg, vitamina C 1,00mg, vitamina K 0,10µg, vitamina B12 0,91µg, folato totale (food) 7,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un pesce fresco non trattato.
+- **Nota di trasparenza (copertura PARZIALE della voce "merluzzo/nasello" della coda)**: questo record rappresenta il merluzzo nordico/atlantico (*Gadus morhua*), corrispondenza letterale della parola italiana "merluzzo". Il **nasello** (*Merluccius merluccius* — lo stesso pesce che al banco pesce italiano viene spesso venduto chiamandolo colloquialmente "merluzzo") è una specie diversa (famiglia Merlucciidae, non Gadidae): FDC non ha per questa specie un record generico pulito, solo un prodotto Branded "Pacific hake steaks" (nasello del Pacifico, porzionato/congelato, non rappresentativo di un nasello fresco intero). Non generalizzato per non forzare un match fra specie diverse (stesso standard già applicato a prosciutto crudo/bresaola in questa coda): **questa voce copre solo la parte "merluzzo" (vero, *Gadus morhua*) della coda; il nasello resta un gap dichiarato, non coperto**, da ricercare separatamente se in futuro emerge un record FDC dedicato.
+- **Fonte scartata per questo stesso nome**: triagemethod.com mostra per "Fish, cod, Atlantic, raw" un secondo gruppo di valori (calcio 20,0mg, ferro 0,20mg, zinco 0,30mg, rame 0,01mg, selenio 27µg, B12 0,30µg, folato 0µg) etichettati esplicitamente **AFCD** (Australian Food Composition Database), non USDA — scartati, stesso trattamento già dato alla fonte AFCD per le acciughe qui sotto.
+- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=171955 --food-id=food_merluzzo_raw --name-it="Merluzzo, crudo" --matrix-id=merluzzo --matrix-description-it="Merluzzo" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=171955 --food-id=food_merluzzo_raw --name-it="Merluzzo, crudo" --matrix-id=merluzzo --matrix-description-it="Merluzzo" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: nessuno trovato per il "nasello" vero (vedi nota sopra) — se in futuro emerge un record FDC dedicato per *Merluccius merluccius*, va aggiunto come voce separata, non in sostituzione di questa.
+
 ### Tonno fresco (pinna gialla), crudo (2026-10-13)
 
 - **FDC ID**: 175159, dataType **SR Legacy** — "Fish, tuna, fresh, yellowfin, raw".
