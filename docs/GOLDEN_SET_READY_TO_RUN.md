@@ -15,6 +15,58 @@
 
 ## Pronti
 
+### Burro, senza sale (2026-10-13)
+
+- **FDC ID**: 173430, dataType **SR Legacy** — "Butter, without salt".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 717kcal, proteine 0,85g, grassi 81,1g, carboidrati 0,060g, fibra 0g, calcio 24,0mg, ferro 0,020mg, zinco 0,090mg, magnesio 2,00mg, rame 0,016mg, selenio 1,00µg, vitamina C 0mg, vitamina K 7,00µg, vitamina B12 0,17µg, folato totale (food) 3,00µg, beta-carotene 158µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un latticino grasso non trattato.
+- **Perché questo record rappresenta bene il burro comune italiano**: "without salt" (senza sale aggiunto) — sodio 11,0mg/100g, coerente con la sola traccia naturale del latte, non con un burro salato (che avrebbe centinaia di mg di sodio); nessuna menzione di "whipped" (montato, aerato, densità diversa) né di margarina o prodotto misto.
+- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`): il burro ha un contenuto di calcio basso in assoluto (24mg/100g) ma nessun inibitore di assorbimento (ossalati/fitati) presente, stessa categoria del latte da cui deriva; matrice propria (`burro`, non riusa `dairy_milk`: composizione nutrizionale molto diversa, quasi tutto grasso).
+- **Categoria dieta**: `egg_dairy` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (uova, latte, latticini e formaggi, burro, miele): vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=173430 --food-id=food_burro --name-it="Burro, senza sale" --matrix-id=burro --matrix-description-it="Burro" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=173430 --food-id=food_burro --name-it="Burro, senza sale" --matrix-id=burro --matrix-description-it="Burro" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: non necessario, il record FDC 173430 è pulito e completo (17/17); una variante "burro salato" (altro FDC ID, non usato) resterebbe disponibile come voce separata se mai richiesta in futuro.
+
+### Yogurt greco (plain, latte intero) (2026-10-13)
+
+- **FDC ID**: 171304, dataType **SR Legacy** — "Yogurt, Greek, plain, whole milk".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 97,0kcal (vedi nota), proteine 9,00g, grassi 5,00g, carboidrati 3,98g, fibra 0g, calcio 100mg, ferro 0mg, zinco 0,52mg, magnesio 11,0mg, rame 0,017mg, selenio 9,70µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 0,75µg, folato totale (food) 5,00µg, beta-carotene 7,00µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
+- **Nota su una piccola discrepanza interna nella pagina aggregatore consultata**: l'etichetta nutrizionale mostrata sulla stessa pagina riporta 100kcal (arrotondato) invece di 97,0kcal di tabella dettagliata — riportato qui il valore di tabella, più granulare; stessa origine per una micro-differenza analoga su B12 (0,8 vs 0,75µg). Scarti di arrotondamento, non una discrepanza sui dati sostanziali — il dry-run reale dello script (fetch diretto dal record FDC) è comunque l'unica verifica che conta prima dell'apply.
+- **Perché questo record rappresenta bene lo yogurt greco comune italiano**: esplicitamente "whole milk" (latte intero) — non la variante nonfat/lowfat (magro), che non rappresenterebbe bene un "yogurt greco intero" comune.
+- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`yogurt_greco`, non riusa `dairy_milk`: composizione nutrizionale diversa dal latte, es. proteine quasi triple per la concentrazione tipica dello yogurt greco).
+- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=171304 --food-id=food_yogurt_greco --name-it="Yogurt greco (plain, latte intero)" --matrix-id=yogurt_greco --matrix-description-it="Yogurt greco" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=171304 --food-id=food_yogurt_greco --name-it="Yogurt greco (plain, latte intero)" --matrix-id=yogurt_greco --matrix-description-it="Yogurt greco" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: FDC 2259794 (Foundation Foods, stessa descrizione "Yogurt, Greek, plain, whole milk") scartato a priori — pagina consultata mostra selenio/vitamina C/B12/folato/carotenoidi tutti "non riportati" e un'energia incoerente su tre punti della stessa pagina (90/94,5/95kcal): molto meno completo e meno coerente del record SR Legacy scelto.
+
+### Yogurt bianco intero (plain, latte intero) (2026-10-13)
+
+- **FDC ID**: 171284, dataType **SR Legacy** — "Yogurt, plain, whole milk".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 61,0kcal, proteine 3,47g, grassi 3,25g, carboidrati 4,66g, fibra 0g, calcio 121mg, ferro 0,050mg, zinco 0,59mg, magnesio 12,0mg, rame 0,0090mg, selenio 2,20µg, vitamina C 0,50mg, vitamina K 0,20µg, vitamina B12 0,37µg, folato totale (food) 7,00µg, beta-carotene 5,00µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare (folato totale = folato alimentare = 7µg) — nessun segnale di arricchimento.
+- **Perché questo record rappresenta bene lo yogurt bianco comune italiano**: esplicitamente "whole milk" (latte intero), non la variante greca (più concentrata/proteica) né magra/nonfat — distinto correttamente dallo yogurt greco qui sopra (proteine 3,47g vs 9,00g/100g, differenza coerente con la concentrazione tipica dello yogurt greco).
+- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`yogurt_bianco_intero`).
+- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=171284 --food-id=food_yogurt_bianco_intero --name-it="Yogurt bianco intero (plain, latte intero)" --matrix-id=yogurt_bianco_intero --matrix-description-it="Yogurt bianco intero" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=171284 --food-id=food_yogurt_bianco_intero --name-it="Yogurt bianco intero (plain, latte intero)" --matrix-id=yogurt_bianco_intero --matrix-description-it="Yogurt bianco intero" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: FDC 2259793 (Foundation Foods, stessa descrizione "Yogurt, plain, whole milk") scartato a priori — pagina consultata mostra selenio/vitamina C/B12/folato/carotenoidi tutti "non riportati" (~9/17) e una discrepanza interna fra l'energia in tabella (77,3kcal) e quella in etichetta (80kcal): molto meno completo e meno coerente del record SR Legacy scelto.
+
 ### Ricotta (latte intero) (2026-10-13)
 
 - **FDC ID**: 170851, dataType **SR Legacy** — "Cheese, ricotta, whole milk".
