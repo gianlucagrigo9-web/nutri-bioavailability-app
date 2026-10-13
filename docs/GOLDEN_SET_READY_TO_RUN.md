@@ -15,6 +15,40 @@
 
 ## Pronti
 
+### Zucchero bianco (semolato) (2026-10-13)
+
+- **FDC ID**: 169655, dataType **SR Legacy** — "Sugars, granulated".
+- **Nutrienti attesi**: 17/17 presenti come valore esplicito nel record (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato su energia/carboidrati/proteine/grassi da recipal.com, stesso NDB ID legacy 19335) — **ma solo 7/17 con un valore diverso da zero**: energia 387kcal, carboidrati 100,0g, calcio 1,00mg, ferro 0,050mg, zinco 0,010mg, rame 0,0070mg, selenio 0,60µg. Gli altri 10 (proteine, grassi, fibra, magnesio, vitamina C, vitamina K, B12, folato totale, beta-carotene, alfa-carotene, beta-criptoxantina) sono riportati esplicitamente come **0** nel record, non assenti — coerente con la composizione chimica reale del prodotto (saccarosio quasi puro, 100g/100g carboidrati): non è un segnale di dato mancante o di match debole, è il comportamento chimico atteso per uno zucchero raffinato non arricchito. **Acido folico 0µg** riportato esplicitamente come voce separata — nessuna fortificazione.
+- **Perché questo record rappresenta bene lo zucchero bianco comune italiano**: "Sugars, granulated" è la voce generica SR Legacy per zucchero da tavola raffinato, senza specificazione di marca o trattamento aggiuntivo. I minerali in traccia (calcio/ferro/zinco/rame/selenio) sono dell'ordine di grandezza tipico di contaminazione di processo per uno zucchero raffinato, non un segno di fortificazione (che richiederebbe acido folico non-zero, qui assente). Scartato esplicitamente FDC 169656 "Sugars, powdered" (zucchero a velo — prodotto diverso, verificato via WebFetch diretto per non confonderlo con questo).
+- **Analogia dichiarata**: `food_farina_di_mais_raw` — approssimazione dichiarata, non una somiglianza nutrizionale reale (la farina di mais mantiene fibra/minerali residui di un cereale integrale, lo zucchero bianco no): usata solo per confermare per analogia `is_heme_iron=false` e `is_fortified_folate=false` (nessun segnale di arricchimento in nessuno dei due record). `botanical_family` lasciata **NULL** qui (a differenza della farina di mais, Poaceae): il record FDC "Sugars, granulated" non specifica se il saccarosio proviene da canna da zucchero (Poaceae) o da barbabietola da zucchero (Amaranthaceae/Chenopodiaceae) — assegnare una famiglia botanica sarebbe un dato indovinato, non verificabile da questo record, quindi omesso. `matrix_category_calcium` NULL (calcio 1mg/100g, trascurabile, nessun effetto matrice rilevante).
+- **Categoria dieta**: `plant_non_fruit` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (..., semi, oli vegetali, **zucchero**): vegetariano SÌ, vegano SÌ, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169655 --food-id=food_zucchero_bianco --name-it="Zucchero bianco (semolato)" --matrix-id=zucchero --matrix-description-it="Zucchero bianco" --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw --diet-category=plant_non_fruit
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169655 --food-id=food_zucchero_bianco --name-it="Zucchero bianco (semolato)" --matrix-id=zucchero --matrix-description-it="Zucchero bianco" --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw --diet-category=plant_non_fruit --apply
+  ```
+- **Piano B**: non necessario per la scelta del record — l'unico altro candidato pulito trovato, FDC 169656 "Sugars, powdered", è un prodotto diverso (zucchero a velo), non usato.
+
+### Miele (2026-10-13)
+
+- **FDC ID**: 169640, dataType **SR Legacy** — "Honey".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato da una seconda fonte indipendente, fitnessvolt.com, con valori numericamente coincidenti o compatibili su tutti i 17). Valori per 100g: energia 304kcal, proteine 0,30g, grassi 0g, carboidrati 82,4g, fibra 0,20g, calcio 6,00mg, ferro 0,42mg, zinco 0,22mg, magnesio 2,00mg, rame 0,036mg, selenio 0,80µg, vitamina C 0,50mg, vitamina K 0µg, vitamina B12 0µg, folato totale (food) 2,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente come voce separata dal folato alimentare — nessun segnale di arricchimento, atteso per un dolcificante naturale non trattato.
+- **Perché questo record rappresenta bene il miele comune italiano**: record generico "Honey" (categoria FDC "Sweets"), non un "honey roll" o un prodotto composito con altri ingredienti; nessuna anomalia nei valori (calcio/ferro bassi, coerenti con miele puro non trattato).
+- **Analogia dichiarata**: `food_egg_raw` — stessa categoria concettuale "prodotto di origine animale, non carne/pesce/latticino" (`is_heme_iron=false`, `botanical_family=NULL`, `matrix_category_calcium` NULL): il miele è una secrezione di origine animale (ape), non vegetale, quindi senza famiglia botanica propria né categoria di assorbimento calcio rilevante (calcio trascurabile, 6mg/100g) — stesso trattamento già dato alle uova, unico altro prodotto animale non-carne/pesce/latticino nel Golden Set; matrice propria (`miele`, non riusa nessuna matrice esistente).
+- **Categoria dieta**: `egg_dairy` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (uova, latte, latticini e formaggi, burro, **miele**): vegetariano SÌ, vegano NO (prodotto di origine animale), fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169640 --food-id=food_miele --name-it="Miele" --matrix-id=miele --matrix-description-it="Miele" --baseline-cooking-state=fresh --analogy-food-id=food_egg_raw --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169640 --food-id=food_miele --name-it="Miele" --matrix-id=miele --matrix-description-it="Miele" --baseline-cooking-state=fresh --analogy-food-id=food_egg_raw --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: non necessario, il record FDC 169640 è pulito e completo (17/17), corroborato da una seconda fonte indipendente.
+
 ### Burro, senza sale (2026-10-13)
 
 - **FDC ID**: 173430, dataType **SR Legacy** — "Butter, without salt".
