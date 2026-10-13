@@ -15,499 +15,15 @@
 
 ## Pronti
 
-### Melone (cantalupo), crudo (2026-10-13, run di verifica serale)
-
-- **FDC ID**: 169092, dataType **SR Legacy** — "Melons, cantaloupe, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 34,0kcal, proteine 0,84g, grassi 0,19g, carboidrati 8,16g, fibra 0,90g, calcio 9,00mg, ferro 0,21mg, zinco 0,18mg, magnesio 12,0mg, rame 0,041mg, selenio 0,40µg, vitamina C 36,7mg, vitamina K (fillochinone) 2,50µg, vitamina B12 0µg, folato totale 21,0µg, beta-carotene 2020µg, alfa-carotene 16,0µg, beta-criptoxantina 1,00µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per frutta fresca non trattata.
-- **Perché questo record rappresenta bene il melone cantalupo comune italiano**: record generico SR Legacy "Melons, cantaloupe, raw", nessuna specificazione di marca/trattamento; beta-carotene alto (2020µg/100g) è una caratteristica nota della polpa arancione del cantalupo, non un'anomalia.
-- **Analogia dichiarata**: `food_oranges_raw` — stessa categoria concettuale "frutta fresca cruda" (stesso trattamento già usato per l'intero lotto 18 di questo file: `matrix_category_calcium` NULL, `is_heme_iron=false`, `--carotenoid-matrix-state=raw_intact`), `botanical_family='Cucurbitaceae'` (famiglia reale di *Cucumis melo*, diversa dagli agrumi — non un'analogia botanica, solo di categoria "frutta fresca"), matrice propria (`melone_cantalupo`).
-- **Categoria dieta**: `fresh_fruit` — frutta fresca nella definizione restrittiva del PRD (non un ortaggio botanicamente "frutto" come pomodoro/zucchina): vegetariano SÌ, vegano SÌ, fruttariano SÌ.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169092 --food-id=food_melone_cantalupo_raw --name-it="Melone (cantalupo), crudo" --matrix-id=melone_cantalupo --matrix-description-it="Melone cantalupo" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=fresh_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169092 --food-id=food_melone_cantalupo_raw --name-it="Melone (cantalupo), crudo" --matrix-id=melone_cantalupo --matrix-description-it="Melone cantalupo" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=fresh_fruit --apply
-  ```
-- **Piano B**: FDC 327198/746770 (altre varianti "Melons, cantaloupe, raw" trovate in ricerca, dataType non confermato) se il dry-run reale di 169092 risultasse incompleto — non necessario a priori, il record scelto è già 17/17.
-
-### Nocciole, secche (2026-10-13, run di verifica serale)
-
-- **FDC ID**: 170581, dataType **SR Legacy** — "Nuts, hazelnuts or filberts".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 628kcal, proteine 14,9g, grassi 60,8g, carboidrati 16,7g, fibra 9,70g, calcio 114mg, ferro 4,70mg, zinco 2,45mg, magnesio 163mg, rame 1,73mg, selenio 2,40µg, vitamina C 6,30mg, vitamina K (fillochinone) 14,2µg, vitamina B12 0µg, folato totale 113µg, beta-carotene 11,0µg, alfa-carotene 3,00µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per frutta a guscio grezza.
-- **Nota sulla dicitura "raw"**: la descrizione FDC esatta è "Nuts, hazelnuts or filberts", senza la parola "raw" esplicita — stesso stile già accettato in questo file per le mandorle del Golden Set originale ("Nuts, almonds") e per le noci qui sopra ("Nuts, walnuts, english"): è la convenzione SR Legacy per frutta a guscio secca/cruda non trattata, non un segnale di ambiguità sullo stato di cottura.
-- **Perché questo record rappresenta bene le nocciole comuni italiane**: record generico SR Legacy per nocciole (*Corylus avellana*), nessuna specificazione di marca/tostatura, valori coerenti con frutta a guscio grezza non salata.
-- **Analogia dichiarata**: `food_almonds` — stessa categoria concettuale "frutta a guscio grezza" (`is_heme_iron=false`, `matrix_category_calcium` NULL), usata anche per `food_noci_raw` qui sopra per coerenza (NON uso `food_noci_raw` come analogia: non è ancora stato eseguito sul DB reale, resta solo "pronto" — l'analogia deve riferirsi a un alimento già esistente in `foods_raw`, come richiesto dallo script), `botanical_family='Betulaceae'` (famiglia reale di *Corylus avellana*), `--carotenoid-matrix-state=raw_intact` (beta-carotene/alfa-carotene non trascurabili), matrice propria (`nocciole`).
-- **Categoria dieta**: `plant_non_fruit` — frutta secca/a guscio: vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170581 --food-id=food_nocciole_raw --name-it="Nocciole, secche" --matrix-id=nocciole --matrix-description-it="Nocciole" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Betulaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170581 --food-id=food_nocciole_raw --name-it="Nocciole, secche" --matrix-id=nocciole --matrix-description-it="Nocciole" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Betulaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: FDC 170582 ("Nuts, hazelnuts or filberts, blanched", SR Legacy) o FDC 2515375 (Foundation Foods, "...raw") se il dry-run reale di 170581 risultasse incompleto — non tentati a priori, nessuna ragione per preferirli al record generico scelto.
-
-### Sedano, crudo (2026-10-13, run di verifica serale)
-
-- **FDC ID**: 169988, dataType **SR Legacy** — "Celery, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; già verificato nella sessione precedente dello stesso giorno, ri-confermato qui). Valori per 100g: energia 14,0kcal, proteine 0,69g, grassi 0,17g, carboidrati 2,97g, fibra 1,60g, calcio 40,0mg, ferro 0,20mg, zinco 0,13mg, magnesio 11,0mg, rame 0,035mg, selenio 0,40µg, vitamina C 3,10mg, vitamina K (fillochinone) 29,3µg, vitamina B12 0µg, folato totale 36,0µg, beta-carotene 270µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
-- **Perché questo record rappresenta bene il sedano comune italiano**: record generico SR Legacy "Celery, raw", nessuna specificazione di marca/trattamento, valori coerenti con una verdura cruda non trattata.
-- **Analogia dichiarata**: `food_carrots_raw` — stessa categoria concettuale "verdura cruda con carotenoidi non trascurabili" (stesso trattamento del lotto 18 e di asparagi/qui sopra: `matrix_category_calcium` NULL, `is_heme_iron=false`, `--carotenoid-matrix-state=raw_intact`), `botanical_family='Apiaceae'` — stessa famiglia reale delle carote (*Apium graveolens* e *Daucus carota* sono entrambe Apiaceae: qui è sia un'analogia di categoria sia botanica reale, non forzata), matrice propria (`sedano`).
-- **Categoria dieta**: `plant_non_fruit` — verdura: vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169988 --food-id=food_sedano_raw --name-it="Sedano, crudo" --matrix-id=sedano --matrix-description-it="Sedano" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169988 --food-id=food_sedano_raw --name-it="Sedano, crudo" --matrix-id=sedano --matrix-description-it="Sedano" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: FDC 2346405 (Foundation Foods, "Celery, raw") se il dry-run reale di 169988 risultasse incompleto — non necessario a priori, il record SR Legacy scelto è già 17/17.
-
-### Patata dolce, cruda (2026-10-13, run di verifica serale)
-
-- **FDC ID**: 168482, dataType **SR Legacy** — "Sweet potato, raw, unprepared (Includes foods for USDA's Food Distribution Program)".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 1,57g, grassi 0,050g, carboidrati 20,1g, fibra 3,00g, calcio 30,0mg, ferro 0,61mg, zinco 0,30mg, magnesio 25,0mg, rame 0,15mg, selenio 0,60µg, vitamina C 2,40mg, vitamina K (fillochinone) 1,80µg, vitamina B12 0µg, folato totale 11,0µg, beta-carotene 8509µg, alfa-carotene 7,00µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un tubero crudo non trattato.
-- **Perché questo record rappresenta bene la patata dolce comune italiana**: record generico SR Legacy "Sweet potato, raw, unprepared" — la dicitura "Includes foods for USDA's Food Distribution Program" è la stessa già accettata in questo file per le mele del lotto 18 e per l'avena di questa stessa sessione: non indica arricchimento, solo una nota di programma di distribuzione USDA. Beta-carotene molto alto (8509µg/100g) è una caratteristica nota e attesa della polpa arancione della patata dolce, non un'anomalia.
-- **Attenzione sulla famiglia botanica (NON riusare quella della patata comune)**: la patata dolce (*Ipomoea batatas*) appartiene alla famiglia **Convolvulaceae**, botanicamente non imparentata con la patata comune (*Solanum tuberosum*, Solanaceae) nonostante il nome simile — nessuna analogia botanica con `food_potato_raw`/`food_potato_boiled_in_skin` del Golden Set originale, solo di categoria alimentare ("tubero").
-- **Analogia dichiarata**: `food_potato_raw` — stessa categoria concettuale "tubero crudo" (`matrix_category_calcium` NULL, `is_heme_iron=false`, stesso trattamento già dato alla patata comune), `botanical_family='Convolvulaceae'` (famiglia reale, diversa da quella della patata comune — vedi nota sopra), `--carotenoid-matrix-state=raw_intact` (beta-carotene molto alto, a differenza della patata comune dove è marginale), matrice propria (`patata_dolce`, non riusa `tubers`: composizione molto diversa, soprattutto su beta-carotene e carboidrati).
-- **Categoria dieta**: `plant_non_fruit` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (..., **tuberi**, ...): vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=168482 --food-id=food_patata_dolce_raw --name-it="Patata dolce, cruda" --matrix-id=patata_dolce --matrix-description-it="Patata dolce" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --carotenoid-matrix-state=raw_intact --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=168482 --food-id=food_patata_dolce_raw --name-it="Patata dolce, cruda" --matrix-id=patata_dolce --matrix-description-it="Patata dolce" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --carotenoid-matrix-state=raw_intact --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non necessario, il record FDC 168482 è pulito e completo (17/17).
-
-### Asparagi, crudi (2026-10-13)
-
-- **FDC ID**: 168389, dataType **SR Legacy** — "Asparagus, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 20,0kcal, proteine 2,20g, grassi 0,12g, carboidrati 3,88g, fibra 2,10g, calcio 24,0mg, ferro 2,14mg, zinco 0,54mg, magnesio 14,0mg, rame 0,19mg, selenio 2,30µg, vitamina C 5,60mg, vitamina K (fillochinone) 41,6µg, vitamina B12 0µg, folato totale 52,0µg, beta-carotene 449µg, alfa-carotene 9,00µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per una verdura cruda non trattata.
-- **Perché questo record rappresenta bene gli asparagi comuni italiani**: record generico SR Legacy "Asparagus, raw", nessuna specificazione di varietà/marca, nessuna anomalia nei valori (folato e vitamina K alti sono una caratteristica nota della verdura, non un segno di trattamento).
-- **Analogia dichiarata**: `food_carrots_raw` — stessa categoria concettuale "verdura cruda con carotenoidi non trascurabili" (stesso trattamento già usato per l'intero lotto 18 verdure/frutta di questo file: `matrix_category_calcium` NULL — le categorie ossalati esistono solo per spinaci/kale/latte —, `is_heme_iron=false`, `--carotenoid-matrix-state=raw_intact` per non far trattare il beta-carotene come "cotto" dal motore, vedi `docs/PENDING_HUMAN_ACTIONS.md`), matrice propria (`asparagi`, non riusa `carrots`: composizione diversa).
-- **Categoria dieta**: `plant_non_fruit` — verdura: vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=168389 --food-id=food_asparagi_raw --name-it="Asparagi, crudi" --matrix-id=asparagi --matrix-description-it="Asparagi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=168389 --food-id=food_asparagi_raw --name-it="Asparagi, crudi" --matrix-id=asparagi --matrix-description-it="Asparagi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: FDC 2710823 ("Asparagus, green, raw", Foundation Foods) se il dry-run reale di 168389 risultasse incompleto — non necessario a priori, il record SR Legacy scelto è già 17/17 e internamente coerente (nessuna mescolanza di fonti rilevata).
-
-### Avena, cruda (secca, non arricchita) (2026-10-13)
-
-- **FDC ID**: 169705, dataType **SR Legacy** — "Oats (Includes foods for USDA's Food Distribution Program)".
-- **Nutrienti attesi**: **13/17** (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record) — mancano **selenio, vitamina K, beta-carotene, altri carotenoidi provitaminici A** (non riportati sulla pagina consultata, non assunti zero). Valori per 100g per i 13 presenti: energia 389kcal, proteine 16,9g, grassi 6,90g, carboidrati 66,3g, fibra 10,6g, calcio 54,0mg, ferro 4,72mg, zinco 3,97mg, magnesio 177mg, rame 0,63mg, vitamina C 0mg, vitamina B12 0µg, folato totale (alimentare) 56,0µg. **Acido folico 0µg** riportato esplicitamente come voce separata — nessuna fortificazione, coerente con un cereale integrale grezzo non trattato.
-- **Perché questo record rappresenta bene l'avena comune italiana**: record generico SR Legacy "Oats" (chicchi/fiocchi d'avena non cotti), la dicitura "Includes foods for USDA's Food Distribution Program" è la stessa già accettata in questo file per le mele del lotto 18 (FDC 171688) — non indica arricchimento, è solo una nota di programma di distribuzione alimentare USDA, non una formulazione diversa. Nessun segno di arricchimento (acido folico 0µg esplicito), coerente con cereale grezzo.
-- **Gap dichiarato (non un segnale di match debole, sotto soglia ma reale)**: selenio e vitamina K mancano dalla pagina aggregatore consultata — possibile limite della pagina riassuntiva, non necessariamente del record FDC reale (il dry-run dello script, che fa un fetch diretto, è l'unica verifica che conta). Beta-carotene/altri carotenoidi provitaminici A plausibilmente assenti o trascurabili per un cereale (nessun pigmento arancione/giallo significativo), ma non assunti zero per disciplina — restano "non trovati", non "0".
-- **Analogia dichiarata**: `food_orzo_perlato_raw` (già eseguito sul DB reale il 2026-10-12, matrix `orzo_perlato`) — stessa categoria concettuale "cereale integrale crudo non arricchito" (`is_heme_iron=false`, `matrix_category_calcium` NULL, famiglia botanica Poaceae condivisa con orzo/riso/farro/mais), matrice propria (`avena`, non riusa `orzo_perlato`: composizione diversa).
-- **Categoria dieta**: `plant_non_fruit` — cereale: vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169705 --food-id=food_avena_cruda --name-it="Avena, cruda (chicchi/fiocchi, non arricchita)" --matrix-id=avena --matrix-description-it="Avena" --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw --botanical-family=Poaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run — vedi gap dichiarato sopra: se il dry-run reale trova selenio/vitamina K, tanto meglio, nessun problema; se il numero di nutrienti estratti è sensibilmente sotto 13/17, fermarsi e segnalarlo):
-  ```
-  npm run add-food -- --fdc-id=169705 --food-id=food_avena_cruda --name-it="Avena, cruda (chicchi/fiocchi, non arricchita)" --matrix-id=avena --matrix-description-it="Avena" --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non tentato in questa ricerca — se il dry-run reale mostra una copertura molto più scarsa di 13/17, una possibile alternativa da ricercare in futuro è "Cereals, oats, regular and rolled and quick and instant, not fortified, dry" (NDB storico diverso, FDC ID non confermato in questa ricerca), non usata qui per mancanza di un FDC ID verificato.
-
-### Sgombro atlantico, crudo (2026-10-13)
-
-- **FDC ID**: 175119, dataType **SR Legacy** — "Fish, mackerel, Atlantic, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 205kcal, proteine 18,6g, grassi 13,9g, carboidrati 0g, fibra 0g, calcio 12,0mg, ferro 1,63mg, zinco 0,63mg, magnesio 76,0mg, rame 0,073mg, selenio 44,1µg, vitamina C 0,40mg, vitamina K (fillochinone) 5,00µg, vitamina B12 8,71µg, folato totale 1,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un pesce fresco non trattato.
-- **Nota su una fonte di corroborazione scartata**: triagemethod.com mostra per lo stesso nome alimento un secondo gruppo di valori (proteine 19,3g, calcio 11,0mg, ferro 0,44mg, zinco 0,49mg, magnesio 33,0mg, selenio 36,5µg, vitamina C 2,0mg, B12 2,4µg, folato 1,0µg) etichettati esplicitamente **AFCD** (Australian Food Composition Database) — scartati, stesso trattamento già dato alla fonte AFCD per merluzzo/acciughe in questo stesso file; le voci che quella stessa pagina etichetta **SR Legacy** (energia 205kcal, grassi 13,9g, rame ~0,07mg, vitamina K1 5,0µg, acido folico 0µg) coincidono esattamente con i valori qui sopra, corroborando che il record FDC 175119 è quello giusto.
-- **Perché questo record rappresenta bene lo sgombro comune italiano**: "Fish, mackerel, Atlantic, raw" è la voce generica SR Legacy per sgombro atlantico (*Scomber scombrus*), la specie più comune in pescheria in Italia; nessun segno di marinatura/trattamento/affumicatura.
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica (alimento animale), matrice propria (`sgombro`).
-- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=175119 --food-id=food_sgombro_raw --name-it="Sgombro atlantico, crudo" --matrix-id=sgombro --matrix-description-it="Sgombro" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=175119 --food-id=food_sgombro_raw --name-it="Sgombro atlantico, crudo" --matrix-id=sgombro --matrix-description-it="Sgombro" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario, il record FDC 175119 è pulito e completo (17/17), corroborato parzialmente da una seconda fonte (vedi nota sopra).
-
-### Noci (gherigli), secche (2026-10-13)
-
-- **FDC ID**: 170187, dataType **SR Legacy** — "Nuts, walnuts, english".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 654kcal, proteine 15,2g, grassi 65,2g, carboidrati 13,7g, fibra 6,70g, calcio 98,0mg, ferro 2,91mg, zinco 3,09mg, magnesio 158mg, rame 1,59mg, selenio 4,90µg, vitamina C 1,30mg, vitamina K (fillochinone) 2,70µg, vitamina B12 0µg, folato totale 98,0µg, beta-carotene 12,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per frutta a guscio grezza.
-- **Corroborazione**: triagemethod.com, per lo stesso nome alimento, etichetta esplicitamente **SR Legacy** un sottoinsieme di valori — selenio 4,9µg, vitamina C 1,3mg, B12 0µg, folato 98,0µg, acido folico 0µg, beta-carotene 12,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg — tutti numericamente identici ai valori sopra, confermando che provengono dallo stesso record FDC 170187. I valori macro (energia/proteine/grassi) mostrati su quella stessa pagina sono invece etichettati **Foundation** (un record diverso e più recente, non quello scelto qui) — non usati, per restare su un'unica fonte/record coerente.
-- **Perché questo record rappresenta bene le noci comuni italiane**: record generico SR Legacy "Nuts, walnuts, english" (la varietà comune europea, *Juglans regia*), nessuna specificazione di marca/trattamento, valori coerenti con una frutta a guscio grezza non salata.
-- **Analogia dichiarata**: `food_almonds` — stessa categoria concettuale "frutta a guscio grezza" (`is_heme_iron=false`, `matrix_category_calcium` NULL, stesso trattamento già dato alle mandorle nel Golden Set), `botanical_family='Juglandaceae'` (famiglia reale di *Juglans regia*, diversa da quella delle mandorle/Rosaceae — non un'analogia botanica, solo di categoria alimentare "frutta a guscio"), `--carotenoid-matrix-state=raw_intact` (beta-carotene 12µg non trascurabile, a differenza delle mandorle dove non era presente), matrice propria (`noci`).
-- **Categoria dieta**: `plant_non_fruit` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (..., **frutta secca/a guscio**, semi, ...): vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170187 --food-id=food_noci_raw --name-it="Noci (gherigli), secche" --matrix-id=noci --matrix-description-it="Noci" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170187 --food-id=food_noci_raw --name-it="Noci (gherigli), secche" --matrix-id=noci --matrix-description-it="Noci" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: FDC 2346394 (Foundation Foods, "Nuts, walnuts, English, halves, raw") se il dry-run reale di 170187 risultasse incompleto — non necessario a priori, il record SR Legacy scelto è già 17/17 e corroborato.
-
-### Zucchero bianco (semolato) (2026-10-13)
-
-- **FDC ID**: 169655, dataType **SR Legacy** — "Sugars, granulated".
-- **Nutrienti attesi**: 17/17 presenti come valore esplicito nel record (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato su energia/carboidrati/proteine/grassi da recipal.com, stesso NDB ID legacy 19335) — **ma solo 7/17 con un valore diverso da zero**: energia 387kcal, carboidrati 100,0g, calcio 1,00mg, ferro 0,050mg, zinco 0,010mg, rame 0,0070mg, selenio 0,60µg. Gli altri 10 (proteine, grassi, fibra, magnesio, vitamina C, vitamina K, B12, folato totale, beta-carotene, alfa-carotene, beta-criptoxantina) sono riportati esplicitamente come **0** nel record, non assenti — coerente con la composizione chimica reale del prodotto (saccarosio quasi puro, 100g/100g carboidrati): non è un segnale di dato mancante o di match debole, è il comportamento chimico atteso per uno zucchero raffinato non arricchito. **Acido folico 0µg** riportato esplicitamente come voce separata — nessuna fortificazione.
-- **Perché questo record rappresenta bene lo zucchero bianco comune italiano**: "Sugars, granulated" è la voce generica SR Legacy per zucchero da tavola raffinato, senza specificazione di marca o trattamento aggiuntivo. I minerali in traccia (calcio/ferro/zinco/rame/selenio) sono dell'ordine di grandezza tipico di contaminazione di processo per uno zucchero raffinato, non un segno di fortificazione (che richiederebbe acido folico non-zero, qui assente). Scartato esplicitamente FDC 169656 "Sugars, powdered" (zucchero a velo — prodotto diverso, verificato via WebFetch diretto per non confonderlo con questo).
-- **Analogia dichiarata**: `food_farina_di_mais_raw` — approssimazione dichiarata, non una somiglianza nutrizionale reale (la farina di mais mantiene fibra/minerali residui di un cereale integrale, lo zucchero bianco no): usata solo per confermare per analogia `is_heme_iron=false` e `is_fortified_folate=false` (nessun segnale di arricchimento in nessuno dei due record). `botanical_family` lasciata **NULL** qui (a differenza della farina di mais, Poaceae): il record FDC "Sugars, granulated" non specifica se il saccarosio proviene da canna da zucchero (Poaceae) o da barbabietola da zucchero (Amaranthaceae/Chenopodiaceae) — assegnare una famiglia botanica sarebbe un dato indovinato, non verificabile da questo record, quindi omesso. `matrix_category_calcium` NULL (calcio 1mg/100g, trascurabile, nessun effetto matrice rilevante).
-- **Categoria dieta**: `plant_non_fruit` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (..., semi, oli vegetali, **zucchero**): vegetariano SÌ, vegano SÌ, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169655 --food-id=food_zucchero_bianco --name-it="Zucchero bianco (semolato)" --matrix-id=zucchero --matrix-description-it="Zucchero bianco" --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169655 --food-id=food_zucchero_bianco --name-it="Zucchero bianco (semolato)" --matrix-id=zucchero --matrix-description-it="Zucchero bianco" --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non necessario per la scelta del record — l'unico altro candidato pulito trovato, FDC 169656 "Sugars, powdered", è un prodotto diverso (zucchero a velo), non usato.
-
-### Miele (2026-10-13)
-
-- **FDC ID**: 169640, dataType **SR Legacy** — "Honey".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato da una seconda fonte indipendente, fitnessvolt.com, con valori numericamente coincidenti o compatibili su tutti i 17). Valori per 100g: energia 304kcal, proteine 0,30g, grassi 0g, carboidrati 82,4g, fibra 0,20g, calcio 6,00mg, ferro 0,42mg, zinco 0,22mg, magnesio 2,00mg, rame 0,036mg, selenio 0,80µg, vitamina C 0,50mg, vitamina K 0µg, vitamina B12 0µg, folato totale (food) 2,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente come voce separata dal folato alimentare — nessun segnale di arricchimento, atteso per un dolcificante naturale non trattato.
-- **Perché questo record rappresenta bene il miele comune italiano**: record generico "Honey" (categoria FDC "Sweets"), non un "honey roll" o un prodotto composito con altri ingredienti; nessuna anomalia nei valori (calcio/ferro bassi, coerenti con miele puro non trattato).
-- **Analogia dichiarata**: `food_egg_raw` — stessa categoria concettuale "prodotto di origine animale, non carne/pesce/latticino" (`is_heme_iron=false`, `botanical_family=NULL`, `matrix_category_calcium` NULL): il miele è una secrezione di origine animale (ape), non vegetale, quindi senza famiglia botanica propria né categoria di assorbimento calcio rilevante (calcio trascurabile, 6mg/100g) — stesso trattamento già dato alle uova, unico altro prodotto animale non-carne/pesce/latticino nel Golden Set; matrice propria (`miele`, non riusa nessuna matrice esistente).
-- **Categoria dieta**: `egg_dairy` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (uova, latte, latticini e formaggi, burro, **miele**): vegetariano SÌ, vegano NO (prodotto di origine animale), fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=169640 --food-id=food_miele --name-it="Miele" --matrix-id=miele --matrix-description-it="Miele" --baseline-cooking-state=fresh --analogy-food-id=food_egg_raw --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=169640 --food-id=food_miele --name-it="Miele" --matrix-id=miele --matrix-description-it="Miele" --baseline-cooking-state=fresh --analogy-food-id=food_egg_raw --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: non necessario, il record FDC 169640 è pulito e completo (17/17), corroborato da una seconda fonte indipendente.
-
-### Burro, senza sale (2026-10-13)
-
-- **FDC ID**: 173430, dataType **SR Legacy** — "Butter, without salt".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 717kcal, proteine 0,85g, grassi 81,1g, carboidrati 0,060g, fibra 0g, calcio 24,0mg, ferro 0,020mg, zinco 0,090mg, magnesio 2,00mg, rame 0,016mg, selenio 1,00µg, vitamina C 0mg, vitamina K 7,00µg, vitamina B12 0,17µg, folato totale (food) 3,00µg, beta-carotene 158µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un latticino grasso non trattato.
-- **Perché questo record rappresenta bene il burro comune italiano**: "without salt" (senza sale aggiunto) — sodio 11,0mg/100g, coerente con la sola traccia naturale del latte, non con un burro salato (che avrebbe centinaia di mg di sodio); nessuna menzione di "whipped" (montato, aerato, densità diversa) né di margarina o prodotto misto.
-- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`): il burro ha un contenuto di calcio basso in assoluto (24mg/100g) ma nessun inibitore di assorbimento (ossalati/fitati) presente, stessa categoria del latte da cui deriva; matrice propria (`burro`, non riusa `dairy_milk`: composizione nutrizionale molto diversa, quasi tutto grasso).
-- **Categoria dieta**: `egg_dairy` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (uova, latte, latticini e formaggi, burro, miele): vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=173430 --food-id=food_burro --name-it="Burro, senza sale" --matrix-id=burro --matrix-description-it="Burro" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=173430 --food-id=food_burro --name-it="Burro, senza sale" --matrix-id=burro --matrix-description-it="Burro" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: non necessario, il record FDC 173430 è pulito e completo (17/17); una variante "burro salato" (altro FDC ID, non usato) resterebbe disponibile come voce separata se mai richiesta in futuro.
-
-### Yogurt greco (plain, latte intero) (2026-10-13)
-
-- **FDC ID**: 171304, dataType **SR Legacy** — "Yogurt, Greek, plain, whole milk".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 97,0kcal (vedi nota), proteine 9,00g, grassi 5,00g, carboidrati 3,98g, fibra 0g, calcio 100mg, ferro 0mg, zinco 0,52mg, magnesio 11,0mg, rame 0,017mg, selenio 9,70µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 0,75µg, folato totale (food) 5,00µg, beta-carotene 7,00µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
-- **Nota su una piccola discrepanza interna nella pagina aggregatore consultata**: l'etichetta nutrizionale mostrata sulla stessa pagina riporta 100kcal (arrotondato) invece di 97,0kcal di tabella dettagliata — riportato qui il valore di tabella, più granulare; stessa origine per una micro-differenza analoga su B12 (0,8 vs 0,75µg). Scarti di arrotondamento, non una discrepanza sui dati sostanziali — il dry-run reale dello script (fetch diretto dal record FDC) è comunque l'unica verifica che conta prima dell'apply.
-- **Perché questo record rappresenta bene lo yogurt greco comune italiano**: esplicitamente "whole milk" (latte intero) — non la variante nonfat/lowfat (magro), che non rappresenterebbe bene un "yogurt greco intero" comune.
-- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`yogurt_greco`, non riusa `dairy_milk`: composizione nutrizionale diversa dal latte, es. proteine quasi triple per la concentrazione tipica dello yogurt greco).
-- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=171304 --food-id=food_yogurt_greco --name-it="Yogurt greco (plain, latte intero)" --matrix-id=yogurt_greco --matrix-description-it="Yogurt greco" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=171304 --food-id=food_yogurt_greco --name-it="Yogurt greco (plain, latte intero)" --matrix-id=yogurt_greco --matrix-description-it="Yogurt greco" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: FDC 2259794 (Foundation Foods, stessa descrizione "Yogurt, Greek, plain, whole milk") scartato a priori — pagina consultata mostra selenio/vitamina C/B12/folato/carotenoidi tutti "non riportati" e un'energia incoerente su tre punti della stessa pagina (90/94,5/95kcal): molto meno completo e meno coerente del record SR Legacy scelto.
-
-### Yogurt bianco intero (plain, latte intero) (2026-10-13)
-
-- **FDC ID**: 171284, dataType **SR Legacy** — "Yogurt, plain, whole milk".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 61,0kcal, proteine 3,47g, grassi 3,25g, carboidrati 4,66g, fibra 0g, calcio 121mg, ferro 0,050mg, zinco 0,59mg, magnesio 12,0mg, rame 0,0090mg, selenio 2,20µg, vitamina C 0,50mg, vitamina K 0,20µg, vitamina B12 0,37µg, folato totale (food) 7,00µg, beta-carotene 5,00µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare (folato totale = folato alimentare = 7µg) — nessun segnale di arricchimento.
-- **Perché questo record rappresenta bene lo yogurt bianco comune italiano**: esplicitamente "whole milk" (latte intero), non la variante greca (più concentrata/proteica) né magra/nonfat — distinto correttamente dallo yogurt greco qui sopra (proteine 3,47g vs 9,00g/100g, differenza coerente con la concentrazione tipica dello yogurt greco).
-- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`yogurt_bianco_intero`).
-- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=171284 --food-id=food_yogurt_bianco_intero --name-it="Yogurt bianco intero (plain, latte intero)" --matrix-id=yogurt_bianco_intero --matrix-description-it="Yogurt bianco intero" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=171284 --food-id=food_yogurt_bianco_intero --name-it="Yogurt bianco intero (plain, latte intero)" --matrix-id=yogurt_bianco_intero --matrix-description-it="Yogurt bianco intero" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: FDC 2259793 (Foundation Foods, stessa descrizione "Yogurt, plain, whole milk") scartato a priori — pagina consultata mostra selenio/vitamina C/B12/folato/carotenoidi tutti "non riportati" (~9/17) e una discrepanza interna fra l'energia in tabella (77,3kcal) e quella in etichetta (80kcal): molto meno completo e meno coerente del record SR Legacy scelto.
-
-### Ricotta (latte intero) (2026-10-13)
-
-- **FDC ID**: 170851, dataType **SR Legacy** — "Cheese, ricotta, whole milk".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 150kcal, proteine 7,54g, grassi 10,2g, carboidrati 7,27g, fibra 0g, calcio 206mg, ferro 0,13mg, zinco 0,53mg, magnesio 20,0mg, rame 0,018mg, selenio 5,90µg, vitamina C 0mg, vitamina K 1,10µg, vitamina B12 0,85µg, folato totale (food) 4,00µg, beta-carotene 33,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento stile USA, atteso per un latticino fresco non trattato.
-- **Perché questo record rappresenta bene la ricotta comune italiana**: "whole milk" (latte intero), senza indicazioni di prodotto magro/scremato o lavorato industrialmente; nessuna anomalia di sodio (110mg/100g, nella norma per un latticino fresco non salato pesantemente). Esiste anche una riga Foundation Foods per lo stesso nome (FDC 323444) con valori leggermente diversi (energia 157kcal, proteine 7,8g) — non usata come primaria: il record SR Legacy scelto è quello con tutti i 17 nutrienti confermati dalla fonte consultata.
-- **Analogia dichiarata**: `food_milk_whole` — unico latticino già presente nel Golden Set (`dairy_milk`, `matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`): stessa categoria di assorbimento del calcio (alta biodisponibilità, nessuna interferenza da ossalati/fitati, a differenza di spinaci/kale), nessuna famiglia botanica (prodotto animale), matrice propria (`ricotta`, non riusa `dairy_milk`: composizione nutrizionale molto diversa dal latte).
-- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170851 --food-id=food_ricotta --name-it="Ricotta (latte intero)" --matrix-id=ricotta --matrix-description-it="Ricotta" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170851 --food-id=food_ricotta --name-it="Ricotta (latte intero)" --matrix-id=ricotta --matrix-description-it="Ricotta" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: FDC 323444 (Foundation Foods, stesso alimento concettuale) se il dry-run reale di 170851 risultasse incompleto — non necessario a priori, il record scelto è già 17/17.
-
-### Mozzarella (latte intero) (2026-10-13)
-
-- **FDC ID**: 170845, dataType **SR Legacy** — "Cheese, mozzarella, whole milk".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato su carboidrati, vitamina K, acido folico e beta-criptoxantina da triagemethod.com, che etichetta esplicitamente queste voci come SR Legacy — le altre voci di quella stessa pagina sono etichettate AFCD, database australiano diverso, non usate). Valori per 100g: energia 299kcal, proteine 22,2g, grassi 22,1g, carboidrati 2,40g, fibra 0g, calcio 505mg, ferro 0,44mg, zinco 2,92mg, magnesio 20,0mg, rame 0,011mg, selenio 17,0µg, vitamina C 0mg, vitamina K 2,30µg, vitamina B12 2,28µg, folato totale (food) 7,00µg, beta-carotene 57,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
-- **Nota sulla rappresentatività**: scelta la variante "whole milk" (latte intero) **senza** la dicitura "low moisture" (quest'ultima è il blocco stagionato/essiccato tipico della mozzarella da pizza USA, non la mozzarella fresca italiana) — la variante qui usata è quindi la più vicina fra le opzioni FDC a una mozzarella fresca comune, pur restando un prodotto generico USDA e non una mozzarella di bufala/fior di latte specifica.
-- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`mozzarella`).
-- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170845 --food-id=food_mozzarella --name-it="Mozzarella (latte intero)" --matrix-id=mozzarella --matrix-description-it="Mozzarella" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170845 --food-id=food_mozzarella --name-it="Mozzarella (latte intero)" --matrix-id=mozzarella --matrix-description-it="Mozzarella" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: non necessario, il record FDC 170845 è pulito e completo (17/17); la variante "low moisture" (altro FDC ID, non usato) resterebbe disponibile come voce separata per la mozzarella da forno/pizza, se mai richiesta in futuro.
-
-### Parmigiano Reggiano (formaggio grana stagionato) (2026-10-13)
-
-- **FDC ID**: 170848, dataType **SR Legacy** — "Cheese, parmesan, hard".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 392kcal, proteine 35,8g, grassi 25,0g, carboidrati 3,22g, fibra 0g, calcio 1184mg, ferro 0,82mg, zinco 2,75mg, magnesio 44,0mg, rame 0,032mg, selenio 22,5µg, vitamina C 0mg, vitamina K 1,70µg, vitamina B12 1,20µg, folato totale (food) 7,00µg, beta-carotene 66,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
-- **Nota sulla rappresentatività (proxy dichiarato, non un prodotto DOP specifico)**: il record FDC "Cheese, parmesan, hard" è una voce generica USDA per formaggio grana stagionato, non uno specifico "Parmigiano Reggiano DOP" — ma i valori (proteine 35,8g, grassi 25,0g, calcio 1184mg/100g) sono nell'ordine di grandezza tipico riportato per il Parmigiano Reggiano reale (tipicamente calcio ~1150-1200mg/100g, proteine ~33-35g/100g), senza alcuna anomalia da arricchimento o trattamento industriale — trattamento diverso dai casi prosciutto crudo/bresaola di questa stessa coda, dove la differenza di prodotto era sostanziale (affumicatura, taglio diverso), qui è un'approssimazione di categoria dichiarata, non uno scarto di qualità. Tentata una corroborazione incrociata su triagemethod.com: la pagina per questo alimento mescola fonti SR Legacy e AFCD (database australiano) senza etichettarle voce per voce in modo utilizzabile (es. calcio mostrato a 130mg, incompatibile con un formaggio stagionato) — scartata come fonte di corroborazione per questo alimento, non usata.
-- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`parmigiano_reggiano`).
-- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=170848 --food-id=food_parmigiano_reggiano --name-it="Parmigiano Reggiano (formaggio grana stagionato, generico tipo parmesan USDA)" --matrix-id=parmigiano_reggiano --matrix-description-it="Parmigiano Reggiano" --baseline-cooking-state=aged --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=170848 --food-id=food_parmigiano_reggiano --name-it="Parmigiano Reggiano (formaggio grana stagionato, generico tipo parmesan USDA)" --matrix-id=parmigiano_reggiano --matrix-description-it="Parmigiano Reggiano" --baseline-cooking-state=aged --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
-  ```
-- **Piano B**: FDC 171247 ("Cheese, parmesan, grated", SR Legacy) o FDC 173431 ("Cheese, parmesan, shredded", SR Legacy) se il dry-run reale di 170848 risultasse incompleto o con un'anomalia non prevista qui — non tentati a priori, nessuna ragione per preferirli al record "hard" scelto.
-
-### Vongole, crude (2026-10-13)
-
-- **FDC ID**: 174214, dataType **SR Legacy** — "Mollusks, clam, mixed species, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 14,7g, grassi 0,96g, carboidrati 3,57g, fibra 0g, calcio 39,0mg, ferro 1,62mg, zinco 0,51mg, magnesio 19,0mg, rame 0,053mg, selenio 30,6µg, vitamina C 0mg, vitamina K 0,20µg, vitamina B12 11,3µg, folato totale (food) 5,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un mollusco fresco non trattato.
-- **Nota sui carboidrati non-zero (3,57g/100g)**: a differenza del pesce (sempre 0g in questo Golden Set), le vongole — come i molluschi bivalvi in genere — riportano un contenuto di glicogeno non trascurabile; non è un'anomalia né segno di trattamento industriale, è una caratteristica nota di questa categoria (vedi anche le cozze sotto, 3,69g/100g, stesso ordine di grandezza).
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "alimento animale acquatico con ferro eme" (`is_heme_iron=true`; i molluschi bivalvi sono una fonte nota di ferro eme pur non essendo muscolo come il pesce), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — frutti di mare (mollusco): vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=174214 --food-id=food_vongole_raw --name-it="Vongole, crude" --matrix-id=vongole --matrix-description-it="Vongole" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=174214 --food-id=food_vongole_raw --name-it="Vongole, crude" --matrix-id=vongole --matrix-description-it="Vongole" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario, il record FDC 174214 è pulito e completo (17/17), letto direttamente dalla pagina con FDC ID e dataType citati.
-
-### Cozze, crude (2026-10-13)
-
-- **FDC ID**: 174216, dataType **SR Legacy** — "Mollusks, mussel, blue, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 11,9g, grassi 2,24g, carboidrati 3,69g, fibra 0g, calcio 26,0mg, ferro 3,95mg, zinco 1,60mg, magnesio 34,0mg, rame 0,094mg, selenio 44,8µg, vitamina C 8,00mg, vitamina K 0,10µg, vitamina B12 12,0µg, folato totale (food) 42,0µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
-- **Nota sui carboidrati non-zero (3,69g/100g)**: vedi nota identica sotto "Vongole" sopra — caratteristica nota dei molluschi bivalvi (glicogeno), non un'anomalia.
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "alimento animale acquatico con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — frutti di mare (mollusco): vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=174216 --food-id=food_cozze_raw --name-it="Cozze, crude" --matrix-id=cozze --matrix-description-it="Cozze" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=174216 --food-id=food_cozze_raw --name-it="Cozze, crude" --matrix-id=cozze --matrix-description-it="Cozze" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario, il record FDC 174216 è pulito e completo (17/17), letto direttamente dalla pagina con FDC ID e dataType citati.
-
-### Acciughe (alici), crude (2026-10-13)
-
-- **FDC ID**: 174182 (identificato indirettamente — vedi nota sotto sul livello di confidenza), dataType **SR Legacy** — "Fish, anchovy, european, raw" (NDB legacy 15001).
-- **Nota sulla fonte (diversa dagli altri 3 alimenti di questo lotto, confidenza più bassa)**: il fetch diretto della pagina getfoodfacts.com per questo FDC ID non è riuscito in questa sessione (l'URL non era apparso di per sé in un risultato di ricerca — solo incluso dentro l'URL di una pagina di confronto getfoodfacts.com/compare, dove compare letteralmente lo slug "fish-anchovy-european-raw-174182"). I valori per 100g sono stati quindi ricostruiti da due aggregatori indipendenti letti con successo, scalati alla loro rispettiva porzione: **recipal.com** (porzione 85g: proteine 20,35g, grassi 4,84g, calcio 141,2mg, ferro 3,29mg, zinco 1,76mg, magnesio 41,2mg, selenio 36,5µg, B12 0,588µg, folato 11,76µg) e **bodbot.com** (porzione 1oz=28,35g: energia 130,5kcal, proteine 20,35g, grassi 4,83g, calcio 146,9mg, ferro 3,25mg, zinco 1,73mg, magnesio 41,0mg, rame 0,212mg, selenio 36,5µg, vitamina K 0,106µg, B12 0,635µg, folato 9,0µg, acido folico 0). Le due fonti, scalate indipendentemente l'una dall'altra, combaciano entro ~5% su quasi tutti i valori (proteine identiche, grassi/selenio quasi identici) — corroborate anche da **triagemethod.com**, che etichetta esplicitamente come SR Legacy un sottoinsieme di valori (grassi 4,8g, rame 0,21mg, vitamina K 0,10µg, acido folico 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg), tutti coerenti con le due fonti scalate. Carboidrati 0g, fibra 0g, vitamina C 0mg, beta-carotene 0µg coerenti su tutte le fonti.
-- **Scartati esplicitamente**: triagemethod.com riporta anche, sotto lo stesso nome alimento, un secondo gruppo di valori (calcio 20,0mg, ferro 0,50mg, zinco 1,6mg, selenio 6,5µg, B12 3,0µg, folato 15,0µg) etichettati **AFCD** (Australian Food Composition Database) — non sono USDA, non corroborano né contraddicono il record FDC: sono una banca dati nazionale diversa per un prodotto non necessariamente identico, non usata.
-- **Nessuna firma di arricchimento**: acido folico 0µg riportato esplicitamente separato dal folato alimentare (fonte: triagemethod SR + bodbot) — atteso per un pesce fresco non trattato.
-- **Attenzione in fase di esecuzione reale (confidenza FDC ID più bassa degli altri 3)**: l'FDC ID 174182 non è stato confermato aprendo direttamente la pagina del record — solo dedotto dalla URL di una pagina di confronto e dalla numerazione sequenziale con il prodotto "in scatola" FDC 174183 (quest'ultimo confermato direttamente in fase di ricerca). Il dry-run dello script è quindi l'unica verifica reale per questo alimento: **se la descrizione FDC stampata non è esattamente "Fish, anchovy, european, raw" o i nutrienti estratti sono sensibilmente diversi dai valori sopra, fermarsi e segnalarlo invece di procedere con l'apply.**
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=174182 --food-id=food_acciughe_raw --name-it="Acciughe (alici), crude" --matrix-id=acciughe --matrix-description-it="Acciughe" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run — vedi attenzione sopra):
-  ```
-  npm run add-food -- --fdc-id=174182 --food-id=food_acciughe_raw --name-it="Acciughe (alici), crude" --matrix-id=acciughe --matrix-description-it="Acciughe" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: nessuno individuato in fase di ricerca; se il dry-run reale mostra una descrizione FDC diversa da "Fish, anchovy, european, raw" o un numero di nutrienti sensibilmente inferiore a 17, fermarsi prima di procedere con l'apply.
-
-### Merluzzo, crudo (2026-10-13)
-
-- **FDC ID**: 171955, dataType **SR Legacy** — "Fish, cod, Atlantic, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 82,0kcal, proteine 17,8g, grassi 0,67g, carboidrati 0g, fibra 0g, calcio 16,0mg, ferro 0,38mg, zinco 0,45mg, magnesio 32,0mg, rame 0,028mg, selenio 33,1µg, vitamina C 1,00mg, vitamina K 0,10µg, vitamina B12 0,91µg, folato totale (food) 7,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un pesce fresco non trattato.
-- **Nota di trasparenza (copertura PARZIALE della voce "merluzzo/nasello" della coda)**: questo record rappresenta il merluzzo nordico/atlantico (*Gadus morhua*), corrispondenza letterale della parola italiana "merluzzo". Il **nasello** (*Merluccius merluccius* — lo stesso pesce che al banco pesce italiano viene spesso venduto chiamandolo colloquialmente "merluzzo") è una specie diversa (famiglia Merlucciidae, non Gadidae): FDC non ha per questa specie un record generico pulito, solo un prodotto Branded "Pacific hake steaks" (nasello del Pacifico, porzionato/congelato, non rappresentativo di un nasello fresco intero). Non generalizzato per non forzare un match fra specie diverse (stesso standard già applicato a prosciutto crudo/bresaola in questa coda): **questa voce copre solo la parte "merluzzo" (vero, *Gadus morhua*) della coda; il nasello resta un gap dichiarato, non coperto**, da ricercare separatamente se in futuro emerge un record FDC dedicato.
-- **Fonte scartata per questo stesso nome**: triagemethod.com mostra per "Fish, cod, Atlantic, raw" un secondo gruppo di valori (calcio 20,0mg, ferro 0,20mg, zinco 0,30mg, rame 0,01mg, selenio 27µg, B12 0,30µg, folato 0µg) etichettati esplicitamente **AFCD** (Australian Food Composition Database), non USDA — scartati, stesso trattamento già dato alla fonte AFCD per le acciughe qui sotto.
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=171955 --food-id=food_merluzzo_raw --name-it="Merluzzo, crudo" --matrix-id=merluzzo --matrix-description-it="Merluzzo" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=171955 --food-id=food_merluzzo_raw --name-it="Merluzzo, crudo" --matrix-id=merluzzo --matrix-description-it="Merluzzo" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: nessuno trovato per il "nasello" vero (vedi nota sopra) — se in futuro emerge un record FDC dedicato per *Merluccius merluccius*, va aggiunto come voce separata, non in sostituzione di questa.
-
-### Tonno fresco (pinna gialla), crudo (2026-10-13)
-
-- **FDC ID**: 175159, dataType **SR Legacy** — "Fish, tuna, fresh, yellowfin, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: pagine aggregatore che riportano il record SR Legacy letteralmente — accurateclinic.com — corroborate su grassi e vitamina K da una seconda fonte indipendente, triagemethod.com; fetch diretto su api.nal.usda.gov non tentato da questa sessione, nessuna rete diretta disponibile — vedi CLAUDE.md). Valori per 100g: energia 109kcal, proteine 24,4g, grassi 0,49g, carboidrati 0g, fibra 0g, calcio 4,0mg, ferro 0,77mg, zinco 0,37mg, magnesio 35,0mg, rame 0,036mg, selenio 90,6µg, vitamina C 0mg, vitamina K 0,1µg, vitamina B12 2,08µg, folato totale (food) 2,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un pesce fresco non trattato.
-- **Perché questo record rappresenta bene il tonno fresco comune italiano**: pinna gialla (yellowfin/ahi) è la specie di tonno fresco più diffusa in pescheria, a differenza del pinna blu (di nicchia/pregiato, FDC 173706, scartato per rappresentatività) o dello skipjack (più tipico del tonno in scatola che del filetto fresco, FDC 175156, copertura nutrienti inferiore nella fonte consultata, ~15/17). Record "raw" semplice, nessun segno di marinatura/trattamento.
-- **Analogia dichiarata**: `food_salmon_raw` — stessa categoria concettuale "pesce crudo con ferro eme" (`is_heme_iron=true`, stesso attributo già usato per il salmone nel Golden Set), nessuna famiglia botanica (alimento animale), matrice propria.
-- **Categoria dieta**: `meat_fish` — pesce: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=175159 --food-id=food_tonno_fresco_raw --name-it="Tonno fresco (pinna gialla), crudo" --matrix-id=tonno --matrix-description-it="Tonno" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=175159 --food-id=food_tonno_fresco_raw --name-it="Tonno fresco (pinna gialla), crudo" --matrix-id=tonno --matrix-description-it="Tonno" --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: FDC 173706 ("Fish, tuna, fresh, bluefin, raw", SR Legacy, 17/17 anch'esso) se il dry-run reale di 175159 risultasse incompleto — non necessario a priori, nessun'altra alternativa generica migliore trovata per "tonno fresco comune".
-- **Nota sulla coda**: questa voce completa solo la parte "fresco" dell'item "tonno (fresco e in scatola sott'olio)" di `docs/PRD.md` — il tonno in scatola sott'olio è un prodotto composito (olio aggiunto) e resta da ricercare separatamente, non lavorato in questo run.
-
-### Prosciutto cotto (2026-10-13)
-
-- **FDC ID**: 167872, dataType **SR Legacy** — "Pork, cured, ham, boneless, regular (approximately 11% fat), roasted".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com/recipal.com, mirror dei dati SR Legacy; fetch diretto su api.nal.usda.gov non tentato da questa sessione — la prova resta il dry-run dello script). Valori per 100g: energia 178kcal, proteine 22,6g, grassi 9,02g, carboidrati 0g, fibra 0g, calcio 8,00mg, ferro 1,34mg, zinco 2,47mg, magnesio 22,0mg, rame 0,14mg, selenio 19,8µg, vitamina C 0mg, vitamina K non riportata come totale (solo fillochinone=0µg — normale per SR Legacy su questi tagli, non una lacuna specifica di questo record), vitamina B12 0,70µg, folato totale (food) 3,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento stile USA.
-- **Nota di trasparenza (sodio, non uno dei 17 nutrienti mappati da questo progetto ma rilevante per onestà sulla rappresentatività)**: il record riporta 1.500mg sodio/100g, più alto del range tipico di un prosciutto cotto italiano (circa 1000-1200mg/100g) — segno di una salagione in stile USA più salata. Non blocca l'inserimento (il sodio non è tra i 17 nutrienti tracciati da `lib/fdc/nutrientMapping.ts`), ma va dichiarato qui per trasparenza; un dato sodio più fedele andrebbe eventualmente integrato da una fonte italiana (CREA), non stimato.
-- **Perché questo record rappresenta bene il prosciutto cotto comune italiano**: "boneless, regular (~11% fat), roasted" — prodotto cotto, non affumicato, non "water added" (scartata la variante FDC 168349 "Pork, cured, ham -- water added..." per lo stesso motivo per cui si scartano le carni fresche con soluzione iniettata già viste in questo file), non "extra lean" irrealistico. Candidato alternativo valutato: FDC 168359 "Pork, cured, ham, slice, bone-in, separable lean and fat, heated, pan-broil" (17/17, sodio 852mg — sotto il range italiano invece che sopra) — profilo nutrizionale molto simile, non usato come primario solo perché la preparazione "bone-in, slice, pan-broil" rappresenta meno bene un prosciutto cotto intero affettato.
-- **Analogia dichiarata**: `food_beef_ground_cooked` — stessa categoria concettuale "carne muscolare COTTA con ferro eme" (`is_heme_iron=true`; scelta la variante cotta, a differenza delle carni fresche crude già in coda, perché il prosciutto cotto è un prodotto già cotto), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — carne di maiale lavorata: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=167872 --food-id=food_prosciutto_cotto --name-it="Prosciutto cotto" --matrix-id=prosciutto_cotto --matrix-description-it="Prosciutto cotto" --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=167872 --food-id=food_prosciutto_cotto --name-it="Prosciutto cotto" --matrix-id=prosciutto_cotto --matrix-description-it="Prosciutto cotto" --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: FDC 168359 (sopra) se il dry-run reale di 167872 risultasse sotto 17/17 o mostrasse un'anomalia non prevista qui.
-
-### Petto di pollo, crudo (senza pelle, senza osso) (2026-10-13)
-
-- **FDC ID**: 171077, dataType **SR Legacy** — "Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g: energia 120kcal, proteine 22,5g, grassi 2,6g, carboidrati 0g, fibra 0g, calcio 5,1mg, ferro 0,36mg, zinco 0,68mg, magnesio 28,0mg, rame 0,04mg, selenio 22,8µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 0,21µg, folato totale 9,1µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** — nessun segno di arricchimento stile USA, atteso per carne non trattata.
-- **Nota di trasparenza sulla fonte (diversa dagli altri 3 alimenti di questo lotto)**: il fetch diretto su fdc.nal.usda.gov/food-details/171077 non è riuscito in questa sessione (bloccato da un controllo di provenienza). I valori sopra vengono da **tre aggregatori secondari indipendenti e concordanti** (myfooddata.com, recipal.com — che riporta anche lo stesso NDB ID legacy 5062 —, nutrifox.com), non dalla pagina ufficiale FDC. Stesso trattamento già usato altrove in questo file per dati letti da riepilogo automatico: vale come controllo di plausibilità, non come prova — la prova resta il dry-run dello script, che ri-scarica il record vero.
-- **Perché questo record rappresenta bene il petto di pollo comune italiano**: descrizione esplicita "skinless, boneless, meat only, raw" — carne cruda non trattata, non marinata, non impanata. Esistono varianti FDC "with added solution" (marinate/iniettate con soluzione salina) viste in fase di ricerca e scartate perché non rappresentano un petto di pollo semplice.
-- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica (alimento animale, come la carne bovina già nel Golden Set), matrice propria (non riusa `beef_ground_meat`: composizione nutrizionale diversa).
-- **Categoria dieta**: `meat_fish` — carne di pollame: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=171077 --food-id=food_petto_di_pollo_raw --name-it="Petto di pollo, crudo (senza pelle, senza osso)" --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=171077 --food-id=food_petto_di_pollo_raw --name-it="Petto di pollo, crudo (senza pelle, senza osso)" --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata), ma data la verifica non diretta sulla pagina FDC ufficiale (vedi nota sopra): se il dry-run reale trova meno di 17/17 nutrienti, fermarsi e segnalarlo prima di procedere con l'apply, invece di considerare l'alimento comunque pronto.
-
-### Coscia di pollo, cruda (carne scura, senza pelle, senza osso) (2026-10-13)
-
-- **FDC ID**: 173627, dataType **SR Legacy** — "Chicken, broilers or fryers, dark meat, thigh, meat only, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da getfoodfacts.com, che riporta esplicitamente FDC ID 173627 come SR Legacy). Valori per 100g: energia 121kcal, proteine 19,7g, grassi 4,12g, carboidrati 0g, fibra 0g, calcio 7,00mg, ferro 0,81mg, zinco 1,58mg, magnesio 23,0mg, rame 0,062mg, selenio 22,9µg, vitamina C 0mg, vitamina K 2,90µg, vitamina B12 0,61µg, folato totale 4,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessuna firma di arricchimento.
-- **Perché questo record rappresenta bene la coscia di pollo comune italiana**: "dark meat, thigh, meat only, raw" — senza pelle, senza marinatura/soluzione aggiunta, senza impanatura. Distinto correttamente dal record FDC 172859 "Chicken, dark meat, thigh, meat only, with added solution, raw" (variante marinata/trattata, scartata in fase di ricerca).
-- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — carne di pollame: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=173627 --food-id=food_coscia_di_pollo_raw --name-it="Coscia di pollo, cruda (carne scura, senza pelle, senza osso)" --matrix-id=coscia_di_pollo --matrix-description-it="Coscia di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=173627 --food-id=food_coscia_di_pollo_raw --name-it="Coscia di pollo, cruda (carne scura, senza pelle, senza osso)" --matrix-id=coscia_di_pollo --matrix-description-it="Coscia di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario, il record FDC 173627 è pulito e completo (17/17), descrizione inequivocabile.
-
-### Lonza di maiale, cruda, magra (2026-10-13)
-
-- **FDC ID**: 168230, dataType **SR Legacy** — "Pork, fresh, loin, whole, separable lean only, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da getfoodfacts.com, che riporta esplicitamente FDC ID 168230 come SR Legacy). Valori per 100g: energia 143kcal, proteine 21,4g, grassi 5,66g, carboidrati 0g, fibra 0g, calcio 17,0mg, ferro 0,84mg, zinco 1,84mg, magnesio 23,0mg, rame 0,062mg, selenio 36,1µg, vitamina C 0,60mg, vitamina K 0µg, vitamina B12 0,63µg, folato totale 5,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessuna firma di arricchimento.
-- **Perché questo record rappresenta bene la lonza di maiale comune italiana**: "fresh, loin, whole, separable lean only, raw" — carne fresca magra, non trattata/marinata/affumicata (niente "with added solution" come in altre varianti viste in fase di ricerca, es. FDC 169181). Scelta la variante "lean only" (magra) invece di "lean and fat" (FDC 167818, che includerebbe anche il grasso visibile) per rappresentare la lonza magra comunemente intesa.
-- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — carne di maiale: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=168230 --food-id=food_lonza_di_maiale_raw --name-it="Lonza di maiale, cruda, magra" --matrix-id=lonza_di_maiale --matrix-description-it="Lonza di maiale" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=168230 --food-id=food_lonza_di_maiale_raw --name-it="Lonza di maiale, cruda, magra" --matrix-id=lonza_di_maiale --matrix-description-it="Lonza di maiale" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario, il record FDC 168230 è pulito e completo (17/17); scartata la variante "lean and fat" (167818) perché includerebbe grasso visibile non rappresentativo della "lonza magra".
-
-### Petto di tacchino, crudo (senza pelle) (2026-10-13)
-
-- **FDC ID**: 174515, dataType **SR Legacy** — "Turkey, retail parts, breast, meat only, raw".
-- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da due fonti indipendenti concordanti: getfoodfacts.com, che riporta esplicitamente FDC ID 174515, e triagemethod.com/Human Nutrition Explorer). Valori per 100g: energia 114kcal, proteine 23,3g, grassi 2,33g, carboidrati 0g, fibra 0g, calcio 9,00mg, ferro 0,76mg, zinco 1,16mg, magnesio 27,0mg, rame 0,054mg, selenio 22,1µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 1,35µg, folato totale (food) 7,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
-- **Nota sull'acido folico**: a differenza degli altri 3 alimenti di questo lotto, le fonti consultate per questo record non riportano una voce "acido folico" separata e distinta dal folato alimentare — solo "Folate, food" = 7,00µg. Non è un segnale di arricchimento mancato da verificare: è semplicemente l'assenza di quella voce specifica nell'aggregatore consultato; nessun valore anomalo (calcio, folato) che faccia sospettare arricchimento stile USA. Il dry-run dello script (che legge direttamente il record FDC) chiarirà se quella voce compare o no.
-- **Perché questo record rappresenta bene il petto di tacchino comune italiano**: "retail parts, breast, meat only, raw" — categoria generica/non trattata, distinta dalla variante "enhanced" (marinata/iniettata con soluzione salina) vista nei risultati di ricerca e scartata.
-- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
-- **Categoria dieta**: `meat_fish` — carne di tacchino: vegetariano NO, vegano NO, fruttariano NO.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=174515 --food-id=food_petto_di_tacchino_raw --name-it="Petto di tacchino, crudo (senza pelle)" --matrix-id=petto_di_tacchino --matrix-description-it="Petto di tacchino" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=174515 --food-id=food_petto_di_tacchino_raw --name-it="Petto di tacchino, crudo (senza pelle)" --matrix-id=petto_di_tacchino --matrix-description-it="Petto di tacchino" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
-  ```
-- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata), ma verificare nel dry-run reale se compare una voce "acido folico" distinta (vedi nota sopra) — se compare non-zero, fermarsi e segnalarlo invece di procedere con l'apply.
-
-### Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale (2026-10-12)
-
-- **FDC ID**: 175203, dataType **SR Legacy** — "Beans, white, mature seeds, cooked, boiled, without salt".
-- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g (confermati da getfoodfacts.com, tabella nutrienti completa per FDC ID 175203, SR Legacy): energia 139kcal, proteine 9,73g, grassi 0,35g, carboidrati 25,1g, fibra 6,30g, calcio 90,0mg, ferro 3,70mg, zinco 1,38mg, magnesio 63,0mg, rame 0,29mg, selenio 1,30µg, vitamina C 0mg, vitamina K 3,50µg, vitamina B12 0µg, folato totale 81,0µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione), beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
-- **Nota sulla scelta del record**: FDC non ha una voce "cannellini" dedicata (solo prodotti Branded di marca, troppo generici/incompleti per questo uso) — "Beans, white, mature seeds" (fagioli bianchi) è la voce generica SR Legacy più diretta per rappresentare i fagioli cannellini (varietà a seme bianco di Phaseolus vulgaris), stesso approccio già usato per fave/piselli in questo file (preferenza per il record generico SR Legacy sulla variante branded specifica).
-- **Perché questo record rappresenta bene i cannellini comuni italiani**: nessuna firma di arricchimento (acido folico 0µg esplicito, separato dal folato totale). Il calcio (90mg/100g) è più alto dei fagioli rossi kidney già nel Golden Set (28mg/100g), ma è una differenza varietale nota fra legumi comuni (i fagioli bianchi riportano tipicamente più calcio dei fagioli rossi nelle tabelle di composizione), non un segnale di arricchimento — quest'ultimo richiederebbe acido folico non-zero, qui assente.
-- **Analogia dichiarata**: `food_kidney_beans_boiled` — stessa specie botanica *Phaseolus vulgaris* (famiglia Fabaceae), stesso matrix_id `legumes` (già esistente in `food_matrices_master`, non serve quindi `--matrix-description-it`), stesso stato "semi maturi, bolliti, senza sale", `matrix_category_calcium` NULL, `is_heme_iron=false`.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=175203 --food-id=food_fagioli_cannellini_bolliti --name-it="Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non necessario, il record FDC 175203 è pulito e completo (17/17).
-
-### Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale (2026-10-12)
-
-- **FDC ID**: 173736, dataType **SR Legacy** — "Beans, cranberry (roman), mature seeds, cooked, boiled, without salt".
-- **Nutrienti attesi**: almeno 14/17 confermati dalla pagina aggregatore consultata (getfoodfacts.com, che riporta esplicitamente FDC ID 173736 come SR Legacy): energia 136kcal, proteine 9,34g, grassi 0,46g, carboidrati 24,5g, fibra 8,60g, calcio 50,0mg, ferro 2,09mg, zinco 1,14mg, magnesio 50,0mg, rame 0,23mg, selenio 1,30µg, vitamina C 0mg, vitamina B12 0µg, folato totale 207µg, **acido folico 0µg riportato esplicitamente come voce separata** (nessuna fortificazione). **Non riportati dalla pagina aggregatore consultata** (ma non necessariamente assenti dal record FDC reale — lo script, al momento dell'esecuzione, farà un fetch diretto che potrà trovarne un numero diverso): vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
-- **Perché questo record rappresenta bene i fagioli borlotti comuni italiani**: nessuna firma di arricchimento (acido folico 0µg esplicito), valori coerenti con un legume bollito senza trattamenti industriali. Record generico SR Legacy, non Branded. FDC non ha una voce "borlotti" dedicata, ma "cranberry (roman) beans" è il nome USDA standard per la stessa varietà screziata di *Phaseolus vulgaris* nota in Italia come borlotto — stesso alimento, nome diverso, non un prodotto diverso.
-- **Analogia dichiarata**: `food_kidney_beans_boiled` — stessa specie botanica *Phaseolus vulgaris* (famiglia Fabaceae), stesso matrix_id `legumes` (già esistente, non serve `--matrix-description-it`), stesso stato "semi maturi, bolliti, senza sale", `matrix_category_calcium` NULL, `is_heme_iron=false`.
-- **Comando dry-run**:
-  ```
-  npm run add-food -- --fdc-id=173736 --food-id=food_fagioli_borlotti_bolliti --name-it="Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit
-  ```
-- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
-  ```
-  npm run add-food -- --fdc-id=173736 --food-id=food_fagioli_borlotti_bolliti --name-it="Fagioli borlotti (cranberry/roman), semi maturi, bolliti, senza sale" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
-  ```
-- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata). Attenzione in fase di esecuzione reale: se il fetch diretto dello script trova meno di ~10/17 nutrienti effettivi (molto sotto i 14/17 già confermati qui da fonte aggregata), il match risulterebbe più debole di quanto stimato in questa ricerca — in quel caso fermarsi e segnalarlo invece di considerare l'alimento comunque pronto per la promozione futura a `verified`.
+*(Stato al 2026-10-14: i 28 alimenti singoli che stavano qui sono stati eseguiti e sono in "Eseguiti" in fondo. Resta in attesa di esecuzione il lotto da 18 qui sotto; le nuove voci del task orario si aggiungono in cima a questa sezione.)*
 
 ### Lotto 18 alimenti vegetali — verdura e frutta (2026-10-12, sera, sessione interattiva; riallineato 2026-10-13)
 
 **Come e' stato preparato.** Ogni FDC ID e' stato verificato aprendo il record `fdc.nal.usda.gov/portal-data/external/<id>` (WebFetch, che il 2026-10-12 sera risulta raggiungibile da questo ambiente — la nota precedente sul blocco riguardava `api.nal.usda.gov`) e controllando che la descrizione coincida con l'alimento voluto. Due ID che avevo in mente a memoria erano sbagliati e sono stati scartati dopo il controllo (uva americana invece di europea; ananas invece di fichi). Per tutti i 18 i valori letti mostrano 17/17 nutrienti presenti e acido folico = 0 (nessuna firma di arricchimento tipo USA). **Questi valori sono stati letti tramite un riepilogo automatico della pagina: valgono come controllo di plausibilita', non come prova. La prova e' il dry-run dello script, che ri-scarica il record vero.**
 
 **Riallineamento al merge (2026-10-13).** La prima stesura di questo lotto aveva 19 alimenti. La **melanzana e' stata tolta**: `food_melanzane_raw` (stessa FDC 169228) e' gia' stata eseguita dall'utente il 2026-10-12 (vedi "Eseguiti" qui sotto); rilanciarla con un altro food_id avrebbe creato un duplicato nel DB. Anche i **piselli freschi crudi** qui sotto sono un alimento diverso dai piselli bolliti gia' eseguiti (`food_piselli_bolliti`): record FDC 170419 contro 170420, matrice propria `piselli` contro `legumes`. **Nota sui nomi:** i food_id di questo lotto sono in inglese (come il Golden Set originale), mentre le sessioni del 2026-10-12 hanno usato nomi italiani (`food_riso_bianco_raw`, `food_melanzane_raw`, `food_zucchine_raw`...). E' solo un'etichetta, nessun vincolo tecnico; se preferisci uniformarli prima di applicare, dillo e rigenero i comandi.
+
+**Aggiornamento 2026-10-14.** I 28 alimenti singoli che precedevano questo lotto sono stati eseguiti (vedi "Eseguiti"). In questo lotto l'aglio ha ora il food_id `food_garlic_fresh_raw` (vedi la nota sull'aglio sotto). Gli altri 17 id sono stati controllati con `check_alimenti_aggiunti.sql`: non esistono ancora nel database, quindi non collidono con nulla. Consiglio operativo: incolla prima le prime 2-3 righe del dry-run, guarda l'esito, poi il resto.
 
 **Cosa guardare nel dry-run**: (1) la riga `FDC description:` deve coincidere con la descrizione attesa in tabella; (2) `Nutrienti estratti (17/17)` — se e' meno di 17, NON applicare quell'alimento e dimmelo; (3) nessuna riga `ERRORE`.
 
@@ -517,7 +33,7 @@
 |---|---|---|---|---|
 | 1 | `food_tomato_raw` | 170457 | Tomatoes, red, ripe, raw, year round average | plant_non_fruit |
 | 2 | `food_onion_raw` | 170000 | Onions, raw | plant_non_fruit |
-| 3 | `food_garlic_raw` | 169230 | Garlic, raw | plant_non_fruit |
+| 3 | `food_garlic_fresh_raw` | 169230 | Garlic, raw | plant_non_fruit |
 | 4 | `food_pepper_red_raw` | 170108 | Peppers, sweet, red, raw | plant_non_fruit |
 | 5 | `food_lettuce_romaine_raw` | 169247 | Lettuce, cos or romaine, raw | plant_non_fruit |
 | 6 | `food_pumpkin_raw` | 168448 | Pumpkin, raw | plant_non_fruit |
@@ -536,7 +52,7 @@
 
 **Note per alimento (solo dove serve):**
 - **Pomodori rossi, crudi** (`food_tomato_raw`): Ortaggio botanicamente frutto: per il PRD resta plant_non_fruit (non fruttariano).
-- **Aglio, crudo** (`food_garlic_raw`): Condimento: i valori per 100g sono molto diversi da un'abituale porzione (pochi grammi).
+- **Aglio, crudo** (`food_garlic_fresh_raw`): Condimento: i valori per 100g sono molto diversi da un'abituale porzione (pochi grammi). **Nome cambiato il 2026-10-14**: il nome originale `food_garlic_raw` esiste gia' nel database come riga legacy del primo seed demo (draft, 8 nutrienti senza fonte, fuori dal Golden Set; stesso gruppo di `food_apple_raw`, `food_beef_raw`... descritto in `fix_baseline_cooking_state.sql`), quindi lo script si sarebbe fermato su quell'alimento. Scoperto dalla query di controllo. La riga legacy NON e' stata toccata (politica: nessuna cancellazione).
 - **Peperoni rossi, crudi** (`food_pepper_red_raw`): Solo il rosso: verde e giallo hanno composizione diversa (non ancora in coda).
 - **Lattuga romana, cruda** (`food_lettuce_romaine_raw`): Scelta mia fra le varianti di lattuga FDC (romaine, green leaf, iceberg, butterhead): nome esplicito 'romana' per non spacciarla per 'lattuga' generica. Se preferisci un'altra variante, dimmelo prima di applicare.
 - **Zucca, cruda** (`food_pumpkin_raw`): Il record FDC non ha il campo dataType (c'e' foodType SR Legacy): non e' un problema, solo una stranezza di formato. Alfa-carotene 4020 ug/100g finisce in other_provitamin_a_carotenoids_mcg.
@@ -552,7 +68,7 @@
 ```
 npm run add-food -- --fdc-id=170457 --food-id=food_tomato_raw --name-it="Pomodori rossi, crudi" --matrix-id=pomodori --matrix-description-it="Pomodori" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
 npm run add-food -- --fdc-id=170000 --food-id=food_onion_raw --name-it="Cipolle, crude" --matrix-id=cipolle --matrix-description-it="Cipolle" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
-npm run add-food -- --fdc-id=169230 --food-id=food_garlic_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
+npm run add-food -- --fdc-id=169230 --food-id=food_garlic_fresh_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
 npm run add-food -- --fdc-id=170108 --food-id=food_pepper_red_raw --name-it="Peperoni rossi, crudi" --matrix-id=peperoni_rossi --matrix-description-it="Peperoni rossi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
 npm run add-food -- --fdc-id=169247 --food-id=food_lettuce_romaine_raw --name-it="Lattuga romana, cruda" --matrix-id=lattuga_romana --matrix-description-it="Lattuga romana" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
 npm run add-food -- --fdc-id=168448 --food-id=food_pumpkin_raw --name-it="Zucca, cruda" --matrix-id=zucca --matrix-description-it="Zucca" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore"
@@ -574,7 +90,7 @@ npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Pis
 ```
 npm run add-food -- --fdc-id=170457 --food-id=food_tomato_raw --name-it="Pomodori rossi, crudi" --matrix-id=pomodori --matrix-description-it="Pomodori" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 npm run add-food -- --fdc-id=170000 --food-id=food_onion_raw --name-it="Cipolle, crude" --matrix-id=cipolle --matrix-description-it="Cipolle" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
-npm run add-food -- --fdc-id=169230 --food-id=food_garlic_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+npm run add-food -- --fdc-id=169230 --food-id=food_garlic_fresh_raw --name-it="Aglio, crudo" --matrix-id=aglio --matrix-description-it="Aglio" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
 npm run add-food -- --fdc-id=170108 --food-id=food_pepper_red_raw --name-it="Peperoni rossi, crudi" --matrix-id=peperoni_rossi --matrix-description-it="Peperoni rossi" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 npm run add-food -- --fdc-id=169247 --food-id=food_lettuce_romaine_raw --name-it="Lattuga romana, cruda" --matrix-id=lattuga_romana --matrix-description-it="Lattuga romana" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
 npm run add-food -- --fdc-id=168448 --food-id=food_pumpkin_raw --name-it="Zucca, cruda" --matrix-id=zucca --matrix-description-it="Zucca" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
@@ -595,6 +111,54 @@ npm run add-food -- --fdc-id=170419 --food-id=food_peas_green_raw --name-it="Pis
 ## Eseguiti (archivio, ultimi 10)
 
 > **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Dalla melanzana in giù in questa lista, sono stati inseriti con la versione di `add-food` precedente alla correzione `--diet-category`: le loro tre colonne `diet_compat_*` risultavano quindi NULL ("non classificato", escluse dai filtri vegetariano/vegano/fruttariano) finche' non e' stato eseguito `fix_diet_compat_pipeline_foods.sql` (**eseguito il 2026-10-13**: l'utente ha confermato a voce che la query di controllo non mostra piu' nessuno di loro come non classificato, senza screenshot rivisto da questa sessione). **Le zucchine, appena sotto, sono il primo alimento eseguito già con `--diet-category` incluso dall'inizio** (diet=plant_non_fruit scritto direttamente, verificato nel riepilogo di scrittura): non serve alcun fix per loro.
+
+### Ventotto alimenti — ✅ eseguiti dall'utente la notte 2026-10-13/14 (verificati con query di controllo)
+
+- **Esito**: per tutti e 28 l'utente ha lanciato `--apply` sul suo PC (PowerShell) e ha riferito che i comandi sono riusciti senza errori. **Verifica indipendente** con `check_alimenti_aggiunti.sql` (sola lettura, nel repo; eseguita nell'editor SQL di Supabase il 2026-10-14): RIEPILOGO **OK=28**, DA CONTROLLARE=1 (l'aglio, vedi sotto: era un problema del lotto da 18, non di queste esecuzioni), NON PRESENTE=17 (il resto del lotto da 18, non ancora eseguito). "OK" significa: riga presente in `foods_raw`, `verification_status='draft'`, numero di nutrienti in `nutrient_values` >= atteso, dieta (vegetariano/vegano/fruttariano) e stato carotenoidi come previsti dal comando.
+- **Cosa quella query NON controllava ancora**: la descrizione FDC salvata (`foods_raw.fdc_name`) e il numero FDC. La versione del 2026-10-14 le controlla: conviene rilanciarla una volta (vedi "Acciughe" sotto). Tutte e 28 restano `draft`: nessuna promozione a `verified` fatta.
+
+| # | food_id | FDC ID | Record FDC | Dieta (veg/vegan/frutt) | Nutrienti | Analogia dichiarata |
+|---|---|---|---|---|---|---|
+| 1 | `food_melone_cantalupo_raw` | 169092 | Melons, cantaloupe, raw | t/t/t | 17/17 | `food_oranges_raw` |
+| 2 | `food_nocciole_raw` | 170581 | Nuts, hazelnuts or filberts | t/t/f | 17/17 | `food_almonds` |
+| 3 | `food_sedano_raw` | 169988 | Celery, raw | t/t/f | 17/17 | `food_carrots_raw` |
+| 4 | `food_patata_dolce_raw` | 168482 | Sweet potato, raw, unprepared (Includes foods for USDA's Food Distribution Program) | t/t/f | 17/17 | `food_potato_raw` |
+| 5 | `food_asparagi_raw` | 168389 | Asparagus, raw | t/t/f | 17/17 | `food_carrots_raw` |
+| 6 | `food_avena_cruda` | 169705 | Oats (Includes foods for USDA's Food Distribution Program) | t/t/f | >=13 | `food_orzo_perlato_raw` |
+| 7 | `food_sgombro_raw` | 175119 | Fish, mackerel, Atlantic, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 8 | `food_noci_raw` | 170187 | Nuts, walnuts, english | t/t/f | 17/17 | `food_almonds` |
+| 9 | `food_zucchero_bianco` | 169655 | Sugars, granulated | t/t/f | 17/17 | `food_farina_di_mais_raw` |
+| 10 | `food_miele` | 169640 | Honey | t/f/f | 17/17 | `food_egg_raw` |
+| 11 | `food_burro` | 173430 | Butter, without salt | t/f/f | 17/17 | `food_milk_whole` |
+| 12 | `food_yogurt_greco` | 171304 | Yogurt, Greek, plain, whole milk | t/f/f | 17/17 | `food_milk_whole` |
+| 13 | `food_yogurt_bianco_intero` | 171284 | Yogurt, plain, whole milk | t/f/f | 17/17 | `food_milk_whole` |
+| 14 | `food_ricotta` | 170851 | Cheese, ricotta, whole milk | t/f/f | 17/17 | `food_milk_whole` |
+| 15 | `food_mozzarella` | 170845 | Cheese, mozzarella, whole milk | t/f/f | 17/17 | `food_milk_whole` |
+| 16 | `food_parmigiano_reggiano` | 170848 | Cheese, parmesan, hard | t/f/f | 17/17 | `food_milk_whole` |
+| 17 | `food_vongole_raw` | 174214 | Mollusks, clam, mixed species, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 18 | `food_cozze_raw` | 174216 | Mollusks, mussel, blue, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 19 | `food_acciughe_raw` | 174182 | Fish, anchovy, european, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 20 | `food_merluzzo_raw` | 171955 | Fish, cod, Atlantic, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 21 | `food_tonno_fresco_raw` | 175159 | Fish, tuna, fresh, yellowfin, raw | f/f/f | 17/17 | `food_salmon_raw` |
+| 22 | `food_prosciutto_cotto` | 167872 | Pork, cured, ham, boneless, regular (approximately 11% fat), roasted | f/f/f | 17/17 | `food_beef_ground_cooked` |
+| 23 | `food_petto_di_pollo_raw` | 171077 | Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw | f/f/f | 17/17 | `food_beef_ground_raw` |
+| 24 | `food_coscia_di_pollo_raw` | 173627 | Chicken, broilers or fryers, dark meat, thigh, meat only, raw | f/f/f | 17/17 | `food_beef_ground_raw` |
+| 25 | `food_lonza_di_maiale_raw` | 168230 | Pork, fresh, loin, whole, separable lean only, raw | f/f/f | 17/17 | `food_beef_ground_raw` |
+| 26 | `food_petto_di_tacchino_raw` | 174515 | Turkey, retail parts, breast, meat only, raw | f/f/f | 17/17 | `food_beef_ground_raw` |
+| 27 | `food_fagioli_cannellini_bolliti` | 175203 | Beans, white, mature seeds, cooked, boiled, without salt | t/t/f | 17/17 | `food_kidney_beans_boiled` |
+| 28 | `food_fagioli_borlotti_bolliti` | 173736 | Beans, cranberry (roman), mature seeds, cooked, boiled, without salt | t/t/f | >=14 | `food_kidney_beans_boiled` |
+
+**Note per alimento (solo dove serve):**
+- `food_avena_cruda`: 13 attesi (mancano selenio, vitamina K, beta-carotene, altri carotenoidi: gap dichiarato, non stimato).
+- `food_fagioli_borlotti_bolliti`: almeno 14 attesi (vitamina K e carotenoidi non letti dall'aggregatore in fase di ricerca).
+- `food_zucchero_bianco`: 17 righe, di cui 10 con valore 0 esplicito nel record (non assenti); botanical_family lasciata NULL di proposito.
+- `food_patata_dolce_raw`: botanical_family Convolvulaceae (NON quella della patata comune).
+- `food_nocciole_raw`: analogia `food_almonds`; botanical_family Betulaceae.
+- `food_noci_raw`: analogia `food_almonds`; botanical_family Juglandaceae.
+- `food_miele`: dieta egg_dairy (vegetariano SI, vegano NO).
+- `food_burro`: dieta egg_dairy (vegetariano SI, vegano NO).
+- **Acciughe** (`food_acciughe_raw`): l'FDC ID 174182 era stato dedotto in modo indiretto in fase di ricerca (pagina di confronto + numerazione), non aprendo il record. Il dry-run dell'utente era l'unica verifica prevista; per averne una indipendente basta guardare la colonna `fdc_name` della nuova `check_alimenti_aggiunti.sql`: deve leggere "Fish, anchovy, european, raw". Se non fosse cosi', l'alimento va riaperto prima di fidarsi dei suoi valori.
+- Le voci complete di questi 28 (comandi, valori letti, fonti consultate, piani B) restano nella cronologia git di questo file, fino al commit `db38419` compreso.
 
 ### Zucchine, crude (con buccia) — ✅ eseguito 2026-10-13
 
