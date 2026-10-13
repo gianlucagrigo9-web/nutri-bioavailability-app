@@ -15,6 +15,57 @@
 
 ## Pronti
 
+### Ricotta (latte intero) (2026-10-13)
+
+- **FDC ID**: 170851, dataType **SR Legacy** — "Cheese, ricotta, whole milk".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 150kcal, proteine 7,54g, grassi 10,2g, carboidrati 7,27g, fibra 0g, calcio 206mg, ferro 0,13mg, zinco 0,53mg, magnesio 20,0mg, rame 0,018mg, selenio 5,90µg, vitamina C 0mg, vitamina K 1,10µg, vitamina B12 0,85µg, folato totale (food) 4,00µg, beta-carotene 33,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento stile USA, atteso per un latticino fresco non trattato.
+- **Perché questo record rappresenta bene la ricotta comune italiana**: "whole milk" (latte intero), senza indicazioni di prodotto magro/scremato o lavorato industrialmente; nessuna anomalia di sodio (110mg/100g, nella norma per un latticino fresco non salato pesantemente). Esiste anche una riga Foundation Foods per lo stesso nome (FDC 323444) con valori leggermente diversi (energia 157kcal, proteine 7,8g) — non usata come primaria: il record SR Legacy scelto è quello con tutti i 17 nutrienti confermati dalla fonte consultata.
+- **Analogia dichiarata**: `food_milk_whole` — unico latticino già presente nel Golden Set (`dairy_milk`, `matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`): stessa categoria di assorbimento del calcio (alta biodisponibilità, nessuna interferenza da ossalati/fitati, a differenza di spinaci/kale), nessuna famiglia botanica (prodotto animale), matrice propria (`ricotta`, non riusa `dairy_milk`: composizione nutrizionale molto diversa dal latte).
+- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=170851 --food-id=food_ricotta --name-it="Ricotta (latte intero)" --matrix-id=ricotta --matrix-description-it="Ricotta" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=170851 --food-id=food_ricotta --name-it="Ricotta (latte intero)" --matrix-id=ricotta --matrix-description-it="Ricotta" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: FDC 323444 (Foundation Foods, stesso alimento concettuale) se il dry-run reale di 170851 risultasse incompleto — non necessario a priori, il record scelto è già 17/17.
+
+### Mozzarella (latte intero) (2026-10-13)
+
+- **FDC ID**: 170845, dataType **SR Legacy** — "Cheese, mozzarella, whole milk".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; corroborato su carboidrati, vitamina K, acido folico e beta-criptoxantina da triagemethod.com, che etichetta esplicitamente queste voci come SR Legacy — le altre voci di quella stessa pagina sono etichettate AFCD, database australiano diverso, non usate). Valori per 100g: energia 299kcal, proteine 22,2g, grassi 22,1g, carboidrati 2,40g, fibra 0g, calcio 505mg, ferro 0,44mg, zinco 2,92mg, magnesio 20,0mg, rame 0,011mg, selenio 17,0µg, vitamina C 0mg, vitamina K 2,30µg, vitamina B12 2,28µg, folato totale (food) 7,00µg, beta-carotene 57,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
+- **Nota sulla rappresentatività**: scelta la variante "whole milk" (latte intero) **senza** la dicitura "low moisture" (quest'ultima è il blocco stagionato/essiccato tipico della mozzarella da pizza USA, non la mozzarella fresca italiana) — la variante qui usata è quindi la più vicina fra le opzioni FDC a una mozzarella fresca comune, pur restando un prodotto generico USDA e non una mozzarella di bufala/fior di latte specifica.
+- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`mozzarella`).
+- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=170845 --food-id=food_mozzarella --name-it="Mozzarella (latte intero)" --matrix-id=mozzarella --matrix-description-it="Mozzarella" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=170845 --food-id=food_mozzarella --name-it="Mozzarella (latte intero)" --matrix-id=mozzarella --matrix-description-it="Mozzarella" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: non necessario, il record FDC 170845 è pulito e completo (17/17); la variante "low moisture" (altro FDC ID, non usato) resterebbe disponibile come voce separata per la mozzarella da forno/pizza, se mai richiesta in futuro.
+
+### Parmigiano Reggiano (formaggio grana stagionato) (2026-10-13)
+
+- **FDC ID**: 170848, dataType **SR Legacy** — "Cheese, parmesan, hard".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 392kcal, proteine 35,8g, grassi 25,0g, carboidrati 3,22g, fibra 0g, calcio 1184mg, ferro 0,82mg, zinco 2,75mg, magnesio 44,0mg, rame 0,032mg, selenio 22,5µg, vitamina C 0mg, vitamina K 1,70µg, vitamina B12 1,20µg, folato totale (food) 7,00µg, beta-carotene 66,0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
+- **Nota sulla rappresentatività (proxy dichiarato, non un prodotto DOP specifico)**: il record FDC "Cheese, parmesan, hard" è una voce generica USDA per formaggio grana stagionato, non uno specifico "Parmigiano Reggiano DOP" — ma i valori (proteine 35,8g, grassi 25,0g, calcio 1184mg/100g) sono nell'ordine di grandezza tipico riportato per il Parmigiano Reggiano reale (tipicamente calcio ~1150-1200mg/100g, proteine ~33-35g/100g), senza alcuna anomalia da arricchimento o trattamento industriale — trattamento diverso dai casi prosciutto crudo/bresaola di questa stessa coda, dove la differenza di prodotto era sostanziale (affumicatura, taglio diverso), qui è un'approssimazione di categoria dichiarata, non uno scarto di qualità. Tentata una corroborazione incrociata su triagemethod.com: la pagina per questo alimento mescola fonti SR Legacy e AFCD (database australiano) senza etichettarle voce per voce in modo utilizzabile (es. calcio mostrato a 130mg, incompatibile con un formaggio stagionato) — scartata come fonte di corroborazione per questo alimento, non usata.
+- **Analogia dichiarata**: `food_milk_whole` — stessa categoria "latticino" (`matrix_category_calcium='medium_oxalate'`, `botanical_family=NULL`, `is_heme_iron=false`), matrice propria (`parmigiano_reggiano`).
+- **Categoria dieta**: `egg_dairy` — latticino: vegetariano SÌ, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=170848 --food-id=food_parmigiano_reggiano --name-it="Parmigiano Reggiano (formaggio grana stagionato, generico tipo parmesan USDA)" --matrix-id=parmigiano_reggiano --matrix-description-it="Parmigiano Reggiano" --baseline-cooking-state=aged --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=170848 --food-id=food_parmigiano_reggiano --name-it="Parmigiano Reggiano (formaggio grana stagionato, generico tipo parmesan USDA)" --matrix-id=parmigiano_reggiano --matrix-description-it="Parmigiano Reggiano" --baseline-cooking-state=aged --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+  ```
+- **Piano B**: FDC 171247 ("Cheese, parmesan, grated", SR Legacy) o FDC 173431 ("Cheese, parmesan, shredded", SR Legacy) se il dry-run reale di 170848 risultasse incompleto o con un'anomalia non prevista qui — non tentati a priori, nessuna ragione per preferirli al record "hard" scelto.
+
 ### Vongole, crude (2026-10-13)
 
 - **FDC ID**: 174214, dataType **SR Legacy** — "Mollusks, clam, mixed species, raw".
