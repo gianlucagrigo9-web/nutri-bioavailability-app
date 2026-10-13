@@ -15,6 +15,76 @@
 
 ## Pronti
 
+### Melone (cantalupo), crudo (2026-10-13, run di verifica serale)
+
+- **FDC ID**: 169092, dataType **SR Legacy** — "Melons, cantaloupe, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 34,0kcal, proteine 0,84g, grassi 0,19g, carboidrati 8,16g, fibra 0,90g, calcio 9,00mg, ferro 0,21mg, zinco 0,18mg, magnesio 12,0mg, rame 0,041mg, selenio 0,40µg, vitamina C 36,7mg, vitamina K (fillochinone) 2,50µg, vitamina B12 0µg, folato totale 21,0µg, beta-carotene 2020µg, alfa-carotene 16,0µg, beta-criptoxantina 1,00µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per frutta fresca non trattata.
+- **Perché questo record rappresenta bene il melone cantalupo comune italiano**: record generico SR Legacy "Melons, cantaloupe, raw", nessuna specificazione di marca/trattamento; beta-carotene alto (2020µg/100g) è una caratteristica nota della polpa arancione del cantalupo, non un'anomalia.
+- **Analogia dichiarata**: `food_oranges_raw` — stessa categoria concettuale "frutta fresca cruda" (stesso trattamento già usato per l'intero lotto 18 di questo file: `matrix_category_calcium` NULL, `is_heme_iron=false`, `--carotenoid-matrix-state=raw_intact`), `botanical_family='Cucurbitaceae'` (famiglia reale di *Cucumis melo*, diversa dagli agrumi — non un'analogia botanica, solo di categoria "frutta fresca"), matrice propria (`melone_cantalupo`).
+- **Categoria dieta**: `fresh_fruit` — frutta fresca nella definizione restrittiva del PRD (non un ortaggio botanicamente "frutto" come pomodoro/zucchina): vegetariano SÌ, vegano SÌ, fruttariano SÌ.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169092 --food-id=food_melone_cantalupo_raw --name-it="Melone (cantalupo), crudo" --matrix-id=melone_cantalupo --matrix-description-it="Melone cantalupo" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=fresh_fruit
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169092 --food-id=food_melone_cantalupo_raw --name-it="Melone (cantalupo), crudo" --matrix-id=melone_cantalupo --matrix-description-it="Melone cantalupo" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=fresh_fruit --apply
+  ```
+- **Piano B**: FDC 327198/746770 (altre varianti "Melons, cantaloupe, raw" trovate in ricerca, dataType non confermato) se il dry-run reale di 169092 risultasse incompleto — non necessario a priori, il record scelto è già 17/17.
+
+### Nocciole, secche (2026-10-13, run di verifica serale)
+
+- **FDC ID**: 170581, dataType **SR Legacy** — "Nuts, hazelnuts or filberts".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 628kcal, proteine 14,9g, grassi 60,8g, carboidrati 16,7g, fibra 9,70g, calcio 114mg, ferro 4,70mg, zinco 2,45mg, magnesio 163mg, rame 1,73mg, selenio 2,40µg, vitamina C 6,30mg, vitamina K (fillochinone) 14,2µg, vitamina B12 0µg, folato totale 113µg, beta-carotene 11,0µg, alfa-carotene 3,00µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per frutta a guscio grezza.
+- **Nota sulla dicitura "raw"**: la descrizione FDC esatta è "Nuts, hazelnuts or filberts", senza la parola "raw" esplicita — stesso stile già accettato in questo file per le mandorle del Golden Set originale ("Nuts, almonds") e per le noci qui sopra ("Nuts, walnuts, english"): è la convenzione SR Legacy per frutta a guscio secca/cruda non trattata, non un segnale di ambiguità sullo stato di cottura.
+- **Perché questo record rappresenta bene le nocciole comuni italiane**: record generico SR Legacy per nocciole (*Corylus avellana*), nessuna specificazione di marca/tostatura, valori coerenti con frutta a guscio grezza non salata.
+- **Analogia dichiarata**: `food_almonds` — stessa categoria concettuale "frutta a guscio grezza" (`is_heme_iron=false`, `matrix_category_calcium` NULL), usata anche per `food_noci_raw` qui sopra per coerenza (NON uso `food_noci_raw` come analogia: non è ancora stato eseguito sul DB reale, resta solo "pronto" — l'analogia deve riferirsi a un alimento già esistente in `foods_raw`, come richiesto dallo script), `botanical_family='Betulaceae'` (famiglia reale di *Corylus avellana*), `--carotenoid-matrix-state=raw_intact` (beta-carotene/alfa-carotene non trascurabili), matrice propria (`nocciole`).
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/a guscio: vegetariano SÌ, vegano SÌ, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=170581 --food-id=food_nocciole_raw --name-it="Nocciole, secche" --matrix-id=nocciole --matrix-description-it="Nocciole" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Betulaceae --diet-category=plant_non_fruit
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=170581 --food-id=food_nocciole_raw --name-it="Nocciole, secche" --matrix-id=nocciole --matrix-description-it="Nocciole" --baseline-cooking-state=raw --analogy-food-id=food_almonds --carotenoid-matrix-state=raw_intact --botanical-family=Betulaceae --diet-category=plant_non_fruit --apply
+  ```
+- **Piano B**: FDC 170582 ("Nuts, hazelnuts or filberts, blanched", SR Legacy) o FDC 2515375 (Foundation Foods, "...raw") se il dry-run reale di 170581 risultasse incompleto — non tentati a priori, nessuna ragione per preferirli al record generico scelto.
+
+### Sedano, crudo (2026-10-13, run di verifica serale)
+
+- **FDC ID**: 169988, dataType **SR Legacy** — "Celery, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record; già verificato nella sessione precedente dello stesso giorno, ri-confermato qui). Valori per 100g: energia 14,0kcal, proteine 0,69g, grassi 0,17g, carboidrati 2,97g, fibra 1,60g, calcio 40,0mg, ferro 0,20mg, zinco 0,13mg, magnesio 11,0mg, rame 0,035mg, selenio 0,40µg, vitamina C 3,10mg, vitamina K (fillochinone) 29,3µg, vitamina B12 0µg, folato totale 36,0µg, beta-carotene 270µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento.
+- **Perché questo record rappresenta bene il sedano comune italiano**: record generico SR Legacy "Celery, raw", nessuna specificazione di marca/trattamento, valori coerenti con una verdura cruda non trattata.
+- **Analogia dichiarata**: `food_carrots_raw` — stessa categoria concettuale "verdura cruda con carotenoidi non trascurabili" (stesso trattamento del lotto 18 e di asparagi/qui sopra: `matrix_category_calcium` NULL, `is_heme_iron=false`, `--carotenoid-matrix-state=raw_intact`), `botanical_family='Apiaceae'` — stessa famiglia reale delle carote (*Apium graveolens* e *Daucus carota* sono entrambe Apiaceae: qui è sia un'analogia di categoria sia botanica reale, non forzata), matrice propria (`sedano`).
+- **Categoria dieta**: `plant_non_fruit` — verdura: vegetariano SÌ, vegano SÌ, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=169988 --food-id=food_sedano_raw --name-it="Sedano, crudo" --matrix-id=sedano --matrix-description-it="Sedano" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=169988 --food-id=food_sedano_raw --name-it="Sedano, crudo" --matrix-id=sedano --matrix-description-it="Sedano" --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+  ```
+- **Piano B**: FDC 2346405 (Foundation Foods, "Celery, raw") se il dry-run reale di 169988 risultasse incompleto — non necessario a priori, il record SR Legacy scelto è già 17/17.
+
+### Patata dolce, cruda (2026-10-13, run di verifica serale)
+
+- **FDC ID**: 168482, dataType **SR Legacy** — "Sweet potato, raw, unprepared (Includes foods for USDA's Food Distribution Program)".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (fonte: getfoodfacts.com, che cita esplicitamente FDC ID e dataType dalla pagina del record). Valori per 100g: energia 86,0kcal, proteine 1,57g, grassi 0,050g, carboidrati 20,1g, fibra 3,00g, calcio 30,0mg, ferro 0,61mg, zinco 0,30mg, magnesio 25,0mg, rame 0,15mg, selenio 0,60µg, vitamina C 2,40mg, vitamina K (fillochinone) 1,80µg, vitamina B12 0µg, folato totale 11,0µg, beta-carotene 8509µg, alfa-carotene 7,00µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessun segnale di arricchimento, atteso per un tubero crudo non trattato.
+- **Perché questo record rappresenta bene la patata dolce comune italiana**: record generico SR Legacy "Sweet potato, raw, unprepared" — la dicitura "Includes foods for USDA's Food Distribution Program" è la stessa già accettata in questo file per le mele del lotto 18 e per l'avena di questa stessa sessione: non indica arricchimento, solo una nota di programma di distribuzione USDA. Beta-carotene molto alto (8509µg/100g) è una caratteristica nota e attesa della polpa arancione della patata dolce, non un'anomalia.
+- **Attenzione sulla famiglia botanica (NON riusare quella della patata comune)**: la patata dolce (*Ipomoea batatas*) appartiene alla famiglia **Convolvulaceae**, botanicamente non imparentata con la patata comune (*Solanum tuberosum*, Solanaceae) nonostante il nome simile — nessuna analogia botanica con `food_potato_raw`/`food_potato_boiled_in_skin` del Golden Set originale, solo di categoria alimentare ("tubero").
+- **Analogia dichiarata**: `food_potato_raw` — stessa categoria concettuale "tubero crudo" (`matrix_category_calcium` NULL, `is_heme_iron=false`, stesso trattamento già dato alla patata comune), `botanical_family='Convolvulaceae'` (famiglia reale, diversa da quella della patata comune — vedi nota sopra), `--carotenoid-matrix-state=raw_intact` (beta-carotene molto alto, a differenza della patata comune dove è marginale), matrice propria (`patata_dolce`, non riusa `tubers`: composizione molto diversa, soprattutto su beta-carotene e carboidrati).
+- **Categoria dieta**: `plant_non_fruit` — esplicitamente uno degli esempi citati nella definizione stessa della categoria (..., **tuberi**, ...): vegetariano SÌ, vegano SÌ, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=168482 --food-id=food_patata_dolce_raw --name-it="Patata dolce, cruda" --matrix-id=patata_dolce --matrix-description-it="Patata dolce" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --carotenoid-matrix-state=raw_intact --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=168482 --food-id=food_patata_dolce_raw --name-it="Patata dolce, cruda" --matrix-id=patata_dolce --matrix-description-it="Patata dolce" --baseline-cooking-state=raw --analogy-food-id=food_potato_raw --carotenoid-matrix-state=raw_intact --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+  ```
+- **Piano B**: non necessario, il record FDC 168482 è pulito e completo (17/17).
+
 ### Asparagi, crudi (2026-10-13)
 
 - **FDC ID**: 168389, dataType **SR Legacy** — "Asparagus, raw".
