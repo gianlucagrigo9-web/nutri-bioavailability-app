@@ -15,6 +15,76 @@
 
 ## Pronti
 
+### Petto di pollo, crudo (senza pelle, senza osso) (2026-10-13)
+
+- **FDC ID**: 171077, dataType **SR Legacy** — "Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante. Valori per 100g: energia 120kcal, proteine 22,5g, grassi 2,6g, carboidrati 0g, fibra 0g, calcio 5,1mg, ferro 0,36mg, zinco 0,68mg, magnesio 28,0mg, rame 0,04mg, selenio 22,8µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 0,21µg, folato totale 9,1µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** — nessun segno di arricchimento stile USA, atteso per carne non trattata.
+- **Nota di trasparenza sulla fonte (diversa dagli altri 3 alimenti di questo lotto)**: il fetch diretto su fdc.nal.usda.gov/food-details/171077 non è riuscito in questa sessione (bloccato da un controllo di provenienza). I valori sopra vengono da **tre aggregatori secondari indipendenti e concordanti** (myfooddata.com, recipal.com — che riporta anche lo stesso NDB ID legacy 5062 —, nutrifox.com), non dalla pagina ufficiale FDC. Stesso trattamento già usato altrove in questo file per dati letti da riepilogo automatico: vale come controllo di plausibilità, non come prova — la prova resta il dry-run dello script, che ri-scarica il record vero.
+- **Perché questo record rappresenta bene il petto di pollo comune italiano**: descrizione esplicita "skinless, boneless, meat only, raw" — carne cruda non trattata, non marinata, non impanata. Esistono varianti FDC "with added solution" (marinate/iniettate con soluzione salina) viste in fase di ricerca e scartate perché non rappresentano un petto di pollo semplice.
+- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica (alimento animale, come la carne bovina già nel Golden Set), matrice propria (non riusa `beef_ground_meat`: composizione nutrizionale diversa).
+- **Categoria dieta**: `meat_fish` — carne di pollame: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=171077 --food-id=food_petto_di_pollo_raw --name-it="Petto di pollo, crudo (senza pelle, senza osso)" --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=171077 --food-id=food_petto_di_pollo_raw --name-it="Petto di pollo, crudo (senza pelle, senza osso)" --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata), ma data la verifica non diretta sulla pagina FDC ufficiale (vedi nota sopra): se il dry-run reale trova meno di 17/17 nutrienti, fermarsi e segnalarlo prima di procedere con l'apply, invece di considerare l'alimento comunque pronto.
+
+### Coscia di pollo, cruda (carne scura, senza pelle, senza osso) (2026-10-13)
+
+- **FDC ID**: 173627, dataType **SR Legacy** — "Chicken, broilers or fryers, dark meat, thigh, meat only, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da getfoodfacts.com, che riporta esplicitamente FDC ID 173627 come SR Legacy). Valori per 100g: energia 121kcal, proteine 19,7g, grassi 4,12g, carboidrati 0g, fibra 0g, calcio 7,00mg, ferro 0,81mg, zinco 1,58mg, magnesio 23,0mg, rame 0,062mg, selenio 22,9µg, vitamina C 0mg, vitamina K 2,90µg, vitamina B12 0,61µg, folato totale 4,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessuna firma di arricchimento.
+- **Perché questo record rappresenta bene la coscia di pollo comune italiana**: "dark meat, thigh, meat only, raw" — senza pelle, senza marinatura/soluzione aggiunta, senza impanatura. Distinto correttamente dal record FDC 172859 "Chicken, dark meat, thigh, meat only, with added solution, raw" (variante marinata/trattata, scartata in fase di ricerca).
+- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — carne di pollame: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=173627 --food-id=food_coscia_di_pollo_raw --name-it="Coscia di pollo, cruda (carne scura, senza pelle, senza osso)" --matrix-id=coscia_di_pollo --matrix-description-it="Coscia di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=173627 --food-id=food_coscia_di_pollo_raw --name-it="Coscia di pollo, cruda (carne scura, senza pelle, senza osso)" --matrix-id=coscia_di_pollo --matrix-description-it="Coscia di pollo" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario, il record FDC 173627 è pulito e completo (17/17), descrizione inequivocabile.
+
+### Lonza di maiale, cruda, magra (2026-10-13)
+
+- **FDC ID**: 168230, dataType **SR Legacy** — "Pork, fresh, loin, whole, separable lean only, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da getfoodfacts.com, che riporta esplicitamente FDC ID 168230 come SR Legacy). Valori per 100g: energia 143kcal, proteine 21,4g, grassi 5,66g, carboidrati 0g, fibra 0g, calcio 17,0mg, ferro 0,84mg, zinco 1,84mg, magnesio 23,0mg, rame 0,062mg, selenio 36,1µg, vitamina C 0,60mg, vitamina K 0µg, vitamina B12 0,63µg, folato totale 5,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. **Acido folico 0µg** riportato esplicitamente separato dal folato alimentare — nessuna firma di arricchimento.
+- **Perché questo record rappresenta bene la lonza di maiale comune italiana**: "fresh, loin, whole, separable lean only, raw" — carne fresca magra, non trattata/marinata/affumicata (niente "with added solution" come in altre varianti viste in fase di ricerca, es. FDC 169181). Scelta la variante "lean only" (magra) invece di "lean and fat" (FDC 167818, che includerebbe anche il grasso visibile) per rappresentare la lonza magra comunemente intesa.
+- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — carne di maiale: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=168230 --food-id=food_lonza_di_maiale_raw --name-it="Lonza di maiale, cruda, magra" --matrix-id=lonza_di_maiale --matrix-description-it="Lonza di maiale" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=168230 --food-id=food_lonza_di_maiale_raw --name-it="Lonza di maiale, cruda, magra" --matrix-id=lonza_di_maiale --matrix-description-it="Lonza di maiale" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario, il record FDC 168230 è pulito e completo (17/17); scartata la variante "lean and fat" (167818) perché includerebbe grasso visibile non rappresentativo della "lonza magra".
+
+### Petto di tacchino, crudo (senza pelle) (2026-10-13)
+
+- **FDC ID**: 174515, dataType **SR Legacy** — "Turkey, retail parts, breast, meat only, raw".
+- **Nutrienti attesi**: 17/17, nessun componente mancante (confermato da due fonti indipendenti concordanti: getfoodfacts.com, che riporta esplicitamente FDC ID 174515, e triagemethod.com/Human Nutrition Explorer). Valori per 100g: energia 114kcal, proteine 23,3g, grassi 2,33g, carboidrati 0g, fibra 0g, calcio 9,00mg, ferro 0,76mg, zinco 1,16mg, magnesio 27,0mg, rame 0,054mg, selenio 22,1µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 1,35µg, folato totale (food) 7,00µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg.
+- **Nota sull'acido folico**: a differenza degli altri 3 alimenti di questo lotto, le fonti consultate per questo record non riportano una voce "acido folico" separata e distinta dal folato alimentare — solo "Folate, food" = 7,00µg. Non è un segnale di arricchimento mancato da verificare: è semplicemente l'assenza di quella voce specifica nell'aggregatore consultato; nessun valore anomalo (calcio, folato) che faccia sospettare arricchimento stile USA. Il dry-run dello script (che legge direttamente il record FDC) chiarirà se quella voce compare o no.
+- **Perché questo record rappresenta bene il petto di tacchino comune italiano**: "retail parts, breast, meat only, raw" — categoria generica/non trattata, distinta dalla variante "enhanced" (marinata/iniettata con soluzione salina) vista nei risultati di ricerca e scartata.
+- **Analogia dichiarata**: `food_beef_ground_raw` — stessa categoria concettuale "carne muscolare cruda con ferro eme" (`is_heme_iron=true`), nessuna famiglia botanica, matrice propria.
+- **Categoria dieta**: `meat_fish` — carne di tacchino: vegetariano NO, vegano NO, fruttariano NO.
+- **Comando dry-run**:
+  ```
+  npm run add-food -- --fdc-id=174515 --food-id=food_petto_di_tacchino_raw --name-it="Petto di tacchino, crudo (senza pelle)" --matrix-id=petto_di_tacchino --matrix-description-it="Petto di tacchino" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish
+  ```
+- **Comando con --apply** (solo dopo aver controllato l'esito del dry-run):
+  ```
+  npm run add-food -- --fdc-id=174515 --food-id=food_petto_di_tacchino_raw --name-it="Petto di tacchino, crudo (senza pelle)" --matrix-id=petto_di_tacchino --matrix-description-it="Petto di tacchino" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --is-heme-iron --diet-category=meat_fish --apply
+  ```
+- **Piano B**: non necessario per la scelta del record (nessuna alternativa migliore trovata), ma verificare nel dry-run reale se compare una voce "acido folico" distinta (vedi nota sopra) — se compare non-zero, fermarsi e segnalarlo invece di procedere con l'apply.
+
 ### Fagioli cannellini (bianchi), semi maturi, bolliti, senza sale (2026-10-12)
 
 - **FDC ID**: 175203, dataType **SR Legacy** — "Beans, white, mature seeds, cooked, boiled, without salt".
