@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Quinoa, secca, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_quinoa_dry_raw` (NON `food_quinoa_raw`: quell'id esiste già nel DB come riga demo legacy del primo seed — vedi nota ID riservati in questo file/PRD).
+- **Nutrienti**: **16/17** — manca solo `vitamin_c_mg` (non riportato nel record). Acido folico 0µg esplicito, folato alimentare 184µg/100g interamente naturale — nessuna firma di arricchimento. Vitamina K (fillochinone) 0µg esplicito.
+- **Analogia usata**: `food_orzo_perlato_raw` (analogia di funzione/categoria "cereale/pseudocereale secco crudo non arricchito", già eseguito nel DB reale). **Deviazione dichiarata**: la famiglia botanica reale della quinoa è Amaranthaceae (Chenopodium quinoa), non Poaceae come l'orzo — stessa logica già usata per `food_patata_dolce_raw` rispetto a `food_potato_raw` (analogia di funzione, famiglia botanica reale diversa, dichiarata esplicitamente).
+- **Categoria dieta**: `plant_non_fruit` (cereale e derivati, come da coda PRD).
+- **Matrice**: nuova `quinoa` ("Quinoa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 8µg/100g, basso ma non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168874 --food-id=food_quinoa_dry_raw \
+  --name-it="Quinoa, secca, cruda" \
+  --matrix-id=quinoa --matrix-description-it="Quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168874 --food-id=food_quinoa_dry_raw \
+  --name-it="Quinoa, secca, cruda" \
+  --matrix-id=quinoa --matrix-description-it="Quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Couscous, crudo (non cotto) — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_couscous_raw`. FDC ID 169699 (SR Legacy, "Couscous, dry").
