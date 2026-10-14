@@ -17,6 +17,33 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cavolo cappuccio bianco, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_cavolo_cappuccio_raw`. FDC ID 169975 (SR Legacy, "Cabbage, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (38µg/100g) — nessuna firma di arricchimento. Calcio 40mg/100g, nella norma per una brassicacea cruda. Beta-carotene 42µg/100g esplicito, alfa-carotene 33µg/100g esplicito, beta-criptoxantina 0 esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Nota sul nome**: questo FDC ID era già stato individuato nel secondo lotto come record generico/liscio per "cavolo cappuccio", ma esplicitamente **non usato** per la voce "verza" (vedi quella voce in questo stesso file: FDC 170388 "Cabbage, savoy, raw", foglia increspata, composizione leggermente diversa) proprio per riservarlo a questa voce distinta — nessun doppione.
+- **Analogia usata**: `food_kale_raw` (cavolo kale, già eseguito nel Golden Set originale — stessa famiglia botanica reale **Brassicaceae**, foglia cruda).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cavolo_cappuccio` ("Cavolo cappuccio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per il cavolo cappuccio nel modello Heaney&Weaver usato dal motore, stesso trattamento già usato per broccoli/verza/rucola in questa coda), `carotenoid_matrix_state=raw_intact` (beta-carotene 42µg/100g, esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169975 --food-id=food_cavolo_cappuccio_raw \
+  --name-it="Cavolo cappuccio bianco, crudo" \
+  --matrix-id=cavolo_cappuccio --matrix-description-it="Cavolo cappuccio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169975 --food-id=food_cavolo_cappuccio_raw \
+  --name-it="Cavolo cappuccio bianco, crudo" \
+  --matrix-id=cavolo_cappuccio --matrix-description-it="Cavolo cappuccio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Lenticchie rosse, decorticate, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_lenticchie_rosse_raw`. FDC ID 174284 (SR Legacy, "Lentils, pink or red, raw").
