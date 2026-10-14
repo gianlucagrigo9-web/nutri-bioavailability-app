@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Porri, crudi — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_porri_raw`. FDC ID 169246 (SR Legacy, "Leeks, (bulb and lower leaf-portion), raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare — nessuna firma di arricchimento.
+- **Analogia usata**: `food_onion_raw` (stessa famiglia botanica reale Amaryllidaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `porri` ("Porri").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 1000µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169246 --food-id=food_porri_raw \
+  --name-it="Porri, crudi" \
+  --matrix-id=porri --matrix-description-it="Porri" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169246 --food-id=food_porri_raw \
+  --name-it="Porri, crudi" \
+  --matrix-id=porri --matrix-description-it="Porri" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Rucola (baby), cruda — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_rucola_raw`. FDC ID 2710822 (Foundation Foods, "Arugula, baby, raw").
