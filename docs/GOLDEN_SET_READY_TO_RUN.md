@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Ciliegie, crude — preparato 2026-10-14 dal task orario (primo alimento lavorato dal terzo lotto)
+
+- **food_id**: `food_ciliegie_raw`. FDC ID 171719 (SR Legacy, "Cherries, sweet, raw").
+- **Nutrienti**: **17/17**. Selenio 0µg e acido folico 0µg entrambi esplicitamente riportati (non assenti) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_peach_yellow_raw` (stessa famiglia botanica reale Rosaceae, stesso genere Prunus, già eseguito).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `ciliegie` ("Ciliegie").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 38µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171719 --food-id=food_ciliegie_raw \
+  --name-it="Ciliegie, crude" \
+  --matrix-id=ciliegie --matrix-description-it="Ciliegie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=171719 --food-id=food_ciliegie_raw \
+  --name-it="Ciliegie, crude" \
+  --matrix-id=ciliegie --matrix-description-it="Ciliegie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Albicocche, crude — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_albicocche_raw`. FDC ID 171697 (SR Legacy, "Apricots, raw").
