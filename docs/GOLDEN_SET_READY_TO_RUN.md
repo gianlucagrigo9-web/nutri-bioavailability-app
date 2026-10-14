@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Mandarini (e clementine), crudi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_mandarini_raw`. FDC ID 169105 (SR Legacy, "Tangerines, (mandarin oranges), raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 16µg/100g interamente naturale) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_oranges_raw` (arance, già eseguito — stessa famiglia botanica reale Rutaceae, stesso genere Citrus dell'arancia).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mandarini` ("Mandarini").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 155µg/100g, alfa-carotene 101µg/100g, beta-criptoxantina 407µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169105 --food-id=food_mandarini_raw \
+  --name-it="Mandarini (e clementine), crudi" \
+  --matrix-id=mandarini --matrix-description-it="Mandarini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169105 --food-id=food_mandarini_raw \
+  --name-it="Mandarini (e clementine), crudi" \
+  --matrix-id=mandarini --matrix-description-it="Mandarini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cachi, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_cachi_raw`. FDC ID 169941 (SR Legacy, "Persimmons, japanese, raw" — la varietà giapponese/kaki, Diospyros kaki, è quella coltivata e venduta in Italia; scartato a priori "Persimmons, native, raw" FDC 169943, specie diversa, Diospyros virginiana, astringente, non commercializzata in Italia).
