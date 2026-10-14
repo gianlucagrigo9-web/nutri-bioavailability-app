@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Barbabietola rossa, cruda — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_barbabietola_rossa_raw`. FDC ID 169145 (SR Legacy, "Beets, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare — nessuna firma di arricchimento.
+- **Analogia usata**: `food_spinach_raw` (stessa famiglia botanica reale Amaranthaceae). **Deviazione dichiarata**: a differenza dello spinacio (che nel Golden Set ha `matrix_category_calcium=high_oxalate`), qui il campo è lasciato NULL — la categoria ossalati nel progetto è dichiarata solo per spinaci/kale/latte (vedi nota del lotto da 18), non per le radici; stessa logica già usata per `food_patata_dolce_raw` rispetto a `food_potato_raw` (analogia di funzione, famiglia botanica reale diversa/non classificata per quell'attributo).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `barbabietola` ("Barbabietola rossa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 20µg/100g, basso ma non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169145 --food-id=food_barbabietola_rossa_raw \
+  --name-it="Barbabietola rossa, cruda" \
+  --matrix-id=barbabietola --matrix-description-it="Barbabietola rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169145 --food-id=food_barbabietola_rossa_raw \
+  --name-it="Barbabietola rossa, cruda" \
+  --matrix-id=barbabietola --matrix-description-it="Barbabietola rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Porri, crudi — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_porri_raw`. FDC ID 169246 (SR Legacy, "Leeks, (bulb and lower leaf-portion), raw").
