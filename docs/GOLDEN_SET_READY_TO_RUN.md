@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di sesamo, secchi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_semi_di_sesamo_raw`. FDC ID 170150 (SR Legacy, "Seeds, sesame seeds, whole, dried").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (97µg/100g interamente naturale) — nessuna firma di arricchimento. Calcio 975mg/100g è molto alto ma è un valore noto e reale per il seme di sesamo intero (il calcio è concentrato nel tegumento esterno del seme), non un segnale di arricchimento in stile USA (che qui sarebbe comunque incoerente: non è un prodotto da forno).
+- **Analogia usata**: `food_almonds` (mandorle, già eseguito — stessa funzione "frutta a guscio/seme oleoso", stessa logica già usata per pistacchi/anacardi/arachidi in questa coda). Famiglia botanica reale del sesamo, Pedaliaceae (Sesamum indicum), dichiarata separatamente — diversa da quella delle mandorle (Rosaceae), nessuna parentela botanica.
+- **Categoria dieta**: `plant_non_fruit` (seme oleoso).
+- **Matrice**: nuova `semi_di_sesamo` ("Semi di sesamo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento di mandorle/noci/nocciole/pistacchi/anacardi/arachidi: nessuna categoria ossalati dichiarata per frutta a guscio/semi), `carotenoid_matrix_state=raw_intact` (beta-carotene 5µg/100g, basso ma esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Pedaliaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170150 --food-id=food_semi_di_sesamo_raw \
+  --name-it="Semi di sesamo, secchi" \
+  --matrix-id=semi_di_sesamo --matrix-description-it="Semi di sesamo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Pedaliaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170150 --food-id=food_semi_di_sesamo_raw \
+  --name-it="Semi di sesamo, secchi" \
+  --matrix-id=semi_di_sesamo --matrix-description-it="Semi di sesamo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Pedaliaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Semi di zucca, secchi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_semi_di_zucca_raw`. FDC ID 170556 (SR Legacy, "Seeds, pumpkin and squash seed kernels, dried").
