@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Crusca di frumento, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_crusca_di_frumento_raw`. FDC ID 169722 (SR Legacy, "Wheat bran, crude").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (79,0µg/100g); calcio 73mg/100g, nella norma per crusca di frumento — nessuna firma di arricchimento in stile USA. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169722.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito sul DB reale — stessa famiglia botanica reale **Poaceae**, stessa convenzione "cereale/derivato crudo non arricchito" già usata per miglio/segale/amaranto in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `crusca_di_frumento` ("Crusca di frumento").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `botanical_family=Poaceae` (Triticum aestivum), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_frumento_raw \
+  --name-it="Crusca di frumento, cruda" \
+  --matrix-id=crusca_di_frumento --matrix-description-it="Crusca di frumento" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_frumento_raw \
+  --name-it="Crusca di frumento, cruda" \
+  --matrix-id=crusca_di_frumento --matrix-description-it="Crusca di frumento" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Lupini, secchi, crudi — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_lupini_raw`. FDC ID 172423 (SR Legacy, "Lupins, mature seeds, raw").
