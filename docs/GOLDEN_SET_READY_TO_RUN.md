@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Albicocche, crude — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_albicocche_raw`. FDC ID 171697 (SR Legacy, "Apricots, raw").
+- **Nutrienti**: **17/17** (`other_provitamin_a_carotenoids_mcg` = alfa-carotene 19µg + beta-criptoxantina 104µg = 123µg). Acido folico 0µg esplicito, separato dal folato alimentare — nessuna firma di arricchimento.
+- **Analogia usata**: `food_peach_yellow_raw` (stessa famiglia botanica reale Rosaceae, stesso genere Prunus, già eseguito).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `albicocche` ("Albicocche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 1094µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171697 --food-id=food_albicocche_raw \
+  --name-it="Albicocche, crude" \
+  --matrix-id=albicocche --matrix-description-it="Albicocche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=171697 --food-id=food_albicocche_raw \
+  --name-it="Albicocche, crude" \
+  --matrix-id=albicocche --matrix-description-it="Albicocche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Anguria, cruda — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_anguria_raw`. FDC ID 167765 (SR Legacy, "Watermelon, raw").
