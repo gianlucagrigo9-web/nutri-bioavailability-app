@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Carciofi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_carciofi_raw`. FDC ID 169205 (SR Legacy, "Artichokes, (globe or french), raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato alimentare 68µg/100g naturale), vitamina B12 0µg, alfa-carotene e beta-criptoxantina 0µg — tutti valori espliciti, nessuna firma di arricchimento.
+- **Analogia usata**: `food_lettuce_romaine_raw` (stessa famiglia botanica reale Asteraceae — carciofo e lattuga appartengono entrambi alle Asteraceae, stessa logica già usata per il radicchio).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `carciofi` ("Carciofi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 8µg/100g, basso ma non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169205 --food-id=food_carciofi_raw \
+  --name-it="Carciofi, crudi" \
+  --matrix-id=carciofi --matrix-description-it="Carciofi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169205 --food-id=food_carciofi_raw \
+  --name-it="Carciofi, crudi" \
+  --matrix-id=carciofi --matrix-description-it="Carciofi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Fagiolini, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_fagiolini_raw`. FDC ID 169961 (SR Legacy, "Beans, snap, green, raw").
