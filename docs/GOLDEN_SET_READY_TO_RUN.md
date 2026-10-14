@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Pistacchi, secchi crudi — preparato 2026-10-14 dal task orario (secondo alimento lavorato dal terzo lotto)
+
+- **food_id**: `food_pistacchi_raw`. FDC ID 170184 (SR Legacy, "Nuts, pistachio nuts, raw").
+- **Nutrienti**: **16/17** — manca solo `vitamin_k_mcg` (non trovato nel record, non assunto zero). Acido folico 0µg esplicito, separato dal folato alimentare — nessuna firma di arricchimento.
+- **Analogia usata**: `food_almonds` (stessa funzione "frutta a guscio" già usata per noci/nocciole nel Golden Set, famiglia botanica reale diversa — vedi sotto).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `pistacchi` ("Pistacchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stessa convenzione di `food_almonds`/`food_noci_raw`/`food_nocciole_raw`, che non hanno questo campo valorizzato nonostante un beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (famiglia reale del pistacchio — diversa da mandorle/Rosaceae, noci/Juglandaceae, nocciole/Betulaceae: l'analogia `food_almonds` è di funzione/categoria "frutta a guscio", non di parentela botanica, stessa logica già dichiarata per `food_nocciole_raw` e `food_noci_raw`), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170184 --food-id=food_pistacchi_raw \
+  --name-it="Pistacchi, secchi crudi" \
+  --matrix-id=pistacchi --matrix-description-it="Pistacchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Anacardiaceae
+```
+```
+npm run add-food -- --fdc-id=170184 --food-id=food_pistacchi_raw \
+  --name-it="Pistacchi, secchi crudi" \
+  --matrix-id=pistacchi --matrix-description-it="Pistacchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Anacardiaceae --apply
+```
+
 ### Ciliegie, crude — preparato 2026-10-14 dal task orario (primo alimento lavorato dal terzo lotto)
 
 - **food_id**: `food_ciliegie_raw`. FDC ID 171719 (SR Legacy, "Cherries, sweet, raw").
