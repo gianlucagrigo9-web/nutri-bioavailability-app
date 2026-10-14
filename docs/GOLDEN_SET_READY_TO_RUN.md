@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Lenticchie rosse, decorticate, crude — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_lenticchie_rosse_raw`. FDC ID 174284 (SR Legacy, "Lentils, pink or red, raw").
+- **Nutrienti**: **16/17** — manca `vitamin_k_mcg` (non riportato nella pagina, non assunto zero). Acido folico 0µg esplicito, separato dal folato totale (204µg/100g) — nessuna firma di arricchimento. Calcio 48mg/100g, nella norma per un legume secco. Beta-carotene 35µg/100g esplicito (non nullo). Selenio 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_lentils_raw` (lenticchie comuni, crude e secche, già eseguite nel Golden Set originale — stessa specie *Lens culinaris*, solo varietà diversa: l'analogia più diretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `lenticchie_rosse` ("Lenticchie rosse decorticate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per le lenticchie comuni nel Golden Set), `carotenoid_matrix_state=raw_intact` (beta-carotene 35µg/100g, esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174284 --food-id=food_lenticchie_rosse_raw \
+  --name-it="Lenticchie rosse, decorticate, crude" \
+  --matrix-id=lenticchie_rosse --matrix-description-it="Lenticchie rosse decorticate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lentils_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=174284 --food-id=food_lenticchie_rosse_raw \
+  --name-it="Lenticchie rosse, decorticate, crude" \
+  --matrix-id=lenticchie_rosse --matrix-description-it="Lenticchie rosse decorticate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lentils_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Piselli secchi, spezzati, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_piselli_secchi_spezzati_raw`. FDC ID 172428 (SR Legacy, "Peas, green, split, mature seeds, raw").
