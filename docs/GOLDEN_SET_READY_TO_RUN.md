@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Sogliola, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_sogliola_raw`. FDC ID 174196 (SR Legacy, "Fish, flatfish (flounder and sole species), raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 5µg/100g), vitamina B12 1,13µg/100g esplicito, selenio 26,6µg/100g — nessuna firma di arricchimento.
+- **Nota sul record**: FDC non ha un record specie-specifico per la sogliola comune (Solea solea); il record SR Legacy disponibile è una categoria ufficiale USDA che raggruppa "flounder and sole species" (passere e sogliole, entrambi pesci piatti) — proxy dichiarato, stesso tipo già usato per branzino ("sea bass, mixed species") in questo stesso quarto lotto, non un mismatch di specie come orata/porgy (scartato) perché la categoria nomina esplicitamente "sole species".
+- **Analogia usata**: `food_salmon_raw` (salmone, già eseguito — stessa funzione di pesce crudo).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sogliola` ("Sogliola").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, nessuna famiglia botanica (alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174196 --food-id=food_sogliola_raw \
+  --name-it="Sogliola, cruda" \
+  --matrix-id=sogliola --matrix-description-it="Sogliola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174196 --food-id=food_sogliola_raw \
+  --name-it="Sogliola, cruda" \
+  --matrix-id=sogliola --matrix-description-it="Sogliola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Pesce spada, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_pesce_spada_raw`. FDC ID 173703 (SR Legacy, "Fish, swordfish, raw").
