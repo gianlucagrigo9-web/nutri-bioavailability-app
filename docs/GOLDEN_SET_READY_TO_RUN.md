@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Seppia, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_seppia_raw`. FDC ID 174215 (SR Legacy, "Mollusks, cuttlefish, mixed species, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero). Acido folico 0µg esplicito (folato totale 16µg/100g), vitamina B12 3,0µg/100g esplicito, selenio 44,8µg/100g — nessuna firma di arricchimento.
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite — stessa classe Mollusca, stessa logica già usata per calamari/polpo in questo stesso quarto lotto), con `--is-heme-iron` per coerenza con la stessa analogia.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `seppia` ("Seppia").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, nessuna famiglia botanica (alimento animale, stesso trattamento già usato per pesce/molluschi/carne/funghi in questa coda), `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174215 --food-id=food_seppia_raw \
+  --name-it="Seppia, cruda" \
+  --matrix-id=seppia --matrix-description-it="Seppia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174215 --food-id=food_seppia_raw \
+  --name-it="Seppia, cruda" \
+  --matrix-id=seppia --matrix-description-it="Seppia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Fichi secchi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_fichi_secchi_raw`. FDC ID 174665 (SR Legacy, "Figs, dried, uncooked").
