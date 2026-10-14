@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Melograno (arilli), crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_melograno_raw`. FDC ID 169134 (SR Legacy, "Pomegranates, raw" — record sugli arilli/chicchi commestibili, non sul frutto intero con buccia, coerente con la voce di coda).
+- **Nutrienti**: **17/17**. Beta-carotene, alfa-carotene e beta-criptoxantina 0µg tutti espliciti; acido folico 0µg esplicito (folato totale 38µg/100g interamente naturale) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_grapes_european_raw` (uva, già eseguito — analogia di funzione "frutto fresco con piccoli semi/arilli commestibili", stessa categoria `fresh_fruit`. **Deviazione dichiarata**: famiglia botanica reale del melograno è Lythraceae (Punica granatum), diversa da quella dell'uva, Vitaceae — nessuna Lythraceae già presente nel Golden Set).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `melograno` ("Melograno").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione già usata per sedano rapa/funghi champignon), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lythraceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169134 --food-id=food_melograno_raw \
+  --name-it="Melograno (arilli), crudo" \
+  --matrix-id=melograno --matrix-description-it="Melograno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --diet-category=fresh_fruit --botanical-family=Lythraceae
+```
+```
+npm run add-food -- --fdc-id=169134 --food-id=food_melograno_raw \
+  --name-it="Melograno (arilli), crudo" \
+  --matrix-id=melograno --matrix-description-it="Melograno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --diet-category=fresh_fruit --botanical-family=Lythraceae --apply
+```
+
 ### Prugne, crude — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_prugne_raw`. FDC ID 169949 (SR Legacy, "Plums, raw").
