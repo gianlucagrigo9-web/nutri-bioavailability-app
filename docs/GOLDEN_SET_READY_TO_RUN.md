@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Farina di ceci (besan) — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_farina_di_ceci_raw`. FDC ID 174288 (SR Legacy, "Chickpea flour (besan)").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare naturale (437µg/100g, alto ma coerente con un legume secco macinato, non un segnale di fortificazione) — nessuna firma di arricchimento. Calcio 45,0mg/100g e ferro 4,86mg/100g nella norma per una farina di legumi non fortificata. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174288 e dataType SR Legacy.
+- **Analogia usata**: `food_chickpeas_raw` (ceci crudi secchi, già eseguito — stesso legume, stessa famiglia botanica Fabaceae, stessa logica "non fortificato" già verificata per il seme intero).
+- **Categoria dieta**: `plant_non_fruit` (legumi e derivati).
+- **Matrice**: nuova `farina_di_ceci` ("Farina di ceci").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione di tutti i legumi già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 25,0µg/100g basso, stesso trattamento già riservato a legumi/cereali con tracce non nulle ma non classificate), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa famiglia dei ceci), `baseline_cooking_state=raw` (farina cruda, non cotta).
+
+```
+npm run add-food -- --fdc-id=174288 --food-id=food_farina_di_ceci_raw \
+  --name-it="Farina di ceci (besan)" \
+  --matrix-id=farina_di_ceci --matrix-description-it="Farina di ceci" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=174288 --food-id=food_farina_di_ceci_raw \
+  --name-it="Farina di ceci (besan)" \
+  --matrix-id=farina_di_ceci --matrix-description-it="Farina di ceci" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Farina di riso, bianca, non arricchita — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_farina_di_riso_raw`. FDC ID 169714 (SR Legacy, "Rice flour, white, unenriched").
