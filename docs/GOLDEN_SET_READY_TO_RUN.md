@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di canapa, decorticati, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_semi_di_canapa_raw`. FDC ID 170148 (SR Legacy, "Seeds, hemp seed, hulled").
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `vitamin_b12_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero — stesso tipo di gap già accettato per `food_avena_cruda`/`food_castagne_raw`, 13/17). Acido folico 0µg esplicito (folato totale 110µg/100g naturale), vitamina C 0,5mg/100g, beta-carotene 7µg/100g (basso ma esplicito e non nullo) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_almonds` (mandorle, già eseguite — stessa funzione "frutta a guscio/semi", stessa logica già usata per noci/nocciole/castagne/anacardi/pistacchi/arachidi in questa coda). Famiglia botanica reale della canapa, Cannabaceae, dichiarata separatamente.
+- **Categoria dieta**: `plant_non_fruit` (seme).
+- **Matrice**: nuova `semi_di_canapa` ("Semi di canapa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo, stessa convenzione già usata per scalogno/porri/cipolla in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cannabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170148 --food-id=food_semi_di_canapa_raw \
+  --name-it="Semi di canapa, decorticati, crudi" \
+  --matrix-id=semi_di_canapa --matrix-description-it="Semi di canapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Cannabaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170148 --food-id=food_semi_di_canapa_raw \
+  --name-it="Semi di canapa, decorticati, crudi" \
+  --matrix-id=semi_di_canapa --matrix-description-it="Semi di canapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Cannabaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Scalogno, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_scalogno_raw`. FDC ID 170499 (SR Legacy, "Shallots, raw").
