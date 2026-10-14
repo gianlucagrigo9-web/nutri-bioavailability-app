@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Fichi secchi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_fichi_secchi_raw`. FDC ID 174665 (SR Legacy, "Figs, dried, uncooked").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 9µg/100g), vitamina B12 0µg esplicito, beta-carotene 6µg/100g esplicito e non nullo, calcio 162mg/100g (alto ma plausibile: il fico secco è un fico fresco concentrato ~3x dalla disidratazione, coerente con la nota concentrazione di calcio di questo frutto, non una firma di arricchimento tipo acido folico/calcio anomalo già scartata per pane/latte vegetale in questa coda) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_fig_raw` (fico fresco, già eseguito — stessa identica specie reale Ficus carica, il fico secco ne è semplicemente la forma disidratata).
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/disidratata per il PRD (§4.9), NON `fresh_fruit`.
+- **Matrice**: nuova `fichi_secchi` ("Fichi secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Moraceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174665 --food-id=food_fichi_secchi_raw \
+  --name-it="Fichi secchi" \
+  --matrix-id=fichi_secchi --matrix-description-it="Fichi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --diet-category=plant_non_fruit --botanical-family=Moraceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=174665 --food-id=food_fichi_secchi_raw \
+  --name-it="Fichi secchi" \
+  --matrix-id=fichi_secchi --matrix-description-it="Fichi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --diet-category=plant_non_fruit --botanical-family=Moraceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Prugne secche, snocciolate — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_prugne_secche_raw`. FDC ID 168162 (SR Legacy, "Plums, dried (prunes), uncooked").
