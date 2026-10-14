@@ -120,6 +120,30 @@ npm run add-food -- --fdc-id=168412 --food-id=food_scarola_raw \
   --carotenoid-matrix-state=raw_intact --apply
 ```
 
+### Rapa, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_rapa_raw`. FDC ID 170465 (SR Legacy, "Turnips, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 15µg/100g naturale), vitamina B12 0µg, calcio 30mg/100g nella norma per un ortaggio a radice — nessuna firma di arricchimento.
+- **Analogia usata**: `food_broccoli_raw` (stessa famiglia botanica reale Brassicaceae — organo diverso, radice invece di infiorescenza, stessa logica già usata per `food_barbabietola_rossa_raw`/`food_spinach_raw` in questa coda — già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `rapa` ("Rapa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170465 --food-id=food_rapa_raw \
+  --name-it="Rapa, cruda" \
+  --matrix-id=rapa --matrix-description-it="Rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae
+```
+```
+npm run add-food -- --fdc-id=170465 --food-id=food_rapa_raw \
+  --name-it="Rapa, cruda" \
+  --matrix-id=rapa --matrix-description-it="Rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
