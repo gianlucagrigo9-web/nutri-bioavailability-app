@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Datteri (Medjool), crudi/disidratati — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_datteri_medjool_raw` (NON `food_dates_raw`: quell'id esiste già nel DB come riga demo legacy del primo seed, fuori dal Golden Set — vedi nota ID riservati in questa coda).
+- **Nutrienti**: **15/17** — mancano `selenium_mcg`, `vitamin_b12_mcg` (non riportati nel record, non assunti zero). Acido folico 0µg esplicito (folato totale 15µg/100g), vitamina C 0mg esplicito, beta-carotene 89µg/100g esplicito e non nullo — nessuna firma di arricchimento.
+- **Analogia usata**: `food_fig_raw` (fico fresco, già eseguito — stessa funzione di frutto dolce ad alto contenuto di zuccheri, famiglia botanica reale diversa, vedi sotto). Famiglia botanica reale del dattero, Arecaceae (palma, Phoenix dactylifera), dichiarata separatamente, diversa da quella del fico (Moraceae).
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/disidratata per il PRD (§4.9), NON `fresh_fruit` (definizione restrittiva: solo frutta fresca).
+- **Matrice**: nuova `datteri_medjool` ("Datteri Medjool").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168191 --food-id=food_datteri_medjool_raw \
+  --name-it="Datteri (Medjool), crudi/disidratati" \
+  --matrix-id=datteri_medjool --matrix-description-it="Datteri Medjool" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168191 --food-id=food_datteri_medjool_raw \
+  --name-it="Datteri (Medjool), crudi/disidratati" \
+  --matrix-id=datteri_medjool --matrix-description-it="Datteri Medjool" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Semi di canapa, decorticati, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_semi_di_canapa_raw`. FDC ID 170148 (SR Legacy, "Seeds, hemp seed, hulled").
