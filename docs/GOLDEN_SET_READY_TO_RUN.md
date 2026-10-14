@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Miglio, decorticato, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_miglio_raw`. FDC ID 169702 (SR Legacy, "Millet, raw").
+- **Nutrienti**: **15/17** — mancano `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (non riportati nella pagina, non assunti zero). Acido folico 0µg esplicito, separato dal folato totale (85µg/100g) — nessuna firma di arricchimento. Calcio 8mg/100g, basso e coerente con un cereale non arricchito (stesso ordine di grandezza di riso/orzo già nel Golden Set). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito — stessa categoria funzionale "cereale crudo non cotto", stessa famiglia botanica reale **Poaceae**).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `miglio` ("Miglio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per i cereali in questo progetto), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non 0 esplicito: non c'è un valore su cui basare lo stato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169702 --food-id=food_miglio_raw \
+  --name-it="Miglio, decorticato, crudo" \
+  --matrix-id=miglio --matrix-description-it="Miglio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169702 --food-id=food_miglio_raw \
+  --name-it="Miglio, decorticato, crudo" \
+  --matrix-id=miglio --matrix-description-it="Miglio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Fegato di pollo, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_fegato_di_pollo_raw`. FDC ID 171060 (SR Legacy, "Chicken, liver, all classes, raw").
