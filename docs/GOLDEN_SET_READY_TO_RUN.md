@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Radicchio rosso, crudo — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_radicchio_raw`. FDC ID 2747664 (Foundation Foods, "Radicchio, raw").
+- **Nutrienti**: **12/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `vitamin_b12_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non trovati nel record, non assunti zero).
+- **Nota sulla qualità**: la pagina aggregatore consultata mostra una lieve discordanza di energia (26,4 kcal in tabella contro 25 kcal in etichetta, ~5%, verosimile arrotondamento etichetta/calcolo) — non lo scarto strutturale a tre valori visto per il cavolfiore (dove un quarto valore calcolato dai macro divergeva ulteriormente). Nessun altro segnale di prodotto diverso o di fonti miste. Nessun record SR Legacy trovato per radicchio (solo questo Foundation Foods, unico candidato).
+- **Analogia usata**: `food_lettuce_romaine_raw` (stessa famiglia botanica reale Asteraceae — lattuga e radicchio appartengono entrambi alle Asteraceae nonostante generi diversi, Lactuca e Cichorium).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `radicchio` ("Radicchio rosso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in questo record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=2747664 --food-id=food_radicchio_raw \
+  --name-it="Radicchio rosso, crudo" \
+  --matrix-id=radicchio --matrix-description-it="Radicchio rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=2747664 --food-id=food_radicchio_raw \
+  --name-it="Radicchio rosso, crudo" \
+  --matrix-id=radicchio --matrix-description-it="Radicchio rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Barbabietola rossa, cruda — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_barbabietola_rossa_raw`. FDC ID 169145 (SR Legacy, "Beets, raw").
