@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Peperoni verdi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_pepper_green_raw`. FDC ID 170427 (SR Legacy, "Peppers, sweet, green, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_pepper_red_raw` (stessa specie reale Capsicum annuum, famiglia Solanaceae, già eseguito — solo varietà di colore diversa, come per il giallo preparato nello stesso run).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `peperoni_verdi` ("Peperoni verdi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 208µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170427 --food-id=food_pepper_green_raw \
+  --name-it="Peperoni verdi, crudi" \
+  --matrix-id=peperoni_verdi --matrix-description-it="Peperoni verdi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170427 --food-id=food_pepper_green_raw \
+  --name-it="Peperoni verdi, crudi" \
+  --matrix-id=peperoni_verdi --matrix-description-it="Peperoni verdi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Peperoni gialli, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_pepper_yellow_raw`. FDC ID 169383 (SR Legacy, "Peppers, sweet, yellow, raw").
