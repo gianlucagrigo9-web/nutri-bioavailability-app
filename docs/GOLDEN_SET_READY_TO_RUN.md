@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Provolone — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_provolone`. FDC ID 170850 (SR Legacy, "Cheese, provolone").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (10,0µg/100g) — nessuna firma di arricchimento. Calcio 756mg/100g e sodio 727mg/100g coerenti con un formaggio semi-duro stagionato (inferiore al parmigiano reggiano, superiore alla mozzarella fresca — ordine di grandezza plausibile). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170850 e dataType SR Legacy.
+- **Analogia usata**: `food_parmigiano_reggiano` (parmigiano reggiano, già eseguito — stessa categoria "formaggio stagionato a latte vaccino", stessa convenzione `matrix_category_calcium=medium_oxalate` di tutti i latticini/formaggi nel Golden Set; più specifica di `food_mozzarella` perché anche il provolone è un formaggio a pasta dura/semidura stagionata, non fresco).
+- **Categoria dieta**: `egg_dairy` (latticino: vegetariano SÌ, vegano NO, fruttariano NO).
+- **Matrice**: nuova `provolone` ("Provolone").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (stessa convenzione di tutti i latticini/formaggi già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — stesso trattamento di tutti i formaggi nel Golden Set nonostante il beta-carotene non nullo, 68µg/100g: la distinzione raw_intact/cooked_or_disrupted non si applica a un prodotto fermentato/stagionato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=fresh` (stessa convenzione di mozzarella/ricotta/feta/gorgonzola: formaggio pronto al consumo, non cotto).
+
+```
+npm run add-food -- --fdc-id=170850 --food-id=food_provolone \
+  --name-it="Provolone" \
+  --matrix-id=provolone --matrix-description-it="Provolone" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_parmigiano_reggiano \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170850 --food-id=food_provolone \
+  --name-it="Provolone" \
+  --matrix-id=provolone --matrix-description-it="Provolone" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_parmigiano_reggiano \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Sogliola, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_sogliola_raw`. FDC ID 174196 (SR Legacy, "Fish, flatfish (flounder and sole species), raw").
