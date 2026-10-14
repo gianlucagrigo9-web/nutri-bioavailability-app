@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Sedano rapa, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_sedano_rapa_raw`. FDC ID 170400 (SR Legacy, "Celeriac, raw").
+- **Nutrienti**: **17/17**. Beta-carotene, alfa-carotene e beta-criptoxantina 0µg tutti espliciti; acido folico 0µg esplicito (folato totale 8µg/100g, interamente naturale) — nessuna firma di arricchimento, calcio 43mg/100g nella norma per un tubero/radice.
+- **Analogia usata**: `food_sedano_raw` (sedano, Apium graveolens var. dulce — il sedano rapa, Apium graveolens var. rapaceum, è la stessa specie botanica, solo varietà coltivata per la radice invece che per il gambo; già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `sedano_rapa` ("Sedano rapa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento del sedano/carote/patate, nessuna categoria ossalati dichiarata per le radici), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione già usata per i funghi champignon: nessun fattore carotenoide da applicare su un valore nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170400 --food-id=food_sedano_rapa_raw \
+  --name-it="Sedano rapa, crudo" \
+  --matrix-id=sedano_rapa --matrix-description-it="Sedano rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=170400 --food-id=food_sedano_rapa_raw \
+  --name-it="Sedano rapa, crudo" \
+  --matrix-id=sedano_rapa --matrix-description-it="Sedano rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply
+```
+
 ### Peperoni verdi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_pepper_green_raw`. FDC ID 170427 (SR Legacy, "Peppers, sweet, green, raw").
