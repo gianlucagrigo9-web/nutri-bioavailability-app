@@ -1,8 +1,7 @@
--- fix_carotenoid_matrix_state_ortaggi_foglia.sql (PROPOSTA 2026-10-13 notte)
+-- fix_carotenoid_matrix_state_ortaggi_foglia.sql (opzione A, APPROVATA dall'utente il 2026-10-14)
 --
--- >>> PROPOSTA -- NON ESEGUITO. Non incollare questo file in Supabase finche'
--- >>> l'utente non ha scelto l'opzione A in docs/PENDING_HUMAN_ACTIONS.md
--- >>> (analisi completa: docs/INDAGINE_CAROTENOID_MATRIX_STATE.md).
+-- >>> Pronto da eseguire, una volta sola. Scritto come proposta il 2026-10-13 notte.
+-- >>> Analisi completa: docs/INDAGINE_CAROTENOID_MATRIX_STATE.md.
 --
 -- Da eseguire UNA VOLTA nell'editor SQL di Supabase (seleziona tutto, Run).
 --
