@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Fichi d'India, crudi — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
+
+- **food_id**: `food_fichi_dindia_raw`. FDC ID 167750 (SR Legacy, "Prickly pears, raw").
+- **Nutrienti**: **16/17** — manca solo vitamina K (non riportata nel record). Acido folico 0µg esplicito, separato dal folato totale (6,0µg/100g) — nessuna firma di arricchimento. Beta-carotene 25,0µg/100g e alfa-carotene/beta-criptoxantina entrambi espliciti (0 e 3,0µg/100g → `other_provitamin_a_carotenoids_mcg`=3,0), calcio 56,0mg/100g e vitamina C 14,0mg/100g nella norma per un frutto fresco, nessun segnale anomalo. Esiste anche un record distinto "Prickly pears, raw (Northern Plains Indians)" FDC 169816 — scartato, è una preparazione/popolazione diversa, non il frutto fresco generico richiesto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167750 e dataType SR Legacy.
+- **Analogia usata**: `food_oranges_raw` (per funzione del campo beta-carotene, non parentela botanica — stessa convenzione già usata per melone cantalupo/papaya/mango/kiwi in questa coda), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicitamente presente nel record).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco vero, mangiato crudo come frutta — non un ortaggio botanicamente "frutto" come pomodoro/zucchina/melanzana, definizione restrittiva del PRD §4.9).
+- **Matrice**: nuova `fichi_dindia` ("Fichi d'India").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cactaceae` (*Opuntia ficus-indica*), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=167750 --food-id=food_fichi_dindia_raw \
+  --name-it="Fichi d'India, crudi" \
+  --matrix-id=fichi_dindia --matrix-description-it="Fichi d'India" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Cactaceae
+```
+```
+npm run add-food -- --fdc-id=167750 --food-id=food_fichi_dindia_raw \
+  --name-it="Fichi d'India, crudi" \
+  --matrix-id=fichi_dindia --matrix-description-it="Fichi d'India" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Cactaceae --apply
+```
+
 ### Cardi, crudi — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
 
 - **food_id**: `food_cardi_raw`. FDC ID 169981 (SR Legacy, "Cardoon, raw").
