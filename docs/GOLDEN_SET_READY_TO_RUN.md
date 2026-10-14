@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Anguria, cruda — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_anguria_raw`. FDC ID 167765 (SR Legacy, "Watermelon, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare — nessuna firma di arricchimento.
+- **Analogia usata**: `food_melone_cantalupo_raw` (stessa famiglia botanica reale Cucurbitaceae, già eseguito; stesso trattamento "melone" come frutta fresca pur essendo botanicamente un frutto della famiglia delle cucurbitacee, coerente con la voce già presente per il melone cantalupo).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, come il melone cantalupo già nel Golden Set).
+- **Matrice**: nuova `anguria` ("Anguria").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 303µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=167765 --food-id=food_anguria_raw \
+  --name-it="Anguria, cruda" \
+  --matrix-id=anguria --matrix-description-it="Anguria" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --diet-category=fresh_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=167765 --food-id=food_anguria_raw \
+  --name-it="Anguria, cruda" \
+  --matrix-id=anguria --matrix-description-it="Anguria" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --diet-category=fresh_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Radicchio rosso, crudo — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_radicchio_raw`. FDC ID 2747664 (Foundation Foods, "Radicchio, raw").
