@@ -197,6 +197,30 @@ npm run add-food -- --fdc-id=174673 --food-id=food_pompelmo_rosa_raw \
   --carotenoid-matrix-state=raw_intact --apply
 ```
 
+### Nespole, crude — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_nespole_raw`. FDC ID 169908 (SR Legacy, "Loquats, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero; il record riporta comunque "Vitamin A, RAE" già derivato, non usato qui perché il progetto traccia il beta-carotene grezzo, non il derivato). Acido folico 0µg esplicito (folato totale 14µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_pear_raw` (stessa famiglia botanica reale Rosaceae, frutto "pomo", già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `nespole` ("Nespole").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169908 --food-id=food_nespole_raw \
+  --name-it="Nespole, crude" \
+  --matrix-id=nespole --matrix-description-it="Nespole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=169908 --food-id=food_nespole_raw \
+  --name-it="Nespole, crude" \
+  --matrix-id=nespole --matrix-description-it="Nespole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
