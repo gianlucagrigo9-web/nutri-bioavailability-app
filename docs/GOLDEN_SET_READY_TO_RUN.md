@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Agnello, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_agnello_raw`. FDC ID 174338 (SR Legacy, "Lamb, New Zealand, imported, frozen, composite of trimmed retail cuts, separable lean only, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero — stesso gap tipico già dichiarato per `food_vitello_raw`, atteso per una carne). Acido folico 0µg esplicito, folato totale 0µg esplicito (non assente: valore riportato) — nessuna firma di arricchimento. **Nota**: selenio 1,50µg/100g è basso rispetto ad altre carni del Golden Set (es. manzo 15,8-21,5µg) — valore esplicito del record, non un errore: la Nuova Zelanda ha aree con suoli poveri di selenio, un fattore agronomico noto e documentato, non un'anomalia da scartare.
+- **Perché il record "composite"**: la voce di coda chiede "agnello" in generale — scelto il record che rappresenta la media dei tagli al dettaglio ("composite of trimmed retail cuts"), stessa logica già usata per `food_vitello_raw` in questo stesso run. Scartato il record "Australian, imported" equivalente (FDC 174399): stessa descrizione concettuale ma copertura nutrienti inferiore (manca anche la vitamina B12... in realtà presente, ma manca folato/vitamina C, circa 11/17 contro i 14/17 di questo record neozelandese).
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, già eseguito — stessa categoria funzionale "carne rossa di mammifero crudo con ferro eme", stessa logica già usata per pollo/tacchino/maiale nel Golden Set; famiglia reale diversa — agnello = Ovis aries, manzo = Bos taurus — nessuna parentela biologica, solo analogia di categoria).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello` ("Agnello").
+- **Attributi**: `is_heme_iron=true` (carne rossa, come manzo/maiale/vitello nel Golden Set/coda), `matrix_category_calcium` omesso (NULL, non applicabile a una carne), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174338 --food-id=food_agnello_raw \
+  --name-it="Agnello, crudo" \
+  --matrix-id=agnello --matrix-description-it="Agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174338 --food-id=food_agnello_raw \
+  --name-it="Agnello, crudo" \
+  --matrix-id=agnello --matrix-description-it="Agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Vitello, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_vitello_raw`. FDC ID 173817 (SR Legacy, "Veal, composite of trimmed retail cuts, separable lean only, raw").
