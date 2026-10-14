@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Coniglio, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_coniglio_raw`. FDC ID 172521 (SR Legacy, "Game meat, rabbit, domesticated, composite of cuts, raw" — verificato apertura diretta del record su `fdc.nal.usda.gov/portal-data/external/172521`, non solo aggregatore).
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (assenti dall'array `foodNutrients` del record, non assunti zero — stesso gap tipico già dichiarato per `food_vitello_raw`/`food_agnello_raw`, atteso per una carne). **Acido folico**: 0µg presente nel record ma con codice di derivazione "Z" ("valore assunto", non misurato) — standard USDA per nutrienti attesi trascurabili in questo gruppo alimentare (carne non arricchita non contiene acido folico per definizione), non un segnale di arricchimento né un'incertezza sul match.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, già eseguito — stessa categoria funzionale "carne rossa di mammifero crudo con ferro eme", stessa logica già usata per vitello/agnello in questo run; famiglia reale diversa — coniglio = Oryctolagus cuniculus, manzo = Bos taurus — nessuna parentela biologica, solo analogia di categoria).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coniglio` ("Coniglio").
+- **Attributi**: `is_heme_iron=true` (carne, come manzo/maiale/vitello/agnello), `matrix_category_calcium` omesso (NULL, non applicabile a una carne), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172521 --food-id=food_coniglio_raw \
+  --name-it="Coniglio, crudo" \
+  --matrix-id=coniglio --matrix-description-it="Coniglio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=172521 --food-id=food_coniglio_raw \
+  --name-it="Coniglio, crudo" \
+  --matrix-id=coniglio --matrix-description-it="Coniglio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Agnello, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_agnello_raw`. FDC ID 174338 (SR Legacy, "Lamb, New Zealand, imported, frozen, composite of trimmed retail cuts, separable lean only, raw").
