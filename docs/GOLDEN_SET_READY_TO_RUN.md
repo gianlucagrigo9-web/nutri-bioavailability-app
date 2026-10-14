@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Aringa atlantica, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_aringa_raw`. FDC ID 175116 (SR Legacy, "Fish, herring, Atlantic, raw").
+- **Nutrienti**: **17/17**. Vitamina B12 molto alta (13,7µg/100g, atteso per un pesce grasso), selenio 36,5µg/100g, acido folico 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175116.
+- **Analogia usata**: `food_sgombro_raw` (sgombro atlantico, già eseguito sul DB reale — stessa categoria "pesce grasso crudo", entrambi pesci azzurri dell'Atlantico con profilo nutrizionale simile, famiglia Clupeidae per l'aringa vs Scombridae per lo sgombro, dichiarate separatamente).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `aringa_atlantica` ("Aringa atlantica").
+- **Attributi**: `is_heme_iron=true` (ferro eme, carne di pesce, stessa convenzione di salmone/sgombro/tonno/merluzzo/acciughe già nel set), `matrix_category_calcium` omesso (NULL), `botanical_family` omesso (NULL — pesce, nessuna famiglia botanica, stessa convenzione degli altri pesci), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=175116 --food-id=food_aringa_raw \
+  --name-it="Aringa atlantica, cruda" \
+  --matrix-id=aringa_atlantica --matrix-description-it="Aringa atlantica" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175116 --food-id=food_aringa_raw \
+  --name-it="Aringa atlantica, cruda" \
+  --matrix-id=aringa_atlantica --matrix-description-it="Aringa atlantica" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Litchi, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_litchi_raw`. FDC ID 169086 (SR Legacy, "Litchis, raw").
