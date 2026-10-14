@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Papaya, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_papaya_raw`. FDC ID 169926 (SR Legacy, "Papayas, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (37,0µg/100g) — nessuna firma di arricchimento (atteso, è un frutto fresco non lavorato). Beta-carotene 274µg/100g, beta-criptoxantina 589µg/100g (valore alto ma ben noto per la papaya, non anomalo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169926.
+- **Analogia usata**: `food_melone_cantalupo_raw` (melone cantalupo, già eseguito sul DB reale — analogia funzionale "frutta fresca cruda tropicale/subtropicale ricca di carotenoidi", famiglia botanica reale diversa dichiarata separatamente: papaya Caricaceae, melone Cucurbitaceae).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva del PRD §9 punto 2d — vero frutto botanico).
+- **Matrice**: nuova `papaya` ("Papaya").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione delle altre frutte fresche già nel Golden Set), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina non nulli, frutto crudo intero non processato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Caricaceae` (Carica papaya), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169926 --food-id=food_papaya_raw \
+  --name-it="Papaya, cruda" \
+  --matrix-id=papaya --matrix-description-it="Papaya" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Caricaceae
+```
+```
+npm run add-food -- --fdc-id=169926 --food-id=food_papaya_raw \
+  --name-it="Papaya, cruda" \
+  --matrix-id=papaya --matrix-description-it="Papaya" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Caricaceae --apply
+```
+
 ### Mango, crudo — preparato 2026-10-14 dal task orario (quinto lotto)
 
 - **food_id**: `food_mango_raw`. FDC ID 169910 (SR Legacy, "Mangos, raw").
