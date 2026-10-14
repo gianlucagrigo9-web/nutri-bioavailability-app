@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Castagne, crude, sbucciate — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_castagne_raw`. FDC ID 170575 (SR Legacy, "Nuts, chestnuts, european, raw, peeled").
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero — stesso tipo di gap già accettato per `food_avena_cruda`, 13/17 con gli stessi 4 nutrienti mancanti). Acido folico 0µg esplicito (folato totale 58µg/100g), vitamina B12 0µg esplicito — nessuna firma di arricchimento. **Nota sulla fibra**: il riepilogo della prima fonte consultata (getfoodfacts.com) mostrava "0g" in contraddizione con la tabella dettagliata — corretto con una seconda fonte (recipal.com, stesso FDC record per descrizione): fibra ≈7,1g/100g, valore plausibile per una castagna, non realmente zero.
+- **Analogia usata**: `food_almonds` (mandorle, già eseguite — stessa funzione "frutta a guscio", stessa logica già usata per noci/nocciole/anacardi in questa coda). Famiglia botanica reale della castagna, Fagaceae (Castanea sativa, castagno europeo — coerente con il castagno coltivato in Italia), dichiarata separatamente, diversa da quella delle mandorle.
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `castagne` ("Castagne").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, stesso trattamento già usato per altra frutta a guscio in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fagaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170575 --food-id=food_castagne_raw \
+  --name-it="Castagne, crude, sbucciate" \
+  --matrix-id=castagne --matrix-description-it="Castagne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Fagaceae
+```
+```
+npm run add-food -- --fdc-id=170575 --food-id=food_castagne_raw \
+  --name-it="Castagne, crude, sbucciate" \
+  --matrix-id=castagne --matrix-description-it="Castagne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Fagaceae --apply
+```
+
 ### Cacao amaro in polvere, non zuccherato — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_cacao_amaro_raw`. FDC ID 169593 (SR Legacy, "Cocoa, dry powder, unsweetened").
