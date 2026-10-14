@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Topinambur, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_topinambur_raw`. FDC ID 169236 (SR Legacy, "Jerusalem-artichokes, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (13µg/100g) — nessuna firma di arricchimento. Calcio 14mg/100g, basso e coerente con un tubero crudo. Beta-carotene 12µg/100g esplicito (basso ma non nullo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_potato_raw` (patata, già eseguita — analogia solo funzionale "tubero crudo", stessa logica già usata per la patata dolce in questa coda). Famiglia botanica reale del topinambur, **Asteraceae** (Helianthus tuberosus — è un tubero di girasole, non ha nessuna parentela con la patata), dichiarata separatamente, diversa da quella della patata (Solanaceae).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `topinambur` ("Topinambur").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per i tuberi in questo progetto), `carotenoid_matrix_state=raw_intact` (beta-carotene 12µg/100g, basso ma esplicito e non nullo, stessa convenzione già usata per segale/amaranto in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169236 --food-id=food_topinambur_raw \
+  --name-it="Topinambur, crudo" \
+  --matrix-id=topinambur --matrix-description-it="Topinambur" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169236 --food-id=food_topinambur_raw \
+  --name-it="Topinambur, crudo" \
+  --matrix-id=topinambur --matrix-description-it="Topinambur" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Amaranto, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_amaranto_raw`. FDC ID 170682 (SR Legacy, "Amaranth grain, uncooked").
