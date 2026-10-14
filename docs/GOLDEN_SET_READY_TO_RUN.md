@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Piselli secchi, spezzati, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_piselli_secchi_spezzati_raw`. FDC ID 172428 (SR Legacy, "Peas, green, split, mature seeds, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (15µg/100g) — nessuna firma di arricchimento. Calcio 46mg/100g, nella norma per un legume secco. Beta-carotene 89µg/100g esplicito (non nullo), alfa-carotene e beta-criptoxantina entrambi 0 esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType. Diverso sia dai piselli freschi crudi (`food_peas_green_raw`, FDC 170419) sia dai piselli verdi bolliti (`food_piselli_bolliti`, FDC 170420) già nel Golden Set: questo è il seme maturo secco spezzato, non il pisello fresco immaturo.
+- **Analogia usata**: `food_lentils_raw` (lenticchie, crude e secche, già eseguite nel Golden Set originale — stessa categoria funzionale "legume secco crudo", stessa famiglia botanica reale **Fabaceae**).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `piselli_secchi_spezzati` ("Piselli secchi spezzati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per lenticchie/ceci/fagioli nel Golden Set, nessuna categoria ossalati stabilita per i legumi), `carotenoid_matrix_state=raw_intact` (beta-carotene 89µg/100g, esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=172428 --food-id=food_piselli_secchi_spezzati_raw \
+  --name-it="Piselli secchi, spezzati, crudi" \
+  --matrix-id=piselli_secchi_spezzati --matrix-description-it="Piselli secchi spezzati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lentils_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=172428 --food-id=food_piselli_secchi_spezzati_raw \
+  --name-it="Piselli secchi, spezzati, crudi" \
+  --matrix-id=piselli_secchi_spezzati --matrix-description-it="Piselli secchi spezzati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lentils_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Topinambur, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_topinambur_raw`. FDC ID 169236 (SR Legacy, "Jerusalem-artichokes, raw").
