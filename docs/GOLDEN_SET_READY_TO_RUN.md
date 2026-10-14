@@ -17,6 +17,33 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (83µg/100g) — nessuna firma di arricchimento. Calcio 108mg/100g e vitamina K alta (224µg/100g), coerenti con una brassicacea a foglia/infiorescenza. Beta-carotene 1.573µg/100g esplicito (alto), alfa-carotene e beta-criptoxantina entrambi 0 esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Corrispondenza del nome**: "broccoli raab"/"rapini" è il nome con cui FDC cataloga esattamente le cime di rapa italiane — stessa specie *Brassica rapa* (var. *rapa*/*sylvestris*, le infiorescenze immature con foglie usate in Italia per "orecchiette e cime di rapa"), non un proxy approssimativo come altri casi ⚠ di questa coda.
+- **Analogia usata**: `food_broccoli_raw` (broccoli, già eseguiti nel Golden Set originale — stessa famiglia botanica reale **Brassicaceae**, stessa categoria funzionale "infiorescenza/foglia crucifera cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cime_di_rapa` ("Cime di rapa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per broccoli/verza/cavolo cappuccio in questa coda, nessuna categoria ossalati stabilita), `carotenoid_matrix_state=raw_intact` (beta-carotene 1.573µg/100g, alto ed esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170381 --food-id=food_cime_di_rapa_raw \
+  --name-it="Cime di rapa, crude" \
+  --matrix-id=cime_di_rapa --matrix-description-it="Cime di rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170381 --food-id=food_cime_di_rapa_raw \
+  --name-it="Cime di rapa, crude" \
+  --matrix-id=cime_di_rapa --matrix-description-it="Cime di rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Bietole da costa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_bietole_da_costa_raw`. FDC ID 169991 (SR Legacy, "Chard, swiss, raw").
