@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Branzino, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_branzino_raw`. FDC ID 175142 (SR Legacy, "Fish, sea bass, mixed species, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5µg/100g) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti.
+- **Deviazione dichiarata**: nessun record FDC specifico per "branzino"/spigola europea (Dicentrarchus labrax) trovato — il genere USDA più vicino, "sea bass", è riportato solo come "mixed species" (categoria generica che raggruppa più specie di spigola/branzino nordamericane, non necessariamente D. labrax). Nessun record SR Legacy/Foundation per "European sea bass" o specie-specifico trovato in ricerca. Accettato come proxy dichiarato — stessa logica già usata per mandarini/clementine in questa coda (specie/varietà affine, non verificata separatamente).
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo, già eseguito — stessa categoria funzionale "pesce bianco magro crudo", profilo lipidico comparabile, più vicino del salmone che è un pesce grasso).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `branzino` ("Branzino").
+- **Attributi**: `is_heme_iron=true` (pesce, come merluzzo/salmone/tonno nel Golden Set), `matrix_category_calcium` omesso (NULL, non applicabile a un pesce), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=175142 --food-id=food_branzino_raw \
+  --name-it="Branzino, crudo" \
+  --matrix-id=branzino --matrix-description-it="Branzino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=175142 --food-id=food_branzino_raw \
+  --name-it="Branzino, crudo" \
+  --matrix-id=branzino --matrix-description-it="Branzino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Anatra, carne senza pelle, cruda — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_anatra_raw`. FDC ID 172410 (SR Legacy, "Duck, domesticated, meat only, raw").
