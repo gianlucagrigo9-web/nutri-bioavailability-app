@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Mango, crudo — preparato 2026-10-14 dal task orario (quinto lotto)
+
+- **food_id**: `food_mango_raw`. FDC ID 169910 (SR Legacy, "Mangos, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (43,0µg/100g) — nessuna firma di arricchimento. Beta-carotene 640µg/100g, valore alto ma ben noto e documentato per il mango, non anomalo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169910.
+- **Analogia usata**: `food_oranges_raw` (arance crude, già eseguito — stessa categoria "frutta fresca cruda ricca di carotenoidi", stessa convenzione `carotenoid_matrix_state=raw_intact`).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva del PRD §9 punto 2d — il mango è un vero frutto botanico, non un ortaggio "frutto" come pomodoro/zucchina).
+- **Matrice**: nuova `mango` ("Mango").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione delle altre frutte fresche già nel Golden Set), `carotenoid_matrix_state=raw_intact` (beta-carotene non nullo, frutto crudo intero non processato, stessa convenzione di carote/arance crude), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (Mangifera indica), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169910 --food-id=food_mango_raw \
+  --name-it="Mango, crudo" \
+  --matrix-id=mango --matrix-description-it="Mango" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Anacardiaceae
+```
+```
+npm run add-food -- --fdc-id=169910 --food-id=food_mango_raw \
+  --name-it="Mango, crudo" \
+  --matrix-id=mango --matrix-description-it="Mango" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Anacardiaceae --apply
+```
+
 ### Sciroppo d'acero — preparato 2026-10-14 dal task orario (quinto lotto)
 
 - **food_id**: `food_sciroppo_di_acero_raw`. FDC ID 169661 (SR Legacy, "Syrups, maple").
