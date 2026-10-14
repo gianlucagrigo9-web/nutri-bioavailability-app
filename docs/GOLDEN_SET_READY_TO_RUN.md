@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Mirtilli, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_mirtilli_raw`. FDC ID 171711 (SR Legacy, "Blueberries, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 6µg/100g interamente naturale), alfa-carotene e beta-criptoxantina 0µg espliciti — nessuna firma di arricchimento.
+- **Analogia usata**: `food_strawberry_raw` (fragole, già eseguito — analogia di funzione "frutto a bacca piccola, fresco", stessa categoria `fresh_fruit`. **Deviazione dichiarata**: famiglia botanica reale del mirtillo è Ericaceae (Vaccinium), diversa da quella della fragola, Rosaceae — nessuna famiglia Ericaceae già presente nel Golden Set da cui prendere l'analogia esatta, stessa logica già usata per `food_patata_dolce_raw`/`food_quinoa_dry_raw` quando l'analogia botanica esatta manca).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mirtilli` ("Mirtilli").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 32µg/100g, esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ericaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171711 --food-id=food_mirtilli_raw \
+  --name-it="Mirtilli, crudi" \
+  --matrix-id=mirtilli --matrix-description-it="Mirtilli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strawberry_raw \
+  --diet-category=fresh_fruit --botanical-family=Ericaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=171711 --food-id=food_mirtilli_raw \
+  --name-it="Mirtilli, crudi" \
+  --matrix-id=mirtilli --matrix-description-it="Mirtilli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strawberry_raw \
+  --diet-category=fresh_fruit --botanical-family=Ericaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Sedano rapa, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_sedano_rapa_raw`. FDC ID 170400 (SR Legacy, "Celeriac, raw").
