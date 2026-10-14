@@ -93,6 +93,33 @@ npm run add-food -- --fdc-id=170404 --food-id=food_indivia_belga_raw \
   --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
 ```
 
+### Scarola, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_scarola_raw`. FDC ID 168412 (SR Legacy, "Endive, raw").
+- **Deviazione dichiarata**: nessun record FDC dedicato a "escarole, raw" trovato — l'unico record "escarole" esistente in FDC è cotto ("Escarole, cooked, boiled, drained, no salt added", FDC 168413), stato di cottura diverso da quello richiesto dalla voce di coda ("scarola, cruda"). Usato invece "Endive, raw" (FDC 168412): stessa specie botanica *Cichorium endivia*, solo varietà a foglia riccia (indivia riccia) invece che a foglia larga (scarola) — stessa pianta, cultivar diversa, non un proxy di specie diversa come altri casi ⚠ di questa coda (es. orata/porgy).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 142µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_lettuce_romaine_raw` (stessa famiglia botanica reale Asteraceae, ortaggio a foglia da insalata, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `scarola` ("Scarola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 1300µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168412 --food-id=food_scarola_raw \
+  --name-it="Scarola, cruda" \
+  --matrix-id=scarola --matrix-description-it="Scarola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168412 --food-id=food_scarola_raw \
+  --name-it="Scarola, cruda" \
+  --matrix-id=scarola --matrix-description-it="Scarola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
