@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Uva passa (sultanina), disidratata — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_uva_passa_raw`. FDC ID 168165 (SR Legacy, "Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 5µg/100g), vitamina B12 0µg esplicito, beta-carotene 0µg esplicito (plausibile per uva scura disidratata), calcio 62mg/100g nella norma — nessuna firma di arricchimento.
+- **Analogia usata**: `food_grapes_european_raw` (stessa specie reale Vitis vinifera, uva europea già eseguita — l'uva passa ne è semplicemente la forma disidratata), famiglia botanica Vitaceae.
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/disidratata per il PRD (§4.9), NON `fresh_fruit`.
+- **Matrice**: nuova `uva_passa` ("Uva passa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione di mandorle/noci/nocciole/pistacchi/anacardi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Vitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168165 --food-id=food_uva_passa_raw \
+  --name-it="Uva passa (sultanina), disidratata" \
+  --matrix-id=uva_passa --matrix-description-it="Uva passa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --diet-category=plant_non_fruit --botanical-family=Vitaceae
+```
+```
+npm run add-food -- --fdc-id=168165 --food-id=food_uva_passa_raw \
+  --name-it="Uva passa (sultanina), disidratata" \
+  --matrix-id=uva_passa --matrix-description-it="Uva passa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --diet-category=plant_non_fruit --botanical-family=Vitaceae --apply
+```
+
 ### Datteri (Medjool), crudi/disidratati — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_datteri_medjool_raw` (NON `food_dates_raw`: quell'id esiste già nel DB come riga demo legacy del primo seed, fuori dal Golden Set — vedi nota ID riservati in questa coda).
