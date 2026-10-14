@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Anacardi, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_anacardi_raw`. FDC ID 170162 (SR Legacy, "Nuts, cashew nuts, raw").
+- **Nutrienti**: **17/17**. Beta-carotene, alfa-carotene e beta-criptoxantina 0µg tutti espliciti; acido folico 0µg esplicito (folato totale 25µg/100g interamente naturale) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_almonds` (mandorle, già eseguito — stessa funzione "frutta a guscio" già usata per noci/nocciole, famiglia botanica reale diversa — vedi sotto). La famiglia botanica reale dell'anacardo, Anacardiaceae, è la stessa dei pistacchi, ma `food_pistacchi_raw` non è ancora eseguito sul DB reale (solo "pronto"): per questo l'analogia dichiarata resta `food_almonds`, coerente con la regola che richiede un alimento già presente nel DB.
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `anacardi` ("Anacardi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione di mandorle/noci/nocciole/pistacchi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170162 --food-id=food_anacardi_raw \
+  --name-it="Anacardi, crudi" \
+  --matrix-id=anacardi --matrix-description-it="Anacardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Anacardiaceae
+```
+```
+npm run add-food -- --fdc-id=170162 --food-id=food_anacardi_raw \
+  --name-it="Anacardi, crudi" \
+  --matrix-id=anacardi --matrix-description-it="Anacardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Anacardiaceae --apply
+```
+
 ### Mandarini (e clementine), crudi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_mandarini_raw`. FDC ID 169105 (SR Legacy, "Tangerines, (mandarin oranges), raw").
