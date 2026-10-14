@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Bietole da costa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_bietole_da_costa_raw`. FDC ID 169991 (SR Legacy, "Chard, swiss, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (14µg/100g) — nessuna firma di arricchimento. Calcio 51mg/100g, vitamina K molto alta (830µg/100g) e beta-carotene alto (3.647µg/100g), entrambi coerenti con una foglia verde scura come la bietola. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_spinach_raw` (spinaci, già eseguiti nel Golden Set originale — stessa famiglia botanica reale **Amaranthaceae**, Beta vulgaris come la bietola da costa è imparentata botanicamente con le barbabietole/spinaci, stessa categoria funzionale "foglia verde cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `bietole_da_costa` ("Bietole da costa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati specificamente stabilita per la bietola nel modello Heaney&Weaver usato dal motore: solo spinaci/kale/latte hanno una categoria dichiarata in questo progetto; assegnarne una per analogia sarebbe una stima non dichiarata come tale, quindi evitata), `carotenoid_matrix_state=raw_intact` (beta-carotene 3.647µg/100g, alto ed esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169991 --food-id=food_bietole_da_costa_raw \
+  --name-it="Bietole da costa, crude" \
+  --matrix-id=bietole_da_costa --matrix-description-it="Bietole da costa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169991 --food-id=food_bietole_da_costa_raw \
+  --name-it="Bietole da costa, crude" \
+  --matrix-id=bietole_da_costa --matrix-description-it="Bietole da costa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cavolo cappuccio bianco, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cavolo_cappuccio_raw`. FDC ID 169975 (SR Legacy, "Cabbage, raw").
