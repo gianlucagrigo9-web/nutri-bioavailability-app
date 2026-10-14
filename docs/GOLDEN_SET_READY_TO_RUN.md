@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Germe di grano, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_germe_di_grano_raw`. FDC ID 168892 (SR Legacy, "Wheat germ, crude").
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina (non elencati nel record, gap dichiarato non stimato). Acido folico 0µg esplicito, separato dal folato totale (281µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168892.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito sul DB reale — stessa famiglia botanica reale **Poaceae**, stessa convenzione "cereale/derivato crudo non arricchito" già usata per crusca di frumento in questo stesso lotto).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `germe_di_grano` ("Germe di grano").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `botanical_family=Poaceae` (Triticum aestivum), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168892 --food-id=food_germe_di_grano_raw \
+  --name-it="Germe di grano, crudo" \
+  --matrix-id=germe_di_grano --matrix-description-it="Germe di grano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168892 --food-id=food_germe_di_grano_raw \
+  --name-it="Germe di grano, crudo" \
+  --matrix-id=germe_di_grano --matrix-description-it="Germe di grano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Crusca di frumento, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_crusca_di_frumento_raw`. FDC ID 169722 (SR Legacy, "Wheat bran, crude").
