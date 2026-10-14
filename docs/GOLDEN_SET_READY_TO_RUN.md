@@ -17,6 +17,33 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Verza (cavolo verza/savoy), cruda — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_verza_raw`. FDC ID 170388 (SR Legacy, "Cabbage, savoy, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg riportato esplicitamente separato dal folato alimentare — nessuna firma di arricchimento.
+- **Precisione sul nome**: la voce di coda diceva "verza (cavolo cappuccio)", trattando i due come sinonimi. In realtà sono due varietà diverse della stessa specie (Brassica oleracea): "verza" = cavolo verza/di Savoia (var. sabauda, foglia increspata), "cavolo cappuccio" = cavolo a palla liscio (var. capitata). FDC ha record separati per entrambi (SR Legacy "Cabbage, savoy, raw" FDC 170388 qui usato per "verza"; "Cabbage, raw" FDC 169975, generico/liscio, resta disponibile per un eventuale "cavolo cappuccio" separato in futuro — non usato qui per non confondere le due verdure, composizione leggermente diversa: 27kcal/35mg calcio/68,8µg vit.K per il verza contro 25kcal/40mg calcio/76µg vit.K per il cappuccio generico).
+- **Analogia usata**: `food_kale_raw` (stessa famiglia botanica reale Brassicaceae, foglia cruda, già eseguito nel Golden Set originale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `verza` ("Verza (cavolo verza)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — la categoria ossalati nel progetto è dichiarata solo per spinaci/kale/latte, non per la verza), `carotenoid_matrix_state=raw_intact` (beta-carotene 600µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170388 --food-id=food_verza_raw \
+  --name-it="Verza (cavolo verza), cruda" \
+  --matrix-id=verza --matrix-description-it="Verza (cavolo verza)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170388 --food-id=food_verza_raw \
+  --name-it="Verza (cavolo verza), cruda" \
+  --matrix-id=verza --matrix-description-it="Verza (cavolo verza)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Edamame (soia verde), sgranati, crudi e congelati (non cotti) — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_edamame_raw`. FDC ID 168410 (SR Legacy, "Edamame, frozen, unprepared").
