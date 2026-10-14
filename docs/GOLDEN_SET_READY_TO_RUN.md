@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Peperoni gialli, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_pepper_yellow_raw`. FDC ID 169383 (SR Legacy, "Peppers, sweet, yellow, raw").
+- **Nutrienti**: **15/17** — mancano `vitamin_k_mcg` (non riportato) e `other_provitamin_a_carotenoids_mcg` (non riportato). Acido folico 0µg esplicito, vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_pepper_red_raw` (stessa specie reale Capsicum annuum, famiglia Solanaceae, già eseguito sul DB reale — solo varietà di colore diversa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente frutto, come il peperone rosso già nel Golden Set).
+- **Matrice**: nuova `peperoni_gialli` ("Peperoni gialli").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 120µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169383 --food-id=food_pepper_yellow_raw \
+  --name-it="Peperoni gialli, crudi" \
+  --matrix-id=peperoni_gialli --matrix-description-it="Peperoni gialli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169383 --food-id=food_pepper_yellow_raw \
+  --name-it="Peperoni gialli, crudi" \
+  --matrix-id=peperoni_gialli --matrix-description-it="Peperoni gialli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Carciofi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_carciofi_raw`. FDC ID 169205 (SR Legacy, "Artichokes, (globe or french), raw").
