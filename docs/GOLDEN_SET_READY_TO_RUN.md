@@ -43,6 +43,32 @@ npm run add-food -- --fdc-id=170499 --food-id=food_scalogno_raw \
   --carotenoid-matrix-state=raw_intact --apply
 ```
 
+### Ravanelli, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_ravanelli_raw`. FDC ID 169276 (SR Legacy, "Radishes, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 25µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_broccoli_raw` (stessa famiglia botanica reale Brassicaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `ravanelli` ("Ravanelli").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per questo tipo di radice), `carotenoid_matrix_state=raw_intact` (beta-carotene 4µg/100g, basso ma esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169276 --food-id=food_ravanelli_raw \
+  --name-it="Ravanelli, crudi" \
+  --matrix-id=ravanelli --matrix-description-it="Ravanelli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169276 --food-id=food_ravanelli_raw \
+  --name-it="Ravanelli, crudi" \
+  --matrix-id=ravanelli --matrix-description-it="Ravanelli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
