@@ -1,0 +1,424 @@
+﻿LOTTO 05 APPLICA - 10/14/2026 23:48:30
+### food_mango_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169910 --food-id=food_mango_raw --name-it=Mango, crudo --matrix-id=mango --matrix-description-it=Mango --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Anacardiaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_mango_raw  fdc_id=169910  matrix_id=mango  analogia dichiarata=food_oranges_raw
+
+FDC description: "Mangos, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: mango ("Mango")
++ foods_raw: food_mango_raw ("Mango, crudo", matrix=mango, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Anacardiaceae, diet=fresh_fruit (vegetarian=true, vegan=true, fruitarian=true), fdc_id=169910, fdc_name="Mangos, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_oranges_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "mango" creata.
+Ô£ô foods_raw "food_mango_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_mango_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=fresh_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_papaya_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169926 --food-id=food_papaya_raw --name-it=Papaya, cruda --matrix-id=papaya --matrix-description-it=Papaya --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Caricaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_papaya_raw  fdc_id=169926  matrix_id=papaya  analogia dichiarata=food_melone_cantalupo_raw
+
+FDC description: "Papayas, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: papaya ("Papaya")
++ foods_raw: food_papaya_raw ("Papaya, cruda", matrix=papaya, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Caricaceae, diet=fresh_fruit (vegetarian=true, vegan=true, fruitarian=true), fdc_id=169926, fdc_name="Papayas, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_melone_cantalupo_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "papaya" creata.
+Ô£ô foods_raw "food_papaya_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_papaya_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=fresh_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_litchi_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169086 --food-id=food_litchi_raw --name-it=Litchi, crudo --matrix-id=litchi --matrix-description-it=Litchi --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Sapindaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_litchi_raw  fdc_id=169086  matrix_id=litchi  analogia dichiarata=food_grapes_european_raw
+
+FDC description: "Litchis, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: litchi ("Litchi")
++ foods_raw: food_litchi_raw ("Litchi, crudo", matrix=litchi, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Sapindaceae, diet=fresh_fruit (vegetarian=true, vegan=true, fruitarian=true), fdc_id=169086, fdc_name="Litchis, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_grapes_european_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "litchi" creata.
+Ô£ô foods_raw "food_litchi_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_litchi_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=fresh_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_aringa_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=175116 --food-id=food_aringa_raw --name-it=Aringa atlantica, cruda --matrix-id=aringa_atlantica --matrix-description-it=Aringa atlantica --baseline-cooking-state=raw --analogy-food-id=food_sgombro_raw --is-heme-iron --diet-category=meat_fish --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_aringa_raw  fdc_id=175116  matrix_id=aringa_atlantica  analogia dichiarata=food_sgombro_raw
+
+FDC description: "Fish, herring, Atlantic, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: aringa_atlantica ("Aringa atlantica")
++ foods_raw: food_aringa_raw ("Aringa atlantica, cruda", matrix=aringa_atlantica, cooking_state=raw, is_heme_iron=true, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=NULL, diet=meat_fish (vegetarian=false, vegan=false, fruitarian=false), fdc_id=175116, fdc_name="Fish, herring, Atlantic, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_sgombro_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "aringa_atlantica" creata.
+Ô£ô foods_raw "food_aringa_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_aringa_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=meat_fish.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_strutto
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=171401 --food-id=food_strutto --name-it=Strutto (lardo di maiale) --matrix-id=strutto --matrix-description-it=Strutto --baseline-cooking-state=rendered --analogy-food-id=food_burro --diet-category=meat_fish --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_strutto  fdc_id=171401  matrix_id=strutto  analogia dichiarata=food_burro
+
+FDC description: "Lard"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: strutto ("Strutto")
++ foods_raw: food_strutto ("Strutto (lardo di maiale)", matrix=strutto, cooking_state=rendered, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=NULL, diet=meat_fish (vegetarian=false, vegan=false, fruitarian=false), fdc_id=171401, fdc_name="Lard", verification_status=draft) -- attributi categorici per analogia dichiarata con food_burro
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "strutto" creata.
+Ô£ô foods_raw "food_strutto" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_strutto" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=meat_fish.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_fagioli_neri_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=175186 --food-id=food_fagioli_neri_raw --name-it=Fagioli neri, secchi, crudi --matrix-id=fagioli_neri --matrix-description-it=Fagioli neri --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_fagioli_neri_raw  fdc_id=175186  matrix_id=fagioli_neri  analogia dichiarata=food_kidney_beans_raw
+
+FDC description: "Beans, black turtle, mature seeds, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: fagioli_neri ("Fagioli neri")
++ foods_raw: food_fagioli_neri_raw ("Fagioli neri, secchi, crudi", matrix=fagioli_neri, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Fabaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=175186, fdc_name="Beans, black turtle, mature seeds, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_kidney_beans_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "fagioli_neri" creata.
+Ô£ô foods_raw "food_fagioli_neri_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_fagioli_neri_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_lupini_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=172423 --food-id=food_lupini_raw --name-it=Lupini, secchi, crudi --matrix-id=lupini --matrix-description-it=Lupini --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_lupini_raw  fdc_id=172423  matrix_id=lupini  analogia dichiarata=food_chickpeas_raw
+
+FDC description: "Lupins, mature seeds, raw"
+Nutrienti estratti (16/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, other_provitamin_a_carotenoids_mcg
+Nutrienti NON trovati in FDC per questo alimento (non inseriti, non assunti zero): vitamin_k_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: lupini ("Lupini")
++ foods_raw: food_lupini_raw ("Lupini, secchi, crudi", matrix=lupini, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Fabaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=172423, fdc_name="Lupins, mature seeds, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_chickpeas_raw
++ nutrient_values: 16 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "lupini" creata.
+Ô£ô foods_raw "food_lupini_raw" creato (draft).
+Ô£ô nutrient_values: 16 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_lupini_raw" presente con 16 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_crusca_di_frumento_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169722 --food-id=food_crusca_di_frumento_raw --name-it=Crusca di frumento, cruda --matrix-id=crusca_di_frumento --matrix-description-it=Crusca di frumento --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_crusca_di_frumento_raw  fdc_id=169722  matrix_id=crusca_di_frumento  analogia dichiarata=food_orzo_perlato_raw
+
+FDC description: "Wheat bran, crude"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: crusca_di_frumento ("Crusca di frumento")
++ foods_raw: food_crusca_di_frumento_raw ("Crusca di frumento, cruda", matrix=crusca_di_frumento, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Poaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=169722, fdc_name="Wheat bran, crude", verification_status=draft) -- attributi categorici per analogia dichiarata con food_orzo_perlato_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "crusca_di_frumento" creata.
+Ô£ô foods_raw "food_crusca_di_frumento_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_crusca_di_frumento_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_germe_di_grano_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=168892 --food-id=food_germe_di_grano_raw --name-it=Germe di grano, crudo --matrix-id=germe_di_grano --matrix-description-it=Germe di grano --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_germe_di_grano_raw  fdc_id=168892  matrix_id=germe_di_grano  analogia dichiarata=food_orzo_perlato_raw
+
+FDC description: "Wheat germ, crude"
+Nutrienti estratti (14/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg
+Nutrienti NON trovati in FDC per questo alimento (non inseriti, non assunti zero): beta_carotene_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: germe_di_grano ("Germe di grano")
++ foods_raw: food_germe_di_grano_raw ("Germe di grano, crudo", matrix=germe_di_grano, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Poaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=168892, fdc_name="Wheat germ, crude", verification_status=draft) -- attributi categorici per analogia dichiarata con food_orzo_perlato_raw
++ nutrient_values: 14 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "germe_di_grano" creata.
+Ô£ô foods_raw "food_germe_di_grano_raw" creato (draft).
+Ô£ô nutrient_values: 14 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_germe_di_grano_raw" presente con 14 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_farina_di_frumento_integrale_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=168893 --food-id=food_farina_di_frumento_integrale_raw --name-it=Farina di frumento integrale, cruda --matrix-id=farina_di_frumento_integrale --matrix-description-it=Farina di frumento integrale --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_farina_di_frumento_integrale_raw  fdc_id=168893  matrix_id=farina_di_frumento_integrale  analogia dichiarata=food_orzo_perlato_raw
+
+FDC description: "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: farina_di_frumento_integrale ("Farina di frumento integrale")
++ foods_raw: food_farina_di_frumento_integrale_raw ("Farina di frumento integrale, cruda", matrix=farina_di_frumento_integrale, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Poaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=168893, fdc_name="Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)", verification_status=draft) -- attributi categorici per analogia dichiarata con food_orzo_perlato_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "farina_di_frumento_integrale" creata.
+Ô£ô foods_raw "food_farina_di_frumento_integrale_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_farina_di_frumento_integrale_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_cardi_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169981 --food-id=food_cardi_raw --name-it=Cardi, crudi --matrix-id=cardi --matrix-description-it=Cardi --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_cardi_raw  fdc_id=169981  matrix_id=cardi  analogia dichiarata=food_lettuce_romaine_raw
+
+FDC description: "Cardoon, raw"
+Nutrienti estratti (14/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg
+Nutrienti NON trovati in FDC per questo alimento (non inseriti, non assunti zero): beta_carotene_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: cardi ("Cardi")
++ foods_raw: food_cardi_raw ("Cardi, crudi", matrix=cardi, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Asteraceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=169981, fdc_name="Cardoon, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_lettuce_romaine_raw
++ nutrient_values: 14 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "cardi" creata.
+Ô£ô foods_raw "food_cardi_raw" creato (draft).
+Ô£ô nutrient_values: 14 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_cardi_raw" presente con 14 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_fichi_dindia_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=167750 --food-id=food_fichi_dindia_raw --name-it=Fichi d'India, crudi --matrix-id=fichi_dindia --matrix-description-it=Fichi d'India --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Cactaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_fichi_dindia_raw  fdc_id=167750  matrix_id=fichi_dindia  analogia dichiarata=food_oranges_raw
+
+FDC description: "Prickly pears, raw"
+Nutrienti estratti (16/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, other_provitamin_a_carotenoids_mcg
+Nutrienti NON trovati in FDC per questo alimento (non inseriti, non assunti zero): vitamin_k_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: fichi_dindia ("Fichi d'India")
++ foods_raw: food_fichi_dindia_raw ("Fichi d'India, crudi", matrix=fichi_dindia, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Cactaceae, diet=fresh_fruit (vegetarian=true, vegan=true, fruitarian=true), fdc_id=167750, fdc_name="Prickly pears, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_oranges_raw
++ nutrient_values: 16 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "fichi_dindia" creata.
+Ô£ô foods_raw "food_fichi_dindia_raw" creato (draft).
+Ô£ô nutrient_values: 16 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_fichi_dindia_raw" presente con 16 righe nutrient_values, tutto draft come atteso, classificato dieta=fresh_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_caprino_fresco
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=173435 --food-id=food_caprino_fresco --name-it=Formaggio caprino, fresco --matrix-id=caprino_fresco --matrix-description-it=Formaggio caprino fresco --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_caprino_fresco  fdc_id=173435  matrix_id=caprino_fresco  analogia dichiarata=food_milk_whole
+
+FDC description: "Cheese, goat, soft type"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: caprino_fresco ("Formaggio caprino fresco")
++ foods_raw: food_caprino_fresco ("Formaggio caprino, fresco", matrix=caprino_fresco, cooking_state=fresh, is_heme_iron=false, matrix_category_calcium=medium_oxalate, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=NULL, diet=egg_dairy (vegetarian=true, vegan=false, fruitarian=false), fdc_id=173435, fdc_name="Cheese, goat, soft type", verification_status=draft) -- attributi categorici per analogia dichiarata con food_milk_whole
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "caprino_fresco" creata.
+Ô£ô foods_raw "food_caprino_fresco" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_caprino_fresco" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=egg_dairy.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_zucchero_di_canna_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=168833 --food-id=food_zucchero_di_canna_raw --name-it=Zucchero di canna, grezzo --matrix-id=zucchero_di_canna --matrix-description-it=Zucchero di canna --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco --diet-category=plant_non_fruit --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_zucchero_di_canna_raw  fdc_id=168833  matrix_id=zucchero_di_canna  analogia dichiarata=food_zucchero_bianco
+
+FDC description: "Sugars, brown"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: zucchero_di_canna ("Zucchero di canna")
++ foods_raw: food_zucchero_di_canna_raw ("Zucchero di canna, grezzo", matrix=zucchero_di_canna, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=NULL, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=168833, fdc_name="Sugars, brown", verification_status=draft) -- attributi categorici per analogia dichiarata con food_zucchero_bianco
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "zucchero_di_canna" creata.
+Ô£ô foods_raw "food_zucchero_di_canna_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_zucchero_di_canna_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_cavolo_rapa_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=168424 --food-id=food_cavolo_rapa_raw --name-it=Cavolo rapa, crudo --matrix-id=cavolo_rapa --matrix-description-it=Cavolo rapa --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_cavolo_rapa_raw  fdc_id=168424  matrix_id=cavolo_rapa  analogia dichiarata=food_broccoli_raw
+
+FDC description: "Kohlrabi, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: cavolo_rapa ("Cavolo rapa")
++ foods_raw: food_cavolo_rapa_raw ("Cavolo rapa, crudo", matrix=cavolo_rapa, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Brassicaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=168424, fdc_name="Kohlrabi, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_broccoli_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "cavolo_rapa" creata.
+Ô£ô foods_raw "food_cavolo_rapa_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_cavolo_rapa_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_fegato_di_vitello_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=172534 --food-id=food_fegato_di_vitello_raw --name-it=Fegato di vitello, crudo --matrix-id=fegato_di_vitello --matrix-description-it=Fegato di vitello --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw --is-heme-iron --diet-category=meat_fish --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_fegato_di_vitello_raw  fdc_id=172534  matrix_id=fegato_di_vitello  analogia dichiarata=food_beef_liver_raw
+
+FDC description: "Veal, variety meats and by-products, liver, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: fegato_di_vitello ("Fegato di vitello")
++ foods_raw: food_fegato_di_vitello_raw ("Fegato di vitello, crudo", matrix=fegato_di_vitello, cooking_state=raw, is_heme_iron=true, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=NULL, diet=meat_fish (vegetarian=false, vegan=false, fruitarian=false), fdc_id=172534, fdc_name="Veal, variety meats and by-products, liver, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_beef_liver_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "fegato_di_vitello" creata.
+Ô£ô foods_raw "food_fegato_di_vitello_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_fegato_di_vitello_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=meat_fish.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_pinoli_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=170591 --food-id=food_pinoli_raw --name-it=Pinoli, secchi --matrix-id=pinoli --matrix-description-it=Pinoli --baseline-cooking-state=raw --analogy-food-id=food_noci_raw --diet-category=plant_non_fruit --botanical-family=Pinaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_pinoli_raw  fdc_id=170591  matrix_id=pinoli  analogia dichiarata=food_noci_raw
+
+FDC description: "Nuts, pine nuts, dried"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: pinoli ("Pinoli")
++ foods_raw: food_pinoli_raw ("Pinoli, secchi", matrix=pinoli, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Pinaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=170591, fdc_name="Nuts, pine nuts, dried", verification_status=draft) -- attributi categorici per analogia dichiarata con food_noci_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "pinoli" creata.
+Ô£ô foods_raw "food_pinoli_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_pinoli_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_ananas_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=169124 --food-id=food_ananas_raw --name-it=Ananas, crudo --matrix-id=ananas --matrix-description-it=Ananas --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Bromeliaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_ananas_raw  fdc_id=169124  matrix_id=ananas  analogia dichiarata=food_oranges_raw
+
+FDC description: "Pineapple, raw, all varieties"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: ananas ("Ananas")
++ foods_raw: food_ananas_raw ("Ananas, crudo", matrix=ananas, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=raw_intact, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Bromeliaceae, diet=fresh_fruit (vegetarian=true, vegan=true, fruitarian=true), fdc_id=169124, fdc_name="Pineapple, raw, all varieties", verification_status=draft) -- attributi categorici per analogia dichiarata con food_oranges_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "ananas" creata.
+Ô£ô foods_raw "food_ananas_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_ananas_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=fresh_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.
+### food_semi_di_chia_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=170554 --food-id=food_semi_di_chia_raw --name-it=Semi di chia, secchi, crudi --matrix-id=semi_di_chia --matrix-description-it=Semi di chia --baseline-cooking-state=raw --analogy-food-id=food_almonds --diet-category=plant_non_fruit --botanical-family=Lamiaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_semi_di_chia_raw  fdc_id=170554  matrix_id=semi_di_chia  analogia dichiarata=food_almonds
+
+FDC description: "Seeds, chia seeds, dried"
+Nutrienti estratti (14/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg
+Nutrienti NON trovati in FDC per questo alimento (non inseriti, non assunti zero): beta_carotene_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: semi_di_chia ("Semi di chia")
++ foods_raw: food_semi_di_chia_raw ("Semi di chia, secchi, crudi", matrix=semi_di_chia, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Lamiaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=170554, fdc_name="Seeds, chia seeds, dried", verification_status=draft) -- attributi categorici per analogia dichiarata con food_almonds
++ nutrient_values: 14 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "semi_di_chia" creata.
+Ô£ô foods_raw "food_semi_di_chia_raw" creato (draft).
+Ô£ô nutrient_values: 14 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_semi_di_chia_raw" presente con 14 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.

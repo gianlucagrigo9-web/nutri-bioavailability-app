@@ -1,0 +1,69 @@
+# LOTTO 02 di 05 - PROVA (dry-run): NON scrive nulla sul database. 20 alimenti.
+# Copia TUTTO il file (Ctrl+A, Ctrl+C), incollalo in PowerShell aperto nella cartella del progetto, aspetta "Finito".
+New-Item -ItemType Directory -Force lotti_alimenti | Out-Null
+$f = "lotti_alimenti\esito_lotto_02_prova.txt"
+Remove-Item $f -ErrorAction SilentlyContinue
+"LOTTO 02 PROVA - " + (Get-Date) | Out-File $f -Encoding utf8
+"### food_mirtilli_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171711 --food-id=food_mirtilli_raw --name-it="Mirtilli, crudi" --matrix-id=mirtilli --matrix-description-it="Mirtilli" --baseline-cooking-state=raw --analogy-food-id=food_strawberry_raw --diet-category=fresh_fruit --botanical-family=Ericaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_mirtilli_raw"
+"### food_prugne_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169949 --food-id=food_prugne_raw --name-it="Prugne, crude" --matrix-id=prugne --matrix-description-it="Prugne" --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw --diet-category=fresh_fruit --botanical-family=Rosaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_prugne_raw"
+"### food_melograno_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169134 --food-id=food_melograno_raw --name-it="Melograno (arilli), crudo" --matrix-id=melograno --matrix-description-it="Melograno" --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw --diet-category=fresh_fruit --botanical-family=Lythraceae 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_melograno_raw"
+"### food_cachi_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169941 --food-id=food_cachi_raw --name-it="Cachi, crudi" --matrix-id=cachi --matrix-description-it="Cachi" --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw --diet-category=fresh_fruit --botanical-family=Ebenaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cachi_raw"
+"### food_mandarini_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169105 --food-id=food_mandarini_raw --name-it="Mandarini (e clementine), crudi" --matrix-id=mandarini --matrix-description-it="Mandarini" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --diet-category=fresh_fruit --botanical-family=Rutaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_mandarini_raw"
+"### food_anacardi_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170162 --food-id=food_anacardi_raw --name-it="Anacardi, crudi" --matrix-id=anacardi --matrix-description-it="Anacardi" --baseline-cooking-state=raw --analogy-food-id=food_almonds --diet-category=plant_non_fruit --botanical-family=Anacardiaceae 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_anacardi_raw"
+"### food_arachidi_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172430 --food-id=food_arachidi_raw --name-it="Arachidi, crude non salate" --matrix-id=arachidi --matrix-description-it="Arachidi" --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw --diet-category=plant_non_fruit --botanical-family=Fabaceae 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_arachidi_raw"
+"### food_semi_di_zucca_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170556 --food-id=food_semi_di_zucca_raw --name-it="Semi di zucca, secchi" --matrix-id=semi_di_zucca --matrix-description-it="Semi di zucca" --baseline-cooking-state=raw --analogy-food-id=food_pumpkin_raw --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_semi_di_zucca_raw"
+"### food_semi_di_sesamo_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170150 --food-id=food_semi_di_sesamo_raw --name-it="Semi di sesamo, secchi" --matrix-id=semi_di_sesamo --matrix-description-it="Semi di sesamo" --baseline-cooking-state=raw --analogy-food-id=food_almonds --diet-category=plant_non_fruit --botanical-family=Pedaliaceae --carotenoid-matrix-state=raw_intact 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_semi_di_sesamo_raw"
+"### food_semi_di_lino_interi_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169414 --food-id=food_semi_di_lino_interi_raw --name-it="Semi di lino, interi" --matrix-id=semi_di_lino --matrix-description-it="Semi di lino" --baseline-cooking-state=raw --analogy-food-id=food_almonds --diet-category=plant_non_fruit --botanical-family=Linaceae 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_semi_di_lino_interi_raw"
+"### food_vitello_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173817 --food-id=food_vitello_raw --name-it="Vitello, crudo" --matrix-id=vitello --matrix-description-it="Vitello" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_vitello_raw"
+"### food_agnello_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174338 --food-id=food_agnello_raw --name-it="Agnello, crudo" --matrix-id=agnello --matrix-description-it="Agnello" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_agnello_raw"
+"### food_coniglio_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172521 --food-id=food_coniglio_raw --name-it="Coniglio, crudo" --matrix-id=coniglio --matrix-description-it="Coniglio" --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_coniglio_raw"
+"### food_anatra_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172410 --food-id=food_anatra_raw --name-it="Anatra, carne senza pelle, cruda" --matrix-id=anatra --matrix-description-it="Anatra" --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_anatra_raw"
+"### food_branzino_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=175142 --food-id=food_branzino_raw --name-it="Branzino, crudo" --matrix-id=branzino --matrix-description-it="Branzino" --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_branzino_raw"
+"### food_feta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173420 --food-id=food_feta --name-it="Feta" --matrix-id=feta --matrix-description-it="Feta" --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_feta"
+"### food_polpo_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174218 --food-id=food_polpo_raw --name-it="Polpo, crudo" --matrix-id=polpo --matrix-description-it="Polpo" --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_polpo_raw"
+"### food_calamari_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174223 --food-id=food_calamari_raw --name-it="Calamari, crudi" --matrix-id=calamari --matrix-description-it="Calamari" --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw --diet-category=meat_fish --is-heme-iron 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_calamari_raw"
+"### food_gorgonzola" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172175 --food-id=food_gorgonzola --name-it="Gorgonzola" --matrix-id=gorgonzola --matrix-description-it="Gorgonzola" --baseline-cooking-state=fresh --analogy-food-id=food_mozzarella --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_gorgonzola"
+"### food_olio_di_girasole_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171025 --food-id=food_olio_di_girasole_raw --name-it="Olio di semi di girasole" --matrix-id=olio_di_girasole --matrix-description-it="Olio di semi di girasole" --baseline-cooking-state=raw --analogy-food-id=food_burro --diet-category=plant_non_fruit --botanical-family=Asteraceae 2>&1 | Select-String -Pattern "FDC description|Nutrienti estratti|NON trovati|inattesa|ERRORE|Errore" | ForEach-Object { $_.ToString() } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_olio_di_girasole_raw"
+Write-Host ""
+Write-Host "Finito il lotto 02. Righe con ERRORE:" (Select-String -Path $f -Pattern "ERRORE|Errore" | Measure-Object).Count
+Get-Content $f

@@ -1,0 +1,24 @@
+COSA FARE CON QUESTA CARTELLA (alimenti preparati dal task orario)
+
+Sono 98 alimenti, divisi in 5 lotti da circa 20. Si procede in due fasi:
+FASE 1 = PROVA (non scrive nulla sul database), FASE 2 = APPLICA (scrive davvero).
+
+FASE 1 - PROVA
+1. Apri PowerShell nella cartella del progetto
+   (C:\Users\inggr\Desktop\nutri-bioavailability-app).
+2. Apri con il Blocco note il file lotto_01_prova.txt, premi Ctrl+A e Ctrl+C
+   (seleziona tutto e copia).
+3. Torna in PowerShell e incolla (Ctrl+V oppure clic destro). Aspetta: ci vogliono
+   2-4 minuti. Compare "fatto: nome_alimento" per ogni alimento e alla fine "Finito".
+4. Ripeti con lotto_02_prova.txt, lotto_03, lotto_04, lotto_05.
+5. Scrivimi "fatto". I risultati restano nei file esito_lotto_NN_prova.txt in questa
+   cartella: li leggo io, non serve nessuno screenshot.
+
+FASE 2 - APPLICA
+Solo dopo il mio OK preparo i file lotto_NN_applica.txt (senza gli eventuali alimenti
+con problemi) e si fa lo stesso procedimento. Alla fine si lancia
+check_alimenti_lotto2.sql in Supabase (Ctrl+A, Ctrl+C, incolla, Run).
+
+Se una riga mostra "ERRORE" non e' un guaio: significa solo che quell'alimento
+non verra' applicato finche' non ne parliamo. Non c'e' nessun rischio per il database
+nella fase 1.

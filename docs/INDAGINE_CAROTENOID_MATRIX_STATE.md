@@ -2,6 +2,7 @@
 
 **Data**: 2026-10-13 (notte). **Sessione**: interattiva collegata al PC. **Richiesta dell'utente**: "indaga su questo carotenoid matrix state … e cerca di proporre soluzioni".
 **Stato**: indagine conclusa, **nessun codice dell'app modificato, nessuna scrittura sul DB**. Resta una decisione che spetta all'utente (sezione 5). Voce corrispondente in `docs/PENDING_HUMAN_ACTIONS.md`.
+**Aggiornamento 2026-10-14 sera — DECISIONE PRESA: opzione A + F.** Lo SQL `fix_carotenoid_matrix_state_ortaggi_foglia.sql` è stato eseguito sul DB reale e l'etichetta è stata corretta da "Vitamina A (RAE)" a "Vitamina A (RE)" nel codice (nessun numero cambia). Le righe "Stato" qui sopra e le frasi "non eseguito" / "nessun codice modificato" descrivono la situazione al momento dell'indagine (2026-10-13 notte). Opzioni B e D rimandate a quando la vitamina A entrerà nel generatore di diete.
 
 ---
 

@@ -1,6 +1,6 @@
 # App nutrizione — biodisponibilità, cottura, microbiota, impatto ambientale
 
-Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RAE,
+Stato: motori core (ferro/zinco/calcio, B12, folati->DFE, vitamina A->RE,
 magnesio/rame/selenio/iodio/vitamina K (composizione grezza, senza
 modello di assorbimento), microbiota, cottura, LCA) riscritti secondo il
 contratto `SourcedValue` definito in `docs/PRD.md` (v2.0), con test reali
