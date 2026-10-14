@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cetrioli, crudi (con buccia) — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_cetrioli_raw`. FDC ID 168409 (SR Legacy, "Cucumber, with peel, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_zucchine_raw` (stessa famiglia botanica reale Cucurbitaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente frutto, come zucchine/pomodori già nel Golden Set).
+- **Matrice**: nuova `cetrioli` ("Cetrioli").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 45µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168409 --food-id=food_cetrioli_raw \
+  --name-it="Cetrioli, crudi (con buccia)" \
+  --matrix-id=cetrioli --matrix-description-it="Cetrioli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168409 --food-id=food_cetrioli_raw \
+  --name-it="Cetrioli, crudi (con buccia)" \
+  --matrix-id=cetrioli --matrix-description-it="Cetrioli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Tofu, al naturale (con solfato di calcio) — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_tofu_raw`. FDC ID 172475 (SR Legacy, "Tofu, raw, firm, prepared with calcium sulfate").
