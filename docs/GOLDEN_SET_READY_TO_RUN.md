@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cacao amaro in polvere, non zuccherato — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_cacao_amaro_raw`. FDC ID 169593 (SR Legacy, "Cocoa, dry powder, unsweetened").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (32µg/100g) — nessuna firma di arricchimento. Il record non specifica se trattato con alcali (dutch process) o naturale, ma la descrizione "dry powder, unsweetened" senza ulteriori qualificatori è coerente con un cacao amaro non trattato (il record "processed with alkali" è un record FDC distinto, non usato qui). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais, già eseguita — stessa categoria funzionale "polvere vegetale secca non cotta", nessuna parentela botanica: famiglia reale del cacao, Malvaceae (Theobroma cacao), dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (derivato vegetale in polvere).
+- **Matrice**: nuova `cacao_amaro` ("Cacao amaro in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 128mg/100g non trascurabile ma nessuna categoria ossalati stabilita per questo tipo di alimento), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169593 --food-id=food_cacao_amaro_raw \
+  --name-it="Cacao amaro in polvere, non zuccherato" \
+  --matrix-id=cacao_amaro --matrix-description-it="Cacao amaro in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --diet-category=plant_non_fruit --botanical-family=Malvaceae
+```
+```
+npm run add-food -- --fdc-id=169593 --food-id=food_cacao_amaro_raw \
+  --name-it="Cacao amaro in polvere, non zuccherato" \
+  --matrix-id=cacao_amaro --matrix-description-it="Cacao amaro in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --diet-category=plant_non_fruit --botanical-family=Malvaceae --apply
+```
+
 ### Olio di cocco — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_olio_di_cocco_raw`. FDC ID 171412 (SR Legacy, "Oil, coconut").
