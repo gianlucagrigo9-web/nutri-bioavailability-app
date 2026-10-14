@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Arachidi, crude non salate — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_arachidi_raw`. FDC ID 172430 (SR Legacy, "Peanuts, all types, raw").
+- **Nutrienti**: **17/17**. Beta-carotene, alfa-carotene, beta-criptoxantina e vitamina K 0µg tutti espliciti; acido folico 0µg esplicito (folato totale 240µg/100g interamente naturale) — nessuna firma di arricchimento. Sodio 18mg/100g, coerente con un prodotto crudo non salato (non dichiarato esplicitamente "unsalted" nella descrizione, ma il valore è troppo basso per un prodotto salato).
+- **Analogia usata**: `food_chickpeas_raw` (ceci, già eseguito — l'arachide è botanicamente un legume, Fabaceae, stessa famiglia reale dei ceci, non solo un'analogia di funzione).
+- **Categoria dieta**: `plant_non_fruit` (legume/frutta a guscio).
+- **Matrice**: nuova `arachidi` ("Arachidi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172430 --food-id=food_arachidi_raw \
+  --name-it="Arachidi, crude non salate" \
+  --matrix-id=arachidi --matrix-description-it="Arachidi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=172430 --food-id=food_arachidi_raw \
+  --name-it="Arachidi, crude non salate" \
+  --matrix-id=arachidi --matrix-description-it="Arachidi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Anacardi, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_anacardi_raw`. FDC ID 170162 (SR Legacy, "Nuts, cashew nuts, raw").
