@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Gorgonzola — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_gorgonzola`. FDC ID 172175 (SR Legacy, "Cheese, blue").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (36µg/100g) — nessuna firma di arricchimento. Calcio 528mg/100g e sodio coerenti con un formaggio erborinato stagionato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Proxy dichiarato**: nessun record FDC rappresenta specificamente il Gorgonzola DOP italiano. Il record SR Legacy generico "Cheese, blue" rappresenta la categoria USA dei formaggi erborinati (tipo Roquefort/blue cheese commerciale), tipicamente anch'esso a latte vaccino come il Gorgonzola reale (a differenza del caso Pecorino Romano, dove lo scostamento era sul tipo di latte: qui il latte è coerente, ma la tecnica di stagionatura/muffa e la consistenza — più morbida e cremosa nel Gorgonzola DOP, più friabile nel "blue cheese" USA da condimento insalate — non sono verificate equivalenti). Stesso tipo di proxy dichiarato già usato in questa coda per branzino/anatra/mandarini (record generico più vicino disponibile, nessuna invenzione di dati).
+- **Analogia usata**: `food_mozzarella` (mozzarella, già eseguita — stessa categoria "formaggio a latte vaccino", stessa convenzione `matrix_category_calcium=medium_oxalate` di tutti i latticini/formaggi nel Golden Set).
+- **Categoria dieta**: `egg_dairy` (latticino: vegetariano SÌ, vegano NO, fruttariano NO).
+- **Matrice**: nuova `gorgonzola` ("Gorgonzola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (stessa convenzione di tutti i latticini/formaggi già nel Golden Set, come per la feta), `carotenoid_matrix_state` omesso (NULL — stesso trattamento di tutti i formaggi nel Golden Set nonostante il beta-carotene non nullo, 74µg/100g: la distinzione raw_intact/cooked_or_disrupted non si applica a un prodotto fermentato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=fresh` (stessa convenzione di mozzarella/ricotta/feta: formaggio pronto al consumo).
+
+```
+npm run add-food -- --fdc-id=172175 --food-id=food_gorgonzola \
+  --name-it="Gorgonzola" \
+  --matrix-id=gorgonzola --matrix-description-it="Gorgonzola" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_mozzarella \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172175 --food-id=food_gorgonzola \
+  --name-it="Gorgonzola" \
+  --matrix-id=gorgonzola --matrix-description-it="Gorgonzola" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_mozzarella \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Calamari, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_calamari_raw`. FDC ID 174223 (SR Legacy, "Mollusks, squid, mixed species, raw").
