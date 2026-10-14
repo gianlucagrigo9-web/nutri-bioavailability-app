@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Noci del Brasile, secche — preparato 2026-10-14 dal task orario (quinto lotto)
+
+- **food_id**: `food_noci_del_brasile_raw`. FDC ID 170569 (SR Legacy, "Nuts, brazilnuts, dried, unblanched").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (22,0µg/100g) — nessuna firma di arricchimento. Selenio **1.917µg/100g**, un valore estremamente alto ma non anomalo: è il dato nutrizionale più noto delle noci del Brasile, ben documentato in letteratura indipendentemente da questo record (non un segnale di errore). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170569, dataType SR Legacy.
+- **Analogia usata**: `food_noci_raw` (noci/gherigli, già eseguito — stessa categoria concettuale "frutta a guscio secca cruda", stessa convenzione già usata per nocciole/pistacchi/anacardi in questa coda; famiglia botanica reale **Lecythidaceae** (Bertholletia excelsa), diversa da quella delle noci comuni (Juglandaceae), dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `noci_del_brasile` ("Noci del Brasile").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione delle altre frutte a guscio nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lecythidaceae`, `baseline_cooking_state=raw` (secche/non tostate, stessa convenzione di mandorle/noci/nocciole).
+
+```
+npm run add-food -- --fdc-id=170569 --food-id=food_noci_del_brasile_raw \
+  --name-it="Noci del Brasile, secche" \
+  --matrix-id=noci_del_brasile --matrix-description-it="Noci del Brasile" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lecythidaceae
+```
+```
+npm run add-food -- --fdc-id=170569 --food-id=food_noci_del_brasile_raw \
+  --name-it="Noci del Brasile, secche" \
+  --matrix-id=noci_del_brasile --matrix-description-it="Noci del Brasile" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lecythidaceae --apply
+```
+
 ### Farina di ceci (besan) — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_farina_di_ceci_raw`. FDC ID 174288 (SR Legacy, "Chickpea flour (besan)").
