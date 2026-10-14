@@ -144,6 +144,33 @@ npm run add-food -- --fdc-id=170465 --food-id=food_rapa_raw \
   --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
 ```
 
+### Peperoncino piccante, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_peperoncino_piccante_raw`. FDC ID 170106 (SR Legacy, "Peppers, hot chili, red, raw").
+- **Nota sulla verifica dell'FDC ID**: questo FDC ID non è stato aperto direttamente su fdc.nal.usda.gov in questa sessione (avrebbe richiesto un'approvazione di provenienza non ottenuta) — stesso livello di cautela già dichiarato per le acciughe in questa coda. È corroborato da due fonti aggregatore indipendenti (logixpathchef.com e myfooddata.com) che citano esplicitamente "170106" per questa identica descrizione, più una terza fonte (triagemethod.com) che conferma descrizione e dataset SR Legacy con un profilo nutrizionale completo e coerente — non un singolo riferimento non corroborato come nei casi ⚠ (pasta di semola, semi di girasole) scartati altrove in questa coda.
+- **Nutrienti**: **17/17** (fonte triagemethod.com, tutti i valori etichettati esplicitamente SR Legacy, nessun mix con AFCD). Acido folico 0µg esplicito (folato totale 23µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_pepper_red_raw` (stesso genere botanico *Capsicum*, famiglia Solanaceae, peperone dolce già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente "frutto", stessa convenzione già usata per i peperoni dolci in questa coda).
+- **Matrice**: nuova `peperoncino_piccante` ("Peperoncino piccante").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 534µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170106 --food-id=food_peperoncino_piccante_raw \
+  --name-it="Peperoncino piccante, crudo" \
+  --matrix-id=peperoncino_piccante --matrix-description-it="Peperoncino piccante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170106 --food-id=food_peperoncino_piccante_raw \
+  --name-it="Peperoncino piccante, crudo" \
+  --matrix-id=peperoncino_piccante --matrix-description-it="Peperoncino piccante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
