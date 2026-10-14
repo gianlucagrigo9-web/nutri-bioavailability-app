@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Vitello, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_vitello_raw`. FDC ID 173817 (SR Legacy, "Veal, composite of trimmed retail cuts, separable lean only, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero; per una carne è un gap atteso/tipico, non un segnale di match debole — vitamina K e carotenoidi sono tracce quasi nulle nella carne anche quando il record USDA le riporta esplicitamente, come per il manzo nel Golden Set). Acido folico 0µg esplicito, separato dal folato totale (13µg/100g) — nessuna firma di arricchimento.
+- **Perché il record "composite"**: la voce di coda chiede "vitello" in generale, non un taglio specifico — il record "composite of trimmed retail cuts" (media pesata dei tagli al dettaglio più comuni) rappresenta meglio un vitello generico di quanto farebbe un singolo taglio (lombo, girello, ecc.), stessa logica già usata altrove nel Golden Set per i tagli generici di pollo/manzo.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, già eseguito — non solo analogia di funzione: vitello e manzo sono la stessa specie reale, Bos taurus, solo età dell'animale diversa — parentela biologica più stretta di qualunque analogia usata finora in questa coda).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello` ("Vitello").
+- **Attributi**: `is_heme_iron=true` (carne rossa, come manzo/maiale/agnello nel Golden Set — ferro eme), `matrix_category_calcium` omesso (NULL, non applicabile a una carne), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale, nessuna famiglia botanica, stesso trattamento di manzo/salmone/pollo nel Golden Set), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=173817 --food-id=food_vitello_raw \
+  --name-it="Vitello, crudo" \
+  --matrix-id=vitello --matrix-description-it="Vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=173817 --food-id=food_vitello_raw \
+  --name-it="Vitello, crudo" \
+  --matrix-id=vitello --matrix-description-it="Vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Semi di lino, interi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_semi_di_lino_interi_raw` (NON `food_flaxseed_raw`: quell'id è riservato, collide con una riga demo legacy — vedi nota ID riservati in questo file/PRD).
