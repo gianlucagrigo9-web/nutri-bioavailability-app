@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di lino, interi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_semi_di_lino_interi_raw` (NON `food_flaxseed_raw`: quell'id è riservato, collide con una riga demo legacy — vedi nota ID riservati in questo file/PRD).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (87µg/100g interamente naturale), vitamina B12 0µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti — nessuna firma di arricchimento.
+- **Analogia usata**: `food_almonds` (mandorle, già eseguito — stessa funzione "frutta a guscio/seme oleoso", stessa logica già usata per pistacchi/anacardi/arachidi/semi di sesamo in questa coda). Famiglia botanica reale del lino, Linaceae (Linum usitatissimum), dichiarata separatamente — diversa da quella delle mandorle (Rosaceae), nessuna parentela botanica.
+- **Categoria dieta**: `plant_non_fruit` (seme oleoso).
+- **Matrice**: nuova `semi_di_lino` ("Semi di lino").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento degli altri semi/frutta a guscio in questa coda), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione già usata per melograno/sedano rapa), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Linaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169414 --food-id=food_semi_di_lino_interi_raw \
+  --name-it="Semi di lino, interi" \
+  --matrix-id=semi_di_lino --matrix-description-it="Semi di lino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Linaceae
+```
+```
+npm run add-food -- --fdc-id=169414 --food-id=food_semi_di_lino_interi_raw \
+  --name-it="Semi di lino, interi" \
+  --matrix-id=semi_di_lino --matrix-description-it="Semi di lino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Linaceae --apply
+```
+
 ### Semi di sesamo, secchi — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_semi_di_sesamo_raw`. FDC ID 170150 (SR Legacy, "Seeds, sesame seeds, whole, dried").
