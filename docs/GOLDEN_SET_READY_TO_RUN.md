@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Fagioli neri (black beans), secchi, crudi — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_fagioli_neri_raw`. FDC ID 175186 (SR Legacy, "Beans, black turtle, mature seeds, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (444µg/100g) — nessuna firma di arricchimento, coerente con un legume secco non processato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175186.
+- **Analogia usata**: `food_kidney_beans_raw` (fagioli rossi/kidney, crudi secchi, già presente nel Golden Set originale — stesso genere botanico **Phaseolus vulgaris**: il fagiolo nero/black turtle è la stessa specie dei kidney, solo varietà diversa, analogia botanica diretta, non solo funzionale).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_neri` ("Fagioli neri").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione degli altri legumi crudi già nel set), `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=175186 --food-id=food_fagioli_neri_raw \
+  --name-it="Fagioli neri, secchi, crudi" \
+  --matrix-id=fagioli_neri --matrix-description-it="Fagioli neri" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=175186 --food-id=food_fagioli_neri_raw \
+  --name-it="Fagioli neri, secchi, crudi" \
+  --matrix-id=fagioli_neri --matrix-description-it="Fagioli neri" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Strutto (lardo di maiale) — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_strutto`. FDC ID 171401 (SR Legacy, "Lard").
