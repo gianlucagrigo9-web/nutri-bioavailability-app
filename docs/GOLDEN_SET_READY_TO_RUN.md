@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Farina di riso, bianca, non arricchita — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_farina_di_riso_raw`. FDC ID 169714 (SR Legacy, "Rice flour, white, unenriched").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare naturale (4,00µg/100g) — nessuna firma di arricchimento in stile USA. Calcio 10,0mg/100g e ferro 0,35mg/100g bassi, coerenti con una farina di riso bianca non arricchita (stesso ordine di grandezza del riso bianco crudo già nel Golden Set, calcio ~sotto 10mg/100g). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169714 e dataType SR Legacy.
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, già eseguito — stesso cereale, stessa specie Oryza sativa, stessa logica "non arricchito" già verificata per il chicco).
+- **Categoria dieta**: `plant_non_fruit` (cereali e derivati).
+- **Matrice**: nuova `farina_di_riso` ("Farina di riso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione di tutti i cereali/legumi/tuberi già nel Golden Set, nessuno ha questo campo valorizzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (Oryza sativa, stessa famiglia del riso), `baseline_cooking_state=raw` (farina cruda, non cotta).
+
+```
+npm run add-food -- --fdc-id=169714 --food-id=food_farina_di_riso_raw \
+  --name-it="Farina di riso, bianca, non arricchita" \
+  --matrix-id=farina_di_riso --matrix-description-it="Farina di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169714 --food-id=food_farina_di_riso_raw \
+  --name-it="Farina di riso, bianca, non arricchita" \
+  --matrix-id=farina_di_riso --matrix-description-it="Farina di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Olio di semi di mais — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_olio_di_mais_raw`. FDC ID 171029 (SR Legacy, "Oil, corn, industrial and retail, all purpose salad or cooking").
