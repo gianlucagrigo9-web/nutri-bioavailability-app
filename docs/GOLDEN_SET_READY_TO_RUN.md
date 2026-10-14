@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Farina di frumento integrale, non arricchita, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_farina_di_frumento_integrale_raw`. FDC ID 168893 (SR Legacy, "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, tutto il folato (44,0µg/100g) riportato come folato alimentare — nessuna firma di arricchimento in stile USA. Calcio 34,0mg/100g, nella norma per farina di frumento integrale non trattata (non anomalo come i casi ⚠ di pane/pasta già scartati in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168893.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito sul DB reale — stessa famiglia botanica reale **Poaceae**, stessa convenzione "cereale/derivato crudo non arricchito" già usata per crusca di frumento e germe di grano in questo stesso lotto).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `farina_di_frumento_integrale` ("Farina di frumento integrale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `botanical_family=Poaceae` (Triticum aestivum), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168893 --food-id=food_farina_di_frumento_integrale_raw \
+  --name-it="Farina di frumento integrale, cruda" \
+  --matrix-id=farina_di_frumento_integrale --matrix-description-it="Farina di frumento integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168893 --food-id=food_farina_di_frumento_integrale_raw \
+  --name-it="Farina di frumento integrale, cruda" \
+  --matrix-id=farina_di_frumento_integrale --matrix-description-it="Farina di frumento integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Germe di grano, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_germe_di_grano_raw`. FDC ID 168892 (SR Legacy, "Wheat germ, crude").
