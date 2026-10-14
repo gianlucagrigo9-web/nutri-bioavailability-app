@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Pesce spada, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_pesce_spada_raw`. FDC ID 173703 (SR Legacy, "Fish, swordfish, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 2µg/100g), vitamina B12 1,7µg/100g esplicito, selenio 57,4µg/100g — nessuna firma di arricchimento.
+- **Analogia usata**: `food_salmon_raw` (salmone, già eseguito — stessa funzione di pesce crudo, già usata come analogia per sgombro/merluzzo/tonno/acciughe/vongole/cozze in questa coda).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_spada` ("Pesce spada").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, nessuna famiglia botanica (alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=173703 --food-id=food_pesce_spada_raw \
+  --name-it="Pesce spada, crudo" \
+  --matrix-id=pesce_spada --matrix-description-it="Pesce spada" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=173703 --food-id=food_pesce_spada_raw \
+  --name-it="Pesce spada, crudo" \
+  --matrix-id=pesce_spada --matrix-description-it="Pesce spada" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Seppia, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_seppia_raw`. FDC ID 174215 (SR Legacy, "Mollusks, cuttlefish, mixed species, raw").
