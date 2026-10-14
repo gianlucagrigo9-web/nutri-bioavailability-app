@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cachi, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_cachi_raw`. FDC ID 169941 (SR Legacy, "Persimmons, japanese, raw" — la varietà giapponese/kaki, Diospyros kaki, è quella coltivata e venduta in Italia; scartato a priori "Persimmons, native, raw" FDC 169943, specie diversa, Diospyros virginiana, astringente, non commercializzata in Italia).
+- **Nutrienti**: **17/17**. Alfa-carotene 0µg esplicito; acido folico 0µg esplicito (folato totale 8µg/100g interamente naturale) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_melone_cantalupo_raw` (melone cantalupo, già eseguito — analogia di funzione "frutto fresco a polpa arancione, ricco di carotenoidi", stessa categoria `fresh_fruit`. **Deviazione dichiarata**: famiglia botanica reale del cachi è Ebenaceae (Diospyros kaki), diversa da quella del melone, Cucurbitaceae — nessuna Ebenaceae già presente nel Golden Set).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `cachi` ("Cachi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 253µg/100g, beta-criptoxantina 1.447µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ebenaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169941 --food-id=food_cachi_raw \
+  --name-it="Cachi, crudi" \
+  --matrix-id=cachi --matrix-description-it="Cachi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --diet-category=fresh_fruit --botanical-family=Ebenaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169941 --food-id=food_cachi_raw \
+  --name-it="Cachi, crudi" \
+  --matrix-id=cachi --matrix-description-it="Cachi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --diet-category=fresh_fruit --botanical-family=Ebenaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Melograno (arilli), crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_melograno_raw`. FDC ID 169134 (SR Legacy, "Pomegranates, raw" — record sugli arilli/chicchi commestibili, non sul frutto intero con buccia, coerente con la voce di coda).
