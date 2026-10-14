@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Calamari, crudi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_calamari_raw`. FDC ID 174223 (SR Legacy, "Mollusks, squid, mixed species, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5µg/100g) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene, beta-criptoxantina e vitamina K tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguito — stessa categoria concettuale "mollusco crudo con ferro eme", stessa logica usata per il polpo in questo stesso run).
+- **Categoria dieta**: `meat_fish` (frutti di mare/mollusco: vegetariano NO, vegano NO, fruttariano NO).
+- **Matrice**: nuova `calamari` ("Calamari").
+- **Attributi**: `is_heme_iron=true` (mollusco, stessa convenzione di vongole/cozze/acciughe/polpo), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174223 --food-id=food_calamari_raw \
+  --name-it="Calamari, crudi" \
+  --matrix-id=calamari --matrix-description-it="Calamari" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174223 --food-id=food_calamari_raw \
+  --name-it="Calamari, crudi" \
+  --matrix-id=calamari --matrix-description-it="Calamari" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Polpo, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_polpo_raw`. FDC ID 174218 (SR Legacy, "Mollusks, octopus, common, raw").
