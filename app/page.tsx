@@ -190,7 +190,7 @@ const TARGET_NUTRIENT_KEY_LABELS: Record<string, string> = {
   selenium: 'Selenio',
   iodine: 'Iodio',
   vitamin_k: 'Vitamina K',
-  vitamin_a_rae: 'Vitamina A (RAE)',
+  vitamin_a_rae: 'Vitamina A (RE)',
 };
 
 function baselineStateLabel(state: string): string {
@@ -798,7 +798,7 @@ export default function Home() {
                 <div>
                   <MetricRow label="Vitamina B12 assorbita" unit="µg" result={b12Score} sourcesMap={sourcesMap} />
                   <MetricRow label="Folati (DFE)" unit="µg" result={folateScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Vitamina A (RAE)" unit="µg" result={vitaminAScore} sourcesMap={sourcesMap} />
+                  <MetricRow label="Vitamina A (RE)" unit="µg" result={vitaminAScore} sourcesMap={sourcesMap} />
                 </div>
                 <div>
                   <MetricRow label="Magnesio" unit="mg" result={magnesiumScore} sourcesMap={sourcesMap} />

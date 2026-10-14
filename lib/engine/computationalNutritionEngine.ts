@@ -419,6 +419,12 @@ export class ComputationalNutritionEngine {
   // crudo/cotto per questo bucket, resta 12:1 flat (NNR2023).
   // Preformed retinol (fonti animali) non e' ancora un campo dell'app:
   // limitazione dichiarata, non silenziosa.
+  //
+  // NB (2026-10-14): i fattori usati qui (6:1 per il beta-carotene, 12:1 per
+  // gli altri carotenoidi) sono quelli del sistema europeo RE (equivalenti
+  // di retinolo, EFSA/LARN), non quelli del RAE statunitense (12:1 e 24:1).
+  // Il nome del metodo e la chiave vitamin_a_rae restano per compatibilita';
+  // in interfaccia l'etichetta e' "Vitamina A (RE)". Dettagli: docs/INDAGINE_CAROTENOID_MATRIX_STATE.md.
   public calculateVitaminARAE(context: Meal | DailyDiet): SourcedValue {
     const foods = flattenFoods(context);
 

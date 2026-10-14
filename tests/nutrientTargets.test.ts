@@ -104,7 +104,7 @@ describe("getNutrientReferenceValue — valori base (eta' sotto qualunque soglia
     expect(getNutrientReferenceValue("vitamin_k", "female", 30).value).toBe(125);
   });
 
-  it("vitamina A (RAE): uomo 750mcg, donna 650mcg", () => {
+  it("vitamina A (RE): uomo 750mcg, donna 650mcg", () => {
     expect(getNutrientReferenceValue("vitamin_a_rae", "male", 30).value).toBe(750);
     expect(getNutrientReferenceValue("vitamin_a_rae", "female", 30).value).toBe(650);
   });

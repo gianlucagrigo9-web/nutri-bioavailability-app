@@ -83,7 +83,7 @@ export interface NutrientReferenceValue {
   sourceIds: string[];
   // true quando il target NON si applica direttamente al campo grezzo
   // di FoodItem con lo stesso nome, ma all'OUTPUT calcolato di un motore
-  // esistente (bioavailability-adjusted per ferro/zinco/calcio, RAE per
+  // esistente (bioavailability-adjusted per ferro/zinco/calcio, RE per
   // la vitamina A, DFE per i folati) -- gap di wiring già dichiarato in
   // docs/PRD.md §4.9 ("integrazione con i valori bioavailability-adjusted
   // [...] non fatta"), qui solo RI-dichiarato per ciascun nutriente
@@ -114,7 +114,7 @@ export const ADULT_NUTRIENT_REFERENCE_VALUES: ReferenceTable = {
     selenium: { value: 55, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: true },
     iodine: { value: 150, unit: "mcg", category: "AI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_EFSA_CROSSCHECK, mapsToRawFoodItemField: true },
     vitamin_k: { value: 135, unit: "mcg", category: "AI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: true },
-    vitamin_a_rae: { value: 750, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: false, engineOutputNote: "Target in RAE (Retinol Activity Equivalents): da confrontare con l'OUTPUT di calculateVitaminARAE, non con beta_carotene_mcg grezzo." },
+    vitamin_a_rae: { value: 750, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: false, engineOutputNote: "Target in RE (equivalenti di retinolo, sistema europeo LARN/EFSA: 1 mcg RE = 6 mcg di beta-carotene = 12 mcg di altri carotenoidi provitaminici): da confrontare con l'OUTPUT di calculateVitaminARAE (che usa gli stessi fattori RE; il nome del metodo resta per compatibilita'), non con beta_carotene_mcg grezzo." },
   },
   female: {
     iron: { value: 18, unit: "mg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: false, engineOutputNote: "Target da confrontare con l'OUTPUT di calculateBioavailableIron, non con iron_mg grezzo.", ageOverride: { ageYearsThreshold: 60, value: 10, note: "Proxy dichiarato per post-menopausa (la fonte non da' un'eta' esatta di menopausa) -- NON un criterio clinico, da sostituire se l'app arrivera' a chiedere lo stato menopausale direttamente." } },
@@ -128,7 +128,7 @@ export const ADULT_NUTRIENT_REFERENCE_VALUES: ReferenceTable = {
     selenium: { value: 55, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: true },
     iodine: { value: 150, unit: "mcg", category: "AI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_EFSA_CROSSCHECK, mapsToRawFoodItemField: true },
     vitamin_k: { value: 125, unit: "mcg", category: "AI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: true },
-    vitamin_a_rae: { value: 650, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: false, engineOutputNote: "Target in RAE: da confrontare con l'OUTPUT di calculateVitaminARAE, non con beta_carotene_mcg grezzo." },
+    vitamin_a_rae: { value: 650, unit: "mcg", category: "PRI", categoryConfirmed: false, evidenceLevel: 5, sourceIds: LARN_SOURCE, mapsToRawFoodItemField: false, engineOutputNote: "Target in RE (equivalenti di retinolo, sistema europeo LARN/EFSA): da confrontare con l'OUTPUT di calculateVitaminARAE (stessi fattori RE), non con beta_carotene_mcg grezzo." },
   },
 };
 
