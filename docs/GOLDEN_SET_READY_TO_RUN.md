@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Sciroppo d'acero — preparato 2026-10-14 dal task orario (quinto lotto)
+
+- **food_id**: `food_sciroppo_di_acero_raw`. FDC ID 169661 (SR Legacy, "Syrups, maple").
+- **Nutrienti**: **17/17**, letti direttamente dall'endpoint `fdc.nal.usda.gov/portal-data/external/169661` (apparso come risultato diretto di ricerca, non indovinato). Acido folico 0µg esplicito, folato totale 0µg — nessuna firma di arricchimento. Calcio 102mg/100g e zinco 1,47mg/100g sono più alti del previsto per uno sciroppo, ma coerenti con la composizione minerale nota dello sciroppo d'acero reale (concentrazione di minerali durante l'evaporazione della linfa, zinco e manganese in particolare sono tipicamente presenti) — non un segnale di arricchimento o errore.
+- **Analogia usata**: `food_zucchero_bianco` (zucchero bianco, già eseguito — stessa categoria concettuale "dolcificante vegetale puro", stessa categoria dieta).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante di origine vegetale — a differenza del miele, che nel PRD §9 punto 2d è esplicitamente categorizzato `egg_dairy` perché prodotto animale; lo sciroppo d'acero è linfa d'albero, vegano).
+- **Matrice**: nuova `sciroppo_di_acero` ("Sciroppo d'acero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione di miele/zucchero già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapindaceae` (Acer saccharum), `baseline_cooking_state=raw` (stessa convenzione di miele/zucchero: prodotto pronto al consumo).
+
+```
+npm run add-food -- --fdc-id=169661 --food-id=food_sciroppo_di_acero_raw \
+  --name-it="Sciroppo d'acero" \
+  --matrix-id=sciroppo_di_acero --matrix-description-it="Sciroppo d'acero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --botanical-family=Sapindaceae
+```
+```
+npm run add-food -- --fdc-id=169661 --food-id=food_sciroppo_di_acero_raw \
+  --name-it="Sciroppo d'acero" \
+  --matrix-id=sciroppo_di_acero --matrix-description-it="Sciroppo d'acero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --botanical-family=Sapindaceae --apply
+```
+
 ### Latte di capra, intero, crudo — preparato 2026-10-14 dal task orario (quinto lotto)
 
 - **food_id**: `food_latte_di_capra_raw`. FDC ID 171278 (SR Legacy, "Milk, goat, fluid, with added vitamin D").
