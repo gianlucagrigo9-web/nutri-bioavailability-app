@@ -826,7 +826,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Frutta fresca: mango, crudo (da ricercare); papaya, cruda (da ricercare); fichi d'India, crudi (da ricercare); litchi, crudo (da ricercare)
     - Frutta secca: 🟡 noci macadamia, secche (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 170178 "Nuts, macadamia nuts, raw" SR Legacy, 14/17, mancano vitamina K/beta-carotene/altri carotenoidi, gap dichiarato, analogia `food_noci_raw`, botanical_family=Proteaceae, diet-category=plant_non_fruit); 🟡 noci del Brasile, secche (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 170569 "Nuts, brazilnuts, dried, unblanched" SR Legacy, 17/17, analogia `food_noci_raw`, botanical_family=Lecythidaceae, diet-category=plant_non_fruit)
     - Pesce: aringa atlantica, cruda (da ricercare)
-    - Latticini: latte di capra, intero, crudo (da ricercare); formaggio caprino, fresco (da ricercare)
+    - Latticini: 🟡 latte di capra, intero, crudo (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 171278 "Milk, goat, fluid, with added vitamin D" SR Legacy, 17/17, unico additivo la vitamina D (stessa convenzione di `food_milk_whole`), analogia `food_milk_whole`, diet-category=egg_dairy); formaggio caprino, fresco (da ricercare)
     - Grassi: olio di arachidi (da ricercare); olio di sesamo (da ricercare); strutto (lardo di maiale) (da ricercare)
     - Dolcificanti: sciroppo d'acero (da ricercare)
 

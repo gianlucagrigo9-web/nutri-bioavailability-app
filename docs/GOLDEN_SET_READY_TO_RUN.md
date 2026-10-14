@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Latte di capra, intero, crudo — preparato 2026-10-14 dal task orario (quinto lotto)
+
+- **food_id**: `food_latte_di_capra_raw`. FDC ID 171278 (SR Legacy, "Milk, goat, fluid, with added vitamin D").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato alimentare naturale (1,00µg/100g) — nessuna firma di arricchimento con acido folico. Calcio 134mg/100g coerente con il latte (stesso ordine di grandezza del latte vaccino intero già nel Golden Set). L'unico additivo dichiarato è la vitamina D (1,30µg/100g) — stessa convenzione già accettata per `food_milk_whole` ("Latte vaccino intero, vitamina D aggiunta"), non una firma di arricchimento anomala. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171278 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, già eseguito — stessa categoria "latte fluido", stessa convenzione `matrix_category_calcium=medium_oxalate`, stessa presenza di vitamina D aggiunta).
+- **Categoria dieta**: `egg_dairy` (latticino: vegetariano SÌ, vegano NO, fruttariano NO).
+- **Matrice**: nuova `dairy_milk_goat` ("Latte di capra").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (stessa convenzione di tutti i latticini già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 7,00µg/100g basso, stesso trattamento già riservato al latte vaccino), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (latte fluido, non cotto).
+
+```
+npm run add-food -- --fdc-id=171278 --food-id=food_latte_di_capra_raw \
+  --name-it="Latte di capra, intero, crudo" \
+  --matrix-id=dairy_milk_goat --matrix-description-it="Latte di capra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171278 --food-id=food_latte_di_capra_raw \
+  --name-it="Latte di capra, intero, crudo" \
+  --matrix-id=dairy_milk_goat --matrix-description-it="Latte di capra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Noci macadamia, secche, crude — preparato 2026-10-14 dal task orario (quinto lotto)
 
 - **food_id**: `food_noci_macadamia_raw`. FDC ID 170178 (SR Legacy, "Nuts, macadamia nuts, raw").
