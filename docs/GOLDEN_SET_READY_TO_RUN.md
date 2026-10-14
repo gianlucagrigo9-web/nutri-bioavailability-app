@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Olio di semi di mais — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_olio_di_mais_raw`. FDC ID 171029 (SR Legacy, "Oil, corn, industrial and retail, all purpose salad or cooking").
+- **Nutrienti**: **17/17**. Quasi tutti i valori sono zero esplicito (proteine, carboidrati, fibre, calcio, ferro, zinco, magnesio, rame, selenio, vitamina C, folato, acido folico, B12, beta-carotene, alfa-carotene, beta-criptoxantina) — coerente con un olio puro (100g grassi/100g), non un segnale di dato mancante. Vitamina K 1,9µg/100g (solo K1). Stesso profilo già visto e accettato per olio di girasole/cocco in questa coda.
+- **Deviazione dichiarata sulla fonte**: il fetch diretto di getfoodfacts.com per questo FDC ID non è riuscito in questa sessione (richiesta di provenienza non approvata in tempo, l'URL della scheda singola non era apparso come risultato diretto di ricerca). Il FDC ID 171029 e la descrizione completa sono corroborati da **tre fonti indipendenti**: l'URL stesso restituito da tre ricerche web separate (sempre con lo stesso slug "oil-corn-industrial-and-retail-all-purpose-salad-or-cooking-171029", pattern già usato con successo altrove in questa coda, es. vongole FDC 174214) e la pagina triagemethod.com (raggiunta e letta direttamente), che conferma la stessa descrizione esatta e tutti i 17 valori nutrienti etichettati esplicitamente "SR Legacy" (non mescolati con AFCD/Foundation come nel caso scartato dell'olio extravergine d'oliva/della trota) — nessuna anomalia nei valori tracciati da questo progetto (le discrepanze sui soli acidi grassi/vitamina E, riportati da Foundation nella stessa pagina, non riguardano nessuno dei 17 nutrienti usati qui).
+- **Deviazione dichiarata sull'analogia**: nessun olio vegetale è ancora stato eseguito sul DB reale (olio di girasole e olio di cocco restano 🟡, mai eseguiti; EVOO resta ⚠). L'analogia è quindi solo funzionale, non botanica: `food_burro` (burro, già eseguito — stessa categoria concettuale "fonte di grasso quasi puro", stessa logica già usata per olio di girasole/cocco in questa coda). Gli attributi categorici effettivi sono comunque tutti determinati direttamente dai valori espliciti del record (tutti nulli/zero), non dedotti dall'analogia.
+- **Categoria dieta**: `plant_non_fruit` (oli vegetali, come da definizione esplicita nel PRD §9 punto 2d).
+- **Matrice**: nuova `olio_di_mais` ("Olio di semi di mais").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 0 esplicito), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (Zea mays), `baseline_cooking_state=raw` (olio non riscaldato dopo l'estrazione, stessa convenzione di girasole/cocco).
+
+```
+npm run add-food -- --fdc-id=171029 --food-id=food_olio_di_mais_raw \
+  --name-it="Olio di semi di mais" \
+  --matrix-id=olio_di_mais --matrix-description-it="Olio di semi di mais" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=171029 --food-id=food_olio_di_mais_raw \
+  --name-it="Olio di semi di mais" \
+  --matrix-id=olio_di_mais --matrix-description-it="Olio di semi di mais" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Provolone — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_provolone`. FDC ID 170850 (SR Legacy, "Cheese, provolone").
