@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Noci macadamia, secche, crude — preparato 2026-10-14 dal task orario (quinto lotto)
+
+- **food_id**: `food_noci_macadamia_raw`. FDC ID 170178 (SR Legacy, "Nuts, macadamia nuts, raw").
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e gli altri carotenoidi provitaminici A (nessuno dei tre presente nel record SR Legacy), gap dichiarato non stimato. Acido folico 0µg esplicito, separato dal folato totale (11,0µg/100g) — nessuna firma di arricchimento. Confrontato anche il record Foundation Foods più recente (FDC 2515378, stessa descrizione): copre solo 11/17 (manca anche vitamina C, folato, B12 oltre ai tre già citati) — scartato a priori, il record SR Legacy resta la fonte migliore. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170178.
+- **Analogia usata**: `food_noci_raw` (noci/gherigli, già eseguito — stessa categoria concettuale "frutta a guscio secca cruda"; famiglia botanica reale **Proteaceae** (Macadamia integrifolia), diversa da Juglandaceae, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `noci_macadamia` ("Noci macadamia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione delle altre frutte a guscio nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non zero esplicito, gap dichiarato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Proteaceae`, `baseline_cooking_state=raw` (secche/non tostate).
+
+```
+npm run add-food -- --fdc-id=170178 --food-id=food_noci_macadamia_raw \
+  --name-it="Noci macadamia, secche, crude" \
+  --matrix-id=noci_macadamia --matrix-description-it="Noci macadamia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Proteaceae
+```
+```
+npm run add-food -- --fdc-id=170178 --food-id=food_noci_macadamia_raw \
+  --name-it="Noci macadamia, secche, crude" \
+  --matrix-id=noci_macadamia --matrix-description-it="Noci macadamia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Proteaceae --apply
+```
+
 ### Noci del Brasile, secche — preparato 2026-10-14 dal task orario (quinto lotto)
 
 - **food_id**: `food_noci_del_brasile_raw`. FDC ID 170569 (SR Legacy, "Nuts, brazilnuts, dried, unblanched").

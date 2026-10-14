@@ -824,7 +824,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Legumi: lupini, secchi, crudi (da ricercare); fagioli neri (black beans), secchi, crudi (da ricercare)
     - Verdura: funghi porcini, crudi (da ricercare); cardi, crudi (da ricercare)
     - Frutta fresca: mango, crudo (da ricercare); papaya, cruda (da ricercare); fichi d'India, crudi (da ricercare); litchi, crudo (da ricercare)
-    - Frutta secca: noci macadamia, secche (da ricercare); 🟡 noci del Brasile, secche (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 170569 "Nuts, brazilnuts, dried, unblanched" SR Legacy, 17/17, analogia `food_noci_raw`, botanical_family=Lecythidaceae, diet-category=plant_non_fruit)
+    - Frutta secca: 🟡 noci macadamia, secche (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 170178 "Nuts, macadamia nuts, raw" SR Legacy, 14/17, mancano vitamina K/beta-carotene/altri carotenoidi, gap dichiarato, analogia `food_noci_raw`, botanical_family=Proteaceae, diet-category=plant_non_fruit); 🟡 noci del Brasile, secche (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — FDC 170569 "Nuts, brazilnuts, dried, unblanched" SR Legacy, 17/17, analogia `food_noci_raw`, botanical_family=Lecythidaceae, diet-category=plant_non_fruit)
     - Pesce: aringa atlantica, cruda (da ricercare)
     - Latticini: latte di capra, intero, crudo (da ricercare); formaggio caprino, fresco (da ricercare)
     - Grassi: olio di arachidi (da ricercare); olio di sesamo (da ricercare); strutto (lardo di maiale) (da ricercare)
