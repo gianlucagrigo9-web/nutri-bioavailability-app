@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Strutto (lardo di maiale) — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_strutto`. FDC ID 171401 (SR Legacy, "Lard").
+- **Nutrienti**: **17/17**. Grasso 100g/100g, energia 902kcal/100g, quasi tutti i micronutrienti riportati come 0 esplicito (ferro, zinco 0,11mg, calcio, magnesio, rame, vitamina C, folato, B12, carotenoidi) — atteso per un grasso animale puro, coerente con la composizione nota dello strutto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171401 (SR Legacy, non il record Branded).
+- **Analogia usata**: `food_burro` (burro, già eseguito sul DB reale — stessa categoria concettuale "fonte di grasso quasi puro", stessa convenzione già usata per olio di semi di girasole/olio di semi di mais in questa coda, nessun grasso vegetale/animale puro diverso dal burro ancora eseguito).
+- **Categoria dieta**: `meat_fish` (grasso animale, derivato dal maiale: vegetariano NO, vegano NO — diversamente dal burro che è `egg_dairy`).
+- **Matrice**: nuova `strutto` ("Strutto").
+- **Attributi**: `is_heme_iron` omesso (false — ferro riportato 0 esplicito, grasso puro senza tessuto muscolare/sangue), `matrix_category_calcium` omesso (NULL), `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=rendered` (non "raw": lo strutto è grasso di maiale reso/fuso per cottura, non un tessuto crudo — deviazione dichiarata rispetto alla maggior parte delle voci di questa coda).
+
+```
+npm run add-food -- --fdc-id=171401 --food-id=food_strutto \
+  --name-it="Strutto (lardo di maiale)" \
+  --matrix-id=strutto --matrix-description-it="Strutto" \
+  --baseline-cooking-state=rendered --analogy-food-id=food_burro \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171401 --food-id=food_strutto \
+  --name-it="Strutto (lardo di maiale)" \
+  --matrix-id=strutto --matrix-description-it="Strutto" \
+  --baseline-cooking-state=rendered --analogy-food-id=food_burro \
+  --diet-category=meat_fish --apply
+```
+
 ### Aringa atlantica, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_aringa_raw`. FDC ID 175116 (SR Legacy, "Fish, herring, Atlantic, raw").
