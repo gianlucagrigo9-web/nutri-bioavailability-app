@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Lupini, secchi, crudi — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_lupini_raw`. FDC ID 172423 (SR Legacy, "Lupins, mature seeds, raw").
+- **Nutrienti**: **16/17** — manca solo vitamina K (non elencata fra i ~72 nutrienti del record, non riportata nemmeno come 0). Acido folico 0µg esplicito, separato dal folato totale (355µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172423.
+- **Analogia usata**: `food_chickpeas_raw` (ceci, crudi secchi, già presente nel Golden Set originale — stessa famiglia botanica **Fabaceae**, genere diverso: ceci Cicer, lupini Lupinus, analogia funzionale/di famiglia, non di genere).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `lupini` ("Lupini").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione degli altri legumi crudi già nel set), `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172423 --food-id=food_lupini_raw \
+  --name-it="Lupini, secchi, crudi" \
+  --matrix-id=lupini --matrix-description-it="Lupini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=172423 --food-id=food_lupini_raw \
+  --name-it="Lupini, secchi, crudi" \
+  --matrix-id=lupini --matrix-description-it="Lupini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Fagioli neri (black beans), secchi, crudi — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_fagioli_neri_raw`. FDC ID 175186 (SR Legacy, "Beans, black turtle, mature seeds, raw").
