@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Couscous, crudo (non cotto) — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_couscous_raw`. FDC ID 169699 (SR Legacy, "Couscous, dry").
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non trovati nel record, non assunti zero — atteso per un cereale raffinato senza carotenoidi significativi). Acido folico 0µg esplicito, separato dal folato alimentare (20µg/100g) — nessuna firma di arricchimento USA (a differenza di pane/pasta comuni già scartati in coda per questo stesso motivo).
+- **Analogia usata**: `food_riso_bianco_raw` (stessa famiglia botanica reale Poaceae — non solo funzionale: couscous è semola di grano duro, Triticum, Poaceae come il riso).
+- **Categoria dieta**: `plant_non_fruit` (cereale e derivati).
+- **Matrice**: nuova `couscous` ("Couscous").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=169699 --food-id=food_couscous_raw \
+  --name-it="Couscous, crudo (non cotto)" \
+  --matrix-id=couscous --matrix-description-it="Couscous" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169699 --food-id=food_couscous_raw \
+  --name-it="Couscous, crudo (non cotto)" \
+  --matrix-id=couscous --matrix-description-it="Couscous" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Pistacchi, secchi crudi — preparato 2026-10-14 dal task orario (secondo alimento lavorato dal terzo lotto)
 
 - **food_id**: `food_pistacchi_raw`. FDC ID 170184 (SR Legacy, "Nuts, pistachio nuts, raw").
