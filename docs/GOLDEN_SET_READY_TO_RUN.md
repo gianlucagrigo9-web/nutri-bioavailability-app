@@ -15,7 +15,32 @@
 
 ## Pronti
 
-*(Stato al 2026-10-14, ore 01: nessuna voce in attesa. I 28 alimenti singoli e il lotto da 18 sono stati eseguiti e stanno in "Eseguiti" in fondo. Le nuove voci del task orario si aggiungono in cima a questa sezione.)*
+*(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
+### Edamame (soia verde), sgranati, crudi e congelati (non cotti) — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_edamame_raw`. FDC ID 168410 (SR Legacy, "Edamame, frozen, unprepared").
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_b12_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non trovati nel record FDC, non assunti zero). Nessuna firma di arricchimento: acido folico 0µg riportato esplicitamente separato dal folato alimentare.
+- **Deviazione dichiarata dalla voce di coda** ("sgranati, bolliti"): la coda chiedeva edamame bollito. In FDC esistono solo due record SR Legacy per edamame: FDC 168411 "Edamame, frozen, prepared" (17/17 nutrienti, ma la descrizione NON specifica il metodo di preparazione — non dice "boiled"/"steamed", né se con o senza sale; il sodio basso, 6mg/100g, è un indizio indiretto ma non una conferma) e FDC 168410 "Edamame, frozen, unprepared" (crudo/congelato, stato non ambiguo, ma solo 13/17). Per non indovinare lo stato di cottura del record "prepared" (Regola 1), si è scelto il record "unprepared", esplicitamente crudo, accettando il gap di 4 nutrienti invece di un'assunzione non verificabile sulla cottura — stesso tipo di scelta già fatto per `food_farro_raw` (accettare un gap dichiarato piuttosto che forzare un dato incerto).
+- **Analogia usata**: `food_chickpeas_raw` (stessa famiglia botanica reale Fabaceae, legume crudo, già eseguito sul DB reale), con `is_fortified_folate=false`.
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `edamame` ("Edamame (soia verde)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in questo record, nessun valore da correggere con un fattore di ritenzione), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168410 --food-id=food_edamame_raw \
+  --name-it="Edamame (soia verde), sgranati, crudi e congelati (non cotti)" \
+  --matrix-id=edamame --matrix-description-it="Edamame (soia verde)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=168410 --food-id=food_edamame_raw \
+  --name-it="Edamame (soia verde), sgranati, crudi e congelati (non cotti)" \
+  --matrix-id=edamame --matrix-description-it="Edamame (soia verde)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
 
 ## Eseguiti (archivio, ultimi 10)
 
