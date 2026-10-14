@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Prugne secche, snocciolate — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_prugne_secche_raw`. FDC ID 168162 (SR Legacy, "Plums, dried (prunes), uncooked").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 4µg/100g), vitamina B12 0µg esplicito, beta-carotene 394µg/100g esplicito e non nullo (plausibile, concentrazione tipica della frutta disidratata) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_peach_yellow_raw` (pesca gialla, già eseguita — stesso genere botanico reale Prunus, famiglia Rosaceae, come l'albicocca secca già preparata in questa coda).
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/disidratata per il PRD (§4.9), NON `fresh_fruit`.
+- **Matrice**: nuova `prugne_secche` ("Prugne secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168162 --food-id=food_prugne_secche_raw \
+  --name-it="Prugne secche, snocciolate" \
+  --matrix-id=prugne_secche --matrix-description-it="Prugne secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=plant_non_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168162 --food-id=food_prugne_secche_raw \
+  --name-it="Prugne secche, snocciolate" \
+  --matrix-id=prugne_secche --matrix-description-it="Prugne secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=plant_non_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Albicocche secche, solforate — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_albicocche_secche_raw`. FDC ID 173941 (SR Legacy, "Apricots, dried, sulfured, uncooked").
