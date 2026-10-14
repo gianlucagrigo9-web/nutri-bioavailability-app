@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Amaranto, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_amaranto_raw`. FDC ID 170682 (SR Legacy, "Amaranth grain, uncooked").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (82µg/100g) — nessuna firma di arricchimento. Calcio 159mg/100g, alto per un seme ma è una caratteristica naturale nota dell'amaranto (pseudocereale, non un vero cereale), non accompagnata da altri segnali di arricchimento (vitamina D assente, nessun'altra anomalia) — diverso quindi dai casi scartati altrove in questa coda (es. bevande vegetali) dove il calcio alto era accompagnato da vitamina D/B12 inattese. Beta-carotene 1µg/100g esplicito (basso ma non nullo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito — analogia solo funzionale "cereale/pseudocereale crudo non cotto", stesso tipo di analogia funzionale senza parentela botanica già usata per cacao/olio di cocco in questa coda). Famiglia botanica reale dell'amaranto, **Amaranthaceae** (Amaranthus spp.), dichiarata separatamente, diversa da quella dell'orzo (Poaceae).
+- **Categoria dieta**: `plant_non_fruit` (pseudocereale).
+- **Matrice**: nuova `amaranto` ("Amaranto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per questo tipo di alimento nel modello Heaney&Weaver usato dal motore, nonostante il calcio non trascurabile), `carotenoid_matrix_state=raw_intact` (beta-carotene 1µg/100g, basso ma esplicito e non nullo, stessa convenzione già usata per segale/semi di sesamo/zucca in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170682 --food-id=food_amaranto_raw \
+  --name-it="Amaranto, crudo" \
+  --matrix-id=amaranto --matrix-description-it="Amaranto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170682 --food-id=food_amaranto_raw \
+  --name-it="Amaranto, crudo" \
+  --matrix-id=amaranto --matrix-description-it="Amaranto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaranthaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Segale, integrale, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_segale_raw`. FDC ID 168884 (SR Legacy, "Rye grain").
