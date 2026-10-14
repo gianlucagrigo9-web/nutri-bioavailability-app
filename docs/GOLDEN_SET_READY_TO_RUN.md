@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Formaggio caprino, fresco — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
+
+- **food_id**: `food_caprino_fresco`. FDC ID 173435 (SR Legacy, "Cheese, goat, soft type").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (12,0µg/100g) — nessuna firma di arricchimento. Calcio 140mg/100g e sodio 459mg/100g coerenti con un formaggio caprino fresco/morbido (inferiore a formaggi vaccini stagionati come il parmigiano, atteso per un prodotto fresco non lungamente salato). La descrizione del record nomina esplicitamente "goat" (caprino): nessuna ambiguità sul tipo di latte, a differenza del caso già scartato ⚠ per il pecorino romano in questa coda (dove "Romano" è uno standard USA che ammette anche latte vaccino). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173435 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, già eseguito — stessa convenzione già usata per `food_feta`/`food_mozzarella`/`food_ricotta`/`food_parmigiano_reggiano`: stessa categoria "latticino", `matrix_category_calcium=medium_oxalate`, `botanical_family` NULL, `is_heme_iron=false`; preferita a `food_parmigiano_reggiano` perché il caprino "soft type" è un formaggio fresco, non stagionato — stessa logica già usata per preferire `food_milk_whole` su `food_parmigiano_reggiano` per la feta).
+- **Categoria dieta**: `egg_dairy` (latticino: vegetariano SÌ, vegano NO, fruttariano NO).
+- **Matrice**: nuova `caprino_fresco` ("Formaggio caprino fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (stessa convenzione di tutti i latticini/formaggi già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 54µg/100g non nullo, ma stesso trattamento già usato per tutti i formaggi: la distinzione raw_intact/cooked_or_disrupted non si applica a un prodotto fermentato animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=fresh` (stessa convenzione di feta/mozzarella/ricotta: formaggio pronto al consumo, non cotto).
+
+```
+npm run add-food -- --fdc-id=173435 --food-id=food_caprino_fresco \
+  --name-it="Formaggio caprino, fresco" \
+  --matrix-id=caprino_fresco --matrix-description-it="Formaggio caprino fresco" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173435 --food-id=food_caprino_fresco \
+  --name-it="Formaggio caprino, fresco" \
+  --matrix-id=caprino_fresco --matrix-description-it="Formaggio caprino fresco" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Fichi d'India, crudi — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
 
 - **food_id**: `food_fichi_dindia_raw`. FDC ID 167750 (SR Legacy, "Prickly pears, raw").
