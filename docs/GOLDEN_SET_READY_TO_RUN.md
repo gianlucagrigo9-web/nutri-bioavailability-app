@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di zucca, secchi — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_semi_di_zucca_raw`. FDC ID 170556 (SR Legacy, "Seeds, pumpkin and squash seed kernels, dried").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 58µg/100g interamente naturale) — nessuna firma di arricchimento.
+- **Analogia usata**: `food_pumpkin_raw` (zucca, già eseguito — stessa famiglia botanica reale Cucurbitaceae, Cucurbita pepo/Cucurbita spp., gli stessi semi del frutto della zucca).
+- **Categoria dieta**: `plant_non_fruit` (semi).
+- **Matrice**: nuova `semi_di_zucca` ("Semi di zucca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 9µg/100g, basso ma esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170556 --food-id=food_semi_di_zucca_raw \
+  --name-it="Semi di zucca, secchi" \
+  --matrix-id=semi_di_zucca --matrix-description-it="Semi di zucca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pumpkin_raw \
+  --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170556 --food-id=food_semi_di_zucca_raw \
+  --name-it="Semi di zucca, secchi" \
+  --matrix-id=semi_di_zucca --matrix-description-it="Semi di zucca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pumpkin_raw \
+  --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Arachidi, crude non salate — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_arachidi_raw`. FDC ID 172430 (SR Legacy, "Peanuts, all types, raw").
