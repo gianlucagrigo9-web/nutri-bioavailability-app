@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Olio di semi di girasole — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_olio_di_girasole_raw`. FDC ID 171025 (SR Legacy, "Oil, sunflower, linoleic, (approx. 65%)").
+- **Nutrienti**: **17/17** (18 voci nella pagina, contando separatamente alfa-carotene e beta-criptoxantina). Quasi tutti i valori sono zero esplicito (proteine, carboidrati, calcio, ferro, zinco, magnesio, rame, selenio, vitamina C, folato, acido folico, B12, beta-carotene, altri carotenoidi) — coerente con un olio puro (quasi 100% grassi), non un segnale di dato mancante: ogni voce compare con un valore numerico nella pagina, non è un'assenza. Vitamina K 5,40µg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Deviazione dichiarata sull'analogia**: nessun olio vegetale è ancora stato eseguito sul DB reale (l'olio extravergine d'oliva resta ⚠, mai eseguito). L'analogia è quindi solo funzionale, non botanica: `food_burro` (burro, già eseguito — stessa categoria concettuale "fonte di grasso quasi puro", stessa logica già usata altrove in questa coda per analogie solo funzionali senza parentela biologica, es. coniglio/manzo, agnello/manzo). Gli attributi categorici effettivi (is_heme_iron, matrix_category_calcium, carotenoid_matrix_state) sono comunque tutti determinati direttamente dai valori espliciti del record (tutti nulli/zero), non dedotti dall'analogia.
+- **Categoria dieta**: `plant_non_fruit` (oli vegetali, come da definizione esplicita nel PRD §9 punto 2d).
+- **Matrice**: nuova `olio_di_girasole` ("Olio di semi di girasole").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 0 esplicito), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (Helianthus annuus), `baseline_cooking_state=raw` (olio non riscaldato dopo l'estrazione; il record non specifica se raffinato o spremuto a freddo, ma nessuno dei 17 nutrienti tracciati da questo progetto ne sarebbe influenzato).
+
+```
+npm run add-food -- --fdc-id=171025 --food-id=food_olio_di_girasole_raw \
+  --name-it="Olio di semi di girasole" \
+  --matrix-id=olio_di_girasole --matrix-description-it="Olio di semi di girasole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=171025 --food-id=food_olio_di_girasole_raw \
+  --name-it="Olio di semi di girasole" \
+  --matrix-id=olio_di_girasole --matrix-description-it="Olio di semi di girasole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Gorgonzola — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_gorgonzola`. FDC ID 172175 (SR Legacy, "Cheese, blue").
