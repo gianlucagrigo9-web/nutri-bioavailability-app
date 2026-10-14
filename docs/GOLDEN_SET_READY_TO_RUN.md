@@ -221,6 +221,32 @@ npm run add-food -- --fdc-id=169908 --food-id=food_nespole_raw \
   --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
 ```
 
+### Lime, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_lime_raw`. FDC ID 168155 (SR Legacy, "Limes, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 8µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_lemon_peeled_raw` (stessa famiglia botanica reale Rutaceae, agrume, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `lime` ("Lime").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 30µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168155 --food-id=food_lime_raw \
+  --name-it="Lime, crudo" \
+  --matrix-id=lime --matrix-description-it="Lime" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lemon_peeled_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168155 --food-id=food_lime_raw \
+  --name-it="Lime, crudo" \
+  --matrix-id=lime --matrix-description-it="Lime" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lemon_peeled_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
