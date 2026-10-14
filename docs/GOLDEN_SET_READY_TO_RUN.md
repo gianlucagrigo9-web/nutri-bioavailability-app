@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Feta — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_feta`. FDC ID 173420 (SR Legacy, "Cheese, feta").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (32µg/100g) — nessuna firma di arricchimento. Calcio 493mg/100g e sodio 1139mg/100g sono alti ma coerenti con un formaggio stagionato in salamoia (atteso per la feta, non un segnale di anomalia o arricchimento).
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, già eseguito — stessa convenzione già usata per `food_mozzarella`/`food_ricotta`/`food_parmigiano_reggiano`: stessa categoria "latticino", `matrix_category_calcium=medium_oxalate`, `botanical_family` NULL, `is_heme_iron=false`).
+- **Categoria dieta**: `egg_dairy` (latticino: vegetariano SÌ, vegano NO, fruttariano NO).
+- **Matrice**: nuova `feta` ("Feta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (stessa convenzione di tutti i latticini/formaggi già nel Golden Set), `carotenoid_matrix_state` omesso (NULL — beta-carotene 3µg/100g, basso, stesso trattamento già usato per gli altri formaggi che non hanno questo campo valorizzato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=fresh` (stessa convenzione di mozzarella/ricotta: formaggio pronto al consumo, non un prodotto cotto).
+
+```
+npm run add-food -- --fdc-id=173420 --food-id=food_feta \
+  --name-it="Feta" \
+  --matrix-id=feta --matrix-description-it="Feta" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173420 --food-id=food_feta \
+  --name-it="Feta" \
+  --matrix-id=feta --matrix-description-it="Feta" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Branzino, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_branzino_raw`. FDC ID 175142 (SR Legacy, "Fish, sea bass, mixed species, raw").
