@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Litchi, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_litchi_raw`. FDC ID 169086 (SR Legacy, "Litchis, raw").
+- **Nutrienti**: **17/17**. Acido folico, B12 e i tre carotenoidi (beta-carotene, alfa-carotene, beta-criptoxantina) riportati come 0 esplicito, non assenti — coerente con un frutto privo di pigmentazione arancione/gialla (polpa bianca). Nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169086.
+- **Analogia usata**: `food_grapes_european_raw` (uva europea, già eseguita sul DB reale — stessa categoria funzionale "frutta fresca cruda a polpa, con carotenoidi trascurabili/nulli", famiglia botanica reale diversa dichiarata separatamente: litchi Sapindaceae, uva Vitaceae).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva del PRD §9 punto 2d).
+- **Matrice**: nuova `litchi` ("Litchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo intero non processato, anche se il valore di carotenoidi è nullo — stessa convenzione dichiarativa usata per le altre frutte fresche crude del set), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapindaceae` (Litchi chinensis), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169086 --food-id=food_litchi_raw \
+  --name-it="Litchi, crudo" \
+  --matrix-id=litchi --matrix-description-it="Litchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Sapindaceae
+```
+```
+npm run add-food -- --fdc-id=169086 --food-id=food_litchi_raw \
+  --name-it="Litchi, crudo" \
+  --matrix-id=litchi --matrix-description-it="Litchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Sapindaceae --apply
+```
+
 ### Papaya, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_papaya_raw`. FDC ID 169926 (SR Legacy, "Papayas, raw").
