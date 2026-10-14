@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Tofu, al naturale (con solfato di calcio) — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_tofu_raw`. FDC ID 172475 (SR Legacy, "Tofu, raw, firm, prepared with calcium sulfate").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non trovati nel record, non assunti zero). Acido folico 0µg esplicito, folato alimentare 29µg/100g naturale, vitamina B12 0µg — nessuna firma di arricchimento tipo pane/pasta.
+- **Nota sul calcio**: 683mg/100g, molto più alto di un legume crudo tipico — **non è un segnale di arricchimento stile USA**: deriva dal solfato di calcio usato come coagulante nella produzione del tofu "firm", un ingrediente reale e atteso per questo tipo di prodotto (non un additivo nascosto). Il contenuto di calcio del tofu varia molto in pratica a seconda del coagulante (nigari/cloruro di magnesio darebbe un calcio molto più basso) — questo record rappresenta la variante con solfato di calcio, non "il" tofu in assoluto; dichiarato qui per trasparenza, non verificabile quale coagulante sia più comune nel tofu italiano venduto al dettaglio.
+- **Analogia usata**: `food_chickpeas_raw` (stessa famiglia botanica reale Fabaceae — il tofu è un derivato della soia).
+- **Categoria dieta**: `plant_non_fruit` (derivato della soia, legume).
+- **Matrice**: nuova `tofu` ("Tofu").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati/coagulante dichiarata nel progetto per il tofu, stesso trattamento dei legumi), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw` (FDC lo descrive esplicitamente "raw"), `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=172475 --food-id=food_tofu_raw \
+  --name-it="Tofu, al naturale (con solfato di calcio)" \
+  --matrix-id=tofu --matrix-description-it="Tofu" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=172475 --food-id=food_tofu_raw \
+  --name-it="Tofu, al naturale (con solfato di calcio)" \
+  --matrix-id=tofu --matrix-description-it="Tofu" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Semi di soia, secchi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_soia_secca_raw`. FDC ID 174270 (SR Legacy, "Soybeans, mature seeds, raw").
