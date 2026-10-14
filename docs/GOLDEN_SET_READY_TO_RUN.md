@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Segale, integrale, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_segale_raw`. FDC ID 168884 (SR Legacy, "Rye grain").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (38µg/100g) — nessuna firma di arricchimento. Calcio 24mg/100g, nella norma per un cereale. Beta-carotene 7µg/100g esplicito (basso ma non nullo), alfa-carotene e beta-criptoxantina entrambi 0 esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato, già eseguito — stessa categoria funzionale "cereale crudo non cotto", stessa famiglia botanica reale **Poaceae**, Secale cereale come l'orzo appartiene alle graminacee).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `segale` ("Segale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna categoria ossalati stabilita per i cereali in questo progetto), `carotenoid_matrix_state=raw_intact` (beta-carotene 7µg/100g, basso ma esplicito e non nullo, stessa convenzione già usata per semi di sesamo/zucca in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=168884 --food-id=food_segale_raw \
+  --name-it="Segale, integrale, cruda" \
+  --matrix-id=segale --matrix-description-it="Segale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=168884 --food-id=food_segale_raw \
+  --name-it="Segale, integrale, cruda" \
+  --matrix-id=segale --matrix-description-it="Segale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Miglio, decorticato, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_miglio_raw`. FDC ID 169702 (SR Legacy, "Millet, raw").
