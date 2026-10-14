@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Fegato di pollo, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_fegato_di_pollo_raw`. FDC ID 171060 (SR Legacy, "Chicken, liver, all classes, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (588µg/100g, molto alto ma atteso per il fegato — stesso ordine di grandezza del fegato di manzo già nel Golden Set) — nessuna firma di arricchimento. Vitamina E aggiunta e B12 aggiunta entrambe 0. Beta-carotene 56µg/100g, alfa-carotene 11µg/100g, beta-criptoxantina 11µg/100g — valori non nulli ma plausibili per un organo di deposito di vitamina A (coerente con la vitamina A RAE molto alta, 3.296µg/100g).
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo, già presente nei 30 alimenti originali del Golden Set — stesso organo, stessa categoria funzionale "fegato", solo specie animale diversa: l'analogia più diretta possibile in questa coda).
+- **Categoria dieta**: `meat_fish` (frattaglia/carne: vegetariano NO, vegano NO, fruttariano NO).
+- **Matrice**: nuova `fegato_di_pollo` ("Fegato di pollo").
+- **Attributi**: `is_heme_iron=true` (fegato, ferro eme, stessa convenzione di `food_beef_liver_raw`), `matrix_category_calcium` omesso (NULL, non applicabile — stesso trattamento del fegato di manzo), `carotenoid_matrix_state` omesso (NULL — stesso trattamento del fegato di manzo, nessun fattore di cottura carotenoidi applicabile a un organo animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171060 --food-id=food_fegato_di_pollo_raw \
+  --name-it="Fegato di pollo, crudo" \
+  --matrix-id=fegato_di_pollo --matrix-description-it="Fegato di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=171060 --food-id=food_fegato_di_pollo_raw \
+  --name-it="Fegato di pollo, crudo" \
+  --matrix-id=fegato_di_pollo --matrix-description-it="Fegato di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Castagne, crude, sbucciate — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_castagne_raw`. FDC ID 170575 (SR Legacy, "Nuts, chestnuts, european, raw, peeled").

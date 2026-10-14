@@ -812,7 +812,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Verdura: cavolo cappuccio bianco, crudo; bietole da costa, crude; cime di rapa, crude; scalogno, crudo; ravanelli, crudi; indivia belga, cruda; scarola, cruda; rapa, cruda; peperoncino piccante, crudo; lattuga iceberg, cruda
     - Frutta fresca: pompelmo rosa, crudo; nespole, crude; uva bianca (tipo italiano), cruda; lime, crudo
     - Frutta secca, semi e frutta disidratata: 🟡 castagne, crude, sbucciate (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14 — 13/17 nutrienti, gap dichiarato); noci pecan, secche; semi di canapa, decorticati; datteri (Medjool), freschi (attenzione id, vedi nota ID riservati: usare `food_datteri_medjool_raw`, non `food_dates_raw`); uva passa (sultanina); albicocche secche; prugne secche, snocciolate; fichi secchi
-    - Carne/frattaglie: fegato di pollo, crudo
+    - Carne/frattaglie: 🟡 fegato di pollo, crudo (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-14)
     - Pesce: seppia, cruda; pesce spada, crudo; sogliola, cruda
     - Latticini/formaggi: provolone
     - Grassi: olio di semi di mais
