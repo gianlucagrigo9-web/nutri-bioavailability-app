@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Anatra, carne senza pelle, cruda — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_anatra_raw`. FDC ID 172410 (SR Legacy, "Duck, domesticated, meat only, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (25µg/100g) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti.
+- **Deviazione dichiarata dalla voce di coda** ("anatra (petto), cruda"): nessun record SR Legacy/Foundation trovato per "anatra, domestica, petto, carne senza pelle, CRUDA" con copertura nutrienti sufficiente — l'unico record "breast" trovato per anatra domestica è cotto ("broiled"), e l'unico "breast" crudo disponibile è di anatra SELVATICA ("Duck, wild, breast, meat only, raw" FDC 174469), specie/allevamento diverso da quella domestica normalmente in commercio. Usato invece il record generico "Duck, domesticated, meat only, raw" (carne senza pelle, non specifico per taglio) — il petto è il taglio più magro e più comune della stessa carne, composizione simile ma non identica; nome alimento corretto in "Anatra, carne senza pelle, cruda" per non spacciarlo per il petto specifico.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo crudo, già eseguito — stessa categoria funzionale "carne di volatile, senza pelle, cruda, ferro eme", più vicina taxonomicamente di un mammifero: entrambi uccelli).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `anatra` ("Anatra").
+- **Attributi**: `is_heme_iron=true` (carne/pollame contiene ferro eme, stessa convenzione di salmone/pollo/manzo nel Golden Set), `matrix_category_calcium` omesso (NULL, non applicabile a una carne), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172410 --food-id=food_anatra_raw \
+  --name-it="Anatra, carne senza pelle, cruda" \
+  --matrix-id=anatra --matrix-description-it="Anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --diet-category=meat_fish --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=172410 --food-id=food_anatra_raw \
+  --name-it="Anatra, carne senza pelle, cruda" \
+  --matrix-id=anatra --matrix-description-it="Anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --diet-category=meat_fish --is-heme-iron --apply
+```
+
 ### Coniglio, crudo — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_coniglio_raw`. FDC ID 172521 (SR Legacy, "Game meat, rabbit, domesticated, composite of cuts, raw" — verificato apertura diretta del record su `fdc.nal.usda.gov/portal-data/external/172521`, non solo aggregatore).
