@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Cardi, crudi — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
+
+- **food_id**: `food_cardi_raw`. FDC ID 169981 (SR Legacy, "Cardoon, raw").
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e gli altri carotenoidi provitaminici A (alfa-carotene/beta-criptoxantina): nessuno dei tre è riportato nel record (non un'assenza/zero, il campo semplicemente non appare fra i 42 nutrienti di questa pagina), gap dichiarato non stimato. Acido folico 0µg esplicito, separato dal folato totale (68,0µg/100g, tutto folato alimentare) — nessuna firma di arricchimento in stile USA. Calcio 70,0mg/100g e ferro 0,70mg/100g nella norma per un gambo/costa di verdura, nessun segnale anomalo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169981 e dataType SR Legacy.
+- **Analogia usata**: `food_lettuce_romaine_raw` (lattuga romana, già eseguita sul DB reale — stessa famiglia botanica reale **Asteraceae**: il cardo, *Cynara cardunculus*, è lo stesso genere del carciofo ma quest'ultimo è solo "pronto", non ancora eseguito, quindi non utilizzabile come analogia per regola del task; nessun'altra pianta Asteraceae è ancora presente nel Golden Set eseguito).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cardi` ("Cardi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento di carote/broccoli/patate: le categorie ossalati esistono solo per spinaci/kale/latte), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato in questo record, nessun valore a cui applicare lo stato della matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (*Cynara cardunculus*), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169981 --food-id=food_cardi_raw \
+  --name-it="Cardi, crudi" \
+  --matrix-id=cardi --matrix-description-it="Cardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=169981 --food-id=food_cardi_raw \
+  --name-it="Cardi, crudi" \
+  --matrix-id=cardi --matrix-description-it="Cardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Farina di frumento integrale, non arricchita, cruda — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_farina_di_frumento_integrale_raw`. FDC ID 168893 (SR Legacy, "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)").
