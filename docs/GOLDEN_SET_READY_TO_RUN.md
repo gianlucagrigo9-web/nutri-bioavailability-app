@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Scalogno, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_scalogno_raw`. FDC ID 170499 (SR Legacy, "Shallots, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 34µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_onion_raw` (stessa famiglia botanica reale Amaryllidaceae, bulbo allium, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `scalogno` ("Scalogno").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 3µg/100g, basso ma esplicito e non nullo, stessa convenzione già usata per cipolla/porri in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170499 --food-id=food_scalogno_raw \
+  --name-it="Scalogno, crudo" \
+  --matrix-id=scalogno --matrix-description-it="Scalogno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=170499 --food-id=food_scalogno_raw \
+  --name-it="Scalogno, crudo" \
+  --matrix-id=scalogno --matrix-description-it="Scalogno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
