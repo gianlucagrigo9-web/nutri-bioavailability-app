@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Fagiolini, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_fagiolini_raw`. FDC ID 169961 (SR Legacy, "Beans, snap, green, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_chickpeas_raw` (stessa famiglia botanica reale Fabaceae, già eseguito).
+- **Categoria dieta**: `plant_non_fruit` (legume/verdura).
+- **Matrice**: nuova `fagiolini` ("Fagiolini").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 379µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169961 --food-id=food_fagiolini_raw \
+  --name-it="Fagiolini, crudi" \
+  --matrix-id=fagiolini --matrix-description-it="Fagiolini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=169961 --food-id=food_fagiolini_raw \
+  --name-it="Fagiolini, crudi" \
+  --matrix-id=fagiolini --matrix-description-it="Fagiolini" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cetrioli, crudi (con buccia) — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cetrioli_raw`. FDC ID 168409 (SR Legacy, "Cucumber, with peel, raw").
