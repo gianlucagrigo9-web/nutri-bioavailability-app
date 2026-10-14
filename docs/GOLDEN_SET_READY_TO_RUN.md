@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di chia, secchi, crudi — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_semi_di_chia_raw`. FDC ID 170554 (SR Legacy, "Seeds, chia seeds, dried").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero — stesso tipo di gap già accettato per `food_semi_di_canapa_raw`/`food_avena_cruda`). Acido folico non riportato nella pagina consultata (ma il folato totale, 49,0µg/100g, è etichettato "Folate, food" cioè alimentare, non un valore composito con acido folico separato — nessun segnale di arricchimento, e un seme secco semplice non è comunque un prodotto soggetto a fortificazione in stile USA). Calcio 631mg/100g è molto alto ma è un valore noto e reale per il seme di chia (uno dei semi più ricchi di calcio in assoluto), non un segnale di anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170554 e dataType SR Legacy.
+- **Analogia usata**: `food_almonds` (mandorle, già nel Golden Set originale — stessa categoria "semi/frutta a guscio", stessa convenzione già usata per semi di lino/sesamo/canapa in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (semi).
+- **Matrice**: nuova `semi_di_chia` ("Semi di chia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento degli altri semi/frutta a guscio in questa coda), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, stessa convenzione già usata per semi di lino/cardi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Salvia hispanica*), `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170554 --food-id=food_semi_di_chia_raw \
+  --name-it="Semi di chia, secchi, crudi" \
+  --matrix-id=semi_di_chia --matrix-description-it="Semi di chia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=170554 --food-id=food_semi_di_chia_raw \
+  --name-it="Semi di chia, secchi, crudi" \
+  --matrix-id=semi_di_chia --matrix-description-it="Semi di chia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae --apply
+```
+
 ### Ananas, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
 
 - **food_id**: `food_ananas_raw`. FDC ID 169124 (SR Legacy, "Pineapple, raw, all varieties").
