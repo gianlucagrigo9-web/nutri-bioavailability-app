@@ -17,6 +17,32 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Semi di soia, secchi, crudi — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_soia_secca_raw`. FDC ID 174270 (SR Legacy, "Soybeans, mature seeds, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato alimentare 375µg/100g interamente naturale), vitamina B12 0µg, alfa-carotene e beta-criptoxantina 0µg — tutti valori espliciti, nessuna firma di arricchimento USA.
+- **Analogia usata**: `food_chickpeas_raw` (stessa famiglia botanica reale Fabaceae, legume secco crudo, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `soia_secca` ("Semi di soia secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento di ceci/lenticchie/fagioli, la categoria ossalati è dichiarata solo per spinaci/kale/latte), `carotenoid_matrix_state=raw_intact` (beta-carotene 13µg/100g, basso ma non nullo e esplicitamente riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174270 --food-id=food_soia_secca_raw \
+  --name-it="Semi di soia, secchi, crudi" \
+  --matrix-id=soia_secca --matrix-description-it="Semi di soia secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=174270 --food-id=food_soia_secca_raw \
+  --name-it="Semi di soia, secchi, crudi" \
+  --matrix-id=soia_secca --matrix-description-it="Semi di soia secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Quinoa, secca, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_quinoa_dry_raw` (NON `food_quinoa_raw`: quell'id esiste già nel DB come riga demo legacy del primo seed — vedi nota ID riservati in questo file/PRD).
