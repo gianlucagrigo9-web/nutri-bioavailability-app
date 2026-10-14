@@ -171,6 +171,32 @@ npm run add-food -- --fdc-id=170106 --food-id=food_peperoncino_piccante_raw \
   --carotenoid-matrix-state=raw_intact --apply
 ```
 
+### Pompelmo rosa, crudo — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_pompelmo_rosa_raw`. FDC ID 174673 (SR Legacy, "Grapefruit, raw, pink and red, all areas").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 13µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_oranges_raw` (stessa famiglia botanica reale Rutaceae, agrume, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `pompelmo` ("Pompelmo rosa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 686µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=174673 --food-id=food_pompelmo_rosa_raw \
+  --name-it="Pompelmo rosa, crudo" \
+  --matrix-id=pompelmo --matrix-description-it="Pompelmo rosa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=174673 --food-id=food_pompelmo_rosa_raw \
+  --name-it="Pompelmo rosa, crudo" \
+  --matrix-id=pompelmo --matrix-description-it="Pompelmo rosa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
