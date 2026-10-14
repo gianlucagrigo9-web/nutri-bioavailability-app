@@ -17,6 +17,33 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Albicocche secche, solforate — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_albicocche_secche_raw`. FDC ID 173941 (SR Legacy, "Apricots, dried, sulfured, uncooked").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito (folato totale 10µg/100g), vitamina B12 0µg esplicito, beta-carotene 2163µg/100g esplicito (alto ma plausibile, concentrazione tipica delle albicocche disidratate) — nessuna firma di arricchimento.
+- **Nota sulla solforazione**: il record è "sulfured" (anidride solforosa come conservante/antiossidante) — pratica standard anche per le albicocche secche italiane/commerciali (spesso etichettate "solforate"), non equivalente al tipo di arricchimento USA (acido folico/calcio anomali) già scartato altrove in questa coda; non cambia la decisione.
+- **Analogia usata**: `food_peach_yellow_raw` (pesca gialla, già eseguita — stesso genere botanico reale Prunus, famiglia Rosaceae, più vicina dell'albicocca di quanto lo sia qualunque frutta a guscio).
+- **Categoria dieta**: `plant_non_fruit` — frutta secca/disidratata per il PRD (§4.9), NON `fresh_fruit`.
+- **Matrice**: nuova `albicocche_secche` ("Albicocche secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=173941 --food-id=food_albicocche_secche_raw \
+  --name-it="Albicocche secche, solforate" \
+  --matrix-id=albicocche_secche --matrix-description-it="Albicocche secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=plant_non_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=173941 --food-id=food_albicocche_secche_raw \
+  --name-it="Albicocche secche, solforate" \
+  --matrix-id=albicocche_secche --matrix-description-it="Albicocche secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=plant_non_fruit --botanical-family=Rosaceae \
+  --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Uva passa (sultanina), disidratata — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_uva_passa_raw`. FDC ID 168165 (SR Legacy, "Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program)").
