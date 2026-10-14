@@ -17,6 +17,30 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Olio di cocco — preparato 2026-10-14 dal task orario (terzo lotto)
+
+- **food_id**: `food_olio_di_cocco_raw`. FDC ID 171412 (SR Legacy, "Oil, coconut").
+- **Nutrienti**: **17/17** (18 voci, vedi nota olio di girasole). Quasi tutti i valori sono zero esplicito (coerente con un olio puro). Vitamina K 0,60µg/100g, calcio 1,00mg/100g, ferro 0,050mg/100g, zinco 0,020mg/100g (tracce, non arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType. Il record non specifica se raffinato o vergine — nessuno dei 17 nutrienti tracciati da questo progetto ne sarebbe influenzato.
+- **Deviazione dichiarata sull'analogia**: stessa situazione dell'olio di semi di girasole (nessun olio vegetale ancora eseguito sul DB reale). Analogia solo funzionale: `food_burro` (burro, già eseguito — stessa categoria concettuale "fonte di grasso quasi puro").
+- **Categoria dieta**: `plant_non_fruit` (oli vegetali).
+- **Matrice**: nuova `olio_di_cocco` ("Olio di cocco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 1mg/100g, traccia), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (Cocos nucifera), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171412 --food-id=food_olio_di_cocco_raw \
+  --name-it="Olio di cocco" \
+  --matrix-id=olio_di_cocco --matrix-description-it="Olio di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae
+```
+```
+npm run add-food -- --fdc-id=171412 --food-id=food_olio_di_cocco_raw \
+  --name-it="Olio di cocco" \
+  --matrix-id=olio_di_cocco --matrix-description-it="Olio di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae --apply
+```
+
 ### Olio di semi di girasole — preparato 2026-10-14 dal task orario (terzo lotto)
 
 - **food_id**: `food_olio_di_girasole_raw`. FDC ID 171025 (SR Legacy, "Oil, sunflower, linoleic, (approx. 65%)").
