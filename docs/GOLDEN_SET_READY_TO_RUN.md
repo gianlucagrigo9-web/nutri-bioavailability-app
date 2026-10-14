@@ -17,6 +17,31 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Rucola (baby), cruda — preparato 2026-10-14 dal task orario
+
+- **food_id**: `food_rucola_raw`. FDC ID 2710822 (Foundation Foods, "Arugula, baby, raw").
+- **Nutrienti**: **12/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `vitamin_b12_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non trovati nel record, non assunti zero).
+- **Nota sulla varietà**: unico record FDC trovato per la rucola è la varietà "baby" (Foundation Foods). Una ricerca mirata per un record "Arugula, raw" generico/SR Legacy non ha dato risultati — non è detto che la composizione della rucola "baby" differisca significativamente da quella matura, ma è una differenza dichiarata, non verificata.
+- **Analogia usata**: `food_kale_raw` (stessa famiglia botanica reale Brassicaceae — la rucola, Eruca vesicaria, appartiene alla famiglia dei cavoli nonostante il nome comune suggerisca altro).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `rucola` ("Rucola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in questo record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=2710822 --food-id=food_rucola_raw \
+  --name-it="Rucola, cruda" \
+  --matrix-id=rucola --matrix-description-it="Rucola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae
+```
+```
+npm run add-food -- --fdc-id=2710822 --food-id=food_rucola_raw \
+  --name-it="Rucola, cruda" \
+  --matrix-id=rucola --matrix-description-it="Rucola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
+```
+
 ### Verza (cavolo verza/savoy), cruda — preparato 2026-10-14 dal task orario
 
 - **food_id**: `food_verza_raw`. FDC ID 170388 (SR Legacy, "Cabbage, savoy, raw").
