@@ -17,6 +17,130 @@
 
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Ananas, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_ananas_raw`. FDC ID 169124 (SR Legacy, "Pineapple, raw, all varieties").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (18,0µg/100g) — nessuna firma di arricchimento. Calcio 13,0mg/100g e vitamina C 47,8mg/100g coerenti con un frutto fresco, nessun segnale anomalo. Esistono anche "Pineapple, raw, traditional varieties" (FDC 168193) e "Pineapple, raw, extra sweet variety" (FDC 168194): scartati, "all varieties" è il record generico più rappresentativo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169124 e dataType SR Legacy.
+- **Analogia usata**: `food_oranges_raw` (per funzione del campo beta-carotene, non parentela botanica — stessa convenzione già usata per gli altri frutti freschi in questa coda), `carotenoid_matrix_state=raw_intact` (beta-carotene 35,0µg/100g esplicito).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco vero).
+- **Matrice**: nuova `ananas` ("Ananas").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Bromeliaceae` (*Ananas comosus*), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169124 --food-id=food_ananas_raw \
+  --name-it="Ananas, crudo" \
+  --matrix-id=ananas --matrix-description-it="Ananas" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Bromeliaceae
+```
+```
+npm run add-food -- --fdc-id=169124 --food-id=food_ananas_raw \
+  --name-it="Ananas, crudo" \
+  --matrix-id=ananas --matrix-description-it="Ananas" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Bromeliaceae --apply
+```
+
+### Pinoli, secchi — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_pinoli_raw`. FDC ID 170591 (SR Legacy, "Nuts, pine nuts, dried").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (34,0µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170591 e dataType SR Legacy. Esiste anche un record Foundation Foods "raw" (FDC 2346392) non usato qui: il record SR Legacy "dried" è lo stesso tipo di stato già accettato per le altre voci "secche" di questa coda (nocciole/noci/mandorle sono tutte vendute e consumate disidratate).
+- **Analogia usata**: `food_noci_raw` (noci, già eseguite — stessa categoria "frutta a guscio", stessa convenzione già usata per noci macadamia/noci del Brasile in questa coda), botanical_family reale diversa (**Pinaceae**, *Pinus pinea*, non un vero "guscio" botanico ma stessa categoria alimentare).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/semi).
+- **Matrice**: nuova `pinoli` ("Pinoli").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stesso trattamento già usato per le altre voci di frutta secca in questa coda, nonostante il beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Pinaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=170591 --food-id=food_pinoli_raw \
+  --name-it="Pinoli, secchi" \
+  --matrix-id=pinoli --matrix-description-it="Pinoli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Pinaceae
+```
+```
+npm run add-food -- --fdc-id=170591 --food-id=food_pinoli_raw \
+  --name-it="Pinoli, secchi" \
+  --matrix-id=pinoli --matrix-description-it="Pinoli" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Pinaceae --apply
+```
+
+### Fegato di vitello, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_fegato_di_vitello_raw`. FDC ID 172534 (SR Legacy, "Veal, variety meats and by-products, liver, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (125µg/100g) — nessuna firma di arricchimento. Ferro 6,40mg/100g, zinco 12,0mg/100g, B12 59,9µg/100g: valori alti ma coerenti con un fegato (stesso ordine di grandezza del fegato di manzo già nel Golden Set). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172534 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo, crudo — già nel Golden Set originale, stessa categoria "frattaglia/fegato", stesso trattamento `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (frattaglia di carne).
+- **Matrice**: nuova `fegato_di_vitello` ("Fegato di vitello").
+- **Attributi**: `is_heme_iron=true` (fegato, ferro eme), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale, stesso trattamento del fegato di manzo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172534 --food-id=food_fegato_di_vitello_raw \
+  --name-it="Fegato di vitello, crudo" \
+  --matrix-id=fegato_di_vitello --matrix-description-it="Fegato di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172534 --food-id=food_fegato_di_vitello_raw \
+  --name-it="Fegato di vitello, crudo" \
+  --matrix-id=fegato_di_vitello --matrix-description-it="Fegato di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Cavolo rapa, crudo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_cavolo_rapa_raw`. FDC ID 168424 (SR Legacy, "Kohlrabi, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento. Calcio 24,0mg/100g e vitamina C 62,0mg/100g coerenti con un ortaggio crucifero crudo, nessun segnale anomalo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168424 e dataType SR Legacy.
+- **Analogia usata**: `food_broccoli_raw` (broccoli, crudi — già nel Golden Set originale, stessa famiglia botanica reale **Brassicaceae**, anzi stessa specie *Brassica oleracea*).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cavolo_rapa` ("Cavolo rapa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 22,0µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168424 --food-id=food_cavolo_rapa_raw \
+  --name-it="Cavolo rapa, crudo" \
+  --matrix-id=cavolo_rapa --matrix-description-it="Cavolo rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Brassicaceae
+```
+```
+npm run add-food -- --fdc-id=168424 --food-id=food_cavolo_rapa_raw \
+  --name-it="Cavolo rapa, crudo" \
+  --matrix-id=cavolo_rapa --matrix-description-it="Cavolo rapa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Brassicaceae --apply
+```
+
+### Zucchero di canna, grezzo — preparato 2026-10-14 dal task orario (sesto lotto)
+
+- **food_id**: `food_zucchero_di_canna_raw`. FDC ID 168833 (SR Legacy, "Sugars, brown").
+- **Nutrienti**: **17/17** — quasi tutti i micronutrienti a valore 0 esplicito nel record (atteso per uno zucchero, non un'assenza), eccetto calcio 83,0mg/100g, ferro 0,71mg/100g, selenio 1,20µg/100g e folato 1,00µg/100g (tracce reali, non arricchimento: nessun acido folico separato riportato come fortificazione). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168833 e dataType SR Legacy.
+- **Analogia usata**: `food_zucchero_bianco` (zucchero bianco, già eseguito — stessa categoria "zucchero", stesso trattamento `botanical_family` NULL di proposito).
+- **Categoria dieta**: `plant_non_fruit` (zucchero, stessa convenzione già usata per lo zucchero bianco — diverso dal miele che è `egg_dairy`).
+- **Matrice**: nuova `zucchero_di_canna` ("Zucchero di canna").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, di proposito — stessa scelta già fatta per lo zucchero bianco), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168833 --food-id=food_zucchero_di_canna_raw \
+  --name-it="Zucchero di canna, grezzo" \
+  --matrix-id=zucchero_di_canna --matrix-description-it="Zucchero di canna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168833 --food-id=food_zucchero_di_canna_raw \
+  --name-it="Zucchero di canna, grezzo" \
+  --matrix-id=zucchero_di_canna --matrix-description-it="Zucchero di canna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio caprino, fresco — preparato 2026-10-14 dal task orario (quinto lotto, voce "da ricercare")
 
 - **food_id**: `food_caprino_fresco`. FDC ID 173435 (SR Legacy, "Cheese, goat, soft type").
