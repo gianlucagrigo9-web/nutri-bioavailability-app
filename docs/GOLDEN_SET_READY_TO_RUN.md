@@ -69,6 +69,30 @@ npm run add-food -- --fdc-id=169276 --food-id=food_ravanelli_raw \
   --carotenoid-matrix-state=raw_intact --apply
 ```
 
+### Indivia belga, cruda — preparato 2026-10-14 dal task orario (quarto lotto)
+
+- **food_id**: `food_indivia_belga_raw`. FDC ID 170404 (SR Legacy, "Chicory, witloof, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero). Acido folico 0µg esplicito (folato totale 37µg/100g naturale), vitamina B12 0µg — nessuna firma di arricchimento.
+- **Analogia usata**: `food_lettuce_romaine_raw` (stessa famiglia botanica reale Asteraceae, ortaggio a foglia da insalata, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `indivia_belga` ("Indivia belga").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`, `is_fortified_folate=false`.
+
+```
+npm run add-food -- --fdc-id=170404 --food-id=food_indivia_belga_raw \
+  --name-it="Indivia belga, cruda" \
+  --matrix-id=indivia_belga --matrix-description-it="Indivia belga" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=170404 --food-id=food_indivia_belga_raw \
+  --name-it="Indivia belga, cruda" \
+  --matrix-id=indivia_belga --matrix-description-it="Indivia belga" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Cime di rapa, crude — preparato 2026-10-14 dal task orario (quarto lotto)
 
 - **food_id**: `food_cime_di_rapa_raw`. FDC ID 170381 (SR Legacy, "Broccoli raab, raw").
