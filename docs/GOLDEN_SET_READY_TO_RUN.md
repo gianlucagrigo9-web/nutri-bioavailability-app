@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Guava, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_guava_raw`. FDC ID 173044 (SR Legacy, "Guavas, common, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (49,0µg/100g) — nessuna firma di arricchimento. Vitamina C 228mg/100g: valore alto ma coerente con la guava, nota per l'altissimo contenuto di vitamina C (non un'anomalia). Beta-carotene 374µg/100g esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173044 e dataType SR Legacy (release 30 aprile 2026). Scartato a priori "Guava, raw" (FDC 2709238, dataType Survey/FNDDS — un composito statistico, non un singolo alimento misurato, stesso tipo di gap già evitato altrove in questa coda).
+- **Analogia usata**: `food_papaya_raw` (papaya, già eseguita sul DB reale — stessa categoria "frutto tropicale a polpa arancione/beta-carotene elevato").
+- **Categoria dieta**: `fresh_fruit` (frutta fresca vera).
+- **Matrice**: nuova `guava` ("Guava").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 374µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myrtaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173044 --food-id=food_guava_raw \
+  --name-it="Guava, cruda" \
+  --matrix-id=guava --matrix-description-it="Guava" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Myrtaceae
+```
+```
+npm run add-food -- --fdc-id=173044 --food-id=food_guava_raw \
+  --name-it="Guava, cruda" \
+  --matrix-id=guava --matrix-description-it="Guava" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Myrtaceae --apply
+```
+
 ### Frutto della passione, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_frutto_della_passione_raw`. FDC ID 169108 (SR Legacy, "Passion-fruit, (granadilla), purple, raw").
