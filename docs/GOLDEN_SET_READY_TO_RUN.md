@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Zucchine, cotte (bollite) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_zucchine_cotte`. FDC ID 169292 (SR Legacy, "Squash, summer, zucchini, includes skin, cooked, boiled, drained, without salt"). Distinta da `food_zucchine_raw` (crude, già eseguite, FDC 169291) — stesso alimento, forma cotta. Scelta la variante "without salt" (esiste anche una "with salt", FDC 170534, con valori non-sodio praticamente identici — "without salt" preferita per coerenza con le altre voci già eseguite in questa coda).
+- **Nutrienti**: **17/17**. Beta-carotene 670µg/100g (coerente, alto come nel crudo). Fonte: getfoodfacts.com (FDC ID 169292, dataType SR Legacy), cross-verificata con foodstruct.com.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente frutto, trattato come tale per il PRD).
+- **Matrice**: nuova `zucchine_cotte` ("Zucchine, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo, coerente con la cruda che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Cucurbitaceae` (stessa famiglia botanica reale della zucchina cruda), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169292 --food-id=food_zucchine_cotte \
+  --name-it="Zucchine, cotte (bollite)" \
+  --matrix-id=zucchine_cotte --matrix-description-it="Zucchine, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169292 --food-id=food_zucchine_cotte \
+  --name-it="Zucchine, cotte (bollite)" \
+  --matrix-id=zucchine_cotte --matrix-description-it="Zucchine, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Orzo perlato, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_orzo_perlato_cotto`. FDC ID 170285 (SR Legacy, "Barley, pearled, cooked"). Distinto da `food_orzo_perlato_raw` (crudo, già eseguito, FDC 170284) — stesso alimento, forma cotta.
