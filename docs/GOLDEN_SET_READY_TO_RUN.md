@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cannella, in polvere — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_cannella_raw`. FDC ID 171320 (SR Legacy, "Spices, cinnamon, ground").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (6,00µg/100g) — nessuna firma di arricchimento. Calcio (1002mg/100g) e ferro (8,32mg/100g) alti ma coerenti con una spezia secca macinata (stessa concentrazione per disidratazione già vista per le altre spezie di questo run). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171320 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre erbe/spezie secche di questa coda; famiglia botanica Lauraceae dichiarata separatamente, diversa da tutte le altre spezie già lavorate in questo run).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `cannella` ("Cannella in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 112µg/100g esplicito — stessa scelta prudente già usata per origano/frutta secca essiccata nel Golden Set), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lauraceae` (*Cinnamomum verum/cassia* — la pagina non distingue le due specie), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi.
+
+```
+npm run add-food -- --fdc-id=171320 --food-id=food_cannella_raw \
+  --name-it="Cannella, in polvere" \
+  --matrix-id=cannella --matrix-description-it="Cannella in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lauraceae
+```
+```
+npm run add-food -- --fdc-id=171320 --food-id=food_cannella_raw \
+  --name-it="Cannella, in polvere" \
+  --matrix-id=cannella --matrix-description-it="Cannella in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lauraceae --apply
+```
+
 ### Rosmarino, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_rosmarino_secco_raw`. FDC ID 171333 (SR Legacy, "Spices, rosemary, dried").
