@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pepe nero, macinato — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota, ultimo del turno)
+
+- **food_id**: `food_pepe_nero_raw`. FDC ID 170931 (SR Legacy, "Spices, pepper, black"). Nota: il record USDA non distingue macinato/in grani nel nome — le porzioni elencate in pagina coprono entrambe le forme ("1 tsp, ground" e "1 tsp, whole") con lo stesso valore per 100g, quindi rappresenta correttamente anche la forma macinata richiesta.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (17,0µg/100g) — nessuna firma di arricchimento. Calcio (443mg/100g) e ferro (9,71mg/100g) alti ma coerenti con una spezia secca (stessa concentrazione da disidratazione già vista per le altre spezie di questo run, qui su scala più contenuta). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170931 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre spezie secche di questa coda; famiglia botanica Piperaceae dichiarata separatamente, diversa da tutte le altre spezie già lavorate in questo run).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `pepe_nero` ("Pepe nero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 310µg/100g esplicito — stessa scelta prudente già usata per le altre spezie di questo run), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Piperaceae` (*Piper nigrum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi.
+
+```
+npm run add-food -- --fdc-id=170931 --food-id=food_pepe_nero_raw \
+  --name-it="Pepe nero, macinato" \
+  --matrix-id=pepe_nero --matrix-description-it="Pepe nero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Piperaceae
+```
+```
+npm run add-food -- --fdc-id=170931 --food-id=food_pepe_nero_raw \
+  --name-it="Pepe nero, macinato" \
+  --matrix-id=pepe_nero --matrix-description-it="Pepe nero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Piperaceae --apply
+```
+
 ### Salvia, secca (macinata) — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota)
 
 - **food_id**: `food_salvia_raw`. FDC ID 170935 (SR Legacy, "Spices, sage, ground"). Nota: il record USDA è specificamente "ground" (macinata), non foglie intere essiccate — nome dell'alimento precisato di conseguenza per non rappresentare una forma diversa da quella misurata.
