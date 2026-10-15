@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cicoria selvatica, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_cicoria_selvatica_raw`. FDC ID 169992 (SR Legacy, "Chicory greens, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (110µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169992 e dataType SR Legacy (release 30 aprile 2026). Distinto da "Chicory, witloof, raw" (FDC 170404, già in coda come indivia belga ⚠) e da "Chicory roots, raw" (FDC 169993, radice non foglia — non quello che si intende per "cicoria selvatica" da insalata/verdura cotta).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stesso genere botanico *Cichorium*, stessa famiglia Asteraceae).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `cicoria_selvatica` ("Cicoria selvatica").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per le altre verdure a foglia di questa coda, le categorie ossalati esistono solo per spinaci/kale/latte), `carotenoid_matrix_state=raw_intact` (beta-carotene 3430µg/100g esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169992 --food-id=food_cicoria_selvatica_raw \
+  --name-it="Cicoria selvatica, cruda" \
+  --matrix-id=cicoria_selvatica --matrix-description-it="Cicoria selvatica" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=169992 --food-id=food_cicoria_selvatica_raw \
+  --name-it="Cicoria selvatica, cruda" \
+  --matrix-id=cicoria_selvatica --matrix-description-it="Cicoria selvatica" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Asteraceae --apply
+```
+
 ### Taccole (piselli mangiatutto), crude — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_taccole_raw`. FDC ID 170010 (SR Legacy, "Peas, edible-podded, raw").
