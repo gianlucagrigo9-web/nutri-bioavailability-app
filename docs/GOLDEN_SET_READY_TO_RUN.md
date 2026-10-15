@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di frumento tipo 00 (bianca), non arricchita, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_farina_frumento_00_raw`. FDC ID 169761 (SR Legacy, "Wheat flour, white, all-purpose, unenriched").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (26,0µg/100g) — nessuna firma di arricchimento, coerente con "unenriched" nel nome del record. Calcio 15,0mg/100g nella norma per una farina raffinata non trattata (non l'anomalia 105-163mg/100g vista nei record "enriched"/"commercially prepared" già scartati in questa coda per pane/pancarré). Beta-carotene, alfa-carotene, beta-criptoxantina tutti 0µg espliciti (coerente con una farina bianca priva di crusca/germe). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169761 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (farina di frumento integrale, già eseguita sul DB reale — stessa specie *Triticum aestivum*, stessa famiglia Poaceae; differisce solo per il grado di raffinazione).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `farina_frumento_00` ("Farina di frumento tipo 00 (bianca)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento degli altri cereali in questa coda), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — "unenriched" esplicito nel nome del record, acido folico 0µg).
+
+```
+npm run add-food -- --fdc-id=169761 --food-id=food_farina_frumento_00_raw \
+  --name-it="Farina di frumento tipo 00 (bianca), non arricchita, cruda" \
+  --matrix-id=farina_frumento_00 --matrix-description-it="Farina di frumento tipo 00 (bianca)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169761 --food-id=food_farina_frumento_00_raw \
+  --name-it="Farina di frumento tipo 00 (bianca), non arricchita, cruda" \
+  --matrix-id=farina_frumento_00 --matrix-description-it="Farina di frumento tipo 00 (bianca)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Capesante, crude — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_capesante_raw`. FDC ID 174220 (SR Legacy, "Mollusks, scallop, mixed species, raw").
