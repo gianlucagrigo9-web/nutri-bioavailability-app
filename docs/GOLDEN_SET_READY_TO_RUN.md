@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Frutto della passione, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_frutto_della_passione_raw`. FDC ID 169108 (SR Legacy, "Passion-fruit, (granadilla), purple, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (14,0µg/100g) — nessuna firma di arricchimento. Beta-carotene 743µg/100g e beta-criptoxantina 41,0µg/100g (entrambi espliciti, confluiscono nei campi del progetto), vitamina C 30,0mg/100g: tutti valori plausibili per un frutto tropicale a polpa arancione, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169108 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_mango_raw` (mango, già eseguito sul DB reale — stessa categoria "frutto tropicale a polpa arancione/beta-carotene elevato").
+- **Categoria dieta**: `fresh_fruit` (frutta fresca vera).
+- **Matrice**: nuova `frutto_della_passione` ("Frutto della passione (maracuja)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 743µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Passifloraceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169108 --food-id=food_frutto_della_passione_raw \
+  --name-it="Frutto della passione, crudo" \
+  --matrix-id=frutto_della_passione --matrix-description-it="Frutto della passione (maracuja)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Passifloraceae
+```
+```
+npm run add-food -- --fdc-id=169108 --food-id=food_frutto_della_passione_raw \
+  --name-it="Frutto della passione, crudo" \
+  --matrix-id=frutto_della_passione --matrix-description-it="Frutto della passione (maracuja)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Passifloraceae --apply
+```
+
 ### Mela cotogna, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_mela_cotogna_raw`. FDC ID 168163 (SR Legacy, "Quinces, raw").
