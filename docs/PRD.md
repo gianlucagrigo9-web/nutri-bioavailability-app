@@ -870,6 +870,19 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
 
     Alimenti ancora "da ricercare" nel sesto lotto dopo questo run: farina di frumento tipo "00" bianca non arricchita cruda; bulgur di grano crudo; ribes rosso crudo; mela cotogna cruda; frutto della passione crudo; guava cruda; noce di cocco polpa fresca cruda; panna fresca da cucina cruda; latte vaccino scremato con vitamina D aggiunta; yogurt magro (nonfat) bianco; olio di semi di colza (canola); funghi pioppini (chiodini) crudi; prezzemolo fresco crudo; basilico fresco crudo.
 
+    **Alimenti lavorati dal task di ricerca nel run del 2026-10-15, ore 07 (quota del turno: 9/9 "pronto", nessun ⚠), comandi pronti in `docs/GOLDEN_SET_READY_TO_RUN.md`**:
+    - 🟡 Farina di frumento tipo 00 (bianca), non arricchita, cruda (food_farina_frumento_00_raw, FDC 169761 SR Legacy "Wheat flour, white, all-purpose, unenriched", 17/17 nutrienti, analogia `food_farina_di_frumento_integrale_raw`, diet-category=plant_non_fruit)
+    - 🟡 Bulgur di grano, crudo (food_bulgur_raw, FDC 170688 SR Legacy "Bulgur, dry", 17/17 nutrienti, analogia `food_farina_di_frumento_integrale_raw`, diet-category=plant_non_fruit)
+    - 🟡 Ribes rosso, crudo (food_ribes_rosso_raw, FDC 173964 SR Legacy "Currants, red and white, raw", 17/17 nutrienti, analogia `food_mirtilli_raw`, diet-category=fresh_fruit)
+    - 🟡 Mela cotogna, cruda (food_mela_cotogna_raw, FDC 168163 SR Legacy "Quinces, raw", 14/17 nutrienti, analogia `food_pear_raw`, diet-category=fresh_fruit)
+    - 🟡 Frutto della passione, crudo (food_frutto_della_passione_raw, FDC 169108 SR Legacy "Passion-fruit, (granadilla), purple, raw", 17/17 nutrienti, analogia `food_mango_raw`, diet-category=fresh_fruit)
+    - 🟡 Guava, cruda (food_guava_raw, FDC 173044 SR Legacy "Guavas, common, raw", 17/17 nutrienti, analogia `food_papaya_raw`, diet-category=fresh_fruit)
+    - 🟡 Noce di cocco, polpa fresca, cruda (food_noce_di_cocco_raw, FDC 170169 SR Legacy "Nuts, coconut meat, raw", 17/17 nutrienti, analogia `food_noci_raw`, diet-category=plant_non_fruit)
+    - 🟡 Prezzemolo fresco, crudo (food_prezzemolo_raw, FDC 170416 SR Legacy "Parsley, fresh", 17/17 nutrienti, analogia `food_scarola_raw`, diet-category=plant_non_fruit)
+    - 🟡 Basilico fresco, crudo (food_basilico_raw, FDC 172232 SR Legacy "Basil, fresh", 17/17 nutrienti, analogia `food_scarola_raw`, diet-category=plant_non_fruit)
+
+    Alimenti ancora "da ricercare" nel sesto lotto dopo questo run (ore 07): panna fresca da cucina, cruda; latte vaccino scremato, con vitamina D aggiunta; yogurt magro (nonfat), bianco; olio di semi di colza (canola); funghi pioppini (chiodini), crudi. Con questi 5 esclusi, il sesto lotto è altrimenti esaurito (ogni altra voce è ✅/⚠/🟡): il prossimo run dovrà lavorare questi 5 e poi, se esauriti anche loro, estendere la coda (punto 1b).
+
 16b. **Piatti tradizionali/compositi** (pasta al pomodoro, minestrone, parmigiana, ecc.) — richiesti dall'utente il 2026-10-11 come parte della copertura del panel italiano. **Design approvato e implementato (schema + motore + test, vedi §4.8)**. **`add_dish_templates.sql` eseguito sul DB reale e verificato (2026-10-11)**: `dish_templates`/`dish_components` esistono, RLS attiva su entrambe. Grammature standard: fonte trovata e sourced (`standardPortions.ts`, §4.8) — resta solo da wirarla a `dish_components.grams_per_serving` quando si popola la coda di piatti, non un gap di dato. Resta 👤 (non delegabile al task diurno automatico) solo per: il wiring UI in `app/page.tsx`. Una volta chiuso questo punto, popolare la coda di piatti (quali, con quali componenti) può tornare un lavoro mediamente meccanico.
 
 ### Fase 5 — Backlog post-MVP (fuori perimetro per sequenza, non per blocco legale)
