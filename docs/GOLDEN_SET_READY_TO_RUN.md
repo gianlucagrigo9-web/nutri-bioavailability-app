@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Zucca butternut, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_zucca_butternut_raw`. FDC ID 169295 (SR Legacy, "Squash, winter, butternut, raw"). Distinta da `food_pumpkin_raw` (zucca generica, già eseguita, stessa famiglia ma cultivar/specie diversa).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (27,0µg/100g) — nessuna firma di arricchimento. Beta-carotene 4.226µg/100g, alfa-carotene 834µg/100g, beta-criptoxantina 3.471µg/100g — valori alti ma coerenti con una zucca invernale a polpa arancione (confrontabile con la zucca generica già nel Golden Set), nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169295 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_pumpkin_raw` (zucca generica, già eseguita sul DB reale — stessa famiglia botanica Cucurbitaceae, stesso tipo di polpa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio, stessa convenzione già usata per la zucca generica).
+- **Matrice**: nuova `zucca_butternut` ("Zucca butternut").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene presente con valore), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169295 --food-id=food_zucca_butternut_raw \
+  --name-it="Zucca butternut, cruda" \
+  --matrix-id=zucca_butternut --matrix-description-it="Zucca butternut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae
+```
+```
+npm run add-food -- --fdc-id=169295 --food-id=food_zucca_butternut_raw \
+  --name-it="Zucca butternut, cruda" \
+  --matrix-id=zucca_butternut --matrix-description-it="Zucca butternut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --botanical-family=Cucurbitaceae --apply
+```
+
 ### Zenzero fresco, crudo — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_zenzero_raw`. FDC ID 169231 (SR Legacy, "Ginger root, raw").
