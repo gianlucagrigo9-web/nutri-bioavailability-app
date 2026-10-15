@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Bulgur di grano, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_bulgur_raw`. FDC ID 170688 (SR Legacy, "Bulgur, dry").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (27,0µg/100g) — nessuna firma di arricchimento. Calcio 35,0mg/100g nella norma per un cereale integrale (non anomalo). Beta-carotene 5,00µg esplicito; alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170688 e dataType SR Legacy (release 30 aprile 2026). "Dry" (secco, non cotto): rappresenta correttamente il bulgur crudo richiesto dalla voce di coda.
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (farina di frumento integrale, già eseguita sul DB reale — stessa famiglia Poaceae, stesso genere cereale non arricchito).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `bulgur` ("Bulgur (grano spezzato)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 5,00µg esplicito, non zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170688 --food-id=food_bulgur_raw \
+  --name-it="Bulgur di grano, crudo" \
+  --matrix-id=bulgur --matrix-description-it="Bulgur (grano spezzato)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=170688 --food-id=food_bulgur_raw \
+  --name-it="Bulgur di grano, crudo" \
+  --matrix-id=bulgur --matrix-description-it="Bulgur (grano spezzato)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae --apply
+```
+
 ### Farina di frumento tipo 00 (bianca), non arricchita, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_farina_frumento_00_raw`. FDC ID 169761 (SR Legacy, "Wheat flour, white, all-purpose, unenriched").
