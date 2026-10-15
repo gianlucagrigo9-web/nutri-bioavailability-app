@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Peperoncino verde piccante, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_peperoncino_verde_raw`. FDC ID 170497 (SR Legacy, "Peppers, hot chili, green, raw"). Distinto da `food_peperoncino_piccante_raw` (peperoncino rosso piccante, FDC 170106, già 🟡 in questa coda — colore/varietà diversa, profilo nutrizionale diverso, non lo stesso alimento) e dai peperoni dolci rosso/giallo/verde già coperti.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (23,0µg/100g) — nessuna firma di arricchimento. Vitamina C 243mg/100g molto alta ma tipica per un peperoncino piccante crudo (coerente con l'ordine di grandezza già visto per i peperoni dolci nel Golden Set). Beta-carotene 671µg/100g, alfa-carotene 23,0µg/100g, beta-criptoxantina 50,0µg/100g tutti espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170497 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_pepper_green_raw` (peperone dolce verde, già nei 30 alimenti originali del Golden Set — stesso genere *Capsicum*, stessa famiglia Solanaceae, stesso colore verde).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente "frutto", stessa convenzione già usata per gli altri peperoni).
+- **Matrice**: nuova `peperoncino_verde` ("Peperoncino verde piccante").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 671µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170497 --food-id=food_peperoncino_verde_raw \
+  --name-it="Peperoncino verde piccante, crudo" \
+  --matrix-id=peperoncino_verde --matrix-description-it="Peperoncino verde piccante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_green_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Solanaceae
+```
+```
+npm run add-food -- --fdc-id=170497 --food-id=food_peperoncino_verde_raw \
+  --name-it="Peperoncino verde piccante, crudo" \
+  --matrix-id=peperoncino_verde --matrix-description-it="Peperoncino verde piccante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_green_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Solanaceae --apply
+```
+
 ### Menta fresca (menta verde/spearmint), cruda — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_menta_raw`. FDC ID 173475 (SR Legacy, "Spearmint, fresh"). Nota: rappresenta la specie *Mentha spicata* (menta verde), la più comune per uso culinario in Italia — FDC non ha un record generico "mint, fresh" con dati completi, solo voci per specie (spearmint/peppermint), stessa situazione già incontrata per basilico/prezzemolo in questa coda.
