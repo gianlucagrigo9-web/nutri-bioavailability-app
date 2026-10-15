@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli azuki, secchi, crudi — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_fagioli_azuki_raw`. FDC ID 173727 (SR Legacy, "Beans, adzuki, mature seeds, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record; il campo "Vitamin A, RAE" = 1µg con retinolo 0 suggerisce una piccola quota di carotenoidi provitaminici A non scomposta per codice specifico — non stimata, lasciata fuori). Acido folico 0µg esplicito, separato dal folato totale (622µg/100g, alto ma coerente con un legume secco) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173727 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_kidney_beans_raw` (fagioli rossi crudi, Golden Set originale — stessa famiglia botanica Fabaceae, stesso matrix_id `legumes` già esistente).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: riusa `legumes` (già esistente, nessun `--matrix-description-it` necessario).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun beta-carotene scomposto nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173727 --food-id=food_fagioli_azuki_raw \
+  --name-it="Fagioli azuki, secchi, crudi" \
+  --matrix-id=legumes \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=173727 --food-id=food_fagioli_azuki_raw \
+  --name-it="Fagioli azuki, secchi, crudi" \
+  --matrix-id=legumes \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Fagioli cannellini, secchi, crudi (non bolliti) — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_fagioli_cannellini_secchi_raw`. FDC ID 175202 (SR Legacy, "Beans, white, mature seeds, raw"). Distinto da `food_fagioli_cannellini_bolliti` (già eseguito, FDC 175203, versione bollita) — stessa coppia FDC cruda/cotta già vista per altri legumi di questa coda.
