@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Salvia, secca (macinata) — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota)
+
+- **food_id**: `food_salvia_raw`. FDC ID 170935 (SR Legacy, "Spices, sage, ground"). Nota: il record USDA è specificamente "ground" (macinata), non foglie intere essiccate — nome dell'alimento precisato di conseguenza per non rappresentare una forma diversa da quella misurata.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (274µg/100g) — nessuna firma di arricchimento. Calcio (1652mg/100g), ferro (28,1mg/100g) e magnesio (428mg/100g) alti ma coerenti con una spezia secca macinata (stessa concentrazione da disidratazione già vista per le altre spezie di questo run). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170935 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre erbe aromatiche secche di questa coda; famiglia botanica Lamiaceae dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `salvia_secca` ("Salvia secca, macinata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 3485µg/100g esplicito — stessa scelta prudente già usata per le altre spezie di questo run), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Salvia officinalis*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi.
+
+```
+npm run add-food -- --fdc-id=170935 --food-id=food_salvia_raw \
+  --name-it="Salvia, secca (macinata)" \
+  --matrix-id=salvia_secca --matrix-description-it="Salvia secca, macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=170935 --food-id=food_salvia_raw \
+  --name-it="Salvia, secca (macinata)" \
+  --matrix-id=salvia_secca --matrix-description-it="Salvia secca, macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae --apply
+```
+
 ### Timo, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota)
 
 - **food_id**: `food_timo_secco_raw`. FDC ID 170938 (SR Legacy, "Spices, thyme, dried").
