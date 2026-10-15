@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte vaccino scremato, con vitamina A e D aggiunte — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
+
+- **food_id**: `food_latte_scremato_raw`. FDC ID 171269 (SR Legacy, "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)"). Distinto da `food_milk_whole` (latte intero, già reale nel DB) — prodotto diverso per contenuto di grassi.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5,00µg/100g) — nessuna firma di arricchimento tipo "enriched" USA (l'aggiunta di vitamina D al latte scremato è pratica standard, non il tipo di arricchimento con acido folico/ferro/calcio anomalo già scartato per pane/pasta). Calcio 122mg/100g, in linea con il latte vaccino intero (123mg/100g già nel Golden Set), nessuna anomalia. Beta-carotene e alfa-carotene 0µg espliciti (coerente con l'assenza di grasso, dove si concentrano i carotenoidi del latte). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171269 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già reale nel DB — stesso animale, stesso prodotto, differisce solo per il contenuto di grassi).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: riusa `dairy_milk` (già esistente dal Golden Set originale — stesso latte vaccino, nessun `--matrix-description-it` necessario).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per yogurt/formaggi/panna aggiunti dopo i 30 originali: la categoria ossalati del latte intero non è stata sistematicamente estesa ai derivati), `carotenoid_matrix_state` omesso (NULL — non applicabile, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171269 --food-id=food_latte_scremato_raw \
+  --name-it="Latte vaccino scremato, con vitamina A e D aggiunte" \
+  --matrix-id=dairy_milk \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171269 --food-id=food_latte_scremato_raw \
+  --name-it="Latte vaccino scremato, con vitamina A e D aggiunte" \
+  --matrix-id=dairy_milk \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Panna da cucina (panna fluida leggera), cruda — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
 
 - **food_id**: `food_panna_da_cucina_raw`. FDC ID 170857 (SR Legacy, "Cream, fluid, light (coffee cream or table cream)").
