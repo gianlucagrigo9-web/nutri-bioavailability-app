@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coniglio, cotto (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_coniglio_cotto`. FDC ID 172522 (SR Legacy, "Game meat, rabbit, domesticated, composite of cuts, cooked, roasted"). Distinto da `food_coniglio_raw` (crudo, già eseguito sul DB reale, FDC 172521 — stesso "composite of cuts, domesticated") — stesso alimento, forma cotta.
+- **Nutrienti**: **14/17 — mancano vitamina K, beta-carotene e altri carotenoidi provitaminici A**, non riportati nel record (stesso identico gap già presente nel crudo `food_coniglio_raw`, coerenza interna). Acido folico 0µg esplicito, folato totale 11,0µg/100g — nessuna firma di arricchimento. Fonte: getfoodfacts.com (FDC ID 172522, dataType SR Legacy).
+- **Analogia usata**: `food_coniglio_raw` (coniglio crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coniglio_cotto` ("Coniglio, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_coniglio_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172522 --food-id=food_coniglio_cotto \
+  --name-it="Coniglio, cotto (arrosto)" \
+  --matrix-id=coniglio_cotto --matrix-description-it="Coniglio, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coniglio_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172522 --food-id=food_coniglio_cotto \
+  --name-it="Coniglio, cotto (arrosto)" \
+  --matrix-id=coniglio_cotto --matrix-description-it="Coniglio, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coniglio_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, cotto — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_agnello_cotto`. FDC ID 174339 (SR Legacy, "Lamb, New Zealand, imported, frozen, composite of trimmed retail cuts, separable lean only, cooked"). Distinto da `food_agnello_raw` (crudo, già eseguito sul DB reale, FDC 174338) — stesso taglio composito, stessa provenienza (Nuova Zelanda, importato, congelato), stessa categoria "lean only", stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la descrizione FDC non specifica un metodo di cottura (non dice "roasted"/"braised"), quindi il nome resta "agnello, cotto" generico invece di "arrosto" per non attribuire un metodo non confermato.
