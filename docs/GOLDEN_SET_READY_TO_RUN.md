@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagiolini, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_fagiolini_cotti`. FDC ID 169141 (SR Legacy, "Beans, snap, green, cooked, boiled, drained, without salt"). Distinti da `food_fagiolini_raw` (crudi, già eseguiti, FDC 169961) — stesso alimento, forma cotta. Scelta la variante "without salt" (esiste anche "with salt", FDC 169321, valori non-sodio identici).
+- **Nutrienti**: **17/17**. Beta-carotene 380µg/100g e alfa-carotene 70,0µg/100g (quest'ultimo confluisce in `other_provitamin_a_carotenoids_mcg`) — unico fra i 9 alimenti di questo turno con un valore non-zero per questo campo, coerente con fagiolini crudi (verdura verde con carotenoidi misti). Fonte: getfoodfacts.com (FDC ID 169141, dataType SR Legacy).
+- **Analogia usata**: `food_fagiolini_raw` (fagiolini crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura/legume a baccello).
+- **Matrice**: nuova `fagiolini_cotti` ("Fagiolini, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene e alfa-carotene significativi, coerente con i crudi che hanno `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae` (stessa famiglia botanica reale dei legumi), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169141 --food-id=food_fagiolini_cotti \
+  --name-it="Fagiolini, cotti (bolliti)" \
+  --matrix-id=fagiolini_cotti --matrix-description-it="Fagiolini, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagiolini_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169141 --food-id=food_fagiolini_cotti \
+  --name-it="Fagiolini, cotti (bolliti)" \
+  --matrix-id=fagiolini_cotti --matrix-description-it="Fagiolini, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagiolini_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Asparagi, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_asparagi_cotti`. FDC ID 168390 (SR Legacy, "Asparagus, cooked, boiled, drained"). Distinti da `food_asparagi_raw` (crudi, già eseguiti, FDC 168389) — stesso alimento, forma cotta. Record base/senza sale (esiste una variante surgelata con sale, FDC 168494, non rilevante qui).
