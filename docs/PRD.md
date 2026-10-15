@@ -846,7 +846,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Grassi: olio di semi di colza (canola) (da ricercare)
     - Funghi: funghi pioppini (chiodini), crudi (da ricercare)
     - Dolcificanti: ✅ zucchero di canna, grezzo (vedi sotto, preparato subito in questo stesso run)
-    - Altro: 🟡 prezzemolo fresco, crudo (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario il 2026-10-15 — FDC 170416 "Parsley, fresh" SR Legacy, 17/17 nutrienti, diet-category=plant_non_fruit); basilico fresco, crudo (da ricercare)
+    - Altro: 🟡 prezzemolo fresco, crudo (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario il 2026-10-15 — FDC 170416 "Parsley, fresh" SR Legacy, 17/17 nutrienti, diet-category=plant_non_fruit); 🟡 basilico fresco, crudo (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario il 2026-10-15 — FDC 172232 "Basil, fresh" SR Legacy, 17/17 nutrienti, diet-category=plant_non_fruit)
 
     **Alimenti lavorati dal task di ricerca in questo stesso run (2026-10-14), comandi pronti in `docs/GOLDEN_SET_READY_TO_RUN.md`**:
     - ✅ Ananas, crudo (food_ananas_raw, FDC 169124 SR Legacy "Pineapple, raw, all varieties", 17/17 nutrienti, analogia `food_oranges_raw`, botanical_family=Bromeliaceae, diet-category=fresh_fruit)
