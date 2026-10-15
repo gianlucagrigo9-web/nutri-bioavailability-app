@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ribes rosso, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_ribes_rosso_raw`. FDC ID 173964 (SR Legacy, "Currants, red and white, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (8,00µg/100g) — nessuna firma di arricchimento (comunque non applicabile a un frutto fresco). Vitamina C 41,0mg/100g, calcio 33,0mg/100g e beta-carotene 25,0µg/100g tutti plausibili per una piccola bacca acidula, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173964 e dataType SR Legacy (release 30 aprile 2026). Distinto da "Currants, european black, raw" (FDC 173963, ribes nero, già scartato ⚠ in questa coda per copertura nutrienti insufficiente, 11/17) — questo record per il ribes rosso/bianco è invece completo.
+- **Analogia usata**: `food_mirtilli_raw` (mirtilli, già eseguiti sul DB reale — stessa categoria "piccola bacca fresca").
+- **Categoria dieta**: `fresh_fruit` (frutta fresca vera).
+- **Matrice**: nuova `ribes_rosso` ("Ribes rosso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 25,0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Grossulariaceae` (genere *Ribes*, famiglia reale diversa dal mirtillo Ericaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173964 --food-id=food_ribes_rosso_raw \
+  --name-it="Ribes rosso, crudo" \
+  --matrix-id=ribes_rosso --matrix-description-it="Ribes rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Grossulariaceae
+```
+```
+npm run add-food -- --fdc-id=173964 --food-id=food_ribes_rosso_raw \
+  --name-it="Ribes rosso, crudo" \
+  --matrix-id=ribes_rosso --matrix-description-it="Ribes rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit \
+  --botanical-family=Grossulariaceae --apply
+```
+
 ### Bulgur di grano, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_bulgur_raw`. FDC ID 170688 (SR Legacy, "Bulgur, dry").
