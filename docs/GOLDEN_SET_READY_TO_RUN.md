@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pesce persico, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_pesce_persico_raw`. FDC ID 173678 (SR Legacy, "Fish, perch, mixed species, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5,00µg/100g) — nessuna firma di arricchimento (comunque non applicabile al pesce). Valori coerenti con un pesce magro d'acqua dolce, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173678 e dataType SR Legacy (release 30 aprile 2026). "Mixed species" (comprende sia pesce persico europeo che americano): il più generico/rappresentativo disponibile in FDC per questo pesce.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo, già eseguito sul DB reale — stessa categoria "pesce magro", stesso trattamento `is_heme_iron=true` già usato per i pesci di questa coda, a loro volta per analogia con `food_salmon_raw` del Golden Set originale).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_persico` ("Pesce persico").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per gli altri pesci di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173678 --food-id=food_pesce_persico_raw \
+  --name-it="Pesce persico, crudo" \
+  --matrix-id=pesce_persico --matrix-description-it="Pesce persico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173678 --food-id=food_pesce_persico_raw \
+  --name-it="Pesce persico, crudo" \
+  --matrix-id=pesce_persico --matrix-description-it="Pesce persico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rognone di manzo, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_rognone_di_manzo_raw`. FDC ID 169449 (SR Legacy, "Beef, variety meats and by-products, kidneys, raw").
