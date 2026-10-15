@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bistecca di manzo (taglio magro), cotta (alla griglia) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_bistecca_di_manzo_cotta`. FDC ID 168634 (SR Legacy, "Beef, top sirloin, steak, separable lean only, trimmed to 0\" fat, all grades, cooked, broiled"). **Non** è ancora la forma cotta di `food_bistecca_di_manzo_raw` (quest'ultimo resta solo 🟡 "Pronti", non eseguito sul DB reale — l'analogia non può riferirsi a lui, vedi sotto): è un record FDC indipendente. **Nota sul trim**: il crudo in coda usa FDC 174055 "trimmed to 1/8\" fat" (taglio magro con un velo di grasso residuo); questo cotto usa "trimmed to 0\" fat" (completamente privo di grasso visibile) — nessun record cotto con lo stesso identico trim 1/8" è stato trovato, solo varianti "lean and fat" (che includerebbero più grasso, non comparabile). Entrambi restano "separable lean only", stessa categoria di taglio magro.
+- **Nutrienti**: **17/17**. Vitamina K riportata in due forme (filloquinone 1,40µg/100g + diidrofilloquinone 0µg/100g) anziché un valore unico, stesso tipo di formato già visto altrove in questa coda — somma 1,40µg/100g usata. Beta-carotene e alfa-carotene 0µg espliciti (coerente con carne). Fonte: getfoodfacts.com (FDC ID 168634, dataType SR Legacy).
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, nel Golden Set originale — stessa specie, stesso stato "cotto", stesso trattamento `is_heme_iron=true` con `matrix_category_calcium`/`botanical_family` NULL; non uso `food_bistecca_di_manzo_raw` perché non ancora eseguito sul DB reale, resta solo "Pronti").
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `bistecca_di_manzo_cotta` ("Bistecca di manzo, cotta") — distinta dalla matrice `bistecca_di_manzo` del crudo (ancora da creare quando/se quel comando verrà eseguito).
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=grilled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168634 --food-id=food_bistecca_di_manzo_cotta \
+  --name-it="Bistecca di manzo (taglio magro), cotta (alla griglia)" \
+  --matrix-id=bistecca_di_manzo_cotta --matrix-description-it="Bistecca di manzo, cotta" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168634 --food-id=food_bistecca_di_manzo_cotta \
+  --name-it="Bistecca di manzo (taglio magro), cotta (alla griglia)" \
+  --matrix-id=bistecca_di_manzo_cotta --matrix-description-it="Bistecca di manzo, cotta" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Coscia di pollo, cotta (brasata) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_coscia_di_pollo_cotta`. FDC ID 172853 (SR Legacy, "Chicken, broilers or fryers, dark meat, thigh, meat only, cooked, braised"). Distinta da `food_coscia_di_pollo_raw` (cruda, già eseguita sul DB reale, FDC 173627 "Chicken, broilers or fryers, dark meat, thigh, meat only, raw" — stesso taglio esatto "thigh, meat only") — stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la voce indicava "arrosto", ma nessun record FDC pulito è stato trovato per coscia di pollo arrosto semplice — solo "braised" (questo record, pagina "USDA Standard Reference" pulita) o varianti "enhanced"/"with added solution" (soluzione salina iniettata, non rappresentativo), stesso tipo di gap già incontrato per il petto di pollo in questa coda (rimasto ⚠ per lo stesso motivo).
