@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rognone di manzo, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_rognone_di_manzo_raw`. FDC ID 169449 (SR Legacy, "Beef, variety meats and by-products, kidneys, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (98,0µg/100g) — nessuna firma di arricchimento (comunque non applicabile a una carne). Vitamina B12 molto alta (27,5µg/100g) e selenio molto alto (141µg/100g) coerenti con una frattaglia renale, non un'anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169449 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo, Golden Set originale — stesso animale, stessa categoria "frattaglia", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_manzo` ("Rognone di manzo").
+- **Attributi**: `--is-heme-iron` (true — frattaglia animale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169449 --food-id=food_rognone_di_manzo_raw \
+  --name-it="Rognone di manzo, crudo" \
+  --matrix-id=rognone_di_manzo --matrix-description-it="Rognone di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169449 --food-id=food_rognone_di_manzo_raw \
+  --name-it="Rognone di manzo, crudo" \
+  --matrix-id=rognone_di_manzo --matrix-description-it="Rognone di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cuore di pollo, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_cuore_di_pollo_raw`. FDC ID 171458 (SR Legacy, "Chicken, heart, all classes, raw").
