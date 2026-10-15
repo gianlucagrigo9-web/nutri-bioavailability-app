@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Melassa — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_melassa`. FDC ID 168820 (SR Legacy, "Molasses"). Distinta da `food_miele` (miele, già eseguito — prodotto animale, dieta egg_dairy) e da `food_sciroppo_di_acero_raw` (sciroppo d'acero, già eseguito — fonte diversa).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (0µg/100g) — nessuna firma di arricchimento. Calcio (205mg/100g) e ferro (4,72mg/100g) alti ma coerenti con la melassa comune (non "blackstrap"): è un sottoprodotto concentrato della raffinazione dello zucchero, notoriamente ricco di minerali — non un segnale di arricchimento artificiale, a differenza dei casi "enriched"/"with added solution" già scartati altrove in questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168820 e dataType SR Legacy (release 30 aprile 2026). La pagina segnala una seconda voce USDA per la melassa (probabilmente "blackstrap", con minerali ancora più concentrati) non consultata: questo comando usa la voce generica "Molasses", non quella eventualmente più concentrata.
+- **Analogia usata**: `food_zucchero_di_canna_raw` (zucchero di canna, già eseguito sul DB reale — stesso sottoprodotto della canna da zucchero, stessa categoria funzionale "dolcificante vegetale", botanical_family lasciata NULL per lo stesso motivo — ambiguità canna/barbabietola — già dichiarato per `food_zucchero_bianco`).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante vegetale, a differenza del miele che è di origine animale).
+- **Matrice**: nuova `melassa` ("Melassa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — melassa può derivare da canna o barbabietola, ambiguo, stessa scelta già fatta per `food_zucchero_bianco`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168820 --food-id=food_melassa \
+  --name-it="Melassa" \
+  --matrix-id=melassa --matrix-description-it="Melassa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_di_canna_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168820 --food-id=food_melassa \
+  --name-it="Melassa" \
+  --matrix-id=melassa --matrix-description-it="Melassa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_di_canna_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di semi di lino, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_olio_di_semi_di_lino_raw`. FDC ID 167702 (SR Legacy, "Oil, flaxseed, cold pressed"). Distinto da `food_semi_di_lino_interi_raw` (semi interi, già eseguiti — prodotto diverso, solo l'olio estratto) e da `food_olio_di_girasole_raw`/`food_olio_di_mais_raw`/`food_olio_di_cocco_raw` (altri oli vegetali, già eseguiti). Scartato a priori "Oil, flaxseed, contains added sliced flaxseed" (FDC 171442): nonostante abbia una pagina getfoodfacts con FDC ID esplicito, la descrizione indica semi di lino a fette AGGIUNTI all'olio — proteine (0,37g/100g), calcio (9mg/100g) e ferro (0,34mg/100g) non nulli per un olio puro confermano che il profilo nutrizionale è contaminato dai semi aggiunti, non rappresenta l'olio puro richiesto.
