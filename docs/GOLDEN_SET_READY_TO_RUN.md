@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Taccole (piselli mangiatutto), crude — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_taccole_raw`. FDC ID 170010 (SR Legacy, "Peas, edible-podded, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (42,0µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170010 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_peas_green_raw` (piselli freschi crudi, già eseguiti sul DB reale — stessa specie *Pisum sativum*, stessa famiglia Fabaceae; le taccole si mangiano col baccello intero, quindi matrice propria separata invece di riusare `piselli`).
+- **Categoria dieta**: `plant_non_fruit` (legume/verdura).
+- **Matrice**: nuova `taccole` ("Taccole / piselli mangiatutto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 630µg/100g esplicito, alpha-carotene 44µg/100g), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170010 --food-id=food_taccole_raw \
+  --name-it="Taccole (piselli mangiatutto), crude" \
+  --matrix-id=taccole --matrix-description-it="Taccole (piselli mangiatutto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peas_green_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=170010 --food-id=food_taccole_raw \
+  --name-it="Taccole (piselli mangiatutto), crude" \
+  --matrix-id=taccole --matrix-description-it="Taccole (piselli mangiatutto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peas_green_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae --apply
+```
+
 ### Fagioli azuki, secchi, crudi — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_fagioli_azuki_raw`. FDC ID 173727 (SR Legacy, "Beans, adzuki, mature seeds, raw").
