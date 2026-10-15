@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Asparagi, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_asparagi_cotti`. FDC ID 168390 (SR Legacy, "Asparagus, cooked, boiled, drained"). Distinti da `food_asparagi_raw` (crudi, già eseguiti, FDC 168389) — stesso alimento, forma cotta. Record base/senza sale (esiste una variante surgelata con sale, FDC 168494, non rilevante qui).
+- **Nutrienti**: **17/17**. Beta-carotene 604µg/100g (coerente con un ortaggio verde, vicino al valore del crudo). Fonte: getfoodfacts.com (FDC ID 168390, dataType SR Legacy).
+- **Analogia usata**: `food_asparagi_raw` (asparagi crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `asparagi_cotti` ("Asparagi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Asparagaceae` (famiglia botanica reale dell'asparago, *Asparagus officinalis* — diversa da Apiaceae usata per l'analogia funzionale carote/sedano), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168390 --food-id=food_asparagi_cotti \
+  --name-it="Asparagi, cotti (bolliti)" \
+  --matrix-id=asparagi_cotti --matrix-description-it="Asparagi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_asparagi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168390 --food-id=food_asparagi_cotti \
+  --name-it="Asparagi, cotti (bolliti)" \
+  --matrix-id=asparagi_cotti --matrix-description-it="Asparagi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_asparagi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Zucchine, cotte (bollite) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_zucchine_cotte`. FDC ID 169292 (SR Legacy, "Squash, summer, zucchini, includes skin, cooked, boiled, drained, without salt"). Distinta da `food_zucchine_raw` (crude, già eseguite, FDC 169291) — stesso alimento, forma cotta. Scelta la variante "without salt" (esiste anche una "with salt", FDC 170534, con valori non-sodio praticamente identici — "without salt" preferita per coerenza con le altre voci già eseguite in questa coda).
