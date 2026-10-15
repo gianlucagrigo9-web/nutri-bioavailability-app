@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sogliola, cotta (al forno) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_sogliola_cotta`. FDC ID 174197 (SR Legacy, "Fish, flatfish (flounder and sole species), cooked, dry heat"). Distinta da `food_sogliola_raw` (cruda, già eseguita sul DB reale, FDC 174196 "Fish, flatfish (flounder and sole species), raw" — stessa "flatfish") — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Vitamina K riportata in due forme (filloquinone 0,10µg/100g + menachinone-4 0,30µg/100g), somma 0,40µg/100g usata. Acido folico 0µg esplicito, folato totale 6,00µg/100g — nessuna firma di arricchimento. Beta-carotene e alfa-carotene 0µg espliciti (coerente con pesce). Fonte: getfoodfacts.com (FDC ID 174197, dataType SR Legacy).
+- **Analogia usata**: `food_sogliola_raw` (sogliola cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `sogliola_cotta` ("Sogliola, cotta").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_sogliola_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174197 --food-id=food_sogliola_cotta \
+  --name-it="Sogliola, cotta (al forno)" \
+  --matrix-id=sogliola_cotta --matrix-description-it="Sogliola, cotta" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sogliola_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174197 --food-id=food_sogliola_cotta \
+  --name-it="Sogliola, cotta (al forno)" \
+  --matrix-id=sogliola_cotta --matrix-description-it="Sogliola, cotta" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sogliola_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Branzino, cotto (al forno) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_branzino_cotto`. FDC ID 173694 (SR Legacy, "Fish, sea bass, mixed species, cooked, dry heat"). Distinto da `food_branzino_raw` (crudo, già eseguito sul DB reale, FDC 175142 "Fish, sea bass, mixed species, raw" — stessa "mixed species") — stesso alimento, forma cotta.
