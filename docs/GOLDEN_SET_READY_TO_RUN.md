@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Funghi champignon, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_funghi_champignon_cotti`. FDC ID 169252 (SR Legacy, "Mushrooms, white, cooked, boiled, drained, without salt"). Distinti da `food_mushroom_white_raw` (crudi, già eseguiti, FDC 169251) — stesso alimento, forma cotta. **Nome cambiato rispetto alla coda**: la voce di coda indicava "cotti (saltati)", ma nessun record FDC per funghi champignon saltati/stir-fried con copertura nutrienti pulita è stato cercato/trovato in questo run — il record SR Legacy disponibile e completo è "boiled, drained" (bolliti, non saltati in padella con grassi aggiunti, che avrebbe un profilo di grassi diverso). Nome aggiornato di conseguenza per non rappresentare un metodo di cottura diverso da quello realmente misurato.
+- **Nutrienti**: **17/17**. Beta-carotene e altri carotenoidi provitaminici A tutti a 0 — coerente col crudo, che non aveva `--carotenoid-matrix-state` impostato per lo stesso motivo (i funghi non sintetizzano carotenoidi provitaminici A in quantità significative). Fonte: getfoodfacts.com (FDC ID 169252, dataType SR Legacy); una fonte alternativa (foodstruct.com) è stata scartata per un'incongruenza nell'URL/slug della pagina (mostrava contenuto sui funghi bianchi ma uno slug "mushrooms-shiitake-raw" — segnale di pagina non affidabile).
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (fungo, non pianta — stesso trattamento già usato per il crudo: nessuna famiglia botanica).
+- **Matrice**: nuova `funghi_champignon_cotti` ("Funghi champignon, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, coerente col crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stesso trattamento del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169252 --food-id=food_funghi_champignon_cotti \
+  --name-it="Funghi champignon, cotti (bolliti)" \
+  --matrix-id=funghi_champignon_cotti --matrix-description-it="Funghi champignon, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169252 --food-id=food_funghi_champignon_cotti \
+  --name-it="Funghi champignon, cotti (bolliti)" \
+  --matrix-id=funghi_champignon_cotti --matrix-description-it="Funghi champignon, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Sedano, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_sedano_cotto`. FDC ID 169989 (SR Legacy, "Celery, cooked, boiled, drained, without salt"). Distinto da `food_sedano_raw` (crudo, già eseguito, FDC 169988) — stesso alimento, forma cotta.
