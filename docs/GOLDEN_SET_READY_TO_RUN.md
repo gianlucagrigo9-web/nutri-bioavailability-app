@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Menta fresca (menta verde/spearmint), cruda — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_menta_raw`. FDC ID 173475 (SR Legacy, "Spearmint, fresh"). Nota: rappresenta la specie *Mentha spicata* (menta verde), la più comune per uso culinario in Italia — FDC non ha un record generico "mint, fresh" con dati completi, solo voci per specie (spearmint/peppermint), stessa situazione già incontrata per basilico/prezzemolo in questa coda.
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina del record, non riportati a zero; gap dichiarato, sopra la soglia minima ~10/17 — inusuale che un'erba a foglia non riporti vitamina K/carotenoidi come basilico e prezzemolo nella stessa coda, ma nessun segnale di record sbagliato: descrizione e resto dei valori coerenti). Acido folico 0µg esplicito, separato dal folato totale (105µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173475 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa categoria "verdura/erba a foglia verde", stessa convenzione già usata per basilico/prezzemolo in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `menta` ("Menta fresca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di basilico/prezzemolo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Mentha spicata*, stessa famiglia già usata per basilico), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173475 --food-id=food_menta_raw \
+  --name-it="Menta fresca, cruda" \
+  --matrix-id=menta --matrix-description-it="Menta fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=173475 --food-id=food_menta_raw \
+  --name-it="Menta fresca, cruda" \
+  --matrix-id=menta --matrix-description-it="Menta fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae --apply
+```
+
 ### Crescione, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_crescione_raw`. FDC ID 170068 (SR Legacy, "Watercress, raw").
