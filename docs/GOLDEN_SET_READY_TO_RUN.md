@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Farina di avena, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_farina_di_avena_raw`. FDC ID 169741 (SR Legacy, "Oat flour, partially debranned").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (32,0µg/100g) — nessuna firma di arricchimento. Calcio 55,0mg/100g nella norma per una farina di cereale integrale/parzialmente decorticata (non l'anomalia 105-163mg/100g vista nei record "enriched"/"commercially prepared" già scartati per pane/pancarré). Beta-carotene, alfa-carotene, beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169741 e dataType SR Legacy (release 30 aprile 2026). Scartato a priori "Flour, oat, whole grain" (FDC 2261421, Foundation Foods) — non verificato, il record SR Legacy era già pulito e completo.
+- **Analogia usata**: `food_avena_cruda` (avena cruda in grani, già eseguita sul DB reale — stessa specie *Avena sativa*, stessa famiglia botanica Poaceae; differisce solo per il grado di macinazione).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `farina_di_avena` ("Farina di avena").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169741 --food-id=food_farina_di_avena_raw \
+  --name-it="Farina di avena, cruda" \
+  --matrix-id=farina_di_avena --matrix-description-it="Farina di avena" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169741 --food-id=food_farina_di_avena_raw \
+  --name-it="Farina di avena, cruda" \
+  --matrix-id=farina_di_avena --matrix-description-it="Farina di avena" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
+### Farina integrale di segale, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_farina_di_segale_integrale_raw`. FDC ID 168885 (SR Legacy, "Rye flour, dark"). "Dark" rye flour = farina integrale (include crusca e germe), distinta dalla "light" (raffinata) — scelta deliberata per rappresentare la farina di segale integrale richiesta dalla voce di coda.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (33,0µg/100g) — nessuna firma di arricchimento. Fibra 23,8g/100g: alta ma coerente con una farina di segale integrale concentrata in crusca (non un'anomalia, lo stesso ordine di grandezza della crusca di frumento già nel Golden Set). Beta-carotene 7,00µg/100g esplicito (piccola traccia, plausibile per una farina integrale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168885 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_segale_raw` (segale in chicchi, già eseguita sul DB reale — stessa specie *Secale cereale*, stessa famiglia botanica Poaceae; differisce solo per il grado di macinazione).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `farina_di_segale_integrale` ("Farina di segale integrale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 7,00µg esplicito, non zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168885 --food-id=food_farina_di_segale_integrale_raw \
+  --name-it="Farina integrale di segale, cruda" \
+  --matrix-id=farina_di_segale_integrale --matrix-description-it="Farina di segale integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_segale_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168885 --food-id=food_farina_di_segale_integrale_raw \
+  --name-it="Farina integrale di segale, cruda" \
+  --matrix-id=farina_di_segale_integrale --matrix-description-it="Farina di segale integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_segale_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae --apply
+```
+
 ### Olio di semi di colza (canola) — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
 
 - **food_id**: `food_olio_di_colza_raw`. FDC ID 172336 (SR Legacy, "Oil, canola").
