@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Crescione, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_crescione_raw`. FDC ID 170068 (SR Legacy, "Watercress, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (9,00µg/100g) — nessuna firma di arricchimento. Calcio 120mg/100g: tipico per una crucifera a foglia verde (coerente con kale/rucola già nel Golden Set), non un'anomalia. Beta-carotene 1914µg/100g esplicito, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti. Vitamina K 250µg/100g, alta ma tipica per una verdura a foglia verde scura. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170068 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_kale_raw` (cavolo kale, già nei 30 alimenti originali del Golden Set — stessa famiglia Brassicaceae, stessa categoria "verdura a foglia verde crucifera", stesso trattamento low_oxalate).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `crescione` ("Crescione").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=low_oxalate` (per analogia diretta con kale, stessa famiglia), `carotenoid_matrix_state=raw_intact` (beta-carotene 1914µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (*Nasturtium officinale*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170068 --food-id=food_crescione_raw \
+  --name-it="Crescione, crudo" \
+  --matrix-id=crescione --matrix-description-it="Crescione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae
+```
+```
+npm run add-food -- --fdc-id=170068 --food-id=food_crescione_raw \
+  --name-it="Crescione, crudo" \
+  --matrix-id=crescione --matrix-description-it="Crescione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
+```
+
 ### Farina di carruba — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_farina_di_carruba_raw`. FDC ID 173755 (SR Legacy, "Carob flour").
