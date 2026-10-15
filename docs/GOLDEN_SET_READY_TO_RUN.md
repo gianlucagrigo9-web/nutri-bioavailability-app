@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pasta integrale, cotta (bollita, non arricchita) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_pasta_integrale_cotta`. FDC ID 168910 (SR Legacy, "Pasta, whole-wheat, cooked (Includes foods for USDA's Food Distribution Program)"). Distinta da `food_pasta_integrale_raw` (cruda/secca, già "pronta" ma non ancora eseguita, FDC 169738, stessa coppia del settimo lotto) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Acido folico (folic acid) riportato come voce separata dal folato totale (21,0µg/100g), con valore **0µg esplicito** — nessuna firma di arricchimento in stile USA, coerente col crudo già valutato. Calcio 13,0mg/100g, magnesio 54,0mg/100g: entrambi nella norma per una pasta integrale non arricchita, nessun segno di propionato di calcio o additivi industriali (lo stesso tipo di segnale già usato per scartare "pane comune"/"pane integrale" in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168910 e dataType SR Legacy.
+- **Analogia usata**: `food_pasta_enriched_cooked` (pasta cotta arricchita, già nei 30 alimenti originali del Golden Set, quindi già reale nel DB — stessa categoria "pasta cotta", stessa famiglia Poaceae; differisce solo per `is_fortified_folate`, qui `false` invece di `true`, stesso schema già usato dal crudo `food_pasta_integrale_raw` con `food_pasta_enriched_dry`. NON uso `food_pasta_integrale_raw` come analogia: è solo "pronto", non ancora eseguito sul DB reale, e l'analogia deve riferirsi a un alimento che esiste davvero.).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `pasta_integrale_cotta` ("Pasta integrale, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 2,00µg/100g molto basso, stesso trattamento già usato per orzo/riso cotti in questo lotto), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Poaceae` (grano, stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — nessuna fortificazione).
+
+```
+npm run add-food -- --fdc-id=168910 --food-id=food_pasta_integrale_cotta \
+  --name-it="Pasta integrale, cotta (bollita, non arricchita)" \
+  --matrix-id=pasta_integrale_cotta --matrix-description-it="Pasta integrale, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168910 --food-id=food_pasta_integrale_cotta \
+  --name-it="Pasta integrale, cotta (bollita, non arricchita)" \
+  --matrix-id=pasta_integrale_cotta --matrix-description-it="Pasta integrale, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Funghi champignon, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_funghi_champignon_cotti`. FDC ID 169252 (SR Legacy, "Mushrooms, white, cooked, boiled, drained, without salt"). Distinti da `food_mushroom_white_raw` (crudi, già eseguiti, FDC 169251) — stesso alimento, forma cotta. **Nome cambiato rispetto alla coda**: la voce di coda indicava "cotti (saltati)", ma nessun record FDC per funghi champignon saltati/stir-fried con copertura nutrienti pulita è stato cercato/trovato in questo run — il record SR Legacy disponibile e completo è "boiled, drained" (bolliti, non saltati in padella con grassi aggiunti, che avrebbe un profilo di grassi diverso). Nome aggiornato di conseguenza per non rappresentare un metodo di cottura diverso da quello realmente misurato.
