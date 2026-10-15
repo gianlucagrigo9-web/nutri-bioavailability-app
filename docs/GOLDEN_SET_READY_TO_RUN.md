@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Olio di semi di colza (canola) — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
+
+- **food_id**: `food_olio_di_colza_raw`. FDC ID 172336 (SR Legacy, "Oil, canola").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (0µg/100g) — nessuna firma di arricchimento (comunque non applicabile a un olio puro). Praticamente tutti i micronutrienti minerali/vitaminici idrosolubili sono 0µg/mg espliciti (coerente con un olio vegetale puro al 100% di grasso, nessuna traccia di proteine/minerali/acqua) — unica eccezione rilevante, vitamina K 71,3µg/100g, plausibile per un olio vegetale (coerente con gli altri oli già nel progetto). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172336 e dataType SR Legacy (release 30 aprile 2026). Scartato a priori un secondo candidato con lo stesso nome (FDC 748278): non verificato, il primo risultato SR Legacy era già pulito e completo.
+- **Analogia usata**: `food_burro` (burro, già eseguito sul DB reale — stessa categoria "grasso puro da cucina", stessa convenzione già usata per olio di girasole/mais/cocco e per lo strutto in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale).
+- **Matrice**: nuova `olio_di_colza` ("Olio di semi di colza (canola)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — stesso trattamento già usato per gli altri oli/zuccheri raffinati di questa coda, prodotto industriale non rappresentativo di una singola pianta), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172336 --food-id=food_olio_di_colza_raw \
+  --name-it="Olio di semi di colza (canola)" \
+  --matrix-id=olio_di_colza --matrix-description-it="Olio di semi di colza (canola)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172336 --food-id=food_olio_di_colza_raw \
+  --name-it="Olio di semi di colza (canola)" \
+  --matrix-id=olio_di_colza --matrix-description-it="Olio di semi di colza (canola)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Yogurt magro (nonfat), bianco — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
 
 - **food_id**: `food_yogurt_magro_raw`. FDC ID 170887 (SR Legacy, "Yogurt, plain, skim milk"). Distinto da `food_yogurt_bianco_intero` (yogurt bianco intero, già eseguito, FDC 171284) e da `food_yogurt_greco` (yogurt greco intero, già eseguito, FDC 171304) — prodotto a basso contenuto di grassi, non Greco.
