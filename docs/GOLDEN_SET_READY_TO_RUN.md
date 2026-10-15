@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Verza, cotta (bollita, con sale) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_verza_cotta`. FDC ID 168516 (SR Legacy, "Cabbage, savoy, cooked, boiled, drained, with salt"). Distinta da `food_verza_raw` (cruda, già eseguita sul DB reale) — stesso alimento, forma cotta. **Solo la variante "with salt" ha un FDC ID verificabile** su getfoodfacts.com: la variante "without salt" è citata da recipal.com/bodbot.com ma senza FDC ID numerico esplicito. Sodio (260mg/100g) non è uno dei 17 nutrienti tracciati, non inquina i valori usati.
+- **Nutrienti**: **14/17 — mancano vitamina K, beta-carotene e altri carotenoidi provitaminici A**, non riportati nella pagina (la pagina mostra solo Vitamina A RAE aggregata, 44,0µg/100g, non le singole frazioni) — gap dichiarato, non stimato. Acido folico 0µg esplicito, separato dal folato totale (46,0µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com (FDC ID 168516, dataType SR Legacy).
+- **Analogia usata**: `food_verza_raw` (verza cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura; eredita `matrix_category_calcium=NULL` dal crudo).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `verza_cotta` ("Verza, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento della riga crudo sorella), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non zero esplicito, vedi gap sopra), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168516 --food-id=food_verza_cotta \
+  --name-it="Verza, cotta (bollita, con sale)" \
+  --matrix-id=verza_cotta --matrix-description-it="Verza, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_verza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168516 --food-id=food_verza_cotta \
+  --name-it="Verza, cotta (bollita, con sale)" \
+  --matrix-id=verza_cotta --matrix-description-it="Verza, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_verza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Bietole da costa, cotte (bollite, con sale) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_bietole_da_costa_cotte`. FDC ID 169343 (SR Legacy, "Chard, swiss, cooked, boiled, drained, with salt"). Distinte da `food_bietole_da_costa_raw` (crude, già eseguite sul DB reale) — stesso alimento, forma cotta. **Solo la variante "with salt" ha un FDC ID verificabile** su getfoodfacts.com: la variante "without salt" è citata da recipal.com/bodbot.com/fitbit.com ma senza un FDC ID numerico esplicito su nessuna di quelle pagine — stesso tipo di scelta già fatta per peperoni rossi e riportata nella coda. Il sodio (415mg/100g) non è uno dei 17 nutrienti tracciati da questo progetto, quindi non inquina i valori usati.
