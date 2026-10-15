@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Merluzzo, cotto al forno (calore secco) — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_merluzzo_cotto`. FDC ID 171956 (SR Legacy, "Fish, cod, Atlantic, cooked, dry heat"). Distinto da `food_merluzzo_raw` (merluzzo crudo, già eseguito, FDC 171955) — stesso pesce, forma cotta "dry heat" (calore secco, es. al forno/alla griglia senza liquido), stessa convenzione già usata per `food_salmon_cooked` nel Golden Set originale (`baseline_cooking_state=dry_heat_cooked`).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (8,00µg/100g) — nessuna firma di arricchimento (comunque non applicabile al pesce). Selenio 37,6µg/100g e vitamina B12 1,05µg/100g coerenti con un pesce magro cotto, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171956 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stesso pesce, stesso stato tranne la cottura; `is_heme_iron=true` mantenuto per coerenza con la convenzione già usata per i pesci di questa coda).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: **nota per chi esegue**: per formare una vera coppia crudo/cotto (necessaria al motore di cottura per calcolare i fattori di ritenzione, come già fatto per carote/broccoli/spinaci/cavoletti nel Golden Set originale) questo alimento dovrebbe riusare lo STESSO `matrix_id` già assegnato a `food_merluzzo_raw` — non verificabile da questa sessione, priva di accesso diretto a Supabase (il comando originale di quella voce è nella cronologia git non più raggiungibile da questa sessione per via del rebase/force-update del repository). Propongo `matrix-id=merluzzo` con descrizione "Merluzzo": se il raw usa già questo nome lo script lo riusa correttamente; se usa un nome diverso, correggere `--matrix-id` prima di lanciare il comando per far coincidere le due righe sulla stessa matrice (altrimenti si crea comunque l'alimento, solo senza la coppia di ritenzione).
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per gli altri pesci di questa coda e per `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171956 --food-id=food_merluzzo_cotto \
+  --name-it="Merluzzo, cotto al forno (calore secco)" \
+  --matrix-id=merluzzo --matrix-description-it="Merluzzo" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171956 --food-id=food_merluzzo_cotto \
+  --name-it="Merluzzo, cotto al forno (calore secco)" \
+  --matrix-id=merluzzo --matrix-description-it="Merluzzo" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Crusca d'avena, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_crusca_di_avena_raw`. FDC ID 168872 (SR Legacy, "Oat bran, raw"). Distinta da `food_crusca_di_frumento_raw` (crusca di frumento, già eseguita, specie diversa) e da `food_farina_di_avena_raw` (preparato in questo stesso run, parte diversa del chicco).
