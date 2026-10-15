@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Sedano, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_sedano_cotto`. FDC ID 169989 (SR Legacy, "Celery, cooked, boiled, drained, without salt"). Distinto da `food_sedano_raw` (crudo, già eseguito, FDC 169988) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 313µg/100g, folato 33,0µg/100g, vitamina K 37,8µg/100g. **Attenzione dichiarata**: la variante "with salt" dello stesso alimento (FDC 169342, anch'essa SR Legacy) riporta valori non-sodio sensibilmente diversi (folato 22,0µg/100g, beta-carotene 235µg/100g, vitamina K 28,4µg/100g — circa 30% in meno su tutti e tre), a differenza di porri/fagiolini dove le varianti con/senza sale hanno valori non-sodio pressoché identici. Sembra una reale discrepanza fra due basi analitiche USDA per il sedano cotto, non un problema di lettura da parte mia. Uso comunque FDC 169989 ("without salt", coerente con la preferenza già adottata in questa coda), ma segnalo la discrepanza qui per trasparenza: se in futuro serve citare con più sicurezza folato/beta-carotene/vit.K del sedano cotto, andrebbe verificata direttamente la pagina FDC ufficiale (non raggiungibile da questa sessione). Fonte: getfoodfacts.com (FDC ID 169989, dataType SR Legacy).
+- **Analogia usata**: `food_sedano_raw` (sedano crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `sedano_cotto` ("Sedano, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo, coerente col crudo che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Apiaceae` (stessa famiglia botanica reale del sedano crudo e delle carote), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169989 --food-id=food_sedano_cotto \
+  --name-it="Sedano, cotto (bollito)" \
+  --matrix-id=sedano_cotto --matrix-description-it="Sedano, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169989 --food-id=food_sedano_cotto \
+  --name-it="Sedano, cotto (bollito)" \
+  --matrix-id=sedano_cotto --matrix-description-it="Sedano, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Porri, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_porri_cotti`. FDC ID 168426 (SR Legacy, "Leeks, (bulb and lower leaf-portion), cooked, boiled, drained, without salt"). Distinti da `food_porri_raw` (crudi, già eseguiti, FDC 169246) — stesso alimento, forma cotta.
