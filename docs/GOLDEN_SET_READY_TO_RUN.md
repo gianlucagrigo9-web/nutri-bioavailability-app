@@ -16,6 +16,160 @@
 
 ## Pronti
 
+### Carciofi, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_carciofi_cotti`. FDC ID 168386 (SR Legacy, "Artichokes, (globe or french), cooked, boiled, drained, without salt"). Distinto da `food_carciofi_raw` (crudi, già eseguiti sul DB reale) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (89,0µg/100g) — nessuna firma di arricchimento. Tutti i valori dichiarati da un'unica fonte SR Legacy sulla pagina, nessuna mescolanza con altri database. Fonte: getfoodfacts.com (FDC ID 168386, dataType SR Legacy).
+- **Analogia usata**: `food_carciofi_raw` (carciofi crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `carciofi_cotti` ("Carciofi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene 8,00µg/100g presente, stessa convenzione delle altre verdure cotte di questo lotto), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Asteraceae` (famiglia botanica reale del carciofo, *Cynara cardunculus*), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168386 --food-id=food_carciofi_cotti \
+  --name-it="Carciofi, cotti (bolliti)" \
+  --matrix-id=carciofi_cotti --matrix-description-it="Carciofi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carciofi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168386 --food-id=food_carciofi_cotti \
+  --name-it="Carciofi, cotti (bolliti)" \
+  --matrix-id=carciofi_cotti --matrix-description-it="Carciofi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carciofi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Patata dolce, cotta (al forno) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_patata_dolce_cotta`. FDC ID 170134 (SR Legacy, "Sweet potato, cooked, baked in skin, flesh, with salt"). Distinta da `food_patata_dolce_raw` (cruda, già eseguita sul DB reale, FDC 168482) — stesso alimento, forma cotta.
+- **Nutrienti**: **15/17 — ATTENZIONE, gap significativo**: mancano **beta-carotene e gli altri carotenoidi provitaminici A**, non riportati in nessuna delle due fonti indipendenti consultate (getfoodfacts.com e recipal.com), nonostante la patata dolce sia notoriamente uno degli alimenti vegetali più ricchi di vitamina A. Gap dichiarato e NON stimato, stesso trattamento già dato a `food_farro_raw` per l'energia mancante — **questo alimento, se inserito, resta `draft` e non va usato per calcolare l'assunzione di vitamina A finché il gap non è risolto da un'altra fonte**. Acido folico 0µg esplicito. Sodio 246mg/100g (sale aggiunto durante la cottura in forno con buccia, consuetudine USA) — non è uno dei 17 nutrienti tracciati da questo progetto, quindi non inquina i valori usati; non è stato trovato un record "without salt" con FDC ID verificabile (solo un NDB ID 11508 su recipal.com, senza FDC ID). Fonte: getfoodfacts.com (FDC ID 170134, dataType SR Legacy), cross-verificata con recipal.com per gli altri nutrienti (valori per 100g coerenti).
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `patata_dolce_cotta` ("Patata dolce, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non zero esplicito, vedi gap sopra), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Convolvulaceae` (famiglia botanica reale della patata dolce, diversa dalla patata comune Solanaceae — stessa nota già fatta per il crudo), `baseline_cooking_state=baked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170134 --food-id=food_patata_dolce_cotta \
+  --name-it="Patata dolce, cotta (al forno, con buccia)" \
+  --matrix-id=patata_dolce_cotta --matrix-description-it="Patata dolce, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_patata_dolce_raw \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170134 --food-id=food_patata_dolce_cotta \
+  --name-it="Patata dolce, cotta (al forno, con buccia)" \
+  --matrix-id=patata_dolce_cotta --matrix-description-it="Patata dolce, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_patata_dolce_raw \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cavolfiore, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_cavolfiore_cotto`. FDC ID 170397 (SR Legacy, "Cauliflower, cooked, boiled, drained, without salt"). **Non** è la forma cotta di un `food_cavolfiore_raw` che non esiste nel DB: il crudo resta ⚠ (match debole, 12/17 nutrienti, 3 valori di energia discordanti sulla stessa pagina — vedi coda PRD). Questo record cotto è un record FDC diverso e indipendente, non ereditato dal crudo.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (44,0µg/100g) — nessuna firma di arricchimento. Un solo valore di energia dichiarato (23,0 kcal/100g), coerente su tutta la pagina — a differenza del crudo. Unica incongruenza minore: il calcolo Atwater dai macronutrienti dichiarati darebbe ~28kcal invece di 23kcal — uno scostamento dello stesso tipo (arrotondamento/metodo "carboidrati per differenza") già visto altrove in questa coda (es. orzo perlato cotto), non bloccante. Fonte: getfoodfacts.com (FDC ID 170397, dataType SR Legacy).
+- **Analogia usata**: `food_broccoli_boiled` (broccoli bolliti, già nei 30 alimenti originali del Golden Set, quindi reale nel DB — stessa famiglia botanica reale Brassicaceae, stesso stato di cottura. NON uso il crudo del cavolfiore come analogia: non esiste nel DB, resta solo ⚠).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cavolfiore_cotto` ("Cavolfiore, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento di `food_broccoli_boiled`), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene 7,00µg/100g presente), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170397 --food-id=food_cavolfiore_cotto \
+  --name-it="Cavolfiore, cotto (bollito)" \
+  --matrix-id=cavolfiore_cotto --matrix-description-it="Cavolfiore, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170397 --food-id=food_cavolfiore_cotto \
+  --name-it="Cavolfiore, cotto (bollito)" \
+  --matrix-id=cavolfiore_cotto --matrix-description-it="Cavolfiore, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cipolle, cotte (bollite) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_cipolle_cotte`. FDC ID 170001 (SR Legacy, "Onions, cooked, boiled, drained, without salt"). Distinte da `food_onion_raw` (crude, già eseguite sul DB reale) — stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la voce indicava "stufate", ma in questo run è stato cercato solo il metodo bollito (nessuna ricerca dedicata per uno stufato con grassi aggiunti, che avrebbe un profilo diverso).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (15,0µg/100g) — nessuna firma di arricchimento. Calcio 22mg/100g nella norma. Fonte: getfoodfacts.com (FDC ID 170001, dataType SR Legacy).
+- **Analogia usata**: `food_onion_raw` (cipolle crude, già eseguite sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cipolle_cotte` ("Cipolle, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene 1,00µg/100g presente anche se basso, stessa convenzione delle altre verdure cotte di questo lotto), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Amaryllidaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170001 --food-id=food_cipolle_cotte \
+  --name-it="Cipolle, cotte (bollite)" \
+  --matrix-id=cipolle_cotte --matrix-description-it="Cipolle, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170001 --food-id=food_cipolle_cotte \
+  --name-it="Cipolle, cotte (bollite)" \
+  --matrix-id=cipolle_cotte --matrix-description-it="Cipolle, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Peperoni rossi, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_peperoni_rossi_cotti`. FDC ID 170515 (SR Legacy, "Peppers, sweet, red, cooked, boiled, drained, with salt"). Distinti da `food_pepper_red_raw` (crudi, già eseguiti sul DB reale) — stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la voce indicava "arrostiti", ma nessun record FDC per peperoni arrostiti è stato trovato in questo run; usato il record bollito.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento. **Nota sul sale**: solo la variante "with salt" risulta indicizzata su getfoodfacts.com con un FDC ID verificabile (sodio 238mg/100g); non è stato trovato un FDC ID verificabile per una variante "without salt" (solo un NDB ID 11823 su recipal.com, senza corrispondenza FDC diretta). Il sodio non è uno dei 17 nutrienti tracciati da questo progetto; inoltre i valori di vitamina C (171mg) e folato (16µg) coincidono quasi esattamente con la stima indipendente "without salt" di recipal.com, a conferma che il sale aggiunto non altera i nutrienti tracciati. Fonte: getfoodfacts.com (FDC ID 170515, dataType SR Legacy).
+- **Analogia usata**: `food_pepper_red_raw` (peperoni rossi crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura, ortaggio botanicamente "frutto" come da definizione PRD §4.9).
+- **Matrice**: nuova `peperoni_rossi_cotti` ("Peperoni rossi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene 1525µg/100g, valore alto), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Solanaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170515 --food-id=food_peperoni_rossi_cotti \
+  --name-it="Peperoni rossi, cotti (bolliti)" \
+  --matrix-id=peperoni_rossi_cotti --matrix-description-it="Peperoni rossi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170515 --food-id=food_peperoni_rossi_cotti \
+  --name-it="Peperoni rossi, cotti (bolliti)" \
+  --matrix-id=peperoni_rossi_cotti --matrix-description-it="Peperoni rossi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Melanzane, cotte (bollite) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
+
+- **food_id**: `food_melanzane_cotte`. FDC ID 169229 (SR Legacy, "Eggplant, cooked, boiled, drained, without salt"). Distinte da `food_melanzane_raw` (crude, già eseguite sul DB reale, FDC 169228) — stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la voce indicava "grigliate", ma nessun record FDC per melanzane grigliate è stato trovato in questo run; usato il record bollito, unico disponibile e completo.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (14,0µg/100g) — nessuna firma di arricchimento. Calcio 6mg/100g basso, coerente con la verdura cruda già eseguita. Fonte: getfoodfacts.com (FDC ID 169229, dataType SR Legacy).
+- **Analogia usata**: `food_melanzane_raw` (melanzane crude, già eseguite sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura, ortaggio botanicamente "frutto" come da definizione PRD §4.9).
+- **Matrice**: nuova `melanzane_cotte` ("Melanzane, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene 22,0µg/100g presente), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Solanaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169229 --food-id=food_melanzane_cotte \
+  --name-it="Melanzane, cotte (bollite)" \
+  --matrix-id=melanzane_cotte --matrix-description-it="Melanzane, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_melanzane_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169229 --food-id=food_melanzane_cotte \
+  --name-it="Melanzane, cotte (bollite)" \
+  --matrix-id=melanzane_cotte --matrix-description-it="Melanzane, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_melanzane_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pasta integrale, cotta (bollita, non arricchita) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
 
 - **food_id**: `food_pasta_integrale_cotta`. FDC ID 168910 (SR Legacy, "Pasta, whole-wheat, cooked (Includes foods for USDA's Food Distribution Program)"). Distinta da `food_pasta_integrale_raw` (cruda/secca, già "pronta" ma non ancora eseguita, FDC 169738, stessa coppia del settimo lotto) — stesso alimento, forma cotta.
