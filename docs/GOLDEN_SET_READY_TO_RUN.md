@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Riso integrale, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_riso_integrale_cotto`. FDC ID 169704 (SR Legacy, "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)"). Distinto da `food_riso_integrale_raw` (crudo, già eseguito, FDC 169703) — stesso alimento, forma cotta. Nessun record SR Legacy "generico" (senza la dicitura FDP) trovato: stessa famiglia di descrizione già vista per il crudo (FDC 169703 ha la stessa dicitura "Includes foods for USDA's Food Distribution Program" senza che questo implichi arricchimento — è solo una nota di programma di distribuzione USDA, non un additivo).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (9,00µg/100g) — nessuna firma di arricchimento (coerente col crudo, già verificato "unenriched"). Calcio 3,0mg/100g basso, coerente con un cereale integrale non trattato. Fonte: getfoodfacts.com (FDC ID 169704, dataType SR Legacy), cross-verificata con foodstruct.com e myfooddata.com (stesso FDC ID, stessa descrizione).
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `riso_integrale_cotto` ("Riso integrale, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, coerente col crudo che non lo aveva impostato), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Poaceae` (famiglia botanica reale del riso, *Oryza sativa*), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169704 --food-id=food_riso_integrale_cotto \
+  --name-it="Riso integrale, cotto (bollito)" \
+  --matrix-id=riso_integrale_cotto --matrix-description-it="Riso integrale, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169704 --food-id=food_riso_integrale_cotto \
+  --name-it="Riso integrale, cotto (bollito)" \
+  --matrix-id=riso_integrale_cotto --matrix-description-it="Riso integrale, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Quinoa, cotta (bollita) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_quinoa_cotta`. FDC ID 168917 (SR Legacy, "Quinoa, cooked"). Distinta da `food_quinoa_dry_raw` (secca/cruda, già eseguita, FDC 168874) — stesso alimento, forma cotta.
