@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bistecca di manzo (taglio magro, es. controfiletto), cruda — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_bistecca_di_manzo_raw`. FDC ID 174055 (SR Legacy, "Beef, top sirloin, steak, separable lean only, trimmed to 1/8\" fat, all grades, raw"). NON usa `food_beef_raw` (riga demo legacy già riservata/esclusa) né altri id riservati.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (13,0µg/100g) — nessuna firma di arricchimento. Calcio 25,0mg/100g, nella norma per un taglio di manzo magro (non l'anomalia vista nei prodotti "enhanced"/affumicati di questa coda). "Separable lean only" = taglio magro, coerente con la richiesta "manzo magro, es. controfiletto". Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174055 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, nel Golden Set originale — stessa specie, stesso trattamento `is_heme_iron=true`, `matrix_category_calcium`/`botanical_family` NULL già usati per quella riga).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `bistecca_di_manzo` ("Bistecca di manzo, taglio magro").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174055 --food-id=food_bistecca_di_manzo_raw \
+  --name-it="Bistecca di manzo (taglio magro, es. controfiletto), cruda" \
+  --matrix-id=bistecca_di_manzo --matrix-description-it="Bistecca di manzo, taglio magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174055 --food-id=food_bistecca_di_manzo_raw \
+  --name-it="Bistecca di manzo (taglio magro, es. controfiletto), cruda" \
+  --matrix-id=bistecca_di_manzo --matrix-description-it="Bistecca di manzo, taglio magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Farina di cocco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_farina_di_cocco_raw`. FDC ID 2515382 (**Foundation Foods**, "Flour, coconut"). Distinta da `food_olio_di_cocco_raw` (olio di cocco, già eseguito — prodotto diverso, solo il grasso estratto) e da `food_noce_di_cocco_raw` (polpa fresca, 🟡 in coda precedente — prodotto disidratato e defatted, non la polpa fresca).
