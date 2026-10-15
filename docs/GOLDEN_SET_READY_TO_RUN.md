@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Funghi shiitake, crudi — preparato 2026-10-15 dal task orario (settimo lotto, bonus oltre la quota)
+
+- **food_id**: `food_funghi_shiitake_raw`. FDC ID 169242 (SR Legacy, "Mushrooms, shiitake, raw").
+- **Nutrienti**: **12/17** — mancano `vitamin_c_mg`, `vitamin_k_mcg`, `vitamin_b12_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina del record, non riportati a zero; gap dichiarato, stesso standard già usato per castagne/cardi in coda precedenti — soglia minima accettata ~10/17, qui sopra soglia). Acido folico 0µg esplicito, separato dal folato totale (13,0µg/100g) — nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169242 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon, già eseguiti sul DB reale — stessa categoria "fungo commestibile", stesso trattamento "nessuna famiglia botanica" perché i funghi non sono piante).
+- **Categoria dieta**: `plant_non_fruit` (fungo).
+- **Matrice**: nuova `funghi_shiitake` ("Funghi shiitake").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — fungo, non pianta, stesso trattamento dei funghi champignon già nel DB), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169242 --food-id=food_funghi_shiitake_raw \
+  --name-it="Funghi shiitake, crudi" \
+  --matrix-id=funghi_shiitake --matrix-description-it="Funghi shiitake" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169242 --food-id=food_funghi_shiitake_raw \
+  --name-it="Funghi shiitake, crudi" \
+  --matrix-id=funghi_shiitake --matrix-description-it="Funghi shiitake" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Semi di papavero, secchi — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_semi_di_papavero_raw`. FDC ID 171330 (SR Legacy, "Spices, poppy seed").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (82,0µg/100g) — nessuna firma di arricchimento. Calcio 1.438mg/100g molto alto ma è una caratteristica nota e reale dei semi di papavero (fra i semi più ricchi di calcio in assoluto, come i semi di sesamo già nel Golden Set), non un'anomalia. Beta-carotene, alfa-carotene, beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171330 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_semi_di_sesamo_raw` (semi di sesamo, già eseguiti sul DB reale — stessa categoria funzionale "seme condimento ad alto contenuto di calcio").
+- **Categoria dieta**: `plant_non_fruit` (seme).
+- **Matrice**: nuova `semi_di_papavero` ("Semi di papavero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione già usata per i funghi champignon e lo zenzero di questo run), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Papaveraceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi (come già per aglio/basilico/prezzemolo/zenzero).
+
+```
+npm run add-food -- --fdc-id=171330 --food-id=food_semi_di_papavero_raw \
+  --name-it="Semi di papavero, secchi" \
+  --matrix-id=semi_di_papavero --matrix-description-it="Semi di papavero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_sesamo_raw \
+  --diet-category=plant_non_fruit --botanical-family=Papaveraceae
+```
+```
+npm run add-food -- --fdc-id=171330 --food-id=food_semi_di_papavero_raw \
+  --name-it="Semi di papavero, secchi" \
+  --matrix-id=semi_di_papavero --matrix-description-it="Semi di papavero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_sesamo_raw \
+  --diet-category=plant_non_fruit --botanical-family=Papaveraceae --apply
+```
+
 ### Formaggio svizzero (Emmentaler) — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_formaggio_svizzero_raw`. FDC ID 171251 (SR Legacy, "Cheese, swiss").
