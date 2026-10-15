@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Origano, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_origano_secco_raw`. FDC ID 171328 (SR Legacy, "Spices, oregano, dried").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (237µg/100g) — nessuna firma di arricchimento. Calcio (1597mg/100g), ferro (36,8mg/100g) e folato molto alti ma coerenti con una spezia secca (concentrazione per disidratazione, stesso fenomeno già visto per basilico/prezzemolo/menta in questa coda, qui amplificato perché l'uso è "dried" non "fresh"), non un segnale di arricchimento artificiale. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171328 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per basilico/prezzemolo/menta in questa coda, "erba/pianta aromatica"; famiglia botanica Lamiaceae dichiarata separatamente, diversa da Asteraceae della scarola).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `origano_secco` ("Origano secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 1007µg/100g esplicito — stessa scelta prudente già usata per la frutta secca essiccata nel Golden Set, fattore di conversione meno generoso), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Origanum vulgare*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi (come già per le altre erbe aromatiche di questa coda).
+
+```
+npm run add-food -- --fdc-id=171328 --food-id=food_origano_secco_raw \
+  --name-it="Origano, secco" \
+  --matrix-id=origano_secco --matrix-description-it="Origano secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=171328 --food-id=food_origano_secco_raw \
+  --name-it="Origano, secco" \
+  --matrix-id=origano_secco --matrix-description-it="Origano secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae --apply
+```
+
 ### Melassa — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_melassa`. FDC ID 168820 (SR Legacy, "Molasses"). Distinta da `food_miele` (miele, già eseguito — prodotto animale, dieta egg_dairy) e da `food_sciroppo_di_acero_raw` (sciroppo d'acero, già eseguito — fonte diversa).
