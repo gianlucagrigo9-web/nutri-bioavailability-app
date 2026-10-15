@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello, cotto — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_agnello_cotto`. FDC ID 174339 (SR Legacy, "Lamb, New Zealand, imported, frozen, composite of trimmed retail cuts, separable lean only, cooked"). Distinto da `food_agnello_raw` (crudo, già eseguito sul DB reale, FDC 174338) — stesso taglio composito, stessa provenienza (Nuova Zelanda, importato, congelato), stessa categoria "lean only", stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la descrizione FDC non specifica un metodo di cottura (non dice "roasted"/"braised"), quindi il nome resta "agnello, cotto" generico invece di "arrosto" per non attribuire un metodo non confermato.
+- **Nutrienti**: **14/17 — mancano vitamina K, beta-carotene e altri carotenoidi provitaminici A**, non riportati nel record (stesso identico gap già presente nel crudo `food_agnello_raw`, coerenza interna). Acido folico 0µg esplicito, folato totale 0µg/100g — nessuna firma di arricchimento. Fonte: getfoodfacts.com (FDC ID 174339, dataType SR Legacy).
+- **Analogia usata**: `food_agnello_raw` (agnello crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_cotto` ("Agnello, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_agnello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174339 --food-id=food_agnello_cotto \
+  --name-it="Agnello, cotto" \
+  --matrix-id=agnello_cotto --matrix-description-it="Agnello, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174339 --food-id=food_agnello_cotto \
+  --name-it="Agnello, cotto" \
+  --matrix-id=agnello_cotto --matrix-description-it="Agnello, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Verza, cotta (bollita, con sale) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_verza_cotta`. FDC ID 168516 (SR Legacy, "Cabbage, savoy, cooked, boiled, drained, with salt"). Distinta da `food_verza_raw` (cruda, già eseguita sul DB reale) — stesso alimento, forma cotta. **Solo la variante "with salt" ha un FDC ID verificabile** su getfoodfacts.com: la variante "without salt" è citata da recipal.com/bodbot.com ma senza FDC ID numerico esplicito. Sodio (260mg/100g) non è uno dei 17 nutrienti tracciati, non inquina i valori usati.
