@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Erba cipollina, fresca — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_erba_cipollina_raw`. FDC ID 169994 (SR Legacy, "Chives, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (105µg/100g) — nessuna firma di arricchimento. Beta-carotene 2612µg/100g esplicito, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti. Calcio 92,0mg/100g, vitamina K 213µg/100g: alti ma tipici per un'erba aromatica allium a foglia, non un'anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169994 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_onion_raw` (cipolla, già eseguita sul DB reale — stessa famiglia Amaryllidaceae, stesso genere *Allium*, già usata come analogia per porri e scalogno in lotti precedenti).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica/ortaggio allium).
+- **Matrice**: nuova `erba_cipollina` ("Erba cipollina").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 2612µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (*Allium schoenoprasum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169994 --food-id=food_erba_cipollina_raw \
+  --name-it="Erba cipollina, fresca" \
+  --matrix-id=erba_cipollina --matrix-description-it="Erba cipollina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Amaryllidaceae
+```
+```
+npm run add-food -- --fdc-id=169994 --food-id=food_erba_cipollina_raw \
+  --name-it="Erba cipollina, fresca" \
+  --matrix-id=erba_cipollina --matrix-description-it="Erba cipollina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Amaryllidaceae --apply
+```
+
 ### Peperoncino verde piccante, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_peperoncino_verde_raw`. FDC ID 170497 (SR Legacy, "Peppers, hot chili, green, raw"). Distinto da `food_peperoncino_piccante_raw` (peperoncino rosso piccante, FDC 170106, già 🟡 in questa coda — colore/varietà diversa, profilo nutrizionale diverso, non lo stesso alimento) e dai peperoni dolci rosso/giallo/verde già coperti.
