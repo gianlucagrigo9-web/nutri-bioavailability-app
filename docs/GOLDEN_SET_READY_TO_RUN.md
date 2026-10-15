@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli borlotti, secchi, crudi (non bolliti) — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_fagioli_borlotti_secchi_raw`. FDC ID 175189 (SR Legacy, "Beans, cranberry (roman), mature seeds, raw"). Distinto da `food_fagioli_borlotti_bolliti` (già eseguito sul DB reale, FDC 173736 — variante bollita, non crudo secco).
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dal record, non riportati a zero; plausibile per un legume secco, non un'anomalia). Acido folico 0µg esplicito, separato dal folato totale (604µg/100g, food folate=604, DFE=604 — tutti coincidenti, alto ma tipico per un legume secco crudo) — nessuna firma di arricchimento. Vitamina C 0mg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175189 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_fagioli_borlotti_bolliti` (stesso fagiolo, variante bollita, già eseguita sul DB reale — stessa cultivar *Phaseolus vulgaris* "cranberry/roman", differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_borlotti_secchi` ("Fagioli borlotti, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw` (secco, non bollito), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175189 --food-id=food_fagioli_borlotti_secchi_raw \
+  --name-it="Fagioli borlotti, secchi, crudi" \
+  --matrix-id=fagioli_borlotti_secchi --matrix-description-it="Fagioli borlotti, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=175189 --food-id=food_fagioli_borlotti_secchi_raw \
+  --name-it="Fagioli borlotti, secchi, crudi" \
+  --matrix-id=fagioli_borlotti_secchi --matrix-description-it="Fagioli borlotti, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Pasta integrale, cruda (non arricchita) — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_pasta_integrale_raw`. FDC ID 169738 (SR Legacy, "Pasta, whole-wheat, dry (Includes foods for USDA's Food Distribution Program)").
