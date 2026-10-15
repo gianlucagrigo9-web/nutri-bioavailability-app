@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cuore di pollo, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_cuore_di_pollo_raw`. FDC ID 171458 (SR Legacy, "Chicken, heart, all classes, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record; coerente, nessuna frattaglia di questa coda li ha). Acido folico 0µg esplicito, separato dal folato totale (72,0µg/100g) — nessuna firma di arricchimento (comunque non applicabile a una carne). Vitamina B12 molto alta (7,29µg/100g, 304% VNR) e ferro/zinco elevati (5,96mg, 6,59mg) coerenti con una frattaglia, non un'anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171458 e dataType SR Legacy (release 30 aprile 2026). Scartato "Chicken, broilers or fryers, giblets, raw" (FDC 171057): è un composito fegato+cuore+ventriglio, non il cuore puro richiesto.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo, già eseguito sul DB reale — stessa specie, stessa categoria "frattaglia di pollo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `cuore_di_pollo` ("Cuore di pollo").
+- **Attributi**: `--is-heme-iron` (true — frattaglia animale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, nessun carotenoide in un alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171458 --food-id=food_cuore_di_pollo_raw \
+  --name-it="Cuore di pollo, crudo" \
+  --matrix-id=cuore_di_pollo --matrix-description-it="Cuore di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171458 --food-id=food_cuore_di_pollo_raw \
+  --name-it="Cuore di pollo, crudo" \
+  --matrix-id=cuore_di_pollo --matrix-description-it="Cuore di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cicoria selvatica, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_cicoria_selvatica_raw`. FDC ID 169992 (SR Legacy, "Chicory greens, raw").
