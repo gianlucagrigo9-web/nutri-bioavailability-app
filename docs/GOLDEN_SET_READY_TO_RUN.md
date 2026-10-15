@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nettarine, crude — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_nettarine_raw`. FDC ID 169914 (SR Legacy, "Nectarines, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5,00µg/100g) — nessuna firma di arricchimento. Beta-carotene 150µg/100g, alfa-carotene 0µg, beta-criptoxantina 98,0µg/100g (quest'ultima confluisce in `other_provitamin_a_carotenoids_mcg`) — valori coerenti con una drupacea, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169914 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_peach_yellow_raw` (pesche gialle, già eseguito sul DB reale — nettarina e pesca sono la stessa specie *Prunus persica*, differiscono solo per il gene della buccia liscia/pelosa: analogia quasi diretta).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca).
+- **Matrice**: nuova `nettarine` ("Nettarine").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene presente con valore), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169914 --food-id=food_nettarine_raw \
+  --name-it="Nettarine, crude" \
+  --matrix-id=nettarine --matrix-description-it="Nettarine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=169914 --food-id=food_nettarine_raw \
+  --name-it="Nettarine, crude" \
+  --matrix-id=nettarine --matrix-description-it="Nettarine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### Merluzzo, cotto al forno (calore secco) — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_merluzzo_cotto`. FDC ID 171956 (SR Legacy, "Fish, cod, Atlantic, cooked, dry heat"). Distinto da `food_merluzzo_raw` (merluzzo crudo, già eseguito, FDC 171955) — stesso pesce, forma cotta "dry heat" (calore secco, es. al forno/alla griglia senza liquido), stessa convenzione già usata per `food_salmon_cooked` nel Golden Set originale (`baseline_cooking_state=dry_heat_cooked`).
