@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pasta integrale, cruda (non arricchita) — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_pasta_integrale_raw`. FDC ID 169738 (SR Legacy, "Pasta, whole-wheat, dry (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **14/17** — mancano `vitamin_c_mg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dal record, non riportati a zero; plausibile per un prodotto a base di farina, non un'anomalia). Acido folico 0µg esplicito, separato dal folato totale (69,0µg/100g, food folate=69,0, DFE=69,0 — tutti coincidenti) — **nessuna firma di arricchimento stile USA**, a differenza della pasta "enriched" già nei 30 originali (`food_pasta_enriched_dry`, FDC 169736): questo record rappresenta genuinamente la pasta integrale comune italiana, non la variante fortificata. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169738 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_pasta_enriched_dry` (pasta secca arricchita, già nei 30 alimenti originali del Golden Set — stessa categoria "pasta di semola secca", stessa famiglia Poaceae; differisce solo per `is_fortified_folate`, qui `false` invece di `true`).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `pasta_integrale_non_arricchita` ("Pasta integrale (non arricchita)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (grano), `baseline_cooking_state=raw` (secca, non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna fortificazione).
+
+```
+npm run add-food -- --fdc-id=169738 --food-id=food_pasta_integrale_raw \
+  --name-it="Pasta integrale, cruda (non arricchita)" \
+  --matrix-id=pasta_integrale_non_arricchita --matrix-description-it="Pasta integrale (non arricchita)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169738 --food-id=food_pasta_integrale_raw \
+  --name-it="Pasta integrale, cruda (non arricchita)" \
+  --matrix-id=pasta_integrale_non_arricchita --matrix-description-it="Pasta integrale (non arricchita)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Funghi shiitake, crudi — preparato 2026-10-15 dal task orario (settimo lotto, bonus oltre la quota)
 
 - **food_id**: `food_funghi_shiitake_raw`. FDC ID 169242 (SR Legacy, "Mushrooms, shiitake, raw").
