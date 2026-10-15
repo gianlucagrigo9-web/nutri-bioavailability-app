@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Orzo perlato, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_orzo_perlato_cotto`. FDC ID 170285 (SR Legacy, "Barley, pearled, cooked"). Distinto da `food_orzo_perlato_raw` (crudo, già eseguito, FDC 170284) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento (coerente col crudo). Beta-carotene 5,00µg/100g basso. Lieve incoerenza interna sulla pagina fonte (etichetta arrotondata 190kcal/tazza vs tabella dettagliata 193kcal/tazza — solo arrotondamento, non un problema di sourcing). Fonte: getfoodfacts.com (FDC ID 170285, dataType SR Legacy).
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `orzo_perlato_cotto` ("Orzo perlato, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene molto basso, coerente col crudo che non lo aveva impostato), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Poaceae` (famiglia botanica reale dell'orzo, *Hordeum vulgare*), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170285 --food-id=food_orzo_perlato_cotto \
+  --name-it="Orzo perlato, cotto (bollito)" \
+  --matrix-id=orzo_perlato_cotto --matrix-description-it="Orzo perlato, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_orzo_perlato_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170285 --food-id=food_orzo_perlato_cotto \
+  --name-it="Orzo perlato, cotto (bollito)" \
+  --matrix-id=orzo_perlato_cotto --matrix-description-it="Orzo perlato, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_orzo_perlato_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Riso integrale, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_riso_integrale_cotto`. FDC ID 169704 (SR Legacy, "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)"). Distinto da `food_riso_integrale_raw` (crudo, già eseguito, FDC 169703) — stesso alimento, forma cotta. Nessun record SR Legacy "generico" (senza la dicitura FDP) trovato: stessa famiglia di descrizione già vista per il crudo (FDC 169703 ha la stessa dicitura "Includes foods for USDA's Food Distribution Program" senza che questo implichi arricchimento — è solo una nota di programma di distribuzione USDA, non un additivo).
