@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Porri, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_porri_cotti`. FDC ID 168426 (SR Legacy, "Leeks, (bulb and lower leaf-portion), cooked, boiled, drained, without salt"). Distinti da `food_porri_raw` (crudi, già eseguiti, FDC 169246) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 487µg/100g, coerente con un ortaggio a foglia/bulbo. Fonte: getfoodfacts.com (FDC ID 168426, dataType SR Legacy).
+- **Analogia usata**: `food_porri_raw` (porri crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `porri_cotti` ("Porri, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo, coerente con il crudo che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Amaryllidaceae` (stessa famiglia botanica reale di aglio/cipolla/scalogno già nel DB), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168426 --food-id=food_porri_cotti \
+  --name-it="Porri, cotti (bolliti)" \
+  --matrix-id=porri_cotti --matrix-description-it="Porri, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_porri_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168426 --food-id=food_porri_cotti \
+  --name-it="Porri, cotti (bolliti)" \
+  --matrix-id=porri_cotti --matrix-description-it="Porri, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_porri_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Fagiolini, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
 
 - **food_id**: `food_fagiolini_cotti`. FDC ID 169141 (SR Legacy, "Beans, snap, green, cooked, boiled, drained, without salt"). Distinti da `food_fagiolini_raw` (crudi, già eseguiti, FDC 169961) — stesso alimento, forma cotta. Scelta la variante "without salt" (esiste anche "with salt", FDC 169321, valori non-sodio identici).
