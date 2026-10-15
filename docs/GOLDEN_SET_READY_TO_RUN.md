@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio svizzero (Emmentaler) — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_formaggio_svizzero_raw`. FDC ID 171251 (SR Legacy, "Cheese, swiss").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (10,0µg/100g) — nessuna firma di arricchimento. Calcio 890mg/100g alto ma coerente con un formaggio a pasta semidura (confrontabile con parmigiano/gorgonzola già nel Golden Set), nessuna anomalia. Vitamina K: il record non riporta un totale ma riporta il filloquinone (fillochinone, la forma mappata dallo script) a 1,40µg/100g — usato come valore. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171251 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_parmigiano_reggiano` (parmigiano, già eseguito sul DB reale — stessa categoria "formaggio a pasta dura/semidura da latte vaccino", calcio concentrato in modo simile).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_svizzero` ("Formaggio svizzero (Emmentaler)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per gli altri latticini del Golden Set, le categorie ossalati esistono solo per spinaci/kale/latte), `carotenoid_matrix_state` omesso (NULL — non applicabile, latticino, beta-carotene presente ma di origine lattea non vegetale, stessa convenzione già usata per burro/latte/yogurt/formaggi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171251 --food-id=food_formaggio_svizzero_raw \
+  --name-it="Formaggio svizzero (Emmentaler)" \
+  --matrix-id=formaggio_svizzero --matrix-description-it="Formaggio svizzero (Emmentaler)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171251 --food-id=food_formaggio_svizzero_raw \
+  --name-it="Formaggio svizzero (Emmentaler)" \
+  --matrix-id=formaggio_svizzero --matrix-description-it="Formaggio svizzero (Emmentaler)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Ostriche, crude (allevate) — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_ostriche_raw`. FDC ID 175172 (SR Legacy, "Mollusks, oyster, eastern, farmed, raw"). Nota: scelta la variante "allevate" (farmed) perché è la forma più diffusa in commercio in Italia/Europa; esiste anche una variante "wild" come record FDC separato, non usata qui.
