@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rosmarino, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_rosmarino_secco_raw`. FDC ID 171333 (SR Legacy, "Spices, rosemary, dried").
+- **Nutrienti**: **13/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina; campi del tutto assenti dal record, non riportati a zero — gap dichiarato, stesso standard già usato altrove in questa coda). Acido folico 0µg esplicito, separato dal folato totale (307µg/100g) — nessuna firma di arricchimento. Calcio (1280mg/100g), ferro (29,3mg/100g) alti ma coerenti con una spezia secca (stessa concentrazione per disidratazione già vista per l'origano in questo run). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171333 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre erbe aromatiche di questa coda; famiglia botanica Lamiaceae dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `rosmarino_secco` ("Rosmarino secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza dell'origano), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Salvia rosmarinus*, già *Rosmarinus officinalis*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi.
+
+```
+npm run add-food -- --fdc-id=171333 --food-id=food_rosmarino_secco_raw \
+  --name-it="Rosmarino, secco" \
+  --matrix-id=rosmarino_secco --matrix-description-it="Rosmarino secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=171333 --food-id=food_rosmarino_secco_raw \
+  --name-it="Rosmarino, secco" \
+  --matrix-id=rosmarino_secco --matrix-description-it="Rosmarino secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lamiaceae --apply
+```
+
 ### Origano, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_origano_secco_raw`. FDC ID 171328 (SR Legacy, "Spices, oregano, dried").
