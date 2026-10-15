@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Panna da cucina (panna fluida leggera), cruda — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
+
+- **food_id**: `food_panna_da_cucina_raw`. FDC ID 170857 (SR Legacy, "Cream, fluid, light (coffee cream or table cream)").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (2,00µg/100g) — nessuna firma di arricchimento. Grasso 19,1g/100g: coerente con una panna "leggera" da cucina (~19-20%), non con la panna fresca da montare (~35%) — scelta deliberata per rappresentare "panna da cucina" come inteso nella voce di coda, non panna per dolci. Calcio 91,0mg/100g e beta-carotene 37,0µg/100g plausibili per un derivato del latte, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170857 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già reale nel DB — stesso prodotto lattiero-caseario, stessa categoria "latte e derivati").
+- **Categoria dieta**: `egg_dairy` (derivato del latte).
+- **Matrice**: nuova `panna_da_cucina` ("Panna da cucina / panna fluida leggera").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per yogurt/formaggi/burro aggiunti dopo i 30 originali: la categoria ossalati non è stata estesa oltre spinaci/kale/latte originale), `carotenoid_matrix_state` omesso (NULL — non applicabile, matrice animale, non vegetale: il beta-carotene del latte non è soggetto a disgregazione di parete cellulare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170857 --food-id=food_panna_da_cucina_raw \
+  --name-it="Panna da cucina (panna fluida leggera), cruda" \
+  --matrix-id=panna_da_cucina --matrix-description-it="Panna da cucina / panna fluida leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170857 --food-id=food_panna_da_cucina_raw \
+  --name-it="Panna da cucina (panna fluida leggera), cruda" \
+  --matrix-id=panna_da_cucina --matrix-description-it="Panna da cucina / panna fluida leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Basilico fresco, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_basilico_raw`. FDC ID 172232 (SR Legacy, "Basil, fresh").
