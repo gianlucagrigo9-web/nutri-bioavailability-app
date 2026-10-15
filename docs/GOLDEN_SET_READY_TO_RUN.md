@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Zenzero fresco, crudo — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_zenzero_raw`. FDC ID 169231 (SR Legacy, "Ginger root, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (11,0µg/100g) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (coerente con una radice, non una parte verde fotosintetica). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169231 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_carrots_raw` (per funzione del campo beta-carotene/radice, stessa convenzione già usata per l'aglio in questa coda — nessuna parentela botanica reale, famiglia vera dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (radice/spezia).
+- **Matrice**: nuova `zenzero` ("Zenzero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione già usata per i funghi champignon), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Zingiberaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi (come già per aglio/basilico/prezzemolo).
+
+```
+npm run add-food -- --fdc-id=169231 --food-id=food_zenzero_raw \
+  --name-it="Zenzero fresco, crudo" \
+  --matrix-id=zenzero --matrix-description-it="Zenzero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae
+```
+```
+npm run add-food -- --fdc-id=169231 --food-id=food_zenzero_raw \
+  --name-it="Zenzero fresco, crudo" \
+  --matrix-id=zenzero --matrix-description-it="Zenzero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply
+```
+
 ### Mirtilli rossi (cranberry), crudi — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_mirtilli_rossi_raw`. FDC ID 171722 (SR Legacy, "Cranberries, raw"). Distinto da `food_mirtilli_raw` (mirtilli blu, già eseguito, specie diversa dello stesso genere *Vaccinium*).
