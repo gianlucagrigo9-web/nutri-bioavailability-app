@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mela cotogna, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_mela_cotogna_raw`. FDC ID 168163 (SR Legacy, "Quinces, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record, non assunti zero; gap dichiarato, stesso standard già usato per nespole/cardi, anch'essi fermi a 14/17 con un singolo record SR Legacy pulito). Acido folico 0µg esplicito, separato dal folato totale (3,00µg/100g) — nessuna firma di arricchimento (comunque non applicabile a un frutto fresco). Calcio 11,0mg/100g nella norma. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168163 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_pear_raw` (pere, Golden Set originale — stessa famiglia botanica Rosaceae, frutto a pomo simile, stessa convenzione già usata per le nespole in questa coda).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca vera).
+- **Matrice**: nuova `mela_cotogna` ("Mela cotogna").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168163 --food-id=food_mela_cotogna_raw \
+  --name-it="Mela cotogna, cruda" \
+  --matrix-id=mela_cotogna --matrix-description-it="Mela cotogna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=168163 --food-id=food_mela_cotogna_raw \
+  --name-it="Mela cotogna, cruda" \
+  --matrix-id=mela_cotogna --matrix-description-it="Mela cotogna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### Ribes rosso, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_ribes_rosso_raw`. FDC ID 173964 (SR Legacy, "Currants, red and white, raw").
