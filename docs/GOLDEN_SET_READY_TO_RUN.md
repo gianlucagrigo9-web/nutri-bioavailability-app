@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anatra, cotta (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_anatra_cotta`. FDC ID 172411 (SR Legacy, "Duck, domesticated, meat only, cooked, roasted"). Distinta da `food_anatra_raw` (cruda, già eseguita sul DB reale, FDC 172410 — stesso "meat only, domesticated") — stesso alimento, forma cotta, stesso taglio "meat only" (senza pelle).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (10,0µg/100g) — nessuna firma di arricchimento. Vitamina K (3,80µg/100g) e B12 (0,40µg/100g) presenti, carotenoidi 0µg esplicito (coerente con carne). Fonte: getfoodfacts.com (FDC ID 172411, dataType SR Legacy).
+- **Analogia usata**: `food_anatra_raw` (anatra cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `anatra_cotta` ("Anatra, cotta").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_anatra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172411 --food-id=food_anatra_cotta \
+  --name-it="Anatra, cotta (arrosto)" \
+  --matrix-id=anatra_cotta --matrix-description-it="Anatra, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172411 --food-id=food_anatra_cotta \
+  --name-it="Anatra, cotta (arrosto)" \
+  --matrix-id=anatra_cotta --matrix-description-it="Anatra, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Coniglio, cotto (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_coniglio_cotto`. FDC ID 172522 (SR Legacy, "Game meat, rabbit, domesticated, composite of cuts, cooked, roasted"). Distinto da `food_coniglio_raw` (crudo, già eseguito sul DB reale, FDC 172521 — stesso "composite of cuts, domesticated") — stesso alimento, forma cotta.
