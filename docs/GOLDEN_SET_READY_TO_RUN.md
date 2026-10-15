@@ -16,6 +16,222 @@
 
 ## Pronti
 
+### Cozze, cotte (al vapore) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_cozze_cotte`. FDC ID 174217 (SR Legacy, "Mollusks, mussel, blue, cooked, moist heat"). Distinto da `food_cozze_raw` (crude, già eseguite, FDC 174216) — stesso mollusco, forma cotta.
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dal record, non riportati a zero; plausibile per un mollusco, non un'anomalia — stesso tipo di gap già visto per granchio/ostriche in questa coda). Acido folico 0µg esplicito, separato dal folato totale (76,0µg/100g) — nessuna firma di arricchimento. Vitamina B12 24,0µg/100g e selenio 89,6µg/100g alti ma tipici per un mollusco cotto (concentrazione per perdita d'acqua in cottura, coerente con i valori crudi già eseguiti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174217 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_cozze_raw` (cozze crude, già eseguite sul DB reale — stesso mollusco, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `cozze_cotte` ("Cozze, cotte").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_cozze_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=boiled` (cottura "moist heat" = al vapore/in acqua), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174217 --food-id=food_cozze_cotte \
+  --name-it="Cozze, cotte (al vapore)" \
+  --matrix-id=cozze_cotte --matrix-description-it="Cozze, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cozze_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174217 --food-id=food_cozze_cotte \
+  --name-it="Cozze, cotte (al vapore)" \
+  --matrix-id=cozze_cotte --matrix-description-it="Cozze, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cozze_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vongole, cotte (al vapore) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_vongole_cotte`. FDC ID 171975 (SR Legacy, "Mollusks, clam, mixed species, cooked, moist heat"). Distinto da `food_vongole_raw` (crude, già eseguite, FDC 174214) — stesso mollusco, forma cotta.
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dal record, non riportati a zero; stesso tipo di gap già visto per granchio/ostriche in questa coda). Acido folico 0µg esplicito, separato dal folato totale (29,0µg/100g) — nessuna firma di arricchimento. Vitamina B12 98,9µg/100g molto alta ma nota caratteristica delle vongole (valore noto in letteratura, non un'anomalia). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171975 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguite sul DB reale — stesso mollusco, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `vongole_cotte` ("Vongole, cotte").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_vongole_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=boiled` (cottura "moist heat"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171975 --food-id=food_vongole_cotte \
+  --name-it="Vongole, cotte (al vapore)" \
+  --matrix-id=vongole_cotte --matrix-description-it="Vongole, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171975 --food-id=food_vongole_cotte \
+  --name-it="Vongole, cotte (al vapore)" \
+  --matrix-id=vongole_cotte --matrix-description-it="Vongole, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Pesce spada, cotto (calore secco) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_pesce_spada_cotto`. FDC ID 173704 (SR Legacy, "Fish, swordfish, cooked, dry heat"). Distinto da `food_pesce_spada_raw` (crudo, già eseguito, FDC 173703) — stesso pesce, forma cotta "dry heat" (calore secco, es. griglia/forno senza liquido), stessa convenzione già usata per `food_salmon_cooked` nel Golden Set originale e per `food_merluzzo_cotto` in questa coda.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (2,00µg/100g) — nessuna firma di arricchimento. Selenio 68,5µg/100g alto ma tipico per un pesce di grossa taglia come il pesce spada (coerente con valori noti in letteratura). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173704 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_pesce_spada_raw` (pesce spada crudo, già eseguito sul DB reale — stesso pesce, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_spada_cotto` ("Pesce spada, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_pesce_spada_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173704 --food-id=food_pesce_spada_cotto \
+  --name-it="Pesce spada, cotto (calore secco)" \
+  --matrix-id=pesce_spada_cotto --matrix-description-it="Pesce spada, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_pesce_spada_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173704 --food-id=food_pesce_spada_cotto \
+  --name-it="Pesce spada, cotto (calore secco)" \
+  --matrix-id=pesce_spada_cotto --matrix-description-it="Pesce spada, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_pesce_spada_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Polpo, cotto (bollito) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_polpo_cotto`. FDC ID 174249 (SR Legacy, "Mollusks, octopus, common, cooked, moist heat"). Distinto da `food_polpo_raw` (crudo, già eseguito, FDC 174218) — stesso mollusco, forma cotta.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (24,0µg/100g) — nessuna firma di arricchimento. Vitamina B12 36,0µg/100g e selenio 89,6µg/100g alti ma tipici per un mollusco cotto (concentrazione per perdita d'acqua in cottura). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174249 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_polpo_raw` (polpo crudo, già eseguito sul DB reale — stesso mollusco, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `polpo_cotto` ("Polpo, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_polpo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=boiled` (cottura "moist heat"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174249 --food-id=food_polpo_cotto \
+  --name-it="Polpo, cotto (bollito)" \
+  --matrix-id=polpo_cotto --matrix-description-it="Polpo, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_polpo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174249 --food-id=food_polpo_cotto \
+  --name-it="Polpo, cotto (bollito)" \
+  --matrix-id=polpo_cotto --matrix-description-it="Polpo, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_polpo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, cotto — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_vitello_cotto`. FDC ID 175265 (SR Legacy, "Veal, composite of trimmed retail cuts, separable lean only, cooked"). Distinto da `food_vitello_raw` (crudo, già eseguito, FDC 173817) — stesso taglio composito, forma cotta. Il record FDC non specifica il metodo di cottura oltre "cooked" (a differenza di tacchino/maiale che specificano "roasted"): `baseline_cooking_state` riflette fedelmente questo, senza inventare un metodo non dichiarato.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento. Calcio 24,0mg/100g, nella norma per una carne magra cotta (coerente con il crudo già eseguito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175265 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, già eseguito sul DB reale — stesso taglio composito, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_cotto` ("Vitello, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=cooked` (metodo non specificato nel record FDC), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175265 --food-id=food_vitello_cotto \
+  --name-it="Vitello, cotto" \
+  --matrix-id=vitello_cotto --matrix-description-it="Vitello, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175265 --food-id=food_vitello_cotto \
+  --name-it="Vitello, cotto" \
+  --matrix-id=vitello_cotto --matrix-description-it="Vitello, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Lonza di maiale, cotta (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_lonza_di_maiale_cotta`. FDC ID 168233 (SR Legacy, "Pork, fresh, loin, whole, separable lean only, cooked, roasted"). Distinto da `food_lonza_di_maiale_raw` (cruda, già eseguita, FDC 168230) — stesso taglio ("loin, whole, separable lean only"), forma cotta arrosto.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (1,00µg/100g) — nessuna firma di arricchimento. Vitamina K 0µg (sia fillochinone sia diidrofillochinone), coerente con una carne magra. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168233 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stesso taglio, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `lonza_di_maiale_cotta` ("Lonza di maiale, cotta").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168233 --food-id=food_lonza_di_maiale_cotta \
+  --name-it="Lonza di maiale, cotta (arrosto)" \
+  --matrix-id=lonza_di_maiale_cotta --matrix-description-it="Lonza di maiale, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168233 --food-id=food_lonza_di_maiale_cotta \
+  --name-it="Lonza di maiale, cotta (arrosto)" \
+  --matrix-id=lonza_di_maiale_cotta --matrix-description-it="Lonza di maiale, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Petto di tacchino, cotto (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
+
+- **food_id**: `food_petto_di_tacchino_cotto`. FDC ID 174516 (SR Legacy, "Turkey, retail parts, breast, meat only, cooked, roasted"). Distinto da `food_petto_di_tacchino_raw` (crudo, già eseguito, FDC 174515) — stesso taglio ("retail parts, breast, meat only"), forma cotta arrosto; FDC ID immediatamente successivo a quello del crudo, stessa voce USDA.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (9,00µg/100g) — nessuna firma di arricchimento. Vitamina B12 1,76µg/100g, selenio 30,7µg/100g: nella norma per petto di tacchino cotto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174516 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino crudo, già eseguito sul DB reale — stesso taglio, stesso trattamento `is_heme_iron=true`, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `petto_di_tacchino_cotto` ("Petto di tacchino, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_petto_di_tacchino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174516 --food-id=food_petto_di_tacchino_cotto \
+  --name-it="Petto di tacchino, cotto (arrosto)" \
+  --matrix-id=petto_di_tacchino_cotto --matrix-description-it="Petto di tacchino, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174516 --food-id=food_petto_di_tacchino_cotto \
+  --name-it="Petto di tacchino, cotto (arrosto)" \
+  --matrix-id=petto_di_tacchino_cotto --matrix-description-it="Petto di tacchino, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Curcuma, in polvere — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 12 — chiude il lotto)
+
+- **food_id**: `food_curcuma_raw`. FDC ID 172231 (SR Legacy, "Spices, turmeric, ground").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (20,0µg/100g) — nessuna firma di arricchimento. Ferro **55,0mg/100g**: valore estremo ma non anomalo — la curcuma è notoriamente tra le spezie più ricche di ferro (stesso ordine di grandezza del timo già lavorato in questa coda, 124mg/100g), coerente con calcio 168mg/100g e magnesio 208mg/100g, tutti alti per concentrazione da disidratazione. Beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg=0`, valore esplicito non assunto). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172231 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre spezie/erbe secche di questa coda; famiglia botanica Zingiberaceae dichiarata separatamente, diversa da tutte le altre spezie già lavorate in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `curcuma` ("Curcuma in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, a differenza di pepe nero/cannella/origano/salvia/timo in questa coda dove era non-zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Zingiberaceae` (*Curcuma longa*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi.
+
+```
+npm run add-food -- --fdc-id=172231 --food-id=food_curcuma_raw \
+  --name-it="Curcuma, in polvere" \
+  --matrix-id=curcuma --matrix-description-it="Curcuma in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae
+```
+```
+npm run add-food -- --fdc-id=172231 --food-id=food_curcuma_raw \
+  --name-it="Curcuma, in polvere" \
+  --matrix-id=curcuma --matrix-description-it="Curcuma in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply
+```
+
+### Zafferano, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 12)
+
+- **food_id**: `food_zafferano_raw`. FDC ID 170934 (SR Legacy, "Spices, saffron").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina; campi del tutto assenti dal record, non riportati a zero — gap dichiarato, sopra la soglia minima, stesso tipo di gap già visto per rosmarino/menta in questa coda). Acido folico 0µg esplicito, separato dal folato totale (93,0µg/100g) — nessuna firma di arricchimento. Vitamina C 80,8mg/100g, ferro 11,1mg/100g: alti ma coerenti con una spezia secca (stessa concentrazione da disidratazione già vista per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170934 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre spezie/erbe secche di questa coda; famiglia botanica Iridaceae dichiarata separatamente, diversa da tutte le altre spezie già lavorate in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `zafferano` ("Zafferano").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di pepe nero/cannella/origano/salvia/timo in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Iridaceae` (*Crocus sativus*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in centesimi di grammo (è la spezia più costosa al mondo).
+
+```
+npm run add-food -- --fdc-id=170934 --food-id=food_zafferano_raw \
+  --name-it="Zafferano, secco" \
+  --matrix-id=zafferano --matrix-description-it="Zafferano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Iridaceae
+```
+```
+npm run add-food -- --fdc-id=170934 --food-id=food_zafferano_raw \
+  --name-it="Zafferano, secco" \
+  --matrix-id=zafferano --matrix-description-it="Zafferano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Iridaceae --apply
+```
+
 ### Pepe nero, macinato — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota, ultimo del turno)
 
 - **food_id**: `food_pepe_nero_raw`. FDC ID 170931 (SR Legacy, "Spices, pepper, black"). Nota: il record USDA non distingue macinato/in grani nel nome — le porzioni elencate in pagina coprono entrambe le forme ("1 tsp, ground" e "1 tsp, whole") con lo stesso valore per 100g, quindi rappresenta correttamente anche la forma macinata richiesta.
