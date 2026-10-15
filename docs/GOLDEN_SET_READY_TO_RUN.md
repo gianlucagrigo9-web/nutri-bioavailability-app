@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coscia di pollo, cotta (brasata) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_coscia_di_pollo_cotta`. FDC ID 172853 (SR Legacy, "Chicken, broilers or fryers, dark meat, thigh, meat only, cooked, braised"). Distinta da `food_coscia_di_pollo_raw` (cruda, già eseguita sul DB reale, FDC 173627 "Chicken, broilers or fryers, dark meat, thigh, meat only, raw" — stesso taglio esatto "thigh, meat only") — stesso alimento, forma cotta. **Nome aggiornato rispetto alla coda**: la voce indicava "arrosto", ma nessun record FDC pulito è stato trovato per coscia di pollo arrosto semplice — solo "braised" (questo record, pagina "USDA Standard Reference" pulita) o varianti "enhanced"/"with added solution" (soluzione salina iniettata, non rappresentativo), stesso tipo di gap già incontrato per il petto di pollo in questa coda (rimasto ⚠ per lo stesso motivo).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (5,00µg/100g) — nessuna firma di arricchimento. Vitamina K (0,30µg/100g) e selenio (29,2µg/100g) presenti e coerenti con pollo. Fonte: getfoodfacts.com (FDC ID 172853, dataType SR Legacy, pagina "USDA Standard Reference · Poultry Products").
+- **Analogia usata**: `food_coscia_di_pollo_raw` (coscia di pollo cruda, già eseguita sul DB reale — stesso alimento, stesso taglio, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coscia_di_pollo_cotta` ("Coscia di pollo, cotta").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione già usata per anatra/petto di pollo in questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172853 --food-id=food_coscia_di_pollo_cotta \
+  --name-it="Coscia di pollo, cotta (brasata)" \
+  --matrix-id=coscia_di_pollo_cotta --matrix-description-it="Coscia di pollo, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172853 --food-id=food_coscia_di_pollo_cotta \
+  --name-it="Coscia di pollo, cotta (brasata)" \
+  --matrix-id=coscia_di_pollo_cotta --matrix-description-it="Coscia di pollo, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Anatra, cotta (arrosto) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_anatra_cotta`. FDC ID 172411 (SR Legacy, "Duck, domesticated, meat only, cooked, roasted"). Distinta da `food_anatra_raw` (cruda, già eseguita sul DB reale, FDC 172410 — stesso "meat only, domesticated") — stesso alimento, forma cotta, stesso taglio "meat only" (senza pelle).
