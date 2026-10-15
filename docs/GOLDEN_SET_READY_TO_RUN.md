@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Granchio, polpa, crudo — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_granchio_raw`. FDC ID 174204 (SR Legacy, "Crustaceans, crab, blue, raw").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina del record, non riportati a zero; gap dichiarato, stesso standard già usato per vitello/agnello/coniglio in questa coda). Acido folico 0µg esplicito, separato dal folato totale (44,0µg/100g) — nessuna firma di arricchimento. Vitamina B12 9,00µg/100g e zinco 3,54mg/100g coerenti con un crostaceo crudo, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174204 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — stessa categoria funzionale "frutti di mare non pesce", stesso trattamento `is_heme_iron=true` già usato per i molluschi di questa coda; nessun altro crostaceo ancora nel Golden Set).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: nuova `granchio` ("Granchio").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174204 --food-id=food_granchio_raw \
+  --name-it="Granchio, polpa, crudo" \
+  --matrix-id=granchio --matrix-description-it="Granchio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174204 --food-id=food_granchio_raw \
+  --name-it="Granchio, polpa, crudo" \
+  --matrix-id=granchio --matrix-description-it="Granchio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Astice (lobster), crudo — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_astice_raw`. FDC ID 174208 (SR Legacy, "Crustaceans, lobster, northern, raw"). Nota sul nome: "astice" in italiano è il crostaceo con le chele (*Homarus*, come questo record); "aragosta" (senza chele, genere *Palinurus*) è un record FDC diverso, non usato qui — il nome scelto riflette il record effettivamente trovato.
