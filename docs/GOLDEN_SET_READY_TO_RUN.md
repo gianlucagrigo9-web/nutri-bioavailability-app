@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di riso integrale, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_farina_di_riso_integrale_raw`. FDC ID 168898 (SR Legacy, "Rice flour, brown"). Distinta da `food_farina_di_riso_raw` (farina di riso bianco, già eseguita, FDC 169714).
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina del record, non riportati a zero; gap dichiarato, stesso standard già usato per il semolino di grano duro in questo stesso run). Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento. Calcio 11,0mg/100g molto basso, coerente con una farina di riso non trattata (non l'anomalia vista nei record "enriched"/"commercially prepared"). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168898 e dataType SR Legacy (release 30 aprile 2026). Scartato a priori "Flour, rice, brown" (FDC 1104812, probabile Branded) — non verificato, il record SR Legacy era già individuato.
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale in chicchi, già eseguito sul DB reale — stesso grado di raffinazione "integrale", stessa specie *Oryza sativa*).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `farina_di_riso_integrale` ("Farina di riso integrale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168898 --food-id=food_farina_di_riso_integrale_raw \
+  --name-it="Farina di riso integrale, cruda" \
+  --matrix-id=farina_di_riso_integrale --matrix-description-it="Farina di riso integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168898 --food-id=food_farina_di_riso_integrale_raw \
+  --name-it="Farina di riso integrale, cruda" \
+  --matrix-id=farina_di_riso_integrale --matrix-description-it="Farina di riso integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Farina di avena, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_farina_di_avena_raw`. FDC ID 169741 (SR Legacy, "Oat flour, partially debranned").
