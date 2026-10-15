@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Branzino, cotto (al forno) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_branzino_cotto`. FDC ID 173694 (SR Legacy, "Fish, sea bass, mixed species, cooked, dry heat"). Distinto da `food_branzino_raw` (crudo, già eseguito sul DB reale, FDC 175142 "Fish, sea bass, mixed species, raw" — stessa "mixed species") — stesso alimento, forma cotta.
+- **Nutrienti**: **14/17 — mancano vitamina K, beta-carotene e altri carotenoidi provitaminici A**, non riportati nel record (stesso identico gap già presente nel crudo `food_branzino_raw`, coerenza interna). Acido folico 0µg esplicito, folato totale 6,00µg/100g — nessuna firma di arricchimento. Fonte: getfoodfacts.com (FDC ID 173694, dataType SR Legacy).
+- **Analogia usata**: `food_branzino_raw` (branzino crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `branzino_cotto` ("Branzino, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione di `food_branzino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173694 --food-id=food_branzino_cotto \
+  --name-it="Branzino, cotto (al forno)" \
+  --matrix-id=branzino_cotto --matrix-description-it="Branzino, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_branzino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173694 --food-id=food_branzino_cotto \
+  --name-it="Branzino, cotto (al forno)" \
+  --matrix-id=branzino_cotto --matrix-description-it="Branzino, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_branzino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bistecca di manzo (taglio magro), cotta (alla griglia) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_bistecca_di_manzo_cotta`. FDC ID 168634 (SR Legacy, "Beef, top sirloin, steak, separable lean only, trimmed to 0\" fat, all grades, cooked, broiled"). **Non** è ancora la forma cotta di `food_bistecca_di_manzo_raw` (quest'ultimo resta solo 🟡 "Pronti", non eseguito sul DB reale — l'analogia non può riferirsi a lui, vedi sotto): è un record FDC indipendente. **Nota sul trim**: il crudo in coda usa FDC 174055 "trimmed to 1/8\" fat" (taglio magro con un velo di grasso residuo); questo cotto usa "trimmed to 0\" fat" (completamente privo di grasso visibile) — nessun record cotto con lo stesso identico trim 1/8" è stato trovato, solo varianti "lean and fat" (che includerebbero più grasso, non comparabile). Entrambi restano "separable lean only", stessa categoria di taglio magro.
