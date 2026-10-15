@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Bietole da costa, cotte (bollite, con sale) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
+
+- **food_id**: `food_bietole_da_costa_cotte`. FDC ID 169343 (SR Legacy, "Chard, swiss, cooked, boiled, drained, with salt"). Distinte da `food_bietole_da_costa_raw` (crude, già eseguite sul DB reale) — stesso alimento, forma cotta. **Solo la variante "with salt" ha un FDC ID verificabile** su getfoodfacts.com: la variante "without salt" è citata da recipal.com/bodbot.com/fitbit.com ma senza un FDC ID numerico esplicito su nessuna di quelle pagine — stesso tipo di scelta già fatta per peperoni rossi e riportata nella coda. Il sodio (415mg/100g) non è uno dei 17 nutrienti tracciati da questo progetto, quindi non inquina i valori usati.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (9,00µg/100g) — nessuna firma di arricchimento. Vitamina K (327µg/100g) e beta-carotene (3.652µg/100g) presenti ed elevati, coerenti con una verdura a foglia verde. Fonte: getfoodfacts.com (FDC ID 169343, dataType SR Legacy).
+- **Analogia usata**: `food_bietole_da_costa_raw` (bietole da costa crude, già eseguite sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura; eredita `matrix_category_calcium=NULL` dal crudo, non `high_oxalate` dell'analogia spinaci usata per il crudo, per restare coerente con la riga sorella già nel DB).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `bietole_da_costa_cotte` ("Bietole da costa, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento della riga crudo sorella), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene presente), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Amaranthaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169343 --food-id=food_bietole_da_costa_cotte \
+  --name-it="Bietole da costa, cotte (bollite, con sale)" \
+  --matrix-id=bietole_da_costa_cotte --matrix-description-it="Bietole da costa, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bietole_da_costa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169343 --food-id=food_bietole_da_costa_cotte \
+  --name-it="Bietole da costa, cotte (bollite, con sale)" \
+  --matrix-id=bietole_da_costa_cotte --matrix-description-it="Bietole da costa, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bietole_da_costa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Carciofi, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 14)
 
 - **food_id**: `food_carciofi_cotti`. FDC ID 168386 (SR Legacy, "Artichokes, (globe or french), cooked, boiled, drained, without salt"). Distinto da `food_carciofi_raw` (crudi, già eseguiti sul DB reale) — stesso alimento, forma cotta.
