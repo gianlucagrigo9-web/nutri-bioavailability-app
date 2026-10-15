@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Ostriche, crude (allevate) — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_ostriche_raw`. FDC ID 175172 (SR Legacy, "Mollusks, oyster, eastern, farmed, raw"). Nota: scelta la variante "allevate" (farmed) perché è la forma più diffusa in commercio in Italia/Europa; esiste anche una variante "wild" come record FDC separato, non usata qui.
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina del record, non riportati a zero; stesso tipo di gap già incontrato per granchio in questo stesso run). Acido folico 0µg esplicito, separato dal folato totale (18,0µg/100g) — nessuna firma di arricchimento. Zinco 37,9mg/100g molto alto: valore noto e corretto per le ostriche (fra gli alimenti più ricchi di zinco in assoluto), non un'anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175172 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — stessa categoria "mollusco bivalve", analogia più stretta di quelle usate per astice/granchio in questo run perché le ostriche sono anch'esse molluschi bivalvi come le vongole).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `ostriche` ("Ostriche").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175172 --food-id=food_ostriche_raw \
+  --name-it="Ostriche, crude (allevate)" \
+  --matrix-id=ostriche --matrix-description-it="Ostriche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175172 --food-id=food_ostriche_raw \
+  --name-it="Ostriche, crude (allevate)" \
+  --matrix-id=ostriche --matrix-description-it="Ostriche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Granchio, polpa, crudo — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_granchio_raw`. FDC ID 174204 (SR Legacy, "Crustaceans, crab, blue, raw").
