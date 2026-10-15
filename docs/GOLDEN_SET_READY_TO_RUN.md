@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Capesante, crude — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_capesante_raw`. FDC ID 174220 (SR Legacy, "Mollusks, scallop, mixed species, raw").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (16,0µg/100g) — nessuna firma di arricchimento (comunque non applicabile a un mollusco). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174220 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — stessa classe Mollusca, stessa convenzione `is_heme_iron=true` già usata per vongole/cozze/polpo/calamari/acciughe in questo progetto).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `capesante` ("Capesante").
+- **Attributi**: `--is-heme-iron` (true — mollusco, stessa convenzione di vongole/cozze/polpo/calamari), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174220 --food-id=food_capesante_raw \
+  --name-it="Capesante, crude" \
+  --matrix-id=capesante --matrix-description-it="Capesante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174220 --food-id=food_capesante_raw \
+  --name-it="Capesante, crude" \
+  --matrix-id=capesante --matrix-description-it="Capesante" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pesce persico, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_pesce_persico_raw`. FDC ID 173678 (SR Legacy, "Fish, perch, mixed species, raw").
