@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Crusca d'avena, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_crusca_di_avena_raw`. FDC ID 168872 (SR Legacy, "Oat bran, raw"). Distinta da `food_crusca_di_frumento_raw` (crusca di frumento, già eseguita, specie diversa) e da `food_farina_di_avena_raw` (preparato in questo stesso run, parte diversa del chicco).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (52,0µg/100g, alto ma coerente con una crusca concentrata in nutrienti) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene, beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168872 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_avena_cruda` (avena cruda in grani, già eseguita sul DB reale — stessa specie *Avena sativa*, stessa famiglia botanica Poaceae; differisce solo per la parte del chicco).
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `crusca_di_avena` ("Crusca d'avena").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168872 --food-id=food_crusca_di_avena_raw \
+  --name-it="Crusca d'avena, cruda" \
+  --matrix-id=crusca_di_avena --matrix-description-it="Crusca d'avena" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168872 --food-id=food_crusca_di_avena_raw \
+  --name-it="Crusca d'avena, cruda" \
+  --matrix-id=crusca_di_avena --matrix-description-it="Crusca d'avena" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Farina di riso integrale, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_farina_di_riso_integrale_raw`. FDC ID 168898 (SR Legacy, "Rice flour, brown"). Distinta da `food_farina_di_riso_raw` (farina di riso bianco, già eseguita, FDC 169714).
