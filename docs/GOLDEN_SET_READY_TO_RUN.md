@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Quinoa, cotta (bollita) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 13)
+
+- **food_id**: `food_quinoa_cotta`. FDC ID 168917 (SR Legacy, "Quinoa, cooked"). Distinta da `food_quinoa_dry_raw` (secca/cruda, già eseguita, FDC 168874) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (42,0µg/100g) — nessuna firma di arricchimento. Beta-carotene 3,00µg/100g (basso ma non assente, coerente col valore non-zero già riportato per la quinoa cruda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168917 e dataType SR Legacy.
+- **Analogia usata**: `food_quinoa_dry_raw` (quinoa secca/cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale/pseudocereale).
+- **Matrice**: nuova `quinoa_cotta` ("Quinoa, cotta").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — stesso trattamento di carote/broccoli/patate: le categorie ossalati esistono solo per spinaci/kale/latte), `--carotenoid-matrix-state=cooked_or_disrupted` (coerente col fatto che la quinoa cruda ha `raw_intact` impostato, essendo presente un beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Amaranthaceae` (famiglia botanica reale di *Chenopodium quinoa*, oggi inclusa in Amaranthaceae), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168917 --food-id=food_quinoa_cotta \
+  --name-it="Quinoa, cotta (bollita)" \
+  --matrix-id=quinoa_cotta --matrix-description-it="Quinoa, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_quinoa_dry_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168917 --food-id=food_quinoa_cotta \
+  --name-it="Quinoa, cotta (bollita)" \
+  --matrix-id=quinoa_cotta --matrix-description-it="Quinoa, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_quinoa_dry_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cozze, cotte (al vapore) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 12)
 
 - **food_id**: `food_cozze_cotte`. FDC ID 174217 (SR Legacy, "Mollusks, mussel, blue, cooked, moist heat"). Distinto da `food_cozze_raw` (crude, già eseguite, FDC 174216) — stesso mollusco, forma cotta.
