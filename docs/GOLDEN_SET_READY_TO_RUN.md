@@ -16,6 +16,252 @@
 
 ## Pronti
 
+### Peperoni verdi, cotti (bolliti) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_peperoni_verdi_cotti`. FDC ID 170109 (SR Legacy, "Peppers, sweet, green, cooked, boiled, drained, with salt"). Distinto da `food_pepper_green_raw` (crudo, già eseguito) — stesso alimento, forma cotta. Scelta la variante "with salt" (sodio 238mg/100g, non uno dei 17 nutrienti tracciati): nessuna pagina getfoodfacts indicizzata per la variante "without salt", stesso tipo di scelta già fatta per peperoni rossi/cipolle in questa coda.
+- **Nutrienti**: **17/17**. Beta-carotene 264µg/100g, alfa-carotene 26µg/100g, beta-criptoxantina 8µg/100g (other_provitamin_a=34µg/100g), vitamina K 9,80µg/100g, folato totale 16,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 170109, dataType SR Legacy).
+- **Analogia usata**: `food_pepper_green_raw` (peperone verde crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente frutto, trattato come tale per il PRD).
+- **Matrice**: nuova `peperoni_verdi_cotti` ("Peperoni verdi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo, coerente con la cruda che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Solanaceae` (famiglia botanica reale del peperone), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170109 --food-id=food_peperoni_verdi_cotti \
+  --name-it="Peperoni verdi, cotti (bolliti)" \
+  --matrix-id=peperoni_verdi_cotti --matrix-description-it="Peperoni verdi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pepper_green_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170109 --food-id=food_peperoni_verdi_cotti \
+  --name-it="Peperoni verdi, cotti (bolliti)" \
+  --matrix-id=peperoni_verdi_cotti --matrix-description-it="Peperoni verdi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pepper_green_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Miglio, cotto — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_miglio_cotto`. FDC ID 168871 (SR Legacy, "Millet, cooked"). Distinto da `food_miglio_raw` (crudo, già eseguito) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 2,00µg/100g e vitamina K 0,30µg/100g molto bassi ma espliciti (non assenti), folato totale 19,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 168871, dataType SR Legacy, categoria "Cereal Grains and Pasta").
+- **Analogia usata**: `food_miglio_raw` (miglio crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `miglio_cotto` ("Miglio, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene molto basso, stesso trattamento già usato per orzo/riso cotti in questa coda), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Poaceae` (famiglia botanica reale del miglio), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168871 --food-id=food_miglio_cotto \
+  --name-it="Miglio, cotto" \
+  --matrix-id=miglio_cotto --matrix-description-it="Miglio, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_miglio_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168871 --food-id=food_miglio_cotto \
+  --name-it="Miglio, cotto" \
+  --matrix-id=miglio_cotto --matrix-description-it="Miglio, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_miglio_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Piselli secchi, spezzati, cotti (bolliti) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_piselli_secchi_spezzati_cotti`. FDC ID 172429 (SR Legacy, "Peas, split, mature seeds, cooked, boiled, without salt"). Distinto da `food_piselli_secchi_spezzati_raw` (crudi, già eseguiti) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 4,00µg/100g molto basso ma esplicito, vitamina K 5,00µg/100g, folato totale 65,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 172429, dataType SR Legacy).
+- **Analogia usata**: `food_piselli_secchi_spezzati_raw` (piselli secchi spezzati crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `piselli_secchi_spezzati_cotti` ("Piselli secchi spezzati, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene molto basso), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172429 --food-id=food_piselli_secchi_spezzati_cotti \
+  --name-it="Piselli secchi, spezzati, cotti (bolliti)" \
+  --matrix-id=piselli_secchi_spezzati_cotti --matrix-description-it="Piselli secchi spezzati, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_piselli_secchi_spezzati_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172429 --food-id=food_piselli_secchi_spezzati_cotti \
+  --name-it="Piselli secchi, spezzati, cotti (bolliti)" \
+  --matrix-id=piselli_secchi_spezzati_cotti --matrix-description-it="Piselli secchi spezzati, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_piselli_secchi_spezzati_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca, cotta (bollita) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_zucca_cotta`. FDC ID 168449 (SR Legacy, "Pumpkin, cooked, boiled, drained, without salt"). Distinta da `food_pumpkin_raw` (cruda, già eseguita) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 2.096µg/100g e alfa-carotene 2.715µg/100g (other_provitamin_a=2.715µg/100g, beta-criptoxantina 0), vitamina K 0,80µg/100g, folato totale 9,00µg/100g con acido folico 0µg esplicito. Fonte: getfoodfacts.com (FDC ID 168449, dataType SR Legacy).
+- **Analogia usata**: `food_pumpkin_raw` (zucca cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio botanicamente frutto, trattato come tale per il PRD).
+- **Matrice**: nuova `zucca_cotta` ("Zucca, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (carotenoidi significativi), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168449 --food-id=food_zucca_cotta \
+  --name-it="Zucca, cotta (bollita)" \
+  --matrix-id=zucca_cotta --matrix-description-it="Zucca, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168449 --food-id=food_zucca_cotta \
+  --name-it="Zucca, cotta (bollita)" \
+  --matrix-id=zucca_cotta --matrix-description-it="Zucca, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Soia secca, cotta (bollita) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_soia_secca_cotta`. FDC ID 174271 (SR Legacy, "Soybeans, mature cooked, boiled, without salt"). Distinta da `food_soia_secca_raw` (cruda, già eseguita) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Beta-carotene 5,00µg/100g molto basso ma esplicito, vitamina K 19,2µg/100g, folato totale 54,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 174271, dataType SR Legacy).
+- **Analogia usata**: `food_soia_secca_raw` (soia secca cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `soia_secca_cotta` ("Soia secca, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene molto basso), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174271 --food-id=food_soia_secca_cotta \
+  --name-it="Soia secca, cotta (bollita)" \
+  --matrix-id=soia_secca_cotta --matrix-description-it="Soia secca, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_soia_secca_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174271 --food-id=food_soia_secca_cotta \
+  --name-it="Soia secca, cotta (bollita)" \
+  --matrix-id=soia_secca_cotta --matrix-description-it="Soia secca, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_soia_secca_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fegato di pollo, cotto (brasato/bollito) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
+
+- **food_id**: `food_fegato_di_pollo_cotto`. FDC ID 171061 (SR Legacy, "Chicken, liver, all classes, cooked, simmered"). Distinto da `food_fegato_di_pollo_raw` (crudo, già eseguito) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Vitamina A molto alta (retinolo 3.978µg/100g, coerente col fegato), beta-carotene 30µg/100g, alfa-carotene 11µg/100g + beta-criptoxantina 11µg/100g (other_provitamin_a=22µg/100g), vitamina K (filloquinone) 0µg esplicito, vitamina B12 16,9µg/100g, folato totale 578µg/100g (coerente con fegato, nessuna firma di arricchimento perché non è un cereale). Fonte: getfoodfacts.com (FDC ID 171061, dataType SR Legacy).
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura; coerente anche con `food_beef_liver_cooked`, già nei 30 originali, stesso tipo di tessuto animale).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `fegato_di_pollo_cotto` ("Fegato di pollo, cotto").
+- **Attributi**: `--is-heme-iron` (true, frattaglia animale, coerente con `food_beef_liver_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non è un vegetale, stesso trattamento già usato per fegato di manzo nei 30 originali), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family` omesso (alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171061 --food-id=food_fegato_di_pollo_cotto \
+  --name-it="Fegato di pollo, cotto (brasato/bollito)" \
+  --matrix-id=fegato_di_pollo_cotto --matrix-description-it="Fegato di pollo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171061 --food-id=food_fegato_di_pollo_cotto \
+  --name-it="Fegato di pollo, cotto (brasato/bollito)" \
+  --matrix-id=fegato_di_pollo_cotto --matrix-description-it="Fegato di pollo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Cime di rapa, cotte (bollite) — preparato 2026-10-15 dal task orario (ottavo lotto, chiusura, turno ore 16)
+
+- **food_id**: `food_cime_di_rapa_cotte`. FDC ID 170382 (SR Legacy, "Broccoli raab, cooked"). Distinte da `food_cime_di_rapa_raw` (crude, già eseguite, FDC 170381 "Broccoli raab, raw") — stesso alimento, forma cotta: NON un duplicato generico di broccoli, perché esiste un record FDC specifico per "broccoli raab" sia crudo che cotto, già usato per il crudo in questa stessa coda.
+- **Nutrienti**: **17/17**. Beta-carotene ≈2.719µg/100g (ricalcolato da 2.312µg/85g), vitamina K (filloquinone) ≈256µg/100g, folato totale ≈71µg/100g con acido folico 0µg esplicito, alfa-carotene e beta-criptoxantina 0 (espliciti, other_provitamin_a=0). Fonte: getfoodfacts.com (FDC ID 170382, dataType SR Legacy), valori per porzione 85g riscalati a 100g.
+- **Analogia usata**: `food_cime_di_rapa_raw` (cime di rapa crude, già eseguite sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cime_di_rapa_cotte` ("Cime di rapa, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene significativo, coerente con la cruda che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Brassicaceae` (*Brassica rapa*, stessa famiglia reale della crucifera), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170382 --food-id=food_cime_di_rapa_cotte \
+  --name-it="Cime di rapa, cotte (bollite)" \
+  --matrix-id=cime_di_rapa_cotte --matrix-description-it="Cime di rapa, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cime_di_rapa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170382 --food-id=food_cime_di_rapa_cotte \
+  --name-it="Cime di rapa, cotte (bollite)" \
+  --matrix-id=cime_di_rapa_cotte --matrix-description-it="Cime di rapa, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cime_di_rapa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Latte di cocco, crudo — preparato 2026-10-15 dal task orario (ottavo lotto, chiusura, turno ore 16)
+
+- **food_id**: `food_latte_di_cocco_raw`. FDC ID 170172 (SR Legacy, "Nuts, coconut milk, raw (liquid expressed from grated meat and water)"). Distinto da `food_olio_di_cocco_raw` (olio, già eseguito) e dalla "Noce di cocco, polpa fresca, cruda" (preparata ma non ancora eseguita): prodotto realmente diverso, un altro record FDC (categoria "Nut and Seed Products"), il liquido spremuto dalla polpa grattugiata, non la polpa né l'olio.
+- **Nutrienti**: **17/17** (valori per 100g ricalcolati dal tbsp/15g della pagina: energia 230kcal, proteine 2,27g, grassi 23,9g, carboidrati 5,53g, fibra 2,2g). Beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0 (other_provitamin_a=0, espliciti non assenti), vitamina K (filloquinone) ≈0,10µg/100g, folato totale ≈16µg/100g, vitamina B12 0µg. Fonte: getfoodfacts.com (FDC ID 170172, dataType SR Legacy).
+- **Analogia usata**: `food_olio_di_cocco_raw` (olio di cocco, già eseguito sul DB reale — stessa specie *Cocos nucifera*, famiglia Arecaceae, stesso tipo di estrazione non termica).
+- **Categoria dieta**: `plant_non_fruit` (derivato di frutta a guscio/seme, non frutta fresca per la definizione restrittiva del PRD §4.9, vegano).
+- **Matrice**: nuova `latte_di_cocco_raw` ("Latte di cocco, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Arecaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170172 --food-id=food_latte_di_cocco_raw \
+  --name-it="Latte di cocco, crudo" \
+  --matrix-id=latte_di_cocco_raw --matrix-description-it="Latte di cocco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170172 --food-id=food_latte_di_cocco_raw \
+  --name-it="Latte di cocco, crudo" \
+  --matrix-id=latte_di_cocco_raw --matrix-description-it="Latte di cocco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
+### Lupini, cotti (ammollati e bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, chiusura, turno ore 16)
+
+- **food_id**: `food_lupini_cotti`. FDC ID 172424 (SR Legacy, "Lupins, mature seeds, cooked, boiled, without salt"). Distinti da `food_lupini_raw` (crudi, già eseguiti, FDC 172423) — stesso alimento, forma cotta.
+- **Nutrienti**: **14/17** — mancano vitamin_k_mcg, beta_carotene_mcg e other_provitamin_a_carotenoids_mcg (vitamina K e tutti i carotenoidi assenti dalla pagina, non riportati, non assunti zero). Resto completo: energia 119kcal/100g, proteine 15,6g, folato totale 59,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 172424, dataType SR Legacy).
+- **Analogia usata**: `food_lupini_raw` (lupini crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `lupini_cotti` ("Lupini, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi assenti dal record), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172424 --food-id=food_lupini_cotti \
+  --name-it="Lupini, cotti (ammollati e bolliti)" \
+  --matrix-id=lupini_cotti --matrix-description-it="Lupini, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_lupini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172424 --food-id=food_lupini_cotti \
+  --name-it="Lupini, cotti (ammollati e bolliti)" \
+  --matrix-id=lupini_cotti --matrix-description-it="Lupini, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_lupini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli neri, cotti (bolliti) — preparato 2026-10-15 dal task orario (ottavo lotto, chiusura, turno ore 16)
+
+- **food_id**: `food_fagioli_neri_cotti`. FDC ID 175239 (SR Legacy, "Beans, black turtle, mature seeds, cooked, boiled, with salt"). Distinti da `food_fagioli_neri_raw` (crudi, già eseguiti, FDC 175186) — stesso alimento, forma cotta. Scelta la variante "with salt" (sodio 239mg/100g, non tracciato): nessuna pagina getfoodfacts indicizzata per "without salt" con FDC ID verificabile (solo recipal.com, senza ID numerico esplicito), stesso tipo di scelta già fatta per peperoni rossi/cipolle in questa coda.
+- **Nutrienti**: **17/17**. Beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (other_provitamin_a=0), vitamina K 3,30µg/100g, folato totale 86,0µg/100g con acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com (FDC ID 175239, dataType SR Legacy).
+- **Analogia usata**: `food_fagioli_borlotti_bolliti` (fagioli borlotti bolliti, già eseguiti sul DB reale — stessa specie *Phaseolus vulgaris*, cultivar diversa, stesso stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_neri_cotti` ("Fagioli neri, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi 0 espliciti), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175239 --food-id=food_fagioli_neri_cotti \
+  --name-it="Fagioli neri, cotti (bolliti)" \
+  --matrix-id=fagioli_neri_cotti --matrix-description-it="Fagioli neri, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175239 --food-id=food_fagioli_neri_cotti \
+  --name-it="Fagioli neri, cotti (bolliti)" \
+  --matrix-id=fagioli_neri_cotti --matrix-description-it="Fagioli neri, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Sogliola, cotta (al forno) — preparato 2026-10-15 dal task orario (ottavo lotto, turno ore 15)
 
 - **food_id**: `food_sogliola_cotta`. FDC ID 174197 (SR Legacy, "Fish, flatfish (flounder and sole species), cooked, dry heat"). Distinta da `food_sogliola_raw` (cruda, già eseguita sul DB reale, FDC 174196 "Fish, flatfish (flounder and sole species), raw" — stessa "flatfish") — stesso alimento, forma cotta.
