@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di cocco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
+
+- **food_id**: `food_farina_di_cocco_raw`. FDC ID 2515382 (**Foundation Foods**, "Flour, coconut"). Distinta da `food_olio_di_cocco_raw` (olio di cocco, già eseguito — prodotto diverso, solo il grasso estratto) e da `food_noce_di_cocco_raw` (polpa fresca, 🟡 in coda precedente — prodotto disidratato e defatted, non la polpa fresca).
+- **Nutrienti**: **11/17** — mancano `vitamin_c_mg`, `folate_mcg`, `vitamin_b12_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dal record Foundation Foods, non riportati a zero — questo dataset riporta meno nutrienti totali, 22 nel complesso, rispetto a un tipico SR Legacy). Gap dichiarato, sopra la soglia minima ~10/17 ma significativo (manca l'intero gruppo vitamine/folato/carotenoidi, non solo un paio di voci marginali). Nessun segno di arricchimento rilevabile (acido folico non riportato affatto, non un valore zero esplicito — diverso dagli altri casi di questa coda dove la non-fortificazione è confermata da uno zero esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2515382 e dataType Foundation Foods (release 30 aprile 2026); alimento generico mono-ingrediente, nessun marchio/prodotto composito.
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais, già eseguita sul DB reale — stessa categoria funzionale "farina vegetale processata, nessun carotenoide rilevato", pur essendo una famiglia botanica diversa — Arecaceae per la noce di cocco contro Poaceae per il mais, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (farina vegetale).
+- **Matrice**: nuova `farina_di_cocco` ("Farina di cocco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (*Cocos nucifera*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — la farina di cocco non è soggetta all'obbligo USA di fortificazione dei cereali, anche se qui il folato non è nemmeno riportato).
+
+```
+npm run add-food -- --fdc-id=2515382 --food-id=food_farina_di_cocco_raw \
+  --name-it="Farina di cocco" \
+  --matrix-id=farina_di_cocco --matrix-description-it="Farina di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae
+```
+```
+npm run add-food -- --fdc-id=2515382 --food-id=food_farina_di_cocco_raw \
+  --name-it="Farina di cocco" \
+  --matrix-id=farina_di_cocco --matrix-description-it="Farina di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae --apply
+```
+
 ### Erba cipollina, fresca — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 10)
 
 - **food_id**: `food_erba_cipollina_raw`. FDC ID 169994 (SR Legacy, "Chives, raw").
