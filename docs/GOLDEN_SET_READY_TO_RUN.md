@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Prezzemolo fresco, crudo — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_prezzemolo_raw`. FDC ID 170416 (SR Legacy, "Parsley, fresh").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (152µg/100g, alto ma coerente con un'erba a foglia verde) — nessuna firma di arricchimento. Calcio 138mg/100g: alto ma tipico per un'erba aromatica a foglia (non un segno di arricchimento, le erbe non vengono fortificate). Beta-carotene 5054µg/100g esplicito, beta-criptoxantina 0µg, alfa-carotene 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170416 e dataType SR Legacy (release 30 aprile 2026; corroborata anche dal link diretto `fdc.nal.usda.gov/portal-data/external/170416` comparso nei risultati di ricerca, non apribile direttamente in questa sessione senza approvazione di provenienza). Scartato a priori "Parsley, raw" (FDC 2709796, dataType Survey/FNDDS — composito statistico, non un singolo alimento misurato).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa categoria "verdura/erba a foglia verde").
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica/verdura a foglia).
+- **Matrice**: nuova `prezzemolo` ("Prezzemolo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento delle altre verdure a foglia di questa coda, le categorie ossalati esistono solo per spinaci/kale/latte), `carotenoid_matrix_state=raw_intact` (beta-carotene 5054µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Petroselinum crispum*, stessa famiglia di sedano/carote), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170416 --food-id=food_prezzemolo_raw \
+  --name-it="Prezzemolo fresco, crudo" \
+  --matrix-id=prezzemolo --matrix-description-it="Prezzemolo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=170416 --food-id=food_prezzemolo_raw \
+  --name-it="Prezzemolo fresco, crudo" \
+  --matrix-id=prezzemolo --matrix-description-it="Prezzemolo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Apiaceae --apply
+```
+
 ### Noce di cocco, polpa fresca, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_noce_di_cocco_raw`. FDC ID 170169 (SR Legacy, "Nuts, coconut meat, raw"). Distinta da `food_olio_di_cocco_raw` (olio di cocco, già eseguito — prodotto diverso, solo il grasso estratto).
