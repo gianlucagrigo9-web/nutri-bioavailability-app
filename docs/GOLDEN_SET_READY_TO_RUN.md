@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mirtilli rossi (cranberry), crudi — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_mirtilli_rossi_raw`. FDC ID 171722 (SR Legacy, "Cranberries, raw"). Distinto da `food_mirtilli_raw` (mirtilli blu, già eseguito, specie diversa dello stesso genere *Vaccinium*).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (1,00µg/100g) — nessuna firma di arricchimento. Beta-carotene 38,0µg/100g, alfa-carotene e beta-criptoxantina 0µg espliciti — valori coerenti con un piccolo frutto di bosco acido, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171722 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_mirtilli_raw` (mirtilli blu, già eseguito sul DB reale — stessa famiglia botanica Ericaceae, stesso genere *Vaccinium*, stesso tipo di bacca).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca).
+- **Matrice**: nuova `mirtilli_rossi` ("Mirtilli rossi (cranberry)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene presente con valore), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ericaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171722 --food-id=food_mirtilli_rossi_raw \
+  --name-it="Mirtilli rossi (cranberry), crudi" \
+  --matrix-id=mirtilli_rossi --matrix-description-it="Mirtilli rossi (cranberry)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Ericaceae
+```
+```
+npm run add-food -- --fdc-id=171722 --food-id=food_mirtilli_rossi_raw \
+  --name-it="Mirtilli rossi (cranberry), crudi" \
+  --matrix-id=mirtilli_rossi --matrix-description-it="Mirtilli rossi (cranberry)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Ericaceae --apply
+```
+
 ### Nettarine, crude — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_nettarine_raw`. FDC ID 169914 (SR Legacy, "Nectarines, raw").
