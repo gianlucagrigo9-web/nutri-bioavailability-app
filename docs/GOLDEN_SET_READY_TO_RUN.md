@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Noce di cocco, polpa fresca, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
+
+- **food_id**: `food_noce_di_cocco_raw`. FDC ID 170169 (SR Legacy, "Nuts, coconut meat, raw"). Distinta da `food_olio_di_cocco_raw` (olio di cocco, già eseguito — prodotto diverso, solo il grasso estratto).
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (26,0µg/100g) — nessuna firma di arricchimento. Beta-carotene, alfa-carotene, beta-criptoxantina tutti 0µg espliciti (coerente con una polpa di frutto senza pigmenti carotenoidi). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170169 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_noci_raw` (noci, già eseguite sul DB reale — stessa categoria "frutta a guscio/seme oleoso", stessa convenzione già usata per pinoli/noci macadamia/noci del Brasile in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio/seme — stessa categoria di mandorle/noci/nocciole, anche se consumata fresca e non secca).
+- **Matrice**: nuova `noce_di_cocco` ("Noce di cocco, polpa fresca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (palma da cocco, *Cocos nucifera*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170169 --food-id=food_noce_di_cocco_raw \
+  --name-it="Noce di cocco, polpa fresca, cruda" \
+  --matrix-id=noce_di_cocco --matrix-description-it="Noce di cocco, polpa fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae
+```
+```
+npm run add-food -- --fdc-id=170169 --food-id=food_noce_di_cocco_raw \
+  --name-it="Noce di cocco, polpa fresca, cruda" \
+  --matrix-id=noce_di_cocco --matrix-description-it="Noce di cocco, polpa fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --diet-category=plant_non_fruit --botanical-family=Arecaceae --apply
+```
+
 ### Guava, cruda — preparato 2026-10-15 dal task orario (sesto lotto)
 
 - **food_id**: `food_guava_raw`. FDC ID 173044 (SR Legacy, "Guavas, common, raw").
