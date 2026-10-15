@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Olio di semi di lino, crudo — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
+
+- **food_id**: `food_olio_di_semi_di_lino_raw`. FDC ID 167702 (SR Legacy, "Oil, flaxseed, cold pressed"). Distinto da `food_semi_di_lino_interi_raw` (semi interi, già eseguiti — prodotto diverso, solo l'olio estratto) e da `food_olio_di_girasole_raw`/`food_olio_di_mais_raw`/`food_olio_di_cocco_raw` (altri oli vegetali, già eseguiti). Scartato a priori "Oil, flaxseed, contains added sliced flaxseed" (FDC 171442): nonostante abbia una pagina getfoodfacts con FDC ID esplicito, la descrizione indica semi di lino a fette AGGIUNTI all'olio — proteine (0,37g/100g), calcio (9mg/100g) e ferro (0,34mg/100g) non nulli per un olio puro confermano che il profilo nutrizionale è contaminato dai semi aggiunti, non rappresenta l'olio puro richiesto.
+- **Nutrienti**: **13/17** — mancano `vitamin_c_mg`, `other_provitamin_a_carotenoids_mcg`/beta-carotene/alfa-carotene (non riportati nella pagina, non assunti zero). Profilo coerente con un olio vegetale puro (grassi 100g/100g, proteine/carboidrati/minerali quasi tutti a zero esplicito o vicino a zero) — nessuna firma di contaminazione come la variante scartata sopra. Fonte: foodstruct.com, pagina che cita esplicitamente il link ufficiale `fdc.nal.usda.gov/food-details/167702/nutrients`.
+- **Analogia usata**: `food_olio_di_girasole_raw` (olio di semi di girasole, già eseguito sul DB reale — stessa categoria funzionale "olio vegetale puro, nessun carotenoide rilevato").
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale).
+- **Matrice**: nuova `olio_di_semi_di_lino` ("Olio di semi di lino").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Linaceae` (*Linum usitatissimum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167702 --food-id=food_olio_di_semi_di_lino_raw \
+  --name-it="Olio di semi di lino, crudo" \
+  --matrix-id=olio_di_semi_di_lino --matrix-description-it="Olio di semi di lino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit --botanical-family=Linaceae
+```
+```
+npm run add-food -- --fdc-id=167702 --food-id=food_olio_di_semi_di_lino_raw \
+  --name-it="Olio di semi di lino, crudo" \
+  --matrix-id=olio_di_semi_di_lino --matrix-description-it="Olio di semi di lino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit --botanical-family=Linaceae --apply
+```
+
 ### Bistecca di manzo (taglio magro, es. controfiletto), cruda — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_bistecca_di_manzo_raw`. FDC ID 174055 (SR Legacy, "Beef, top sirloin, steak, separable lean only, trimmed to 1/8\" fat, all grades, raw"). NON usa `food_beef_raw` (riga demo legacy già riservata/esclusa) né altri id riservati.
