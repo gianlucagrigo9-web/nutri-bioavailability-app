@@ -16,9 +16,31 @@
 
 ## Pronti
 
-*(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+### Semolino di grano duro, crudo, non arricchito — preparato 2026-10-15 dal task orario (sesto lotto)
 
-*(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
+- **food_id**: `food_semolino_di_grano_duro_raw`. FDC ID 168933 (SR Legacy, "Semolina, unenriched").
+- **Nutrienti**: **13/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (non riportati nel record consultato, non assunti zero). Due fonti indipendenti (bodbot.com e eatthismuch.com, entrambe su base "1 cup = 167g") concordano cifra per cifra sui valori per porzione: 601kcal, proteine 21,18g, grassi 1,75g, carboidrati 121,63g, fibra 6,51g, calcio 28,39mg, ferro 2,05mg, zinco 1,75mg, magnesio 78,49mg, rame 0,3mg, folato 120,24µg, vitamina C 0, B12 0 — nessun acido folico riportato separatamente (campo assente, non zero esplicito) e nessun segno di arricchimento in stile USA: per confronto, la variante "enriched" (FDC 169715, eatthismuch id 4825) ha ferro ~4,2mg/100g e folato ~183µg/100g, valori chiaramente più alti per fortificazione — questo record "unenriched" non li ha. Un terzo sito (foodstruct.com) dava per "Semolina" valori contraddittori con intestazione di pagina che citava un alimento diverso (riso), quindi scartato come fonte non attendibile per questo record.
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (farina di frumento integrale, già eseguita sul DB reale — stessa famiglia botanica Poaceae, stessa categoria "farina/derivato del grano").
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `semolino_di_grano_duro` ("Semolino di grano duro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento degli altri cereali in questa coda), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (*Triticum durum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, vedi sopra).
+
+```
+npm run add-food -- --fdc-id=168933 --food-id=food_semolino_di_grano_duro_raw \
+  --name-it="Semolino di grano duro, crudo, non arricchito" \
+  --matrix-id=semolino_di_grano_duro --matrix-description-it="Semolino di grano duro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168933 --food-id=food_semolino_di_grano_duro_raw \
+  --name-it="Semolino di grano duro, crudo, non arricchito" \
+  --matrix-id=semolino_di_grano_duro --matrix-description-it="Semolino di grano duro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
+*(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
 ## Eseguiti (archivio, ultimi 10)
 
