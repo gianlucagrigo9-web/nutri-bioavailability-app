@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Astice (lobster), crudo — preparato 2026-10-15 dal task orario (settimo lotto)
+
+- **food_id**: `food_astice_raw`. FDC ID 174208 (SR Legacy, "Crustaceans, lobster, northern, raw"). Nota sul nome: "astice" in italiano è il crostaceo con le chele (*Homarus*, come questo record); "aragosta" (senza chele, genere *Palinurus*) è un record FDC diverso, non usato qui — il nome scelto riflette il record effettivamente trovato.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (10,0µg/100g) — nessuna firma di arricchimento (non applicabile ai crostacei). Zinco 3,53mg/100g e vitamina B12 1,25µg/100g coerenti con un crostaceo crudo, nessuna anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174208 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — nessun crostaceo ancora nel Golden Set: analogia funzionale per categoria "frutti di mare non pesce", stesso trattamento `is_heme_iron=true` già usato per i molluschi di questa coda).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: nuova `astice` ("Astice").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174208 --food-id=food_astice_raw \
+  --name-it="Astice, crudo" \
+  --matrix-id=astice --matrix-description-it="Astice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174208 --food-id=food_astice_raw \
+  --name-it="Astice, crudo" \
+  --matrix-id=astice --matrix-description-it="Astice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Zucca butternut, cruda — preparato 2026-10-15 dal task orario (settimo lotto)
 
 - **food_id**: `food_zucca_butternut_raw`. FDC ID 169295 (SR Legacy, "Squash, winter, butternut, raw"). Distinta da `food_pumpkin_raw` (zucca generica, già eseguita, stessa famiglia ma cultivar/specie diversa).
