@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Yogurt magro (nonfat), bianco — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
+
+- **food_id**: `food_yogurt_magro_raw`. FDC ID 170887 (SR Legacy, "Yogurt, plain, skim milk"). Distinto da `food_yogurt_bianco_intero` (yogurt bianco intero, già eseguito, FDC 171284) e da `food_yogurt_greco` (yogurt greco intero, già eseguito, FDC 171304) — prodotto a basso contenuto di grassi, non Greco.
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (12,0µg/100g) — nessuna firma di arricchimento. Calcio 199mg/100g: più alto del latte scremato di partenza (122mg/100g), coerente con la concentrazione di solidi del latte durante la fermentazione in yogurt, non un'anomalia. Beta-carotene e alfa-carotene 0µg espliciti (coerente con l'assenza di grasso). **Nota di ricerca**: un primo candidato (FDC 2647437 "Yogurt, plain, nonfat", Foundation Foods) è stato scartato — pagina con dati incompleti/ambigui (ferro, rame, manganese riportati a 0 senza chiarezza se assenti o non misurati; vitamina C, selenio, vitamina K, B12, folato e carotenoidi del tutto assenti dalla pagina, un gap troppo ampio proprio sui micronutrienti seguiti da questo progetto) — il record SR Legacy 170887 usato invece è completo e pulito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170887 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_yogurt_bianco_intero` (yogurt bianco intero, già eseguito sul DB reale — stesso prodotto "yogurt bianco", differisce solo per il contenuto di grassi, analogia più precisa del semplice latte).
+- **Categoria dieta**: `egg_dairy` (derivato del latte).
+- **Matrice**: nuova `yogurt_magro` ("Yogurt magro/scremato"). **Nota per chi esegue**: se nel DB reale esiste già una matrice `yogurt` o simile usata per gli yogurt già eseguiti (non verificabile da questa sessione, priva di accesso diretto a Supabase — il dettaglio dei comandi originali di quelle due voci è stato compattato in una tabella riassuntiva e non riporta il matrix_id esatto), valutare se riusarla invece di crearne una nuova, per evitare matrici duplicate per lo stesso tipo di alimento; lo script comunque non si rompe in nessuno dei due casi.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento già usato per gli altri derivati del latte aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170887 --food-id=food_yogurt_magro_raw \
+  --name-it="Yogurt magro (nonfat), bianco" \
+  --matrix-id=yogurt_magro --matrix-description-it="Yogurt magro/scremato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170887 --food-id=food_yogurt_magro_raw \
+  --name-it="Yogurt magro (nonfat), bianco" \
+  --matrix-id=yogurt_magro --matrix-description-it="Yogurt magro/scremato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy --apply
+```
+
 ### Latte vaccino scremato, con vitamina A e D aggiunte — preparato 2026-10-15 dal task orario (sesto lotto, chiusura)
 
 - **food_id**: `food_latte_scremato_raw`. FDC ID 171269 (SR Legacy, "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)"). Distinto da `food_milk_whole` (latte intero, già reale nel DB) — prodotto diverso per contenuto di grassi.
