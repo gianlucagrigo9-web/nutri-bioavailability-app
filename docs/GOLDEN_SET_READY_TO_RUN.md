@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Timo, secco — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11, oltre la quota)
+
+- **food_id**: `food_timo_secco_raw`. FDC ID 170938 (SR Legacy, "Spices, thyme, dried").
+- **Nutrienti**: **17/17**. Acido folico 0µg esplicito, separato dal folato totale (274µg/100g) — nessuna firma di arricchimento. Ferro **124mg/100g**: valore estremo ma non anomalo — il timo secco è notoriamente tra le spezie più ricche di ferro in assoluto (fonte: dato USDA stesso, nessun altro segnale di errore nel record, coerente con calcio 1890mg/100g e magnesio 220mg/100g, tutti alti per lo stesso motivo di concentrazione da disidratazione). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170938 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per le altre erbe aromatiche secche di questa coda; famiglia botanica Lamiaceae dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `timo_secco` ("Timo secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 2264µg/100g esplicito — stessa scelta prudente già usata per le altre spezie di questo run), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Thymus vulgaris*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi; il ferro altissimo va interpretato dall'app con questa scala in mente quando usato nel Meal Builder.
+
+```
+npm run add-food -- --fdc-id=170938 --food-id=food_timo_secco_raw \
+  --name-it="Timo, secco" \
+  --matrix-id=timo_secco --matrix-description-it="Timo secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=170938 --food-id=food_timo_secco_raw \
+  --name-it="Timo, secco" \
+  --matrix-id=timo_secco --matrix-description-it="Timo secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae --apply
+```
+
 ### Cannella, in polvere — preparato 2026-10-15 dal task orario (settimo lotto, turno ore 11)
 
 - **food_id**: `food_cannella_raw`. FDC ID 171320 (SR Legacy, "Spices, cinnamon, ground").
