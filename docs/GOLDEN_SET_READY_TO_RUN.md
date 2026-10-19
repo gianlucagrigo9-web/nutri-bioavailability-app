@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Olive nere, in salamoia (inscatolate) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11, ultimo del turno)
+
+- **food_id**: `food_olive_nere`. FDC ID 169094 (SR Legacy, "Olives, ripe, canned (small-extra large)"). Oliva nera matura in salamoia/inscatolata semplice, non farcita né condita.
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 116kcal, proteine 0,84g, grassi 10,9g, carboidrati 6,04g, fibra 1,60g, ferro 6,28mg, zinco 0,22mg, calcio 88,0mg, rame 0,25mg, magnesio 4,00mg, selenio 0,90µg, vitamina C 0,90mg, vitamina K (fillochinone) 1,40µg, vitamina B12 0µg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 198µg, alfa-carotene 0µg e beta-criptoxantina 0µg (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169094 e dataType SR Legacy; stesso record identificato anche tramite NBD ID 9193 su recipal.com/bodbot.com (solo come conferma identità, non come fonte dei valori). Nota: ferro molto più alto (6,28mg/100g) che nelle olive verdi (0,49mg/100g) — plausibile per il trattamento con gluconato ferroso tipico delle olive nere "stile California", ma non verificata una nota esplicita in merito sulla fonte: riportato solo come dato, nessuna interpretazione aggiunta.
+- **Analogia usata**: `food_albicocche_secche_raw` (albicocche secche, già eseguite sul DB reale — stessa analogia funzionale già usata per le olive verdi in questo stesso lotto: frutto trasformato/conservato classificato `plant_non_fruit` nonostante sia botanicamente un frutto; nessuna pianta della famiglia reale Oleaceae ancora eseguita, famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (oliva in salamoia/inscatolata: prodotto trasformato/condimento, non frutta fresca nella definizione restrittiva del PRD §4.9, stessa convenzione già usata per le olive verdi).
+- **Matrice**: nuova `olive_nere` ("Olive nere, in salamoia") — distinta da `olive_verdi` (composizione diversa, in particolare il ferro).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 198µg/100g presente, ma matrice disgregata dal trattamento di conservazione/inscatolamento, stessa convenzione già usata per le olive verdi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Oleaceae`, `baseline_cooking_state=pickled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169094 --food-id=food_olive_nere \
+  --name-it="Olive nere, in salamoia (inscatolate)" \
+  --matrix-id=olive_nere --matrix-description-it="Olive nere, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Oleaceae
+```
+```
+npm run add-food -- --fdc-id=169094 --food-id=food_olive_nere \
+  --name-it="Olive nere, in salamoia (inscatolate)" \
+  --matrix-id=olive_nere --matrix-description-it="Olive nere, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Oleaceae --apply
+```
+
 ### Olive verdi, in salamoia — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_olive_verdi`. FDC ID 169096 (SR Legacy, "Olives, pickled, canned or bottled, green"). Oliva da tavola in salamoia semplice, non farcita né condita.
