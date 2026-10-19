@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Amaranto, cotto — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_amaranto_cotto`. FDC ID 170683 (SR Legacy, "Amaranth grain, cooked"). Distinto da `food_amaranto_raw` (crudo, già eseguito, FDC 170682, 17/17 nutrienti) — stesso alimento, forma cotta.
+- **Nutrienti**: **12/17** — gap dichiarato, più ampio del crudo (17/17). Presenti: energia 102kcal, proteine 3,80g, grassi 1,58g, carboidrati 18,7g, fibra 2,10g, calcio 47,0mg, ferro 2,10mg, magnesio 65,0mg, zinco 0,86mg, rame 0,15mg, selenio 5,50µg, folato totale 22,0µg. **Mancano** (non riportati nella pagina, non assunti zero): vitamina C, vitamina B12, vitamina K, beta-carotene, altri carotenoidi provitaminici A (alfa-carotene + beta-criptoxantina). Nessun segno di arricchimento (folato 22µg plausibile per un cereale integrale, nessuna firma anomala). Fonte: getfoodfacts.com (FDC ID 170683, dataType SR Legacy). **Draft non da usare per vitamina C/B12/K/vitamina A finché il gap non è risolto**, stesso trattamento già dato a `food_farro_raw`/`food_patata_dolce_cotta` per i rispettivi gap.
+- **Analogia usata**: `food_amaranto_raw` (amaranto crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale/pseudocereale).
+- **Matrice**: nuova `amaranto_cotto` ("Amaranto, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, a differenza del crudo che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Amaranthaceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170683 --food-id=food_amaranto_cotto \
+  --name-it="Amaranto, cotto" \
+  --matrix-id=amaranto_cotto --matrix-description-it="Amaranto, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170683 --food-id=food_amaranto_cotto \
+  --name-it="Amaranto, cotto" \
+  --matrix-id=amaranto_cotto --matrix-description-it="Amaranto, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Couscous, cotto — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_couscous_cotto`. FDC ID 169700 (SR Legacy, "Couscous, cooked"). Distinto da `food_couscous_raw` (secco/crudo, già eseguito, FDC 169699) — stesso alimento, forma cotta.
