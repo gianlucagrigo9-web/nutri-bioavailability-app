@@ -16,7 +16,31 @@
 
 ## Pronti
 
-### Timo, fresco, crudo — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Basilico, essiccato — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_basilico_secco_raw`. FDC ID 171317 (SR Legacy, "Spices, basil, dried"). Distinto dal basilico fresco (già "pronto", non ancora eseguito, in una coda precedente): prodotto diverso, record FDC separato e proprio.
+- **Nutrienti**: **17/17** — tutti presenti. Energia 233kcal, proteine 23,0g, grassi 4,07g, carboidrati 47,8g, fibra 37,7g, ferro 89,8mg, zinco 7,10mg, calcio 2240mg, rame 2,10mg, magnesio 711mg, selenio 3,00µg, vitamina C 0,80mg, vitamina K (fillochinone) 1715µg, vitamina B12 0µg esplicito, folato totale 310µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 378µg, alfa-carotene 113µg e beta-criptoxantina 24,0µg (entrambi presenti, other_provitamin_a_carotenoids_mcg=137). Ferro/calcio/vitamina K molto alti, ma coerenti con la concentrazione tipica di una spezia essiccata (stesso fenomeno già visto per origano/rosmarino/cannella secchi in questa stessa coda), non un segnale di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171317 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per tutte le altre spezie secche di questa coda; famiglia botanica Lamiaceae dichiarata separatamente, diversa da Asteraceae della scarola).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `basilico_secco` ("Basilico, essiccato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene/alfa-carotene/beta-criptoxantina tutti espliciti e non nulli, stessa scelta già usata per le altre spezie secche di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Ocimum basilicum*, stessa famiglia di origano/rosmarino/timo/salvia/menta), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171317 --food-id=food_basilico_secco_raw \
+  --name-it="Basilico, essiccato" \
+  --matrix-id=basilico_secco --matrix-description-it="Basilico, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Lamiaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171317 --food-id=food_basilico_secco_raw \
+  --name-it="Basilico, essiccato" \
+  --matrix-id=basilico_secco --matrix-description-it="Basilico, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Lamiaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --apply
+```
 
 - **food_id**: `food_timo_fresco_raw`. FDC ID 173470 (SR Legacy, "Thyme, fresh"). Distinto da `food_timo_secco_raw` (essiccato, FDC 170938, solo "pronto" non ancora eseguito, già in questa coda): prodotto diverso (fresco vs essiccato), record FDC separato e proprio.
 - **Nutrienti**: **14/17** — mancano `selenium_mcg` (assente dalla pagina), `vitamin_k_mcg` (assente) e `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina entrambi assenti dalla pagina, servono entrambi per comporre il codice). Presenti: energia 101kcal, proteine 5,56g, grassi 1,68g, carboidrati 24,4g, fibra 14,0g, ferro 17,4mg, zinco 1,81mg, calcio 405mg, rame 0,56mg, magnesio 160mg, vitamina C 160mg, vitamina B12 0µg esplicito, folato totale 45,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 2851µg. Ferro, calcio e vitamina C molto alti, ma coerenti con un'erba fresca a foglia piccola/densa (stesso ordine di grandezza già visto per altre erbe/spezie di questa coda, es. basilico/prezzemolo freschi, origano/rosmarino secchi) — non un segnale di record sbagliato. Gap dichiarato, non stimato; soglia di match ampiamente superata (14/17, stesso livello già accettato per agnello/lupini/cozze cotte in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173470 e dataType SR Legacy.
