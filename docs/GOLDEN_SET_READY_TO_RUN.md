@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Granchio, cotto (al vapore/bollito) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_granchio_cotto`. FDC ID 174205 (SR Legacy, "Crustaceans, crab, blue, cooked, moist heat"). Distinto da `food_granchio_raw` (crudo, FDC 174204, solo "pronto" non ancora eseguito) — stesso crostaceo, forma cotta.
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 83,0kcal, proteine 17,9g, grassi 0,74g, carboidrati 0g, fibra 0g, ferro 0,50mg, zinco 3,81mg, calcio 91,0mg, rame 0,81mg, magnesio 36,0mg, selenio 42,9µg, vitamina C 3,30mg, vitamina K (fillochinone) 0,30µg, vitamina B12 3,33µg, folato totale 51,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile ai crostacei), beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174205 e dataType SR Legacy, incrociata con triagemethod.com (stessi valori).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — nessun crostaceo ancora eseguito nel Golden Set, `food_granchio_raw` crudo è solo "pronto": stessa analogia funzionale "frutti di mare non pesce" già usata per la voce cruda sorella, `is_heme_iron=true` per coerenza).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: `granchio` — **nota per chi esegue**: stesso `matrix_id` già proposto per `food_granchio_raw` (crudo, solo "pronto"), per formare una coppia crudo/cotto quando entrambi saranno eseguiti; se il crudo viene eseguito per primo la matrice esiste già e questo comando la riusa automaticamente (nessun `--matrix-description-it` necessario in quel caso — qui incluso comunque per il caso in cui questo venga eseguito per primo).
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi/crostacei di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=moist_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174205 --food-id=food_granchio_cotto \
+  --name-it="Granchio, cotto (al vapore/bollito)" \
+  --matrix-id=granchio --matrix-description-it="Granchio" \
+  --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174205 --food-id=food_granchio_cotto \
+  --name-it="Granchio, cotto (al vapore/bollito)" \
+  --matrix-id=granchio --matrix-description-it="Granchio" \
+  --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Capesante, cotte (al vapore) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_capesante_cotte`. FDC ID 167742 (SR Legacy, "Mollusks, scallop, (bay and sea), cooked, steamed").
