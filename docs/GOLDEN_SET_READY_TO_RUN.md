@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Astice (lobster), cotto (bollito) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_astice_cotto`. FDC ID 174209 (SR Legacy, "Crustaceans, lobster, northern, cooked, moist heat"). Distinto da `food_astice_raw` (crudo, FDC 174208, solo "pronto" non ancora eseguito) — stesso crostaceo, forma cotta.
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 89,0kcal, proteine 19,0g, grassi 0,86g, carboidrati 0g, fibra 0g, ferro 0,29mg, zinco 4,05mg, calcio 96,0mg, rame 1,55mg, magnesio 43,0mg, selenio 73,1µg, vitamina C 0µg esplicito, vitamina K (fillochinone, menachinone-4, diidrofillochinone tutte) 0µg esplicito, vitamina B12 1,43µg, folato totale 11,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile ai crostacei), beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174209 e dataType SR Legacy, con FDC ID confermato anche dagli URL di myfooddata.com e logixpathchef.com (contenuto bloccato da robots.txt, solo ID confermato dall'URL). **Nota di cautela riportata per trasparenza**: una fonte terza (uhhospitals.org) riporta per lo zinco un valore ricalcolato da una porzione in once che risulterebbe più alto (~8,75mg/100g) del valore letto su getfoodfacts.com (4,05mg/100g) — discrepanza fra fonti secondarie non risolta in fase di ricerca; non è un problema per il comando qui sotto, perché lo script ri-scarica il valore reale direttamente da FDC al momento dell'esecuzione (non usa i numeri scritti in questa voce) — chi esegue può comunque controllare il valore di zinco nel riepilogo del dry-run prima di confermare l'apply.
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — nessun crostaceo ancora eseguito nel Golden Set, `food_astice_raw` crudo è solo "pronto": stessa analogia funzionale già usata per la voce cruda sorella, `is_heme_iron=true` per coerenza).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: `astice` — **nota per chi esegue**: stesso `matrix_id` già proposto per `food_astice_raw` (crudo, solo "pronto"), per formare una coppia crudo/cotto quando entrambi saranno eseguiti.
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi/crostacei di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=moist_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174209 --food-id=food_astice_cotto \
+  --name-it="Astice, cotto (bollito)" \
+  --matrix-id=astice --matrix-description-it="Astice" \
+  --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174209 --food-id=food_astice_cotto \
+  --name-it="Astice, cotto (bollito)" \
+  --matrix-id=astice --matrix-description-it="Astice" \
+  --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Granchio, cotto (al vapore/bollito) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_granchio_cotto`. FDC ID 174205 (SR Legacy, "Crustaceans, crab, blue, cooked, moist heat"). Distinto da `food_granchio_raw` (crudo, FDC 174204, solo "pronto" non ancora eseguito) — stesso crostaceo, forma cotta.
