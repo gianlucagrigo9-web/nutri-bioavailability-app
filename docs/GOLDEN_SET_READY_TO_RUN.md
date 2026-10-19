@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Zenzero, in polvere (secco) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_zenzero_polvere_raw`. FDC ID 170926 (SR Legacy, "Spices, ginger, ground").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 335kcal, proteine 8,98g, grassi 4,24g, carboidrati 71,6g, fibra 14,1g, ferro 19,8mg, zinco 3,64mg, calcio 114mg, rame 0,48mg, magnesio 214mg, selenio 55,8µg, vitamina C 0,70mg, vitamina K (fillochinone) 0,80µg, vitamina B12 0µg esplicito, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 18,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg`=0 dichiarato, non assente). Nota minore: etichetta/descrizione riportano 340kcal invece di 335kcal della tabella dettagliata — usati questi ultimi, stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170926 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione generica delle altre spezie/erbe secche di questa coda; nessuna pianta della famiglia Zingiberaceae ancora eseguita sul DB reale — curcuma e zenzero fresco restano solo "pronti", famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `zenzero_polvere` ("Zenzero, in polvere") — distinta dalla matrice `zenzero` già usata per lo zenzero fresco (solo "pronto", non eseguito): composizione molto diversa fra fresco e disidratato/macinato, non riusabile.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stessa convenzione delle altre spezie di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Zingiberaceae` (*Zingiber officinale*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170926 --food-id=food_zenzero_polvere_raw \
+  --name-it="Zenzero, in polvere (secco)" \
+  --matrix-id=zenzero_polvere --matrix-description-it="Zenzero, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae
+```
+```
+npm run add-food -- --fdc-id=170926 --food-id=food_zenzero_polvere_raw \
+  --name-it="Zenzero, in polvere (secco)" \
+  --matrix-id=zenzero_polvere --matrix-description-it="Zenzero, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply
+```
+
 ### Aglio, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_aglio_polvere_raw`. FDC ID 171325 (SR Legacy, "Spices, garlic powder").
