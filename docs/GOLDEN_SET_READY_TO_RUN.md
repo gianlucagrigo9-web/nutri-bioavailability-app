@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Capesante, cotte (al vapore) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_capesante_cotte`. FDC ID 167742 (SR Legacy, "Mollusks, scallop, (bay and sea), cooked, steamed").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 111kcal, proteine 20,5g, grassi 0,84g, carboidrati 5,41g (per differenza), fibra 0g, ferro 0,58mg, zinco 1,55mg, calcio 10,0mg, rame 0,033mg, magnesio 37,0mg, selenio 21,7µg, vitamina C 0µg esplicito, vitamina K (fillochinone) 0µg esplicito (la pagina mostra anche menachinone-4 e diidrofillochinone, entrambi 0µg — nessuna forma di vitamina K presente), vitamina B12 2,15µg, folato totale 20,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, comunque non applicabile al pesce), beta-carotene, alfa-carotene e beta-criptoxantina tutti 0µg espliciti (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167742 e dataType SR Legacy. Distinto dal record impanato/fritto "Mollusks, scallop, mixed species, cooked, breaded and fried" FDC 174221, non usato qui (prodotto composito diverso).
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — stessa classe reale Bivalvia (mollusco bivalve), stessa convenzione `is_heme_iron=true` già usata per i molluschi/crostacei di questa coda; nessuna specie Pectinidae ancora eseguita per un'analogia più precisa).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `capesante` ("Capesante").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi/crostacei di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=steamed`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167742 --food-id=food_capesante_cotte \
+  --name-it="Capesante, cotte (al vapore)" \
+  --matrix-id=capesante --matrix-description-it="Capesante" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167742 --food-id=food_capesante_cotte \
+  --name-it="Capesante, cotte (al vapore)" \
+  --matrix-id=capesante --matrix-description-it="Capesante" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Kumquat, crudo — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_kumquat_raw`. FDC ID 168154 (SR Legacy, "Kumquats, raw").
