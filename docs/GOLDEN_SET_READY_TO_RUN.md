@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uova di quaglia, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_uova_di_quaglia_raw`. FDC ID 172191 (SR Legacy, "Egg, quail, whole, fresh, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 158kcal (il riepilogo della pagina arrotonda a 160kcal, incongruenza minore già vista altrove in questa coda, non bloccante), proteine 13,1g, grassi 11,1g, carboidrati 0,41g, fibra 0g esplicito, ferro 3,65mg, zinco 1,47mg, calcio 64,0mg, rame 0,062mg, magnesio 13,0mg, selenio 32,0µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,30µg, vitamina B12 1,58µg, folato totale 66,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 11,0µg, alfa-carotene 0µg e beta-criptoxantina 10,0µg (plausibile per il tuorlo pigmentato dell'uovo di quaglia). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172191 e dataType SR Legacy. Distinto dall'uovo di gallina già nel Golden Set per specie, con selenio, ferro e vitamina B12 per 100g notevolmente più alti.
+- **Analogia usata**: `food_egg_raw` (uovo di gallina, già nel Golden Set originale — stessa categoria "uovo crudo", `is_heme_iron=false` come l'uovo di gallina).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uova_di_quaglia` ("Uova di quaglia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (coerente con `food_egg_raw`, che non lo imposta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172191 --food-id=food_uova_di_quaglia_raw \
+  --name-it="Uova di quaglia, crude" \
+  --matrix-id=uova_di_quaglia --matrix-description-it="Uova di quaglia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172191 --food-id=food_uova_di_quaglia_raw \
+  --name-it="Uova di quaglia, crude" \
+  --matrix-id=uova_di_quaglia --matrix-description-it="Uova di quaglia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Pomodori secchi, non in olio — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_pomodori_secchi_raw`. FDC ID 168567 (SR Legacy, "Tomatoes, sun-dried").
