@@ -16,7 +16,30 @@
 
 ## Pronti
 
-### Pane azzimo (matzo), semplice — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Succo di pompelmo (rosa), crudo (spremuto) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_succo_di_pompelmo_rosa_raw`. FDC ID 167774 (SR Legacy, "Grapefruit juice, pink, raw").
+- **Nutrienti**: **12/17** — mancano `fiber_g` (la pagina è incoerente: il riepilogo indica 0g, la tabella dettagliata e il pannello dicono "non dichiarata" — non considerato un valore affidabile, trattato come assente, non assunto zero), `selenium_mcg` (assente dalla pagina), `vitamin_k_mcg` (assente), `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (la pagina riporta solo la vitamina A aggregata in RAE, 54,3µg/porzione, non i singoli carotenoidi — nessun valore utilizzabile per i codici tracciati). Presenti: energia 39,0kcal, proteine 0,50g, grassi 0,10g, carboidrati 9,20g, ferro 0,20mg, zinco 0,050mg, calcio 9,00mg, rame 0,033mg, magnesio 12,0mg, vitamina C 38,0mg, vitamina B12 0µg esplicito, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Gap dichiarato, non stimato — soglia di match comunque superata (12/17, stesso ordine di grandezza già accettato per radicchio 12/17 e couscous/avena 13/17 in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167774 e dataType SR Legacy (release 30 aprile 2026).
+- **Nota su zucchero aggiunto**: la pagina dichiara "not declared" sia per zucchero totale sia per zucchero aggiunto — non verificabile, ma nessun indizio positivo di zucchero aggiunto (coerente con un succo di pompelmo semplice spremuto, non una bevanda zuccherata).
+- **Analogia usata**: `food_pompelmo_rosa_raw` (pompelmo rosa, già eseguito sul DB reale — stessa specie *Citrus × paradisi*, stessa famiglia Rutaceae, forma diversa: succo spremuto invece di polpa intera, stessa convenzione già usata per gli altri succhi di questa coda, es. succo di mela/melograno).
+- **Categoria dieta**: `plant_non_fruit` (succo è forma trasformata del frutto, non frutta fresca intera, stessa convenzione già usata per succo d'arancia/limone/mela/melograno in questa coda — non cambia vegetariano/vegano, solo la compatibilità fruttariana).
+- **Matrice**: nuova `succo_di_pompelmo_rosa` ("Succo di pompelmo (rosa), crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione degli altri succhi), `carotenoid_matrix_state` omesso (NULL — a differenza del succo di mela/melograno dove i carotenoidi erano 0µg espliciti, qui sono semplicemente assenti dal record: nessuno stato dichiarabile, gap sopra), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (famiglia reale degli agrumi, stessa di `food_pompelmo_rosa_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167774 --food-id=food_succo_di_pompelmo_rosa_raw \
+  --name-it="Succo di pompelmo (rosa), crudo (spremuto)" \
+  --matrix-id=succo_di_pompelmo_rosa --matrix-description-it="Succo di pompelmo (rosa), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_rosa_raw \
+  --botanical-family=Rutaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167774 --food-id=food_succo_di_pompelmo_rosa_raw \
+  --name-it="Succo di pompelmo (rosa), crudo (spremuto)" \
+  --matrix-id=succo_di_pompelmo_rosa --matrix-description-it="Succo di pompelmo (rosa), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_rosa_raw \
+  --botanical-family=Rutaceae --diet-category=plant_non_fruit --apply
+```
 
 - **food_id**: `food_pane_azzimo`. FDC ID 172740 (SR Legacy, "Crackers, matzo, plain").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 395kcal, proteine 10,0g, grassi 1,40g, carboidrati 83,7g, fibra 3,00g, ferro 3,16mg, zinco 0,68mg, calcio 13,0mg, rame 0,060mg, magnesio 25,0mg, selenio 36,9µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,30µg, vitamina B12 0µg esplicito, folato totale 17,0µg, acido folico 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172740 e dataType SR Legacy.
