@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Senape, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_senape_raw`. FDC ID 170929 (SR Legacy, "Spices, mustard seed, ground").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 508kcal, proteine 26,1g, grassi 36,2g, carboidrati 28,1g, fibra 12,2g, ferro 9,21mg, zinco 6,08mg, calcio 266mg, rame 0,65mg, magnesio 370mg, selenio 208µg, vitamina C 7,10mg, vitamina K (fillochinone) 5,40µg, vitamina B12 0µg esplicito, folato totale 162µg, acido folico 0µg esplicito (nessuna firma di arricchimento), alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg`=0 dichiarato, non assente), beta-carotene 18,0µg. Nota minore: il riepilogo della pagina indica 510kcal invece di 508kcal della tabella dettagliata — usati questi ultimi, stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170929 e dataType SR Legacy. Nota sulla forma: il record trovato è esplicitamente "ground" (macinato/in polvere), non "semi interi" come la voce di coda suggerirebbe letteralmente — nessun record SR Legacy/Foundation distinto per semi di senape interi è stato trovato in questa ricerca; la composizione nutrizionale di un seme intero e della sua forma macinata è la stessa materia prima, quindi non è un caso di prodotto diverso (a differenza delle fortificazioni USA già scartate altrove in questa coda) — trattato come match valido per "semi di senape" in generale.
+- **Analogia usata**: `food_brussels_sprouts_raw` (cavoletti di Bruxelles, già nel Golden Set originale — stessa famiglia botanica reale Brassicaceae della senape, *Brassica nigra*/*Sinapis alba*: un'analogia più precisa della convenzione generica `food_scarola_raw` usata per le altre spezie di questa coda senza famiglia già eseguita).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `senape` ("Senape").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stessa convenzione delle altre spezie di questa coda, uso reale in grammi/pizzichi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170929 --food-id=food_senape_raw \
+  --name-it="Senape, semi secchi" \
+  --matrix-id=senape --matrix-description-it="Senape" \
+  --baseline-cooking-state=raw --analogy-food-id=food_brussels_sprouts_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae
+```
+```
+npm run add-food -- --fdc-id=170929 --food-id=food_senape_raw \
+  --name-it="Senape, semi secchi" \
+  --matrix-id=senape --matrix-description-it="Senape" \
+  --baseline-cooking-state=raw --analogy-food-id=food_brussels_sprouts_raw \
+  --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply
+```
+
 ### Coriandolo, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09, oltre la quota, ultimo del turno)
 
 - **food_id**: `food_coriandolo_raw`. FDC ID 170922 (SR Legacy, "Spices, coriander seed").
