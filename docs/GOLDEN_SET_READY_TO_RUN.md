@@ -16,7 +16,29 @@
 
 ## Pronti
 
-### Panna, densa, da montare (heavy whipping cream), cruda — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Formaggio Brie — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_brie`. FDC ID 172177 (SR Legacy, "Cheese, brie").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 334kcal, proteine 20,8g, grassi 27,7g, carboidrati 0,45g, fibra 0g esplicito, ferro 0,50mg, zinco 2,38mg, calcio 184mg, rame 0,019mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,30µg, vitamina B12 1,65µg, folato totale 65,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento — i valori di B12/folato sono naturali del formaggio), beta-carotene 9,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172177 e dataType SR Legacy. Energia coerente col calcolo dai macronutrienti (~332kcal contro 334 dichiarati); sodio alto (629mg/100g) ma tipico dei formaggi, non uno dei 17 nutrienti tracciati. Contrariamente al precedente già dichiarato per mascarpone/mozzarella di bufala in questa coda (nessun record generico, solo Branded scarsi), per il brie esiste un record SR Legacy generico pulito e completo.
+- **Analogia usata**: `food_parmigiano_reggiano` (formaggio stagionato, già eseguito sul DB reale — stessa categoria "formaggio a pasta ottenuta per coagulazione e stagionatura", a differenza di mozzarella/ricotta che sono formaggi freschi non stagionati).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `brie` ("Formaggio Brie").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini/formaggi aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (stessa convenzione già usata per gli altri formaggi pronti al consumo, es. parmigiano/mozzarella/ricotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172177 --food-id=food_brie \
+  --name-it="Formaggio Brie" \
+  --matrix-id=brie --matrix-description-it="Formaggio Brie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172177 --food-id=food_brie \
+  --name-it="Formaggio Brie" \
+  --matrix-id=brie --matrix-description-it="Formaggio Brie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
 
 - **food_id**: `food_panna_densa_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 340kcal, proteine 2,84g, grassi 36,1g, carboidrati 2,84g, fibra 0g esplicito, ferro 0,10mg, zinco 0,24mg, calcio 66,0mg, rame 0,011mg, magnesio 7,00mg, selenio 3,00µg, vitamina C 0,60mg, vitamina K (fillochinone) 3,20µg, vitamina B12 0,16µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 72,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170859 e dataType SR Legacy. Piccola incongruenza minore fra carboidrati per differenza (2,84g) e zuccheri totali dichiarati (2,92g) sulla stessa pagina — scarto di arrotondamento, stesso tipo di piccola discrepanza già accettata altrove in questa coda, non bloccante.
