@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cavolo cappuccio rosso, crudo — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
+
+- **food_id**: `food_cavolo_cappuccio_rosso_raw`. FDC ID 169977 (SR Legacy, "Cabbage, red, raw").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 31,0kcal, proteine 1,43g, grassi 0,16g, carboidrati 7,37g, fibra 2,10g, ferro 0,80mg, zinco 0,22mg, calcio 45,0mg, rame 0,017mg, magnesio 16,0mg, selenio 0,60µg, vitamina C 57,0mg, vitamina K 38,2µg, vitamina B12 0µg esplicito, folato totale 18,0µg, beta-carotene 670µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169977 e dataType SR Legacy.
+- **Analogia usata**: `food_cavolo_cappuccio_raw` (cavolo cappuccio bianco, già eseguito sul DB reale — stessa specie *Brassica oleracea*, varietà/cultivar diversa: rosso invece che bianco).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolo_cappuccio_rosso` ("Cavolo cappuccio rosso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_cavolo_cappuccio_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene 670µg/100g presente, crudo, stessa convenzione del cappuccio bianco), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_cappuccio_rosso_raw \
+  --name-it="Cavolo cappuccio rosso, crudo" \
+  --matrix-id=cavolo_cappuccio_rosso --matrix-description-it="Cavolo cappuccio rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cavolo_cappuccio_raw \
+  --botanical-family=Brassicaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_cappuccio_rosso_raw \
+  --name-it="Cavolo cappuccio rosso, crudo" \
+  --matrix-id=cavolo_cappuccio_rosso --matrix-description-it="Cavolo cappuccio rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cavolo_cappuccio_raw \
+  --botanical-family=Brassicaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Zucca, cotta (bollita, senza sale) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
 
 - **food_id**: `food_zucca_cotta`. FDC ID 168449 (SR Legacy, "Pumpkin, cooked, boiled, drained, without salt").
