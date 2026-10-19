@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Couscous, cotto — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_couscous_cotto`. FDC ID 169700 (SR Legacy, "Couscous, cooked"). Distinto da `food_couscous_raw` (secco/crudo, già eseguito, FDC 169699) — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Energia 112 kcal, proteine 3,79g, grassi 0,16g, carboidrati 23,2g, fibra 1,40g, calcio 8,00mg, ferro 0,38mg, magnesio 8,00mg, zinco 0,26mg, rame 0,041mg, selenio 27,5µg, folato totale 15,0µg, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, vitamina K 0,10µg, beta-carotene 0µg esplicito, altri carotenoidi provitaminici A (alfa+cripto) 0µg esplicito. Calcio molto basso (8mg/100g), nessun segno di farina/semola arricchita in stile USA (a differenza del caso pane/pasta già scartato altrove in questa coda — il couscous non ha mai mostrato questo problema). Fonte: getfoodfacts.com (FDC ID 169700, dataType SR Legacy).
+- **Analogia usata**: `food_couscous_raw` (couscous secco/crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `couscous_cotto` ("Couscous, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stesso trattamento già usato per i cereali di questa coda, carotenoidi non significativi), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Poaceae` (famiglia botanica reale del grano duro), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169700 --food-id=food_couscous_cotto \
+  --name-it="Couscous, cotto" \
+  --matrix-id=couscous_cotto --matrix-description-it="Couscous, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_couscous_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169700 --food-id=food_couscous_cotto \
+  --name-it="Couscous, cotto" \
+  --matrix-id=couscous_cotto --matrix-description-it="Couscous, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_couscous_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Peperoni verdi, cotti (bolliti) — preparato 2026-10-15 dal task orario (nono lotto, turno ore 16)
 
 - **food_id**: `food_peperoni_verdi_cotti`. FDC ID 170109 (SR Legacy, "Peppers, sweet, green, cooked, boiled, drained, with salt"). Distinto da `food_pepper_green_raw` (crudo, già eseguito) — stesso alimento, forma cotta. Scelta la variante "with salt" (sodio 238mg/100g, non uno dei 17 nutrienti tracciati): nessuna pagina getfoodfacts indicizzata per la variante "without salt", stesso tipo di scelta già fatta per peperoni rossi/cipolle in questa coda.
