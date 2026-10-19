@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### More, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_more_raw`. FDC ID 173946 (SR Legacy, "Blackberries, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 43,0kcal, proteine 1,39g, grassi 0,49g, carboidrati 9,61g, fibra 5,30g, ferro 0,62mg, zinco 0,53mg, calcio 29,0mg, rame 0,17mg, magnesio 20,0mg, selenio 0,40µg, vitamina C 21,0mg, vitamina K (fillochinone) 19,8µg, vitamina B12 0µg esplicito, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 128µg, alfa-carotene 0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173946 e dataType SR Legacy. Alimento non ancora coperto nonostante mirtilli/ribes/uva spina già presenti: buco reale, non di nicchia.
+- **Analogia usata**: `food_mirtilli_raw` (già eseguito sul DB reale — analogia funzionale di categoria "piccolo frutto di bosco crudo", famiglia botanica reale diversa: Rosaceae/*Rubus fruticosus*, non Ericaceae come il mirtillo — dichiarata separatamente).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, non trasformato).
+- **Matrice**: nuova `more` ("More (frutti di rovo)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo, matrice intatta, beta-carotene 128µg non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173946 --food-id=food_more_raw \
+  --name-it="More, crude" \
+  --matrix-id=more --matrix-description-it="More (frutti di rovo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=173946 --food-id=food_more_raw \
+  --name-it="More, crude" \
+  --matrix-id=more --matrix-description-it="More (frutti di rovo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### Cuore di manzo, crudo — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12, nono alimento "pronto" del turno)
 
 - **food_id**: `food_cuore_di_manzo_raw`. FDC ID 168625 (SR Legacy, "Beef, variety meats and by-products, heart, raw").
