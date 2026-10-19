@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di grano saraceno, cruda — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_farina_di_grano_saraceno_raw`. FDC ID 170687 (SR Legacy, "Buckwheat flour, whole-groat").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 335kcal, proteine 12,6g, grassi 3,10g, carboidrati 70,6g, fibra 10,0g, ferro 4,06mg, zinco 3,12mg, calcio 41,0mg, rame 0,52mg, magnesio 251mg (molto alto, coerente col grano saraceno), selenio 5,70µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 7,00µg, vitamina B12 0µg esplicito, folato totale 54,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (`other_provitamin_a_carotenoids_mcg`=0, atteso per una farina). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170687 e dataType SR Legacy — release FoodData Central 2026-04-30. Prodotto distinto dal grano saraceno in chicchi già scartato ⚠ nel quarto lotto (lì mancava un record pulito per i chicchi crudi non tostati; qui si tratta invece della farina, un prodotto diverso con un record proprio pulito).
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (già eseguito sul DB reale — analogia solo funzionale di categoria "farina integrale", famiglia botanica reale diversa: Polygonaceae/*Fagopyrum esculentum*, non una vera graminacea, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farina_di_grano_saraceno` ("Farina di grano saraceno").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Polygonaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170687 --food-id=food_farina_di_grano_saraceno_raw \
+  --name-it="Farina di grano saraceno, cruda" \
+  --matrix-id=farina_di_grano_saraceno --matrix-description-it="Farina di grano saraceno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Polygonaceae
+```
+```
+npm run add-food -- --fdc-id=170687 --food-id=food_farina_di_grano_saraceno_raw \
+  --name-it="Farina di grano saraceno, cruda" \
+  --matrix-id=farina_di_grano_saraceno --matrix-description-it="Farina di grano saraceno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Polygonaceae --apply
+```
+
 ### Fegato di maiale, crudo — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_fegato_di_maiale_raw`. FDC ID 167862 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, raw").
