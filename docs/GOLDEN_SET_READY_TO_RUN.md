@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Maggiorana, secca — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_maggiorana_raw`. FDC ID 170928 (SR Legacy, "Spices, marjoram, dried").
+- **Nutrienti**: **17/17**. Energia 271kcal, proteine 12,7g, grassi 7,04g, carboidrati 60,6g, fibra 40,3g, ferro 82,7mg, zinco 3,60mg, calcio 1990mg (altissimo ma coerente con la concentrazione da disidratazione già vista per le altre erbe secche di questa coda, es. semi di finocchio 1196mg), rame 1,13mg, magnesio 346mg, selenio 4,50µg, vitamina C 51,4mg, vitamina K 622µg, vitamina B12 0µg, folato totale 274µg, acido folico 0µg esplicito separato dal folato alimentare — nessuna firma di arricchimento —, beta-carotene 4806µg, altri carotenoidi provitaminici A (alfa 0 + cripto 70,0) = 70,0µg. Nota minore: l'etichetta riporta 270kcal invece di 271kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170928 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione delle altre spezie/erbe secche di questa coda; nessuna pianta della famiglia Lamiaceae ancora eseguita nel Golden Set — origano/rosmarino/timo/salvia/menta/basilico restano tutti solo "pronti" — famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica vegetale).
+- **Matrice**: nuova `maggiorana` ("Maggiorana").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo, stessa scelta già usata per le altre spezie di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae` (*Origanum majorana*, stessa famiglia di origano/rosmarino/timo/salvia/menta/basilico, nessuno ancora eseguito), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170928 --food-id=food_maggiorana_raw \
+  --name-it="Maggiorana, secca" \
+  --matrix-id=maggiorana --matrix-description-it="Maggiorana" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae
+```
+```
+npm run add-food -- --fdc-id=170928 --food-id=food_maggiorana_raw \
+  --name-it="Maggiorana, secca" \
+  --matrix-id=maggiorana --matrix-description-it="Maggiorana" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Lamiaceae --apply
+```
+
 ### Alloro, foglie secche — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_alloro_raw`. FDC ID 170917 (SR Legacy, "Spices, bay leaf").
