@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Nocciole, tostate (senza sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
+
+- **food_id**: `food_nocciole_tostate`. FDC ID 170583 (SR Legacy, "Nuts, hazelnuts or filberts, dry roasted, without salt added").
+- **Nutrienti**: **15/17**. Presenti: energia 646kcal, proteine 15,0g, grassi 62,4g, carboidrati 17,6g, fibra 9,40g, ferro 4,38mg, zinco 2,50mg, calcio 123mg, rame 1,75mg, magnesio 173mg, selenio 4,10µg, vitamina C 3,80mg, vitamina B12 0µg esplicito, folato totale 88,0µg, beta-carotene 36,0µg. Mancanti (non assunti zero): `vitamin_k_mcg` (non riportato nel record) e `other_provitamin_a_carotenoids_mcg` (alfa-carotene 1,00µg presente ma beta-criptoxantina non riportata — per il composito basta un solo componente assente perché l'intero nutriente non venga promosso, vedi `lib/fdc/nutrientMapping.ts`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170583 e dataType SR Legacy.
+- **Analogia usata**: `food_nocciole_raw` (nocciole crude, già eseguite sul DB reale — stesso alimento, *Corylus avellana*, forma diversa: tostato invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `nocciole_tostate` ("Nocciole, tostate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_nocciole_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 36,0µg/100g presente ma seme tostato, matrice disgregata dal calore, stessa convenzione già usata per mandorle tostate/semi di girasole tostati/tahina in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Betulaceae` (stessa famiglia reale di `food_nocciole_raw`), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170583 --food-id=food_nocciole_tostate \
+  --name-it="Nocciole, tostate (senza sale)" \
+  --matrix-id=nocciole_tostate --matrix-description-it="Nocciole, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170583 --food-id=food_nocciole_tostate \
+  --name-it="Nocciole, tostate (senza sale)" \
+  --matrix-id=nocciole_tostate --matrix-description-it="Nocciole, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mandorle, tostate (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
 
 - **food_id**: `food_mandorle_tostate`. FDC ID 168596 (SR Legacy, "Nuts, almonds, dry roasted, with salt added").
