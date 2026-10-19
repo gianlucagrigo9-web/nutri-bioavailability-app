@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Uva spina, cruda — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_uva_spina_raw`. FDC ID 173030 (SR Legacy, "Gooseberries, raw").
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A, non riportati nel record (non assunti zero). Energia 44,0kcal (la pagina mostra anche "70 calorie" nel riepilogo, incongruenza minore di arrotondamento già vista altrove in questa coda, non bloccante — la tabella dettagliata resta la fonte usata), proteine 0,88g, grassi 0,58g, carboidrati 10,2g, fibra 4,30g, ferro 0,31mg, zinco 0,12mg, calcio 25,0mg, rame 0,070mg, magnesio 10,0mg, selenio 0,60µg, vitamina C 27,7mg, vitamina B12 0µg esplicito, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173030 e dataType SR Legacy — release FoodData Central 2026-04-30.
+- **Analogia usata**: `food_mirtilli_raw` (già eseguito sul DB reale — analogia funzionale di categoria "piccolo frutto di bosco", famiglia botanica reale diversa: Grossulariaceae/*Ribes uva-crispa*, dichiarata separatamente; nessuna pianta del genere *Ribes* ancora eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, non trasformato).
+- **Matrice**: nuova `uva_spina` ("Uva spina").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo, matrice intatta — nessun beta-carotene riportato ma lo stato va dichiarato lo stesso per coerenza con gli altri frutti freschi crudi di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Grossulariaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173030 --food-id=food_uva_spina_raw \
+  --name-it="Uva spina, cruda" \
+  --matrix-id=uva_spina --matrix-description-it="Uva spina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Grossulariaceae
+```
+```
+npm run add-food -- --fdc-id=173030 --food-id=food_uva_spina_raw \
+  --name-it="Uva spina, cruda" \
+  --matrix-id=uva_spina --matrix-description-it="Uva spina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Grossulariaceae --apply
+```
+
 ### Farina di grano saraceno, cruda — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_farina_di_grano_saraceno_raw`. FDC ID 170687 (SR Legacy, "Buckwheat flour, whole-groat").
