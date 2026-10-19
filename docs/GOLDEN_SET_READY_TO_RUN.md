@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagioli lima, cotti, bolliti (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 16)
+
+- **food_id**: `food_fagioli_lima_bolliti`. FDC ID 173802 (SR Legacy, "Lima beans, large, mature seeds, cooked, boiled, with salt").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 115kcal, proteine 7,80g, grassi 0,38g, carboidrati 20,9g, fibra 7,00g, ferro 2,39mg, zinco 0,95mg, calcio 17,0mg, rame 0,23mg, magnesio 43,0mg, selenio 4,50µg, vitamina C 0mg esplicito, vitamina K 2,00µg, vitamina B12 0µg esplicito, folato totale 83,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 238mg/100g: nessuna variante "without salt" con FDC ID verificabile trovata in nessuna fonte consultata (solo un NBD ID legacy su recipal.com, 16072/16075) — stesso tipo di gap già incontrato più volte in questa coda per legumi/verdure cotte (es. cavolfiore cotto, peperoni cotti, cipolle cotte); scelta la variante "with salt", l'unica con FDC ID verificato, sodio non è uno dei 17 nutrienti tracciati.
+- **Analogia usata**: `food_kidney_beans_boiled` (fagioli rossi bolliti, Golden Set originale — stesso genere *Phaseolus*, stesso stato di cottura; coerente con l'analogia già usata per il crudo `food_fagioli_lima_raw`, ancora solo "pronto" e quindi non utilizzabile come analogia per punto 2c del COMPITO).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_lima_bolliti` ("Fagioli lima, cotti, bolliti") — distinta dalla matrice dei fagioli lima secchi crudi.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173802 --food-id=food_fagioli_lima_bolliti \
+  --name-it="Fagioli lima, cotti, bolliti" \
+  --matrix-id=fagioli_lima_bolliti --matrix-description-it="Fagioli lima, cotti, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173802 --food-id=food_fagioli_lima_bolliti \
+  --name-it="Fagioli lima, cotti, bolliti" \
+  --matrix-id=fagioli_lima_bolliti --matrix-description-it="Fagioli lima, cotti, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ceci, in scatola, sgocciolati — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 16)
 
 - **food_id**: `food_ceci_in_scatola`. FDC ID 173800 (SR Legacy, "Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained solids").
