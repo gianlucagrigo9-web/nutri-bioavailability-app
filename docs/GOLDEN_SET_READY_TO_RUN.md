@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pomodori secchi, non in olio — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_pomodori_secchi_raw`. FDC ID 168567 (SR Legacy, "Tomatoes, sun-dried").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 258kcal, proteine 14,1g, grassi 2,97g, carboidrati 55,8g, fibra 12,3g, ferro 9,09mg, zinco 1,99mg, calcio 110mg, rame 1,42mg, magnesio 194mg, selenio 5,50µg, vitamina C 39,2mg, vitamina K (fillochinone) 43,0µg, vitamina B12 0µg esplicito, folato totale 68,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 524µg (riga unica "Carotene, beta", non divisa in cis/trans), alfa-carotene 0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168567 e dataType SR Legacy. Valori coerenti con la concentrazione per disidratazione rispetto al pomodoro fresco (ferro/calcio/magnesio circa 5-7x più alti), nessun segno di arricchimento o sale aggiunto nei dati riportati. Record "non in olio" distinto da FDC 169384 "packed in oil, drained" (prodotto diverso, non usato).
+- **Analogia usata**: `food_tomato_raw` (pomodoro comune, già eseguito sul DB reale — stessa specie, stessa famiglia Solanaceae, forma disidratata).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pomodori_secchi` ("Pomodori secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo; nessuna cottura, solo disidratazione), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw` (coerente con la convenzione già usata per altri alimenti secchi/disidratati in questa coda, es. spezie secche), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168567 --food-id=food_pomodori_secchi_raw \
+  --name-it="Pomodori secchi" \
+  --matrix-id=pomodori_secchi --matrix-description-it="Pomodori secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae
+```
+```
+npm run add-food -- --fdc-id=168567 --food-id=food_pomodori_secchi_raw \
+  --name-it="Pomodori secchi" \
+  --matrix-id=pomodori_secchi --matrix-description-it="Pomodori secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --botanical-family=Solanaceae --apply
+```
+
 ### Nasello, crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_nasello_raw`. FDC ID 173713 (SR Legacy, "Fish, whiting, mixed species, raw").
