@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Semi di zucca, tostati (senza sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18, chiusura del lotto)
+
+- **food_id**: `food_semi_di_zucca_tostati`. FDC ID 170557 (SR Legacy, "Seeds, pumpkin and squash seed kernels, roasted, without salt").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 574kcal, proteine 29,8g, grassi 49,0g, carboidrati 14,7g, fibra 6,50g, ferro 8,07mg, zinco 7,64mg, calcio 52,0mg, rame 1,27mg, magnesio 550mg, selenio 9,40µg, vitamina C 1,80mg, vitamina K 4,50µg, vitamina B12 0µg esplicito, folato totale 57,0µg, beta-carotene 5,00µg, alfa-carotene 1,00µg e beta-criptoxantina 0µg esplicito (composito provitamina A = 1,00µg). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170557 e dataType SR Legacy.
+- **Analogia usata**: `food_semi_di_zucca_raw` (semi di zucca crudi/essiccati, già eseguiti sul DB reale — stesso alimento, *Cucurbita* spp., forma diversa: tostato invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `semi_di_zucca_tostati` ("Semi di zucca, tostati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_semi_di_zucca_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 5,00µg/100g presente ma seme tostato, matrice disgregata dal calore — la versione cruda/essiccata era invece `raw_intact`, stessa convenzione già usata per mandorle/nocciole/pistacchi tostati in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa famiglia reale di `food_semi_di_zucca_raw`/`food_pumpkin_raw`), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170557 --food-id=food_semi_di_zucca_tostati \
+  --name-it="Semi di zucca, tostati (senza sale)" \
+  --matrix-id=semi_di_zucca_tostati --matrix-description-it="Semi di zucca, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_zucca_raw \
+  --botanical-family=Cucurbitaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170557 --food-id=food_semi_di_zucca_tostati \
+  --name-it="Semi di zucca, tostati (senza sale)" \
+  --matrix-id=semi_di_zucca_tostati --matrix-description-it="Semi di zucca, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_zucca_raw \
+  --botanical-family=Cucurbitaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Anacardi, tostati (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
 
 - **food_id**: `food_anacardi_tostati`. FDC ID 169421 (SR Legacy, "Nuts, cashew nuts, dry roasted, with salt added").
