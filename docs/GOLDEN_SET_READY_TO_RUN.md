@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Olive verdi, in salamoia — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_olive_verdi`. FDC ID 169096 (SR Legacy, "Olives, pickled, canned or bottled, green"). Oliva da tavola in salamoia semplice, non farcita né condita.
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 145kcal, proteine 1,03g, grassi 15,3g, carboidrati 3,84g, fibra 3,30g, ferro 0,49mg, zinco 0,040mg, calcio 52,0mg, rame 0,12mg, magnesio 11,0mg, selenio 0,90µg, vitamina C 0µg esplicito, vitamina K (fillochinone) 1,40µg, vitamina B12 0µg esplicito, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 231µg, alfa-carotene 0µg e beta-criptoxantina 9,00µg (`other_provitamin_a_carotenoids_mcg`=9,00µg). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169096 e dataType SR Legacy, incrociata con triagemethod.com (stessi valori su ferro/calcio/magnesio/selenio/vitamina K/folato/beta-carotene).
+- **Analogia usata**: `food_albicocche_secche_raw` (albicocche secche, già eseguite sul DB reale — analogia solo funzionale: frutto trasformato/conservato classificato `plant_non_fruit` nonostante sia botanicamente un frutto, stesso ragionamento categoriale qui applicato alle olive in salamoia; nessuna pianta della famiglia reale Oleaceae ancora eseguita nel Golden Set per un'analogia più precisa, famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (oliva in salamoia: prodotto trasformato/condimento, non frutta fresca nella definizione restrittiva del PRD §4.9, stesso trattamento già usato per pomodoro/zucchina/melanzana pur essendo botanicamente un frutto).
+- **Matrice**: nuova `olive_verdi` ("Olive verdi, in salamoia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 231µg/100g e beta-criptoxantina 9,00µg/100g presenti, ma matrice disgregata dal trattamento di conservazione/inscatolamento, stessa convenzione già usata per i semi tostati di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Oleaceae`, `baseline_cooking_state=pickled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169096 --food-id=food_olive_verdi \
+  --name-it="Olive verdi, in salamoia" \
+  --matrix-id=olive_verdi --matrix-description-it="Olive verdi, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Oleaceae
+```
+```
+npm run add-food -- --fdc-id=169096 --food-id=food_olive_verdi \
+  --name-it="Olive verdi, in salamoia" \
+  --matrix-id=olive_verdi --matrix-description-it="Olive verdi, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Oleaceae --apply
+```
+
 ### Fagioli azuki, cotti (bolliti, senza sale) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_fagioli_azuki_bolliti`. FDC ID 173728 (SR Legacy, "Beans, adzuki, mature seeds, cooked, boiled, without salt"). Distinto da `food_fagioli_azuki_raw` (secchi crudi, FDC 173727, solo "pronto" non ancora eseguito) — stesso legume, forma cotta. FDC ID confermato tramite una pagina-hub getfoodfacts.com che elenca tutte le 4 preparazioni di azuki con i rispettivi ID (raw=173727, bolliti senza sale=173728, bolliti con sale=173789, in scatola zuccherati=173729) — scartato un link fdc.nal.usda.gov apparso inizialmente in ricerca che risultava invece essere fagioli neri, non azuki (verificato via WebFetch diretto sul JSON prima di scartarlo).
