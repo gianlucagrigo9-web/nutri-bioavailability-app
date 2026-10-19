@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uova d'anatra, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_uova_danatra_raw`. FDC ID 172189 (SR Legacy, "Egg, duck, whole, fresh, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 185kcal, proteine 12,8g, grassi 13,8g, carboidrati 1,45g, fibra 0g esplicito, ferro 3,85mg, zinco 1,41mg, calcio 64,0mg, rame 0,062mg, magnesio 17,0mg, selenio 36,4µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,40µg, vitamina B12 5,40µg, folato totale 80,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 14,0µg, alfa-carotene 0µg e beta-criptoxantina 12,0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172189 e dataType SR Legacy. Distinto dall'uovo di gallina e da quello di quaglia appena preparato per specie, con B12 e selenio notevolmente più alti.
+- **Analogia usata**: `food_egg_raw` (uovo di gallina, già nel Golden Set originale — stessa categoria "uovo crudo", `is_heme_iron=false` come l'uovo di gallina).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uova_danatra` ("Uova d'anatra").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (coerente con `food_egg_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172189 --food-id=food_uova_danatra_raw \
+  --name-it="Uova d'anatra, crude" \
+  --matrix-id=uova_danatra --matrix-description-it="Uova d'anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172189 --food-id=food_uova_danatra_raw \
+  --name-it="Uova d'anatra, crude" \
+  --matrix-id=uova_danatra --matrix-description-it="Uova d'anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Uova di quaglia, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_uova_di_quaglia_raw`. FDC ID 172191 (SR Legacy, "Egg, quail, whole, fresh, raw").
