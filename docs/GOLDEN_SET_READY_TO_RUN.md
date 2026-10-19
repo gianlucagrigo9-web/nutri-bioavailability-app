@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Farina di soia, non arricchita, cruda — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 19)
+
+- **food_id**: `food_farina_di_soia_raw`. FDC ID 174273 (SR Legacy, "Soy flour, full-fat, raw").
+- **Nutrienti**: **17/17**. Energia 434kcal, proteine 37,8g, grassi 20,6g, carboidrati 31,9g, fibra 9,60g, ferro 6,37mg, zinco 3,92mg, calcio 206mg, rame 2,92mg, magnesio 429mg, selenio 7,50µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 345µg con acido folico 0µg esplicito separato (nessuna firma di arricchimento in stile USA, coerente con "full-fat, raw" non trattato), vitamina K 70,0µg, beta-carotene 72,0µg, altri carotenoidi provitaminici A (alfa 0 + cripto 0) = 0µg. Calcio e folato naturalmente alti per un derivato della soia, stessa plausibilità già vista per `food_soia_secca_raw`. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174273 e dataType SR Legacy (release USDA 30 aprile 2026).
+- **Analogia usata**: `food_farina_di_ceci_raw` (farina di ceci, già eseguita sul DB reale — stessa categoria "farina da legume", famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farina_di_soia` ("Farina di soia, cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_farina_di_ceci_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene presente e non trascurabile, 72µg/100g — a differenza delle altre farine di questa coda dove il beta-carotene è 0 esplicito o assente; la macinazione dissocia la matrice vegetale, stessa scelta già fatta per la tahina rispetto al seme di sesamo intero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (*Glycine max*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessun segno di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174273 --food-id=food_farina_di_soia_raw \
+  --name-it="Farina di soia, non arricchita, cruda" \
+  --matrix-id=farina_di_soia --matrix-description-it="Farina di soia, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_ceci_raw \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174273 --food-id=food_farina_di_soia_raw \
+  --name-it="Farina di soia, non arricchita, cruda" \
+  --matrix-id=farina_di_soia --matrix-description-it="Farina di soia, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_ceci_raw \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Semi di sesamo, tostati — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
 
 - **food_id**: `food_semi_di_sesamo_tostati`. FDC ID 170151 (SR Legacy, "Seeds, sesame seeds, whole, roasted and toasted").
