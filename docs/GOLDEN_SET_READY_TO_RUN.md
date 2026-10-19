@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Capperi, in salamoia (sgocciolati) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
+
+- **food_id**: `food_capperi_in_salamoia`. FDC ID 172238 (SR Legacy, "Capers, canned").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 23,0kcal (l'intestazione della pagina arrotonda a 25kcal, incongruenza minore già vista altrove in questa coda, non bloccante), proteine 2,36g, grassi 0,86g, carboidrati 4,89g, fibra 3,20g, ferro 1,67mg, zinco 0,32mg, calcio 40,0mg, rame 0,37mg, magnesio 33,0mg, selenio 1,20µg, vitamina C 4,30mg, vitamina K (fillochinone) 24,6µg, vitamina B12 0µg esplicito, folato totale 23,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 83,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg esplicito (`other_provitamin_a_carotenoids_mcg`=0). Sodio 2.348mg/100g, molto alto, coerente con la conservazione in salamoia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172238 e dataType SR Legacy.
+- **Nota sulla rappresentatività (nome aggiornato rispetto alla voce di coda originale "capperi, sotto sale")**: il record FDC trovato è "canned" (inscatolati, in salamoia/liquido di governo — sodio 2.348mg/100g coerente con una salamoia liquida), NON i capperi italiani tipici conservati "sotto sale" (essiccati, sale a contatto diretto, in genere sciacquati prima dell'uso — composizione diversa, tipicamente meno acqua e un profilo minerale differente). Nessun record FDC a fonte singola trovato specificamente per capperi sotto sale secchi. Nome aggiornato di conseguenza ("in salamoia, sgocciolati") per non spacciare il record per un prodotto che non è — stessa cautela già usata in questa coda per aglio/funghi/melanzane quando il record disponibile rappresentava una forma diversa da quella richiesta.
+- **Analogia usata**: `food_onion_raw` (cipolla, già eseguita sul DB reale — stessa categoria funzionale "ortaggio/condimento", nessuna pianta della famiglia reale Capparaceae ancora eseguita nel Golden Set per un'analogia botanica più precisa, famiglia reale dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (boccio di fiore conservato, prodotto vegetale/condimento, non frutta fresca).
+- **Matrice**: nuova `capperi` ("Capperi, in salamoia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 83,0µg/100g presente, ma matrice disgregata dalla conservazione in salamoia, stessa convenzione già usata per le olive in salamoia in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Capparaceae`, `baseline_cooking_state=pickled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172238 --food-id=food_capperi_in_salamoia \
+  --name-it="Capperi, in salamoia (sgocciolati)" \
+  --matrix-id=capperi --matrix-description-it="Capperi, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Capparaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172238 --food-id=food_capperi_in_salamoia \
+  --name-it="Capperi, in salamoia (sgocciolati)" \
+  --matrix-id=capperi --matrix-description-it="Capperi, in salamoia" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Capparaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di melograno, crudo (spremuto) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, terzo "pronto" del turno)
 
 - **food_id**: `food_succo_di_melograno_raw`. FDC ID 167787 (SR Legacy, "Pomegranate juice, bottled").
