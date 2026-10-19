@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Aceto di mele — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 12, chiusura del lotto)
+
+- **food_id**: `food_aceto_di_mele`. FDC ID 173469 (SR Legacy, "Vinegar, cider").
+- **Nutrienti**: **17/17** — tutti presenti (quasi tutti a zero esplicito, atteso per un aceto). Energia 21,0kcal, proteine 0g, grassi 0g, carboidrati 0,93g, fibra 0g, ferro 0,20mg, zinco 0,040mg, calcio 7,00mg, rame 0,0080mg, magnesio 5,00mg, selenio 0,10µg, vitamina C 0mg, vitamina K 0µg, vitamina B12 0µg, folato totale 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173469, dataType SR Legacy, descrizione "Vinegar, cider" — release FoodData Central 2026-04-30.
+- **Analogia usata**: `food_zucchero_bianco` (già eseguito sul DB reale — analogia solo funzionale: prodotto vegetale trasformato con profilo nutrizionale quasi tutto a zero esplicito, nessun fermentato/condimento liquido ancora classificato nel Golden Set per un'analogia più precisa).
+- **Categoria dieta**: `plant_non_fruit` (aceto: prodotto di fermentazione di origine vegetale, condimento — non frutta fresca nella definizione restrittiva del PRD §4.9).
+- **Matrice**: nuova `aceto_di_mele` ("Aceto di mele").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito, nessuno stato di matrice da dichiarare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto di fermentazione, non un alimento vegetale diretto, stessa convenzione già usata per zucchero bianco/sciroppo d'acero/melassa), `baseline_cooking_state=fermented`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173469 --food-id=food_aceto_di_mele \
+  --name-it="Aceto di mele" \
+  --matrix-id=aceto_di_mele --matrix-description-it="Aceto di mele" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173469 --food-id=food_aceto_di_mele \
+  --name-it="Aceto di mele" \
+  --matrix-id=aceto_di_mele --matrix-description-it="Aceto di mele" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Olive nere, in salamoia (inscatolate) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11, ultimo del turno)
 
 - **food_id**: `food_olive_nere`. FDC ID 169094 (SR Legacy, "Olives, ripe, canned (small-extra large)"). Oliva nera matura in salamoia/inscatolata semplice, non farcita né condita.
