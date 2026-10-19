@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cardi, cotti (bolliti) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_cardi_cotti`. FDC ID 169982 (SR Legacy, "Cardoon, cooked, boiled, drained, without salt"). Distinto da `food_cardi_raw` (crudo, FDC 169981, già eseguito sul DB reale) — stesso alimento, forma cotta.
+- **Nutrienti**: **13/17** — mancano `copper_mg`, `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — un gap più ampio del crudo, che era già 14/17 con lo stesso tipo di mancanza su vitamina K/carotenoidi, qui si aggiunge anche il rame assente). Energia 22,0kcal, proteine 0,76g, grassi 0,11g, carboidrati 5,33g, fibra 1,70g, ferro 0,73mg, zinco 0,18mg, calcio 72,0mg, magnesio 43,0mg, selenio 1,00µg, vitamina C 1,70mg, vitamina B12 0µg esplicito, folato totale 22,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento. Sodio 176mg/100g: non nullo nonostante "without salt" nella descrizione — indica solo "nessun sale aggiunto in cottura", non assenza di sodio nell'alimento, nota già incontrata per altre verdure bollite "without salt" di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169982 e dataType SR Legacy.
+- **Analogia usata**: `food_cardi_raw` (cardi crudi, già eseguiti sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura: l'analogia più precisa possibile).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `cardi_cotti` ("Cardi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento della riga crudo sorella), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di altre verdure cotte di questa coda dove il dato era presente anche se basso), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (*Cynara cardunculus*, stessa famiglia del crudo e del carciofo già nel Golden Set), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false). Nota: questo alimento draft non va usato per calcolare l'assunzione di vitamina A/K/rame finché il gap non è risolto.
+
+```
+npm run add-food -- --fdc-id=169982 --food-id=food_cardi_cotti \
+  --name-it="Cardi, cotti (bolliti)" \
+  --matrix-id=cardi_cotti --matrix-description-it="Cardi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cardi_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=169982 --food-id=food_cardi_cotti \
+  --name-it="Cardi, cotti (bolliti)" \
+  --matrix-id=cardi_cotti --matrix-description-it="Cardi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cardi_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Semi di girasole, tostati (senza sale) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_semi_di_girasole_tostati`. FDC ID 170563 (SR Legacy, "Seeds, sunflower seed kernels, dry roasted, without salt"). Distinto dalla variante cruda/secca (già ⚠ in coda precedente per mancanza di un FDC ID verificabile) e dalla variante "with salt added" (FDC 169418/325524, scartata perché non "senza sale" come richiesto dalla voce di coda).
