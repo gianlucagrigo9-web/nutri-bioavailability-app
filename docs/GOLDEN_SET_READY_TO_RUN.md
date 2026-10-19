@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cumino, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_cumino_raw`. FDC ID 170923 (SR Legacy, "Spices, cumin seed").
+- **Nutrienti**: **17/17**. Energia 375kcal, proteine 17,8g, grassi 22,3g, carboidrati 44,2g, fibra 10,5g, ferro 66,4mg (altissimo ma coerente con un dato noto e spesso citato per i semi di cumino secchi, non un'anomalia isolata), zinco 4,80mg, calcio 931mg, rame 0,87mg, magnesio 366mg, selenio 5,20µg, vitamina C 7,70mg, vitamina K 5,40µg, vitamina B12 0µg, folato totale 10,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento —, beta-carotene 762µg, altri carotenoidi provitaminici A (alfa 0 + cripto 0) = 0. Nota minore: l'intestazione della pagina riporta 380kcal/22g grassi invece di 375kcal/22,3g della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per noce moscata/chiodi di garofano). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170923 e dataType SR Legacy.
+- **Analogia usata**: `food_sedano_raw` (sedano, già eseguito sul DB reale — stessa famiglia botanica reale Apiaceae del cumino, a differenza delle altre spezie di questa coda per cui si è usata `food_scarola_raw` come convenzione generica).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `cumino` ("Cumino").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo, stessa scelta già usata per le altre spezie di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Cuminum cyminum*, stessa famiglia di sedano/carote già nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170923 --food-id=food_cumino_raw \
+  --name-it="Cumino, semi secchi" \
+  --matrix-id=cumino --matrix-description-it="Cumino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=170923 --food-id=food_cumino_raw \
+  --name-it="Cumino, semi secchi" \
+  --matrix-id=cumino --matrix-description-it="Cumino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Apiaceae --apply
+```
+
 ### Chiodi di garofano, secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_chiodi_di_garofano_raw`. FDC ID 171321 (SR Legacy, "Spices, cloves, ground").
