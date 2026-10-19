@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Ostriche, cotte (al forno, calore secco) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_ostriche_cotte`. FDC ID 175173 (SR Legacy, "Mollusks, oyster, eastern, farmed, cooked, dry heat"). Distinto da `food_ostriche_raw` (crudo, FDC 175172 "...eastern, farmed, raw", solo "pronto" non ancora eseguito) — stessa specie "eastern" e stesso lineage "farmed" del crudo, forma cotta. Esisteva anche un candidato "wild" (FDC 171980, "cooked, moist heat") con copertura nutrienti leggermente diversa, scartato per mantenere coerenza di lineage (farmed) con la voce cruda sorella — più rilevante della copertura marginale in più.
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi non riportati dalla fonte consultata, non assunti zero) — **stesso identico gap della voce cruda sorella** `food_ostriche_raw` (anch'essa 14/17 con gli stessi 3 campi mancanti), coerenza che rafforza la scelta di questo record rispetto all'alternativa "wild". Energia 79,0kcal, proteine 7,00g, grassi 2,12g, carboidrati 7,28g, fibra 0g, ferro 7,77mg, zinco 45,1mg, calcio 56,0mg, rame 1,43mg, magnesio 33,0mg, selenio 77,5µg, vitamina C 6,00mg, vitamina B12 24,3µg, folato totale 24,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile ai molluschi). Zinco molto alto (45,1mg/100g): coerente con le ostriche, fra gli alimenti più ricchi di zinco in assoluto (stessa nota già fatta per `food_ostriche_raw`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175173 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (vongole, già eseguite sul DB reale — nessun mollusco bivalve "ostrica" ancora eseguito nel Golden Set, `food_ostriche_raw` crudo è solo "pronto": stessa analogia funzionale già usata per la voce cruda sorella, `is_heme_iron=true` per coerenza).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: `ostriche` — **nota per chi esegue**: stesso `matrix_id` già proposto per `food_ostriche_raw` (crudo, solo "pronto"), per formare una coppia crudo/cotto quando entrambi saranno eseguiti.
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per pesci/molluschi/crostacei di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false). Nota: questo alimento draft non va usato per calcolare l'assunzione di vitamina A/K finché il gap non è risolto (stessa nota già valida per la voce cruda sorella).
+
+```
+npm run add-food -- --fdc-id=175173 --food-id=food_ostriche_cotte \
+  --name-it="Ostriche, cotte (al forno, calore secco)" \
+  --matrix-id=ostriche --matrix-description-it="Ostriche" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175173 --food-id=food_ostriche_cotte \
+  --name-it="Ostriche, cotte (al forno, calore secco)" \
+  --matrix-id=ostriche --matrix-description-it="Ostriche" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Astice (lobster), cotto (bollito) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_astice_cotto`. FDC ID 174209 (SR Legacy, "Crustaceans, lobster, northern, cooked, moist heat"). Distinto da `food_astice_raw` (crudo, FDC 174208, solo "pronto" non ancora eseguito) — stesso crostaceo, forma cotta.
