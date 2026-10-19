@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Nasello, crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_nasello_raw`. FDC ID 173713 (SR Legacy, "Fish, whiting, mixed species, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 90,0kcal, proteine 18,3g, grassi 1,3g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,34mg, zinco 0,88mg, calcio 48,0mg, rame 0,03mg, magnesio 21,0mg, selenio 32,1µg, vitamina C 0mg esplicito, vitamina K 0,10µg, vitamina B12 2,28µg, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (atteso per un pesce). Fonte: due pagine indipendenti concordanti citano esplicitamente FDC ID 173713 (triagemethod.com, con ogni valore etichettato "SR" = SR Legacy; tools.myfooddata.com/nutrition-facts/173713/wt1, FDC ID nell'URL stesso) — stessi valori su entrambe.
+- **Nota tassonomica importante (motivo per cui questo alimento è diverso dal "merlano" già scartato ⚠ nell'undicesimo lotto con lo STESSO record FDC)**: questo stesso FDC 173713 era stato valutato e scartato per rappresentare il "merlano" italiano (*Merlangius merlangus*, famiglia Gadidae) perché negli USA "whiting" indica comunemente pesci del genere *Merluccius* (famiglia Merlucciidae) — confermato di nuovo in questa sessione (Wikipedia, voce "Whiting (fish)": "in US commercial use, 'whiting' alone generally refers to various hake of the genus *Merluccius*", mentre il merlano europeo viene distinto come "English whiting"). Il nasello italiano è esattamente *Merluccius merluccius*, STESSO GENERE *Merluccius* del pesce a cui "whiting" si riferisce nel commercio USA (tipicamente *M. bilinearis*, "silver hake"/"Atlantic whiting") — non la stessa specie (*M. merluccius* vs *M. bilinearis*), ma un match di genere, molto più solido del mismatch di famiglia già scartato per il merlano. Resta un proxy dichiarato a livello di genere, non di specie — stesso tipo di cautela già usata per "sogliola" (categoria "sole species" ufficiale USDA) e diverso dal mismatch di famiglia già scartato per orata/porgy e merlano.
+- **Analogia usata**: `food_merluzzo_raw` (già eseguito sul DB reale — analogia funzionale di categoria "pesce bianco magro crudo", famiglia reale diversa: Merlucciidae contro Gadidae del merluzzo, dichiarata separatamente; `is_heme_iron=true` come ogni pesce già in coda).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `nasello` ("Nasello").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173713 --food-id=food_nasello_raw \
+  --name-it="Nasello, crudo" \
+  --matrix-id=nasello --matrix-description-it="Nasello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173713 --food-id=food_nasello_raw \
+  --name-it="Nasello, crudo" \
+  --matrix-id=nasello --matrix-description-it="Nasello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pompelmo bianco, crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_pompelmo_bianco_raw`. FDC ID 174676 (SR Legacy, "Grapefruit, raw, white, all areas").
