@@ -69,6 +69,8 @@ npm run add-food -- --fdc-id=171317 --food-id=food_basilico_secco_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Timo, fresco, crudo — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
 - **food_id**: `food_timo_fresco_raw`. FDC ID 173470 (SR Legacy, "Thyme, fresh"). Distinto da `food_timo_secco_raw` (essiccato, FDC 170938, solo "pronto" non ancora eseguito, già in questa coda): prodotto diverso (fresco vs essiccato), record FDC separato e proprio.
 - **Nutrienti**: **14/17** — mancano `selenium_mcg` (assente dalla pagina), `vitamin_k_mcg` (assente) e `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina entrambi assenti dalla pagina, servono entrambi per comporre il codice). Presenti: energia 101kcal, proteine 5,56g, grassi 1,68g, carboidrati 24,4g, fibra 14,0g, ferro 17,4mg, zinco 1,81mg, calcio 405mg, rame 0,56mg, magnesio 160mg, vitamina C 160mg, vitamina B12 0µg esplicito, folato totale 45,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 2851µg. Ferro, calcio e vitamina C molto alti, ma coerenti con un'erba fresca a foglia piccola/densa (stesso ordine di grandezza già visto per altre erbe/spezie di questa coda, es. basilico/prezzemolo freschi, origano/rosmarino secchi) — non un segnale di record sbagliato. Gap dichiarato, non stimato; soglia di match ampiamente superata (14/17, stesso livello già accettato per agnello/lupini/cozze cotte in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173470 e dataType SR Legacy.
 - **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per tutte le altre erbe/spezie di questa coda, "verdura/erba aromatica a foglia"; famiglia botanica Lamiaceae dichiarata separatamente, diversa da Asteraceae della scarola; nessuna pianta della famiglia Lamiaceae ancora eseguita nel Golden Set, tutte — origano/rosmarino/timo secco/salvia/menta/basilico — restano solo "pronte").
@@ -93,6 +95,8 @@ npm run add-food -- --fdc-id=173470 --food-id=food_timo_fresco_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Succo di pompelmo (rosa), crudo (spremuto) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
 - **food_id**: `food_succo_di_pompelmo_rosa_raw`. FDC ID 167774 (SR Legacy, "Grapefruit juice, pink, raw").
 - **Nutrienti**: **12/17** — mancano `fiber_g` (la pagina è incoerente: il riepilogo indica 0g, la tabella dettagliata e il pannello dicono "non dichiarata" — non considerato un valore affidabile, trattato come assente, non assunto zero), `selenium_mcg` (assente dalla pagina), `vitamin_k_mcg` (assente), `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (la pagina riporta solo la vitamina A aggregata in RAE, 54,3µg/porzione, non i singoli carotenoidi — nessun valore utilizzabile per i codici tracciati). Presenti: energia 39,0kcal, proteine 0,50g, grassi 0,10g, carboidrati 9,20g, ferro 0,20mg, zinco 0,050mg, calcio 9,00mg, rame 0,033mg, magnesio 12,0mg, vitamina C 38,0mg, vitamina B12 0µg esplicito, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Gap dichiarato, non stimato — soglia di match comunque superata (12/17, stesso ordine di grandezza già accettato per radicchio 12/17 e couscous/avena 13/17 in questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167774 e dataType SR Legacy (release 30 aprile 2026).
 - **Nota su zucchero aggiunto**: la pagina dichiara "not declared" sia per zucchero totale sia per zucchero aggiunto — non verificabile, ma nessun indizio positivo di zucchero aggiunto (coerente con un succo di pompelmo semplice spremuto, non una bevanda zuccherata).
@@ -115,6 +119,8 @@ npm run add-food -- --fdc-id=167774 --food-id=food_succo_di_pompelmo_rosa_raw \
   --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_rosa_raw \
   --botanical-family=Rutaceae --diet-category=plant_non_fruit --apply
 ```
+
+### Pane azzimo (matzo), semplice — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
 
 - **food_id**: `food_pane_azzimo`. FDC ID 172740 (SR Legacy, "Crackers, matzo, plain").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 395kcal, proteine 10,0g, grassi 1,40g, carboidrati 83,7g, fibra 3,00g, ferro 3,16mg, zinco 0,68mg, calcio 13,0mg, rame 0,060mg, magnesio 25,0mg, selenio 36,9µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,30µg, vitamina B12 0µg esplicito, folato totale 17,0µg, acido folico 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172740 e dataType SR Legacy.
@@ -139,6 +145,8 @@ npm run add-food -- --fdc-id=172740 --food-id=food_pane_azzimo \
   --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Formaggio Camembert — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
 - **food_id**: `food_camembert`. FDC ID 172178 (SR Legacy, "Cheese, camembert").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 300kcal, proteine 19,8g, grassi 24,3g, carboidrati 0,46g, fibra 0g esplicito, ferro 0,33mg, zinco 2,38mg, calcio 388mg, rame 0,021mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,00µg, vitamina B12 1,30µg, folato totale 62,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 12,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172178 e dataType SR Legacy (voce immediatamente successiva al brie nel catalogo SR Legacy). Energia coerente coi macronutrienti; sodio alto (842mg/100g) ma tipico dei formaggi, non tracciato. Stesso esito positivo del brie lavorato in questo stesso turno: a differenza di mascarpone/mozzarella di bufala, esiste un record generico SR Legacy pulito e completo.
 - **Analogia usata**: `food_parmigiano_reggiano` (formaggio stagionato, già eseguito sul DB reale — stessa categoria "formaggio a pasta ottenuta per coagulazione e stagionatura"; NON `food_brie`, che in questo stesso turno è solo "pronto", non ancora reale nel DB).
@@ -160,6 +168,8 @@ npm run add-food -- --fdc-id=172178 --food-id=food_camembert \
   --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
   --diet-category=egg_dairy --apply
 ```
+
+### Formaggio Brie — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
 
 - **food_id**: `food_brie`. FDC ID 172177 (SR Legacy, "Cheese, brie").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 334kcal, proteine 20,8g, grassi 27,7g, carboidrati 0,45g, fibra 0g esplicito, ferro 0,50mg, zinco 2,38mg, calcio 184mg, rame 0,019mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,30µg, vitamina B12 1,65µg, folato totale 65,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento — i valori di B12/folato sono naturali del formaggio), beta-carotene 9,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172177 e dataType SR Legacy. Energia coerente col calcolo dai macronutrienti (~332kcal contro 334 dichiarati); sodio alto (629mg/100g) ma tipico dei formaggi, non uno dei 17 nutrienti tracciati. Contrariamente al precedente già dichiarato per mascarpone/mozzarella di bufala in questa coda (nessun record generico, solo Branded scarsi), per il brie esiste un record SR Legacy generico pulito e completo.
@@ -183,6 +193,8 @@ npm run add-food -- --fdc-id=172177 --food-id=food_brie \
   --diet-category=egg_dairy --apply
 ```
 
+### Panna, densa, da montare (heavy whipping cream), cruda — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
 - **food_id**: `food_panna_densa_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 340kcal, proteine 2,84g, grassi 36,1g, carboidrati 2,84g, fibra 0g esplicito, ferro 0,10mg, zinco 0,24mg, calcio 66,0mg, rame 0,011mg, magnesio 7,00mg, selenio 3,00µg, vitamina C 0,60mg, vitamina K (fillochinone) 3,20µg, vitamina B12 0,16µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 72,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170859 e dataType SR Legacy. Piccola incongruenza minore fra carboidrati per differenza (2,84g) e zuccheri totali dichiarati (2,92g) sulla stessa pagina — scarto di arrotondamento, stesso tipo di piccola discrepanza già accettata altrove in questa coda, non bloccante.
 - **Distinto da**: `food_panna_da_cucina_raw` (panna fluida leggera/da cucina, FDC 170857, grasso 19,1g/100g, solo "pronto" non ancora eseguito, preparata nel sesto lotto): prodotto diverso (panna da montare vs panna da cucina, quasi il doppio del grasso), non riusabile come analogia perché non ancora reale nel DB.
@@ -205,6 +217,8 @@ npm run add-food -- --fdc-id=170859 --food-id=food_panna_densa_raw \
   --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
   --diet-category=egg_dairy --apply
 ```
+
+### Latte vaccino, parzialmente scremato (2% grassi, senza vitamine A/D aggiunte) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
 
 - **food_id**: `food_latte_parzialmente_scremato_raw`. FDC ID 172205 (SR Legacy, "Milk, reduced fat, fluid, 2% milkfat, without added vitamin A and vitamin D").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 50,0kcal, proteine 3,30g, grassi 1,98g, carboidrati 4,80g, fibra 0g esplicito, ferro 0,020mg, zinco 0,48mg, calcio 120mg, rame 0,0060mg, magnesio 11,0mg, selenio 2,50µg, vitamina C 0,20mg, vitamina K (fillochinone) 0,20µg, vitamina B12 0,53µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento — coerente col nome del record, "without added vitamin A and vitamin D"), beta-carotene 7,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172205 e dataType SR Legacy. Calcolo kcal dai macronutrienti (~50) coerente col valore dichiarato — nessuna anomalia.
