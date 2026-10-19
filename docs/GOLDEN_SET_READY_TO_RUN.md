@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio Edam — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
+
+- **food_id**: `food_formaggio_edam`. FDC ID 173419 (SR Legacy, "Cheese, edam").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 357kcal, proteine 25,0g, grassi 28,6g, carboidrati 1,43g, fibra 0g esplicito, ferro 0,44mg, zinco 3,75mg, calcio 731mg, rame 0,036mg, magnesio 30,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K 2,30µg, vitamina B12 1,54µg, folato totale 16,0µg, beta-carotene 11,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Sodio 973mg/100g, non uno dei 17 nutrienti tracciati. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173419 e dataType SR Legacy.
+- **Analogia usata**: `food_parmigiano_reggiano` (formaggio europeo standard, stessa convenzione già usata per gruyère/cheddar/svizzero/provolone in questa coda — nessun formaggio olandese ancora nel Golden Set).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_edam` ("Formaggio Edam").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_parmigiano_reggiano`), `carotenoid_matrix_state` omesso (NULL — latticino, non un vegetale con matrice a disposizione, stessa scelta degli altri formaggi in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw` (nessuna cottura, stagionatura), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173419 --food-id=food_formaggio_edam \
+  --name-it="Formaggio Edam" \
+  --matrix-id=formaggio_edam --matrix-description-it="Formaggio Edam" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173419 --food-id=food_formaggio_edam \
+  --name-it="Formaggio Edam" \
+  --matrix-id=formaggio_edam --matrix-description-it="Formaggio Edam" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Semi di zucca, tostati (senza sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18, chiusura del lotto)
 
 - **food_id**: `food_semi_di_zucca_tostati`. FDC ID 170557 (SR Legacy, "Seeds, pumpkin and squash seed kernels, roasted, without salt").

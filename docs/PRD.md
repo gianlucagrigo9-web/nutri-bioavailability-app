@@ -984,7 +984,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Frutta: platano (plantain), crudo (distinto dalla banana già coperta — specie *Musa* diversa, consumato cotto/fritto ma la voce di riferimento FDC è la forma cruda)
     - Frutta a guscio/semi, tostati (stesso pattern di successo di mandorle/nocciole/pistacchi/anacardi/semi di zucca appena fatti in questo turno): semi di sesamo, tostati
     - Farine: farina di soia, non arricchita, cruda
-    - Latticini: panna acida (sour cream); yogurt greco, intero (non magro — distinto dal magro già coperto); formaggio Edam (stesso tipo di formaggio europeo standard già riuscito con gruyère/cheddar/svizzero/provolone)
+    - Latticini: panna acida (sour cream); yogurt greco, intero (non magro — distinto dal magro già coperto); 🟡 formaggio Edam (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario il 2026-10-19, turno ore 18 — FDC 173419 SR Legacy "Cheese, edam", 17/17 nutrienti, analogia `food_parmigiano_reggiano`, diet-category=egg_dairy)
     - Bevande vegetali (rischio arricchimento nascosto già incontrato per soia/mandorla/avena in questa coda, da verificare caso per caso): latte di riso, non zuccherato
     - Condimenti: aceto di riso
     - Esplorativo (non ancora verificato se FDC abbia un record pulito, priorità bassa): zucca spaghetti, cruda; jackfruit, crudo (giovane, verde); quark (formaggio fresco tedesco, non stagionato); burro di mandorle (stesso tipo di rischio ambiguità zuccheri già incontrato per il burro di arachidi, da verificare)
