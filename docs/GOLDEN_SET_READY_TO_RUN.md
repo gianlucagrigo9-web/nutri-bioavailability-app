@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Tonno, in scatola, sott'olio, scolato (senza sale) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_tonno_in_scatola_olio_raw`. FDC ID 174227 (SR Legacy, "Fish, tuna, light, canned in oil, without salt, drained solids").
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (`other_provitamin_a_carotenoids_mcg`, componente beta-criptoxantina/alfa-carotene non riportati), non assunti zero. Gap atteso e coerente per un pesce (nessun pigmento vegetale), stesso tipo di gap già visto per seppia/branzino/agnello in questa coda. Energia 198kcal, proteine 29,1g, grassi 8,21g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 1,39mg, zinco 0,90mg, calcio 13,0mg, rame 0,071mg, magnesio 31,0mg, selenio 76,0µg, vitamina C 0mg esplicito, vitamina B12 2,20µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174227 e dataType SR Legacy — release FoodData Central 2026-04-30.
+- **Limite dichiarato**: il record non specifica il tipo di olio di conservazione (non dichiarato "olio d'oliva" come il tonno italiano commerciale tipico, potrebbe essere olio vegetale generico) — nessun segnale nei 17 nutrienti tracciati che dipenda dal tipo d'olio (vengono dal pesce stesso, non dal grasso di conservazione), ma la vitamina K non riportata potrebbe in parte derivare dall'olio e non essere quindi un vero zero: gap dichiarato, non stimato. Variante "with salt" scartata a priori (sodio non tracciato tra i 17, ma preferibile la versione senza sale aggiunto per rappresentare il prodotto base).
+- **Analogia usata**: `food_tonno_fresco_raw` (già eseguito sul DB reale — stessa specie concettuale, tonno pinna gialla/"light tuna", forma diversa: in scatola sott'olio invece di fresco crudo), `is_heme_iron=true` (pesce, stessa convenzione di tutti i pesci già eseguiti).
+- **Categoria dieta**: `meat_fish` (pesce in conserva: carne/pesce, vegetariano no, vegano no, fruttariano no — invariata dal fatto che sia in scatola).
+- **Matrice**: nuova `tonno_in_scatola_olio` ("Tonno, in scatola, sott'olio").
+- **Attributi**: `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=canned_in_oil`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174227 --food-id=food_tonno_in_scatola_olio_raw \
+  --name-it="Tonno, in scatola, sott'olio, scolato (senza sale)" \
+  --matrix-id=tonno_in_scatola_olio --matrix-description-it="Tonno, in scatola, sott'olio" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174227 --food-id=food_tonno_in_scatola_olio_raw \
+  --name-it="Tonno, in scatola, sott'olio, scolato (senza sale)" \
+  --matrix-id=tonno_in_scatola_olio --matrix-description-it="Tonno, in scatola, sott'olio" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Succo d'arancia, crudo (spremuto) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_succo_di_arancia_raw`. FDC ID 169098 (SR Legacy, "Orange juice, raw (Includes foods for USDA's Food Distribution Program)").
