@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sgombro atlantico, cotto (al forno/calore secco) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_sgombro_cotto`. FDC ID 175120 (SR Legacy, "Fish, mackerel, Atlantic, cooked, dry heat"). Distinto da `food_sgombro_raw` (crudo, già eseguito, FDC 175119 "Fish, mackerel, Atlantic, raw") — stesso pesce, forma cotta "dry heat". **Nota sulla fonte**: l'FDC ID è confermato tramite l'URL di una pagina di confronto getfoodfacts.com comparsa nei risultati di ricerca (`.../compare/fish-herring-atlantic-pickled-175118/fish-mackerel-atlantic-cooked-dry-heat-175120/...`), ma il fetch diretto alla pagina di dettaglio getfoodfacts.com per questo record è stato bloccato da un timeout di provenance in questa sessione pianificata non presidiata (nessun utente a confermare l'accesso in tempo). I valori sotto sono letti da due fonti secondarie indipendenti e concordanti (recipal.com, triagemethod.com, che riportano numeri quasi identici), non dalla pagina FDC primaria — stessa cautela già usata per `food_acciughe_raw` ("FDC ID dedotto indirettamente").
+- **Nutrienti**: **~14/17** (valori approssimati da fonti secondarie, da verificare col dry-run reale che ri-scarica da FDC). Energia ~262kcal, proteine ~23,9g, grassi ~17,8g, carboidrati 0g, fibra 0g, ferro ~1,6mg, zinco ~0,9mg, rame ~0,09mg, calcio ~11-15mg, magnesio ~85-97mg, selenio ~46-52µg, vitamina B12 ~17-19µg, folato totale ~2,0µg (basso, coerente col pesce), vitamina C ~0-0,4mg. **Mancano** (assenti in entrambe le fonti consultate, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — gap plausibile per un pesce (dato raramente misurato), non necessariamente un segnale di match debole.
+- **Analogia usata**: `food_sgombro_raw` (sgombro atlantico crudo, già eseguito sul DB reale — stesso pesce, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `sgombro_cotto` ("Sgombro atlantico, cotto").
+- **Attributi**: `--is-heme-iron` (true, stessa convenzione già usata per gli altri pesci di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked` (stessa convenzione già usata per `food_merluzzo_cotto`), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175120 --food-id=food_sgombro_cotto \
+  --name-it="Sgombro atlantico, cotto (al forno)" \
+  --matrix-id=sgombro_cotto --matrix-description-it="Sgombro atlantico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175120 --food-id=food_sgombro_cotto \
+  --name-it="Sgombro atlantico, cotto (al forno)" \
+  --matrix-id=sgombro_cotto --matrix-description-it="Sgombro atlantico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di vitello, cotto (brasato) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_vitello_cotto`. FDC ID 172535 (SR Legacy, "Veal, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_vitello_raw` (crudo, già eseguito sul DB reale, confermato in `lotti_alimenti/esito_lotto_05_applica.txt`, FDC 172534) — stesso alimento, forma cotta. Scelta la variante "braised" (non "pan-fried", FDC 174358, che implica grasso di cottura aggiunto) come preparazione più semplice/paragonabile al crudo.
