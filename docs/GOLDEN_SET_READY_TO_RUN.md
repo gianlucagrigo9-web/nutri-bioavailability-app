@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Scarola, cotta (bollita, senza sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_scarola_cotta`. FDC ID 168413 (SR Legacy, "Escarole, cooked, boiled, drained, no salt added"). Distinta da `food_scarola_raw` (cruda, già eseguita, FDC 168412 "Endive, raw") — con una precisione in più: "escarole" è il nome inglese esatto della scarola (*Cichorium endivia* var. *latifolium*, foglia larga), mentre il crudo aveva dovuto usare "Endive, raw" generico per mancanza di un record "escarole" crudo distinto in FDC. Per la forma cotta, invece, FDC distingue correttamente "escarole" — un match più preciso del crudo, non solo un'analogia.
+- **Nutrienti**: **17/17**. Energia 15,0kcal, proteine 1,15g, grassi 0,18g, carboidrati 3,07g, fibra 2,80g, calcio 46,0mg, ferro 0,72mg, magnesio 13,0mg, zinco 0,69mg, rame 0,087mg, selenio 0,20µg, vitamina B12 0µg esplicito, folato totale 78,0µg, vitamina C 3,30mg, vitamina K 212µg, beta-carotene 1.133µg (alto, coerente con una verdura a foglia verde), altri carotenoidi provitaminici A (alfa 0 + cripto 0) = 0µg. Nessun segno di sale aggiunto ("no salt added" esplicito nel nome). Fonte: getfoodfacts.com (FDC ID 168413, dataType SR Legacy).
+- **Analogia usata**: `food_scarola_raw` (scarola cruda, già eseguita sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `scarola_cotta` ("Scarola, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene molto significativo, coerente col crudo che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Asteraceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168413 --food-id=food_scarola_cotta \
+  --name-it="Scarola, cotta (bollita, senza sale)" \
+  --matrix-id=scarola_cotta --matrix-description-it="Scarola, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168413 --food-id=food_scarola_cotta \
+  --name-it="Scarola, cotta (bollita, senza sale)" \
+  --matrix-id=scarola_cotta --matrix-description-it="Scarola, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Edamame (soia verde), cotto (bollito) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_edamame_cotto`. FDC ID 168411 (SR Legacy, "Edamame, frozen, prepared" — "prepared" = bollito/cotto, distinto dal crudo/congelato "frozen, unprepared" FDC 168410 già eseguito come `food_edamame_raw`).
