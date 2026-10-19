@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Trippa di manzo, cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13, nono "pronto" del turno)
+
+- **food_id**: `food_trippa_di_manzo_raw`. FDC ID 170599 (SR Legacy, "Beef, variety meats and by-products, tripe, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 85,0kcal, proteine 12,1g, grassi 3,69g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,59mg, zinco 1,42mg, calcio 69,0mg, rame 0,070mg, magnesio 13,0mg, selenio 12,5µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 1,39µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (atteso per una carne/frattaglia). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170599 e dataType SR Legacy. Calcio 69mg/100g più alto del tipico per una carne, ma plausibile per la trippa (tessuto dello stomaco, non muscolo puro); nessun segno di additivi.
+- **Analogia usata**: `food_beef_liver_raw` (già nel Golden Set originale — stessa specie, categoria "frattaglia di manzo", `is_heme_iron=true` come ogni carne/frattaglia già in coda).
+- **Categoria dieta**: `meat_fish` (frattaglia di origine animale).
+- **Matrice**: nuova `trippa_di_manzo` ("Trippa di manzo").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170599 --food-id=food_trippa_di_manzo_raw \
+  --name-it="Trippa di manzo, cruda" \
+  --matrix-id=trippa_di_manzo --matrix-description-it="Trippa di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170599 --food-id=food_trippa_di_manzo_raw \
+  --name-it="Trippa di manzo, cruda" \
+  --matrix-id=trippa_di_manzo --matrix-description-it="Trippa di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Uova d'anatra, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_uova_danatra_raw`. FDC ID 172189 (SR Legacy, "Egg, duck, whole, fresh, raw").
