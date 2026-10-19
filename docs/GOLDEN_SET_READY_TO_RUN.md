@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Aneto, secco — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_aneto_raw`. FDC ID 171322 (SR Legacy, "Spices, dill weed, dried").
+- **Nutrienti**: **12/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `folate_mcg` (quindi l'acido folico non è dichiarabile separatamente), `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — gap dichiarato, il più ampio di questa coda insieme ai semi di finocchio: manca anche il folato, uno dei micronutrienti seguiti dall'app, non solo vitamina K/carotenoidi come per alloro/dragoncello). Energia 253kcal, proteine 20,0g, grassi 4,36g, carboidrati 55,8g, fibra 13,6g, ferro 48,8mg, zinco 3,30mg, calcio 1784mg (altissimo ma coerente con la concentrazione da disidratazione già vista per le altre erbe secche di questa coda), rame 0,49mg, magnesio 451mg, vitamina C 50,0mg, vitamina B12 0µg. Nota minore: l'etichetta riporta 250kcal invece di 253kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171322 e dataType SR Legacy.
+- **Analogia usata**: `food_sedano_raw` (sedano, già eseguito sul DB reale — stessa famiglia botanica reale Apiaceae dell'aneto, come già fatto per cumino/semi di finocchio in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica vegetale).
+- **Matrice**: nuova `aneto` ("Aneto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Anethum graveolens*, stessa famiglia di cumino/semi di finocchio/sedano/carote già nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi; questo alimento draft non va usato per calcolare l'assunzione di folato finché il gap non è risolto.
+
+```
+npm run add-food -- --fdc-id=171322 --food-id=food_aneto_raw \
+  --name-it="Aneto, secco" \
+  --matrix-id=aneto --matrix-description-it="Aneto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=171322 --food-id=food_aneto_raw \
+  --name-it="Aneto, secco" \
+  --matrix-id=aneto --matrix-description-it="Aneto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply
+```
+
 ### Dragoncello, secco — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_dragoncello_raw`. FDC ID 170937 (SR Legacy, "Spices, tarragon, dried").
