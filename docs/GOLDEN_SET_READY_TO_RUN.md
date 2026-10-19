@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Riso bianco, cotto, bollito (con sale) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18, riapertura dell'undicesimo lotto)
+
+- **food_id**: `food_riso_bianco_cotto`. FDC ID 168935 (riso bianco a chicco lungo, non arricchito, bollito, con sale — dataType non indicato esplicitamente dalla fonte consultata, ma coerente per intervallo numerico con gli altri record SR Legacy di riso già usati in questa coda, 168878-168935).
+- **Deviazione dichiarata (variante "con sale" invece di "senza sale")**: la voce di coda era già stata scartata ⚠ nell'undicesimo lotto perché nessuna fonte mostrava un FDC ID numerico per la variante "without salt" richiesta — solo NBD ID interni di aggregatore. Motivo nuovo per riaprirla ora: la variante "with salt" HA un FDC ID verificabile (168935, citato esplicitamente da foodstruct.com con link diretto a `fdc.nal.usda.gov/food-details/168935/nutrients`) — stessa deviazione "con sale" già validata tre volte in questo turno per mandorle/pistacchi/anacardi tostati. Sodio 382mg/100g, non uno dei 17 nutrienti tracciati.
+- **Nutrienti**: **15/17**. Presenti: energia 130kcal, proteine 2,7g, grassi 0,28g, carboidrati 28g, fibra 0,4g, ferro 0,2mg, zinco 0,49mg, calcio 10mg, rame 0,07mg, magnesio 12mg, selenio 7,5µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 0µg esplicito, folato totale 3µg. Mancanti (non assunti zero, non riportati nella fonte consultata): `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (atteso per un cereale raffinato, nessun impatto pratico su vitamina A).
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, già eseguito sul DB reale — stesso alimento, forma diversa: bollito invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `riso_bianco_cotto` ("Riso bianco, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_riso_bianco_raw`), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato per questo alimento), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale del riso, stessa di altri cereali già nel Golden Set), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento: acido folico non riportato separatamente, folato 3µg basso e coerente con un cereale non arricchito).
+
+```
+npm run add-food -- --fdc-id=168935 --food-id=food_riso_bianco_cotto \
+  --name-it="Riso bianco, cotto, bollito (con sale)" \
+  --matrix-id=riso_bianco_cotto --matrix-description-it="Riso bianco, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168935 --food-id=food_riso_bianco_cotto \
+  --name-it="Riso bianco, cotto, bollito (con sale)" \
+  --matrix-id=riso_bianco_cotto --matrix-description-it="Riso bianco, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di carota, crudo (in scatola) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
 
 - **food_id**: `food_succo_di_carota_raw`. FDC ID 170491 (SR Legacy, "Carrot juice, canned").
