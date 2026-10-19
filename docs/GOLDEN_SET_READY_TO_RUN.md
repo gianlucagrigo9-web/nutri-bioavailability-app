@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Pistacchi, tostati (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
+
+- **food_id**: `food_pistacchi_tostati`. FDC ID 169426 (SR Legacy, "Nuts, pistachio nuts, dry roasted, with salt added").
+- **Deviazione dichiarata (variante "con sale" invece di "senza sale")**: la voce di coda chiedeva pistacchi tostati senza sale. Nessun FDC ID verificabile trovato per la variante "without salt added": l'unica pagina trovata (recipal.com, ingrediente 3718) cita solo un "NBD ID" (12152, National Nutrient Database, non FDC) e i valori per 100g sono ricavati per conversione aritmetica da una porzione di 1 cup, non valori ufficiali diretti — stesso tipo di gap già usato per scartare altri alimenti in questa coda (farina di mandorle, succo d'ananas). L'unica variante con un FDC ID verificato su getfoodfacts.com è "with salt added", FDC 169426 — stessa deviazione già accettata per le mandorle tostate in questo stesso turno. Sodio 428mg/100g, non uno dei 17 nutrienti tracciati.
+- **Nutrienti**: **17/17** — tutti presenti. Energia 569kcal, proteine 21,1g, grassi 45,8g, carboidrati 27,6g, fibra 10,3g, ferro 4,03mg, zinco 2,34mg, calcio 107mg, rame 1,29mg, magnesio 109mg, selenio 10,0µg, vitamina C 3,00mg, vitamina K 13,2µg, vitamina B12 0µg esplicito, folato totale 51,0µg, beta-carotene 159µg, alfa-carotene e beta-criptoxantina 0µg espliciti (composito provitamina A = 0, valore riportato non assente). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169426 e dataType SR Legacy.
+- **Analogia usata**: `food_pistacchi_raw` (pistacchi crudi, già eseguiti sul DB reale — stesso alimento, *Pistacia vera*, forma diversa: tostato invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pistacchi_tostati` ("Pistacchi, tostati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_pistacchi_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 159µg/100g presente ma seme tostato, matrice disgregata dal calore, stessa convenzione già usata per mandorle/nocciole tostate in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (famiglia botanica reale del pistacchio), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169426 --food-id=food_pistacchi_tostati \
+  --name-it="Pistacchi, tostati (con sale)" \
+  --matrix-id=pistacchi_tostati --matrix-description-it="Pistacchi, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_pistacchi_raw \
+  --botanical-family=Anacardiaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169426 --food-id=food_pistacchi_tostati \
+  --name-it="Pistacchi, tostati (con sale)" \
+  --matrix-id=pistacchi_tostati --matrix-description-it="Pistacchi, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_pistacchi_raw \
+  --botanical-family=Anacardiaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Nocciole, tostate (senza sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
 
 - **food_id**: `food_nocciole_tostate`. FDC ID 170583 (SR Legacy, "Nuts, hazelnuts or filberts, dry roasted, without salt added").
