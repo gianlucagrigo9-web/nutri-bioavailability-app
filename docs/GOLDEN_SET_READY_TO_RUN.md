@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cavolo rapa, cotto (bollito, con sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_cavolo_rapa_cotto`. FDC ID 169357 (SR Legacy, "Kohlrabi, cooked, boiled, drained, with salt" — solo questa variante ha un FDC ID verificato su getfoodfacts.com). Distinto da `food_cavolo_rapa_raw` (crudo, già eseguito, FDC 168424 "Kohlrabi, raw") — stesso alimento, forma cotta.
+- **Nutrienti**: **17/17**. Energia 29,0kcal, proteine 1,80g, grassi 0,11g, carboidrati 6,69g, fibra 1,10g, calcio 25,0mg, ferro 0,40mg, magnesio 19,0mg, zinco 0,31mg, rame 0,13mg, selenio 0,80µg, vitamina B12 0µg esplicito, folato totale 12,0µg, vitamina C 54,0mg, vitamina K 0,10µg, beta-carotene 21,0µg, altri carotenoidi provitaminici A (alfa 0 + cripto 0) = 0µg. Sodio 257mg/100g (variante "with salt", non uno dei 17 nutrienti tracciati). Fonte: getfoodfacts.com (FDC ID 169357, dataType SR Legacy).
+- **Analogia usata**: `food_cavolo_rapa_raw` (cavolo rapa crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (crucifera).
+- **Matrice**: nuova `cavolo_rapa_cotto` ("Cavolo rapa, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene presente 21,0µg, coerente col crudo che ha `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Brassicaceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169357 --food-id=food_cavolo_rapa_cotto \
+  --name-it="Cavolo rapa, cotto (bollito, con sale)" \
+  --matrix-id=cavolo_rapa_cotto --matrix-description-it="Cavolo rapa, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolo_rapa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169357 --food-id=food_cavolo_rapa_cotto \
+  --name-it="Cavolo rapa, cotto (bollito, con sale)" \
+  --matrix-id=cavolo_rapa_cotto --matrix-description-it="Cavolo rapa, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolo_rapa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Sedano rapa, cotto (bollito, con sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_sedano_rapa_cotto`. FDC ID 169341 (SR Legacy, "Celeriac, cooked, boiled, drained, with salt" — solo questa variante ha un FDC ID verificato su getfoodfacts.com; nessuna variante "without salt" distinta trovata). Distinto da `food_sedano_rapa_raw` (crudo, già eseguito, FDC 170400 "Celeriac, raw") — stesso alimento, forma cotta.
