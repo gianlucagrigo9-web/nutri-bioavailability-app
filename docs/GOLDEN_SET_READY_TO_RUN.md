@@ -91,32 +91,6 @@ npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_cappuccio_rosso_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
-### Zucca, cotta (bollita, senza sale) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
-
-- **food_id**: `food_zucca_cotta`. FDC ID 168449 (SR Legacy, "Pumpkin, cooked, boiled, drained, without salt").
-- **Nutrienti**: **17/17** — tutti presenti. Energia 20kcal, proteine 0,72g, grassi 0,070g, carboidrati 4,90g, fibra 1,10g, ferro 0,57mg, zinco 0,23mg, calcio 15,0mg, rame 0,091mg, magnesio 9,00mg, selenio 0,20µg, vitamina C 4,70mg, vitamina K 0,80µg, vitamina B12 0µg esplicito, folato totale 9,00µg, beta-carotene 2.096µg, alfa-carotene 2.715µg, beta-criptoxantina 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168449 e dataType SR Legacy.
-- **Analogia usata**: `food_pumpkin_raw` (zucca cruda, già eseguita sul DB reale — stesso alimento, *Cucurbita* spp., forma diversa: cotta/bollita invece di cruda; distinta dalla zucca butternut, già coperta come varietà separata, e dai fiori/foglie di zucca, non richiesti).
-- **Categoria dieta**: `plant_non_fruit`.
-- **Matrice**: nuova `zucca_cotta` ("Zucca, cotta").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_pumpkin_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e alfa-carotene entrambi presenti e abbondanti, matrice disgregata dalla bollitura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=168449 --food-id=food_zucca_cotta \
-  --name-it="Zucca, cotta (bollita)" \
-  --matrix-id=zucca_cotta --matrix-description-it="Zucca, cotta" \
-  --baseline-cooking-state=boiled --analogy-food-id=food_pumpkin_raw \
-  --botanical-family=Cucurbitaceae --carotenoid-matrix-state=cooked_or_disrupted \
-  --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=168449 --food-id=food_zucca_cotta \
-  --name-it="Zucca, cotta (bollita)" \
-  --matrix-id=zucca_cotta --matrix-description-it="Zucca, cotta" \
-  --baseline-cooking-state=boiled --analogy-food-id=food_pumpkin_raw \
-  --botanical-family=Cucurbitaceae --carotenoid-matrix-state=cooked_or_disrupted \
-  --diet-category=plant_non_fruit --apply
-```
-
 ### Formaggio Edam — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
 
 - **food_id**: `food_formaggio_edam`. FDC ID 173419 (SR Legacy, "Cheese, edam").
