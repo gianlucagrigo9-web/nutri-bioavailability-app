@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Quaglia, carne (senza pelle e ossa), cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, secondo "pronto" del turno)
+
+- **food_id**: `food_quaglia_carne_raw`. FDC ID 172419 (SR Legacy, "Quail, meat only, raw").
+- **Nutrienti**: **14/17**. Energia 134kcal, proteine 21,8g, grassi 4,53g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 4,51mg, zinco 2,70mg, calcio 13,0mg, rame 0,59mg, magnesio 25,0mg, selenio 17,4µg, vitamina C 7,20mg, vitamina B12 0,47µg, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172419 e dataType SR Legacy.
+- **Nota sulla rappresentatività**: la voce di coda originale chiedeva "quaglia, carne (petto), cruda". **Nessun record FDC con un FDC ID numerico verificabile è stato trovato specificamente per il solo petto** ("Quail, breast, meat only, raw" compare su recipal.com e triagemethod.com senza FDC ID citato — solo l'etichetta generica "SR (USDA Standard Reference Legacy)"). Usato quindi il record "carne, senza pelle e ossa" (intera, non solo petto), con FDC ID verificabile: rappresenta comunque bene "carne di quaglia" in generale — la quaglia è un uccello piccolo con composizione carne bianca/scura più omogenea di un pollo adulto, quindi la differenza petto/carne intera è minore che per il pollo. Nome scelto di conseguenza ("carne", non "petto"), per non spacciare il record per qualcosa che non è.
+- **Analogia usata**: `food_petto_di_pollo_raw` (pollame, già eseguito sul DB reale — stessa categoria "carne di pollame magra cruda", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne di origine animale).
+- **Matrice**: nuova `quaglia_carne` ("Quaglia, carne").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172419 --food-id=food_quaglia_carne_raw \
+  --name-it="Quaglia, carne (senza pelle e ossa), cruda" \
+  --matrix-id=quaglia_carne --matrix-description-it="Quaglia, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172419 --food-id=food_quaglia_carne_raw \
+  --name-it="Quaglia, carne (senza pelle e ossa), cruda" \
+  --matrix-id=quaglia_carne --matrix-description-it="Quaglia, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Lingua di manzo, cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, primo "pronto" del turno)
 
 - **food_id**: `food_lingua_di_manzo_raw`. FDC ID 170196 (SR Legacy, "Beef, variety meats and by-products, tongue, raw").
