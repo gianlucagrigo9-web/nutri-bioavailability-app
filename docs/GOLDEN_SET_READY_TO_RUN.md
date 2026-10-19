@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Carambola (starfruit), cruda — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10, ultimo del turno)
+
+- **food_id**: `food_carambola_raw`. FDC ID 171715 (SR Legacy, "Carambola, (starfruit), raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 31,0kcal, proteine 1,04g, grassi 0,33g, carboidrati 6,73g, fibra 2,80g, ferro 0,080mg, zinco 0,12mg, calcio 3,00mg, rame 0,14mg, magnesio 10,0mg, selenio 0,60µg, vitamina C 34,4mg, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0µg esplicito, folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, comunque non applicabile a un frutto fresco), beta-carotene 25,0µg, alfa-carotene 24,0µg e beta-criptoxantina 0µg (quindi `other_provitamin_a_carotenoids_mcg`=24,0µg dalla somma dei componenti mappati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171715 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_kiwi_green_raw` (kiwi, già eseguito sul DB reale — analogia solo funzionale: frutto fresco di piccola/media taglia, buona vitamina C, carotenoidi presenti ma non dominanti; nessuna pianta della famiglia reale Oxalidaceae, *Averrhoa carambola*, ancora eseguita nel Golden Set per un'analogia più precisa, famiglia dichiarata separatamente).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca nella definizione restrittiva del PRD §4.9 — non frutta secca, non ortaggio botanicamente "frutto").
+- **Matrice**: nuova `carambola` ("Carambola (starfruit)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 25,0µg/100g e alfa-carotene 24,0µg/100g presenti, frutto crudo non disgregato, stessa convenzione delle altre forme crude di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Oxalidaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171715 --food-id=food_carambola_raw \
+  --name-it="Carambola (starfruit), cruda" \
+  --matrix-id=carambola --matrix-description-it="Carambola (starfruit)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Oxalidaceae
+```
+```
+npm run add-food -- --fdc-id=171715 --food-id=food_carambola_raw \
+  --name-it="Carambola (starfruit), cruda" \
+  --matrix-id=carambola --matrix-description-it="Carambola (starfruit)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Oxalidaceae --apply
+```
+
 ### Cardi, cotti (bolliti) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_cardi_cotti`. FDC ID 169982 (SR Legacy, "Cardoon, cooked, boiled, drained, without salt"). Distinto da `food_cardi_raw` (crudo, FDC 169981, già eseguito sul DB reale) — stesso alimento, forma cotta.
