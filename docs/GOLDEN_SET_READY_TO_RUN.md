@@ -16,6 +16,55 @@
 
 ## Pronti
 
+### Grano saraceno, decorticato, tostato (kasha), secco — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
+
+- **food_id**: `food_grano_saraceno_tostato_raw`. FDC ID 170685 (SR Legacy, "Buckwheat groats, roasted, dry").
+- **Nutrienti**: **13/17**. Energia 346kcal, proteine 11,7g, grassi 2,71g, carboidrati 75,0g, fibra 10,3g, ferro 2,47mg, zinco 2,42mg, calcio 17,0mg, rame 0,62mg, magnesio 221mg, selenio 8,40µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 42,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati nella pagina fra i 75 nutrienti del record, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso ordine di grandezza di gap già accettato per couscous (13/17) e farina di cocco (11/17) in questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170685 e dataType SR Legacy. Prodotto distinto dai chicchi di grano saraceno crudi non tostati (già scartati ⚠ nel quarto lotto per mancanza di un record pulito) e dalla farina di grano saraceno (già preparata nell'undicesimo lotto, FDC diverso): il kasha è il chicco decorticato e tostato, non macinato, "secco" cioè non ancora cotto in acqua.
+- **Analogia usata**: `food_quinoa_dry_raw` (quinoa cruda/secca, già eseguita sul DB reale — stessa categoria "pseudocereale in chicchi crudi/secchi", stesso trattamento "nessun heme iron").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `grano_saraceno_tostato` ("Grano saraceno tostato (kasha), secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non zero esplicito: nessuno stato dichiarabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Polygonaceae` (famiglia reale del grano saraceno, *Fagopyrum esculentum* — non è un vero cereale/Poaceae, è uno pseudocereale), `baseline_cooking_state=raw` (il kasha "secco" non è ancora cotto in acqua, coerente con la convenzione già usata per quinoa/couscous crudi), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170685 --food-id=food_grano_saraceno_tostato_raw \
+  --name-it="Grano saraceno, decorticato, tostato (kasha), secco" \
+  --matrix-id=grano_saraceno_tostato --matrix-description-it="Grano saraceno tostato (kasha), secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --diet-category=plant_non_fruit --botanical-family=Polygonaceae
+```
+```
+npm run add-food -- --fdc-id=170685 --food-id=food_grano_saraceno_tostato_raw \
+  --name-it="Grano saraceno, decorticato, tostato (kasha), secco" \
+  --matrix-id=grano_saraceno_tostato --matrix-description-it="Grano saraceno tostato (kasha), secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --diet-category=plant_non_fruit --botanical-family=Polygonaceae --apply
+```
+
+### Succo di mela, non zuccherato (senza acido ascorbico aggiunto) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
+
+- **food_id**: `food_succo_di_mela_raw`. FDC ID 173933 (SR Legacy, "Apple juice, canned or bottled, unsweetened, without added ascorbic acid").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 46,0kcal, proteine 0,10g, grassi 0,13g, carboidrati 11,3g, fibra 0,20g, ferro 0,12mg, zinco 0,020mg, calcio 8,00mg, rame 0,012mg, magnesio 5,00mg, selenio 0,10µg, vitamina C 0,90mg, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0µg esplicito (assunto, non misurato — dichiarato così dalla fonte), folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg esplicito (valore calcolato, non analitico, dichiarato così dalla fonte), alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (entrambi calcolati, non analitici). Fonte: fdc.nal.usda.gov/portal-data/external/173933 (JSON ufficiale, comparso in un risultato di ricerca precedente), dataType "SR Legacy" (campo `foodType`).
+- **Attenzione specifica all'arricchimento USA (vedi punto 2b del COMPITO)**: esiste anche una variante dello stesso succo "with added ascorbic acid" (FDC 167771), con vitamina C 38,5mg/100g — quasi 43 volte più alta di questo record (0,90mg/100g) per aggiunta diretta di acido ascorbico, un additivo comune nei succhi USA. **Scelta deliberatamente la variante "without added ascorbic acid"**, che rappresenta meglio un succo di mela semplice (0,90mg/100g di vitamina C è coerente con il contenuto naturale basso della mela, vedi `food_apple_with_skin_raw` già eseguito).
+- **Analogia usata**: `food_apple_with_skin_raw` (mela, già eseguita sul DB reale — stessa specie *Malus domestica*, forma diversa: succo spremuto/pastorizzato invece di polpa intera).
+- **Categoria dieta**: `plant_non_fruit` (non `fresh_fruit`: succo è una forma trasformata del frutto, non frutta fresca intera, stessa convenzione già usata per succo d'arancia/limone/melograno in questa coda — non cambia vegetariano/vegano, solo la compatibilità fruttariana).
+- **Matrice**: nuova `succo_di_mela` ("Succo di mela, non zuccherato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene/alfa-carotene/beta-criptoxantina tutti 0 espliciti nel record — nessuno stato carotenoide da dichiarare, a differenza del succo d'arancia/limone/melograno che avevano almeno un carotenoide non-zero, coerente con la convenzione già usata per `food_trippa_di_manzo_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173933 --food-id=food_succo_di_mela_raw \
+  --name-it="Succo di mela, non zuccherato (senza acido ascorbico aggiunto)" \
+  --matrix-id=succo_di_mela --matrix-description-it="Succo di mela, non zuccherato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173933 --food-id=food_succo_di_mela_raw \
+  --name-it="Succo di mela, non zuccherato (senza acido ascorbico aggiunto)" \
+  --matrix-id=succo_di_mela --matrix-description-it="Succo di mela, non zuccherato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Capperi, in salamoia (sgocciolati) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
 
 - **food_id**: `food_capperi_in_salamoia`. FDC ID 172238 (SR Legacy, "Capers, canned").
