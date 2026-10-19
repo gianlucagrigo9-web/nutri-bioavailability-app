@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Semi di finocchio, secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_semi_di_finocchio_raw`. FDC ID 171323 (SR Legacy, "Spices, fennel seed").
+- **Nutrienti**: **12/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `folate_mcg` (e quindi l'acido folico non è dichiarabile separatamente), `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg`: campi del tutto assenti dalla pagina consultata, non riportati a zero — gap dichiarato, sopra la soglia minima di ~10/17 presa come segnale di match debole ma comunque un gap reale, da non usare per questi micronutrienti. Energia 345kcal, proteine 15,8g, grassi 14,9g, carboidrati 52,3g, fibra 39,8g, ferro 18,5mg, zinco 3,70mg, calcio 1196mg (molto alto ma coerente con la concentrazione da disidratazione già vista per le altre spezie di questa coda), rame 1,07mg, magnesio 385mg, vitamina C 21,0mg, vitamina B12 0µg esplicito. Nota minore: l'etichetta della pagina riporta 350kcal invece di 345kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171323 e dataType SR Legacy.
+- **Analogia usata**: `food_fennel_raw` (finocchi, bulbo crudo, già eseguito sul DB reale — stessa specie reale *Foeniculum vulgare* del seme di finocchio, non solo stessa famiglia: l'analogia più precisa di questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `semi_di_finocchio` ("Semi di finocchio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di pepe nero/cannella/origano/salvia/timo/noce moscata/chiodi di garofano/cumino in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Foeniculum vulgare*, stessa famiglia di cumino/sedano/carote, stessa specie del finocchio bulbo già nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=171323 --food-id=food_semi_di_finocchio_raw \
+  --name-it="Semi di finocchio, secchi" \
+  --matrix-id=semi_di_finocchio --matrix-description-it="Semi di finocchio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fennel_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=171323 --food-id=food_semi_di_finocchio_raw \
+  --name-it="Semi di finocchio, secchi" \
+  --matrix-id=semi_di_finocchio --matrix-description-it="Semi di finocchio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fennel_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply
+```
+
 ### Cumino, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_cumino_raw`. FDC ID 170923 (SR Legacy, "Spices, cumin seed").
