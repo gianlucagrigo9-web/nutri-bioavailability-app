@@ -16,6 +16,83 @@
 
 ## Pronti
 
+### Tahina (crema di semi di sesamo tostati) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, bonus oltre la quota)
+
+- **food_id**: `food_tahina`. FDC ID 170189 (SR Legacy, "Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 595kcal, proteine 17,0g, grassi 53,8g, carboidrati 21,2g, fibra 9,30g, ferro 8,95mg, zinco 4,62mg, calcio 426mg, rame 1,61mg, magnesio 95,0mg, selenio 34,4µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 0µg esplicito, folato totale 98,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 40,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170189 e dataType SR Legacy.
+- **Analogia usata**: `food_semi_di_sesamo_raw` (semi di sesamo, già eseguiti sul DB reale — stessa fonte vegetale, forma diversa: pasta tostata e macinata invece del seme intero).
+- **Categoria dieta**: `plant_non_fruit` (derivato vegetale da semi).
+- **Matrice**: nuova `tahina` ("Tahina, crema di semi di sesamo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 40,0µg/100g presente, ma matrice disgregata dalla tostatura e macinazione), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Pedaliaceae` (famiglia reale del sesamo, *Sesamum indicum*), `baseline_cooking_state=roasted` (da semi tostati e abbrustoliti), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170189 --food-id=food_tahina \
+  --name-it="Tahina (crema di semi di sesamo tostati)" \
+  --matrix-id=tahina --matrix-description-it="Tahina, crema di semi di sesamo" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_sesamo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Pedaliaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170189 --food-id=food_tahina \
+  --name-it="Tahina (crema di semi di sesamo tostati)" \
+  --matrix-id=tahina --matrix-description-it="Tahina, crema di semi di sesamo" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_sesamo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Pedaliaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Lievito di birra, secco attivo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, bonus oltre la quota)
+
+- **food_id**: `food_lievito_di_birra_secco`. FDC ID 175043 (SR Legacy, "Leavening agents, yeast, baker's, active dry").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 325kcal, proteine 40,4g, grassi 7,61g, carboidrati 41,2g, fibra 26,9g, ferro 2,17mg, zinco 7,94mg, calcio 30,0mg, rame 0,44mg, magnesio 54,0mg, selenio 7,90µg, vitamina C 0,30mg, vitamina K (fillochinone) 0,40µg, vitamina B12 0,070µg, folato totale 2.340µg (molto alto, ma caratteristica nota e naturale del lievito — non un segno di arricchimento: non c'è un acido folico separato diverso da zero e la pagina non menziona additivi), acido folico 0µg esplicito, beta-carotene 0µg esplicito, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175043 e dataType SR Legacy.
+- **Distinzione dal "lievito alimentare" già scartato (⚠, lotto precedente)**: questo è lievito di birra/panificazione attivo essiccato (*Saccharomyces cerevisiae* per lievitazione, non disattivato), diverso dal lievito alimentare (nutritional yeast, disattivato, spesso arricchito artificialmente con B12 — da cui il problema di fortificazione già incontrato). Qui la vitamina B12 è bassa (0,070µg/100g) e coerente con un lievito non arricchito, nessun segnale di fortificazione.
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon, già eseguiti sul DB reale — stessa categoria "fungo, non pianta", nessuna famiglia botanica, stesso trattamento categorico già usato per i funghi in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (fungo, non di origine animale; stesso bucket categorico già usato per i funghi).
+- **Matrice**: nuova `lievito_di_birra` ("Lievito di birra, secco attivo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — fungo, non pianta, stessa convenzione dei funghi champignon/shiitake già in coda), `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175043 --food-id=food_lievito_di_birra_secco \
+  --name-it="Lievito di birra, secco attivo" \
+  --matrix-id=lievito_di_birra --matrix-description-it="Lievito di birra, secco attivo" \
+  --baseline-cooking-state=dried --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175043 --food-id=food_lievito_di_birra_secco \
+  --name-it="Lievito di birra, secco attivo" \
+  --matrix-id=lievito_di_birra --matrix-description-it="Lievito di birra, secco attivo" \
+  --baseline-cooking-state=dried --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Pepe di Cayenna, macinato — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, bonus oltre la quota)
+
+- **food_id**: `food_pepe_di_cayenna_raw`. FDC ID 170932 (SR Legacy, "Spices, pepper, red or cayenne").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 318kcal, proteine 12,0g, grassi 17,3g, carboidrati 56,6g, fibra 27,2g, ferro 7,80mg, zinco 2,48mg, calcio 148mg, rame 0,37mg, magnesio 152mg, selenio 8,80µg, vitamina C 76,4mg, vitamina K (fillochinone) 80,3µg, vitamina B12 0µg esplicito, folato totale 106µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 21.840µg, alfa-carotene 0µg e beta-criptoxantina 6.252µg (`other_provitamin_a_carotenoids_mcg`=6.252). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170932 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (escarola, già eseguita sul DB reale — stessa convenzione già usata per tutte le spezie secche di questa coda, es. cannella/origano/rosmarino/timo/salvia/pepe nero, analogia funzionale non botanica).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `pepe_di_cayenna` ("Pepe di Cayenna, macinato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina presenti e non zero, spezia secca non cotta, stessa convenzione delle altre spezie secche in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (genere *Capsicum*, stessa famiglia di peperoni/peperoncini già in coda), `baseline_cooking_state=raw` (secco/macinato, stessa convenzione delle altre spezie), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170932 --food-id=food_pepe_di_cayenna_raw \
+  --name-it="Pepe di Cayenna, macinato" \
+  --matrix-id=pepe_di_cayenna --matrix-description-it="Pepe di Cayenna, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170932 --food-id=food_pepe_di_cayenna_raw \
+  --name-it="Pepe di Cayenna, macinato" \
+  --matrix-id=pepe_di_cayenna --matrix-description-it="Pepe di Cayenna, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Kefir, magro (low fat), bianco — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
 
 - **food_id**: `food_kefir_raw`. FDC ID 170904 (SR Legacy, "Kefir, lowfat, plain, LIFEWAY").
