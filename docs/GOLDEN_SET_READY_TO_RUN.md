@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Lingua di manzo, cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, primo "pronto" del turno)
+
+- **food_id**: `food_lingua_di_manzo_raw`. FDC ID 170196 (SR Legacy, "Beef, variety meats and by-products, tongue, raw").
+- **Nutrienti**: **14/17**. Energia 224kcal, proteine 14,9g, grassi 16,1g, carboidrati 3,68g, fibra 0g esplicito, ferro 2,95mg, zinco 2,87mg, calcio 6,00mg, rame 0,17mg, magnesio 16,0mg, selenio 9,40µg, vitamina C 3,10mg, vitamina B12 3,79µg, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati nella pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso identico pattern di gap già visto per vitello/agnello/coniglio crudi in questa coda (14/17, stessi 3 nutrienti mancanti), coerente con una frattaglia/carne magra. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170196 e dataType SR Legacy. Calcio 6mg/100g basso, nessun segno di arricchimento (atteso per una frattaglia non lavorata).
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, 30 alimenti reali nel DB — stessa specie, stessa categoria "frattaglia di manzo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (frattaglia di origine animale).
+- **Matrice**: nuova `lingua_di_manzo` ("Lingua di manzo").
+- **Attributi**: `is_heme_iron=true`, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene non riportato, non zero esplicito: nessuno stato dichiarabile, coerente con `food_beef_liver_raw` che ha lo stesso campo NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170196 --food-id=food_lingua_di_manzo_raw \
+  --name-it="Lingua di manzo, cruda" \
+  --matrix-id=lingua_di_manzo --matrix-description-it="Lingua di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170196 --food-id=food_lingua_di_manzo_raw \
+  --name-it="Lingua di manzo, cruda" \
+  --matrix-id=lingua_di_manzo --matrix-description-it="Lingua di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Trippa di manzo, cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13, nono "pronto" del turno)
 
 - **food_id**: `food_trippa_di_manzo_raw`. FDC ID 170599 (SR Legacy, "Beef, variety meats and by-products, tripe, raw").
