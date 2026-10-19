@@ -16,7 +16,29 @@
 
 ## Pronti
 
-### Formaggio Brie — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Formaggio Camembert — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_camembert`. FDC ID 172178 (SR Legacy, "Cheese, camembert").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 300kcal, proteine 19,8g, grassi 24,3g, carboidrati 0,46g, fibra 0g esplicito, ferro 0,33mg, zinco 2,38mg, calcio 388mg, rame 0,021mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,00µg, vitamina B12 1,30µg, folato totale 62,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 12,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172178 e dataType SR Legacy (voce immediatamente successiva al brie nel catalogo SR Legacy). Energia coerente coi macronutrienti; sodio alto (842mg/100g) ma tipico dei formaggi, non tracciato. Stesso esito positivo del brie lavorato in questo stesso turno: a differenza di mascarpone/mozzarella di bufala, esiste un record generico SR Legacy pulito e completo.
+- **Analogia usata**: `food_parmigiano_reggiano` (formaggio stagionato, già eseguito sul DB reale — stessa categoria "formaggio a pasta ottenuta per coagulazione e stagionatura"; NON `food_brie`, che in questo stesso turno è solo "pronto", non ancora reale nel DB).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `camembert` ("Formaggio Camembert").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini/formaggi aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (stessa convenzione degli altri formaggi pronti al consumo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172178 --food-id=food_camembert \
+  --name-it="Formaggio Camembert" \
+  --matrix-id=camembert --matrix-description-it="Formaggio Camembert" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172178 --food-id=food_camembert \
+  --name-it="Formaggio Camembert" \
+  --matrix-id=camembert --matrix-description-it="Formaggio Camembert" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
 
 - **food_id**: `food_brie`. FDC ID 172177 (SR Legacy, "Cheese, brie").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 334kcal, proteine 20,8g, grassi 27,7g, carboidrati 0,45g, fibra 0g esplicito, ferro 0,50mg, zinco 2,38mg, calcio 184mg, rame 0,019mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,30µg, vitamina B12 1,65µg, folato totale 65,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento — i valori di B12/folato sono naturali del formaggio), beta-carotene 9,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172177 e dataType SR Legacy. Energia coerente col calcolo dai macronutrienti (~332kcal contro 334 dichiarati); sodio alto (629mg/100g) ma tipico dei formaggi, non uno dei 17 nutrienti tracciati. Contrariamente al precedente già dichiarato per mascarpone/mozzarella di bufala in questa coda (nessun record generico, solo Branded scarsi), per il brie esiste un record SR Legacy generico pulito e completo.
