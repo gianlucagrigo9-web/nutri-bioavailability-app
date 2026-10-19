@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Succo d'arancia, crudo (spremuto) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_succo_di_arancia_raw`. FDC ID 169098 (SR Legacy, "Orange juice, raw (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 45,0kcal, proteine 0,70g, grassi 0,20g, carboidrati 10,4g, fibra 0,20g, ferro 0,20mg, zinco 0,050mg, calcio 11,0mg, rame 0,044mg, magnesio 11,0mg, selenio 0,10µg, vitamina C 50,0mg, vitamina K (fillochinone) 0,10µg, vitamina B12 0µg esplicito, folato totale 30,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 33,0µg, alfa-carotene 6,00µg e beta-criptoxantina 169µg (`other_provitamin_a_carotenoids_mcg`=169µg, coerente col pigmento caratteristico dell'arancia). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169098 e dataType SR Legacy — release FoodData Central 2026-04-30.
+- **Analogia usata**: `food_oranges_raw` (già nel Golden Set originale — stessa specie, stessa famiglia reale Rutaceae, forma diversa: succo spremuto invece di polpa).
+- **Categoria dieta**: `plant_non_fruit` (non `fresh_fruit`: stessa convenzione dichiarata per il succo di limone in questo stesso lotto — succo spremuto è forma trasformata, non frutto intero, secondo la definizione restrittiva del PRD §4.9; nota per revisione umana identica a quella del succo di limone, vale anche qui).
+- **Matrice**: nuova `succo_di_arancia` ("Succo d'arancia, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi presenti ma matrice completamente disgregata dalla spremitura, stessa convenzione del succo di limone/olive in salamoia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169098 --food-id=food_succo_di_arancia_raw \
+  --name-it="Succo d'arancia, crudo (spremuto)" \
+  --matrix-id=succo_di_arancia --matrix-description-it="Succo d'arancia, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Rutaceae
+```
+```
+npm run add-food -- --fdc-id=169098 --food-id=food_succo_di_arancia_raw \
+  --name-it="Succo d'arancia, crudo (spremuto)" \
+  --matrix-id=succo_di_arancia --matrix-description-it="Succo d'arancia, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Rutaceae --apply
+```
+
 ### Succo di limone, crudo (spremuto) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_succo_di_limone_raw`. FDC ID 167747 (SR Legacy, "Lemon juice, raw").
