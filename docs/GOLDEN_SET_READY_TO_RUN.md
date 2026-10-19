@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Anacardi, tostati (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
+
+- **food_id**: `food_anacardi_tostati`. FDC ID 169421 (SR Legacy, "Nuts, cashew nuts, dry roasted, with salt added").
+- **Deviazione dichiarata (variante "con sale" invece di "senza sale")**: la voce di coda chiedeva anacardi tostati senza sale. Nessun FDC ID verificabile trovato per la variante "without salt added": l'unica pagina trovata (recipal.com, ingrediente 3676) cita solo un "NBD ID" (12085, non FDC) e i valori per 100g sono ricavati per conversione aritmetica da una porzione di 1 tazza, non valori ufficiali diretti — stesso tipo di gap già usato per scartare altri alimenti in questa coda. L'unica variante con un FDC ID verificato su getfoodfacts.com è "with salt added", FDC 169421 — stessa deviazione già accettata per mandorle/pistacchi tostati in questo stesso turno. Sodio 640mg/100g, non uno dei 17 nutrienti tracciati.
+- **Nutrienti**: **17/17** — tutti presenti. Energia 574kcal, proteine 15,3g, grassi 46,4g, carboidrati 32,7g, fibra 3,00g, ferro 6,00mg, zinco 5,60mg, calcio 45,0mg, rame 2,22mg, magnesio 260mg, selenio 11,7µg, vitamina C 0mg esplicito, vitamina K 34,7µg, vitamina B12 0µg esplicito, folato totale 69,0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti (composito provitamina A = 0, valore riportato non assente). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169421 e dataType SR Legacy.
+- **Analogia usata**: `food_anacardi_raw` (anacardi crudi, già eseguiti sul DB reale — stesso alimento, *Anacardium occidentale*, forma diversa: tostato invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `anacardi_tostati` ("Anacardi, tostati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_anacardi_raw`), `carotenoid_matrix_state` omesso/NULL (beta-carotene 0µg/100g per questo alimento — nessun contenuto di carotenoidi da descrivere, stessa scelta già fatta per `food_anacardi_raw` crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (famiglia botanica reale dell'anacardio), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169421 --food-id=food_anacardi_tostati \
+  --name-it="Anacardi, tostati (con sale)" \
+  --matrix-id=anacardi_tostati --matrix-description-it="Anacardi, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169421 --food-id=food_anacardi_tostati \
+  --name-it="Anacardi, tostati (con sale)" \
+  --matrix-id=anacardi_tostati --matrix-description-it="Anacardi, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pistacchi, tostati (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 18)
 
 - **food_id**: `food_pistacchi_tostati`. FDC ID 169426 (SR Legacy, "Nuts, pistachio nuts, dry roasted, with salt added").
