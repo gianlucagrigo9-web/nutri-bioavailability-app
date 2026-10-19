@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
+
+- **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 356kcal, proteine 24,9g, grassi 27,4g, carboidrati 2,22g, fibra 0g esplicito, ferro 0,24mg, zinco 3,90mg, calcio 700mg, rame 0,036mg, magnesio 29,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,30µg, vitamina B12 1,54µg, folato totale 21,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 10,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Calcio molto alto (700mg/100g) ma tipico di un formaggio stagionato a pasta dura/semidura, stesso ordine di grandezza già visto per parmigiano/edam. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171241 e dataType SR Legacy (release USDA 30 aprile 2026).
+- **Analogia usata**: `food_parmigiano_reggiano` (formaggio stagionato, già eseguito sul DB reale — stessa categoria "formaggio a pasta dura/semidura stagionata"; non `food_edam` perché quest'ultimo è solo "pronto" in questo stesso lotto, non ancora eseguito — l'analogia deve riferirsi a un alimento reale nel DB).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `gouda` ("Formaggio Gouda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini/formaggi aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione di brie/panna densa/panna acida), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (prodotto pronto al consumo, stessa convenzione degli altri formaggi), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171241 --food-id=food_gouda \
+  --name-it="Formaggio Gouda" \
+  --matrix-id=gouda --matrix-description-it="Formaggio Gouda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171241 --food-id=food_gouda \
+  --name-it="Formaggio Gouda" \
+  --matrix-id=gouda --matrix-description-it="Formaggio Gouda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
+### Salmone, affumicato (lox) — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
+
+- **food_id**: `food_salmone_affumicato_raw`. FDC ID 171985 (SR Legacy, "Fish, salmon, chinook, smoked, (lox), regular").
+- **Nutrienti**: **14/17**. Energia 117kcal, proteine 18,3g, grassi 4,32g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,85mg, zinco 0,31mg, calcio 11,0mg, rame 0,23mg, magnesio 18,0mg, selenio 38,1µg, vitamina C 0mg esplicito, vitamina B12 3,26µg, folato totale 2,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — gap atteso per un pesce, stesso ordine di grandezza già accettato per branzino/sogliola/pesce spada cotti in questa coda. Sodio molto alto (819mg/100g, non uno dei 17 nutrienti tracciati) per il sale usato nell'affumicatura/salagione, coerente con un prodotto affumicato reale, non un segnale di anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171985 e dataType SR Legacy (release USDA 30 aprile 2026).
+- **Analogia usata**: `food_salmon_cooked` (salmone, Golden Set originale, già eseguito sul DB reale — stessa specie *Oncorhynchus*, forma diversa: affumicato invece di cotto a calore secco).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_affumicato` ("Salmone, affumicato").
+- **Attributi**: `is_heme_iron=true` (carne di pesce, stessa convenzione già usata per gli altri pesci di questa coda), `matrix_category_calcium` omesso (NULL — non applicabile a un prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=smoked` (descrive lo stato reale a cui si riferiscono questi valori, non validato come enum dallo script — libero), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171985 --food-id=food_salmone_affumicato_raw \
+  --name-it="Salmone, affumicato (lox)" --is-heme-iron \
+  --matrix-id=salmone_affumicato --matrix-description-it="Salmone, affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171985 --food-id=food_salmone_affumicato_raw \
+  --name-it="Salmone, affumicato (lox)" --is-heme-iron \
+  --matrix-id=salmone_affumicato --matrix-description-it="Salmone, affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --diet-category=meat_fish --apply
+```
+
+### Farina di castagne, cruda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
+
+- **food_id**: `food_farina_di_castagne_raw`. FDC ID 2515377 (Foundation Foods, "Flour, chestnut").
+- **Nutrienti**: **12/17**. Energia 385kcal (pagina riporta anche 380kcal nel riepilogo etichetta, scarto di arrotondamento minore, stesso tipo già accettato altrove in questa coda — usato il valore della tabella dettagliata), proteine 5,29g, grassi 4,64g, carboidrati 80,5g, fibra 8,71g, ferro 1,62mg, zinco 1,04mg, calcio 55,8mg, rame 0,58mg, magnesio 68,8mg, selenio 0µg esplicito, vitamina C 4,05mg. **Mancano** (non riportati nel record, non assunti zero): vitamina B12, folato totale, acido folico separato, vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso ordine di grandezza di gap già accettato per farina di cocco (11/17) in questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2515377 e dataType Foundation Foods (release USDA 30 aprile 2026).
+- **Analogia usata**: `food_castagne_raw` (castagne crude sbucciate, già eseguite sul DB reale — stessa specie *Castanea sativa*, forma diversa: farina macinata invece dell'intero).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farina_di_castagne` ("Farina di castagne").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_castagne_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, stessa scelta già fatta per farina di cocco), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fagaceae` (*Castanea sativa*, stessa famiglia di `food_castagne_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun segno di arricchimento nei campi presenti, anche se il folato stesso non è riportato quindi non direttamente verificabile su questo record, stesso trattamento già dato a `food_farro_raw`).
+
+```
+npm run add-food -- --fdc-id=2515377 --food-id=food_farina_di_castagne_raw \
+  --name-it="Farina di castagne, cruda" \
+  --matrix-id=farina_di_castagne --matrix-description-it="Farina di castagne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2515377 --food-id=food_farina_di_castagne_raw \
+  --name-it="Farina di castagne, cruda" \
+  --matrix-id=farina_di_castagne --matrix-description-it="Farina di castagne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Panna acida (sour cream) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 19)
 
 - **food_id**: `food_panna_acida_raw`. FDC ID 171257 (SR Legacy, "Cream, sour, cultured").
