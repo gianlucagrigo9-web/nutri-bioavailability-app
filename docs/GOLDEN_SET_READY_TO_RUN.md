@@ -16,7 +16,30 @@
 
 ## Pronti
 
-### Latte vaccino, parzialmente scremato (2% grassi, senza vitamine A/D aggiunte) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Panna, densa, da montare (heavy whipping cream), cruda — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_panna_densa_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 340kcal, proteine 2,84g, grassi 36,1g, carboidrati 2,84g, fibra 0g esplicito, ferro 0,10mg, zinco 0,24mg, calcio 66,0mg, rame 0,011mg, magnesio 7,00mg, selenio 3,00µg, vitamina C 0,60mg, vitamina K (fillochinone) 3,20µg, vitamina B12 0,16µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 72,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170859 e dataType SR Legacy. Piccola incongruenza minore fra carboidrati per differenza (2,84g) e zuccheri totali dichiarati (2,92g) sulla stessa pagina — scarto di arrotondamento, stesso tipo di piccola discrepanza già accettata altrove in questa coda, non bloccante.
+- **Distinto da**: `food_panna_da_cucina_raw` (panna fluida leggera/da cucina, FDC 170857, grasso 19,1g/100g, solo "pronto" non ancora eseguito, preparata nel sesto lotto): prodotto diverso (panna da montare vs panna da cucina, quasi il doppio del grasso), non riusabile come analogia perché non ancora reale nel DB.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, già eseguito sul DB reale — nessun derivato della panna è ancora eseguito nel Golden Set: stessa famiglia di prodotto, latte fluido, differisce per contenuto di grassi).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `panna_densa` ("Panna, densa, da montare").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini/formaggi aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione dei latticini), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170859 --food-id=food_panna_densa_raw \
+  --name-it="Panna, densa, da montare (heavy whipping cream), cruda" \
+  --matrix-id=panna_densa --matrix-description-it="Panna, densa, da montare" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170859 --food-id=food_panna_densa_raw \
+  --name-it="Panna, densa, da montare (heavy whipping cream), cruda" \
+  --matrix-id=panna_densa --matrix-description-it="Panna, densa, da montare" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
 
 - **food_id**: `food_latte_parzialmente_scremato_raw`. FDC ID 172205 (SR Legacy, "Milk, reduced fat, fluid, 2% milkfat, without added vitamin A and vitamin D").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 50,0kcal, proteine 3,30g, grassi 1,98g, carboidrati 4,80g, fibra 0g esplicito, ferro 0,020mg, zinco 0,48mg, calcio 120mg, rame 0,0060mg, magnesio 11,0mg, selenio 2,50µg, vitamina C 0,20mg, vitamina K (fillochinone) 0,20µg, vitamina B12 0,53µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento — coerente col nome del record, "without added vitamin A and vitamin D"), beta-carotene 7,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172205 e dataType SR Legacy. Calcolo kcal dai macronutrienti (~50) coerente col valore dichiarato — nessuna anomalia.
