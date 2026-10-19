@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fontina — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_fontina`. FDC ID 170843 (SR Legacy, "Cheese, fontina").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 389kcal, proteine 25,6g, grassi 31,1g, carboidrati 1,55g, fibra 0g esplicito, ferro 0,23mg, zinco 3,50mg, calcio 550mg, rame 0,025mg, magnesio 14,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,60µg, vitamina B12 1,68µg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 32,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (`other_provitamin_a_carotenoids_mcg`=0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170843 e dataType SR Legacy — release FoodData Central 2026-04-30. Calcio 550mg/100g alto ma coerente con un formaggio a pasta semidura come la fontina (stesso ordine di grandezza di parmigiano/provolone già eseguiti), non un segnale di arricchimento.
+- **Analogia usata**: `food_parmigiano_reggiano` (già eseguito sul DB reale — stessa convenzione già usata per `food_provolone`: formaggio a pasta dura/semidura).
+- **Categoria dieta**: `egg_dairy` (formaggio: vegetariano sì, vegano no).
+- **Matrice**: nuova `fontina` ("Fontina").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dei latticini già eseguiti), `carotenoid_matrix_state` omesso (beta-carotene presente ma nessuno stato di matrice dichiarato per i formaggi già eseguiti, stessa convenzione), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale, nessuna famiglia botanica), `baseline_cooking_state=raw` (stessa convenzione dei latticini già eseguiti, es. `food_milk_whole`), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170843 --food-id=food_fontina \
+  --name-it="Fontina" \
+  --matrix-id=fontina --matrix-description-it="Fontina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170843 --food-id=food_fontina \
+  --name-it="Fontina" \
+  --matrix-id=fontina --matrix-description-it="Fontina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Aceto di mele — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 12, chiusura del lotto)
 
 - **food_id**: `food_aceto_di_mele`. FDC ID 173469 (SR Legacy, "Vinegar, cider").
