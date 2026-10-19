@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Kefir, magro (low fat), bianco — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
+
+- **food_id**: `food_kefir_raw`. FDC ID 170904 (SR Legacy, "Kefir, lowfat, plain, LIFEWAY").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 43,0kcal, proteine 3,79g, grassi 1,02g, carboidrati 4,77g, fibra 0g esplicito, ferro 0,040mg, zinco 0,46mg, calcio 130mg, rame 0,0090mg, magnesio 12,0mg, selenio 3,60µg, vitamina C 0,20mg, vitamina K (fillochinone) 0,10µg, vitamina B12 0,29µg, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170904 e dataType SR Legacy. Il nome del produttore (LIFEWAY) compare nella descrizione FDC stessa — pratica nota di SR Legacy per alcuni latticini fermentati di riferimento, non un prodotto "Branded" nel senso usato da questo progetto per scartare record con pochi nutrienti: qui tutti e 17 sono presenti. Calcio 130mg/100g coerente con un latticino magro liquido (confrontabile con lo yogurt magro già eseguito).
+- **Analogia usata**: `food_yogurt_bianco_intero` (yogurt bianco, già eseguito sul DB reale — stessa categoria "latticino fermentato liquido/semiliquido").
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `kefir` ("Kefir, magro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per gli altri latticini del Golden Set), `carotenoid_matrix_state` omesso (NULL — non applicabile, latticino, beta-carotene presente come 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170904 --food-id=food_kefir_raw \
+  --name-it="Kefir, magro (low fat), bianco" \
+  --matrix-id=kefir --matrix-description-it="Kefir, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170904 --food-id=food_kefir_raw \
+  --name-it="Kefir, magro (low fat), bianco" \
+  --matrix-id=kefir --matrix-description-it="Kefir, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio gruyère (groviera) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
+
+- **food_id**: `food_formaggio_gruyere_raw`. FDC ID 171242 (SR Legacy, "Cheese, gruyere").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 413kcal, proteine 29,8g, grassi 32,3g, carboidrati 0,36g, fibra 0g esplicito, ferro 0,17mg, zinco 3,90mg, calcio 1011mg, rame 0,032mg, magnesio 36,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,70µg, vitamina B12 1,60µg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 33,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171242 e dataType SR Legacy. Calcio 1011mg/100g alto ma coerente con un formaggio a pasta dura/semidura (confrontabile con parmigiano già nel Golden Set).
+- **Analogia usata**: `food_parmigiano_reggiano` (parmigiano, già eseguito sul DB reale — stessa categoria "formaggio a pasta dura/semidura da latte vaccino", calcio concentrato in modo simile, stessa convenzione già usata per il formaggio svizzero in questa coda).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_gruyere` ("Formaggio gruyère (groviera)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per gli altri formaggi del Golden Set), `carotenoid_matrix_state` omesso (NULL — non applicabile, latticino, stessa convenzione già usata per formaggio svizzero/burro/latte/yogurt), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171242 --food-id=food_formaggio_gruyere_raw \
+  --name-it="Formaggio gruyère (groviera)" \
+  --matrix-id=formaggio_gruyere --matrix-description-it="Formaggio gruyère (groviera)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171242 --food-id=food_formaggio_gruyere_raw \
+  --name-it="Formaggio gruyère (groviera)" \
+  --matrix-id=formaggio_gruyere --matrix-description-it="Formaggio gruyère (groviera)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio cheddar — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, nono "pronto" del turno — quota raggiunta)
+
+- **food_id**: `food_formaggio_cheddar_raw`. FDC ID 173414 (SR Legacy, "Cheese, cheddar (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 403kcal, proteine 22,9g, grassi 33,3g, carboidrati 3,37g, fibra 0g esplicito, ferro 0,14mg, zinco 3,64mg, calcio 710mg, rame 0,030mg, magnesio 27,0mg, selenio 28,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,40µg (la pagina riporta separatamente anche il menachinone-4 8,60µg, non usato: lo script mappa solo il fillochinone), vitamina B12 1,10µg, folato totale 27,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 85,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173414 e dataType SR Legacy. Calcio 710mg/100g coerente con un formaggio a pasta semidura.
+- **Analogia usata**: `food_parmigiano_reggiano` (parmigiano, già eseguito sul DB reale — stessa categoria "formaggio a pasta dura/semidura da latte vaccino", stessa convenzione già usata per formaggio svizzero/gruyère in questa coda).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_cheddar` ("Formaggio cheddar").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per gli altri formaggi del Golden Set), `carotenoid_matrix_state` omesso (NULL — non applicabile, latticino, stessa convenzione già usata per formaggio svizzero/gruyère/burro/latte/yogurt), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173414 --food-id=food_formaggio_cheddar_raw \
+  --name-it="Formaggio cheddar" \
+  --matrix-id=formaggio_cheddar --matrix-description-it="Formaggio cheddar" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173414 --food-id=food_formaggio_cheddar_raw \
+  --name-it="Formaggio cheddar" \
+  --matrix-id=formaggio_cheddar --matrix-description-it="Formaggio cheddar" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Grano saraceno, decorticato, tostato (kasha), secco — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14)
 
 - **food_id**: `food_grano_saraceno_tostato_raw`. FDC ID 170685 (SR Legacy, "Buckwheat groats, roasted, dry").
