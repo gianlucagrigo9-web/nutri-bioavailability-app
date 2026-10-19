@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Melone verde (honeydew), crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_melone_verde_raw`. FDC ID 169911 (SR Legacy, "Melons, honeydew, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 36,0kcal, proteine 0,54g, grassi 0,14g, carboidrati 9,09g, fibra 0,80g, ferro 0,17mg, zinco 0,090mg, calcio 6,00mg, rame 0,024mg, magnesio 10,0mg, selenio 0,70µg, vitamina C 18,0mg, vitamina K (fillochinone) 2,90µg, vitamina B12 0µg esplicito, folato totale 19,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 30,0µg, alfa-carotene 0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169911 e dataType SR Legacy. Alimento distinto dal melone cantalupo già eseguito: polpa verde, profilo vitamina A/beta-carotene più basso (30µg contro valori tipicamente più alti del cantalupo), stessa specie botanica ma varietà diversa (*Cucumis melo* var. *inodorus* vs var. *cantalupensis*).
+- **Analogia usata**: `food_melone_cantalupo_raw` (già eseguito sul DB reale — stessa specie *Cucumis melo*, stessa famiglia Cucurbitaceae, varietà diversa).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, non trasformato).
+- **Matrice**: nuova `melone_verde` ("Melone verde (honeydew)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo, matrice intatta, beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169911 --food-id=food_melone_verde_raw \
+  --name-it="Melone verde (honeydew), crudo" \
+  --matrix-id=melone_verde --matrix-description-it="Melone verde (honeydew)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Cucurbitaceae
+```
+```
+npm run add-food -- --fdc-id=169911 --food-id=food_melone_verde_raw \
+  --name-it="Melone verde (honeydew), crudo" \
+  --matrix-id=melone_verde --matrix-description-it="Melone verde (honeydew)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_cantalupo_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Cucurbitaceae --apply
+```
+
 ### Lamponi, crudi — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_lamponi_raw`. FDC ID 167755 (SR Legacy, "Raspberries, raw").
