@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fegato di maiale, crudo — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_fegato_di_maiale_raw`. FDC ID 167862 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, raw").
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A, non riportati nel record (non assunti zero). Gap biologicamente coerente: il fegato immagazzina vitamina A come retinolo preformato (Vitamin A, RAE = 6.502µg/100g riportato separatamente), non come carotenoidi vegetali — stesso tipo di gap atteso per qualunque fegato, coerente con `food_beef_liver_raw`/`food_fegato_di_pollo_raw`/`food_fegato_di_vitello_raw` già eseguiti. Energia 134kcal, proteine 21,4g, grassi 3,65g, carboidrati 2,47g, fibra 0g esplicito, ferro 23,3mg, zinco 5,76mg, calcio 9,00mg, rame 0,68mg, magnesio 18,0mg, selenio 52,7µg, vitamina C 25,3mg, vitamina B12 26,0µg, folato totale 212µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167862 e dataType SR Legacy — release FoodData Central 2026-04-30.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (già eseguito sul DB reale — stessa categoria "frattaglia/fegato", stesso trattamento categorico già usato per manzo/pollo/vitello), `is_heme_iron=true` (coerente con tutti i fegati già eseguiti).
+- **Categoria dieta**: `meat_fish` (frattaglia di origine animale).
+- **Matrice**: nuova `fegato_di_maiale` ("Fegato di maiale").
+- **Attributi**: `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167862 --food-id=food_fegato_di_maiale_raw \
+  --name-it="Fegato di maiale, crudo" \
+  --matrix-id=fegato_di_maiale --matrix-description-it="Fegato di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167862 --food-id=food_fegato_di_maiale_raw \
+  --name-it="Fegato di maiale, crudo" \
+  --matrix-id=fegato_di_maiale --matrix-description-it="Fegato di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tonno, in scatola, sott'olio, scolato (senza sale) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_tonno_in_scatola_olio_raw`. FDC ID 174227 (SR Legacy, "Fish, tuna, light, canned in oil, without salt, drained solids").
