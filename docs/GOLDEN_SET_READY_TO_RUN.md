@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Alloro, foglie secche — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_alloro_raw`. FDC ID 170917 (SR Legacy, "Spices, bay leaf").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — gap dichiarato, stesso tipo di gap già visto per zafferano/rosmarino/menta in questa coda). Energia 313kcal, proteine 7,61g, grassi 8,36g, carboidrati 75,0g, fibra 26,3g, ferro 43,0mg (molto alto ma coerente con la concentrazione da disidratazione già vista per le altre spezie di questa coda), zinco 3,70mg, calcio 834mg, rame 0,42mg, magnesio 120mg, selenio 2,80µg, vitamina C 46,5mg, vitamina B12 0µg, folato totale 180µg, acido folico 0µg esplicito separato dal folato alimentare — nessuna firma di arricchimento. Nota minore: l'etichetta della pagina riporta 310kcal/830mg calcio invece di 313kcal/834mg della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170917 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione delle altre spezie/erbe secche di questa coda; nessuna pianta della famiglia Lauraceae ancora eseguita nel Golden Set per un'analogia più precisa, famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `alloro` ("Alloro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di pepe nero/cannella/origano/salvia/timo/noce moscata/chiodi di garofano/cumino/paprika in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lauraceae` (*Laurus nobilis*, stessa famiglia della cannella — non ancora eseguita sul DB reale, solo "pronta" — ma genere diverso), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in 1-2 foglie per piatto.
+
+```
+npm run add-food -- --fdc-id=170917 --food-id=food_alloro_raw \
+  --name-it="Alloro, foglie secche" \
+  --matrix-id=alloro --matrix-description-it="Alloro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lauraceae
+```
+```
+npm run add-food -- --fdc-id=170917 --food-id=food_alloro_raw \
+  --name-it="Alloro, foglie secche" \
+  --matrix-id=alloro --matrix-description-it="Alloro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lauraceae --apply
+```
+
 ### Paprika dolce, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_paprika_raw`. FDC ID 171329 (SR Legacy, "Spices, paprika").
