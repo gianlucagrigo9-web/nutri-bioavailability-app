@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Paprika dolce, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_paprika_raw`. FDC ID 171329 (SR Legacy, "Spices, paprika").
+- **Nutrienti**: **17/17**. Energia 282kcal, proteine 14,1g, grassi 12,9g, carboidrati 54,0g, fibra 34,9g, ferro 21,1mg, zinco 4,33mg, calcio 229mg, rame 0,71mg, magnesio 178mg, selenio 6,30µg, vitamina C 0,90mg, vitamina K 80,3µg, vitamina B12 0µg, folato totale 49,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento —, beta-carotene 26162µg (altissimo ma coerente con una spezia ottenuta da peperoni rossi disidratati e concentrati, stesso pigmento già visto per peperoni rossi/peperoncino in questa coda, qui su scala concentrata x10-15 per la disidratazione), altri carotenoidi provitaminici A (alfa 595 + cripto 6186) = 6781µg. Nota minore: l'etichetta della pagina mostra 280kcal arrotondate invece di 282kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171329 e dataType SR Legacy.
+- **Analogia usata**: `food_pepper_red_raw` (peperone rosso crudo, già eseguito sul DB reale — stessa specie reale *Capsicum annuum* della paprika, che è peperone rosso disidratato e macinato, non solo stessa famiglia).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `paprika` ("Paprika dolce").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e molto alto, stessa scelta già usata per le altre spezie di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (*Capsicum annuum*, stessa famiglia/specie di peperoni/peperoncino/melanzane/pomodori già nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=171329 --food-id=food_paprika_raw \
+  --name-it="Paprika dolce, in polvere" \
+  --matrix-id=paprika --matrix-description-it="Paprika dolce" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Solanaceae
+```
+```
+npm run add-food -- --fdc-id=171329 --food-id=food_paprika_raw \
+  --name-it="Paprika dolce, in polvere" \
+  --matrix-id=paprika --matrix-description-it="Paprika dolce" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Solanaceae --apply
+```
+
 ### Semi di finocchio, secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_semi_di_finocchio_raw`. FDC ID 171323 (SR Legacy, "Spices, fennel seed").
