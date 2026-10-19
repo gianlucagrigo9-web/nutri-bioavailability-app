@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Panna acida (sour cream) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 19)
+
+- **food_id**: `food_panna_acida_raw`. FDC ID 171257 (SR Legacy, "Cream, sour, cultured").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 198kcal, proteine 2,44g, grassi 19,4g, carboidrati 4,63g, fibra 0g esplicito, ferro 0,070mg, zinco 0,33mg, calcio 101mg, rame 0,018mg, magnesio 10,0mg, selenio 3,70µg, vitamina C 0,90mg, vitamina K (fillochinone 1,50µg + menachinone-4 6,00µg), vitamina B12 0,21µg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento, valori naturali di un latticino), beta-carotene 25,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 1,00µg. Calcio e grassi coerenti con panna acida intera/regolare, non la variante "reduced fat" (distinta nel record FDC 171256, non usata qui). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171257 e dataType SR Legacy (release USDA 30 aprile 2026).
+- **Analogia usata**: `food_yogurt_bianco_intero` (yogurt bianco intero, già eseguito sul DB reale — stessa categoria funzionale "latticino fermentato/colturato", a differenza della panna densa/da cucina che sono panna non colturata e restano solo "pronte" non ancora eseguite nel Golden Set).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `panna_acida` ("Panna acida (sour cream)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini aggiunti dopo i 30 originali), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione già usata per brie/panna densa pur con beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (prodotto pronto al consumo, stessa convenzione degli altri latticini), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171257 --food-id=food_panna_acida_raw \
+  --name-it="Panna acida (sour cream)" \
+  --matrix-id=panna_acida --matrix-description-it="Panna acida (sour cream)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171257 --food-id=food_panna_acida_raw \
+  --name-it="Panna acida (sour cream)" \
+  --matrix-id=panna_acida --matrix-description-it="Panna acida (sour cream)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_bianco_intero \
+  --diet-category=egg_dairy --apply
+```
+
 ### Farina di soia, non arricchita, cruda — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 19)
 
 - **food_id**: `food_farina_di_soia_raw`. FDC ID 174273 (SR Legacy, "Soy flour, full-fat, raw").
