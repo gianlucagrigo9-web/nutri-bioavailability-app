@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cuore di manzo, crudo — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12, nono alimento "pronto" del turno)
+
+- **food_id**: `food_cuore_di_manzo_raw`. FDC ID 168625 (SR Legacy, "Beef, variety meats and by-products, heart, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 112kcal, proteine 17,7g, grassi 3,94g, carboidrati 0,14g, fibra 0g esplicito, ferro 4,31mg, zinco 1,70mg, calcio 7,00mg, rame 0,40mg, magnesio 21,0mg, selenio 21,8µg, vitamina C 2,00mg, vitamina K 0µg esplicito, vitamina B12 8,55µg, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg (`other_provitamin_a_carotenoids_mcg`=0, atteso per una carne, non un fegato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168625 e dataType SR Legacy — release FoodData Central 2026-04-30. Distinto dal cuore di pollo (già in coda, non ancora eseguito) per specie.
+- **Analogia usata**: `food_beef_liver_raw` (già nel Golden Set originale — stessa specie, stessa categoria "frattaglia", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (frattaglia di origine animale).
+- **Matrice**: nuova `cuore_di_manzo` ("Cuore di manzo").
+- **Attributi**: `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene = 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168625 --food-id=food_cuore_di_manzo_raw \
+  --name-it="Cuore di manzo, crudo" \
+  --matrix-id=cuore_di_manzo --matrix-description-it="Cuore di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168625 --food-id=food_cuore_di_manzo_raw \
+  --name-it="Cuore di manzo, crudo" \
+  --matrix-id=cuore_di_manzo --matrix-description-it="Cuore di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Uva spina, cruda — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_uva_spina_raw`. FDC ID 173030 (SR Legacy, "Gooseberries, raw").
