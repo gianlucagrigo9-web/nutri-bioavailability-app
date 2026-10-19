@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pompelmo bianco, crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_pompelmo_bianco_raw`. FDC ID 174676 (SR Legacy, "Grapefruit, raw, white, all areas").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 33,0kcal, proteine 0,69g, grassi 0,10g, carboidrati 8,41g, fibra 1,10g, ferro 0,060mg, zinco 0,070mg, calcio 12,0mg, rame 0,050mg, magnesio 9,00mg, selenio 1,40µg, vitamina C 33,3mg, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0µg esplicito, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 14,0µg, alfa-carotene 8,00µg e beta-criptoxantina 3,00µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174676 e dataType SR Legacy. Distinto dal pompelmo rosa già eseguito: profilo carotenoidi molto più basso (14+8+3=25µg contro i valori tipicamente più alti del pompelmo rosa/rosso, coerente con l'assenza di licopene/carotenoidi rossi nella polpa bianca), record FDC separato e proprio, non un duplicato funzionale.
+- **Analogia usata**: `food_pompelmo_rosa_raw` (già eseguito sul DB reale — stessa specie *Citrus × paradisi*, stessa famiglia Rutaceae, varietà a polpa diversa).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, non trasformato).
+- **Matrice**: nuova `pompelmo_bianco` ("Pompelmo bianco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo, matrice intatta, carotenoidi non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174676 --food-id=food_pompelmo_bianco_raw \
+  --name-it="Pompelmo bianco, crudo" \
+  --matrix-id=pompelmo_bianco --matrix-description-it="Pompelmo bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_rosa_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae
+```
+```
+npm run add-food -- --fdc-id=174676 --food-id=food_pompelmo_bianco_raw \
+  --name-it="Pompelmo bianco, crudo" \
+  --matrix-id=pompelmo_bianco --matrix-description-it="Pompelmo bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_rosa_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae --apply
+```
+
 ### Melone verde (honeydew), crudo — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_melone_verde_raw`. FDC ID 169911 (SR Legacy, "Melons, honeydew, raw").
