@@ -949,7 +949,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Carne/frattaglie: trippa di manzo, cruda; lingua di manzo, cruda; quaglia, carne (petto), cruda
     - Uova: uova di quaglia, crude; uova d'anatra, crude
     - Verdura/derivati del pomodoro: passata di pomodoro; pomodori secchi, non in olio; pomodorini (pomodori cherry), crudi; capperi, sotto sale (sciacquati)
-    - Frutta fresca: 🟡 more, crude (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-19, turno ore 13 — FDC 173946 SR Legacy "Blackberries, raw", 17/17 nutrienti, analogia `food_mirtilli_raw`, botanical_family=Rosaceae, diet-category=fresh_fruit); lamponi, crudi; melone verde (honeydew), crudo; pompelmo bianco, crudo; avocado, crudo; giuggiole, crude (esplorativo)
+    - Frutta fresca: 🟡 more, crude (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-19, turno ore 13 — FDC 173946 SR Legacy "Blackberries, raw", 17/17 nutrienti, analogia `food_mirtilli_raw`, botanical_family=Rosaceae, diet-category=fresh_fruit); 🟡 lamponi, crudi (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task orario 2026-10-19, turno ore 13 — FDC 167755 SR Legacy "Raspberries, raw", 17/17 nutrienti, analogia `food_mirtilli_raw`, botanical_family=Rosaceae, diet-category=fresh_fruit); melone verde (honeydew), crudo; pompelmo bianco, crudo; avocado, crudo; giuggiole, crude (esplorativo)
     - Succhi: succo di pomodoro; succo di mela, non zuccherato; succo di melograno
     - Frutta secca/semi: semi di girasole, tostati a secco, non salati; grano saraceno, decorticato, tostato (kasha), crudo/secco
     - Latticini/formaggi: kefir, intero o magro; formaggio gruyère/groviera; formaggio cheddar

@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Lamponi, crudi — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
+
+- **food_id**: `food_lamponi_raw`. FDC ID 167755 (SR Legacy, "Raspberries, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 52,0kcal, proteine 1,20g, grassi 0,65g, carboidrati 11,9g, fibra 6,50g, ferro 0,69mg, zinco 0,42mg, calcio 25,0mg, rame 0,090mg, magnesio 22,0mg, selenio 0,20µg, vitamina C 26,2mg, vitamina K (fillochinone) 7,80µg, vitamina B12 0µg esplicito, folato totale 21,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 12,0µg, alfa-carotene 16,0µg e beta-criptoxantina 0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167755 e dataType SR Legacy.
+- **Analogia usata**: `food_mirtilli_raw` (già eseguito sul DB reale — analogia funzionale di categoria "piccolo frutto di bosco crudo", famiglia botanica reale diversa: Rosaceae/*Rubus idaeus* — dichiarata separatamente; stesso genere *Rubus* delle more appena preparate sopra, ma specie distinta).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, non trasformato).
+- **Matrice**: nuova `lamponi` ("Lamponi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (frutto crudo, matrice intatta, beta-carotene e alfa-carotene non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167755 --food-id=food_lamponi_raw \
+  --name-it="Lamponi, crudi" \
+  --matrix-id=lamponi --matrix-description-it="Lamponi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=167755 --food-id=food_lamponi_raw \
+  --name-it="Lamponi, crudi" \
+  --matrix-id=lamponi --matrix-description-it="Lamponi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### More, crude — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 13)
 
 - **food_id**: `food_more_raw`. FDC ID 173946 (SR Legacy, "Blackberries, raw").
