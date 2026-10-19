@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Succo di melograno, crudo (spremuto) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, terzo "pronto" del turno)
+
+- **food_id**: `food_succo_di_melograno_raw`. FDC ID 167787 (SR Legacy, "Pomegranate juice, bottled").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 54,0kcal, proteine 0,15g, grassi 0,29g, carboidrati 13,1g, fibra 0,10g, ferro 0,10mg, zinco 0,090mg, calcio 11,0mg, rame 0,021mg, magnesio 7,00mg, selenio 0,30µg, vitamina C 0,10mg, vitamina K (fillochinone) 10,4µg, vitamina B12 0µg esplicito, folato totale 24,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg, alfa-carotene 0µg e beta-criptoxantina 0µg esplicito (atteso per un succo filtrato, senza polpa). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167787 e dataType SR Legacy.
+- **Analogia usata**: `food_melograno_raw` (già eseguito sul DB reale — stessa specie, stesso frutto, forma diversa: succo spremuto/imbottigliato invece di arilli).
+- **Categoria dieta**: `plant_non_fruit` (stessa convenzione già usata per succo d'arancia e succo di limone in questo stesso lotto: succo spremuto/imbottigliato è forma trasformata, non frutto intero, secondo la definizione restrittiva del PRD §4.9 — non cambia vegetariano/vegano rispetto a `fresh_fruit`, solo la compatibilità fruttariana).
+- **Matrice**: nuova `succo_di_melograno` ("Succo di melograno, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (beta-carotene/alfa-carotene/beta-criptoxantina tutti 0 espliciti nel record — nessuno stato carotenoide da dichiarare, a differenza del succo d'arancia/limone che li avevano non-zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lythraceae` (famiglia reale del melograno, *Punica granatum*, nella classificazione APG moderna), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167787 --food-id=food_succo_di_melograno_raw \
+  --name-it="Succo di melograno, crudo (spremuto)" \
+  --matrix-id=succo_di_melograno --matrix-description-it="Succo di melograno, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melograno_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lythraceae
+```
+```
+npm run add-food -- --fdc-id=167787 --food-id=food_succo_di_melograno_raw \
+  --name-it="Succo di melograno, crudo (spremuto)" \
+  --matrix-id=succo_di_melograno --matrix-description-it="Succo di melograno, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melograno_raw \
+  --diet-category=plant_non_fruit --botanical-family=Lythraceae --apply
+```
+
 ### Quaglia, carne (senza pelle e ossa), cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, secondo "pronto" del turno)
 
 - **food_id**: `food_quaglia_carne_raw`. FDC ID 172419 (SR Legacy, "Quail, meat only, raw").
