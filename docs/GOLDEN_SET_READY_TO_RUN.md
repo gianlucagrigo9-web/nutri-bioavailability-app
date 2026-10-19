@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Chiodi di garofano, secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_chiodi_di_garofano_raw`. FDC ID 171321 (SR Legacy, "Spices, cloves, ground").
+- **Nutrienti**: **17/17**. Energia 274kcal, proteine 5,97g, grassi 13,0g, carboidrati 65,5g, fibra 33,9g, ferro 11,8mg, zinco 2,32mg, calcio 632mg, rame 0,37mg, magnesio 259mg, selenio 7,20µg, vitamina C 0,20mg, vitamina K 142µg, vitamina B12 0µg, folato totale 25,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento —, beta-carotene 45,0µg, altri carotenoidi provitaminici A (alfa 0 + cripto 103) = 103µg. Valori molto alti di calcio/ferro/magnesio/vitamina K coerenti con la concentrazione tipica da disidratazione di una spezia secca, qui su scala ancora più marcata che per le altre spezie di questa coda. Nota minore: l'etichetta "Nutrition Facts" riporta 270kcal invece di 274kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per noce moscata/cavolfiore cotto). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171321 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione delle altre spezie/erbe secche di questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `chiodi_di_garofano` ("Chiodi di garofano").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo, stessa scelta già usata per pepe nero/cannella/origano/salvia/timo/noce moscata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myrtaceae` (*Syzygium aromaticum*, prima spezia di questa famiglia nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=171321 --food-id=food_chiodi_di_garofano_raw \
+  --name-it="Chiodi di garofano, secchi" \
+  --matrix-id=chiodi_di_garofano --matrix-description-it="Chiodi di garofano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Myrtaceae
+```
+```
+npm run add-food -- --fdc-id=171321 --food-id=food_chiodi_di_garofano_raw \
+  --name-it="Chiodi di garofano, secchi" \
+  --matrix-id=chiodi_di_garofano --matrix-description-it="Chiodi di garofano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Myrtaceae --apply
+```
+
 ### Noce moscata, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_noce_moscata_raw`. FDC ID 171326 (SR Legacy, "Spices, nutmeg, ground").
