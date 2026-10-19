@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Dragoncello, secco — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_dragoncello_raw`. FDC ID 170937 (SR Legacy, "Spices, tarragon, dried").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — gap dichiarato, stesso tipo di gap già visto per alloro/zafferano/rosmarino/menta in questa coda). Energia 295kcal, proteine 22,8g, grassi 7,24g, carboidrati 50,2g, fibra 7,40g, ferro 32,3mg, zinco 3,90mg, calcio 1139mg, rame 0,68mg, magnesio 347mg, selenio 4,40µg, vitamina C 50,0mg, vitamina B12 0µg, folato totale 274µg, acido folico 0µg esplicito separato dal folato alimentare — nessuna firma di arricchimento. Nota minore: la tabella di sintesi della pagina indica 300kcal invece di 295kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170937 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — qui un'analogia più precisa delle altre spezie di questa coda: stessa famiglia botanica reale Asteraceae, *Cichorium endivia* vs *Artemisia dracunculus*).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica vegetale).
+- **Matrice**: nuova `dragoncello` ("Dragoncello").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, a differenza di pepe nero/cannella/origano/salvia/timo/noce moscata/chiodi di garofano/cumino/paprika/maggiorana in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (*Artemisia dracunculus*, stessa famiglia di scarola/radicchio/lattuga romana già nel Golden Set, genere diverso), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170937 --food-id=food_dragoncello_raw \
+  --name-it="Dragoncello, secco" \
+  --matrix-id=dragoncello --matrix-description-it="Dragoncello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=170937 --food-id=food_dragoncello_raw \
+  --name-it="Dragoncello, secco" \
+  --matrix-id=dragoncello --matrix-description-it="Dragoncello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Maggiorana, secca — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_maggiorana_raw`. FDC ID 170928 (SR Legacy, "Spices, marjoram, dried").
