@@ -16,6 +16,212 @@
 
 ## Pronti
 
+### Noce di cocco, disidratata (grattugiata), non zuccherata — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
+
+- **food_id**: `food_cocco_disidratato_raw`. FDC ID 170170 (SR Legacy, "Nuts, coconut meat, dried (desiccated), not sweetened").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 660kcal, proteine 6,88g, grassi 64,5g, carboidrati 23,6g, fibra 16,3g, ferro 3,32mg, zinco 2,01mg, calcio 26,0mg, rame 0,80mg, magnesio 90,0mg, selenio 18,5µg, vitamina C 1,50mg, vitamina K 0,30µg, vitamina B12 0µg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuno zucchero aggiunto, "not sweetened" dichiarato nel nome del record stesso), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 170170 e dataType SR Legacy.
+- **Analogia usata**: `food_olio_di_cocco_raw` (olio di cocco, già eseguito sul DB reale — stessa specie *Cocos nucifera*, famiglia Arecaceae; distinto da `food_noce_di_cocco_raw`, polpa fresca, ancora solo "pronta" non eseguita, e da `food_farina_di_cocco_raw`, farina, anch'essa solo "pronta": l'analogia non può riferirsi a nessuna delle due).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cocco_disidratato` ("Noce di cocco, disidratata, non zuccherata") — distinta dalla polpa fresca e dall'olio.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae`, `baseline_cooking_state=dried` (prodotto disidratato, non crudo fresco né cotto), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170170 --food-id=food_cocco_disidratato_raw \
+  --name-it="Noce di cocco, disidratata (grattugiata), non zuccherata" \
+  --matrix-id=cocco_disidratato --matrix-description-it="Noce di cocco, disidratata, non zuccherata" \
+  --baseline-cooking-state=dried --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170170 --food-id=food_cocco_disidratato_raw \
+  --name-it="Noce di cocco, disidratata (grattugiata), non zuccherata" \
+  --matrix-id=cocco_disidratato --matrix-description-it="Noce di cocco, disidratata, non zuccherata" \
+  --baseline-cooking-state=dried --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Fave, secche, crude — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
+
+- **food_id**: `food_fave_secche_raw`. FDC ID 175205 (SR Legacy, "Broadbeans (fava beans), mature seeds, raw").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 341kcal, proteine 26,1g, grassi 1,53g, carboidrati 58,3g, fibra 25,0g, ferro 6,70mg, zinco 3,14mg, calcio 103mg, rame 0,82mg, magnesio 192mg, selenio 8,20µg, vitamina C 1,40mg, vitamina K 9,00µg, vitamina B12 0µg esplicito, folato totale 423µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 32,0µg (seme crudo, non zero), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 175205 e dataType SR Legacy.
+- **Analogia usata**: `food_fave_bollite` (fave bollite, Golden Set/primo lotto, già eseguite sul DB reale — stesso alimento, forma cruda/secca invece di bollita).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fave_secche` ("Fave, secche, crude") — distinta dalla matrice usata per le fave bollite.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene 32,0µg/100g presente, seme crudo intatto, non disgregato dalla cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175205 --food-id=food_fave_secche_raw \
+  --name-it="Fave, secche, crude" \
+  --matrix-id=fave_secche --matrix-description-it="Fave, secche, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_bollite \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175205 --food-id=food_fave_secche_raw \
+  --name-it="Fave, secche, crude" \
+  --matrix-id=fave_secche --matrix-description-it="Fave, secche, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_bollite \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Tonno, in scatola, al naturale (in acqua), sgocciolato — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
+
+- **food_id**: `food_tonno_in_scatola_acqua`. FDC ID 171986 (SR Legacy, "Fish, tuna, light, canned in water, without salt, drained solids").
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina (non riportati nel record, gap atteso per un pesce in scatola, stesso tipo di gap già visto per il tonno sott'olio in coda precedente). Energia 116kcal, proteine 25,5g, grassi 0,82g, carboidrati 0g, fibra 0g, ferro 1,53mg, zinco 0,77mg, calcio 11,0mg, rame 0,051mg, magnesio 27,0mg, selenio 80,4µg, vitamina C 0mg esplicito, vitamina B12 2,99µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento; variante "without salt" scelta deliberatamente, nessun sodio aggiunto). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 171986 e dataType SR Legacy.
+- **Analogia usata**: `food_tonno_fresco_raw` (tonno fresco, pinna gialla, già eseguito sul DB reale — stesso genere *Thunnus*, prodotto in scatola invece che fresco).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `tonno_in_scatola_acqua` ("Tonno, in scatola, al naturale, sgocciolato") — distinta dal tonno sott'olio (ancora solo "pronto", non eseguito) e dal tonno fresco.
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`, muscolo di pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non pertinente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (animale, non pertinente), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171986 --food-id=food_tonno_in_scatola_acqua \
+  --name-it="Tonno, in scatola, al naturale (in acqua), sgocciolato" \
+  --matrix-id=tonno_in_scatola_acqua --matrix-description-it="Tonno, in scatola, al naturale, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171986 --food-id=food_tonno_in_scatola_acqua \
+  --name-it="Tonno, in scatola, al naturale (in acqua), sgocciolato" \
+  --matrix-id=tonno_in_scatola_acqua --matrix-description-it="Tonno, in scatola, al naturale, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Yogurt greco, magro (nonfat) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
+
+- **food_id**: `food_yogurt_greco_magro`. FDC ID 170894 (SR Legacy, "Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 59,0kcal, proteine 10,2g, grassi 0,39g, carboidrati 3,60g, fibra 0g, ferro 0,070mg, zinco 0,52mg, calcio 110mg, rame 0,017mg, magnesio 11,0mg, selenio 9,70µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 0,75µg, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 170894 e dataType SR Legacy.
+- **Analogia usata**: `food_yogurt_greco` (yogurt greco intero, già eseguito sul DB reale — stesso prodotto, variante magra/nonfat invece di intera).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `yogurt_greco_magro` ("Yogurt greco, magro") — distinta dallo yogurt greco intero.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=raw` (latticino fresco, nessuna cottura), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170894 --food-id=food_yogurt_greco_magro \
+  --name-it="Yogurt greco, magro (nonfat)" \
+  --matrix-id=yogurt_greco_magro --matrix-description-it="Yogurt greco, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_greco \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170894 --food-id=food_yogurt_greco_magro \
+  --name-it="Yogurt greco, magro (nonfat)" \
+  --matrix-id=yogurt_greco_magro --matrix-description-it="Yogurt greco, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_greco \
+  --diet-category=egg_dairy --apply
+```
+
+### Fagioli lima (lima beans), secchi, crudi — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
+
+- **food_id**: `food_fagioli_lima_raw`. FDC ID 174252 (SR Legacy, "Lima beans, large, mature seeds, raw").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 338kcal, proteine 21,5g, grassi 0,69g, carboidrati 63,4g, fibra 19,0g, ferro 7,51mg, zinco 2,83mg, calcio 81,0mg, rame 0,74mg, magnesio 224mg, selenio 7,20µg, vitamina C 0mg esplicito, vitamina K 6,00µg, vitamina B12 0µg esplicito, folato totale 395µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 174252 e dataType SR Legacy.
+- **Analogia usata**: `food_kidney_beans_raw` (fagioli rossi crudi, Golden Set originale — stesso genere *Phaseolus*, specie diversa: *P. lunatus* contro *P. vulgaris*, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_lima` ("Fagioli lima, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174252 --food-id=food_fagioli_lima_raw \
+  --name-it="Fagioli lima (lima beans), secchi, crudi" \
+  --matrix-id=fagioli_lima --matrix-description-it="Fagioli lima, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174252 --food-id=food_fagioli_lima_raw \
+  --name-it="Fagioli lima (lima beans), secchi, crudi" \
+  --matrix-id=fagioli_lima --matrix-description-it="Fagioli lima, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Salmone, in scatola (con lische, sgocciolato) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 15)
+
+- **food_id**: `food_salmone_in_scatola`. FDC ID 175135 (SR Legacy, "Fish, salmon, chum, canned, drained solids with bone").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 141kcal, proteine 21,4g, grassi 5,50g, carboidrati 0g, fibra 0g, ferro 0,70mg, zinco 1,00mg, calcio 249mg (alto per le lische edibili incluse nel prodotto, non arricchimento), rame 0,10mg, magnesio 30,0mg, selenio 43,3µg, vitamina C 0mg esplicito, vitamina K 0,10µg, vitamina B12 4,40µg, folato totale 20,0µg, acido folico 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 175135 e dataType SR Legacy. Specie salmone chum (*Oncorhynchus keta*), non atlantico — nessun record FDC per salmone in scatola di specie atlantica trovato; il chum è comunque un salmone reale, comunemente in scatola, non un pesce diverso sotto nome improprio.
+- **Analogia usata**: `food_salmon_cooked` (salmone atlantico cotto, Golden Set originale, già eseguito/verificato — stessa famiglia Salmonidae, specie diversa dichiarata separatamente).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_in_scatola` ("Salmone, in scatola, con lische, sgocciolato").
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`), `matrix_category_calcium` omesso (NULL — il calcio alto è dichiarato a parte nel testo, non categorizzato: quella colonna è pensata per matrici vegetali/ossalati, non per pesce), `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175135 --food-id=food_salmone_in_scatola \
+  --name-it="Salmone, in scatola (con lische, sgocciolato)" \
+  --matrix-id=salmone_in_scatola --matrix-description-it="Salmone, in scatola, con lische, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175135 --food-id=food_salmone_in_scatola \
+  --name-it="Salmone, in scatola (con lische, sgocciolato)" \
+  --matrix-id=salmone_in_scatola --matrix-description-it="Salmone, in scatola, con lische, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Baccalà (merluzzo salato ed essiccato) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 15)
+
+- **food_id**: `food_baccala_salato_secco`. FDC ID 174190 (SR Legacy, "Fish, cod, Atlantic, dried and salted").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 290kcal, proteine 62,8g, grassi 2,37g, carboidrati 0g, fibra 0g, ferro 2,50mg, zinco 1,59mg, calcio 160mg, rame 0,18mg, magnesio 133mg, selenio 148µg, vitamina C 3,50mg, vitamina K 0,40µg, vitamina B12 10,0µg, folato totale 25,0µg, acido folico 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 174190 e dataType SR Legacy. Prodotto a lunga conservazione (merluzzo salato ed essiccato) — rappresenta direttamente il "baccalà" italiano, stessa specie *Gadus morhua*, non un alimento diverso sotto nome improprio; sodio non tracciato dal motore ma elevato per natura del prodotto.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo/Atlantic cod, già eseguito sul DB reale — stessa specie *Gadus morhua*, diverso solo per il metodo di conservazione).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `baccala` ("Baccalà, merluzzo salato ed essiccato").
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=dried_salted` (nessun enum fisso per questo campo nello script: descrive correttamente un prodotto conservato, non crudo fresco), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174190 --food-id=food_baccala_salato_secco \
+  --name-it="Baccalà (merluzzo salato ed essiccato)" \
+  --matrix-id=baccala --matrix-description-it="Baccalà, merluzzo salato ed essiccato" \
+  --baseline-cooking-state=dried_salted --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174190 --food-id=food_baccala_salato_secco \
+  --name-it="Baccalà (merluzzo salato ed essiccato)" \
+  --matrix-id=baccala --matrix-description-it="Baccalà, merluzzo salato ed essiccato" \
+  --baseline-cooking-state=dried_salted --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Acqua di cocco, cruda — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 15 — ricerca FDC già fatta nel turno ore 14, qui completata la scrittura del comando)
+
+- **food_id**: `food_acqua_di_cocco_raw`. FDC ID 170174 (SR Legacy, "Nuts, coconut water (liquid from coconuts)").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 19,0kcal, proteine 0,72g, grassi 0,20g, carboidrati 3,71g, fibra 1,10g, ferro 0,29mg, zinco 0,10mg, calcio 24,0mg, rame 0,040mg, magnesio 25,0mg, selenio 1,00µg, vitamina C 2,40mg, vitamina K 0µg esplicito, vitamina B12 0µg esplicito, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 170174 e dataType SR Legacy.
+- **Analogia usata**: `food_olio_di_cocco_raw` (olio di cocco, già eseguito sul DB reale — stessa specie *Cocos nucifera*, famiglia Arecaceae; liquido naturale, non un "latte" ricostituito/arricchito come le bevande vegetali già scartate in coda precedente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `acqua_di_cocco` ("Acqua di cocco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa scelta già fatta per polpa/farina di cocco), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170174 --food-id=food_acqua_di_cocco_raw \
+  --name-it="Acqua di cocco, cruda" \
+  --matrix-id=acqua_di_cocco --matrix-description-it="Acqua di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170174 --food-id=food_acqua_di_cocco_raw \
+  --name-it="Acqua di cocco, cruda" \
+  --matrix-id=acqua_di_cocco --matrix-description-it="Acqua di cocco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Tahina (crema di semi di sesamo tostati) — preparato 2026-10-19 dal task orario (dodicesimo lotto, turno ore 14, bonus oltre la quota)
 
 - **food_id**: `food_tahina`. FDC ID 170189 (SR Legacy, "Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)").
