@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Aglio, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_aglio_polvere_raw`. FDC ID 171325 (SR Legacy, "Spices, garlic powder").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 331kcal, proteine 16,6g, grassi 0,73g, carboidrati 72,7g, fibra 9,00g, ferro 5,65mg, zinco 2,99mg, calcio 79,0mg, rame 0,53mg, magnesio 77,0mg, selenio 23,9µg, vitamina C 1,20mg, vitamina K (fillochinone) 0,40µg, vitamina B12 0µg esplicito, folato totale 47,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg`=0 dichiarato, non assente). Nota minore: l'etichetta riassuntiva riporta 330kcal/0,5g grassi invece di 331kcal/0,73g della tabella dettagliata — usati questi ultimi, stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171325 e dataType SR Legacy.
+- **Analogia usata**: `food_garlic_fresh_raw` (aglio fresco, già eseguito sul DB reale — stessa specie reale *Allium sativum*, non solo stessa famiglia: l'analogia più precisa di questa coda insieme a paprika/finocchio).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `aglio_polvere` ("Aglio, in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0 esplicito, nessun carotenoide significativo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (stessa famiglia dell'aglio fresco/cipolla/scalogno già nel DB), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=171325 --food-id=food_aglio_polvere_raw \
+  --name-it="Aglio, in polvere" \
+  --matrix-id=aglio_polvere --matrix-description-it="Aglio, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_garlic_fresh_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae
+```
+```
+npm run add-food -- --fdc-id=171325 --food-id=food_aglio_polvere_raw \
+  --name-it="Aglio, in polvere" \
+  --matrix-id=aglio_polvere --matrix-description-it="Aglio, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_garlic_fresh_raw \
+  --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae --apply
+```
+
 ### Senape, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_senape_raw`. FDC ID 170929 (SR Legacy, "Spices, mustard seed, ground").
