@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ceci, in scatola, sgocciolati — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 16)
+
+- **food_id**: `food_ceci_in_scatola`. FDC ID 173800 (SR Legacy, "Chickpeas (garbanzo beans, bengal gram), mature seeds, canned, drained solids").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 139kcal, proteine 7,05g, grassi 2,77g, carboidrati 22,5g, fibra 6,40g, ferro 1,07mg, zinco 0,63mg, calcio 45,0mg, rame 0,25mg, magnesio 26,0mg, selenio 3,10µg, vitamina C 0,10mg, vitamina K 3,40µg, vitamina B12 0µg esplicito, folato totale 48,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 14,0µg, alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 246mg/100g (sale di conservazione tipico per un prodotto in scatola, non uno dei 17 nutrienti tracciati, non un segnale di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 173800 e dataType SR Legacy.
+- **Analogia usata**: `food_chickpeas_raw` (ceci crudi secchi, Golden Set originale, già eseguiti sul DB reale — stesso alimento, forma in scatola/già cotta invece di secca).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `ceci_in_scatola` ("Ceci, in scatola, sgocciolati") — distinta dalla matrice dei ceci secchi crudi.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 14,0µg/100g presente, ma matrice disgregata dalla cottura in scatola/processo di inscatolamento), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173800 --food-id=food_ceci_in_scatola \
+  --name-it="Ceci, in scatola, sgocciolati" \
+  --matrix-id=ceci_in_scatola --matrix-description-it="Ceci, in scatola, sgocciolati" \
+  --baseline-cooking-state=canned --analogy-food-id=food_chickpeas_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173800 --food-id=food_ceci_in_scatola \
+  --name-it="Ceci, in scatola, sgocciolati" \
+  --matrix-id=ceci_in_scatola --matrix-description-it="Ceci, in scatola, sgocciolati" \
+  --baseline-cooking-state=canned --analogy-food-id=food_chickpeas_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Noce di cocco, disidratata (grattugiata), non zuccherata — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 15)
 
 - **food_id**: `food_cocco_disidratato_raw`. FDC ID 170170 (SR Legacy, "Nuts, coconut meat, dried (desiccated), not sweetened").
