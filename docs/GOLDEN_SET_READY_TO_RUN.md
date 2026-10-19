@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Mandorle, tostate (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_mandorle_tostate`. FDC ID 168596 (SR Legacy, "Nuts, almonds, dry roasted, with salt added").
+- **Deviazione dichiarata (variante "con sale" invece di "senza sale")**: la voce di coda chiedeva mandorle tostate senza sale. Nessun FDC ID verificabile trovato per la variante "without salt added" in nessuna fonte consultata (recipal.com la elenca ma cita solo un "NBD ID" legacy, 12063, non un FDC ID; nessuna pagina getfoodfacts.com la indicizza). L'unica variante con un FDC ID verificato su getfoodfacts.com è "with salt added", FDC 168596 — usata qui, stesso tipo di deviazione già accettata altrove in questa coda per prodotti cotti/conservati (es. fagioli lima, cavolo verza). Sodio 234mg/100g, non uno dei 17 nutrienti tracciati.
+- **Nutrienti**: **17/17** — tutti presenti. Energia 598kcal, proteine 21,0g, grassi 52,5g, carboidrati 21,0g, fibra 10,9g, ferro 3,73mg, zinco 3,31mg, calcio 268mg, rame 1,10mg, magnesio 279mg, selenio 2,00µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 0µg esplicito, folato totale 55,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 1,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168596 e dataType SR Legacy.
+- **Analogia usata**: `food_almonds` (mandorle crude, non salate, già eseguite sul DB reale/originali del Golden Set — stesso alimento, *Prunus dulcis*, forma diversa: tostato invece di crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `mandorle_tostate` ("Mandorle, tostate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_almonds`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 1,00µg/100g presente ma seme tostato, matrice disgregata dal calore, stessa convenzione già usata per i semi di girasole tostati e la tahina in questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa famiglia reale di `food_almonds`), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168596 --food-id=food_mandorle_tostate \
+  --name-it="Mandorle, tostate (con sale)" \
+  --matrix-id=mandorle_tostate --matrix-description-it="Mandorle, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_almonds \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168596 --food-id=food_mandorle_tostate \
+  --name-it="Mandorle, tostate (con sale)" \
+  --matrix-id=mandorle_tostate --matrix-description-it="Mandorle, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_almonds \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Basilico, essiccato — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
 
 - **food_id**: `food_basilico_secco_raw`. FDC ID 171317 (SR Legacy, "Spices, basil, dried"). Distinto dal basilico fresco (già "pronto", non ancora eseguito, in una coda precedente): prodotto diverso, record FDC separato e proprio.
