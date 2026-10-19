@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Succo di limone, crudo (spremuto) — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
+
+- **food_id**: `food_succo_di_limone_raw`. FDC ID 167747 (SR Legacy, "Lemon juice, raw").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 22,0kcal, proteine 0,35g, grassi 0,24g, carboidrati 6,90g, fibra 0,30g, ferro 0,080mg, zinco 0,050mg, calcio 6,00mg, rame 0,016mg, magnesio 6,00mg, selenio 0,10µg, vitamina C 38,7mg, vitamina K 0µg esplicito, vitamina B12 0µg esplicito, folato totale 20,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 1,00µg, alfa-carotene 0µg esplicito e beta-criptoxantina 4,00µg (`other_provitamin_a_carotenoids_mcg`=4,00µg). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167747 e dataType SR Legacy — release FoodData Central 2026-04-30. Vitamina C più bassa del limone intero già eseguito (diluizione nella spremitura), coerente, non un segnale di problema.
+- **Analogia usata**: `food_lemon_peeled_raw` (già eseguito sul DB reale — stessa specie *Citrus limon*, stessa famiglia reale Rutaceae, forma diversa: succo spremuto invece di polpa).
+- **Categoria dieta**: `plant_non_fruit` (non `fresh_fruit`: succo spremuto è una forma trasformata del frutto — polpa e fibra rimosse dalla spremitura —, non frutta fresca intera nella definizione restrittiva del PRD §4.9; stessa convenzione già usata per frutta secca/disidratata e olive in salamoia in questa coda, qui applicata a un frutto liquido pressato. Nota per revisione umana: la scelta fra `fresh_fruit`/`plant_non_fruit` qui non cambia vegetariano/vegano — identici su entrambi gli assi — cambia solo la compatibilità fruttariana; se si preferisce includere i succhi di frutta puri non zuccherati nella dieta fruttariana, va corretto esplicitamente, non assunto qui).
+- **Matrice**: nuova `succo_di_limone` ("Succo di limone, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/beta-criptoxantina presenti ma matrice completamente disgregata dalla spremitura, stessa convenzione già usata per le olive in salamoia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167747 --food-id=food_succo_di_limone_raw \
+  --name-it="Succo di limone, crudo (spremuto)" \
+  --matrix-id=succo_di_limone --matrix-description-it="Succo di limone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lemon_peeled_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Rutaceae
+```
+```
+npm run add-food -- --fdc-id=167747 --food-id=food_succo_di_limone_raw \
+  --name-it="Succo di limone, crudo (spremuto)" \
+  --matrix-id=succo_di_limone --matrix-description-it="Succo di limone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lemon_peeled_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Rutaceae --apply
+```
+
 ### Fontina — preparato 2026-10-19 dal task orario (undicesimo lotto, turno ore 12)
 
 - **food_id**: `food_fontina`. FDC ID 170843 (SR Legacy, "Cheese, fontina").
