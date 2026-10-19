@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fegato di vitello, cotto (brasato) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_fegato_di_vitello_cotto`. FDC ID 172535 (SR Legacy, "Veal, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_vitello_raw` (crudo, già eseguito sul DB reale, confermato in `lotti_alimenti/esito_lotto_05_applica.txt`, FDC 172534) — stesso alimento, forma cotta. Scelta la variante "braised" (non "pan-fried", FDC 174358, che implica grasso di cottura aggiunto) come preparazione più semplice/paragonabile al crudo.
+- **Nutrienti**: **17/17**. Energia 192kcal, proteine 28,4g, grassi 6,26g, carboidrati 3,77g, fibra 0g esplicito, calcio 6,00mg, ferro 5,11mg, magnesio 20,0mg, zinco 11,2mg, rame 14,9mg (molto alto ma coerente col fegato, organo che accumula rame), selenio 19,3µg, vitamina B12 84,6µg (molto alta, coerente col fegato), folato totale 331µg, vitamina C 1,10mg, vitamina K 1,40µg, beta-carotene 47,0µg, altri carotenoidi provitaminici A (alfa 11,0 + cripto 11,0) = 22,0µg. Fonte: getfoodfacts.com (FDC ID 172535, dataType SR Legacy).
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura; `is_heme_iron=true` mantenuto per coerenza).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `fegato_di_vitello_cotto` ("Fegato di vitello, cotto").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia dichiarata e con `food_beef_liver_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172535 --food-id=food_fegato_di_vitello_cotto \
+  --name-it="Fegato di vitello, cotto (brasato)" \
+  --matrix-id=fegato_di_vitello_cotto --matrix-description-it="Fegato di vitello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172535 --food-id=food_fegato_di_vitello_cotto \
+  --name-it="Fegato di vitello, cotto (brasato)" \
+  --matrix-id=fegato_di_vitello_cotto --matrix-description-it="Fegato di vitello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cavolo rapa, cotto (bollito, con sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_cavolo_rapa_cotto`. FDC ID 169357 (SR Legacy, "Kohlrabi, cooked, boiled, drained, with salt" — solo questa variante ha un FDC ID verificato su getfoodfacts.com). Distinto da `food_cavolo_rapa_raw` (crudo, già eseguito, FDC 168424 "Kohlrabi, raw") — stesso alimento, forma cotta.
