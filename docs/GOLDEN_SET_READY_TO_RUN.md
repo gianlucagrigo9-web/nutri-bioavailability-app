@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cardamomo, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09, oltre la quota)
+
+- **food_id**: `food_cardamomo_raw`. FDC ID 170919 (SR Legacy, "Spices, cardamom").
+- **Nutrienti**: **12/17** — mancano `selenium_mcg`, `vitamin_k_mcg`, `folate_mcg` (quindi l'acido folico non è dichiarabile separatamente), `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — stesso tipo e stessa ampiezza di gap già visti per l'aneto in questa coda, manca anche il folato). Energia 311kcal, proteine 10,8g, grassi 6,70g, carboidrati 68,5g, fibra 28,0g, ferro 14,0mg, zinco 7,47mg (il più alto fra le spezie di questa coda), calcio 383mg, rame 0,38mg, magnesio 229mg, vitamina C 21,0mg, vitamina B12 0µg. Nota minore: il riepilogo della pagina riporta 310kcal invece di 311kcal della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170919 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione delle altre spezie/erbe secche di questa coda; nessuna pianta della famiglia Zingiberaceae ancora eseguita — curcuma e zenzero fresco restano solo "pronti" — famiglia dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `cardamomo` ("Cardamomo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Zingiberaceae` (*Elettaria cardamomum*, stessa famiglia di curcuma/zenzero, nessuno ancora eseguito), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi; questo alimento draft non va usato per calcolare l'assunzione di folato finché il gap non è risolto.
+
+```
+npm run add-food -- --fdc-id=170919 --food-id=food_cardamomo_raw \
+  --name-it="Cardamomo, semi secchi" \
+  --matrix-id=cardamomo --matrix-description-it="Cardamomo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae
+```
+```
+npm run add-food -- --fdc-id=170919 --food-id=food_cardamomo_raw \
+  --name-it="Cardamomo, semi secchi" \
+  --matrix-id=cardamomo --matrix-description-it="Cardamomo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply
+```
+
 ### Aneto, secco — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
 
 - **food_id**: `food_aneto_raw`. FDC ID 171322 (SR Legacy, "Spices, dill weed, dried").
