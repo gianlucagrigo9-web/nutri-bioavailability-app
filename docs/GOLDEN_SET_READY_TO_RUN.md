@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Kumquat, crudo — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_kumquat_raw`. FDC ID 168154 (SR Legacy, "Kumquats, raw").
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 71,0kcal, proteine 1,88g, grassi 0,86g, carboidrati 15,9g, fibra 6,50g, ferro 0,86mg, zinco 0,17mg, calcio 62,0mg, rame 0,095mg, magnesio 20,0mg, selenio 0µg esplicito, vitamina C 43,9mg, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0µg esplicito, folato totale 17,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, comunque non applicabile a un frutto fresco), beta-carotene 0µg esplicito, alfa-carotene 155µg e beta-criptoxantina 193µg (quindi `other_provitamin_a_carotenoids_mcg`=348µg dalla somma dei componenti mappati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168154 e dataType SR Legacy.
+- **Analogia usata**: `food_mandarini_raw` (mandarini, già eseguiti sul DB reale — stessa famiglia botanica reale Rutaceae, stesso genere *Citrus*/affine *Fortunella*: analogia più precisa di quella usata per la carambola in questo stesso lotto, che era solo funzionale).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca nella definizione restrittiva del PRD §4.9).
+- **Matrice**: nuova `kumquat` ("Kumquat").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (alfa-carotene 155µg/100g e beta-criptoxantina 193µg/100g presenti, frutto crudo non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168154 --food-id=food_kumquat_raw \
+  --name-it="Kumquat, crudo" \
+  --matrix-id=kumquat --matrix-description-it="Kumquat" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae
+```
+```
+npm run add-food -- --fdc-id=168154 --food-id=food_kumquat_raw \
+  --name-it="Kumquat, crudo" \
+  --matrix-id=kumquat --matrix-description-it="Kumquat" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=fresh_fruit --botanical-family=Rutaceae --apply
+```
+
 ### Carambola (starfruit), cruda — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10, ultimo del turno)
 
 - **food_id**: `food_carambola_raw`. FDC ID 171715 (SR Legacy, "Carambola, (starfruit), raw").
