@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Latte vaccino, parzialmente scremato (2% grassi, senza vitamine A/D aggiunte) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_latte_parzialmente_scremato_raw`. FDC ID 172205 (SR Legacy, "Milk, reduced fat, fluid, 2% milkfat, without added vitamin A and vitamin D").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 50,0kcal, proteine 3,30g, grassi 1,98g, carboidrati 4,80g, fibra 0g esplicito, ferro 0,020mg, zinco 0,48mg, calcio 120mg, rame 0,0060mg, magnesio 11,0mg, selenio 2,50µg, vitamina C 0,20mg, vitamina K (fillochinone) 0,20µg, vitamina B12 0,53µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento — coerente col nome del record, "without added vitamin A and vitamin D"), beta-carotene 7,00µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172205 e dataType SR Legacy. Calcolo kcal dai macronutrienti (~50) coerente col valore dichiarato — nessuna anomalia.
+- **Distinto da**: `food_milk_whole` (latte intero 3,25% grassi, con vitamina D aggiunta, già eseguito) per contenuto di grassi e per l'assenza di vitamine A/D aggiunte — queste ultime non sono fra i 17 nutrienti tracciati, quindi la differenza non incide sui valori salvati. Anche distinto da `food_latte_scremato_raw` (0% grassi, con vitamine A/D aggiunte, solo "pronto" non ancora eseguito in questa stessa coda): prodotto diverso, non riusabile come analogia perché non ancora reale nel DB.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, già eseguito sul DB reale — stessa famiglia di prodotto, latte fluido, differisce solo per percentuale di grassi).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `latte_parzialmente_scremato` ("Latte vaccino, parzialmente scremato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i latticini/formaggi aggiunti dopo i 30 originali, la categoria ossalati del latte intero non è stata sistematicamente estesa ai derivati), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione già usata per `food_latte_scremato_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172205 --food-id=food_latte_parzialmente_scremato_raw \
+  --name-it="Latte vaccino, parzialmente scremato (2% grassi, senza vitamine A/D aggiunte)" \
+  --matrix-id=latte_parzialmente_scremato --matrix-description-it="Latte vaccino, parzialmente scremato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172205 --food-id=food_latte_parzialmente_scremato_raw \
+  --name-it="Latte vaccino, parzialmente scremato (2% grassi, senza vitamine A/D aggiunte)" \
+  --matrix-id=latte_parzialmente_scremato --matrix-description-it="Latte vaccino, parzialmente scremato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Fagioli lima, cotti, bolliti (con sale) — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 16)
 
 - **food_id**: `food_fagioli_lima_bolliti`. FDC ID 173802 (SR Legacy, "Lima beans, large, mature seeds, cooked, boiled, with salt").
