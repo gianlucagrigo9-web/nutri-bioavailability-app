@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Semi di girasole, tostati (senza sale) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_semi_di_girasole_tostati`. FDC ID 170563 (SR Legacy, "Seeds, sunflower seed kernels, dry roasted, without salt"). Distinto dalla variante cruda/secca (già ⚠ in coda precedente per mancanza di un FDC ID verificabile) e dalla variante "with salt added" (FDC 169418/325524, scartata perché non "senza sale" come richiesto dalla voce di coda).
+- **Nutrienti**: **17/17** — tutti presenti, nessun gap. Energia 582kcal, proteine 19,3g, grassi 49,8g, carboidrati 24,1g, fibra 11,1g, ferro 3,80mg, zinco 5,29mg, calcio 70,0mg, rame 1,83mg, magnesio 129mg, selenio 79,3µg, vitamina C 1,40mg, vitamina K (fillochinone) 2,70µg, vitamina B12 0µg esplicito, folato totale 237µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 5,00µg, alfa-carotene 0µg e beta-criptoxantina 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg`=0 dichiarato, non assente). Sodio 3,00mg/100g, coerente con "without salt" (l'etichetta arrotonda a 0mg per porzione, ma il valore reale per 100g non è nullo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170563 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa famiglia botanica reale Asteraceae del girasole, *Helianthus annuus*: nessun'altra pianta Asteraceae con un'analogia più precisa ancora eseguita, stessa convenzione di dragoncello/cardi in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/semi).
+- **Matrice**: nuova `semi_di_girasole_tostati` ("Semi di girasole, tostati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 5,00µg/100g presente, seme tostato quindi matrice disgregata dal calore, stessa convenzione delle altre forme tostate/cotte di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae`, `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170563 --food-id=food_semi_di_girasole_tostati \
+  --name-it="Semi di girasole, tostati (senza sale)" \
+  --matrix-id=semi_di_girasole_tostati --matrix-description-it="Semi di girasole, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae
+```
+```
+npm run add-food -- --fdc-id=170563 --food-id=food_semi_di_girasole_tostati \
+  --name-it="Semi di girasole, tostati (senza sale)" \
+  --matrix-id=semi_di_girasole_tostati --matrix-description-it="Semi di girasole, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply
+```
+
 ### Pepe bianco, macinato — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_pepe_bianco_raw`. FDC ID 170933 (SR Legacy, "Spices, pepper, white").
