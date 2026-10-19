@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Noce moscata, in polvere — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09)
+
+- **food_id**: `food_noce_moscata_raw`. FDC ID 171326 (SR Legacy, "Spices, nutmeg, ground").
+- **Nutrienti**: **17/17**. Energia 525kcal, proteine 5,84g, grassi 36,3g, carboidrati 49,3g, fibra 20,8g, ferro 3,04mg, zinco 2,15mg, calcio 184mg, rame 1,03mg, magnesio 183mg, selenio 1,60µg, vitamina C 3,00mg, vitamina K 0µg, vitamina B12 0µg, folato totale 76,0µg, acido folico 0µg esplicito separato dal folato alimentare — nessuna firma di arricchimento —, beta-carotene 28,0µg, altri carotenoidi provitaminici A (alfa 0 + cripto 66,0) = 66,0µg. Valori alti di calcio/ferro/magnesio coerenti con la concentrazione tipica da disidratazione di una spezia secca (stessa cautela già usata per le altre spezie di questa coda). Nota minore: la tabella "Nutrition Facts" della stessa pagina riporta 530kcal/180mg calcio invece di 525kcal/184mg della tabella dettagliata per 100g — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per il cavolfiore cotto, non bloccante). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171326 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione già usata per tutte le spezie/erbe secche di questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `noce_moscata` ("Noce moscata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene esplicito e non nullo, stessa scelta già usata per pepe nero/cannella/origano/salvia/timo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myristicaceae` (*Myristica fragrans*, prima spezia di questa famiglia nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=171326 --food-id=food_noce_moscata_raw \
+  --name-it="Noce moscata, in polvere" \
+  --matrix-id=noce_moscata --matrix-description-it="Noce moscata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Myristicaceae
+```
+```
+npm run add-food -- --fdc-id=171326 --food-id=food_noce_moscata_raw \
+  --name-it="Noce moscata, in polvere" \
+  --matrix-id=noce_moscata --matrix-description-it="Noce moscata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit \
+  --botanical-family=Myristicaceae --apply
+```
+
 ### Sgombro atlantico, cotto (al forno/calore secco) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_sgombro_cotto`. FDC ID 175120 (SR Legacy, "Fish, mackerel, Atlantic, cooked, dry heat"). Distinto da `food_sgombro_raw` (crudo, già eseguito, FDC 175119 "Fish, mackerel, Atlantic, raw") — stesso pesce, forma cotta "dry heat". **Nota sulla fonte**: l'FDC ID è confermato tramite l'URL di una pagina di confronto getfoodfacts.com comparsa nei risultati di ricerca (`.../compare/fish-herring-atlantic-pickled-175118/fish-mackerel-atlantic-cooked-dry-heat-175120/...`), ma il fetch diretto alla pagina di dettaglio getfoodfacts.com per questo record è stato bloccato da un timeout di provenance in questa sessione pianificata non presidiata (nessun utente a confermare l'accesso in tempo). I valori sotto sono letti da due fonti secondarie indipendenti e concordanti (recipal.com, triagemethod.com, che riportano numeri quasi identici), non dalla pagina FDC primaria — stessa cautela già usata per `food_acciughe_raw` ("FDC ID dedotto indirettamente").
