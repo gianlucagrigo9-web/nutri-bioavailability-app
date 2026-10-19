@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sedano rapa, cotto (bollito, con sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_sedano_rapa_cotto`. FDC ID 169341 (SR Legacy, "Celeriac, cooked, boiled, drained, with salt" — solo questa variante ha un FDC ID verificato su getfoodfacts.com; nessuna variante "without salt" distinta trovata). Distinto da `food_sedano_rapa_raw` (crudo, già eseguito, FDC 170400 "Celeriac, raw") — stesso alimento, forma cotta.
+- **Nutrienti**: **13/17** — gap dichiarato. Presenti: energia 27,0kcal, proteine 0,96g, grassi 0,19g, carboidrati 5,90g, calcio 26,0mg, ferro 0,43mg, magnesio 12,0mg, zinco 0,20mg, rame 0,043mg, selenio 0,40µg, vitamina B12 0µg esplicito, folato totale 3,00µg, vitamina C 3,60mg. Sodio 297mg/100g (variante "with salt", non uno dei 17 nutrienti tracciati). **Mancano** (non riportati, non assunti zero): fibra, vitamina K, beta-carotene, altri carotenoidi provitaminici A. Fonte: getfoodfacts.com (FDC ID 169341, dataType SR Legacy).
+- **Analogia usata**: `food_sedano_rapa_raw` (sedano rapa crudo, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura).
+- **Categoria dieta**: `plant_non_fruit` (tubero/ortaggio da radice).
+- **Matrice**: nuova `sedano_rapa_cotto` ("Sedano rapa, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi assenti dal record, stesso trattamento già usato per il crudo), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Apiaceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169341 --food-id=food_sedano_rapa_cotto \
+  --name-it="Sedano rapa, cotto (bollito, con sale)" \
+  --matrix-id=sedano_rapa_cotto --matrix-description-it="Sedano rapa, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_rapa_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169341 --food-id=food_sedano_rapa_cotto \
+  --name-it="Sedano rapa, cotto (bollito, con sale)" \
+  --matrix-id=sedano_rapa_cotto --matrix-description-it="Sedano rapa, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_rapa_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Scarola, cotta (bollita, senza sale) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_scarola_cotta`. FDC ID 168413 (SR Legacy, "Escarole, cooked, boiled, drained, no salt added"). Distinta da `food_scarola_raw` (cruda, già eseguita, FDC 168412 "Endive, raw") — con una precisione in più: "escarole" è il nome inglese esatto della scarola (*Cichorium endivia* var. *latifolium*, foglia larga), mentre il crudo aveva dovuto usare "Endive, raw" generico per mancanza di un record "escarole" crudo distinto in FDC. Per la forma cotta, invece, FDC distingue correttamente "escarole" — un match più preciso del crudo, non solo un'analogia.
