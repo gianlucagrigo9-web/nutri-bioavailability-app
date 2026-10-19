@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pepe bianco, macinato — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
+
+- **food_id**: `food_pepe_bianco_raw`. FDC ID 170933 (SR Legacy, "Spices, pepper, white").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — stesso tipo di gap già visto per alloro/dragoncello/coriandolo in questa coda). Energia 296kcal, proteine 10,4g, grassi 2,12g, carboidrati 68,6g, fibra 26,2g, ferro 14,3mg, zinco 1,13mg, calcio 265mg, rame 0,91mg, magnesio 90,0mg, selenio 3,10µg, vitamina C 21,0mg, vitamina B12 0µg esplicito, folato totale 10,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento. Nota minore: il riepilogo della pagina arrotonda l'energia a 300kcal invece di 296kcal della tabella dettagliata — usati questi ultimi, stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170933 e dataType SR Legacy.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stessa convenzione generica delle altre spezie/erbe secche di questa coda; nessuna pianta della famiglia Piperaceae ancora eseguita sul DB reale — il pepe nero (`food_pepe_nero_raw`) resta solo "pronto", non eseguito, quindi non utilizzabile come analogia per le regole di questo task).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `pepe_bianco` ("Pepe bianco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Piperaceae` (*Piper nigrum* — il pepe bianco è lo stesso frutto del pepe nero, privato della buccia esterna per macerazione), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi; questo alimento draft non va usato per calcolare l'assunzione di vitamina A/K finché il gap non è risolto.
+
+```
+npm run add-food -- --fdc-id=170933 --food-id=food_pepe_bianco_raw \
+  --name-it="Pepe bianco, macinato" \
+  --matrix-id=pepe_bianco --matrix-description-it="Pepe bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Piperaceae
+```
+```
+npm run add-food -- --fdc-id=170933 --food-id=food_pepe_bianco_raw \
+  --name-it="Pepe bianco, macinato" \
+  --matrix-id=pepe_bianco --matrix-description-it="Pepe bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --diet-category=plant_non_fruit --botanical-family=Piperaceae --apply
+```
+
 ### Zenzero, in polvere (secco) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 10)
 
 - **food_id**: `food_zenzero_polvere_raw`. FDC ID 170926 (SR Legacy, "Spices, ginger, ground").
