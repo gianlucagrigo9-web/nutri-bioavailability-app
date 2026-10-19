@@ -16,7 +16,30 @@
 
 ## Pronti
 
-### Formaggio Camembert — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+### Pane azzimo (matzo), semplice — preparato 2026-10-19 dal task orario (tredicesimo lotto, turno ore 17)
+
+- **food_id**: `food_pane_azzimo`. FDC ID 172740 (SR Legacy, "Crackers, matzo, plain").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 395kcal, proteine 10,0g, grassi 1,40g, carboidrati 83,7g, fibra 3,00g, ferro 3,16mg, zinco 0,68mg, calcio 13,0mg, rame 0,060mg, magnesio 25,0mg, selenio 36,9µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,30µg, vitamina B12 0µg esplicito, folato totale 17,0µg, acido folico 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172740 e dataType SR Legacy.
+- **Verifica specifica anti-arricchimento (punto 2b del COMPITO)**: a differenza di pane comune/pane integrale/pancarré (tutti ⚠ in questa coda per firma di arricchimento stile USA), il matzo "plain" **evita** il problema: l'acido folico è riportato come voce separata dal folato alimentare ma a **0µg esplicito** (non positivo come nei pane arricchiti già scartati, dove era 18-98µg/100g), e il calcio (13mg/100g) è basso, coerente con un prodotto semplice farina+acqua, non con farina arricchita stile USA (quei record mostravano 86-163mg/100g). Coerente col fatto che il matzo tradizionale (per l'uso rituale ebraico) usa farina non arricchita per ricetta — variante "plain", distinta dalle varianti "egg"/"egg and onion"/"whole-wheat" trovate nella stessa ricerca ma scartate perché prodotti diversi (ingredienti aggiunti o farina integrale non richiesta dalla voce di coda).
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (farina di frumento integrale, già eseguita sul DB reale — stesso cereale *Triticum*, entrambi prodotti non arricchiti).
+- **Categoria dieta**: `plant_non_fruit` (prodotto da forno a base di sola farina e acqua, nessun ingrediente animale nella variante "plain").
+- **Matrice**: nuova `pane_azzimo` ("Pane azzimo (matzo), semplice").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, nessuno stato da dichiarare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del grano, *Triticum aestivum*), `baseline_cooking_state=baked` (prodotto da forno, non crudo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, vedi verifica sopra).
+
+```
+npm run add-food -- --fdc-id=172740 --food-id=food_pane_azzimo \
+  --name-it="Pane azzimo (matzo), semplice" \
+  --matrix-id=pane_azzimo --matrix-description-it="Pane azzimo (matzo), semplice" \
+  --baseline-cooking-state=baked --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172740 --food-id=food_pane_azzimo \
+  --name-it="Pane azzimo (matzo), semplice" \
+  --matrix-id=pane_azzimo --matrix-description-it="Pane azzimo (matzo), semplice" \
+  --baseline-cooking-state=baked --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
 
 - **food_id**: `food_camembert`. FDC ID 172178 (SR Legacy, "Cheese, camembert").
 - **Nutrienti**: **17/17** — tutti presenti. Energia 300kcal, proteine 19,8g, grassi 24,3g, carboidrati 0,46g, fibra 0g esplicito, ferro 0,33mg, zinco 2,38mg, calcio 388mg, rame 0,021mg, magnesio 20,0mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,00µg, vitamina B12 1,30µg, folato totale 62,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 12,0µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172178 e dataType SR Legacy (voce immediatamente successiva al brie nel catalogo SR Legacy). Energia coerente coi macronutrienti; sodio alto (842mg/100g) ma tipico dei formaggi, non tracciato. Stesso esito positivo del brie lavorato in questo stesso turno: a differenza di mascarpone/mozzarella di bufala, esiste un record generico SR Legacy pulito e completo.
