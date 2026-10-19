@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coriandolo, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09, oltre la quota, ultimo del turno)
+
+- **food_id**: `food_coriandolo_raw`. FDC ID 170922 (SR Legacy, "Spices, coriander seed").
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi del tutto assenti dalla pagina consultata, non riportati a zero — stesso tipo di gap già visto per alloro/dragoncello in questa coda). Energia 298kcal, proteine 12,4g, grassi 17,8g, carboidrati 55,0g, fibra 41,9g, ferro 16,3mg, zinco 4,70mg, calcio 709mg, rame 0,97mg, magnesio 330mg, selenio 26,2µg, vitamina C 21,0mg, vitamina B12 0µg, folato totale 0µg esplicito (riportato, non assente — a differenza di aneto/cardamomo in questa coda, dove il folato manca del tutto), acido folico 0µg esplicito — nessuna firma di arricchimento. Nota minore: il riepilogo della pagina indica 300kcal/710mg calcio invece di 298kcal/709mg della tabella dettagliata — usati questi ultimi (stesso tipo di arrotondamento minore già accettato per le altre spezie di questa coda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170922 e dataType SR Legacy (release 30 aprile 2026).
+- **Analogia usata**: `food_sedano_raw` (sedano, già eseguito sul DB reale — stessa famiglia botanica reale Apiaceae del coriandolo, come già fatto per cumino/aneto/semi di finocchio in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `coriandolo` ("Coriandolo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Coriandrum sativum*, stessa famiglia di cumino/aneto/semi di finocchio/sedano/carote già nel Golden Set), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false). Nota: valori per 100g, uso reale tipico in grammi/pizzichi.
+
+```
+npm run add-food -- --fdc-id=170922 --food-id=food_coriandolo_raw \
+  --name-it="Coriandolo, semi secchi" \
+  --matrix-id=coriandolo --matrix-description-it="Coriandolo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae
+```
+```
+npm run add-food -- --fdc-id=170922 --food-id=food_coriandolo_raw \
+  --name-it="Coriandolo, semi secchi" \
+  --matrix-id=coriandolo --matrix-description-it="Coriandolo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply
+```
+
 ### Cardamomo, semi secchi — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 09, oltre la quota)
 
 - **food_id**: `food_cardamomo_raw`. FDC ID 170919 (SR Legacy, "Spices, cardamom").
