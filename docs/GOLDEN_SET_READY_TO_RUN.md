@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Edamame (soia verde), cotto (bollito) — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
+
+- **food_id**: `food_edamame_cotto`. FDC ID 168411 (SR Legacy, "Edamame, frozen, prepared" — "prepared" = bollito/cotto, distinto dal crudo/congelato "frozen, unprepared" FDC 168410 già eseguito come `food_edamame_raw`).
+- **Nutrienti**: **17/17**. Energia 121kcal, proteine 11,9g, grassi 5,20g, carboidrati 8,91g, fibra 5,20g, calcio 63,0mg, ferro 2,27mg, magnesio 64,0mg, zinco 1,37mg, rame 0,34mg, selenio 0,80µg, vitamina B12 0µg esplicito, folato totale 311µg (alto ma plausibile per semi di soia, noti per l'alto contenuto di folato naturale — nessun segnale di arricchimento/acido folico separato), vitamina C 6,10mg, vitamina K 26,7µg, beta-carotene 175µg, altri carotenoidi provitaminici A (alfa 0 + cripto 8,00) = 8,00µg. Nessun segno di sale aggiunto (sodio 6,00mg/100g, basso) né additivi. Fonte: getfoodfacts.com (FDC ID 168411, dataType SR Legacy).
+- **Analogia usata**: `food_edamame_raw` (edamame crudo/congelato, già eseguito sul DB reale — stesso alimento, stesso trattamento categorico, differisce solo per stato di cottura; manteniamo `carotenoid_matrix_state` NULL per coerenza con l'analogia dichiarata, pur essendo presente un beta-carotene significativo).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `edamame_cotto` ("Edamame, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, coerente con l'analogia dichiarata `food_edamame_raw`), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Fabaceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168411 --food-id=food_edamame_cotto \
+  --name-it="Edamame (soia verde), cotto (bollito)" \
+  --matrix-id=edamame_cotto --matrix-description-it="Edamame, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_edamame_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168411 --food-id=food_edamame_cotto \
+  --name-it="Edamame (soia verde), cotto (bollito)" \
+  --matrix-id=edamame_cotto --matrix-description-it="Edamame, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_edamame_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Amaranto, cotto — preparato 2026-10-19 dal task orario (nono lotto, turno ore 08)
 
 - **food_id**: `food_amaranto_cotto`. FDC ID 170683 (SR Legacy, "Amaranth grain, cooked"). Distinto da `food_amaranto_raw` (crudo, già eseguito, FDC 170682, 17/17 nutrienti) — stesso alimento, forma cotta.
