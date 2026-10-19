@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Succo di carota, crudo (in scatola) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
+
+- **food_id**: `food_succo_di_carota_raw`. FDC ID 170491 (SR Legacy, "Carrot juice, canned").
+- **Nutrienti**: **17/17** — tutti presenti. Energia 40,0kcal, proteine 0,95g, grassi 0,15g, carboidrati 9,28g, fibra 0,80g, ferro 0,46mg, zinco 0,18mg, calcio 24,0mg, rame 0,046mg, magnesio 14,0mg, selenio 0,60µg, vitamina C 8,50mg, vitamina K 15,5µg, vitamina B12 0µg esplicito, folato totale 4,00µg, beta-carotene 9.303µg, alfa-carotene 4.342µg, beta-criptoxantina 0µg esplicito (valori di carotenoidi molto alti, coerenti con una verdura notoriamente ricca di provitamina A concentrata in forma di succo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170491 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_raw` (carote, nel Golden Set originale — stesso alimento, forma diversa: succo spremuto/in scatola invece di radice intera).
+- **Categoria dieta**: `plant_non_fruit` (stessa convenzione già usata per succo d'arancia/limone/melograno/mela in questa coda: succo è forma trasformata, non l'ortaggio/frutto intero — non cambia vegetariano/vegano, solo la compatibilità fruttariana, qui comunque irrilevante trattandosi di una radice).
+- **Matrice**: nuova `succo_di_carota` ("Succo di carota, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_carrots_raw`), `carotenoid_matrix_state` omesso (NULL — stessa convenzione già usata per i succhi di frutta in questa coda, nessuno dei quali ha impostato questo campo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (famiglia botanica reale della carota), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170491 --food-id=food_succo_di_carota_raw \
+  --name-it="Succo di carota, crudo (in scatola)" \
+  --matrix-id=succo_di_carota --matrix-description-it="Succo di carota, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170491 --food-id=food_succo_di_carota_raw \
+  --name-it="Succo di carota, crudo (in scatola)" \
+  --matrix-id=succo_di_carota --matrix-description-it="Succo di carota, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolo cappuccio rosso, crudo — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
 
 - **food_id**: `food_cavolo_cappuccio_rosso_raw`. FDC ID 169977 (SR Legacy, "Cabbage, red, raw").
