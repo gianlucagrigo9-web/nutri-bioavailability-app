@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Semi di sesamo, tostati — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18)
+
+- **food_id**: `food_semi_di_sesamo_tostati`. FDC ID 170151 (SR Legacy, "Seeds, sesame seeds, whole, roasted and toasted").
+- **Nutrienti**: **15/17**. Presenti: energia 565kcal, proteine 17,0g, grassi 48,0g, carboidrati 25,7g, fibra 14,0g, ferro 14,8mg, zinco 7,16mg, calcio 989mg, rame 2,47mg, magnesio 356mg, selenio 34,4µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 98,0µg. Mancanti (non assunti zero, non riportati nel record): `vitamin_k_mcg` e `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina entrambi non riportati — a differenza del seme crudo, dove erano presenti e avevano dato `carotenoidi raw_intact`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170151 e dataType SR Legacy (release USDA 30 aprile 2026 indicata in pagina).
+- **Analogia usata**: `food_semi_di_sesamo_raw` (semi di sesamo crudi, già eseguiti sul DB reale — stesso alimento, *Sesamum indicum*, forma diversa: tostato invece di crudo; distinto dalla tahina, già eseguita, che è la pasta macinata, non il seme intero).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `semi_di_sesamo_tostati` ("Semi di sesamo, tostati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_semi_di_sesamo_raw`), `carotenoid_matrix_state` omesso (NULL — a differenza del crudo (`raw_intact`) e della tahina (`cooked_or_disrupted`), qui il beta-carotene non è riportato affatto nel record, nessun valore da associare a uno stato di matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Pedaliaceae` (stessa famiglia reale di `food_semi_di_sesamo_raw`/`food_tahina`), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170151 --food-id=food_semi_di_sesamo_tostati \
+  --name-it="Semi di sesamo, tostati" \
+  --matrix-id=semi_di_sesamo_tostati --matrix-description-it="Semi di sesamo, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_sesamo_raw \
+  --botanical-family=Pedaliaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170151 --food-id=food_semi_di_sesamo_tostati \
+  --name-it="Semi di sesamo, tostati" \
+  --matrix-id=semi_di_sesamo_tostati --matrix-description-it="Semi di sesamo, tostati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_sesamo_raw \
+  --botanical-family=Pedaliaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Riso bianco, cotto, bollito (con sale) — preparato 2026-10-19 dal task orario (quattordicesimo lotto, turno ore 18, riapertura dell'undicesimo lotto)
 
 - **food_id**: `food_riso_bianco_cotto`. FDC ID 168935 (riso bianco a chicco lungo, non arricchito, bollito, con sale — dataType non indicato esplicitamente dalla fonte consultata, ma coerente per intervallo numerico con gli altri record SR Legacy di riso già usati in questa coda, 168878-168935).
