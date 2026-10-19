@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli azuki, cotti (bolliti, senza sale) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
+
+- **food_id**: `food_fagioli_azuki_bolliti`. FDC ID 173728 (SR Legacy, "Beans, adzuki, mature seeds, cooked, boiled, without salt"). Distinto da `food_fagioli_azuki_raw` (secchi crudi, FDC 173727, solo "pronto" non ancora eseguito) — stesso legume, forma cotta. FDC ID confermato tramite una pagina-hub getfoodfacts.com che elenca tutte le 4 preparazioni di azuki con i rispettivi ID (raw=173727, bolliti senza sale=173728, bolliti con sale=173789, in scatola zuccherati=173729) — scartato un link fdc.nal.usda.gov apparso inizialmente in ricerca che risultava invece essere fagioli neri, non azuki (verificato via WebFetch diretto sul JSON prima di scartarlo).
+- **Nutrienti**: **14/17** (stimato dalla fonte secondaria consultata) — mancano `vitamin_k_mcg`, `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` (campi non mostrati dalla pagina, non assunti zero) — **stesso gap della voce cruda sorella** `food_fagioli_azuki_raw` (anch'essa 14/17 con gli stessi 3 campi mancanti). Energia 128kcal, proteine 7,52g, grassi 0,10g, carboidrati 24,8g, fibra 7,30g, ferro 2,00mg, zinco 1,77mg, calcio 28,0mg, rame 0,30mg, magnesio 52,0mg, selenio 1,20µg, vitamina C 0µg esplicito, vitamina B12 0µg esplicito, folato totale 121µg, acido folico 0µg esplicito (nessuna firma di arricchimento, coerente con un legume non trattato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173728 e dataType SR Legacy (valori letti dal rendering della pagina, non dal JSON diretto fdc.nal.usda.gov — non raggiungibile in ricerca per questo ID specifico; il conteggio 14/17 verrà confermato dal dry-run reale, che ri-scarica il record).
+- **Analogia usata**: `food_fagioli_cannellini_bolliti` (fagioli cannellini bolliti, già eseguiti sul DB reale — stessa famiglia botanica Fabaceae, stesso trattamento "legume bollito senza sale", stesso matrix_id `legumes`; preferito a `food_fagioli_azuki_raw`, che è solo "pronto" e non eseguito).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: riusa `legumes` (già esistente, nessun `--matrix-description-it` necessario).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nella fonte), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173728 --food-id=food_fagioli_azuki_bolliti \
+  --name-it="Fagioli azuki, cotti (bolliti, senza sale)" \
+  --matrix-id=legumes \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=173728 --food-id=food_fagioli_azuki_bolliti \
+  --name-it="Fagioli azuki, cotti (bolliti, senza sale)" \
+  --matrix-id=legumes \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply
+```
+
 ### Ostriche, cotte (al forno, calore secco) — preparato 2026-10-19 dal task orario (decimo lotto, turno ore 11)
 
 - **food_id**: `food_ostriche_cotte`. FDC ID 175173 (SR Legacy, "Mollusks, oyster, eastern, farmed, cooked, dry heat"). Distinto da `food_ostriche_raw` (crudo, FDC 175172 "...eastern, farmed, raw", solo "pronto" non ancora eseguito) — stessa specie "eastern" e stesso lineage "farmed" del crudo, forma cotta. Esisteva anche un candidato "wild" (FDC 171980, "cooked, moist heat") con copertura nutrienti leggermente diversa, scartato per mantenere coerenza di lineage (farmed) con la voce cruda sorella — più rilevante della copertura marginale in più.
