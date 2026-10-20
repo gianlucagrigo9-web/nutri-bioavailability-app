@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Animelle d'agnello (pancreas), crude — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_animelle_di_agnello_raw`. FDC ID 172538 (SR Legacy, "Lamb, variety meats and by-products, pancreas, raw").
+- **Nutrienti**: **14/17**. Energia 152kcal, proteine 14,8g, grassi 9,82g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,30mg, zinco 1,93mg, calcio 8,00mg, rame 0,061mg, magnesio 21,0mg, selenio 34,3µg, vitamina C 18,0mg, vitamina B12 6,00µg, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (vitamina A RAE/retinolo riportati esplicitamente a 0µg, non mancanti). Nota terminologica: "animelle" in cucina italiana indica tipicamente il timo (sweetbread), ma FDC traccia solo il pancreas per questa specie/categoria — stesso termine commerciale italiano, organo anatomicamente diverso (il timo non ha un record FDC distinto per l'agnello); scelto comunque il pancreas come il record FDC più vicino al concetto commerciale di "animelle", nessun record alternativo per il timo trovato in nessuna fonte consultata. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172538 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`, stessa convenzione usata per le altre frattaglie d'agnello crude in questo stesso lotto).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `animelle_di_agnello` ("Animelle di agnello (pancreas)").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172538 --food-id=food_animelle_di_agnello_raw \
+  --name-it="Animelle d'agnello (pancreas), crude" \
+  --matrix-id=animelle_di_agnello --matrix-description-it="Animelle di agnello (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172538 --food-id=food_animelle_di_agnello_raw \
+  --name-it="Animelle d'agnello (pancreas), crude" \
+  --matrix-id=animelle_di_agnello --matrix-description-it="Animelle di agnello (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Milza d'agnello, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_milza_di_agnello_raw`. FDC ID 174364 (SR Legacy, "Lamb, variety meats and by-products, spleen, raw").
