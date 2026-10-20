@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Oca, carne senza pelle, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_oca_raw`. FDC ID 172413 (SR Legacy, "Goose, domesticated, meat only, raw").
+- **Nutrienti**: **14/17**. Energia 161kcal, proteine 22,8g, grassi 7,13g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,57mg, zinco 2,34mg, calcio 13,0mg, rame 0,31mg, magnesio 24,0mg, selenio 16,8µg, vitamina C 7,20mg, vitamina B12 0,49µg, folato totale 31,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, comunque non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A (`other_provitamin_a_carotenoids_mcg`) — non riportati nel record, non assunti zero; stesso gap tipico già visto per anatra/agnello/coniglio/vitello crudi in questa pipeline. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172413 e dataType SR Legacy.
+- **Analogia usata**: `food_anatra_raw` (anatra, carne senza pelle, cruda — già eseguita sul DB reale. Stessa categoria "pollame, carne senza pelle, cruda", `is_heme_iron=true` come la carne di anatra).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `oca` ("Oca").
+- **Attributi**: `is_heme_iron` presente (true, come anatra/pollo/tacchino), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172413 --food-id=food_oca_raw \
+  --name-it="Oca, carne senza pelle, cruda" \
+  --matrix-id=oca --matrix-description-it="Oca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172413 --food-id=food_oca_raw \
+  --name-it="Oca, carne senza pelle, cruda" \
+  --matrix-id=oca --matrix-description-it="Oca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Albume d'uovo, crudo — preparato 2026-10-20 dal task orario (diciottesimo lotto)
 
 - **food_id**: `food_albume_uovo_raw`. FDC ID 172183 (SR Legacy, "Egg, white, raw, fresh").
