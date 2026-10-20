@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Siero di latte dolce (whey), liquido — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_siero_di_latte_dolce_raw`. FDC ID 171282 (SR Legacy, "Whey, sweet, fluid" — il siero "dolce", sottoprodotto della caseificazione a caglio, distinto dal siero "acido" (FDC 170885, "Whey, acid, fluid") tipico delle cagliate acide come la ricotta; scelto il dolce perché più rappresentativo della produzione di formaggi stagionati a caglio come parmigiano/grana, già nel Golden Set).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 27,0kcal, proteine 0,85g, grassi 0,36g, carboidrati 5,14g, fibra 0g esplicito, ferro 0,060mg, zinco 0,13mg, calcio 47,0mg, rame 0,0040mg, magnesio 8,00mg, selenio 1,90µg, vitamina C 0,10mg, vitamina B12 0,28µg, folato totale 1,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 0µg esplicito, beta-carotene 1,00µg (minimo ma reale, coerente con un residuo di grasso del latte), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171282 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido/derivato lattiero-caseario liquido", `matrix_category_calcium=medium_oxalate` per analogia diretta, stessa convenzione già usata per latte di pecora/capra/latte condensato in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (derivato del latte).
+- **Matrice**: nuova `siero_di_latte_dolce` ("Siero di latte dolce (whey)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione degli altri latticini, nonostante il beta-carotene minimo non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (liquido pronto al consumo, stessa convenzione del latte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171282 --food-id=food_siero_di_latte_dolce_raw \
+  --name-it="Siero di latte dolce (whey), liquido" \
+  --matrix-id=siero_di_latte_dolce --matrix-description-it="Siero di latte dolce (whey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171282 --food-id=food_siero_di_latte_dolce_raw \
+  --name-it="Siero di latte dolce (whey), liquido" \
+  --matrix-id=siero_di_latte_dolce --matrix-description-it="Siero di latte dolce (whey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy --apply
+```
+
 ### Pesce gatto americano (channel catfish), allevato, crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_pesce_gatto_americano_raw`. FDC ID 175165 (SR Legacy, "Fish, catfish, channel, farmed, raw"). **Nota di trasparenza**: questo è il pesce gatto americano (*Ictalurus punctatus*), SPECIE DIVERSA dal pangasio asiatico (*Pangasius*) scartato poco sopra in questo stesso turno per mismatch di specie — qui invece il nome e la specie corrispondono esattamente al record FDC, nessuna sostituzione.
