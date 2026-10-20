@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Luccio, cotto (calore secco) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_luccio_cotto`. FDC ID 175127 (SR Legacy, "Fish, pike, northern, cooked, dry heat"). **Nota**: il crudo (FDC 173680, "Fish, pike, northern, raw") è stato cercato ma scartato — nessuna pagina getfoodfacts.com indicizzata per il crudo (solo una pagina "compare" vuota/non renderizzata), e le uniche fonti con dati numerici (myfooddata.com, triagemethod.com) non dichiarano un dataType SR Legacy/Foundation sulla stessa pagina della tabella nutrienti (triagemethod mescola addirittura fonti SR Legacy e AFCD australiano riga per riga, stesso segnale già usato per scartare EVOO/cavolo cappuccio cotto/barbabietola cotta); il cotto invece ha una pagina getfoodfacts.com pulita con FDC ID e dataType espliciti, quindi entra in coda solo in questa forma.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero). Per 100g: energia 113kcal, proteine 24,7g, grassi 0,88g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,71mg, zinco 0,86mg, calcio 73,0mg, rame 0,065mg, magnesio 40,0mg, selenio 16,2µg, vitamina C 3,80mg, vitamina B12 2,30µg, folato totale 17,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175127 e dataType SR Legacy.
+- **Analogia usata**: `food_salmon_cooked` (salmone cotto a calore secco, Golden Set originale, già eseguito sul DB reale — stessa categoria "pesce magro/medio-grasso cotto a calore secco", `is_heme_iron=true`, stesso `baseline_cooking_state`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `luccio_cotto` ("Luccio, cotto").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di salmone/tonno/merluzzo/sgombro già eseguiti), `matrix_category_calcium` omesso (NULL — stessa convenzione del salmone), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=dry_heat_cooked` (stessa convenzione del salmone cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175127 --food-id=food_luccio_cotto \
+  --name-it="Luccio, cotto (calore secco)" \
+  --matrix-id=luccio_cotto --matrix-description-it="Luccio, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175127 --food-id=food_luccio_cotto \
+  --name-it="Luccio, cotto (calore secco)" \
+  --matrix-id=luccio_cotto --matrix-description-it="Luccio, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Rafano (daikon), crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_rafano_raw`. FDC ID 168451 (SR Legacy, "Radishes, oriental, raw" — nome USDA per il daikon/rafano asiatico, distinto dal ravanello rosso comune già eseguito, FDC 169276 "Radishes, raw").
