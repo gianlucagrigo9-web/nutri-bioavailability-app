@@ -112,6 +112,30 @@ npm run add-food -- --fdc-id=167860 --food-id=food_rognone_di_maiale_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Lingua di maiale, cotta (brasata) — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_lingua_di_maiale_cotta`. FDC ID 168276 (SR Legacy, "Pork, fresh, variety meats and by-products, tongue, cooked, braised"). **Nessuna voce cruda corrispondente in questa coda**: nessun record FDC con ID verificabile trovato per "tongue, raw" (vedi nota ⚠ nella coda del PRD) — stesso schema già usato per la milza di manzo nel sedicesimo lotto (solo cotta, senza crudo).
+- **Nutrienti**: **14/17**. Energia 271kcal, proteine 24,1g, grassi 18,6g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 4,99mg, zinco 4,53mg, calcio 19,0mg, rame 0,11mg, magnesio 20,0mg, selenio 15,5µg, vitamina C 1,70mg, vitamina B12 2,39µg, folato totale 4,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168276 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale). Stessa categoria frattaglia cotta, organo/specie diversi.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `lingua_di_maiale_cotta` ("Lingua di maiale, cotta").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168276 --food-id=food_lingua_di_maiale_cotta \
+  --name-it="Lingua di maiale, cotta (brasata)" \
+  --matrix-id=lingua_di_maiale_cotta --matrix-description-it="Lingua di maiale, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168276 --food-id=food_lingua_di_maiale_cotta \
+  --name-it="Lingua di maiale, cotta (brasata)" \
+  --matrix-id=lingua_di_maiale_cotta --matrix-description-it="Lingua di maiale, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
