@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Animelle di manzo (pancreas), crude — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_animelle_di_manzo_raw`. FDC ID 169452 (SR Legacy, "Beef, variety meats and by-products, pancreas, raw").
+- **Nutrienti**: **14/17**. Energia 235kcal, proteine 15,7g, grassi 18,6g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,22mg, zinco 2,58mg, calcio 9,00mg, rame 0,060mg, magnesio 18,0mg, selenio 24,7µg, vitamina C 13,7mg, vitamina B12 14,0µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169452 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo crudo, Golden Set originale — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo").
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `animelle_di_manzo` ("Animelle di manzo (pancreas)").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169452 --food-id=food_animelle_di_manzo_raw \
+  --name-it="Animelle di manzo (pancreas), crude" \
+  --matrix-id=animelle_di_manzo --matrix-description-it="Animelle di manzo (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169452 --food-id=food_animelle_di_manzo_raw \
+  --name-it="Animelle di manzo (pancreas), crude" \
+  --matrix-id=animelle_di_manzo --matrix-description-it="Animelle di manzo (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Animelle di maiale (pancreas), crude — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_animelle_di_maiale_raw`. FDC ID 168273 (SR Legacy, "Pork, fresh, variety meats and by-products, pancreas, raw").
+- **Nutrienti**: **14/17**. Energia 199kcal, proteine 18,6g, grassi 13,2g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,13mg, zinco 2,62mg, calcio 11,0mg, rame 0,090mg, magnesio 17,0mg, selenio 40,8µg, vitamina C 15,3mg, vitamina B12 16,4µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168273 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo crudo, Golden Set originale — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo"; nessun organo di maiale ancora eseguito sul DB reale da usare come analogia di specie).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `animelle_di_maiale` ("Animelle di maiale (pancreas)").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168273 --food-id=food_animelle_di_maiale_raw \
+  --name-it="Animelle di maiale (pancreas), crude" \
+  --matrix-id=animelle_di_maiale --matrix-description-it="Animelle di maiale (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168273 --food-id=food_animelle_di_maiale_raw \
+  --name-it="Animelle di maiale (pancreas), crude" \
+  --matrix-id=animelle_di_maiale --matrix-description-it="Animelle di maiale (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervella di maiale, cruda — preparato 2026-10-20 dal task orario (ventunesimo lotto)
 
 - **food_id**: `food_cervella_di_maiale_raw`. FDC ID 168264 (SR Legacy, "Pork, fresh, variety meats and by-products, brain, raw").
