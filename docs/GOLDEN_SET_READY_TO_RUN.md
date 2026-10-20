@@ -40,6 +40,30 @@ npm run add-food -- --fdc-id=167863 --food-id=food_fegato_di_maiale_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Trippa di manzo, cotta (bollita) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_trippa_di_manzo_cotta`. FDC ID 174769 (SR Legacy, "Beef, variety meats and by-products, tripe, cooked, simmered"). Distinta da `food_trippa_di_manzo_raw` (cruda, FDC 170599, solo "pronto" in questo file — non ancora eseguita sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **17/17** — tutti presenti, diversi espliciti a zero (tipico per questo alimento). Energia 94,0kcal, proteine 11,7g, grassi 4,05g, carboidrati 1,99g, fibra 0g esplicito, ferro 0,66mg, zinco 1,71mg, calcio 81,0mg, rame 0mg esplicito, magnesio 15,0mg, selenio 11,8µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 0,72µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti. Calcio relativamente alto (81mg/100g) ma caratteristica nota della trippa (tessuto di rivestimento gastrico), non un'anomalia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174769 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_trippa_di_manzo_raw`, che resta solo "pronto" e non è nel DB. Stessa specie, categoria frattaglia cotta, organo diverso).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `trippa_di_manzo_cotta` ("Trippa di manzo, cotta").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174769 --food-id=food_trippa_di_manzo_cotta \
+  --name-it="Trippa di manzo, cotta (bollita)" \
+  --matrix-id=trippa_di_manzo_cotta --matrix-description-it="Trippa di manzo, cotta" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174769 --food-id=food_trippa_di_manzo_cotta \
+  --name-it="Trippa di manzo, cotta (bollita)" \
+  --matrix-id=trippa_di_manzo_cotta --matrix-description-it="Trippa di manzo, cotta" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
