@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Capra, carne cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_capra_raw`. FDC ID 175303 (SR Legacy, "Game meat, goat, raw").
+- **Nutrienti**: **13/17**. Energia 109kcal, proteine 20,6g, grassi 2,31g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,83mg, zinco 4,00mg, calcio 13,0mg, rame 0,26mg, selenio 8,80µg, vitamina C 0mg esplicito, vitamina B12 1,13µg, folato totale 5,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: magnesio, vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175303 e dataType SR Legacy.
+- **Analogia usata**: `food_agnello_raw` (agnello, carne cruda — già eseguito sul DB reale. Stessa sottofamiglia zoologica Caprinae (capra e pecora/agnello sono parenti stretti), carne rossa magra cruda, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `capra` ("Capra").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175303 --food-id=food_capra_raw \
+  --name-it="Capra, carne cruda" \
+  --matrix-id=capra --matrix-description-it="Capra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175303 --food-id=food_capra_raw \
+  --name-it="Capra, carne cruda" \
+  --matrix-id=capra --matrix-description-it="Capra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Faraona, carne senza pelle, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_faraona_raw`. FDC ID 174471 (SR Legacy, "Guinea hen, meat only, raw").
