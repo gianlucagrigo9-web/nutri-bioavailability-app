@@ -40,6 +40,31 @@ npm run add-food -- --fdc-id=173418 --food-id=food_formaggio_cremoso_raw \
   --diet-category=egg_dairy --apply
 ```
 
+### Riso venere (nero), crudo — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
+
+- **food_id**: `food_riso_venere_raw`. FDC ID 2710825 (Foundation Foods, "Rice, black, unenriched, raw" — categoria "Cereal Grains and Pasta").
+- **Nutrienti**: **10/17**. Per 100g: energia ~360kcal (etichetta; 361kcal nelle statistiche di riferimento), proteine 7,57g, grassi 3,44g, carboidrati 77,2g, fibra 4,18g, ferro 1,12mg, zinco 1,72mg, calcio 14,4mg, rame 0,21mg, magnesio 113mg. **Mancano**: selenio, vitamina C, vitamina B12, folato totale, vitamina K, beta-carotene, l'altro carotenoide provitaminico A — non riportati nel record FDC (non assunti zero). Nessuna firma di arricchimento: il nome stesso dice "unenriched", nessun acido folico/vitamina aggiunta elencati.
+- **Nota di trasparenza dichiarata**: questo è un record generico "black rice" (riso nero), non specifico per il cultivar italiano "Riso Venere" (ibrido *Oryza sativa* japonica x riso nero selvatico, selezionato e coltivato prevalentemente in Italia, Pianura Padana). Nessun record FDC dedicato al Venere trovato in nessuna fonte consultata (getfoodfacts.com indicizza solo un prodotto Branded di singolo produttore, "Riso Bello Venere Black Rice" — scartato perché non generico). Il record Foundation Foods "black rice" generico è usato come il proxy più vicino disponibile — stesso tipo di approssimazione dichiarata già accettata per bacon/pancetta in una coda precedente. Copertura nutrienti (10/17) sotto la soglia tipica ma nello stesso ordine di grandezza di rucola (11/17) già accettata. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2710825 e dataType Foundation Foods.
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale crudo, Golden Set pipeline — già eseguito sul DB reale il 2026-10-12. Stessa categoria "cereale integrale in chicchi crudi", stessa famiglia botanica reale Poaceae).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `riso_venere` ("Riso venere (nero)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, "unenriched" esplicito).
+
+```
+npm run add-food -- --fdc-id=2710825 --food-id=food_riso_venere_raw \
+  --name-it="Riso venere (nero), crudo" \
+  --matrix-id=riso_venere --matrix-description-it="Riso venere (nero)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710825 --food-id=food_riso_venere_raw \
+  --name-it="Riso venere (nero), crudo" \
+  --matrix-id=riso_venere --matrix-description-it="Riso venere (nero)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
 
 - **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
