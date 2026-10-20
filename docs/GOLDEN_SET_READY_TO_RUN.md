@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anice (verde/comune), semi secchi — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_anice_semi_raw`. FDC ID 171316 (SR Legacy, "Spices, anise seed"). **Nota di trasparenza importante**: questo stesso FDC ID era già stato individuato e SCARTATO in un lotto precedente di questa pipeline come proxy ERRATO per "anice stellato" (*Illicium verum*, famiglia Illiciaceae/Schisandraceae) — il record descrive invece correttamente l'anice verde/comune (*Pimpinella anisum*, famiglia Apiaceae), una spezia italiana distinta (usata in biscotti, anisette, taralli) mai aggiunta sotto il proprio nome in questa pipeline. Non è quindi un doppione del tentativo precedente: qui il record viene usato per l'alimento che effettivamente rappresenta.
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, non riportati nel record, non assunti zero) — stesso ordine di grandezza di altre spezie/semi già accettati in questa coda con gap analoghi. Per 100g: energia 337kcal, proteine 17,6g, grassi 15,9g, carboidrati 50,0g, fibra 14,6g, calcio 646mg, ferro 37,0mg (alto, atteso per una spezia secca concentrata, stesso ordine di grandezza di cannella/cumino già eseguiti), zinco 5,30mg, magnesio 170mg, rame 0,91mg, selenio 5,00µg, vitamina C 21,0mg, folato totale 10,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171316 e dataType SR Legacy.
+- **Analogia usata**: `food_cacao_amaro_raw` (cacao amaro in polvere, Golden Set pipeline, già eseguito sul DB reale — stessa categoria funzionale "derivato vegetale secco concentrato in semi/polvere", preferito a `food_scarola_raw` usato per altre spezie in code precedenti perché più vicino come matrice secca concentrata a un seme di spezia che a una verdura fresca a foglia).
+- **Categoria dieta**: `plant_non_fruit` (spezia).
+- **Matrice**: nuova `anice_semi` ("Anice (verde/comune), semi secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Pimpinella anisum*, famiglia reale, stessa di finocchio/aneto/coriandolo/prezzemolo), `baseline_cooking_state=raw` (spezia secca, stessa convenzione delle altre spezie/erbe secche già eseguite), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171316 --food-id=food_anice_semi_raw \
+  --name-it="Anice (verde/comune), semi secchi" \
+  --matrix-id=anice_semi --matrix-description-it="Anice (verde/comune), semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cacao_amaro_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171316 --food-id=food_anice_semi_raw \
+  --name-it="Anice (verde/comune), semi secchi" \
+  --matrix-id=anice_semi --matrix-description-it="Anice (verde/comune), semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cacao_amaro_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Siero di latte acido (acid whey), liquido — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_siero_di_latte_acido_raw`. FDC ID 170885 (SR Legacy, "Whey, acid, fluid" — il siero "acido", sottoprodotto della coagulazione acida tipica di formaggi come la ricotta (già eseguita nel Golden Set come `food_ricotta`), distinto dal siero "dolce" (FDC 171282, già 🟡 in questa pipeline dal ventiquattresimo lotto) sottoprodotto della coagulazione a caglio).
