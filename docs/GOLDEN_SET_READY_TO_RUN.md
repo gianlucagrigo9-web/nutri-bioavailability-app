@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Fegato d'oca, crudo — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_fegato_di_oca_raw`. FDC ID 172415 (SR Legacy, "Goose, liver, raw").
+- **Nutrienti**: **14/17**. Energia 133kcal, proteine 16,4g, grassi 4,28g, carboidrati 6,32g, fibra 0g esplicito, ferro 30,5mg, zinco 3,07mg, calcio 43,0mg, rame 7,52mg, magnesio 24,0mg, selenio 68,1µg, vitamina C 4,50mg, vitamina B12 54,0µg, folato totale 738µg, acido folico 0µg esplicito separato, vitamina A RAE/retinolo 9.309µg esplicito (valore enorme ma tipico del fegato, nessuna firma di arricchimento). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172415 e dataType SR Legacy. **Nota di trasparenza**: ferro (30,5mg), vitamina B12 (54,0µg) e folato (738µg) coincidono esattamente con quelli del fegato d'anatra (voce precedente, stesso lotto) — non è un errore di questa pipeline, sono i valori esplicitamente riportati dalla fonte per questo specifico FDC ID; energia, proteine, grassi, carboidrati, calcio e rame differiscono fra i due record, quindi non è un duplicato dello stesso alimento, verosimilmente USDA ha stimato alcuni micronutrienti dei due fegati di palmipede da un campione/riferimento comune.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo — già eseguito sul DB reale. Stessa categoria "fegato di pollame crudo").
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `fegato_di_oca` ("Fegato d'oca").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172415 --food-id=food_fegato_di_oca_raw \
+  --name-it="Fegato d'oca, crudo" \
+  --matrix-id=fegato_di_oca --matrix-description-it="Fegato d'oca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172415 --food-id=food_fegato_di_oca_raw \
+  --name-it="Fegato d'oca, crudo" \
+  --matrix-id=fegato_di_oca --matrix-description-it="Fegato d'oca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Fegato d'anatra, crudo — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_fegato_di_anatra_raw`. FDC ID 174467 (SR Legacy, "Duck, domesticated, liver, raw").
+- **Nutrienti**: **14/17**. Energia 136kcal, proteine 18,7g, grassi 4,64g, carboidrati 3,53g, fibra 0g esplicito, ferro 30,5mg, zinco 3,07mg, calcio 11,0mg, rame 5,96mg, magnesio 24,0mg, selenio 67,0µg, vitamina C 4,50mg, vitamina B12 54,0µg, folato totale 738µg, acido folico 0µg esplicito separato, vitamina A RAE/retinolo 11.984µg esplicito (valore enorme ma tipico del fegato, nessuna firma di arricchimento). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174467 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo — già eseguito sul DB reale. Stessa categoria "fegato di pollame crudo").
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `fegato_di_anatra` ("Fegato d'anatra").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174467 --food-id=food_fegato_di_anatra_raw \
+  --name-it="Fegato d'anatra, crudo" \
+  --matrix-id=fegato_di_anatra --matrix-description-it="Fegato d'anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174467 --food-id=food_fegato_di_anatra_raw \
+  --name-it="Fegato d'anatra, crudo" \
+  --matrix-id=fegato_di_anatra --matrix-description-it="Fegato d'anatra" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Animelle di manzo (pancreas), crude — preparato 2026-10-20 dal task orario (ventunesimo lotto)
 
 - **food_id**: `food_animelle_di_manzo_raw`. FDC ID 169452 (SR Legacy, "Beef, variety meats and by-products, pancreas, raw").
