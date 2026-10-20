@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Faraona, carne senza pelle, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_faraona_raw`. FDC ID 174471 (SR Legacy, "Guinea hen, meat only, raw").
+- **Nutrienti**: **14/17**. Energia 110kcal, proteine 20,6g, grassi 2,47g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,77mg, zinco 1,20mg, calcio 11,0mg, rame 0,044mg, magnesio 24,0mg, selenio 17,5µg, vitamina C 1,70mg, vitamina B12 0,37µg, folato totale 6,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record, stesso gap tipico già visto per oca/anatra/agnello in questa pipeline. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174471 e dataType SR Legacy. Nessun record "cooked"/cotto trovato per la faraona in nessuna fonte consultata (getfoodfacts.com, triagemethod.com, foodnutrify.com) — solo il crudo è indicizzato.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, pollame, carne senza pelle, crudo — già eseguito sul DB reale. Stessa categoria "pollame, carne magra senza pelle, cruda", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `faraona` ("Faraona").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174471 --food-id=food_faraona_raw \
+  --name-it="Faraona, carne senza pelle, cruda" \
+  --matrix-id=faraona --matrix-description-it="Faraona" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174471 --food-id=food_faraona_raw \
+  --name-it="Faraona, carne senza pelle, cruda" \
+  --matrix-id=faraona --matrix-description-it="Faraona" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Oca, cotta (arrosto) — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_oca_cotta`. FDC ID 172414 (SR Legacy, "Goose, domesticated, meat only, cooked, roasted").
