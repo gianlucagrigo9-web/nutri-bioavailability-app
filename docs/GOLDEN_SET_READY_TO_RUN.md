@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pesce gatto americano (channel catfish), allevato, crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_pesce_gatto_americano_raw`. FDC ID 175165 (SR Legacy, "Fish, catfish, channel, farmed, raw"). **Nota di trasparenza**: questo è il pesce gatto americano (*Ictalurus punctatus*), SPECIE DIVERSA dal pangasio asiatico (*Pangasius*) scartato poco sopra in questo stesso turno per mismatch di specie — qui invece il nome e la specie corrispondono esattamente al record FDC, nessuna sostituzione.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 119kcal, proteine 15,2g, grassi 5,94g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,23mg, zinco 0,48mg, calcio 8,00mg, rame 0,032mg, magnesio 19,0mg, selenio 8,20µg, vitamina C 0mg esplicito, vitamina B12 2,88µg, folato totale 10,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 2,10µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175165 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa categoria funzionale "pesce bianco/magro crudo d'acqua dolce o salata", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_gatto_americano` ("Pesce gatto americano (channel catfish)").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di merluzzo/tilapia/halibut già eseguiti/in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175165 --food-id=food_pesce_gatto_americano_raw \
+  --name-it="Pesce gatto americano (channel catfish), allevato, crudo" \
+  --matrix-id=pesce_gatto_americano --matrix-description-it="Pesce gatto americano (channel catfish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175165 --food-id=food_pesce_gatto_americano_raw \
+  --name-it="Pesce gatto americano (channel catfish), allevato, crudo" \
+  --matrix-id=pesce_gatto_americano --matrix-description-it="Pesce gatto americano (channel catfish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Alga nori (laver), cruda/secca — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_alga_nori_raw`. FDC ID 168458 (SR Legacy, "Seaweed, laver, raw" — "laver"/nori è il nome comune inglese dell'alga rossa *Porphyra/Pyropia*, la stessa usata per i fogli di sushi). **Nota sulla fonte**: nessuna pagina getfoodfacts.com `/food/` dedicata è stata trovata (solo una pagina "compare" il cui URL conferma l'FDC ID nello slug, ma il fetch diretto restituisce solo il template vuoto della pagina di confronto, stesso limite già incontrato per il luccio crudo in questo stesso turno); i valori sotto sono letti da triagemethod.com (ogni riga etichettata esplicitamente "SR (USDA Standard Reference Legacy)", nessuna riga mescolata con AFCD australiano — a differenza dei casi già scartati in questa coda) e confermati in modo indipendente da tools.myfooddata.com (stesso FDC ID 168458 citato esplicitamente, valori numerici praticamente identici dopo conversione: energia 34,6 vs 35,0kcal, ferro 1,81 vs 1,8mg, calcio 70,0 vs 70,0mg, folato 146,2 vs 146µg, vitamina K 3,8 vs 4,0µg, beta-carotene 3121,2 vs 3121µg) — stesso livello di verifica indiretta già accettato per `food_petto_di_pollo_raw`/milza di maiale in code precedenti.
