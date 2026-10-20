@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Piccione (colombo), carne senza pelle, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_piccione_raw`. FDC ID 171079 (SR Legacy, "Squab, (pigeon), meat only, raw").
+- **Nutrienti**: **14/17**. Energia 142kcal, proteine 17,5g, grassi 7,50g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 4,51mg, zinco 2,70mg, calcio 13,0mg, rame 0,59mg, magnesio 25,0mg, selenio 13,5µg, vitamina C 7,20mg, vitamina B12 0,47µg, folato totale 7,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record, stesso gap tipico già visto per oca/anatra/faraona/agnello in questa pipeline. "Squab" è il termine inglese standard per il piccione giovane da carne (colombo), "meat only" esclude la pelle, coerente con la convenzione già usata per petto di pollo/faraona. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171079 e dataType SR Legacy.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, pollame, carne senza pelle, crudo — già eseguito sul DB reale. Stessa categoria "pollame, carne magra senza pelle, cruda", `is_heme_iron=true` — stessa convenzione già usata per la faraona nel diciannovesimo lotto).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `piccione` ("Piccione (colombo)").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171079 --food-id=food_piccione_raw \
+  --name-it="Piccione (colombo), carne senza pelle, cruda" \
+  --matrix-id=piccione --matrix-description-it="Piccione (colombo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171079 --food-id=food_piccione_raw \
+  --name-it="Piccione (colombo), carne senza pelle, cruda" \
+  --matrix-id=piccione --matrix-description-it="Piccione (colombo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Animelle d'agnello (pancreas), crude — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_animelle_di_agnello_raw`. FDC ID 172538 (SR Legacy, "Lamb, variety meats and by-products, pancreas, raw").
