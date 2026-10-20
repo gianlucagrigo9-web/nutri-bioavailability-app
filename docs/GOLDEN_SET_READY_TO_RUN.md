@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Cervella di maiale, cruda — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_cervella_di_maiale_raw`. FDC ID 168264 (SR Legacy, "Pork, fresh, variety meats and by-products, brain, raw").
+- **Nutrienti**: **14/17**. Energia 127kcal, proteine 10,3g, grassi 9,21g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 1,60mg, zinco 1,27mg, calcio 10,0mg, rame 0,24mg, magnesio 14,0mg, selenio 15,9µg, vitamina C 13,5mg, vitamina B12 2,19µg, folato totale 6,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168264 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo crudo, Golden Set originale — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo"; nessun organo di maiale ancora eseguito sul DB reale da usare come analogia di specie).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `cervella_di_maiale` ("Cervella di maiale").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168264 --food-id=food_cervella_di_maiale_raw \
+  --name-it="Cervella di maiale, cruda" \
+  --matrix-id=cervella_di_maiale --matrix-description-it="Cervella di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168264 --food-id=food_cervella_di_maiale_raw \
+  --name-it="Cervella di maiale, cruda" \
+  --matrix-id=cervella_di_maiale --matrix-description-it="Cervella di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Polmone di maiale, crudo — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_polmone_di_maiale_raw`. FDC ID 167864 (SR Legacy, "Pork, fresh, variety meats and by-products, lungs, raw").
+- **Nutrienti**: **14/17**. Energia 85,0kcal, proteine 14,1g, grassi 2,72g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 18,9mg, zinco 2,03mg, calcio 7,00mg, rame 0,083mg, magnesio 14,0mg, selenio 17,8µg, vitamina C 12,3mg, vitamina B12 2,75µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). Ferro molto alto (18,9mg/100g), coerente con un organo molto vascolarizzato. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167864 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (fegato di manzo crudo, Golden Set originale — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo ricco di ferro"; nessun organo di maiale ancora eseguito sul DB reale da usare come analogia di specie).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `polmone_di_maiale` ("Polmone di maiale").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167864 --food-id=food_polmone_di_maiale_raw \
+  --name-it="Polmone di maiale, crudo" \
+  --matrix-id=polmone_di_maiale --matrix-description-it="Polmone di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167864 --food-id=food_polmone_di_maiale_raw \
+  --name-it="Polmone di maiale, crudo" \
+  --matrix-id=polmone_di_maiale --matrix-description-it="Polmone di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Milza di vitello, cruda — preparato 2026-10-20 dal task orario (ventunesimo lotto)
 
 - **food_id**: `food_milza_di_vitello_raw`. FDC ID 172540 (SR Legacy, "Veal, variety meats and by-products, spleen, raw").
