@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Olio di palma — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_olio_di_palma_raw`. FDC ID 171015 (SR Legacy, "Oil, palm"). **Nota di trasparenza**: beta-carotene riportato a 0µg esplicito indica che questo record rappresenta l'olio di palma raffinato/sbiancato/deodorato (RBD) — la forma più diffusa come olio da cucina/industriale, inclusa in alimenti confezionati — e NON l'olio di palma rosso non raffinato (ricco di carotenoidi naturali, fino a diverse centinaia di mg/kg). Voce quindi limitata all'olio di palma "comune"; l'olio di palma rosso andrebbe eventualmente aggiunto come alimento distinto con un record dedicato, non con questo FDC ID.
+- **Nutrienti**: **17/17** (completo, quasi tutto a zero esplicito come atteso per un grasso puro raffinato). Per 100g: energia 884kcal, proteine 0g esplicito, grassi 100g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0,010mg, zinco 0mg esplicito, magnesio 0mg esplicito, rame 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K (fillochinone) 8,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171015 e dataType SR Legacy.
+- **Analogia usata**: `food_olio_di_cocco_raw` (olio di cocco, Golden Set pipeline, già eseguito sul DB reale — stessa categoria "olio vegetale puro non raffinato/raffinato", E stessa famiglia botanica reale **Arecaceae** (palma): olio di cocco da *Cocos nucifera*, olio di palma da *Elaeis guineensis*, generi diversi ma stessa famiglia).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale).
+- **Matrice**: nuova `olio_di_palma` ("Olio di palma").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 0mg esplicito), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, stessa convenzione degli altri oli raffinati già eseguiti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae`, `baseline_cooking_state=raw` (olio pronto al consumo, stessa convenzione degli altri oli), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171015 --food-id=food_olio_di_palma_raw \
+  --name-it="Olio di palma" \
+  --matrix-id=olio_di_palma --matrix-description-it="Olio di palma" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171015 --food-id=food_olio_di_palma_raw \
+  --name-it="Olio di palma" \
+  --matrix-id=olio_di_palma --matrix-description-it="Olio di palma" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Rana pescatrice (coda di rospo), cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_rana_pescatrice_raw`. FDC ID 173676 (SR Legacy, "Fish, monkfish, raw" — pagina getfoodfacts.com dedicata e pulita, nessun candidato alternativo necessario).
