@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salame, stagionato (solo maiale) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_salame_raw`. FDC ID 172938 (SR Legacy, "Salami, dry or hard, pork" — scelta la variante solo maiale, non la "pork, beef" FDC 174582 trovata nella stessa ricerca, perché più vicina al salame italiano tradizionale, solitamente 100% maiale).
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero). Per 100g: energia 407kcal, proteine 22,6g, grassi 33,7g, carboidrati 1,60g, fibra 0g esplicito, ferro 1,30mg, zinco 4,20mg, calcio 13,0mg, rame 0,16mg, magnesio 22,0mg, selenio 25,4µg, vitamina C 0mg esplicito, vitamina B12 2,80µg, folato totale 2,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). Sodio 2260mg/100g, alto ma atteso per un salume stagionato ed essiccato (curatura marcata, più intensa della pancetta già accettata) — non una firma di arricchimento, il sodio non è uno dei 17 nutrienti tracciati. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172938 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, già eseguito sul DB reale — stessa convenzione "carne processata" già usata per `food_prosciutto_cotto`/`food_pancetta_raw` in questa pipeline).
+- **Categoria dieta**: `meat_fish` (salume di maiale).
+- **Matrice**: nuova `salame_raw` ("Salame, stagionato").
+- **Attributi**: `is_heme_iron=true` (carne di maiale stagionata, stessa convenzione di pancetta/lonza/prosciutto già eseguiti), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (FDC "dry or hard" — stagionato/essiccato, non cotto, stessa convenzione della pancetta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172938 --food-id=food_salame_raw \
+  --name-it="Salame, stagionato (solo maiale)" \
+  --matrix-id=salame_raw --matrix-description-it="Salame, stagionato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172938 --food-id=food_salame_raw \
+  --name-it="Salame, stagionato (solo maiale)" \
+  --matrix-id=salame_raw --matrix-description-it="Salame, stagionato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Siero di latte dolce (whey), liquido — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_siero_di_latte_dolce_raw`. FDC ID 171282 (SR Legacy, "Whey, sweet, fluid" — il siero "dolce", sottoprodotto della caseificazione a caglio, distinto dal siero "acido" (FDC 170885, "Whey, acid, fluid") tipico delle cagliate acide come la ricotta; scelto il dolce perché più rappresentativo della produzione di formaggi stagionati a caglio come parmigiano/grana, già nel Golden Set).
