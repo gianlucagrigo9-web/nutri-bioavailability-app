@@ -160,6 +160,30 @@ npm run add-food -- --fdc-id=172532 --food-id=food_fegato_di_agnello_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Rognone d'agnello, cotto (brasato) — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_rognone_di_agnello_cotto`. FDC ID 174355 (SR Legacy, "Lamb, variety meats and by-products, kidneys, cooked, braised").
+- **Nutrienti**: **14/17**. Energia 137kcal, proteine 23,6g, grassi 3,62g, carboidrati 0,99g, fibra 0g esplicito, ferro 12,4mg (molto alto, atteso per un rene d'agnello), zinco 3,80mg, calcio 18,0mg, rame 0,37mg, magnesio 20,0mg, selenio 219µg, vitamina C 12,0mg, vitamina B12 78,9µg, folato totale 81,0µg, acido folico 0µg esplicito (riportato come 0, nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174355 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale). Stessa categoria frattaglia cotta, organo/specie diversi.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_agnello_cotto` ("Rognone d'agnello, cotto").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174355 --food-id=food_rognone_di_agnello_cotto \
+  --name-it="Rognone d'agnello, cotto (brasato)" \
+  --matrix-id=rognone_di_agnello_cotto --matrix-description-it="Rognone d'agnello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174355 --food-id=food_rognone_di_agnello_cotto \
+  --name-it="Rognone d'agnello, cotto (brasato)" \
+  --matrix-id=rognone_di_agnello_cotto --matrix-description-it="Rognone d'agnello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
