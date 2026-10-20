@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Oca, cotta (arrosto) — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_oca_cotta`. FDC ID 172414 (SR Legacy, "Goose, domesticated, meat only, cooked, roasted").
+- **Nutrienti**: **14/17**. Energia 238kcal, proteine 29,0g, grassi 12,7g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,87mg, zinco 3,17mg, calcio 14,0mg, rame 0,28mg, magnesio 25,0mg, selenio 25,5µg, vitamina C 0mg esplicito, vitamina B12 0,49µg, folato totale 12,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap del crudo `food_oca_raw` (solo "pronto" in questo stesso lotto, non ancora eseguito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172414 e dataType SR Legacy.
+- **Analogia usata**: `food_anatra_raw` (anatra, carne senza pelle, cruda — già eseguita sul DB reale. `food_anatra_cotta`, pur più precisa per lo stato di cottura, esiste solo come voce "pronta" non ancora eseguita nel Golden Set, quindi non riusabile come analogia per questa regola; l'analogia riguarda gli attributi categorici — `is_heme_iron` — non il valore nutrizionale, non influenzati dallo stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `oca_cotta` ("Oca, cotta").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172414 --food-id=food_oca_cotta \
+  --name-it="Oca, cotta (arrosto)" \
+  --matrix-id=oca_cotta --matrix-description-it="Oca, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172414 --food-id=food_oca_cotta \
+  --name-it="Oca, cotta (arrosto)" \
+  --matrix-id=oca_cotta --matrix-description-it="Oca, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Oca, carne senza pelle, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_oca_raw`. FDC ID 172413 (SR Legacy, "Goose, domesticated, meat only, raw").
