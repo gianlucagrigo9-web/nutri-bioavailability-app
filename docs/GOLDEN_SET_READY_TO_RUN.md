@@ -88,6 +88,30 @@ npm run add-food -- --fdc-id=170598 --food-id=food_lingua_di_manzo_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Rognone di manzo, cotto (bollito) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_rognone_di_manzo_cotto`. FDC ID 169450 (SR Legacy, "Beef, variety meats and by-products, kidneys, cooked, simmered"). Distinto da `food_rognone_di_manzo_raw` (crudo, FDC 169449, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **17/17** — tutti presenti. Energia 158kcal, proteine 27,3g, grassi 4,65g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 5,80mg, zinco 2,84mg, calcio 19,0mg, rame 0,56mg, magnesio 12,0mg, selenio 168µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, vitamina B12 24,9µg, folato totale 83,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti. Selenio molto alto (168µg/100g) ma caratteristica nota del rognone, organo con selenio concentrato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169450 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_rognone_di_manzo_raw`, che resta solo "pronto" e non è nel DB. Stessa specie, categoria frattaglia cotta, organo diverso).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_manzo_cotto` ("Rognone di manzo, cotto").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169450 --food-id=food_rognone_di_manzo_cotto \
+  --name-it="Rognone di manzo, cotto (bollito)" \
+  --matrix-id=rognone_di_manzo_cotto --matrix-description-it="Rognone di manzo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169450 --food-id=food_rognone_di_manzo_cotto \
+  --name-it="Rognone di manzo, cotto (bollito)" \
+  --matrix-id=rognone_di_manzo_cotto --matrix-description-it="Rognone di manzo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
