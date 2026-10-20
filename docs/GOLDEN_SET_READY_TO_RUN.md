@@ -208,6 +208,32 @@ npm run add-food -- --fdc-id=169902 --food-id=food_quaglia_carne_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Zucca butternut, cotta (al forno, con sale) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_zucca_butternut_cotta`. FDC ID 170130 (SR Legacy, "Squash, winter, butternut, cooked, baked, with salt" — unica variante con pagina getfoodfacts.com pulita trovata; esiste anche un FDC ID adiacente 169296 per la variante "without salt", ma nessuna fonte consultata ne cita esplicitamente l'FDC ID in pagina — solo valori identici alla variante con sale tranne il sodio, non confermati come appartenenti a quell'ID specifico — quindi non usato). Distinta da `food_zucca_butternut_raw` (cruda, FDC 169295, solo "pronto" in questo file — non ancora eseguita sul DB reale, stesso alimento, forma cotta). **Deviazione dichiarata**: variante "con sale" (sodio 240mg/100g contro 4mg/100g del crudo), non tracciato dai 17 nutrienti del motore — stessa deviazione già accettata più volte in questa coda (riso bianco cotto, bietole da costa cotte, verza cotta, peperoni rossi/verdi cotti, cavolo rapa cotto, sedano rapa cotto).
+- **Nutrienti**: **17/17** — tutti presenti. Energia 40,0kcal, proteine 0,88g, grassi 0,09g, carboidrati 10,5g, fibra 3,22g, ferro 0,59mg, zinco 0,13mg, calcio 41,0mg, rame 0,06mg, magnesio 29,0mg, selenio 0,49µg, vitamina C 15,1mg, vitamina K 1,02µg, vitamina B12 0µg esplicito, folato totale 19,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 4570µg, alfa-carotene 1130µg e beta-criptoxantina 3116µg (somma in `other_provitamin_a_carotenoids_mcg` = 4246µg). Carotenoidi molto alti, coerente con la nota caratteristica della zucca butternut. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170130 e dataType SR Legacy.
+- **Analogia usata**: `food_pumpkin_raw` (zucca generica cruda, già eseguita sul DB reale — stessa famiglia botanica Cucurbitaceae, stessa matrice tipo polpa/carotenoidi; non `food_zucca_cotta`/`food_zucca_butternut_raw`, entrambi solo "pronti" e non nel DB).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_butternut_cotta` ("Zucca butternut, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, per analogia con `food_pumpkin_raw`), `--carotenoid-matrix-state=cooked_or_disrupted` (beta-carotene molto presente ma matrice disgregata dalla cottura — il crudo sarebbe `raw_intact`, stessa convenzione già usata per le altre verdure cotte in questa coda), `zinc_bioaccessibility_bucket` default `none`, `--botanical-family=Cucurbitaceae` (stessa famiglia di `food_pumpkin_raw`/`food_zucca_butternut_raw`), `baseline_cooking_state=baked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170130 --food-id=food_zucca_butternut_cotta \
+  --name-it="Zucca butternut, cotta (al forno, con sale)" \
+  --matrix-id=zucca_butternut_cotta --matrix-description-it="Zucca butternut, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170130 --food-id=food_zucca_butternut_cotta \
+  --name-it="Zucca butternut, cotta (al forno, con sale)" \
+  --matrix-id=zucca_butternut_cotta --matrix-description-it="Zucca butternut, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_pumpkin_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
