@@ -213,6 +213,32 @@ npm run add-food -- --fdc-id=173668 --food-id=food_aringa_affumicata_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Noci pecan, crude (secche) — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_noci_pecan_raw`. FDC ID 170182 (SR Legacy, "Nuts, pecans" — record generico storico USDA, NDB 12142, nessun termine di tostatura nel nome: rappresenta il seme crudo/secco).
+- **Nutrienti**: **17/17**, nessun gap. Energia 691kcal, proteine 9,17g, grassi 72,0g, carboidrati 13,9g, fibra 9,60g, ferro 2,53mg, zinco 4,53mg, calcio 70,0mg, rame 1,20mg, magnesio 121mg, selenio 3,80µg, vitamina C 1,10mg, vitamina K (fillochinone) 3,50µg, vitamina B12 0µg esplicito, folato totale 22,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 29,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 9,00µg (quindi `other_provitamin_a_carotenoids_mcg=9,00`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170182 e dataType SR Legacy; identità del record (seme crudo, non tostato) confermata per riscontro incrociato con recipal.com/ingredients/3711, che cita lo stesso alimento come NDB 12142 "Nuts, Pecans" senza termine di tostatura. **Distinto** dai record "dry roasted" (FDC 169424/altri) già scartati in coda precedente per mancanza di un FDC ID verificabile sulla variante tostata — qui la variante cruda/secca ha invece un FDC ID verificato e completo. Scartato a priori il record Foundation Foods FDC 2346395 "Nuts, pecans, halves, raw": copertura nutrienti insufficiente (11/17, mancano selenio, vitamina C, vitamina B12, folato totale, acido folico e tutti i carotenoidi, assenti dalla pagina).
+- **Analogia usata**: `food_almonds` (Golden Set originale, mandorle secche non salate — già eseguite sul DB reale. Stessa categoria "frutta a guscio cruda/secca", `is_heme_iron=false`).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca).
+- **Matrice**: nuova `noci_pecan_raw` ("Noci pecan, crude").
+- **Attributi**: `is_heme_iron` omesso (false, come le mandorle), `matrix_category_calcium` omesso (NULL, per analogia con `food_almonds`), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina presenti e non nulli, seme crudo/secco non tostato — matrice non disgregata dal calore), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Juglandaceae` (famiglia botanica reale del pecan, *Carya illinoinensis* — stessa famiglia del noce comune, diversa da quella delle mandorle usate per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170182 --food-id=food_noci_pecan_raw \
+  --name-it="Noci pecan, crude (secche)" \
+  --matrix-id=noci_pecan_raw --matrix-description-it="Noci pecan, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170182 --food-id=food_noci_pecan_raw \
+  --name-it="Noci pecan, crude (secche)" \
+  --matrix-id=noci_pecan_raw --matrix-description-it="Noci pecan, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_almonds \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
