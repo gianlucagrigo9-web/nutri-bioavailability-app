@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Avena, cotta (porridge con acqua, non arricchita, senza sale) — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_avena_cotta`. FDC ID 173905 (SR Legacy, "Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt"). Aggiunto oltre i 10 candidati originari del lotto: forma cotta mai tentata finora per l'avena, distinta da `food_avena_cruda` (cruda, già eseguita), stessa convenzione "coppie crudo/cotto" già usata per riso/orzo/quinoa/pasta in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 71,0kcal, proteine 2,54g, grassi 1,52g, carboidrati 12,0g, fibra 1,70g, calcio 9,00mg, ferro 0,90mg, zinco 1,00mg, magnesio 27,0mg, rame 0,074mg, selenio 5,40µg, vitamina C 0mg esplicito, folato totale 6,00µg, acido folico 0µg esplicito (titolo "unenriched" esplicito, nessuna firma di arricchimento, coerente con l'avena cruda già eseguita), vitamina B12 0µg esplicito, vitamina K (fillochinone) 0,30µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 4,00mg/100g (quasi nullo, coerente con "without salt" nel titolo, non uno dei 17 nutrienti tracciati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173905 e dataType SR Legacy.
+- **Analogia usata**: `food_avena_cruda` (avena cruda, Golden Set pipeline, già eseguita sul DB reale — stesso alimento, stato di cottura diverso, stessa famiglia botanica reale Poaceae).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `avena_cotta` ("Avena, cotta (porridge)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (*Avena sativa*, stessa di `food_avena_cruda`), `baseline_cooking_state=boiled` (cotta in acqua), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, "unenriched" esplicito nel titolo).
+
+```
+npm run add-food -- --fdc-id=173905 --food-id=food_avena_cotta \
+  --name-it="Avena, cotta (porridge, non arricchita, senza sale)" \
+  --matrix-id=avena_cotta --matrix-description-it="Avena, cotta (porridge)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_avena_cruda \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173905 --food-id=food_avena_cotta \
+  --name-it="Avena, cotta (porridge, non arricchita, senza sale)" \
+  --matrix-id=avena_cotta --matrix-description-it="Avena, cotta (porridge)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_avena_cruda \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Carpa, cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_carpa_raw`. FDC ID 171952 (SR Legacy, "Fish, carp, raw" — pagina getfoodfacts.com dedicata e pulita). Aggiunto oltre i 10 candidati originari del lotto (pesce d'acqua dolce europeo comune, mai tentato finora in questa pipeline).
