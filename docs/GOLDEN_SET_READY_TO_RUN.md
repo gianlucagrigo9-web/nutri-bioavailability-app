@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Carpa, cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_carpa_raw`. FDC ID 171952 (SR Legacy, "Fish, carp, raw" — pagina getfoodfacts.com dedicata e pulita). Aggiunto oltre i 10 candidati originari del lotto (pesce d'acqua dolce europeo comune, mai tentato finora in questa pipeline).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 127kcal, proteine 17,8g, grassi 5,60g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 41,0mg, ferro 1,24mg, zinco 1,48mg, magnesio 29,0mg, rame 0,057mg, selenio 12,6µg, vitamina C 1,60mg, folato totale 15,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina B12 1,53µg, vitamina K (fillochinone) 0,10µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171952 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa categoria funzionale "pesce crudo d'acqua dolce/salata", `is_heme_iron=true`, stessa convenzione già usata per tilapia/pesce gatto americano, altri pesci d'acqua dolce in questa coda).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `carpa` ("Carpa").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di merluzzo/tilapia/pesce gatto già eseguiti/in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171952 --food-id=food_carpa_raw \
+  --name-it="Carpa, cruda" \
+  --matrix-id=carpa --matrix-description-it="Carpa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171952 --food-id=food_carpa_raw \
+  --name-it="Carpa, cruda" \
+  --matrix-id=carpa --matrix-description-it="Carpa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Latte di bufala, crudo — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_latte_di_bufala_raw`. FDC ID 171280 (SR Legacy, "Milk, indian buffalo, fluid"). **Nota di trasparenza**: il record descrive il latte di bufala di tipo/razza indiana (es. Murrah), non la bufala mediterranea italiana (razza usata per la mozzarella di bufala campana) — ma si tratta della STESSA SPECIE (*Bubalus bubalis*, bufalo d'acqua domestico), non di una specie diversa: un proxy a livello di razza all'interno della stessa specie, diverso dal mismatch di specie/famiglia già scartato per orata/porgy o triglia/cefalo in questa pipeline — stessa convenzione già accettata per record USDA generici "all types"/"all commercial varieties" usati altrove nel Golden Set. **Distinto** da "mozzarella di bufala" (già ⚠ in un lotto precedente: nessun record FDC trovato per il formaggio).
