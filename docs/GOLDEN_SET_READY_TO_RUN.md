@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Latte di bufala, crudo — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_latte_di_bufala_raw`. FDC ID 171280 (SR Legacy, "Milk, indian buffalo, fluid"). **Nota di trasparenza**: il record descrive il latte di bufala di tipo/razza indiana (es. Murrah), non la bufala mediterranea italiana (razza usata per la mozzarella di bufala campana) — ma si tratta della STESSA SPECIE (*Bubalus bubalis*, bufalo d'acqua domestico), non di una specie diversa: un proxy a livello di razza all'interno della stessa specie, diverso dal mismatch di specie/famiglia già scartato per orata/porgy o triglia/cefalo in questa pipeline — stessa convenzione già accettata per record USDA generici "all types"/"all commercial varieties" usati altrove nel Golden Set. **Distinto** da "mozzarella di bufala" (già ⚠ in un lotto precedente: nessun record FDC trovato per il formaggio).
+- **Nutrienti**: **13/17** — mancano selenio, vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, non riportati nel record, non assunti zero). Per 100g: energia 97,0kcal, proteine 3,75g, grassi 6,89g, carboidrati 5,18g, fibra 0g esplicito, calcio 169mg (alto, coerente con latte di bufala, noto per calcio superiore al latte vaccino), ferro 0,12mg, zinco 0,22mg, magnesio 31,0mg, rame 0,046mg, vitamina C 2,30mg, folato totale 6,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento/aggiunta di vitamina D dichiarata), vitamina B12 0,36µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171280 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido animale", `matrix_category_calcium=medium_oxalate` per analogia diretta, stessa convenzione già usata per latte di pecora/capra/siero dolce/acido in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: nuova `latte_di_bufala` ("Latte di bufala").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171280 --food-id=food_latte_di_bufala_raw \
+  --name-it="Latte di bufala, crudo" \
+  --matrix-id=latte_di_bufala --matrix-description-it="Latte di bufala" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171280 --food-id=food_latte_di_bufala_raw \
+  --name-it="Latte di bufala, crudo" \
+  --matrix-id=latte_di_bufala --matrix-description-it="Latte di bufala" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy --apply
+```
+
 ### Anice (verde/comune), semi secchi — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_anice_semi_raw`. FDC ID 171316 (SR Legacy, "Spices, anise seed"). **Nota di trasparenza importante**: questo stesso FDC ID era già stato individuato e SCARTATO in un lotto precedente di questa pipeline come proxy ERRATO per "anice stellato" (*Illicium verum*, famiglia Illiciaceae/Schisandraceae) — il record descrive invece correttamente l'anice verde/comune (*Pimpinella anisum*, famiglia Apiaceae), una spezia italiana distinta (usata in biscotti, anisette, taralli) mai aggiunta sotto il proprio nome in questa pipeline. Non è quindi un doppione del tentativo precedente: qui il record viene usato per l'alimento che effettivamente rappresenta.
