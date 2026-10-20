@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Capra, carne cotta (arrosto) — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_capra_cotta`. FDC ID 175304 (SR Legacy, "Game meat, goat, cooked, roasted").
+- **Nutrienti**: **16/17** — il record più completo di questo lotto. Energia 143kcal, proteine 27,1g, grassi 3,03g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 3,73mg, zinco 5,27mg, calcio 17,0mg, rame 0,30mg, magnesio 0mg esplicito, selenio 11,8µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 1,20µg, vitamina B12 1,19µg, folato totale 5,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito. **Manca solo**: il composito `other_provitamin_a_carotenoids_mcg` (alfa-carotene/beta-criptoxantina), non riportato nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175304 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto alla griglia — già eseguito sul DB reale. `food_capra_raw`, pur più precisa per la specie, esiste solo come voce "pronta" in questo stesso lotto, non ancora eseguita — l'analogia deve riferirsi a un alimento già reale nel DB; attributi categorici — `is_heme_iron` — identici fra carne rossa cruda e cotta, indipendenti dallo stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `capra_cotta` ("Capra, cotta").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175304 --food-id=food_capra_cotta \
+  --name-it="Capra, carne cotta (arrosto)" \
+  --matrix-id=capra_cotta --matrix-description-it="Capra, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175304 --food-id=food_capra_cotta \
+  --name-it="Capra, carne cotta (arrosto)" \
+  --matrix-id=capra_cotta --matrix-description-it="Capra, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Capra, carne cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_capra_raw`. FDC ID 175303 (SR Legacy, "Game meat, goat, raw").
