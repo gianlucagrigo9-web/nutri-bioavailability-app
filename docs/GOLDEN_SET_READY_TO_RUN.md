@@ -64,6 +64,30 @@ npm run add-food -- --fdc-id=168268 --food-id=food_cuore_di_maiale_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Rognone di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_rognone_di_maiale_raw`. FDC ID 168270 (SR Legacy, "Pork, fresh, variety meats and by-products, kidneys, raw").
+- **Nutrienti**: **14/17**. Energia 100kcal, proteine 16,5g, grassi 3,25g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 4,89mg, zinco 2,75mg, calcio 9,00mg, rame 0,62mg, magnesio 17,0mg, selenio 190µg (molto alto, atteso per un rene), vitamina C 13,3mg, vitamina B12 8,49µg, folato totale 42,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap delle altre frattaglie di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168270 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale). Stessa categoria frattaglia cruda, organo/specie diversi.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_maiale_raw` ("Rognone di maiale, crudo").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168270 --food-id=food_rognone_di_maiale_raw \
+  --name-it="Rognone di maiale, crudo" \
+  --matrix-id=rognone_di_maiale_raw --matrix-description-it="Rognone di maiale, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168270 --food-id=food_rognone_di_maiale_raw \
+  --name-it="Rognone di maiale, crudo" \
+  --matrix-id=rognone_di_maiale_raw --matrix-description-it="Rognone di maiale, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
