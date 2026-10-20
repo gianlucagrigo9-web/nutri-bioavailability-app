@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **14/17**. Energia 165kcal, proteine 26,0g, grassi 4,40g, carboidrati 3,76g, fibra 0g esplicito, ferro 17,9mg, zinco 6,72mg, calcio 10,0mg, rame 0,63mg, magnesio 14,0mg, selenio 67,5µg, vitamina C 23,6mg, vitamina B12 18,7µg, folato totale 163µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — gap atteso per un fegato, stesso ordine di grandezza già accettato per fegato di vitello/pollo cotti in questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167863 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_fegato_di_maiale_raw`, che resta solo "pronto" e non è nel DB. Stesso organo/categoria frattaglia cotta, specie diversa — stesso tipo di analogia cross-specie già usato per il crudo del fegato di maiale stesso, che usa `food_fegato_di_vitello_raw`).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `fegato_di_maiale_cotto` ("Fegato di maiale, cotto").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167863 --food-id=food_fegato_di_maiale_cotto \
+  --name-it="Fegato di maiale, cotto (brasato)" \
+  --matrix-id=fegato_di_maiale_cotto --matrix-description-it="Fegato di maiale, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167863 --food-id=food_fegato_di_maiale_cotto \
+  --name-it="Fegato di maiale, cotto (brasato)" \
+  --matrix-id=fegato_di_maiale_cotto --matrix-description-it="Fegato di maiale, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
