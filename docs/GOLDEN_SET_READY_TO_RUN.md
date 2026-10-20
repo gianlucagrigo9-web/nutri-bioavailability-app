@@ -160,6 +160,30 @@ npm run add-food -- --fdc-id=171059 --food-id=food_cuore_di_pollo_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Milza di manzo, cotta (brasata) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_milza_di_manzo_cotta`. FDC ID 170597 (SR Legacy, "Beef, variety meats and by-products, spleen, cooked, braised"). Alimento tradizionale italiano (es. "pani ca meusa" palermitano). **Nota**: il crudo è stato valutato in parallelo e SCARTATO — nessuna fonte consultata (getfoodfacts.com, triagemethod.com, bodbot.com, recipal.com, uhhospitals.org, chrismasterjohnphd.com) riporta un FDC ID moderno verificabile per "spleen, raw", solo il numero legacy NDB 13333 su più fonti indipendenti (una fonte, chrismasterjohnphd.com, riporta anche un'energia 272kcal in evidente contraddizione con le altre, 105kcal) — quindi questo alimento entra in coda SOLO nella forma cotta, senza una voce "cruda" corrispondente (stesso schema già usato per formaggio Gouda/salmone affumicato: un alimento nuovo non ha sempre un pari crudo/cotto).
+- **Nutrienti**: **14/17**. Energia 145kcal, proteine 25,1g, grassi 4,20g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 39,4mg, zinco 2,79mg, calcio 12,0mg, rame 0,92mg, magnesio 19,0mg, selenio 91,4µg, vitamina C 50,3mg, vitamina B12 5,02µg, folato totale 4,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap atteso delle altre frattaglie in questa coda. Ferro molto alto (39,4mg/100g) ma caratteristica nota della milza, organo che filtra/ricicla globuli rossi. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170597 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale. Stessa specie, categoria frattaglia cotta, organo diverso — stesso tipo di analogia già usato per trippa/lingua/rognone/cuore di manzo in questo stesso lotto).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `milza_di_manzo_cotta` ("Milza di manzo, cotta").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170597 --food-id=food_milza_di_manzo_cotta \
+  --name-it="Milza di manzo, cotta (brasata)" \
+  --matrix-id=milza_di_manzo_cotta --matrix-description-it="Milza di manzo, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170597 --food-id=food_milza_di_manzo_cotta \
+  --name-it="Milza di manzo, cotta (brasata)" \
+  --matrix-id=milza_di_manzo_cotta --matrix-description-it="Milza di manzo, cotta" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
