@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cuore d'agnello, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_cuore_di_agnello_raw`. FDC ID 172527 (SR Legacy, "Lamb, variety meats and by-products, heart, raw").
+- **Nutrienti**: **14/17**. Energia 122kcal, proteine 16,5g, grassi 5,68g, carboidrati 0,21g, fibra 0g esplicito, ferro 4,60mg, zinco 1,87mg, calcio 6,00mg, rame 0,40mg, magnesio 17,0mg, selenio 32,0µg, vitamina C 5,00mg, vitamina B12 10,3µg, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (vitamina A RAE/retinolo riportati esplicitamente a 0µg, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172527 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo ricco di ferro", `is_heme_iron=true`; distinto dal cuore d'agnello COTTO, già 🟡 dal diciassettesimo lotto con FDC 172528, non riusabile come analogia perché non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `cuore_di_agnello` ("Cuore di agnello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172527 --food-id=food_cuore_di_agnello_raw \
+  --name-it="Cuore d'agnello, crudo" \
+  --matrix-id=cuore_di_agnello --matrix-description-it="Cuore di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172527 --food-id=food_cuore_di_agnello_raw \
+  --name-it="Cuore d'agnello, crudo" \
+  --matrix-id=cuore_di_agnello --matrix-description-it="Cuore di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rognone d'agnello, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_rognone_di_agnello_raw`. FDC ID 174354 (SR Legacy, "Lamb, variety meats and by-products, kidneys, raw").
