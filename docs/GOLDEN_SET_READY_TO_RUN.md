@@ -136,6 +136,30 @@ npm run add-food -- --fdc-id=168276 --food-id=food_lingua_di_maiale_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Fegato d'agnello, cotto (brasato) — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_fegato_di_agnello_cotto`. FDC ID 172532 (SR Legacy, "Lamb, variety meats and by-products, liver, cooked, braised").
+- **Nutrienti**: **14/17**. Energia 220kcal, proteine 30,6g, grassi 8,81g, carboidrati 2,53g, fibra 0g esplicito, ferro 8,28mg, zinco 7,89mg, calcio 8,00mg, rame 7,07mg (molto alto, atteso per un fegato), magnesio 22,0mg, selenio 111µg, vitamina C 4,00mg, vitamina B12 76,5µg, folato totale 73,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap atteso per un fegato già accettato per fegato di manzo/vitello/maiale cotti in questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172532 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale). Stesso organo, specie diversa — stesso tipo di analogia cross-specie già usata per fegato di maiale/vitello cotti in questa coda.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `fegato_di_agnello_cotto` ("Fegato d'agnello, cotto").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172532 --food-id=food_fegato_di_agnello_cotto \
+  --name-it="Fegato d'agnello, cotto (brasato)" \
+  --matrix-id=fegato_di_agnello_cotto --matrix-description-it="Fegato d'agnello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172532 --food-id=food_fegato_di_agnello_cotto \
+  --name-it="Fegato d'agnello, cotto (brasato)" \
+  --matrix-id=fegato_di_agnello_cotto --matrix-description-it="Fegato d'agnello, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
