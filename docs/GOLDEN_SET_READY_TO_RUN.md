@@ -140,6 +140,31 @@ npm run add-food -- --fdc-id=169219 --food-id=food_songino_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Pancetta, cruda (non affumicata) — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_pancetta_raw`. FDC ID 168277 (SR Legacy, "Pork, cured, bacon, unprepared").
+- **Nutrienti**: **17/17**, nessun gap. Energia 393kcal/100g (444kcal per porzione da 113g), proteine 13,6g/100g, grassi 37,2g/100g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,38mg/100g, zinco 1,14mg/100g, calcio 6,00mg/100g, rame 0,046mg/100g, magnesio 13,0mg/100g, selenio 20,1µg/100g, vitamina C 0mg esplicito, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0,50µg/100g, folato totale 0µg esplicito, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 751mg/100g, atteso per un salume stagionato/salato (curatura), non una firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168277 e dataType SR Legacy.
+- **Nota di trasparenza**: il "bacon" USA e la pancetta italiana non sono lo stesso prodotto (il bacon USA è tipicamente più salato e spesso affumicato in pratica, anche se qui non dichiarato — la descrizione FDC non menziona affumicatura né additivi oltre "cured"/"unprepared"), ma è il record FDC generico più vicino trovato — stesso tipo di approssimazione già accettata per il prosciutto cotto in questa coda (record USA per un salume italiano affine).
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, già eseguito sul DB reale — stessa convenzione "carne processata" già usata per `food_prosciutto_cotto`, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (salume/carne di maiale).
+- **Matrice**: nuova `pancetta_raw` ("Pancetta, cruda").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (FDC "unprepared" — non cotta/fritta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168277 --food-id=food_pancetta_raw \
+  --name-it="Pancetta, cruda (non affumicata)" \
+  --matrix-id=pancetta_raw --matrix-description-it="Pancetta, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168277 --food-id=food_pancetta_raw \
+  --name-it="Pancetta, cruda (non affumicata)" \
+  --matrix-id=pancetta_raw --matrix-description-it="Pancetta, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
