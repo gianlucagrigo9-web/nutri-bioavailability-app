@@ -65,6 +65,30 @@ npm run add-food -- --fdc-id=2710825 --food-id=food_riso_venere_raw \
   --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Salsiccia di maiale fresca, cruda — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
+
+- **food_id**: `food_salsiccia_di_maiale_raw`. FDC ID 171631 (SR Legacy, "Sausage, Italian, pork, mild, raw" — categoria "Sausages and Luncheon Meats").
+- **Nutrienti**: **15/17**. Per 100g: energia 290kcal, proteine 13,9g, grassi 24,3g, carboidrati 2,97g (coerente con spezie/eventuali legami, non anomalo per un salume fresco), fibra 0g esplicito, ferro 1,77mg, zinco 1,91mg, calcio 12,0mg, rame 0,064mg, magnesio 16,0mg, selenio 11,3µg, vitamina C 0mg esplicito, vitamina B12 1,00µg, beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg tutti espliciti, vitamina A RAE/retinolo 0µg espliciti. **Mancano**: folato totale (solo acido folico 0µg esplicito separato, non assunto come proxy del folato alimentare) e vitamina K — non riportati nel record. Nessuna firma di arricchimento. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171631 e dataType SR Legacy.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda — già eseguita sul DB reale, FDC 168230. Stessa specie *Sus domesticus*, carne di maiale cruda, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/salume).
+- **Matrice**: nuova `salsiccia_di_maiale` ("Salsiccia di maiale fresca").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con la carne di maiale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171631 --food-id=food_salsiccia_di_maiale_raw \
+  --name-it="Salsiccia di maiale fresca, cruda" \
+  --matrix-id=salsiccia_di_maiale --matrix-description-it="Salsiccia di maiale fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171631 --food-id=food_salsiccia_di_maiale_raw \
+  --name-it="Salsiccia di maiale fresca, cruda" \
+  --matrix-id=salsiccia_di_maiale --matrix-description-it="Salsiccia di maiale fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
 
 - **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
