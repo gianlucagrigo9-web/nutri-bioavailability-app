@@ -114,6 +114,30 @@ npm run add-food -- --fdc-id=170924 --food-id=food_curry_in_polvere_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Latte condensato, zuccherato — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
+
+- **food_id**: `food_latte_condensato_raw`. FDC ID 171275 (SR Legacy, "Milk, canned, condensed, sweetened").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 321kcal (etichetta: 120kcal/portione arrotondato), proteine 7,91g, grassi 8,70g, carboidrati 54,4g, fibra 0g esplicito, ferro 0,19mg, zinco 0,94mg, calcio 284mg, rame 0,015mg, magnesio 26,0mg, selenio 14,8µg, vitamina C 2,60mg, vitamina B12 0,44µg, folato totale 11,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento oltre allo zucchero stesso, dichiarato nel nome), retinolo 73,0µg, beta-carotene 14,0µg, alfa-carotene 0µg + beta-criptoxantina 0µg espliciti, vitamina K (fillochinone) 0,60µg. Nessun nutriente mancante. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171275 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale — già eseguito sul DB reale. Stessa categoria "latte liquido", `matrix_category_calcium=medium_oxalate`, stessa convenzione già usata per latte di pecora/capra in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (latte, prodotto zuccherato ma di origine lattiero-casearia).
+- **Matrice**: nuova `latte_condensato` ("Latte condensato zuccherato").
+- **Attributi**: `is_heme_iron` omesso (false, come il latte vaccino), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=condensed` (distinto da "raw": è un latte concentrato per evaporazione e zuccherato, non latte fluido fresco), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171275 --food-id=food_latte_condensato_raw \
+  --name-it="Latte condensato, zuccherato" \
+  --matrix-id=latte_condensato --matrix-description-it="Latte condensato zuccherato" \
+  --baseline-cooking-state=condensed --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171275 --food-id=food_latte_condensato_raw \
+  --name-it="Latte condensato, zuccherato" \
+  --matrix-id=latte_condensato --matrix-description-it="Latte condensato zuccherato" \
+  --baseline-cooking-state=condensed --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
 
 - **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
