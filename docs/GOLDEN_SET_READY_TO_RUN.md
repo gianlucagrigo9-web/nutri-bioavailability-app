@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Siero di latte acido (acid whey), liquido — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_siero_di_latte_acido_raw`. FDC ID 170885 (SR Legacy, "Whey, acid, fluid" — il siero "acido", sottoprodotto della coagulazione acida tipica di formaggi come la ricotta (già eseguita nel Golden Set come `food_ricotta`), distinto dal siero "dolce" (FDC 171282, già 🟡 in questa pipeline dal ventiquattresimo lotto) sottoprodotto della coagulazione a caglio).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 24,0kcal, proteine 0,76g, grassi 0,090g, carboidrati 5,12g, fibra 0g esplicito, calcio 103mg, ferro 0,080mg, zinco 0,43mg, magnesio 10,0mg, rame 0,0030mg, selenio 1,80µg, vitamina C 0,10mg, folato totale 2,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina B12 0,18µg, vitamina K (fillochinone) 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170885 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido/derivato lattiero-caseario liquido", `matrix_category_calcium=medium_oxalate` per analogia diretta, stessa convenzione già usata per latte di pecora/capra/latte condensato/siero dolce in questa pipeline; `food_ricotta`, formaggio a coagulazione acida di cui questo siero è il sottoprodotto, non usato come analogia formale perché è un solido, non un liquido).
+- **Categoria dieta**: `egg_dairy` (derivato del latte).
+- **Matrice**: nuova `siero_di_latte_acido` ("Siero di latte acido (acid whey)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (liquido pronto al consumo, stessa convenzione del latte/siero dolce), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170885 --food-id=food_siero_di_latte_acido_raw \
+  --name-it="Siero di latte acido (acid whey), liquido" \
+  --matrix-id=siero_di_latte_acido --matrix-description-it="Siero di latte acido (acid whey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170885 --food-id=food_siero_di_latte_acido_raw \
+  --name-it="Siero di latte acido (acid whey), liquido" \
+  --matrix-id=siero_di_latte_acido --matrix-description-it="Siero di latte acido (acid whey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy --apply
+```
+
 ### Olio di palma — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_olio_di_palma_raw`. FDC ID 171015 (SR Legacy, "Oil, palm"). **Nota di trasparenza**: beta-carotene riportato a 0µg esplicito indica che questo record rappresenta l'olio di palma raffinato/sbiancato/deodorato (RBD) — la forma più diffusa come olio da cucina/industriale, inclusa in alimenti confezionati — e NON l'olio di palma rosso non raffinato (ricco di carotenoidi naturali, fino a diverse centinaia di mg/kg). Voce quindi limitata all'olio di palma "comune"; l'olio di palma rosso andrebbe eventualmente aggiunto come alimento distinto con un record dedicato, non con questo FDC ID.
