@@ -88,6 +88,32 @@ npm run add-food -- --fdc-id=173904 --food-id=food_fiocchi_di_avena_raw \
   --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Pastinaca, cruda — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_pastinaca_raw`. FDC ID 170417 (SR Legacy, "Parsnips, raw").
+- **Nutrienti**: **17/17**, nessun gap. Energia 75,0kcal, proteine 1,20g, grassi 0,30g, carboidrati 18,0g, fibra 4,90g, ferro 0,59mg, zinco 0,59mg, calcio 36,0mg, rame 0,12mg, magnesio 29,0mg, selenio 1,80µg, vitamina C 17,0mg, vitamina K (fillochinone) 22,5µg, vitamina B12 0µg esplicito, folato totale 67,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti — coerente con una radice pallida priva di pigmento carotenoide, non un gap di dato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170417 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_raw` (Golden Set originale, carote crude — già eseguite sul DB reale. Stessa famiglia botanica reale Apiaceae, stesso tipo di radice).
+- **Categoria dieta**: `plant_non_fruit` (verdura/radice).
+- **Matrice**: nuova `pastinaca_raw` ("Pastinaca, cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come le carote), `carotenoid_matrix_state=raw_intact` (come le carote, stessa famiglia; beta-carotene comunque 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170417 --food-id=food_pastinaca_raw \
+  --name-it="Pastinaca, cruda" \
+  --matrix-id=pastinaca_raw --matrix-description-it="Pastinaca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170417 --food-id=food_pastinaca_raw \
+  --name-it="Pastinaca, cruda" \
+  --matrix-id=pastinaca_raw --matrix-description-it="Pastinaca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
