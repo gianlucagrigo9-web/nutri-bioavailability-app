@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Cervella di manzo, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_cervella_di_manzo_raw`. FDC ID 168622 (SR Legacy, "Beef, variety meats and by-products, brain, raw").
+- **Nutrienti**: **17/17** — il più completo di questo lotto. Energia 143kcal, proteine 10,9g, grassi 10,3g, carboidrati 1,05g, fibra 0g esplicito, ferro 2,55mg, zinco 1,02mg, calcio 43,0mg, rame 0,29mg, magnesio 13,0mg, selenio 21,3µg, vitamina C 10,7mg, vitamina K 0µg esplicito, vitamina B12 9,51µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne), beta-carotene 88,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Nessun nutriente mancante. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168622 e dataType SR Legacy. Primo alimento di questo lotto a non avere alcun gap dichiarato — frattaglia mai tentata per nessuna specie nei diciannove lotti precedenti.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `cervella_di_manzo` ("Cervella di manzo").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168622 --food-id=food_cervella_di_manzo_raw \
+  --name-it="Cervella di manzo, cruda" \
+  --matrix-id=cervella_di_manzo --matrix-description-it="Cervella di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168622 --food-id=food_cervella_di_manzo_raw \
+  --name-it="Cervella di manzo, cruda" \
+  --matrix-id=cervella_di_manzo --matrix-description-it="Cervella di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Polmone di manzo, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_polmone_di_manzo_raw`. FDC ID 168628 (SR Legacy, "Beef, variety meats and by-products, lungs, raw").
+- **Nutrienti**: **14/17**. Energia 92,0kcal, proteine 16,2g, grassi 2,50g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 7,95mg, zinco 1,61mg, calcio 10,0mg, rame 0,26mg, magnesio 14,0mg, selenio 44,3µg, vitamina C 38,5mg, vitamina B12 3,81µg, folato totale 11,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (vitamina A RAE/retinolo riportati esplicitamente a 14,0µg, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168628 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `polmone_di_manzo` ("Polmone di manzo").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168628 --food-id=food_polmone_di_manzo_raw \
+  --name-it="Polmone di manzo, crudo" \
+  --matrix-id=polmone_di_manzo --matrix-description-it="Polmone di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168628 --food-id=food_polmone_di_manzo_raw \
+  --name-it="Polmone di manzo, crudo" \
+  --matrix-id=polmone_di_manzo --matrix-description-it="Polmone di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sorgo, integrale, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_sorgo_raw`. FDC ID 169716 (SR Legacy, "Sorghum grain").
