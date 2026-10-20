@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Milza di maiale, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_milza_di_maiale_raw`. FDC ID 167865 (SR Legacy, "Pork, fresh, variety meats and by-products, spleen, raw").
+- **Nutrienti**: **14/17**. Energia 100kcal, proteine 17,9g, grassi 2,6g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 22,3mg, zinco 2,5mg, calcio 10,0mg, rame 0,13mg, magnesio 13,0mg, selenio 32,8µg, vitamina C 28,5mg, vitamina B12 3,3µg, folato totale 4,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Ferro molto alto, coerente con un organo linfoematopoietico ricco di sangue come la milza (stesso ordine di grandezza del fegato già nel Golden Set).
+- **Nota sulla fonte (FDC ID non aperto direttamente)**: nessuna pagina individuale getfoodfacts.com risulta indicizzata per questo record, ma l'FDC ID 167865 è confermato dallo slug della pagina di confronto getfoodfacts.com stessa (`.../pork-fresh-variety-meats-and-by-products-spleen-raw-167865/...`) e corroborato da due fonti indipendenti concordanti: triagemethod.com (etichetta esplicitamente i valori come "SR (USDA Standard Reference Legacy)") e recipal.com (cita "USDA database, NBD ID: 10117"). I valori numerici coincidono fra le due fonti entro l'arrotondamento (ferro 22,3 vs ~22,5mg/100g, selenio 32,8 vs ~32,1µg/100g, energia 100 vs 100,0kcal, proteine 17,9 vs 17,86g, vitamina C 28,5 vs ~28,6mg/100g) — stesso tipo di verifica indiretta già accettato per `food_petto_di_pollo_raw` in questa pipeline (fetch diretto non riuscito, verifica primaria da 3 fonti concordanti).
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo ricco di ferro", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `milza_di_maiale` ("Milza di maiale").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167865 --food-id=food_milza_di_maiale_raw \
+  --name-it="Milza di maiale, cruda" \
+  --matrix-id=milza_di_maiale --matrix-description-it="Milza di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167865 --food-id=food_milza_di_maiale_raw \
+  --name-it="Milza di maiale, cruda" \
+  --matrix-id=milza_di_maiale --matrix-description-it="Milza di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cavallo, carne cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_cavallo_raw`. FDC ID 175086 (SR Legacy, "Game meat, horse, raw").
