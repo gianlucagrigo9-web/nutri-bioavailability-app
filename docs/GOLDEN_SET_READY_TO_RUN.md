@@ -40,6 +40,30 @@ npm run add-food -- --fdc-id=168267 --food-id=food_cuore_di_maiale_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Cuore di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_cuore_di_maiale_cotto`. FDC ID 168268 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, cooked, braised"). Distinto da `food_cuore_di_maiale_raw` (crudo, FDC 168267, "pronto" in questo file).
+- **Nutrienti**: **14/17**. Energia 148kcal, proteine 23,6g, grassi 5,05g, carboidrati 0,40g, fibra 0g esplicito, ferro 5,83mg, zinco 3,09mg, calcio 7,00mg, rame 0,51mg, magnesio 24,0mg, selenio 18,3µg, vitamina C 2,00mg, vitamina B12 3,79µg, folato totale 4,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap già accettato per le altre frattaglie cotte di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168268 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_cuore_di_maiale_raw`, che resta solo "pronto"). Stessa categoria frattaglia cotta, specie/organo diversi.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `cuore_di_maiale_cotto` ("Cuore di maiale, cotto").
+- **Attributi**: `--is-heme-iron` (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168268 --food-id=food_cuore_di_maiale_cotto \
+  --name-it="Cuore di maiale, cotto (brasato)" \
+  --matrix-id=cuore_di_maiale_cotto --matrix-description-it="Cuore di maiale, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168268 --food-id=food_cuore_di_maiale_cotto \
+  --name-it="Cuore di maiale, cotto (brasato)" \
+  --matrix-id=cuore_di_maiale_cotto --matrix-description-it="Cuore di maiale, cotto" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
