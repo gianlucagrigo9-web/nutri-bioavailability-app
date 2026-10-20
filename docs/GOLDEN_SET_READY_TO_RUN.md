@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nespola, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_nespola_raw`. FDC ID 169908 (SR Legacy, "Loquats, raw").
+- **Nutrienti**: **14/17**. Energia 47,0kcal, proteine 0,43g, grassi 0,20g, carboidrati 12,1g, fibra 1,70g, ferro 0,28mg, zinco 0,050mg, calcio 16,0mg, rame 0,040mg, magnesio 13,0mg, selenio 0,60µg, vitamina C 1,00mg, vitamina B12 0µg esplicito, folato totale 14,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169908 e dataType SR Legacy.
+- **Analogia usata**: `food_peach_yellow_raw` (pesche gialle, crude — già eseguite sul DB reale. Stessa famiglia botanica reale Rosaceae della nespola, *Eriobotrya japonica*; frutto fresco a polpa carnosa).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca nella definizione restrittiva del PRD §4.9).
+- **Matrice**: nuova `nespola` ("Nespola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun valore di carotenoidi presente nel record a cui applicare il fattore matrice, nessuna stima aggiunta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169908 --food-id=food_nespola_raw \
+  --name-it="Nespola, cruda" \
+  --matrix-id=nespola --matrix-description-it="Nespola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae
+```
+```
+npm run add-food -- --fdc-id=169908 --food-id=food_nespola_raw \
+  --name-it="Nespola, cruda" \
+  --matrix-id=nespola --matrix-description-it="Nespola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peach_yellow_raw \
+  --diet-category=fresh_fruit --botanical-family=Rosaceae --apply
+```
+
 ### Milza di maiale, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_milza_di_maiale_raw`. FDC ID 167865 (SR Legacy, "Pork, fresh, variety meats and by-products, spleen, raw").
