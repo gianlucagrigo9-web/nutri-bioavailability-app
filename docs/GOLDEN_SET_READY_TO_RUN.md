@@ -114,6 +114,32 @@ npm run add-food -- --fdc-id=170417 --food-id=food_pastinaca_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Songino (valerianella), crudo — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_songino_raw`. FDC ID 169219 (SR Legacy, "Cornsalad, raw" — nome comune inglese del songino/valerianella, *Valerianella locusta*).
+- **Nutrienti**: **13/17**. Energia 21,0kcal, proteine 2,00g, grassi 0,40g, carboidrati 3,60g, ferro 2,18mg, zinco 0,59mg, calcio 38,0mg, rame 0,13mg, magnesio 13,0mg, selenio 0,90µg, vitamina C 38,2mg, vitamina B12 0µg esplicito, folato totale 14,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record, non assunti zero): fibra, vitamina K, beta-carotene, l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina) — gap dichiarato, sopra la soglia minima già accettata per altre insalate di questo progetto (indivia belga/cardi 14/17, radicchio 12/17). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169219 e dataType SR Legacy; nota interna sulla fibra, riportata "0g" in un riepilogo ma "non dichiarata"/assente altrove sulla stessa pagina — trattata qui come non riportata, non come zero.
+- **Analogia usata**: `food_lettuce_romaine_raw` (lattuga romana, già eseguita sul DB reale — stessa convenzione "insalata a foglia cruda" già usata per scarola/indivia belga/cardi/radicchio in questa coda, pur trattandosi di famiglie botaniche reali diverse: la valerianella è Valerianaceae/Caprifoliaceae, non Asteraceae).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `songino_raw` ("Songino (valerianella), crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come lattuga/scarola — non un'insalata notoriamente ad alto oxalato come spinaci/bietole), `carotenoid_matrix_state=raw_intact` (crudo, stessa convenzione delle altre insalate crude di questa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Valerianaceae` (famiglia botanica reale della pianta, oggi inclusa in Caprifoliaceae secondo APG IV; non Asteraceae come l'analogia dichiarata), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169219 --food-id=food_songino_raw \
+  --name-it="Songino (valerianella), crudo" \
+  --matrix-id=songino_raw --matrix-description-it="Songino (valerianella), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Valerianaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169219 --food-id=food_songino_raw \
+  --name-it="Songino (valerianella), crudo" \
+  --matrix-id=songino_raw --matrix-description-it="Songino (valerianella), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Valerianaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
