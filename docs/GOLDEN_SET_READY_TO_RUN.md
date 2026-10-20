@@ -40,6 +40,30 @@ npm run add-food -- --fdc-id=172183 --food-id=food_albume_uovo_raw \
   --diet-category=egg_dairy --apply
 ```
 
+### Tuorlo d'uovo, crudo — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_tuorlo_uovo_raw`. FDC ID 172184 (SR Legacy, "Egg, yolk, raw, fresh").
+- **Nutrienti**: **17/17**, nessun gap. Energia 322kcal, proteine 15,9g, grassi 26,5g, carboidrati 3,59g, fibra 0g esplicito, ferro 2,73mg, zinco 2,30mg, calcio 129mg, rame 0,077mg, magnesio 5,00mg, selenio 56,0µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,70µg, vitamina B12 1,95µg, folato totale 146µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 88,0µg, alfa-carotene 38,0µg, beta-criptoxantina 33,0µg — questi ultimi tre valori reali e non nulli, plausibili per il pigmento del tuorlo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172184 e dataType SR Legacy.
+- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo intero crudo — già eseguito sul DB reale. Stessa categoria "uovo crudo", `is_heme_iron=false`).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `tuorlo_uovo_raw` ("Tuorlo d'uovo, crudo").
+- **Attributi**: `is_heme_iron` omesso (false, come l'uovo intero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — **nota di trasparenza**: il tuorlo riporta valori reali di carotenoidi, non nulli, ma questo progetto non ha un fattore di bioaccessibilità "matrice" specifico per il tuorlo d'uovo distinto dal valore grezzo FDC; NULL segue la stessa convenzione già usata per `food_egg_raw` e per le uova di quaglia crude, nessuna stima aggiunta, il valore nutriente resta quello riportato da FDC), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172184 --food-id=food_tuorlo_uovo_raw \
+  --name-it="Tuorlo d'uovo, crudo" \
+  --matrix-id=tuorlo_uovo_raw --matrix-description-it="Tuorlo d'uovo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172184 --food-id=food_tuorlo_uovo_raw \
+  --name-it="Tuorlo d'uovo, crudo" \
+  --matrix-id=tuorlo_uovo_raw --matrix-description-it="Tuorlo d'uovo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
