@@ -89,6 +89,31 @@ npm run add-food -- --fdc-id=171631 --food-id=food_salsiccia_di_maiale_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Curry, in polvere — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
+
+- **food_id**: `food_curry_in_polvere_raw`. FDC ID 170924 (SR Legacy, "Spices, curry powder").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 325kcal, proteine 14,3g, grassi 14,0g, carboidrati 55,8g, fibra 53,2g, ferro 19,1mg, zinco 4,70mg, calcio 525mg, rame 1,20mg, magnesio 255mg, selenio 40,3µg, vitamina C 0,70mg, vitamina B12 0µg esplicito, folato totale 56,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina A RAE 1,00µg/retinolo 0µg esplicito, beta-carotene 11,0µg, alfa-carotene 0µg + beta-criptoxantina 0µg espliciti, vitamina K (fillochinone) 99,8µg. Nessun nutriente mancante.
+- **Nota di trasparenza dichiarata**: il curry in polvere è una MISCELA di spezie (tipicamente curcuma, coriandolo, cumino, fieno greco, peperoncino, ecc.), non una spezia singola come basilico/origano/cannella/pepe già coperti in questa coda — a differenza di un piatto composito (che richiederebbe `dish_templates`/`dish_components` con grammature per ingrediente, §4.8), il curry in polvere è un singolo prodotto da scaffale con un singolo record nutrizionale USDA, trattato quindi come ingrediente unico ai fini di questa pipeline, sullo stesso piano di altre "Spices, X" già aggiunte. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170924 e dataType SR Legacy.
+- **Analogia usata**: `food_cacao_amaro_raw` (cacao amaro in polvere, non zuccherato, Golden Set pipeline — già eseguito sul DB reale, FDC 169593. Stessa categoria "polvere vegetale secca concentrata").
+- **Categoria dieta**: `plant_non_fruit` (spezia/condimento vegetale).
+- **Matrice**: nuova `curry_in_polvere` ("Curry, in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto secco macinato, non una matrice vegetale intatta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — miscela di più famiglie botaniche, nessuna singola applicabile), `baseline_cooking_state=raw` (prodotto secco pronto all'uso, stessa convenzione delle altre spezie), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170924 --food-id=food_curry_in_polvere_raw \
+  --name-it="Curry, in polvere" \
+  --matrix-id=curry_in_polvere --matrix-description-it="Curry, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cacao_amaro_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170924 --food-id=food_curry_in_polvere_raw \
+  --name-it="Curry, in polvere" \
+  --matrix-id=curry_in_polvere --matrix-description-it="Curry, in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cacao_amaro_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
 
 - **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
