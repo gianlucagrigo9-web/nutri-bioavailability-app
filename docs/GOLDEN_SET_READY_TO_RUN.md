@@ -165,6 +165,30 @@ npm run add-food -- --fdc-id=168277 --food-id=food_pancetta_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Seppia, cotta (bollita) — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_seppia_cotta`. FDC ID 172010 (SR Legacy, "Mollusks, cuttlefish, mixed species, cooked, moist heat").
+- **Nutrienti**: **14/17**. Energia 158kcal, proteine 32,5g, grassi 1,40g, carboidrati 1,64g, fibra 0g esplicito, ferro 10,8mg, zinco 3,46mg, calcio 180mg, rame 1,0mg, magnesio 60,0mg, selenio 89,6µg, vitamina C 8,50mg, vitamina B12 5,40µg, folato totale 24,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A — stesso identico gap già presente nella sorella cruda `food_seppia_raw` (FDC 174215, SOLO "pronta" in questa coda, non ancora eseguita sul DB reale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172010 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (Golden Set, vongole crude — già eseguite sul DB reale. Stessa categoria "mollusco", stessa convenzione già usata per vongole/cozze cotte in code precedenti — non `food_seppia_raw`, che resta solo "pronta", non eseguita).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `seppia_cotta` ("Seppia, cotta").
+- **Attributi**: `--is-heme-iron` (true — stessa convenzione già usata per vongole/cozze/capesante/astice in questa coda, analogia `food_vongole_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172010 --food-id=food_seppia_cotta \
+  --name-it="Seppia, cotta (bollita)" \
+  --matrix-id=seppia_cotta --matrix-description-it="Seppia, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172010 --food-id=food_seppia_cotta \
+  --name-it="Seppia, cotta (bollita)" \
+  --matrix-id=seppia_cotta --matrix-description-it="Seppia, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
