@@ -112,6 +112,30 @@ npm run add-food -- --fdc-id=169450 --food-id=food_rognone_di_manzo_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Cuore di manzo, cotto (bollito) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_cuore_di_manzo_cotto`. FDC ID 169448 (SR Legacy, "Beef, variety meats and by-products, heart, cooked, simmered"). Distinto da `food_cuore_di_manzo_raw` (crudo, FDC 168625, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **17/17** — tutti presenti, diversi espliciti a zero. Energia 165kcal, proteine 28,5g, grassi 4,73g, carboidrati 0,15g, fibra 0g esplicito, ferro 6,38mg, zinco 2,87mg, calcio 5,00mg, rame 0,56mg, magnesio 21,0mg, selenio 38,9µg, vitamina C 0mg esplicito, vitamina K 0,50µg, vitamina B12 10,8µg, folato totale 5,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169448 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_cuore_di_manzo_raw`, che resta solo "pronto" e non è nel DB. Stessa specie, categoria frattaglia cotta, organo diverso).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `cuore_di_manzo_cotto` ("Cuore di manzo, cotto").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169448 --food-id=food_cuore_di_manzo_cotto \
+  --name-it="Cuore di manzo, cotto (bollito)" \
+  --matrix-id=cuore_di_manzo_cotto --matrix-description-it="Cuore di manzo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169448 --food-id=food_cuore_di_manzo_cotto \
+  --name-it="Cuore di manzo, cotto (bollito)" \
+  --matrix-id=cuore_di_manzo_cotto --matrix-description-it="Cuore di manzo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
