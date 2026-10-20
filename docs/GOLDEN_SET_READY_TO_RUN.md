@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Halibut, crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_halibut_raw`. FDC ID 174200 (SR Legacy, "Fish, halibut, Atlantic and Pacific, raw" — record generico, distinto dalla variante "Alaska Native" trovata nella stessa ricerca e scartata perché appartiene al dataset etnico "American Indian/Alaska Native Foods", non rappresentativo di un halibut comune).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 91,0kcal, proteine 18,6g, grassi 1,33g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,16mg, zinco 0,36mg, calcio 7,00mg, rame 0,023mg, magnesio 23,0mg, selenio 45,6µg, vitamina C 0mg esplicito, vitamina B12 1,10µg, folato totale 12,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un pesce bianco senza pigmenti — non un gap). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174200 e dataType SR Legacy.
+- **Analogia usata**: `food_sogliola_raw` (sogliola cruda, già eseguita sul DB reale — stesso ordine zoologico reale Pleuronectiformes (pesci piatti), categoria "pesce bianco magro crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `halibut` ("Halibut").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di sogliola/merluzzo/tilapia già eseguiti/in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174200 --food-id=food_halibut_raw \
+  --name-it="Halibut, crudo" \
+  --matrix-id=halibut --matrix-description-it="Halibut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sogliola_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174200 --food-id=food_halibut_raw \
+  --name-it="Halibut, crudo" \
+  --matrix-id=halibut --matrix-description-it="Halibut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sogliola_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Tilapia, cruda — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_tilapia_raw`. FDC ID 175176 (SR Legacy, "Fish, tilapia, raw").
