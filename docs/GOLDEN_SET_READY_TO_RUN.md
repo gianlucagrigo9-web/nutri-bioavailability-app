@@ -64,6 +64,30 @@ npm run add-food -- --fdc-id=172184 --food-id=food_tuorlo_uovo_raw \
   --diet-category=egg_dairy --apply
 ```
 
+### Fiocchi d'avena, crudi — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_fiocchi_di_avena_raw`. FDC ID 173904 (SR Legacy, "Cereals, oats, regular and quick, not fortified, dry").
+- **Nutrienti**: **17/17**, nessun gap. Energia 379kcal, proteine 13,2g, grassi 6,52g, carboidrati 67,7g, fibra 10,1g, ferro 4,25mg, zinco 3,64mg, calcio 52,0mg, rame 0,39mg, magnesio 138mg, selenio 28,9µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 2,00µg, vitamina B12 0µg esplicito, folato totale 32,0µg, acido folico 0µg esplicito separato, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Titolo del record esplicito "not fortified"; la pagina riporta anche "Vitamin E, added" e "Vitamin B-12, added" entrambi a 0 — nessuna firma di arricchimento, stesso controllo già fatto per `food_farina_di_avena_raw`. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173904 e dataType SR Legacy. **Distinto** da FDC 169741 "Oat flour, partially debranned" (già usato per `food_farina_di_avena_raw`, eseguito sul DB reale) — fiocchi interi non macinati, non lo stesso prodotto sotto altro nome. Scartato il record Foundation Foods FDC 2346396 "Oats, whole grain, rolled, old fashioned": copertura nutrienti insufficiente (~8-9/17, mancano vitamina C/K/B12/acido folico/tutti i carotenoidi; fibra riportata in modo incoerente fra sezioni della stessa pagina — 0g sul riepilogo, "not declared" sull'etichetta, assente dalla tabella dei 29 nutrienti).
+- **Analogia usata**: `food_avena_cruda` (avena cruda in grani, già eseguita sul DB reale — stessa specie *Avena sativa*, famiglia botanica reale Poaceae; differisce solo per il grado di lavorazione — grani interi vs fiocchi).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `fiocchi_di_avena_raw` ("Fiocchi d'avena, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, titolo "not fortified").
+
+```
+npm run add-food -- --fdc-id=173904 --food-id=food_fiocchi_di_avena_raw \
+  --name-it="Fiocchi d'avena, crudi" \
+  --matrix-id=fiocchi_di_avena_raw --matrix-description-it="Fiocchi d'avena, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173904 --food-id=food_fiocchi_di_avena_raw \
+  --name-it="Fiocchi d'avena, crudi" \
+  --matrix-id=fiocchi_di_avena_raw --matrix-description-it="Fiocchi d'avena, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_avena_cruda \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
