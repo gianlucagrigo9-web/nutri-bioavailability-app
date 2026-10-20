@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rana pescatrice (coda di rospo), cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_rana_pescatrice_raw`. FDC ID 173676 (SR Legacy, "Fish, monkfish, raw" — pagina getfoodfacts.com dedicata e pulita, nessun candidato alternativo necessario).
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, non riportati nel record, non assunti zero). Per 100g: energia 76,0kcal, proteine 14,5g, grassi 1,52g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,00mg, ferro 0,32mg, zinco 0,41mg, magnesio 21,0mg, rame 0,028mg, selenio 36,5µg (alto, coerente con un pesce marino), vitamina C 1,00mg, folato totale 7,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina B12 0,90µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173676 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa categoria funzionale "pesce bianco magro crudo", grassi 1,52g/100g coerente con pesce magro, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `rana_pescatrice` ("Rana pescatrice (coda di rospo)").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di merluzzo/halibut/tilapia già eseguiti/in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173676 --food-id=food_rana_pescatrice_raw \
+  --name-it="Rana pescatrice (coda di rospo), cruda" \
+  --matrix-id=rana_pescatrice --matrix-description-it="Rana pescatrice (coda di rospo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173676 --food-id=food_rana_pescatrice_raw \
+  --name-it="Rana pescatrice (coda di rospo), cruda" \
+  --matrix-id=rana_pescatrice --matrix-description-it="Rana pescatrice (coda di rospo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Anguilla, cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
 
 - **food_id**: `food_anguilla_raw`. FDC ID 174193 (SR Legacy, "Fish, eel, mixed species, raw" — confermato dataType e FDC ID sulla pagina getfoodfacts.com dedicata, distinta dalla pagina USDA Survey/FNDDS trovata inizialmente nella stessa ricerca, scartata perché meno affidabile per questo progetto).
