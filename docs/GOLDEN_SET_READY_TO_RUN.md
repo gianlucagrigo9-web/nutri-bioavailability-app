@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Animelle di vitello (pancreas), crude — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_animelle_di_vitello_raw`. FDC ID 174362 (SR Legacy, "Veal, variety meats and by-products, pancreas, raw").
+- **Nutrienti**: **14/17**. Energia 182kcal, proteine 15,0g, grassi 13,1g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,10mg, zinco 2,60mg, calcio 19,0mg, rame 0,060mg, magnesio 18,0mg, selenio 20,7µg, vitamina C 16,0mg, vitamina B12 13,4µg, folato totale 3,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174362 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `animelle_di_vitello` ("Animelle di vitello (pancreas)").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174362 --food-id=food_animelle_di_vitello_raw \
+  --name-it="Animelle di vitello (pancreas), crude" \
+  --matrix-id=animelle_di_vitello --matrix-description-it="Animelle di vitello (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174362 --food-id=food_animelle_di_vitello_raw \
+  --name-it="Animelle di vitello (pancreas), crude" \
+  --matrix-id=animelle_di_vitello --matrix-description-it="Animelle di vitello (pancreas)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Polmone di vitello, crudo — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_polmone_di_vitello_raw`. FDC ID 174361 (SR Legacy, "Veal, variety meats and by-products, lungs, raw").
+- **Nutrienti**: **14/17**. Energia 90,0kcal, proteine 16,3g, grassi 2,30g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 5,23mg, zinco 1,16mg, calcio 7,00mg, rame 0,24mg, magnesio 12,0mg, selenio 17,2µg, vitamina C 39,0mg, vitamina B12 3,83µg, folato totale 11,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174361 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `polmone_di_vitello` ("Polmone di vitello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174361 --food-id=food_polmone_di_vitello_raw \
+  --name-it="Polmone di vitello, crudo" \
+  --matrix-id=polmone_di_vitello --matrix-description-it="Polmone di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174361 --food-id=food_polmone_di_vitello_raw \
+  --name-it="Polmone di vitello, crudo" \
+  --matrix-id=polmone_di_vitello --matrix-description-it="Polmone di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervella di manzo, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_cervella_di_manzo_raw`. FDC ID 168622 (SR Legacy, "Beef, variety meats and by-products, brain, raw").
