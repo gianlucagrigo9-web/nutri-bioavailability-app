@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Rafano (daikon), crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_rafano_raw`. FDC ID 168451 (SR Legacy, "Radishes, oriental, raw" — nome USDA per il daikon/rafano asiatico, distinto dal ravanello rosso comune già eseguito, FDC 169276 "Radishes, raw").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 18,0kcal, proteine 0,60g, grassi 0,10g, carboidrati 4,10g, fibra 1,60g, ferro 0,40mg, zinco 0,15mg, calcio 27,0mg, rame 0,12mg, magnesio 16,0mg, selenio 0,70µg, vitamina C 22,0mg, vitamina B12 0µg esplicito, folato totale 28,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 0,30µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con una radice bianca priva di pigmento, stessa convenzione già usata per pastinaca — non un gap). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168451 e dataType SR Legacy.
+- **Analogia usata**: `food_ravanelli_raw` (ravanelli, già eseguiti sul DB reale — stessa specie botanica reale *Raphanus sativus*, solo varietà diversa, radice crucifera cruda).
+- **Categoria dieta**: `plant_non_fruit` (radice/ortaggio).
+- **Matrice**: nuova `rafano` ("Rafano (daikon)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio marginale, 27mg/100g, stessa convenzione delle altre radici crude già nella pipeline), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, nessun pigmento reale da modellare, stessa convenzione già usata per pastinaca), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (famiglia botanica reale, stessa dei ravanelli/cavoli/kale già classificati), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168451 --food-id=food_rafano_raw \
+  --name-it="Rafano (daikon), crudo" \
+  --matrix-id=rafano --matrix-description-it="Rafano (daikon)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168451 --food-id=food_rafano_raw \
+  --name-it="Rafano (daikon), crudo" \
+  --matrix-id=rafano --matrix-description-it="Rafano (daikon)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mais dolce (granoturco dolce), cotto (bollito) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_mais_dolce_cotto`. FDC ID 169999 (SR Legacy, "Corn, sweet, yellow, cooked, boiled, drained, without salt").
