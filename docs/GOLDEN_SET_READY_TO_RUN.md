@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anguilla, cruda — preparato 2026-10-20 dal task orario (venticinquesimo lotto, turno ore 15)
+
+- **food_id**: `food_anguilla_raw`. FDC ID 174193 (SR Legacy, "Fish, eel, mixed species, raw" — confermato dataType e FDC ID sulla pagina getfoodfacts.com dedicata, distinta dalla pagina USDA Survey/FNDDS trovata inizialmente nella stessa ricerca, scartata perché meno affidabile per questo progetto).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 184kcal, proteine 18,4g, grassi 11,7g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 20,0mg, ferro 0,50mg, zinco 1,62mg, magnesio 20,0mg, rame 0,023mg, selenio 6,50µg, vitamina C 1,80mg, folato totale 15,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina B12 3,00µg, vitamina K (fillochinone) 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174193 e dataType SR Legacy.
+- **Analogia usata**: `food_salmon_raw` (salmone atlantico crudo, Golden Set originale, già eseguito sul DB reale — stessa categoria "pesce grasso crudo", grassi 11,7g/100g nello stesso ordine di grandezza, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `anguilla` ("Anguilla").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di salmone/sgombro/tonno già eseguiti), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174193 --food-id=food_anguilla_raw \
+  --name-it="Anguilla, cruda" \
+  --matrix-id=anguilla --matrix-description-it="Anguilla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174193 --food-id=food_anguilla_raw \
+  --name-it="Anguilla, cruda" \
+  --matrix-id=anguilla --matrix-description-it="Anguilla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salame, stagionato (solo maiale) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_salame_raw`. FDC ID 172938 (SR Legacy, "Salami, dry or hard, pork" — scelta la variante solo maiale, non la "pork, beef" FDC 174582 trovata nella stessa ricerca, perché più vicina al salame italiano tradizionale, solitamente 100% maiale).
