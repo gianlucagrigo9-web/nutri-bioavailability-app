@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Milza di vitello, cruda — preparato 2026-10-20 dal task orario (ventunesimo lotto)
+
+- **food_id**: `food_milza_di_vitello_raw`. FDC ID 172540 (SR Legacy, "Veal, variety meats and by-products, spleen, raw").
+- **Nutrienti**: **14/17**. Energia 98,0kcal, proteine 18,3g, grassi 2,20g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 9,32mg, zinco 1,61mg, calcio 6,00mg, rame 0,17mg, magnesio 17,0mg, selenio 61,7µg, vitamina C 41,0mg, vitamina B12 5,34µg, folato totale 4,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172540 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `milza_di_vitello` ("Milza di vitello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172540 --food-id=food_milza_di_vitello_raw \
+  --name-it="Milza di vitello, cruda" \
+  --matrix-id=milza_di_vitello --matrix-description-it="Milza di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172540 --food-id=food_milza_di_vitello_raw \
+  --name-it="Milza di vitello, cruda" \
+  --matrix-id=milza_di_vitello --matrix-description-it="Milza di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Animelle di vitello (pancreas), crude — preparato 2026-10-20 dal task orario (ventunesimo lotto)
 
 - **food_id**: `food_animelle_di_vitello_raw`. FDC ID 174362 (SR Legacy, "Veal, variety meats and by-products, pancreas, raw").
