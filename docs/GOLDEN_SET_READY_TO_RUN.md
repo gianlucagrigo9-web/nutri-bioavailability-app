@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fegato d'agnello, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_fegato_di_agnello_raw`. FDC ID 172531 (SR Legacy, "Lamb, variety meats and by-products, liver, raw").
+- **Nutrienti**: **15/17**. Energia 139kcal, proteine 20,4g, grassi 5,02g, carboidrati 1,78g, fibra 0g esplicito, ferro 7,37mg, zinco 4,66mg, calcio 7,00mg, rame 6,98mg, magnesio 19,0mg, selenio 82,4µg, vitamina C 4,00mg, vitamina B12 90,0µg, folato totale 230µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile alla carne). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (stesso gap tipico già visto su fegato di manzo/vitello/maiale in questa pipeline). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172531 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo ricco di ferro", `is_heme_iron=true`; distinto dal fegato d'agnello COTTO, già 🟡 dal diciassettesimo lotto con FDC 172532, non riusabile come analogia perché non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `fegato_di_agnello` ("Fegato di agnello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172531 --food-id=food_fegato_di_agnello_raw \
+  --name-it="Fegato d'agnello, crudo" \
+  --matrix-id=fegato_di_agnello --matrix-description-it="Fegato di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172531 --food-id=food_fegato_di_agnello_raw \
+  --name-it="Fegato d'agnello, crudo" \
+  --matrix-id=fegato_di_agnello --matrix-description-it="Fegato di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Latte di pecora, crudo — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_latte_di_pecora_raw`. FDC ID 170882 (SR Legacy, "Milk, sheep, fluid").
