@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Albume d'uovo, crudo — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_albume_uovo_raw`. FDC ID 172183 (SR Legacy, "Egg, white, raw, fresh").
+- **Nutrienti**: **17/17**, nessun gap. Energia 52,0kcal, proteine 10,9g, grassi 0,17g, carboidrati 0,73g, fibra 0g esplicito, ferro 0,080mg, zinco 0,030mg, calcio 7,00mg, rame 0,023mg, magnesio 11,0mg, selenio 20,0µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0µg esplicito, vitamina B12 0,090µg, folato totale 4,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti — tutti coerenti con un albume privo di tuorlo/pigmenti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172183 e dataType SR Legacy.
+- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo intero crudo — già eseguito sul DB reale. Stessa categoria "uovo crudo", `is_heme_iron=false` come l'uovo intero).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `albume_uovo_raw` ("Albume d'uovo, crudo").
+- **Attributi**: `is_heme_iron` omesso (false, come l'uovo intero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172183 --food-id=food_albume_uovo_raw \
+  --name-it="Albume d'uovo, crudo" \
+  --matrix-id=albume_uovo_raw --matrix-description-it="Albume d'uovo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172183 --food-id=food_albume_uovo_raw \
+  --name-it="Albume d'uovo, crudo" \
+  --matrix-id=albume_uovo_raw --matrix-description-it="Albume d'uovo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
