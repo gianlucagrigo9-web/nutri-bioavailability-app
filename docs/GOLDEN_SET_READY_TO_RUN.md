@@ -208,6 +208,30 @@ npm run add-food -- --fdc-id=172528 --food-id=food_cuore_di_agnello_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Ventriglio di pollo, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
+
+- **food_id**: `food_ventriglio_di_pollo_raw`. FDC ID 171456 (SR Legacy, "Chicken, gizzard, all classes, raw").
+- **Nutrienti**: **17/17** — il record più completo di questa coda: tutti i valori sono espliciti, incluso 0 dove assente. Energia 94,0kcal, proteine 17,7g, grassi 2,06g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,49mg, zinco 2,72mg, calcio 11,0mg, rame 0,12mg, magnesio 15,0mg, selenio 25,5µg, vitamina C 3,70mg, vitamina K (fillochinone) 0µg esplicito, vitamina B12 1,21µg, folato totale 5,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti (quindi `other_provitamin_a_carotenoids_mcg=0`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171456 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (stessa specie *Gallus gallus* — presente nella tabella dei "98 alimenti" eseguiti il 2026-10-14, FDC 171060, già nel DB reale). Frattaglia cruda, organo diverso (ventriglio = muscolo digestivo, non fegato), stesso tipo di analogia cross-organo già usato altrove in questa coda.
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `ventriglio_di_pollo_raw` ("Ventriglio di pollo, crudo").
+- **Attributi**: `--is-heme-iron` (true, tessuto muscolare, coerente con le altre frattaglie di questa coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171456 --food-id=food_ventriglio_di_pollo_raw \
+  --name-it="Ventriglio di pollo, crudo" \
+  --matrix-id=ventriglio_di_pollo_raw --matrix-description-it="Ventriglio di pollo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171456 --food-id=food_ventriglio_di_pollo_raw \
+  --name-it="Ventriglio di pollo, crudo" \
+  --matrix-id=ventriglio_di_pollo_raw --matrix-description-it="Ventriglio di pollo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato di maiale, cotto (brasato) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
 
 - **food_id**: `food_fegato_di_maiale_cotto`. FDC ID 167863 (SR Legacy, "Pork, fresh, variety meats and by-products, liver, cooked, braised"). Distinto da `food_fegato_di_maiale_raw` (crudo, FDC 167862, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
