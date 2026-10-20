@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Alga nori (laver), cruda/secca — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_alga_nori_raw`. FDC ID 168458 (SR Legacy, "Seaweed, laver, raw" — "laver"/nori è il nome comune inglese dell'alga rossa *Porphyra/Pyropia*, la stessa usata per i fogli di sushi). **Nota sulla fonte**: nessuna pagina getfoodfacts.com `/food/` dedicata è stata trovata (solo una pagina "compare" il cui URL conferma l'FDC ID nello slug, ma il fetch diretto restituisce solo il template vuoto della pagina di confronto, stesso limite già incontrato per il luccio crudo in questo stesso turno); i valori sotto sono letti da triagemethod.com (ogni riga etichettata esplicitamente "SR (USDA Standard Reference Legacy)", nessuna riga mescolata con AFCD australiano — a differenza dei casi già scartati in questa coda) e confermati in modo indipendente da tools.myfooddata.com (stesso FDC ID 168458 citato esplicitamente, valori numerici praticamente identici dopo conversione: energia 34,6 vs 35,0kcal, ferro 1,81 vs 1,8mg, calcio 70,0 vs 70,0mg, folato 146,2 vs 146µg, vitamina K 3,8 vs 4,0µg, beta-carotene 3121,2 vs 3121µg) — stesso livello di verifica indiretta già accettato per `food_petto_di_pollo_raw`/milza di maiale in code precedenti.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 35,0kcal, proteine 5,8g, grassi 0,28g, carboidrati 5,1g, fibra 0,30g, ferro 1,8mg, zinco 1,1mg, calcio 70,0mg, rame 0,26mg, magnesio 2,0mg (nota: valore basso e anomalo per un'alga, verificato comunque concordante fra le due fonti indipendenti), selenio 0,70µg, vitamina C 39,0mg, vitamina B12 0µg esplicito, folato totale 146µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 4,0µg, beta-carotene 3121µg (molto alto, coerente col colore rosso-violaceo dell'alga ricca di pigmenti — non un errore), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_kale_raw` (cavolo kale crudo, Golden Set originale, già eseguito sul DB reale — stessa categoria generale "vegetale a foglia/tallo crudo con carotenoidi reali e ferro significativo"; nessuna vera famiglia botanica di riferimento esiste per un'alga, che non è una pianta vascolare — `botanical_family` lasciato NULL per questo motivo, non per un gap di dato).
+- **Categoria dieta**: `plant_non_fruit` (alga, prodotto vegetale).
+- **Matrice**: nuova `alga_nori` ("Alga nori (laver)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato di ossalati per le alghe in questa pipeline), `carotenoid_matrix_state=raw_intact` (crudo, carotenoidi reali e sostanziali, stessa convenzione delle verdure a foglia crude), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alga, non una pianta vascolare con famiglia botanica convenzionale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168458 --food-id=food_alga_nori_raw \
+  --name-it="Alga nori (laver), cruda/secca" \
+  --matrix-id=alga_nori --matrix-description-it="Alga nori (laver)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168458 --food-id=food_alga_nori_raw \
+  --name-it="Alga nori (laver), cruda/secca" \
+  --matrix-id=alga_nori --matrix-description-it="Alga nori (laver)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Halibut, crudo — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_halibut_raw`. FDC ID 174200 (SR Legacy, "Fish, halibut, Atlantic and Pacific, raw" — record generico, distinto dalla variante "Alaska Native" trovata nella stessa ricerca e scartata perché appartiene al dataset etnico "American Indian/Alaska Native Foods", non rappresentativo di un halibut comune).
