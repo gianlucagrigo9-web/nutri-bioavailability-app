@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio cremoso/spalmabile (tipo Philadelphia), fresco — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
+
+- **food_id**: `food_formaggio_cremoso_raw`. FDC ID 173418 (SR Legacy, "Cheese, cream").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 350kcal, proteine 6,15g, grassi 34,4g, carboidrati 5,52g, fibra 0g esplicito, ferro 0,11mg, zinco 0,50mg, calcio 97,0mg, rame 0,018mg, magnesio 9,00mg, selenio 8,60µg, vitamina C 0mg esplicito, vitamina B12 0,22µg, folato totale 9,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), retinolo 303µg/vitamina A RAE 308µg, beta-carotene 59,0µg, alfa-carotene 1,00µg, beta-criptoxantina 2,00µg (tutti reali e non nulli, coerenti col grasso di latte — non un gap), vitamina K (fillochinone 2,10µg + menachinone-4 8,70µg, dihydrofillochinone 0µg esplicito). Record pulito e completo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173418 e dataType SR Legacy.
+- **Analogia usata**: `food_ricotta` (ricotta, formaggio fresco non stagionato — già eseguita sul DB reale. Stessa categoria "formaggio fresco a pasta molle non stagionato", a differenza di parmigiano/gouda/fontina/edam che sono stagionati).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+- **Matrice**: nuova `formaggio_cremoso` ("Formaggio cremoso/spalmabile").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i formaggi aggiunti dopo i 30 originali, es. brie/gouda/fontina), `carotenoid_matrix_state` omesso (NULL — non applicabile a un prodotto animale, stessa convenzione di brie/panna densa/panna acida, nonostante il beta-carotene reale non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw` (prodotto pronto al consumo, stessa convenzione degli altri formaggi), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173418 --food-id=food_formaggio_cremoso_raw \
+  --name-it="Formaggio cremoso/spalmabile (tipo Philadelphia), fresco" \
+  --matrix-id=formaggio_cremoso --matrix-description-it="Formaggio cremoso/spalmabile" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173418 --food-id=food_formaggio_cremoso_raw \
+  --name-it="Formaggio cremoso/spalmabile (tipo Philadelphia), fresco" \
+  --matrix-id=formaggio_cremoso --matrix-description-it="Formaggio cremoso/spalmabile" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy --apply
+```
+
 ### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
 
 - **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
