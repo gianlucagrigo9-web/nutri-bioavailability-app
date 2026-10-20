@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Milza d'agnello, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_milza_di_agnello_raw`. FDC ID 174364 (SR Legacy, "Lamb, variety meats and by-products, spleen, raw").
+- **Nutrienti**: **14/17**. Energia 101kcal, proteine 17,2g, grassi 3,10g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 41,9mg, zinco 2,84mg, calcio 9,00mg, rame 0,12mg, magnesio 21,0mg, selenio 32,4µg, vitamina C 23,0mg, vitamina B12 5,34µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento, non applicabile alla carne). Ferro fortemente elevato, coerente con un organo linfoematopoietico ricco di sangue come la milza (stesso tipo di valore già visto per la milza di maiale, 22,3mg/100g, in questa stessa coda). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (vitamina A RAE/retinolo riportati esplicitamente a 0µg, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174364 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_raw` (Golden Set originale, fegato di manzo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia/organo crudo ricco di ferro", `is_heme_iron=true`; stessa convenzione già usata per la milza di maiale cruda nel diciannovesimo lotto, non riusabile come analogia perché ancora solo "pronta").
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `milza_di_agnello` ("Milza di agnello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174364 --food-id=food_milza_di_agnello_raw \
+  --name-it="Milza d'agnello, cruda" \
+  --matrix-id=milza_di_agnello --matrix-description-it="Milza di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174364 --food-id=food_milza_di_agnello_raw \
+  --name-it="Milza d'agnello, cruda" \
+  --matrix-id=milza_di_agnello --matrix-description-it="Milza di agnello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cuore d'agnello, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_cuore_di_agnello_raw`. FDC ID 172527 (SR Legacy, "Lamb, variety meats and by-products, heart, raw").
