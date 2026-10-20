@@ -136,6 +136,30 @@ npm run add-food -- --fdc-id=169448 --food-id=food_cuore_di_manzo_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Cuore di pollo, cotto (bollito) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_cuore_di_pollo_cotto`. FDC ID 171059 (SR Legacy, "Chicken, heart, all classes, cooked, simmered"). Distinto da `food_cuore_di_pollo_raw` (crudo, FDC 171458, solo "pronto" in questo file — non ancora eseguito sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **14/17**. Energia 185kcal, proteine 26,4g, grassi 7,92g, carboidrati 0,10g, fibra 0g esplicito, ferro 9,03mg, zinco 7,30mg, calcio 19,0mg, rame 0,50mg, magnesio 20,0mg, selenio 8,00µg, vitamina C 1,80mg, vitamina B12 7,29µg, folato totale 80,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento). **Mancano** (non riportati nel record — pagina con tabella vitamine più corta, 13 voci contro le 33 del cuore di manzo cotto —, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171059 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_cuore_di_pollo_raw`, che resta solo "pronto" e non è nel DB. Specie e organo diversi ma stessa categoria frattaglia cotta, ferro eme).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `cuore_di_pollo_cotto` ("Cuore di pollo, cotto").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171059 --food-id=food_cuore_di_pollo_cotto \
+  --name-it="Cuore di pollo, cotto (bollito)" \
+  --matrix-id=cuore_di_pollo_cotto --matrix-description-it="Cuore di pollo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171059 --food-id=food_cuore_di_pollo_cotto \
+  --name-it="Cuore di pollo, cotto (bollito)" \
+  --matrix-id=cuore_di_pollo_cotto --matrix-description-it="Cuore di pollo, cotto" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
