@@ -184,6 +184,30 @@ npm run add-food -- --fdc-id=170597 --food-id=food_milza_di_manzo_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Quaglia, carne, cotta — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_quaglia_carne_cotta`. FDC ID 169902 (SR Legacy, "Quail, cooked, total edible"). Distinta da `food_quaglia_carne_raw` (cruda, FDC 172419, solo "pronto" in questo file — non ancora eseguita sul DB reale, stesso alimento, forma cotta; metodo di cottura non specificato dal nome FDC, "total edible" indica solo che è carne intera edibile, non un taglio specifico).
+- **Nutrienti**: **17/17** — tutti presenti. Energia 227kcal, proteine 25,1g, grassi 14,1g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 4,43mg, zinco 3,10mg, calcio 15,0mg, rame 0,59mg, magnesio 22,0mg, selenio 21,8µg, vitamina C 2,30mg, vitamina K 4,20µg, vitamina B12 0,36µg, folato totale 6,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti. **Nota di cautela**: i valori di carboidrati/fibra/acido folico/carotenoidi sono tutti riportati come zero esplicito sulla pagina, ma non è possibile distinguere da qui se si tratti di uno zero realmente misurato o di un default USDA per nutrienti non analizzati — plausibile per un alimento di carne (zero carotenoidi/carboidrati è l'aspettativa fisiologica), quindi non bloccante, ma degno di nota per chi promuoverà questa riga a `verified`. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169902 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non `food_quaglia_carne_raw`/`food_petto_di_pollo_raw`, entrambi solo "pronti" o comunque crudi, non coerenti con lo stato di cottura. Specie e organo diversi ma stessa categoria carne/frattaglia cotta, ferro eme — stesso tipo di analogia già usato per tutte le frattaglie di questo lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `quaglia_cotta` ("Quaglia, carne, cotta").
+- **Attributi**: `--is-heme-iron` (true, carne di selvaggina da penna, coerente con `food_petto_di_pollo_raw`/l'analogia dichiarata per il crudo della quaglia stessa), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=cooked` (metodo non specificato dal record FDC), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169902 --food-id=food_quaglia_carne_cotta \
+  --name-it="Quaglia, carne, cotta" \
+  --matrix-id=quaglia_cotta --matrix-description-it="Quaglia, carne, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169902 --food-id=food_quaglia_carne_cotta \
+  --name-it="Quaglia, carne, cotta" \
+  --matrix-id=quaglia_cotta --matrix-description-it="Quaglia, carne, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
