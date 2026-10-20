@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cavallo, carne cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_cavallo_raw`. FDC ID 175086 (SR Legacy, "Game meat, horse, raw").
+- **Nutrienti**: **13/17**. Energia 133kcal, proteine 21,4g, grassi 4,60g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 3,82mg, zinco 2,90mg, calcio 6,00mg, rame 0,14mg, magnesio 24,0mg, selenio 10,1µg, vitamina C 1,00mg, vitamina B12 3,00µg. **Mancano**: vitamina K, folato totale, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record (il gap su folato è più ampio del solito per questa coda, dove la maggior parte delle carni riporta almeno un valore di folato anche piccolo, ma 13/17 resta sopra la soglia minima di match debole già usata in questa coda, ~10/17). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175086 e dataType SR Legacy; valori con precisione realistica (es. rame 0,14mg/100g), nessun segno di valori segnaposto.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato (85% magro), crudo — già eseguito sul DB reale. Stessa convenzione categorica già usata per vitello/agnello/coniglio in questa pipeline: carne rossa magra cruda, specie diversa dal bovino ma trattata in modo equivalente, `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cavallo` ("Cavallo").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175086 --food-id=food_cavallo_raw \
+  --name-it="Cavallo, carne cruda" \
+  --matrix-id=cavallo --matrix-description-it="Cavallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175086 --food-id=food_cavallo_raw \
+  --name-it="Cavallo, carne cruda" \
+  --matrix-id=cavallo --matrix-description-it="Cavallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Capra, carne cotta (arrosto) — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_capra_cotta`. FDC ID 175304 (SR Legacy, "Game meat, goat, cooked, roasted").
