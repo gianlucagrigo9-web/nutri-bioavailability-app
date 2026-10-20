@@ -64,6 +64,30 @@ npm run add-food -- --fdc-id=174769 --food-id=food_trippa_di_manzo_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Lingua di manzo, cotta (bollita) — preparato 2026-10-20 dal task orario (sedicesimo lotto, turno ore 08)
+
+- **food_id**: `food_lingua_di_manzo_cotta`. FDC ID 170598 (SR Legacy, "Beef, variety meats and by-products, tongue, cooked, simmered"). Distinta da `food_lingua_di_manzo_raw` (cruda, FDC 170196, solo "pronto" in questo file — non ancora eseguita sul DB reale, stesso alimento, forma cotta).
+- **Nutrienti**: **17/17** — tutti presenti. Energia 284kcal, proteine 19,3g, grassi 22,3g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,61mg, zinco 4,09mg, calcio 5,00mg, rame 0,15mg, magnesio 15,0mg, selenio 13,2µg, vitamina C 1,30mg, vitamina K 1,20µg, vitamina B12 3,13µg, folato totale 7,00µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene 0µg esplicito, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170598 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_liver_cooked` (Golden Set originale, fegato di manzo cotto — già eseguito sul DB reale; non il crudo `food_lingua_di_manzo_raw`, che resta solo "pronto" e non è nel DB. Stessa specie, categoria frattaglia cotta, organo diverso).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `lingua_di_manzo_cotta` ("Lingua di manzo, cotta").
+- **Attributi**: `--is-heme-iron` (true, coerente con l'analogia e con tutte le frattaglie già in coda), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170598 --food-id=food_lingua_di_manzo_cotta \
+  --name-it="Lingua di manzo, cotta (bollita)" \
+  --matrix-id=lingua_di_manzo_cotta --matrix-description-it="Lingua di manzo, cotta" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170598 --food-id=food_lingua_di_manzo_cotta \
+  --name-it="Lingua di manzo, cotta (bollita)" \
+  --matrix-id=lingua_di_manzo_cotta --matrix-description-it="Lingua di manzo, cotta" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio Gouda — preparato 2026-10-19 dal task orario (quindicesimo lotto, turno ore 19)
 
 - **food_id**: `food_gouda`. FDC ID 171241 (SR Legacy, "Cheese, gouda").
