@@ -189,6 +189,30 @@ npm run add-food -- --fdc-id=172010 --food-id=food_seppia_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Aringa, affumicata (kippered) — preparato 2026-10-20 dal task orario (diciottesimo lotto)
+
+- **food_id**: `food_aringa_affumicata_raw`. FDC ID 173668 (SR Legacy, "Fish, herring, Atlantic, kippered").
+- **Nutrienti**: **17/17**, nessun gap. Energia 217kcal, proteine 24,6g, grassi 12,4g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 1,51mg, zinco 1,36mg, calcio 84,0mg, rame 0,14mg, magnesio 46,0mg, selenio 52,6µg, vitamina C 1,00mg, vitamina K (fillochinone) 0,10µg, vitamina B12 18,7µg, folato totale 14,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 918mg/100g, alto ma coerente con un prodotto affumicato/salato reale (stesso tipo di valore già accettato per il salmone affumicato, 819mg/100g), non una firma di arricchimento. "Kippered" è il termine inglese standard per l'aringa affumicata tradizionale (sventrata, salata, affumicata) — rappresenta bene l'aringa affumicata italiana. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173668 e dataType SR Legacy. **Distinta** dall'aringa cruda, già ⚠ in coda precedente per mancanza di un FDC ID verificabile — qui un FDC ID esiste ed è verificato, l'affumicatura è un prodotto a sé.
+- **Analogia usata**: `food_salmon_cooked` (Golden Set originale, salmone, già eseguito sul DB reale — stessa convenzione "pesce affumicato" già usata per `food_salmone_affumicato_raw` in coda precedente).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `aringa_affumicata` ("Aringa, affumicata").
+- **Attributi**: `--is-heme-iron` (true, carne di pesce, stessa convenzione degli altri pesci), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=smoked` (libero, non un enum validato dallo script), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173668 --food-id=food_aringa_affumicata_raw \
+  --name-it="Aringa, affumicata (kippered)" \
+  --matrix-id=aringa_affumicata --matrix-description-it="Aringa, affumicata" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173668 --food-id=food_aringa_affumicata_raw \
+  --name-it="Aringa, affumicata (kippered)" \
+  --matrix-id=aringa_affumicata --matrix-description-it="Aringa, affumicata" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cuore di maiale, crudo — preparato 2026-10-20 dal task orario (diciassettesimo lotto)
 
 - **food_id**: `food_cuore_di_maiale_raw`. FDC ID 168267 (SR Legacy, "Pork, fresh, variety meats and by-products, heart, raw").
