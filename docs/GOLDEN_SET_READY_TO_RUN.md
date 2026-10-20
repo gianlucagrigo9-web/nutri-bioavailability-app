@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Tilapia, cruda — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_tilapia_raw`. FDC ID 175176 (SR Legacy, "Fish, tilapia, raw").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 96,0kcal, proteine 20,1g, grassi 1,70g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 0,56mg, zinco 0,33mg, calcio 10,0mg, rame 0,075mg, magnesio 27,0mg, selenio 41,8µg, vitamina C 0mg esplicito, vitamina B12 1,58µg, folato totale 24,0µg, acido folico 0µg esplicito separato (nessuna firma di arricchimento), vitamina K (fillochinone) 1,40µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un pesce bianco senza pigmenti carotenoidi — non un gap). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175176 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa categoria "pesce bianco magro crudo", `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `tilapia` ("Tilapia").
+- **Attributi**: `is_heme_iron=true` (pesce, stessa convenzione di merluzzo/salmone/tonno già eseguiti), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175176 --food-id=food_tilapia_raw \
+  --name-it="Tilapia, cruda" \
+  --matrix-id=tilapia --matrix-description-it="Tilapia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175176 --food-id=food_tilapia_raw \
+  --name-it="Tilapia, cruda" \
+  --matrix-id=tilapia --matrix-description-it="Tilapia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Luccio, cotto (calore secco) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
 
 - **food_id**: `food_luccio_cotto`. FDC ID 175127 (SR Legacy, "Fish, pike, northern, cooked, dry heat"). **Nota**: il crudo (FDC 173680, "Fish, pike, northern, raw") è stato cercato ma scartato — nessuna pagina getfoodfacts.com indicizzata per il crudo (solo una pagina "compare" vuota/non renderizzata), e le uniche fonti con dati numerici (myfooddata.com, triagemethod.com) non dichiarano un dataType SR Legacy/Foundation sulla stessa pagina della tabella nutrienti (triagemethod mescola addirittura fonti SR Legacy e AFCD australiano riga per riga, stesso segnale già usato per scartare EVOO/cavolo cappuccio cotto/barbabietola cotta); il cotto invece ha una pagina getfoodfacts.com pulita con FDC ID e dataType espliciti, quindi entra in coda solo in questa forma.
