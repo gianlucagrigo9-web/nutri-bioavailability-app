@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sorgo, integrale, crudo — preparato 2026-10-20 dal task orario (ventesimo lotto)
+
+- **food_id**: `food_sorgo_raw`. FDC ID 169716 (SR Legacy, "Sorghum grain").
+- **Nutrienti**: **14/17**. Energia 329kcal, proteine 10,6g, grassi 3,46g, carboidrati 72,1g, fibra 6,70g, ferro 3,36mg, zinco 1,67mg, calcio 13,0mg, rame 0,28mg, magnesio 165mg, selenio 12,2µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 20,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento: calcio e ferro nella norma per un cereale integrale, coerenti con riso integrale/orzo già nel Golden Set). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169716 e dataType SR Legacy. Primo cereale comune mai cercato in venti lotti (grano saraceno/miglio/segale/amaranto/quinoa/couscous/orzo/riso/farro già tutti presenti o valutati).
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale crudo, Golden Set pipeline — già eseguito sul DB reale il 2026-10-12. Stessa categoria "cereale integrale in chicchi crudi", stessa famiglia botanica reale Poaceae, stesso trattamento "nessun heme iron").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `sorgo` ("Sorgo, integrale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non zero esplicito: nessuno stato dichiarabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale del sorgo, *Sorghum bicolor* — stessa famiglia del riso/grano/orzo), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169716 --food-id=food_sorgo_raw \
+  --name-it="Sorgo, integrale, crudo" \
+  --matrix-id=sorgo --matrix-description-it="Sorgo, integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=169716 --food-id=food_sorgo_raw \
+  --name-it="Sorgo, integrale, crudo" \
+  --matrix-id=sorgo --matrix-description-it="Sorgo, integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --diet-category=plant_non_fruit --botanical-family=Poaceae --apply
+```
+
 ### Piccione (colombo), carne senza pelle, cruda — preparato 2026-10-20 dal task orario (ventesimo lotto)
 
 - **food_id**: `food_piccione_raw`. FDC ID 171079 (SR Legacy, "Squab, (pigeon), meat only, raw").
