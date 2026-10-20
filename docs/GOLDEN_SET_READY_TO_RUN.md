@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Mais dolce (granoturco dolce), cotto (bollito) — preparato 2026-10-20 dal task orario (ventiquattresimo lotto, turno ore 14)
+
+- **food_id**: `food_mais_dolce_cotto`. FDC ID 169999 (SR Legacy, "Corn, sweet, yellow, cooked, boiled, drained, without salt").
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 96,0kcal, proteine 3,41g, grassi 1,50g, carboidrati 21,0g, fibra 2,40g, ferro 0,45mg, zinco 0,62mg, calcio 3,00mg, rame 0,049mg, magnesio 26,0mg, selenio 0,20µg, vitamina C 5,50mg, vitamina B12 0µg esplicito, folato totale 23,0µg, acido folico 0µg esplicito separato dal folato alimentare (nessuna firma di arricchimento, coerente con un vegetale non trattato), beta-carotene 66,0µg, alfa-carotene 23,0µg, beta-criptoxantina 161µg (tutti reali e non nulli, coerenti col colore giallo del chicco — non un gap), vitamina K (fillochinone) 0,40µg. Distinto da `food_farina_di_mais_raw` (FDC 169697, farina di mais integrale macinata, già eseguita sul DB reale — prodotto diverso, chicco intero cotto vs farina macinata cruda). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169999 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguita sul DB reale — stessa categoria "verdura cotta con carotenoidi reali resi più disponibili dalla cottura", `carotenoid_matrix_state=cooked_or_disrupted`; famiglia botanica reale diversa, Apiaceae per le carote contro Poaceae per il mais, usata solo per gli attributi categorici generali, non per la famiglia botanica che è scritta correttamente).
+- **Categoria dieta**: `plant_non_fruit` (cereale/verdura in chicchi, non frutto botanico).
+- **Matrice**: nuova `mais_dolce_cotto` ("Mais dolce, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio marginale, 3mg/100g, stessa convenzione di altre verdure cotte senza rilevanza calcio/oxalati), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi reali presenti e alimento cotto, stessa convenzione di carote/zucca butternut cotte), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale del mais, *Zea mays*, stessa famiglia di riso/frumento/avena/orzo/sorgo già classificati in questa pipeline), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169999 --food-id=food_mais_dolce_cotto \
+  --name-it="Mais dolce (granoturco dolce), cotto (bollito)" \
+  --matrix-id=mais_dolce_cotto --matrix-description-it="Mais dolce, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169999 --food-id=food_mais_dolce_cotto \
+  --name-it="Mais dolce (granoturco dolce), cotto (bollito)" \
+  --matrix-id=mais_dolce_cotto --matrix-description-it="Mais dolce, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio cremoso/spalmabile (tipo Philadelphia), fresco — preparato 2026-10-20 dal task orario (ventitreesimo lotto, turno ore 13)
 
 - **food_id**: `food_formaggio_cremoso_raw`. FDC ID 173418 (SR Legacy, "Cheese, cream").
