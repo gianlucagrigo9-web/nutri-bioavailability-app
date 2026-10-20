@@ -16,6 +16,103 @@
 
 ## Pronti
 
+### Ventriglio di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
+
+- **food_id**: `food_ventriglio_di_tacchino_raw`. FDC ID 171085 (SR Legacy, "Turkey, gizzard, all classes, raw").
+- **Nutrienti**: **17/17** (completo). Energia 111kcal, proteine 18,8g, grassi 3,37g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 2,78mg, zinco 3,03mg, calcio 16,0mg, rame 0,22mg, magnesio 19,0mg, selenio 28,8µg, vitamina C 6,20mg, vitamina B12 3,61µg, folato totale 6,00µg, acido folico 0µg esplicito separato, vitamina A RAE/retinolo 46,0µg esplicito (coerente con un ventriglio, non un fegato), beta-carotene 0µg esplicito, alpha-carotene 0µg + beta-criptoxantina 0µg espliciti, vitamina K 0µg esplicito. Nessun nutriente mancante — record raro per completezza fra le frattaglie di questo progetto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171085 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia di pollame crudo"; nessun ventriglio di pollame ancora eseguito sul DB reale da usare come analogia più stretta — `food_ventriglio_di_pollo_raw` risulta solo "Pronti", non eseguito).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `ventriglio_di_tacchino` ("Ventriglio di tacchino").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171085 --food-id=food_ventriglio_di_tacchino_raw \
+  --name-it="Ventriglio di tacchino, crudo" \
+  --matrix-id=ventriglio_di_tacchino --matrix-description-it="Ventriglio di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171085 --food-id=food_ventriglio_di_tacchino_raw \
+  --name-it="Ventriglio di tacchino, crudo" \
+  --matrix-id=ventriglio_di_tacchino --matrix-description-it="Ventriglio di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Cuore di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
+
+- **food_id**: `food_cuore_di_tacchino_raw`. FDC ID 171484 (SR Legacy, "Turkey, all classes, heart, raw").
+- **Nutrienti**: **16/17**. Energia 140kcal, proteine 16,7g, grassi 7,44g, carboidrati 0,40g, fibra 0g esplicito, ferro 3,70mg, zinco 3,21mg, calcio 18,0mg, rame 0,49mg, magnesio 21,0mg, selenio 35,4µg, vitamina C 3,00mg, vitamina B12 13,3µg, acido folico 0µg esplicito separato, vitamina A RAE 82,0µg/retinolo 80,0µg esplicito, beta-carotene 23,0µg esplicito, alpha-carotene 0µg + beta-criptoxantina 0µg espliciti, vitamina K 0µg esplicito. **Manca**: folato totale (non riportato nel record FDC). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171484 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo — già eseguito sul DB reale. Stessa categoria "frattaglia di pollame crudo"; nessun cuore di pollame ancora eseguito sul DB reale da usare come analogia più stretta — `food_cuore_di_pollo_raw` risulta solo "Pronti", non eseguito).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cuore_di_tacchino` ("Cuore di tacchino").
+- **Attributi**: `is_heme_iron` presente (true), resto come sopra (NULL/default/raw).
+
+```
+npm run add-food -- --fdc-id=171484 --food-id=food_cuore_di_tacchino_raw \
+  --name-it="Cuore di tacchino, crudo" \
+  --matrix-id=cuore_di_tacchino --matrix-description-it="Cuore di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171484 --food-id=food_cuore_di_tacchino_raw \
+  --name-it="Cuore di tacchino, crudo" \
+  --matrix-id=cuore_di_tacchino --matrix-description-it="Cuore di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Fegato di tacchino, crudo — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
+
+- **food_id**: `food_fegato_di_tacchino_raw`. FDC ID 171486 (SR Legacy, "Turkey, all classes, liver, raw").
+- **Nutrienti**: **17/17** (completo). Energia 128kcal, proteine 18,3g, grassi 5,50g, carboidrati 0g esplicito, fibra 0g esplicito, ferro 8,94mg, zinco 3,37mg, calcio 20,0mg, rame 0,86mg, magnesio 24,0mg, selenio 68,7µg, vitamina C 24,5mg, vitamina B12 19,7µg, folato totale 677µg, acido folico 0µg esplicito separato, vitamina A RAE 8.058µg/retinolo 8.056µg esplicito (valore molto alto ma tipico del fegato, nessuna firma di arricchimento), beta-carotene 29,0µg esplicito, alpha-carotene 0µg + beta-criptoxantina 0µg espliciti, vitamina K 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171486 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_pollo_raw` (fegato di pollo crudo — già eseguito sul DB reale. Stessa categoria "fegato di pollame crudo", stesso tipo di analogia già usato per fegato d'anatra/d'oca nel ventunesimo lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `fegato_di_tacchino` ("Fegato di tacchino").
+- **Attributi**: `is_heme_iron` presente (true), resto come sopra (NULL/default/raw).
+
+```
+npm run add-food -- --fdc-id=171486 --food-id=food_fegato_di_tacchino_raw \
+  --name-it="Fegato di tacchino, crudo" \
+  --matrix-id=fegato_di_tacchino --matrix-description-it="Fegato di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171486 --food-id=food_fegato_di_tacchino_raw \
+  --name-it="Fegato di tacchino, crudo" \
+  --matrix-id=fegato_di_tacchino --matrix-description-it="Fegato di tacchino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Lingua di vitello, cruda — preparato 2026-10-20 dal task orario (ventiduesimo lotto)
+
+- **food_id**: `food_lingua_di_vitello_raw`. FDC ID 174368 (SR Legacy, "Veal, variety meats and by-products, tongue, raw").
+- **Nutrienti**: **14/17**. Energia 131kcal, proteine 17,2g, grassi 5,48g, carboidrati 1,91g, fibra 0g esplicito, ferro 2,72mg, zinco 2,63mg, calcio 7,00mg, rame 0,20mg, magnesio 17,0mg, selenio 7,00µg, vitamina C 5,00mg, vitamina B12 6,10µg, folato totale 5,00µg, acido folico 0µg esplicito separato, vitamina A RAE/retinolo 0µg esplicito (coerente con un muscolo come la lingua, non un fegato — nessun'anomalia). **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174368 e dataType SR Legacy.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo — già eseguito sul DB reale. Stessa specie, stessa categoria "frattaglia/organo crudo" — stesso tipo di analogia cross-organo già usato nel ventunesimo lotto per polmone/milza/animelle di vitello).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `lingua_di_vitello` ("Lingua di vitello").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+- **Nota di trasparenza**: la nota di chiusura del ventesimo e del ventunesimo lotto in `docs/PRD.md` elencava questo alimento come già coperto ("fegato/rognone/cuore/lingua di vitello già ✅/🟡") — verificato con `git log --all` e ricerca testuale in questo file e nel PRD che non è mai stato realmente preparato né eseguito prima di questo lotto. Era un'imprecisione della nota riassuntiva di un run precedente (probabile confusione con lingua di maiale/agnello, già valutate), corretta nel ventiduesimo lotto.
+
+```
+npm run add-food -- --fdc-id=174368 --food-id=food_lingua_di_vitello_raw \
+  --name-it="Lingua di vitello, cruda" \
+  --matrix-id=lingua_di_vitello --matrix-description-it="Lingua di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174368 --food-id=food_lingua_di_vitello_raw \
+  --name-it="Lingua di vitello, cruda" \
+  --matrix-id=lingua_di_vitello --matrix-description-it="Lingua di vitello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fegato d'oca, crudo — preparato 2026-10-20 dal task orario (ventunesimo lotto)
 
 - **food_id**: `food_fegato_di_oca_raw`. FDC ID 172415 (SR Legacy, "Goose, liver, raw").
