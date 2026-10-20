@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte di pecora, crudo — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
+
+- **food_id**: `food_latte_di_pecora_raw`. FDC ID 170882 (SR Legacy, "Milk, sheep, fluid").
+- **Nutrienti**: **14/17**. Energia 108kcal, proteine 5,98g, grassi 7,00g, carboidrati 5,36g, fibra 0g esplicito, ferro 0,10mg, zinco 0,54mg, calcio 193mg, rame 0,046mg, magnesio 18,0mg, selenio 1,70µg, vitamina C 4,20mg, vitamina B12 0,71µg, folato totale 7,00µg, acido folico 0µg esplicito separato. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati nel record. Nessuna firma di arricchimento: la pagina non menziona vitamina D aggiunta (a differenza di `food_milk_whole` vaccino, che la riporta esplicitamente — ma la vitamina D non è un nutriente tracciato da questo motore, quindi la differenza non ha effetto pratico). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170882 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (Golden Set originale, latte vaccino intero — già eseguito sul DB reale. Stessa categoria "latte liquido", `matrix_category_calcium=medium_oxalate`; distinto dal pecorino romano, già ⚠ in questa pipeline per lo stesso motivo del latte non specificato, e da feta/formaggio caprino, che non sono latte liquido).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: nuova `latte_di_pecora` ("Latte di pecora").
+- **Attributi**: `is_heme_iron` omesso (false, come il latte vaccino), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170882 --food-id=food_latte_di_pecora_raw \
+  --name-it="Latte di pecora, crudo" \
+  --matrix-id=latte_di_pecora --matrix-description-it="Latte di pecora" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170882 --food-id=food_latte_di_pecora_raw \
+  --name-it="Latte di pecora, crudo" \
+  --matrix-id=latte_di_pecora --matrix-description-it="Latte di pecora" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Nespola, cruda — preparato 2026-10-20 dal task orario (diciannovesimo lotto)
 
 - **food_id**: `food_nespola_raw`. FDC ID 169908 (SR Legacy, "Loquats, raw").
