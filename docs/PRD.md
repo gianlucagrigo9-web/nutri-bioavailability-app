@@ -486,6 +486,37 @@ Vedi il dettaglio completo sotto il filtro tipo-dieta in §4.9 sopra. In sintesi
 
 **Non ancora fatto, dichiarato esplicitamente**: `buildDietNutrientTargets` non è ancora richiamato da `app/page.tsx` (nessun input sesso/età nell'UI oggi); risoluzione dei gap raw-field-vs-engine-output per ferro/zinco/folati/vitamina A (richiede decidere come `generateDiet` invocherebbe i motori bioavailability-adjusted per candidato, livello di integrazione non ancora progettato — stesso gap dichiarato in testa a `dietGenerator.ts`); righe `sources` reali per `LARN_2024_SINU` ed `EFSA_DRV_SUMMARY_2017` non ancora create sul DB (richiede accesso Supabase, bloccato in questo sandbox — accodato a `docs/PENDING_HUMAN_ACTIONS.md`); nessuna fascia età/gravidanza/allattamento oltre quanto dichiarato sopra; raggiungimento del PDF ufficiale SINU (oggi solo le tabelle di sintesi secondarie SmartFood/IEO).
 
+### 4.11 Livello sociale: nickname, punteggio condiviso, ricette degli utenti, voti (2026-10-22) — **PROPOSTA: direzione approvata dall'utente, design NON chiuso, nessun codice né schema scritto**
+
+**Origine.** Richiesta dell'utente il 2026-10-22: aggiungere una componente sociale perché un'app solo "di calcolo" è facile da copiare. Tre funzioni: (1) condividere (o no) il proprio nome/nickname con un punteggio che mescola impatto ambientale e qualità della dieta; (2) possibilità per gli utenti di pubblicare ricette (si presume salutari), che il team vaglia e a cui assegna valori nutrizionali stimati; (3) voti da 1 a 5 stelle sulle ricette da parte degli altri utenti, che alimentano una seconda classifica.
+
+**Valutazione di Claude (condivisa dall'utente, 2026-10-22).** La parte facilmente copiabile è l'interfaccia; il vantaggio difficile da copiare è il database verificato e i motori di biodisponibilità (§4, §5), non il livello sociale. Una componente sociale trattiene gli utenti solo con una massa minima di utenti (classifiche vuote non servono a nulla), quindi va costruita **dopo** il lancio del nucleo dell'app, non al suo posto. Nessuna delle tre funzioni è urgente rispetto alla Fase 2 (§9).
+
+**Regole proposte (vincolanti se la funzione viene approvata nel design):**
+1. **Condivisione sempre opt-in.** Profilo privato di default; nickname scelto dall'utente (mai il nome reale di default); consenso esplicito, ritirabile in qualunque momento, con cancellazione/esportazione dei dati sociali.
+2. **Punteggio relativo ai propri obiettivi, non assoluto.** Misura quanto la dieta dell'utente si avvicina ai *suoi* target (stesso meccanismo di adeguatezza NAR/MAR già in §4.9, per età e sesso) combinato con l'Eco-Score (§6); altrimenti penalizzerebbe chi ha fabbisogni diversi (gravidanza, anziani, diete vegetali) e premierebbe chi mangia poco.
+3. **Nessun incentivo alla restrizione.** Il punteggio ha un tetto e non cresce mangiando meno del fabbisogno; nessuna classifica "dieta più leggera/più restrittiva". Rischio per la salute (disturbi alimentari), considerato obbligatorio da affrontare nel design, non opzionale.
+4. **Trasparenza del numero (§2 Regola 1/4).** Ogni punteggio ha il proprio "Perché questo numero?": componenti, pesi, fonti. Formula e pesi dichiarati pubblicamente, non una scatola nera.
+5. **Dati auto-dichiarati = classifica non verificabile.** Dichiararlo nell'interfaccia; contromisure anti-abuso (finestra settimanale, limiti ai valori plausibili); nessun premio materiale legato alla classifica senza un meccanismo di verifica.
+6. **Ricette: valori sempre "stima".** Valori nutrizionali calcolati con il motore dei piatti compositi (§4.8, terza fascia di accuratezza), con intervallo e `source_type = 'internal_estimate'` (§4.7), mai presentati come misurati. Coerente con "zero dati inventati": si stima solo a partire da alimenti verificati del database, e un ingrediente senza dato verificato lascia la ricetta "non calcolabile" per quel nutriente.
+7. **Moderazione prima della pubblicazione.** Flusso: invio → coda → revisione (umana, con aiuto del motore) → pubblicazione. La coda è manuale e non scala: limite di invii per utente alla settimana all'inizio. Pulsante "segnala", regole d'uso e possibilità di rimozione (il team risponde dei contenuti pubblicati).
+8. **Voti anti-abuso.** Un voto per utente per ricetta, nessun autovoto, solo account registrati, classifica su media corretta (bayesiana) con numero minimo di voti per comparire.
+9. **Nessuna classifica sotto soglia di utenti.** Finché gli utenti con condivisione attiva sono sotto una soglia minima (da decidere), la classifica non viene mostrata.
+10. **Minori e privacy.** In Italia l'età minima per il consenso digitale autonomo è 14 anni: sotto, serve il consenso dei genitori o la funzione sociale resta spenta. La nota GDPR di §1.1 (dati "ordinari") riguarda l'MVP *senza* livello sociale: rendere pubblici, anche in opt-in, nickname e abitudini alimentari cambia il trattamento. **Va riverificata con un professionista (legale/DPO) prima del lancio della funzione** — qui non c'è alcun parere legale.
+
+**Dipendenze tecniche (nulla di tutto ciò esiste oggi).** Autenticazione utenti (l'app oggi non ha account; RLS attuale è in sola lettura sulle tabelle alimenti, §9 Fase 2.9); tabelle nuove (profili pubblici, punteggi, ricette, ingredienti delle ricette, voti, segnalazioni) con policy RLS proprie; ruolo amministratore per la coda di revisione; riuso dei motori esistenti (`dietAdequacy`, `lcaLogisticsEngine`, `dishComposition`).
+
+**Fasi proposte (ordine di sviluppo):**
+1. Registrazione utenti (prerequisito di tutto).
+2. Profilo con nickname e punteggio **privato** (visibile solo al proprietario).
+3. Condivisione opzionale del punteggio e classifica.
+4. Ricette: invio, coda di revisione, calcolo dei valori stimati, pubblicazione.
+5. Voti da 1 a 5 e classifica delle ricette.
+
+**Decisioni aperte (nessuna presa):** formula e pesi del punteggio (dieta vs ambiente) e sua finestra temporale; soglia minima di utenti per le classifiche; fornitore di autenticazione; limiti di invio ricette e capacità di moderazione; valutazione legale (GDPR, minori, responsabilità sui contenuti); lingua/regole d'uso; se e quando collocare l'avvio (dopo Fase 2 e lancio del nucleo).
+
+**Non ancora fatto, dichiarato esplicitamente:** nessun codice, nessuno schema SQL, nessuna modifica all'interfaccia; questa sezione registra solo la direzione e i rischi emersi nella discussione del 2026-10-22.
+
 ---
 
 ## 5. Architettura dati con provenienza
@@ -591,6 +622,7 @@ Questo contratto sarà il primo criterio di accettazione da validare quando risc
 ### Fuori (rimandato, non cancellato)
 - OCR referti, profili clinici, prescrizioni — **bloccato** finché non c'è una valutazione legale (§1.1).
 - Integrazione wearable (Apple HealthKit/Health Connect) — richiede app nativa, non PWA.
+- Livello sociale (nickname e punteggio condiviso, ricette degli utenti, voti e classifiche) — direzione approvata il 2026-10-22, design aperto, da dopo il lancio del nucleo: vedi §4.11.
 - Mappa globale di popolazione (FAOSTAT/GDD).
 - Database integratori e crononutrizione.
 - AI Recipe Co-Pilot conversazionale.
@@ -1201,6 +1233,7 @@ Dalla visione a 7 step condivisa il 2026-10-10, al netto delle voci escluse (ved
 19. Database integratori e crononutrizione.
 20. Mappa globale di popolazione (FAOSTAT/GDD).
 21. Integrazione wearable (HealthKit/Health Connect) — richiede app nativa, non PWA: decisione architetturale a sé.
+24. Livello sociale (nickname + punteggio condiviso opt-in, ricette degli utenti con revisione, voti 1-5 e classifiche) — proposta 2026-10-22, design aperto, vedi §4.11; richiede autenticazione utenti e una verifica legale (GDPR, minori) prima del lancio.
 
 ### Fase 6 — Intenzionalmente parcheggiato (non "dopo", ma "da ridiscutere se e quando")
 22. Modulo clinico (ontologia eziologica, alberi decisionali per patologia) — fuori perimetro per motivi legali/regolatori (§1.1), si rivaluta a MVP completo.
@@ -1218,7 +1251,7 @@ Stessi punti di sopra, solo riordinati in un'unica lista di priorità verso il l
 5. 👤 **Fase 2.11 — Collegare Vercel**: richiede l'account Vercel dell'utente (login, scelta dominio) — preparo io i file di configurazione, ma il collegamento stesso è un'azione umana.
 6. 👤 **Fase 1.8 — Controllo periodico più approfondito sui 30 alimenti promossi**: va prima definito un criterio/checklist esplicito (oggi non esiste) — una volta approvato, l'esecuzione ricorrente diventa 🤖.
 7. 👤 **Integrazione CREA** (dati italiani ufficiali, oggi solo dichiarata come gap) — nuova fonte dati, nuova pipeline, serve una sessione di design come per FDC.
-8. 👤 **Fase 5 (17-21)**: pipeline evidenze PubMed, AI Recipe Co-Pilot, integratori/crononutrizione, mappa popolazione, wearable — post-MVP, ciascuno da scoprire quando ci si arriva, nessuno ancora scoping-ato.
+8. 👤 **Fase 5 (17-21 e 24)**: pipeline evidenze PubMed, AI Recipe Co-Pilot, integratori/crononutrizione, mappa popolazione, wearable, livello sociale (§4.11) — post-MVP, ciascuno da scoprire quando ci si arriva, nessuno ancora scoping-ato.
 9. **Fase 6 (22-23)**: modulo clinico, CGM — intenzionalmente fuori da questa lista, cancello legale/regolatorio non ancora passato (§1.1, §7).
 
 **Nota sul "fare tutto in autonomia" (richiesta dell'utente, 2026-10-11)**: il task diurno pianificato resta scoped al punto 1 (e, una volta approvati i rispettivi design, ai punti che diventano 🤖 sopra) perché quel lavoro è meccanico e ogni singolo output è verificabile a posteriori senza ambiguità (un alimento FDC esiste o non esiste, un valore combacia o non combacia). I punti 👤 richiedono invece un giudizio che la Regola 5 riserva esplicitamente a una sessione con criteri approvati PRIMA del codice, o un'azione che solo l'utente può fisicamente fare (login Vercel, scansione di un prodotto reale). Non è una decisione contro l'autonomia in sé — è la stessa distinzione già in vigore stasera tra "il task diurno scrive ed esegue" e "io propongo, tu approvi, poi si scrive".
