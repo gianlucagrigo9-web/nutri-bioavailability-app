@@ -40,6 +40,30 @@ npm run add-food -- --fdc-id=173851 --food-id=food_bisonte_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Struzzo, carne macinata cruda — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_struzzo_raw`. FDC ID 174481 (SR Legacy, "Ostrich, ground, raw" — pagina getfoodfacts.com dedicata e pulita). Nessun record generico "ostrich, raw" non macinato trovato: FDC traccia solo tagli specifici (inside leg, outside leg, top loin, tenderloin...) più questo "ground" generico, accettato per la stessa convenzione già usata per il manzo macinato nel Golden Set originale.
+- **Nutrienti**: **16/17** (il più completo di questo lotto). Per 100g: energia 165kcal, proteine 20,2g, grassi 8,70g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 7,00mg, ferro 2,91mg, zinco 3,51mg, magnesio 20,0mg, rame 0,13mg, selenio 33,0µg, vitamina C 0mg esplicito, vitamina B12 4,61µg, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito (alfa-carotene e beta-criptoxantina entrambi 0). **Manca** (non riportata sulla pagina, non assunta zero): vitamina K. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174481 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale). Nota di trasparenza: lo struzzo è un uccello (ratite), non un mammifero, ma la carne di struzzo è nutrizionalmente classificata come carne rossa per l'alto contenuto di mioglobina — confermato qui dal ferro 2,91mg/100g, più vicino al range delle carni rosse magre (manzo/capra/cavallo, 2,6-4,7mg/100g in questa pipeline) che al pollame magro (petto di pollo/tacchino, tipicamente <1mg/100g) — e dal fatto che questo stesso record FDC è "ground", stesso formato già usato per il manzo. Non usata un'analogia aviaria (es. `food_petto_di_pollo_raw`) proprio per questo motivo nutrizionale, non per un errore di classificazione zoologica.
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo` ("Struzzo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174481 --food-id=food_struzzo_raw \
+  --name-it="Struzzo, carne macinata cruda" \
+  --matrix-id=struzzo --matrix-description-it="Struzzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174481 --food-id=food_struzzo_raw \
+  --name-it="Struzzo, carne macinata cruda" \
+  --matrix-id=struzzo --matrix-description-it="Struzzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
