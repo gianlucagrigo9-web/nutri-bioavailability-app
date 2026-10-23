@@ -1,0 +1,94 @@
+# LOTTO 10 di 15 - APPLICA: SCRIVE DAVVERO sul database (28 alimenti, tutti salvati come "bozza").
+# Copia TUTTO il file (Ctrl+A, Ctrl+C), incollalo in PowerShell aperto nella cartella del progetto, aspetta "Finito".
+# Se lo incolli due volte non succede nulla di male: gli alimenti gia presenti vengono rifiutati.
+New-Item -ItemType Directory -Force lotti_alimenti | Out-Null
+$f = "lotti_alimenti\esito_lotto_10_applica.txt"
+Remove-Item $f -ErrorAction SilentlyContinue
+"LOTTO 10 APPLICA - " + (Get-Date) | Out-File $f -Encoding utf8
+"### food_maggiorana_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170928 --food-id=food_maggiorana_raw --name-it="Maggiorana, secca" --matrix-id=maggiorana --matrix-description-it="Maggiorana" --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --botanical-family=Lamiaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_maggiorana_raw"
+"### food_dragoncello_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170937 --food-id=food_dragoncello_raw --name-it="Dragoncello, secco" --matrix-id=dragoncello --matrix-description-it="Dragoncello" --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_dragoncello_raw"
+"### food_aneto_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171322 --food-id=food_aneto_raw --name-it="Aneto, secco" --matrix-id=aneto --matrix-description-it="Aneto" --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_aneto_raw"
+"### food_cardamomo_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170919 --food-id=food_cardamomo_raw --name-it="Cardamomo, semi secchi" --matrix-id=cardamomo --matrix-description-it="Cardamomo" --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cardamomo_raw"
+"### food_coriandolo_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170922 --food-id=food_coriandolo_raw --name-it="Coriandolo, semi secchi" --matrix-id=coriandolo --matrix-description-it="Coriandolo" --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw --diet-category=plant_non_fruit --botanical-family=Apiaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_coriandolo_raw"
+"### food_senape_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170929 --food-id=food_senape_raw --name-it="Senape, semi secchi" --matrix-id=senape --matrix-description-it="Senape" --baseline-cooking-state=raw --analogy-food-id=food_brussels_sprouts_raw --diet-category=plant_non_fruit --botanical-family=Brassicaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_senape_raw"
+"### food_aglio_polvere_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171325 --food-id=food_aglio_polvere_raw --name-it="Aglio, in polvere" --matrix-id=aglio_polvere --matrix-description-it="Aglio, in polvere" --baseline-cooking-state=raw --analogy-food-id=food_garlic_fresh_raw --diet-category=plant_non_fruit --botanical-family=Amaryllidaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_aglio_polvere_raw"
+"### food_zenzero_polvere_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170926 --food-id=food_zenzero_polvere_raw --name-it="Zenzero, in polvere (secco)" --matrix-id=zenzero_polvere --matrix-description-it="Zenzero, in polvere" --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw --diet-category=plant_non_fruit --botanical-family=Zingiberaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_zenzero_polvere_raw"
+"### food_pepe_bianco_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170933 --food-id=food_pepe_bianco_raw --name-it="Pepe bianco, macinato" --matrix-id=pepe_bianco --matrix-description-it="Pepe bianco" --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw --diet-category=plant_non_fruit --botanical-family=Piperaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_pepe_bianco_raw"
+"### food_semi_di_girasole_tostati" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170563 --food-id=food_semi_di_girasole_tostati --name-it="Semi di girasole, tostati (senza sale)" --matrix-id=semi_di_girasole_tostati --matrix-description-it="Semi di girasole, tostati" --baseline-cooking-state=roasted --analogy-food-id=food_scarola_raw --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_semi_di_girasole_tostati"
+"### food_cardi_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169982 --food-id=food_cardi_cotti --name-it="Cardi, cotti (bolliti)" --matrix-id=cardi_cotti --matrix-description-it="Cardi, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_cardi_raw --diet-category=plant_non_fruit --botanical-family=Asteraceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cardi_cotti"
+"### food_carambola_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171715 --food-id=food_carambola_raw --name-it="Carambola (starfruit), cruda" --matrix-id=carambola --matrix-description-it="Carambola (starfruit)" --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Oxalidaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_carambola_raw"
+"### food_kumquat_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168154 --food-id=food_kumquat_raw --name-it="Kumquat, crudo" --matrix-id=kumquat --matrix-description-it="Kumquat" --baseline-cooking-state=raw --analogy-food-id=food_mandarini_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Rutaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_kumquat_raw"
+"### food_capesante_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=167742 --food-id=food_capesante_cotte --name-it="Capesante, cotte (al vapore)" --matrix-id=capesante --matrix-description-it="Capesante" --baseline-cooking-state=steamed --analogy-food-id=food_vongole_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_capesante_cotte"
+"### food_granchio_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174205 --food-id=food_granchio_cotto --name-it="Granchio, cotto (al vapore/bollito)" --matrix-id=granchio --matrix-description-it="Granchio" --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_granchio_cotto"
+"### food_astice_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174209 --food-id=food_astice_cotto --name-it="Astice, cotto (bollito)" --matrix-id=astice --matrix-description-it="Astice" --baseline-cooking-state=moist_heat_cooked --analogy-food-id=food_vongole_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_astice_cotto"
+"### food_ostriche_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=175173 --food-id=food_ostriche_cotte --name-it="Ostriche, cotte (al forno, calore secco)" --matrix-id=ostriche --matrix-description-it="Ostriche" --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_vongole_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_ostriche_cotte"
+"### food_fagioli_azuki_bolliti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173728 --food-id=food_fagioli_azuki_bolliti --name-it="Fagioli azuki, cotti (bolliti, senza sale)" --matrix-id=legumes --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_cannellini_bolliti --diet-category=plant_non_fruit --botanical-family=Fabaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_fagioli_azuki_bolliti"
+"### food_olive_verdi" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169096 --food-id=food_olive_verdi --name-it="Olive verdi, in salamoia" --matrix-id=olive_verdi --matrix-description-it="Olive verdi, in salamoia" --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --botanical-family=Oleaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_olive_verdi"
+"### food_olive_nere" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169094 --food-id=food_olive_nere --name-it="Olive nere, in salamoia (inscatolate)" --matrix-id=olive_nere --matrix-description-it="Olive nere, in salamoia" --baseline-cooking-state=pickled --analogy-food-id=food_albicocche_secche_raw --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --botanical-family=Oleaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_olive_nere"
+"### food_aceto_di_mele" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173469 --food-id=food_aceto_di_mele --name-it="Aceto di mele" --matrix-id=aceto_di_mele --matrix-description-it="Aceto di mele" --baseline-cooking-state=fermented --analogy-food-id=food_zucchero_bianco --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_aceto_di_mele"
+"### food_fontina" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170843 --food-id=food_fontina --name-it="Fontina" --matrix-id=fontina --matrix-description-it="Fontina" --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano --diet-category=egg_dairy --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_fontina"
+"### food_succo_di_limone_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=167747 --food-id=food_succo_di_limone_raw --name-it="Succo di limone, crudo (spremuto)" --matrix-id=succo_di_limone --matrix-description-it="Succo di limone, crudo" --baseline-cooking-state=raw --analogy-food-id=food_lemon_peeled_raw --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --botanical-family=Rutaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_succo_di_limone_raw"
+"### food_succo_di_arancia_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169098 --food-id=food_succo_di_arancia_raw --name-it="Succo d'arancia, crudo (spremuto)" --matrix-id=succo_di_arancia --matrix-description-it="Succo d'arancia, crudo" --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --botanical-family=Rutaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_succo_di_arancia_raw"
+"### food_tonno_in_scatola_olio_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174227 --food-id=food_tonno_in_scatola_olio_raw --name-it="Tonno, in scatola, sott'olio, scolato (senza sale)" --matrix-id=tonno_in_scatola_olio --matrix-description-it="Tonno, in scatola, sott'olio" --baseline-cooking-state=canned_in_oil --analogy-food-id=food_tonno_fresco_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_tonno_in_scatola_olio_raw"
+"### food_fegato_di_maiale_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=167862 --food-id=food_fegato_di_maiale_raw --name-it="Fegato di maiale, crudo" --matrix-id=fegato_di_maiale --matrix-description-it="Fegato di maiale" --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_fegato_di_maiale_raw"
+"### food_farina_di_grano_saraceno_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170687 --food-id=food_farina_di_grano_saraceno_raw --name-it="Farina di grano saraceno, cruda" --matrix-id=farina_di_grano_saraceno --matrix-description-it="Farina di grano saraceno" --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw --diet-category=plant_non_fruit --botanical-family=Polygonaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_farina_di_grano_saraceno_raw"
+"### food_uva_spina_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173030 --food-id=food_uva_spina_raw --name-it="Uva spina, cruda" --matrix-id=uva_spina --matrix-description-it="Uva spina" --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw --carotenoid-matrix-state=raw_intact --diet-category=fresh_fruit --botanical-family=Grossulariaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_uva_spina_raw"
+Write-Host ""
+Write-Host "Finito il lotto 10. Righe con ERRORE:" (Select-String -Path $f -Pattern "ERRORE|Errore" | Measure-Object).Count
+Get-Content $f | Select-String -Pattern "###|creat|inserit|erifica|ERRORE|Errore"

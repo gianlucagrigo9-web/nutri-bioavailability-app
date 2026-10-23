@@ -1,0 +1,94 @@
+# LOTTO 08 di 15 - APPLICA: SCRIVE DAVVERO sul database (28 alimenti, tutti salvati come "bozza").
+# Copia TUTTO il file (Ctrl+A, Ctrl+C), incollalo in PowerShell aperto nella cartella del progetto, aspetta "Finito".
+# Se lo incolli due volte non succede nulla di male: gli alimenti gia presenti vengono rifiutati.
+New-Item -ItemType Directory -Force lotti_alimenti | Out-Null
+$f = "lotti_alimenti\esito_lotto_08_applica.txt"
+Remove-Item $f -ErrorAction SilentlyContinue
+"LOTTO 08 APPLICA - " + (Get-Date) | Out-File $f -Encoding utf8
+"### food_petto_di_tacchino_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174516 --food-id=food_petto_di_tacchino_cotto --name-it="Petto di tacchino, cotto (arrosto)" --matrix-id=petto_di_tacchino_cotto --matrix-description-it="Petto di tacchino, cotto" --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_petto_di_tacchino_cotto"
+"### food_lonza_di_maiale_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168233 --food-id=food_lonza_di_maiale_cotta --name-it="Lonza di maiale, cotta (arrosto)" --matrix-id=lonza_di_maiale_cotta --matrix-description-it="Lonza di maiale, cotta" --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_lonza_di_maiale_cotta"
+"### food_vitello_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=175265 --food-id=food_vitello_cotto --name-it="Vitello, cotto" --matrix-id=vitello_cotto --matrix-description-it="Vitello, cotto" --baseline-cooking-state=cooked --analogy-food-id=food_vitello_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_vitello_cotto"
+"### food_polpo_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174249 --food-id=food_polpo_cotto --name-it="Polpo, cotto (bollito)" --matrix-id=polpo_cotto --matrix-description-it="Polpo, cotto" --baseline-cooking-state=boiled --analogy-food-id=food_polpo_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_polpo_cotto"
+"### food_pesce_spada_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=173704 --food-id=food_pesce_spada_cotto --name-it="Pesce spada, cotto (calore secco)" --matrix-id=pesce_spada_cotto --matrix-description-it="Pesce spada, cotto" --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_pesce_spada_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_pesce_spada_cotto"
+"### food_vongole_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=171975 --food-id=food_vongole_cotte --name-it="Vongole, cotte (al vapore)" --matrix-id=vongole_cotte --matrix-description-it="Vongole, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_vongole_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_vongole_cotte"
+"### food_cozze_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174217 --food-id=food_cozze_cotte --name-it="Cozze, cotte (al vapore)" --matrix-id=cozze_cotte --matrix-description-it="Cozze, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_cozze_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cozze_cotte"
+"### food_quinoa_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168917 --food-id=food_quinoa_cotta --name-it="Quinoa, cotta (bollita)" --matrix-id=quinoa_cotta --matrix-description-it="Quinoa, cotta" --baseline-cooking-state=boiled --analogy-food-id=food_quinoa_dry_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_quinoa_cotta"
+"### food_riso_integrale_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169704 --food-id=food_riso_integrale_cotto --name-it="Riso integrale, cotto (bollito)" --matrix-id=riso_integrale_cotto --matrix-description-it="Riso integrale, cotto" --baseline-cooking-state=boiled --analogy-food-id=food_riso_integrale_raw --botanical-family=Poaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_riso_integrale_cotto"
+"### food_orzo_perlato_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170285 --food-id=food_orzo_perlato_cotto --name-it="Orzo perlato, cotto (bollito)" --matrix-id=orzo_perlato_cotto --matrix-description-it="Orzo perlato, cotto" --baseline-cooking-state=boiled --analogy-food-id=food_orzo_perlato_raw --botanical-family=Poaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_orzo_perlato_cotto"
+"### food_zucchine_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169292 --food-id=food_zucchine_cotte --name-it="Zucchine, cotte (bollite)" --matrix-id=zucchine_cotte --matrix-description-it="Zucchine, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_zucchine_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_zucchine_cotte"
+"### food_asparagi_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168390 --food-id=food_asparagi_cotti --name-it="Asparagi, cotti (bolliti)" --matrix-id=asparagi_cotti --matrix-description-it="Asparagi, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_asparagi_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_asparagi_cotti"
+"### food_fagiolini_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169141 --food-id=food_fagiolini_cotti --name-it="Fagiolini, cotti (bolliti)" --matrix-id=fagiolini_cotti --matrix-description-it="Fagiolini, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_fagiolini_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_fagiolini_cotti"
+"### food_porri_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168426 --food-id=food_porri_cotti --name-it="Porri, cotti (bolliti)" --matrix-id=porri_cotti --matrix-description-it="Porri, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_porri_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_porri_cotti"
+"### food_sedano_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169989 --food-id=food_sedano_cotto --name-it="Sedano, cotto (bollito)" --matrix-id=sedano_cotto --matrix-description-it="Sedano, cotto" --baseline-cooking-state=boiled --analogy-food-id=food_sedano_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_sedano_cotto"
+"### food_funghi_champignon_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169252 --food-id=food_funghi_champignon_cotti --name-it="Funghi champignon, cotti (bolliti)" --matrix-id=funghi_champignon_cotti --matrix-description-it="Funghi champignon, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_mushroom_white_raw --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_funghi_champignon_cotti"
+"### food_pasta_integrale_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168910 --food-id=food_pasta_integrale_cotta --name-it="Pasta integrale, cotta (bollita, non arricchita)" --matrix-id=pasta_integrale_cotta --matrix-description-it="Pasta integrale, cotta" --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked --botanical-family=Poaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_pasta_integrale_cotta"
+"### food_melanzane_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169229 --food-id=food_melanzane_cotte --name-it="Melanzane, cotte (bollite)" --matrix-id=melanzane_cotte --matrix-description-it="Melanzane, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_melanzane_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_melanzane_cotte"
+"### food_peperoni_rossi_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170515 --food-id=food_peperoni_rossi_cotti --name-it="Peperoni rossi, cotti (bolliti)" --matrix-id=peperoni_rossi_cotti --matrix-description-it="Peperoni rossi, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_pepper_red_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_peperoni_rossi_cotti"
+"### food_cipolle_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170001 --food-id=food_cipolle_cotte --name-it="Cipolle, cotte (bollite)" --matrix-id=cipolle_cotte --matrix-description-it="Cipolle, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_onion_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cipolle_cotte"
+"### food_cavolfiore_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170397 --food-id=food_cavolfiore_cotto --name-it="Cavolfiore, cotto (bollito)" --matrix-id=cavolfiore_cotto --matrix-description-it="Cavolfiore, cotto" --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_cavolfiore_cotto"
+"### food_patata_dolce_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170134 --food-id=food_patata_dolce_cotta --name-it="Patata dolce, cotta (al forno, con buccia)" --matrix-id=patata_dolce_cotta --matrix-description-it="Patata dolce, cotta" --baseline-cooking-state=baked --analogy-food-id=food_patata_dolce_raw --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_patata_dolce_cotta"
+"### food_carciofi_cotti" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168386 --food-id=food_carciofi_cotti --name-it="Carciofi, cotti (bolliti)" --matrix-id=carciofi_cotti --matrix-description-it="Carciofi, cotti" --baseline-cooking-state=boiled --analogy-food-id=food_carciofi_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_carciofi_cotti"
+"### food_bietole_da_costa_cotte" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=169343 --food-id=food_bietole_da_costa_cotte --name-it="Bietole da costa, cotte (bollite, con sale)" --matrix-id=bietole_da_costa_cotte --matrix-description-it="Bietole da costa, cotte" --baseline-cooking-state=boiled --analogy-food-id=food_bietole_da_costa_raw --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_bietole_da_costa_cotte"
+"### food_verza_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=168516 --food-id=food_verza_cotta --name-it="Verza, cotta (bollita, con sale)" --matrix-id=verza_cotta --matrix-description-it="Verza, cotta" --baseline-cooking-state=boiled --analogy-food-id=food_verza_raw --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_verza_cotta"
+"### food_agnello_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=174339 --food-id=food_agnello_cotto --name-it="Agnello, cotto" --matrix-id=agnello_cotto --matrix-description-it="Agnello, cotto" --baseline-cooking-state=cooked --analogy-food-id=food_agnello_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_agnello_cotto"
+"### food_coniglio_cotto" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172522 --food-id=food_coniglio_cotto --name-it="Coniglio, cotto (arrosto)" --matrix-id=coniglio_cotto --matrix-description-it="Coniglio, cotto" --baseline-cooking-state=roasted --analogy-food-id=food_coniglio_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_coniglio_cotto"
+"### food_anatra_cotta" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=172411 --food-id=food_anatra_cotta --name-it="Anatra, cotta (arrosto)" --matrix-id=anatra_cotta --matrix-description-it="Anatra, cotta" --baseline-cooking-state=roasted --analogy-food-id=food_anatra_raw --is-heme-iron --diet-category=meat_fish --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_anatra_cotta"
+Write-Host ""
+Write-Host "Finito il lotto 08. Righe con ERRORE:" (Select-String -Path $f -Pattern "ERRORE|Errore" | Measure-Object).Count
+Get-Content $f | Select-String -Pattern "###|creat|inserit|erifica|ERRORE|Errore"

@@ -3,11 +3,11 @@ NIENTE DA ESEGUIRE ORA
 Tutti gli alimenti preparati finora sono stati eseguiti e controllati:
 - 28 alimenti la notte 2026-10-13/14
 - lotto di 18 (verdura e frutta) la notte 2026-10-14
-- 98 alimenti (cinque lotti) la sera 2026-10-14, controllo finale con
-  check_alimenti_lotto2.sql: 98 su 98 OK
-- decisione vitamina A (opzione A + F) eseguita, righe vecchie del seed demo ripulite.
+- 98 alimenti (cinque lotti) la sera 2026-10-14: 98 su 98 OK
+- 275 alimenti (lotti 06-15 piu' la riprova 16) la sera 2026-10-22: tutti presenti, controllo con
+  check_alimenti_serie2.sql (le due righe "DA CONTROLLARE" sulla bistecca di manzo sono un falso allarme).
 
-Il task orario "Ricerca Golden Set" riparte alle 08:08 (poi ogni ora fino alle 20:08) e prepara
-circa 9 alimenti all'ora in docs/GOLDEN_SET_READY_TO_RUN.md. La sera scrivi in chat
-"c'e' il lotto di oggi": una sessione interattiva (Claude in chat) prepara la cartella
-lotti_alimenti con i passi da incollare in PowerShell (prima prova, poi applica).
+Il task "Ricerca Golden Set" riparte il 2026-10-23 alle 12:00 con 3 turni al giorno (circa 12:12, 16:12 e 20:12)
+e prepara circa 9 alimenti a turno in docs/GOLDEN_SET_READY_TO_RUN.md. Quando ce ne sono abbastanza scrivi in chat
+"c'e' il lotto": una sessione interattiva (Claude in chat) prepara la cartella lotti_alimenti con i passi da
+incollare in PowerShell.

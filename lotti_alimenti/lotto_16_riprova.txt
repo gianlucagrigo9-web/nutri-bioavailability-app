@@ -1,0 +1,12 @@
+# LOTTO 16 - RIPROVA: SCRIVE DAVVERO sul database (1 alimento/i che avevano dato errore di rete, salvati come "bozza").
+# Copia TUTTO il file (Ctrl+A, Ctrl+C), incollalo in PowerShell aperto nella cartella del progetto, aspetta "Finito".
+New-Item -ItemType Directory -Force lotti_alimenti | Out-Null
+$f = "lotti_alimenti\esito_lotto_16_riprova.txt"
+Remove-Item $f -ErrorAction SilentlyContinue
+"LOTTO 16 RIPROVA - " + (Get-Date) | Out-File $f -Encoding utf8
+"### food_noce_di_cocco_raw" | Out-File $f -Append -Encoding utf8
+npm run add-food -- --fdc-id=170169 --food-id=food_noce_di_cocco_raw --name-it="Noce di cocco, polpa fresca, cruda" --matrix-id=noce_di_cocco --matrix-description-it="Noce di cocco, polpa fresca" --baseline-cooking-state=raw --analogy-food-id=food_noci_raw --diet-category=plant_non_fruit --botanical-family=Arecaceae --apply 2>&1 | ForEach-Object { "$_" } | Out-File $f -Append -Encoding utf8
+Write-Host "fatto: food_noce_di_cocco_raw"
+Write-Host ""
+Write-Host "Finito il lotto 16. Righe con ERRORE:" (Select-String -Path $f -Pattern "ERRORE|Errore" | Measure-Object).Count
+Get-Content $f | Select-String -Pattern "###|creat|inserit|erifica|ERRORE|Errore"

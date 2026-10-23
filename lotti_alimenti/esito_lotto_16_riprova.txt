@@ -1,0 +1,23 @@
+﻿LOTTO 16 RIPROVA - 10/22/2026 20:47:57
+### food_noce_di_cocco_raw
+
+> nutri-bioavailability-app@0.1.0 add-food
+> tsx scripts/add_food_from_fdc.ts --fdc-id=170169 --food-id=food_noce_di_cocco_raw --name-it=Noce di cocco, polpa fresca, cruda --matrix-id=noce_di_cocco --matrix-description-it=Noce di cocco, polpa fresca --baseline-cooking-state=raw --analogy-food-id=food_noci_raw --diet-category=plant_non_fruit --botanical-family=Arecaceae --apply
+
+=== Aggiunta alimento da FDC (Fase 4 punto 16) ===
+Modalit├á: APPLY (scrive sul DB)
+food_id=food_noce_di_cocco_raw  fdc_id=170169  matrix_id=noce_di_cocco  analogia dichiarata=food_noci_raw
+
+FDC description: "Nuts, coconut meat, raw"
+Nutrienti estratti (17/17): protein_g, fat_g, carbohydrates_g, energy_kcal, fiber_g, calcium_mg, iron_mg, magnesium_mg, zinc_mg, copper_mg, selenium_mcg, beta_carotene_mcg, vitamin_c_mg, folate_mcg, vitamin_b12_mcg, vitamin_k_mcg, other_provitamin_a_carotenoids_mcg
+
+=== Riepilogo scrittura prevista ===
++ food_matrices_master: noce_di_cocco ("Noce di cocco, polpa fresca")
++ foods_raw: food_noce_di_cocco_raw ("Noce di cocco, polpa fresca, cruda", matrix=noce_di_cocco, cooking_state=raw, is_heme_iron=false, matrix_category_calcium=NULL, carotenoid_matrix_state=NULL, zinc_bioaccessibility_bucket=none, is_fortified_folate=false, botanical_family=Arecaceae, diet=plant_non_fruit (vegetarian=true, vegan=true, fruitarian=false), fdc_id=170169, fdc_name="Nuts, coconut meat, raw", verification_status=draft) -- attributi categorici per analogia dichiarata con food_noci_raw
++ nutrient_values: 17 righe (source_id=USDA_FDC, verification_status=draft)
+Ô£ô food_matrices_master "noce_di_cocco" creata.
+Ô£ô foods_raw "food_noce_di_cocco_raw" creato (draft).
+Ô£ô nutrient_values: 17 righe inserite (draft).
+
+Ô£ô Verifica difensiva passata: "food_noce_di_cocco_raw" presente con 17 righe nutrient_values, tutto draft come atteso, classificato dieta=plant_non_fruit.
+Ricorda: resta 'draft' finch├® scripts/verify_golden_set_batch.ts (o una revisione umana) non lo promuove esplicitamente.

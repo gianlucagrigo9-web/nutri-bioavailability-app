@@ -1,0 +1,27 @@
+SERIE 2 - 275 alimenti preparati dal task orario (lotti da 06 a 15)
+
+Sono 275 alimenti divisi in 10 lotti da 27-28. Qui si salta la "prova": si applica
+direttamente, perche' lo script si ferma da solo PRIMA di scrivere se qualcosa non va
+(alimento gia presente, valore fuori elenco, ecc.) e gli alimenti entrano tutti come
+"bozza" (l'app mostra solo quelli "verificati", quindi nessun utente li vede).
+Dopo l'ultimo lotto un controllo in Supabase confronta ogni alimento con quanto previsto.
+
+COSA FARE (per ognuno dei 10 lotti, in ordine)
+1. Apri PowerShell nella cartella del progetto
+   (C:\Users\inggr\Desktop\nutri-bioavailability-app).
+2. Apri con il Blocco note lotto_06_applica.txt, premi Ctrl+A e Ctrl+C
+   (seleziona tutto e copia).
+3. Torna in PowerShell e incolla (Ctrl+V oppure clic destro). Aspetta: ci vogliono
+   circa 4-5 minuti. Compare "fatto: nome_alimento" per ogni alimento e alla fine "Finito".
+4. Ripeti con lotto_07_applica.txt, ... fino a lotto_15_applica.txt.
+5. Scrivimi "fatto" (anche a meta': posso leggere gli esiti man mano). I risultati restano
+   nei file esito_lotto_NN_applica.txt nella cartella lotti_alimenti: li leggo io, non serve
+   nessuno screenshot.
+
+ALLA FINE
+In Supabase apri l'editor SQL, incolla il contenuto di check_alimenti_serie2.sql
+(Ctrl+A, Ctrl+C), premi Run e mandami lo screenshot (o due, se serve scorrere).
+
+Se una riga mostra "ERRORE" non e' un guaio: quell'alimento non e' stato scritto e se ne
+parla dopo. Se il PC va in stand-by o chiudi la finestra a meta' lotto, basta rincollare
+lo stesso lotto: gli alimenti gia inseriti vengono semplicemente saltati con un errore.
