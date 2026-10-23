@@ -161,6 +161,31 @@ npm run add-food -- --fdc-id=174473 --food-id=food_fagiano_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Coregone, crudo — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_coregone_raw`. FDC ID 173711 (SR Legacy, "Fish, whitefish, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, incrociata con triagemethod.com: stessi valori). Scartata la variante "(Alaska Native)" FDC 168033 (categoria etnica composita, calcio/selenio/B12/folato/vitamina K/carotenoidi tutti assenti).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 134kcal, proteine 19,1g, grassi 5,86g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 26,0mg, ferro 0,37mg, zinco 0,99mg, magnesio 33,0mg, rame 0,072mg, selenio 12,6µg, vitamina C 0mg esplicito, vitamina B12 1,00µg, folato totale 15,0µg, vitamina K 0,10µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173711 e dataType SR Legacy.
+- **Nota di trasparenza (Regola 6)**: il nome FDC "whitefish, mixed species" non nomina esplicitamente il genere *Coregonus* (il coregone dei laghi alpini/subalpini italiani), ma "whitefish" è il nome commerciale standard nordamericano proprio per i pesci di questo genere (soprattutto *Coregonus clupeaformis*) — accettato con lo stesso livello di generalità già accettato in questa pipeline per record USDA "mixed species"/aggregati di famiglia (platessa, vongole, cozze).
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, pesce magro, già eseguito sul DB reale — stessa categoria funzionale, stesso attributo `is_heme_iron` usato per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (prodotto animale).
+- **Matrice**: nuova `coregone` ("Coregone").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di pesce, stesso precedente di `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173711 --food-id=food_coregone_raw \
+  --name-it="Coregone, crudo" \
+  --matrix-id=coregone --matrix-description-it="Coregone" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173711 --food-id=food_coregone_raw \
+  --name-it="Coregone, crudo" \
+  --matrix-id=coregone --matrix-description-it="Coregone" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
