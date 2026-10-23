@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cipollotto fresco (cipolla novella, bulbo e foglie) — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_cipollotto_raw`. FDC ID 170005 (SR Legacy, "Onions, spring or scallions (includes tops and bulb), raw" — pagina getfoodfacts.com dedicata e pulita). Distinto da cipolla matura (`food_onion_raw`, già eseguita) ed erba cipollina (`food_erba_cipollina_raw`, già eseguita): il cipollotto è il bulbo immaturo con le foglie verdi, consumato intero.
+- **Nutrienti**: **17/17**. Per 100g: energia 32,0kcal, proteine 1,83g, grassi 0,19g, carboidrati 7,34g, fibra 2,60g, calcio 72,0mg, ferro 1,48mg, zinco 0,39mg, magnesio 20,0mg, rame 0,083mg, selenio 0,60µg, vitamina C 18,8mg, vitamina B12 0µg esplicito, folato totale 64,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 207µg, beta-carotene 598µg (alto, coerente con le foglie verdi), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170005 e dataType SR Legacy.
+- **Analogia usata**: `food_onion_raw` (cipolla matura, già eseguita sul DB reale — stessa specie/famiglia, stesso precedente già usato per `food_erba_cipollina_raw` in un lotto precedente).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio, nessun ingrediente animale).
+- **Matrice**: nuova `cipollotto` ("Cipollotto fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_onion_raw`/`food_erba_cipollina_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, crudo, foglie intatte), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (stesso precedente di `food_erba_cipollina_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170005 --food-id=food_cipollotto_raw \
+  --name-it="Cipollotto fresco (cipolla novella, bulbo e foglie)" \
+  --matrix-id=cipollotto --matrix-description-it="Cipollotto fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170005 --food-id=food_cipollotto_raw \
+  --name-it="Cipollotto fresco (cipolla novella, bulbo e foglie)" \
+  --matrix-id=cipollotto --matrix-description-it="Cipollotto fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio di capra, fresco (tipo soft) — preparato 2026-10-23 dal task (trentesimo lotto)
 
 - **food_id**: `food_formaggio_di_capra_raw`. FDC ID 173435 (SR Legacy, "Cheese, goat, soft type" — pagina getfoodfacts.com dedicata e pulita). Primo formaggio di capra della pipeline (finora solo latte di capra e formaggi vaccini).
