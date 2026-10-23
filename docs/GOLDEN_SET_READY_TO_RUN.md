@@ -20,6 +20,30 @@
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
 
+### Farina di farro, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_farro_raw`. FDC ID 2003587 (Foundation Foods, "Flour, spelt, whole grain" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Distinta dal chicco perlato già eseguito (`food_farro_raw`): farina integrale di farro macinata, non il chicco intero.
+- **Nutrienti**: **12/17**. Per 100g (valori esatti dalla tabella nutrienti della pagina, non dal pannello etichetta arrotondato — la pagina mostra 340kcal sul pannello etichetta ma 341kcal nel box statistico/tabella, usato quest'ultimo): energia 341kcal, proteine 14,5g, grassi 2,54g, carboidrati 70,7g, fibra 9,34g, calcio 30,0mg, ferro 3,77mg, zinco 3,59mg, magnesio 124mg, rame 0,53mg, selenio 9,48µg, folato totale 38,4µg. Sodio 0mg/100g esplicito (riferimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina C, acido folico separato, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A (alfa-carotene + beta-criptoxantina) — nessuna firma di arricchimento nei campi presenti (folato totale 38,4µg senza una componente "acido folico" separata). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2003587 e dataType Foundation.
+- **Analogia usata**: `food_farro_raw` (farro perlato, secco, crudo, già eseguito sul DB reale — stessa pianta *Triticum spelta*, farina invece di chicco perlato; nota di trasparenza: anche `food_farro_raw` ha un gap dichiarato sull'energia per lo stesso tipo di record Foundation Foods, quindi non è garantito che il fetch reale dallo script riproduca esattamente i 12 nutrienti letti qui dalla pagina — stesso limite già documentato per quell'alimento, l'estrazione reale avviene al momento dell'`--apply`).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_farro` ("Farina di farro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di cereale, stessa convenzione delle altre farine già eseguite), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del farro, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato totale presente senza componente acido folico separata).
+
+```
+npm run add-food -- --fdc-id=2003587 --food-id=food_farina_di_farro_raw \
+  --name-it="Farina di farro, cruda" \
+  --matrix-id=farina_di_farro --matrix-description-it="Farina di farro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2003587 --food-id=food_farina_di_farro_raw \
+  --name-it="Farina di farro, cruda" \
+  --matrix-id=farina_di_farro --matrix-description-it="Farina di farro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
