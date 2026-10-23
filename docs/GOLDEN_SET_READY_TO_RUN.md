@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
+- **Nutrienti**: **14/17**. Per 100g: energia 587kcal, proteine 17,6g, grassi 49,4g, carboidrati 27,6g, fibra 2,00g, calcio 43,0mg, ferro 5,03mg, zinco 5,16mg, magnesio 258mg, rame 2,19mg, selenio 11,5µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 68,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170163 e dataType SR Legacy.
+- **Analogia usata**: `food_anacardi_raw` (anacardi crudi, già eseguiti sul DB reale — stessa pianta *Anacardium occidentale*, crema/burro estratto dal seme invece del seme intero).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/derivato).
+- **Matrice**: nuova `burro_di_anacardi` ("Burro di anacardi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione di anacardi interi), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (famiglia reale dell'anacardio, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170163 --food-id=food_burro_di_anacardi_raw \
+  --name-it="Burro di anacardi, non salato" \
+  --matrix-id=burro_di_anacardi --matrix-description-it="Burro di anacardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170163 --food-id=food_burro_di_anacardi_raw \
+  --name-it="Burro di anacardi, non salato" \
+  --matrix-id=burro_di_anacardi --matrix-description-it="Burro di anacardi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Wurstel di manzo, non riscaldato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_wurstel_di_manzo_raw`. FDC ID 173862 (SR Legacy, "Frankfurter, beef, unheated" — pagina getfoodfacts.com dedicata e pulita). Primo prodotto di salumeria processata a base di manzo di questa pipeline (distinto da salame/pancetta/salsiccia già fatti, tutti a base di maiale).
