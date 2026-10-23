@@ -20,6 +20,30 @@
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
 
+### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 290kcal, proteine 57,5g (molto alta, coerente con la spirulina, nota fonte proteica concentrata), grassi 7,72g, carboidrati 23,9g, fibra 3,60g, calcio 120mg, ferro 28,5mg (alto), zinco 2,00mg, magnesio 195mg, rame 6,10mg (alto), selenio 7,20µg, vitamina C 10,1mg, folato totale 94,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 25,5µg, beta-carotene 342µg (reale e non nullo, coerente col pigmento dell'alga), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 1048mg/100g (alto, coerente con un'alga secca — riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170495 e dataType SR Legacy.
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "alga marina cruda/secca").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `alga_spirulina` ("Alga spirulina").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (alga secca con beta-carotene reale non nullo, stessa convenzione di wakame appena preparata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` NULL (nessuna vera famiglia botanica per un'alga/cianobatterio, stessa convenzione di nori/wakame), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170495 --food-id=food_alga_spirulina_raw \
+  --name-it="Alga spirulina, secca" \
+  --matrix-id=alga_spirulina --matrix-description-it="Alga spirulina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170495 --food-id=food_alga_spirulina_raw \
+  --name-it="Alga spirulina, secca" \
+  --matrix-id=alga_spirulina --matrix-description-it="Alga spirulina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --apply
+```
+
 ### Alga wakame, cruda — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_wakame_raw`. FDC ID 170496 (SR Legacy, "Seaweed, wakame, raw" — pagina getfoodfacts.com dedicata e pulita). Seconda alga di questa pipeline dopo la nori, già eseguita.
