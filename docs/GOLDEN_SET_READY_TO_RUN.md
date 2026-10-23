@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Sardine, in scatola, sott'olio (sgocciolate, con lische) — preparato 2026-10-23 dal task (ventinovesimo lotto)
+
+- **food_id**: `food_sardine_in_scatola_olio`. FDC ID 175139 (SR Legacy, "Fish, sardine, Atlantic, canned in oil, drained solids with bone" — pagina getfoodfacts.com dedicata e pulita). Distinto da "sardine, crude" (già ⚠ dal secondo/terzo lotto: nessun record FDC per la sardina cruda/fresca, solo prodotti già in scatola) — qui il prodotto è esplicitamente il conservato in scatola, non spacciato per fresco, stessa distinzione già fatta per baccalà/salmone in scatola rispetto ai loro equivalenti crudi.
+- **Nutrienti**: **17/17**. Per 100g: energia 208kcal, proteine 24,6g, grassi 11,4g, carboidrati 0g, fibra 0g, calcio 382mg (alto per le lische edibili incluse nel prodotto in scatola, non arricchimento — stesso schema già visto per salmone in scatola 249mg/100g), ferro 2,92mg, zinco 1,31mg, magnesio 39,0mg, rame 0,19mg, selenio 52,7µg, vitamina C 0mg esplicito, vitamina B12 8,94µg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 2,60µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 307mg/100g, coerente con un prodotto in scatola. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175139 e dataType SR Legacy.
+- **Analogia usata**: `food_salmone_in_scatola` (salmone in scatola con lische, sgocciolato, già eseguito sul DB reale — stessa categoria funzionale "pesce azzurro/grasso in scatola con lische edibili, sgocciolato").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sardine_in_scatola` ("Sardine, in scatola, sott'olio, sgocciolate, con lische").
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`), `matrix_category_calcium` omesso (NULL — il calcio alto è dichiarato a parte nel testo, non categorizzato: colonna pensata per matrici vegetali/ossalati, non per pesce, stessa convenzione già usata per salmone/baccalà in scatola), `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175139 --food-id=food_sardine_in_scatola_olio \
+  --name-it="Sardine, in scatola, sott'olio (sgocciolate, con lische)" \
+  --matrix-id=sardine_in_scatola --matrix-description-it="Sardine, in scatola, sott'olio, sgocciolate, con lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175139 --food-id=food_sardine_in_scatola_olio \
+  --name-it="Sardine, in scatola, sott'olio (sgocciolate, con lische)" \
+  --matrix-id=sardine_in_scatola --matrix-description-it="Sardine, in scatola, sott'olio, sgocciolate, con lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Fruttosio, cristallino — preparato 2026-10-23 dal task (ventinovesimo lotto)
 
 - **food_id**: `food_fruttosio_raw`. FDC ID 169896 (SR Legacy, "Sweeteners, tabletop, fructose, dry powder" — pagina getfoodfacts.com dedicata e pulita).
