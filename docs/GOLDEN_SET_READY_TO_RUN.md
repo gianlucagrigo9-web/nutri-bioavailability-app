@@ -89,6 +89,30 @@ npm run add-food -- --fdc-id=167744 --food-id=food_lumache_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Rane, cosce di rana crude — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_rane_raw`. FDC ID 168148 (SR Legacy, "Frog legs, raw" — pagina getfoodfacts.com dedicata e pulita, nome inequivocabile).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 73,0kcal, proteine 16,4g, grassi 0,30g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 18,0mg, ferro 1,50mg, zinco 1,00mg, magnesio 20,0mg, rame 0,25mg, selenio 14,1µg, vitamina C 0mg esplicito, vitamina B12 0,40µg, folato totale 15,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0,10µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168148 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, pesce magro bianco, già eseguito sul DB reale — stessa categoria funzionale "carne magra bianca a basso contenuto di grasso", stesso attributo `is_heme_iron` usato per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (prodotto animale).
+- **Matrice**: nuova `rane` ("Rane").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168148 --food-id=food_rane_raw \
+  --name-it="Rane, cosce di rana crude" \
+  --matrix-id=rane --matrix-description-it="Rane" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168148 --food-id=food_rane_raw \
+  --name-it="Rane, cosce di rana crude" \
+  --matrix-id=rane --matrix-description-it="Rane" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
