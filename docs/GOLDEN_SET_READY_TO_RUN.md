@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Caviale (uova di storione, in granuli) — preparato 2026-10-23 dal task (ventottesimo lotto)
+
+- **food_id**: `food_caviale_raw`. FDC ID 174188 (SR Legacy, "Fish, caviar, black and red, granular" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**. Per 100g: energia 264kcal, proteine 24,6g, grassi 17,9g, carboidrati 4,00g, fibra 0g, calcio 275mg, ferro 11,9mg (alto, coerente con un uovo ricco di riserve), zinco 0,95mg, magnesio 300mg (alto, plausibile per un uovo concentrato), rame 0,11mg, selenio 65,5µg (alto, coerente con un prodotto ittico), vitamina C 0mg esplicito, vitamina B12 20,0µg (molto alto, coerente con un prodotto ittico/uovo), folato totale 50,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0,60µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 1.500mg/100g (alto, coerente con la salagione tipica del caviale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174188 e dataType SR Legacy.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo di gallina, Golden Set originale, già eseguito) — scelta specificamente per l'attributo `is_heme_iron`: il caviale è un uovo (roe), non tessuto muscolare, quindi il ferro non proviene da mioglobina/emoglobina come nella carne/pesce muscolare, ma ha lo stesso profilo "ferro d'uovo, non-eme" già classificato per le uova di gallina/quaglia/anatra in questa pipeline — nonostante la specie sia un pesce (storione), la struttura biologica rilevante per questo attributo è l'uovo, non il muscolo. **Nota di trasparenza**: la categoria dieta resta `meat_fish` (non `egg_dairy`) perché il caviale è un prodotto ittico/di mare per convenzione comune (un vegetariano che mangia uova di gallina tipicamente non mangia caviale) — nessuna analogia già eseguita in questa pipeline copre esattamente questo caso (uovo di pesce), quindi la decisione per `is_heme_iron` e quella per `diet-category` usano due ragionamenti distinti e dichiarati separatamente, non una singola analogia automatica.
+- **Categoria dieta**: `meat_fish` (prodotto ittico/di mare, non vegetariano per convenzione comune).
+- **Matrice**: nuova `caviale` ("Caviale (uova di storione)").
+- **Attributi**: `is_heme_iron=false` (per il ragionamento "uovo, non muscolo" sopra), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (non cotto, solo salato), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174188 --food-id=food_caviale_raw \
+  --name-it="Caviale (uova di storione, in granuli)" \
+  --matrix-id=caviale --matrix-description-it="Caviale (uova di storione)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174188 --food-id=food_caviale_raw \
+  --name-it="Caviale (uova di storione, in granuli)" \
+  --matrix-id=caviale --matrix-description-it="Caviale (uova di storione)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=meat_fish --apply
+```
+
 ### Funghi pleurotus (ostrica), crudi — preparato 2026-10-23 dal task (ventottesimo lotto)
 
 - **food_id**: `food_funghi_pleurotus_raw`. FDC ID 168580 (SR Legacy, "Mushrooms, oyster, raw" — pagina getfoodfacts.com dedicata e pulita).
