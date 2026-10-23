@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Succo di mirtillo rosso (cranberry), non zuccherato — preparato 2026-10-23 dal task (ventinovesimo lotto, bonus)
+
+- **food_id**: `food_succo_di_mirtillo_rosso_raw`. FDC ID 168117 (SR Legacy, "Cranberry juice, unsweetened" — pagina getfoodfacts.com dedicata e pulita). Candidato scoperto durante la ricerca di questo lotto, non previsto originariamente — aggiunto per lo stesso motivo già usato per "farina di patate" nel ventisettesimo lotto (candidato bonus di qualità scoperto durante la ricerca di un altro alimento).
+- **Nutrienti**: **17/17**. Per 100g: energia 46,0kcal, proteine 0,39g, grassi 0,13g, carboidrati 12,2g, fibra 0,10g, calcio 8,00mg, ferro 0,25mg, zinco 0,10mg, magnesio 6,00mg, rame 0,055mg, selenio 0,10µg, vitamina C 9,30mg, vitamina B12 0µg esplicito, folato totale 1,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento — la pagina riporta esplicitamente anche "Vitamin E, added" e "Vitamin B-12, added" entrambi a 0, confermando l'assenza di fortificazione, a differenza del succo d'uva/succo di ananas scartati in questo stesso lotto/in lotti precedenti per acido ascorbico aggiunto dichiarato), vitamina K 5,10µg, beta-carotene 27,0µg (reale e non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168117 e dataType SR Legacy.
+- **Analogia usata**: `food_mirtilli_rossi_raw` (mirtilli rossi/cranberries freschi, già eseguiti sul DB reale — stesso frutto, forma succo spremuto invece di frutto intero).
+- **Categoria dieta**: `plant_non_fruit` (succo spremuto, forma trasformata — stessa convenzione già usata per succo di limone/arancia/mela/melograno/pompelmo rosa in questa pipeline, non `fresh_fruit` nonostante il frutto di origine).
+- **Matrice**: nuova `succo_di_mirtillo_rosso` ("Succo di mirtillo rosso (cranberry), non zuccherato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, succo), `carotenoid_matrix_state=raw_intact` (succo non cotto, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ericaceae` (*Vaccinium macrocarpon*, stessa famiglia già usata per mirtilli/mirtilli rossi), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168117 --food-id=food_succo_di_mirtillo_rosso_raw \
+  --name-it="Succo di mirtillo rosso (cranberry), non zuccherato" \
+  --matrix-id=succo_di_mirtillo_rosso --matrix-description-it="Succo di mirtillo rosso (cranberry), non zuccherato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_rossi_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Ericaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168117 --food-id=food_succo_di_mirtillo_rosso_raw \
+  --name-it="Succo di mirtillo rosso (cranberry), non zuccherato" \
+  --matrix-id=succo_di_mirtillo_rosso --matrix-description-it="Succo di mirtillo rosso (cranberry), non zuccherato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_rossi_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Ericaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Sardine, in scatola, sott'olio (sgocciolate, con lische) — preparato 2026-10-23 dal task (ventinovesimo lotto)
 
 - **food_id**: `food_sardine_in_scatola_olio`. FDC ID 175139 (SR Legacy, "Fish, sardine, Atlantic, canned in oil, drained solids with bone" — pagina getfoodfacts.com dedicata e pulita). Distinto da "sardine, crude" (già ⚠ dal secondo/terzo lotto: nessun record FDC per la sardina cruda/fresca, solo prodotti già in scatola) — qui il prodotto è esplicitamente il conservato in scatola, non spacciato per fresco, stessa distinzione già fatta per baccalà/salmone in scatola rispetto ai loro equivalenti crudi.

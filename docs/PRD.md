@@ -1271,6 +1271,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Farine di semi oleosi: ⚠ farina di canapa, decorticata (valutato il 2026-10-23: nessuna pagina getfoodfacts.com indicizza un record SR Legacy/Foundation per "hemp flour"/"hemp seed flour" — nessun risultato di ricerca ha restituito una pagina aggregatore con FDC ID esplicito, solo prodotti Branded europei (Rapunzel, Hodmedod's) su OpenFoodFacts/siti produttore e articoli scientifici su contenuto nutrizionale senza citare un FDC ID; stesso tipo di gap già incontrato per burro di mandorle/germogli di alfalfa in questa pipeline; serve CREA o altra fonte, non ancora integrata)
     - Prodotti compositi quotidiani: gnocchi di patate, freschi, crudi (non cotti); grissini, da forno
     - Condimenti di nicchia: colatura di alici (liquido di maturazione delle alici salate)
+    - Bonus scoperto durante la ricerca: ✅ succo di mirtillo rosso (cranberry), non zuccherato (comando pronto in GOLDEN_SET_READY_TO_RUN.md, preparato dal task 2026-10-23 — FDC 168117 SR Legacy "Cranberry juice, unsweetened", 17/17 nutrienti, nessuna firma di arricchimento (a differenza di succo d'uva/ananas scartati in questo lotto), analogia `food_mirtilli_rossi_raw`, diet-category=plant_non_fruit)
     Metodo di ricerca identico ai turni precedenti: `WebSearch` (nome inglese + "SR Legacy"/"Foundation" + "fdc"/"getfoodfacts.com"), poi lettura della pagina trovata per i valori esatti della tabella "per 100g" (mai dal pannello etichetta arrotondato):
 
 
