@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maionese — preparato 2026-10-23 dal task (ventottesimo lotto)
+
+- **food_id**: `food_maionese`. FDC ID 171009 (SR Legacy, "Salad dressing, mayonnaise, regular" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**. Per 100g: energia 680kcal, proteine 0,96g, grassi 74,8g, carboidrati 0,57g, fibra 0g, calcio 8,00mg, ferro 0,21mg, zinco 0,15mg, magnesio 1,00mg, rame 0,019mg, selenio 2,30µg, vitamina C 0mg esplicito, vitamina B12 0,12µg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 163µg (alta, coerente con l'olio vegetale usato come base), beta-carotene 6,00µg, beta-criptoxantina 4,00µg (usata come "altro carotenoide provitaminico A"). Sodio 635mg/100g (riferimento, non tracciato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171009 e dataType SR Legacy.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo intero cotto, Golden Set originale, già eseguito) — non per il tipo di alimento (maionese è soprattutto olio, non uovo), ma specificamente per l'attributo `is_heme_iron`: la maionese contiene tuorlo d'uovo come unico ingrediente animale, e il ferro dell'uovo è non-eme (stessa convenzione già usata per uova di gallina/quaglia/anatra in questa pipeline) — nessun'altra voce già eseguita rappresenta un prodotto "a base di uovo non muscolare" meglio di questa. Categoria dieta decisa separatamente per analogia di contenuto (contiene uovo, non vegetale puro): `egg_dairy` (vegetariano sì, vegano no), coerente con la definizione del PRD §4.9 ("uova, latticini, miele").
+- **Categoria dieta**: `egg_dairy` (contiene tuorlo d'uovo; nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `maionese` ("Maionese").
+- **Attributi**: `is_heme_iron=false` (per analogia con l'uovo, non con carne/pesce), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto condimento non a base vegetale/lattiero-casearia classificabile per ossalati), `carotenoid_matrix_state` omesso (NULL — beta-carotene/beta-criptoxantina presenti ma in tracce, residuo dell'olio vegetale, non un alimento la cui classificazione dipenda dalla matrice carotenoide), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto uovo+olio vegetale, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=raw` (emulsione non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171009 --food-id=food_maionese \
+  --name-it="Maionese" \
+  --matrix-id=maionese --matrix-description-it="Maionese" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171009 --food-id=food_maionese \
+  --name-it="Maionese" \
+  --matrix-id=maionese --matrix-description-it="Maionese" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 *(Le voci nuove del task orario si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
