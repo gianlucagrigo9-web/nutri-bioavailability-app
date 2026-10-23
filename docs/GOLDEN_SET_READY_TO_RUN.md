@@ -92,6 +92,32 @@ npm run add-food -- --fdc-id=2512372 --food-id=food_farina_di_quinoa_raw \
   --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Farina di patate, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_patate_raw`. FDC ID 168446 (SR Legacy, "Potato flour" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota di trasparenza importante**: questo NON è l'amido/fecola di patate (starch puro, quasi solo carboidrato, proteine/fibra trascurabili) originariamente previsto dalla voce di coda — nessun record FDC SR Legacy/Foundation per "Starch, potato" è stato trovato in nessuna fonte consultata (solo riferimenti enciclopedici, nessun FDC ID verificabile). "Potato flour" è invece patata intera disidratata e macinata (proteine 6,90g/100g, fibra 5,90g/100g — valori incompatibili con uno starch puro), un prodotto diverso e distinto sia dall'amido di patate sia dalle patate crude già nel Golden Set originale (`food_potato_raw`) — non una sostituzione dell'alimento richiesto, ma un alimento nuovo e genuino nel suo diritto, scelto al posto dell'amido per non forzare un match sbagliato (stesso principio già applicato per pangasio/catfish e orata/porgy in questa coda).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 357kcal, proteine 6,90g, grassi 0,34g, carboidrati 83,1g, fibra 5,90g, calcio 65,0mg, ferro 1,38mg, zinco 0,54mg, magnesio 65,0mg, rame 0,20mg, selenio 1,10µg, vitamina C 3,80mg, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un tubero bianco privo di pigmento, stessa convenzione già usata per patate/rafano/pastinaca). Sodio 55,0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168446 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale — stesso tubero *Solanum tuberosum*, farina/disidratato invece di crudo fresco).
+- **Categoria dieta**: `plant_non_fruit` (tubero/derivato di tubero).
+- **Matrice**: nuova `farina_di_patate` ("Farina di patate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione di `food_potato_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene 0µg esplicito, matrice non alterata da cottura — stessa convenzione di rafano/daikon), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale della patata, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168446 --food-id=food_farina_di_patate_raw \
+  --name-it="Farina di patate, cruda" \
+  --matrix-id=farina_di_patate --matrix-description-it="Farina di patate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168446 --food-id=food_farina_di_patate_raw \
+  --name-it="Farina di patate, cruda" \
+  --matrix-id=farina_di_patate --matrix-description-it="Farina di patate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
