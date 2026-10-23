@@ -75,6 +75,7 @@ import {
   type FdcFoodDetail,
 } from "../lib/fdc/nutrientMapping";
 import { loadEnvLocal, requireEnv } from "../lib/loadEnvLocal";
+import { evaluatePromotionGate } from "../lib/fdc/promotionGates";
 
 loadEnvLocal();
 
@@ -100,6 +101,10 @@ interface DraftRow {
   fdc_id: number | null;
   fdc_name: string | null;
   food_verification_status: string;
+  name_it: string | null;
+  diet_compat_vegetarian: boolean | null;
+  diet_compat_vegan: boolean | null;
+  diet_compat_fruitarian: boolean | null;
 }
 
 type RowOutcome =
@@ -109,6 +114,7 @@ type RowOutcome =
   | { kind: "UNIT_MISMATCH"; detail: string }
   | { kind: "NOT_MAPPED"; detail: string }
   | { kind: "BLOCKED_NO_FDC_ID"; detail: string }
+  | { kind: "BLOCKED_GATE"; detail: string }
   | { kind: "FOOD_UNREACHABLE"; detail: string };
 
 function sleep(ms: number) {
@@ -161,30 +167,66 @@ async function main() {
   // questo script non può verificarlo da questo sandbox (nessun accesso di
   // rete a Supabase -- vedi header del file). Due select piatte sono
   // garantite a funzionare indipendentemente da quel dettaglio.
-  let nvQuery = supabaseAdmin
-    .from("nutrient_values")
-    .select("food_id, nutrient_code, value")
-    .eq("source_id", "USDA_FDC")
-    .eq("verification_status", "draft");
-  if (FOOD_ID_FILTER) nvQuery = nvQuery.eq("food_id", FOOD_ID_FILTER);
+  // PAGINAZIONE (aggiunta 2026-10-23, Regola 4): PostgREST/Supabase
+  // restituisce al massimo 1000 righe per query SENZA segnalare che ha
+  // troncato -- con i 428 alimenti della pipeline (~15 righe nutrienti
+  // ciascuno) le righe in scope sono migliaia, e la versione precedente
+  // avrebbe elaborato in silenzio solo le prime 1000. Si legge a pagine da
+  // 1000 con un ordinamento stabile finche' una pagina non e' incompleta.
+  const PAGE = 1000;
+  const nvData: any[] = [];
+  for (let from = 0; ; from += PAGE) {
+    let q = supabaseAdmin
+      .from("nutrient_values")
+      .select("food_id, nutrient_code, value")
+      .eq("source_id", "USDA_FDC")
+      .eq("verification_status", "draft")
+      .order("food_id", { ascending: true })
+      .order("nutrient_code", { ascending: true })
+      .range(from, from + PAGE - 1);
+    if (FOOD_ID_FILTER) q = q.eq("food_id", FOOD_ID_FILTER);
+    const { data, error } = await q;
+    if (error) throw new Error(`Query righe in scope fallita (pagina da ${from}): ${error.message}`);
+    nvData.push(...(data ?? []));
+    if (!data || data.length < PAGE) break;
+  }
 
-  const { data: nvData, error: nvError } = await nvQuery;
-  if (nvError) throw new Error(`Query righe in scope fallita: ${nvError.message}`);
+  const distinctFoodIds = Array.from(new Set(nvData.map((r: any) => r.food_id as string)));
 
-  const distinctFoodIds = Array.from(new Set((nvData ?? []).map((r: any) => r.food_id as string)));
+  // foods_raw a blocchi da 50 id: una sola .in() con centinaia di id
+  // supera il limite di lunghezza dell'URL di PostgREST.
+  const frData: any[] = [];
+  for (let i = 0; i < distinctFoodIds.length; i += 50) {
+    const chunk = distinctFoodIds.slice(i, i + 50);
+    const { data, error } = await supabaseAdmin
+      .from("foods_raw")
+      .select("food_id, name_it, fdc_id, fdc_name, verification_status, diet_compat_vegetarian, diet_compat_vegan, diet_compat_fruitarian")
+      .in("food_id", chunk);
+    if (error) throw new Error(`Query foods_raw (per il join manuale) fallita: ${error.message}`);
+    frData.push(...(data ?? []));
+  }
 
-  const { data: frData, error: frError } = await supabaseAdmin
-    .from("foods_raw")
-    .select("food_id, fdc_id, fdc_name, verification_status")
-    .in("food_id", distinctFoodIds.length > 0 ? distinctFoodIds : ["__nessun_alimento__"]);
-  if (frError) throw new Error(`Query foods_raw (per il join manuale) fallita: ${frError.message}`);
-
-  const foodsById = new Map<string, { fdc_id: number | null; fdc_name: string | null; verification_status: string }>();
-  for (const f of frData ?? []) {
+  const foodsById = new Map<
+    string,
+    {
+      fdc_id: number | null;
+      fdc_name: string | null;
+      verification_status: string;
+      name_it: string | null;
+      diet_compat_vegetarian: boolean | null;
+      diet_compat_vegan: boolean | null;
+      diet_compat_fruitarian: boolean | null;
+    }
+  >();
+  for (const f of frData) {
     foodsById.set(f.food_id, {
       fdc_id: f.fdc_id ?? null,
       fdc_name: f.fdc_name ?? null,
       verification_status: f.verification_status ?? "draft",
+      name_it: f.name_it ?? null,
+      diet_compat_vegetarian: f.diet_compat_vegetarian ?? null,
+      diet_compat_vegan: f.diet_compat_vegan ?? null,
+      diet_compat_fruitarian: f.diet_compat_fruitarian ?? null,
     });
   }
 
@@ -203,6 +245,10 @@ async function main() {
       fdc_id: fr?.fdc_id ?? null,
       fdc_name: fr?.fdc_name ?? null,
       food_verification_status: fr?.verification_status ?? "draft",
+      name_it: fr?.name_it ?? null,
+      diet_compat_vegetarian: fr?.diet_compat_vegetarian ?? null,
+      diet_compat_vegan: fr?.diet_compat_vegan ?? null,
+      diet_compat_fruitarian: fr?.diet_compat_fruitarian ?? null,
     };
   });
 
@@ -250,6 +296,33 @@ async function main() {
         outcomes.push({ food_id: foodId, nutrient_code: r.nutrient_code, outcome: { kind: "FOOD_UNREACHABLE", detail: e.message } });
       }
       continue;
+    }
+
+    // Controlli automatici aggiuntivi (lib/fdc/promotionGates.ts), solo per
+    // gli alimenti ancora 'draft' in foods_raw (quelli che stiamo per
+    // promuovere): descrizione FDC invariata, classificazione dieta
+    // completa e coerente, nome presente. Un alimento gia' 'verified' (es.
+    // Golden Set con righe macro successive ancora draft) mantiene il
+    // comportamento precedente: il confronto numerico riga per riga.
+    if (foodRows[0].food_verification_status === "draft") {
+      const gate = evaluatePromotionGate({
+        nameIt: foodRows[0].name_it,
+        fdcNameStored: foodRows[0].fdc_name,
+        fdcDescriptionLive: fdcFood.description,
+        dietVegetarian: foodRows[0].diet_compat_vegetarian,
+        dietVegan: foodRows[0].diet_compat_vegan,
+        dietFruitarian: foodRows[0].diet_compat_fruitarian,
+      });
+      if (!gate.ok) {
+        for (const r of foodRows) {
+          outcomes.push({
+            food_id: foodId,
+            nutrient_code: r.nutrient_code,
+            outcome: { kind: "BLOCKED_GATE", detail: gate.reasons.join("; ") },
+          });
+        }
+        continue;
+      }
     }
 
     let allMatchForThisFood = true;

@@ -122,6 +122,19 @@ export interface FoodItem {
   // nessuna modifica necessaria a quella funzione.
   nutrientSourceIds?: Partial<Record<NutrientFieldName, string>>;
 
+  // Nutrienti per cui NON esiste nessun dato nel database per questo
+  // alimento (nessuna riga in nutrient_values), aggiunto 2026-10-23 su
+  // decisione esplicita dell'utente: un nutriente assente dalla letteratura
+  // consultata NON e' uno zero. I campi numerici sopra restano a 0 solo
+  // perche' i motori richiedono un numero; questo elenco permette alla UI
+  // di mostrare "dato non disponibile" invece di "0" e di non far passare
+  // l'assenza di dato per assenza del nutriente. undefined = alimento senza
+  // questa informazione (es. prodotti scansionati, che hanno la propria
+  // legenda misurato/stimato/non disponibile): trattato come "nessuna
+  // lacuna dichiarata", mai come "dati completi garantiti".
+  // Popolato da computeMissingNutrients (lib/engine/missingNutrients.ts).
+  missingNutrients?: NutrientFieldName[];
+
   // Piatti compositi/tradizionali (aggiunto 2026-10-11, design approvato
   // dall'utente in docs/PRD.md §4.8). true quando questo FoodItem non è
   // stato scelto a mano nel Meal Builder ma generato espandendo un
@@ -207,7 +220,7 @@ export function flattenFoods(context: Meal | DailyDiet): FoodItem[] {
 // carotenoid_matrix_state/zinc_bioaccessibility_bucket (categorici/booleani:
 // restano gli stessi indipendentemente da quanto l'alimento viene mangiato —
 // scalarli non avrebbe senso fisico, es. "mezzo booleano").
-const SCALABLE_NUTRIENT_FIELDS = [
+export const SCALABLE_NUTRIENT_FIELDS = [
   "iron_mg", "zinc_mg", "calcium_mg", "vitamin_c_mg", "phytates_mg",
   "oxalates_mg", "polyphenols_mg", "macs_mg", "vitamin_b12_mcg",
   "folate_mcg", "beta_carotene_mcg", "other_provitamin_a_carotenoids_mcg",

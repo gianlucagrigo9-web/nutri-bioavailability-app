@@ -34,7 +34,8 @@ import { supabase } from '@/lib/supabaseClient';
 import { MicrobiotaEngine } from '@/lib/engine/microbiotaEngine';
 import { ComputationalNutritionEngine } from '@/lib/engine/computationalNutritionEngine';
 import { CookingTransformationEngine, RetentionFactorRecord } from '@/lib/engine/cookingTransformationEngine';
-import { FoodItem, SourcedValue, OxalateCategory, Meal, scaleFoodItemToGrams } from '@/lib/engine/types';
+import { FoodItem, SourcedValue, OxalateCategory, Meal, NutrientFieldName, scaleFoodItemToGrams } from '@/lib/engine/types';
+import { NUTRIENT_LABELS_IT, NutrientGap, computeMissingNutrients, describeNutrientGap, summarizeMissingInMeal } from '@/lib/engine/missingNutrients';
 import { fetchOffProduct, buildApproximatedFood, ApproximatedFood } from '@/lib/openFoodFacts';
 import BarcodeScanner from '@/components/BarcodeScanner';
 import { DietType, filterFoodsByDietType } from '@/lib/engine/dietTypeFilter';
@@ -234,6 +235,11 @@ function foodRowToFoodItem(row: FoodRow): FoodItem {
     carbohydrates_g: nutrientValue(nutrients, 'carbohydrates_g'),
     fat_g: nutrientValue(nutrients, 'fat_g'),
     fiber_g: nutrientValue(nutrients, 'fiber_g'),
+    // Campi senza NESSUNA riga in nutrient_values: il valore numerico sopra
+    // e' 0 solo perche' i motori richiedono un numero, ma NON significa che
+    // il nutriente valga zero -- la UI mostra "n.d." (dato non disponibile
+    // in letteratura) invece di 0. Vedi lib/engine/missingNutrients.ts.
+    missingNutrients: computeMissingNutrients(nutrients.map((n) => n.nutrient_code)),
     // Popolato SOLO se tutti e 3 gli assi sono classificati nel DB (mai
     // parzialmente, per non far passare un filtro su un asse non
     // verificato) -- vedi commento su FoodRow sopra e dietTypeFilter.ts.
@@ -257,11 +263,16 @@ function MetricRow({
   unit,
   result,
   sourcesMap,
+  gap,
 }: {
   label: string;
   unit: string;
   result: SourcedValue;
   sourcesMap: Record<string, SourceRow>;
+  // Lacune di dato nel pasto per questo nutriente (vedi
+  // lib/engine/missingNutrients.ts). unavailable -> "n.d." al posto dello
+  // 0 calcolato; foodsWithGap non vuoto -> avviso di possibile sottostima.
+  gap?: NutrientGap;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -277,18 +288,36 @@ function MetricRow({
           <span className="text-[9px] text-indigo-400 font-mono">
             {result.verificationStatus === 'draft' ? 'draft' : 'verified'}
             {result.bioavailabilityAdjusted === false ? ' · composizione grezza' : ''}
+            {gap?.unavailable ? ' · dato non disponibile' : gap && gap.foodsWithGap.length > 0 ? ' · dato parziale' : ''}
             {' · perché questo numero? '}
             {open ? '▲' : '▼'}
           </span>
         </div>
         <span className="text-xl font-black text-white shrink-0 ml-3">
-          {Number.isFinite(result.value) ? result.value.toFixed(2) : result.value}
-          <span className="text-xs text-indigo-300 ml-1">{unit}</span>
+          {gap?.unavailable ? (
+            <span title="Dato non disponibile in letteratura (o non ancora inserito): non significa che il nutriente valga zero.">n.d.</span>
+          ) : (
+            <>
+              {Number.isFinite(result.value) ? result.value.toFixed(2) : result.value}
+              <span className="text-xs text-indigo-300 ml-1">{unit}</span>
+            </>
+          )}
         </span>
       </button>
 
       {open && (
         <div className="mt-2 bg-indigo-900/40 rounded-xl p-3 text-xs text-indigo-100 space-y-1">
+          {gap && gap.foodsWithGap.length > 0 && (
+            <div className="text-amber-300">
+              {gap.unavailable
+                ? 'Dato non disponibile in letteratura (o non ancora inserito) per: '
+                : 'Attenzione, dato mancante per: '}
+              {gap.foodsWithGap.join(', ')}.{' '}
+              {gap.unavailable
+                ? 'Il valore mostrato come n.d. NON significa che il nutriente valga zero.'
+                : 'Per questi alimenti il contributo non e\' stato contato (non e\' uno zero misurato): il totale potrebbe essere sottostimato.'}
+            </div>
+          )}
           <div>
             <span className="text-indigo-400">Livello di evidenza:</span> {result.evidenceLevel}/5
           </div>
@@ -393,23 +422,36 @@ export default function Home() {
       // verification_status (alcune righe sourced da letteratura restano
       // 'draft' non per sospetto, ma perché non ri-controllate oggi --
       // escluderle sovrastimerebbe l'assorbimento, un errore peggiore).
-      const { data: foodsData, error: foodsError } = await supabase
-        .from('foods_raw')
-        .select(
-          `food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium,
+      // Lettura a pagine da 1000 (aggiunto 2026-10-23): Supabase tronca in
+      // silenzio a 1000 righe per query, e gli alimenti verificati stanno
+      // per superare quella soglia con la promozione dei lotti pipeline
+      // (Regola 4: nessun troncamento silenzioso). Ordinamento stabile
+      // (name_it, poi food_id) cosi' le pagine non si sovrappongono.
+      const PAGE = 1000;
+      const allFoods: FoodRow[] = [];
+      for (let from = 0; ; from += PAGE) {
+        const { data: foodsData, error: foodsError } = await supabase
+          .from('foods_raw')
+          .select(
+            `food_id, name_it, matrix_id, baseline_cooking_state, is_heme_iron, matrix_category_calcium,
            botanical_family, carotenoid_matrix_state, zinc_bioaccessibility_bucket,
            is_fortified_folate, diet_compat_vegetarian, diet_compat_vegan, diet_compat_fruitarian,
            nutrient_values ( nutrient_code, value, confidence_low, confidence_high, source_id, verification_status )`
-        )
-        .eq('verification_status', 'verified')
-        .order('name_it');
+          )
+          .eq('verification_status', 'verified')
+          .order('name_it')
+          .order('food_id')
+          .range(from, from + PAGE - 1);
 
-      if (foodsError) {
-        setError(`Errore nel caricare foods_raw da Supabase: ${foodsError.message}`);
-        setLoading(false);
-        return;
+        if (foodsError) {
+          setError(`Errore nel caricare foods_raw da Supabase: ${foodsError.message}`);
+          setLoading(false);
+          return;
+        }
+        allFoods.push(...((foodsData ?? []) as unknown as FoodRow[]));
+        if (!foodsData || foodsData.length < PAGE) break;
       }
-      setFoods((foodsData ?? []) as unknown as FoodRow[]);
+      setFoods(allFoods);
 
       const { data: factorsData, error: factorsError } = await supabase
         .from('retention_factors')
@@ -593,6 +635,12 @@ export default function Home() {
 
   const mealContext: Meal = { foods: currentMealFoods };
 
+  // Campi senza dato per un alimento del Golden Set/pipeline (vedi
+  // lib/engine/missingNutrients.ts), per la riga dell'alimento nel piatto.
+  function mealMissing(food: FoodRow): NutrientFieldName[] {
+    return computeMissingNutrients((food.nutrient_values ?? []).map((n) => n.nutrient_code));
+  }
+
   // Vedi lib/openFoodFacts.ts: i prodotti scansionati entrano in
   // currentMealFoods con un profilo inibitori/promotori parzialmente
   // approssimato o assente (vedi ApproximatedFood.approximatedFields /
@@ -631,6 +679,36 @@ export default function Home() {
   const totalRawZinc = currentMealFoods.reduce((acc, f) => acc + f.zinc_mg, 0).toFixed(2);
   const totalVitC = currentMealFoods.reduce((acc, f) => acc + f.vitamin_c_mg, 0).toFixed(2);
   const totalPhytates = currentMealFoods.reduce((acc, f) => acc + f.phytates_mg, 0).toFixed(2);
+
+  // Lacune di dato nel pasto (decisione dell'utente 2026-10-22): un
+  // nutriente senza dato in letteratura NON e' uno zero. I motori sopra
+  // lavorano con 0 per quei campi (richiedono un numero); qui si decide
+  // cosa MOSTRARE: "n.d." quando nessun alimento del pasto ha il dato,
+  // avviso di possibile sottostima quando il dato manca solo per alcuni.
+  const gapOf = (...fields: NutrientFieldName[]) => describeNutrientGap(currentMealFoods, fields);
+  const ironGap = gapOf('iron_mg');
+  const zincGap = gapOf('zinc_mg');
+  const calciumGap = gapOf('calcium_mg');
+  const vitCGap = gapOf('vitamin_c_mg');
+  const phytatesGap = gapOf('phytates_mg');
+  const macsGap = gapOf('macs_mg');
+  const polyphenolsGap = gapOf('polyphenols_mg');
+  const b12Gap = gapOf('vitamin_b12_mcg');
+  const folateGap = gapOf('folate_mcg');
+  const vitaminAGap = gapOf('beta_carotene_mcg', 'other_provitamin_a_carotenoids_mcg');
+  const magnesiumGap = gapOf('magnesium_mg');
+  const copperGap = gapOf('copper_mg');
+  const seleniumGap = gapOf('selenium_mcg');
+  const iodineGap = gapOf('iodine_mcg');
+  const vitaminKGap = gapOf('vitamin_k_mcg');
+  const energyGap = gapOf('energy_kcal');
+  const proteinGap = gapOf('protein_g');
+  const carbsGap = gapOf('carbohydrates_g');
+  const fatGap = gapOf('fat_g');
+  const fiberGap = gapOf('fiber_g');
+  const missingSummary = summarizeMissingInMeal(currentMealFoods);
+  const ND = 'n.d.';
+  const ND_TITLE = 'Dato non disponibile in letteratura (o non ancora inserito): non significa che il nutriente valga zero.';
 
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-10 font-sans">
@@ -676,7 +754,13 @@ export default function Home() {
                 <div className="bg-indigo-950 p-4 rounded-xl">
                   <span className="text-xs text-indigo-200 block mb-1">Ferro (Eq.2 H&H)</span>
                   <strong className="text-2xl text-white block">
-                    {ironScore.value} <span className="text-sm font-normal text-indigo-400">/ {totalRawIron} mg</span>
+                    {ironGap.unavailable ? (
+                      <span title={ND_TITLE}>{ND}</span>
+                    ) : (
+                      <>
+                        {ironScore.value} <span className="text-sm font-normal text-indigo-400">/ {totalRawIron} mg</span>
+                      </>
+                    )}
                   </strong>
                   <span className="text-[9px] text-indigo-400 uppercase tracking-widest">
                     {ironScore.verificationStatus === 'draft' ? 'Draft' : 'Verified'}
@@ -685,7 +769,13 @@ export default function Home() {
                 <div className="bg-indigo-950 p-4 rounded-xl">
                   <span className="text-xs text-indigo-200 block mb-1">Zinco (Miller &apos;07)</span>
                   <strong className="text-2xl text-white block">
-                    {zincScore.value} <span className="text-sm font-normal text-indigo-400">/ {totalRawZinc} mg</span>
+                    {zincGap.unavailable ? (
+                      <span title={ND_TITLE}>{ND}</span>
+                    ) : (
+                      <>
+                        {zincScore.value} <span className="text-sm font-normal text-indigo-400">/ {totalRawZinc} mg</span>
+                      </>
+                    )}
                   </strong>
                   <span className="text-[9px] text-indigo-400 uppercase tracking-widest">
                     {zincScore.verificationStatus === 'draft' ? 'Draft' : 'Verified'}
@@ -694,7 +784,13 @@ export default function Home() {
                 <div className="bg-indigo-950 p-4 rounded-xl">
                   <span className="text-xs text-indigo-200 block mb-1">Calcio (H&W)</span>
                   <strong className="text-2xl text-white block">
-                    {calciumScore.value} <span className="text-sm font-normal text-indigo-400">mg</span>
+                    {calciumGap.unavailable ? (
+                      <span title={ND_TITLE}>{ND}</span>
+                    ) : (
+                      <>
+                        {calciumScore.value} <span className="text-sm font-normal text-indigo-400">mg</span>
+                      </>
+                    )}
                   </strong>
                   <span className="text-[9px] text-indigo-400 uppercase tracking-widest">
                     {calciumScore.verificationStatus === 'draft' ? 'Draft' : 'Verified'}
@@ -711,15 +807,27 @@ export default function Home() {
                 <div className="bg-slate-900 p-4 rounded-xl flex flex-col justify-center">
                   <span className="text-xs text-slate-400 block mb-1">MACs</span>
                   <strong className="text-2xl text-emerald-400 block">
-                    {microbiotaScores.macsScore.value}
-                    <span className="text-sm font-normal text-emerald-600">/100</span>
+                    {macsGap.unavailable ? (
+                      <span title={ND_TITLE}>{ND}</span>
+                    ) : (
+                      <>
+                        {microbiotaScores.macsScore.value}
+                        <span className="text-sm font-normal text-emerald-600">/100</span>
+                      </>
+                    )}
                   </strong>
                 </div>
                 <div className="bg-slate-900 p-4 rounded-xl flex flex-col justify-center">
                   <span className="text-xs text-slate-400 block mb-1">Polifenoli</span>
                   <strong className="text-2xl text-purple-400 block">
-                    {microbiotaScores.polyphenolsScore.value}
-                    <span className="text-sm font-normal text-purple-600">/100</span>
+                    {polyphenolsGap.unavailable ? (
+                      <span title={ND_TITLE}>{ND}</span>
+                    ) : (
+                      <>
+                        {microbiotaScores.polyphenolsScore.value}
+                        <span className="text-sm font-normal text-purple-600">/100</span>
+                      </>
+                    )}
                   </strong>
                 </div>
               </div>
@@ -732,11 +840,11 @@ export default function Home() {
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 h-full flex flex-col justify-center">
                 <div className="flex justify-between text-sm mb-2">
                   <span className="text-slate-500">Vit. C (Promotore)</span>
-                  <strong className="text-slate-700">{totalVitC} mg</strong>
+                  <strong className="text-slate-700" title={vitCGap.unavailable ? ND_TITLE : undefined}>{vitCGap.unavailable ? ND : `${totalVitC} mg`}</strong>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Fitati (Inibitore)</span>
-                  <strong className="text-slate-700">{totalPhytates} mg</strong>
+                  <strong className="text-slate-700" title={phytatesGap.unavailable ? ND_TITLE : undefined}>{phytatesGap.unavailable ? ND : `${totalPhytates} mg`}</strong>
                 </div>
               </div>
             </div>
@@ -754,27 +862,27 @@ export default function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
                 <span className="text-[10px] text-slate-500 block mb-1">Energia</span>
-                <strong className="text-lg text-slate-700">{energyScore.value}</strong>
+                <strong className="text-lg text-slate-700" title={energyGap.unavailable ? ND_TITLE : undefined}>{energyGap.unavailable ? ND : energyScore.value}</strong>
                 <span className="text-[10px] text-slate-400 block">kcal</span>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
                 <span className="text-[10px] text-slate-500 block mb-1">Proteine</span>
-                <strong className="text-lg text-slate-700">{proteinScore.value}</strong>
+                <strong className="text-lg text-slate-700" title={proteinGap.unavailable ? ND_TITLE : undefined}>{proteinGap.unavailable ? ND : proteinScore.value}</strong>
                 <span className="text-[10px] text-slate-400 block">g</span>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
                 <span className="text-[10px] text-slate-500 block mb-1">Carboidrati</span>
-                <strong className="text-lg text-slate-700">{carbsScore.value}</strong>
+                <strong className="text-lg text-slate-700" title={carbsGap.unavailable ? ND_TITLE : undefined}>{carbsGap.unavailable ? ND : carbsScore.value}</strong>
                 <span className="text-[10px] text-slate-400 block">g</span>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
                 <span className="text-[10px] text-slate-500 block mb-1">Grassi</span>
-                <strong className="text-lg text-slate-700">{fatScore.value}</strong>
+                <strong className="text-lg text-slate-700" title={fatGap.unavailable ? ND_TITLE : undefined}>{fatGap.unavailable ? ND : fatScore.value}</strong>
                 <span className="text-[10px] text-slate-400 block">g</span>
               </div>
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
                 <span className="text-[10px] text-slate-500 block mb-1">Fibra</span>
-                <strong className="text-lg text-slate-700">{fiberScore.value}</strong>
+                <strong className="text-lg text-slate-700" title={fiberGap.unavailable ? ND_TITLE : undefined}>{fiberGap.unavailable ? ND : fiberScore.value}</strong>
                 <span className="text-[10px] text-slate-400 block">g</span>
               </div>
             </div>
@@ -796,28 +904,53 @@ export default function Home() {
             {showFullBreakdown && (
               <div className="mt-4 bg-indigo-950 p-5 rounded-2xl border border-indigo-900/50 grid grid-cols-1 md:grid-cols-3 gap-x-8">
                 <div>
-                  <MetricRow label="Vitamina B12 assorbita" unit="µg" result={b12Score} sourcesMap={sourcesMap} />
-                  <MetricRow label="Folati (DFE)" unit="µg" result={folateScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Vitamina A (RE)" unit="µg" result={vitaminAScore} sourcesMap={sourcesMap} />
+                  <MetricRow label="Vitamina B12 assorbita" unit="µg" result={b12Score} sourcesMap={sourcesMap} gap={b12Gap} />
+                  <MetricRow label="Folati (DFE)" unit="µg" result={folateScore} sourcesMap={sourcesMap} gap={folateGap} />
+                  <MetricRow label="Vitamina A (RE)" unit="µg" result={vitaminAScore} sourcesMap={sourcesMap} gap={vitaminAGap} />
                 </div>
                 <div>
-                  <MetricRow label="Magnesio" unit="mg" result={magnesiumScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Rame" unit="mg" result={copperScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Selenio" unit="µg" result={seleniumScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Iodio" unit="µg" result={iodineScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Vitamina K" unit="µg" result={vitaminKScore} sourcesMap={sourcesMap} />
+                  <MetricRow label="Magnesio" unit="mg" result={magnesiumScore} sourcesMap={sourcesMap} gap={magnesiumGap} />
+                  <MetricRow label="Rame" unit="mg" result={copperScore} sourcesMap={sourcesMap} gap={copperGap} />
+                  <MetricRow label="Selenio" unit="µg" result={seleniumScore} sourcesMap={sourcesMap} gap={seleniumGap} />
+                  <MetricRow label="Iodio" unit="µg" result={iodineScore} sourcesMap={sourcesMap} gap={iodineGap} />
+                  <MetricRow label="Vitamina K" unit="µg" result={vitaminKScore} sourcesMap={sourcesMap} gap={vitaminKGap} />
                 </div>
                 <div>
-                  <MetricRow label="Energia" unit="kcal" result={energyScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Proteine" unit="g" result={proteinScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Carboidrati" unit="g" result={carbsScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Grassi" unit="g" result={fatScore} sourcesMap={sourcesMap} />
-                  <MetricRow label="Fibra" unit="g" result={fiberScore} sourcesMap={sourcesMap} />
+                  <MetricRow label="Energia" unit="kcal" result={energyScore} sourcesMap={sourcesMap} gap={energyGap} />
+                  <MetricRow label="Proteine" unit="g" result={proteinScore} sourcesMap={sourcesMap} gap={proteinGap} />
+                  <MetricRow label="Carboidrati" unit="g" result={carbsScore} sourcesMap={sourcesMap} gap={carbsGap} />
+                  <MetricRow label="Grassi" unit="g" result={fatScore} sourcesMap={sourcesMap} gap={fatGap} />
+                  <MetricRow label="Fibra" unit="g" result={fiberScore} sourcesMap={sourcesMap} gap={fiberGap} />
                 </div>
               </div>
             )}
           </div>
         </div>
+
+        {/* DATI NON DISPONIBILI NEL PASTO (2026-10-23, decisione dell'utente):
+            un nutriente senza dato in letteratura non e' uno zero. Elenca,
+            per ogni nutriente con lacune, quali alimenti del piatto non
+            hanno il dato. Mostrato solo se c'e' almeno una lacuna. */}
+        {missingSummary.length > 0 && (
+          <details className="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-10 -mt-6 text-sm text-amber-900">
+            <summary className="cursor-pointer font-semibold">
+              Dati non disponibili in questo piatto ({missingSummary.length} nutrienti) — non significano &quot;zero&quot;
+            </summary>
+            <p className="text-xs mt-2 mb-2">
+              Per i nutrienti qui sotto la letteratura consultata non riporta un valore per almeno uno degli alimenti
+              scelti. L&apos;app non lo conta come zero misurato: dove i valori sopra mostrano &quot;n.d.&quot; nessun
+              alimento ha il dato; dove il dato manca solo per alcuni alimenti il totale potrebbe essere sottostimato.
+            </p>
+            <ul className="text-xs space-y-1 list-disc list-inside">
+              {missingSummary.map((m) => (
+                <li key={m.field}>
+                  <strong>{m.label}</strong>
+                  {m.allFoodsMissing ? ' (nessun alimento del piatto)' : ''}: {m.foodNames.join(', ')}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
 
         {/* GENERA UN PIANO ALIMENTARE (2026-10-11, docs/PRD.md §4.9) --
             generateDiet + buildDietNutrientTargets, sui soli alimenti
@@ -993,6 +1126,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto pr-2">
               {foods.filter((food) => visibleFoodIds.has(food.food_id)).map((food) => {
                 const hasDraft = (food.nutrient_values ?? []).some((n) => n.verification_status === 'draft');
+                const pantryMissing = computeMissingNutrients((food.nutrient_values ?? []).map((n) => n.nutrient_code));
                 // "Stima": almeno un fattore di ritenzione applicabile a questa
                 // matrice (qualunque metodo di cottura, non solo quello
                 // eventualmente selezionato ora) cita una fonte classificata
@@ -1020,6 +1154,14 @@ export default function Home() {
                       <span className="text-[10px] text-slate-400 uppercase">
                         {food.botanical_family || 'Animale'}
                         {hasDraft && <span className="text-amber-500"> · contiene dati draft</span>}
+                        {pantryMissing.length > 0 && (
+                          <span
+                            className="text-slate-500"
+                            title={`Dati non disponibili in letteratura (o non ancora inseriti), non sono zero: ${pantryMissing.map((f) => NUTRIENT_LABELS_IT[f]).join(', ')}`}
+                          >
+                            {' '}· {pantryMissing.length} dati non disponibili
+                          </span>
+                        )}
                         {hasEstimatedRetention && (
                           <span className="text-amber-500" title="Il fattore di ritenzione da crudo a cotto per questo alimento e' stimato (derivato dal rapporto USDA crudo/cotto), non misurato da uno studio dedicato.">
                             {' '}· cottura stimata
@@ -1138,6 +1280,14 @@ export default function Home() {
                       <div>
                         <h4 className="font-bold text-slate-800 text-lg">{dbFood.name_it}</h4>
                         <span className="text-[10px] text-slate-400 uppercase tracking-widest">{dbFood.matrix_id}</span>
+                        {mealMissing(dbFood).length > 0 && (
+                          <span
+                            className="text-[10px] text-slate-500 block mt-1"
+                            title={`Non disponibili (non sono zero): ${mealMissing(dbFood).map((f) => NUTRIENT_LABELS_IT[f]).join(', ')}`}
+                          >
+                            {mealMissing(dbFood).length} dati non disponibili in letteratura (non contati come zero)
+                          </span>
+                        )}
                       </div>
 
                       <div className="flex items-center gap-4 w-full sm:w-auto">

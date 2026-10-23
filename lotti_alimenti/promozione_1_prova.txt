@@ -1,0 +1,13 @@
+# PROMOZIONE - PROVA: NON SCRIVE NULLA sul database (dry-run).
+# Controlla, alimento per alimento, che i valori nel database combacino con USDA e che l'alimento sia completo.
+# Durata: circa 10 minuti (1 secondo di pausa per alimento, lo vuole USDA). NON chiudere PowerShell.
+# Copia TUTTO il file (Ctrl+A, Ctrl+C), incollalo in PowerShell aperto nella cartella del progetto, aspetta "Finito".
+New-Item -ItemType Directory -Force lotti_alimenti | Out-Null
+$f = "lotti_alimenti\esito_promozione_prova.txt"
+Remove-Item $f -ErrorAction SilentlyContinue
+"PROMOZIONE PROVA - " + (Get-Date) | Out-File $f -Encoding utf8
+npm run verify:golden-set 2>&1 | Out-File $f -Append -Encoding utf8
+"FINE - " + (Get-Date) | Out-File $f -Append -Encoding utf8
+Write-Host ""
+Write-Host "Finito la prova. Riepilogo:"
+Get-Content $f | Select-String -Pattern "Righe draft|MATCH:|MISMATCH:|BLOCKED|NOT_FOUND|UNIT_MISMATCH|FOOD_UNREACHABLE|NOT_MAPPED|promosse|promossi|Errore fatale"
