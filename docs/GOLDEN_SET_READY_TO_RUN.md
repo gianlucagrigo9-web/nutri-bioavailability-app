@@ -20,6 +20,30 @@
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
 
+### Olio di nocciola — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_olio_di_nocciola_raw`. FDC ID 171427 (SR Legacy, "Oil, hazelnut" — pagina getfoodfacts.com dedicata e pulita). Distinto da `food_nocciole_raw`/`food_nocciole_tostate` (seme intero, già eseguiti): l'olio è il grasso estratto, un prodotto distinto con un proprio record FDC, stessa convenzione già usata per olio di cocco/palma rispetto al seme/frutto intero.
+- **Nutrienti**: **15/17** — mancano rame e vitamina K (non riportati nel record, non assunti zero). Per 100g (valori presenti): energia 884kcal, proteine 0g esplicito, grassi 100g esplicito, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0mg esplicito, zinco 0mg esplicito, magnesio 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un grasso puro raffinato). Sodio 0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171427 e dataType SR Legacy.
+- **Analogia usata**: `food_nocciole_raw` (nocciole secche, Golden Set pipeline, già eseguite sul DB reale — stessa pianta *Corylus avellana*, stessa famiglia botanica reale Betulaceae, prodotto derivato diverso: olio estratto vs seme intero).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale).
+- **Matrice**: nuova `olio_di_nocciola` ("Olio di nocciola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Betulaceae` (stessa di `food_nocciole_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171427 --food-id=food_olio_di_nocciola_raw \
+  --name-it="Olio di nocciola" \
+  --matrix-id=olio_di_nocciola --matrix-description-it="Olio di nocciola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171427 --food-id=food_olio_di_nocciola_raw \
+  --name-it="Olio di nocciola" \
+  --matrix-id=olio_di_nocciola --matrix-description-it="Olio di nocciola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Tapioca, perle secche — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_tapioca_perle_raw`. FDC ID 169717 (SR Legacy, "Tapioca, pearl, dry" — pagina getfoodfacts.com dedicata e pulita). Amido estratto dalla radice di manioca (*Manihot esculenta*), nessun alimento a base di manioca già presente in questa pipeline.
