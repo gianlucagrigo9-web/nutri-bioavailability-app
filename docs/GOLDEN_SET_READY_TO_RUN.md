@@ -44,6 +44,30 @@ npm run add-food -- --fdc-id=2003587 --food-id=food_farina_di_farro_raw \
   --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Farina di sorgo, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_sorgo_raw`. FDC ID 168943 (SR Legacy, "Sorghum flour, whole-grain" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30; la pagina segnala che esistono 2 descrizioni USDA di farina di sorgo, questa è la "whole-grain" scelta come più rappresentativa di un prodotto semplice non raffinato). Distinta dal chicco intero già eseguito (`food_sorgo_raw`).
+- **Nutrienti**: **14/17**. Per 100g: energia 359kcal, proteine 8,43g, grassi 3,34g, carboidrati 76,6g, fibra 6,60g, calcio 12,0mg, ferro 3,14mg, zinco 1,63mg, magnesio 123mg, rame 0,25mg, selenio 12,2µg, vitamina C 0,80mg, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 6,40µg (fogliata — la pagina riporta separatamente anche menaquinone-4 0,20µg e diidrofillochinone 0µg, non sommati qui, solo la fillochinone standard usata dalla mappatura). Sodio 3,00mg/100g (riferimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina B12, beta-carotene, altro carotenoide provitaminico A (alfa-carotene + beta-criptoxantina). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168943 e dataType SR Legacy.
+- **Analogia usata**: `food_sorgo_raw` (sorgo integrale crudo, già eseguito sul DB reale — stessa pianta *Sorghum bicolor*, farina invece di chicco intero).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_sorgo` ("Farina di sorgo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di cereale, stessa convenzione delle altre farine), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del sorgo, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168943 --food-id=food_farina_di_sorgo_raw \
+  --name-it="Farina di sorgo, cruda" \
+  --matrix-id=farina_di_sorgo --matrix-description-it="Farina di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168943 --food-id=food_farina_di_sorgo_raw \
+  --name-it="Farina di sorgo, cruda" \
+  --matrix-id=farina_di_sorgo --matrix-description-it="Farina di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
