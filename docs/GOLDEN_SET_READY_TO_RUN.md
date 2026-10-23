@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di manioca, cruda — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_farina_di_manioca_raw`. FDC ID 2512377 (Foundation Foods, "Flour, cassava" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Farina di radice di manioca (*Manihot esculenta*) macinata, distinta dalla tapioca già preparata in questa pipeline (`food_tapioca_perle_raw`, amido puro estratto dalla stessa radice — prodotto diverso, farina integrale contro amido isolato, stessa distinzione già fatta per farina di patate vs amido di patate).
+- **Nutrienti**: **11/17**. Per 100g: energia 359kcal (valore statistico della pagina, nessuna riga "Energy" esplicita nella tabella dettagliata ma coerente con le "Calorie per 100g" riportate altrove sulla stessa pagina — stessa convenzione già usata per farina di farro, dove si legge il valore dal box statistico quando l'etichetta arrotonda diversamente), proteine 0,92g, grassi 0,49g, carboidrati 87,3g, fibra 4,83g, calcio 74,5mg, ferro 3,99mg, zinco 0,41mg, magnesio 33,6mg, rame 0,077mg, selenio 0µg esplicito. **Mancano** (non riportati sulla pagina, non assunti zero): vitamina C, vitamina B12, folato totale, vitamina K, beta-carotene, altro carotenoide provitaminico A (alfa-carotene + beta-criptoxantina) — nessuna riga per questi nutrienti nella tabella completa della pagina (92/93 righe totali verificate, nessuna fra queste sei). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2512377 e dataType Foundation.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguita — analogia funzionale, stessa convenzione già usata per farina di patate: tubero/radice amidacea trasformata in farina, famiglia botanica diversa — Euphorbiaceae per la manioca contro Solanaceae per la patata — non usata per calcolare nulla, solo per audit).
+- **Categoria dieta**: `plant_non_fruit` (radice/tubero e suoi derivati).
+- **Matrice**: nuova `farina_di_manioca` ("Farina di manioca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di radice, stessa convenzione di farina di patate/tapioca), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati sulla pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Euphorbiaceae` (famiglia reale della manioca, *Manihot esculenta* — per riferimento tassonomico, non usata per la categoria dieta), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non riportato, nessuna firma di arricchimento rilevabile).
+
+```
+npm run add-food -- --fdc-id=2512377 --food-id=food_farina_di_manioca_raw \
+  --name-it="Farina di manioca, cruda" \
+  --matrix-id=farina_di_manioca --matrix-description-it="Farina di manioca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512377 --food-id=food_farina_di_manioca_raw \
+  --name-it="Farina di manioca, cruda" \
+  --matrix-id=farina_di_manioca --matrix-description-it="Farina di manioca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Teff, crudo (non cotto) — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_teff_raw`. FDC ID 169747 (SR Legacy, "Teff, uncooked" — pagina getfoodfacts.com dedicata e pulita). Cereale antico etiope mai tentato in questa pipeline (distinto da amaranto/quinoa/grano saraceno/miglio già presenti, altra pianta — *Eragrostis tef*).
