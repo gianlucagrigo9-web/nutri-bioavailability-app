@@ -137,6 +137,30 @@ npm run add-food -- --fdc-id=173853 --food-id=food_renna_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Fagiano, carne cruda (senza pelle) — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_fagiano_raw`. FDC ID 174473 (SR Legacy, "Pheasant, raw, meat only" — pagina getfoodfacts.com dedicata e pulita). Esistono anche varianti più specifiche (meat and skin FDC 174472, leg FDC 172417) non usate: scelto il generico "meat only", stessa convenzione già usata per faraona/oca in questa pipeline.
+- **Nutrienti**: **14/17**. Per 100g: energia 133kcal, proteine 23,6g, grassi 3,64g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 13,0mg, ferro 1,15mg, zinco 0,97mg, magnesio 20,0mg, rame 0,069mg, selenio 16,2µg, vitamina C 6,00mg, vitamina B12 0,84µg, folato totale 6,00µg. **Mancano** (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174473 e dataType SR Legacy.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, pollame, carne senza pelle, già eseguito sul DB reale — stessa convenzione già usata per la faraona in un lotto precedente, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne di pollame).
+- **Matrice**: nuova `fagiano` ("Fagiano").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174473 --food-id=food_fagiano_raw \
+  --name-it="Fagiano, carne cruda (senza pelle)" \
+  --matrix-id=fagiano --matrix-description-it="Fagiano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174473 --food-id=food_fagiano_raw \
+  --name-it="Fagiano, carne cruda (senza pelle)" \
+  --matrix-id=fagiano --matrix-description-it="Fagiano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
