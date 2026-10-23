@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Wurstel di manzo, non riscaldato — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_wurstel_di_manzo_raw`. FDC ID 173862 (SR Legacy, "Frankfurter, beef, unheated" — pagina getfoodfacts.com dedicata e pulita). Primo prodotto di salumeria processata a base di manzo di questa pipeline (distinto da salame/pancetta/salsiccia già fatti, tutti a base di maiale).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 315kcal, proteine 11,7g, grassi 28,1g, carboidrati 2,97g, fibra 0g esplicito, calcio 14,0mg, ferro 1,12mg, zinco 2,01mg, magnesio 11,0mg, rame 0,044mg, selenio 10,3µg, vitamina C 0mg esplicito, vitamina B12 0,96µg, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 1,80µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un prodotto di carne, nessun pigmento vegetale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173862 e dataType SR Legacy.
+- **Nota di trasparenza sulla categoria dieta**: il nome del record FDC dichiara esplicitamente "beef" come unica specie — a differenza di un wurstel/hot dog generico multi-carne (che sarebbe stato trattato come caso ⚠ per lo stesso principio già applicato a maionese/ketchup/margarina/cioccolato fondente), questo record specifico non lascia margine di ambiguità sulla specie animale. Un'eventuale presenza di leganti/derivati del latte non cambia comunque la classificazione: un prodotto di carne resta `meat_fish` (non vegetariano) indipendentemente dagli ingredienti secondari.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato 85% magro, crudo, Golden Set originale, già eseguito sul DB reale — stesso animale, prodotto trasformato/processato invece di carne macinata fresca, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne processata).
+- **Matrice**: nuova `wurstel_di_manzo` ("Wurstel di manzo").
+- **Attributi**: `is_heme_iron` (flag attivo — prodotto di carne di mammifero, stesso precedente di `food_beef_ground_raw`/salame/salsiccia), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (descrizione FDC "unheated", coerente con "crudo/non riscaldato"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173862 --food-id=food_wurstel_di_manzo_raw \
+  --name-it="Wurstel di manzo, non riscaldato" \
+  --matrix-id=wurstel_di_manzo --matrix-description-it="Wurstel di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173862 --food-id=food_wurstel_di_manzo_raw \
+  --name-it="Wurstel di manzo, non riscaldato" \
+  --matrix-id=wurstel_di_manzo --matrix-description-it="Wurstel di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Latte evaporato, con vitamina A aggiunta — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_latte_evaporato_raw`. FDC ID 172194 (SR Legacy, "Milk, canned, evaporated, with added vitamin A" — pagina getfoodfacts.com dedicata e pulita). Latte concentrato per evaporazione, non zuccherato — distinto dal latte condensato zuccherato già preparato in un lotto precedente (`food_latte_condensato`, prodotto diverso con zucchero aggiunto).
