@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Rombo (turbot europeo), crudo — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_rombo_raw`. FDC ID 173710 (SR Legacy, "Fish, turbot, european, raw" — pagina getfoodfacts.com dedicata e pulita, record specifico per specie). Primo pesce piatto (Pleuronettiformi) della pipeline.
+- **Nutrienti**: **13/17**. Per 100g: energia 95,0kcal, proteine 16,1g, grassi 2,95g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 18,0mg, ferro 0,36mg, zinco 0,22mg, magnesio 51,0mg, rame 0,037mg, selenio 36,5µg, vitamina C 1,70mg, vitamina B12 2,20µg, folato totale 8,00µg, acido folico 0µg esplicito. **Mancano** (assenti dalla pagina, non zero): vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina — stesso gap tipico già accettato per altri pesci (sgombro, salmone, ecc.). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173710 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro bianco, già eseguito sul DB reale — stessa categoria funzionale "pesce magro", stesso attributo `is_heme_iron` usato per quella voce e per tutti i pesci della pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `rombo` ("Rombo (turbot europeo)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di pesce, stesso precedente di `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173710 --food-id=food_rombo_raw \
+  --name-it="Rombo (turbot europeo), crudo" \
+  --matrix-id=rombo --matrix-description-it="Rombo (turbot europeo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173710 --food-id=food_rombo_raw \
+  --name-it="Rombo (turbot europeo), crudo" \
+  --matrix-id=rombo --matrix-description-it="Rombo (turbot europeo)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Platessa (pesce piatto, famiglia sogliola/platessa), cruda — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_platessa_raw`. FDC ID 174196 (SR Legacy, "Fish, flatfish (flounder and sole species), raw" — pagina getfoodfacts.com dedicata e pulita). Record generico USDA per la famiglia Pleuronectidae/Soleidae (platessa europea è Pleuronectes platessa, nella stessa famiglia della passera/flounder citata nel nome del record) — stesso principio già usato da USDA stesso nel raggruppare "flounder and sole species" in un unico record.
+- **Nutrienti**: **17/17**. Per 100g: energia 70,0kcal, proteine 12,4g, grassi 1,93g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 21,0mg, ferro 0,18mg, zinco 0,32mg, magnesio 18,0mg, rame 0,019mg, selenio 26,6µg, vitamina C 0mg esplicito, vitamina B12 1,13µg, folato totale 5,00µg, acido folico 0µg esplicito, vitamina K (fillochinone 0,10µg + menachinone-4 0,20µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174196 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro bianco, già eseguito sul DB reale — stessa categoria funzionale, stesso attributo `is_heme_iron` usato per tutti i pesci della pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `platessa` ("Platessa (pesce piatto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di pesce, stesso precedente di `food_merluzzo_raw`/`food_rombo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174196 --food-id=food_platessa_raw \
+  --name-it="Platessa (pesce piatto), cruda" \
+  --matrix-id=platessa --matrix-description-it="Platessa (pesce piatto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174196 --food-id=food_platessa_raw \
+  --name-it="Platessa (pesce piatto), cruda" \
+  --matrix-id=platessa --matrix-description-it="Platessa (pesce piatto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cipollotto fresco (cipolla novella, bulbo e foglie) — preparato 2026-10-23 dal task (trentesimo lotto)
 
 - **food_id**: `food_cipollotto_raw`. FDC ID 170005 (SR Legacy, "Onions, spring or scallions (includes tops and bulb), raw" — pagina getfoodfacts.com dedicata e pulita). Distinto da cipolla matura (`food_onion_raw`, già eseguita) ed erba cipollina (`food_erba_cipollina_raw`, già eseguita): il cipollotto è il bulbo immaturo con le foglie verdi, consumato intero.
