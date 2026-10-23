@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, carne cruda — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_bisonte_raw`. FDC ID 173851 (SR Legacy, "Game meat, bison, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita). Nessun record generico "bison, raw" non trimmato trovato in nessuna fonte consultata: il più vicino a un generico è questo "separable lean only" — accettato come rappresentazione generica della carne, stessa convenzione già usata per agnello/vitello/lonza di maiale "lean only"/"composite of trimmed retail cuts" in questa pipeline.
+- **Nutrienti**: **12/17**. Per 100g: energia 109kcal, proteine 21,6g, grassi 1,84g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 2,60mg, zinco 2,80mg, magnesio 25,0mg, rame 0,090mg, selenio 27,0µg, vitamina C 0mg esplicito. **Mancano** (non riportati sulla pagina, non assunti zero): vitamina B12, folato totale, vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173851 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa sottofamiglia zoologica Bovinae del bisonte, carne rossa magra cruda, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne di mammifero).
+- **Matrice**: nuova `bisonte` ("Bisonte").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173851 --food-id=food_bisonte_raw \
+  --name-it="Bisonte, carne cruda (separable lean only)" \
+  --matrix-id=bisonte --matrix-description-it="Bisonte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173851 --food-id=food_bisonte_raw \
+  --name-it="Bisonte, carne cruda (separable lean only)" \
+  --matrix-id=bisonte --matrix-description-it="Bisonte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
