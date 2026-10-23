@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio di capra, fresco (tipo soft) — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_formaggio_di_capra_raw`. FDC ID 173435 (SR Legacy, "Cheese, goat, soft type" — pagina getfoodfacts.com dedicata e pulita). Primo formaggio di capra della pipeline (finora solo latte di capra e formaggi vaccini).
+- **Nutrienti**: **17/17**. Per 100g: energia 264kcal, proteine 18,5g, grassi 21,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 140mg, ferro 1,90mg, zinco 0,92mg, magnesio 16,0mg, rame 0,73mg, selenio 2,80µg, vitamina C 0mg esplicito, vitamina B12 0,19µg, folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 1,80µg, beta-carotene 54,0µg, alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173435 e dataType SR Legacy.
+- **Analogia usata**: `food_formaggio_svizzero_raw` (formaggio vaccino a pasta dura/semidura, già eseguito sul DB reale — stessa categoria funzionale "formaggio", nessun attributo categorico oltre a cottura/matrice usato per quella voce).
+- **Categoria dieta**: `egg_dairy` (formaggio, nessun ingrediente non-lattiero-caseario).
+- **Matrice**: nuova `formaggio_di_capra` ("Formaggio di capra, fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di `food_formaggio_svizzero_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173435 --food-id=food_formaggio_di_capra_raw \
+  --name-it="Formaggio di capra, fresco" \
+  --matrix-id=formaggio_di_capra --matrix-description-it="Formaggio di capra, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173435 --food-id=food_formaggio_di_capra_raw \
+  --name-it="Formaggio di capra, fresco" \
+  --matrix-id=formaggio_di_capra --matrix-description-it="Formaggio di capra, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Zucchero a velo (zucchero in polvere) — preparato 2026-10-23 dal task (ventinovesimo lotto, bonus)
 
 - **food_id**: `food_zucchero_a_velo_raw`. FDC ID 169656 (SR Legacy, "Sugars, powdered" — pagina getfoodfacts.com dedicata e pulita). Candidato scoperto durante la ricerca di questo lotto per completare la quota, non previsto originariamente.
