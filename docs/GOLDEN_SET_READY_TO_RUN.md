@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Salsa di soia (shoyu) — preparato 2026-10-23 dal task (ventottesimo lotto, bonus)
+
+- **food_id**: `food_salsa_di_soia`. FDC ID 174277 (SR Legacy, "Soy sauce made from soy and wheat (shoyu)" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**. Per 100g: energia 53,0kcal, proteine 8,14g, grassi 0,57g, carboidrati 4,93g, fibra 0,80g, calcio 33,0mg, ferro 1,45mg, zinco 0,87mg, magnesio 74,0mg, rame 0,043mg, selenio 0,50µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 14,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 5.493mg/100g — molto alto ma coerente con un condimento fermentato concentrato (stesso ordine di grandezza della salatura già vista per capperi/olive/colza in questa pipeline). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174277 e dataType SR Legacy.
+- **Analogia usata**: `food_soia_secca_cotta` (soia secca cotta/bollita, già eseguita sul DB reale — stesso legume di base, prodotto fermentato/trasformato invece del seme bollito). Nota di trasparenza: il nome FDC stesso dichiara esplicitamente la composizione "made from soy and wheat" (soia+frumento), quindi — a differenza del miso scartato ⚠ nel ventisettesimo lotto per mancanza di conferma sulla composizione — qui la composizione è dichiarata direttamente sul record, non serve una fonte esterna per confermarla.
+- **Categoria dieta**: `plant_non_fruit` (soia+frumento, nessun ingrediente animale).
+- **Matrice**: nuova `salsa_di_soia` ("Salsa di soia (shoyu)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento trasformato), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto soia (Fabaceae) + frumento (Poaceae), nessuna famiglia botanica singola applicabile), `baseline_cooking_state=fermented` (prodotto fermentato), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174277 --food-id=food_salsa_di_soia \
+  --name-it="Salsa di soia (shoyu)" \
+  --matrix-id=salsa_di_soia --matrix-description-it="Salsa di soia (shoyu)" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174277 --food-id=food_salsa_di_soia \
+  --name-it="Salsa di soia (shoyu)" \
+  --matrix-id=salsa_di_soia --matrix-description-it="Salsa di soia (shoyu)" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Taccole, cotte (congelate, bollite, senza sale) — preparato 2026-10-23 dal task (ventottesimo lotto, bonus)
+
+- **food_id**: `food_taccole_cotte`. FDC ID 170418 (SR Legacy, "Peas, edible-podded, frozen, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita). **Deviazione dichiarata**: nessun record FDC generico trovato per la variante fresca (non congelata) cotta — l'unica fonte con valori per la variante fresca (recipal.com #3088) cita solo un NDB legacy ID (11301), non un FDC ID verificabile. Usata quindi la variante congelata/cotta, stesso precedente già accettato per edamame cotto (FDC "Edamame, frozen, prepared" usato come proxy del bollito).
+- **Nutrienti**: **17/17**. Per 100g: energia 52,0kcal, proteine 3,50g, grassi 0,38g, carboidrati 9,02g, fibra 3,10g, calcio 59,0mg, ferro 2,40mg, zinco 0,49mg, magnesio 28,0mg, rame 0,090mg, selenio 0,80µg, vitamina C 22,0mg (reale), vitamina B12 0µg esplicito, folato totale 35,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 30,2µg, beta-carotene 760µg (reale e alto, coerente con una verdura verde cotta), alfa-carotene 53,0µg (usato come "altro carotenoide provitaminico A"), beta-criptoxantina 0µg. Sodio 5,00mg/100g (basso, coerente con "without salt"). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170418 e dataType SR Legacy.
+- **Analogia usata**: `food_taccole_raw` (taccole crude, stesso alimento, già eseguito sul DB reale — differisce solo per stato di cottura; stessa famiglia botanica Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legume/ortaggio, nessun ingrediente animale).
+- **Matrice**: riusa `taccole` (già esistente nel DB reale da `food_taccole_raw`, già eseguito).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione del crudo), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, matrice disgregata dalla cottura — più alto del crudo, 760µg vs valore del crudo non riletto qui ma coerente con l'effetto noto della cottura sulla biodisponibilità), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170418 --food-id=food_taccole_cotte \
+  --name-it="Taccole, cotte (congelate, bollite, senza sale)" \
+  --matrix-id=taccole --matrix-description-it="Taccole" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taccole_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170418 --food-id=food_taccole_cotte \
+  --name-it="Taccole, cotte (congelate, bollite, senza sale)" \
+  --matrix-id=taccole --matrix-description-it="Taccole" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taccole_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Caviale (uova di storione, in granuli) — preparato 2026-10-23 dal task (ventottesimo lotto)
 
 - **food_id**: `food_caviale_raw`. FDC ID 174188 (SR Legacy, "Fish, caviar, black and red, granular" — pagina getfoodfacts.com dedicata e pulita).
