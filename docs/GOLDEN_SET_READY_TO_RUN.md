@@ -144,6 +144,32 @@ npm run add-food -- --fdc-id=169308 --food-id=food_taro_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Igname, crudo — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_igname_raw`. FDC ID 170071 (SR Legacy, "Yam, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Secondo tubero tropicale di questa pipeline (distinto da taro, genere *Dioscorea* vs *Colocasia*, famiglie botaniche diverse).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 118kcal, proteine 1,53g, grassi 0,17g, carboidrati 27,9g, fibra 4,10g, calcio 17,0mg, ferro 0,54mg, zinco 0,24mg, magnesio 21,0mg, rame 0,18mg, selenio 0,70µg, vitamina C 17,1mg, folato totale 23,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 2,30µg, beta-carotene 83,0µg (reale e non nullo), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 9,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170071 e dataType SR Legacy.
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, Golden Set, già eseguita sul DB reale — stessa categoria "tubero tropicale crudo con carotenoidi reali non nulli"; **non** usato `food_taro_raw` appena preparato sopra, perché ancora solo "pronto" e non eseguito sul DB reale — l'analogia deve riferirsi a un alimento che esiste davvero nel DB).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `igname` ("Igname").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dei tuberi già eseguiti), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, tubero crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Dioscoreaceae` (famiglia botanica reale dell'igname, genere *Dioscorea* — diversa da taro/Araceae, patata dolce/Convolvulaceae e patata/Solanaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170071 --food-id=food_igname_raw \
+  --name-it="Igname, crudo" \
+  --matrix-id=igname --matrix-description-it="Igname" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Dioscoreaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170071 --food-id=food_igname_raw \
+  --name-it="Igname, crudo" \
+  --matrix-id=igname --matrix-description-it="Igname" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Dioscoreaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
