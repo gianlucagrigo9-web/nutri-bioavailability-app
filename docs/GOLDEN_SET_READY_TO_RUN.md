@@ -113,6 +113,30 @@ npm run add-food -- --fdc-id=168148 --food-id=food_rane_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Renna (caribù), carne cruda — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_renna_raw`. FDC ID 173853 (SR Legacy, "Game meat, caribou, raw" — pagina getfoodfacts.com dedicata e pulita). Nota: alimento di bassa rilevanza per la dieta italiana (non una specie cacciata/consumata in Italia), incluso per completare il filone "Game meat" USDA e per l'alta qualità del dato, non per priorità alta dichiarata al punto 1b(iii) del COMPITO.
+- **Nutrienti**: **14/17**. Per 100g: energia 127kcal, proteine 22,6g, grassi 3,36g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 17,0mg, ferro 4,69mg, zinco 4,00mg, magnesio 26,0mg, rame 0,22mg, selenio 10,2µg, vitamina C 0mg esplicito, vitamina B12 6,31µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173853 e dataType SR Legacy.
+- **Analogia usata**: `food_capra_raw` (capra cruda, già eseguita sul DB reale — stessa categoria USDA "Game meat", stesso attributo `is_heme_iron` usato per quella voce).
+- **Categoria dieta**: `meat_fish` (carne di mammifero).
+- **Matrice**: nuova `renna` ("Renna").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173853 --food-id=food_renna_raw \
+  --name-it="Renna (caribù), carne cruda" \
+  --matrix-id=renna --matrix-description-it="Renna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173853 --food-id=food_renna_raw \
+  --name-it="Renna (caribù), carne cruda" \
+  --matrix-id=renna --matrix-description-it="Renna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
