@@ -68,6 +68,30 @@ npm run add-food -- --fdc-id=168943 --food-id=food_farina_di_sorgo_raw \
   --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Farina di quinoa, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_quinoa_raw`. FDC ID 2512372 (Foundation Foods, "Flour, quinoa" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Distinta dalla quinoa secca intera già eseguita (`food_quinoa_dry_raw`).
+- **Nutrienti**: **11/17** (record Foundation con 30 nutrienti totali elencati in pagina, ma solo questi 11 fra i 17 tracciati da questo progetto). Per 100g: energia 378kcal, proteine 11,9g, grassi 6,60g, carboidrati 69,5g, fibra 6,29g, calcio 37,6mg, ferro 4,53mg, zinco 2,77mg, magnesio 164mg, rame 0,48mg, selenio 4,10µg. Sodio 6,32mg/100g (riferimento). **Mancano** (il record Foundation elenca esplicitamente "ogni nutriente presente", 30 in totale — questi non ci sono, non assunti zero): vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A. Gap dichiarato, coerente con lo stesso schema già visto per altre farine Foundation Foods prive di alcuni micronutrienti (farina di orzo, farina di cocco). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2512372 e dataType Foundation.
+- **Analogia usata**: `food_quinoa_dry_raw` (quinoa secca, cruda, già eseguita sul DB reale — stessa pianta *Chenopodium quinoa*, farina invece di seme intero).
+- **Categoria dieta**: `plant_non_fruit` (farina di pseudocereale).
+- **Matrice**: nuova `farina_di_quinoa` ("Farina di quinoa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina, stessa convenzione delle altre farine), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia reale della quinoa, stessa usata per `food_quinoa_dry_raw`/`food_quinoa_cotta`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun dato di folato/acido folico sul record, nessun segnale di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2512372 --food-id=food_farina_di_quinoa_raw \
+  --name-it="Farina di quinoa, cruda" \
+  --matrix-id=farina_di_quinoa --matrix-description-it="Farina di quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512372 --food-id=food_farina_di_quinoa_raw \
+  --name-it="Farina di quinoa, cruda" \
+  --matrix-id=farina_di_quinoa --matrix-description-it="Farina di quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
