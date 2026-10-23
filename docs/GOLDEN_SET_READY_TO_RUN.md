@@ -170,6 +170,32 @@ npm run add-food -- --fdc-id=170071 --food-id=food_igname_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Patate, cotte (bollite, con sale) — preparato 2026-10-23 dal task (ventisettesimo lotto), deviazione dichiarata
+
+- **food_id**: `food_patate_bollite`. FDC ID 170114 (SR Legacy, "Potatoes, boiled, cooked in skin, flesh, with salt" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Deviazione dichiarata**: la voce di coda chiedeva "senza sale" — nessuna pagina getfoodfacts.com trovata per la variante corrispondente ("Potatoes, boiled, cooked in skin, flesh, without salt"), solo fonti che mescolano standard diversi (triagemethod.com) senza FDC ID/dataType espliciti sulla stessa pagina; usata la variante "con sale", stessa deviazione già validata più volte in questa coda (frutta a guscio tostata con sale, riso bianco cotto con sale) — sodio 240mg/100g, molto più alto del crudo (`food_potato_raw`, non ancora misurato per il sodio in questo progetto ma atteso <10mg), coerente con l'aggiunta di sale in cottura, non con un'anomalia del dato. Prima coppia crudo/cotto per questo tubero (il crudo è nel Golden Set originale).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 87,0kcal, proteine 1,87g, grassi 0,10g, carboidrati 20,1g, fibra 2,00g, calcio 5,00mg, ferro 0,31mg, zinco 0,30mg, magnesio 22,0mg, rame 0,19mg, selenio 0,30µg, vitamina C 13,0mg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 2,20µg, beta-carotene 2,00µg (piccolo ma reale e non nullo), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 240mg/100g (atteso per la variante "con sale", vedi deviazione sopra). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170114 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguita — stesso alimento, coppia cotta per il crudo, stesso schema già usato per carote/broccoli/spinaci/manzo/salmone/merluzzo).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: riuso `tubers` (stessa matrice del crudo `food_potato_raw`, nessuna nuova matrice necessaria).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione del crudo), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, matrice alterata dalla cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia/crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170114 --food-id=food_patate_bollite \
+  --name-it="Patate, cotte (bollite, con sale)" \
+  --matrix-id=tubers --matrix-description-it="Tuberi" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170114 --food-id=food_patate_bollite \
+  --name-it="Patate, cotte (bollite, con sale)" \
+  --matrix-id=tubers --matrix-description-it="Tuberi" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
