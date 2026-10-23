@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ketchup (salsa di pomodoro) — preparato 2026-10-23 dal task (ventottesimo lotto)
+
+- **food_id**: `food_ketchup`. FDC ID 168556 (SR Legacy, "Catsup" — pagina getfoodfacts.com dedicata e pulita, titolo "Catsup (SR Legacy)").
+- **Nutrienti**: **17/17**. Per 100g (valori dalla tabella nutrienti completa, non dal pannello etichetta arrotondato — pannello 100kcal/910mg sodio, tabella 101kcal/907mg): energia 101kcal, proteine 1,04g, grassi 0,10g, carboidrati 27,4g, fibra 0,30g, calcio 15,0mg, ferro 0,35mg, zinco 0,17mg, magnesio 13,0mg, rame 0,085mg, selenio 0,70µg, vitamina C 4,10mg (reale, coerente col pomodoro), vitamina B12 0µg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 3,00µg, beta-carotene 316µg (reale e alto, coerente col pomodoro concentrato), alfa-carotene/beta-criptoxantina 0µg (usati come "altro carotenoide provitaminico A" = 0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168556 e dataType SR Legacy.
+- **Analogia usata**: `food_pomodori_secchi_raw` (pomodori secchi, già eseguito sul DB reale — stessa pianta *Solanum lycopersicum*, famiglia botanica reale Solanaceae; prodotto di pomodoro concentrato/trasformato come il ketchup, non il pomodoro fresco).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, ortaggio botanicamente "frutto" ma classificato come verdura per convenzione del PRD §4.9; nessun ingrediente animale).
+- **Matrice**: nuova `ketchup` ("Ketchup (salsa di pomodoro)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto trasformato non classificato per ossalati), `carotenoid_matrix_state=cooked_or_disrupted` (il pomodoro è cotto/concentrato nella produzione del ketchup, matrice carotenoide disgregata dal calore — beta-carotene reale e alto lo confirma), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale del pomodoro, come per l'analogia), `baseline_cooking_state=cooked` (il pomodoro è cotto/concentrato), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168556 --food-id=food_ketchup \
+  --name-it="Ketchup (salsa di pomodoro)" \
+  --matrix-id=ketchup --matrix-description-it="Ketchup (salsa di pomodoro)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168556 --food-id=food_ketchup \
+  --name-it="Ketchup (salsa di pomodoro)" \
+  --matrix-id=ketchup --matrix-description-it="Ketchup (salsa di pomodoro)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Maionese — preparato 2026-10-23 dal task (ventottesimo lotto)
 
 - **food_id**: `food_maionese`. FDC ID 171009 (SR Legacy, "Salad dressing, mayonnaise, regular" — pagina getfoodfacts.com dedicata e pulita).
