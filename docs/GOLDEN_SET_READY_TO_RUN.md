@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Crusca di mais, cruda — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_crusca_di_mais_raw`. FDC ID 170289 (SR Legacy, "Corn bran, crude" — pagina getfoodfacts.com dedicata e pulita). Sottoprodotto del mais distinto dal chicco intero (`food_corn_raw`/mais dolce già presenti) e dalle crusche di altri cereali già eseguite (avena, frumento) o pronte (riso) in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 224kcal, proteine 8,36g, grassi 0,92g, carboidrati 85,6g, fibra 79,0g, calcio 42,0mg, ferro 2,79mg, zinco 1,56mg, magnesio 64,0mg, rame 0,25mg, selenio 16,5µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento — coerente con un sottoprodotto grezzo non trattato), vitamina K (fillochinone) 0,30µg, beta-carotene 32,0µg, alfa-carotene 21,0µg + beta-criptoxantina 0µg esplicito (somma 21,0µg per l'altro carotenoide provitaminico A). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170289 e dataType SR Legacy.
+- **Analogia usata**: `food_crusca_di_avena_raw` (crusca d'avena, cruda, già eseguita sul DB reale — stesso tipo di sottoprodotto di cereale, stessa famiglia botanica Poaceae, stessa convenzione di matrice).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `crusca_di_mais` ("Crusca di mais").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione delle altre crusche già eseguite, non una verdura ad alto ossalato), `carotenoid_matrix_state=raw_intact` (beta-carotene e alfa-carotene entrambi non nulli, prodotto grezzo non cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del mais, *Zea mays*, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170289 --food-id=food_crusca_di_mais_raw \
+  --name-it="Crusca di mais, cruda" \
+  --matrix-id=crusca_di_mais --matrix-description-it="Crusca di mais" \
+  --baseline-cooking-state=raw --analogy-food-id=food_crusca_di_avena_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170289 --food-id=food_crusca_di_mais_raw \
+  --name-it="Crusca di mais, cruda" \
+  --matrix-id=crusca_di_mais --matrix-description-it="Crusca di mais" \
+  --baseline-cooking-state=raw --analogy-food-id=food_crusca_di_avena_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Filetto di maiale, crudo — preparato 2026-10-23 dal task (trentesimo lotto)
 
 - **food_id**: `food_filetto_di_maiale_raw`. FDC ID 168249 (SR Legacy, "Pork, fresh, loin, tenderloin, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita). Taglio distinto dalla lonza (`food_lonza_di_maiale_raw`, già eseguita) e dalla pancetta/prosciutto già fatti — il filetto (tenderloin) è un taglio magro specifico, mai tentato.
