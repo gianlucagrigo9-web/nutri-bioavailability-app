@@ -1,15 +1,11 @@
-DA ESEGUIRE (2026-10-23 sera): push dei file preparati, poi promozione dei 428 alimenti
+NIENTE DA ESEGUIRE ORA
 
-Gli alimenti inseriti finora (428 dalla pipeline FDC) sono tutti "bozza" e quindi invisibili nell'app.
-Su richiesta dell'utente (criteri solo automatici) e' pronta la promozione a "verificato".
-
-ORDINE (non invertire):
-1. Aggiornare il computer e fare il push dei file preparati (app corretta sui nutrienti mancanti,
-   script di promozione con i nuovi controlli, due file PowerShell, check SQL). Prima "npm run typecheck"
-   e "npm test" devono passare.
-2. lotti_alimenti\promozione_1_prova.txt  -> PROVA, non scrive nulla (circa 10 minuti). Dire "fatto" a Claude,
-   che legge lotti_alimenti\esito_promozione_prova.txt.
-3. lotti_alimenti\promozione_2_applica.txt -> promuove davvero (circa 20-30 minuti), solo se Claude conferma.
-4. check_promozione.sql nell'editor SQL di Supabase: riepilogo e motivi degli eventuali alimenti rimasti bozza.
-
-Poi, quando si accumulano nuove voci "Pronti" (la ricerca gira ogni ora), scrivere in chat "c'e' il lotto".
+Stato al 2026-10-24 (notte):
+- 428 alimenti da pipeline FDC inseriti e PROMOSSI a "verificato" (promozione automatica del 2026-10-24:
+  6878 righe, 0 errori; controllo check_promozione.sql: verified=458, draft=0). Sono visibili nell'app.
+- L'app mostra "n.d." (dato non disponibile) al posto dello zero quando un nutriente manca.
+- Il task "Ricerca Golden Set" gira ogni ora, anche di notte, e prepara circa 9 alimenti a turno in
+  docs/GOLDEN_SET_READY_TO_RUN.md (sezione "Pronti"). Quando ce ne sono abbastanza scrivi in chat
+  "c'e' il lotto": una sessione interattiva prepara la cartella lotti_alimenti con i passi da incollare
+  in PowerShell. Dopo l'inserimento gli alimenti nuovi sono "bozza": per renderli visibili si rilancia la
+  promozione (lotti_alimenti\promozione_1_prova.txt poi promozione_2_applica.txt, valide anche per i lotti nuovi).
