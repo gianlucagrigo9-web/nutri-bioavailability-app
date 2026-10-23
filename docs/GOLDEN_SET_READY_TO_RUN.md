@@ -20,6 +20,30 @@
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
 
+### Tapioca, perle secche — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_tapioca_perle_raw`. FDC ID 169717 (SR Legacy, "Tapioca, pearl, dry" — pagina getfoodfacts.com dedicata e pulita). Amido estratto dalla radice di manioca (*Manihot esculenta*), nessun alimento a base di manioca già presente in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 358kcal, proteine 0,19g, grassi 0,020g, carboidrati 88,7g, fibra 0,90g, calcio 20,0mg, ferro 1,58mg, zinco 0,12mg, magnesio 1,00mg, rame 0,020mg, selenio 0,80µg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un amido puro). Sodio 1,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169717 e dataType SR Legacy.
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, Golden Set pipeline, già eseguito sul DB reale — analogia **funzionale** di categoria, "carboidrato raffinato puro con pochi micronutrienti", non botanica: il riso è Poaceae, la manioca è Euphorbiaceae, nessuna parentela reale, come già per patata dolce/patata comune in un lotto precedente).
+- **Categoria dieta**: `plant_non_fruit` (amido vegetale).
+- **Matrice**: nuova `tapioca_perle` ("Tapioca, perle secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Euphorbiaceae` (famiglia botanica REALE della manioca, non quella dell'analogia funzionale), `baseline_cooking_state=raw` (perle secche, non cotte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169717 --food-id=food_tapioca_perle_raw \
+  --name-it="Tapioca, perle secche" \
+  --matrix-id=tapioca_perle --matrix-description-it="Tapioca, perle secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169717 --food-id=food_tapioca_perle_raw \
+  --name-it="Tapioca, perle secche" \
+  --matrix-id=tapioca_perle --matrix-description-it="Tapioca, perle secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Crusca di riso, cruda — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_crusca_di_riso_raw`. FDC ID 169713 (SR Legacy, "Rice bran, crude" — pagina getfoodfacts.com dedicata e pulita). Distinta da `food_riso_integrale_raw`/`food_riso_bianco_raw` (chicco intero, già eseguiti): la crusca è lo strato esterno separato, un sottoprodotto distinto con un proprio record FDC, stessa convenzione già usata per crusca d'avena/frumento in un lotto precedente.
