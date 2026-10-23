@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte evaporato, con vitamina A aggiunta — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_latte_evaporato_raw`. FDC ID 172194 (SR Legacy, "Milk, canned, evaporated, with added vitamin A" — pagina getfoodfacts.com dedicata e pulita). Latte concentrato per evaporazione, non zuccherato — distinto dal latte condensato zuccherato già preparato in un lotto precedente (`food_latte_condensato`, prodotto diverso con zucchero aggiunto).
+- **Nutrienti**: **14/17**. Per 100g: energia 134kcal, proteine 6,81g, grassi 7,56g, carboidrati 10,0g, fibra 0g esplicito, calcio 261mg, ferro 0,19mg, zinco 0,77mg, magnesio 24,0mg, rame 0,016mg, selenio 2,30µg, vitamina C 1,90mg, vitamina B12 0,16µg, folato totale 8,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento tipo cereali — solo vitamina A aggiunta, pratica standard su questo tipo di latte in scatola, stessa convenzione già accettata per `food_milk_whole`/vitamina D e per il latte di capra già preparato). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172194 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido animale", stessa convenzione già usata per latte di pecora/capra/bufala e siero dolce/acido in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `latte_evaporato` ("Latte evaporato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172194 --food-id=food_latte_evaporato_raw \
+  --name-it="Latte evaporato, con vitamina A aggiunta" \
+  --matrix-id=latte_evaporato --matrix-description-it="Latte evaporato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172194 --food-id=food_latte_evaporato_raw \
+  --name-it="Latte evaporato, con vitamina A aggiunta" \
+  --matrix-id=latte_evaporato --matrix-description-it="Latte evaporato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Farina di manioca, cruda — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_farina_di_manioca_raw`. FDC ID 2512377 (Foundation Foods, "Flour, cassava" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Farina di radice di manioca (*Manihot esculenta*) macinata, distinta dalla tapioca già preparata in questa pipeline (`food_tapioca_perle_raw`, amido puro estratto dalla stessa radice — prodotto diverso, farina integrale contro amido isolato, stessa distinzione già fatta per farina di patate vs amido di patate).
