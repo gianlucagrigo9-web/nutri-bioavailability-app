@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Zucchero a velo (zucchero in polvere) — preparato 2026-10-23 dal task (ventinovesimo lotto, bonus)
+
+- **food_id**: `food_zucchero_a_velo_raw`. FDC ID 169656 (SR Legacy, "Sugars, powdered" — pagina getfoodfacts.com dedicata e pulita). Candidato scoperto durante la ricerca di questo lotto per completare la quota, non previsto originariamente.
+- **Nutrienti**: **17/17**. Per 100g: energia 389kcal, proteine 0g esplicito, grassi 0g esplicito, carboidrati 99,8g, fibra 0g esplicito, calcio 1,00mg, ferro 0,060mg, zinco 0,010mg, magnesio 0mg esplicito, rame 0,0070mg, selenio 0,60µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti — profilo coerente con uno zucchero puro (stesso schema di `food_zucchero_bianco`/`food_fruttosio_raw`), con tracce minime di amido anti-agglomerante tipiche dello zucchero a velo commerciale già incluse nel record USDA generico (non un prodotto Branded specifico). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169656 e dataType SR Legacy.
+- **Analogia usata**: `food_zucchero_bianco` (zucchero bianco granulato, già eseguito sul DB reale — stessa categoria funzionale "zucchero puro", stesso precedente di `botanical_family` NULL già dichiarato per quella voce e per `food_fruttosio_raw` in questo stesso lotto).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante vegetale puro, nessun ingrediente animale).
+- **Matrice**: nuova `zucchero_a_velo` ("Zucchero a velo (zucchero in polvere)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, zucchero), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — zucchero isolato industrialmente, stesso motivo già dichiarato per `food_zucchero_bianco`/`food_fruttosio_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169656 --food-id=food_zucchero_a_velo_raw \
+  --name-it="Zucchero a velo (zucchero in polvere)" \
+  --matrix-id=zucchero_a_velo --matrix-description-it="Zucchero a velo (zucchero in polvere)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169656 --food-id=food_zucchero_a_velo_raw \
+  --name-it="Zucchero a velo (zucchero in polvere)" \
+  --matrix-id=zucchero_a_velo --matrix-description-it="Zucchero a velo (zucchero in polvere)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di mirtillo rosso (cranberry), non zuccherato — preparato 2026-10-23 dal task (ventinovesimo lotto, bonus)
 
 - **food_id**: `food_succo_di_mirtillo_rosso_raw`. FDC ID 168117 (SR Legacy, "Cranberry juice, unsweetened" — pagina getfoodfacts.com dedicata e pulita). Candidato scoperto durante la ricerca di questo lotto, non previsto originariamente — aggiunto per lo stesso motivo già usato per "farina di patate" nel ventisettesimo lotto (candidato bonus di qualità scoperto durante la ricerca di un altro alimento).
