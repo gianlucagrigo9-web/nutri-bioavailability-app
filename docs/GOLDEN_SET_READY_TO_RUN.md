@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Teff, crudo (non cotto) — preparato 2026-10-23 dal task (trentunesimo lotto)
+
+- **food_id**: `food_teff_raw`. FDC ID 169747 (SR Legacy, "Teff, uncooked" — pagina getfoodfacts.com dedicata e pulita). Cereale antico etiope mai tentato in questa pipeline (distinto da amaranto/quinoa/grano saraceno/miglio già presenti, altra pianta — *Eragrostis tef*).
+- **Nutrienti**: **14/17**. Per 100g: energia 367kcal, proteine 13,3g, grassi 2,38g, carboidrati 73,1g, fibra 8,00g, calcio 180mg, ferro 7,63mg, zinco 3,63mg, magnesio 184mg, rame 0,81mg, selenio 4,40µg, vitamina K (fillochinone) 1,90µg, beta-carotene 5,00µg, alfa-carotene 0µg esplicito + beta-criptoxantina 0µg esplicito (somma 0µg per l'altro carotenoide provitaminico A). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina C, vitamina B12, folato totale — nessuna riga per questi tre nutrienti nella tabella completa della pagina (verificata per intero, non solo il riepilogo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169747 e dataType SR Legacy.
+- **Analogia usata**: `food_miglio_raw` (miglio crudo, già eseguito sul DB reale — altro piccolo cereale antico della stessa famiglia botanica Poaceae, stesso tipo di gap dichiarato su alcuni micronutrienti).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `teff` ("Teff").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a un cereale, stessa convenzione delle altre farine/cereali già eseguiti), `carotenoid_matrix_state=raw_intact` (beta-carotene 5,00µg non nullo, prodotto crudo non cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del teff, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non riportato, nessuna firma di arricchimento rilevabile).
+
+```
+npm run add-food -- --fdc-id=169747 --food-id=food_teff_raw \
+  --name-it="Teff, crudo (non cotto)" \
+  --matrix-id=teff --matrix-description-it="Teff" \
+  --baseline-cooking-state=raw --analogy-food-id=food_miglio_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169747 --food-id=food_teff_raw \
+  --name-it="Teff, crudo (non cotto)" \
+  --matrix-id=teff --matrix-description-it="Teff" \
+  --baseline-cooking-state=raw --analogy-food-id=food_miglio_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Crusca di mais, cruda — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_crusca_di_mais_raw`. FDC ID 170289 (SR Legacy, "Corn bran, crude" — pagina getfoodfacts.com dedicata e pulita). Sottoprodotto del mais distinto dal chicco intero (`food_corn_raw`/mais dolce già presenti) e dalle crusche di altri cereali già eseguite (avena, frumento) o pronte (riso) in questa pipeline.
