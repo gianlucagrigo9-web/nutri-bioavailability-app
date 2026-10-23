@@ -118,6 +118,32 @@ npm run add-food -- --fdc-id=168446 --food-id=food_farina_di_patate_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Taro, crudo — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_taro_raw`. FDC ID 169308 (SR Legacy, "Taro, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Primo tubero tropicale di questa pipeline (distinto dalla patata/patata dolce già nel Golden Set).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 112kcal, proteine 1,50g, grassi 0,20g, carboidrati 26,5g, fibra 4,10g, calcio 43,0mg, ferro 0,55mg, zinco 0,23mg, magnesio 33,0mg, rame 0,17mg, selenio 0,70µg, vitamina C 4,50mg, folato totale 22,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1,00µg, beta-carotene 35,0µg (reale e non nullo, coerente con la polpa leggermente pigmentata del taro), alfa-carotene 0µg esplicito, beta-criptoxantina 20,0µg (reale e non nullo). Sodio 11,0mg/100g (riferimento). Nota di precisione: la pagina presenta i valori per 100g come derivati per scala dalla porzione da 1 cup/104g — stessa minima imprecisione di arrotondamento già accettata altrove in questa coda, non un gap di fonte. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169308 e dataType SR Legacy.
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, Golden Set — stessa categoria "tubero tropicale crudo con carotenoidi reali non nulli", a differenza della patata comune che non ne ha; nessuna parentela botanica reale, stessa convenzione già usata per patata dolce/patata comune).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `taro` ("Taro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dei tuberi già eseguiti), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali e non nulli, tubero crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae` (famiglia botanica reale del taro, *Colocasia esculenta* — diversa sia da quella della patata dolce, Convolvulaceae, sia da quella della patata comune, Solanaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169308 --food-id=food_taro_raw \
+  --name-it="Taro, crudo" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169308 --food-id=food_taro_raw \
+  --name-it="Taro, crudo" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
