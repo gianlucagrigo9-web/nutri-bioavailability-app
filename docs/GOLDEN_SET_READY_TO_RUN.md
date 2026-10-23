@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cervo, carne cruda — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_cervo_raw`. FDC ID 173855 (SR Legacy, "Game meat, deer, raw" — pagina getfoodfacts.com dedicata e pulita). Secondo cervide/selvaggina della pipeline dopo il cinghiale (rimasto ⚠ per mancanza di un FDC ID verificabile).
+- **Nutrienti**: **17/17**. Per 100g: energia 120kcal, proteine 23,0g, grassi 2,42g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 3,40mg (alto, coerente con carne rossa magra di selvaggina), zinco 2,09mg, magnesio 23,0mg, rame 0,25mg, selenio 9,70µg, vitamina C 0mg esplicito, vitamina B12 6,31µg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone 1,10µg + diidrofillochinone 0µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173855 e dataType SR Legacy.
+- **Analogia usata**: `food_capra_raw` (Game meat, goat, raw — già eseguita sul DB reale, stessa categoria USDA "Game meat", stesso attributo `is_heme_iron` usato per quella voce).
+- **Categoria dieta**: `meat_fish` (carne rossa).
+- **Matrice**: nuova `cervo` ("Cervo, carne").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173855 --food-id=food_cervo_raw \
+  --name-it="Cervo, carne cruda" \
+  --matrix-id=cervo --matrix-description-it="Cervo, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173855 --food-id=food_cervo_raw \
+  --name-it="Cervo, carne cruda" \
+  --matrix-id=cervo --matrix-description-it="Cervo, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rombo (turbot europeo), crudo — preparato 2026-10-23 dal task (trentesimo lotto)
 
 - **food_id**: `food_rombo_raw`. FDC ID 173710 (SR Legacy, "Fish, turbot, european, raw" — pagina getfoodfacts.com dedicata e pulita, record specifico per specie). Primo pesce piatto (Pleuronettiformi) della pipeline.
