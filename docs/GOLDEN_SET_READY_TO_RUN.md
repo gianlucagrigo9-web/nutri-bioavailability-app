@@ -20,6 +20,424 @@
 
 *(Questa sezione contiene solo voci non ancora eseguite: se in essa non c'è nessuna voce "###", non c'è nulla da eseguire. Le voci eseguite vengono riassunte in "Eseguiti"; il testo completo di quelle del 2026-10-14 è nella cronologia git, `git show 7460196:docs/GOLDEN_SET_READY_TO_RUN.md`, e quello delle 275 eseguite il 2026-10-22 con `git show cacb1e5:docs/GOLDEN_SET_READY_TO_RUN.md`.)*
 
+### Farina di farro, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_farro_raw`. FDC ID 2003587 (Foundation Foods, "Flour, spelt, whole grain" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Distinta dal chicco perlato già eseguito (`food_farro_raw`): farina integrale di farro macinata, non il chicco intero.
+- **Nutrienti**: **12/17**. Per 100g (valori esatti dalla tabella nutrienti della pagina, non dal pannello etichetta arrotondato — la pagina mostra 340kcal sul pannello etichetta ma 341kcal nel box statistico/tabella, usato quest'ultimo): energia 341kcal, proteine 14,5g, grassi 2,54g, carboidrati 70,7g, fibra 9,34g, calcio 30,0mg, ferro 3,77mg, zinco 3,59mg, magnesio 124mg, rame 0,53mg, selenio 9,48µg, folato totale 38,4µg. Sodio 0mg/100g esplicito (riferimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina C, acido folico separato, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A (alfa-carotene + beta-criptoxantina) — nessuna firma di arricchimento nei campi presenti (folato totale 38,4µg senza una componente "acido folico" separata). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2003587 e dataType Foundation.
+- **Analogia usata**: `food_farro_raw` (farro perlato, secco, crudo, già eseguito sul DB reale — stessa pianta *Triticum spelta*, farina invece di chicco perlato; nota di trasparenza: anche `food_farro_raw` ha un gap dichiarato sull'energia per lo stesso tipo di record Foundation Foods, quindi non è garantito che il fetch reale dallo script riproduca esattamente i 12 nutrienti letti qui dalla pagina — stesso limite già documentato per quell'alimento, l'estrazione reale avviene al momento dell'`--apply`).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_farro` ("Farina di farro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di cereale, stessa convenzione delle altre farine già eseguite), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del farro, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato totale presente senza componente acido folico separata).
+
+```
+npm run add-food -- --fdc-id=2003587 --food-id=food_farina_di_farro_raw \
+  --name-it="Farina di farro, cruda" \
+  --matrix-id=farina_di_farro --matrix-description-it="Farina di farro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2003587 --food-id=food_farina_di_farro_raw \
+  --name-it="Farina di farro, cruda" \
+  --matrix-id=farina_di_farro --matrix-description-it="Farina di farro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di sorgo, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_sorgo_raw`. FDC ID 168943 (SR Legacy, "Sorghum flour, whole-grain" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30; la pagina segnala che esistono 2 descrizioni USDA di farina di sorgo, questa è la "whole-grain" scelta come più rappresentativa di un prodotto semplice non raffinato). Distinta dal chicco intero già eseguito (`food_sorgo_raw`).
+- **Nutrienti**: **14/17**. Per 100g: energia 359kcal, proteine 8,43g, grassi 3,34g, carboidrati 76,6g, fibra 6,60g, calcio 12,0mg, ferro 3,14mg, zinco 1,63mg, magnesio 123mg, rame 0,25mg, selenio 12,2µg, vitamina C 0,80mg, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 6,40µg (fogliata — la pagina riporta separatamente anche menaquinone-4 0,20µg e diidrofillochinone 0µg, non sommati qui, solo la fillochinone standard usata dalla mappatura). Sodio 3,00mg/100g (riferimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina B12, beta-carotene, altro carotenoide provitaminico A (alfa-carotene + beta-criptoxantina). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168943 e dataType SR Legacy.
+- **Analogia usata**: `food_sorgo_raw` (sorgo integrale crudo, già eseguito sul DB reale — stessa pianta *Sorghum bicolor*, farina invece di chicco intero).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_sorgo` ("Farina di sorgo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di cereale, stessa convenzione delle altre farine), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del sorgo, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168943 --food-id=food_farina_di_sorgo_raw \
+  --name-it="Farina di sorgo, cruda" \
+  --matrix-id=farina_di_sorgo --matrix-description-it="Farina di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168943 --food-id=food_farina_di_sorgo_raw \
+  --name-it="Farina di sorgo, cruda" \
+  --matrix-id=farina_di_sorgo --matrix-description-it="Farina di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di quinoa, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_quinoa_raw`. FDC ID 2512372 (Foundation Foods, "Flour, quinoa" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Distinta dalla quinoa secca intera già eseguita (`food_quinoa_dry_raw`).
+- **Nutrienti**: **11/17** (record Foundation con 30 nutrienti totali elencati in pagina, ma solo questi 11 fra i 17 tracciati da questo progetto). Per 100g: energia 378kcal, proteine 11,9g, grassi 6,60g, carboidrati 69,5g, fibra 6,29g, calcio 37,6mg, ferro 4,53mg, zinco 2,77mg, magnesio 164mg, rame 0,48mg, selenio 4,10µg. Sodio 6,32mg/100g (riferimento). **Mancano** (il record Foundation elenca esplicitamente "ogni nutriente presente", 30 in totale — questi non ci sono, non assunti zero): vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A. Gap dichiarato, coerente con lo stesso schema già visto per altre farine Foundation Foods prive di alcuni micronutrienti (farina di orzo, farina di cocco). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2512372 e dataType Foundation.
+- **Analogia usata**: `food_quinoa_dry_raw` (quinoa secca, cruda, già eseguita sul DB reale — stessa pianta *Chenopodium quinoa*, farina invece di seme intero).
+- **Categoria dieta**: `plant_non_fruit` (farina di pseudocereale).
+- **Matrice**: nuova `farina_di_quinoa` ("Farina di quinoa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina, stessa convenzione delle altre farine), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia reale della quinoa, stessa usata per `food_quinoa_dry_raw`/`food_quinoa_cotta`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun dato di folato/acido folico sul record, nessun segnale di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2512372 --food-id=food_farina_di_quinoa_raw \
+  --name-it="Farina di quinoa, cruda" \
+  --matrix-id=farina_di_quinoa --matrix-description-it="Farina di quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512372 --food-id=food_farina_di_quinoa_raw \
+  --name-it="Farina di quinoa, cruda" \
+  --matrix-id=farina_di_quinoa --matrix-description-it="Farina di quinoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di patate, cruda — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_farina_di_patate_raw`. FDC ID 168446 (SR Legacy, "Potato flour" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota di trasparenza importante**: questo NON è l'amido/fecola di patate (starch puro, quasi solo carboidrato, proteine/fibra trascurabili) originariamente previsto dalla voce di coda — nessun record FDC SR Legacy/Foundation per "Starch, potato" è stato trovato in nessuna fonte consultata (solo riferimenti enciclopedici, nessun FDC ID verificabile). "Potato flour" è invece patata intera disidratata e macinata (proteine 6,90g/100g, fibra 5,90g/100g — valori incompatibili con uno starch puro), un prodotto diverso e distinto sia dall'amido di patate sia dalle patate crude già nel Golden Set originale (`food_potato_raw`) — non una sostituzione dell'alimento richiesto, ma un alimento nuovo e genuino nel suo diritto, scelto al posto dell'amido per non forzare un match sbagliato (stesso principio già applicato per pangasio/catfish e orata/porgy in questa coda).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 357kcal, proteine 6,90g, grassi 0,34g, carboidrati 83,1g, fibra 5,90g, calcio 65,0mg, ferro 1,38mg, zinco 0,54mg, magnesio 65,0mg, rame 0,20mg, selenio 1,10µg, vitamina C 3,80mg, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un tubero bianco privo di pigmento, stessa convenzione già usata per patate/rafano/pastinaca). Sodio 55,0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168446 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale — stesso tubero *Solanum tuberosum*, farina/disidratato invece di crudo fresco).
+- **Categoria dieta**: `plant_non_fruit` (tubero/derivato di tubero).
+- **Matrice**: nuova `farina_di_patate` ("Farina di patate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione di `food_potato_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene 0µg esplicito, matrice non alterata da cottura — stessa convenzione di rafano/daikon), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale della patata, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168446 --food-id=food_farina_di_patate_raw \
+  --name-it="Farina di patate, cruda" \
+  --matrix-id=farina_di_patate --matrix-description-it="Farina di patate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168446 --food-id=food_farina_di_patate_raw \
+  --name-it="Farina di patate, cruda" \
+  --matrix-id=farina_di_patate --matrix-description-it="Farina di patate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Taro, crudo — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_taro_raw`. FDC ID 169308 (SR Legacy, "Taro, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Primo tubero tropicale di questa pipeline (distinto dalla patata/patata dolce già nel Golden Set).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 112kcal, proteine 1,50g, grassi 0,20g, carboidrati 26,5g, fibra 4,10g, calcio 43,0mg, ferro 0,55mg, zinco 0,23mg, magnesio 33,0mg, rame 0,17mg, selenio 0,70µg, vitamina C 4,50mg, folato totale 22,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1,00µg, beta-carotene 35,0µg (reale e non nullo, coerente con la polpa leggermente pigmentata del taro), alfa-carotene 0µg esplicito, beta-criptoxantina 20,0µg (reale e non nullo). Sodio 11,0mg/100g (riferimento). Nota di precisione: la pagina presenta i valori per 100g come derivati per scala dalla porzione da 1 cup/104g — stessa minima imprecisione di arrotondamento già accettata altrove in questa coda, non un gap di fonte. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169308 e dataType SR Legacy.
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, Golden Set — stessa categoria "tubero tropicale crudo con carotenoidi reali non nulli", a differenza della patata comune che non ne ha; nessuna parentela botanica reale, stessa convenzione già usata per patata dolce/patata comune).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `taro` ("Taro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dei tuberi già eseguiti), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali e non nulli, tubero crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae` (famiglia botanica reale del taro, *Colocasia esculenta* — diversa sia da quella della patata dolce, Convolvulaceae, sia da quella della patata comune, Solanaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169308 --food-id=food_taro_raw \
+  --name-it="Taro, crudo" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169308 --food-id=food_taro_raw \
+  --name-it="Taro, crudo" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Igname, crudo — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_igname_raw`. FDC ID 170071 (SR Legacy, "Yam, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Secondo tubero tropicale di questa pipeline (distinto da taro, genere *Dioscorea* vs *Colocasia*, famiglie botaniche diverse).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 118kcal, proteine 1,53g, grassi 0,17g, carboidrati 27,9g, fibra 4,10g, calcio 17,0mg, ferro 0,54mg, zinco 0,24mg, magnesio 21,0mg, rame 0,18mg, selenio 0,70µg, vitamina C 17,1mg, folato totale 23,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 2,30µg, beta-carotene 83,0µg (reale e non nullo), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 9,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170071 e dataType SR Legacy.
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, Golden Set, già eseguita sul DB reale — stessa categoria "tubero tropicale crudo con carotenoidi reali non nulli"; **non** usato `food_taro_raw` appena preparato sopra, perché ancora solo "pronto" e non eseguito sul DB reale — l'analogia deve riferirsi a un alimento che esiste davvero nel DB).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `igname` ("Igname").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dei tuberi già eseguiti), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, tubero crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Dioscoreaceae` (famiglia botanica reale dell'igname, genere *Dioscorea* — diversa da taro/Araceae, patata dolce/Convolvulaceae e patata/Solanaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170071 --food-id=food_igname_raw \
+  --name-it="Igname, crudo" \
+  --matrix-id=igname --matrix-description-it="Igname" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Dioscoreaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170071 --food-id=food_igname_raw \
+  --name-it="Igname, crudo" \
+  --matrix-id=igname --matrix-description-it="Igname" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Dioscoreaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Patate, cotte (bollite, con sale) — preparato 2026-10-23 dal task (ventisettesimo lotto), deviazione dichiarata
+
+- **food_id**: `food_patate_bollite`. FDC ID 170114 (SR Legacy, "Potatoes, boiled, cooked in skin, flesh, with salt" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Deviazione dichiarata**: la voce di coda chiedeva "senza sale" — nessuna pagina getfoodfacts.com trovata per la variante corrispondente ("Potatoes, boiled, cooked in skin, flesh, without salt"), solo fonti che mescolano standard diversi (triagemethod.com) senza FDC ID/dataType espliciti sulla stessa pagina; usata la variante "con sale", stessa deviazione già validata più volte in questa coda (frutta a guscio tostata con sale, riso bianco cotto con sale) — sodio 240mg/100g, molto più alto del crudo (`food_potato_raw`, non ancora misurato per il sodio in questo progetto ma atteso <10mg), coerente con l'aggiunta di sale in cottura, non con un'anomalia del dato. Prima coppia crudo/cotto per questo tubero (il crudo è nel Golden Set originale).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 87,0kcal, proteine 1,87g, grassi 0,10g, carboidrati 20,1g, fibra 2,00g, calcio 5,00mg, ferro 0,31mg, zinco 0,30mg, magnesio 22,0mg, rame 0,19mg, selenio 0,30µg, vitamina C 13,0mg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 2,20µg, beta-carotene 2,00µg (piccolo ma reale e non nullo), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 240mg/100g (atteso per la variante "con sale", vedi deviazione sopra). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170114 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguita — stesso alimento, coppia cotta per il crudo, stesso schema già usato per carote/broccoli/spinaci/manzo/salmone/merluzzo).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: riuso `tubers` (stessa matrice del crudo `food_potato_raw`, nessuna nuova matrice necessaria).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione del crudo), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, matrice alterata dalla cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia/crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170114 --food-id=food_patate_bollite \
+  --name-it="Patate, cotte (bollite, con sale)" \
+  --matrix-id=tubers --matrix-description-it="Tuberi" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170114 --food-id=food_patate_bollite \
+  --name-it="Patate, cotte (bollite, con sale)" \
+  --matrix-id=tubers --matrix-description-it="Tuberi" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di fagiolo mungo, crudi — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_germogli_fagiolo_mungo_raw`. FDC ID 169957 (SR Legacy, "Mung beans, mature seeds, sprouted, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota terminologica**: nome scelto deliberatamente preciso ("fagiolo mungo", *Vigna radiata*) e non "germogli di soia" come spesso chiamati genericamente al dettaglio in Italia — i germogli comunemente venduti come "germogli di soia" sono quasi sempre germogli di fagiolo mungo, botanicamente distinti dalla soia vera (*Glycine max*, già coperta come semi secchi/tofu/edamame in questa coda); nessun record FDC per germogli di soia vera (*Glycine max* germogliata) trovato in questa ricerca, quindi questa voce rappresenta solo il fagiolo mungo, non un sinonimo della soia.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 30,0kcal, proteine 3,04g, grassi 0,18g, carboidrati 5,94g, fibra 1,80g, calcio 13,0mg, ferro 0,91mg, zinco 0,41mg, magnesio 21,0mg, rame 0,16mg, selenio 0,60µg, vitamina C 13,2mg, folato totale 61,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 33,0µg, beta-carotene 6,00µg, alfa-carotene 6,00µg, beta-criptoxantina 6,00µg (tutti piccoli ma reali e non nulli, coerenti con un germoglio verde). Sodio 6,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169957 e dataType SR Legacy.
+- **Analogia usata**: `food_chickpeas_boiled` (ceci bolliti, Golden Set originale, già eseguito sul DB reale — stessa famiglia botanica reale Fabaceae, stesso gruppo "legume").
+- **Categoria dieta**: `plant_non_fruit` (legume germogliato).
+- **Matrice**: nuova `germogli_fagiolo_mungo` ("Germogli di fagiolo mungo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, germoglio crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale del fagiolo mungo, *Vigna radiata* — stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169957 --food-id=food_germogli_fagiolo_mungo_raw \
+  --name-it="Germogli di fagiolo mungo, crudi" \
+  --matrix-id=germogli_fagiolo_mungo --matrix-description-it="Germogli di fagiolo mungo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_boiled \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169957 --food-id=food_germogli_fagiolo_mungo_raw \
+  --name-it="Germogli di fagiolo mungo, crudi" \
+  --matrix-id=germogli_fagiolo_mungo --matrix-description-it="Germogli di fagiolo mungo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_boiled \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 290kcal, proteine 57,5g (molto alta, coerente con la spirulina, nota fonte proteica concentrata), grassi 7,72g, carboidrati 23,9g, fibra 3,60g, calcio 120mg, ferro 28,5mg (alto), zinco 2,00mg, magnesio 195mg, rame 6,10mg (alto), selenio 7,20µg, vitamina C 10,1mg, folato totale 94,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 25,5µg, beta-carotene 342µg (reale e non nullo, coerente col pigmento dell'alga), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 1048mg/100g (alto, coerente con un'alga secca — riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170495 e dataType SR Legacy.
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "alga marina cruda/secca").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `alga_spirulina` ("Alga spirulina").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (alga secca con beta-carotene reale non nullo, stessa convenzione di wakame appena preparata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` NULL (nessuna vera famiglia botanica per un'alga/cianobatterio, stessa convenzione di nori/wakame), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170495 --food-id=food_alga_spirulina_raw \
+  --name-it="Alga spirulina, secca" \
+  --matrix-id=alga_spirulina --matrix-description-it="Alga spirulina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170495 --food-id=food_alga_spirulina_raw \
+  --name-it="Alga spirulina, secca" \
+  --matrix-id=alga_spirulina --matrix-description-it="Alga spirulina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --apply
+```
+
+### Alga wakame, cruda — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_alga_wakame_raw`. FDC ID 170496 (SR Legacy, "Seaweed, wakame, raw" — pagina getfoodfacts.com dedicata e pulita). Seconda alga di questa pipeline dopo la nori, già eseguita.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 45,0kcal, proteine 3,03g, grassi 0,64g, carboidrati 9,14g, fibra 0,50g, calcio 150mg, ferro 2,18mg, zinco 0,38mg, magnesio 107mg, rame 0,28mg, selenio 0,70µg, vitamina C 3,00mg, folato totale 196µg (alto, coerente con un'alga), acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 5,30µg, beta-carotene 216µg (reale e non nullo, coerente col pigmento dell'alga), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 872mg/100g (alto, coerente con un'alga marina — riferimento, non uno dei 17 tracciati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170496 e dataType SR Legacy.
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "alga marina cruda/secca"; prima volta in questa pipeline che un'alga ha un'altra alga, non una verdura generica, come analogia diretta).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `alga_wakame` ("Alga wakame").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (alga cruda/secca con beta-carotene reale non nullo, matrice non alterata da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` NULL (nessuna vera famiglia botanica per un'alga, stessa convenzione di `food_alga_nori_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170496 --food-id=food_alga_wakame_raw \
+  --name-it="Alga wakame, cruda" \
+  --matrix-id=alga_wakame --matrix-description-it="Alga wakame" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170496 --food-id=food_alga_wakame_raw \
+  --name-it="Alga wakame, cruda" \
+  --matrix-id=alga_wakame --matrix-description-it="Alga wakame" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --apply
+```
+
+### Latticello (buttermilk), intero — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_latticello_raw`. FDC ID 172225 (SR Legacy, "Milk, buttermilk, fluid, whole" — pagina getfoodfacts.com dedicata e pulita). Distinto dal siero di latte dolce/acido già eseguiti: il latticello è il liquido residuo della burrificazione (sbattitura della panna), non della caseificazione — sottoprodotto diverso, non un duplicato.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 62,0kcal, proteine 3,21g, grassi 3,31g, carboidrati 4,88g, fibra 0g esplicito, calcio 115mg, ferro 0,030mg, zinco 0,38mg, magnesio 10,0mg, rame 0,025mg, selenio 3,70µg, vitamina C 0mg esplicito, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,46µg, vitamina K 0,30µg, beta-carotene 7,00µg, alfa-carotene/beta-criptoxantina entrambi 0µg espliciti. Sodio 105mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172225 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido animale", stessa convenzione già usata per latte di pecora/capra/bufala e siero dolce/acido in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (latte/derivato del latte).
+- **Matrice**: nuova `latticello` ("Latticello (buttermilk)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172225 --food-id=food_latticello_raw \
+  --name-it="Latticello (buttermilk), intero" \
+  --matrix-id=latticello --matrix-description-it="Latticello (buttermilk)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172225 --food-id=food_latticello_raw \
+  --name-it="Latticello (buttermilk), intero" \
+  --matrix-id=latticello --matrix-description-it="Latticello (buttermilk)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
+### Olio di avocado — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_olio_di_avocado_raw`. FDC ID 173573 (SR Legacy, "Oil, avocado" — pagina getfoodfacts.com dedicata e pulita). **Nota di trasparenza su categoria dieta**: distinto dall'avocado intero (`⚠` in coda, lotto 19, per ambiguità fresh_fruit/plant_non_fruit — avocado botanicamente un frutto ma nutrizionalmente/culinariamente un grasso). L'olio NON eredita quell'ambiguità: è un grasso vegetale puro (0g carboidrati, 0g proteine, 100g grassi/100g), rientra senza dubbio nella definizione di "oli vegetali" della categoria `plant_non_fruit` usata per ogni altro olio di questa pipeline (palma, cocco, girasole, colza), indipendentemente da come si classifichi il frutto intero da cui proviene.
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina; nessuno riportato nel record, nessuno assunto zero). Per 100g (valori presenti): energia 884kcal, proteine 0g esplicito, grassi 100g esplicito, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0mg esplicito, zinco 0mg esplicito, magnesio 0mg esplicito, rame 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito. Sodio 0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173573 e dataType SR Legacy.
+- **Analogia usata**: `food_olio_di_palma_raw` (olio di palma, Golden Set pipeline, già eseguito sul DB reale — analogia **funzionale**, "olio vegetale puro raffinato", non botanica: la palma è Arecaceae, l'avocado è Lauraceae).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale — vedi nota di trasparenza sopra).
+- **Matrice**: nuova `olio_di_avocado` ("Olio di avocado").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lauraceae` (famiglia botanica REALE dell'avocado, *Persea americana*, per riferimento tassonomico — non usata per la categoria dieta), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173573 --food-id=food_olio_di_avocado_raw \
+  --name-it="Olio di avocado" \
+  --matrix-id=olio_di_avocado --matrix-description-it="Olio di avocado" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_palma_raw \
+  --botanical-family=Lauraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173573 --food-id=food_olio_di_avocado_raw \
+  --name-it="Olio di avocado" \
+  --matrix-id=olio_di_avocado --matrix-description-it="Olio di avocado" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_palma_raw \
+  --botanical-family=Lauraceae --diet-category=plant_non_fruit --apply
+```
+
+### Olio di nocciola — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_olio_di_nocciola_raw`. FDC ID 171427 (SR Legacy, "Oil, hazelnut" — pagina getfoodfacts.com dedicata e pulita). Distinto da `food_nocciole_raw`/`food_nocciole_tostate` (seme intero, già eseguiti): l'olio è il grasso estratto, un prodotto distinto con un proprio record FDC, stessa convenzione già usata per olio di cocco/palma rispetto al seme/frutto intero.
+- **Nutrienti**: **15/17** — mancano rame e vitamina K (non riportati nel record, non assunti zero). Per 100g (valori presenti): energia 884kcal, proteine 0g esplicito, grassi 100g esplicito, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0mg esplicito, zinco 0mg esplicito, magnesio 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un grasso puro raffinato). Sodio 0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171427 e dataType SR Legacy.
+- **Analogia usata**: `food_nocciole_raw` (nocciole secche, Golden Set pipeline, già eseguite sul DB reale — stessa pianta *Corylus avellana*, stessa famiglia botanica reale Betulaceae, prodotto derivato diverso: olio estratto vs seme intero).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale).
+- **Matrice**: nuova `olio_di_nocciola` ("Olio di nocciola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Betulaceae` (stessa di `food_nocciole_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171427 --food-id=food_olio_di_nocciola_raw \
+  --name-it="Olio di nocciola" \
+  --matrix-id=olio_di_nocciola --matrix-description-it="Olio di nocciola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171427 --food-id=food_olio_di_nocciola_raw \
+  --name-it="Olio di nocciola" \
+  --matrix-id=olio_di_nocciola --matrix-description-it="Olio di nocciola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_nocciole_raw \
+  --botanical-family=Betulaceae --diet-category=plant_non_fruit --apply
+```
+
+### Tapioca, perle secche — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_tapioca_perle_raw`. FDC ID 169717 (SR Legacy, "Tapioca, pearl, dry" — pagina getfoodfacts.com dedicata e pulita). Amido estratto dalla radice di manioca (*Manihot esculenta*), nessun alimento a base di manioca già presente in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 358kcal, proteine 0,19g, grassi 0,020g, carboidrati 88,7g, fibra 0,90g, calcio 20,0mg, ferro 1,58mg, zinco 0,12mg, magnesio 1,00mg, rame 0,020mg, selenio 0,80µg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un amido puro). Sodio 1,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169717 e dataType SR Legacy.
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, Golden Set pipeline, già eseguito sul DB reale — analogia **funzionale** di categoria, "carboidrato raffinato puro con pochi micronutrienti", non botanica: il riso è Poaceae, la manioca è Euphorbiaceae, nessuna parentela reale, come già per patata dolce/patata comune in un lotto precedente).
+- **Categoria dieta**: `plant_non_fruit` (amido vegetale).
+- **Matrice**: nuova `tapioca_perle` ("Tapioca, perle secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Euphorbiaceae` (famiglia botanica REALE della manioca, non quella dell'analogia funzionale), `baseline_cooking_state=raw` (perle secche, non cotte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169717 --food-id=food_tapioca_perle_raw \
+  --name-it="Tapioca, perle secche" \
+  --matrix-id=tapioca_perle --matrix-description-it="Tapioca, perle secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169717 --food-id=food_tapioca_perle_raw \
+  --name-it="Tapioca, perle secche" \
+  --matrix-id=tapioca_perle --matrix-description-it="Tapioca, perle secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Crusca di riso, cruda — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_crusca_di_riso_raw`. FDC ID 169713 (SR Legacy, "Rice bran, crude" — pagina getfoodfacts.com dedicata e pulita). Distinta da `food_riso_integrale_raw`/`food_riso_bianco_raw` (chicco intero, già eseguiti): la crusca è lo strato esterno separato, un sottoprodotto distinto con un proprio record FDC, stessa convenzione già usata per crusca d'avena/frumento in un lotto precedente.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 316kcal, proteine 13,3g, grassi 20,9g, carboidrati 49,7g, fibra 21,0g (molto alta, coerente con una crusca concentrata), calcio 57,0mg, ferro 18,5mg, zinco 6,04mg, magnesio 781mg (alto, coerente con una crusca di cereale), rame 0,73mg, selenio 15,6µg, vitamina C 0mg esplicito, folato totale 63,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1,90µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 5,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169713 e dataType SR Legacy.
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale crudo, Golden Set pipeline, già eseguito sul DB reale — stessa pianta *Oryza sativa*, stessa famiglia botanica reale Poaceae, parte diversa della stessa pianta: crusca invece di chicco integrale).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `crusca_di_riso` ("Crusca di riso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (stessa di `food_riso_integrale_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169713 --food-id=food_crusca_di_riso_raw \
+  --name-it="Crusca di riso, cruda" \
+  --matrix-id=crusca_di_riso --matrix-description-it="Crusca di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169713 --food-id=food_crusca_di_riso_raw \
+  --name-it="Crusca di riso, cruda" \
+  --matrix-id=crusca_di_riso --matrix-description-it="Crusca di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di orzo, cruda — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_farina_di_orzo_raw`. FDC ID 2512376 (Foundation Foods, "Flour, barley" — pagina getfoodfacts.com dedicata e pulita). Distinta da `food_orzo_perlato_raw`/`food_orzo_perlato_cotto` (chicco perlato, già eseguiti): la farina è il prodotto macinato, un alimento distinto con un proprio record FDC.
+- **Nutrienti**: **10/17** — mancano energy (il record Foundation non riporta una riga diretta per il nutriente "Energy" in kcal: la pagina mostra solo cifre di pannello/etichetta derivate e fra loro discordanti, 360 vs 357 — stesso schema già visto per `food_farina_di_cocco_raw`, altra farina Foundation Foods priva di energy fra i 17), vitamin_c, folate, vitamin_b12, vitamin_k, beta_carotene, other_provitamin_a_carotenoids (nessuno di questi riportato nel record, nessuno assunto zero). Per 100g (valori presenti): proteine 8,72g, grassi 2,45g, carboidrati 77,4g, fibra 12,8g, calcio 35,6mg, ferro 3,30mg, zinco 2,14mg, magnesio 88,0mg, rame 0,39mg, selenio 13,1µg. Sodio 20,3mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2512376 e dataType Foundation Foods.
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato crudo, Golden Set pipeline, già eseguito sul DB reale — stessa pianta *Hordeum vulgare*, stessa famiglia botanica reale Poaceae, prodotto derivato diverso: farina macinata vs chicco perlato).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `farina_di_orzo` ("Farina di orzo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state` omesso (NULL — non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (stessa di `food_orzo_perlato_raw`), `baseline_cooking_state=raw` (farina cruda, non cotta), `is_fortified_folate` omesso (false — nessuna dicitura "enriched" nel nome, nessun segnale di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2512376 --food-id=food_farina_di_orzo_raw \
+  --name-it="Farina di orzo, cruda" \
+  --matrix-id=farina_di_orzo --matrix-description-it="Farina di orzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512376 --food-id=food_farina_di_orzo_raw \
+  --name-it="Farina di orzo, cruda" \
+  --matrix-id=farina_di_orzo --matrix-description-it="Farina di orzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Amido di mais (maizena), crudo — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
+
+- **food_id**: `food_amido_di_mais_raw`. FDC ID 169698 (SR Legacy, "Cornstarch" — pagina getfoodfacts.com dedicata e pulita). Distinto da `food_farina_di_mais_raw` (farina di mais integrale per polenta, già eseguita): l'amido è l'estratto puro di carboidrato, privo di crusca/germe, un prodotto distinto con un proprio record FDC, non un duplicato.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 381kcal, proteine 0,26g, grassi 0,050g, carboidrati 91,3g, fibra 0,90g, calcio 2,00mg, ferro 0,47mg, zinco 0,060mg, magnesio 3,00mg, rame 0,050mg, selenio 2,80µg, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un amido puro, privo di pigmenti). Sodio 9,00mg/100g (riferimento, non uno dei 17 tracciati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169698 e dataType SR Legacy.
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais integrale, Golden Set pipeline, già eseguita sul DB reale — stessa pianta *Zea mays*, stessa famiglia botanica reale Poaceae, prodotto derivato diverso: amido puro estratto vs farina integrale macinata).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `amido_di_mais` ("Amido di mais (maizena)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio quasi nullo, nessuna base per una categoria ossalati), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (stessa di `food_farina_di_mais_raw`), `baseline_cooking_state=raw` (polvere cruda, non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna dicitura "enriched").
+
+```
+npm run add-food -- --fdc-id=169698 --food-id=food_amido_di_mais_raw \
+  --name-it="Amido di mais (maizena), crudo" \
+  --matrix-id=amido_di_mais --matrix-description-it="Amido di mais (maizena)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169698 --food-id=food_amido_di_mais_raw \
+  --name-it="Amido di mais (maizena), crudo" \
+  --matrix-id=amido_di_mais --matrix-description-it="Amido di mais (maizena)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ## Eseguiti (archivio, ultimi 10)
 
 > **Nota (2026-10-13) sulla classificazione dieta degli alimenti qui sotto.** Dalla melanzana in giù in questa lista, sono stati inseriti con la versione di `add-food` precedente alla correzione `--diet-category`: le loro tre colonne `diet_compat_*` risultavano quindi NULL ("non classificato", escluse dai filtri vegetariano/vegano/fruttariano) finche' non e' stato eseguito `fix_diet_compat_pipeline_foods.sql` (**eseguito il 2026-10-13**: l'utente ha confermato a voce che la query di controllo non mostra piu' nessuno di loro come non classificato, senza screenshot rivisto da questa sessione). **Le zucchine, appena sotto, sono il primo alimento eseguito già con `--diet-category` incluso dall'inizio** (diet=plant_non_fruit scritto direttamente, verificato nel riepilogo di scrittura): non serve alcun fix per loro.
