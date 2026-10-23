@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Filetto di maiale, crudo — preparato 2026-10-23 dal task (trentesimo lotto)
+
+- **food_id**: `food_filetto_di_maiale_raw`. FDC ID 168249 (SR Legacy, "Pork, fresh, loin, tenderloin, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita). Taglio distinto dalla lonza (`food_lonza_di_maiale_raw`, già eseguita) e dalla pancetta/prosciutto già fatti — il filetto (tenderloin) è un taglio magro specifico, mai tentato.
+- **Nutrienti**: **17/17**. Per 100g: energia 109kcal, proteine 20,9g, grassi 2,17g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 0,98mg, zinco 1,89mg, magnesio 27,0mg, rame 0,090mg, selenio 30,8µg, vitamina C 0mg esplicito, vitamina B12 0,51µg, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone 0µg + diidrofillochinone 0µg, entrambi espliciti), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168249 e dataType SR Legacy.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stesso animale, stesso tipo di taglio magro crudo, stesso attributo `is_heme_iron` usato per quella voce).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `filetto_di_maiale` ("Filetto di maiale").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168249 --food-id=food_filetto_di_maiale_raw \
+  --name-it="Filetto di maiale, crudo" \
+  --matrix-id=filetto_di_maiale --matrix-description-it="Filetto di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168249 --food-id=food_filetto_di_maiale_raw \
+  --name-it="Filetto di maiale, crudo" \
+  --matrix-id=filetto_di_maiale --matrix-description-it="Filetto di maiale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervo, carne cruda — preparato 2026-10-23 dal task (trentesimo lotto)
 
 - **food_id**: `food_cervo_raw`. FDC ID 173855 (SR Legacy, "Game meat, deer, raw" — pagina getfoodfacts.com dedicata e pulita). Secondo cervide/selvaggina della pipeline dopo il cinghiale (rimasto ⚠ per mancanza di un FDC ID verificabile).
