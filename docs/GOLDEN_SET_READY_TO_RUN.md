@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fruttosio, cristallino — preparato 2026-10-23 dal task (ventinovesimo lotto)
+
+- **food_id**: `food_fruttosio_raw`. FDC ID 169896 (SR Legacy, "Sweeteners, tabletop, fructose, dry powder" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**. Per 100g: energia 368kcal, proteine 0g, grassi 0g, carboidrati 100g, fibra 0g, calcio 0mg esplicito, ferro 0,10mg, zinco 0mg esplicito, magnesio 0mg esplicito, rame 0,22mg, selenio 0,60µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti — profilo coerente con uno zucchero puro isolato (quasi tutti i micronutrienti a zero esplicito, solo tracce di ferro/rame/selenio residue dalla lavorazione, stesso schema già visto per `food_zucchero_bianco`). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169896 e dataType SR Legacy.
+- **Analogia usata**: `food_zucchero_bianco` (zucchero bianco granulato, già eseguito sul DB reale — stessa categoria funzionale "zucchero puro isolato", stesso precedente di `botanical_family` NULL già dichiarato per quella voce).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante vegetale puro, nessun ingrediente animale — distinto dal miele che è `egg_dairy`).
+- **Matrice**: nuova `fruttosio` ("Fruttosio, cristallino").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, zucchero isolato), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — zucchero isolato industrialmente, nessuna pianta di origine univoca, stesso motivo già dichiarato per `food_zucchero_bianco`/`food_melassa`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169896 --food-id=food_fruttosio_raw \
+  --name-it="Fruttosio, cristallino" \
+  --matrix-id=fruttosio --matrix-description-it="Fruttosio, cristallino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169896 --food-id=food_fruttosio_raw \
+  --name-it="Fruttosio, cristallino" \
+  --matrix-id=fruttosio --matrix-description-it="Fruttosio, cristallino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa di soia (shoyu) — preparato 2026-10-23 dal task (ventottesimo lotto, bonus)
 
 - **food_id**: `food_salsa_di_soia`. FDC ID 174277 (SR Legacy, "Soy sauce made from soy and wheat (shoyu)" — pagina getfoodfacts.com dedicata e pulita).
