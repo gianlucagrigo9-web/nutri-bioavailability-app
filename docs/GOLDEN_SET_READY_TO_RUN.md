@@ -64,6 +64,31 @@ npm run add-food -- --fdc-id=174481 --food-id=food_struzzo_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Lumache, crude — preparato 2026-10-23 dal task (trentaduesimo lotto)
+
+- **food_id**: `food_lumache_raw`. FDC ID 167744 (SR Legacy, "Mollusks, snail, raw" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 90,0kcal, proteine 16,1g, grassi 1,40g, carboidrati 2,00g, fibra 0g esplicito, calcio 10,0mg, ferro 3,50mg, zinco 1,00mg, magnesio 250mg, rame 0,40mg, selenio 27,4µg, vitamina C 0mg esplicito, vitamina B12 0,50µg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0,10µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167744 e dataType SR Legacy.
+- **Nota di trasparenza (Regola 6)**: la descrizione FDC "Mollusks, snail, raw" non specifica se si tratti di lumaca terrestre (*Helix*, l'escargot/lumaca da gastronomia italiana ed europea) o di una lumaca marina — nessuna classificazione taxonomica dichiarata sulla pagina. I valori riportati (90kcal, proteine 16,1g/100g) corrispondono però esattamente ai dati nutrizionali comunemente citati per l'escargot nelle fonti di settore gastronomico, il che rende questo match ragionevolmente affidabile pur senza una conferma taxonomica esplicita sulla fonte primaria — stesso livello di generalità già accettato in questa pipeline per altre categorie USDA "mixed species"/non specificate (es. vongole, cozze, platessa).
+- **Analogia usata**: `food_vongole_raw` (vongole crude, mollusco, già eseguito sul DB reale — stessa categoria funzionale "mollusco crudo", stesso attributo `is_heme_iron` usato per tutti i molluschi di questa pipeline).
+- **Categoria dieta**: `meat_fish` (mollusco, prodotto animale).
+- **Matrice**: nuova `lumache` ("Lumache").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mollusco, stesso precedente di `food_vongole_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167744 --food-id=food_lumache_raw \
+  --name-it="Lumache, crude" \
+  --matrix-id=lumache --matrix-description-it="Lumache" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167744 --food-id=food_lumache_raw \
+  --name-it="Lumache, crude" \
+  --matrix-id=lumache --matrix-description-it="Lumache" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro di anacardi, non salato — preparato 2026-10-23 dal task (trentunesimo lotto)
 
 - **food_id**: `food_burro_di_anacardi_raw`. FDC ID 170163 (SR Legacy, "Nuts, cashew butter, plain, without salt added" — pagina getfoodfacts.com dedicata e pulita). Prima crema di frutta secca di questa pipeline distinta dal seme intero (burro di mandorle/arachidi già valutati ⚠ in lotti precedenti per mancanza di un record FDC generico — questo invece ha un record SR Legacy pulito e dedicato).
