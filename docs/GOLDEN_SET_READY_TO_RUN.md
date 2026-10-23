@@ -196,6 +196,32 @@ npm run add-food -- --fdc-id=170114 --food-id=food_patate_bollite \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Germogli di fagiolo mungo, crudi — preparato 2026-10-23 dal task (ventisettesimo lotto)
+
+- **food_id**: `food_germogli_fagiolo_mungo_raw`. FDC ID 169957 (SR Legacy, "Mung beans, mature seeds, sprouted, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota terminologica**: nome scelto deliberatamente preciso ("fagiolo mungo", *Vigna radiata*) e non "germogli di soia" come spesso chiamati genericamente al dettaglio in Italia — i germogli comunemente venduti come "germogli di soia" sono quasi sempre germogli di fagiolo mungo, botanicamente distinti dalla soia vera (*Glycine max*, già coperta come semi secchi/tofu/edamame in questa coda); nessun record FDC per germogli di soia vera (*Glycine max* germogliata) trovato in questa ricerca, quindi questa voce rappresenta solo il fagiolo mungo, non un sinonimo della soia.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 30,0kcal, proteine 3,04g, grassi 0,18g, carboidrati 5,94g, fibra 1,80g, calcio 13,0mg, ferro 0,91mg, zinco 0,41mg, magnesio 21,0mg, rame 0,16mg, selenio 0,60µg, vitamina C 13,2mg, folato totale 61,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 33,0µg, beta-carotene 6,00µg, alfa-carotene 6,00µg, beta-criptoxantina 6,00µg (tutti piccoli ma reali e non nulli, coerenti con un germoglio verde). Sodio 6,00mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169957 e dataType SR Legacy.
+- **Analogia usata**: `food_chickpeas_boiled` (ceci bolliti, Golden Set originale, già eseguito sul DB reale — stessa famiglia botanica reale Fabaceae, stesso gruppo "legume").
+- **Categoria dieta**: `plant_non_fruit` (legume germogliato).
+- **Matrice**: nuova `germogli_fagiolo_mungo` ("Germogli di fagiolo mungo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, germoglio crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale del fagiolo mungo, *Vigna radiata* — stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169957 --food-id=food_germogli_fagiolo_mungo_raw \
+  --name-it="Germogli di fagiolo mungo, crudi" \
+  --matrix-id=germogli_fagiolo_mungo --matrix-description-it="Germogli di fagiolo mungo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_boiled \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169957 --food-id=food_germogli_fagiolo_mungo_raw \
+  --name-it="Germogli di fagiolo mungo, crudi" \
+  --matrix-id=germogli_fagiolo_mungo --matrix-description-it="Germogli di fagiolo mungo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_boiled \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Alga spirulina, secca — preparato 2026-10-23 dal task orario (ventiseiesimo lotto)
 
 - **food_id**: `food_alga_spirulina_raw`. FDC ID 170495 (SR Legacy, "Seaweed, spirulina, dried" — pagina getfoodfacts.com dedicata e pulita). Terza alga di questa pipeline dopo nori e wakame (quest'ultima preparata nello stesso turno, vedi sopra).
