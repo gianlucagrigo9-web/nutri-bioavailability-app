@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene, altro carotenoide provitaminico A (nessuno riportato nel record, nessuno assunto zero). Per 100g (valori presenti): energia 82,0kcal, proteine 3,30g, grassi 0,20g, carboidrati 18,6g, fibra 3,30g, calcio 60,0mg, ferro 0,70mg, zinco 0,38mg, magnesio 23,0mg, rame 0,089mg, selenio 0,80µg, vitamina C 8,00mg, vitamina B12 0µg esplicito, folato totale 26,0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169277 e dataType SR Legacy.
+- **Analogia usata**: `food_cicoria_selvatica_raw` (cicoria selvatica cruda, già eseguita sul DB reale — stessa famiglia botanica reale Asteraceae, stesso stato "crudo", ortaggio a radice/foglia della stessa famiglia).
+- **Categoria dieta**: `plant_non_fruit` (verdura/radice, nessun ingrediente animale).
+- **Matrice**: nuova `salsefrica` ("Salsefrica bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo ortaggio), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (famiglia botanica reale, *Tragopogon porrifolius*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169277 --food-id=food_salsefrica_raw \
+  --name-it="Salsefrica bianca, cruda" \
+  --matrix-id=salsefrica --matrix-description-it="Salsefrica bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169277 --food-id=food_salsefrica_raw \
+  --name-it="Salsefrica bianca, cruda" \
+  --matrix-id=salsefrica --matrix-description-it="Salsefrica bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne secche — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_castagne_secche_raw`. FDC ID 170167 (SR Legacy, "Nuts, chestnuts, european, dried, peeled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_castagne_raw` (castagne fresche crude, FDC 170575, già eseguite) e da `food_farina_di_castagne_raw` (farina, FDC 2515377, già eseguita): la castagna secca è un prodotto di conservazione distinto (disidratazione del frutto intero sbucciato), con un proprio record FDC, stessa specie *Castanea sativa* varietà europea.
