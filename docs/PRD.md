@@ -1316,7 +1316,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Cereali/paste alternative: 🟡 pasta di grano saraceno (soba), secca, cruda (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 168906 SR Legacy "Noodles, japanese, soba, dry", 12/17 nutrienti, analogia `food_grano_saraceno_tostato_raw`, diet-category=plant_non_fruit); 🟡 pasta di riso, secca, cruda (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 169742 SR Legacy "Rice noodles, dry", 17/17 nutrienti, analogia `food_riso_bianco_raw`, diet-category=plant_non_fruit); pasta di ceci, secca, cruda
     - Crusca: crusca di segale, cruda
     - Latticini: 🟡 latte scremato in polvere (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 170877 SR Legacy "Milk, dry, nonfat, regular, without added vitamin A and vitamin D", 17/17 nutrienti, analogia `food_milk_whole`, diet-category=egg_dairy)
-    - Verdura: cavolo cinese (pak choi), crudo; salsefrica bianca, cruda
+    - Verdura: 🟡 cavolo cinese (pak choi), crudo (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 2685572 Foundation Foods "Cabbage, bok choy, raw", 11/17 nutrienti, analogia `food_broccoli_raw`, diet-category=plant_non_fruit); salsefrica bianca, cruda
     - Frutta secca: castagne secche
     - A rischio dichiarato di assenza USDA: farina di semi di lino; latte di canapa
 

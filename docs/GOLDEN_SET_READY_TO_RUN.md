@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cavolo cinese (pak choi), crudo — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_cavolo_cinese_raw`. FDC ID 2685572 (Foundation Foods, "Cabbage, bok choy, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Ortaggio asiatico (*Brassica rapa* subsp. *chinensis*) ormai comune anche nella grande distribuzione italiana, mai tentato in questa pipeline — distinto da tutti gli altri cavoli/Brassicaceae già coperti (verza, cavolo nero, cavolfiore, cavolo cappuccio, broccolo, ecc.).
+- **Nutrienti**: **11/17** — mancano selenio, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A (nessuno riportato nel record Foundation Foods consultato, nessuno assunto zero). Per 100g (valori presenti): energia 17,0kcal (il pannello etichetta arrotonda a 15kcal, usato il valore della tabella nutrienti), proteine 1,02g, grassi 0,23g, carboidrati 3,51g, fibra 1,26g, calcio 61,9mg, ferro 0,44mg, zinco 0,27mg, magnesio 13,6mg, rame 0,028mg, vitamina C 30,3mg, folato totale 68,0µg (di cui 5-MTHF 50,0µg, componente del folato alimentare, non una firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2685572 e dataType Foundation Foods.
+- **Analogia usata**: `food_broccoli_raw` (broccoli crudi, Golden Set originale, già eseguito sul DB reale — stessa famiglia botanica reale Brassicaceae, stesso stato "crudo").
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessun ingrediente animale).
+- **Matrice**: nuova `cavolo_cinese` ("Cavolo cinese, pak choi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile per questa pipeline, nessun dato sull'acido ossalico specifico per questa verdura), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato nel record Foundation Foods consultato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato coerente con una verdura a foglia).
+
+```
+npm run add-food -- --fdc-id=2685572 --food-id=food_cavolo_cinese_raw \
+  --name-it="Cavolo cinese (pak choi), crudo" \
+  --matrix-id=cavolo_cinese --matrix-description-it="Cavolo cinese, pak choi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2685572 --food-id=food_cavolo_cinese_raw \
+  --name-it="Cavolo cinese (pak choi), crudo" \
+  --matrix-id=cavolo_cinese --matrix-description-it="Cavolo cinese, pak choi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Latte scremato in polvere — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_latte_scremato_polvere_raw`. FDC ID 170877 (SR Legacy, "Milk, dry, nonfat, regular, without added vitamin A and vitamin D" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_latte_evaporato_raw` (latte concentrato liquido, già preparato in un lotto precedente, non ancora eseguito) e da `food_milk_whole` (latte fresco intero liquido, Golden Set originale): il latte in polvere è un prodotto disidratato distinto, con un proprio record FDC.
