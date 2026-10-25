@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pasta di riso, secca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_pasta_di_riso_raw`. FDC ID 169742 (SR Legacy, "Rice noodles, dry" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_riso_bianco_raw`/`food_riso_integrale_raw` (chicco intero, già eseguiti): la pasta di riso è un prodotto trasformato (farina di riso + acqua, estrusa e seccata), con un proprio record FDC.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 364kcal, proteine 5,95g, grassi 0,56g, carboidrati 80,2g, fibra 1,60g, calcio 18,0mg, ferro 0,70mg, zinco 0,74mg, magnesio 12,0mg, rame 0,078mg, selenio 15,1µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 3,00µg (molto basso, nessuna firma di arricchimento — coerente con un prodotto a base di sola farina di riso non trattata), vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un prodotto bianco privo di pigmenti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169742 e dataType SR Legacy.
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, già eseguito sul DB reale — stessa pianta *Oryza sativa*, stessa famiglia botanica reale Poaceae, stesso ingrediente unico, qui sotto forma di pasta estrusa invece di chicco intero).
+- **Categoria dieta**: `plant_non_fruit` (pasta di cereali, nessun ingrediente animale).
+- **Matrice**: nuova `pasta_di_riso` ("Pasta di riso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, pasta di cereali), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (riso, stessa famiglia di `food_riso_bianco_raw`), `baseline_cooking_state=raw` (pasta secca, non cotta), `is_fortified_folate` omesso (false — folato molto basso, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169742 --food-id=food_pasta_di_riso_raw \
+  --name-it="Pasta di riso, secca, cruda" \
+  --matrix-id=pasta_di_riso --matrix-description-it="Pasta di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169742 --food-id=food_pasta_di_riso_raw \
+  --name-it="Pasta di riso, secca, cruda" \
+  --matrix-id=pasta_di_riso --matrix-description-it="Pasta di riso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pasta di grano saraceno (soba), secca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_pasta_di_grano_saraceno_raw`. FDC ID 168906 (SR Legacy, "Noodles, japanese, soba, dry" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sul match**: il soba tradizionale giapponese è tipicamente una miscela di farina di grano saraceno e farina di frumento (non grano saraceno al 100%), non esiste nessun record USDA generico per una pasta di grano saraceno puro — questa stessa composizione (farina di grano saraceno + farina di frumento) è anche quella tradizionale dei pizzoccheri della Valtellina, quindi il record rappresenta correttamente il tipo di prodotto "pasta di grano saraceno" reperibile anche in Italia, non un alimento diverso sotto mentite spoglie. Distinto da `food_farina_di_grano_saraceno_raw` (farina, non pasta) e da `food_grano_saraceno_tostato_raw` (chicco intero/kasha, non pasta), entrambi già eseguiti.
