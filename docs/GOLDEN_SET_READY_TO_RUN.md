@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte scremato in polvere — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_latte_scremato_polvere_raw`. FDC ID 170877 (SR Legacy, "Milk, dry, nonfat, regular, without added vitamin A and vitamin D" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_latte_evaporato_raw` (latte concentrato liquido, già preparato in un lotto precedente, non ancora eseguito) e da `food_milk_whole` (latte fresco intero liquido, Golden Set originale): il latte in polvere è un prodotto disidratato distinto, con un proprio record FDC.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 362kcal, proteine 36,2g, grassi 0,77g, carboidrati 52,0g, fibra 0g esplicito, calcio 1.257mg (alto, coerente con la concentrazione per disidratazione), ferro 0,32mg, zinco 4,08mg, magnesio 110mg, rame 0,041mg, selenio 27,3µg, vitamina C 6,80mg, vitamina B12 4,03µg, folato totale 50,0µg (nessuna firma di arricchimento tipo cereali — valore plausibile per un derivato del latte concentrato, stessa convenzione già accettata per `food_latte_evaporato_raw`), vitamina K 0,10µg, beta-carotene 1,00µg, alfa-carotene/beta-criptoxantina 0µg espliciti (coerente con un prodotto scremato, privo di grasso butirroso dove si concentrano i carotenoidi). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170877 e dataType SR Legacy.
+- **Analogia usata**: `food_milk_whole` (latte vaccino intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte liquido/derivato animale", stessa convenzione già usata per latte di pecora/capra/bufala, siero dolce/acido e latte evaporato in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `latte_scremato_polvere` ("Latte scremato in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`, stessa convenzione usata per `food_latte_evaporato_raw`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170877 --food-id=food_latte_scremato_polvere_raw \
+  --name-it="Latte scremato in polvere" \
+  --matrix-id=latte_scremato_polvere --matrix-description-it="Latte scremato in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170877 --food-id=food_latte_scremato_polvere_raw \
+  --name-it="Latte scremato in polvere" \
+  --matrix-id=latte_scremato_polvere --matrix-description-it="Latte scremato in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Pasta di riso, secca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_pasta_di_riso_raw`. FDC ID 169742 (SR Legacy, "Rice noodles, dry" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_riso_bianco_raw`/`food_riso_integrale_raw` (chicco intero, già eseguiti): la pasta di riso è un prodotto trasformato (farina di riso + acqua, estrusa e seccata), con un proprio record FDC.
