@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pomodori pelati, in scatola (senza sale aggiunto) — preparato 2026-10-25 dal task (trentatreesimo lotto)
+
+- **food_id**: `food_pomodori_pelati`. FDC ID 170138 (SR Legacy, "Tomatoes, red, ripe, canned, packed in tomato juice, no salt added" — pagina getfoodfacts.com dedicata e pulita). Rappresenta i pomodori pelati in scatola nel loro liquido, senza sale aggiunto (la variante "no salt added" evita la confondente di sodio, non traccata comunque fra i 17 nutrienti).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 16,0kcal, proteine 0,79g, grassi 0,25g, carboidrati 3,47g, fibra 1,90g, calcio 33,0mg, ferro 0,57mg, zinco 0,12mg, magnesio 10,0mg, rame 0,052mg, selenio 0,70µg, vitamina C 12,6mg (reale, coerente con pomodoro cotto/in scatola — più basso del pomodoro fresco per la cottura), vitamina B12 0µg esplicito, folato totale 8,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 2,90µg, beta-carotene 265µg (reale, coerente), alfa-carotene/beta-criptoxantina 0µg (usati come "altro carotenoide provitaminico A"). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170138 e dataType SR Legacy.
+- **Analogia usata**: `food_pomodori_secchi_raw` (pomodori secchi, già eseguito sul DB reale — stessa pianta *Solanum lycopersicum*, famiglia botanica reale Solanaceae; prodotto di pomodoro trasformato/cotto come i pelati, non il pomodoro fresco — stessa analogia già usata per ketchup/concentrato di pomodoro).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, ortaggio botanicamente "frutto" ma classificato come verdura per convenzione del PRD §4.9; nessun ingrediente animale).
+- **Matrice**: nuova `pomodori_pelati` ("Pomodori pelati, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto trasformato), `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto in scatola, matrice carotenoide disgregata dal calore), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170138 --food-id=food_pomodori_pelati \
+  --name-it="Pomodori pelati, in scatola (senza sale aggiunto)" \
+  --matrix-id=pomodori_pelati --matrix-description-it="Pomodori pelati, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170138 --food-id=food_pomodori_pelati \
+  --name-it="Pomodori pelati, in scatola (senza sale aggiunto)" \
+  --matrix-id=pomodori_pelati --matrix-description-it="Pomodori pelati, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Concentrato di pomodoro, doppio concentrato — preparato 2026-10-25 dal task (trentatreesimo lotto)
 
 - **food_id**: `food_concentrato_di_pomodoro`. FDC ID 170459 (SR Legacy, "Tomato products, canned, paste, without salt added (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita).
