@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Funghi cremini (champignon bruni), crudi — preparato 2026-10-25 dal task (trentaquattresimo lotto)
+
+- **food_id**: `food_funghi_cremini_raw`. FDC ID 168434 (SR Legacy, "Mushrooms, brown, italian, or crimini, raw" — pagina getfoodfacts.com dedicata e pulita; scartata deliberatamente la variante FDC 168557 "exposed to ultraviolet light, raw", stesso nome ma prodotto diverso — arricchito artificialmente in vitamina D da esposizione UV, non il fungo comune).
+- **Nutrienti**: **17/17**. Per 100g: energia 22,0kcal, proteine 2,50g, grassi 0,10g, carboidrati 4,30g, fibra 0,60g, calcio 18,0mg, ferro 0,40mg, zinco 1,10mg, magnesio 9,00mg, rame 0,50mg, selenio 26,0µg, vitamina C 0mg esplicito, vitamina B12 0,10µg, folato totale 25,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito (tutte le forme), beta-carotene 0µg esplicito, alfa-carotene/beta-criptoxantina 0µg esplicito (usati come "altro carotenoide provitaminico A" = 0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168434 e dataType SR Legacy.
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon bianchi crudi, Golden Set, già eseguiti sul DB reale — stessa specie *Agaricus bisporus*, il cremini è semplicemente la varietà bruna dello stesso champignon, analogia più diretta possibile; stesso trattamento già usato: nessuna famiglia botanica, nessun --carotenoid-matrix-state perché beta-carotene=0).
+- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
+- **Matrice**: nuova `funghi_cremini` ("Funghi cremini (champignon bruni)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — beta-carotene=0 esplicito, stessa convenzione di `food_mushroom_white_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168434 --food-id=food_funghi_cremini_raw \
+  --name-it="Funghi cremini (champignon bruni), crudi" \
+  --matrix-id=funghi_cremini --matrix-description-it="Funghi cremini (champignon bruni)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168434 --food-id=food_funghi_cremini_raw \
+  --name-it="Funghi cremini (champignon bruni), crudi" \
+  --matrix-id=funghi_cremini --matrix-description-it="Funghi cremini (champignon bruni)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Finferli (galletti), crudi — preparato 2026-10-25 dal task (trentaquattresimo lotto)
 
 - **food_id**: `food_finferli_raw`. FDC ID 168422 (SR Legacy, "Mushrooms, chanterelle, raw" — pagina getfoodfacts.com dedicata e pulita).
