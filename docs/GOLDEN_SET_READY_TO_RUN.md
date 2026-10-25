@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Piselli, in scatola, scolati (senza sale aggiunto) — preparato 2026-10-25 dal task (continuazione trentaquattresimo lotto, candidato bonus)
+
+- **food_id**: `food_piselli_in_scatola`. FDC ID 170104 (SR Legacy, "Peas, green, canned, no salt added, drained solids" — pagina getfoodfacts.com dedicata e pulita, corrispondenza esatta con l'alimento richiesto). Distinto sia dai piselli freschi crudi (`food_peas_green_raw`, FDC 170419) sia dai piselli bolliti (`food_piselli_bolliti`, FDC 170420), entrambi già eseguiti — nessuno dei due copre la forma in scatola, come nota esplicitamente la voce originale dei piselli freschi in questo stesso file.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 69,0kcal, proteine 4,42g, grassi 0,35g, carboidrati 12,6g, fibra 4,10g, calcio 20,0mg, ferro 0,95mg, zinco 0,71mg, magnesio 17,0mg, rame 0,082mg, selenio 1,70µg, vitamina C 9,60mg, vitamina B12 0µg esplicito, folato totale 44,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 21,4µg, beta-carotene 320µg (reale e alto, coerente col pisello verde), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170104 e dataType SR Legacy.
+- **Analogia usata**: `food_piselli_bolliti` (piselli verdi cotti bolliti, già eseguiti sul DB reale — stesso legume *Pisum sativum*, qui in scatola invece che bolliti a casa, stesso stato "cotto").
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `piselli_in_scatola` ("Piselli, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume), `carotenoid_matrix_state=cooked_or_disrupted` (piselli in scatola, sterilizzati a calore, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale del pisello, stessa dell'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, cotto durante la conservazione), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170104 --food-id=food_piselli_in_scatola \
+  --name-it="Piselli, in scatola, scolati (senza sale aggiunto)" \
+  --matrix-id=piselli_in_scatola --matrix-description-it="Piselli, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_piselli_bolliti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170104 --food-id=food_piselli_in_scatola \
+  --name-it="Piselli, in scatola, scolati (senza sale aggiunto)" \
+  --matrix-id=piselli_in_scatola --matrix-description-it="Piselli, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_piselli_bolliti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ananas, in scatola, nel suo succo, scolato — preparato 2026-10-25 dal task (trentaquattresimo lotto)
 
 - **food_id**: `food_ananas_in_scatola`. FDC ID 167767 (SR Legacy, "Pineapple, canned, juice pack, drained" — pagina getfoodfacts.com dedicata e pulita, corrispondenza esatta con l'alimento richiesto). Distinto dall'ananas fresco (`food_ananas_raw`, già eseguito) e dal succo d'ananas (ancora ⚠ in questa coda per mancanza di un record FDC per succo semplicemente spremuto) — qui il frutto a pezzi in scatola nel proprio succo, prodotto di conservazione diverso.
