@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ananas, in scatola, nel suo succo, scolato — preparato 2026-10-25 dal task (trentaquattresimo lotto)
+
+- **food_id**: `food_ananas_in_scatola`. FDC ID 167767 (SR Legacy, "Pineapple, canned, juice pack, drained" — pagina getfoodfacts.com dedicata e pulita, corrispondenza esatta con l'alimento richiesto). Distinto dall'ananas fresco (`food_ananas_raw`, già eseguito) e dal succo d'ananas (ancora ⚠ in questa coda per mancanza di un record FDC per succo semplicemente spremuto) — qui il frutto a pezzi in scatola nel proprio succo, prodotto di conservazione diverso.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 60,0kcal, proteine 0,51g, grassi 0,11g, carboidrati 15,6g, fibra 1,30g, calcio 16,0mg, ferro 0,28mg, zinco 0,10mg, magnesio 15,0mg, rame 0,11mg, selenio 0,40µg, vitamina C 9,40mg, vitamina B12 0µg esplicito, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0,70µg, beta-carotene 30,0µg (reale e non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti (usati come "altro carotenoide provitaminico A" = 0). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167767 e dataType SR Legacy.
+- **Analogia usata**: `food_ananas_raw` (ananas fresco, già eseguito sul DB reale — stesso frutto *Ananas comosus*, qui in scatola invece che fresco).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per i succhi di frutta non zuccherati in questa pipeline: succo di limone/arancia/mela/melograno/pompelmo rosa/mirtillo rosso tutti `plant_non_fruit`, non `fresh_fruit`, nonostante il frutto di origine fresco).
+- **Matrice**: nuova `ananas_in_scatola` ("Ananas, in scatola, nel suo succo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (ananas in scatola, sterilizzato a calore, matrice carotenoide disgregata, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Bromeliaceae` (famiglia reale dell'ananas, nota con certezza, non assunta per analogia), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione — stessa convenzione già usata per pomodori pelati/concentrato in questa coda), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167767 --food-id=food_ananas_in_scatola \
+  --name-it="Ananas, in scatola, nel suo succo, scolato" \
+  --matrix-id=ananas_in_scatola --matrix-description-it="Ananas, in scatola, nel suo succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ananas_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Bromeliaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167767 --food-id=food_ananas_in_scatola \
+  --name-it="Ananas, in scatola, nel suo succo, scolato" \
+  --matrix-id=ananas_in_scatola --matrix-description-it="Ananas, in scatola, nel suo succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ananas_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Bromeliaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mais dolce, in scatola, scolato (sciacquato) — preparato 2026-10-25 dal task (trentaquattresimo lotto)
 
 - **food_id**: `food_mais_dolce_in_scatola`. FDC ID 168397 (SR Legacy, "Corn, sweet, yellow, canned, drained solids, rinsed with tap water" — pagina getfoodfacts.com dedicata e pulita). **Deviazione dichiarata**: la variante "drained solids" semplice (senza sciacquatura) citata da altre fonti (recipal.com #2976) non riporta alcun FDC ID verificabile, solo un NBD legacy ID (11172) — stesso tipo di gap già accettato per la frutta a guscio tostata "senza sale" in lotti precedenti; usata quindi la variante "rinsed with tap water", unica con FDC ID/dataType espliciti sulla stessa pagina — lo sciacquo riduce principalmente il sodio (non tracciato fra i 17 nutrienti), non altera la matrice del chicco.
