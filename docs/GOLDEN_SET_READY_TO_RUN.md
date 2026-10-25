@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Burro di semi di girasole, non salato — preparato 2026-10-25 dal task (trentatreesimo lotto)
+
+- **food_id**: `food_burro_di_semi_di_girasole_raw`. FDC ID 170155 (SR Legacy, "Seeds, sunflower seed butter, without salt" — pagina getfoodfacts.com dedicata e pulita). Stesso filone riuscito per burro di anacardi (trentunesimo lotto), prima crema di semi oleosi di questa pipeline.
+- **Nutrienti**: **14/17**. Per 100g: energia 617kcal, proteine 17,3g, grassi 55,2g, carboidrati 23,3g, fibra 5,70g, calcio 64,0mg, ferro 4,12mg, zinco 4,89mg, magnesio 311mg, rame 1,60mg, selenio 104µg, vitamina C 2,70mg, vitamina B12 0µg esplicito, folato totale 237µg (naturale, alto — coerente coi semi oleosi), acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170155 e dataType SR Legacy.
+- **Analogia usata**: `food_semi_di_girasole_tostati` (semi di girasole tostati, già eseguiti sul DB reale — stessa pianta *Helianthus annuus*, stesso seme, crema/burro estratto invece del seme intero — stessa convenzione già usata per burro di anacardi/food_anacardi_raw).
+- **Categoria dieta**: `plant_non_fruit` (semi oleosi/derivato).
+- **Matrice**: nuova `burro_di_semi_di_girasole` ("Burro di semi di girasole").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione dei semi di girasole interi), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (famiglia reale del girasole, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170155 --food-id=food_burro_di_semi_di_girasole_raw \
+  --name-it="Burro di semi di girasole, non salato" \
+  --matrix-id=burro_di_semi_di_girasole --matrix-description-it="Burro di semi di girasole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_girasole_tostati \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170155 --food-id=food_burro_di_semi_di_girasole_raw \
+  --name-it="Burro di semi di girasole, non salato" \
+  --matrix-id=burro_di_semi_di_girasole --matrix-description-it="Burro di semi di girasole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_girasole_tostati \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pomodori pelati, in scatola (senza sale aggiunto) — preparato 2026-10-25 dal task (trentatreesimo lotto)
 
 - **food_id**: `food_pomodori_pelati`. FDC ID 170138 (SR Legacy, "Tomatoes, red, ripe, canned, packed in tomato juice, no salt added" — pagina getfoodfacts.com dedicata e pulita). Rappresenta i pomodori pelati in scatola nel loro liquido, senza sale aggiunto (la variante "no salt added" evita la confondente di sodio, non traccata comunque fra i 17 nutrienti).
