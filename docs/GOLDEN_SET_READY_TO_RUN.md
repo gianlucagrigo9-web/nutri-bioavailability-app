@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Finferli (galletti), crudi — preparato 2026-10-25 dal task (trentaquattresimo lotto)
+
+- **food_id**: `food_finferli_raw`. FDC ID 168422 (SR Legacy, "Mushrooms, chanterelle, raw" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **12/17**. Per 100g: energia 32,0kcal, proteine 1,49g, grassi 0,53g, carboidrati 6,86g, fibra 3,80g, calcio 15,0mg, ferro 3,47mg, zinco 0,71mg, magnesio 13,0mg, rame 0,35mg, selenio 2,20µg, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati sulla pagina — solo tiamina/riboflavina/niacina/acido pantotenico/B6/vitamina D elencati oltre ai folati, nessuna voce per questi): vitamina C, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168422 e dataType SR Legacy.
+- **Analogia usata**: `food_funghi_shiitake_raw` (funghi shiitake crudi, già eseguiti sul DB reale nel lotto 07 dei 275 — stessa categoria "fungo crudo", non pianta, nessuna famiglia botanica applicabile, stesso profilo di nutrienti mancanti: beta-carotene/vitamina C/B12/K/altro carotenoide assenti per entrambi).
+- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
+- **Matrice**: nuova `funghi_finferli` ("Funghi finferli (galletti)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stessa convenzione già usata per shiitake/champignon/pleurotus in questa pipeline), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168422 --food-id=food_finferli_raw \
+  --name-it="Finferli (galletti), crudi" \
+  --matrix-id=funghi_finferli --matrix-description-it="Funghi finferli (galletti)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168422 --food-id=food_finferli_raw \
+  --name-it="Finferli (galletti), crudi" \
+  --matrix-id=funghi_finferli --matrix-description-it="Funghi finferli (galletti)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Burro di semi di girasole, non salato — preparato 2026-10-25 dal task (trentatreesimo lotto)
 
 - **food_id**: `food_burro_di_semi_di_girasole_raw`. FDC ID 170155 (SR Legacy, "Seeds, sunflower seed butter, without salt" — pagina getfoodfacts.com dedicata e pulita). Stesso filone riuscito per burro di anacardi (trentunesimo lotto), prima crema di semi oleosi di questa pipeline.
