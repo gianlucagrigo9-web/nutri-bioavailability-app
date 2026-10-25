@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Concentrato di pomodoro, doppio concentrato — preparato 2026-10-25 dal task (trentatreesimo lotto)
+
+- **food_id**: `food_concentrato_di_pomodoro`. FDC ID 170459 (SR Legacy, "Tomato products, canned, paste, without salt added (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 82,0kcal, proteine 4,32g, grassi 0,47g, carboidrati 18,9g, fibra 4,10g, calcio 36,0mg, ferro 2,98mg, zinco 0,63mg, magnesio 42,0mg, rame 0,36mg, selenio 5,30µg, vitamina C 21,9mg (reale, coerente col pomodoro), vitamina B12 0µg esplicito, folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 11,4µg, beta-carotene 901µg (alto, coerente con la concentrazione del pomodoro), alfa-carotene 29,0µg/beta-criptoxantina 0µg (usati come "altro carotenoide provitaminico A"). Ferro più alto del pomodoro fresco, atteso per un prodotto concentrato (5-6x). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170459 e dataType SR Legacy.
+- **Analogia usata**: `food_pomodori_secchi_raw` (pomodori secchi, già eseguito sul DB reale — stessa pianta *Solanum lycopersicum*, famiglia botanica reale Solanaceae; prodotto di pomodoro concentrato/trasformato come il concentrato, non il pomodoro fresco — stessa analogia già usata per il ketchup).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, ortaggio botanicamente "frutto" ma classificato come verdura per convenzione del PRD §4.9; nessun ingrediente animale).
+- **Matrice**: nuova `concentrato_di_pomodoro` ("Concentrato di pomodoro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto trasformato), `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto/concentrato, matrice carotenoide disgregata dal calore — beta-carotene reale e molto alto lo conferma), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170459 --food-id=food_concentrato_di_pomodoro \
+  --name-it="Concentrato di pomodoro, doppio concentrato" \
+  --matrix-id=concentrato_di_pomodoro --matrix-description-it="Concentrato di pomodoro" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170459 --food-id=food_concentrato_di_pomodoro \
+  --name-it="Concentrato di pomodoro, doppio concentrato" \
+  --matrix-id=concentrato_di_pomodoro --matrix-description-it="Concentrato di pomodoro" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Bisonte, carne cruda — preparato 2026-10-23 dal task (trentaduesimo lotto)
 
 - **food_id**: `food_bisonte_raw`. FDC ID 173851 (SR Legacy, "Game meat, bison, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita). Nessun record generico "bison, raw" non trimmato trovato in nessuna fonte consultata: il più vicino a un generico è questo "separable lean only" — accettato come rappresentazione generica della carne, stessa convenzione già usata per agnello/vitello/lonza di maiale "lean only"/"composite of trimmed retail cuts" in questa pipeline.
