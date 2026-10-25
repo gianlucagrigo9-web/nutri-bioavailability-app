@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mais dolce, in scatola, scolato (sciacquato) — preparato 2026-10-25 dal task (trentaquattresimo lotto)
+
+- **food_id**: `food_mais_dolce_in_scatola`. FDC ID 168397 (SR Legacy, "Corn, sweet, yellow, canned, drained solids, rinsed with tap water" — pagina getfoodfacts.com dedicata e pulita). **Deviazione dichiarata**: la variante "drained solids" semplice (senza sciacquatura) citata da altre fonti (recipal.com #2976) non riporta alcun FDC ID verificabile, solo un NBD legacy ID (11172) — stesso tipo di gap già accettato per la frutta a guscio tostata "senza sale" in lotti precedenti; usata quindi la variante "rinsed with tap water", unica con FDC ID/dataType espliciti sulla stessa pagina — lo sciacquo riduce principalmente il sodio (non tracciato fra i 17 nutrienti), non altera la matrice del chicco.
+- **Nutrienti**: **12/17**. Per 100g: energia 64,0kcal, proteine 2,18g, grassi 1,43g, carboidrati 13,0g, fibra 1,70g, calcio 2,00mg, ferro 0,22mg, zinco 0,28mg, magnesio 11,0mg, rame 0,031mg, vitamina C 1,70mg, vitamina B12 0µg esplicito, folato totale 29,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). **Mancano** (non riportati sulla pagina, non assunti zero): selenio, vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_mais_dolce_cotto` (mais dolce giallo cotto bollito, già eseguito sul DB reale — stessa pianta *Zea mays*, stesso chicco di mais dolce cotto, qui in scatola invece che bollito a casa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/cereale, nessun ingrediente animale).
+- **Matrice**: nuova `mais_dolce_in_scatola` ("Mais dolce, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto trasformato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato su questa pagina, non assunto zero, a differenza del mais cotto bollito dove era reale e riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del mais, come per l'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, cotto durante la conservazione), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168397 --food-id=food_mais_dolce_in_scatola \
+  --name-it="Mais dolce, in scatola, scolato (sciacquato)" \
+  --matrix-id=mais_dolce_in_scatola --matrix-description-it="Mais dolce, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mais_dolce_cotto \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168397 --food-id=food_mais_dolce_in_scatola \
+  --name-it="Mais dolce, in scatola, scolato (sciacquato)" \
+  --matrix-id=mais_dolce_in_scatola --matrix-description-it="Mais dolce, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mais_dolce_cotto \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Funghi cremini (champignon bruni), crudi — preparato 2026-10-25 dal task (trentaquattresimo lotto)
 
 - **food_id**: `food_funghi_cremini_raw`. FDC ID 168434 (SR Legacy, "Mushrooms, brown, italian, or crimini, raw" — pagina getfoodfacts.com dedicata e pulita; scartata deliberatamente la variante FDC 168557 "exposed to ultraviolet light, raw", stesso nome ma prodotto diverso — arricchito artificialmente in vitamina D da esposizione UV, non il fungo comune).
