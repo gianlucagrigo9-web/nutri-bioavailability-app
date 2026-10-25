@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagne secche — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_castagne_secche_raw`. FDC ID 170167 (SR Legacy, "Nuts, chestnuts, european, dried, peeled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_castagne_raw` (castagne fresche crude, FDC 170575, già eseguite) e da `food_farina_di_castagne_raw` (farina, FDC 2515377, già eseguita): la castagna secca è un prodotto di conservazione distinto (disidratazione del frutto intero sbucciato), con un proprio record FDC, stessa specie *Castanea sativa* varietà europea.
+- **Nutrienti**: **12/17** — mancano fibra (la pagina mostra un valore di sintesi "0g" ma il campo "Dietary Fiber" risulta "n/a"/non dichiarato nella tabella nutrienti completa: trattato come non riportato, non zero, stessa cautela già applicata a `food_castagne_raw` in questa pipeline — che aveva lo stesso gap sulla fibra), selenio, vitamina K, beta-carotene, altro carotenoide provitaminico A (nessuno riportato nel record, nessuno assunto zero). Per 100g (valori presenti): energia 369kcal (molto più alta delle castagne fresche, coerente con la perdita d'acqua da disidratazione), proteine 5,01g, grassi 3,91g, carboidrati 78,4g, calcio 64,0mg, ferro 2,39mg, zinco 0,35mg, magnesio 74,0mg, rame 0,65mg, vitamina C 15,1mg, vitamina B12 0µg esplicito, folato totale 110µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170167 e dataType SR Legacy.
+- **Analogia usata**: `food_castagne_raw` (castagne fresche crude, già eseguite sul DB reale — stessa specie *Castanea sativa*, stessa famiglia botanica reale Fagaceae, stesso gap categorico su fibra/selenio/vitamina K/carotenoidi).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca a guscio, nessun ingrediente animale).
+- **Matrice**: nuova `castagne_secche` ("Castagne secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — per analogia diretta con `food_castagne_raw`), `carotenoid_matrix_state` omesso (NULL — per analogia diretta, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fagaceae` (stessa dell'analogia e della farina di castagne), `baseline_cooking_state=raw` (secca/disidratata, non cotta), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170167 --food-id=food_castagne_secche_raw \
+  --name-it="Castagne secche" \
+  --matrix-id=castagne_secche --matrix-description-it="Castagne secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170167 --food-id=food_castagne_secche_raw \
+  --name-it="Castagne secche" \
+  --matrix-id=castagne_secche --matrix-description-it="Castagne secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolo cinese (pak choi), crudo — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_cavolo_cinese_raw`. FDC ID 2685572 (Foundation Foods, "Cabbage, bok choy, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Ortaggio asiatico (*Brassica rapa* subsp. *chinensis*) ormai comune anche nella grande distribuzione italiana, mai tentato in questa pipeline — distinto da tutti gli altri cavoli/Brassicaceae già coperti (verza, cavolo nero, cavolfiore, cavolo cappuccio, broccolo, ecc.).
