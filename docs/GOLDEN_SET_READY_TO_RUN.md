@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pasta di grano saraceno (soba), secca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
+
+- **food_id**: `food_pasta_di_grano_saraceno_raw`. FDC ID 168906 (SR Legacy, "Noodles, japanese, soba, dry" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sul match**: il soba tradizionale giapponese è tipicamente una miscela di farina di grano saraceno e farina di frumento (non grano saraceno al 100%), non esiste nessun record USDA generico per una pasta di grano saraceno puro — questa stessa composizione (farina di grano saraceno + farina di frumento) è anche quella tradizionale dei pizzoccheri della Valtellina, quindi il record rappresenta correttamente il tipo di prodotto "pasta di grano saraceno" reperibile anche in Italia, non un alimento diverso sotto mentite spoglie. Distinto da `food_farina_di_grano_saraceno_raw` (farina, non pasta) e da `food_grano_saraceno_tostato_raw` (chicco intero/kasha, non pasta), entrambi già eseguiti.
+- **Nutrienti**: **12/17** — mancano fibra (valore "0g" presente solo in un riquadro di sintesi ma assente dalla tabella nutrienti completa e dichiarato "non declared" in etichetta: trattato come non riportato, non zero), selenio, vitamina K, beta-carotene, altro carotenoide provitaminico A (nessuno riportato nel record, nessuno assunto zero). Per 100g (valori presenti): energia 336kcal, proteine 14,4g, grassi 0,71g, carboidrati 74,6g, calcio 35,0mg, ferro 2,70mg, zinco 1,71mg, magnesio 95,0mg, rame 0,23mg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 60,0µg (nessuna firma di arricchimento esplicita separata come acido folico; valore plausibile per un cereale non trattato, non sospetto come i ~237µg della pasta arricchita USA già nel Golden Set). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168906 e dataType SR Legacy.
+- **Analogia usata**: `food_grano_saraceno_tostato_raw` (grano saraceno tostato/kasha, già eseguito sul DB reale — stessa pianta *Fagopyrum esculentum*, stessa famiglia botanica reale Polygonaceae, stesso ingrediente principale, qui sotto forma di pasta secca invece di chicco tostato).
+- **Categoria dieta**: `plant_non_fruit` (pasta di cereali, nessun ingrediente animale — anche con la quota di farina di frumento, resta un prodotto vegetale).
+- **Matrice**: nuova `pasta_di_grano_saraceno` ("Pasta di grano saraceno").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, pasta di cereali), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Polygonaceae` (grano saraceno, ingrediente principale/che definisce il prodotto, per riferimento tassonomico — non usato per la categoria dieta), `baseline_cooking_state=raw` (pasta secca, non cotta), `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato in linea con un cereale non trattato).
+
+```
+npm run add-food -- --fdc-id=168906 --food-id=food_pasta_di_grano_saraceno_raw \
+  --name-it="Pasta di grano saraceno (soba), secca, cruda" \
+  --matrix-id=pasta_di_grano_saraceno --matrix-description-it="Pasta di grano saraceno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grano_saraceno_tostato_raw \
+  --botanical-family=Polygonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168906 --food-id=food_pasta_di_grano_saraceno_raw \
+  --name-it="Pasta di grano saraceno (soba), secca, cruda" \
+  --matrix-id=pasta_di_grano_saraceno --matrix-description-it="Pasta di grano saraceno" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grano_saraceno_tostato_raw \
+  --botanical-family=Polygonaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Piselli, in scatola, scolati (senza sale aggiunto) — preparato 2026-10-25 dal task (continuazione trentaquattresimo lotto, candidato bonus)
 
 - **food_id**: `food_piselli_in_scatola`. FDC ID 170104 (SR Legacy, "Peas, green, canned, no salt added, drained solids" — pagina getfoodfacts.com dedicata e pulita, corrispondenza esatta con l'alimento richiesto). Distinto sia dai piselli freschi crudi (`food_peas_green_raw`, FDC 170419) sia dai piselli bolliti (`food_piselli_bolliti`, FDC 170420), entrambi già eseguiti — nessuno dei due copre la forma in scatola, come nota esplicitamente la voce originale dei piselli freschi in questo stesso file.
