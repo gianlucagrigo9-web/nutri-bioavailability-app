@@ -68,6 +68,34 @@ npm run add-food -- --fdc-id=169207 --food-id=food_asparagi_in_scatola \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Spinaci, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto, completamento coda)
+
+- **food_id**: `food_spinaci_in_scatola`. FDC ID 169286 (SR Legacy, "Spinach, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_spinach_raw` (crudo, Golden Set originale) e `food_spinach_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 23,0kcal, proteine 2,81g, grassi 0,50g, carboidrati 3,40g, fibra 2,40g, calcio 127mg, ferro 2,30mg, zinco 0,46mg, magnesio 76,0mg, rame 0,18mg, selenio 1,40µg, vitamina C 14,3mg, vitamina K (fillochinone) 462µg, folato totale 98,0µg, beta-carotene 5881µg (molto alto, pienamente coerente con lo spinacio); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169286 e dataType SR Legacy.
+- **Analogia usata**: `food_spinach_boiled` (spinaci bolliti, Golden Set originale, già eseguiti sul DB reale — stessa pianta, entrambi trattati a calore, più vicino alla conserva in scatola del crudo, `matrix_category_calcium=high_oxalate` e `botanical_family=Amaranthaceae` stesso precedente).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `spinaci_in_scatola` ("Spinaci, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=high_oxalate` (stesso precedente di `food_spinach_raw`/`food_spinach_boiled` — foglia ricca di oxalati, nessun motivo per cui la conservazione in scatola lo cambi), `carotenoid_matrix_state=cooked_or_disrupted` (spinaci in scatola, sterilizzati a calore, matrice carotenoide disgregata, beta-carotene molto alto e reale, stesso precedente del bollito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia reale dello spinacio, nota con certezza, stesso precedente di `food_spinach_raw`/`food_spinach_boiled`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169286 --food-id=food_spinaci_in_scatola \
+  --name-it="Spinaci, in scatola, sgocciolati" \
+  --matrix-id=spinaci_in_scatola --matrix-description-it="Spinaci, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_spinach_boiled \
+  --matrix-category-calcium=high_oxalate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169286 --food-id=food_spinaci_in_scatola \
+  --name-it="Spinaci, in scatola, sgocciolati" \
+  --matrix-id=spinaci_in_scatola --matrix-description-it="Spinaci, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_spinach_boiled \
+  --matrix-category-calcium=high_oxalate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
