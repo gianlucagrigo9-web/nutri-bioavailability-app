@@ -96,6 +96,32 @@ npm run add-food -- --fdc-id=169286 --food-id=food_spinaci_in_scatola \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Pollo, in scatola, con brodo — preparato 2026-10-26 dal task (quarantunesimo lotto, completamento coda)
+
+- **food_id**: `food_pollo_in_scatola`. FDC ID 171099 (SR Legacy, "Chicken, canned, meat only, with broth" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: la pagina non cita nessuna variante "no broth"/sgocciolata con un FDC ID diverso — solo questa variante "with broth" risulta verificabile; non un mismatch, il brodo è una caratteristica tipica del pollo in scatola (conservato nel proprio liquido), non un additivo nascosto. Distinto da `food_petto_di_pollo_raw` e `food_coscia_di_pollo_cotta` (già eseguiti) — FDC ID diverso, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 165kcal, proteine 21,8g, grassi 7,95g, carboidrati 0g, fibra 0g, calcio 14,0mg, ferro 1,58mg, zinco 1,41mg, magnesio 12,0mg, rame 0,046mg, selenio 15,8µg, vitamina C 2,00mg, vitamina K (fillochinone) 1,80µg, folato totale 4,00µg, vitamina B12 0,29µg (tutti reali e coerenti con carne di pollo); acido folico, beta-carotene, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un prodotto animale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171099 e dataType SR Legacy.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, già eseguita sul DB reale — stessa specie *Gallus gallus*, entrambe carne cotta/trattata a calore, più vicino alla conserva in scatola del crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (pollame).
+- **Matrice**: nuova `pollo_in_scatola` ("Pollo, in scatola").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171099 --food-id=food_pollo_in_scatola \
+  --name-it="Pollo, in scatola, con brodo" \
+  --matrix-id=pollo_in_scatola --matrix-description-it="Pollo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171099 --food-id=food_pollo_in_scatola \
+  --name-it="Pollo, in scatola, con brodo" \
+  --matrix-id=pollo_in_scatola --matrix-description-it="Pollo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
