@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Broccoli, cotti (bolliti, con sale — deviazione dichiarata) — preparato 2026-10-26 dal task (quarantacinquesimo lotto, bonus)
+
+- **food_id**: `food_broccoli_cotto`. FDC ID 168510 (SR Legacy, "Broccoli, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Gap genuino scoperto durante l'inventario di questo lotto**: `food_broccoli_raw` è nel Golden Set originale (30 alimenti) ma nessuna variante cotta è mai stata preparata in tutta la pipeline — il broccolo è l'ortaggio cotto più comune nella dieta italiana a non avere ancora una riga propria. **Deviazione dichiarata**: la variante "without salt" non ha un record a fonte singola verificabile — l'unica pagina trovata (triagemethod.com) dichiara esplicitamente di mescolare USDA SR Legacy e FSANZ AFCD nutriente per nutriente (es. proteine da AFCD, grassi da SR, selenio 0µg da AFCD contro 1,60µg SR della variante con sale) senza un FDC ID citato — stesso tipo di gap già incontrato per passata di pomodoro/succo d'uva/taccole cotte in questa pipeline. Usata quindi la variante "with salt", stessa deviazione già validata più volte in questa coda (patate cotte `food_patate_bollite`, frutta a guscio tostata con sale): il sale nell'acqua di cottura altera il sodio (non uno dei 17 nutrienti tracciati), non la matrice vitaminico-minerale del vegetale stesso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 35,0kcal, proteine 2,38g, grassi 0,41g, carboidrati 7,18g, fibra 3,30g, calcio 40,0mg, ferro 0,67mg, zinco 0,45mg, magnesio 21,0mg, rame 0,061mg, selenio 1,60µg, vitamina C 64,9mg, vitamina K (fillochinone) 141µg, folato totale 108µg, beta-carotene 929µg; alfa-carotene e beta-criptoxantina esplicitamente riportati come zero (coerente con un ortaggio verde, non arancione/rosso); vitamina B12 e acido folico esplicitamente riportati come zero (nessuna firma di arricchimento). Sodio 262mg/100g — nettamente più alto del crudo, coerente con il sale aggiunto in cottura (non uno dei 17 nutrienti tracciati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168510 e dataType SR Legacy.
+- **Analogia usata**: `food_broccoli_raw` (broccoli crudi, Golden Set originale, già eseguiti — stessa pianta *Brassica oleracea*, stesso ortaggio, qui cotto invece di crudo).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio, nessun ingrediente animale).
+- **Matrice**: nuova `broccoli_cotto` ("Broccoli, cotti, bolliti").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile a questa cottura, stesso trattamento del crudo originale), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi reali presenti e stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa famiglia di `food_broccoli_raw`), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168510 --food-id=food_broccoli_cotto \
+  --name-it="Broccoli, cotti, bolliti (con sale)" \
+  --matrix-id=broccoli_cotto --matrix-description-it="Broccoli, cotti, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168510 --food-id=food_broccoli_cotto \
+  --name-it="Broccoli, cotti, bolliti (con sale)" \
+  --matrix-id=broccoli_cotto --matrix-description-it="Broccoli, cotti, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mais dolce, crudo — preparato 2026-10-26 dal task (quarantacinquesimo lotto, bonus)
 
 - **food_id**: `food_mais_dolce_raw`. FDC ID 169998 (SR Legacy, "Corn, sweet, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Candidato bonus scoperto cercando una sostituzione dopo due ⚠ consecutivi (taccole cotte, palamita): il chicco di mais dolce era già coperto cotto/bollito e in scatola, ma non ancora crudo — gap genuino scoperto durante il lavoro di questo turno.
