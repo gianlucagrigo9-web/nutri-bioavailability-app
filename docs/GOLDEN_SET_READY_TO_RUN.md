@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ostriche, in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
+
+- **food_id**: `food_ostriche_in_scatola`. FDC ID 171981 (SR Legacy, "Mollusks, oyster, eastern, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_ostriche_raw` (FDC 175172, crudo, già eseguito) e `food_ostriche_cotte` (FDC 175173, cotto a calore secco, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante (la vitamina B12 non compariva nella prima lettura automatica della tabella per un troncamento della pagina, verificata con una seconda query dedicata: 19,1µg/100g, presente). Per 100g: energia 68,0kcal, proteine 7,06g, grassi 2,47g, carboidrati 3,91g, fibra 0g, calcio 45,0mg, ferro 6,70mg, zinco 91,0mg (molto alto ma coerente con l'ostrica, il mollusco con il contenuto di zinco più alto in questa pipeline — stesso ordine di grandezza riportato per il crudo/cotto già eseguiti), magnesio 54,0mg, rame 4,46mg, selenio 35,8µg, vitamina C 5,00mg, vitamina K (fillochinone) 0,10µg, folato totale 9,00µg, vitamina B12 19,1µg (molto alta, coerente con l'ostrica); acido folico, beta-carotene, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171981 e dataType SR Legacy.
+- **Analogia usata**: `food_ostriche_cotte` (ostriche cotte a calore secco, già eseguite sul DB reale — stessa specie *Crassostrea virginica*, entrambe trattate a calore, più vicino alla conserva in scatola del crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `ostriche_in_scatola` ("Ostriche, in scatola").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mollusco, stesso precedente di `food_ostriche_cotte`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171981 --food-id=food_ostriche_in_scatola \
+  --name-it="Ostriche, in scatola" \
+  --matrix-id=ostriche_in_scatola --matrix-description-it="Ostriche, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171981 --food-id=food_ostriche_in_scatola \
+  --name-it="Ostriche, in scatola" \
+  --matrix-id=ostriche_in_scatola --matrix-description-it="Ostriche, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Tacchino, in scatola, con brodo — preparato 2026-10-26 dal task (quarantaduesimo lotto)
 
 - **food_id**: `food_tacchino_in_scatola`. FDC ID 171101 (SR Legacy, "Turkey, canned, meat only, with broth" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, stesso schema già visto per il pollo in scatola nello stesso lotto). Distinto da `food_petto_di_tacchino_raw`/`food_petto_di_tacchino_cotto` (già eseguiti) — FDC ID diverso, nessun doppione mascherato.
