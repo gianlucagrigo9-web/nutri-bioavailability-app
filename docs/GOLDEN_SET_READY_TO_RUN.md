@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Tonno bianco (alalunga), in scatola, al naturale (acqua), sgocciolato — preparato 2026-10-26 dal task (quarantaquattresimo lotto, bonus)
+
+- **food_id**: `food_tonno_bianco_in_scatola_acqua`. FDC ID 171988 (SR Legacy, "Fish, tuna, white, canned in water, without salt, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Bonus scoperto durante la ricerca su acciughe/sgombro sott'olio** (filone pesce conservato): specie *Thunnus alalunga* (tonno bianco/alalunga), DISTINTA da `food_tonno_in_scatola_acqua` già nel DB (FDC 171986, "tuna, **light**" — specie diverse, tipicamente *Katsuwonus pelamis*/*Thunnus albacares* — nessun doppione mascherato) e da `food_tonno_in_scatola_olio_raw` (FDC 174227, tonno "light" sott'olio). Mai tentato il tonno bianco separatamente in questa pipeline.
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi provitaminici A (alfa-carotene + beta-criptoxantina), non riportati dalla fonte consultata — stesso identico gap già visto per `food_tonno_in_scatola_acqua` (tonno "light"), coerente fra le due varianti dello stesso prodotto conservato. Per 100g: energia 128kcal, proteine 23,6g, grassi 2,97g, carboidrati 0g, fibra 0g, calcio 14,0mg, ferro 0,97mg, zinco 0,48mg, magnesio 33,0mg, rame 0,039mg, selenio 65,7µg, vitamina B12 1,17µg, folato totale 2,00µg; vitamina C e acido folico esplicitamente riportati come zero. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171988 e dataType SR Legacy.
+- **Analogia usata**: `food_tonno_in_scatola_acqua` (tonno "light" in scatola al naturale, già eseguito sul DB reale — stessa categoria funzionale "tonno in scatola al naturale in acqua", stesso precedente di `baseline_cooking_state=canned` e `is_heme_iron=true`, stesso identico gap nutrienti).
+- **Categoria dieta**: `meat_fish` (pesce conservato, nessun ingrediente vegetale/lattiero).
+- **Matrice**: nuova `tonno_bianco_in_scatola_acqua` ("Tonno bianco (alalunga), in scatola, al naturale").
+- **Attributi**: `is_heme_iron=true` (pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned` (stesso precedente di `food_tonno_in_scatola_acqua`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171988 --food-id=food_tonno_bianco_in_scatola_acqua \
+  --name-it="Tonno bianco (alalunga), in scatola, al naturale, sgocciolato" \
+  --matrix-id=tonno_bianco_in_scatola_acqua --matrix-description-it="Tonno bianco (alalunga), in scatola, al naturale" \
+  --baseline-cooking-state=canned --analogy-food-id=food_tonno_in_scatola_acqua \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171988 --food-id=food_tonno_bianco_in_scatola_acqua \
+  --name-it="Tonno bianco (alalunga), in scatola, al naturale, sgocciolato" \
+  --matrix-id=tonno_bianco_in_scatola_acqua --matrix-description-it="Tonno bianco (alalunga), in scatola, al naturale" \
+  --baseline-cooking-state=canned --analogy-food-id=food_tonno_in_scatola_acqua \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Acciughe, sott'olio, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantaquattresimo lotto)
 
 - **food_id**: `food_acciughe_sott_olio`. FDC ID 174183 (SR Legacy, "Fish, anchovy, european, canned in oil, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_acciughe_raw` già nel DB (FDC 174182, crude, non conservate). **Nota sulla voce di coda originale**: pensata inizialmente come "acciughe, sotto sale" (conservazione tradizionale a secco), ma nessuna fonte consultata riporta un record USDA distinto per quel metodo — pivotata su "sott'olio", che ha invece un record SR Legacy dedicato e pulito.
