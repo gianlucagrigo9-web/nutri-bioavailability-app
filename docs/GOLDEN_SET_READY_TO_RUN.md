@@ -92,6 +92,30 @@ npm run add-food -- --fdc-id=167959 --food-id=food_popcorn_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Cioccolato al latte — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_cioccolato_al_latte_raw`. FDC ID 167587 (SR Legacy, "Candies, milk chocolate" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 535kcal, proteine 7,65g, grassi 29,7g, carboidrati 59,4g, fibra 3,40g, calcio 189mg, ferro 2,35mg, zinco 2,30mg, magnesio 63,0mg, rame 0,49mg, selenio 4,50µg, vitamina C 0mg esplicito, vitamina B12 0,75µg (reale, coerente col latte presente), folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 5,70µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167587 e dataType SR Legacy. **Nota di trasparenza sulla categoria dieta**: il cioccolato al latte contiene latte per definizione di prodotto (standard di identità), non un ingrediente opzionale/variabile da marca a marca — a differenza del cioccolato fondente (che può contenere latte come "può contenere" opzionale) e della margarina (già scartati o segnalati ⚠ per questo motivo in lotti precedenti), qui non c'è ambiguità: la vitamina B12 reale non nulla (0,75µg) confirma la presenza di latte, coerente con `egg_dairy`.
+- **Analogia usata**: `food_latte_condensato_raw` (latte condensato zuccherato, già eseguito sul DB reale — stessa categoria funzionale "prodotto dolce industriale a base di latte con zucchero aggiunto").
+- **Categoria dieta**: `egg_dairy` (contiene latte, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `cioccolato_al_latte` ("Cioccolato al latte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia con `food_latte_condensato_raw`, stessa convenzione dei derivati del latte in questa pipeline), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito latte+cacao, nessuna famiglia botanica singola applicabile, stesso trattamento già dato alla maionese), `baseline_cooking_state=raw` (prodotto manufatto, nessuna cottura domestica), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167587 --food-id=food_cioccolato_al_latte_raw \
+  --name-it="Cioccolato al latte" \
+  --matrix-id=cioccolato_al_latte --matrix-description-it="Cioccolato al latte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_condensato_raw \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=167587 --food-id=food_cioccolato_al_latte_raw \
+  --name-it="Cioccolato al latte" \
+  --matrix-id=cioccolato_al_latte --matrix-description-it="Cioccolato al latte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_condensato_raw \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
