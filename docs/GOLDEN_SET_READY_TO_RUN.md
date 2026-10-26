@@ -66,6 +66,32 @@ npm run add-food -- --fdc-id=174258 --food-id=food_noodles_fagiolo_mungo_raw \
   --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Popcorn, soffiato ad aria, non salato — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_popcorn_raw`. FDC ID 167959 (SR Legacy, "Snacks, popcorn, air-popped" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 387kcal, proteine 12,9g, grassi 4,54g, carboidrati 77,8g, fibra 14,5g, calcio 7,00mg, ferro 3,19mg, zinco 3,08mg, magnesio 144mg, rame 0,26mg, selenio 0µg esplicito, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 31,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 1,20µg, beta-carotene 89,0µg (reale e non nullo) e alfa-carotene 58,0µg (reale e non nullo, usato come "altro carotenoide provitaminico A"), beta-criptoxantina 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167959 e dataType SR Legacy.
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais integrale per polenta, già eseguita sul DB reale — stessa pianta *Zea mays*, stessa famiglia botanica reale Poaceae).
+- **Categoria dieta**: `plant_non_fruit` (mais soffiato ad aria, senza sale/burro/olio aggiunti — "air-popped" nel nome del record esclude l'uso di olio/burro, nessun ingrediente animale).
+- **Matrice**: nuova `popcorn` ("Popcorn").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio basso, nessuna base per una categoria ossalati), `carotenoid_matrix_state=cooked_or_disrupted` (il mais viene riscaldato e scoppiato durante la produzione — processo termico che disgrega la matrice cellulare, stessa logica già applicata al mais dolce in scatola/ketchup in lotti precedenti — beta-carotene/alfa-carotene reali e non nulli lo confermano), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale, stessa di `food_farina_di_mais_raw`), `baseline_cooking_state=popped` (stato specifico di preparazione — scoppiato a secco, non bollito/arrostito), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167959 --food-id=food_popcorn_raw \
+  --name-it="Popcorn, soffiato ad aria, non salato" \
+  --matrix-id=popcorn --matrix-description-it="Popcorn" \
+  --baseline-cooking-state=popped --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167959 --food-id=food_popcorn_raw \
+  --name-it="Popcorn, soffiato ad aria, non salato" \
+  --matrix-id=popcorn --matrix-description-it="Popcorn" \
+  --baseline-cooking-state=popped --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
