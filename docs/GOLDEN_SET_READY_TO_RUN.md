@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Latte in polvere intero, con vitamina D aggiunta — preparato 2026-10-26 dal task (trentaseiesimo lotto, apre il lotto)
+
+- **food_id**: `food_latte_polvere_intero_raw`. FDC ID 170876 (SR Legacy, "Milk, dry, whole, with added vitamin D" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_latte_scremato_polvere_raw` (latte scremato in polvere, già preparato in un lotto precedente, non ancora eseguito): il latte intero in polvere è un prodotto diverso (grasso butirroso presente, calcio/carotenoidi coerenti con un derivato NON scremato).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 496kcal, proteine 26,3g, grassi 26,7g, carboidrati 38,4g, fibra 0g esplicito, calcio 912mg (alto, coerente con la concentrazione per disidratazione, come già osservato per il latte scremato in polvere), ferro 0,47mg, zinco 3,34mg, magnesio 85,0mg, rame 0,080mg, selenio 16,3µg, vitamina C 8,60mg, vitamina B12 3,25µg, folato totale 37,0µg (nessuna firma di arricchimento tipo cereali — acido folico 0µg esplicito, stessa convenzione già accettata per gli altri derivati del latte concentrato/disidratato in questa pipeline), vitamina K 2,20µg, beta-carotene 55,0µg (reale e non nullo, coerente con il grasso butirroso presente — a differenza del latte SCREMATO in polvere dove i carotenoidi erano quasi nulli), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170876 e dataType SR Legacy. **Nota sulla vitamina D aggiunta**: come già per `food_latte_evaporato_raw` e per il latte fresco del Golden Set originale (`food_milk_whole`), la vitamina D aggiunta è pratica standard anche fuori dagli USA per il latte, non la stessa firma di arricchimento su acido folico/ferro già scartata per pane/pasta in questa coda.
+- **Analogia usata**: `food_milk_whole` (latte vaccino fresco intero, Golden Set originale, già eseguito sul DB reale — stessa categoria "latte vaccino", stessa convenzione già usata per `food_latte_evaporato_raw` e `food_latte_condensato_raw`, entrambi derivati concentrati/disidratati del medesimo latte).
+- **Categoria dieta**: `egg_dairy` (derivato del latte vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `latte_in_polvere_intero` ("Latte in polvere intero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=medium_oxalate` (per analogia diretta con `food_milk_whole`, stessa convenzione già usata per `food_latte_evaporato_raw`/`food_latte_condensato_raw`/`food_latte_scremato_polvere_raw`), `carotenoid_matrix_state` omesso (NULL — non applicabile, alimento animale, stesso trattamento già dato agli altri derivati del latte nonostante il beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, solo vitamina D aggiunta come il latte fresco).
+
+```
+npm run add-food -- --fdc-id=170876 --food-id=food_latte_polvere_intero_raw \
+  --name-it="Latte in polvere intero, con vitamina D aggiunta" \
+  --matrix-id=latte_in_polvere_intero --matrix-description-it="Latte in polvere intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170876 --food-id=food_latte_polvere_intero_raw \
+  --name-it="Latte in polvere intero, con vitamina D aggiunta" \
+  --matrix-id=latte_in_polvere_intero --matrix-description-it="Latte in polvere intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
