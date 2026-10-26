@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Salmone rosa, in scatola, sgocciolato, senza pelle e lische — preparato 2026-10-26 dal task (quarantaquattresimo lotto, bonus)
+
+- **food_id**: `food_salmone_rosa_in_scatola`. FDC ID 173724 (SR Legacy, "Fish, Salmon, pink, canned, drained solids, without skin and bones" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Bonus scoperto nello stesso filone "specie distinta già tracciata da USDA" del tonno bianco sopra**: specie *Oncorhynchus gorbuscha* (salmone rosa/pink), DISTINTA da `food_salmone_in_scatola` già nel DB (FDC 175135, salmone "chum", *Oncorhynchus keta*, con lische) — specie diversa E preparazione diversa (senza pelle/lische vs con lische), nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 136kcal, proteine 24,6g, grassi 4,21g, carboidrati 0g, fibra 0g, calcio 60,0mg, ferro 0,57mg, zinco 0,65mg, magnesio 24,0mg, rame 0,077mg, selenio 39,6µg, vitamina B12 4,96µg, vitamina K (fillochinone) 0,10µg, folato totale 4,00µg; vitamina C, acido folico e i tre carotenoidi tutti esplicitamente riportati come zero (coerente con un pesce conservato senza pelle, nessun pigmento vegetale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173724 e dataType SR Legacy.
+- **Analogia usata**: `food_salmone_in_scatola` (salmone chum in scatola con lische, già eseguito sul DB reale — stessa categoria funzionale "pesce conservato in scatola", stesso precedente di `baseline_cooking_state=canned` e `is_heme_iron=true`, specie diversa dichiarata esplicitamente).
+- **Categoria dieta**: `meat_fish` (pesce conservato, nessun ingrediente vegetale/lattiero).
+- **Matrice**: nuova `salmone_rosa_in_scatola` ("Salmone rosa, in scatola, senza pelle e lische").
+- **Attributi**: `is_heme_iron=true` (pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi comunque 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned` (stesso precedente di `food_salmone_in_scatola`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173724 --food-id=food_salmone_rosa_in_scatola \
+  --name-it="Salmone rosa, in scatola, sgocciolato, senza pelle e lische" \
+  --matrix-id=salmone_rosa_in_scatola --matrix-description-it="Salmone rosa, in scatola, senza pelle e lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173724 --food-id=food_salmone_rosa_in_scatola \
+  --name-it="Salmone rosa, in scatola, sgocciolato, senza pelle e lische" \
+  --matrix-id=salmone_rosa_in_scatola --matrix-description-it="Salmone rosa, in scatola, senza pelle e lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Sardine del Pacifico, in scatola con salsa di pomodoro, sgocciolate con lische — preparato 2026-10-26 dal task (quarantaquattresimo lotto, bonus)
+
+- **food_id**: `food_sardine_pacifico_in_scatola_pomodoro`. FDC ID 175140 (SR Legacy, "Fish, sardine, Pacific, canned in tomato sauce, drained solids with bone" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Secondo bonus nello stesso filone**: specie *Sardinops sagax* (sardina del Pacifico), DISTINTA da `food_sardine_in_scatola_olio` già nel DB (FDC 175139, sardina Atlantica *Sardina pilchardus*, sott'olio) — specie diversa E metodo di conservazione diverso (salsa di pomodoro vs olio), nessun doppione mascherato. Prodotto composito ma standard/mono-ricetta (pesce + salsa di pomodoro), stessa convenzione già accettata per ketchup/maionese/rafano preparato in questa pipeline.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 185kcal, proteine 20,9g, grassi 10,4g, carboidrati 0,54g, fibra 0,10g, calcio 240mg, ferro 2,30mg, zinco 1,40mg, magnesio 34,0mg, rame 0,27mg, selenio 40,6µg, vitamina C 1,00mg, vitamina B12 9,00µg, vitamina K (fillochinone) 0,40µg, folato totale 24,0µg, beta-carotene 26,0µg (reale, dalla salsa di pomodoro); acido folico, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175140 e dataType SR Legacy.
+- **Analogia usata**: `food_sardine_in_scatola_olio` (sardine Atlantiche in scatola sott'olio, già eseguite sul DB reale — stessa categoria funzionale "pesce azzurro in scatola con lische edibili, sgocciolato", specie e metodo di conservazione diversi dichiarati esplicitamente).
+- **Categoria dieta**: `meat_fish` (pesce conservato con salsa di pomodoro, nessun ingrediente lattiero/uovo).
+- **Matrice**: nuova `sardine_pacifico_in_scatola_pomodoro` ("Sardine del Pacifico, in scatola con salsa di pomodoro, con lische").
+- **Attributi**: `is_heme_iron=true` (pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale con lische; stesso trattamento già usato per sardine sott'olio), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un prodotto a base di pesce nonostante il beta-carotene non nullo dalla salsa di pomodoro, stesso precedente già usato per formaggi con beta-carotene residuo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto a base animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175140 --food-id=food_sardine_pacifico_in_scatola_pomodoro \
+  --name-it="Sardine del Pacifico, in scatola con salsa di pomodoro, sgocciolate con lische" \
+  --matrix-id=sardine_pacifico_in_scatola_pomodoro --matrix-description-it="Sardine del Pacifico, in scatola con salsa di pomodoro, con lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_sardine_in_scatola_olio \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175140 --food-id=food_sardine_pacifico_in_scatola_pomodoro \
+  --name-it="Sardine del Pacifico, in scatola con salsa di pomodoro, sgocciolate con lische" \
+  --matrix-id=sardine_pacifico_in_scatola_pomodoro --matrix-description-it="Sardine del Pacifico, in scatola con salsa di pomodoro, con lische" \
+  --baseline-cooking-state=canned --analogy-food-id=food_sardine_in_scatola_olio \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Tonno bianco (alalunga), in scatola, al naturale (acqua), sgocciolato — preparato 2026-10-26 dal task (quarantaquattresimo lotto, bonus)
 
 - **food_id**: `food_tonno_bianco_in_scatola_acqua`. FDC ID 171988 (SR Legacy, "Fish, tuna, white, canned in water, without salt, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Bonus scoperto durante la ricerca su acciughe/sgombro sott'olio** (filone pesce conservato): specie *Thunnus alalunga* (tonno bianco/alalunga), DISTINTA da `food_tonno_in_scatola_acqua` già nel DB (FDC 171986, "tuna, **light**" — specie diverse, tipicamente *Katsuwonus pelamis*/*Thunnus albacares* — nessun doppione mascherato) e da `food_tonno_in_scatola_olio_raw` (FDC 174227, tonno "light" sott'olio). Mai tentato il tonno bianco separatamente in questa pipeline.
