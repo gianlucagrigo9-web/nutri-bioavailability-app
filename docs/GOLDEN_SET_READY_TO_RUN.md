@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 25,0kcal, proteine 0,64g, grassi 0,19g, carboidrati 5,54g, fibra 1,50g, calcio 25,0mg, ferro 0,64mg, zinco 0,26mg, magnesio 8,00mg, rame 0,10mg, selenio 0,40µg, vitamina C 2,70mg, vitamina K (fillochinone) 9,80µg, folato totale 9,00µg, beta-carotene 5331µg e alfa-carotene 2743µg (entrambi molto alti, pienamente coerenti con la carota, somma carotenoidi in `other_provitamin_a_carotenoids_mcg` insieme alla beta-criptoxantina); acido folico, vitamina B12 e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170396 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale — stesso ortaggio, entrambi trattati a calore, più vicino alla conserva in scatola del crudo, `carotenoid_matrix_state=cooked_or_disrupted` e `botanical_family=Apiaceae` stesso precedente).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `carote_in_scatola` ("Carote, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_carrots_raw`/`food_carrots_boiled`), `carotenoid_matrix_state=cooked_or_disrupted` (carote in scatola, sterilizzate a calore, matrice carotenoide disgregata, carotenoidi molto alti e reali, stesso precedente del bollito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (famiglia reale della carota, nota con certezza, stesso precedente di `food_carrots_raw`/`food_carrots_boiled`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170396 --food-id=food_carote_in_scatola \
+  --name-it="Carote, in scatola, sgocciolate" \
+  --matrix-id=carote_in_scatola --matrix-description-it="Carote, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170396 --food-id=food_carote_in_scatola \
+  --name-it="Carote, in scatola, sgocciolate" \
+  --matrix-id=carote_in_scatola --matrix-description-it="Carote, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Funghi champignon, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_funghi_champignon_in_scatola`. FDC ID 169254 (SR Legacy, "Mushrooms, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_mushroom_white_raw` (crudo) e `food_funghi_champignon_cotti` (FDC 169252, bollito, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
