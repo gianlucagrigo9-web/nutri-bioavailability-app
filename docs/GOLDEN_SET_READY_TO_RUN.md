@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Germogli di bambù, crudi — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_germogli_di_bambu_raw`. FDC ID 169210 (SR Legacy, "Bamboo shoots, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Ortaggio esotico mai tentato in questa pipeline, famiglia botanica reale Poaceae (sottofamiglia Bambusoideae, stessa famiglia di riso/mais/avena/orzo/segale/sorgo/miglio già eseguiti, ma parte della pianta completamente diversa — germoglio, non chicco).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 27,0kcal, proteine 2,60g, grassi 0,30g, carboidrati 5,20g, fibra 2,20g, calcio 13,0mg, ferro 0,50mg, zinco 1,10mg, magnesio 3,00mg, rame 0,19mg, selenio 0,80µg, vitamina C 4,00mg, folato totale 7,00µg, beta-carotene 12,0µg (reale e non nullo, coerente con un germoglio vegetale crudo); vitamina K, acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169210 e dataType SR Legacy.
+- **Analogia usata**: `food_germogli_fagiolo_mungo_raw` (germogli di fagiolo mungo, già eseguiti sul DB reale — analogia funzionale "germoglio/vegetale appena spuntato mangiato crudo" con lo stesso precedente di `carotenoid_matrix_state=raw_intact` e carotenoide reale basso ma non nullo; famiglia botanica reale diversa, Poaceae non Fabaceae, dichiarata separatamente e non derivata dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `germogli_di_bambu` ("Germogli di bambù").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio basso, nessun dato specifico sull'acido ossalico per questo ortaggio), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, germoglio crudo non cotto/non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale, sottofamiglia Bambusoideae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale dell'ortaggio).
+
+```
+npm run add-food -- --fdc-id=169210 --food-id=food_germogli_di_bambu_raw \
+  --name-it="Germogli di bambù, crudi" \
+  --matrix-id=germogli_di_bambu --matrix-description-it="Germogli di bambù" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169210 --food-id=food_germogli_di_bambu_raw \
+  --name-it="Germogli di bambù, crudi" \
+  --matrix-id=germogli_di_bambu --matrix-description-it="Germogli di bambù" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Gombo (okra), crudo — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_gombo_raw`. FDC ID 169260 (SR Legacy, "Okra, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Ortaggio mai tentato in questa pipeline, famiglia botanica Malvaceae (*Abelmoschus esculentus*), nessun'altra Malvaceae ancora eseguita.
