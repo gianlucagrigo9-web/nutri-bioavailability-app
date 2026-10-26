@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Feijoa, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_feijoa_raw`. FDC ID 168176 (SR Legacy, "Feijoa, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto esotico mai tentato in questa pipeline, famiglia botanica reale Myrtaceae — stessa famiglia della guava già eseguita.
+- **Nutrienti**: **16/17** — manca solo il selenio (non presente nel record, non assunto zero). Per 100g: energia 61,0kcal, proteine 0,71g, grassi 0,42g, carboidrati 15,2g, fibra 6,40g, calcio 17,0mg, ferro 0,14mg, zinco 0,060mg, magnesio 9,00mg, rame 0,036mg, vitamina C 32,9mg, vitamina K 3,50µg, folato totale 23,0µg, beta-carotene 2,00µg e beta-criptoxantina 3,00µg (entrambi reali e non nulli); acido folico, vitamina B12 e alfa-carotene tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168176 e dataType SR Legacy.
+- **Analogia usata**: `food_guava_raw` (guava cruda, già eseguita sul DB reale — stessa famiglia botanica reale Myrtaceae, stessa categoria "frutto esotico crudo con carotenoidi reali non nulli").
+- **Categoria dieta**: `fresh_fruit` (frutta fresca).
+- **Matrice**: nuova `feijoa` ("Feijoa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali e non nulli, frutto crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myrtaceae` (famiglia botanica reale, stessa di `food_guava_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del frutto).
+
+```
+npm run add-food -- --fdc-id=168176 --food-id=food_feijoa_raw \
+  --name-it="Feijoa, cruda" \
+  --matrix-id=feijoa --matrix-description-it="Feijoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Myrtaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168176 --food-id=food_feijoa_raw \
+  --name-it="Feijoa, cruda" \
+  --matrix-id=feijoa --matrix-description-it="Feijoa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Myrtaceae --diet-category=fresh_fruit --apply
+```
+
 ### Portulaca, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_portulaca_raw`. FDC ID 169274 ("Purslane, raw" — pagina getfoodfacts.com dedicata, categoria "USDA Standard Reference Vegetables and Vegetable Products" nell'intestazione e footer "Data source: USDA FoodData Central (FDC ID: 169274). USDA Standard Reference database" — **nota di trasparenza sul dataType**: la pagina non scrive mai letteralmente la stringa "SR Legacy" (a differenza della maggior parte delle fonti usate in questa coda), ma la dicitura "USDA Standard Reference" e l'intervallo dell'FDC ID (169xxx, stesso intervallo di decine di altri record SR Legacy già usati in questa pipeline, es. 169210/169260/169308) sono coerenti con SR Legacy; nessun'altra fonte con un FDC ID alternativo trovata per questo alimento. Erba spontanea commestibile mai tentata in questa pipeline (famiglia botanica reale Portulacaceae, *Portulaca oleracea* — comune anche come insalata selvatica in Italia).
