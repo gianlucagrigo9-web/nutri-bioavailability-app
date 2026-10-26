@@ -212,6 +212,30 @@ npm run add-food -- --fdc-id=173416 --food-id=food_formaggio_colby_raw \
   --diet-category=egg_dairy --apply
 ```
 
+### Farina di segale chiara, cruda — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_farina_di_segale_chiara_raw`. FDC ID 168887 (SR Legacy, "Rye flour, light" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_farina_di_segale_integrale_raw` (farina di segale integrale/scura, FDC 168885, già eseguita): record FDC diverso, prodotto di macinazione più raffinato (meno crusca/germe), non un duplicato.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 357kcal, proteine 9,82g, grassi 1,33g, carboidrati 76,7g, fibra 8,00g (inferiore alla farina integrale, coerente con una macinazione più raffinata), calcio 13,0mg, ferro 0,91mg, zinco 1,33mg, magnesio 32,0mg, rame 0,21mg, selenio 17,6µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 23,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 5,90µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti (coerente con una farina chiara, priva della parte esterna pigmentata del chicco). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168887 e dataType SR Legacy.
+- **Analogia usata**: `food_farina_di_segale_integrale_raw` (farina di segale integrale, già eseguita sul DB reale — stesso cereale *Secale cereale*, stessa famiglia botanica reale Poaceae, variante di macinazione diversa).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale, nessun ingrediente animale).
+- **Matrice**: nuova `farina_di_segale_chiara` ("Farina di segale chiara").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio basso, nessuna base per una categoria ossalati, stesso trattamento della farina integrale), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale, stessa di `food_farina_di_segale_integrale_raw`), `baseline_cooking_state=raw` (farina cruda, non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168887 --food-id=food_farina_di_segale_chiara_raw \
+  --name-it="Farina di segale chiara, cruda" \
+  --matrix-id=farina_di_segale_chiara --matrix-description-it="Farina di segale chiara" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_segale_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168887 --food-id=food_farina_di_segale_chiara_raw \
+  --name-it="Farina di segale chiara, cruda" \
+  --matrix-id=farina_di_segale_chiara --matrix-description-it="Farina di segale chiara" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_segale_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
