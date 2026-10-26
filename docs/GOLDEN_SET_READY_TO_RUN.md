@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Eglefino (haddock), crudo — preparato 2026-10-26 dal task (trentottesimo lotto)
+
+- **food_id**: `food_eglefino_raw`. FDC ID 171964 (SR Legacy, "Fish, haddock, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Pesce atlantico distinto da merluzzo/nasello/halibut/coregone già coperti in questa pipeline, mai tentato finora.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 74,0kcal, proteine 16,3g, grassi 0,45g, carboidrati 0g (zero esplicito), fibra 0g (zero esplicito), calcio 11,0mg, ferro 0,17mg, zinco 0,32mg, magnesio 21,0mg, rame 0,021mg, selenio 25,9µg, vitamina C 0mg (zero esplicito), folato totale 12,0µg, acido folico 0µg (zero esplicito, nessuna firma di arricchimento), vitamina B12 1,83µg, vitamina K 0,10µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg (zero esplicito, coerente con un pesce senza pigmenti vegetali). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171964 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, pesce magro bianco, già eseguito sul DB reale — stessa categoria funzionale "carne magra bianca a basso contenuto di grasso", stesso attributo `is_heme_iron` usato per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `eglefino` ("Eglefino").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171964 --food-id=food_eglefino_raw \
+  --name-it="Eglefino (haddock), crudo" \
+  --matrix-id=eglefino --matrix-description-it="Eglefino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171964 --food-id=food_eglefino_raw \
+  --name-it="Eglefino (haddock), crudo" \
+  --matrix-id=eglefino --matrix-description-it="Eglefino" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Noci di macadamia, tostate con sale aggiunto — preparato 2026-10-26 dal task (trentasettesimo lotto, quarto bonus oltre la quota, ultima valutazione del turno/dodicesima su 12 ammesse)
 
 - **food_id**: `food_noci_macadamia_tostate`. FDC ID 168598 (SR Legacy, "Nuts, macadamia nuts, dry roasted, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Deviazione dichiarata**: nessuna pagina getfoodfacts.com pulita trovata per la versione "without salt added" (solo recipal.com/fatsecret/foodstruct, non ammesse da questa coda per criterio di fonte); stessa deviazione già accettata in lotti precedenti per `food_pistacchi_tostati` (FDC 169426, "with salt added") e `food_anacardi_tostati` (FDC 169421, "with salt added"). Distinto da `food_noci_macadamia_raw` (seme crudo, già eseguito): qui lo stesso seme tostato a secco, prodotto distinto con un proprio record FDC.
