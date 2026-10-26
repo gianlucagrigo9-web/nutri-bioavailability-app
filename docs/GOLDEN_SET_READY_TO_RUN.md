@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ciliegie dolci, in scatola, sciroppo leggero, con il liquido di governo — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_ciliegie_in_scatola`. FDC ID 173959 (SR Legacy, "Cherries, sweet, canned, light syrup pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sulla forma**: la coda richiedeva "in scatola/sciroppate, sgocciolate" (come per pesche/pere/albicocche appena fatte in questo lotto), ma per le ciliegie **nessuna fonte consultata** cita un FDC ID per la variante "drained"/sgocciolata — getfoodfacts.com indicizza solo varianti "solids and liquids" (col liquido di governo: extra heavy syrup FDC 171720, water pack FDC 173957, juice pack FDC 173958, light syrup FDC 173959) e recipal.com cita una variante "pitted, heavy syrup, drained" ma senza alcun FDC ID verificabile (solo un ID interno recipal). Usata quindi la variante "light syrup pack, solids and liquids" (meno dolcificata delle alternative "extra heavy syrup", più rappresentativa di un prodotto comune) con il nome italiano corretto di conseguenza ("con il liquido di governo", non "sgocciolate") — scelta trasparente, non un mismatch nascosto.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 67,0kcal, proteine 0,61g, grassi 0,15g, carboidrati 17,3g, fibra 1,50g, calcio 9,00mg, ferro 0,36mg, zinco 0,10mg, magnesio 9,00mg, rame 0,14mg, vitamina C 3,70mg, vitamina K (fillochinone) 1,40µg, folato totale 4,00µg, beta-carotene 94,0µg (reale e non nullo); selenio, acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173959 e dataType SR Legacy.
+- **Analogia usata**: `food_ciliegie_raw` (ciliegie dolci fresche, già eseguite sul DB reale — stesso frutto *Prunus avium*, qui in scatola con sciroppo leggero invece che fresche).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per ananas/pesche/pere/albicocche in scatola).
+- **Matrice**: nuova `ciliegie_in_scatola` ("Ciliegie dolci, in scatola, sciroppo leggero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (ciliegie in scatola, sterilizzate a calore, matrice carotenoide disgregata, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale della ciliegia, nota con certezza, stesso precedente di `food_ciliegie_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173959 --food-id=food_ciliegie_in_scatola \
+  --name-it="Ciliegie dolci, in scatola, sciroppo leggero, con il liquido di governo" \
+  --matrix-id=ciliegie_in_scatola --matrix-description-it="Ciliegie dolci, in scatola, sciroppo leggero" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173959 --food-id=food_ciliegie_in_scatola \
+  --name-it="Ciliegie dolci, in scatola, sciroppo leggero, con il liquido di governo" \
+  --matrix-id=ciliegie_in_scatola --matrix-description-it="Ciliegie dolci, in scatola, sciroppo leggero" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Albicocche, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_albicocche_in_scatola`. FDC ID 167768 (SR Legacy, "Apricots, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, stesso filone SR Legacy "Fruits and Fruit Juices" in scatola delle pesche/pere appena fatte in questo lotto). Distinta dall'albicocca fresca (`food_albicocche_raw`, già eseguita) e dall'albicocca secca (`food_albicocche_secche_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, terzo prodotto di conservazione diverso per lo stesso frutto.
