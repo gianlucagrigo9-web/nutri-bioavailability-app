@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Rafano piccante (salsa di rafano), preparato — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
+
+- **food_id**: `food_rafano_piccante_preparato`. FDC ID 173472 (SR Legacy, "Horseradish, prepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sul match**: il vero rafano piccante (*Armoracia rusticana*, distinto dal daikon/*Raphanus sativus* già eseguito come `food_rafano_raw`) non ha un record USDA generico per la radice fresca cruda (l'unico risultato per "Horseradish, raw" è un record USDA Survey/FNDDS, FDC 2710083, fuori dal criterio SR Legacy/Foundation di questa coda) — l'unico record a fonte singola pulita trovato è questo, il prodotto preparato/condimento (radice grattugiata con aceto e sale), rappresenta quindi il condimento commerciale standard, non la radice fresca, stessa convenzione già accettata per capperi in salamoia/ketchup/maionese in questa pipeline (prodotti processati ma mono-ingrediente standard).
+- **Nutrienti**: **17/17** (completo). Per 100g (valori dalla tabella nutrienti completa, non dal pannello etichetta arrotondato — pannello 50kcal, tabella 48,0kcal): energia 48,0kcal, proteine 1,18g, grassi 0,69g, carboidrati 11,3g, fibra 3,30g, calcio 56,0mg, ferro 0,42mg, zinco 0,83mg, magnesio 27,0mg, rame 0,058mg, selenio 2,80µg, vitamina C 24,9mg, vitamina B12 0µg esplicito, folato totale 57,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 1,30µg, beta-carotene 1,00µg (reale ma minimo), alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 420mg/100g — alto ma coerente con un condimento conservato in aceto/sale, stesso ordine di grandezza già visto per capperi/olive in questa pipeline. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173472 e dataType SR Legacy.
+- **Analogia usata**: `food_capperi_in_salamoia` (capperi in salamoia, già eseguiti sul DB reale — stessa categoria funzionale "ortaggio conservato in aceto/salamoia, grattugiato/disgregato", stesso precedente di `baseline_cooking_state=pickled` e `carotenoid_matrix_state=cooked_or_disrupted` nonostante l'assenza di cottura a calore).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/radice conservata, nessun ingrediente animale).
+- **Matrice**: nuova `rafano_piccante_preparato` ("Rafano piccante (salsa di rafano), preparato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questa radice), `carotenoid_matrix_state=cooked_or_disrupted` (radice grattugiata/disgregata e conservata in aceto, matrice disgregata anche senza cottura a calore, stesso precedente di `food_capperi_in_salamoia`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (famiglia botanica reale, *Armoracia rusticana* — stessa famiglia di daikon/rucola/cavoli già eseguiti, ma genere diverso, dichiarata per fatto e non per analogia), `baseline_cooking_state=pickled` (radice grattugiata conservata in aceto, non cotta a calore), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173472 --food-id=food_rafano_piccante_preparato \
+  --name-it="Rafano piccante (salsa di rafano), preparato" \
+  --matrix-id=rafano_piccante_preparato --matrix-description-it="Rafano piccante (salsa di rafano), preparato" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_capperi_in_salamoia \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173472 --food-id=food_rafano_piccante_preparato \
+  --name-it="Rafano piccante (salsa di rafano), preparato" \
+  --matrix-id=rafano_piccante_preparato --matrix-description-it="Rafano piccante (salsa di rafano), preparato" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_capperi_in_salamoia \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Borragine, foglie crude — preparato 2026-10-26 dal task (trentasettesimo lotto)
 
 - **food_id**: `food_borragine_raw`. FDC ID 170481 (SR Legacy, "Borage, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Erba spontanea europea (*Borago officinalis*) mai tentata in questa pipeline, a rischio di assenza USDA segnalato nella voce di coda — trovato invece un record pulito al primo tentativo.
