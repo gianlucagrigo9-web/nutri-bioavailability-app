@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Panna di cocco, cruda (liquido spremuto dalla polpa grattugiata) — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
+
+- **food_id**: `food_panna_di_cocco_raw`. FDC ID 170580 (SR Legacy, "Nuts, coconut cream, raw (liquid expressed from grated meat)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_noce_di_cocco_raw` (polpa di cocco intera, già eseguita) e dal latte di cocco (già ⚠, nessun record non arricchito trovato) — la panna di cocco è il liquido più grasso/concentrato spremuto dalla polpa, prodotto distinto con un proprio FDC ID, non un doppione mascherato.
+- **Nutrienti**: **13/17** — mancano selenio, vitamina K e i due carotenoidi provitaminici A (beta-carotene e "altri carotenoidi provitaminici A" — non riportati sulla pagina, non assunti zero, coerente con un grasso vegetale senza pigmenti). Per 100g: energia 330kcal, proteine 3,63g, grassi 34,7g, carboidrati 6,65g, fibra 2,20g, calcio 11,0mg, ferro 2,28mg, zinco 0,96mg, magnesio 28,0mg, rame 0,38mg, vitamina C 2,80mg, folato totale 23,0µg; vitamina B12 e acido folico esplicitamente riportati come zero (nessuna firma di arricchimento, coerente con un prodotto vegetale non trattato). Sodio 4,00mg/100g, coerente con un prodotto non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170580 e dataType SR Legacy.
+- **Analogia usata**: `food_noce_di_cocco_raw` (polpa di cocco cruda, già eseguita sul DB reale — stessa pianta *Cocos nucifera*, famiglia Arecaceae, liquido spremuto dalla polpa invece della polpa intera).
+- **Categoria dieta**: `plant_non_fruit` (grasso vegetale, nessun ingrediente animale).
+- **Matrice**: nuova `panna_di_cocco` ("Panna di cocco, cruda").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati dalla fonte, stesso trattamento già dato a `food_noce_di_cocco_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (stessa famiglia di `food_noce_di_cocco_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170580 --food-id=food_panna_di_cocco_raw \
+  --name-it="Panna di cocco, cruda (liquido spremuto dalla polpa grattugiata)" \
+  --matrix-id=panna_di_cocco --matrix-description-it="Panna di cocco, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noce_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170580 --food-id=food_panna_di_cocco_raw \
+  --name-it="Panna di cocco, cruda (liquido spremuto dalla polpa grattugiata)" \
+  --matrix-id=panna_di_cocco --matrix-description-it="Panna di cocco, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noce_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Patate bianche, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
 
 - **food_id**: `food_patate_in_scatola`. FDC ID 170444 (SR Legacy, "Potatoes, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalla patata dolce in scatola già "pronta" (`food_patata_dolce_in_scatola`, specie botanica diversa, *Ipomoea batatas* vs *Solanum tuberosum*) e dalla patata cruda/cotta già eseguite — prima volta che la patata comune (bianca) viene tentata nella sua forma di conserva.
