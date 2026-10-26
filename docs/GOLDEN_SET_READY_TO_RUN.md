@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagioli mung, secchi crudi (seme intero non germinato) — preparato 2026-10-26 dal task (trentasettesimo lotto)
+
+- **food_id**: `food_fagioli_mung_secchi_raw`. FDC ID 174256 (SR Legacy, "Mung beans, mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_germogli_fagiolo_mungo_raw` (germogli, già eseguiti) e da `food_noodles_fagiolo_mungo_raw` (amido estratto in filamenti, già preparato nel trentaseiesimo lotto): qui il seme secco intero non germinato, mai tentato in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 347kcal, proteine 23,9g, grassi 1,15g, carboidrati 62,6g, fibra 16,3g, calcio 132mg, ferro 6,74mg, zinco 2,68mg, magnesio 189mg, rame 0,94mg, selenio 8,20µg, vitamina C 4,80mg, vitamina B12 0µg esplicito, folato totale 625µg (molto alto ma coerente con un legume secco, nessuna firma di arricchimento: acido folico 0µg esplicito separato), vitamina K 9,00µg, beta-carotene 68,0µg (reale e non nullo, a differenza dei fagioli bianchi/neri/pinto/lima già fatti in questa coda, tutti a beta-carotene 0µg esplicito — coerente col colore verde-oliva del tegumento del fagiolo mungo), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174256 e dataType SR Legacy.
+- **Analogia usata**: `food_fave_secche_raw` (fave secche crude, già eseguite sul DB reale — stessa famiglia botanica reale Fabaceae, stesso stato "seme secco crudo intero", stesso precedente di `carotenoid_matrix_state=raw_intact` con beta-carotene reale non nullo, a differenza dei fagioli a tegumento chiaro/scuro privi di carotenoidi già fatti in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (legume secco, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_mung_secchi` ("Fagioli mung, secchi (seme intero)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo legume, stessa convenzione già usata per gli altri fagioli secchi), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, seme crudo non cotto/non disgregato, stesso precedente di `food_fave_secche_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, stessa di `food_fave_secche_raw`/`food_germogli_fagiolo_mungo_raw`), `baseline_cooking_state=raw` (seme secco crudo, non cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato alto ma naturale del legume).
+
+```
+npm run add-food -- --fdc-id=174256 --food-id=food_fagioli_mung_secchi_raw \
+  --name-it="Fagioli mung, secchi crudi (seme intero)" \
+  --matrix-id=fagioli_mung_secchi --matrix-description-it="Fagioli mung, secchi (seme intero)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_secche_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174256 --food-id=food_fagioli_mung_secchi_raw \
+  --name-it="Fagioli mung, secchi crudi (seme intero)" \
+  --matrix-id=fagioli_mung_secchi --matrix-description-it="Fagioli mung, secchi (seme intero)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_secche_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Fagioli pinto, secchi crudi — preparato 2026-10-26 dal task (trentasettesimo lotto, apre il lotto)
 
 - **food_id**: `food_fagioli_pinto_secchi_raw`. FDC ID 175199 (SR Legacy, "Beans, pinto, mature seeds, raw (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Phaseolus vulgaris* mai tentata in questa pipeline (distinta da cannellini/borlotti/kidney/neri/lima/azuki già eseguiti o preparati, tutti con un proprio record FDC dedicato).
