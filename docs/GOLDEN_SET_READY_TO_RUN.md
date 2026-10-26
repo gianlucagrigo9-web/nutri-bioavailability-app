@@ -42,6 +42,30 @@ npm run add-food -- --fdc-id=170876 --food-id=food_latte_polvere_intero_raw \
 
 *(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
+### Noodles di fagiolo mungo (vermicelli cellophane), secchi — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_noodles_fagiolo_mungo_raw`. FDC ID 174258 (SR Legacy, "Noodles, chinese, cellophane or long rice (mung beans), dehydrated" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prodotto distinto dai germogli di fagiolo mungo già eseguiti (`food_germogli_fagiolo_mungo_raw`) e dalla pasta di grano saraceno/riso già preparate in un lotto precedente: è un amido di legume estratto ed essiccato in filamenti, non il seme/germoglio intero né un prodotto a base di cereale.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 351kcal, proteine 0,16g, grassi 0,060g, carboidrati 86,1g, fibra 0,50g, calcio 25,0mg, ferro 2,17mg, zinco 0,41mg, magnesio 3,00mg, rame 0,081mg, selenio 7,90µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti (coerente con un amido puro, privo delle parti verdi/germinate della pianta). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174258 e dataType SR Legacy. **Nota**: l'etichetta arrotondata della stessa pagina riporta 350kcal/0g proteine contro i 351kcal/0,16g della tabella nutrienti completa — presa la tabella, non il pannello etichetta, come da convenzione di questa pipeline.
+- **Analogia usata**: `food_germogli_fagiolo_mungo_raw` (germogli di fagiolo mungo, già eseguiti sul DB reale — stessa pianta *Vigna radiata*, stessa famiglia botanica reale Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (amido di legume, nessun ingrediente animale).
+- **Matrice**: nuova `noodles_fagiolo_mungo` ("Noodles di fagiolo mungo (vermicelli cellophane)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio basso, nessuna base per una categoria ossalati, prodotto d'amido non foglia/seme intero), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, stessa di `food_germogli_fagiolo_mungo_raw`), `baseline_cooking_state=raw` (prodotto secco non cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174258 --food-id=food_noodles_fagiolo_mungo_raw \
+  --name-it="Noodles di fagiolo mungo (vermicelli cellophane), secchi" \
+  --matrix-id=noodles_fagiolo_mungo --matrix-description-it="Noodles di fagiolo mungo (vermicelli cellophane)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174258 --food-id=food_noodles_fagiolo_mungo_raw \
+  --name-it="Noodles di fagiolo mungo (vermicelli cellophane), secchi" \
+  --matrix-id=noodles_fagiolo_mungo --matrix-description-it="Noodles di fagiolo mungo (vermicelli cellophane)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
