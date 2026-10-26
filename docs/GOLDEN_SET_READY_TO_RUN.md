@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli cannellini, in scatola, sgocciolati — preparato 2026-10-26 dal task (trentottesimo lotto, bonus oltre i candidati originari)
+
+- **food_id**: `food_fagioli_cannellini_scatola_raw`. FDC ID 175204 (SR Legacy, "Beans, white, mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Stessa linea cultivar "white beans" già usata per `food_fagioli_cannellini_secchi_raw` (FDC 175202, secco crudo, già eseguito) ma FDC ID diverso e prodotto distinto (in scatola, non secco crudo) — non un doppione mascherato, verificato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 114kcal, proteine 7,26g, grassi 0,29g, carboidrati 21,2g, fibra 4,80g, calcio 73,0mg, ferro 2,99mg, zinco 1,12mg, magnesio 51,0mg, rame 0,23mg, selenio 1,60µg, vitamina K 2,90µg, folato totale 65,0µg; vitamina C, acido folico, vitamina B12, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175204 e dataType SR Legacy.
+- **Analogia usata**: `food_ceci_in_scatola` (ceci in scatola sgocciolati, già eseguiti sul DB reale — stessa categoria di prodotto "legume in scatola", stesso stato di conservazione).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_cannellini_scatola` ("Fagioli cannellini, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per i cannellini secchi), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, stessa convenzione già usata per i fagioli pinto secchi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stesso precedente di `food_fagioli_cannellini_secchi_raw`), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del legume).
+
+```
+npm run add-food -- --fdc-id=175204 --food-id=food_fagioli_cannellini_scatola_raw \
+  --name-it="Fagioli cannellini, in scatola, sgocciolati" \
+  --matrix-id=fagioli_cannellini_scatola --matrix-description-it="Fagioli cannellini, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175204 --food-id=food_fagioli_cannellini_scatola_raw \
+  --name-it="Fagioli cannellini, in scatola, sgocciolati" \
+  --matrix-id=fagioli_cannellini_scatola --matrix-description-it="Fagioli cannellini, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Macis (involucro secco della noce moscata), macinato — preparato 2026-10-26 dal task (trentottesimo lotto)
 
 - **food_id**: `food_macis_raw`. FDC ID 170927 (SR Legacy, "Spices, mace, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dalla noce moscata già eseguita (`food_noce_moscata_raw`): stessa pianta *Myristica fragrans*, ma il macis è l'involucro carnoso (arillo) che avvolge il seme, non il seme stesso — prodotto botanicamente e commercialmente distinto, con un proprio record FDC.
