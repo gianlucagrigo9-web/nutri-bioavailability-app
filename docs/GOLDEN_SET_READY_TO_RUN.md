@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Succo di lime, crudo — preparato 2026-10-26 dal task (trentottesimo lotto)
+
+- **food_id**: `food_succo_di_lime_raw`. FDC ID 168156 (SR Legacy, "Lime juice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dal lime fresco (`food_lime_raw`, già eseguito) e dai succhi di limone/arancia/pompelmo/uva/mela già fatti: qui il succo spremuto di lime, prodotto distinto con un proprio record FDC.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 25,0kcal, proteine 0,42g, grassi 0,070g, carboidrati 8,42g, fibra 0,40g, calcio 14,0mg, ferro 0,090mg, zinco 0,080mg, magnesio 8,00mg, rame 0,027mg, selenio 0,10µg, vitamina C 30,0mg, folato totale 10,0µg, vitamina K 0,60µg, beta-carotene 30,0µg (reale, non nullo — succo, matrice disgregata); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168156 e dataType SR Legacy.
+- **Analogia usata**: `food_succo_di_limone_raw` (succo di limone crudo, già eseguito sul DB reale — stessa categoria di prodotto "succo di agrume spremuto", stessa famiglia botanica reale Rutaceae, stesso stato carotenoidi disgregato).
+- **Categoria dieta**: `plant_non_fruit` (succo spremuto, forma trasformata — non frutto intero, stessa convenzione già usata per i succhi di limone/arancia di questa coda, scelta invece di `fresh_fruit`).
+- **Matrice**: nuova `succo_di_lime` ("Succo di lime").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, succo spremuto, matrice disgregata — stesso precedente di `food_succo_di_limone_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (stesso precedente di `food_succo_di_limone_raw`/`food_lime_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, acido folico 0µg esplicito separato dal folato totale naturale).
+
+```
+npm run add-food -- --fdc-id=168156 --food-id=food_succo_di_lime_raw \
+  --name-it="Succo di lime, crudo" \
+  --matrix-id=succo_di_lime --matrix-description-it="Succo di lime" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_limone_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168156 --food-id=food_succo_di_lime_raw \
+  --name-it="Succo di lime, crudo" \
+  --matrix-id=succo_di_lime --matrix-description-it="Succo di lime" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_limone_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cipolla rossa, cruda — preparato 2026-10-26 dal task (trentottesimo lotto)
 
 - **food_id**: `food_cipolla_rossa_raw`. FDC ID 790577 (Foundation Foods, "Onions, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Record distinto dalla cipolla comune già eseguita (`food_onion_raw`, FDC 170000 "Onions, raw"): verificato che non sia lo stesso doppione mascherato temuto in apertura di lotto (FDC ID diverso, descrizione esplicitamente "red").
