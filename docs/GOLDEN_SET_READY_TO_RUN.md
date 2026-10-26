@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Alga agar, secca — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
+
+- **food_id**: `food_alga_agar_raw`. FDC ID 170090 (SR Legacy, "Seaweed, agar, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quarta alga di questa pipeline dopo nori (già eseguita)/wakame/spirulina (già preparate), mai tentata sotto questo nome — distinta dalle altre per uso tipico come gelificante (agente addensante vegano, sostituto della gelatina) piuttosto che come alimento a sé.
+- **Nutrienti**: **17/17** (completo). Per 100g (valori dalla tabella nutrienti completa, non dal pannello etichetta arrotondato — pannello 310kcal/630mg calcio/6g proteine, tabella 306kcal/625mg/6,21g): energia 306kcal, proteine 6,21g, grassi 0,30g, carboidrati 80,9g, fibra 7,70g, calcio 625mg (molto alto, coerente con la concentrazione per disidratazione, stesso ordine di grandezza già visto per le altre alghe secche di questa pipeline), ferro 21,4mg, zinco 5,80mg, magnesio 770mg, rame 0,61mg, selenio 7,40µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 580µg (alto ma coerente con un'alga secca concentrata, nessuna firma di arricchimento: acido folico 0µg esplicito separato), vitamina K 24,4µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (a differenza di wakame/spirulina, che avevano carotenoidi reali e non nulli). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170090 e dataType SR Legacy.
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "alga marina cruda/secca", stessa convenzione già usata per wakame/spirulina).
+- **Categoria dieta**: `plant_non_fruit` (alga, nessun ingrediente animale).
+- **Matrice**: nuova `alga_agar` ("Alga agar, secca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per le altre alghe), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, a differenza di wakame/spirulina dove erano reali e avevano giustificato `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` NULL (nessuna vera famiglia botanica per un'alga, stessa convenzione di `food_alga_nori_raw`/`food_alga_wakame_raw`/`food_alga_spirulina_raw`), `baseline_cooking_state=raw` (secca ma non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato alto ma naturale dell'alga concentrata).
+
+```
+npm run add-food -- --fdc-id=170090 --food-id=food_alga_agar_raw \
+  --name-it="Alga agar, secca" \
+  --matrix-id=alga_agar --matrix-description-it="Alga agar, secca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170090 --food-id=food_alga_agar_raw \
+  --name-it="Alga agar, secca" \
+  --matrix-id=alga_agar --matrix-description-it="Alga agar, secca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Rafano piccante (salsa di rafano), preparato — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
 
 - **food_id**: `food_rafano_piccante_preparato`. FDC ID 173472 (SR Legacy, "Horseradish, prepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sul match**: il vero rafano piccante (*Armoracia rusticana*, distinto dal daikon/*Raphanus sativus* già eseguito come `food_rafano_raw`) non ha un record USDA generico per la radice fresca cruda (l'unico risultato per "Horseradish, raw" è un record USDA Survey/FNDDS, FDC 2710083, fuori dal criterio SR Legacy/Foundation di questa coda) — l'unico record a fonte singola pulita trovato è questo, il prodotto preparato/condimento (radice grattugiata con aceto e sale), rappresenta quindi il condimento commerciale standard, non la radice fresca, stessa convenzione già accettata per capperi in salamoia/ketchup/maionese in questa pipeline (prodotti processati ma mono-ingrediente standard).
