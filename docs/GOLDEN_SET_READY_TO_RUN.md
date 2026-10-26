@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Palombo (gattuccio), crudo — preparato 2026-10-26 dal task (quarantesimo lotto)
+
+- **food_id**: `food_palombo_raw`. FDC ID 173697 (SR Legacy, "Fish, shark, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza importante**: nessun record USDA FDC specifico per *Mustelus mustelus* (palombo/gattuccio, famiglia Triakidae) trovato in nessuna fonte consultata — solo articoli scientifici (scholar.sun.ac.za, ejabf.journals.ekb.eg, bib.irb.hr), nessun dato USDA per questa specie esatta. Usato il record generico USDA "shark, mixed species" — una categoria "mixed species" progettata esplicitamente da USDA per coprire più specie di squalo commerciali insieme (stesso principio già accettato in questa pipeline per "clam/squid/shrimp, mixed species"), non una sostituzione con una specie diversa e specifica (diverso dal caso respinto per ombrina/croaker, dove l'unico record trovato era di un genere diverso e specifico, non una categoria generica dichiarata). Il palombo è comunque uno squalo (Chondrichthyes), quindi entra nella categoria tassonomica che il record intende rappresentare — resta un'approssimazione dichiarata (la composizione in grassi può variare fra specie di squalo), non un errore di specie.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 130kcal, proteine 21,0g, grassi 4,51g, calcio 34,0mg, ferro 0,84mg, zinco 0,43mg, magnesio 49,0mg, rame 0,033mg, selenio 36,5µg, vitamina K (fillochinone) 0,10µg, folato totale 3,00µg e vitamina B12 1,49µg (tutti reali e non nulli); carboidrati, fibra, vitamina C, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173697 e dataType SR Legacy.
+- **Analogia usata**: `food_pesce_spada_raw` (pesce spada crudo, già eseguito sul DB reale — stessa categoria funzionale "grande pesce predatore pelagico, muscolo magro-medio", stesso attributo `is_heme_iron` usato per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce/squalo).
+- **Matrice**: nuova `palombo` ("Palombo (gattuccio)").
+- **Attributi**: `is_heme_iron=true` (muscolo animale, stesso precedente di `food_pesce_spada_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del pesce).
+
+```
+npm run add-food -- --fdc-id=173697 --food-id=food_palombo_raw \
+  --name-it="Palombo (gattuccio), crudo" \
+  --matrix-id=palombo --matrix-description-it="Palombo (gattuccio)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_spada_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173697 --food-id=food_palombo_raw \
+  --name-it="Palombo (gattuccio), crudo" \
+  --matrix-id=palombo --matrix-description-it="Palombo (gattuccio)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_spada_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vongole, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantesimo lotto)
 
 - **food_id**: `food_vongole_in_scatola`. FDC ID 171976 (SR Legacy, "Mollusks, clam, mixed species, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_vongole_raw`/`food_vongole_cotte` già eseguiti (crude e cotte al vapore) — qui la conserva in scatola sgocciolata, sulla scia del successo già visto per cannellini/ceci/fagioli neri in scatola.
