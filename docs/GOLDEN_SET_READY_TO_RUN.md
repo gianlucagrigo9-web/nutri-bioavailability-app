@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Germogli di soia, cotti (al vapore) — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
+
+- **food_id**: `food_germogli_di_soia_cotti`. FDC ID 168460 (SR Legacy, "Soybeans, mature seeds, sprouted, cooked, steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie *Glycine max* (soia), distinta da `food_germogli_fagiolo_mungo_raw` (*Vigna radiata*, fagiolo mung, già eseguita) e dal crudo `food_germogli_di_soia_raw` (ancora solo "pronto", non eseguito — quindi non usabile come analogia). Variante "al vapore" semplice scelta rispetto a "stir-fried, with salt" (altro record disponibile, FDC 168461) per evitare grasso/sale di cottura aggiunti non dichiarati come nutrienti propri del legume.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 81,0kcal, proteine 8,47g, grassi 4,45g, carboidrati 6,53g, fibra 0,80g, calcio 59,0mg, ferro 1,31mg, zinco 1,04mg, magnesio 60,0mg, rame 0,33mg, selenio 0,60µg, vitamina C 8,30mg, vitamina K (fillochinone) 70,6µg, folato totale 80,0µg, beta-carotene 12,0µg, alfa-carotene 12,0µg, beta-criptoxantina 12,0µg (carotenoidi reali, non nulli — coerente con un germoglio vegetale cotto); vitamina B12 e acido folico esplicitamente riportati come zero (nessuna firma di arricchimento). Sodio 10,0mg/100g, coerente con "steamed" senza sale aggiunto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168460 e dataType SR Legacy.
+- **Analogia usata**: `food_germogli_fagiolo_mungo_raw` (germogli di fagiolo mungo, già eseguiti sul DB reale — stessa categoria funzionale "legume germogliato", stessa famiglia botanica reale Fabaceae, specie e stato di cottura diversi dichiarati esplicitamente).
+- **Categoria dieta**: `plant_non_fruit` (legume germogliato, nessun ingrediente animale).
+- **Matrice**: nuova `germogli_di_soia_cotti` ("Germogli di soia, cotti al vapore").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile, non un ortaggio a foglia), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi reali presenti e stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa famiglia di `food_germogli_fagiolo_mungo_raw`), `baseline_cooking_state=steamed`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale 80µg).
+
+```
+npm run add-food -- --fdc-id=168460 --food-id=food_germogli_di_soia_cotti \
+  --name-it="Germogli di soia, cotti al vapore" \
+  --matrix-id=germogli_di_soia_cotti --matrix-description-it="Germogli di soia, cotti al vapore" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168460 --food-id=food_germogli_di_soia_cotti \
+  --name-it="Germogli di soia, cotti al vapore" \
+  --matrix-id=germogli_di_soia_cotti --matrix-description-it="Germogli di soia, cotti al vapore" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Panna di cocco, cruda (liquido spremuto dalla polpa grattugiata) — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
 
 - **food_id**: `food_panna_di_cocco_raw`. FDC ID 170580 (SR Legacy, "Nuts, coconut cream, raw (liquid expressed from grated meat)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_noce_di_cocco_raw` (polpa di cocco intera, già eseguita) e dal latte di cocco (già ⚠, nessun record non arricchito trovato) — la panna di cocco è il liquido più grasso/concentrato spremuto dalla polpa, prodotto distinto con un proprio FDC ID, non un doppione mascherato.
