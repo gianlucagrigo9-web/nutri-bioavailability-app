@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Albicocche, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_albicocche_in_scatola`. FDC ID 167768 (SR Legacy, "Apricots, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, stesso filone SR Legacy "Fruits and Fruit Juices" in scatola delle pesche/pere appena fatte in questo lotto). Distinta dall'albicocca fresca (`food_albicocche_raw`, già eseguita) e dall'albicocca secca (`food_albicocche_secche_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, terzo prodotto di conservazione diverso per lo stesso frutto.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 83,0kcal, proteine 0,64g, grassi 0,11g, carboidrati 21,3g (coerente con lo sciroppo zuccherino), fibra 2,70g, calcio 10,0mg, ferro 0,30mg, zinco 0,11mg, magnesio 7,00mg, rame 0,097mg, selenio 0,10µg, vitamina C 3,10mg, vitamina K (fillochinone) 3,30µg, folato totale 2,00µg, beta-carotene 1746µg (alto e reale, coerente con l'albicocca — frutto ricco di carotenoidi anche fresco) e beta-criptoxantina 16,0µg (reale e non nulla, somma in `other_provitamin_a_carotenoids_mcg`); acido folico, vitamina B12 e alfa-carotene tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167768 e dataType SR Legacy.
+- **Analogia usata**: `food_albicocche_raw` (albicocca fresca, già eseguita sul DB reale — stesso frutto, qui in scatola invece che fresca).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per ananas/pesche/pere in scatola).
+- **Matrice**: nuova `albicocche_in_scatola` ("Albicocche, in scatola, sciroppo pesante").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (albicocche in scatola, sterilizzate a calore, matrice carotenoide disgregata, beta-carotene/beta-criptoxantina reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale dell'albicocca, nota con certezza, stesso precedente di `food_albicocche_raw`/`food_albicocche_secche_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167768 --food-id=food_albicocche_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=albicocche_in_scatola --matrix-description-it="Albicocche, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167768 --food-id=food_albicocche_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=albicocche_in_scatola --matrix-description-it="Albicocche, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pere, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_pere_in_scatola`. FDC ID 168182 (SR Legacy, "Pears, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, ID consecutivo a quello delle pesche in scatola appena fatte in questo stesso lotto — 168181/168182, stesso filone SR Legacy "Fruits and Fruit Juices" in scatola). Distinta dalla pera fresca (`food_pear_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, prodotto di conservazione diverso.
