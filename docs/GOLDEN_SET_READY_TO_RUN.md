@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Funghi champignon, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_funghi_champignon_in_scatola`. FDC ID 169254 (SR Legacy, "Mushrooms, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_mushroom_white_raw` (crudo) e `food_funghi_champignon_cotti` (FDC 169252, bollito, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 25,0kcal, proteine 1,87g, grassi 0,29g, carboidrati 5,09g, fibra 2,40g, calcio 11,0mg, ferro 0,79mg, zinco 0,72mg, magnesio 15,0mg, rame 0,23mg, selenio 4,10µg, folato totale 12,0µg (tutti reali e non nulli); vitamina C, vitamina K, acido folico, vitamina B12 e tutti e tre i carotenoidi tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un fungo, non una pianta con pigmenti/vitamina C). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169254 e dataType SR Legacy.
+- **Analogia usata**: `food_funghi_champignon_cotti` (funghi champignon bolliti, già eseguiti sul DB reale — stessa specie *Agaricus bisporus*, entrambi trattati a calore, più vicino alla conserva in scatola del crudo).
+- **Categoria dieta**: `plant_non_fruit` (fungo, categoria assimilata per convenzione del Golden Set).
+- **Matrice**: nuova `funghi_champignon_in_scatola` ("Funghi champignon, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — beta-carotene=0 esplicito, stessa convenzione di `food_mushroom_white_raw`/`food_funghi_champignon_cotti`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stesso precedente), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169254 --food-id=food_funghi_champignon_in_scatola \
+  --name-it="Funghi champignon, in scatola, sgocciolati" \
+  --matrix-id=funghi_champignon_in_scatola --matrix-description-it="Funghi champignon, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_champignon_cotti \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169254 --food-id=food_funghi_champignon_in_scatola \
+  --name-it="Funghi champignon, in scatola, sgocciolati" \
+  --matrix-id=funghi_champignon_in_scatola --matrix-description-it="Funghi champignon, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_champignon_cotti \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Fagiolini, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_fagiolini_in_scatola`. FDC ID 169143 (SR Legacy, "Beans, snap, green, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagiolini_raw` (crudo) e `food_fagiolini_cotti` (FDC 169141, bollito, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
