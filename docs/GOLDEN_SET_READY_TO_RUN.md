@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli neri, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantesimo lotto)
+
+- **food_id**: `food_fagioli_neri_in_scatola`. FDC ID 175188 (SR Legacy, "Beans, black turtle, mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagioli_neri_raw`/`food_fagioli_neri_cotti` già eseguiti (secco crudo e cotto in casa) — qui la conserva in scatola, sulla scia del successo già visto per ceci/cannellini in scatola.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 91,0kcal, proteine 6,03g, grassi 0,29g, carboidrati 16,6g, fibra 6,90g, calcio 35,0mg, ferro 1,90mg, zinco 0,54mg, magnesio 35,0mg, rame 0,19mg, selenio 1,30µg, vitamina C 2,70mg, vitamina K (fillochinone) 2,30µg e folato totale 61,0µg (tutti reali e non nulli); acido folico, vitamina B12, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un legume in scatola senza carotenoidi reali, nessun pigmento nel seme nero). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175188 e dataType SR Legacy.
+- **Analogia usata**: `food_ceci_in_scatola` (ceci in scatola sgocciolati, già eseguiti sul DB reale — stessa categoria di prodotto "legume in scatola", stesso stato di conservazione; NON usata l'analogia più ovvia `food_fagioli_cannellini_scatola_raw` perché quella voce è solo "pronta" in questo stesso file, non ancora eseguita sul DB reale — l'analogia deve riferirsi a un alimento che esiste davvero).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_neri_in_scatola` ("Fagioli neri, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, nessun pigmento reale nel seme), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa famiglia di `food_fagioli_neri_raw`/`food_ceci_in_scatola`), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del legume).
+
+```
+npm run add-food -- --fdc-id=175188 --food-id=food_fagioli_neri_in_scatola \
+  --name-it="Fagioli neri, in scatola, sgocciolati" \
+  --matrix-id=fagioli_neri_in_scatola --matrix-description-it="Fagioli neri, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175188 --food-id=food_fagioli_neri_in_scatola \
+  --name-it="Fagioli neri, in scatola, sgocciolati" \
+  --matrix-id=fagioli_neri_in_scatola --matrix-description-it="Fagioli neri, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pollock (merluzzo dell'Alaska), crudo — preparato 2026-10-26 dal task (quarantesimo lotto)
 
 - **food_id**: `food_pollock_raw`. FDC ID 175130 (SR Legacy, "Fish, pollock, Alaska, raw (may contain additives to retain moisture)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Pesce nordatlantico (*Gadus chalcogrammus*, famiglia Gadidae) mai tentato in questa pipeline nonostante merluzzo/nasello/eglefino (stessa famiglia, generi diversi) già eseguiti. **Nota di trasparenza**: esiste anche un record FDC 173725 con lo stesso nome senza la dicitura "may contain additives" ma con solo ~8/17 nutrienti compilati (selenio, vitamina C, vitamina K, folato, B12 e carotenoidi tutti assenti dalla tabella, fibra ambigua) — scartato a favore di questo record, molto più completo, coerente con la stessa dicitura già accettata per i gamberi in questo stesso lotto (non un additivo nascosto non dichiarato, solo la variante USDA con più nutrienti compilati).
