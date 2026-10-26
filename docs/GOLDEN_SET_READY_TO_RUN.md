@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Noci di macadamia, tostate con sale aggiunto — preparato 2026-10-26 dal task (trentasettesimo lotto, quarto bonus oltre la quota, ultima valutazione del turno/dodicesima su 12 ammesse)
+
+- **food_id**: `food_noci_macadamia_tostate`. FDC ID 168598 (SR Legacy, "Nuts, macadamia nuts, dry roasted, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Deviazione dichiarata**: nessuna pagina getfoodfacts.com pulita trovata per la versione "without salt added" (solo recipal.com/fatsecret/foodstruct, non ammesse da questa coda per criterio di fonte); stessa deviazione già accettata in lotti precedenti per `food_pistacchi_tostati` (FDC 169426, "with salt added") e `food_anacardi_tostati` (FDC 169421, "with salt added"). Distinto da `food_noci_macadamia_raw` (seme crudo, già eseguito): qui lo stesso seme tostato a secco, prodotto distinto con un proprio record FDC.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g (dalla tabella nutrienti della pagina, non dal pannello etichetta): energia 716kcal, proteine 7,79g, grassi 76,1g, carboidrati 12,8g, fibra 8,00g, calcio 70,0mg, ferro 2,65mg, zinco 1,29mg, magnesio 118mg, rame 0,57mg, selenio 11,7µg, vitamina C 0,70mg, folato totale 10,0µg; vitamina B12, acido folico, vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168598 e dataType SR Legacy.
+- **Analogia usata**: `food_noci_macadamia_raw` (noci di macadamia crude, già eseguite sul DB reale — stessa pianta *Macadamia integrifolia*, tostata a secco con sale invece di cruda).
+- **Categoria dieta**: `plant_non_fruit` (frutto a guscio, nessun ingrediente animale; il sale aggiunto non cambia la categoria).
+- **Matrice**: nuova `noci_macadamia_tostate` ("Noci di macadamia, tostate, con sale aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna indicazione di matrice ad alto ossalato per questo seme, stessa convenzione già usata per le altre noci/semi tostati di questa pipeline), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi tracciati sono esplicitamente zero nel record, non un valore reale non-zero da classificare raw_intact/cooked_or_disrupted), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Proteaceae` (famiglia botanica reale, *Macadamia integrifolia*), `baseline_cooking_state=roasted` (tostata a secco, "dry roasted"), `is_fortified_folate` omesso (false — nessun segnale di arricchimento nella descrizione del prodotto).
+
+```
+npm run add-food -- --fdc-id=168598 --food-id=food_noci_macadamia_tostate \
+  --name-it="Noci di macadamia, tostate, con sale aggiunto" \
+  --matrix-id=noci_macadamia_tostate --matrix-description-it="Noci di macadamia, tostate, con sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_macadamia_raw \
+  --botanical-family=Proteaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168598 --food-id=food_noci_macadamia_tostate \
+  --name-it="Noci di macadamia, tostate, con sale aggiunto" \
+  --matrix-id=noci_macadamia_tostate --matrix-description-it="Noci di macadamia, tostate, con sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_macadamia_raw \
+  --botanical-family=Proteaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Semi di lino, macinati — preparato 2026-10-26 dal task (trentasettesimo lotto, terzo bonus oltre la quota)
 
 - **food_id**: `food_semi_di_lino_macinati_raw`. FDC ID 2262075 (Foundation Foods, "Flaxseed, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_semi_di_lino_interi_raw` (seme intero, già eseguito) e dall'olio di semi di lino (già ⚠ nel trentaseiesimo lotto, nessun record FDC trovato per l'olio estratto): qui il seme macinato/farina grossa, prodotto distinto con un proprio record FDC.
