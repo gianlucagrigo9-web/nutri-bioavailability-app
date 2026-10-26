@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Acciughe, sott'olio, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantaquattresimo lotto)
+
+- **food_id**: `food_acciughe_sott_olio`. FDC ID 174183 (SR Legacy, "Fish, anchovy, european, canned in oil, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_acciughe_raw` già nel DB (FDC 174182, crude, non conservate). **Nota sulla voce di coda originale**: pensata inizialmente come "acciughe, sotto sale" (conservazione tradizionale a secco), ma nessuna fonte consultata riporta un record USDA distinto per quel metodo — pivotata su "sott'olio", che ha invece un record SR Legacy dedicato e pulito.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 210kcal, proteine 28,9g, grassi 9,71g, carboidrati 0g, fibra 0g, calcio 232mg, ferro 4,63mg, zinco 2,44mg, magnesio 69,0mg, rame 0,34mg, selenio 68,1µg, vitamina B12 0,88µg, vitamina K (fillochinone) 12,1µg, folato totale 13,0µg; vitamina C, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero (coerente con un pesce conservato, nessun pigmento vegetale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174183 e dataType SR Legacy.
+- **Analogia usata**: `food_tonno_in_scatola_olio_raw` (tonno in scatola sott'olio, già eseguito sul DB reale — stessa categoria funzionale "pesce conservato sott'olio", stesso precedente di `baseline_cooking_state=canned_in_oil` e `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (pesce conservato, nessun ingrediente vegetale/lattiero).
+- **Matrice**: nuova `acciughe_sott_olio` ("Acciughe, sott'olio, in scatola").
+- **Attributi**: `is_heme_iron=true` (pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale, stesso precedente di tonno/sgombro/salmone in scatola), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile; beta-carotene comunque 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned_in_oil`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174183 --food-id=food_acciughe_sott_olio \
+  --name-it="Acciughe, sott'olio, in scatola, sgocciolate" \
+  --matrix-id=acciughe_sott_olio --matrix-description-it="Acciughe, sott'olio, in scatola" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_tonno_in_scatola_olio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174183 --food-id=food_acciughe_sott_olio \
+  --name-it="Acciughe, sott'olio, in scatola, sgocciolate" \
+  --matrix-id=acciughe_sott_olio --matrix-description-it="Acciughe, sott'olio, in scatola" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_tonno_in_scatola_olio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pomodori secchi, sott'olio, sgocciolati — preparato 2026-10-26 dal task (quarantaquattresimo lotto)
+
+- **food_id**: `food_pomodori_secchi_sott_olio`. FDC ID 169384 (SR Legacy, "Tomatoes, sun-dried, packed in oil, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_pomodori_secchi_raw` già nel DB (FDC 168567, "Tomatoes, sun-dried" semplici, senza olio).
+- **Nutrienti**: **13/17** — mancano: vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati dalla fonte consultata, gap dichiarato non assunto zero). Per 100g: energia 213kcal, proteine 5,06g, grassi 14,1g, carboidrati 23,3g, fibra 5,80g, calcio 47,0mg, ferro 2,68mg, zinco 0,78mg, magnesio 81,0mg, rame 0,47mg, selenio 3,00µg, vitamina C 102mg, folato totale 23,0µg; vitamina B12 e acido folico esplicitamente riportati come zero. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169384 e dataType SR Legacy (release USDA FoodData Central aprile 2026).
+- **Analogia usata**: `food_pomodori_secchi_raw` (pomodori secchi semplici, già eseguiti sul DB reale — stessa pianta *Solanum lycopersicum*, famiglia botanica reale Solanaceae, stesso prodotto di base disidratato, differisce solo per la conservazione in olio).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio conservato, nessun ingrediente animale).
+- **Matrice**: nuova `pomodori_secchi_sott_olio` ("Pomodori secchi, sott'olio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo prodotto), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dalla fonte consultata, non assunto nonostante l'olio aggiunto, stesso trattamento già usato per germogli di soia in questa pipeline per dati mancanti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale, nota con certezza), `baseline_cooking_state=canned_in_oil` (stesso precedente di tonno/acciughe sott'olio in questa pipeline), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169384 --food-id=food_pomodori_secchi_sott_olio \
+  --name-it="Pomodori secchi, sott'olio, sgocciolati" \
+  --matrix-id=pomodori_secchi_sott_olio --matrix-description-it="Pomodori secchi, sott'olio" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_pomodori_secchi_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169384 --food-id=food_pomodori_secchi_sott_olio \
+  --name-it="Pomodori secchi, sott'olio, sgocciolati" \
+  --matrix-id=pomodori_secchi_sott_olio --matrix-description-it="Pomodori secchi, sott'olio" \
+  --baseline-cooking-state=canned_in_oil --analogy-food-id=food_pomodori_secchi_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Finocchio, crudo (bulbo) — preparato 2026-10-26 dal task (quarantatreesimo lotto)
 
 - **food_id**: `food_finocchio_raw`. FDC ID 169385 (SR Legacy, "Fennel, bulb, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima voce del quarantatreesimo lotto, aperto dopo l'esaurimento del quarantaduesimo (vedi `docs/PRD.md` §9 punto 16). Distinto da `food_semi_di_finocchio_raw` già nel DB (semi/spezia, non il bulbo).
