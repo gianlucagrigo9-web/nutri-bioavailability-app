@@ -116,6 +116,30 @@ npm run add-food -- --fdc-id=167587 --food-id=food_cioccolato_al_latte_raw \
   --matrix-category-calcium=medium_oxalate --diet-category=egg_dairy --apply
 ```
 
+### Wurstel di pollo, non riscaldato — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_wurstel_di_pollo_raw`. FDC ID 171624 (SR Legacy, "Frankfurter, chicken" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 223kcal, proteine 15,5g, grassi 16,2g, carboidrati 2,74g, fibra 0g esplicito, calcio 74,0mg, ferro 1,17mg, zinco 1,11mg, magnesio 20,0mg, rame 0,078mg, selenio 23,0µg, vitamina C 0mg esplicito, vitamina B12 0,54µg, folato totale 7,00µg, acido folico 3,00µg (presente ma basso, coerente con un legante/additivo minore, non una firma di arricchimento tipo cereali), vitamina K (fillochinone) 0µg esplicito (la pagina riporta anche una frazione menachinone-4 25,1µg, non mappata in questa pipeline — il fillochinone, il vitamero standard usato per `vitamin_k` in tutti i record di questa coda, è 0 esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171624 e dataType SR Legacy. **Nota di trasparenza sulla categoria dieta**: come già per il wurstel di manzo nel trentunesimo lotto, il record FDC dichiara nel nome la specie esatta ("chicken" soltanto) — un'eventuale presenza di derivati del latte come legante non cambia comunque la classificazione, un prodotto di carne resta `meat_fish`.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, pollame, carne senza pelle, già eseguito sul DB reale — stessa specie *Gallus gallus*, stesso attributo `is_heme_iron`, stessa convenzione già usata per faraona/quaglia/piccione/anatra in questa pipeline; non usata l'analogia col wurstel di manzo, ancora solo "pronto" e non eseguito sul DB reale — l'analogia deve riferirsi a un alimento che esiste davvero nel DB).
+- **Categoria dieta**: `meat_fish` (carne di pollo trasformata, specie dichiarata esplicitamente nel nome del record).
+- **Matrice**: nuova `wurstel_di_pollo` ("Wurstel di pollo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (coerente con "unheated" nel nome del record), `is_fortified_folate` omesso (false — acido folico basso ma non una firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171624 --food-id=food_wurstel_di_pollo_raw \
+  --name-it="Wurstel di pollo, non riscaldato" \
+  --matrix-id=wurstel_di_pollo --matrix-description-it="Wurstel di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171624 --food-id=food_wurstel_di_pollo_raw \
+  --name-it="Wurstel di pollo, non riscaldato" \
+  --matrix-id=wurstel_di_pollo --matrix-description-it="Wurstel di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
