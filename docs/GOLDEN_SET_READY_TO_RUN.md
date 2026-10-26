@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagioli pinto, secchi crudi — preparato 2026-10-26 dal task (trentasettesimo lotto, apre il lotto)
+
+- **food_id**: `food_fagioli_pinto_secchi_raw`. FDC ID 175199 (SR Legacy, "Beans, pinto, mature seeds, raw (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Phaseolus vulgaris* mai tentata in questa pipeline (distinta da cannellini/borlotti/kidney/neri/lima/azuki già eseguiti o preparati, tutti con un proprio record FDC dedicato).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 347kcal, proteine 21,4g, grassi 1,23g, carboidrati 62,5g, fibra 15,5g, calcio 113mg, ferro 5,07mg, zinco 2,28mg, magnesio 176mg, rame 0,89mg, selenio 27,9µg, vitamina C 6,30mg, vitamina B12 0µg esplicito, folato totale 525µg (molto alto ma coerente con un legume secco, nessuna firma di arricchimento: acido folico 0µg esplicito separato), vitamina K 5,60µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175199 e dataType SR Legacy.
+- **Analogia usata**: `food_fagioli_cannellini_secchi_raw` (fagioli cannellini secchi crudi, già eseguiti sul DB reale — stessa specie *Phaseolus vulgaris*, cultivar diversa, stesso stato "secco crudo").
+- **Categoria dieta**: `plant_non_fruit` (legume secco, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_pinto_secchi` ("Fagioli pinto, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per cannellini/neri/lima secchi, nessun dato specifico sull'acido ossalico per questo legume), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, stessa di `food_fagioli_cannellini_secchi_raw`), `baseline_cooking_state=raw` (seme secco crudo, non cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato alto ma naturale del legume).
+
+```
+npm run add-food -- --fdc-id=175199 --food-id=food_fagioli_pinto_secchi_raw \
+  --name-it="Fagioli pinto, secchi crudi" \
+  --matrix-id=fagioli_pinto_secchi --matrix-description-it="Fagioli pinto, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175199 --food-id=food_fagioli_pinto_secchi_raw \
+  --name-it="Fagioli pinto, secchi crudi" \
+  --matrix-id=fagioli_pinto_secchi --matrix-description-it="Fagioli pinto, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Latte in polvere intero, con vitamina D aggiunta — preparato 2026-10-26 dal task (trentaseiesimo lotto, apre il lotto)
 
 - **food_id**: `food_latte_polvere_intero_raw`. FDC ID 170876 (SR Legacy, "Milk, dry, whole, with added vitamin D" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_latte_scremato_polvere_raw` (latte scremato in polvere, già preparato in un lotto precedente, non ancora eseguito): il latte intero in polvere è un prodotto diverso (grasso butirroso presente, calcio/carotenoidi coerenti con un derivato NON scremato).
