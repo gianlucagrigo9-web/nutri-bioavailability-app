@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pesche, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_pesche_in_scatola`. FDC ID 168181 (SR Legacy, "Peaches, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo della pagina "(SR Legacy)"). Distinta dalla pesca gialla fresca (`food_peach_yellow_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, prodotto di conservazione diverso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 72,0kcal, proteine 0,52g, grassi 0,18g, carboidrati 18,4g (coerente con lo sciroppo zuccherino, non un'anomalia), fibra 1,20g, calcio 3,00mg, ferro 0,27mg, zinco 0,090mg, magnesio 5,00mg, rame 0,063mg, vitamina C 0,70mg, vitamina K (fillochinone) 2,40µg, folato totale 9,00µg, beta-carotene 333µg (reale e non nullo) e beta-criptoxantina 85,0µg (reale e non nulla, somma in `other_provitamin_a_carotenoids_mcg`); selenio, acido folico, vitamina B12 e alfa-carotene tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un frutto non reintegrato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168181 e dataType SR Legacy.
+- **Analogia usata**: `food_peach_yellow_raw` (pesca gialla fresca, già eseguita sul DB reale — stesso frutto *Prunus persica*, qui in scatola invece che fresca).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per l'ananas in scatola e per i succhi di frutta in questa pipeline: un frutto fresco è `fresh_fruit`, la sua forma conservata/trasformata no, vedi `food_ananas_in_scatola`).
+- **Matrice**: nuova `pesche_in_scatola` ("Pesche, in scatola, sciroppo pesante").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (pesche in scatola, sterilizzate a calore, matrice carotenoide disgregata, beta-carotene/beta-criptoxantina reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale della pesca, nota con certezza, stesso precedente di `food_peach_yellow_raw`/`food_albicocche_raw`/`food_ciliegie_raw`/`food_prugne_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione — stessa convenzione già usata per ananas/pomodori pelati in scatola), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168181 --food-id=food_pesche_in_scatola \
+  --name-it="Pesche, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=pesche_in_scatola --matrix-description-it="Pesche, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peach_yellow_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168181 --food-id=food_pesche_in_scatola \
+  --name-it="Pesche, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=pesche_in_scatola --matrix-description-it="Pesche, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peach_yellow_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Trota (iridea), allevata, cruda — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_trota_raw`. FDC ID 173717. Pesce mai tentato in nessuna forma finora in questa pipeline, segnalato come "scoperto" già nel secondo e nel quinto lotto ma mai più ripreso — probabile svista corretta solo ora. **Nota di trasparenza sul dataType**: nessuna fonte consultata dichiara esplicitamente "SR Legacy"/"Foundation" per questo FDC ID — inferito da indizi concordanti (il numero FDC 173717 cade nello stesso intervallo 173xxx-175xxx usato finora in questa pipeline per i record SR Legacy di pesce/crostacei/molluschi — es. 173697 squalo, 173725/175130 pollock, 174190 baccalà, 175135 salmone in scatola — e la versione cotta della stessa trota ha FDC ID 173718, immediatamente adiacente, stesso pattern crudo/cotto consecutivo già visto per altri pesci SR Legacy in questa pipeline), non da una dichiarazione diretta — gap dichiarato, non assunto come certo.
