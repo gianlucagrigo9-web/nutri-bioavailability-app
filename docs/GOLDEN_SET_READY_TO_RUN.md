@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pere, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_pere_in_scatola`. FDC ID 168182 (SR Legacy, "Pears, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, ID consecutivo a quello delle pesche in scatola appena fatte in questo stesso lotto — 168181/168182, stesso filone SR Legacy "Fruits and Fruit Juices" in scatola). Distinta dalla pera fresca (`food_pear_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, prodotto di conservazione diverso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 74,0kcal, proteine 0,24g, grassi 0,18g, carboidrati 19,1g (coerente con lo sciroppo zuccherino), fibra 2,70g, calcio 6,00mg, ferro 0,22mg, zinco 0,080mg, magnesio 4,00mg, rame 0,061mg, selenio 0,10µg, vitamina C 1,10mg, vitamina K (fillochinone) 0,30µg, folato totale 1,00µg, beta-carotene 4,00µg e beta-criptoxantina 2,00µg (entrambi reali e non nulli, bassi ma coerenti con una pera chiara, somma in `other_provitamin_a_carotenoids_mcg`); acido folico, vitamina B12 e alfa-carotene tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168182 e dataType SR Legacy.
+- **Analogia usata**: `food_pear_raw` (pera fresca, già eseguita sul DB reale — stesso frutto, qui in scatola invece che fresca).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per ananas/pesche in scatola e per i succhi di frutta in questa pipeline).
+- **Matrice**: nuova `pere_in_scatola` ("Pere, in scatola, sciroppo pesante").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (pere in scatola, sterilizzate a calore, matrice carotenoide disgregata, beta-carotene/beta-criptoxantina reali e non nulli seppure bassi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale della pera, nota con certezza, stesso precedente di `food_pear_raw`/`food_mela_cotogna_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168182 --food-id=food_pere_in_scatola \
+  --name-it="Pere, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=pere_in_scatola --matrix-description-it="Pere, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168182 --food-id=food_pere_in_scatola \
+  --name-it="Pere, in scatola, sciroppo pesante, scolate" \
+  --matrix-id=pere_in_scatola --matrix-description-it="Pere, in scatola, sciroppo pesante" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pesche, in scatola, sciroppo pesante, scolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_pesche_in_scatola`. FDC ID 168181 (SR Legacy, "Peaches, canned, heavy syrup, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo della pagina "(SR Legacy)"). Distinta dalla pesca gialla fresca (`food_peach_yellow_raw`, già eseguita) — qui il frutto in scatola nello sciroppo, prodotto di conservazione diverso.
