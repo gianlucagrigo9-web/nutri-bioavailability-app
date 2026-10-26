@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Gombo (okra), crudo — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_gombo_raw`. FDC ID 169260 (SR Legacy, "Okra, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Ortaggio mai tentato in questa pipeline, famiglia botanica Malvaceae (*Abelmoschus esculentus*), nessun'altra Malvaceae ancora eseguita.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 33,0kcal, proteine 1,93g, grassi 0,19g, carboidrati 7,45g, fibra 3,20g, calcio 82,0mg, ferro 0,62mg, zinco 0,58mg, magnesio 57,0mg, rame 0,11mg, selenio 0,70µg, vitamina C 23,0mg, vitamina K 31,3µg, folato totale 60,0µg, beta-carotene 416µg e alfa-carotene 27,0µg (entrambi reali e non nulli, coerenti con un ortaggio verde crudo); acido folico, vitamina B12 e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169260 e dataType SR Legacy.
+- **Analogia usata**: `food_fagiolini_raw` (fagiolini crudi, già eseguiti sul DB reale — analogia funzionale "ortaggio a baccello verde crudo" con lo stesso precedente di `carotenoid_matrix_state=raw_intact` e carotenoidi reali non nulli; famiglia botanica reale diversa, Malvaceae non Fabaceae, dichiarata separatamente e non derivata dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `gombo` ("Gombo (okra)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo ortaggio, stessa convenzione già usata per la maggior parte degli ortaggi non a foglia), `carotenoid_matrix_state=raw_intact` (beta-carotene e alfa-carotene reali e non nulli, ortaggio crudo non cotto/non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae` (famiglia botanica reale, *Abelmoschus esculentus*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale dell'ortaggio).
+
+```
+npm run add-food -- --fdc-id=169260 --food-id=food_gombo_raw \
+  --name-it="Gombo (okra), crudo" \
+  --matrix-id=gombo --matrix-description-it="Gombo (okra)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Malvaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169260 --food-id=food_gombo_raw \
+  --name-it="Gombo (okra), crudo" \
+  --matrix-id=gombo --matrix-description-it="Gombo (okra)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Malvaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli dall'occhio, secchi crudi — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_fagioli_dall_occhio_raw`. FDC ID 173758 (SR Legacy, "Cowpeas, common (blackeyes, crowder, southern), mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Legume mai tentato in questa pipeline, distinto da tutti i fagioli *Phaseolus* già fatti (i fagioli dall'occhio sono *Vigna unguiculata*, stesso genere dei fagioli mung/azuki già eseguiti ma specie diversa).
