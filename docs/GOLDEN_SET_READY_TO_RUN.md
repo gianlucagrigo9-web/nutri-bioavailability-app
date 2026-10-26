@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vongole, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantesimo lotto)
+
+- **food_id**: `food_vongole_in_scatola`. FDC ID 171976 (SR Legacy, "Mollusks, clam, mixed species, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_vongole_raw`/`food_vongole_cotte` già eseguiti (crude e cotte al vapore) — qui la conserva in scatola sgocciolata, sulla scia del successo già visto per cannellini/ceci/fagioli neri in scatola.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 142kcal, proteine 24,3g, grassi 1,59g, carboidrati 5,90g, calcio 65,0mg, ferro 2,68mg, zinco 0,84mg, magnesio 32,0mg, rame 0,087mg, selenio 50,5µg, vitamina K (fillochinone) 0,30µg, folato totale 7,00µg e vitamina B12 18,6µg (tutti reali e non nulli); fibra, vitamina C, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un mollusco in scatola senza fibra/carotenoidi vegetali). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171976 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguite sul DB reale — stesso alimento, stato di conservazione diverso).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `vongole_in_scatola` ("Vongole, in scatola").
+- **Attributi**: `is_heme_iron=true` (muscolo animale, stesso precedente di `food_vongole_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del mollusco).
+
+```
+npm run add-food -- --fdc-id=171976 --food-id=food_vongole_in_scatola \
+  --name-it="Vongole, in scatola, sgocciolate" \
+  --matrix-id=vongole_in_scatola --matrix-description-it="Vongole, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171976 --food-id=food_vongole_in_scatola \
+  --name-it="Vongole, in scatola, sgocciolate" \
+  --matrix-id=vongole_in_scatola --matrix-description-it="Vongole, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fagioli neri, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantesimo lotto)
 
 - **food_id**: `food_fagioli_neri_in_scatola`. FDC ID 175188 (SR Legacy, "Beans, black turtle, mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagioli_neri_raw`/`food_fagioli_neri_cotti` già eseguiti (secco crudo e cotto in casa) — qui la conserva in scatola, sulla scia del successo già visto per ceci/cannellini in scatola.
