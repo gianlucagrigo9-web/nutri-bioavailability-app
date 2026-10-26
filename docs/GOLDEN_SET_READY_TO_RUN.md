@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Mais dolce, crudo — preparato 2026-10-26 dal task (quarantacinquesimo lotto, bonus)
+
+- **food_id**: `food_mais_dolce_raw`. FDC ID 169998 (SR Legacy, "Corn, sweet, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Candidato bonus scoperto cercando una sostituzione dopo due ⚠ consecutivi (taccole cotte, palamita): il chicco di mais dolce era già coperto cotto/bollito e in scatola, ma non ancora crudo — gap genuino scoperto durante il lavoro di questo turno.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 86,0kcal, proteine 3,27g, grassi 1,35g, carboidrati 18,7g, fibra 2,00g, calcio 2,00mg, ferro 0,52mg, zinco 0,46mg, magnesio 37,0mg, rame 0,054mg, selenio 0,60µg, vitamina C 6,80mg, vitamina K (fillochinone) 0,30µg, folato totale 42,0µg, beta-carotene 47,0µg, alfa-carotene 16,0µg, beta-criptoxantina 115µg (carotenoidi reali, coerenti con il chicco giallo); vitamina B12 e acido folico esplicitamente riportati come zero (nessuna firma di arricchimento). Sodio 15,0mg/100g, coerente con un ortaggio crudo non trattato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169998 e dataType SR Legacy.
+- **Analogia usata**: `food_mais_dolce_cotto` (mais dolce giallo cotto bollito, già eseguito sul DB reale — stessa pianta *Zea mays*, stesso chicco, qui crudo invece di cotto).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/cereale a chicco, nessun ingrediente animale).
+- **Matrice**: nuova `mais_dolce_raw` ("Mais dolce, crudo").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (stessa famiglia di `food_mais_dolce_cotto`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169998 --food-id=food_mais_dolce_raw \
+  --name-it="Mais dolce, crudo" \
+  --matrix-id=mais_dolce_raw --matrix-description-it="Mais dolce, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mais_dolce_cotto \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169998 --food-id=food_mais_dolce_raw \
+  --name-it="Mais dolce, crudo" \
+  --matrix-id=mais_dolce_raw --matrix-description-it="Mais dolce, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mais_dolce_cotto \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Germogli di soia, cotti (al vapore) — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
 
 - **food_id**: `food_germogli_di_soia_cotti`. FDC ID 168460 (SR Legacy, "Soybeans, mature seeds, sprouted, cooked, steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie *Glycine max* (soia), distinta da `food_germogli_fagiolo_mungo_raw` (*Vigna radiata*, fagiolo mung, già eseguita) e dal crudo `food_germogli_di_soia_raw` (ancora solo "pronto", non eseguito — quindi non usabile come analogia). Variante "al vapore" semplice scelta rispetto a "stir-fried, with salt" (altro record disponibile, FDC 168461) per evitare grasso/sale di cottura aggiunti non dichiarati come nutrienti propri del legume.
