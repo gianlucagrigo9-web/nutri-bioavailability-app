@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Gamberi, crudi — preparato 2026-10-26 dal task (quarantesimo lotto)
+
+- **food_id**: `food_gamberi_raw`. FDC ID 174210 (SR Legacy, "Crustaceans, shrimp, mixed species, raw (may contain additives to retain moisture)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Crostaceo fra i più diffusi nella dieta italiana, mai tentato in questa pipeline nonostante granchio/astice/cozze/vongole/ostriche già eseguiti — probabile svista piuttosto che gap reale di FDC.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 71,0kcal, proteine 13,6g, grassi 1,01g, carboidrati 0,91g, calcio 54,0mg, ferro 0,21mg, zinco 0,97mg, magnesio 22,0mg, rame 0,18mg, selenio 29,6µg, folato totale 19,0µg, vitamina B12 1,11µg e vitamina K (fillochinone, FDC #430) 0,30µg (tutti reali e non nulli); fibra, vitamina C, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un crostaceo senza fibra/carotenoidi vegetali). **Nota di trasparenza sul nome FDC**: la dicitura "(may contain additives to retain moisture)" è parte del nome ufficiale USDA per questo record generico mixed-species (trattamento comune per i gamberi commerciali, non un additivo nascosto non dichiarato) — non è un prodotto composito, resta un singolo ingrediente mono-componente. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174210 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguite sul DB reale — stessa convenzione già usata per granchio/astice: crostacei/molluschi marini, muscolo animale, stesso `is_heme_iron=true` e assenza di carotenoidi/categoria calcio).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: nuova `gamberi` ("Gamberi").
+- **Attributi**: `is_heme_iron=true` (muscolo animale, stessa convenzione di granchio/astice/cozze/vongole/ostriche), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del crostaceo).
+
+```
+npm run add-food -- --fdc-id=174210 --food-id=food_gamberi_raw \
+  --name-it="Gamberi, crudi" \
+  --matrix-id=gamberi --matrix-description-it="Gamberi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174210 --food-id=food_gamberi_raw \
+  --name-it="Gamberi, crudi" \
+  --matrix-id=gamberi --matrix-description-it="Gamberi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Semi di carvi, secchi — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_semi_di_carvi_raw`. FDC ID 170918 (SR Legacy, "Spices, caraway seed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Spezia mai tentata in questa pipeline, stesso filone Apiaceae di aneto/cumino/coriandolo/semi di finocchio già eseguiti.
