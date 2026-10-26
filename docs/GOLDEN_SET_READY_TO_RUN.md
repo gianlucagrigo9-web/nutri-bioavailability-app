@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Triticale, chicco crudo — preparato 2026-10-26 dal task (trentasettesimo lotto)
+
+- **food_id**: `food_triticale_raw`. FDC ID 169718 (SR Legacy, "Triticale" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cereale ibrido grano×segale (×*Triticosecale*) mai tentato in questa pipeline, distinto da entrambi i cereali genitori già eseguiti.
+- **Nutrienti**: **12/17** — mancano fibra, selenio, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero; la pagina mostra anche un'incongruenza nel riquadro riassuntivo che indica fibra "0g" mentre la tabella nutrienti completa non la elenca affatto — presa la tabella completa, non il riquadro riassuntivo, come da convenzione di questa pipeline: fibra trattata come mancante, non zero). Per 100g: energia 336kcal, proteine 13,1g, grassi 2,09g, carboidrati 72,1g, calcio 37,0mg, ferro 2,57mg, zinco 3,45mg, magnesio 130mg, rame 0,46mg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 73,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169718 e dataType SR Legacy. 12/17 è sopra la soglia minima di ~10/17 già accettata in questa coda per i cereali antichi (teff 14/17, amaranto cotto 12/17), gap dichiarato.
+- **Analogia usata**: `food_miglio_raw` (miglio crudo, già eseguito sul DB reale — altro piccolo cereale della stessa famiglia botanica reale Poaceae, stesso stato "chicco crudo intero").
+- **Categoria dieta**: `plant_non_fruit` (cereale, nessun ingrediente animale).
+- **Matrice**: nuova `triticale` ("Triticale, chicco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo cereale), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale, stessa di `food_miglio_raw`), `baseline_cooking_state=raw` (chicco crudo, non cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169718 --food-id=food_triticale_raw \
+  --name-it="Triticale, chicco crudo" \
+  --matrix-id=triticale --matrix-description-it="Triticale, chicco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_miglio_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169718 --food-id=food_triticale_raw \
+  --name-it="Triticale, chicco crudo" \
+  --matrix-id=triticale --matrix-description-it="Triticale, chicco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_miglio_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Tarassaco (dente di leone), foglie crude — preparato 2026-10-26 dal task (trentasettesimo lotto)
 
 - **food_id**: `food_tarassaco_raw`. FDC ID 169226 (SR Legacy, "Dandelion greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Erba spontanea comune anche in Italia (*Taraxacum officinale*), mai tentata in questa pipeline.
