@@ -140,6 +140,30 @@ npm run add-food -- --fdc-id=171624 --food-id=food_wurstel_di_pollo_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Caffè, solubile/istantaneo, in polvere — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_caffe_solubile_raw`. FDC ID 171893 (SR Legacy, "Beverages, coffee, instant, regular, powder" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Distinto e non in conflitto** con "caffè in grani/macinato, crudo" già ⚠ in un lotto precedente (nessun record USDA per il prodotto secco non infuso trovato allora): questo è un prodotto diverso, disidratato per spray-drying/liofilizzazione da caffè già infuso, con un proprio record FDC dedicato.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 353kcal, proteine 12,2g, grassi 0,50g, carboidrati 75,4g, fibra 0g esplicito, calcio 141mg, ferro 4,41mg, zinco 0,35mg, magnesio 327mg, rame 0,14mg, selenio 12,6µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 1,90µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171893 e dataType SR Legacy. **Nota**: l'etichetta arrotondata della stessa pagina riporta 350kcal contro i 353kcal della tabella nutrienti completa — presa la tabella, come da convenzione di questa pipeline.
+- **Analogia usata**: `food_cacao_amaro_raw` (cacao amaro in polvere, non zuccherato, già eseguito sul DB reale — stessa categoria funzionale "polvere vegetale secca concentrata, non zuccherata", stesso tipo di analogia già usata per il curry in polvere in un lotto precedente).
+- **Categoria dieta**: `plant_non_fruit` (seme/bevanda di origine vegetale, nessun ingrediente animale).
+- **Matrice**: nuova `caffe_solubile` ("Caffè solubile").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rubiaceae` (famiglia botanica reale del genere *Coffea*, dichiarata per fatto e non per analogia con il cacao — usato solo per gli attributi categorici non botanici), `baseline_cooking_state=dried` (prodotto disidratato da caffè già infuso/torrefatto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171893 --food-id=food_caffe_solubile_raw \
+  --name-it="Caffè, solubile/istantaneo, in polvere" \
+  --matrix-id=caffe_solubile --matrix-description-it="Caffè solubile" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cacao_amaro_raw \
+  --botanical-family=Rubiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171893 --food-id=food_caffe_solubile_raw \
+  --name-it="Caffè, solubile/istantaneo, in polvere" \
+  --matrix-id=caffe_solubile --matrix-description-it="Caffè solubile" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cacao_amaro_raw \
+  --botanical-family=Rubiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
