@@ -122,6 +122,32 @@ npm run add-food -- --fdc-id=171099 --food-id=food_pollo_in_scatola \
   --diet-category=meat_fish --apply
 ```
 
+### Carne di manzo in scatola (corned beef) — preparato 2026-10-26 dal task (quarantunesimo lotto, completamento coda)
+
+- **food_id**: `food_manzo_in_scatola`. FDC ID 170602 (SR Legacy, "Beef, cured, corned beef, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: il prodotto è "cured" (salato/stagionato con nitriti) — a differenza del caso pane/pasta, qui non è un segnale di mismatch: il corned beef è per definizione carne di manzo salmistrata, "cured" è la caratteristica che definisce il prodotto richiesto, non un ingrediente nascosto diverso dall'alimento cercato. Distinto da `food_beef_ground_raw`/`food_beef_ground_cooked`/`food_bistecca_di_manzo_raw`/`food_bistecca_di_manzo_cotta` (già eseguiti) — FDC ID diverso, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 250kcal, proteine 27,1g, grassi 14,9g, carboidrati 0g, fibra 0g, calcio 12,0mg, ferro 2,08mg, zinco 3,57mg, magnesio 14,0mg, rame 0,064mg, selenio 42,9µg, vitamina K (fillochinone) 1,60µg, folato totale 9,00µg, vitamina B12 1,62µg (tutti reali e coerenti con la carne di manzo, nessun valore anomalo); vitamina C, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un prodotto animale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170602 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, entrambi carne cotta/trattata a calore, più vicino alla conserva in scatola del crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne bovina).
+- **Matrice**: nuova `manzo_in_scatola` ("Carne di manzo, in scatola").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170602 --food-id=food_manzo_in_scatola \
+  --name-it="Carne di manzo, in scatola (corned beef)" \
+  --matrix-id=manzo_in_scatola --matrix-description-it="Carne di manzo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170602 --food-id=food_manzo_in_scatola \
+  --name-it="Carne di manzo, in scatola (corned beef)" \
+  --matrix-id=manzo_in_scatola --matrix-description-it="Carne di manzo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
