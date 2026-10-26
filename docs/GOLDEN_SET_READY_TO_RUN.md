@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Portulaca, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_portulaca_raw`. FDC ID 169274 ("Purslane, raw" — pagina getfoodfacts.com dedicata, categoria "USDA Standard Reference Vegetables and Vegetable Products" nell'intestazione e footer "Data source: USDA FoodData Central (FDC ID: 169274). USDA Standard Reference database" — **nota di trasparenza sul dataType**: la pagina non scrive mai letteralmente la stringa "SR Legacy" (a differenza della maggior parte delle fonti usate in questa coda), ma la dicitura "USDA Standard Reference" e l'intervallo dell'FDC ID (169xxx, stesso intervallo di decine di altri record SR Legacy già usati in questa pipeline, es. 169210/169260/169308) sono coerenti con SR Legacy; nessun'altra fonte con un FDC ID alternativo trovata per questo alimento. Erba spontanea commestibile mai tentata in questa pipeline (famiglia botanica reale Portulacaceae, *Portulaca oleracea* — comune anche come insalata selvatica in Italia).
+- **Nutrienti**: **12/17** — mancano fibra, vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina (non presenti nella tabella dettagliata della fonte, non assunti zero — **nota**: la pagina riporta solo "Vitamina A, 1320 IU" in una sezione aggregata, segno che il record FDC sorgente probabilmente ha i carotenoidi ma questa fonte secondaria non li scompone nella tabella dettagliata; gap dichiarato, non forzato). Per 100g: energia 20,0kcal, proteine 2,0g, grassi 0,4g, carboidrati 3,4g, calcio 65,0mg, ferro 2,0mg, zinco 0,2mg, magnesio 68,0mg, rame 0,1mg, selenio 0,9µg, vitamina C 21,0mg, folato totale 12,0µg; acido folico e vitamina B12 esplicitamente riportati come zero.
+- **Analogia usata**: `food_scarola_raw` (scarola cruda, già eseguita sul DB reale — stessa convenzione già usata per erbe/verdure a foglia senza una pianta della stessa famiglia botanica reale ancora presente nel DB; famiglia botanica reale Portulacaceae dichiarata separatamente, non derivata dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (verdura/erba spontanea).
+- **Matrice**: nuova `portulaca` ("Portulaca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna fonte consultata quantifica l'acido ossalico per questo alimento, nonostante la portulaca sia talvolta citata come verdura ad alto contenuto di oxalati in letteratura: non assunto senza una fonte quantitativa dedicata, Regola 1), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nella tabella dettagliata della fonte, non classificabili, a differenza di un valore 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Portulacaceae` (famiglia botanica reale, *Portulaca oleracea*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale della pianta).
+
+```
+npm run add-food -- --fdc-id=169274 --food-id=food_portulaca_raw \
+  --name-it="Portulaca, cruda" \
+  --matrix-id=portulaca --matrix-description-it="Portulaca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Portulacaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169274 --food-id=food_portulaca_raw \
+  --name-it="Portulaca, cruda" \
+  --matrix-id=portulaca --matrix-description-it="Portulaca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Portulacaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagna d'acqua, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_castagna_d_acqua_raw`. FDC ID 170066 (SR Legacy, "Waterchestnuts, chinese, (matai), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Tubero acquatico mai tentato in questa pipeline, famiglia botanica reale Cyperaceae (*Eleocharis dulcis*, un giunco, non una vera "castagna" nonostante il nome comune — nessun'altra Cyperaceae ancora eseguita).
