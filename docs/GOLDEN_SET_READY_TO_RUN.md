@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Borragine, foglie crude — preparato 2026-10-26 dal task (trentasettesimo lotto)
+
+- **food_id**: `food_borragine_raw`. FDC ID 170481 (SR Legacy, "Borage, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Erba spontanea europea (*Borago officinalis*) mai tentata in questa pipeline, a rischio di assenza USDA segnalato nella voce di coda — trovato invece un record pulito al primo tentativo.
+- **Nutrienti**: **12/17** — mancano fibra, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero; la pagina mostra la stessa incongruenza già vista per il triticale in questo stesso lotto, fibra "0g" nel riquadro riassuntivo ma assente dalla tabella nutrienti completa — presa la tabella completa, fibra trattata come mancante). Per 100g: energia 21,0kcal, proteine 1,80g, grassi 0,70g, carboidrati 3,06g, calcio 93,0mg, ferro 3,30mg, zinco 0,20mg, magnesio 52,0mg, rame 0,13mg, selenio 0,90µg, vitamina C 35,0mg, vitamina B12 0µg esplicito, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170481 e dataType SR Legacy. 12/17 è sopra la soglia minima di ~10/17 già accettata in questa coda (stesso livello del triticale appena preparato in questo lotto), gap dichiarato.
+- **Analogia usata**: `food_scarola_raw` (scarola cruda, già eseguita sul DB reale — stessa categoria funzionale "verdura/erba a foglia cruda", stesso trattamento di `matrix_category_calcium`/`carotenoid_matrix_state` omessi per dati mancanti nel record; famiglia botanica reale diversa, Boraginaceae non Asteraceae, dichiarata separatamente e non derivata dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (erba/verdura a foglia, nessun ingrediente animale).
+- **Matrice**: nuova `borragine` ("Borragine, foglie").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questa foglia nel record FDC), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Boraginaceae` (famiglia botanica reale, *Borago officinalis* — prima pianta di questa famiglia in questa pipeline), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170481 --food-id=food_borragine_raw \
+  --name-it="Borragine, foglie crude" \
+  --matrix-id=borragine --matrix-description-it="Borragine, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Boraginaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170481 --food-id=food_borragine_raw \
+  --name-it="Borragine, foglie crude" \
+  --matrix-id=borragine --matrix-description-it="Borragine, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Boraginaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Triticale, chicco crudo — preparato 2026-10-26 dal task (trentasettesimo lotto)
 
 - **food_id**: `food_triticale_raw`. FDC ID 169718 (SR Legacy, "Triticale" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cereale ibrido grano×segale (×*Triticosecale*) mai tentato in questa pipeline, distinto da entrambi i cereali genitori già eseguiti.
