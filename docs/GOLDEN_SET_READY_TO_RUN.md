@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Patata dolce, in scatola, sciroppata — preparato 2026-10-26 dal task (quarantaduesimo lotto)
+
+- **food_id**: `food_patata_dolce_in_scatola`. FDC ID 170084 (SR Legacy, "Sweet potato, canned, syrup pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: l'unica variante con un FDC ID verificabile è "syrup pack" (sciroppata, con zucchero aggiunto) — nessuna variante "senza sciroppo"/"senza sale aggiunto" trovata con un FDC ID citato; nome italiano corretto di conseguenza ("sciroppata", non generico "in scatola"), non un mismatch nascosto. Distinta da `food_patata_dolce_raw` (crudo, già eseguito) e `food_patata_dolce_cotta` (cotta al forno, già pronta) — FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 108kcal, proteine 1,28g, grassi 0,32g, carboidrati 25,4g (coerente con l'aggiunta di sciroppo, più alto del crudo ~20g), fibra 3,00g, calcio 17,0mg, ferro 0,95mg, zinco 0,16mg, magnesio 12,0mg, rame 0,17mg, selenio 0,80µg, vitamina C 10,8mg, vitamina K (fillochinone) 2,60µg, folato totale 8,00µg, beta-carotene 5501µg (molto alto, pienamente coerente con la patata dolce, nessun segnale di diluizione); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170084 e dataType SR Legacy.
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, già eseguita sul DB reale — unico alimento della stessa specie *Ipomoea batatas* presente nel database in forma eseguita; `food_patata_dolce_cotta` resta solo "pronta", non eseguita, quindi non usabile come analogia per questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `patata_dolce_in_scatola` ("Patata dolce, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_patata_dolce_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (prodotto in scatola, sterilizzato a calore, matrice carotenoide disgregata, beta-carotene molto alto e reale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Convolvulaceae` (famiglia reale della patata dolce, nota con certezza, stesso precedente di `food_patata_dolce_raw` — diversa dalla patata comune Solanaceae), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170084 --food-id=food_patata_dolce_in_scatola \
+  --name-it="Patata dolce, in scatola, sciroppata" \
+  --matrix-id=patata_dolce_in_scatola --matrix-description-it="Patata dolce, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Convolvulaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170084 --food-id=food_patata_dolce_in_scatola \
+  --name-it="Patata dolce, in scatola, sciroppata" \
+  --matrix-id=patata_dolce_in_scatola --matrix-description-it="Patata dolce, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Convolvulaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ostriche, in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
 
 - **food_id**: `food_ostriche_in_scatola`. FDC ID 171981 (SR Legacy, "Mollusks, oyster, eastern, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_ostriche_raw` (FDC 175172, crudo, già eseguito) e `food_ostriche_cotte` (FDC 175173, cotto a calore secco, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
