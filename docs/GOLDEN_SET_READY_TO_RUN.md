@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Patate bianche, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantacinquesimo lotto)
+
+- **food_id**: `food_patate_in_scatola`. FDC ID 170444 (SR Legacy, "Potatoes, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalla patata dolce in scatola già "pronta" (`food_patata_dolce_in_scatola`, specie botanica diversa, *Ipomoea batatas* vs *Solanum tuberosum*) e dalla patata cruda/cotta già eseguite — prima volta che la patata comune (bianca) viene tentata nella sua forma di conserva.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina (non riportati sulla pagina consultata, non assunti zero — coerente con un tubero senza pigmenti carotenoidi significativi). Per 100g: energia 60,0kcal, proteine 1,41g, grassi 0,21g, carboidrati 13,6g, fibra 2,30g, calcio 5,00mg, ferro 1,26mg, zinco 0,28mg, magnesio 14,0mg, rame 0,057mg, selenio 0,90µg, vitamina C 5,10mg, folato totale 6,00µg; vitamina B12 e acido folico esplicitamente riportati come zero (nessuna firma di arricchimento, coerente con un prodotto vegetale non trattato). Sodio 219mg/100g — più alto del tubero crudo, coerente con il liquido di governo salato standard di una conserva in scatola (non è uno dei 17 nutrienti tracciati, non blocca l'inserimento, stesso trattamento già dato a legumi/verdure in scatola in questa pipeline). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170444 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguita sul DB reale — stesso tubero, stessa famiglia botanica, forma di conservazione invece di crudo; nessun alimento "patata in scatola" ancora eseguito da cui ereditare l'analogia diretta).
+- **Categoria dieta**: `plant_non_fruit` (tubero in conserva, nessun ingrediente animale).
+- **Matrice**: nuova `patate_in_scatola` ("Patate bianche, in scatola, sgocciolate").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non un ortaggio a foglia, non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati dalla fonte, non applicabile a un tubero senza pigmenti significativi, stesso trattamento già dato a farina di manioca/amido di mais), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa famiglia di `food_potato_raw`), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170444 --food-id=food_patate_in_scatola \
+  --name-it="Patate bianche, in scatola, sgocciolate" \
+  --matrix-id=patate_in_scatola --matrix-description-it="Patate bianche, in scatola, sgocciolate" \
+  --baseline-cooking-state=canned --analogy-food-id=food_potato_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170444 --food-id=food_patate_in_scatola \
+  --name-it="Patate bianche, in scatola, sgocciolate" \
+  --matrix-id=patate_in_scatola --matrix-description-it="Patate bianche, in scatola, sgocciolate" \
+  --baseline-cooking-state=canned --analogy-food-id=food_potato_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salmone rosa, in scatola, sgocciolato, senza pelle e lische — preparato 2026-10-26 dal task (quarantaquattresimo lotto, bonus)
 
 - **food_id**: `food_salmone_rosa_in_scatola`. FDC ID 173724 (SR Legacy, "Fish, Salmon, pink, canned, drained solids, without skin and bones" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Bonus scoperto nello stesso filone "specie distinta già tracciata da USDA" del tonno bianco sopra**: specie *Oncorhynchus gorbuscha* (salmone rosa/pink), DISTINTA da `food_salmone_in_scatola` già nel DB (FDC 175135, salmone "chum", *Oncorhynchus keta*, con lische) — specie diversa E preparazione diversa (senza pelle/lische vs con lische), nessun doppione mascherato.
