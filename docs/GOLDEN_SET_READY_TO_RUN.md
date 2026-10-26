@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagiolini, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_fagiolini_in_scatola`. FDC ID 169143 (SR Legacy, "Beans, snap, green, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagiolini_raw` (crudo) e `food_fagiolini_cotti` (FDC 169141, bollito, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 21,0kcal, proteine 1,05g, grassi 0,41g, carboidrati 4,19g, fibra 1,90g, calcio 37,0mg, ferro 0,89mg, zinco 0,19mg, magnesio 13,0mg, rame 0,039mg, selenio 0,40µg, vitamina C 2,80mg, vitamina K (fillochinone) 38,9µg, folato totale 24,0µg, beta-carotene 122µg, alfa-carotene 156µg e beta-criptoxantina 24,0µg (tutti reali e non nulli, coerenti con un ortaggio verde, somma carotenoidi in `other_provitamin_a_carotenoids_mcg`); acido folico e vitamina B12 esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169143 e dataType SR Legacy.
+- **Analogia usata**: `food_fagiolini_cotti` (fagiolini bolliti, già eseguiti sul DB reale — stesso ortaggio, entrambi trattati a calore, più vicino alla conserva in scatola del crudo).
+- **Categoria dieta**: `plant_non_fruit` (legume/ortaggio a baccello).
+- **Matrice**: nuova `fagiolini_in_scatola` ("Fagiolini, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_fagiolini_raw`/`food_fagiolini_cotti`), `carotenoid_matrix_state=cooked_or_disrupted` (fagiolini in scatola, sterilizzati a calore, matrice carotenoide disgregata, carotenoidi reali e non nulli, stesso precedente del bollito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale del fagiolino, nota con certezza, stesso precedente di `food_fagiolini_raw`/`food_fagiolini_cotti`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169143 --food-id=food_fagiolini_in_scatola \
+  --name-it="Fagiolini, in scatola, sgocciolati" \
+  --matrix-id=fagiolini_in_scatola --matrix-description-it="Fagiolini, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagiolini_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169143 --food-id=food_fagiolini_in_scatola \
+  --name-it="Fagiolini, in scatola, sgocciolati" \
+  --matrix-id=fagiolini_in_scatola --matrix-description-it="Fagiolini, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagiolini_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mandarini, in scatola, nel loro succo, scolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_mandarini_in_scatola`. FDC ID 168184 (SR Legacy, "Tangerines, (mandarin oranges), canned, juice pack, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, ID numericamente consecutivo a pesche/pere in scatola appena fatte in questo lotto — 168181/168182/168184 — stesso filone SR Legacy di conserve di frutta, ulteriore conferma di affidabilità). Distinto dal mandarino fresco (`food_mandarini_raw`, già eseguito) — qui il frutto in scatola nel proprio succo e sgocciolato, prodotto di conservazione diverso, corrispondenza esatta con la forma "scolati" richiesta in coda (a differenza delle ciliegie appena valutate in questo stesso lotto, dove nessuna variante "drained" aveva un FDC ID citabile).
