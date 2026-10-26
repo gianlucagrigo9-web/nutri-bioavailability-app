@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagioli rossi (kidney), in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
+
+- **food_id**: `food_fagioli_rossi_in_scatola`. FDC ID 175195 (SR Legacy, "Beans, kidney, red, mature seeds, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_kidney_beans_boiled` (Golden Set originale, bollito) — FDC ID diverso, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 81,0kcal, proteine 5,22g, grassi 0,36g, carboidrati 14,8g, fibra 4,30g, calcio 29,0mg, ferro 1,25mg, zinco 0,62mg, magnesio 30,0mg, rame 0,15mg, selenio 1,10µg, vitamina C 0,80mg, vitamina K (fillochinone) 4,10µg, folato totale 23,0µg (tutti reali e coerenti con un legume in scatola); acido folico, vitamina B12, beta-carotene, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un seme senza pigmento carotenoide). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175195 e dataType SR Legacy.
+- **Analogia usata**: `food_kidney_beans_boiled` (fagioli rossi bolliti, Golden Set originale, già eseguito sul DB reale — stesso legume, entrambi trattati a calore, più vicino alla conserva in scatola del crudo, stesso `botanical_family=Fabaceae`).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_rossi_in_scatola` ("Fagioli rossi (kidney), in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_kidney_beans_boiled`), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, coerente con un legume senza pigmento, stessa convenzione già usata per fagioli neri/cannellini in scatola), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale del fagiolo, nota con certezza, stesso precedente di `food_kidney_beans_boiled`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175195 --food-id=food_fagioli_rossi_in_scatola \
+  --name-it="Fagioli rossi (kidney), in scatola" \
+  --matrix-id=fagioli_rossi_in_scatola --matrix-description-it="Fagioli rossi (kidney), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175195 --food-id=food_fagioli_rossi_in_scatola \
+  --name-it="Fagioli rossi (kidney), in scatola" \
+  --matrix-id=fagioli_rossi_in_scatola --matrix-description-it="Fagioli rossi (kidney), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Patata dolce, in scatola, sciroppata — preparato 2026-10-26 dal task (quarantaduesimo lotto)
 
 - **food_id**: `food_patata_dolce_in_scatola`. FDC ID 170084 (SR Legacy, "Sweet potato, canned, syrup pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: l'unica variante con un FDC ID verificabile è "syrup pack" (sciroppata, con zucchero aggiunto) — nessuna variante "senza sciroppo"/"senza sale aggiunto" trovata con un FDC ID citato; nome italiano corretto di conseguenza ("sciroppata", non generico "in scatola"), non un mismatch nascosto. Distinta da `food_patata_dolce_raw` (crudo, già eseguito) e `food_patata_dolce_cotta` (cotta al forno, già pronta) — FDC ID diverso da entrambi, nessun doppione mascherato.
