@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Barbabietola, in scatola, senza sale aggiunto (con il liquido di governo) — preparato 2026-10-26 dal task (quarantunesimo lotto, completamento coda)
+
+- **food_id**: `food_barbabietola_in_scatola`. FDC ID 168507 (SR Legacy, "Beets, canned, no salt added, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: la voce di coda nel PRD chiedeva "sgocciolata" (drained solids); nessuna fonte consultata cita un FDC ID per quella variante specifica della barbabietola (solo pagine che mescolano SR Legacy/AFCD senza FDC ID dichiarato, stesso tipo di gap già incontrato per la barbabietola cotta in un lotto precedente) — usata invece la variante "no salt added, solids and liquids", con nome italiano corretto di conseguenza; non un mismatch nascosto, un prodotto in scatola comunque genuino. Distinta da `food_barbabietola_rossa_raw` (crudo, già eseguito) — FDC ID diverso, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 28,0kcal, proteine 0,80g, grassi 0,070g, carboidrati 6,57g, fibra 1,20g, calcio 13,0mg, ferro 0,63mg, zinco 0,23mg, magnesio 16,0mg, rame 0,097mg, selenio 0,50µg, vitamina C 2,80mg, vitamina K (fillochinone) 0,10µg, folato totale 29,0µg, beta-carotene 13,0µg (reale e coerente con un ortaggio pigmentato, valore basso per la cottura/sterilizzazione); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168507 e dataType SR Legacy.
+- **Analogia usata**: `food_barbabietola_rossa_raw` (barbabietola rossa cruda, già eseguita sul DB reale — unico alimento della stessa specie *Beta vulgaris* presente nel database: la barbabietola cotta/bollita resta `⚠` in questa pipeline, nessun record FDC con FDC ID verificabile mai trovato per quella forma, quindi non disponibile come analogia più vicina).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `barbabietola_in_scatola` ("Barbabietola, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_barbabietola_rossa_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (prodotto in scatola, sterilizzato a calore, matrice carotenoide disgregata — coerente con il beta-carotene basso ma non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia reale della barbabietola, *Beta vulgaris* — stessa famiglia di spinaci/bietole in questa pipeline, nota con certezza), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168507 --food-id=food_barbabietola_in_scatola \
+  --name-it="Barbabietola, in scatola, senza sale aggiunto" \
+  --matrix-id=barbabietola_in_scatola --matrix-description-it="Barbabietola, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_barbabietola_rossa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168507 --food-id=food_barbabietola_in_scatola \
+  --name-it="Barbabietola, in scatola, senza sale aggiunto" \
+  --matrix-id=barbabietola_in_scatola --matrix-description-it="Barbabietola, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_barbabietola_rossa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
