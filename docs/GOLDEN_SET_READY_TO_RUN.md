@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli dall'occhio, secchi crudi — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_fagioli_dall_occhio_raw`. FDC ID 173758 (SR Legacy, "Cowpeas, common (blackeyes, crowder, southern), mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Legume mai tentato in questa pipeline, distinto da tutti i fagioli *Phaseolus* già fatti (i fagioli dall'occhio sono *Vigna unguiculata*, stesso genere dei fagioli mung/azuki già eseguiti ma specie diversa).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 336kcal, proteine 23,5g, grassi 1,26g, carboidrati 60,0g, fibra 10,6g, calcio 110mg, ferro 8,27mg, zinco 3,37mg, magnesio 184mg, rame 0,84mg, selenio 9,00µg, vitamina C 1,50mg, vitamina K 5,00µg, folato totale 633µg, beta-carotene 30,0µg (reale e non nullo, coerente con un seme crudo non disgregato); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173758 e dataType SR Legacy.
+- **Analogia usata**: `food_fave_secche_raw` (fave secche crude, già eseguite sul DB reale — stessa famiglia botanica Fabaceae, stesso stato "seme secco crudo intero", stesso precedente di `carotenoid_matrix_state=raw_intact` con beta-carotene reale non nullo, a differenza dei fagioli a tegumento chiaro/scuro privi di carotenoidi già fatti in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_dall_occhio` ("Fagioli dall'occhio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo legume, stessa convenzione già usata per gli altri fagioli secchi), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, seme crudo non cotto/non disgregato, stesso precedente di `food_fave_secche_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato alto ma naturale del legume).
+
+```
+npm run add-food -- --fdc-id=173758 --food-id=food_fagioli_dall_occhio_raw \
+  --name-it="Fagioli dall'occhio, secchi crudi" \
+  --matrix-id=fagioli_dall_occhio --matrix-description-it="Fagioli dall'occhio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_secche_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173758 --food-id=food_fagioli_dall_occhio_raw \
+  --name-it="Fagioli dall'occhio, secchi crudi" \
+  --matrix-id=fagioli_dall_occhio --matrix-description-it="Fagioli dall'occhio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fave_secche_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli cannellini, in scatola, sgocciolati — preparato 2026-10-26 dal task (trentottesimo lotto, bonus oltre i candidati originari)
 
 - **food_id**: `food_fagioli_cannellini_scatola_raw`. FDC ID 175204 (SR Legacy, "Beans, white, mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Stessa linea cultivar "white beans" già usata per `food_fagioli_cannellini_secchi_raw` (FDC 175202, secco crudo, già eseguito) ma FDC ID diverso e prodotto distinto (in scatola, non secco crudo) — non un doppione mascherato, verificato.
