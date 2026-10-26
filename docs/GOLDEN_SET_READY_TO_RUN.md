@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Macis (involucro secco della noce moscata), macinato — preparato 2026-10-26 dal task (trentottesimo lotto)
+
+- **food_id**: `food_macis_raw`. FDC ID 170927 (SR Legacy, "Spices, mace, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dalla noce moscata già eseguita (`food_noce_moscata_raw`): stessa pianta *Myristica fragrans*, ma il macis è l'involucro carnoso (arillo) che avvolge il seme, non il seme stesso — prodotto botanicamente e commercialmente distinto, con un proprio record FDC.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero). Per 100g: energia 475kcal (etichetta arrotonda a 480kcal, differenza di arrotondamento non bloccante, stesso tipo già visto altrove in questa coda), proteine 6,71g, grassi 32,4g, carboidrati 50,5g, fibra 20,2g, calcio 252mg, ferro 13,9mg, zinco 2,30mg, magnesio 163mg, rame 2,47mg, selenio 2,70µg, vitamina C 21,0mg, folato totale 76,0µg, acido folico 0µg (zero esplicito, nessuna firma di arricchimento), vitamina B12 0µg (zero esplicito, coerente con una spezia vegetale). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170927 e dataType SR Legacy.
+- **Analogia usata**: `food_noce_moscata_raw` (noce moscata macinata, già eseguita sul DB reale — stessa pianta *Myristica fragrans*, stessa famiglia botanica, parte diversa del frutto).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `macis` ("Macis").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non classificabili, a differenza della noce moscata che ha beta-carotene reale non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myristicaceae` (stesso precedente di `food_noce_moscata_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170927 --food-id=food_macis_raw \
+  --name-it="Macis (involucro secco della noce moscata), macinato" \
+  --matrix-id=macis --matrix-description-it="Macis" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noce_moscata_raw \
+  --botanical-family=Myristicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170927 --food-id=food_macis_raw \
+  --name-it="Macis (involucro secco della noce moscata), macinato" \
+  --matrix-id=macis --matrix-description-it="Macis" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noce_moscata_raw \
+  --botanical-family=Myristicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di lime, crudo — preparato 2026-10-26 dal task (trentottesimo lotto)
 
 - **food_id**: `food_succo_di_lime_raw`. FDC ID 168156 (SR Legacy, "Lime juice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dal lime fresco (`food_lime_raw`, già eseguito) e dai succhi di limone/arancia/pompelmo/uva/mela già fatti: qui il succo spremuto di lime, prodotto distinto con un proprio record FDC.
