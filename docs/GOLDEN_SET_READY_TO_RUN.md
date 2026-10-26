@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Mandarini, in scatola, nel loro succo, scolati — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_mandarini_in_scatola`. FDC ID 168184 (SR Legacy, "Tangerines, (mandarin oranges), canned, juice pack, drained" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, ID numericamente consecutivo a pesche/pere in scatola appena fatte in questo lotto — 168181/168182/168184 — stesso filone SR Legacy di conserve di frutta, ulteriore conferma di affidabilità). Distinto dal mandarino fresco (`food_mandarini_raw`, già eseguito) — qui il frutto in scatola nel proprio succo e sgocciolato, prodotto di conservazione diverso, corrispondenza esatta con la forma "scolati" richiesta in coda (a differenza delle ciliegie appena valutate in questo stesso lotto, dove nessuna variante "drained" aveva un FDC ID citabile).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 38,0kcal, proteine 0,75g, grassi 0,040g, carboidrati 9,41g (basso, coerente con il succo proprio senza sciroppo aggiunto invece che con sciroppo zuccherino), fibra 1,20g, calcio 12,0mg, ferro 0,27mg, zinco 0,53mg, magnesio 11,0mg, rame 0,041mg, selenio 0,40µg, vitamina C 33,9mg (alta, coerente con un agrume), folato totale 5,00µg, beta-carotene 298µg, alfa-carotene 204µg e beta-criptoxantina 775µg (tutti reali e alti, coerenti con un agrume pigmentato, somma carotenoidi in `other_provitamin_a_carotenoids_mcg`); vitamina K, acido folico e vitamina B12 tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168184 e dataType SR Legacy.
+- **Analogia usata**: `food_mandarini_raw` (mandarino fresco, già eseguito sul DB reale — stesso frutto, qui in scatola nel proprio succo invece che fresco).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di conservazione/trasformato — stessa convenzione già usata per ananas/pesche/pere/albicocche/ciliegie in scatola).
+- **Matrice**: nuova `mandarini_in_scatola` ("Mandarini, in scatola, nel loro succo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (mandarini in scatola, sterilizzati a calore, matrice carotenoide disgregata, carotenoidi reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (famiglia reale del mandarino, nota con certezza, stesso precedente di `food_mandarini_raw`/`food_kumquat_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168184 --food-id=food_mandarini_in_scatola \
+  --name-it="Mandarini, in scatola, nel loro succo, scolati" \
+  --matrix-id=mandarini_in_scatola --matrix-description-it="Mandarini, in scatola, nel loro succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168184 --food-id=food_mandarini_in_scatola \
+  --name-it="Mandarini, in scatola, nel loro succo, scolati" \
+  --matrix-id=mandarini_in_scatola --matrix-description-it="Mandarini, in scatola, nel loro succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ciliegie dolci, in scatola, sciroppo leggero, con il liquido di governo — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_ciliegie_in_scatola`. FDC ID 173959 (SR Legacy, "Cherries, sweet, canned, light syrup pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sulla forma**: la coda richiedeva "in scatola/sciroppate, sgocciolate" (come per pesche/pere/albicocche appena fatte in questo lotto), ma per le ciliegie **nessuna fonte consultata** cita un FDC ID per la variante "drained"/sgocciolata — getfoodfacts.com indicizza solo varianti "solids and liquids" (col liquido di governo: extra heavy syrup FDC 171720, water pack FDC 173957, juice pack FDC 173958, light syrup FDC 173959) e recipal.com cita una variante "pitted, heavy syrup, drained" ma senza alcun FDC ID verificabile (solo un ID interno recipal). Usata quindi la variante "light syrup pack, solids and liquids" (meno dolcificata delle alternative "extra heavy syrup", più rappresentativa di un prodotto comune) con il nome italiano corretto di conseguenza ("con il liquido di governo", non "sgocciolate") — scelta trasparente, non un mismatch nascosto.
