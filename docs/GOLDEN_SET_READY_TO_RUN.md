@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollock (merluzzo dell'Alaska), crudo — preparato 2026-10-26 dal task (quarantesimo lotto)
+
+- **food_id**: `food_pollock_raw`. FDC ID 175130 (SR Legacy, "Fish, pollock, Alaska, raw (may contain additives to retain moisture)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Pesce nordatlantico (*Gadus chalcogrammus*, famiglia Gadidae) mai tentato in questa pipeline nonostante merluzzo/nasello/eglefino (stessa famiglia, generi diversi) già eseguiti. **Nota di trasparenza**: esiste anche un record FDC 173725 con lo stesso nome senza la dicitura "may contain additives" ma con solo ~8/17 nutrienti compilati (selenio, vitamina C, vitamina K, folato, B12 e carotenoidi tutti assenti dalla tabella, fibra ambigua) — scartato a favore di questo record, molto più completo, coerente con la stessa dicitura già accettata per i gamberi in questo stesso lotto (non un additivo nascosto non dichiarato, solo la variante USDA con più nutrienti compilati).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 56,0kcal, proteine 12,2g, grassi 0,41g, calcio 15,0mg, ferro 0,22mg, zinco 0,31mg, magnesio 16,0mg, rame 0,031mg, selenio 15,9µg, folato totale 3,00µg e vitamina B12 1,63µg (tutti reali e non nulli); carboidrati, fibra, vitamina C, vitamina K (fillochinone), acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti — coerente con un pesce magro senza fibra/carotenoidi). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175130 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa famiglia botanica/zoologica Gadidae, stessa categoria funzionale "carne magra bianca a basso contenuto di grasso", stesso attributo `is_heme_iron` usato per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pollock` ("Pollock (merluzzo dell'Alaska)").
+- **Attributi**: `is_heme_iron=true` (muscolo animale, stesso precedente di `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del pesce).
+
+```
+npm run add-food -- --fdc-id=175130 --food-id=food_pollock_raw \
+  --name-it="Pollock (merluzzo dell'Alaska), crudo" \
+  --matrix-id=pollock --matrix-description-it="Pollock (merluzzo dell'Alaska)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175130 --food-id=food_pollock_raw \
+  --name-it="Pollock (merluzzo dell'Alaska), crudo" \
+  --matrix-id=pollock --matrix-description-it="Pollock (merluzzo dell'Alaska)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Gamberi, crudi — preparato 2026-10-26 dal task (quarantesimo lotto)
 
 - **food_id**: `food_gamberi_raw`. FDC ID 174210 (SR Legacy, "Crustaceans, shrimp, mixed species, raw (may contain additives to retain moisture)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Crostaceo fra i più diffusi nella dieta italiana, mai tentato in questa pipeline nonostante granchio/astice/cozze/vongole/ostriche già eseguiti — probabile svista piuttosto che gap reale di FDC.
