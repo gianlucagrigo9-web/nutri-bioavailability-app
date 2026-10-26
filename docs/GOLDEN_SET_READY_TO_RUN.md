@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Tarassaco (dente di leone), foglie crude — preparato 2026-10-26 dal task (trentasettesimo lotto)
+
+- **food_id**: `food_tarassaco_raw`. FDC ID 169226 (SR Legacy, "Dandelion greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Erba spontanea comune anche in Italia (*Taraxacum officinale*), mai tentata in questa pipeline.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 45,0kcal, proteine 2,70g, grassi 0,70g, carboidrati 9,20g, fibra 3,50g, calcio 187mg, ferro 3,10mg, zinco 0,41mg, magnesio 36,0mg, rame 0,17mg, selenio 0,50µg, vitamina C 35,0mg, vitamina B12 0µg esplicito, folato totale 27,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 778µg (molto alta, coerente con una verdura a foglia verde scura), beta-carotene 5.854µg (alto, coerente con una foglia verde scura cruda), alfa-carotene 363µg, beta-criptoxantina 121µg (entrambi reali e non nulli). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169226 e dataType SR Legacy.
+- **Analogia usata**: `food_cicoria_selvatica_raw` (cicoria selvatica cruda, già eseguita sul DB reale — stessa famiglia botanica reale Asteraceae, stessa categoria "erba/verdura a foglia selvatica cruda", stesso precedente di `carotenoid_matrix_state=raw_intact` e di `matrix_category_calcium` omesso per mancanza di un dato specifico sull'acido ossalico).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia, nessun ingrediente animale).
+- **Matrice**: nuova `tarassaco` ("Tarassaco (dente di leone), foglie").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_cicoria_selvatica_raw`, nessun dato specifico sull'acido ossalico per questa foglia nel record FDC), `carotenoid_matrix_state=raw_intact` (beta-carotene/alfa-carotene/beta-criptoxantina tutti reali e non nulli, foglia cruda non cotta/non disgregata, stesso precedente di `food_cicoria_selvatica_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (famiglia reale, stessa di `food_cicoria_selvatica_raw`/`food_scarola_raw`/`food_carciofi_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169226 --food-id=food_tarassaco_raw \
+  --name-it="Tarassaco (dente di leone), foglie crude" \
+  --matrix-id=tarassaco --matrix-description-it="Tarassaco (dente di leone), foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169226 --food-id=food_tarassaco_raw \
+  --name-it="Tarassaco (dente di leone), foglie crude" \
+  --matrix-id=tarassaco --matrix-description-it="Tarassaco (dente di leone), foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Fagioli mung, secchi crudi (seme intero non germinato) — preparato 2026-10-26 dal task (trentasettesimo lotto)
 
 - **food_id**: `food_fagioli_mung_secchi_raw`. FDC ID 174256 (SR Legacy, "Mung beans, mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_germogli_fagiolo_mungo_raw` (germogli, già eseguiti) e da `food_noodles_fagiolo_mungo_raw` (amido estratto in filamenti, già preparato nel trentaseiesimo lotto): qui il seme secco intero non germinato, mai tentato in questa pipeline.
