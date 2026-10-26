@@ -1405,7 +1405,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Verdura conservata: 🟡 funghi (champignon), in scatola, sgocciolati (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 169254 SR Legacy "Mushrooms, canned, drained solids", 17/17 nutrienti, analogia `food_funghi_champignon_cotti` (già eseguita), diet-category=plant_non_fruit)
     - Verdura conservata: 🟡 carote, in scatola, sgocciolate (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 170396 SR Legacy "Carrots, canned, regular pack, drained solids", 17/17 nutrienti, analogia `food_carrots_boiled` (Golden Set originale), diet-category=plant_non_fruit)
     - Verdura conservata: 🟡 barbabietola, in scatola, senza sale aggiunto (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 168507 SR Legacy "Beets, canned, no salt added, solids and liquids", 17/17 nutrienti; nome aggiornato rispetto a "sgocciolata" richiesta in origine: nessuna fonte consultata cita un FDC ID per la variante drained, usata "no salt added, solids and liquids"; analogia `food_barbabietola_rossa_raw` (già eseguita), diet-category=plant_non_fruit)
-    - Verdura conservata: asparagi, in scatola, sgocciolati
+    - Verdura conservata: 🟡 asparagi, in scatola, sgocciolati (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 169207 SR Legacy "Asparagus, canned, drained solids", 17/17 nutrienti, analogia `food_asparagi_cotti` (già eseguita), diet-category=plant_non_fruit)
     - Verdura conservata: spinaci, in scatola, sgocciolati
     - Carne conservata: pollo, in scatola, sgocciolato
     - Carne conservata: carne di manzo, in scatola (corned beef)

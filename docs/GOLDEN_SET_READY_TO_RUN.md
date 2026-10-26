@@ -42,6 +42,32 @@ npm run add-food -- --fdc-id=168507 --food-id=food_barbabietola_in_scatola \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Asparagi, in scatola, sgocciolati — preparato 2026-10-26 dal task (quarantunesimo lotto, completamento coda)
+
+- **food_id**: `food_asparagi_in_scatola`. FDC ID 169207 (SR Legacy, "Asparagus, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_asparagi_raw` (FDC 168389, crudo, già eseguito) e `food_asparagi_cotti` (FDC 168390, bollito, già eseguito) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 19,0kcal, proteine 2,14g, grassi 0,65g, carboidrati 2,46g, fibra 1,60g, calcio 16,0mg, ferro 1,83mg, zinco 0,40mg, magnesio 10,0mg, rame 0,096mg, selenio 1,70µg, vitamina C 18,4mg, vitamina K (fillochinone) 41,3µg, folato totale 96,0µg, beta-carotene 493µg (reale e coerente con l'ortaggio verde); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169207 e dataType SR Legacy.
+- **Analogia usata**: `food_asparagi_cotti` (asparagi bolliti, già eseguiti sul DB reale — stesso ortaggio, entrambi trattati a calore, più vicino alla conserva in scatola del crudo).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `asparagi_in_scatola` ("Asparagi, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_asparagi_raw`/`food_asparagi_cotti`), `carotenoid_matrix_state=cooked_or_disrupted` (asparagi in scatola, sterilizzati a calore, matrice carotenoide disgregata, beta-carotene reale e non nullo, stesso precedente del bollito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asparagaceae` (famiglia reale dell'asparago, nota con certezza, stesso precedente di `food_asparagi_raw`/`food_asparagi_cotti`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169207 --food-id=food_asparagi_in_scatola \
+  --name-it="Asparagi, in scatola, sgocciolati" \
+  --matrix-id=asparagi_in_scatola --matrix-description-it="Asparagi, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169207 --food-id=food_asparagi_in_scatola \
+  --name-it="Asparagi, in scatola, sgocciolati" \
+  --matrix-id=asparagi_in_scatola --matrix-description-it="Asparagi, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Carote, in scatola, sgocciolate — preparato 2026-10-26 dal task (quarantunesimo lotto)
 
 - **food_id**: `food_carote_in_scatola`. FDC ID 170396 (SR Legacy, "Carrots, canned, regular pack, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_carrots_raw` (crudo, Golden Set originale) e `food_carrots_boiled` (bollito, Golden Set originale) — qui la conserva in scatola, FDC ID diverso da entrambi, nessun doppione mascherato.
