@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Semi di carvi, secchi — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_semi_di_carvi_raw`. FDC ID 170918 (SR Legacy, "Spices, caraway seed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Spezia mai tentata in questa pipeline, stesso filone Apiaceae di aneto/cumino/coriandolo/semi di finocchio già eseguiti.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 333kcal, proteine 19,8g, grassi 14,6g, carboidrati 49,9g, fibra 38,0g, calcio 689mg, ferro 16,2mg, zinco 5,50mg, magnesio 258mg, rame 0,91mg, selenio 12,1µg, vitamina C 21,0mg, folato totale 10,0µg, beta-carotene 206µg, alfa-carotene 8,00µg e beta-criptoxantina 16,0µg (tutti reali e non nulli, coerenti con una spezia secca da seme); vitamina K, acido folico e vitamina B12 tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170918 e dataType SR Legacy.
+- **Analogia usata**: `food_sedano_raw` (sedano crudo, già eseguito sul DB reale — stessa famiglia botanica reale Apiaceae, stessa analogia già usata per cumino/aneto/coriandolo in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (spezia vegetale).
+- **Matrice**: nuova `semi_di_carvi` ("Semi di carvi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene, alfa-carotene e beta-criptoxantina tutti reali e non nulli, spezia secca non alterata da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (famiglia botanica reale, stessa di `food_sedano_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale della spezia).
+
+```
+npm run add-food -- --fdc-id=170918 --food-id=food_semi_di_carvi_raw \
+  --name-it="Semi di carvi, secchi" \
+  --matrix-id=semi_di_carvi --matrix-description-it="Semi di carvi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170918 --food-id=food_semi_di_carvi_raw \
+  --name-it="Semi di carvi, secchi" \
+  --matrix-id=semi_di_carvi --matrix-description-it="Semi di carvi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Feijoa, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_feijoa_raw`. FDC ID 168176 (SR Legacy, "Feijoa, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto esotico mai tentato in questa pipeline, famiglia botanica reale Myrtaceae — stessa famiglia della guava già eseguita.
