@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagna d'acqua, cruda — preparato 2026-10-26 dal task (trentanovesimo lotto)
+
+- **food_id**: `food_castagna_d_acqua_raw`. FDC ID 170066 (SR Legacy, "Waterchestnuts, chinese, (matai), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Tubero acquatico mai tentato in questa pipeline, famiglia botanica reale Cyperaceae (*Eleocharis dulcis*, un giunco, non una vera "castagna" nonostante il nome comune — nessun'altra Cyperaceae ancora eseguita).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 97,0kcal, proteine 1,40g, grassi 0,10g, carboidrati 23,9g, fibra 3,00g, calcio 11,0mg, ferro 0,060mg, zinco 0,50mg, magnesio 22,0mg, rame 0,33mg, selenio 0,70µg, vitamina C 4,00mg, vitamina K 0,30µg, folato totale 16,0µg; acido folico, vitamina B12, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170066 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguita — analogia funzionale "tubero/radice crudo non disgregato", stesso precedente già usato per la farina di patate: `carotenoid_matrix_state=raw_intact` anche con carotenoidi 0µg espliciti, perché l'attributo descrive lo stato della matrice non alterata da cottura, non la presenza del carotenoide; famiglia botanica reale diversa, Cyperaceae non Solanaceae, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/tubero).
+- **Matrice**: nuova `castagna_d_acqua` ("Castagna d'acqua").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio molto basso, nessun dato specifico sull'acido ossalico), `carotenoid_matrix_state=raw_intact` (carotenoidi 0µg espliciti ma matrice cruda non disgregata, stessa convenzione di patata/daikon), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cyperaceae` (famiglia botanica reale, *Eleocharis dulcis*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del tubero).
+
+```
+npm run add-food -- --fdc-id=170066 --food-id=food_castagna_d_acqua_raw \
+  --name-it="Castagna d'acqua, cruda" \
+  --matrix-id=castagna_d_acqua --matrix-description-it="Castagna d'acqua" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cyperaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170066 --food-id=food_castagna_d_acqua_raw \
+  --name-it="Castagna d'acqua, cruda" \
+  --matrix-id=castagna_d_acqua --matrix-description-it="Castagna d'acqua" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cyperaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Germogli di bambù, crudi — preparato 2026-10-26 dal task (trentanovesimo lotto)
 
 - **food_id**: `food_germogli_di_bambu_raw`. FDC ID 169210 (SR Legacy, "Bamboo shoots, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Ortaggio esotico mai tentato in questa pipeline, famiglia botanica reale Poaceae (sottofamiglia Bambusoideae, stessa famiglia di riso/mais/avena/orzo/segale/sorgo/miglio già eseguiti, ma parte della pianta completamente diversa — germoglio, non chicco).
