@@ -16,6 +16,240 @@
 
 ## Pronti
 
+### Finocchio, crudo (bulbo) — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_finocchio_raw`. FDC ID 169385 (SR Legacy, "Fennel, bulb, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima voce del quarantatreesimo lotto, aperto dopo l'esaurimento del quarantaduesimo (vedi `docs/PRD.md` §9 punto 16). Distinto da `food_semi_di_finocchio_raw` già nel DB (semi/spezia, non il bulbo).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 31,0kcal, proteine 1,24g, grassi 0,20g, carboidrati 7,30g, fibra 3,10g, calcio 49,0mg, ferro 0,73mg, zinco 0,20mg, magnesio 17,0mg, rame 0,066mg, selenio 0,70µg, vitamina C 12,0mg, vitamina K (fillochinone) 62,8µg, folato totale 27,0µg, beta-carotene 578µg (coerente con un ortaggio a foglia/bulbo verde chiaro); vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero dalla tabella (non assunti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169385 e dataType SR Legacy.
+- **Analogia usata**: `food_prezzemolo_raw` (prezzemolo crudo, già eseguito sul DB reale — stessa famiglia botanica Apiaceae, stesso stato crudo non trasformato).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `finocchio` ("Finocchio, crudo (bulbo)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo ortaggio), `carotenoid_matrix_state=raw_intact` (ortaggio crudo, non trattato termicamente, beta-carotene reale e presente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (famiglia reale del finocchio, nota con certezza), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun acido folico aggiunto, prodotto non lavorato).
+
+```
+npm run add-food -- --fdc-id=169385 --food-id=food_finocchio_raw \
+  --name-it="Finocchio, crudo (bulbo)" \
+  --matrix-id=finocchio --matrix-description-it="Finocchio, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169385 --food-id=food_finocchio_raw \
+  --name-it="Finocchio, crudo (bulbo)" \
+  --matrix-id=finocchio --matrix-description-it="Finocchio, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di soia, crudi — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_germogli_di_soia_raw`. FDC ID 169284 (SR Legacy, "Soybeans, mature seeds, sprouted, raw" — pagina getfoodfacts.com dedicata e pulita, confermata anche su recipal.com con lo stesso nome). **Nota terminologica**: specie *Glycine max* (soia), DISTINTA da `food_germogli_fagiolo_mungo_raw` già nel DB (*Vigna radiata*, fagiolo mung) — nessun doppione mascherato.
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi (alfa-carotene + beta-criptoxantina), non riportati da nessuna delle due fonti consultate (gap dichiarato, non assunto zero). Per 100g: energia 122kcal, proteine 13,1g, grassi 6,70g, carboidrati 9,57g, fibra 1,10g, calcio 67,0mg, ferro 2,10mg, zinco 1,17mg, magnesio 72,0mg, rame 0,43mg, selenio 0,60µg, vitamina C 15,3mg, folato totale 172µg; vitamina B12 esplicitamente riportata come zero. Fonte: getfoodfacts.com (FDC ID e dataType citati esplicitamente) + recipal.com (NDB ID storico corrispondente, stessi valori macro, usato solo come conferma incrociata).
+- **Analogia usata**: `food_germogli_fagiolo_mungo_raw` (germogli di fagiolo mungo, già eseguiti sul DB reale — stessa categoria funzionale "legume germogliato crudo", stessa famiglia botanica reale Fabaceae, genere diverso dichiarato esplicitamente).
+- **Categoria dieta**: `plant_non_fruit` (legume germogliato).
+- **Matrice**: nuova `germogli_di_soia_raw` ("Germogli di soia, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato da nessuna fonte, non assunto raw_intact senza dato reale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale della soia, nota con certezza), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169284 --food-id=food_germogli_di_soia_raw \
+  --name-it="Germogli di soia, crudi" \
+  --matrix-id=germogli_di_soia_raw --matrix-description-it="Germogli di soia, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169284 --food-id=food_germogli_di_soia_raw \
+  --name-it="Germogli di soia, crudi" \
+  --matrix-id=germogli_di_soia_raw --matrix-description-it="Germogli di soia, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germogli_fagiolo_mungo_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cuori di palma, in scatola — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_cuori_di_palma_in_scatola`. FDC ID 168569 (SR Legacy, "Hearts of palm, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi (non riportati dalla fonte, gap dichiarato). Per 100g: energia 28,0kcal, proteine 2,52g, grassi 0,62g, carboidrati 4,62g, fibra 2,40g, calcio 58,0mg, ferro 3,13mg, zinco 1,15mg, magnesio 38,0mg, rame 0,13mg, selenio 0,70µg, vitamina C 7,90mg, folato totale 39,0µg; vitamina B12 esplicitamente riportata come zero. Fonte: getfoodfacts.com, FDC ID 168569 citato esplicitamente.
+- **Analogia usata**: `food_noce_di_cocco_raw` (noce di cocco, già eseguita sul DB reale — unico alimento della stessa famiglia botanica reale Arecaceae/Palmae presente in forma eseguita; parte diversa della pianta, dichiarato esplicitamente, nessuna analogia più vicina disponibile).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/germoglio di palma conservato).
+- **Matrice**: nuova `cuori_di_palma_in_scatola` ("Cuori di palma, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae`, `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168569 --food-id=food_cuori_di_palma_in_scatola \
+  --name-it="Cuori di palma, in scatola" \
+  --matrix-id=cuori_di_palma_in_scatola --matrix-description-it="Cuori di palma, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_noce_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168569 --food-id=food_cuori_di_palma_in_scatola \
+  --name-it="Cuori di palma, in scatola" \
+  --matrix-id=cuori_di_palma_in_scatola --matrix-description-it="Cuori di palma, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_noce_di_cocco_raw \
+  --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cetriolini, sott'aceto — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_cetriolini_sott_aceto`. FDC ID 324653 (**Foundation**, "Pickles, cucumber, dill or kosher dill" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_cetrioli_raw` già nel DB (cetrioli freschi, non sott'aceto).
+- **Nutrienti**: **15/17** — mancano: selenio, vitamina B12 (non riportati dalla fonte, gap dichiarato). Per 100g: energia 12,0kcal, proteine 0,48g, grassi 0,43g, carboidrati 1,99g, fibra 1,00g, calcio 54,0mg, ferro 0,23mg, zinco 0,11mg, magnesio 7,10mg, rame 0,026mg, vitamina C 2,10mg, vitamina K (fillochinone) 16,8µg, folato totale 8,00µg, beta-carotene 45,0µg; alfa-carotene esplicitamente zero, beta-criptoxantina 1,00µg (somma "altri carotenoidi provitamina A" = 1,00µg).
+- **Analogia usata**: `food_cetrioli_raw` (cetrioli crudi, già eseguiti sul DB reale — stesso ortaggio, stessa famiglia botanica Cucurbitaceae, qui conservato sott'aceto invece che fresco).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio conservato).
+- **Matrice**: nuova `cetriolini_sott_aceto` ("Cetriolini, sott'aceto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (prodotto conservato/sott'aceto, beta-carotene reale e presente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=pickled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=324653 --food-id=food_cetriolini_sott_aceto \
+  --name-it="Cetriolini, sott'aceto" \
+  --matrix-id=cetriolini_sott_aceto --matrix-description-it="Cetriolini, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_cetrioli_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=324653 --food-id=food_cetriolini_sott_aceto \
+  --name-it="Cetriolini, sott'aceto" \
+  --matrix-id=cetriolini_sott_aceto --matrix-description-it="Cetriolini, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_cetrioli_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zucca, in scatola — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_zucca_in_scatola`. FDC ID 168450 (SR Legacy, "Pumpkin, canned, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Verificato distinto** da `food_zucca_cotta` già nel DB (FDC 168449, "Pumpkin, cooked, boiled, drained, without salt") — FDC ID diverso, nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 34,0kcal, proteine 1,10g, grassi 0,28g, carboidrati 8,09g, fibra 2,90g, calcio 26,0mg, ferro 1,39mg, zinco 0,17mg, magnesio 23,0mg, rame 0,11mg, selenio 0,40µg, vitamina C 4,20mg, vitamina K (fillochinone) 16,0µg, folato totale 12,0µg, beta-carotene 6940µg (molto alto, coerente con la zucca), alfa-carotene 4795µg (anch'esso alto, coerente con zucca invernale); vitamina B12 e beta-criptoxantina esplicitamente riportate come zero.
+- **Analogia usata**: `food_zucca_cotta` (zucca cotta bollita, già eseguita sul DB reale — stessa pianta *Cucurbita*, qui in scatola invece di bollita in casa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/zucca, per convenzione del Golden Set).
+- **Matrice**: nuova `zucca_in_scatola` ("Zucca, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente di `food_zucca_cotta`), `carotenoid_matrix_state=cooked_or_disrupted` (prodotto in scatola, sterilizzato, carotenoidi molto alti e reali), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stesso precedente di `food_zucca_cotta`), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168450 --food-id=food_zucca_in_scatola \
+  --name-it="Zucca, in scatola" \
+  --matrix-id=zucca_in_scatola --matrix-description-it="Zucca, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_zucca_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168450 --food-id=food_zucca_in_scatola \
+  --name-it="Zucca, in scatola" \
+  --matrix-id=zucca_in_scatola --matrix-description-it="Zucca, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_zucca_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Peperoncini piccanti, sott'aceto — preparato 2026-10-26 dal task (quarantatreesimo lotto, bonus scoperto durante la ricerca sui peperoni)
+
+- **food_id**: `food_peperoncini_piccanti_sott_aceto`. FDC ID 169766 (SR Legacy, "Peppers, hot pickled, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: scoperto durante la ricerca per "peperoni, in scatola" — questo record è **peperoncino piccante** (hot chile), non il peperone dolce (voce separata sotto); nome italiano corretto di conseguenza, non un mismatch nascosto.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 22,0kcal, proteine 0,80g, grassi 0,40g, carboidrati 4,56g, fibra 2,60g, calcio 61,0mg, ferro 0,32mg, zinco 0,090mg, magnesio 6,00mg, rame 0,045mg, selenio 0,40µg, vitamina C 12,3mg, vitamina K (fillochinone) 21,9µg, folato totale 13,0µg, beta-carotene 440µg, alfa-carotene 163µg, beta-criptoxantina 1,00µg (somma "altri carotenoidi provitamina A" = 164µg); vitamina B12 esplicitamente zero.
+- **Analogia usata**: `food_peperoni_rossi_cotti` (peperoni rossi cotti, già eseguiti sul DB reale — stesso genere botanico *Capsicum*, stessa famiglia Solanaceae; cultivar/specie diversa — piccante vs dolce — dichiarata esplicitamente, non nascosta).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `peperoncini_piccanti_sott_aceto` ("Peperoncini piccanti, sott'aceto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (prodotto sott'aceto/in scatola, carotenoidi reali e presenti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=pickled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169766 --food-id=food_peperoncini_piccanti_sott_aceto \
+  --name-it="Peperoncini piccanti, sott'aceto" \
+  --matrix-id=peperoncini_piccanti_sott_aceto --matrix-description-it="Peperoncini piccanti, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_peperoni_rossi_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169766 --food-id=food_peperoncini_piccanti_sott_aceto \
+  --name-it="Peperoncini piccanti, sott'aceto" \
+  --matrix-id=peperoncini_piccanti_sott_aceto --matrix-description-it="Peperoncini piccanti, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_peperoni_rossi_cotti \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Peperoni rossi dolci, in scatola — preparato 2026-10-26 dal task (quarantatreesimo lotto)
+
+- **food_id**: `food_peperoni_rossi_in_scatola`. FDC ID 168546 (SR Legacy, "Peppers, sweet, red, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza**: nome originario in coda era "peperoni, in scatola (sott'aceto)" — l'unico record generico verificabile per il peperone DOLCE è "canned, solids and liquids" (in salamoia/liquido di governo, non specificamente sott'aceto); la variante "hot pickled" trovata nella stessa ricerca è un peperoncino piccante, trattata come voce separata sopra, non un mismatch nascosto sotto lo stesso nome.
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi (non riportati dalla fonte, gap dichiarato — a differenza del peperoncino piccante sopra, questo record non li riporta). Per 100g: energia 18,0kcal, proteine 0,80g, grassi 0,30g, carboidrati 3,90g, fibra 1,20g, calcio 41,0mg, ferro 0,80mg, zinco 0,18mg, magnesio 11,0mg, rame 0,13mg, selenio 0,30µg, vitamina C 46,5mg, folato totale 16,0µg; vitamina B12 esplicitamente zero. La pagina riporta anche "Vitamin A, RAE" 26,0µg (valore aggregato calcolato, non equivalente ai singoli carotenoidi richiesti — non usato).
+- **Analogia usata**: `food_peperoni_rossi_cotti` (peperoni rossi cotti, già eseguiti sul DB reale — stessa specie *Capsicum annuum*, stessa famiglia Solanaceae, qui in scatola invece che cotti in casa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `peperoni_rossi_in_scatola` ("Peperoni rossi dolci, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato da questa fonte, non assunto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168546 --food-id=food_peperoni_rossi_in_scatola \
+  --name-it="Peperoni rossi dolci, in scatola" \
+  --matrix-id=peperoni_rossi_in_scatola --matrix-description-it="Peperoni rossi dolci, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peperoni_rossi_cotti \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168546 --food-id=food_peperoni_rossi_in_scatola \
+  --name-it="Peperoni rossi dolci, in scatola" \
+  --matrix-id=peperoni_rossi_in_scatola --matrix-description-it="Peperoni rossi dolci, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peperoni_rossi_cotti \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Fave, in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
+
+- **food_id**: `food_fave_in_scatola`. FDC ID 173754 (SR Legacy, "Broadbeans (fava beans), mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fave_bollite` già nel DB (FDC 173753, bollite in casa) — FDC ID diverso.
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi (non riportati dalla fonte, gap dichiarato, non assunto zero). Per 100g: energia 71,0kcal, proteine 5,47g, grassi 0,22g, carboidrati 12,4g, fibra 3,70g, calcio 26,0mg, ferro 1,00mg, zinco 0,62mg, magnesio 32,0mg, rame 0,11mg, selenio 1,80µg, vitamina C 1,80mg, folato totale 33,0µg; vitamina B12 esplicitamente zero.
+- **Analogia usata**: `food_fave_bollite` (fave secche bollite, già eseguite sul DB reale — stessa specie *Vicia faba*, stessa famiglia botanica Fabaceae, qui in scatola invece che bollite in casa).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fave_in_scatola` ("Fave, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente di `food_fave_bollite`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stesso precedente di `food_fave_bollite`), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173754 --food-id=food_fave_in_scatola \
+  --name-it="Fave, in scatola" \
+  --matrix-id=fave_in_scatola --matrix-description-it="Fave, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fave_bollite \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173754 --food-id=food_fave_in_scatola \
+  --name-it="Fave, in scatola" \
+  --matrix-id=fave_in_scatola --matrix-description-it="Fave, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fave_bollite \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli borlotti, in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
+
+- **food_id**: `food_fagioli_borlotti_in_scatola`. FDC ID 173737 (SR Legacy, "Beans, cranberry (roman), mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, confermata anche su triagemethod.com, FDC ID e dataType citati esplicitamente). Distinto da `food_fagioli_borlotti_bolliti` già nel DB (FDC 173736, bolliti in casa) — FDC ID diverso.
+- **Nutrienti**: **14/17** — mancano: vitamina K, beta-carotene, altri carotenoidi (non riportati dalla fonte, gap dichiarato). Per 100g: energia 83,0kcal, proteine 5,54g, grassi 0,28g, carboidrati 15,1g, fibra 6,30g, calcio 34,0mg, ferro 1,55mg, zinco 0,84mg, magnesio 32,0mg, rame 0,14mg, selenio 3,10µg, vitamina C 0,80mg, folato totale 77,0µg; vitamina B12 esplicitamente zero.
+- **Analogia usata**: `food_fagioli_borlotti_bolliti` (fagioli borlotti bolliti, già eseguiti sul DB reale — stessa specie, stessa famiglia botanica Fabaceae, qui in scatola invece che bolliti in casa).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_borlotti_in_scatola` ("Fagioli borlotti, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173737 --food-id=food_fagioli_borlotti_in_scatola \
+  --name-it="Fagioli borlotti, in scatola" \
+  --matrix-id=fagioli_borlotti_in_scatola --matrix-description-it="Fagioli borlotti, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173737 --food-id=food_fagioli_borlotti_in_scatola \
+  --name-it="Fagioli borlotti, in scatola" \
+  --matrix-id=fagioli_borlotti_in_scatola --matrix-description-it="Fagioli borlotti, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_borlotti_bolliti \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli rossi (kidney), in scatola — preparato 2026-10-26 dal task (quarantaduesimo lotto)
 
 - **food_id**: `food_fagioli_rossi_in_scatola`. FDC ID 175195 (SR Legacy, "Beans, kidney, red, mature seeds, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_kidney_beans_boiled` (Golden Set originale, bollito) — FDC ID diverso, nessun doppione mascherato.
