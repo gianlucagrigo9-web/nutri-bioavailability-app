@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cipolla rossa, cruda — preparato 2026-10-26 dal task (trentottesimo lotto)
+
+- **food_id**: `food_cipolla_rossa_raw`. FDC ID 790577 (Foundation Foods, "Onions, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Record distinto dalla cipolla comune già eseguita (`food_onion_raw`, FDC 170000 "Onions, raw"): verificato che non sia lo stesso doppione mascherato temuto in apertura di lotto (FDC ID diverso, descrizione esplicitamente "red").
+- **Nutrienti**: **10/17** — mancano folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record Foundation Foods, non assunti zero — gap tipico già visto per altri record Foundation Foods di questa coda). 10/17 è esattamente alla soglia minima già accettata in questa coda (sotto la quale, 9/17, è stato scartato il farro monococco nel lotto precedente). Per 100g: energia 44,0kcal, proteine 0,94g, grassi 0,10g, carboidrati 9,93g, fibra 2,20g, calcio 17,0mg, ferro 0,24mg, zinco 0,17mg, magnesio 11,4mg, rame 0,058mg, selenio 0,50µg, vitamina C 8,10mg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 790577 e dataType Foundation Foods.
+- **Analogia usata**: `food_onion_raw` (cipolla comune cruda, già eseguita sul DB reale — stessa specie *Allium cepa*, cultivar pigmentata invece della comune).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `cipolla_rossa` ("Cipolla rossa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_onion_raw`), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non classificabili), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (stesso precedente di `food_onion_raw`/`food_cipollotto_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato semplicemente non riportato).
+
+```
+npm run add-food -- --fdc-id=790577 --food-id=food_cipolla_rossa_raw \
+  --name-it="Cipolla rossa, cruda" \
+  --matrix-id=cipolla_rossa --matrix-description-it="Cipolla rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=790577 --food-id=food_cipolla_rossa_raw \
+  --name-it="Cipolla rossa, cruda" \
+  --matrix-id=cipolla_rossa --matrix-description-it="Cipolla rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Eglefino (haddock), crudo — preparato 2026-10-26 dal task (trentottesimo lotto)
 
 - **food_id**: `food_eglefino_raw`. FDC ID 171964 (SR Legacy, "Fish, haddock, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Pesce atlantico distinto da merluzzo/nasello/halibut/coregone già coperti in questa pipeline, mai tentato finora.

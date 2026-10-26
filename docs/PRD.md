@@ -1357,7 +1357,7 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - Molluschi: cannolicchi, crudi
     - Spezie: nigella (cumino nero/kalonji), semi secchi
     - Spezie: macis (involucro secco della noce moscata)
-    - Verdura: cipolla rossa, cruda
+    - Verdura: 🟡 cipolla rossa, cruda (comando già preparato in GOLDEN_SET_READY_TO_RUN.md dal task, non ancora eseguito — FDC 790577 Foundation Foods "Onions, red, raw", **10/17 nutrienti** — mancano folato totale, acido folico, B12, vitamina K e i tre carotenoidi, gap dichiarato, alla soglia minima già accettata in questa coda —, verificato distinto dalla cipolla comune (`food_onion_raw`, FDC diverso), analogia `food_onion_raw`, diet-category=plant_non_fruit)
     - Bevande/succhi: succo di lime, non zuccherato
 
 16b. **Piatti tradizionali/compositi** (pasta al pomodoro, minestrone, parmigiana, ecc.) — richiesti dall'utente il 2026-10-11 come parte della copertura del panel italiano. **Design approvato e implementato (schema + motore + test, vedi §4.8)**. **`add_dish_templates.sql` eseguito sul DB reale e verificato (2026-10-11)**: `dish_templates`/`dish_components` esistono, RLS attiva su entrambe. Grammature standard: fonte trovata e sourced (`standardPortions.ts`, §4.8) — resta solo da wirarla a `dish_components.grams_per_serving` quando si popola la coda di piatti, non un gap di dato. Resta 👤 (non delegabile al task diurno automatico) solo per: il wiring UI in `app/page.tsx`. Una volta chiuso questo punto, popolare la coda di piatti (quali, con quali componenti) può tornare un lavoro mediamente meccanico.
