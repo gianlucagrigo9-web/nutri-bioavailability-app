@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Granchio, in scatola, sgocciolato — preparato 2026-10-26 dal task (quarantesimo lotto, bonus oltre i candidati originari)
+
+- **food_id**: `food_granchio_in_scatola`. FDC ID 171966 (SR Legacy, "Crustaceans, crab, blue, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_granchio_raw`/`food_granchio_cotto` già eseguiti (crudo e cotto a calore umido) — qui la conserva in scatola, aggiunto come bonus dopo la serie di ⚠ sui pesci europei di nicchia per completare la quota del turno con un prodotto mono-ingrediente ad alta probabilità (stessa categoria già riuscita per vongole/fagioli neri in scatola in questo stesso lotto).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 83,0kcal, proteine 17,9g, grassi 0,74g, calcio 91,0mg, ferro 0,50mg, zinco 3,81mg, magnesio 36,0mg, rame 0,81mg, selenio 42,9µg, vitamina C 3,30mg, vitamina K (fillochinone) 0,30µg, folato totale 51,0µg e vitamina B12 3,33µg (tutti reali e non nulli); carboidrati, fibra, acido folico, beta-carotene, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero dalla tabella (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171966 e dataType SR Legacy.
+- **Analogia usata**: `food_granchio_raw` (granchio crudo, già eseguito sul DB reale — stesso alimento, stato di conservazione diverso).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: nuova `granchio_in_scatola` ("Granchio, in scatola").
+- **Attributi**: `is_heme_iron=true` (muscolo animale, stesso precedente di `food_granchio_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del crostaceo).
+
+```
+npm run add-food -- --fdc-id=171966 --food-id=food_granchio_in_scatola \
+  --name-it="Granchio, in scatola, sgocciolato" \
+  --matrix-id=granchio_in_scatola --matrix-description-it="Granchio, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_granchio_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171966 --food-id=food_granchio_in_scatola \
+  --name-it="Granchio, in scatola, sgocciolato" \
+  --matrix-id=granchio_in_scatola --matrix-description-it="Granchio, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_granchio_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Palombo (gattuccio), crudo — preparato 2026-10-26 dal task (quarantesimo lotto)
 
 - **food_id**: `food_palombo_raw`. FDC ID 173697 (SR Legacy, "Fish, shark, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza importante**: nessun record USDA FDC specifico per *Mustelus mustelus* (palombo/gattuccio, famiglia Triakidae) trovato in nessuna fonte consultata — solo articoli scientifici (scholar.sun.ac.za, ejabf.journals.ekb.eg, bib.irb.hr), nessun dato USDA per questa specie esatta. Usato il record generico USDA "shark, mixed species" — una categoria "mixed species" progettata esplicitamente da USDA per coprire più specie di squalo commerciali insieme (stesso principio già accettato in questa pipeline per "clam/squid/shrimp, mixed species"), non una sostituzione con una specie diversa e specifica (diverso dal caso respinto per ombrina/croaker, dove l'unico record trovato era di un genere diverso e specifico, non una categoria generica dichiarata). Il palombo è comunque uno squalo (Chondrichthyes), quindi entra nella categoria tassonomica che il record intende rappresentare — resta un'approssimazione dichiarata (la composizione in grassi può variare fra specie di squalo), non un errore di specie.
