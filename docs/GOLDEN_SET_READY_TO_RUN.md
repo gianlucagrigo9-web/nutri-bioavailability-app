@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Semi di lino, macinati — preparato 2026-10-26 dal task (trentasettesimo lotto, terzo bonus oltre la quota)
+
+- **food_id**: `food_semi_di_lino_macinati_raw`. FDC ID 2262075 (Foundation Foods, "Flaxseed, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_semi_di_lino_interi_raw` (seme intero, già eseguito) e dall'olio di semi di lino (già ⚠ nel trentaseiesimo lotto, nessun record FDC trovato per l'olio estratto): qui il seme macinato/farina grossa, prodotto distinto con un proprio record FDC.
+- **Nutrienti**: **12/17** — mancano vitamina C, vitamina B12, acido folico, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati nel record, non assunti zero; "altro carotenoide provitaminico A" conta come una voce, quindi 5 mancanti su 17). Per 100g: energia 510kcal (pannello) / 514kcal (tabella di confronto, discrepanza non risolta dalla pagina — presa la tabella, 514kcal), proteine 18,0g, grassi 37,3g, carboidrati 34,4g, fibra 23,1g, calcio 230mg, ferro 5,78mg, zinco 4,74mg, magnesio 372mg, rame 1,34mg, selenio 136µg (alto, coerente con il seme di lino intero già eseguito), folato totale 41,5µg, vitamina K 3,67µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2262075 e dataType Foundation Foods. 12/17 è sopra la soglia minima di ~10/17 già accettata in questa coda, gap dichiarato.
+- **Analogia usata**: `food_semi_di_lino_interi_raw` (semi di lino interi crudi, già eseguiti sul DB reale — stessa pianta *Linum usitatissimum*, seme macinato invece di intero).
+- **Categoria dieta**: `plant_non_fruit` (seme oleoso, nessun ingrediente animale).
+- **Matrice**: nuova `semi_di_lino_macinati` ("Semi di lino, macinati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo seme, stessa convenzione già usata per il seme intero), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Linaceae` (famiglia botanica reale, *Linum usitatissimum*), `baseline_cooking_state=raw` (macinato ma non cotto), `is_fortified_folate` omesso (false — nessun segnale di arricchimento nella descrizione del prodotto).
+
+```
+npm run add-food -- --fdc-id=2262075 --food-id=food_semi_di_lino_macinati_raw \
+  --name-it="Semi di lino, macinati" \
+  --matrix-id=semi_di_lino_macinati --matrix-description-it="Semi di lino, macinati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_lino_interi_raw \
+  --botanical-family=Linaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2262075 --food-id=food_semi_di_lino_macinati_raw \
+  --name-it="Semi di lino, macinati" \
+  --matrix-id=semi_di_lino_macinati --matrix-description-it="Semi di lino, macinati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_lino_interi_raw \
+  --botanical-family=Linaceae --diet-category=plant_non_fruit --apply
+```
+
+*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
+
 ### Alga agar, secca — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
 
 - **food_id**: `food_alga_agar_raw`. FDC ID 170090 (SR Legacy, "Seaweed, agar, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quarta alga di questa pipeline dopo nori (già eseguita)/wakame/spirulina (già preparate), mai tentata sotto questo nome — distinta dalle altre per uso tipico come gelificante (agente addensante vegano, sostituto della gelatina) piuttosto che come alimento a sé.
