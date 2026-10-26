@@ -188,6 +188,30 @@ npm run add-food -- --fdc-id=170844 --food-id=food_formaggio_monterey_jack_raw \
   --diet-category=egg_dairy --apply
 ```
 
+### Formaggio Colby — preparato 2026-10-26 dal task (trentaseiesimo lotto)
+
+- **food_id**: `food_formaggio_colby_raw`. FDC ID 173416 (SR Legacy, "Cheese, colby" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dal Monterey Jack appena preparato (FDC 170844, record diverso): entrambi formaggi vaccini americani a pasta semidura, ma due prodotti/record distinti.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 394kcal, proteine 23,8g, grassi 32,1g, carboidrati 2,57g, fibra 0g esplicito, calcio 685mg, ferro 0,76mg, zinco 3,07mg, magnesio 26,0mg, rame 0,042mg, selenio 14,5µg, vitamina C 0mg esplicito, vitamina B12 0,83µg, folato totale 18,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 2,70µg, beta-carotene 82,0µg (reale, coerente col grasso butirroso), alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173416 e dataType SR Legacy.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino americano a pasta semidura, non stagionato a lungo", stessa analogia appena usata per il Monterey Jack).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_colby` ("Formaggio Colby").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di `food_formaggio_svizzero_raw`/`food_formaggio_di_capra_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173416 --food-id=food_formaggio_colby_raw \
+  --name-it="Formaggio Colby" \
+  --matrix-id=formaggio_colby --matrix-description-it="Formaggio Colby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173416 --food-id=food_formaggio_colby_raw \
+  --name-it="Formaggio Colby" \
+  --matrix-id=formaggio_colby --matrix-description-it="Formaggio Colby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsefrica bianca, cruda — preparato 2026-10-25 dal task (trentacinquesimo lotto)
 
 - **food_id**: `food_salsefrica_raw`. FDC ID 169277 (SR Legacy, "Salsify, (vegetable oyster), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di provenienza**: questo stesso record era già stato individuato nel trentaquattresimo lotto come proxy ERRATO per "scorzonera" (*Scorzonera hispanica*, rimasta ⚠) — rappresenta invece correttamente un ortaggio a radice distinto, la salsefrica bianca/scorzabianca (*Tragopogon porrifolius*), stessa famiglia botanica Asteraceae ma genere diverso, spesso confusa con la scorzonera in cucina ma nutrizionalmente e botanicamente un alimento separato con il proprio nome corretto: non un doppione mascherato, un alimento genuinamente nuovo aggiunto sotto il nome che gli compete.
