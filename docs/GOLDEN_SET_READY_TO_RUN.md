@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Trota (iridea), allevata, cruda — preparato 2026-10-26 dal task (quarantunesimo lotto)
+
+- **food_id**: `food_trota_raw`. FDC ID 173717. Pesce mai tentato in nessuna forma finora in questa pipeline, segnalato come "scoperto" già nel secondo e nel quinto lotto ma mai più ripreso — probabile svista corretta solo ora. **Nota di trasparenza sul dataType**: nessuna fonte consultata dichiara esplicitamente "SR Legacy"/"Foundation" per questo FDC ID — inferito da indizi concordanti (il numero FDC 173717 cade nello stesso intervallo 173xxx-175xxx usato finora in questa pipeline per i record SR Legacy di pesce/crostacei/molluschi — es. 173697 squalo, 173725/175130 pollock, 174190 baccalà, 175135 salmone in scatola — e la versione cotta della stessa trota ha FDC ID 173718, immediatamente adiacente, stesso pattern crudo/cotto consecutivo già visto per altri pesci SR Legacy in questa pipeline), non da una dichiarazione diretta — gap dichiarato, non assunto come certo.
+- **Nutrienti**: **15/17** trovati con valori concordanti fra due fonti indipendenti (foodstruct.com, che cita esplicitamente l'URL FDC https://fdc.nal.usda.gov/fdc-app.html#/food-details/173717/nutrients per "Rainbow trout", e myfooddata.com, URL tools.myfooddata.com/nutrition-facts/173717/wt1 "Nutrition Facts for Raw Rainbow Trout" — stesso FDC ID nell'URL, valori per 100g pressoché identici dopo conversione dalla porzione). Per 100g: energia 141kcal, proteine 19,94g, grassi 6,18g, carboidrati 0g, fibra 0g, calcio 25mg, ferro 0,31mg, zinco 0,45mg, magnesio 25mg, rame 0,046mg, selenio 23,6µg, vitamina C 2,9mg, vitamina K 0,1µg, folato totale 11µg, vitamina B12 4,3µg. **Mancano** (gap dichiarato, non assunti zero): beta-carotene e la somma alfa-carotene+beta-criptoxantina (`other_provitamin_a_carotenoids_mcg`) — una terza fonte consultata (triagemethod.com) mostrava questi carotenoidi come "0" espliciti ma con altri valori (calcio 48mg, zinco 0,79mg, vitamina B12 2,2µg) sensibilmente diversi dalle due fonti concordanti sopra, e dichiara di mescolare dati SR Legacy e AFCD (il database australiano) — stessa riserva già applicata ad altre voci di questa coda per questo stesso sito, quindi scartata come fonte per i valori e per i carotenoidi, non assunti zero senza conferma pulita.
+- **Analogia usata**: `food_salmon_raw` (salmone atlantico allevato crudo, Golden Set originale — stessa famiglia botanica/taxonomica Salmonidae, entrambi pesci grassi d'acqua dolce/anadromi allevati, `is_heme_iron=true` nello stesso precedente).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `trota` ("Trota").
+- **Attributi**: `is_heme_iron=true` (muscolo di pesce, stesso precedente di `food_salmon_raw`/`food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — carotenoidi non confermati, gap dichiarato sopra), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun segnale di arricchimento, folato naturale del pesce).
+
+```
+npm run add-food -- --fdc-id=173717 --food-id=food_trota_raw \
+  --name-it="Trota (iridea), allevata, cruda" \
+  --matrix-id=trota --matrix-description-it="Trota" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173717 --food-id=food_trota_raw \
+  --name-it="Trota (iridea), allevata, cruda" \
+  --matrix-id=trota --matrix-description-it="Trota" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Granchio, in scatola, sgocciolato — preparato 2026-10-26 dal task (quarantesimo lotto, bonus oltre i candidati originari)
 
 - **food_id**: `food_granchio_in_scatola`. FDC ID 171966 (SR Legacy, "Crustaceans, crab, blue, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_granchio_raw`/`food_granchio_cotto` già eseguiti (crudo e cotto a calore umido) — qui la conserva in scatola, aggiunto come bonus dopo la serie di ⚠ sui pesci europei di nicchia per completare la quota del turno con un prodotto mono-ingrediente ad alta probabilità (stessa categoria già riuscita per vongole/fagioli neri in scatola in questo stesso lotto).
