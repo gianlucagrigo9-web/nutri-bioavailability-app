@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Orecchia di mare (abalone), cruda — preparato 2026-10-29 dal task (quarantasettesimo lotto)
+
+- **food_id**: `food_orecchia_di_mare_raw`. FDC ID 174212 (SR Legacy, "Mollusks, abalone, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Mollusco gasteropode marino mai tentato in questa pipeline, distinto dai bivalvi già eseguiti.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 105kcal, proteine 17,1g, grassi 0,76g, carboidrati 6,01g, fibra 0g, calcio 31,0mg, ferro 3,19mg, zinco 0,82mg, magnesio 48,0mg, rame 0,20mg, selenio 44,8µg, vitamina C 2,00mg, vitamina K (fillochinone) 23,0µg, folato totale 5,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un mollusco); vitamina B12 0,73µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Sodio 301mg/100g, coerente con un mollusco marino crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174212 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguite sul DB reale — stessa categoria funzionale "mollusco marino crudo").
+- **Categoria dieta**: `meat_fish` (mollusco, prodotto animale).
+- **Matrice**: nuova `orecchia_di_mare_raw` ("Orecchia di mare, cruda").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_vongole_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174212 --food-id=food_orecchia_di_mare_raw \
+  --name-it="Orecchia di mare, cruda" \
+  --matrix-id=orecchia_di_mare_raw --matrix-description-it="Orecchia di mare, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174212 --food-id=food_orecchia_di_mare_raw \
+  --name-it="Orecchia di mare, cruda" \
+  --matrix-id=orecchia_di_mare_raw --matrix-description-it="Orecchia di mare, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Gambero di fiume (crayfish), crudo — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_gambero_di_fiume_raw`. FDC ID 175169 (SR Legacy, "Crustaceans, crayfish, mixed species, farmed, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Crostaceo decapode mai tentato in questa pipeline, distinto da gamberi/granchio/astice già eseguiti o pronti (famiglia *Astacidae*/*Cambaridae*, diversa dai gamberi marini).
