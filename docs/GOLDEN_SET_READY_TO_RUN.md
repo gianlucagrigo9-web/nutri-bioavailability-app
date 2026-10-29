@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Buccina (whelk), cruda — preparato 2026-10-29 dal task (quarantasettesimo lotto)
+
+- **food_id**: `food_buccina_raw`. FDC ID 171983 (SR Legacy, "Mollusks, whelk, unspecified, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Mollusco gasteropode marino mai tentato in questa pipeline, distinto dai bivalvi (vongole/cozze/ostriche) già eseguiti.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 137kcal, proteine 23,8g, grassi 0,40g, carboidrati 7,76g, fibra 0g, calcio 57,0mg, ferro 5,03mg, zinco 1,63mg, magnesio 86,0mg, rame 1,03mg, selenio 44,8µg, vitamina C 4,00mg, vitamina K (fillochinone) 0,10µg, folato totale 6,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un mollusco, nessun pigmento vegetale); vitamina B12 9,07µg (alta, coerente con un mollusco marino), acido folico 0µg esplicito (nessuna firma di arricchimento). Sodio 206mg/100g, coerente con un mollusco marino crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171983 e dataType SR Legacy.
+- **Analogia usata**: `food_vongole_raw` (vongole crude, già eseguite sul DB reale — stessa categoria funzionale "mollusco marino crudo", stesso attributo `is_heme_iron` usato per tutti i molluschi di questa pipeline).
+- **Categoria dieta**: `meat_fish` (mollusco, prodotto animale).
+- **Matrice**: nuova `buccina_raw` ("Buccina, cruda").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_vongole_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171983 --food-id=food_buccina_raw \
+  --name-it="Buccina, cruda" \
+  --matrix-id=buccina_raw --matrix-description-it="Buccina, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171983 --food-id=food_buccina_raw \
+  --name-it="Buccina, cruda" \
+  --matrix-id=buccina_raw --matrix-description-it="Buccina, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Orecchia di mare (abalone), cruda — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_orecchia_di_mare_raw`. FDC ID 174212 (SR Legacy, "Mollusks, abalone, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Mollusco gasteropode marino mai tentato in questa pipeline, distinto dai bivalvi già eseguiti.
