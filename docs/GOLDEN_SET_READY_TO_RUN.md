@@ -16,6 +16,228 @@
 
 ## Pronti
 
+### Peperoncini verdi, piccanti, in scatola — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_peperoncino_verde_in_scatola`. FDC ID 168577 (SR Legacy, "Peppers, chili, green, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_peperoncino_verde_raw` (peperoncino verde fresco crudo, già eseguito sul DB reale): qui la conserva in scatola, forma di conservazione mai tentata.
+- **Nutrienti**: **13/17** — mancano rame, beta-carotene, vitamina K, altri carotenoidi provitaminici A (nessuno riportato nella pagina consultata, non assunti zero). Per 100g (valori presenti): energia 21,0kcal, proteine 0,72g, grassi 0,27g, carboidrati 4,60g, fibra 1,70g, calcio 36,0mg, ferro 1,33mg, zinco 0,090mg, magnesio 4,00mg, selenio 0,30µg, vitamina C 34,2mg, folato totale 54,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Sodio 397mg/100g — alto, coerente con un prodotto in scatola salato (nessuna dicitura "no salt added" sulla pagina). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168577 e dataType SR Legacy.
+- **Analogia usata**: `food_peperoncino_verde_raw` (peperoncino verde fresco, già eseguito sul DB reale — stessa specie, stessa famiglia Solanaceae).
+- **Categoria dieta**: `plant_non_fruit` (verdura conservata, nessun ingrediente animale).
+- **Matrice**: nuova `peperoncino_verde_in_scatola` ("Peperoncini verdi, piccanti, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun dato reale da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168577 --food-id=food_peperoncino_verde_in_scatola \
+  --name-it="Peperoncini verdi, piccanti, in scatola" \
+  --matrix-id=peperoncino_verde_in_scatola --matrix-description-it="Peperoncini verdi, piccanti, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_peperoncino_verde_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168577 --food-id=food_peperoncino_verde_in_scatola \
+  --name-it="Peperoncini verdi, piccanti, in scatola" \
+  --matrix-id=peperoncino_verde_in_scatola --matrix-description-it="Peperoncini verdi, piccanti, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_peperoncino_verde_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Salmone sockeye, in scatola, sgocciolato — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_salmone_sockeye_in_scatola`. FDC ID 173693 (SR Legacy, "Fish, salmon, sockeye, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Terza specie distinta di salmone in scatola di questa pipeline (*Oncorhynchus nerka*), dopo chum/*Oncorhynchus keta* (`food_salmone_in_scatola`, già eseguito) e rosa/*Oncorhynchus gorbuscha* (`food_salmone_rosa_in_scatola`, già 🟡) — record FDC proprio e distinto (es. calcio 232mg/100g, diverso dagli altri due), nessun doppione mascherato.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 167kcal, proteine 23,6g, grassi 7,39g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 232mg, ferro 0,65mg, zinco 0,84mg, magnesio 31,0mg, rame 0,072mg, selenio 34,3µg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 5,50µg, vitamina K (fillochinone) 0,10µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 408mg/100g — coerente con un pesce in scatola, stesso ordine di grandezza già visto per salmone chum/rosa in questa pipeline. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173693 e dataType SR Legacy.
+- **Analogia usata**: `food_salmone_in_scatola` (salmone chum in scatola, già eseguito sul DB reale — stessa categoria funzionale "pesce conservato in scatola", specie diversa dichiarata esplicitamente).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_sockeye_in_scatola` ("Salmone sockeye, in scatola, sgocciolato").
+- **Attributi**: `is_heme_iron=true` (pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — non applicabile, carotenoidi comunque 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173693 --food-id=food_salmone_sockeye_in_scatola \
+  --name-it="Salmone sockeye, in scatola, sgocciolato" \
+  --matrix-id=salmone_sockeye_in_scatola --matrix-description-it="Salmone sockeye, in scatola, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173693 --food-id=food_salmone_sockeye_in_scatola \
+  --name-it="Salmone sockeye, in scatola, sgocciolato" \
+  --matrix-id=salmone_sockeye_in_scatola --matrix-description-it="Salmone sockeye, in scatola, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_salmone_in_scatola \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Salsa di mirtilli rossi (cranberry sauce), in scatola, zuccherata — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_salsa_di_mirtilli_rossi_in_scatola`. FDC ID 173961 (SR Legacy, "Cranberry sauce, canned, sweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima conserva di mirtilli rossi di questa pipeline (solo i mirtilli rossi freschi crudi già eseguiti). **Nota di trasparenza**: prodotto zuccherato (zuccheri totali 31,8g/100g, perlopiù glucosio e fruttosio) — i mirtilli rossi crudi sono troppo acidi per essere consumati così, questa è la forma in cui il prodotto esiste davvero in commercio, stessa logica già accettata per le altre conserve di frutta sciroppate di questa pipeline (pesche/pere/albicocche/ciliegie/prugne/fichi in scatola).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 159kcal, proteine 0,90g, grassi 0,15g, carboidrati 40,4g, fibra 1,10g, calcio 3,00mg, ferro 0,41mg, zinco 0,030mg, magnesio 2,00mg, rame 0,026mg, selenio 0,40µg, vitamina C 1,00mg, folato totale 1,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 1,40µg, beta-carotene 20,0µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 5,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173961 e dataType SR Legacy.
+- **Analogia usata**: `food_mirtilli_rossi_raw` (mirtilli rossi freschi crudi, stessa specie *Vaccinium macrocarpon*, già eseguiti sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline, già usata per pesche/pere/albicocche/ciliegie/prugne/fichi in scatola).
+- **Matrice**: nuova `salsa_di_mirtilli_rossi_in_scatola` ("Salsa di mirtilli rossi, in scatola, zuccherata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (conserva cotta/sterilizzata, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ericaceae` (stessa dell'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173961 --food-id=food_salsa_di_mirtilli_rossi_in_scatola \
+  --name-it="Salsa di mirtilli rossi, in scatola, zuccherata" \
+  --matrix-id=salsa_di_mirtilli_rossi_in_scatola --matrix-description-it="Salsa di mirtilli rossi, in scatola, zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mirtilli_rossi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Ericaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173961 --food-id=food_salsa_di_mirtilli_rossi_in_scatola \
+  --name-it="Salsa di mirtilli rossi, in scatola, zuccherata" \
+  --matrix-id=salsa_di_mirtilli_rossi_in_scatola --matrix-description-it="Salsa di mirtilli rossi, in scatola, zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mirtilli_rossi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Ericaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Salsa di mele (applesauce), in scatola, non zuccherata — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_salsa_di_mele_in_scatola`. FDC ID 171695 (SR Legacy, "Applesauce, canned, unsweetened, without added ascorbic acid (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima conserva di mela di questa pipeline (solo la mela fresca cruda già coperta).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 42,0kcal, proteine 0,17g, grassi 0,10g, carboidrati 11,3g, fibra 1,10g, calcio 4,00mg, ferro 0,23mg, zinco 0,030mg, magnesio 3,00mg, rame 0,027mg, selenio 0,30µg, vitamina C 1,00mg, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 0,50µg, beta-carotene 13,0µg e beta-criptoxantina 9,00µg (entrambi reali, non nulli), alfa-carotene 0µg esplicito. Sodio 2,00mg/100g — non salato, coerente con "unsweetened" (gli zuccheri presenti, 9,39g/100g, sono quelli naturali della mela, non aggiunti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171695 e dataType SR Legacy.
+- **Analogia usata**: `food_pear_raw` (pera cruda, già eseguita sul DB reale — stessa famiglia Rosaceae, stesso tipo di frutto a pomo).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline).
+- **Matrice**: nuova `salsa_di_mele_in_scatola` ("Salsa di mele, in scatola, non zuccherata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (conserva cotta, beta-carotene e beta-criptoxantina reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, cotto durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171695 --food-id=food_salsa_di_mele_in_scatola \
+  --name-it="Salsa di mele, in scatola, non zuccherata" \
+  --matrix-id=salsa_di_mele_in_scatola --matrix-description-it="Salsa di mele, in scatola, non zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171695 --food-id=food_salsa_di_mele_in_scatola \
+  --name-it="Salsa di mele, in scatola, non zuccherata" \
+  --matrix-id=salsa_di_mele_in_scatola --matrix-description-it="Salsa di mele, in scatola, non zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Castagne, bollite al vapore — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_castagne_bollite`. FDC ID 170168 (SR Legacy, "Nuts, chestnuts, european, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta da `food_castagne_raw` (crude, FDC 170575) e `food_castagne_secche_raw` (secche, FDC 170167), entrambe già eseguite sul DB reale: qui la forma bollita/cotta al vapore, mai tentata. **Nota di trasparenza**: un primo tentativo su "castagne, in scatola" è stato scartato in questo stesso run perché l'unico record FDC per castagne in scatola trovato riguarda la castagna d'acqua (*Eleocharis dulcis*, tubero acquatico asiatico, già `food_castagna_d_acqua_raw`), non la vera castagna europea (*Castanea sativa*) richiesta — risolto scegliendo invece questa forma cotta, mai tentata finora.
+- **Nutrienti**: **12/17** — mancano fibra (la pagina dichiara esplicitamente "Dietary Fiber not declared", non un valore a zero), selenio, vitamina K, beta-carotene, altri carotenoidi provitaminici A (nessuno riportato sulla pagina consultata, non assunti zero — stesso identico gap già visto per `food_castagne_raw`/`food_castagne_secche_raw` in questa pipeline). Per 100g (valori presenti): energia 131kcal, proteine 2,00g, grassi 1,38g, carboidrati 27,8g, calcio 46,0mg, ferro 1,73mg, zinco 0,25mg, magnesio 54,0mg, rame 0,47mg, vitamina C 26,7mg, folato totale 38,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Sodio 27,0mg/100g — basso, coerente con una cottura in acqua/vapore senza sale aggiunto dichiarato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170168 e dataType SR Legacy.
+- **Analogia usata**: `food_castagne_raw` (castagne fresche crude, stessa specie *Castanea sativa*, già eseguite sul DB reale — stesso gap categorico su fibra/selenio/vitamina K/carotenoidi).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca a guscio, nessun ingrediente animale).
+- **Matrice**: nuova `castagne_bollite` ("Castagne, bollite al vapore").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — per analogia diretta con `food_castagne_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun dato reale da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fagaceae` (stessa dell'analogia), `baseline_cooking_state=boiled` (bollita/cotta al vapore), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170168 --food-id=food_castagne_bollite \
+  --name-it="Castagne, bollite al vapore" \
+  --matrix-id=castagne_bollite --matrix-description-it="Castagne, bollite al vapore" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170168 --food-id=food_castagne_bollite \
+  --name-it="Castagne, bollite al vapore" \
+  --matrix-id=castagne_bollite --matrix-description-it="Castagne, bollite al vapore" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
+### Semi di soia, secchi, crudi, interi — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_semi_di_soia_secchi_raw`. FDC ID 174270 (SR Legacy, "Soybeans, mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima forma del seme di soia intero non germinato di questa pipeline: farina di soia (`food_farina_di_soia_raw`), germogli (`food_germogli_di_soia_raw`/cotti) ed edamame (`food_edamame_bollito`) già fatti, ma non ancora il seme secco crudo.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 446kcal, proteine 36,5g, grassi 19,9g, carboidrati 30,2g, fibra 9,30g, calcio 277mg, ferro 15,7mg, zinco 4,89mg, magnesio 280mg, rame 1,66mg, selenio 17,8µg, vitamina C 6,00mg, folato totale 375µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 47,0µg, beta-carotene 13,0µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 2,00mg/100g — non salato (seme crudo non lavorato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174270 e dataType SR Legacy.
+- **Analogia usata**: `food_kidney_beans_raw` (fagioli rossi secchi crudi, Golden Set originale, già eseguiti sul DB reale — stessa convenzione già usata per i nuovi legumi secchi di questa pipeline, es. fagioli lima/pinto/mung/azuki/dall'occhio/fave).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `semi_di_soia_secchi` ("Semi di soia, secchi, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (seme secco crudo non disgregato, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174270 --food-id=food_semi_di_soia_secchi_raw \
+  --name-it="Semi di soia, secchi, crudi" \
+  --matrix-id=semi_di_soia_secchi --matrix-description-it="Semi di soia, secchi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174270 --food-id=food_semi_di_soia_secchi_raw \
+  --name-it="Semi di soia, secchi, crudi" \
+  --matrix-id=semi_di_soia_secchi --matrix-description-it="Semi di soia, secchi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli dall'occhio (cowpea), in scatola, semplici — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_fagioli_dall_occhio_in_scatola`. FDC ID 173760 (SR Legacy, "Cowpeas, common (blackeyes, crowder, southern), mature seeds, canned, plain" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verificato esplicitamente trattarsi della variante "plain" (nessuna carne nel record: la pagina non menziona mai "pork", a differenza del record gemello FDC 173761 "canned with pork", scartato). Distinto da `food_fagioli_dall_occhio_raw` (secco crudo, ancora solo 🟡): qui la conserva in scatola, mai tentata.
+- **Nutrienti**: **14/17** — mancano beta-carotene, vitamina K, altri carotenoidi provitaminici A (nessuno riportato sulla pagina consultata, non assunti zero). Per 100g (valori presenti): energia 77,0kcal, proteine 4,74g, grassi 0,55g, carboidrati 13,6g, fibra 3,30g, calcio 20,0mg, ferro 0,97mg, zinco 0,70mg, magnesio 28,0mg, rame 0,12mg, selenio 2,30µg, vitamina C 2,70mg, folato totale 51,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Sodio 293mg/100g — coerente con un legume in scatola salato, stesso ordine di grandezza già visto per ceci/fagioli neri in scatola. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173760 e dataType SR Legacy.
+- **Analogia usata**: `food_ceci_in_scatola` (ceci in scatola sgocciolati, già eseguiti sul DB reale — stessa categoria di prodotto "legume in scatola", stesso stato di conservazione; NON usata l'analogia più ovvia `food_fagioli_dall_occhio_raw` perché quella voce è solo "pronta" in questo stesso file, non ancora eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_dall_occhio_in_scatola` ("Fagioli dall'occhio, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun dato reale da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa dell'analogia), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173760 --food-id=food_fagioli_dall_occhio_in_scatola \
+  --name-it="Fagioli dall'occhio, in scatola" \
+  --matrix-id=fagioli_dall_occhio_in_scatola --matrix-description-it="Fagioli dall'occhio, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173760 --food-id=food_fagioli_dall_occhio_in_scatola \
+  --name-it="Fagioli dall'occhio, in scatola" \
+  --matrix-id=fagioli_dall_occhio_in_scatola --matrix-description-it="Fagioli dall'occhio, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_ceci_in_scatola \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli pinto, in scatola — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_fagioli_pinto_in_scatola`. FDC ID 175201 (SR Legacy, "Beans, pinto, mature seeds, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagioli_pinto_secchi_raw` (secco crudo, ancora solo 🟡): qui la conserva in scatola, mai tentata.
+- **Nutrienti**: **16/17** — manca solo selenio (non riportato sulla pagina consultata, non assunto zero). Per 100g: energia 82,0kcal, proteine 4,60g, grassi 0,56g, carboidrati 15,2g, fibra 4,60g, calcio 47,0mg, ferro 1,47mg, zinco 0,56mg, magnesio 33,0mg, rame 0,16mg, vitamina C 0,70mg, folato totale 24,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 2,10µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti (beta-carotene 0µg esplicito anch'esso). Sodio 268mg/100g — coerente con un legume in scatola salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175201 e dataType SR Legacy.
+- **Analogia usata**: `food_fagioli_cannellini_secchi_raw` (fagioli cannellini secchi crudi, stessa specie *Phaseolus vulgaris*, già eseguiti sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_pinto_in_scatola` ("Fagioli pinto, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, nessun pigmento reale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa dell'analogia), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175201 --food-id=food_fagioli_pinto_in_scatola \
+  --name-it="Fagioli pinto, in scatola" \
+  --matrix-id=fagioli_pinto_in_scatola --matrix-description-it="Fagioli pinto, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175201 --food-id=food_fagioli_pinto_in_scatola \
+  --name-it="Fagioli pinto, in scatola" \
+  --matrix-id=fagioli_pinto_in_scatola --matrix-description-it="Fagioli pinto, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli di Lima, grandi, in scatola — preparato 2026-10-29 dal task (cinquantunesimo lotto)
+
+- **food_id**: `food_fagioli_lima_in_scatola`. FDC ID 174254 (SR Legacy, "Lima beans, large, mature seeds, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_fagioli_lima_raw`/`food_fagioli_lima_bolliti` (secco crudo e bollito in casa, entrambi già eseguiti sul DB reale): qui la conserva in scatola, mai tentata.
+- **Nutrienti**: **14/17** — mancano beta-carotene, vitamina K, altri carotenoidi provitaminici A (nessuno riportato sulla pagina consultata, non assunti zero). Per 100g: energia 79,0kcal, proteine 4,93g, grassi 0,17g, carboidrati 14,9g, fibra 4,80g, calcio 21,0mg, ferro 1,81mg, zinco 0,65mg, magnesio 39,0mg, rame 0,18mg, selenio 4,50µg, vitamina C 0mg esplicito, folato totale 50,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Sodio 336mg/100g — coerente con un legume in scatola salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174254 e dataType SR Legacy.
+- **Analogia usata**: `food_fagioli_lima_raw` (fagioli lima secchi crudi, stessa specie *Phaseolus lunatus*, già eseguiti sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_lima_in_scatola` ("Fagioli di Lima, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun dato reale da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa dell'analogia), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174254 --food-id=food_fagioli_lima_in_scatola \
+  --name-it="Fagioli di Lima, in scatola" \
+  --matrix-id=fagioli_lima_in_scatola --matrix-description-it="Fagioli di Lima, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_lima_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174254 --food-id=food_fagioli_lima_in_scatola \
+  --name-it="Fagioli di Lima, in scatola" \
+  --matrix-id=fagioli_lima_in_scatola --matrix-description-it="Fagioli di Lima, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_lima_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fichi, in scatola, sciroppo leggero — preparato 2026-10-29 dal task (cinquantesimo lotto)
 
 - **food_id**: `food_fichi_in_scatola`. FDC ID 173023 (SR Legacy, "Figs, canned, light syrup pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Primo fico di questa pipeline in qualunque forma (solo fichi secchi erano già stati fatti, il fico fresco crudo non è mai stato tentato).
