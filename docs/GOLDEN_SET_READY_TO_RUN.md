@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Granchio Dungeness, crudo — preparato 2026-10-29 dal task (quarantasettesimo lotto)
+
+- **food_id**: `food_granchio_dungeness_raw`. FDC ID 171968 (SR Legacy, "Crustaceans, crab, dungeness, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie distinta (*Metacarcinus magister*, granchio Dungeness) dal granchio blu già eseguito (*Callinectes sapidus*, `food_granchio_raw`, FDC 174204) — stesso filone "specie distinta di un crostaceo/mollusco già coperto in un'altra specie" che aveva dato buoni risultati nei lotti 41-42-46 (tonno bianco/salmone rosa/sardine del Pacifico/ostrica del Pacifico).
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (nessun carotenoide riportato nel record, coerente con un crostaceo — stesso identico gap già presente per il granchio blu già eseguito). Per 100g: energia 86,0kcal, proteine 17,4g, grassi 0,97g, carboidrati 0,74g, fibra 0g, calcio 46,0mg, ferro 0,37mg, zinco 4,27mg, magnesio 45,0mg, rame 0,67mg, selenio 37,1µg, vitamina C 3,50mg, folato totale 44,0µg, vitamina B12 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Sodio 295mg/100g, coerente con un crostaceo marino crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171968 e dataType SR Legacy.
+- **Analogia usata**: `food_granchio_raw` (granchio blu, crudo, già eseguito sul DB reale — stesso genere funzionale "granchio crudo", stesso identico gap di carotenoidi/vitamina K).
+- **Categoria dieta**: `meat_fish` (crostaceo, prodotto animale).
+- **Matrice**: nuova `granchio_dungeness_raw` ("Granchio Dungeness, crudo").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_granchio_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171968 --food-id=food_granchio_dungeness_raw \
+  --name-it="Granchio Dungeness, crudo" \
+  --matrix-id=granchio_dungeness_raw --matrix-description-it="Granchio Dungeness, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171968 --food-id=food_granchio_dungeness_raw \
+  --name-it="Granchio Dungeness, crudo" \
+  --matrix-id=granchio_dungeness_raw --matrix-description-it="Granchio Dungeness, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Buccina (whelk), cruda — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_buccina_raw`. FDC ID 171983 (SR Legacy, "Mollusks, whelk, unspecified, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Mollusco gasteropode marino mai tentato in questa pipeline, distinto dai bivalvi (vongole/cozze/ostriche) già eseguiti.
