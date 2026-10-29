@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Jicama, cruda — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_jicama_raw`. FDC ID 170073 (SR Legacy, "Yambean (jicama), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Radice/tubero della famiglia Fabaceae (*Pachyrhizus erosus*) mai tentato in questa pipeline — nessun legume/radice di questa specie ancora coperto.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 38,0kcal, proteine 0,72g, grassi 0,090g, carboidrati 8,82g, fibra 4,90g, calcio 12,0mg, ferro 0,60mg, zinco 0,16mg, magnesio 12,0mg, rame 0,048mg, selenio 0,70µg, vitamina C 20,2mg, vitamina K (fillochinone) 0,30µg, folato totale 12,0µg, beta-carotene 13,0µg (basso ma reale e non nullo, coerente con una radice bianca), alfa-carotene e beta-criptoxantina entrambi 0µg espliciti; vitamina B12 e acido folico esplicitamente 0µg (nessuna firma di arricchimento). Zuccheri totali 1,80g/100g, sodio 4,00mg/100g, coerenti con una radice cruda non trattata. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170073 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_raw` (carote crude, Golden Set originale, già eseguita sul DB reale — stessa categoria "radice/tubero crudo con `matrix_category_calcium` non applicabile/NULL", stesso precedente già usato per carote). **Nota di trasparenza dichiarata**: famiglia botanica reale diversa dall'analogia (Fabaceae per la jicama contro Apiaceae per la carota) — l'analogia è usata solo per gli attributi categorici di bioaccessibilità (nessun precedente Fabaceae già eseguito per una radice/tubero in questa pipeline), non per la famiglia botanica dichiarata, che resta quella vera della jicama.
+- **Categoria dieta**: `plant_non_fruit` (radice/tubero, nessun ingrediente animale).
+- **Matrice**: nuova `jicama_raw` ("Jicama, cruda").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_carrots_raw`), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti, seppur bassi, e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia botanica reale della jicama), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170073 --food-id=food_jicama_raw \
+  --name-it="Jicama, cruda" \
+  --matrix-id=jicama_raw --matrix-description-it="Jicama, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170073 --food-id=food_jicama_raw \
+  --name-it="Jicama, cruda" \
+  --matrix-id=jicama_raw --matrix-description-it="Jicama, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolo collard, crudo — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
 
 - **food_id**: `food_cavolo_collard_raw`. FDC ID 170406 (SR Legacy, "Collards, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verdura a foglia della famiglia Brassicaceae (*Brassica oleracea* var. *viridis*, la stessa specie botanica del kale/cavolo riccio *Brassica oleracea* var. *acephala* già eseguito, ma cultivar/varietà distinta, foglie larghe non ricciute) mai tentata sotto questo nome.
