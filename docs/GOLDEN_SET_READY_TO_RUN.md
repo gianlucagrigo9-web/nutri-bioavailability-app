@@ -16,6 +16,214 @@
 
 ## Pronti
 
+### Pesce "spot" (Leiostomus xanthurus), crudo — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_pesce_spot_raw`. FDC ID 173700 (SR Legacy, "Fish, spot, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Leiostomus xanthurus*, famiglia Sciaenidae); nessun nome comune italiano consolidato, nome scientifico mantenuto in chiaro per trasparenza.
+- **Nutrienti**: **14/17** — mancano beta_carotene, vitamin_k, other_provitamin_a_carotenoids (nessuna riga carotenoidi/vitamina K sulla pagina consultata, non assunti zero). Per 100g: energia 123kcal, proteine 18,5g, grassi 4,90g, carboidrati 0g, fibra 0g, calcio 14,0mg, ferro 0,32mg, zinco 0,51mg, magnesio 42,0mg, rame 0,046mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 5,00µg, vitamina B12 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173700 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_spot` ("Pesce 'spot' (Leiostomus xanthurus)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173700 --food-id=food_pesce_spot_raw \
+  --name-it="Pesce \"spot\" (Leiostomus xanthurus), crudo" \
+  --matrix-id=pesce_spot --matrix-description-it="Pesce 'spot' (Leiostomus xanthurus)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173700 --food-id=food_pesce_spot_raw \
+  --name-it="Pesce \"spot\" (Leiostomus xanthurus), crudo" \
+  --matrix-id=pesce_spot --matrix-description-it="Pesce 'spot' (Leiostomus xanthurus)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pompano della Florida, crudo — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_pompano_raw`. FDC ID 173682 (SR Legacy, "Fish, pompano, florida, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Trachinotus carolinus*).
+- **Nutrienti**: **17/17** — nessun valore mancante, carotenoidi tutti 0µg espliciti. Per 100g: energia 164kcal, proteine 18,5g, grassi 9,47g, carboidrati 0g, fibra 0g, calcio 22,0mg, ferro 0,60mg, zinco 0,72mg, magnesio 27,0mg, rame 0,038mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 1,30µg, vitamina K 0,10µg, beta-carotene 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173682 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata anche per pesci più grassi come il merluzzo nero/sablefish).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pompano` ("Pompano della Florida").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173682 --food-id=food_pompano_raw \
+  --name-it="Pompano della Florida, crudo" \
+  --matrix-id=pompano --matrix-description-it="Pompano della Florida" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173682 --food-id=food_pompano_raw \
+  --name-it="Pompano della Florida, crudo" \
+  --matrix-id=pompano --matrix-description-it="Pompano della Florida" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Emu, carne macinata cruda — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_emu_raw`. FDC ID 172832 (SR Legacy, "Emu, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Seconda ratite di questa pipeline, distinta dallo struzzo (`food_struzzo_raw`, ancora solo 🟡 "Pronti" non eseguito sul DB reale, quindi non utilizzabile come analogia per la regola del punto 2c). Nessun record generico "emu, raw" non macinato trovato: FDC traccia solo tagli specifici (full rump, inside/outside drum, fan/flat fillet) più questo "ground" generico — stessa convenzione già accettata per lo struzzo macinato.
+- **Nutrienti**: **16/17** — manca solo vitamin_k (nessuna riga vitamina K sulla pagina consultata, non assunta zero). Per 100g: energia 134kcal, proteine 22,8g, grassi 4,03g, carboidrati 0g, fibra 0g, calcio 7,00mg, ferro 4,02mg, zinco 3,48mg, magnesio 24,0mg, rame 0,20mg, selenio 30,5µg, vitamina C 0mg esplicito, folato totale 13,0µg, vitamina B12 6,75µg, beta-carotene 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172832 e dataType SR Legacy.
+- **Analogia usata**: `food_anatra_raw` (anatra, cruda, già eseguita sul DB reale — categoria funzionale "carne di volatile", stesso attributo `is_heme_iron`; preferita allo struzzo perché quest'ultimo non è ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne/pollame).
+- **Matrice**: nuova `emu` ("Emu, carne macinata").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_anatra_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi riportati 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172832 --food-id=food_emu_raw \
+  --name-it="Emu, carne macinata cruda" \
+  --matrix-id=emu --matrix-description-it="Emu, carne macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172832 --food-id=food_emu_raw \
+  --name-it="Emu, carne macinata cruda" \
+  --matrix-id=emu --matrix-description-it="Emu, carne macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Bottatrice (burbot), cruda — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_bottatrice_raw`. FDC ID 171950 (SR Legacy, "Fish, burbot, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Lota lota*, famiglia Lotidae, vicina ai Gadidae del merluzzo).
+- **Nutrienti**: **14/17** — mancano beta_carotene, vitamin_k, other_provitamin_a_carotenoids (nessuna riga carotenoidi/vitamina K sulla pagina consultata, non assunti zero). Per 100g: energia 90,0kcal, proteine 19,3g, grassi 0,81g, carboidrati 0g, fibra 0g, calcio 50,0mg, ferro 0,90mg, zinco 0,76mg, magnesio 32,0mg, rame 0,20mg, selenio 12,6µg, vitamina C 0mg esplicito, folato totale 1,00µg, vitamina B12 0,80µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171950 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutto il pesce di questa pipeline, famiglia zoologica vicina).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `bottatrice` ("Bottatrice (burbot)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171950 --food-id=food_bottatrice_raw \
+  --name-it="Bottatrice (burbot), cruda" \
+  --matrix-id=bottatrice --matrix-description-it="Bottatrice (burbot)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171950 --food-id=food_bottatrice_raw \
+  --name-it="Bottatrice (burbot), cruda" \
+  --matrix-id=bottatrice --matrix-description-it="Bottatrice (burbot)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Alosa americana (shad), cruda — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_alosa_raw`. FDC ID 173696 (SR Legacy, "Fish, shad, american, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Alosa sapidissima*).
+- **Nutrienti**: **17/17** — nessun valore mancante, carotenoidi tutti 0µg espliciti. Per 100g: energia 197kcal, proteine 16,9g, grassi 13,8g, carboidrati 0g, fibra 0g, calcio 47,0mg, ferro 0,97mg, zinco 0,37mg, magnesio 30,0mg, rame 0,064mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 0,15µg, vitamina K 0,10µg, beta-carotene 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173696 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata anche per pesci più grassi come il merluzzo nero/sablefish).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `alosa` ("Alosa americana (shad)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173696 --food-id=food_alosa_raw \
+  --name-it="Alosa americana (shad), cruda" \
+  --matrix-id=alosa --matrix-description-it="Alosa americana (shad)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173696 --food-id=food_alosa_raw \
+  --name-it="Alosa americana (shad), cruda" \
+  --matrix-id=alosa --matrix-description-it="Alosa americana (shad)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Storione, carne cruda — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_storione_raw`. FDC ID 173701 (SR Legacy, "Fish, sturgeon, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Distinto dal caviale (uova di storione, `food_caviale_raw`, già ✅): qui il muscolo, non le uova.
+- **Nutrienti**: **17/17** — nessun valore mancante, carotenoidi tutti 0µg espliciti. Per 100g: energia 105kcal, proteine 16,1g, grassi 4,04g, carboidrati 0g, fibra 0g, calcio 13,0mg, ferro 0,70mg, zinco 0,42mg, magnesio 35,0mg, rame 0,041mg, selenio 12,6µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 2,20µg, vitamina K 0,10µg, beta-carotene 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173701 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutto il pesce di questa pipeline; per l'attributo `is_heme_iron` è il muscolo, non l'uovo, quindi non si applica la convenzione usata per il caviale).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `storione` ("Storione, carne").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173701 --food-id=food_storione_raw \
+  --name-it="Storione, carne cruda" \
+  --matrix-id=storione --matrix-description-it="Storione, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173701 --food-id=food_storione_raw \
+  --name-it="Storione, carne cruda" \
+  --matrix-id=storione --matrix-description-it="Storione, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Salmone coho (selvaggio), crudo — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_salmone_coho_raw`. FDC ID 175136 (SR Legacy, "Fish, salmon, coho, wild, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie distinta (*Oncorhynchus kisutch*) dal salmone atlantico del Golden Set originale (`food_salmon_raw`, *Salmo salar*) e dal salmone rosa in scatola già fatto (*Oncorhynchus gorbuscha*).
+- **Nutrienti**: **17/17** — nessun valore mancante, carotenoidi tutti 0µg espliciti. Per 100g: energia 146kcal, proteine 21,6g, grassi 5,93g, carboidrati 0g, fibra 0g, calcio 36,0mg, ferro 0,56mg, zinco 0,41mg, magnesio 31,0mg, rame 0,051mg, selenio 36,5µg, vitamina C 1,00mg, folato totale 9,00µg, vitamina B12 4,17µg, vitamina K 0,10µg, beta-carotene 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175136 e dataType SR Legacy.
+- **Analogia usata**: `food_salmon_raw` (salmone atlantico, crudo, Golden Set originale, già eseguito sul DB reale — stesso genere funzionale "salmone crudo", famiglia reale distinta dichiarata esplicitamente).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_coho` ("Salmone coho (selvaggio)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_salmon_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175136 --food-id=food_salmone_coho_raw \
+  --name-it="Salmone coho (selvaggio), crudo" \
+  --matrix-id=salmone_coho --matrix-description-it="Salmone coho (selvaggio)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175136 --food-id=food_salmone_coho_raw \
+  --name-it="Salmone coho (selvaggio), crudo" \
+  --matrix-id=salmone_coho --matrix-description-it="Salmone coho (selvaggio)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Cefalo (muggine), crudo — preparato 2026-10-29 dal task (quarantanovesimo lotto)
+
+- **food_id**: `food_cefalo_raw`. FDC ID 175123 (SR Legacy, "Fish, mullet, striped, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Stesso record già incontrato nel ventesimo lotto per valutare la triglia (*Mullus barbatus*, famiglia Mullidae) e scartato allora perché rappresenta invece il cefalo/muggine striato (*Mugil cephalus*, famiglia Mugilidae) — qui usato correttamente per l'alimento che rappresenta davvero, non ancora aggiunto sotto questo nome.
+- **Nutrienti**: **17/17** — nessun valore mancante, carotenoidi tutti 0µg espliciti. Per 100g: energia 117kcal, proteine 19,4g, grassi 3,79g, carboidrati 0g, fibra 0g, calcio 41,0mg, ferro 1,02mg, zinco 0,52mg, magnesio 29,0mg, rame 0,051mg, selenio 36,5µg, vitamina C 1,20mg, folato totale 9,00µg, vitamina B12 0,22µg, vitamina K 0,10µg, beta-carotene 0µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175123 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutto il pesce di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `cefalo` ("Cefalo (muggine)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175123 --food-id=food_cefalo_raw \
+  --name-it="Cefalo (muggine), crudo" \
+  --matrix-id=cefalo --matrix-description-it="Cefalo (muggine)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175123 --food-id=food_cefalo_raw \
+  --name-it="Cefalo (muggine), crudo" \
+  --matrix-id=cefalo --matrix-description-it="Cefalo (muggine)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pesce lupo atlantico (wolffish), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
 
 - **food_id**: `food_pesce_lupo_raw`. FDC ID 175162 (SR Legacy, "Fish, wolffish, Atlantic, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Anarhichas lupus*).
