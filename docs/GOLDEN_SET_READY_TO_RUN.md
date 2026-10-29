@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Nopal (fico d'India, pala), crudo — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_nopales_raw`. FDC ID 168571 (SR Legacy, "Nopales, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "uno dei 2" record USDA per il nopal). Cactus comestibile della famiglia Cactaceae (*Opuntia* spp., la pala/pad del fico d'India) mai tentato in questa pipeline — nessun precedente di questa famiglia, salvo il frutto del fico d'India stesso (già eseguito, parte della pianta diversa: frutto vs pala/stelo).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 16,0kcal, proteine 1,32g, grassi 0,090g, carboidrati 3,33g, fibra 2,20g, calcio 164mg, ferro 0,59mg, zinco 0,25mg, magnesio 52,0mg, rame 0,052mg, selenio 0,70µg, vitamina C 9,30mg, vitamina K (fillochinone) 5,30µg, folato totale 3,00µg, beta-carotene 250µg, alfa-carotene 48,0µg (carotenoidi reali e non nulli, coerenti col colore verde della pala), beta-criptoxantina 0µg esplicito; vitamina B12 e acido folico esplicitamente 0µg (nessuna firma di arricchimento). Sodio 21,0mg/100g, coerente con un ortaggio crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168571 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_raw` (carote crude, Golden Set originale, già eseguita sul DB reale — stessa categoria "ortaggio crudo con carotenoidi reali e `matrix_category_calcium` non applicabile/NULL"). **Nota di trasparenza dichiarata**: famiglia botanica reale diversa dall'analogia (Cactaceae contro Apiaceae) — nessun precedente Cactaceae già eseguito in questa pipeline (il frutto del fico d'India, se presente, è una parte diversa della stessa pianta); analogia usata solo per gli attributi categorici di bioaccessibilità, non per la famiglia botanica dichiarata, che resta quella vera del nopal.
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/stelo di cactus, nessun ingrediente animale).
+- **Matrice**: nuova `nopales_raw` ("Nopal (pala di fico d'India), crudo").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — contenuto di ossalato del nopal non caratterizzato con certezza in questa pipeline, stesso precedente di `food_carrots_raw`, mai indovinato), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cactaceae` (famiglia botanica reale del nopal), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168571 --food-id=food_nopales_raw \
+  --name-it="Nopal (fico d'India, pala), crudo" \
+  --matrix-id=nopales_raw --matrix-description-it="Nopal (pala di fico d'India), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cactaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168571 --food-id=food_nopales_raw \
+  --name-it="Nopal (fico d'India, pala), crudo" \
+  --matrix-id=nopales_raw --matrix-description-it="Nopal (pala di fico d'India), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cactaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Jicama, cruda — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
 
 - **food_id**: `food_jicama_raw`. FDC ID 170073 (SR Legacy, "Yambean (jicama), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Radice/tubero della famiglia Fabaceae (*Pachyrhizus erosus*) mai tentato in questa pipeline — nessun legume/radice di questa specie ancora coperto.
