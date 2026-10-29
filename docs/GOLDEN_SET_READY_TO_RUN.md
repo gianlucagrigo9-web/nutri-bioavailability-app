@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Granchio reale (Alaska king crab), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
+
+- **food_id**: `food_granchio_reale_raw`. FDC ID 175164 (SR Legacy, "Crustaceans, crab, alaska king, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie distinta (*Paralithodes camtschaticus*) dal granchio blu (*Callinectes sapidus*, `food_granchio_raw`) e dal granchio Dungeness (*Metacarcinus magister*, `food_granchio_dungeness_raw`) già coperti in questa pipeline — segue il filone "specie distinta di un crostaceo già coperto in un'altra specie" raccomandato alla chiusura del quarantasettesimo lotto.
+- **Nutrienti**: **14/17** — mancano beta_carotene, vitamin_k, other_provitamin_a_carotenoids (nessuna riga carotenoidi/vitamina K sulla pagina consultata, non assunti zero, stesso identico gap già visto per granchio blu/Dungeness/queen crab in questa pipeline). Per 100g: energia 84,0kcal, proteine 18,3g, grassi 0,60g, carboidrati 0g, fibra 0g, calcio 46,0mg, ferro 0,59mg, zinco 5,95mg, magnesio 49,0mg, rame 0,92mg, selenio 36,4µg, vitamina C 7,00mg, folato totale 44,0µg, vitamina B12 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175164 e dataType SR Legacy.
+- **Analogia usata**: `food_granchio_raw` (granchio blu, crudo, già eseguito sul DB reale — stesso ordine Decapoda, categoria "crostaceo marino crudo", stesso identico gap di carotenoidi/vitamina K).
+- **Categoria dieta**: `meat_fish` (crostaceo).
+- **Matrice**: nuova `granchio_reale` ("Granchio reale (Alaska king crab)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_granchio_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175164 --food-id=food_granchio_reale_raw \
+  --name-it="Granchio reale (Alaska king crab), crudo" \
+  --matrix-id=granchio_reale --matrix-description-it="Granchio reale (Alaska king crab)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175164 --food-id=food_granchio_reale_raw \
+  --name-it="Granchio reale (Alaska king crab), crudo" \
+  --matrix-id=granchio_reale --matrix-description-it="Granchio reale (Alaska king crab)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Senape preparata, gialla — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_senape_preparata_raw`. FDC ID 172234 (SR Legacy, "Mustard, prepared, yellow" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Condimento mono-ingrediente mai tentato in questa pipeline, distinto dai semi di senape macinati già eseguiti (`food_senape_raw`, FDC 170929).
