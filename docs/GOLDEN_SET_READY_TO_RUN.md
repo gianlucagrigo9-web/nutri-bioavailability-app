@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Gambero di fiume (crayfish), crudo — preparato 2026-10-29 dal task (quarantasettesimo lotto)
+
+- **food_id**: `food_gambero_di_fiume_raw`. FDC ID 175169 (SR Legacy, "Crustaceans, crayfish, mixed species, farmed, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Crostaceo decapode mai tentato in questa pipeline, distinto da gamberi/granchio/astice già eseguiti o pronti (famiglia *Astacidae*/*Cambaridae*, diversa dai gamberi marini).
+- **Nutrienti**: **14/17** — mancano `vitamin_k_mcg`, `beta_carotene_mcg` e `other_provitamin_a_carotenoids_mcg` (nessun carotenoide riportato nel record, coerente con un crostaceo). Per 100g: energia 72,0kcal, proteine 14,8g, grassi 0,97g, carboidrati 0g, fibra 0g, calcio 25,0mg, ferro 0,55mg, zinco 1,01mg, magnesio 30,0mg, rame 0,24mg, selenio 28,4µg, vitamina C 0,50mg, folato totale 30,0µg, vitamina B12 2,10µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Sodio 62,0mg/100g, coerente con un crostaceo marino/d'acqua dolce crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175169 e dataType SR Legacy.
+- **Analogia usata**: `food_granchio_raw` (granchio crudo, già eseguito sul DB reale — stesso ordine Decapoda, categoria "crostaceo crudo", stesso identico gap di carotenoidi/vitamina K).
+- **Categoria dieta**: `meat_fish` (crostaceo, prodotto animale).
+- **Matrice**: nuova `gambero_di_fiume_raw` ("Gambero di fiume, crudo").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_granchio_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175169 --food-id=food_gambero_di_fiume_raw \
+  --name-it="Gambero di fiume, crudo" \
+  --matrix-id=gambero_di_fiume_raw --matrix-description-it="Gambero di fiume, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175169 --food-id=food_gambero_di_fiume_raw \
+  --name-it="Gambero di fiume, crudo" \
+  --matrix-id=gambero_di_fiume_raw --matrix-description-it="Gambero di fiume, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_granchio_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Aragosta, cruda — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_aragosta_raw`. FDC ID 174211 (SR Legacy, "Crustaceans, spiny lobster, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie distinta (famiglia *Palinuridae*, aragosta/spiny lobster, senza chele) dall'astice già eseguito (*Homarus*, con chele, `food_astice_raw`, FDC 174208) — record FDC dedicato e distinto, non lo stesso già usato per l'astice (nota di trasparenza già presente in questa coda dal settimo lotto: il record FDC 174208 usato per "astice (aragosta)" è in realtà l'astice con chele, non la vera aragosta).
