@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pesce persico oceanico (ocean perch atlantico), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
+
+- **food_id**: `food_persico_oceanico_raw`. FDC ID 175125 (SR Legacy, "Fish, ocean perch, Atlantic, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie distinta (*Sebastes* spp., famiglia Sebastidae, "rockfish") dal persico d'acqua dolce/*Perca* spp. già eseguito (`food_pesce_persico_raw`, FDC 173678 "Fish, perch, mixed species, raw") — nome italiano simile ma zoologicamente non collegato (ordine Scorpaeniformes contro Perciformes).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 79,0kcal, proteine 15,3g, grassi 1,54g, carboidrati 0g, fibra 0g, calcio 28,0mg, ferro 0,22mg, zinco 0,29mg, magnesio 23,0mg, rame 0,021mg, selenio 28,6µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,10µg + menachinone-4 0,20µg, folato totale 9,00µg, vitamina B12 1,50µg, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito (usati come "altro carotenoide provitaminico A"), acido folico 0µg esplicito (nessuna firma di arricchimento) — tutti i valori a zero sono righe esplicite del record, non campi assenti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175125 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutti i pesci di questa pipeline; famiglia botanica/zoologica reale dichiarata diversa, analogia usata solo per gli attributi categorici).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `persico_oceanico` ("Pesce persico oceanico (ocean perch atlantico)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175125 --food-id=food_persico_oceanico_raw \
+  --name-it="Pesce persico oceanico (ocean perch atlantico), crudo" \
+  --matrix-id=persico_oceanico --matrix-description-it="Pesce persico oceanico (ocean perch atlantico)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175125 --food-id=food_persico_oceanico_raw \
+  --name-it="Pesce persico oceanico (ocean perch atlantico), crudo" \
+  --matrix-id=persico_oceanico --matrix-description-it="Pesce persico oceanico (ocean perch atlantico)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Merluzzo nero (sablefish), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
 
 - **food_id**: `food_merluzzo_nero_raw`. FDC ID 175134 (SR Legacy, "Fish, sablefish, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Anoplopoma fimbria*) — nonostante il nome italiano comune richiami il merluzzo, è una specie zoologicamente distinta dal merluzzo nordico/*Gadus morhua* (`food_merluzzo_raw`) e dal merluzzo dell'Alaska/pollock già in coda; un pesce notevolmente più grasso (15,3g grassi/100g contro <1g del merluzzo comune).
