@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Rabarbaro, crudo — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_rabarbaro_raw`. FDC ID 167758 (SR Legacy, "Rhubarb, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, USDA cita 5 descrizioni per il rabarbaro). Ortaggio a stelo/picciolo della famiglia Polygonaceae mai tentato in questa pipeline.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 21,0kcal, proteine 0,90g, grassi 0,20g, carboidrati 4,54g, fibra 1,80g, calcio 86,0mg, ferro 0,22mg, zinco 0,10mg, magnesio 12,0mg, rame 0,021mg, selenio 1,10µg, vitamina C 8,00mg, vitamina K (fillochinone) 29,3µg, folato totale 7,00µg, beta-carotene 61,0µg (reale e non nullo), alfa-carotene e beta-criptoxantina entrambi 0µg espliciti; vitamina B12 e acido folico esplicitamente 0µg (nessuna firma di arricchimento). Sodio 4,00mg/100g, coerente con un ortaggio crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167758 e dataType SR Legacy.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguito sul DB reale). **Nota di trasparenza dichiarata**: analogia scelta non per famiglia botanica (Polygonaceae per il rabarbaro contro Amaranthaceae per gli spinaci, nessun precedente Polygonaceae già eseguito) ma per `matrix_category_calcium=high_oxalate` — il rabarbaro è notoriamente tra gli alimenti a più alto contenuto di acido ossalico (fatto ampiamente documentato in letteratura nutrizionale, non un valore numerico inventato), stesso ordine di grandezza qualitativo già assegnato agli spinaci in questa pipeline; nessun valore `oxalates_mg` aggiunto da questo script (fuori dal suo perimetro), solo la categoria bucket per la bioaccessibilità del calcio.
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a stelo, botanicamente non un frutto — classificazione USDA standard, nessun ingrediente animale).
+- **Matrice**: nuova `rabarbaro_raw` ("Rabarbaro, crudo").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium=high_oxalate` (per analogia qualitativa dichiarata con gli spinaci, non per famiglia botanica), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Polygonaceae` (famiglia botanica reale del rabarbaro), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167758 --food-id=food_rabarbaro_raw \
+  --name-it="Rabarbaro, crudo" \
+  --matrix-id=rabarbaro_raw --matrix-description-it="Rabarbaro, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=high_oxalate \
+  --botanical-family=Polygonaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167758 --food-id=food_rabarbaro_raw \
+  --name-it="Rabarbaro, crudo" \
+  --matrix-id=rabarbaro_raw --matrix-description-it="Rabarbaro, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=high_oxalate \
+  --botanical-family=Polygonaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ostrica del Pacifico, cruda — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
 
 - **food_id**: `food_ostrica_pacifico_raw`. FDC ID 174219 (SR Legacy, "Mollusks, oyster, Pacific, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie distinta (*Crassostrea gigas*, ostrica del Pacifico/giapponese) dall'ostrica orientale/atlantica già eseguita (*Crassostrea virginica*, `food_ostriche_raw`, FDC 175172) — stesso filone "specie distinta di un mollusco/pesce già coperto in un'altra specie" che aveva dato 3/3 nei lotti 41-42 (tonno bianco/salmone rosa/sardine del Pacifico).
