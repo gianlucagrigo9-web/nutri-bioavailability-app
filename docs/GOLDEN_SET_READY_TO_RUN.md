@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Senape preparata, gialla — preparato 2026-10-29 dal task (quarantasettesimo lotto)
+
+- **food_id**: `food_senape_preparata_raw`. FDC ID 172234 (SR Legacy, "Mustard, prepared, yellow" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Condimento mono-ingrediente mai tentato in questa pipeline, distinto dai semi di senape macinati già eseguiti (`food_senape_raw`, FDC 170929).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 60,0kcal, proteine 3,74g, grassi 3,34g, carboidrati 5,83g, fibra 4,00g, calcio 63,0mg, ferro 1,61mg, zinco 0,64mg, magnesio 48,0mg, rame 0,074mg, selenio 33,5µg, vitamina C 0,30mg, vitamina K (fillochinone) 1,40µg, folato totale 7,00µg, beta-carotene 51,0µg (reale e non nullo), alfa-carotene 1,00µg e beta-criptoxantina 27,0µg (entrambi reali, usati come "altro carotenoide provitaminico A"); vitamina B12 e acido folico entrambi 0µg espliciti (nessuna firma di arricchimento). Sodio 1104mg/100g, alto ma coerente con un condimento salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172234 e dataType SR Legacy.
+- **Analogia usata**: `food_senape_raw` (semi di senape macinati, già eseguiti sul DB reale — stessa pianta/famiglia botanica reale Brassicaceae, condimento derivato dallo stesso seme).
+- **Nota di trasparenza sulla categoria dieta**: a differenza di cioccolato fondente/margarina (scartati o segnalati ⚠ per ambiguità di composizione in questa coda), la senape preparata gialla comune ha una composizione universalmente nota e priva di variabilità: seme di senape, aceto, acqua, sale, curcuma (nessun latte/uovo in nessuna formulazione standard di questo prodotto, a differenza della senape "al miele" o di varianti gourmet, qui non richieste) — stessa certezza già usata per ketchup/maionese in questa coda (classificati per composizione nota, non indovinati).
+- **Categoria dieta**: `plant_non_fruit` (condimento a base di seme vegetale, nessun ingrediente animale).
+- **Matrice**: nuova `senape_preparata_raw` ("Senape preparata, gialla").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non applicabile, condimento trasformato), `carotenoid_matrix_state` omesso (NULL — beta-carotene/altri carotenoidi presenti ma il prodotto è un condimento macinato/miscelato, non classificato per matrice carotenoide, stessa convenzione già usata per la maionese), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (famiglia reale, stessa di `food_senape_raw`), `baseline_cooking_state=raw` (emulsione/pasta non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172234 --food-id=food_senape_preparata_raw \
+  --name-it="Senape preparata, gialla" \
+  --matrix-id=senape_preparata_raw --matrix-description-it="Senape preparata, gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_senape_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172234 --food-id=food_senape_preparata_raw \
+  --name-it="Senape preparata, gialla" \
+  --matrix-id=senape_preparata_raw --matrix-description-it="Senape preparata, gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_senape_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Granchio Dungeness, crudo — preparato 2026-10-29 dal task (quarantasettesimo lotto)
 
 - **food_id**: `food_granchio_dungeness_raw`. FDC ID 171968 (SR Legacy, "Crustaceans, crab, dungeness, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie distinta (*Metacarcinus magister*, granchio Dungeness) dal granchio blu già eseguito (*Callinectes sapidus*, `food_granchio_raw`, FDC 174204) — stesso filone "specie distinta di un crostaceo/mollusco già coperto in un'altra specie" che aveva dato buoni risultati nei lotti 41-42-46 (tonno bianco/salmone rosa/sardine del Pacifico/ostrica del Pacifico).
