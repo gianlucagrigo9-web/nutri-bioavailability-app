@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ostrica del Pacifico, cruda — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_ostrica_pacifico_raw`. FDC ID 174219 (SR Legacy, "Mollusks, oyster, Pacific, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Specie distinta (*Crassostrea gigas*, ostrica del Pacifico/giapponese) dall'ostrica orientale/atlantica già eseguita (*Crassostrea virginica*, `food_ostriche_raw`, FDC 175172) — stesso filone "specie distinta di un mollusco/pesce già coperto in un'altra specie" che aveva dato 3/3 nei lotti 41-42 (tonno bianco/salmone rosa/sardine del Pacifico).
+- **Nutrienti**: **14/17** — mancano `beta_carotene_mcg`, `vitamin_k_mcg` e `other_provitamin_a_carotenoids_mcg` (nessun carotenoide riportato nel record, coerente con un mollusco — stesso identico gap già presente per l'ostrica orientale/atlantica già eseguita). Per 100g: energia 81,0kcal, proteine 9,45g, grassi 2,30g, carboidrati 4,95g, fibra 0g, calcio 8,00mg, ferro 5,11mg, zinco 16,6mg (molto alto, coerente col profilo noto delle ostriche), magnesio 22,0mg, rame 1,58mg (alto, coerente), selenio 77,0µg (molto alto, coerente), vitamina C 8,00mg, folato totale 10,0µg, vitamina B12 16,0µg (alta, coerente con un mollusco), acido folico 0µg esplicito (nessuna firma di arricchimento). Sodio 106mg/100g, coerente con un mollusco marino crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174219 e dataType SR Legacy.
+- **Analogia usata**: `food_ostriche_raw` (ostrica orientale/atlantica, cruda, già eseguita sul DB reale — stesso genere *Crassostrea*, stessa categoria "mollusco bivalve crudo", stesso identico gap di carotenoidi/vitamina K).
+- **Categoria dieta**: `meat_fish` (mollusco, prodotto animale).
+- **Matrice**: nuova `ostrica_pacifico_raw` ("Ostrica del Pacifico, cruda").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_ostriche_raw`), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente dell'ostrica atlantica), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record, coerente con l'assenza dal mapping), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174219 --food-id=food_ostrica_pacifico_raw \
+  --name-it="Ostrica del Pacifico, cruda" \
+  --matrix-id=ostrica_pacifico_raw --matrix-description-it="Ostrica del Pacifico, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ostriche_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174219 --food-id=food_ostrica_pacifico_raw \
+  --name-it="Ostrica del Pacifico, cruda" \
+  --matrix-id=ostrica_pacifico_raw --matrix-description-it="Ostrica del Pacifico, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ostriche_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Nopal (fico d'India, pala), crudo — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
 
 - **food_id**: `food_nopales_raw`. FDC ID 168571 (SR Legacy, "Nopales, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "uno dei 2" record USDA per il nopal). Cactus comestibile della famiglia Cactaceae (*Opuntia* spp., la pala/pad del fico d'India) mai tentato in questa pipeline — nessun precedente di questa famiglia, salvo il frutto del fico d'India stesso (già eseguito, parte della pianta diversa: frutto vs pala/stelo).
