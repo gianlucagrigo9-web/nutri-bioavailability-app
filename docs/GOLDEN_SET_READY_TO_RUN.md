@@ -16,6 +16,135 @@
 
 ## Pronti
 
+### Fichi, in scatola, sciroppo leggero — preparato 2026-10-29 dal task (cinquantesimo lotto)
+
+- **food_id**: `food_fichi_in_scatola`. FDC ID 173023 (SR Legacy, "Figs, canned, light syrup pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Primo fico di questa pipeline in qualunque forma (solo fichi secchi erano già stati fatti, il fico fresco crudo non è mai stato tentato).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 69,0kcal, proteine 0,39g, grassi 0,10g, carboidrati 17,9g, fibra 1,80g, calcio 27,0mg, ferro 0,29mg, zinco 0,11mg, magnesio 10,0mg, rame 0,11mg, selenio 0,20µg, vitamina C 1,00mg, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 4,20µg, beta-carotene 22,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 1,00mg/100g — non salato, coerente con "light syrup pack" (zuccherato ma non salato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173023 e dataType SR Legacy, release 30-04-2026.
+- **Analogia usata**: `food_fichi_secchi_raw` (fichi secchi, già eseguiti sul DB reale — stesso frutto, forma di conservazione diversa).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline, già usata per pesche/pere/albicocche/ciliegie/mandarini/ananas in scatola).
+- **Matrice**: nuova `fichi_in_scatola` ("Fichi, in scatola, sciroppo leggero").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (fichi in scatola, sterilizzati a calore, matrice carotenoide disgregata, beta-carotene reale seppure basso e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Moraceae` (famiglia reale del fico, *Ficus carica*), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173023 --food-id=food_fichi_in_scatola \
+  --name-it="Fichi, in scatola, sciroppo leggero" \
+  --matrix-id=fichi_in_scatola --matrix-description-it="Fichi, in scatola, sciroppo leggero" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fichi_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Moraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173023 --food-id=food_fichi_in_scatola \
+  --name-it="Fichi, in scatola, sciroppo leggero" \
+  --matrix-id=fichi_in_scatola --matrix-description-it="Fichi, in scatola, sciroppo leggero" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fichi_secchi_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Moraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Amarene (ciliegie acide, Prunus cerasus), in scatola, nel loro liquido — preparato 2026-10-29 dal task (cinquantesimo lotto)
+
+- **food_id**: `food_amarene_in_scatola`. FDC ID 173955 (SR Legacy, "Cherries, sour, red, canned, water pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie botanica distinta (*Prunus cerasus*) dalla ciliegia dolce (*Prunus avium*) già usata per `food_ciliegie_raw` e per le ciliegie dolci in scatola del quarantunesimo lotto — non un doppione, record FDC diverso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 36,0kcal, proteine 0,77g, grassi 0,10g, carboidrati 8,94g, fibra 1,10g, calcio 11,0mg, ferro 1,37mg, zinco 0,070mg, magnesio 6,00mg, rame 0,070mg, selenio 0µg esplicito, vitamina C 2,10mg, folato totale 8,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1,40µg, beta-carotene 452µg, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 7,00mg/100g — non salato, coerente con "water pack". Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173955 e dataType SR Legacy, release 30-04-2026.
+- **Analogia usata**: `food_ciliegie_raw` (ciliegie dolci crude, già eseguite sul DB reale — stesso genere *Prunus*, frutto a drupa).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline).
+- **Matrice**: nuova `amarene_in_scatola` ("Amarene (ciliegie acide), in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 452µg/100g, valore reale non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale, stesso precedente di `food_ciliegie_raw`/`food_prugne_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173955 --food-id=food_amarene_in_scatola \
+  --name-it="Amarene (ciliegie acide), in scatola, nel loro liquido" \
+  --matrix-id=amarene_in_scatola --matrix-description-it="Amarene (ciliegie acide), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173955 --food-id=food_amarene_in_scatola \
+  --name-it="Amarene (ciliegie acide), in scatola, nel loro liquido" \
+  --matrix-id=amarene_in_scatola --matrix-description-it="Amarene (ciliegie acide), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Pompelmo, a sezioni, in scatola, nel proprio succo — preparato 2026-10-29 dal task (cinquantesimo lotto)
+
+- **food_id**: `food_pompelmo_in_scatola`. FDC ID 173036 (SR Legacy, "Grapefruit, sections, canned, juice pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Distinto dal pompelmo bianco/rosa freschi già eseguiti — qui il frutto in scatola nel proprio succo, prodotto di conservazione diverso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 37,0kcal, proteine 0,70g, grassi 0,090g, carboidrati 9,21g, fibra 0,40g, calcio 15,0mg, ferro 0,21mg, zinco 0,080mg, magnesio 11,0mg, rame 0,037mg, selenio 0,90µg, vitamina C 33,9mg, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 7,00mg/100g — non salato, coerente con "juice pack". Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173036 e dataType SR Legacy, release 30-04-2026.
+- **Nota di trasparenza**: il record FDC non specifica la varietà (bianco/rosa). Analogia dichiarata su `food_pompelmo_rosa_raw` (varietà commerciale più diffusa per questo tipo di conserva) non su `food_pompelmo_bianco_raw` — scelta editoriale esplicita, non un dato nascosto.
+- **Analogia usata**: `food_pompelmo_rosa_raw` (pompelmo rosa crudo, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline).
+- **Matrice**: nuova `pompelmo_in_scatola` ("Pompelmo, a sezioni, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (famiglia reale degli agrumi, stesso precedente di `food_pompelmo_rosa_raw`/`food_pompelmo_bianco_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173036 --food-id=food_pompelmo_in_scatola \
+  --name-it="Pompelmo, a sezioni, in scatola, nel proprio succo" \
+  --matrix-id=pompelmo_in_scatola --matrix-description-it="Pompelmo, a sezioni, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pompelmo_rosa_raw \
+  --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173036 --food-id=food_pompelmo_in_scatola \
+  --name-it="Pompelmo, a sezioni, in scatola, nel proprio succo" \
+  --matrix-id=pompelmo_in_scatola --matrix-description-it="Pompelmo, a sezioni, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pompelmo_rosa_raw \
+  --botanical-family=Rutaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Prugne, in scatola, nel loro succo — preparato 2026-10-29 dal task (cinquantesimo lotto)
+
+- **food_id**: `food_prugne_in_scatola`. FDC ID 169951 (SR Legacy, "Plums, canned, purple, juice pack, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Distinto dalle prugne fresche/secche già eseguite — qui il frutto in scatola nel proprio succo, prodotto di conservazione diverso.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 58,0kcal, proteine 0,51g, grassi 0,020g, carboidrati 15,2g, fibra 0,90g, calcio 10,0mg, ferro 0,34mg, zinco 0,11mg, magnesio 8,00mg, rame 0,054mg, selenio 0µg esplicito, vitamina C 2,80mg, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 4,30µg, beta-carotene 554µg, alfa-carotene 0µg esplicito, beta-criptoxantina 102µg. Sodio 1,00mg/100g — non salato, coerente con "juice pack". Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169951 e dataType SR Legacy, release 30-04-2026.
+- **Analogia usata**: `food_prugne_raw` (prugne crude, già eseguite sul DB reale — stesso frutto, forma di conservazione diversa).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline).
+- **Matrice**: nuova `prugne_in_scatola` ("Prugne, in scatola, nel loro succo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 554µg/100g e beta-criptoxantina 102µg/100g, valori reali non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia reale della prugna, stesso precedente di `food_prugne_raw`/`food_ciliegie_raw`), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169951 --food-id=food_prugne_in_scatola \
+  --name-it="Prugne, in scatola, nel loro succo" \
+  --matrix-id=prugne_in_scatola --matrix-description-it="Prugne, in scatola, nel loro succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prugne_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169951 --food-id=food_prugne_in_scatola \
+  --name-it="Prugne, in scatola, nel loro succo" \
+  --matrix-id=prugne_in_scatola --matrix-description-it="Prugne, in scatola, nel loro succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prugne_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Funghi paglia (straw mushroom, Volvariella volvacea), in scatola, sgocciolati — preparato 2026-10-29 dal task (cinquantesimo lotto)
+
+- **food_id**: `food_funghi_paglia_in_scatola`. FDC ID 168582 (SR Legacy, "Mushrooms, straw, canned, drained solids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie distinta (*Volvariella volvacea*) da champignon/cremini/finferli/pleurotus già fatti, mai tentata in questa pipeline, qui solo in scatola.
+- **Nutrienti**: **16/17** — manca solo vitamin_k (nessuna riga sulla pagina consultata, non assunta zero). Per 100g: energia 32,0kcal, proteine 3,83g, grassi 0,68g, carboidrati 4,64g, fibra 2,50g, calcio 10,0mg, ferro 1,43mg, zinco 0,67mg, magnesio 7,00mg, rame 0,13mg, selenio 15,2µg, vitamina C 0mg esplicito, folato totale 38,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 384mg/100g — coerente con un prodotto in scatola "regular pack" (non "no salt added"), stessa convenzione già accettata per funghi champignon/carote/asparagi in scatola di questa pipeline. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168582 e dataType SR Legacy, release 30-04-2026.
+- **Analogia usata**: `food_funghi_champignon_cotti` (funghi champignon cotti, già eseguiti sul DB reale — stessa convenzione "fungo, non pianta" già usata per champignon/cremini/finferli).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `funghi_paglia_in_scatola` ("Funghi paglia (straw mushroom), in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti, nessun carotenoide reale nel record, stessa convenzione di `food_funghi_champignon_cotti`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stesso precedente), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168582 --food-id=food_funghi_paglia_in_scatola \
+  --name-it="Funghi paglia (straw mushroom), in scatola, sgocciolati" \
+  --matrix-id=funghi_paglia_in_scatola --matrix-description-it="Funghi paglia (straw mushroom), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_champignon_cotti \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168582 --food-id=food_funghi_paglia_in_scatola \
+  --name-it="Funghi paglia (straw mushroom), in scatola, sgocciolati" \
+  --matrix-id=funghi_paglia_in_scatola --matrix-description-it="Funghi paglia (straw mushroom), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_champignon_cotti \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pesce "spot" (Leiostomus xanthurus), crudo — preparato 2026-10-29 dal task (quarantanovesimo lotto)
 
 - **food_id**: `food_pesce_spot_raw`. FDC ID 173700 (SR Legacy, "Fish, spot, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Leiostomus xanthurus*, famiglia Sciaenidae); nessun nome comune italiano consolidato, nome scientifico mantenuto in chiaro per trasparenza.
