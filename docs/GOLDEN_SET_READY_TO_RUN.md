@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pesce lupo atlantico (wolffish), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
+
+- **food_id**: `food_pesce_lupo_raw`. FDC ID 175162 (SR Legacy, "Fish, wolffish, Atlantic, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Anarhichas lupus*).
+- **Nutrienti**: **14/17** — mancano beta_carotene, vitamin_k, other_provitamin_a_carotenoids (nessuna riga carotenoidi/vitamina K sulla pagina consultata, non assunti zero). Per 100g: energia 96,0kcal, proteine 17,5g, grassi 2,39g, carboidrati 0g, fibra 0g, calcio 6,00mg, ferro 0,090mg, zinco 0,78mg, magnesio 30,0mg, rame 0,029mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 5,00µg, vitamina B12 2,03µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175162 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro bianco" già usata per tutti i pesci di questa pipeline).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_lupo` ("Pesce lupo atlantico (wolffish)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175162 --food-id=food_pesce_lupo_raw \
+  --name-it="Pesce lupo atlantico (wolffish), crudo" \
+  --matrix-id=pesce_lupo --matrix-description-it="Pesce lupo atlantico (wolffish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175162 --food-id=food_pesce_lupo_raw \
+  --name-it="Pesce lupo atlantico (wolffish), crudo" \
+  --matrix-id=pesce_lupo --matrix-description-it="Pesce lupo atlantico (wolffish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pesce persico oceanico (ocean perch atlantico), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
 
 - **food_id**: `food_persico_oceanico_raw`. FDC ID 175125 (SR Legacy, "Fish, ocean perch, Atlantic, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie distinta (*Sebastes* spp., famiglia Sebastidae, "rockfish") dal persico d'acqua dolce/*Perca* spp. già eseguito (`food_pesce_persico_raw`, FDC 173678 "Fish, perch, mixed species, raw") — nome italiano simile ma zoologicamente non collegato (ordine Scorpaeniformes contro Perciformes).
