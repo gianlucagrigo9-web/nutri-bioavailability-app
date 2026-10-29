@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Foglie di rapa, crude (turnip greens) — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_foglie_di_rapa_raw`. FDC ID 170061 (SR Legacy, "Turnip greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verdura a foglia della famiglia Brassicaceae (*Brassica rapa*) mai tentata in questa pipeline nonostante kale/verza/rucola/cavolfiore/cavolo cinese già coperti — specie/parte della pianta mai tentata sotto questo nome.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 32,0kcal, proteine 1,50g, grassi 0,30g, carboidrati 7,13g, fibra 3,20g, calcio 190mg, ferro 1,10mg, zinco 0,19mg, magnesio 31,0mg, rame 0,35mg, selenio 1,20µg, vitamina C 60,0mg, vitamina K (fillochinone) 251µg, folato totale 194µg, beta-carotene 6952µg (molto alto, coerente col pigmento verde scuro della foglia), alfa-carotene e beta-criptoxantina entrambi 0µg espliciti; vitamina B12 e acido folico esplicitamente 0µg (nessuna firma di arricchimento, coerente con una verdura a foglia fresca non trattata). Sodio 40,0mg/100g, coerente con un ortaggio crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170061 e dataType SR Legacy.
+- **Analogia usata**: `food_kale_raw` (cavolo kale, crudo, Golden Set originale, già eseguito sul DB reale — stessa famiglia botanica reale Brassicaceae, stessa categoria "verdura a foglia crucifera cruda a basso ossalato").
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia, nessun ingrediente animale).
+- **Matrice**: nuova `foglie_di_rapa_raw` ("Foglie di rapa, crude").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium=low_oxalate` (per analogia diretta con kale, stessa famiglia Brassicaceae, note per basso ossalato a differenza di spinaci/bietole), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170061 --food-id=food_foglie_di_rapa_raw \
+  --name-it="Foglie di rapa, crude" \
+  --matrix-id=foglie_di_rapa_raw --matrix-description-it="Foglie di rapa, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170061 --food-id=food_foglie_di_rapa_raw \
+  --name-it="Foglie di rapa, crude" \
+  --matrix-id=foglie_di_rapa_raw --matrix-description-it="Foglie di rapa, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mais dolce, crudo — preparato 2026-10-26 dal task (quarantacinquesimo lotto, bonus)
 
 - **food_id**: `food_mais_dolce_raw`. FDC ID 169998 (SR Legacy, "Corn, sweet, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Candidato bonus scoperto cercando una sostituzione dopo due ⚠ consecutivi (taccole cotte, palamita): il chicco di mais dolce era già coperto cotto/bollito e in scatola, ma non ancora crudo — gap genuino scoperto durante il lavoro di questo turno.
