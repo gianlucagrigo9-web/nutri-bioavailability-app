@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Cavolo collard, crudo — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
+
+- **food_id**: `food_cavolo_collard_raw`. FDC ID 170406 (SR Legacy, "Collards, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verdura a foglia della famiglia Brassicaceae (*Brassica oleracea* var. *viridis*, la stessa specie botanica del kale/cavolo riccio *Brassica oleracea* var. *acephala* già eseguito, ma cultivar/varietà distinta, foglie larghe non ricciute) mai tentata sotto questo nome.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 32,0kcal, proteine 3,02g, grassi 0,61g, carboidrati 5,42g, fibra 4,00g, calcio 232mg, ferro 0,47mg, zinco 0,21mg, magnesio 27,0mg, rame 0,046mg, selenio 1,30µg, vitamina C 35,3mg, vitamina K (fillochinone) 437µg (molto alta, coerente con una crucifera a foglia verde scura), folato totale 129µg, beta-carotene 2991µg, alfa-carotene 14,0µg, beta-criptoxantina 28,0µg (carotenoidi reali e non nulli, coerenti col pigmento verde); vitamina B12 e acido folico esplicitamente 0µg (nessuna firma di arricchimento). Sodio 17,0mg/100g, coerente con un ortaggio crudo. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170406 e dataType SR Legacy.
+- **Analogia usata**: `food_kale_raw` (cavolo kale, crudo, Golden Set originale, già eseguito sul DB reale — stessa specie botanica reale *Brassica oleracea*, stessa categoria "verdura a foglia crucifera cruda a basso ossalato").
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia, nessun ingrediente animale).
+- **Matrice**: nuova `cavolo_collard_raw` ("Cavolo collard, crudo").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium=low_oxalate` (per analogia diretta con kale, stessa specie botanica), `carotenoid_matrix_state=raw_intact` (carotenoidi reali presenti e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170406 --food-id=food_cavolo_collard_raw \
+  --name-it="Cavolo collard, crudo" \
+  --matrix-id=cavolo_collard_raw --matrix-description-it="Cavolo collard, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170406 --food-id=food_cavolo_collard_raw \
+  --name-it="Cavolo collard, crudo" \
+  --matrix-id=cavolo_collard_raw --matrix-description-it="Cavolo collard, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Foglie di rapa, crude (turnip greens) — preparato 2026-10-29 dal task (quarantaseiesimo lotto)
 
 - **food_id**: `food_foglie_di_rapa_raw`. FDC ID 170061 (SR Legacy, "Turnip greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verdura a foglia della famiglia Brassicaceae (*Brassica rapa*) mai tentata in questa pipeline nonostante kale/verza/rucola/cavolfiore/cavolo cinese già coperti — specie/parte della pianta mai tentata sotto questo nome.
