@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Merluzzo nero (sablefish), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
+
+- **food_id**: `food_merluzzo_nero_raw`. FDC ID 175134 (SR Legacy, "Fish, sablefish, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Specie mai tentata in questa pipeline (*Anoplopoma fimbria*) — nonostante il nome italiano comune richiami il merluzzo, è una specie zoologicamente distinta dal merluzzo nordico/*Gadus morhua* (`food_merluzzo_raw`) e dal merluzzo dell'Alaska/pollock già in coda; un pesce notevolmente più grasso (15,3g grassi/100g contro <1g del merluzzo comune).
+- **Nutrienti**: **14/17** — mancano beta_carotene, vitamin_k, other_provitamin_a_carotenoids (nessuna riga carotenoidi/vitamina K sulla pagina consultata, non assunti zero). Per 100g: energia 195kcal, proteine 13,4g, grassi 15,3g, carboidrati 0g, fibra 0g, calcio 35,0mg, ferro 1,28mg, zinco 0,32mg, magnesio 55,0mg, rame 0,022mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 1,50µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175134 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo nordico, crudo, già eseguito sul DB reale — stessa convenzione "pesce magro/muscolo di pesce" già usata per tutti i pesci di questa pipeline, stesso attributo `is_heme_iron`, nonostante il contenuto di grasso diverso).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `merluzzo_nero` ("Merluzzo nero (sablefish)").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia diretta con `food_merluzzo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175134 --food-id=food_merluzzo_nero_raw \
+  --name-it="Merluzzo nero (sablefish), crudo" \
+  --matrix-id=merluzzo_nero --matrix-description-it="Merluzzo nero (sablefish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175134 --food-id=food_merluzzo_nero_raw \
+  --name-it="Merluzzo nero (sablefish), crudo" \
+  --matrix-id=merluzzo_nero --matrix-description-it="Merluzzo nero (sablefish)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Granchio delle nevi (queen crab), crudo — preparato 2026-10-29 dal task (quarantottesimo lotto)
 
 - **food_id**: `food_granchio_delle_nevi_raw`. FDC ID 171969 (SR Legacy, "Crustaceans, crab, queen, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Terza specie distinta di granchio (*Chionoecetes opilio*, commercialmente "snow crab") dopo granchio blu (*Callinectes sapidus*), Dungeness (*Metacarcinus magister*) e reale (*Paralithodes camtschaticus*) già coperti in questa pipeline.
