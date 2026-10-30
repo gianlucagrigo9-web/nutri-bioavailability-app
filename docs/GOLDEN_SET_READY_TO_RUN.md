@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Ala di pollo, cotta (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_ala_di_pollo_cotta`. FDC ID 172392 (SR Legacy, "Chicken, broilers or fryers, wing, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del pollo mai tentata in questa pipeline (petto e coscia già coperti, l'ala no).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 203kcal, proteine 30,5g, grassi 8,13g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,16mg, magnesio 21,0mg, zinco 2,14mg, rame 0,054mg, selenio 24,7µg, sodio 92,0mg (basso, coerente con pollo arrosto non lavorato), vitamina C 0mg (esplicito), folato totale 4,00µg, vitamina B12 0,34µg, vitamina K (fillochinone 0,30µg + diidrofillochinone 0µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172392 e dataType SR Legacy.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, FDC 172853, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `ala_di_pollo_cotta` ("Ala di pollo, cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted` (coerente con "cooked, roasted" nel nome del record), `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172392 --food-id=food_ala_di_pollo_cotta \
+  --name-it="Ala di pollo, cotta (arrosto)" \
+  --matrix-id=ala_di_pollo_cotta --matrix-description-it="Ala di pollo, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172392 --food-id=food_ala_di_pollo_cotta \
+  --name-it="Ala di pollo, cotta (arrosto)" \
+  --matrix-id=ala_di_pollo_cotta --matrix-description-it="Ala di pollo, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Ala di pollo, cruda — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_ala_di_pollo_raw`. FDC ID 173632 (SR Legacy, "Chicken, broilers or fryers, wing, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del pollo mai tentata in questa pipeline (petto e coscia già coperti, l'ala no).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 126kcal, proteine 22,0g, grassi 3,54g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 0,88mg, magnesio 22,0mg, zinco 1,63mg, rame 0,041mg, selenio 17,8µg, sodio 81,0mg (basso, coerente con pollo crudo non lavorato), vitamina C 1,20mg, folato totale 4,00µg, vitamina B12 0,38µg, vitamina K (fillochinone 0µg esplicito; diidrofillochinone non riportato in pagina ma non mappato da `lib/fdc/nutrientMapping.ts`, che usa solo il fillochinone — non un gap reale), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173632 e dataType SR Legacy.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (coscia di pollo cruda, FDC 173627, già eseguita sul DB reale — stessa specie *Gallus gallus*, carne cruda senza pelle, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `ala_di_pollo_raw` ("Ala di pollo, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_coscia_di_pollo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173632 --food-id=food_ala_di_pollo_raw \
+  --name-it="Ala di pollo, cruda" \
+  --matrix-id=ala_di_pollo_raw --matrix-description-it="Ala di pollo, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173632 --food-id=food_ala_di_pollo_raw \
+  --name-it="Ala di pollo, cruda" \
+  --matrix-id=ala_di_pollo_raw --matrix-description-it="Ala di pollo, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Filetto di maiale, cotto (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_filetto_di_maiale_cotto`. FDC ID 168250 (SR Legacy, "Pork, fresh, loin, tenderloin, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA FoodData Central, SR Legacy, FDC 168250", release USDA 2026-04-30). Versione cotta del filetto di maiale, il cui crudo è già 🟡 in questa stessa coda (`food_filetto_di_maiale_raw`, FDC 168249, non ancora eseguito sul DB reale — quindi non usabile come analogia per la regola del punto 2c del COMPITO) — stesso schema cottura già usato per lonza/coscia di pollo/petto di tacchino in questa pipeline. Scartata esplicitamente la variante "with added solution" (FDC 169180), che indica salamoia/iniezione non rappresentativa dell'alimento "comune" richiesto.
