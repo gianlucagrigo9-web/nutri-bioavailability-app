@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo (intero), carne e pelle, crudo — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_pollo_intero_con_pelle_raw`. FDC ID 171447 (SR Legacy, "Chicken, broilers or fryers, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Pollo INTERO con pelle, distinto dal `food_petto_di_pollo_raw` già eseguito (solo petto, senza pelle, senza osso) — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo in questo stesso lotto per anatra/oca/gallina.
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 1,50µg esplicita). Per 100g: energia 215kcal, proteine 18,6g, grassi 15,1g, carboidrati 0g, fibra 0g, calcio 11,0mg, ferro 0,90mg, magnesio 20,0mg, zinco 1,31mg, rame 0,048mg, selenio 14,4µg, sodio 70,0mg (basso, nessun segnale di salamoia), vitamina C 1,60mg, vitamina B12 0,31µg, folato totale 6,00µg, vitamina K 1,50µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie, stessa categoria USDA "Chicken, broilers or fryers").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_intero_con_pelle` ("Pollo intero, carne e pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171447 --food-id=food_pollo_intero_con_pelle_raw \
+  --name-it="Pollo (intero), carne e pelle, crudo" \
+  --matrix-id=pollo_intero_con_pelle --matrix-description-it="Pollo intero, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171447 --food-id=food_pollo_intero_con_pelle_raw \
+  --name-it="Pollo (intero), carne e pelle, crudo" \
+  --matrix-id=pollo_intero_con_pelle --matrix-description-it="Pollo intero, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Gallina (da brodo), carne e pelle, cotta (stufata/bollita) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_gallina_cotta`. FDC ID 172401 (SR Legacy, "Chicken, stewing, meat and skin, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra, coerente con l'uso tipico della gallina da brodo lessata/stufata).
