@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Manzo, stinco (shank), cotto (brasato/stufato) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_stinco_cotto`. FDC ID 169442 (SR Legacy, "Beef, shank crosscuts, separable lean only, trimmed to 1/4\" fat, choice, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 169442", release USDA 2026-04-30; nota: lo slug URL della pagina è troncato "cooked-simmere", il titolo della pagina è invece "simmered" per intero). Versione cotta dello stinco di manzo, il cui crudo è anch'esso 🟡 in questo stesso lotto — primo taglio "stinco" mai tentato in questa pipeline per il manzo. Nota sulla forma del taglio: "shank crosscuts" (fette trasversali dello stinco con l'osso, parte magra separata) è la forma standard con cui USDA traccia lo stinco di manzo al dettaglio — non esiste nel database FDC un record "stinco intero" distinto, a differenza di petto/taglio reale/lonza dove la frazione "steak"/"half" era un'alternativa scartabile in favore del "whole": qui "crosscuts" È la forma generica standard, coerente anche con l'uso italiano (lo stinco si vende e si cucina tipicamente a fette trasversali, es. per l'ossobuco).
+- **Nutrienti**: **14/17**. Per 100g: energia 201kcal, proteine 33,7g, grassi 6,36g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 32,0mg, ferro 3,86mg, magnesio 30,0mg, zinco 10,5mg, rame 0,17mg, selenio 30,0µg, sodio 64,0mg (basso, coerente con carne stufata non lavorata/non salata), vitamina C 0mg (esplicito), folato totale 10,0µg, vitamina B12 3,79µg. Mancano (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso gap tipico già visto per quasi tutti i tagli di manzo/vitello in questa pipeline.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_stinco_cotto` ("Manzo, stinco (shank), cotto (brasato/stufato)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=simmered` (coerente con "cooked, simmered" nel nome del record), `is_fortified_folate` omesso (false — folato 10,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169442 --food-id=food_manzo_stinco_cotto \
+  --name-it="Manzo, stinco (shank), cotto (brasato/stufato)" \
+  --matrix-id=manzo_stinco_cotto --matrix-description-it="Manzo, stinco (shank), cotto (brasato/stufato)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169442 --food-id=food_manzo_stinco_cotto \
+  --name-it="Manzo, stinco (shank), cotto (brasato/stufato)" \
+  --matrix-id=manzo_stinco_cotto --matrix-description-it="Manzo, stinco (shank), cotto (brasato/stufato)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, stinco (shank), crudo — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_stinco_raw`. FDC ID 169441 (SR Legacy, "Beef, shank crosscuts, separable lean only, trimmed to 1/4\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 169441", release USDA 2026-04-30). Taglio mai tentato in questa pipeline per il manzo — "shank crosscuts" è la forma standard con cui USDA traccia lo stinco al dettaglio (fette trasversali con osso, parte magra separata), coerente con l'uso italiano dello stinco (vedi nota nella voce cotta per il dettaglio su questa scelta).
+- **Nutrienti**: **14/17**. Per 100g: energia 128kcal, proteine 21,8g, grassi 3,85g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 20,0mg, ferro 2,32mg, magnesio 14,0mg, zinco 6,94mg, rame 0,071mg, selenio 17,7µg, sodio 63,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 8,00µg, vitamina B12 3,33µg. Mancano (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_stinco_raw` ("Manzo, stinco (shank), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 8,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169441 --food-id=food_manzo_stinco_raw \
+  --name-it="Manzo, stinco (shank), crudo" \
+  --matrix-id=manzo_stinco_raw --matrix-description-it="Manzo, stinco (shank), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169441 --food-id=food_manzo_stinco_raw \
+  --name-it="Manzo, stinco (shank), crudo" \
+  --matrix-id=manzo_stinco_raw --matrix-description-it="Manzo, stinco (shank), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, punta di petto (brisket), cotta (brasata) — preparato 2026-10-30 dal task (sessantesimo lotto)
 
 - **food_id**: `food_manzo_punta_di_petto_cotta`. FDC ID 170612 (SR Legacy, "Beef, brisket, whole, separable lean only, trimmed to 0\" fat, all grades, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 170612", release USDA 2026-04-30). Versione cotta della punta di petto (brisket) intera, la cui cruda è anch'essa 🟡 in questa stessa coda — taglio pieno, non una frazione (es. "flat half"/"point half").
