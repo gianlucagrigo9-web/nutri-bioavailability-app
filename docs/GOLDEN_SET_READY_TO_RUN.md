@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Vitello, costata (rib), cotta (brasata) — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_costata_cotto`. FDC ID 175276 (SR Legacy, "Veal, rib, separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim del crudo sotto. Con questo taglio si chiude l'intero elenco dei sette tagli di vitello tracciati da USDA SR Legacy (spalla, lombo/lonza, sirloin, stinco, costata, petto, coscia/fesa — elenco confermato dalla nota ⚠ sul collo di vitello del lotto 61, che non è una regione tracciata).
+- **Nutrienti**: **17/17 — record completo** (a differenza del crudo sotto, qui vitamina K, beta-carotene e altri carotenoidi provitaminici A sono tutti espliciti). Per 100g: energia 251kcal, proteine 32,4g, grassi 12,5g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 22,0mg, ferro 1,41mg, magnesio 25,0mg, zinco 5,57mg, rame 0,13mg, selenio 13,9µg, sodio 95,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 1,45µg, folato totale 16,0µg, vitamina K 7,00µg (fillochinone; diidrofillochinone 0µg), beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito — alfa-carotene e beta-criptoxantina entrambe dichiarate 0).
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato cotto).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_costata_cotto` ("Vitello, costata (rib), cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 16,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175276 --food-id=food_vitello_costata_cotto \
+  --name-it="Vitello, costata (rib), cotta (brasata)" \
+  --matrix-id=vitello_costata_cotto --matrix-description-it="Vitello, costata (rib), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175276 --food-id=food_vitello_costata_cotto \
+  --name-it="Vitello, costata (rib), cotta (brasata)" \
+  --matrix-id=vitello_costata_cotto --matrix-description-it="Vitello, costata (rib), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, costata (rib), cruda — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_costata_raw`. FDC ID 175275 (SR Legacy, "Veal, rib, separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Uno dei due ultimi tagli di vitello tracciati da USDA ancora mai tentati in questa pipeline (l'altro è il sirloin, sotto).
+- **Nutrienti**: **14/17 nutrienti**. Per 100g: energia 162kcal, proteine 18,9g, grassi 9,01g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 0,86mg, magnesio 22,0mg, zinco 3,24mg, rame 0,10mg, selenio 8,20µg, sodio 89,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 1,29µg, folato totale 12,0µg. Mancano: vitamina K, beta-carotene, altri carotenoidi provitaminici A (non riportati su questa pagina, non assunti zero — gap tipico della carne).
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_costata_raw` ("Vitello, costata (rib), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 12,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175275 --food-id=food_vitello_costata_raw \
+  --name-it="Vitello, costata (rib), cruda" \
+  --matrix-id=vitello_costata_raw --matrix-description-it="Vitello, costata (rib), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175275 --food-id=food_vitello_costata_raw \
+  --name-it="Vitello, costata (rib), cruda" \
+  --matrix-id=vitello_costata_raw --matrix-description-it="Vitello, costata (rib), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, sirloin, cotto (arrosto) — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_sirloin_cotto`. FDC ID 175288 (SR Legacy, "Veal, sirloin, separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim del crudo sotto.
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 202kcal, proteine 25,1g, grassi 10,4g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 0,92mg, magnesio 26,0mg, zinco 3,35mg, rame 0,13mg, selenio 11,1µg, sodio 83,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 1,42µg, folato totale 15,0µg, vitamina K 6,60µg (fillochinone; diidrofillochinone 0µg), beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito).
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato cotto).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_sirloin_cotto` ("Vitello, sirloin, cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 15,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175288 --food-id=food_vitello_sirloin_cotto \
+  --name-it="Vitello, sirloin, cotto (arrosto)" \
+  --matrix-id=vitello_sirloin_cotto --matrix-description-it="Vitello, sirloin, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175288 --food-id=food_vitello_sirloin_cotto \
+  --name-it="Vitello, sirloin, cotto (arrosto)" \
+  --matrix-id=vitello_sirloin_cotto --matrix-description-it="Vitello, sirloin, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, sirloin, crudo — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_sirloin_raw`. FDC ID 175286 (SR Legacy, "Veal, sirloin, separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Uno dei due ultimi tagli di vitello tracciati da USDA ancora mai tentati in questa pipeline (l'altro è la costata, sopra) — elenco completo dei sette tagli di vitello tracciati da USDA confermato dalla nota ⚠ sul collo di vitello del lotto 61 (spalla, lombo/lonza, sirloin, stinco, costata, petto, coscia/fesa).
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 152kcal, proteine 19,1g, grassi 7,81g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 11,0mg, ferro 0,78mg, magnesio 24,0mg, zinco 2,55mg, rame 0,11mg, selenio 8,50µg, sodio 76,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 1,27µg, folato totale 13,0µg, vitamina K 4,60µg (fillochinone; diidrofillochinone 0µg), beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito — alfa-carotene e beta-criptoxantina entrambe dichiarate 0).
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_sirloin_raw` ("Vitello, sirloin, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 13,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175286 --food-id=food_vitello_sirloin_raw \
+  --name-it="Vitello, sirloin, crudo" \
+  --matrix-id=vitello_sirloin_raw --matrix-description-it="Vitello, sirloin, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175286 --food-id=food_vitello_sirloin_raw \
+  --name-it="Vitello, sirloin, crudo" \
+  --matrix-id=vitello_sirloin_raw --matrix-description-it="Vitello, sirloin, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, pancia (fresca, senza pelle), cruda — preparato 2026-10-30 dal task (settantesimo lotto)
 
 - **food_id**: `food_maiale_pancia_raw`. FDC ID 167812 (SR Legacy, "Pork, fresh, belly, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto da banco macelleria (carne fresca non trasformata), distinto dalla pancetta (`food_pancetta_raw`, FDC 168277, già eseguita sul DB reale — prodotto stagionato/affumicato dello stesso taglio anatomico).
