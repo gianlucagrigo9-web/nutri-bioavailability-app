@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Manzo, punta di petto (brisket), cotta (brasata) — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_manzo_punta_di_petto_cotta`. FDC ID 170612 (SR Legacy, "Beef, brisket, whole, separable lean only, trimmed to 0\" fat, all grades, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 170612", release USDA 2026-04-30). Versione cotta della punta di petto (brisket) intera, la cui cruda è anch'essa 🟡 in questa stessa coda — taglio pieno, non una frazione (es. "flat half"/"point half").
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 218kcal, proteine 29,8g, grassi 10,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 2,81mg, magnesio 23,0mg, zinco 6,89mg, rame 0,12mg, selenio 24,5µg, sodio 70,0mg (basso, coerente con carne brasata non lavorata/non salata), vitamina C 0mg (esplicito), folato totale 8,00µg, vitamina B12 2,60µg, vitamina K (fillochinone) 1,60µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_punta_di_petto_cotta` ("Manzo, punta di petto (brisket), cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=braised` (coerente con "cooked, braised" nel nome del record — metodo di cottura tipico di questo taglio), `is_fortified_folate` omesso (false — folato 8,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170612 --food-id=food_manzo_punta_di_petto_cotta \
+  --name-it="Manzo, punta di petto (brisket), cotta (brasata)" \
+  --matrix-id=manzo_punta_di_petto_cotta --matrix-description-it="Manzo, punta di petto (brisket), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170612 --food-id=food_manzo_punta_di_petto_cotta \
+  --name-it="Manzo, punta di petto (brisket), cotta (brasata)" \
+  --matrix-id=manzo_punta_di_petto_cotta --matrix-description-it="Manzo, punta di petto (brisket), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, punta di petto (brisket), cruda — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_manzo_punta_di_petto_raw`. FDC ID 168607 (SR Legacy, "Beef, brisket, whole, separable lean only, all grades, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168607", release USDA 2026-04-30). Taglio pieno (whole, non una frazione come "flat half"/"point half"), mai tentato in questa pipeline — manzo finora rappresentato solo dal composito generico `food_beef_ground_raw`.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 157kcal, proteine 20,7g, grassi 7,37g, carboidrati 0,60g, fibra 0g (esplicito), calcio 5,00mg, ferro 1,92mg, magnesio 23,0mg, zinco 4,31mg, rame 0,080mg, selenio 16,4µg, sodio 79,0mg, vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 2,43µg, vitamina K (fillochinone) 1,30µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_punta_di_petto_raw` ("Manzo, punta di petto (brisket), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168607 --food-id=food_manzo_punta_di_petto_raw \
+  --name-it="Manzo, punta di petto (brisket), cruda" \
+  --matrix-id=manzo_punta_di_petto_raw --matrix-description-it="Manzo, punta di petto (brisket), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168607 --food-id=food_manzo_punta_di_petto_raw \
+  --name-it="Manzo, punta di petto (brisket), cruda" \
+  --matrix-id=manzo_punta_di_petto_raw --matrix-description-it="Manzo, punta di petto (brisket), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, taglio reale (chuck, clod roast), cotto (arrosto) — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_manzo_reale_cotta`. FDC ID 171780 (SR Legacy, "Beef, chuck, clod roast, separable lean only, trimmed to 1/4\" fat, all grades, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 171780", release USDA 2026-04-30). Versione cotta del taglio reale (chuck), la cui cruda è anch'essa 🟡 in questa stessa coda — stesso livello di trim (1/4" fat) e grado (all grades) del crudo, per coerenza.
+- **Nutrienti**: **16/17**. Per 100g: energia 173kcal, proteine 26,4g, grassi 6,75g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 7,00mg, ferro 3,09mg, magnesio 22,0mg, zinco 6,39mg, rame 0,10mg, selenio 30,0µg, sodio 71,0mg (basso, coerente con carne arrosto non lavorata), vitamina C 0mg (esplicito), folato totale 9,00µg, vitamina B12 3,02µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Manca solo vitamina K (fillochinone, non riportata in pagina, non assunta zero) — stesso gap del crudo.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_reale_cotta` ("Manzo, taglio reale (chuck, clod roast), cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171780 --food-id=food_manzo_reale_cotta \
+  --name-it="Manzo, taglio reale (chuck, clod roast), cotto (arrosto)" \
+  --matrix-id=manzo_reale_cotta --matrix-description-it="Manzo, taglio reale (chuck, clod roast), cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171780 --food-id=food_manzo_reale_cotta \
+  --name-it="Manzo, taglio reale (chuck, clod roast), cotto (arrosto)" \
+  --matrix-id=manzo_reale_cotta --matrix-description-it="Manzo, taglio reale (chuck, clod roast), cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, taglio reale (chuck, clod roast), crudo — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_manzo_reale_raw`. FDC ID 174018 (SR Legacy, "Beef, chuck, clod roast, separable lean only, trimmed to 1/4\" fat, all grades, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 174018", release USDA 2026-04-30). Taglio pieno "clod roast" (non una steak/porzione), mai tentato in questa pipeline — manzo finora rappresentato solo dal composito generico `food_beef_ground_raw`.
+- **Nutrienti**: **16/17**. Per 100g: energia 129kcal, proteine 19,6g, grassi 5,02g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 2,35mg, magnesio 22,0mg, zinco 4,83mg, rame 0,090mg, selenio 30,0µg, sodio 64,0mg, vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 3,21µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Manca solo vitamina K (fillochinone, non riportata in pagina, non assunta zero).
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_reale_raw` ("Manzo, taglio reale (chuck, clod roast), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174018 --food-id=food_manzo_reale_raw \
+  --name-it="Manzo, taglio reale (chuck, clod roast), crudo" \
+  --matrix-id=manzo_reale_raw --matrix-description-it="Manzo, taglio reale (chuck, clod roast), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174018 --food-id=food_manzo_reale_raw \
+  --name-it="Manzo, taglio reale (chuck, clod roast), crudo" \
+  --matrix-id=manzo_reale_raw --matrix-description-it="Manzo, taglio reale (chuck, clod roast), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, spalla (taglio arm), cotta (arrosto) — preparato 2026-10-30 dal task (sessantesimo lotto)
 
 - **food_id**: `food_vitello_spalla_cotta`. FDC ID 175284 (SR Legacy, "Veal, shoulder, arm, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 175284", release USDA 2026-04-30). Versione cotta della spalla di vitello (taglio "arm"), il cui crudo è anch'esso 🟡 in questa stessa coda — primo taglio specifico (non il composito generico `food_vitello_raw`/`food_vitello_cotto`) mai tentato per il vitello in questa pipeline.
