@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, cervella, cotta (bollita) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_cervella_di_manzo_cotta`. FDC ID 168624 (SR Legacy, "Beef, variety meats and by-products, brain, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La cruda `food_cervella_di_manzo_raw` è già eseguita sul DB reale dal ventesimo lotto; la cotta non era mai stata tentata.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 151kcal, proteine 11,7g, grassi 10,5g, carboidrati 1,48g, fibra 0g (esplicito), calcio 9,00mg, ferro 2,30mg, magnesio 12,0mg, zinco 1,09mg, rame 0,23mg, selenio 21,8µg, sodio 108mg (basso, nessun segnale di salamoia), vitamina C 10,5mg (non nulla), vitamina B12 10,1µg, folato totale 5,00µg, vitamina K (fillochinone 0,10µg), beta-carotene 70,0µg (non nullo — valore esplicito riportato dalla fonte per questo FDC ID, non un errore di trascrizione), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_cervella_di_manzo_raw` (cervella di manzo cruda, già eseguita sul DB reale — stessa specie, stessa frattaglia, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cervella_di_manzo_cotta` ("Manzo, cervella, cotta (bollita)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne, nonostante il beta-carotene non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=simmered` (il record FDC specifica "simmered"), `is_fortified_folate` omesso (false — folato 5,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168624 --food-id=food_cervella_di_manzo_cotta \
+  --name-it="Manzo, cervella, cotta (bollita)" \
+  --matrix-id=cervella_di_manzo_cotta --matrix-description-it="Manzo, cervella, cotta (bollita)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_cervella_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168624 --food-id=food_cervella_di_manzo_cotta \
+  --name-it="Manzo, cervella, cotta (bollita)" \
+  --matrix-id=cervella_di_manzo_cotta --matrix-description-it="Manzo, cervella, cotta (bollita)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_cervella_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervo, carne cotta (arrosto) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_cervo_cotto`. FDC ID 175085 (SR Legacy, "Game meat, deer, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_cervo_raw` (FDC 173855) è già "Pronti" dal trentesimo lotto, non ancora eseguito sul DB reale; il cotto non era mai stato tentato.
