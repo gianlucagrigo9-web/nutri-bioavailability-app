@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Maiale, pancia (fresca, senza pelle), cruda — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_maiale_pancia_raw`. FDC ID 167812 (SR Legacy, "Pork, fresh, belly, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto da banco macelleria (carne fresca non trasformata), distinto dalla pancetta (`food_pancetta_raw`, FDC 168277, già eseguita sul DB reale — prodotto stagionato/affumicato dello stesso taglio anatomico).
+- **Nutrienti**: **17/17 — il più completo di questo lotto**. Per 100g: energia 518kcal, proteine 9,34g, grassi 53,0g, carboidrati 0g (esplicito, valore by-difference leggermente negativo arrotondato a 0 sulla pagina), fibra 0g (esplicito), calcio 5,00mg, ferro 0,52mg, magnesio 4,00mg, zinco 1,02mg, rame 0,052mg, selenio 8,00µg, sodio 32,0mg (basso, nessun segnale di salamoia), vitamina C 0,30mg, vitamina B12 0,84µg, folato totale 1,00µg, vitamina K 0µg (esplicito — fillochinone e diidrofillochinone entrambi dichiarati 0, non assenti), beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito — alfa-carotene e beta-criptoxantina entrambe dichiarate 0).
+- **Analogia usata**: `food_pancetta_raw` (pancetta di maiale cruda, già eseguita sul DB reale — stesso taglio anatomico "pancia di maiale", stesso attributo `is_heme_iron`, qui nella forma fresca non trasformata invece che stagionata/affumicata).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `maiale_pancia_raw` ("Maiale, pancia (fresca, senza pelle), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_pancetta_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 1,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167812 --food-id=food_maiale_pancia_raw \
+  --name-it="Maiale, pancia (fresca, senza pelle), cruda" \
+  --matrix-id=maiale_pancia_raw --matrix-description-it="Maiale, pancia (fresca, senza pelle), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167812 --food-id=food_maiale_pancia_raw \
+  --name-it="Maiale, pancia (fresca, senza pelle), cruda" \
+  --matrix-id=maiale_pancia_raw --matrix-description-it="Maiale, pancia (fresca, senza pelle), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, petto, cotto (brasato) — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_petto_cotto`. FDC ID 174393 (SR Legacy, "Veal, breast, whole, boneless, separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline per il vitello, distinto dalla fesa (`food_vitello_fesa_raw`, solo "pronta") e dalla spalla (`food_vitello_spalla_raw`, solo "pronta") già in coda, e dal composito generico `food_vitello_cotto` già eseguito. **Nota di trasparenza sull'asimmetria crudo/cotto**: il crudo dello stesso taglio (FDC 174392) esiste con pagina dedicata ma riporta un gap anomalo su vitamina B12 e folato (non presente nel cotto qui), quindi resta ⚠ in `docs/PRD.md` — qui si prepara solo il cotto, che non ha questo gap.
+- **Nutrienti**: **13/17 nutrienti confermati espliciti sulla pagina consultata**. Per 100g: energia 266kcal, proteine 27,0g, grassi 16,8g, carboidrati 0g (esplicito), calcio 9,00mg, ferro 0,77mg, magnesio 20,0mg, zinco 3,64mg, rame 0,071mg, selenio 11,0µg, sodio 65,0mg (basso, nessun segnale di salamoia), vitamina B12 1,33µg, folato totale 13,0µg. Mancano: fibra e vitamina C (non mostrate in tabella su questa pagina), vitamina K, beta-carotene, altri carotenoidi provitaminici A (gap tipico della carne, non riportati in pagina, non assunti zero).
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato cotto).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_petto_cotto` ("Vitello, petto, cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 13,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174393 --food-id=food_vitello_petto_cotto \
+  --name-it="Vitello, petto, cotto (brasato)" \
+  --matrix-id=vitello_petto_cotto --matrix-description-it="Vitello, petto, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174393 --food-id=food_vitello_petto_cotto \
+  --name-it="Vitello, petto, cotto (brasato)" \
+  --matrix-id=vitello_petto_cotto --matrix-description-it="Vitello, petto, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, stinco (ossobuco), cotto (brasato) — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_stinco_cotto`. FDC ID 172569 (SR Legacy, "Veal, shank (fore and hind), separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso identico trim del crudo sotto (unica differenza nel nome è la preparazione "cooked, braised"). PRIMO taglio "stinco" tentato per il vitello in questa pipeline, nonostante il composito generico e fesa/spalla siano già coperti.
+- **Nutrienti**: **13/17 nutrienti confermati espliciti sulla pagina consultata**. Per 100g: energia 191kcal, proteine 31,5g, grassi 6,20g, carboidrati 0g (esplicito), calcio 33,0mg, ferro 1,25mg, magnesio 25,0mg, zinco 6,63mg, rame 0,11mg, selenio 15,3µg, sodio 93,0mg (basso), vitamina B12 1,61µg, folato totale 17,0µg. Mancano: fibra e vitamina C (non mostrate in tabella su questa pagina), vitamina K, beta-carotene, altri carotenoidi provitaminici A (gap tipico della carne).
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato cotto).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_stinco_cotto` ("Vitello, stinco (ossobuco), cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 17,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172569 --food-id=food_vitello_stinco_cotto \
+  --name-it="Vitello, stinco (ossobuco), cotto (brasato)" \
+  --matrix-id=vitello_stinco_cotto --matrix-description-it="Vitello, stinco (ossobuco), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172569 --food-id=food_vitello_stinco_cotto \
+  --name-it="Vitello, stinco (ossobuco), cotto (brasato)" \
+  --matrix-id=vitello_stinco_cotto --matrix-description-it="Vitello, stinco (ossobuco), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, stinco (ossobuco), crudo — preparato 2026-10-30 dal task (settantesimo lotto)
+
+- **food_id**: `food_vitello_stinco_raw`. FDC ID 172568 (SR Legacy, "Veal, shank (fore and hind), separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). PRIMO taglio "stinco" tentato per il vitello in questa pipeline, nonostante il composito generico (`food_vitello_raw`) e fesa/spalla di vitello siano già ampiamente coperti.
+- **Nutrienti**: **13/17 nutrienti confermati espliciti sulla pagina consultata**. Per 100g: energia 113kcal, proteine 19,1g, grassi 3,48g, carboidrati 0g (esplicito), calcio 20,0mg, ferro 0,76mg, magnesio 21,0mg, zinco 3,99mg, rame 0,074mg, selenio 7,90µg, sodio 84,0mg (basso, nessun segnale di salamoia), vitamina B12 1,36µg, folato totale 15,0µg. Mancano: fibra e vitamina C (non mostrate in tabella su questa pagina, il conteggio esatto sarà confermato dallo script quando interroga l'API FDC direttamente), vitamina K, beta-carotene, altri carotenoidi provitaminici A (gap tipico della carne, non riportati in pagina, non assunti zero).
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito generico di tagli, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `vitello_stinco_raw` ("Vitello, stinco (ossobuco), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 15,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172568 --food-id=food_vitello_stinco_raw \
+  --name-it="Vitello, stinco (ossobuco), crudo" \
+  --matrix-id=vitello_stinco_raw --matrix-description-it="Vitello, stinco (ossobuco), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172568 --food-id=food_vitello_stinco_raw \
+  --name-it="Vitello, stinco (ossobuco), crudo" \
+  --matrix-id=vitello_stinco_raw --matrix-description-it="Vitello, stinco (ossobuco), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, collo (neck), con pelle, crudo — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_pollo_collo_con_pelle_raw`. FDC ID 172382 (SR Legacy, "Chicken, broilers or fryers, neck, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte distinta dal collo "meat only" già visto altrove in questa pipeline (collo di tacchino, `food_collo_di_tacchino_raw`/`food_collo_di_tacchino_cotto`, solo "Pronti", non ancora eseguiti sul DB reale) — qui è il collo di pollo, specie e trim diversi ("meat and skin" vs "meat only"), mai tentato finora. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il cotto semplice "neck, meat and skin, cooked, simmered" (solo le varianti fritte in pastella/farina hanno pagina dedicata, oltre a recipal.com/triagemethod.com/fatsecret per il semplice "simmered" senza un FDC ID verificabile su fonte getfoodfacts). Qui si prepara solo il crudo, il cotto resta ⚠ in `docs/PRD.md`.
