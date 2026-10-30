@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio cottage (creamed, a grana grossa o fine) — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
+
+- **food_id**: `food_formaggio_cottage_raw`. FDC ID 172179 (SR Legacy, "Cheese, cottage, creamed, large or small curd" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; esiste anche un record Survey/FNDDS distinto per lo stesso nome generico, FDC 2705748, scartato per convenzione già in uso in questa coda — Survey/FNDDS non accettato). Formaggio fresco a pasta granulosa mai tentato in questa pipeline, distinto dai formaggi freschi già coperti (ricotta, caprino fresco, formaggio cremoso tipo Philadelphia, mascarpone già ⚠ per assenza di record FDC).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 98,0kcal, proteine 11,1g, grassi 4,30g, carboidrati 3,38g, fibra 0g (esplicito), calcio 83,0mg, ferro 0,070mg, magnesio 8,00mg, zinco 0,40mg, selenio 9,70µg, sodio 315mg (coerente con un formaggio fresco salato), vitamina C 0mg (esplicito), folato totale 12,0µg, vitamina B12 0,43µg, vitamina K 0,90µg (menachinone-4, unica forma non nulla delle tre riportate separatamente sulla pagina), vitamina A (RAE) 37,0µg, beta-carotene 12,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172179 e dataType SR Legacy.
+- **Analogia usata**: `food_ricotta` (formaggio fresco a pasta morbida, già eseguito sul DB reale — stessa categoria "formaggio fresco non stagionato").
+- **Categoria dieta**: `egg_dairy` (formaggio, nessun altro ingrediente animale).
+- **Matrice**: nuova `formaggio_cottage` ("Formaggio cottage").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile ai formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — stessa convenzione già usata per gli altri formaggi, il beta-carotene deriva dal latte non da una matrice vegetale classificabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non un vegetale), `baseline_cooking_state=raw` (formaggio fresco, non cotto), `is_fortified_folate` omesso (false — folato coerente con un latticino).
+
+```
+npm run add-food -- --fdc-id=172179 --food-id=food_formaggio_cottage_raw \
+  --name-it="Formaggio cottage (creamed, a grana grossa o fine)" \
+  --matrix-id=formaggio_cottage --matrix-description-it="Formaggio cottage" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172179 --food-id=food_formaggio_cottage_raw \
+  --name-it="Formaggio cottage (creamed, a grana grossa o fine)" \
+  --matrix-id=formaggio_cottage --matrix-description-it="Formaggio cottage" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy --apply
+```
+
 ### Formaggio Muenster — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
 
 - **food_id**: `food_formaggio_muenster_raw`. FDC ID 171245 (SR Legacy, "Cheese, muenster" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio semiduro vaccino americano mai tentato in questa pipeline, distinto dai formaggi semiduri già coperti (cheddar, Colby, Monterey Jack, svizzero, gouda, edam, gruyère).
