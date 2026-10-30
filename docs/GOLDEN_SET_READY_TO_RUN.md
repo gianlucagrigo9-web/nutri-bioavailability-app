@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, coscia, con pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_coscia_di_pollo_con_pelle_raw`. FDC ID 172385 (SR Legacy, "Chicken, broilers or fryers, thigh, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Variante "carne e pelle" della coscia di pollo, distinta dalla variante "meat only" già eseguita sul DB reale (`food_coscia_di_pollo_raw`, FDC 173627) — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo nel lotto 67 per il pollame intero.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 221kcal, proteine 16,5g, grassi 16,6g, carboidrati 0,25g, fibra 0g, calcio 7,00mg, ferro 0,68mg, magnesio 18,0mg, zinco 1,29mg, rame 0,054mg, selenio 18,9µg, sodio 81,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,62µg, folato totale 3,00µg, vitamina K 2,10µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (coscia di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stesso taglio anatomico "thigh/coscia", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `coscia_di_pollo_con_pelle` ("Pollo, coscia, con pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_coscia_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 3,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172385 --food-id=food_coscia_di_pollo_con_pelle_raw \
+  --name-it="Pollo, coscia, con pelle, cruda" \
+  --matrix-id=coscia_di_pollo_con_pelle --matrix-description-it="Pollo, coscia, con pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172385 --food-id=food_coscia_di_pollo_con_pelle_raw \
+  --name-it="Pollo, coscia, con pelle, cruda" \
+  --matrix-id=coscia_di_pollo_con_pelle --matrix-description-it="Pollo, coscia, con pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cappone, carne e pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_cappone_cotto`. FDC ID 173646 (SR Legacy, "Chicken, capons, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, SOLO carne e pelle senza frattaglie). **Candidato bonus**, trovato durante la ricerca del crudo: il crudo NON ha una pagina a fonte singola per il solo "meat and skin" (solo il composito con frattaglie/collo, FDC 172406, ha pagina dedicata — vedi ⚠ nella coda), quindi questa voce resta senza una corrispondente cruda verificabile in questo run. Cappone (gallo castrato, piatto tradizionale natalizio italiano) mai cercato in sessantasei lotti precedenti.
