@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, carne chiara, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_pollo_carne_chiara_raw`. FDC ID 171464 (SR Legacy, "Chicken, broilers or fryers, light meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita). Composito "carne chiara" (petto + ali, aggregato per anatomia USDA), distinto dal singolo taglio petto già eseguito (`food_petto_di_pollo_raw`, FDC 171077) — record FDC realmente diverso, mai tentato in nessuno dei sessantasette lotti precedenti.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 114kcal, proteine 23,2g, grassi 1,65g, carboidrati 0g, fibra 0g, calcio 12,0mg, ferro 0,73mg, magnesio 27,0mg, zinco 0,97mg, rame 0,040mg, selenio 17,8µg, sodio 68,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,38µg, folato totale 4,00µg, vitamina K (fillochinone) 2,40µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria "carne chiara"/petto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_carne_chiara` ("Pollo, carne chiara, senza pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 4,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171464 --food-id=food_pollo_carne_chiara_raw \
+  --name-it="Pollo, carne chiara, senza pelle, cruda" \
+  --matrix-id=pollo_carne_chiara --matrix-description-it="Pollo, carne chiara, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171464 --food-id=food_pollo_carne_chiara_raw \
+  --name-it="Pollo, carne chiara, senza pelle, cruda" \
+  --matrix-id=pollo_carne_chiara --matrix-description-it="Pollo, carne chiara, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, coscia, con pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_coscia_di_tacchino_con_pelle_cotta`. FDC ID 171137 (SR Legacy, "Turkey, retail parts, thigh, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra). A differenza del pollo, qui sia il crudo sia il cotto hanno una pagina dedicata pulita per il trim semplice "arrosto".
