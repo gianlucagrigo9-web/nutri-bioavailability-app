@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Maiale, orecchie, cotte (bollite) — preparato 2026-10-30 dal task (sessantaseiesimo lotto)
+
+- **food_id**: `food_orecchie_di_maiale_cotte`. FDC ID 167858 (SR Legacy, "Pork, fresh, variety meats and by-products, ears, frozen, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso by-product del crudo sotto, qualificatore USDA "frozen" riferito alla conservazione del campione analizzato, non a una lavorazione aggiuntiva.
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati in pagina, non assunti zero). Per 100g: energia 166kcal, proteine 15,9g, grassi 10,8g, carboidrati 0,20g, fibra 0g (esplicito), calcio 18,0mg, ferro 1,50mg, magnesio 7,00mg, zinco 0,20mg, rame 0,0060mg, selenio 4,40µg, sodio 167mg (basso, coerente con "simmered" senza sale aggiunto, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,040µg, folato totale 0µg (esplicito).
+- **Analogia usata**: `food_cuore_di_maiale_cotto` (cuore di maiale cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne/by-product animale).
+- **Matrice**: nuova `orecchie_di_maiale` ("Maiale, orecchie").
+- **Attributi**: `is_heme_iron` (flag attivo — tessuto animale di mammifero, stesso precedente di cuore/piedini/coda di maiale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "simmered"), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167858 --food-id=food_orecchie_di_maiale_cotte \
+  --name-it="Maiale, orecchie, cotte (bollite)" \
+  --matrix-id=orecchie_di_maiale --matrix-description-it="Maiale, orecchie" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167858 --food-id=food_orecchie_di_maiale_cotte \
+  --name-it="Maiale, orecchie, cotte (bollite)" \
+  --matrix-id=orecchie_di_maiale --matrix-description-it="Maiale, orecchie" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, orecchie, crude — preparato 2026-10-30 dal task (sessantaseiesimo lotto)
+
+- **food_id**: `food_orecchie_di_maiale_raw`. FDC ID 167857 (SR Legacy, "Pork, fresh, variety meats and by-products, ears, frozen, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). By-product di maiale mai tentato in questa pipeline, distinto da guanciola/coda/piedini/milza già fatti. Qualificatore USDA "frozen" riferito alla conservazione del campione, non a una lavorazione/salatura aggiuntiva.
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati in pagina, non assunti zero). Per 100g: energia 234kcal, proteine 22,4g, grassi 15,1g, carboidrati 0,60g, fibra 0g (esplicito), calcio 21,0mg, ferro 2,40mg, magnesio 7,00mg, zinco 0,19mg, rame 0,0060mg, selenio 4,30µg, sodio 191mg (sotto la soglia ~300mg di enhancement, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,070µg, folato totale 0µg (esplicito).
+- **Analogia usata**: `food_milza_di_maiale_raw` (milza di maiale cruda, già eseguita sul DB reale — stessa specie, stessa categoria USDA "variety meats and by-products", crudo).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `orecchie_di_maiale` ("Maiale, orecchie").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167857 --food-id=food_orecchie_di_maiale_raw \
+  --name-it="Maiale, orecchie, crude" \
+  --matrix-id=orecchie_di_maiale --matrix-description-it="Maiale, orecchie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167857 --food-id=food_orecchie_di_maiale_raw \
+  --name-it="Maiale, orecchie, crude" \
+  --matrix-id=orecchie_di_maiale --matrix-description-it="Maiale, orecchie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, stomaco, cotto (bollito) — preparato 2026-10-30 dal task (sessantaseiesimo lotto)
+
+- **food_id**: `food_stomaco_di_maiale_cotto`. FDC ID 168323 (SR Legacy, "Pork, fresh, variety meats and by-products, stomach, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, stesso by-product del crudo sotto, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (record completo, vitamina K/beta-carotene/altri carotenoidi provitaminici A tutti 0µg espliciti, stesso stato del crudo). Per 100g: energia 157kcal, proteine 21,4g, grassi 7,26g, carboidrati 0,090g, fibra 0g (esplicito), calcio 15,0mg, ferro 1,23mg, magnesio 15,0mg, zinco 2,92mg, rame 0,24mg, selenio 40,3µg, sodio 40,0mg (basso, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,48µg, folato totale 3,00µg.
+- **Analogia usata**: `food_cuore_di_maiale_cotto` (cuore di maiale cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `stomaco_di_maiale` (già creata dalla voce cruda sotto).
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "simmered"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168323 --food-id=food_stomaco_di_maiale_cotto \
+  --name-it="Maiale, stomaco, cotto (bollito)" \
+  --matrix-id=stomaco_di_maiale --matrix-description-it="Maiale, stomaco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168323 --food-id=food_stomaco_di_maiale_cotto \
+  --name-it="Maiale, stomaco, cotto (bollito)" \
+  --matrix-id=stomaco_di_maiale --matrix-description-it="Maiale, stomaco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, stomaco, crudo — preparato 2026-10-30 dal task (sessantaseiesimo lotto)
+
+- **food_id**: `food_stomaco_di_maiale_raw`. FDC ID 167867 (SR Legacy, "Pork, fresh, variety meats and by-products, stomach, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Parte/by-product di maiale mai tentata in questa pipeline, distinta da trippa/milza/guanciola/coda/piedini già fatti.
+- **Nutrienti**: **17/17** (record completo, vitamina K/beta-carotene/altri carotenoidi provitaminici A tutti 0µg espliciti). Per 100g: energia 159kcal, proteine 16,9g, grassi 10,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 11,0mg, ferro 1,01mg, magnesio 11,0mg, zinco 1,85mg, rame 0,17mg, selenio 31,1µg, sodio 75,0mg (basso, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,30µg, folato totale 3,00µg.
+- **Analogia usata**: `food_milza_di_maiale_raw` (milza di maiale cruda, già eseguita sul DB reale — stessa specie, stessa categoria USDA "variety meats and by-products", crudo).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `stomaco_di_maiale` ("Maiale, stomaco").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167867 --food-id=food_stomaco_di_maiale_raw \
+  --name-it="Maiale, stomaco, crudo" \
+  --matrix-id=stomaco_di_maiale --matrix-description-it="Maiale, stomaco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167867 --food-id=food_stomaco_di_maiale_raw \
+  --name-it="Maiale, stomaco, crudo" \
+  --matrix-id=stomaco_di_maiale --matrix-description-it="Maiale, stomaco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, coda (tail), cruda — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
 
 - **food_id**: `food_coda_di_maiale_raw`. FDC ID 168291 (SR Legacy, "Pork, fresh, variety meats and by-products, tail, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Parte/by-product di maiale mai tentata in questa pipeline, distinta dal composito generico e da piedini/guanciola/milza/polmone già fatti.
