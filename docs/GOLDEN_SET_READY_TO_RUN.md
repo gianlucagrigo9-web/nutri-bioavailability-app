@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Maiale, stinco, cotto (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_maiale_stinco_cotta`. FDC ID 168229 (SR Legacy, "Pork, fresh, leg (ham), shank half, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Lo "stinco" italiano corrisponde alla metà "shank" della coscia/prosciutto fresco di maiale — taglio pieno (non frazione), trim "separable lean only" identico al crudo sotto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 175kcal, proteine 28,7g, grassi 5,83g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 14,0mg, ferro 0,92mg, magnesio 24,0mg, zinco 2,67mg, rame 0,12mg, selenio 28,6µg, sodio 84,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0,50µg, vitamina K 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta/arrosto, già eseguita sul DB reale — stesso animale, stessa trasformazione raw→roasted, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_stinco_cotta` ("Maiale, stinco, cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168229 --food-id=food_maiale_stinco_cotta \
+  --name-it="Maiale, stinco, cotto (arrosto)" \
+  --matrix-id=maiale_stinco_cotta --matrix-description-it="Maiale, stinco, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168229 --food-id=food_maiale_stinco_cotta \
+  --name-it="Maiale, stinco, cotto (arrosto)" \
+  --matrix-id=maiale_stinco_cotta --matrix-description-it="Maiale, stinco, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, stinco, crudo — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_maiale_stinco_raw`. FDC ID 168228 (SR Legacy, "Pork, fresh, leg (ham), shank half, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "separable lean only" del cotto sopra — ambito anatomico e trim verificati coerenti fra crudo e cotto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 119kcal, proteine 21,7g, grassi 2,95g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 0,77mg, magnesio 21,0mg, zinco 2,25mg, rame 0,14mg, selenio 21,3µg, sodio 90,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0,51µg, vitamina K 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stesso animale, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_stinco_raw` ("Maiale, stinco, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168228 --food-id=food_maiale_stinco_raw \
+  --name-it="Maiale, stinco, crudo" \
+  --matrix-id=maiale_stinco_raw --matrix-description-it="Maiale, stinco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168228 --food-id=food_maiale_stinco_raw \
+  --name-it="Maiale, stinco, crudo" \
+  --matrix-id=maiale_stinco_raw --matrix-description-it="Maiale, stinco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, carré/costolette, cotto (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_agnello_carre_cotta`. FDC ID 172495 (SR Legacy, "Lamb, rib, separable lean only, trimmed to 1/4\" fat, choice, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota sul nome**: la coda proponeva "alla griglia", ma il record USDA dedicato per questo taglio è "roasted" (arrosto), non "broiled" (griglia) — nome aggiornato di conseguenza, stessa convenzione già usata per "noce di manzo" in questo stesso lotto (si segue il metodo di cottura realmente tracciato da USDA, non quello della coda). Primo taglio specifico di agnello (non il composito generico `food_agnello_raw`/`food_agnello_cotto`) tentato in questa pipeline, dopo il cosciotto scartato ⚠ nel lotto 59.
