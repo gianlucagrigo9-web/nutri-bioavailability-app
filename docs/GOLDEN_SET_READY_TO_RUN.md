@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Manzo, pancia (flank steak), cotta (alla griglia) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_pancia_cotta`. FDC ID 168611 (SR Legacy, "Beef, flank, steak, separable lean only, trimmed to 0\" fat, choice, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168611", release USDA 2026-04-30). Versione cotta della pancia/bavetta di manzo (flank steak), la cui cruda è anch'essa 🟡 in questo stesso lotto, stesso grado "choice" per coerenza col crudo — taglio mai tentato in questa pipeline per il manzo. Nota sulla forma del taglio: come per lo stinco, il flank è anatomicamente un unico muscolo piatto venduto e tracciato da USDA come "steak" intero (non una frazione come "half"/porzione) — stessa convenzione già accettata per `food_bistecca_di_manzo_raw`/`cotta` (top sirloin steak) in questa pipeline.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 194kcal, proteine 27,8g, grassi 8,32g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 15,0mg, ferro 1,84mg, magnesio 23,0mg, zinco 5,11mg, rame 0,086mg, selenio 31,2µg, sodio 56,0mg (basso, coerente con carne alla griglia non lavorata), vitamina C 0mg (esplicito), folato totale 9,00µg, vitamina B12 1,74µg, vitamina K (fillochinone) 1,40µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_pancia_cotta` ("Manzo, pancia (flank steak), cotta (alla griglia)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=grilled` (coerente con "cooked, broiled" nel nome del record — alla griglia/ai ferri è la cottura tipica di questo taglio), `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168611 --food-id=food_manzo_pancia_cotta \
+  --name-it="Manzo, pancia (flank steak), cotta (alla griglia)" \
+  --matrix-id=manzo_pancia_cotta --matrix-description-it="Manzo, pancia (flank steak), cotta (alla griglia)" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168611 --food-id=food_manzo_pancia_cotta \
+  --name-it="Manzo, pancia (flank steak), cotta (alla griglia)" \
+  --matrix-id=manzo_pancia_cotta --matrix-description-it="Manzo, pancia (flank steak), cotta (alla griglia)" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, pancia (flank steak), cruda — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_pancia_raw`. FDC ID 168609 (SR Legacy, "Beef, flank, steak, separable lean only, trimmed to 0\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168609", release USDA 2026-04-30). Taglio mai tentato in questa pipeline per il manzo — "flank steak" è il muscolo intero (non una frazione/porzione), stessa convenzione già accettata per `food_bistecca_di_manzo_raw` (top sirloin steak).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 149kcal, proteine 21,7g, grassi 6,29g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 28,0mg, ferro 1,62mg, magnesio 23,0mg, zinco 4,12mg, rame 0,072mg, selenio 25,4µg, sodio 57,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 13,0µg, vitamina B12 1,18µg, vitamina K (fillochinone) 1,20µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_pancia_raw` ("Manzo, pancia (flank steak), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 13,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168609 --food-id=food_manzo_pancia_raw \
+  --name-it="Manzo, pancia (flank steak), cruda" \
+  --matrix-id=manzo_pancia_raw --matrix-description-it="Manzo, pancia (flank steak), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168609 --food-id=food_manzo_pancia_raw \
+  --name-it="Manzo, pancia (flank steak), cruda" \
+  --matrix-id=manzo_pancia_raw --matrix-description-it="Manzo, pancia (flank steak), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, stinco (shank), cotto (brasato/stufato) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_manzo_stinco_cotto`. FDC ID 169442 (SR Legacy, "Beef, shank crosscuts, separable lean only, trimmed to 1/4\" fat, choice, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 169442", release USDA 2026-04-30; nota: lo slug URL della pagina è troncato "cooked-simmere", il titolo della pagina è invece "simmered" per intero). Versione cotta dello stinco di manzo, il cui crudo è anch'esso 🟡 in questo stesso lotto — primo taglio "stinco" mai tentato in questa pipeline per il manzo. Nota sulla forma del taglio: "shank crosscuts" (fette trasversali dello stinco con l'osso, parte magra separata) è la forma standard con cui USDA traccia lo stinco di manzo al dettaglio — non esiste nel database FDC un record "stinco intero" distinto, a differenza di petto/taglio reale/lonza dove la frazione "steak"/"half" era un'alternativa scartabile in favore del "whole": qui "crosscuts" È la forma generica standard, coerente anche con l'uso italiano (lo stinco si vende e si cucina tipicamente a fette trasversali, es. per l'ossobuco).
