@@ -16,6 +16,198 @@
 
 ## Pronti
 
+### Maiale, carré (centro costola), disossato, cotto (arrosto) — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_carre_cotto`. FDC ID 167894 (SR Legacy, "Pork, fresh, loin, center rib (roasts), boneless, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Versione cotta del carré/centro costola, il cui crudo è pronto sotto in questa stessa voce di coda. Taglio distinto dalla lonza generica (`food_lonza_di_maiale_raw`/`cotta`) e dalla lonza posteriore/sirloin (voce sotto), mai tentato in questa pipeline.
+- **Nutrienti**: **14/17**. Per 100g: energia 214kcal, proteine 28,8g, grassi 10,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 1,00mg, magnesio 24,0mg, zinco 2,83mg, rame 0,012mg, selenio 43,2µg, sodio 50,0mg, vitamina C 0,40mg, folato totale 9,00µg, vitamina B12 0,55µg. **Mancano** (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — a differenza del crudo sotto, che li ha tutti espliciti a 0.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_carre_cotto` ("Maiale, carré (centro costola), disossato, cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167894 --food-id=food_maiale_carre_cotto \
+  --name-it="Maiale, carré (centro costola), disossato, cotto (arrosto)" \
+  --matrix-id=maiale_carre_cotto --matrix-description-it="Maiale, carré (centro costola), disossato, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167894 --food-id=food_maiale_carre_cotto \
+  --name-it="Maiale, carré (centro costola), disossato, cotto (arrosto)" \
+  --matrix-id=maiale_carre_cotto --matrix-description-it="Maiale, carré (centro costola), disossato, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, carré (centro costola), disossato, crudo — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_carre_raw`. FDC ID 168302 (SR Legacy, "Pork, fresh, loin, center rib (chops or roasts), boneless, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline, distinto dalla lonza generica e dalla lonza posteriore/sirloin (voce sotto) — sezione "centro costola" del lombo di maiale, disossata.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 152kcal, proteine 21,8g, grassi 6,48g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 5,00mg, ferro 0,77mg, magnesio 22,0mg, zinco 1,69mg, rame 0,058mg, selenio 35,4µg, sodio 45,0mg, vitamina C 0,30mg (reale, non nulla), folato totale 7,00µg, vitamina B12 0,53µg, vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_carre_raw` ("Maiale, carré (centro costola), disossato, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168302 --food-id=food_maiale_carre_raw \
+  --name-it="Maiale, carré (centro costola), disossato, crudo" \
+  --matrix-id=maiale_carre_raw --matrix-description-it="Maiale, carré (centro costola), disossato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168302 --food-id=food_maiale_carre_raw \
+  --name-it="Maiale, carré (centro costola), disossato, crudo" \
+  --matrix-id=maiale_carre_raw --matrix-description-it="Maiale, carré (centro costola), disossato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto) — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_lonza_sirloin_cotta`. FDC ID 168248 (SR Legacy, "Pork, fresh, loin, sirloin (roasts), bone-in, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "bone-in, separable lean only" del crudo sotto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 204kcal, proteine 27,8g, grassi 9,44g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 0,96mg, magnesio 26,0mg, zinco 2,62mg, rame 0,12mg, selenio 46,4µg, sodio 59,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,61µg, vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_lonza_sirloin_cotta` ("Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168248 --food-id=food_maiale_lonza_sirloin_cotta \
+  --name-it="Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto)" \
+  --matrix-id=maiale_lonza_sirloin_cotta --matrix-description-it="Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168248 --food-id=food_maiale_lonza_sirloin_cotta \
+  --name-it="Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto)" \
+  --matrix-id=maiale_lonza_sirloin_cotta --matrix-description-it="Maiale, lonza (parte posteriore/sirloin, con osso), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, lonza (parte posteriore/sirloin, con osso), cruda — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_lonza_sirloin_raw`. FDC ID 167837 (SR Legacy, "Pork, fresh, loin, sirloin (chops or roasts), bone-in, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline, distinto dalla lonza generica (`food_lonza_di_maiale_raw`) e dal carré/centro costola (voce sopra) — sezione posteriore/sirloin del lombo, con osso.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 129kcal, proteine 21,6g, grassi 4,02g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 0,85mg, magnesio 25,0mg, zinco 2,05mg, rame 0,092mg, selenio 30,9µg, sodio 59,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,53µg, vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_lonza_sirloin_raw` ("Maiale, lonza (parte posteriore/sirloin, con osso), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167837 --food-id=food_maiale_lonza_sirloin_raw \
+  --name-it="Maiale, lonza (parte posteriore/sirloin, con osso), cruda" \
+  --matrix-id=maiale_lonza_sirloin_raw --matrix-description-it="Maiale, lonza (parte posteriore/sirloin, con osso), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167837 --food-id=food_maiale_lonza_sirloin_raw \
+  --name-it="Maiale, lonza (parte posteriore/sirloin, con osso), cruda" \
+  --matrix-id=maiale_lonza_sirloin_raw --matrix-description-it="Maiale, lonza (parte posteriore/sirloin, con osso), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia) — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_lonza_blade_cotta`. FDC ID 169196 (SR Legacy, "Pork, fresh, loin, blade (chops), boneless, separable lean only, boneless, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30; la ripetizione di "boneless" nel nome è così come riportata dalla pagina USDA, non un errore di trascrizione). Stesso trim "boneless, separable lean only" del crudo sotto. Taglio distinto dalla lonza generica, dalla lonza posteriore/sirloin e dal carré/centro costola (voci sopra) — sezione anteriore del lombo di maiale, disossata.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 169kcal, proteine 26,1g, grassi 6,74g, carboidrati 0,89g (reale, non nullo — valore "by difference" del record USDA), fibra 0g (esplicito), calcio 7,00mg, ferro 0,92mg, magnesio 25,0mg, zinco 2,45mg, rame 0,068mg, selenio 47,2µg, sodio 58,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,69µg, vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_lonza_blade_cotta` ("Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=broiled` (coerente con "cooked, broiled" nel nome del record), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169196 --food-id=food_maiale_lonza_blade_cotta \
+  --name-it="Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia)" \
+  --matrix-id=maiale_lonza_blade_cotta --matrix-description-it="Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia)" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169196 --food-id=food_maiale_lonza_blade_cotta \
+  --name-it="Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia)" \
+  --matrix-id=maiale_lonza_blade_cotta --matrix-description-it="Maiale, lonza (taglio anteriore/blade), disossata, cotta (alla griglia)" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, lonza (taglio anteriore/blade), disossata, cruda — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_maiale_lonza_blade_raw`. FDC ID 169194 (SR Legacy, "Pork, fresh, loin, blade (chops or roasts), boneless, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline, distinto dalla lonza generica, dalla lonza posteriore/sirloin e dal carré/centro costola (voci sopra) — sezione anteriore del lombo di maiale, disossata.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 123kcal, proteine 21,4g, grassi 3,78g, carboidrati 0,82g (reale, non nullo — valore "by difference" del record USDA), fibra 0g (esplicito), calcio 6,00mg, ferro 0,77mg, magnesio 22,0mg, zinco 1,82mg, rame 0,052mg, selenio 39,1µg, sodio 65,0mg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,49µg, vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stessa specie, stesso trim "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_lonza_blade_raw` ("Maiale, lonza (taglio anteriore/blade), disossata, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169194 --food-id=food_maiale_lonza_blade_raw \
+  --name-it="Maiale, lonza (taglio anteriore/blade), disossata, cruda" \
+  --matrix-id=maiale_lonza_blade_raw --matrix-description-it="Maiale, lonza (taglio anteriore/blade), disossata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169194 --food-id=food_maiale_lonza_blade_raw \
+  --name-it="Maiale, lonza (taglio anteriore/blade), disossata, cruda" \
+  --matrix-id=maiale_lonza_blade_raw --matrix-description-it="Maiale, lonza (taglio anteriore/blade), disossata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, sottofesa (bottom round), cotta (arrosto) — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_manzo_sottofesa_cotta`. FDC ID 174059 (SR Legacy, "Beef, round, bottom round, roast, separable lean only, trimmed to 1/8\" fat, choice, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "lean only, trimmed to 1/8\" fat, choice" del crudo sotto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 179kcal, proteine 27,6g, grassi 6,77g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 2,43mg, magnesio 19,0mg, zinco 4,82mg, rame 0,065mg, selenio 31,4µg, sodio 36,0mg, vitamina C 0mg (esplicito), folato totale 9,00µg, vitamina B12 1,63µg, vitamina K (fillochinone) 1,30µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_sottofesa_cotta` ("Manzo, sottofesa (bottom round), cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174059 --food-id=food_manzo_sottofesa_cotta \
+  --name-it="Manzo, sottofesa (bottom round), cotta (arrosto)" \
+  --matrix-id=manzo_sottofesa_cotta --matrix-description-it="Manzo, sottofesa (bottom round), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174059 --food-id=food_manzo_sottofesa_cotta \
+  --name-it="Manzo, sottofesa (bottom round), cotta (arrosto)" \
+  --matrix-id=manzo_sottofesa_cotta --matrix-description-it="Manzo, sottofesa (bottom round), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, sottofesa (bottom round), cruda — preparato 2026-10-30 dal task (sessantatreesimo lotto)
+
+- **food_id**: `food_manzo_sottofesa_raw`. FDC ID 174058 (SR Legacy, "Beef, round, bottom round, roast, separable lean only, trimmed to 1/8\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline, distinto da fesa/eye of round (`food_manzo_fesa_raw`, già eseguita) e noce/tip round (`food_manzo_noce_raw`, già eseguita) e da girello/top round (scartato ⚠ nel lotto 60, nome diverso per evitare ambiguità).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 140kcal, proteine 22,2g, grassi 4,96g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 19,0mg, ferro 2,06mg, magnesio 24,0mg, zinco 4,16mg, rame 0,098mg, selenio 27,7µg, sodio 56,0mg, vitamina C 0mg (esplicito), folato totale 13,0µg, vitamina B12 1,85µg, vitamina K (fillochinone) 1,20µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_sottofesa_raw` ("Manzo, sottofesa (bottom round), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 13,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174058 --food-id=food_manzo_sottofesa_raw \
+  --name-it="Manzo, sottofesa (bottom round), cruda" \
+  --matrix-id=manzo_sottofesa_raw --matrix-description-it="Manzo, sottofesa (bottom round), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174058 --food-id=food_manzo_sottofesa_raw \
+  --name-it="Manzo, sottofesa (bottom round), cruda" \
+  --matrix-id=manzo_sottofesa_raw --matrix-description-it="Manzo, sottofesa (bottom round), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, fuso (drumstick), crudo — preparato 2026-10-30 dal task (sessantaduesimo lotto)
 
 - **food_id**: `food_tacchino_fuso_raw`. FDC ID 171136 (SR Legacy, "Turkey, drumstick, from whole bird, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio mai tentato in questa pipeline per il tacchino (distinto dal petto `food_petto_di_tacchino_raw`/`cotto` e dalla coscia `food_coscia_di_tacchino_raw`/`cotta`, già eseguiti).
