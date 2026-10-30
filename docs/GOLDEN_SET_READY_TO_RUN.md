@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, carne scura, senza pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_tacchino_carne_scura_cotta`. FDC ID 171091 (SR Legacy, "Turkey, whole, dark meat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita). **Nota di trasparenza sulla verifica del trim**: il nome del record non include letteralmente "meat only" (a differenza del crudo FDC 171090 sopra), ma esiste un record FDC distinto e separato per la variante "carne e pelle" della stessa specie/stato ("Turkey, whole, dark meat, meat and skin, cooked, roasted", FDC 171489) — confermato leggendo entrambe le pagine e confrontando i grassi totali: 6,04g/100g per questo record (171091) contro 9,95g/100g per il record esplicitamente "meat and skin" (171489), coerente con una composizione senza pelle. Composito "carne scura" distinto dal singolo taglio petto già eseguito.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 173kcal, proteine 27,7g, grassi 6,04g, carboidrati 0g, fibra 0g, calcio 17,0mg, ferro 1,43mg, magnesio 27,0mg, zinco 3,51mg, rame 0,13mg, selenio 31,4µg, sodio 104mg (basso/nel range tipico della carne scura cotta, confrontato con la variante "meat and skin" della stessa specie/stato, 105mg — valori quasi identici, nessun segnale di iniezione aggiuntiva), vitamina C 0mg (esplicito), vitamina B12 1,65µg, folato totale 9,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_carne_scura_cotta` ("Tacchino, carne scura, senza pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171091 --food-id=food_tacchino_carne_scura_cotta \
+  --name-it="Tacchino, carne scura, senza pelle, cotta (arrosto)" \
+  --matrix-id=tacchino_carne_scura_cotta --matrix-description-it="Tacchino, carne scura, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171091 --food-id=food_tacchino_carne_scura_cotta \
+  --name-it="Tacchino, carne scura, senza pelle, cotta (arrosto)" \
+  --matrix-id=tacchino_carne_scura_cotta --matrix-description-it="Tacchino, carne scura, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, carne scura, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_tacchino_carne_scura_raw`. FDC ID 171090 (SR Legacy, "Turkey, whole, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita). Composito "carne scura" (coscia + fuso + ali, aggregato per anatomia USDA), distinto dal singolo taglio petto già eseguito (`food_petto_di_tacchino_raw`) — record FDC realmente diverso, mai tentato finora.
