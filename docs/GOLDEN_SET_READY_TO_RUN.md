@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Oca, carne e pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_oca_con_pelle_cotta`. FDC ID 172412 (SR Legacy, "Goose, domesticated, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra).
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 5,10µg esplicita — a differenza del crudo sopra, che non riporta questi tre nutrienti). Per 100g: energia 305kcal, proteine 25,2g, grassi 21,9g, carboidrati 0g, fibra 0g, calcio 13,0mg, ferro 2,83mg, magnesio 22,0mg, zinco 2,62mg, rame 0,26mg, selenio 21,8µg, sodio 70,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 0,41µg, folato totale 2,00µg, vitamina K 5,10µg.
+- **Analogia usata**: `food_oca_raw` (oca, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie, stessa categoria funzionale "carne di volatile").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `oca_con_pelle_cotta` ("Oca, carne e pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_oca_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "roasted"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172412 --food-id=food_oca_con_pelle_cotta \
+  --name-it="Oca, carne e pelle, cotta (arrosto)" \
+  --matrix-id=oca_con_pelle_cotta --matrix-description-it="Oca, carne e pelle, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_oca_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172412 --food-id=food_oca_con_pelle_cotta \
+  --name-it="Oca, carne e pelle, cotta (arrosto)" \
+  --matrix-id=oca_con_pelle_cotta --matrix-description-it="Oca, carne e pelle, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_oca_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Oca, carne e pelle, cruda — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_oca_con_pelle_raw`. FDC ID 174470 (SR Legacy, "Goose, domesticated, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Variante "carne E pelle" distinta dal composito "carne senza pelle" (`food_oca_raw`, FDC 172413, già eseguita sul DB reale) — record FDC realmente distinto, stesso pattern dell'anatra appena preparata in questo stesso lotto.
