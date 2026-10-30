@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, dorso (back), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_pollo_dorso_con_pelle_cotto`. FDC ID 171071 (SR Legacy, "Chicken, broilers or fryers, back, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso trim del crudo sopra (`food_pollo_dorso_con_pelle_raw`), coppia crudo/cotto completa su fonte primaria.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 300kcal, proteine 25,9g, grassi 21,0g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 21,0mg, ferro 1,42mg, magnesio 20,0mg, zinco 2,25mg, rame 0,076mg, selenio 22,5µg, sodio 87,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 0,27µg, folato totale 6,00µg, vitamina K 4,90µg (reale, non nulla), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_dorso_con_pelle_cotto` ("Pollo, dorso (back), con pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — folato 6,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171071 --food-id=food_pollo_dorso_con_pelle_cotto \
+  --name-it="Pollo, dorso (back), con pelle, cotto (arrosto)" \
+  --matrix-id=pollo_dorso_con_pelle_cotto --matrix-description-it="Pollo, dorso (back), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171071 --food-id=food_pollo_dorso_con_pelle_cotto \
+  --name-it="Pollo, dorso (back), con pelle, cotto (arrosto)" \
+  --matrix-id=pollo_dorso_con_pelle_cotto --matrix-description-it="Pollo, dorso (back), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, dorso (back), con pelle, crudo — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_pollo_dorso_con_pelle_raw`. FDC ID 171469 (SR Legacy, "Chicken, broilers or fryers, back, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica mai tentata in questa pipeline per nessuna specie di pollame (distinta da petto/coscia/ala/fuso/carne chiara/carne scura/intero, già eseguiti o preparati per pollo e tacchino).
