@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Grasso di pollo (schmaltz), fuso — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_grasso_di_pollo_raw`. FDC ID 173564 (SR Legacy, "Fat, chicken" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). Terzo grasso animale fuso di questa pipeline dopo strutto di maiale e grasso di manzo, mai tentato per il pollo.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 900kcal, proteine 0g (esplicito), grassi 99,8g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), magnesio 0mg (esplicito), zinco 0mg (esplicito), rame 0mg (esplicito), selenio 0,20µg (reale e non nullo, identico al grasso di manzo), sodio 0mg (esplicito), vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0µg (esplicito), vitamina K (fillochinone) 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Profilo identico al pattern già visto per strutto/grasso di manzo (quasi tutto a zero tranne energia/grassi, selenio reale e non nullo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173564 e dataType SR Legacy.
+- **Analogia usata**: `food_grasso_bovino_raw` (grasso di manzo/tallow, FDC 171400, già eseguito sul DB reale — stessa categoria funzionale "grasso animale fuso", stessa classificazione dieta `meat_fish`, stesso profilo nutrienti quasi tutto a zero).
+- **Categoria dieta**: `meat_fish` (grasso animale, stessa convenzione già usata per strutto/grasso di manzo — non adatto a vegetariani/vegani).
+- **Matrice**: nuova `grasso_di_pollo` ("Grasso di pollo (schmaltz), fuso").
+- **Attributi**: `is_heme_iron=false` (grasso puro, nessun ferro, stesso precedente di `food_grasso_bovino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (grasso fuso/reso, stessa convenzione di strutto/grasso di manzo), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173564 --food-id=food_grasso_di_pollo_raw \
+  --name-it="Grasso di pollo (schmaltz), fuso" \
+  --matrix-id=grasso_di_pollo --matrix-description-it="Grasso di pollo (schmaltz), fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_bovino_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173564 --food-id=food_grasso_di_pollo_raw \
+  --name-it="Grasso di pollo (schmaltz), fuso" \
+  --matrix-id=grasso_di_pollo --matrix-description-it="Grasso di pollo (schmaltz), fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_bovino_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Pancetta di maiale, cotta (in padella) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_pancetta_cotta`. FDC ID 168322 (SR Legacy, "Pork, cured, bacon, pre-sliced, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di cottura mai tentata per la pancetta, la cui versione cruda (`food_pancetta_raw`, FDC 168277) è già eseguita sul DB reale. "Pre-sliced" descrive solo la forma commerciale di vendita (la pancetta/bacon USA è tipicamente già affettata), non un ingrediente aggiunto — nessuna lista ingredienti in pagina, nessun additivo dichiarato oltre la curatura già presente nel crudo.
