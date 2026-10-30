@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Agnello, carré/costolette, cotto (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_agnello_carre_cotta`. FDC ID 172495 (SR Legacy, "Lamb, rib, separable lean only, trimmed to 1/4\" fat, choice, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota sul nome**: la coda proponeva "alla griglia", ma il record USDA dedicato per questo taglio è "roasted" (arrosto), non "broiled" (griglia) — nome aggiornato di conseguenza, stessa convenzione già usata per "noce di manzo" in questo stesso lotto (si segue il metodo di cottura realmente tracciato da USDA, non quello della coda). Primo taglio specifico di agnello (non il composito generico `food_agnello_raw`/`food_agnello_cotto`) tentato in questa pipeline, dopo il cosciotto scartato ⚠ nel lotto 59.
+- **Nutrienti**: **14/17**. Per 100g: energia 232kcal, proteine 26,2g, grassi 13,3g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 21,0mg, ferro 1,77mg, magnesio 23,0mg, zinco 4,47mg, rame 0,13mg, selenio 26,9µg, sodio 81,0mg, vitamina C 0mg (esplicito), folato totale 22,0µg, vitamina B12 2,16µg. **Mancano** (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso identico gap già accettato per `food_agnello_raw`/`food_agnello_cotto` già eseguiti sul DB reale.
+- **Analogia usata**: `food_agnello_cotto` (agnello cotto, composito generico, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked/roasted, stesso attributo `is_heme_iron`, stesso identico gap nutrienti).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_carre_cotta` ("Agnello, carré/costolette, cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_agnello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 22,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172495 --food-id=food_agnello_carre_cotta \
+  --name-it="Agnello, carré/costolette, cotto (arrosto)" \
+  --matrix-id=agnello_carre_cotta --matrix-description-it="Agnello, carré/costolette, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172495 --food-id=food_agnello_carre_cotta \
+  --name-it="Agnello, carré/costolette, cotto (arrosto)" \
+  --matrix-id=agnello_carre_cotta --matrix-description-it="Agnello, carré/costolette, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Agnello, carré/costolette, crudo — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_agnello_carre_raw`. FDC ID 172493 (SR Legacy, "Lamb, rib, separable lean only, trimmed to 1/4\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso taglio "rib" (carré/costolette), stesso trim "separable lean only, trimmed to 1/4\" fat, choice" della versione cotta sopra — ambito anatomico e trim verificati coerenti fra crudo e cotto (lezione del lotto 59/60/61 su vitello stinco/petto, qui rispettata: entrambe le pagine dichiarano esplicitamente lo stesso trim).
+- **Nutrienti**: **14/17**. Per 100g: energia 169kcal, proteine 20,0g, grassi 9,23g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 1,67mg, magnesio 25,0mg, zinco 3,80mg, rame 0,11mg, selenio 22,3µg, sodio 72,0mg, vitamina C 0mg (esplicito), folato totale 21,0µg, vitamina B12 2,38µg. **Mancano** (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso identico gap già accettato per `food_agnello_raw` già eseguito sul DB reale.
+- **Analogia usata**: `food_agnello_raw` (agnello crudo, composito generico, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`, stesso identico gap nutrienti).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_carre_raw` ("Agnello, carré/costolette, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_agnello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 21,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172493 --food-id=food_agnello_carre_raw \
+  --name-it="Agnello, carré/costolette, crudo" \
+  --matrix-id=agnello_carre_raw --matrix-description-it="Agnello, carré/costolette, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172493 --food-id=food_agnello_carre_raw \
+  --name-it="Agnello, carré/costolette, crudo" \
+  --matrix-id=agnello_carre_raw --matrix-description-it="Agnello, carré/costolette, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, noce (tip round roast), cotta (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_manzo_noce_cotta`. FDC ID 170233 (SR Legacy, "Beef, round, tip round, roast, separable lean only, trimmed to 0\" fat, all grades, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 170233", release USDA 2026-04-30). Versione cotta della noce di manzo (tip round roast, dalla regione "round" — distinta sia dal girello/top round, scartato ⚠ nel lotto 60 come record Foundation incompleto, sia dal taglio reale/chuck e dalla punta di petto già pronti), la cui cruda è anch'essa 🟡 in questo stesso lotto. "Roast" (arrosto) è la forma di taglio pieno/generica tracciata da USDA per questa regione, stessa convenzione già accettata per il "chuck, clod roast" nel lotto 60 — non una frazione come "side"/"center" (quelle sono le varianti del "knuckle" propriamente detto, scartate qui a favore del "tip round" generico).
