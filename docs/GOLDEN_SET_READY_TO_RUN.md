@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Coscia di tacchino, cotta (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_coscia_di_tacchino_cotta`. FDC ID 172877 (SR Legacy, "Turkey, retail parts, thigh, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del tacchino mai tentata in questa pipeline (solo il petto, `food_petto_di_tacchino_raw/cotto`, è già coperto) — stesso schema "thigh"/coscia già usato con successo per il pollo.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 159kcal, proteine 25,1g, grassi 6,25g, carboidrati 0,46g, fibra 0g (esplicito), calcio 4,00mg, ferro 1,59mg, magnesio 23,0mg, zinco 3,26mg, rame 0,094mg, selenio 29,3µg, sodio 104mg (nella norma per carne arrosto, non una firma di arricchimento/salamoia), vitamina C 0mg (esplicito), folato totale 8,00µg, vitamina B12 1,63µg, vitamina K (fillochinone) 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172877 e dataType SR Legacy.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, FDC 172853, già eseguita sul DB reale — stessa parte anatomica "thigh/coscia" in pollame, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coscia_di_tacchino_cotta` ("Coscia di tacchino, cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 8,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172877 --food-id=food_coscia_di_tacchino_cotta \
+  --name-it="Coscia di tacchino, cotta (arrosto)" \
+  --matrix-id=coscia_di_tacchino_cotta --matrix-description-it="Coscia di tacchino, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172877 --food-id=food_coscia_di_tacchino_cotta \
+  --name-it="Coscia di tacchino, cotta (arrosto)" \
+  --matrix-id=coscia_di_tacchino_cotta --matrix-description-it="Coscia di tacchino, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Coscia di tacchino, cruda — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_coscia_di_tacchino_raw`. FDC ID 174518 (SR Legacy, "Turkey, retail parts, thigh, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del tacchino mai tentata in questa pipeline.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 116kcal, proteine 20,6g, grassi 3,69g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 4,00mg, ferro 1,42mg, magnesio 22,0mg, zinco 2,95mg, rame 0,083mg, selenio 21,5µg, sodio 75,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 2,17µg, vitamina K (fillochinone) 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174518 e dataType SR Legacy.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (coscia di pollo cruda, FDC 173627, già eseguita sul DB reale — stessa parte anatomica "thigh/coscia" in pollame, carne cruda senza pelle, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coscia_di_tacchino_raw` ("Coscia di tacchino, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_coscia_di_pollo_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174518 --food-id=food_coscia_di_tacchino_raw \
+  --name-it="Coscia di tacchino, cruda" \
+  --matrix-id=coscia_di_tacchino_raw --matrix-description-it="Coscia di tacchino, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174518 --food-id=food_coscia_di_tacchino_raw \
+  --name-it="Coscia di tacchino, cruda" \
+  --matrix-id=coscia_di_tacchino_raw --matrix-description-it="Coscia di tacchino, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Ala di pollo, cotta (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_ala_di_pollo_cotta`. FDC ID 172392 (SR Legacy, "Chicken, broilers or fryers, wing, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del pollo mai tentata in questa pipeline (petto e coscia già coperti, l'ala no).
