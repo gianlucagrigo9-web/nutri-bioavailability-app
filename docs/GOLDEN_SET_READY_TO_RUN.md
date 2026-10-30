@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, carne scura, senza pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_pollo_carne_scura_cotta`. FDC ID 171069 (SR Legacy, "Chicken, broilers or fryers, dark meat, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita). Composito "carne scura" (coscia + ali + dorso, aggregato per anatomia USDA), distinto dal singolo taglio coscia già eseguito (`food_coscia_di_pollo_cotta`, FDC 172853) — record FDC realmente diverso, mai tentato finora. Nota di trasparenza: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "dark meat, meat only, raw" semplice (solo "Chicken, roasting, dark meat, meat only, raw", FDC 173638, che è una specie USDA diversa, "roasting" non "broilers or fryers"); qui si prepara solo il cotto, voce isolata senza il crudo corrispondente, stesso schema già usato per il fuso di tacchino nel lotto 62.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 205kcal, proteine 27,4g, grassi 9,73g, carboidrati 0g, fibra 0g, calcio 15,0mg, ferro 1,33mg, magnesio 23,0mg, zinco 2,80mg, rame 0,080mg, selenio 18,0µg, sodio 93,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,32µg, folato totale 8,00µg, vitamina K (fillochinone) 3,90µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria "carne scura"/coscia, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_carne_scura_cotta` ("Pollo, carne scura, senza pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 8,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171069 --food-id=food_pollo_carne_scura_cotta \
+  --name-it="Pollo, carne scura, senza pelle, cotta (arrosto)" \
+  --matrix-id=pollo_carne_scura_cotta --matrix-description-it="Pollo, carne scura, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171069 --food-id=food_pollo_carne_scura_cotta \
+  --name-it="Pollo, carne scura, senza pelle, cotta (arrosto)" \
+  --matrix-id=pollo_carne_scura_cotta --matrix-description-it="Pollo, carne scura, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, carne chiara, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_pollo_carne_chiara_raw`. FDC ID 171464 (SR Legacy, "Chicken, broilers or fryers, light meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita). Composito "carne chiara" (petto + ali, aggregato per anatomia USDA), distinto dal singolo taglio petto già eseguito (`food_petto_di_pollo_raw`, FDC 171077) — record FDC realmente diverso, mai tentato in nessuno dei sessantasette lotti precedenti.
