@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, macinato, crudo — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_pollo_macinato_raw`. FDC ID 171116 (SR Legacy, "Chicken, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il pollo (macinato), sulla stessa scia del tacchino macinato già eseguito sul DB reale e del manzo macinato del Golden Set originale — nessuna delle due specie principali di pollame (pollo, qui; tacchino, già fatto) aveva ancora il macinato prima di questo lotto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 143kcal, proteine 17,4g, grassi 8,10g, carboidrati 0,040g, fibra 0g (esplicito), calcio 6,00mg, ferro 0,82mg, magnesio 21,0mg, zinco 1,47mg, rame 0,065mg, selenio 10,2µg, sodio 60,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,56µg, folato totale 1,00µg, vitamina K (fillochinone) 0,80µg, beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito — alfa-carotene e beta-criptoxantina entrambe dichiarate 0).
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa forma di consumo "carne macinata cruda", stesso attributo `is_heme_iron`; stessa convenzione già usata per `food_tacchino_macinato_raw`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `pollo_macinato_raw` ("Pollo, macinato, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 1,00µg, valore tipico della carne di pollo, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171116 --food-id=food_pollo_macinato_raw \
+  --name-it="Pollo, macinato, crudo" \
+  --matrix-id=pollo_macinato_raw --matrix-description-it="Pollo, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171116 --food-id=food_pollo_macinato_raw \
+  --name-it="Pollo, macinato, crudo" \
+  --matrix-id=pollo_macinato_raw --matrix-description-it="Pollo, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, costata (rib), cotta (brasata) — preparato 2026-10-30 dal task (settantesimo lotto)
 
 - **food_id**: `food_vitello_costata_cotto`. FDC ID 175276 (SR Legacy, "Veal, rib, separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim del crudo sotto. Con questo taglio si chiude l'intero elenco dei sette tagli di vitello tracciati da USDA SR Legacy (spalla, lombo/lonza, sirloin, stinco, costata, petto, coscia/fesa — elenco confermato dalla nota ⚠ sul collo di vitello del lotto 61, che non è una regione tracciata).
