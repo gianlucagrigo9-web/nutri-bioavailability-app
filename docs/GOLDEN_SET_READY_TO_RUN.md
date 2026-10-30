@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Gallina (da brodo), carne e pelle, cruda — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_gallina_raw`. FDC ID 172400 (SR Legacy, "Chicken, stewing, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). USDA traccia "Chicken, stewing" (gallina da brodo/ovaiola a fine carriera) come categoria distinta da "Chicken, broilers or fryers" (pollo da carne, già usato per tutti i tagli di pollo fin qui, es. `food_petto_di_pollo_raw`) — alimento di uso quotidiano in Italia (brodo di gallina) mai cercato in sessantasei lotti precedenti.
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 2,40µg esplicita). Per 100g: energia 258kcal, proteine 17,6g, grassi 20,3g, carboidrati 0g, fibra 0g, calcio 10,0mg, ferro 1,04mg, magnesio 20,0mg, zinco 1,19mg, rame 0,074mg, selenio 14,4µg, sodio 71,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,32µg, folato totale 6,00µg, vitamina K 2,40µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria funzionale "carne di pollame crudo"; nessun record più specifico per "Chicken, stewing" già nel DB).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `gallina` ("Gallina da brodo, carne e pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172400 --food-id=food_gallina_raw \
+  --name-it="Gallina (da brodo), carne e pelle, cruda" \
+  --matrix-id=gallina --matrix-description-it="Gallina da brodo, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172400 --food-id=food_gallina_raw \
+  --name-it="Gallina (da brodo), carne e pelle, cruda" \
+  --matrix-id=gallina --matrix-description-it="Gallina da brodo, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Oca, carne e pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_oca_con_pelle_cotta`. FDC ID 172412 (SR Legacy, "Goose, domesticated, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra).
