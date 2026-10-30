@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anatra, carne e pelle, cruda — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_anatra_con_pelle_raw`. FDC ID 172408 (SR Legacy, "Duck, domesticated, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Variante "carne E pelle" distinta dal composito "carne senza pelle" (`food_anatra_raw`, FDC 172410, già eseguito sul DB reale) — record FDC realmente distinto, non un doppione, stesso pattern già usato con successo per l'ala di tacchino nel sessantacinquesimo lotto (meat and skin vs meat only).
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 5,50µg esplicita). Per 100g: energia 404kcal, proteine 11,5g, grassi 39,3g, carboidrati 0g, fibra 0g, calcio 11,0mg, ferro 2,40mg, magnesio 15,0mg, zinco 1,36mg, rame 0,24mg, selenio 12,4µg, sodio 63,0mg (basso, nessun segnale di salamoia), vitamina C 2,80mg, vitamina B12 0,25µg, folato totale 13,0µg, vitamina K 5,50µg.
+- **Analogia usata**: `food_anatra_raw` (anatra, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie, stessa categoria funzionale "carne di volatile", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `anatra_con_pelle` ("Anatra, carne e pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_anatra_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172408 --food-id=food_anatra_con_pelle_raw \
+  --name-it="Anatra, carne e pelle, cruda" \
+  --matrix-id=anatra_con_pelle --matrix-description-it="Anatra, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172408 --food-id=food_anatra_con_pelle_raw \
+  --name-it="Anatra, carne e pelle, cruda" \
+  --matrix-id=anatra_con_pelle --matrix-description-it="Anatra, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, orecchie, cotte (bollite) — preparato 2026-10-30 dal task (sessantaseiesimo lotto)
 
 - **food_id**: `food_orecchie_di_maiale_cotte`. FDC ID 167858 (SR Legacy, "Pork, fresh, variety meats and by-products, ears, frozen, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso by-product del crudo sotto, qualificatore USDA "frozen" riferito alla conservazione del campione analizzato, non a una lavorazione aggiuntiva.
