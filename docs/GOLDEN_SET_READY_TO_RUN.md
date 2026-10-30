@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, ala, con pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_ala_di_pollo_con_pelle_cotta`. FDC ID 173630 (SR Legacy, "Chicken, broilers or fryers, wing, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra). Qui, a differenza della coscia, sia il crudo sia il cotto hanno una pagina dedicata pulita per il trim semplice "arrosto".
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 254kcal, proteine 23,8g, grassi 16,9g, carboidrati 0g, fibra 0g, calcio 18,0mg, ferro 0,84mg, magnesio 19,0mg, zinco 1,64mg, rame 0,041mg, selenio 25,5µg, sodio 98,0mg (basso/borderline, nessun segnale chiaro di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,35µg, folato totale 9,00µg, vitamina K (fillochinone) 0,30µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, FDC 172853, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `ala_di_pollo_con_pelle_cotta` ("Pollo, ala, con pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173630 --food-id=food_ala_di_pollo_con_pelle_cotta \
+  --name-it="Pollo, ala, con pelle, cotta (arrosto)" \
+  --matrix-id=ala_di_pollo_con_pelle_cotta --matrix-description-it="Pollo, ala, con pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173630 --food-id=food_ala_di_pollo_con_pelle_cotta \
+  --name-it="Pollo, ala, con pelle, cotta (arrosto)" \
+  --matrix-id=ala_di_pollo_con_pelle_cotta --matrix-description-it="Pollo, ala, con pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, ala, con pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_ala_di_pollo_con_pelle_raw`. FDC ID 172390 (SR Legacy, "Chicken, broilers or fryers, wing, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Variante "carne e pelle" dell'ala di pollo, distinta dalla variante "meat only" già preparata (ma non ancora eseguita sul DB reale, quindi qui l'analogia usa un alimento diverso già eseguito, vedi sotto) — record FDC realmente distinto.
