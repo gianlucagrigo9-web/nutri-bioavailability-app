@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, taglio per spezzatino (chuck), crudo — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_manzo_spezzatino_raw`. FDC ID 170809 (SR Legacy, "Beef, chuck for stew, separable lean and fat, select, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a pezzi per stufato/spezzatino", distinta dai tagli interi di manzo già coperti — seguendo la raccomandazione del settantunesimo lotto di verificare se USDA traccia "stew meat"/"cubed" come record distinti (manzo e agnello e vitello sì, pollo e maiale no — nessuna pagina getfoodfacts.com dedicata trovata per questi ultimi due).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 124kcal, proteine 21,9g, grassi 3,99g, carboidrati 0,21g, fibra 0g (esplicito), calcio 14,0mg, ferro 2,20mg, magnesio 20,0mg, zinco 5,51mg, rame 0,093mg, selenio 26,0µg, sodio 81,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 2,42µg, folato totale 4,00µg, vitamina K (fillochinone 1,50µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_spezzatino_raw` ("Manzo, taglio per spezzatino (chuck), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico di carne cruda, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170809 --food-id=food_manzo_spezzatino_raw \
+  --name-it="Manzo, taglio per spezzatino (chuck), crudo" \
+  --matrix-id=manzo_spezzatino_raw --matrix-description-it="Manzo, taglio per spezzatino (chuck), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170809 --food-id=food_manzo_spezzatino_raw \
+  --name-it="Manzo, taglio per spezzatino (chuck), crudo" \
+  --matrix-id=manzo_spezzatino_raw --matrix-description-it="Manzo, taglio per spezzatino (chuck), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, spalla (Boston butt/blade), cotta (brasata) — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_maiale_spalla_boston_cotta`. FDC ID 167850 (SR Legacy, "Pork, fresh, shoulder, (Boston butt), blade (steaks), separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; titolo verificato SENZA "with added solution", a differenza di altre varianti trovate nella stessa ricerca). Taglio distinto dalla "spalla (picnic)" già scartata ⚠ nel lotto 61 (`docs/PRD.md`, riga ~1716-1717): sono le due sotto-parti standard della spalla di maiale USDA — blade/Boston butt (parte superiore, qui) e picnic/arm (parte inferiore, già tentata e scartata) — mai tentato in questa pipeline.
