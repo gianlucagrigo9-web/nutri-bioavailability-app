@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Grasso di manzo (sugna/tallow), fuso — preparato 2026-10-30 dal task (cinquantottesimo lotto)
+
+- **food_id**: `food_grasso_bovino_raw`. FDC ID 171400 (SR Legacy, "Fat, beef tallow" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). FDC ID adiacente a quello dello strutto di maiale già eseguito (171401, "Lard") — stessa serie USDA, specie animale distinta (bovino vs suino), non un doppione.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 902kcal, proteine 0g (esplicito), grassi 100g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), magnesio 0mg (esplicito), zinco 0mg (esplicito), rame 0mg (esplicito), selenio 0,20µg (reale e non nullo), vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0µg (esplicito), vitamina K 0µg (esplicito), beta-carotene 0µg (esplicito), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Profilo coerente con un grasso animale fuso puro (stesso pattern già visto per burro/strutto/oli in questa pipeline: quasi tutto a zero tranne energia/grassi, con selenio reale e non nullo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171400 e dataType SR Legacy.
+- **Analogia usata**: `food_strutto` (strutto di maiale, FDC 171401, già eseguito sul DB reale — stessa categoria funzionale "grasso animale fuso", stessa classificazione dieta `meat_fish`, FDC ID adiacente).
+- **Categoria dieta**: `meat_fish` (grasso animale, stessa convenzione già usata per lo strutto — non adatto a vegetariani/vegani).
+- **Matrice**: nuova `grasso_bovino` ("Grasso di manzo (sugna/tallow), fuso").
+- **Attributi**: `is_heme_iron=false` (grasso puro, nessun ferro), `matrix_category_calcium` omesso (NULL, stessa convenzione dello strutto/burro/oli già eseguiti), `carotenoid_matrix_state` omesso (NULL, tutti i carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (prodotto animale), `baseline_cooking_state=raw` (grasso fuso/reso, non un piatto cotto — stessa convenzione dello strutto), `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171400 --food-id=food_grasso_bovino_raw \
+  --name-it="Grasso di manzo (sugna/tallow), fuso" \
+  --matrix-id=grasso_bovino --matrix-description-it="Grasso di manzo (sugna/tallow), fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strutto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171400 --food-id=food_grasso_bovino_raw \
+  --name-it="Grasso di manzo (sugna/tallow), fuso" \
+  --matrix-id=grasso_bovino --matrix-description-it="Grasso di manzo (sugna/tallow), fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strutto \
+  --diet-category=meat_fish --apply
+```
+
 ### Uovo d'oca, intero, crudo — preparato 2026-10-30 dal task (cinquantottesimo lotto)
 
 - **food_id**: `food_uovo_doca_raw`. FDC ID 172190 (SR Legacy, "Egg, goose, whole, fresh, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Dairy and Egg Products", release USDA 2026-04-30). FDC ID adiacente a quello dell'uovo d'anatra già eseguito (172189, "Egg, duck, whole, fresh, raw") — stessa serie USDA, specie aviaria distinta (oca vs anatra), non un doppione.
