@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, ventriglio, cotto (bollito) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_ventriglio_di_tacchino_cotto`. FDC ID 171483 (SR Legacy, "Turkey, all classes, gizzard, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_ventriglio_di_tacchino_raw` è già eseguito sul DB reale dal ventiduesimo lotto; il cotto non era mai stato tentato.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 155kcal, proteine 26,4g, grassi 4,64g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 17,0mg, ferro 3,68mg, magnesio 21,0mg, zinco 3,92mg, rame 0,27mg, selenio 44,1µg, sodio 127mg (moderato, ben sotto la soglia ~300mg di salamoia/iniezione), vitamina C 6,30mg (non nulla), vitamina B12 3,91µg, folato totale 13,0µg, vitamina K (fillochinone 0µg esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_ventriglio_di_tacchino_raw` (ventriglio di tacchino crudo, già eseguito sul DB reale — stessa specie, stessa frattaglia, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `ventriglio_di_tacchino_cotto` ("Tacchino, ventriglio, cotto (bollito)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=simmered` (il record FDC specifica "simmered"), `is_fortified_folate` omesso (false — folato 13,0µg, valore tipico, nessuna firma di arricchimento) — durante la stessa ricerca trovato anche il ventriglio di pollo cotto, ma senza pagina getfoodfacts.com dedicata (solo un riferimento di striscio in una pagina "compare"), resta ⚠ in `docs/PRD.md`.
+
+```
+npm run add-food -- --fdc-id=171483 --food-id=food_ventriglio_di_tacchino_cotto \
+  --name-it="Tacchino, ventriglio, cotto (bollito)" \
+  --matrix-id=ventriglio_di_tacchino_cotto --matrix-description-it="Tacchino, ventriglio, cotto (bollito)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_ventriglio_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171483 --food-id=food_ventriglio_di_tacchino_cotto \
+  --name-it="Tacchino, ventriglio, cotto (bollito)" \
+  --matrix-id=ventriglio_di_tacchino_cotto --matrix-description-it="Tacchino, ventriglio, cotto (bollito)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_ventriglio_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_agnello_spezzatino_cotto`. FDC ID 172509 (SR Legacy, "Lamb, cubed for stew or kabob (leg and shoulder), separable lean only, trimmed to 1/4\" fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a cubetti per spezzatino/kebab", distinta dai tagli interi/composito "agnello, cotto" già coperto.
