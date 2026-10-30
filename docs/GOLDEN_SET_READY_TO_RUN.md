@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, spalla (Boston butt/blade), cotta (brasata) — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_maiale_spalla_boston_cotta`. FDC ID 167850 (SR Legacy, "Pork, fresh, shoulder, (Boston butt), blade (steaks), separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; titolo verificato SENZA "with added solution", a differenza di altre varianti trovate nella stessa ricerca). Taglio distinto dalla "spalla (picnic)" già scartata ⚠ nel lotto 61 (`docs/PRD.md`, riga ~1716-1717): sono le due sotto-parti standard della spalla di maiale USDA — blade/Boston butt (parte superiore, qui) e picnic/arm (parte inferiore, già tentata e scartata) — mai tentato in questa pipeline.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 267kcal, proteine 25,1g, grassi 17,7g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 26,0mg, ferro 1,75mg, magnesio 23,0mg, zinco 4,84mg, rame 0,13mg, selenio 42,4µg, sodio 58,0mg (basso, nessun segnale di salamoia — titolo confermato senza "with added solution"), vitamina C 0mg (esplicito), vitamina B12 0,93µg, folato totale 0µg (esplicito), vitamina K (fillochinone 0µg, diidrofillochinone 0µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_spalla_boston_cotta` ("Maiale, spalla (Boston butt/blade), cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "braised"), `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento) — nota di trasparenza: nessuna pagina getfoodfacts.com dedicata trovata per il crudo con lo stesso trim "separable lean and fat, raw" senza "with added solution" (solo recipal.com/bodbot.com per la versione semplice, mentre getfoodfacts.com indicizza solo la variante crudo "with added solution"/iniezione salina, FDC 168365/168366 — non rappresentativa di un taglio semplice); quindi qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+
+```
+npm run add-food -- --fdc-id=167850 --food-id=food_maiale_spalla_boston_cotta \
+  --name-it="Maiale, spalla (Boston butt/blade), cotta (brasata)" \
+  --matrix-id=maiale_spalla_boston_cotta --matrix-description-it="Maiale, spalla (Boston butt/blade), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167850 --food-id=food_maiale_spalla_boston_cotta \
+  --name-it="Maiale, spalla (Boston butt/blade), cotta (brasata)" \
+  --matrix-id=maiale_spalla_boston_cotta --matrix-description-it="Maiale, spalla (Boston butt/blade), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, macinato, cotto (alla griglia) — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_vitello_macinato_cotto`. FDC ID 175291 (SR Legacy, "Veal, ground, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo sopra). Stessa forma di consumo del crudo sopra.
