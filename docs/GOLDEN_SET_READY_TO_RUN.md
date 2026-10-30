@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, fegato, cotto (bollito) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_fegato_di_tacchino_cotto`. FDC ID 171487 (SR Legacy, "Turkey, all classes, liver, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_fegato_di_tacchino_raw` è già eseguito sul DB reale dal ventiduesimo lotto; il cotto non era mai stato tentato.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 189kcal, proteine 27,0g, grassi 8,18g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 19,0mg, ferro 1,79mg, magnesio 26,0mg, zinco 4,53mg, rame 1,05mg, selenio 102µg, sodio 98,0mg (basso, nessun segnale di salamoia), vitamina C 22,6mg (alta ma coerente con un fegato), vitamina B12 28,2µg (alta, coerente con un fegato), folato totale 691µg (molto alto, coerente con un fegato — nessuna firma di arricchimento, non è acido folico separato), vitamina K (fillochinone 0µg esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_fegato_di_tacchino_raw` (fegato di tacchino crudo, già eseguito sul DB reale — stessa specie, stessa frattaglia, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `fegato_di_tacchino_cotto` ("Tacchino, fegato, cotto (bollito)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=simmered` (il record FDC specifica "simmered"), `is_fortified_folate` omesso (false — folato 691µg alto ma tipico di un fegato, nessuna firma di arricchimento distinta dal folato alimentare).
+
+```
+npm run add-food -- --fdc-id=171487 --food-id=food_fegato_di_tacchino_cotto \
+  --name-it="Tacchino, fegato, cotto (bollito)" \
+  --matrix-id=fegato_di_tacchino_cotto --matrix-description-it="Tacchino, fegato, cotto (bollito)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171487 --food-id=food_fegato_di_tacchino_cotto \
+  --name-it="Tacchino, fegato, cotto (bollito)" \
+  --matrix-id=fegato_di_tacchino_cotto --matrix-description-it="Tacchino, fegato, cotto (bollito)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, cuore, cotto (bollito) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_cuore_di_tacchino_cotto`. FDC ID 171485 (SR Legacy, "Turkey, all classes, heart, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_cuore_di_tacchino_raw` è già eseguito sul DB reale dal ventiduesimo lotto; il cotto non era mai stato tentato.
