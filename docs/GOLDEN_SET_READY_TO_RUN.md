@@ -16,6 +16,174 @@
 
 ## Pronti
 
+### Broccoli cinesi (gai lan/kai-lan), crudi — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_broccoli_cinesi_raw`. FDC ID 169404 (SR Legacy, "Broccoli, chinese, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente, release FoodData Central 30-04-2026). Specie *Brassica oleracea* var. *alboglabra* (gai lan/kai-lan), distinta dal broccolo comune del Golden Set (*Brassica oleracea* var. *italica*, `food_broccoli_raw`, già eseguito) e dal cavolo cinese/pak choi già eseguito (`food_cavolo_cinese_raw`, FDC 2685572, specie diversa *Brassica rapa* subsp. *chinensis* — non un doppione, specie botanica distinta).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 26,0kcal, proteine 1,20g, grassi 0,76g, carboidrati 4,67g, fibra 2,60g, calcio 105mg, ferro 0,59mg, rame 0,064mg, magnesio 19,0mg, zinco 0,41mg, selenio 1,40µg, vitamina C 29,6mg, folato totale 104µg, vitamina B12 0µg (esplicito), vitamina K (fillochinone) 89,1µg, beta-carotene 1032µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito, somma "altri carotenoidi provitamina A" = 0µg). Sodio 7,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169404 e dataType SR Legacy.
+- **Analogia usata**: `food_broccoli_raw` (broccolo comune, Golden Set originale, stessa specie *Brassica oleracea*, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `broccoli_cinesi` ("Broccoli cinesi (gai lan)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169404 --food-id=food_broccoli_cinesi_raw \
+  --name-it="Broccoli cinesi (gai lan), crudi" \
+  --matrix-id=broccoli_cinesi --matrix-description-it="Broccoli cinesi (gai lan)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169404 --food-id=food_broccoli_cinesi_raw \
+  --name-it="Broccoli cinesi (gai lan), crudi" \
+  --matrix-id=broccoli_cinesi --matrix-description-it="Broccoli cinesi (gai lan)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cavolo rosso, cotto (bollito, con sale) — preparato 2026-10-30 dal task (cinquantacinquesimo lotto, bonus)
+
+- **food_id**: `food_cavolo_rosso_cotto`. FDC ID 168515 (SR Legacy, "Cabbage, red, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Trovato durante la stessa ricerca del cavolo rosso crudo in questo lotto (bonus, non conteggiato nel tetto di 12 valutati). Sodio 244mg/100g coerente col "with salt" dichiarato nel nome.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 29,0kcal, proteine 1,51g, grassi 0,090g, carboidrati 6,94g, fibra 2,60g, calcio 42,0mg, ferro 0,66mg, rame 0,054mg, magnesio 17,0mg, zinco 0,25mg, selenio 2,30µg, vitamina C 10,8mg, folato totale 24,0µg, vitamina B12 0µg (esplicito), vitamina K 47,6µg, beta-carotene 20,0µg (reale e non nullo, più basso del crudo come atteso dopo cottura), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito).
+- **Analogia usata**: `food_broccoli_boiled` (Golden Set originale, già eseguito — stessa famiglia Brassicaceae, stesso stato di cottura bollito; NON il cavolo rosso crudo di questo stesso lotto, che è solo "pronto" e non ancora eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: riusa `cavolo_rosso` (stessa matrice del cavolo rosso crudo preparato in questo stesso lotto — stesso alimento, stato di cottura diverso).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale non nullo, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168515 --food-id=food_cavolo_rosso_cotto \
+  --name-it="Cavolo rosso, cotto (bollito)" \
+  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168515 --food-id=food_cavolo_rosso_cotto \
+  --name-it="Cavolo rosso, cotto (bollito)" \
+  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cavolo rosso, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_cavolo_rosso_raw`. FDC ID 169977 (SR Legacy, "Cabbage, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar pigmentata di *Brassica oleracea*, distinta dal cavolo verza/savoy già eseguito (`food_verza_raw`) e da tutte le altre Brassicaceae già coperte — mai tentata in questa pipeline nonostante l'alta probabilità di match FDC pulito.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 31,0kcal, proteine 1,43g, grassi 0,16g, carboidrati 7,37g, fibra 2,10g, calcio 45,0mg, ferro 0,80mg, rame 0,017mg, magnesio 16,0mg, zinco 0,22mg, selenio 0,60µg, vitamina C 57,0mg, folato totale 18,0µg, vitamina B12 0µg (esplicito), vitamina K 38,2µg, beta-carotene 670µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Sodio 27,0mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169977 e dataType SR Legacy.
+- **Analogia usata**: `food_verza_raw` (cavolo verza/savoy, già eseguito sul DB reale — stessa specie *Brassica oleracea*, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolo_rosso` ("Cavolo rosso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_rosso_raw \
+  --name-it="Cavolo rosso, crudo" \
+  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_verza_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_rosso_raw \
+  --name-it="Cavolo rosso, crudo" \
+  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_verza_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Peperone giallo, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_peperone_giallo_raw`. FDC ID 169383 (SR Legacy, "Peppers, sweet, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar/colore distinto dal peperone rosso già eseguito (`food_pepper_red_raw`) e dal peperone verde già eseguito — distinto anche dal peperone arancione (già ⚠, Foundation troppo lacunoso) e dal peperone jalapeño/a banana (cultivar diverse, già eseguiti).
+- **Nutrienti**: **15/17** — mancano vitamina K (nessuna riga fillochinone sulla pagina consultata, non assunta zero) e `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina entrambi assenti dalla tabella, non calcolabile per intero — richiede entrambi i componenti). Per 100g (valori presenti): energia 27,0kcal, proteine 1,00g, grassi 0,21g, carboidrati 6,32g, fibra 0,90g, calcio 11,0mg, ferro 0,46mg, rame 0,11mg, magnesio 12,0mg, zinco 0,17mg, selenio 0,30µg, vitamina C 184mg, folato totale 26,0µg, vitamina B12 0µg (esplicito), beta-carotene 120µg (reale e non nullo). Sodio 2,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169383 e dataType SR Legacy.
+- **Analogia usata**: `food_pepper_red_raw` (peperone rosso, già eseguito sul DB reale — stesso genere *Capsicum*, stessa famiglia Solanaceae, colore/cultivar diverso).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `peperone_giallo` ("Peperone giallo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169383 --food-id=food_peperone_giallo_raw \
+  --name-it="Peperone giallo, crudo" \
+  --matrix-id=peperone_giallo --matrix-description-it="Peperone giallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169383 --food-id=food_peperone_giallo_raw \
+  --name-it="Peperone giallo, crudo" \
+  --matrix-id=peperone_giallo --matrix-description-it="Peperone giallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pomodoro Roma, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_pomodoro_roma_raw`. FDC ID 1999634 (**Foundation**, "Tomato, roma" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar/forma distinta dal pomodoro generico del Golden Set (`food_tomato_raw`, già eseguito) — pomodoro da sugo/salsa ovale, diverso dal pomodorino/pomodoro cherry rotondo già ⚠ in lotti precedenti per mancanza di record pulito.
+- **Nutrienti**: **15/17** — mancano vitamina B12 e vitamina K (nessuna riga fillochinone/B12 sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 19,0kcal (il pannello etichetta arrotonda a 20kcal, uso il valore della tabella dettagliata "per 100g" come da convenzione), proteine 0,70g, grassi 0,42g, carboidrati 3,84g, fibra 0,97g, calcio 9,96mg, ferro 0,10mg, rame 0,032mg, magnesio 8,09mg, zinco 0,082mg, selenio 0µg (esplicito), vitamina C 17,8mg, folato totale 9,99µg, beta-carotene 276µg, alfa-carotene 0,88µg, beta-criptoxantina 19,1µg (tutti e due i carotenoidi provitamina A secondari reali e non nulli). Sodio 0mg/100g (esplicito) — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 1999634 e dataType Foundation.
+- **Analogia usata**: `food_tomato_raw` (pomodoro generico, già eseguito sul DB reale — stessa specie *Solanum lycopersicum*, forma/cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pomodoro_roma` ("Pomodoro Roma").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e altri carotenoidi reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=1999634 --food-id=food_pomodoro_roma_raw \
+  --name-it="Pomodoro Roma, crudo" \
+  --matrix-id=pomodoro_roma --matrix-description-it="Pomodoro Roma" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=1999634 --food-id=food_pomodoro_roma_raw \
+  --name-it="Pomodoro Roma, crudo" \
+  --matrix-id=pomodoro_roma --matrix-description-it="Pomodoro Roma" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pera Bosc, cruda — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_pera_bosc_raw`. FDC ID 167778 (SR Legacy, "Pears, raw, bosc (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Pyrus communis* distinta dalla pera generica del Golden Set (`food_pear_raw`) e dalla pera Bartlett già preparata nel cinquantatreesimo lotto.
+- **Nutrienti**: **16/17** — manca solo vitamina B12 (nessuna riga sulla pagina consultata, non assunta zero). Per 100g (valori presenti): energia 67,0kcal, proteine 0,36g, grassi 0,090g, carboidrati 16,1g, fibra 3,10g, calcio 10,0mg, ferro 0,15mg, rame 0,10mg, magnesio 7,00mg, zinco 0,13mg, selenio 0µg (esplicito), vitamina C 2,80mg, folato totale 7,00µg, vitamina K 5,20µg, beta-carotene 11,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167778 e dataType SR Legacy.
+- **Analogia usata**: `food_pear_raw` (pera cruda, Golden Set originale, stessa specie *Pyrus communis*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `pera_bosc` ("Pera Bosc").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167778 --food-id=food_pera_bosc_raw \
+  --name-it="Pera Bosc, cruda" \
+  --matrix-id=pera_bosc --matrix-description-it="Pera Bosc" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167778 --food-id=food_pera_bosc_raw \
+  --name-it="Pera Bosc, cruda" \
+  --matrix-id=pera_bosc --matrix-description-it="Pera Bosc" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Pera Anjou (red Anjou), cruda — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
+
+- **food_id**: `food_pera_anjou_raw`. FDC ID 167777 (SR Legacy, "Pears, raw, red anjou" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Pyrus communis* distinta dalla pera generica del Golden Set e dalle pere Bartlett/Bosc già preparate. Nota: esiste anche un record Foundation distinto per "Pear, Anjou, green, with skin, raw" (FDC 2710836) — verificato e scartato per questa voce perché troppo lacunoso (mancano selenio, folato, B12, vitamina K, tutti i carotenoidi, oltre a un'incongruenza interna sull'energia 60 vs 57kcal); usata invece la variante red anjou SR Legacy, nettamente più completa.
+- **Nutrienti**: **16/17** — manca solo vitamina B12 (nessuna riga sulla pagina consultata, non assunta zero). Per 100g (valori presenti): energia 62,0kcal, proteine 0,33g, grassi 0,14g, carboidrati 14,9g, fibra 3,00g, calcio 11,0mg, ferro 0,19mg, rame 0,070mg, magnesio 7,00mg, zinco 0,13mg, selenio 0,10µg, vitamina C 5,20mg, folato totale 7,00µg, vitamina K 4,90µg, beta-carotene 14,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 1,00µg (reale e non nullo). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167777 e dataType SR Legacy.
+- **Analogia usata**: `food_pear_raw` (pera cruda, Golden Set originale, stessa specie *Pyrus communis*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `pera_anjou` ("Pera Anjou").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167777 --food-id=food_pera_anjou_raw \
+  --name-it="Pera Anjou, cruda" \
+  --matrix-id=pera_anjou --matrix-description-it="Pera Anjou" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167777 --food-id=food_pera_anjou_raw \
+  --name-it="Pera Anjou, cruda" \
+  --matrix-id=pera_anjou --matrix-description-it="Pera Anjou" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
 ### Kiwi gold (Zespri SunGold), crudo — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
 
 - **food_id**: `food_kiwi_gold_raw`. FDC ID 168211 (SR Legacy, "Kiwifruit, ZESPRI SunGold, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente nonostante il nome varietale commerciale; release FoodData Central 30-04-2026). Specie *Actinidia chinensis*, distinta dal kiwi verde del Golden Set (*Actinidia deliciosa*, `food_kiwi_green_raw`, FDC 168153, già eseguito).
