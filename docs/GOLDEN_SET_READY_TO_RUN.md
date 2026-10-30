@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, macinato, cotto (in padella) — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_pollo_macinato_cotto`. FDC ID 171117 (SR Legacy, "Chicken, ground, crumbles, cooked, pan-browned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo sopra). Stessa forma di consumo del crudo sopra.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 189kcal, proteine 23,3g, grassi 10,9g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 8,00mg, ferro 0,93mg, magnesio 28,0mg, zinco 1,92mg, rame 0,062mg, selenio 14,3µg, sodio 75,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,51µg, folato totale 2,00µg, vitamina K (fillochinone) 2,10µg, beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito).
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto, già eseguito sul DB reale — stessa forma di consumo "carne macinata cotta", stesso attributo `is_heme_iron`; stessa convenzione già usata per `food_tacchino_macinato_cotto`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `pollo_macinato_cotto` ("Pollo, macinato, cotto (in padella)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (il record FDC specifica "pan-browned"; "cooked" generico per restare nella stessa convenzione già usata per `food_tacchino_macinato_cotto`/`food_pancetta_cotta`), `is_fortified_folate` omesso (false — folato 2,00µg, valore tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171117 --food-id=food_pollo_macinato_cotto \
+  --name-it="Pollo, macinato, cotto (in padella)" \
+  --matrix-id=pollo_macinato_cotto --matrix-description-it="Pollo, macinato, cotto (in padella)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171117 --food-id=food_pollo_macinato_cotto \
+  --name-it="Pollo, macinato, cotto (in padella)" \
+  --matrix-id=pollo_macinato_cotto --matrix-description-it="Pollo, macinato, cotto (in padella)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, macinato, crudo — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_pollo_macinato_raw`. FDC ID 171116 (SR Legacy, "Chicken, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il pollo (macinato), sulla stessa scia del tacchino macinato già eseguito sul DB reale e del manzo macinato del Golden Set originale — nessuna delle due specie principali di pollame (pollo, qui; tacchino, già fatto) aveva ancora il macinato prima di questo lotto.
