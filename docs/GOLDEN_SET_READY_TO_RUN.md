@@ -16,6 +16,174 @@
 
 ## Pronti
 
+### Kiwi gold (Zespri SunGold), crudo — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_kiwi_gold_raw`. FDC ID 168211 (SR Legacy, "Kiwifruit, ZESPRI SunGold, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente nonostante il nome varietale commerciale; release FoodData Central 30-04-2026). Specie *Actinidia chinensis*, distinta dal kiwi verde del Golden Set (*Actinidia deliciosa*, `food_kiwi_green_raw`, FDC 168153, già eseguito).
+- **Nutrienti**: **16/17** — manca solo l'altro carotenoide provitaminico A (beta-criptoxantina non riportata sulla pagina consultata, non assunta zero; alfa-carotene 0µg esplicito, quindi `other_provitamin_a_carotenoids_mcg` non è calcolabile per intero). Per 100g (valori presenti): energia 63,0kcal, proteine 1,02g, grassi 0,28g, carboidrati 15,8g, fibra 1,40g, calcio 17,0mg, ferro 0,21mg, rame 0,15mg, magnesio 12,0mg, zinco 0,080mg, selenio 0,40µg, vitamina C 161mg, folato totale 31,0µg, vitamina B12 0,080µg (reale e non nullo), vitamina K 6,10µg, beta-carotene 14,0µg (reale e non nullo), alfa-carotene 0µg (esplicito). Sodio 3,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168211 e dataType SR Legacy.
+- **Analogia usata**: `food_kiwi_green_raw` (kiwi verde, Golden Set originale, stessa famiglia Actinidiaceae, specie diversa ma stesso genere *Actinidia*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `kiwi_gold` ("Kiwi gold (Zespri SunGold)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e vitamina B12 reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Actinidiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168211 --food-id=food_kiwi_gold_raw \
+  --name-it="Kiwi gold (Zespri SunGold), crudo" \
+  --matrix-id=kiwi_gold --matrix-description-it="Kiwi gold (Zespri SunGold)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168211 --food-id=food_kiwi_gold_raw \
+  --name-it="Kiwi gold (Zespri SunGold), crudo" \
+  --matrix-id=kiwi_gold --matrix-description-it="Kiwi gold (Zespri SunGold)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit --apply
+```
+
+### Arancia Valencia (California), cruda — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_arancia_valencia_raw`. FDC ID 169916 (SR Legacy, "Oranges, raw, California, valencias" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar di *Citrus sinensis* distinta dall'arancia generica del Golden Set (`food_oranges_raw`, già eseguita) e dall'arancia navel di questo stesso lotto.
+- **Nutrienti**: **13/17** — mancano selenio, beta-carotene e l'altro carotenoide provitaminico A (nessuno riportato sulla pagina consultata, non assunti zero). Per 100g (valori presenti): energia 49,0kcal, proteine 1,04g, grassi 0,30g, carboidrati 11,9g, fibra 2,50g, calcio 40,0mg, ferro 0,090mg, rame 0,037mg, magnesio 10,0mg, zinco 0,060mg, vitamina C 48,5mg, folato totale 39,0µg, vitamina B12 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169916 e dataType SR Legacy.
+- **Analogia usata**: `food_oranges_raw` (arancia cruda, Golden Set originale, stessa specie *Citrus sinensis*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `arancia_valencia` ("Arancia Valencia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (stato crudo, coerente con le altre voci di agrumi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169916 --food-id=food_arancia_valencia_raw \
+  --name-it="Arancia Valencia (California), cruda" \
+  --matrix-id=arancia_valencia --matrix-description-it="Arancia Valencia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169916 --food-id=food_arancia_valencia_raw \
+  --name-it="Arancia Valencia (California), cruda" \
+  --matrix-id=arancia_valencia --matrix-description-it="Arancia Valencia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit --apply
+```
+
+### Arancia navel, cruda — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_arancia_navel_raw`. FDC ID 169917 (SR Legacy, "Oranges, raw, navels (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar di *Citrus sinensis* distinta dall'arancia generica del Golden Set (`food_oranges_raw`, già eseguita).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 49,0kcal, proteine 0,91g, grassi 0,15g, carboidrati 12,5g, fibra 2,20g, calcio 43,0mg, ferro 0,13mg, rame 0,039mg, magnesio 11,0mg, zinco 0,080mg, selenio 0µg (esplicito), vitamina C 59,1mg, folato totale 34,0µg, vitamina B12 0µg (esplicito), vitamina K 0µg (esplicito, entrambe le forme), beta-carotene 87,0µg (reale e non nullo), alfa-carotene 7,00µg e beta-criptoxantina 116µg (entrambi reali e non nulli). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169917 e dataType SR Legacy.
+- **Analogia usata**: `food_oranges_raw` (arancia cruda, Golden Set originale, stessa specie *Citrus sinensis*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `arancia_navel` ("Arancia navel").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (carotenoidi reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169917 --food-id=food_arancia_navel_raw \
+  --name-it="Arancia navel, cruda" \
+  --matrix-id=arancia_navel --matrix-description-it="Arancia navel" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169917 --food-id=food_arancia_navel_raw \
+  --name-it="Arancia navel, cruda" \
+  --matrix-id=arancia_navel --matrix-description-it="Arancia navel" \
+  --baseline-cooking-state=raw --analogy-food-id=food_oranges_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit --apply
+```
+
+### Clementine, crude — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_clementine_raw`. FDC ID 168195 (SR Legacy, "Clementines, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Ibrido *Citrus clementina* mai tentato separatamente in questa pipeline: il mandarino generico (`food_mandarini_raw`, FDC 169105, già eseguito) viene usato dal 2026-10-14 anche per rappresentare le clementine, con nota di trasparenza scritta allora ("non verificato separatamente per clementine, varietà ibrida affine").
+- **Nutrienti**: **14/17** — mancano vitamina B12, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, nessuno riportato sulla pagina consultata, non assunti zero). Per 100g (valori presenti): energia 47,0kcal, proteine 0,85g, grassi 0,15g, carboidrati 12,0g, fibra 1,70g, calcio 30,0mg, ferro 0,14mg, rame 0,043mg, magnesio 10,0mg, zinco 0,060mg, selenio 0,10µg, vitamina C 48,8mg, folato totale 24,0µg, vitamina K 0µg (esplicito, entrambe le forme). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168195 e dataType SR Legacy.
+- **Analogia usata**: `food_mandarini_raw` (mandarino crudo, Golden Set esteso, stesso genere *Citrus*, parente diretto, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `clementine` ("Clementine").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (stato crudo, coerente con le altre voci di agrumi, anche se beta-carotene manca per questo record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168195 --food-id=food_clementine_raw \
+  --name-it="Clementine, crude" \
+  --matrix-id=clementine --matrix-description-it="Clementine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168195 --food-id=food_clementine_raw \
+  --name-it="Clementine, crude" \
+  --matrix-id=clementine --matrix-description-it="Clementine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mandarini_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit --apply
+```
+
+### Lattuga a foglia rossa (red leaf), cruda — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_lattuga_foglia_rossa_raw`. FDC ID 168431 (SR Legacy, "Lettuce, red leaf, raw" — confermato su getfoodfacts.com con colonna dedicata "per 100g", FDC ID e dataType SR Legacy citati esplicitamente). Cultivar di *Lactuca sativa* distinta dalla lattuga romana del Golden Set (`food_lettuce_romaine_raw`, già eseguita) e dalle altre due lattughe di questo stesso lotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 13,0kcal, proteine 1,33g, grassi 0,22g, carboidrati 2,26g, fibra 0,90g, calcio 33,0mg, ferro 1,20mg, rame 0,028mg, magnesio 12,0mg, zinco 0,20mg, selenio 1,50µg, vitamina C 3,70mg, folato totale 36,0µg, vitamina B12 0µg (esplicito), vitamina K 140µg (fillochinone; diidrofillochinone 0µg), beta-carotene 4495µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi espliciti). Sodio 25,0mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168431 e dataType SR Legacy, colonna "per 100g" dedicata (non derivata da una porzione diversa).
+- **Analogia usata**: `food_lettuce_romaine_raw` (lattuga romana, Golden Set esteso, stessa specie *Lactuca sativa*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `lattuga_foglia_rossa` ("Lattuga a foglia rossa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168431 --food-id=food_lattuga_foglia_rossa_raw \
+  --name-it="Lattuga a foglia rossa (red leaf), cruda" \
+  --matrix-id=lattuga_foglia_rossa --matrix-description-it="Lattuga a foglia rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168431 --food-id=food_lattuga_foglia_rossa_raw \
+  --name-it="Lattuga a foglia rossa (red leaf), cruda" \
+  --matrix-id=lattuga_foglia_rossa --matrix-description-it="Lattuga a foglia rossa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Lattuga a foglia verde (green leaf), cruda — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_lattuga_foglia_verde_raw`. FDC ID 169249 (SR Legacy, "Lettuce, green leaf, raw" — valori per 100g riconfermati sulla pagina calcolatrice dedicata myfooddata.com/recipe-nutrition-calculator con porzione impostata esplicitamente a 100g, non derivati da una porzione minore; dataType SR Legacy coerente con l'intervallo di FDC ID 169xxx e con la pagina originale NDB legacy). Cultivar di *Lactuca sativa* distinta dalla lattuga romana del Golden Set e dalle altre due lattughe di questo stesso lotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 15kcal, proteine 1,4g, grassi 0,15g, carboidrati 2,9g, fibra 1,3g, calcio 36mg, ferro 0,86mg, rame 0,03mg, magnesio 13mg, zinco 0,18mg, selenio 0,6µg, vitamina C 9,2mg, folato totale 38µg, vitamina B12 0µg (esplicito, non un trattino "dati mancanti"), vitamina K 126,3µg, beta-carotene 4443µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi espliciti, non trattini). Fonte: myfooddata.com, pagina calcolatrice con porzione 100g esplicita.
+- **Analogia usata**: `food_lettuce_romaine_raw` (lattuga romana, Golden Set esteso, stessa specie *Lactuca sativa*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `lattuga_foglia_verde` ("Lattuga a foglia verde").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169249 --food-id=food_lattuga_foglia_verde_raw \
+  --name-it="Lattuga a foglia verde (green leaf), cruda" \
+  --matrix-id=lattuga_foglia_verde --matrix-description-it="Lattuga a foglia verde" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169249 --food-id=food_lattuga_foglia_verde_raw \
+  --name-it="Lattuga a foglia verde (green leaf), cruda" \
+  --matrix-id=lattuga_foglia_verde --matrix-description-it="Lattuga a foglia verde" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Lattuga burro (butterhead, incluse boston e bibb), cruda — preparato 2026-10-30 dal task (cinquantaquattresimo lotto)
+
+- **food_id**: `food_lattuga_burro_raw`. FDC ID 168429 (SR Legacy, "Lettuce, butterhead (includes boston and bibb types), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar di *Lactuca sativa* distinta dalla lattuga romana del Golden Set e dalle altre due lattughe di questo stesso lotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 13,0kcal, proteine 1,35g, grassi 0,22g, carboidrati 2,23g, fibra 1,10g, calcio 35,0mg, ferro 1,24mg, rame 0,016mg, magnesio 13,0mg, zinco 0,20mg, selenio 0,60µg, vitamina C 3,70mg, folato totale 73,0µg, vitamina B12 0µg (esplicito), vitamina K 102µg (fillochinone; diidrofillochinone 0µg), beta-carotene 1987µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi espliciti). Sodio 5,00mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168429 e dataType SR Legacy.
+- **Analogia usata**: `food_lettuce_romaine_raw` (lattuga romana, Golden Set esteso, stessa specie *Lactuca sativa*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `lattuga_burro` ("Lattuga burro (butterhead)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168429 --food-id=food_lattuga_burro_raw \
+  --name-it="Lattuga burro (butterhead), cruda" \
+  --matrix-id=lattuga_burro --matrix-description-it="Lattuga burro (butterhead)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168429 --food-id=food_lattuga_burro_raw \
+  --name-it="Lattuga burro (butterhead), cruda" \
+  --matrix-id=lattuga_burro --matrix-description-it="Lattuga burro (butterhead)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lettuce_romaine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pera Bartlett, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
 
 - **food_id**: `food_pera_bartlett_raw`. FDC ID 167776 (SR Legacy, "Pears, raw, bartlett (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Cultivar di *Pyrus communis* distinta dalla pera generica del Golden Set originale (`food_pear_raw`, FDC 169118).
