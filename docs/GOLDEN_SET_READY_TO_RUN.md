@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, carne chiara, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_tacchino_carne_chiara_raw`. FDC ID 171490 (SR Legacy, "Turkey, whole, light meat, raw" — pagina getfoodfacts.com dedicata e pulita). **Nota di trasparenza sulla verifica del trim**: il nome del record non include letteralmente "meat only", ma esiste un record FDC distinto e separato per la variante "carne e pelle" della stessa specie/stato ("Turkey, whole, light meat, meat and skin, raw", FDC 171088) — confermato leggendo entrambe le pagine e confrontando i grassi totali: 1,48g/100g per questo record (171490) contro 7,43g/100g per il record esplicitamente "meat and skin" (171088), coerente con una composizione senza pelle. Composito "carne chiara" (petto, aggregato per anatomia USDA), distinto dal singolo petto già eseguito (`food_petto_di_tacchino_raw`) — qui è un composito leggermente diverso dal singolo taglio, ma la stessa categoria "carne chiara"/petto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 114kcal, proteine 23,7g, grassi 1,48g, carboidrati 0,14g, fibra 0g, calcio 11,0mg, ferro 0,73mg, magnesio 28,0mg, zinco 1,28mg, rame 0,070mg, selenio 22,7µg, sodio 113mg (nel range tipico della carne di tacchino cruda, confrontato con la variante "meat and skin" della stessa specie/stato, 105mg — valori comparabili, nessun segnale di iniezione aggiuntiva), vitamina C 0mg (esplicito), vitamina B12 0,63µg, folato totale 7,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Meleagris gallopavo*, stessa categoria "carne chiara"/petto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_carne_chiara` ("Tacchino, carne chiara, senza pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171490 --food-id=food_tacchino_carne_chiara_raw \
+  --name-it="Tacchino, carne chiara, senza pelle, cruda" \
+  --matrix-id=tacchino_carne_chiara --matrix-description-it="Tacchino, carne chiara, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171490 --food-id=food_tacchino_carne_chiara_raw \
+  --name-it="Tacchino, carne chiara, senza pelle, cruda" \
+  --matrix-id=tacchino_carne_chiara --matrix-description-it="Tacchino, carne chiara, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, carne scura, senza pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_tacchino_carne_scura_cotta`. FDC ID 171091 (SR Legacy, "Turkey, whole, dark meat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita). **Nota di trasparenza sulla verifica del trim**: il nome del record non include letteralmente "meat only" (a differenza del crudo FDC 171090 sopra), ma esiste un record FDC distinto e separato per la variante "carne e pelle" della stessa specie/stato ("Turkey, whole, dark meat, meat and skin, cooked, roasted", FDC 171489) — confermato leggendo entrambe le pagine e confrontando i grassi totali: 6,04g/100g per questo record (171091) contro 9,95g/100g per il record esplicitamente "meat and skin" (171489), coerente con una composizione senza pelle. Composito "carne scura" distinto dal singolo taglio petto già eseguito.
