@@ -16,6 +16,246 @@
 
 ## Pronti
 
+### Agnello, petto (breast), cotto (brasato) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_agnello_petto_cotto`. FDC ID 172610 (SR Legacy, "Lamb, New Zealand, imported, breast, separable lean only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, trovata solo con una ricerca mirata di secondo livello dopo che la prima ricerca per parole chiave aveva trovato solo il crudo; release USDA 2026-04-30). Taglio mai tentato in questa pipeline, stesso trim "separable lean only" del crudo sotto in questa stessa voce di coda.
+- **Nutrienti**: **15/17**. Per 100g: energia 270kcal, proteine 28,2g, grassi 17,5g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 25,0mg, ferro 1,89mg, magnesio 20,0mg, zinco 4,80mg, rame 0,14mg, selenio 6,40µg, sodio 86,0mg, vitamina C 0mg, vitamina B12 1,44µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. **Mancano** (non riportati in pagina, non assunti zero): folato totale, vitamina K — stesso identico gap del crudo sotto.
+- **Analogia usata**: `food_agnello_cotto` (agnello cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_petto_cotto` ("Agnello, petto (breast), cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_agnello_cotto`), `matrix_category_calcium` omesso (NULL — prodotto animale), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato semplicemente non riportato in pagina).
+
+```
+npm run add-food -- --fdc-id=172610 --food-id=food_agnello_petto_cotto \
+  --name-it="Agnello, petto (breast), cotto (brasato)" \
+  --matrix-id=agnello_petto_cotto --matrix-description-it="Agnello, petto (breast), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172610 --food-id=food_agnello_petto_cotto \
+  --name-it="Agnello, petto (breast), cotto (brasato)" \
+  --matrix-id=agnello_petto_cotto --matrix-description-it="Agnello, petto (breast), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Agnello, petto (breast), crudo — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_agnello_petto_raw`. FDC ID 172611 (SR Legacy, "Lamb, New Zealand, imported, breast, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline.
+- **Nutrienti**: **15/17**. Per 100g: energia 149kcal, proteine 18,3g, grassi 7,98g, carboidrati 1,02g, fibra 0g (esplicito), calcio 13,0mg, ferro 1,15mg, magnesio 21,0mg, zinco 2,93mg, rame 0,089mg, selenio 4,00µg, sodio 107mg, vitamina C 0mg, vitamina B12 1,96µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. **Mancano** (non riportati in pagina, non assunti zero): folato totale, vitamina K.
+- **Analogia usata**: `food_agnello_raw` (agnello crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_petto_raw` ("Agnello, petto (breast), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172611 --food-id=food_agnello_petto_raw \
+  --name-it="Agnello, petto (breast), crudo" \
+  --matrix-id=agnello_petto_raw --matrix-description-it="Agnello, petto (breast), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172611 --food-id=food_agnello_petto_raw \
+  --name-it="Agnello, petto (breast), crudo" \
+  --matrix-id=agnello_petto_raw --matrix-description-it="Agnello, petto (breast), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, fesa (leg, top round), cotta (arrosto) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_vitello_fesa_cotta`. FDC ID 173821 (SR Legacy, "Veal, leg (top round), separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "separable lean and fat" del crudo sotto — unico trim con pagine dedicate coerenti su entrambi gli stati per questo taglio.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 160kcal, proteine 27,7g, grassi 4,65g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 0,91mg, magnesio 28,0mg, zinco 3,04mg, rame 0,13mg, selenio 11,2µg, sodio 68,0mg, vitamina C 0mg, folato totale 16,0µg, vitamina B12 1,17µg, vitamina K 5,50µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito di tagli, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked/roasted).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_fesa_cotta` ("Vitello, fesa (leg, top round), cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 16,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173821 --food-id=food_vitello_fesa_cotta \
+  --name-it="Vitello, fesa (leg, top round), cotta (arrosto)" \
+  --matrix-id=vitello_fesa_cotta --matrix-description-it="Vitello, fesa (leg, top round), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173821 --food-id=food_vitello_fesa_cotta \
+  --name-it="Vitello, fesa (leg, top round), cotta (arrosto)" \
+  --matrix-id=vitello_fesa_cotta --matrix-description-it="Vitello, fesa (leg, top round), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, fesa (leg, top round), cruda — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_vitello_fesa_raw`. FDC ID 175268 (SR Legacy, "Veal, leg (top round), separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio mai tentato in questa pipeline nonostante il composito generico (`food_vitello_raw`) sia già eseguito da tempo; distinto anche dalla spalla (`food_vitello_spalla_raw`, solo "pronta", non ancora eseguita sul DB reale — non utilizzabile come riferimento "esiste già"). Trim "lean and fat", non "lean only" — unico trim con pagine getfoodfacts.com dedicate coerenti su crudo e cotto per questo taglio (la versione "lean only" ha pagina dedicata solo per il cotto).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 117kcal, proteine 21,0g, grassi 3,08g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 5,00mg, ferro 0,79mg, magnesio 26,0mg, zinco 2,30mg, rame 0,11mg, selenio 9,00µg, sodio 63,0mg, vitamina C 0mg, folato totale 14,0µg, vitamina B12 1,04µg, vitamina K 3,90µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito di tagli, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_fesa_raw` ("Vitello, fesa (leg, top round), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175268 --food-id=food_vitello_fesa_raw \
+  --name-it="Vitello, fesa (leg, top round), cruda" \
+  --matrix-id=vitello_fesa_raw --matrix-description-it="Vitello, fesa (leg, top round), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175268 --food-id=food_vitello_fesa_raw \
+  --name-it="Vitello, fesa (leg, top round), cruda" \
+  --matrix-id=vitello_fesa_raw --matrix-description-it="Vitello, fesa (leg, top round), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, spalla (chuck, arm pot roast), cotta (brasata) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_spalla_cotta`. FDC ID 168667 (SR Legacy, "Beef, chuck, arm pot roast, separable lean and fat, trimmed to 1/8\" fat, all grades, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "lean and fat" e stesso grade "all grades" del crudo sotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 302kcal, proteine 30,1g, grassi 19,2g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 17,0mg, ferro 2,53mg, magnesio 20,0mg, zinco 6,98mg, rame 0,10mg, selenio 28,3µg, sodio 50,0mg, vitamina C 0mg, folato totale 9,00µg, vitamina B12 2,22µg, vitamina K 1,90µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_spalla_cotta` ("Manzo, spalla (chuck, arm pot roast), cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168667 --food-id=food_manzo_spalla_cotta \
+  --name-it="Manzo, spalla (chuck, arm pot roast), cotta (brasata)" \
+  --matrix-id=manzo_spalla_cotta --matrix-description-it="Manzo, spalla (chuck, arm pot roast), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168667 --food-id=food_manzo_spalla_cotta \
+  --name-it="Manzo, spalla (chuck, arm pot roast), cotta (brasata)" \
+  --matrix-id=manzo_spalla_cotta --matrix-description-it="Manzo, spalla (chuck, arm pot roast), cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, spalla (chuck, arm pot roast), cruda — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_spalla_raw`. FDC ID 169491 (SR Legacy, "Beef, chuck, arm pot roast, separable lean and fat, trimmed to 1/8\" fat, all grades, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Sotto-taglio del chuck distinto dal "taglio reale/clod roast" già eseguito (`food_manzo_reale_raw`/`cotta`) — sotto-primale diverso, tracciato da USDA con un proprio FDC ID. Trim "lean and fat", non "lean only" — unico con pagine getfoodfacts.com dedicate coerenti su crudo e cotto allo stesso grade "all grades" per questo sotto-taglio (stesso pattern già visto per la fesa di manzo nel lotto 62).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 244kcal, proteine 19,2g, grassi 18,0g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 17,0mg, ferro 1,67mg, magnesio 19,0mg, zinco 4,54mg, rame 0,081mg, selenio 20,3µg, sodio 62,0mg, vitamina C 0mg, folato totale 10,0µg, vitamina B12 1,65µg, vitamina K 1,60µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_spalla_raw` ("Manzo, spalla (chuck, arm pot roast), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169491 --food-id=food_manzo_spalla_raw \
+  --name-it="Manzo, spalla (chuck, arm pot roast), cruda" \
+  --matrix-id=manzo_spalla_raw --matrix-description-it="Manzo, spalla (chuck, arm pot roast), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169491 --food-id=food_manzo_spalla_raw \
+  --name-it="Manzo, spalla (chuck, arm pot roast), cruda" \
+  --matrix-id=manzo_spalla_raw --matrix-description-it="Manzo, spalla (chuck, arm pot roast), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, diaframma (outside skirt steak), cotto (alla griglia) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_diaframma_cotta`. FDC ID 173379 (SR Legacy, "Beef, plate steak, boneless, outside skirt, separable lean only, trimmed to 0\" fat, select, cooked, grilled" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "lean only" e stesso grade "select" del crudo sotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 268kcal, proteine 28,6g, grassi 17,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 8,00mg, ferro 5,46mg, magnesio 26,0mg, zinco 7,38mg, rame 0,22mg, selenio 36,0µg, sodio 70,0mg, vitamina C 0mg, folato totale 7,00µg, vitamina B12 7,53µg, vitamina K 1,60µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_diaframma_cotta` ("Manzo, diaframma (outside skirt steak), cotto (alla griglia)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=grilled`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173379 --food-id=food_manzo_diaframma_cotta \
+  --name-it="Manzo, diaframma (outside skirt steak), cotto (alla griglia)" \
+  --matrix-id=manzo_diaframma_cotta --matrix-description-it="Manzo, diaframma (outside skirt steak), cotto (alla griglia)" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173379 --food-id=food_manzo_diaframma_cotta \
+  --name-it="Manzo, diaframma (outside skirt steak), cotto (alla griglia)" \
+  --matrix-id=manzo_diaframma_cotta --matrix-description-it="Manzo, diaframma (outside skirt steak), cotto (alla griglia)" \
+  --baseline-cooking-state=grilled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, diaframma (outside skirt steak), crudo — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_diaframma_raw`. FDC ID 172141 (SR Legacy, "Beef, plate steak, boneless, outside skirt, separable lean only, trimmed to 0\" fat, select, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio ("diaframma"/skirt steak) mai tentato in questa pipeline.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 198kcal, proteine 19,1g, grassi 13,4g, carboidrati 0,23g, fibra 0g (esplicito), calcio 6,00mg, ferro 3,80mg, magnesio 21,0mg, zinco 5,36mg, rame 0,17mg, selenio 24,0µg, sodio 65,0mg, vitamina C 0mg, folato totale 3,00µg, vitamina B12 5,16µg, vitamina K 1,50µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_diaframma_raw` ("Manzo, diaframma (outside skirt steak), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172141 --food-id=food_manzo_diaframma_raw \
+  --name-it="Manzo, diaframma (outside skirt steak), crudo" \
+  --matrix-id=manzo_diaframma_raw --matrix-description-it="Manzo, diaframma (outside skirt steak), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172141 --food-id=food_manzo_diaframma_raw \
+  --name-it="Manzo, diaframma (outside skirt steak), crudo" \
+  --matrix-id=manzo_diaframma_raw --matrix-description-it="Manzo, diaframma (outside skirt steak), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, filetto (tenderloin), cotto (alla griglia) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_filetto_cotto`. FDC ID 173117 (SR Legacy, "Beef, tenderloin, steak, separable lean only, trimmed to 1/8\" fat, choice, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim "lean only" e stesso grade "choice" del crudo sotto.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 206kcal, proteine 29,0g, grassi 9,10g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,95mg, magnesio 24,0mg, zinco 5,40mg, rame 0,091mg, selenio 33,0µg, sodio 59,0mg, vitamina C 0mg, folato totale 10,0µg, vitamina B12 1,81µg, vitamina K 1,50µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_filetto_cotto` ("Manzo, filetto (tenderloin), cotto (alla griglia)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=broiled`, `is_fortified_folate` omesso (false — folato 10,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173117 --food-id=food_manzo_filetto_cotto \
+  --name-it="Manzo, filetto (tenderloin), cotto (alla griglia)" \
+  --matrix-id=manzo_filetto_cotto --matrix-description-it="Manzo, filetto (tenderloin), cotto (alla griglia)" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173117 --food-id=food_manzo_filetto_cotto \
+  --name-it="Manzo, filetto (tenderloin), cotto (alla griglia)" \
+  --matrix-id=manzo_filetto_cotto --matrix-description-it="Manzo, filetto (tenderloin), cotto (alla griglia)" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, filetto (tenderloin), crudo — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
+
+- **food_id**: `food_manzo_filetto_raw`. FDC ID 174762 (SR Legacy, "Beef, tenderloin, steak, separable lean only, trimmed to 1/8\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Taglio "premium" (filetto) mai tentato in questa pipeline nonostante l'estesa copertura di altri tagli di manzo.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 158kcal, proteine 22,2g, grassi 7,07g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 28,0mg, ferro 1,63mg, magnesio 23,0mg, zinco 4,13mg, rame 0,072mg, selenio 25,4µg, sodio 57,0mg, vitamina C 0mg, folato totale 13,0µg, vitamina B12 1,20µg, vitamina K 1,30µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_filetto_raw` ("Manzo, filetto (tenderloin), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi comunque tutti espliciti a 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174762 --food-id=food_manzo_filetto_raw \
+  --name-it="Manzo, filetto (tenderloin), crudo" \
+  --matrix-id=manzo_filetto_raw --matrix-description-it="Manzo, filetto (tenderloin), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174762 --food-id=food_manzo_filetto_raw \
+  --name-it="Manzo, filetto (tenderloin), crudo" \
+  --matrix-id=manzo_filetto_raw --matrix-description-it="Manzo, filetto (tenderloin), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, carré (centro costola), disossato, cotto (arrosto) — preparato 2026-10-30 dal task (sessantatreesimo lotto)
 
 - **food_id**: `food_maiale_carre_cotto`. FDC ID 167894 (SR Legacy, "Pork, fresh, loin, center rib (roasts), boneless, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Versione cotta del carré/centro costola, il cui crudo è pronto sotto in questa stessa voce di coda. Taglio distinto dalla lonza generica (`food_lonza_di_maiale_raw`/`cotta`) e dalla lonza posteriore/sirloin (voce sotto), mai tentato in questa pipeline.
