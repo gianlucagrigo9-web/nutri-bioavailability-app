@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Cappone, carne e pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_cappone_cotto`. FDC ID 173646 (SR Legacy, "Chicken, capons, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, SOLO carne e pelle senza frattaglie). **Candidato bonus**, trovato durante la ricerca del crudo: il crudo NON ha una pagina a fonte singola per il solo "meat and skin" (solo il composito con frattaglie/collo, FDC 172406, ha pagina dedicata — vedi ⚠ nella coda), quindi questa voce resta senza una corrispondente cruda verificabile in questo run. Cappone (gallo castrato, piatto tradizionale natalizio italiano) mai cercato in sessantasei lotti precedenti.
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — nessuna riga per questi nutrienti nella pagina, non assunti zero). Per 100g: energia 229kcal, proteine 29,0g, grassi 11,7g, carboidrati 0g, fibra 0g, calcio 14,0mg, ferro 1,49mg, magnesio 24,0mg, zinco 1,74mg, rame 0,069mg, selenio 21,6µg, sodio 49,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 0,33µg, folato totale 6,00µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria funzionale "carne di pollame").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `cappone` ("Cappone, carne e pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "roasted"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173646 --food-id=food_cappone_cotto \
+  --name-it="Cappone, carne e pelle, cotto (arrosto)" \
+  --matrix-id=cappone --matrix-description-it="Cappone, carne e pelle" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173646 --food-id=food_cappone_cotto \
+  --name-it="Cappone, carne e pelle, cotto (arrosto)" \
+  --matrix-id=cappone --matrix-description-it="Cappone, carne e pelle" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino (intero), carne e pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_tacchino_intero_con_pelle_cotto`. FDC ID 171479 (SR Legacy, "Turkey, whole, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra).
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 0µg esplicito). Per 100g: energia 189kcal, proteine 28,6g, grassi 7,39g, carboidrati 0,060g, fibra 0g, calcio 14,0mg, ferro 1,09mg, magnesio 30,0mg, zinco 2,48mg, rame 0,093mg, selenio 29,8µg, sodio 103mg (sotto la soglia ~300mg di enhancement, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 1,02µg, folato totale 9,00µg, vitamina K 0µg.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_intero_con_pelle_cotto` ("Tacchino intero, carne e pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "roasted"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171479 --food-id=food_tacchino_intero_con_pelle_cotto \
+  --name-it="Tacchino (intero), carne e pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_intero_con_pelle_cotto --matrix-description-it="Tacchino intero, carne e pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171479 --food-id=food_tacchino_intero_con_pelle_cotto \
+  --name-it="Tacchino (intero), carne e pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_intero_con_pelle_cotto --matrix-description-it="Tacchino intero, carne e pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino (intero), carne e pelle, crudo — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_tacchino_intero_con_pelle_raw`. FDC ID 171081 (SR Legacy, "Turkey, whole, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Tacchino INTERO con pelle, distinto dal `food_petto_di_tacchino_raw` già eseguito (solo petto, senza pelle) — stesso filone "meat and skin vs meat only" di questo lotto.
