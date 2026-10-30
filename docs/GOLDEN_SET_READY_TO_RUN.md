@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino (intero), carne e pelle, crudo — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_tacchino_intero_con_pelle_raw`. FDC ID 171081 (SR Legacy, "Turkey, whole, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Tacchino INTERO con pelle, distinto dal `food_petto_di_tacchino_raw` già eseguito (solo petto, senza pelle) — stesso filone "meat and skin vs meat only" di questo lotto.
+- **Nutrienti**: **17/17** (record completo, inclusi beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti e vitamina K 0µg esplicito). Per 100g: energia 144kcal, proteine 21,6g, grassi 5,64g, carboidrati 0,14g, fibra 0g, calcio 11,0mg, ferro 0,86mg, magnesio 25,0mg, zinco 1,78mg, rame 0,077mg, selenio 21,3µg, sodio 112mg (sotto la soglia ~300mg di enhancement, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 1,22µg, folato totale 7,00µg, vitamina K 0µg.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie, stessa categoria USDA "Turkey").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_intero_con_pelle` ("Tacchino intero, carne e pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171081 --food-id=food_tacchino_intero_con_pelle_raw \
+  --name-it="Tacchino (intero), carne e pelle, crudo" \
+  --matrix-id=tacchino_intero_con_pelle --matrix-description-it="Tacchino intero, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171081 --food-id=food_tacchino_intero_con_pelle_raw \
+  --name-it="Tacchino (intero), carne e pelle, crudo" \
+  --matrix-id=tacchino_intero_con_pelle --matrix-description-it="Tacchino intero, carne e pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo (intero), carne e pelle, crudo — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_pollo_intero_con_pelle_raw`. FDC ID 171447 (SR Legacy, "Chicken, broilers or fryers, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). Pollo INTERO con pelle, distinto dal `food_petto_di_pollo_raw` già eseguito (solo petto, senza pelle, senza osso) — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo in questo stesso lotto per anatra/oca/gallina.
