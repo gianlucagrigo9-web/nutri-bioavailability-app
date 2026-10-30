@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uovo, intero, fritto — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
+
+- **food_id**: `food_uovo_fritto_raw`. FDC ID 173423 (SR Legacy, "Egg, whole, cooked, fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di cottura mai tentata in questa pipeline: solo uovo crudo (`food_egg_raw`) e sodo (`food_egg_hard_boiled`) sono nel Golden Set originale, nessuna forma fritta.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 196kcal, proteine 13,6g, grassi 14,8g, carboidrati 0,83g, fibra 0g (esplicito), calcio 62,0mg, ferro 1,89mg, magnesio 13,0mg, zinco 1,39mg, selenio 33,1µg, sodio 207mg (più alto del crudo, coerente con l'aggiunta di grasso/sale in cottura), vitamina C 0mg (esplicito), folato totale 51,0µg, vitamina B12 0,97µg, vitamina K 5,70µg (somma delle due forme riportate separatamente, fillochinone 5,60 + diidrofillochinone 0,10), vitamina A (RAE) 219µg, beta-carotene 35,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 10,0µg (reale e non nullo). Energia/grassi/sodio più alti del crudo o del sodo sono coerenti con la frittura (grasso di cottura assorbito), non un'anomalia del dato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173423 e dataType SR Legacy.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo intero cotto, Golden Set originale, già eseguito sul DB reale — stesso alimento di base, differisce solo per metodo di cottura).
+- **Categoria dieta**: `egg_dairy` (uovo, nessun altro ingrediente animale).
+- **Matrice**: nuova `uovo_fritto` ("Uovo, intero, fritto").
+- **Attributi**: `is_heme_iron` omesso (false — ferro dell'uovo non-eme, stessa convenzione già usata per le altre forme di uovo in questa pipeline), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e beta-criptoxantina reali e non nulli, stato cotto/fritto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non un vegetale), `baseline_cooking_state=fried`, `is_fortified_folate` omesso (false — folato coerente con un uovo, nessuna firma di arricchimento tipo cereali).
+
+```
+npm run add-food -- --fdc-id=173423 --food-id=food_uovo_fritto_raw \
+  --name-it="Uovo, intero, fritto" \
+  --matrix-id=uovo_fritto --matrix-description-it="Uovo, intero, fritto" \
+  --baseline-cooking-state=fried --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173423 --food-id=food_uovo_fritto_raw \
+  --name-it="Uovo, intero, fritto" \
+  --matrix-id=uovo_fritto --matrix-description-it="Uovo, intero, fritto" \
+  --baseline-cooking-state=fried --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy --apply
+```
+
 ### Cavolfiore verde, cotto (bollito, senza sale) — preparato 2026-10-30 dal task (cinquantaseiesimo lotto, bonus)
 
 - **food_id**: `food_cavolfiore_verde_cotto`. FDC ID 169390 (SR Legacy, "Cauliflower, green, cooked, no salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente; la pagina stessa dichiara "uno dei 3 USDA descriptions of green cauliflower" insieme al crudo e alla variante con sale). Trovato durante la stessa ricerca del cavolfiore verde crudo in questo lotto (bonus, non conteggiato nel tetto di 12 valutati).
