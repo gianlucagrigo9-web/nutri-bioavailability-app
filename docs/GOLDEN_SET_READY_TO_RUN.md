@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, macinato, cotto — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_maiale_macinato_cotto`. FDC ID 167903 (SR Legacy, "Pork, fresh, ground, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo sopra). Stessa forma di consumo del crudo sopra.
+- **Nutrienti**: **17/17** — record completo (a differenza del crudo sopra, qui vitamina K e carotenoidi sono tutti espliciti). Per 100g: energia 297kcal, proteine 25,7g, grassi 20,8g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 22,0mg, ferro 1,29mg, magnesio 24,0mg, zinco 3,21mg, rame 0,044mg, selenio 35,4µg, sodio 73,0mg (basso, nessun segnale di salamoia), vitamina C 0,70mg, vitamina B12 0,54µg, folato totale 6,00µg, vitamina K (fillochinone e diidrofillochinone) 0µg espliciti, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto, già eseguito sul DB reale — stessa forma di consumo "carne macinata cotta", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_macinato_cotto` ("Maiale, macinato, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (il record FDC non specifica il metodo), `is_fortified_folate` omesso (false — folato 6,00µg, valore tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167903 --food-id=food_maiale_macinato_cotto \
+  --name-it="Maiale, macinato, cotto" \
+  --matrix-id=maiale_macinato_cotto --matrix-description-it="Maiale, macinato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167903 --food-id=food_maiale_macinato_cotto \
+  --name-it="Maiale, macinato, cotto" \
+  --matrix-id=maiale_macinato_cotto --matrix-description-it="Maiale, macinato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, macinato, crudo — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_maiale_macinato_raw`. FDC ID 167902 (SR Legacy, "Pork, fresh, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il maiale (macinato), stesso filone del pollo macinato sopra e del tacchino macinato già eseguito. Scelta la voce generica "fresh, ground" invece delle varianti con percentuale di magro dichiarata (es. "84% lean/16% fat") trovate nella stessa ricerca, per restare sulla voce più comune/generica, stessa logica già usata per il tacchino macinato.
