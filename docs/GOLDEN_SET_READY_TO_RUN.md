@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, fuso (drumstick), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_tacchino_fuso_con_pelle_cotto`. FDC ID 171135 (SR Legacy, "Turkey, retail parts, drumstick, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio distinto dal fuso "meat only" già preparato (`food_tacchino_fuso_raw`, solo "pronto") — variante "con pelle" mai tentata in questa pipeline per il fuso di tacchino. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo con lo stesso trim "retail parts, drumstick, meat and skin, raw" (solo recipal.com/triagemethod.com/calforlife.com/caloriefriend.com, mai un FDC ID citato su fonte getfoodfacts) — qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 197kcal, proteine 28,2g, grassi 9,37g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,58mg, magnesio 24,0mg, zinco 4,22mg, rame 0,11mg, selenio 29,9µg, sodio 112mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 2,46µg, folato totale 9,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie *Meleagris gallopavo*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_fuso_con_pelle_cotto` ("Tacchino, fuso (drumstick), con pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171135 --food-id=food_tacchino_fuso_con_pelle_cotto \
+  --name-it="Tacchino, fuso (drumstick), con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_fuso_con_pelle_cotto --matrix-description-it="Tacchino, fuso (drumstick), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171135 --food-id=food_tacchino_fuso_con_pelle_cotto \
+  --name-it="Tacchino, fuso (drumstick), con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_fuso_con_pelle_cotto --matrix-description-it="Tacchino, fuso (drumstick), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, carne chiara, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_tacchino_carne_chiara_raw`. FDC ID 171490 (SR Legacy, "Turkey, whole, light meat, raw" — pagina getfoodfacts.com dedicata e pulita). **Nota di trasparenza sulla verifica del trim**: il nome del record non include letteralmente "meat only", ma esiste un record FDC distinto e separato per la variante "carne e pelle" della stessa specie/stato ("Turkey, whole, light meat, meat and skin, raw", FDC 171088) — confermato leggendo entrambe le pagine e confrontando i grassi totali: 1,48g/100g per questo record (171490) contro 7,43g/100g per il record esplicitamente "meat and skin" (171088), coerente con una composizione senza pelle. Composito "carne chiara" (petto, aggregato per anatomia USDA), distinto dal singolo petto già eseguito (`food_petto_di_tacchino_raw`) — qui è un composito leggermente diverso dal singolo taglio, ma la stessa categoria "carne chiara"/petto.
