@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, dorso (back), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_tacchino_dorso_con_pelle_cotto`. FDC ID 171092 (SR Legacy, "Turkey, all classes, back, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stessa parte "dorso" mai tentata del pollo sopra, qui per il tacchino. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "all classes, back, meat and skin, raw" dello stesso trim (solo recipal.com/bodbot.com/uhhospitals.org, nessun FDC ID su fonte getfoodfacts). Qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 244kcal, proteine 26,6g, grassi 14,4g, carboidrati 0,16g (reale, non nullo — valore "by difference" del record USDA), fibra 0g (esplicito), calcio 33,0mg, ferro 2,19mg, magnesio 22,0mg, zinco 3,92mg, rame 0,14mg, selenio 37,8µg, sodio 73,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 0,34µg, folato totale 8,00µg, vitamina K 4,50µg (reale, non nulla), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie *Meleagris gallopavo*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_dorso_con_pelle_cotto` ("Tacchino, dorso (back), con pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — folato 8,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171092 --food-id=food_tacchino_dorso_con_pelle_cotto \
+  --name-it="Tacchino, dorso (back), con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_dorso_con_pelle_cotto --matrix-description-it="Tacchino, dorso (back), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171092 --food-id=food_tacchino_dorso_con_pelle_cotto \
+  --name-it="Tacchino, dorso (back), con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_dorso_con_pelle_cotto --matrix-description-it="Tacchino, dorso (back), con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, dorso (back), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_pollo_dorso_con_pelle_cotto`. FDC ID 171071 (SR Legacy, "Chicken, broilers or fryers, back, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso trim del crudo sopra (`food_pollo_dorso_con_pelle_raw`), coppia crudo/cotto completa su fonte primaria.
