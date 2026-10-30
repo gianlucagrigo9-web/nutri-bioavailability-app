@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Knockwurst (knackwurst, wurstel tedesco di maiale e manzo) — preparato 2026-10-30 dal task (cinquantottesimo lotto)
+
+- **food_id**: `food_knockwurst_cotto`. FDC ID 173867 (SR Legacy, "Knackwurst, knockwurst, pork, beef" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Sausages and Luncheon Meats", release USDA 2026-04-30). Primo salume/insaccato tedesco di questa pipeline (wurstel di manzo/pollo restano solo "Pronti" non eseguiti, quindi non utilizzabili come analogia — vedi sotto). **Nota sullo stato di cottura**: la descrizione FDC non riporta esplicitamente "raw"/"cooked", ma il knockwurst/knackwurst è per definizione un insaccato affumicato e precotto in fabbrica (categoria distinta dal bratwurst fresco crudo, che infatti non ha trovato un record FDC generico utilizzabile in questo stesso turno — vedi ⚠ sotto) — `baseline_cooking_state=cooked` dichiarato per questo motivo, non per un dato osservato sulla pagina.
+- **Nutrienti**: **17/17** — record completo (i 17 nutrient_code mappati da `lib/fdc/nutrientMapping.ts`, verificato il mapping esatto prima di scrivere questa voce: energy/protein/fat/carbohydrates/fiber/calcium/iron/magnesium/zinc/copper/selenium/vitamin_c/folate/vitamin_b12/vitamin_k(solo fillochinone, FDC #430)/beta_carotene/other_provitamin_a_carotenoids(alfa-carotene+beta-criptoxantina)). Per 100g: energia 307kcal, proteine 11,1g, grassi 27,7g, carboidrati 3,20g, fibra 0g, calcio 11,0mg, ferro 0,66mg, magnesio 11,0mg, zinco 1,66mg, rame 0,060mg, selenio 13,5µg, sodio 930mg (non mappato dal motore, solo per contesto), vitamina C 0mg (esplicito), folato totale 2,00µg, vitamina B12 1,18µg, vitamina K (fillochinone) 1,60µg, beta-carotene 0µg (esplicito), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173867 e dataType SR Legacy.
+- **Analogia usata**: `food_prosciutto_cotto` (FDC 167872, prosciutto di maiale cotto/arrostito, già eseguito sul DB reale — stessa categoria "salume di maiale cotto/affumicato pronto al consumo", stesso `is_heme_iron=true`). Non usata l'analogia wurstel di manzo/pollo perché quelle voci sono solo "Pronti", non ancora eseguite sul DB reale (regola del punto 2c del COMPITO: l'analogia deve riferirsi a un alimento che esiste davvero nel DB).
+- **Categoria dieta**: `meat_fish` (carne di maiale e manzo, nessun dubbio).
+- **Matrice**: nuova `knockwurst` ("Knockwurst (wurstel di maiale e manzo)").
+- **Attributi**: `is_heme_iron=true` (carne), `matrix_category_calcium` omesso (NULL, stessa convenzione dei salumi già eseguiti), `carotenoid_matrix_state` omesso (NULL, beta-carotene e carotenoidi tutti espliciti a zero, nessun pigmento vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (prodotto animale), `baseline_cooking_state=cooked` (vedi nota sopra), `is_fortified_folate` omesso (false — folato 2µg coerente con un insaccato di carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173867 --food-id=food_knockwurst_cotto \
+  --name-it="Knockwurst (wurstel di maiale e manzo), cotto/affumicato" \
+  --matrix-id=knockwurst --matrix-description-it="Knockwurst (wurstel di maiale e manzo)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173867 --food-id=food_knockwurst_cotto \
+  --name-it="Knockwurst (wurstel di maiale e manzo), cotto/affumicato" \
+  --matrix-id=knockwurst --matrix-description-it="Knockwurst (wurstel di maiale e manzo)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rucola (foglia matura, non baby), cruda — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
 
 - **food_id**: `food_rucola_matura_raw`. FDC ID 169387 (SR Legacy, "Arugula, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione**: l'unica rucola già eseguita sul DB reale, `food_rucola_raw`, è un record DIVERSO — FDC 2710822 "Arugula, baby, raw", dataType **Foundation Foods** (non SR Legacy), solo 11/17 nutrienti e senza nemmeno l'energia. Verificato esplicitamente fetchando la pagina della foglia baby: è un secondo record USDA distinto ("uno dei 2 USDA descriptions of arugula"), senza energia nella tabella dettagliata e con dataType diverso — non la stessa foglia a uno stadio diverso rappresentata dallo stesso ID, un prodotto commerciale realmente distinto (foglia baby vs foglia matura standard), stesso tipo di distinzione già accettata in questa pipeline per spinaci/kale baby vs standard quando entrambi i record esistono separatamente in FDC. Questo record (foglia matura/standard, SR Legacy, 17/17) è un miglioramento di qualità netto rispetto a quello già in DB, non solo un'aggiunta.
