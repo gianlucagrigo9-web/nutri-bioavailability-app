@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Tacchino macinato, cotto — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_tacchino_macinato_cotto`. FDC ID 171506 (SR Legacy, "Turkey, Ground, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il tacchino (macinato), sulla stessa scia del manzo macinato già presente nel Golden Set originale. Record generico (non specifica % magro, a differenza di altre varianti "93% lean/7% fat" trovate nella stessa ricerca ma scartate per restare sulla voce più generica/comune).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 203kcal, proteine 27,4g, grassi 10,4g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 28,0mg, ferro 1,52mg, magnesio 30,0mg, zinco 3,11mg, rame 0,15mg, selenio 31,1µg, sodio 78,0mg (basso, coerente con carne macinata cotta non lavorata), vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 1,34µg, vitamina K (fillochinone) 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171506 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto, già eseguito sul DB reale — stessa forma di consumo "carne macinata cotta", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `tacchino_macinato_cotto` ("Tacchino macinato, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (il record FDC non specifica il metodo — "cooked" generico, stessa convenzione già usata per `food_manzo_in_scatola`), `is_fortified_folate` omesso (false — folato 7,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171506 --food-id=food_tacchino_macinato_cotto \
+  --name-it="Tacchino macinato, cotto" \
+  --matrix-id=tacchino_macinato_cotto --matrix-description-it="Tacchino macinato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171506 --food-id=food_tacchino_macinato_cotto \
+  --name-it="Tacchino macinato, cotto" \
+  --matrix-id=tacchino_macinato_cotto --matrix-description-it="Tacchino macinato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino macinato, crudo — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_tacchino_macinato_raw`. FDC ID 171505 (SR Legacy, "Turkey, Ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il tacchino (macinato), sulla stessa scia del manzo macinato già presente nel Golden Set originale.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 148kcal, proteine 19,7g, grassi 7,66g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 19,0mg, ferro 1,09mg, magnesio 23,0mg, zinco 2,35mg, rame 0,096mg, selenio 21,9µg, sodio 58,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 1,00µg, vitamina K (fillochinone) 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171505 e dataType SR Legacy.
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa forma di consumo "carne macinata cruda", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `tacchino_macinato_raw` ("Tacchino macinato, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171505 --food-id=food_tacchino_macinato_raw \
+  --name-it="Tacchino macinato, crudo" \
+  --matrix-id=tacchino_macinato_raw --matrix-description-it="Tacchino macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171505 --food-id=food_tacchino_macinato_raw \
+  --name-it="Tacchino macinato, crudo" \
+  --matrix-id=tacchino_macinato_raw --matrix-description-it="Tacchino macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Coscia di tacchino, cotta (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_coscia_di_tacchino_cotta`. FDC ID 172877 (SR Legacy, "Turkey, retail parts, thigh, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte anatomica del tacchino mai tentata in questa pipeline (solo il petto, `food_petto_di_tacchino_raw/cotto`, è già coperto) — stesso schema "thigh"/coscia già usato con successo per il pollo.
