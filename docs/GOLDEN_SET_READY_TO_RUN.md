@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Agnello, spalla, cotta (brasata) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_agnello_spalla_cotta`. FDC ID 174327 (SR Legacy, "Lamb, shoulder, whole (arm and blade), separable lean only, trimmed to 1/4\" fat, choice, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). **Nota sul nome**: la coda proponeva "arrosto", ma il record USDA dedicato con trim coerente al crudo è "braised" (brasata) — nome aggiornato di conseguenza (stessa convenzione già usata per "noce di manzo" e "carré di agnello" in questo lotto: si segue il metodo di cottura realmente tracciato da USDA con trim coerente, non quello della coda). Trim "separable lean only, trimmed to 1/4\" fat, choice" identico al crudo (anche sotto in questo lotto) — ambito anatomico e trim verificati coerenti.
+- **Nutrienti**: **14/17**. Per 100g: energia 283kcal, proteine 32,8g, grassi 15,9g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 26,0mg, ferro 2,67mg, magnesio 27,0mg, zinco 7,52mg, rame 0,13mg, selenio 37,0µg, sodio 79,0mg, vitamina C 0mg (esplicito), folato totale 21,0µg, vitamina B12 2,91µg. **Mancano** (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — stesso identico gap già accettato per `food_agnello_cotto` già eseguito sul DB reale.
+- **Analogia usata**: `food_agnello_cotto` (agnello cotto, composito generico, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`, stesso identico gap nutrienti).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_spalla_cotta` ("Agnello, spalla, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_agnello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 21,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174327 --food-id=food_agnello_spalla_cotta \
+  --name-it="Agnello, spalla, cotta (brasata)" \
+  --matrix-id=agnello_spalla_cotta --matrix-description-it="Agnello, spalla, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174327 --food-id=food_agnello_spalla_cotta \
+  --name-it="Agnello, spalla, cotta (brasata)" \
+  --matrix-id=agnello_spalla_cotta --matrix-description-it="Agnello, spalla, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Agnello, spalla, cruda — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_agnello_spalla_raw`. FDC ID 174326 (SR Legacy, "Lamb, shoulder, whole (arm and blade), separable lean only, trimmed to 1/4\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Stesso trim della versione cotta sopra.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 144kcal, proteine 19,6g, grassi 6,76g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 15,0mg, ferro 1,66mg, magnesio 24,0mg, zinco 4,77mg, rame 0,11mg, selenio 22,2µg, sodio 70,0mg, vitamina C 0mg (esplicito), folato totale 23,0µg, vitamina B12 2,78µg, vitamina K (fillochinone) 3,40µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_agnello_raw` (agnello crudo, composito generico, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_spalla_raw` ("Agnello, spalla, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_agnello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 23,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174326 --food-id=food_agnello_spalla_raw \
+  --name-it="Agnello, spalla, cruda" \
+  --matrix-id=agnello_spalla_raw --matrix-description-it="Agnello, spalla, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174326 --food-id=food_agnello_spalla_raw \
+  --name-it="Agnello, spalla, cruda" \
+  --matrix-id=agnello_spalla_raw --matrix-description-it="Agnello, spalla, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, stinco, cotto (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_maiale_stinco_cotta`. FDC ID 168229 (SR Legacy, "Pork, fresh, leg (ham), shank half, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Lo "stinco" italiano corrisponde alla metà "shank" della coscia/prosciutto fresco di maiale — taglio pieno (non frazione), trim "separable lean only" identico al crudo sotto.
