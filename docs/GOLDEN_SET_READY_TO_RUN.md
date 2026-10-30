@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Vitello, spalla (taglio arm), cotta (arrosto) — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_vitello_spalla_cotta`. FDC ID 175284 (SR Legacy, "Veal, shoulder, arm, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 175284", release USDA 2026-04-30). Versione cotta della spalla di vitello (taglio "arm"), il cui crudo è anch'esso 🟡 in questa stessa coda — primo taglio specifico (non il composito generico `food_vitello_raw`/`food_vitello_cotto`) mai tentato per il vitello in questa pipeline.
+- **Nutrienti**: **13/17**. Per 100g: energia 164kcal, proteine 26,1g, grassi 5,81g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 27,0mg, ferro 1,16mg, magnesio 27,0mg, zinco 4,32mg, rame 0,15mg, selenio 11,3µg, sodio 91,0mg (basso, coerente con carne arrosto non lavorata), vitamina C 0mg (esplicito), folato totale 17,0µg, vitamina B12 1,57µg. Mancano (non riportati in pagina, non assunti zero): vitamina K (fillochinone), beta-carotene, alfa-carotene, beta-criptoxantina — stesso gap del crudo, nessun segnale di qualità scarsa (il resto del record è completo e coerente).
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito di tagli, FDC 175265, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked/roasted, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_spalla_cotta` ("Vitello, spalla (taglio arm), cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 17,0µg, valore nella norma per la carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175284 --food-id=food_vitello_spalla_cotta \
+  --name-it="Vitello, spalla (taglio arm), cotta (arrosto)" \
+  --matrix-id=vitello_spalla_cotta --matrix-description-it="Vitello, spalla (taglio arm), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175284 --food-id=food_vitello_spalla_cotta \
+  --name-it="Vitello, spalla (taglio arm), cotta (arrosto)" \
+  --matrix-id=vitello_spalla_cotta --matrix-description-it="Vitello, spalla (taglio arm), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, spalla (taglio arm), cruda — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_vitello_spalla_raw`. FDC ID 175282 (SR Legacy, "Veal, shoulder, arm, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 175282", release USDA 2026-04-30). Taglio pieno (non una frazione), distinto dal composito generico `food_vitello_raw` già eseguito.
+- **Nutrienti**: **13/17**. Per 100g: energia 105kcal, proteine 20,0g, grassi 2,16g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 22,0mg, ferro 1,02mg, magnesio 26,0mg, zinco 3,34mg, rame 0,12mg, selenio 8,60µg, sodio 86,0mg, vitamina C 0mg (esplicito), folato totale 16,0µg, vitamina B12 1,42µg. Mancano (non riportati in pagina, non assunti zero): vitamina K (fillochinone), beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito di tagli, FDC 173817, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_spalla_raw` ("Vitello, spalla (taglio arm), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 16,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175282 --food-id=food_vitello_spalla_raw \
+  --name-it="Vitello, spalla (taglio arm), cruda" \
+  --matrix-id=vitello_spalla_raw --matrix-description-it="Vitello, spalla (taglio arm), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175282 --food-id=food_vitello_spalla_raw \
+  --name-it="Vitello, spalla (taglio arm), cruda" \
+  --matrix-id=vitello_spalla_raw --matrix-description-it="Vitello, spalla (taglio arm), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, lonza, cotta (arrosto) — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_vitello_lonza_cotta`. FDC ID 175274 (SR Legacy, "Veal, loin, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 175274", release USDA 2026-04-30).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 175kcal, proteine 26,3g, grassi 6,94g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 21,0mg, ferro 0,85mg, magnesio 26,0mg, zinco 3,24mg, rame 0,12mg, selenio 11,6µg, sodio 96,0mg (basso, coerente con carne arrosto non lavorata), vitamina C 0mg (esplicito), folato totale 16,0µg, vitamina B12 1,31µg, vitamina K (fillochinone) 5,50µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito di tagli, FDC 175265, già eseguito sul DB reale — stessa specie, stessa trasformazione cooked/roasted).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_lonza_cotta` ("Vitello, lonza, cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_vitello_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 16,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175274 --food-id=food_vitello_lonza_cotta \
+  --name-it="Vitello, lonza, cotta (arrosto)" \
+  --matrix-id=vitello_lonza_cotta --matrix-description-it="Vitello, lonza, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175274 --food-id=food_vitello_lonza_cotta \
+  --name-it="Vitello, lonza, cotta (arrosto)" \
+  --matrix-id=vitello_lonza_cotta --matrix-description-it="Vitello, lonza, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, lonza, cruda — preparato 2026-10-30 dal task (sessantesimo lotto)
+
+- **food_id**: `food_vitello_lonza_raw`. FDC ID 173826 (SR Legacy, "Veal, loin, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central 173826, SR Legacy", release USDA 2026-04-30). Primo taglio specifico (non il composito generico `food_vitello_raw`) mai tentato per il vitello in questa pipeline — taglio pieno "loin", non una frazione.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 114kcal, proteine 21,9g, grassi 2,90g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 11,0mg, ferro 0,85mg, magnesio 47,0mg, zinco 2,15mg, rame 0,088mg, selenio 18,0µg, sodio 99,0mg, vitamina C 0mg (esplicito), folato totale 3,00µg, vitamina B12 2,65µg, vitamina K (fillochinone) 1,10µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_vitello_raw` (vitello crudo, composito di tagli, FDC 173817, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_lonza_raw` ("Vitello, lonza, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_vitello_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 3,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173826 --food-id=food_vitello_lonza_raw \
+  --name-it="Vitello, lonza, cruda" \
+  --matrix-id=vitello_lonza_raw --matrix-description-it="Vitello, lonza, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173826 --food-id=food_vitello_lonza_raw \
+  --name-it="Vitello, lonza, cruda" \
+  --matrix-id=vitello_lonza_raw --matrix-description-it="Vitello, lonza, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Grasso d'oca, fuso, crudo — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_grasso_doca_raw`. FDC ID 173572 (SR Legacy, "Fat, goose" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA FoodData Central, SR Legacy, FDC 173572", release USDA 2026-04-30). Secondo tentativo per un grasso d'oca dopo lo scarto del grasso d'anatra (duck fat) nel cinquantottesimo lotto per assenza di un FDC ID verificabile — qui invece una pagina getfoodfacts.com dedicata esiste, specie distinta (oca) mai cercata prima.
