@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uovo d'oca, intero, crudo — preparato 2026-10-30 dal task (cinquantottesimo lotto)
+
+- **food_id**: `food_uovo_doca_raw`. FDC ID 172190 (SR Legacy, "Egg, goose, whole, fresh, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Dairy and Egg Products", release USDA 2026-04-30). FDC ID adiacente a quello dell'uovo d'anatra già eseguito (172189, "Egg, duck, whole, fresh, raw") — stessa serie USDA, specie aviaria distinta (oca vs anatra), non un doppione.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 185kcal, proteine 13,9g, grassi 13,3g, carboidrati 1,35g, fibra 0g, calcio 60,0mg, ferro 3,64mg, magnesio 16,0mg, zinco 1,33mg, rame 0,062mg, selenio 36,9µg, sodio 138mg (non mappato dal motore, solo per contesto), vitamina C 0mg (esplicito), folato totale 76,0µg, vitamina B12 5,10µg, vitamina K (fillochinone) 0,40µg, beta-carotene 13,0µg (reale e non nullo, coerente col pigmento del tuorlo), alfa-carotene 0µg (esplicito), beta-criptoxantina 12,0µg (reale e non nullo, coerente col pigmento del tuorlo). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172190 e dataType SR Legacy.
+- **Analogia usata**: `food_uova_danatra_raw` (uovo d'anatra, FDC 172189, già eseguito sul DB reale — stessa serie USDA "uovo intero fresco crudo", stesso `is_heme_iron=false`, FDC ID adiacente).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uovo_doca` ("Uovo d'oca, intero").
+- **Attributi**: `is_heme_iron=false` (uovo), `matrix_category_calcium` omesso (NULL, stessa convenzione già usata per le altre uova di questa pipeline), `carotenoid_matrix_state` omesso (NULL per analogia diretta con `food_egg_raw`/uova di quaglia e anatra crude — stessa convenzione già in uso per tutte le uova in questo progetto, il modello attuale non ha un fattore matrice specifico per l'uovo intero; carotenoidi reali e non nulli segnalati qui per trasparenza, non trattati come gap bloccante), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un uovo, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172190 --food-id=food_uovo_doca_raw \
+  --name-it="Uovo d'oca, intero, crudo" \
+  --matrix-id=uovo_doca --matrix-description-it="Uovo d'oca, intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_uova_danatra_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172190 --food-id=food_uovo_doca_raw \
+  --name-it="Uovo d'oca, intero, crudo" \
+  --matrix-id=uovo_doca --matrix-description-it="Uovo d'oca, intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_uova_danatra_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Pancetta canadese (Canadian bacon, lombo di maiale affumicato non cotto) — preparato 2026-10-30 dal task (cinquantottesimo lotto)
 
 - **food_id**: `food_pancetta_canadese_raw`. FDC ID 167869 (SR Legacy, "Canadian bacon, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Pork Products", release USDA 2026-04-30; la pagina nota esplicitamente "one of 3 USDA descriptions of canadian bacon"). Distinta dalla pancetta italiana già eseguita (`food_pancetta_raw`, FDC 168277 "Pork, cured, bacon, unprepared") — stesso concetto "pancetta di maiale cruda affumicata" ma taglio anatomico diverso (lombo/lonza per la pancetta canadese, pancia per quella italiana), FDC ID distinto, non un doppione.
