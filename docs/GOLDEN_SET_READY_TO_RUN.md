@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio Muenster — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
+
+- **food_id**: `food_formaggio_muenster_raw`. FDC ID 171245 (SR Legacy, "Cheese, muenster" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio semiduro vaccino americano mai tentato in questa pipeline, distinto dai formaggi semiduri già coperti (cheddar, Colby, Monterey Jack, svizzero, gouda, edam, gruyère).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 368kcal, proteine 23,4g, grassi 30,0g, carboidrati 1,12g, fibra 0g (esplicito), calcio 717mg, ferro 0,41mg, magnesio 27,0mg, zinco 2,81mg, selenio 14,5µg, sodio 628mg (coerente con un formaggio stagionato salato), vitamina C 0mg (esplicito), folato totale 12,0µg, vitamina B12 1,47µg, vitamina K 2,50µg, vitamina A (RAE) 298µg, beta-carotene 13,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171245 e dataType SR Legacy.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio vaccino semiduro, già eseguito sul DB reale — stessa categoria "formaggio stagionato a pasta semidura di latte vaccino").
+- **Categoria dieta**: `egg_dairy` (formaggio, nessun altro ingrediente animale).
+- **Matrice**: nuova `formaggio_muenster` ("Formaggio Muenster").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile ai formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — il beta-carotene presente deriva dal latte/foraggio, non da una matrice vegetale crudo/cotta classificabile con questo attributo, stessa convenzione già usata per gli altri formaggi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non un vegetale), `baseline_cooking_state=raw` (formaggio stagionato, non cotto), `is_fortified_folate` omesso (false — folato coerente con un latticino, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171245 --food-id=food_formaggio_muenster_raw \
+  --name-it="Formaggio Muenster" \
+  --matrix-id=formaggio_muenster --matrix-description-it="Formaggio Muenster" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171245 --food-id=food_formaggio_muenster_raw \
+  --name-it="Formaggio Muenster" \
+  --matrix-id=formaggio_muenster --matrix-description-it="Formaggio Muenster" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Uovo, intero, fritto — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
 
 - **food_id**: `food_uovo_fritto_raw`. FDC ID 173423 (SR Legacy, "Egg, whole, cooked, fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di cottura mai tentata in questa pipeline: solo uovo crudo (`food_egg_raw`) e sodo (`food_egg_hard_boiled`) sono nel Golden Set originale, nessuna forma fritta.
