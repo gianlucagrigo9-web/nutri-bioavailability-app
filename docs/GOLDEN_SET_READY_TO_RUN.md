@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, petto, con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_pollo_petto_con_pelle_cotto`. FDC ID 171075 (SR Legacy, "Chicken, broilers or fryers, breast, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio specifico del petto distinto dal pollo INTERO "meat and skin" già eseguito (`food_pollo_intero_con_pelle_raw`, FDC 171447) e dal petto senza pelle già eseguito (`food_petto_di_pollo_raw`) — record FDC realmente distinto. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "breast, meat and skin, raw" dello stesso trim — confermato esplicitamente leggendo per intero la pagina recipal.com/ingredients/876 dedicata a quel record, che cita solo un NBD ID (5057), non un FDC ID verificabile. Qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 197kcal, proteine 29,8g, grassi 7,78g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 14,0mg, ferro 1,07mg, magnesio 27,0mg, zinco 1,02mg, rame 0,050mg, selenio 24,7µg, sodio 71,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 0,32µg, folato totale 4,00µg, vitamina K 0,30µg (reale, non nullo), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_petto_con_pelle_cotto` ("Pollo, petto, con pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_coscia_di_pollo_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — folato 4,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171075 --food-id=food_pollo_petto_con_pelle_cotto \
+  --name-it="Pollo, petto, con pelle, cotto (arrosto)" \
+  --matrix-id=pollo_petto_con_pelle_cotto --matrix-description-it="Pollo, petto, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171075 --food-id=food_pollo_petto_con_pelle_cotto \
+  --name-it="Pollo, petto, con pelle, cotto (arrosto)" \
+  --matrix-id=pollo_petto_con_pelle_cotto --matrix-description-it="Pollo, petto, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, fuso (drumstick), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_tacchino_fuso_con_pelle_cotto`. FDC ID 171135 (SR Legacy, "Turkey, retail parts, drumstick, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio distinto dal fuso "meat only" già preparato (`food_tacchino_fuso_raw`, solo "pronto") — variante "con pelle" mai tentata in questa pipeline per il fuso di tacchino. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo con lo stesso trim "retail parts, drumstick, meat and skin, raw" (solo recipal.com/triagemethod.com/calforlife.com/caloriefriend.com, mai un FDC ID citato su fonte getfoodfacts) — qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
