@@ -16,6 +16,198 @@
 
 ## Pronti
 
+### Fagioli azuki, in scatola, dolci (zuccherati) — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_fagioli_azuki_in_scatola`. FDC ID 173729 (SR Legacy, "Beans, adzuki, mature seeds, canned, sweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza importante**: l'UNICO record FDC trovato per "fagioli azuki in scatola" in nessuna fonte consultata è questa variante dolce/zuccherata in stile dessert asiatico (an/anko) — nessun record "plain"/salato/semplice trovato. Energia 237kcal e carboidrati 55g/100g sono coerenti con l'aggiunta di zucchero. Rappresenta quindi un prodotto diverso da ciò che un utente italiano immaginerebbe per "fagioli in scatola", ma è l'unico alimento reale esistente sotto questo nome in FDC — stessa logica già accettata per la salsa di mirtilli rossi (necessariamente zuccherata) nel cinquantunesimo lotto. Distinto da `food_fagioli_azuki_raw`/`food_fagioli_azuki_bolliti` (forma secca, già eseguite): qui la conserva in scatola, forma mai tentata.
+- **Nutrienti**: **13/17** — mancano fibra (dichiarazione contraddittoria sulla pagina: un riquadro dice "0g", un altro "non dichiarata", non assunta), vitamina K, beta-carotene, altro carotenoide provitaminico A (nessuno riportato). Per 100g (valori presenti): energia 237kcal, proteine 3,80g, grassi 0,030g, carboidrati 55,0g, calcio 22,0mg, ferro 1,13mg, zinco 1,56mg, magnesio 31,0mg, selenio 3,20µg, vitamina C 0mg, folato totale 107µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Sodio 218mg/100g — moderato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173729 e dataType SR Legacy.
+- **Analogia usata**: `food_fagioli_azuki_raw` (fagioli azuki secchi crudi, stessa specie *Vigna angularis*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume conservato, nessun ingrediente animale).
+- **Matrice**: nuova `fagioli_azuki_in_scatola` ("Fagioli azuki, in scatola, dolci").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa dell'analogia), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173729 --food-id=food_fagioli_azuki_in_scatola \
+  --name-it="Fagioli azuki, in scatola, dolci (zuccherati)" \
+  --matrix-id=fagioli_azuki_in_scatola --matrix-description-it="Fagioli azuki, in scatola, dolci" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_azuki_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173729 --food-id=food_fagioli_azuki_in_scatola \
+  --name-it="Fagioli azuki, in scatola, dolci (zuccherati)" \
+  --matrix-id=fagioli_azuki_in_scatola --matrix-description-it="Fagioli azuki, in scatola, dolci" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fagioli_azuki_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cipolla dolce, cruda — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_cipolla_dolce_raw`. FDC ID 170008 (SR Legacy, "Onions, sweet, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar distinta dalla cipolla generica già coperta (`food_onion_raw`, FDC diverso), stessa specie *Allium cepa*.
+- **Nutrienti**: **15/17** — mancano acido folico separato e vitamina B12 (non riportati sulla pagina consultata, non assunti zero). Per 100g (valori presenti): energia 32,0kcal, proteine 0,80g, grassi 0,080g, carboidrati 7,55g, fibra 0,90g, calcio 20,0mg, ferro 0,26mg, zinco 0,13mg, magnesio 9,00mg, selenio 0,50µg, vitamina C 4,80mg, folato totale 23,0µg, vitamina K 0,30µg, beta-carotene 1,00µg (reale, non nullo), alfa-carotene 0µg, beta-criptoxantina 0µg. Sodio 8,00mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170008 e dataType SR Legacy.
+- **Analogia usata**: `food_onion_raw` (cipolla generica cruda, stessa specie, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cipolla_dolce` ("Cipolla dolce").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170008 --food-id=food_cipolla_dolce_raw \
+  --name-it="Cipolla dolce, cruda" \
+  --matrix-id=cipolla_dolce --matrix-description-it="Cipolla dolce" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170008 --food-id=food_cipolla_dolce_raw \
+  --name-it="Cipolla dolce, cruda" \
+  --matrix-id=cipolla_dolce --matrix-description-it="Cipolla dolce" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
+### Patate rosse, crude — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_patate_rosse_raw`. FDC ID 170029 (SR Legacy, "Potatoes, red, flesh and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar distinta dalla patata generica del Golden Set originale (`food_potato_raw`, FDC diverso).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 70,0kcal, proteine 1,89g, grassi 0,14g, carboidrati 15,9g, fibra 1,70g, calcio 10,0mg, ferro 0,73mg, zinco 0,33mg, magnesio 22,0mg, selenio 0,50µg, vitamina C 8,60mg, folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 2,90µg, beta-carotene 4,00µg (reale, seppur basso), alfa-carotene 0µg, beta-criptoxantina 0µg. Sodio 18,0mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170029 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, stesso tubero, stessa famiglia botanica, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `patate_rosse` ("Patate rosse").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170029 --food-id=food_patate_rosse_raw \
+  --name-it="Patate rosse, crude (con la buccia)" \
+  --matrix-id=patate_rosse --matrix-description-it="Patate rosse" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170029 --food-id=food_patate_rosse_raw \
+  --name-it="Patate rosse, crude (con la buccia)" \
+  --matrix-id=patate_rosse --matrix-description-it="Patate rosse" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Carote baby, crude — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_carote_baby_raw`. FDC ID 168568 (SR Legacy, "Carrots, baby, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar/stadio di raccolta distinto dalla carota generica del Golden Set originale (`food_carrots_raw`, FDC diverso).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 35,0kcal, proteine 0,64g, grassi 0,13g, carboidrati 8,24g, fibra 2,90g, calcio 32,0mg, ferro 0,89mg, zinco 0,17mg, magnesio 10,0mg, selenio 0,90µg, vitamina C 2,60mg, folato totale 27,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 9,40µg, beta-carotene 6.391µg e alfa-carotene 3.767µg (entrambi reali e non nulli, valori più alti della carota adulta generica), beta-criptoxantina 0µg. Sodio 78,0mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168568 e dataType SR Legacy.
+- **Analogia usata**: `food_carrots_raw` (carote crude, Golden Set originale, stessa specie *Daucus carota*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `carote_baby` ("Carote baby").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (carotenoidi reali e non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168568 --food-id=food_carote_baby_raw \
+  --name-it="Carote baby, crude" \
+  --matrix-id=carote_baby --matrix-description-it="Carote baby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168568 --food-id=food_carote_baby_raw \
+  --name-it="Carote baby, crude" \
+  --matrix-id=carote_baby --matrix-description-it="Carote baby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca gialla crookneck, cruda — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_zucca_gialla_crookneck_raw`. FDC ID 168464 (SR Legacy, "Squash, summer, crookneck and straightneck, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Cucurbita pepo* distinta dalla zucchina generica già coperta (`food_zucchine_raw`, FDC 169291).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 19,0kcal, proteine 1,01g, grassi 0,27g, carboidrati 3,88g, fibra 1,00g, calcio 21,0mg, ferro 0,44mg, zinco 0,29mg, magnesio 20,0mg, selenio 0,20µg, vitamina C 19,3mg, folato totale 19,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 3,20µg, beta-carotene 90,0µg (reale, non nullo), alfa-carotene 0µg, beta-criptoxantina 0µg. Sodio 2,00mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168464 e dataType SR Legacy.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, stessa specie *Cucurbita pepo*, stessa famiglia Cucurbitaceae, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_gialla_crookneck` ("Zucca gialla crookneck").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168464 --food-id=food_zucca_gialla_crookneck_raw \
+  --name-it="Zucca gialla crookneck, cruda" \
+  --matrix-id=zucca_gialla_crookneck --matrix-description-it="Zucca gialla crookneck" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168464 --food-id=food_zucca_gialla_crookneck_raw \
+  --name-it="Zucca gialla crookneck, cruda" \
+  --matrix-id=zucca_gialla_crookneck --matrix-description-it="Zucca gialla crookneck" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Peperoncino a banana (banana pepper), crudo — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_peperoncino_a_banana_raw`. FDC ID 169394 (SR Legacy, "Pepper, banana, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Seconda cultivar di *Capsicum* di questo lotto, distinta dal peperoncino verde/piccante generico già coperto e dal jalapeño di questo stesso lotto.
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 27,0kcal, proteine 1,66g, grassi 0,45g, carboidrati 5,35g, fibra 3,40g, calcio 14,0mg, ferro 0,46mg, zinco 0,25mg, magnesio 17,0mg, selenio 0,30µg, vitamina C 82,7mg, folato totale 29,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 9,50µg, beta-carotene 184µg e alfa-carotene 39,0µg (entrambi reali e non nulli), beta-criptoxantina 0µg. Sodio 13,0mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169394 e dataType SR Legacy.
+- **Analogia usata**: `food_peperoncino_verde_raw` (peperoncino verde piccante, stesso genere *Capsicum*, stessa famiglia Solanaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `peperoncino_a_banana` ("Peperoncino a banana").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (carotenoidi reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169394 --food-id=food_peperoncino_a_banana_raw \
+  --name-it="Peperoncino a banana, crudo" \
+  --matrix-id=peperoncino_a_banana --matrix-description-it="Peperoncino a banana" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169394 --food-id=food_peperoncino_a_banana_raw \
+  --name-it="Peperoncino a banana, crudo" \
+  --matrix-id=peperoncino_a_banana --matrix-description-it="Peperoncino a banana" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Peperoncino jalapeño, crudo — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_peperoncino_jalapeno_raw`. FDC ID 168576 (SR Legacy, "Peppers, jalapeno, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Capsicum annuum* distinta dal peperoncino verde/piccante generico già coperto (`food_peperoncino_verde_raw`, FDC 170497/170106).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 29,0kcal, proteine 0,91g, grassi 0,37g, carboidrati 6,50g, fibra 2,80g, calcio 12,0mg, ferro 0,25mg, zinco 0,14mg, magnesio 15,0mg, selenio 0,40µg, vitamina C 119mg, folato totale 27,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 18,5µg, beta-carotene 561µg, alfa-carotene 67,0µg, beta-criptoxantina 105µg (tutti reali e non nulli). Sodio 3,00mg/100g. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168576 e dataType SR Legacy.
+- **Analogia usata**: `food_peperoncino_verde_raw` (peperoncino verde piccante, stesso genere, stessa famiglia Solanaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `peperoncino_jalapeno` ("Peperoncino jalapeño").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (carotenoidi reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168576 --food-id=food_peperoncino_jalapeno_raw \
+  --name-it="Peperoncino jalapeño, crudo" \
+  --matrix-id=peperoncino_jalapeno --matrix-description-it="Peperoncino jalapeño" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168576 --food-id=food_peperoncino_jalapeno_raw \
+  --name-it="Peperoncino jalapeño, crudo" \
+  --matrix-id=peperoncino_jalapeno --matrix-description-it="Peperoncino jalapeño" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Gamberi, in scatola — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
+
+- **food_id**: `food_gamberi_in_scatola`. FDC ID 171972 (SR Legacy, "Crustaceans, shrimp, mixed species, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_gamberi_raw` (gamberi crudi, stessa specie ma ancora solo "pronto", non eseguito sul DB reale): qui la conserva in scatola, forma mai tentata.
+- **Nutrienti**: **17/17** — nessun valore mancante (carotenoidi e vitamina K tutti 0µg espliciti, coerente con un prodotto animale conservato). Per 100g: energia 100kcal, proteine 20,4g, grassi 1,36g, carboidrati 0g, fibra 0g, calcio 145mg, ferro 2,13mg, zinco 1,96mg, magnesio 33,0mg, selenio 47,5µg, vitamina C 4,10mg, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 0,74µg, vitamina K 0µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg. Sodio 870mg/100g — alto, coerente con un prodotto in scatola in salamoia. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 171972 e dataType SR Legacy.
+- **Analogia usata**: `food_granchio_raw` (granchio blu, crudo, già eseguito sul DB reale — stesso ordine Decapoda, categoria "crostaceo marino"; NON `food_gamberi_raw`, che è la stessa specie ma ancora solo "pronto").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `gamberi_in_scatola` ("Gamberi, in scatola").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_granchio_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171972 --food-id=food_gamberi_in_scatola \
+  --name-it="Gamberi, in scatola" \
+  --matrix-id=gamberi_in_scatola --matrix-description-it="Gamberi, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_granchio_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171972 --food-id=food_gamberi_in_scatola \
+  --name-it="Gamberi, in scatola" \
+  --matrix-id=gamberi_in_scatola --matrix-description-it="Gamberi, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_granchio_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Peperoncini verdi, piccanti, in scatola — preparato 2026-10-29 dal task (cinquantunesimo lotto)
 
 - **food_id**: `food_peperoncino_verde_in_scatola`. FDC ID 168577 (SR Legacy, "Peppers, chili, green, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto da `food_peperoncino_verde_raw` (peperoncino verde fresco crudo, già eseguito sul DB reale): qui la conserva in scatola, forma di conservazione mai tentata.
