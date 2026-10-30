@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, petto, con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_tacchino_petto_con_pelle_cotto`. FDC ID 171529 (SR Legacy, "Turkey, retail parts, breast, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio specifico del petto distinto dal tacchino INTERO "meat and skin" già eseguito (`food_tacchino_intero_con_pelle_raw`) e dal petto senza pelle già eseguito (`food_petto_di_tacchino_raw`/`cotto`). **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo semplice "retail parts, breast, meat and skin, raw" — solo la variante "with added solution" (iniezione salina, FDC 171130) ha una pagina dedicata, non rappresentativa di un petto di tacchino semplice; la pagina recipal.com/ingredients/10679 per la versione semplice, letta per intero, cita solo un NBD ID (5732), non un FDC ID. Qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 164kcal, proteine 29,0g, grassi 5,33g, carboidrati 0,050g (reale, non nullo — valore "by difference" del record USDA), fibra 0g (esplicito), calcio 15,0mg, ferro 1,03mg, magnesio 29,0mg, zinco 1,57mg, rame 0,064mg, selenio 29,8µg, sodio 114mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 1,75µg, folato totale 9,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie *Meleagris gallopavo*, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_petto_con_pelle_cotto` ("Tacchino, petto, con pelle, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171529 --food-id=food_tacchino_petto_con_pelle_cotto \
+  --name-it="Tacchino, petto, con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_petto_con_pelle_cotto --matrix-description-it="Tacchino, petto, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171529 --food-id=food_tacchino_petto_con_pelle_cotto \
+  --name-it="Tacchino, petto, con pelle, cotto (arrosto)" \
+  --matrix-id=tacchino_petto_con_pelle_cotto --matrix-description-it="Tacchino, petto, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, petto, con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_pollo_petto_con_pelle_cotto`. FDC ID 171075 (SR Legacy, "Chicken, broilers or fryers, breast, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Taglio specifico del petto distinto dal pollo INTERO "meat and skin" già eseguito (`food_pollo_intero_con_pelle_raw`, FDC 171447) e dal petto senza pelle già eseguito (`food_petto_di_pollo_raw`) — record FDC realmente distinto. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "breast, meat and skin, raw" dello stesso trim — confermato esplicitamente leggendo per intero la pagina recipal.com/ingredients/876 dedicata a quel record, che cita solo un NBD ID (5057), non un FDC ID verificabile. Qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
