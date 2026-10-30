@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Gallina (da brodo), carne e pelle, cotta (stufata/bollita) — preparato 2026-10-30 dal task (sessantasettesimo lotto)
+
+- **food_id**: `food_gallina_cotta`. FDC ID 172401 (SR Legacy, "Chicken, stewing, meat and skin, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra, coerente con l'uso tipico della gallina da brodo lessata/stufata).
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — nessuna riga per questi nutrienti nella pagina, non assunti zero; a differenza del crudo sopra, che li riporta tutti espliciti). Per 100g: energia 285kcal, proteine 26,9g, grassi 18,9g, carboidrati 0g, fibra 0g, calcio 13,0mg, ferro 1,37mg, magnesio 20,0mg, zinco 1,77mg, rame 0,10mg, selenio 19,7µg, sodio 73,0mg (basso, coerente con "stewed" senza sale aggiunto), vitamina C 0mg (esplicito), vitamina B12 0,23µg, folato totale 5,00µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria funzionale "carne di pollame"; `food_gallina_raw` non riusabile come analogia perché preparato nello stesso run, non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `gallina_cotta` ("Gallina da brodo, carne e pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "stewed"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172401 --food-id=food_gallina_cotta \
+  --name-it="Gallina (da brodo), carne e pelle, cotta (stufata/bollita)" \
+  --matrix-id=gallina_cotta --matrix-description-it="Gallina da brodo, carne e pelle, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172401 --food-id=food_gallina_cotta \
+  --name-it="Gallina (da brodo), carne e pelle, cotta (stufata/bollita)" \
+  --matrix-id=gallina_cotta --matrix-description-it="Gallina da brodo, carne e pelle, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Gallina (da brodo), carne e pelle, cruda — preparato 2026-10-30 dal task (sessantasettesimo lotto)
 
 - **food_id**: `food_gallina_raw`. FDC ID 172400 (SR Legacy, "Chicken, stewing, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita). USDA traccia "Chicken, stewing" (gallina da brodo/ovaiola a fine carriera) come categoria distinta da "Chicken, broilers or fryers" (pollo da carne, già usato per tutti i tagli di pollo fin qui, es. `food_petto_di_pollo_raw`) — alimento di uso quotidiano in Italia (brodo di gallina) mai cercato in sessantasei lotti precedenti.
