@@ -16,6 +16,222 @@
 
 ## Pronti
 
+### Maiale, coda (tail), cruda — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_coda_di_maiale_raw`. FDC ID 168291 (SR Legacy, "Pork, fresh, variety meats and by-products, tail, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Parte/by-product di maiale mai tentata in questa pipeline, distinta dal composito generico e da piedini/guanciola/milza/polmone già fatti.
+- **Nutrienti**: **14/17**. Per 100g: energia 378kcal, proteine 17,8g, grassi 33,5g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 18,0mg, ferro 0,99mg, magnesio 8,00mg, zinco 2,31mg, rame 0,084mg, selenio 2,70µg, sodio 63,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg, vitamina B12 0,88µg, folato totale 5,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti nella tabella ma la pagina stessa non li elenca in una riga propria — trattati come assenti per coerenza con il metodo di questa coda. **Mancano** (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A (alfa-carotene/beta-criptoxantina).
+- **Analogia usata**: `food_milza_di_maiale_raw` (milza di maiale cruda, Golden Set/pipeline, già eseguita sul DB reale — stessa specie, stessa categoria USDA "variety meats and by-products", crudo).
+- **Categoria dieta**: `meat_fish` (carne/by-product animale).
+- **Matrice**: nuova `coda_di_maiale` ("Maiale, coda (tail)").
+- **Attributi**: `is_heme_iron` (flag attivo — tessuto animale di mammifero, stesso precedente di milza/piedini di maiale), `matrix_category_calcium` omesso (NULL — prodotto animale), `carotenoid_matrix_state` omesso (NULL — prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato basso e coerente con un by-product non arricchito).
+
+```
+npm run add-food -- --fdc-id=168291 --food-id=food_coda_di_maiale_raw \
+  --name-it="Maiale, coda (tail), cruda" \
+  --matrix-id=coda_di_maiale --matrix-description-it="Maiale, coda (tail)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168291 --food-id=food_coda_di_maiale_raw \
+  --name-it="Maiale, coda (tail), cruda" \
+  --matrix-id=coda_di_maiale --matrix-description-it="Maiale, coda (tail)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, coda (tail), cotta (bollita) — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_coda_di_maiale_cotta`. FDC ID 167881 (SR Legacy, "Pork, fresh, variety meats and by-products, tail, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, stesso identico by-product del crudo sopra, release USDA 2026-04-30).
+- **Nutrienti**: **14/17** (stesso gap del crudo: vitamina K, beta-carotene, altri carotenoidi provitaminici A non riportati in pagina). Per 100g: energia 396kcal, proteine 17,0g, grassi 35,8g, carboidrati 0g, fibra 0g, calcio 14,0mg, ferro 0,79mg, magnesio 7,00mg, zinco 1,64mg, rame 0,067mg, selenio 3,10µg, sodio 25,0mg (basso, coerente con "simmered" senza sale aggiunto, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,55µg, folato totale 4,00µg.
+- **Analogia usata**: `food_lingua_di_maiale_cotta` (lingua di maiale cotta, già eseguita sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`; il crudo `food_coda_di_maiale_raw` di questa stessa voce resta solo "pronto", non eseguito, quindi non riusabile come analogia).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `coda_di_maiale` (già creata dalla voce cruda sopra).
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "simmered"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167881 --food-id=food_coda_di_maiale_cotta \
+  --name-it="Maiale, coda (tail), cotta (bollita)" \
+  --matrix-id=coda_di_maiale --matrix-description-it="Maiale, coda (tail)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_lingua_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167881 --food-id=food_coda_di_maiale_cotta \
+  --name-it="Maiale, coda (tail), cotta (bollita)" \
+  --matrix-id=coda_di_maiale --matrix-description-it="Maiale, coda (tail)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_lingua_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, piedini (feet), crudi — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_piedini_di_maiale_raw`. FDC ID 167859 (SR Legacy, "Pork, fresh, variety meats and by-products, feet, raw" — pagina getfoodfacts.com dedicata e pulita, versione fresca non stagionata/non in salamoia — distinta da "Pork, cured, feet, pickled" scartata a priori, release USDA 2026-04-30). By-product di maiale mai tentato in questa pipeline.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 212kcal, proteine 23,2g, grassi 12,6g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 70,0mg, ferro 0,58mg, magnesio 6,00mg, zinco 0,76mg, rame 0,070mg, selenio 23,3µg, sodio 132mg (nessun segnale di salamoia — la versione "cured, pickled" è un prodotto distinto, scartata a priori), vitamina C 0mg, vitamina B12 0,52µg, folato totale 10,0µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_milza_di_maiale_raw` (milza di maiale cruda, già eseguita sul DB reale — stessa specie, stessa categoria USDA "variety meats and by-products", crudo).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `piedini_di_maiale` ("Maiale, piedini (feet)").
+- **Attributi**: `is_heme_iron` (flag attivo — tessuto animale di mammifero), `matrix_category_calcium` omesso (NULL — prodotto animale), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167859 --food-id=food_piedini_di_maiale_raw \
+  --name-it="Maiale, piedini (feet), crudi" \
+  --matrix-id=piedini_di_maiale --matrix-description-it="Maiale, piedini (feet)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167859 --food-id=food_piedini_di_maiale_raw \
+  --name-it="Maiale, piedini (feet), crudi" \
+  --matrix-id=piedini_di_maiale --matrix-description-it="Maiale, piedini (feet)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, piedini (feet), cotti (bolliti) — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_piedini_di_maiale_cotti`. FDC ID 168290 (SR Legacy, "Pork, fresh, variety meats and by-products, feet, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, stesso identico by-product del crudo sopra, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 238kcal, proteine 21,9g, grassi 16,1g, carboidrati 0g, fibra 0g, calcio **0mg esplicito** (nota di trasparenza: valore sorprendente per un taglio ricco di osso/cartilagine, che di solito concentra calcio durante una cottura lunga in acqua — il crudo riporta invece 70,0mg; preso come riportato dalla pagina, senza correggerlo a mano, perché non c'è alcuna incongruenza interna nella pagina stessa che lo contraddica — da verificare se possibile con una query reale dopo l'inserimento), ferro 0,98mg, magnesio 5,00mg, zinco 1,05mg, rame 0,062mg, selenio 23,0µg, sodio 73,0mg (nessun segnale di salamoia), vitamina C 0mg, vitamina B12 0,41µg, folato totale 2,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_cuore_di_maiale_cotto` (cuore di maiale cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`; il crudo `food_piedini_di_maiale_raw` di questa stessa voce resta solo "pronto", non eseguito).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `piedini_di_maiale` (già creata dalla voce cruda sopra).
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168290 --food-id=food_piedini_di_maiale_cotti \
+  --name-it="Maiale, piedini (feet), cotti (bolliti)" \
+  --matrix-id=piedini_di_maiale --matrix-description-it="Maiale, piedini (feet)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168290 --food-id=food_piedini_di_maiale_cotti \
+  --name-it="Maiale, piedini (feet), cotti (bolliti)" \
+  --matrix-id=piedini_di_maiale --matrix-description-it="Maiale, piedini (feet)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cuore_di_maiale_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, guanciola (jowl), fresca (non stagionata), cruda — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_guanciola_di_maiale_raw`. FDC ID 168269 (SR Legacy, "Pork, fresh, variety meats and by-products, jowl, raw" — pagina getfoodfacts.com dedicata e pulita, versione FRESCA non stagionata — distinta dal guanciale italiano stagionato, salume di nicchia già un vicolo cieco USDA in questa pipeline; qui il taglio fresco crudo è un prodotto USDA diverso, mai cercato prima, release USDA 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 655kcal, proteine 6,38g, grassi 69,6g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 4,00mg, ferro 0,42mg, magnesio 3,00mg, zinco 0,84mg, rame 0,040mg, selenio 1,50µg, sodio 25,0mg (molto basso, nessun segnale di salamoia/stagionatura — coerente con "fresh", non "cured"), vitamina C 0mg, vitamina B12 0,82µg, folato totale 1,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. **Manca** (non riportata in pagina, non assunta zero): vitamina K.
+- **Analogia usata**: `food_pancetta_raw` (pancetta di maiale cruda, già eseguita sul DB reale — stesso taglio concettuale "sottocute/grasso fresco di maiale, crudo", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `guanciola_di_maiale` ("Maiale, guanciola (jowl), fresca").
+- **Attributi**: `is_heme_iron` (flag attivo — tessuto animale di mammifero, stesso precedente di pancetta/lonza), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato molto basso, nessun segno di arricchimento). **Nota di trasparenza**: nessuna pagina getfoodfacts.com dedicata trovata per la guanciola cotta con lo stesso trim — la voce "cotta" resta ⚠ in coda (vedi `docs/PRD.md`), solo questa forma cruda viene preparata.
+
+```
+npm run add-food -- --fdc-id=168269 --food-id=food_guanciola_di_maiale_raw \
+  --name-it="Maiale, guanciola (jowl), fresca (non stagionata), cruda" \
+  --matrix-id=guanciola_di_maiale --matrix-description-it="Maiale, guanciola (jowl), fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168269 --food-id=food_guanciola_di_maiale_raw \
+  --name-it="Maiale, guanciola (jowl), fresca (non stagionata), cruda" \
+  --matrix-id=guanciola_di_maiale --matrix-description-it="Maiale, guanciola (jowl), fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino, ala (wing), cruda — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_ala_di_tacchino_raw`. FDC ID 171132 (SR Legacy, "Turkey, retail parts, wing, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Parte di tacchino mai tentata in questa pipeline, distinta da petto/coscia/fuso/collo già fatti.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 202kcal, proteine 19,5g, grassi 13,8g, carboidrati 0,050g, fibra 0g, calcio 8,00mg, ferro 0,68mg, magnesio 17,0mg, zinco 2,14mg, rame 0,049mg, selenio 18,0µg, sodio 67,0mg (nessun segnale di salamoia/iniezione; nessuna menzione di "enhanced"/"with added solution" in pagina), vitamina C 0mg, vitamina B12 0,91µg, folato totale 6,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino crudo, già eseguito sul DB reale — stessa specie, pollame, carne con pelle, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ala_di_tacchino` ("Tacchino, ala (wing)").
+- **Attributi**: `is_heme_iron` (flag attivo — carne di pollame, stesso precedente di petto/coscia di tacchino), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171132 --food-id=food_ala_di_tacchino_raw \
+  --name-it="Tacchino, ala (wing), cruda" \
+  --matrix-id=ala_di_tacchino --matrix-description-it="Tacchino, ala (wing)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171132 --food-id=food_ala_di_tacchino_raw \
+  --name-it="Tacchino, ala (wing), cruda" \
+  --matrix-id=ala_di_tacchino --matrix-description-it="Tacchino, ala (wing)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino, ala (wing), cotta (arrosto) — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_ala_di_tacchino_cotta`. FDC ID 171133 (SR Legacy, "Turkey, retail parts, wing, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso identico trim del crudo sopra, FDC ID adiacente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 235kcal, proteine 28,7g, grassi 13,3g, carboidrati 0,13g, fibra 0g, calcio 14,0mg, ferro 1,00mg, magnesio 24,0mg, zinco 2,99mg, rame 0,070mg, selenio 28,4µg, sodio 106mg (coerente con la cottura, nessun segnale di salamoia), vitamina C 0mg, vitamina B12 1,36µg, folato totale 9,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `ala_di_tacchino` (già creata dalla voce cruda sopra).
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171133 --food-id=food_ala_di_tacchino_cotta \
+  --name-it="Tacchino, ala (wing), cotta (arrosto)" \
+  --matrix-id=ala_di_tacchino --matrix-description-it="Tacchino, ala (wing)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171133 --food-id=food_ala_di_tacchino_cotta \
+  --name-it="Tacchino, ala (wing), cotta (arrosto)" \
+  --matrix-id=ala_di_tacchino --matrix-description-it="Tacchino, ala (wing)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino, collo (neck), crudo — preparato 2026-10-30 dal task (sessantacinquesimo lotto)
+
+- **food_id**: `food_collo_di_tacchino_raw`. FDC ID 171086 (SR Legacy, "Turkey, whole, neck, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, release USDA 2026-04-30). Parte di tacchino mai tentata in questa pipeline.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 125kcal, proteine 16,5g, grassi 6,04g, carboidrati 0g, fibra 0g, calcio 24,0mg, ferro 1,01mg, magnesio 15,0mg, zinco 3,39mg, rame 0,14mg, selenio 28,6µg, sodio 233mg (**nota di trasparenza**: più alto della media di questa coda per il pollame — wing/jowl/feet sono 25-132mg — ma sotto la soglia ~300mg usata in questa coda come segnale di salamoia/iniezione, nessuna menzione di "enhanced"/"with added solution" in pagina, coerente con un tessuto a più alto contenuto di connettivo come il collo), vitamina C 0mg, vitamina B12 1,76µg, folato totale 5,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino crudo, già eseguito sul DB reale — stessa specie, pollame, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `collo_di_tacchino` ("Tacchino, collo (neck)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171086 --food-id=food_collo_di_tacchino_raw \
+  --name-it="Tacchino, collo (neck), crudo" \
+  --matrix-id=collo_di_tacchino --matrix-description-it="Tacchino, collo (neck)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171086 --food-id=food_collo_di_tacchino_raw \
+  --name-it="Tacchino, collo (neck), crudo" \
+  --matrix-id=collo_di_tacchino --matrix-description-it="Tacchino, collo (neck)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tacchino, collo (neck), cotto (bollito) — preparato 2026-10-30 dal task (sessantacinquesimo lotto, bonus trovato nella stessa ricerca del crudo)
+
+- **food_id**: `food_collo_di_tacchino_cotto`. FDC ID 171087 (SR Legacy, "Turkey, whole, neck, meat only, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, stesso identico trim del crudo sopra, FDC ID adiacente, release USDA 2026-04-30). Non richiesto esplicitamente in coda (che chiedeva solo il crudo), ma trovato senza una ricerca separata durante la stessa verifica — aggiunto come bonus oltre la riga di coda, stessa convenzione già usata in lotti precedenti.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 162kcal, proteine 22,5g, grassi 7,36g, carboidrati 0g, fibra 0g, calcio 58,0mg, ferro 1,18mg, magnesio 18,0mg, zinco 4,03mg, rame 0,16mg, selenio 36,2µg, sodio 246mg (coerente con il crudo 233mg, nessun salto anomalo che segnali salamoia aggiunta in cottura), vitamina C 0mg, vitamina B12 1,42µg, folato totale 7,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `collo_di_tacchino` (già creata dalla voce cruda sopra).
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (coerente con "simmered"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171087 --food-id=food_collo_di_tacchino_cotto \
+  --name-it="Tacchino, collo (neck), cotto (bollito)" \
+  --matrix-id=collo_di_tacchino --matrix-description-it="Tacchino, collo (neck)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171087 --food-id=food_collo_di_tacchino_cotto \
+  --name-it="Tacchino, collo (neck), cotto (bollito)" \
+  --matrix-id=collo_di_tacchino --matrix-description-it="Tacchino, collo (neck)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, petto (breast), cotto (brasato) — preparato 2026-10-30 dal task (sessantaquattresimo lotto)
 
 - **food_id**: `food_agnello_petto_cotto`. FDC ID 172610 (SR Legacy, "Lamb, New Zealand, imported, breast, separable lean only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, trovata solo con una ricerca mirata di secondo livello dopo che la prima ricerca per parole chiave aveva trovato solo il crudo; release USDA 2026-04-30). Taglio mai tentato in questa pipeline, stesso trim "separable lean only" del crudo sotto in questa stessa voce di coda.
