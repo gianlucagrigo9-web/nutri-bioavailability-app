@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello, macinato, crudo — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_agnello_macinato_raw`. FDC ID 174370 (SR Legacy, "Lamb, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per l'agnello (macinato), stesso filone del pollo/maiale macinato sopra e del tacchino macinato già eseguito.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 282kcal, proteine 16,6g, grassi 23,4g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,55mg, magnesio 21,0mg, zinco 3,41mg, rame 0,10mg, selenio 18,8µg, sodio 59,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 2,31µg, folato totale 18,0µg, vitamina K (fillochinone 3,60µg, diidrofillochinone 0µg), beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito).
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa forma di consumo "carne macinata cruda", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_macinato_raw` ("Agnello, macinato, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 18,0µg, valore tipico per agnello, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174370 --food-id=food_agnello_macinato_raw \
+  --name-it="Agnello, macinato, crudo" \
+  --matrix-id=agnello_macinato_raw --matrix-description-it="Agnello, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174370 --food-id=food_agnello_macinato_raw \
+  --name-it="Agnello, macinato, crudo" \
+  --matrix-id=agnello_macinato_raw --matrix-description-it="Agnello, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, macinato, cotto — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_maiale_macinato_cotto`. FDC ID 167903 (SR Legacy, "Pork, fresh, ground, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo sopra). Stessa forma di consumo del crudo sopra.
