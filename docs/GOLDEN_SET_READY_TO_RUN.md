@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_agnello_spezzatino_cotto`. FDC ID 172509 (SR Legacy, "Lamb, cubed for stew or kabob (leg and shoulder), separable lean only, trimmed to 1/4\" fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a cubetti per spezzatino/kebab", distinta dai tagli interi/composito "agnello, cotto" già coperto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 223kcal, proteine 33,7g, grassi 8,80g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 15,0mg, ferro 2,80mg, magnesio 28,0mg, zinco 6,58mg, rame 0,14mg, selenio 38,1µg, sodio 70,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 2,73µg, folato totale 21,0µg, vitamina K (fillochinone 4,40µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_agnello_cotto` (agnello cotto, composito generico, già eseguito sul DB reale — stessa specie, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `agnello_spezzatino_cotto` ("Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "braised"), `is_fortified_folate` omesso (false — folato 21,0µg, valore tipico, nessuna firma di arricchimento) — nota di trasparenza: nessuna pagina getfoodfacts.com dedicata trovata per il crudo con lo stesso trim "trimmed to 1/4\" fat, raw" (solo myfooddata.com/caloriefriend.com/fatsecret, senza un FDC ID verificabile su fonte getfoodfacts.com); quindi qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+
+```
+npm run add-food -- --fdc-id=172509 --food-id=food_agnello_spezzatino_cotto \
+  --name-it="Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato)" \
+  --matrix-id=agnello_spezzatino_cotto --matrix-description-it="Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172509 --food-id=food_agnello_spezzatino_cotto \
+  --name-it="Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato)" \
+  --matrix-id=agnello_spezzatino_cotto --matrix-description-it="Agnello, a cubetti per spezzatino/kebab (coscia e spalla), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_vitello_spezzatino_cotto`. FDC ID 175289 (SR Legacy, "Veal, cubed for stew (leg and shoulder), separable lean only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a cubetti per spezzatino", distinta dai tagli interi di vitello già coperti (vitello ha già tutti i sette tagli USDA standard dal lotto 70).
