@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Cavolfiore verde, cotto (bollito, senza sale) — preparato 2026-10-30 dal task (cinquantaseiesimo lotto, bonus)
+
+- **food_id**: `food_cavolfiore_verde_cotto`. FDC ID 169390 (SR Legacy, "Cauliflower, green, cooked, no salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente; la pagina stessa dichiara "uno dei 3 USDA descriptions of green cauliflower" insieme al crudo e alla variante con sale). Trovato durante la stessa ricerca del cavolfiore verde crudo in questo lotto (bonus, non conteggiato nel tetto di 12 valutati).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 32,0kcal, proteine 3,04g, grassi 0,31g, carboidrati 6,28g, fibra 3,30g, calcio 32,0mg, ferro 0,72mg, magnesio 19,0mg, zinco 0,63mg, selenio 0,80µg, sodio 23,0mg (coerente con "no salt added"), vitamina C 72,6mg, folato totale 41,0µg, vitamina B12 0µg (esplicito), vitamina K 20,8µg, vitamina A (RAE) 7,00µg, beta-carotene 86,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Nota: lieve incoerenza interna sulla pagina fra pannello etichetta (30kcal) e tabella dettagliata (32,0kcal) — stesso tipo di arrotondamento minore già visto altrove in questa coda, non bloccante. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169390 e dataType SR Legacy.
+- **Analogia usata**: `food_cavolfiore_cotto` (cavolfiore bianco generico cotto, già eseguito sul DB reale — stessa specie *Brassica oleracea*, stesso stato di cottura, differisce solo per cultivar/colore).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolfiore_verde_cotto` ("Cavolfiore verde, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico non separato riportato, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169390 --food-id=food_cavolfiore_verde_cotto \
+  --name-it="Cavolfiore verde, cotto (bollito, senza sale)" \
+  --matrix-id=cavolfiore_verde_cotto --matrix-description-it="Cavolfiore verde, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolfiore_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169390 --food-id=food_cavolfiore_verde_cotto \
+  --name-it="Cavolfiore verde, cotto (bollito, senza sale)" \
+  --matrix-id=cavolfiore_verde_cotto --matrix-description-it="Cavolfiore verde, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolfiore_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cavolfiore verde, crudo — preparato 2026-10-30 dal task (cinquantaseiesimo lotto)
+
+- **food_id**: `food_cavolfiore_verde_raw`. FDC ID 169389 (SR Legacy, "Cauliflower, green, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, trovata tramite la pagina di confronto `getfoodfacts.com/nutrition/green-cauliflower` che elenca le 3 preparazioni USDA del cavolfiore verde). Cultivar/colore di *Brassica oleracea* distinta dal cavolfiore bianco generico — il cui crudo resta ⚠ in questa coda per match debole (12/17, energia discordante), mentre questo record verde è pulito e completo.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 31,0kcal, proteine 2,95g, grassi 0,30g, carboidrati 6,09g, fibra 3,20g, calcio 33,0mg, ferro 0,73mg, magnesio 20,0mg, zinco 0,64mg, selenio 0,60µg, sodio 23,0mg, vitamina C 88,1mg, folato totale 57,0µg, vitamina B12 0µg (esplicito), vitamina K 20,2µg, vitamina A (RAE) 8,00µg, beta-carotene 93,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Tutte le differenze fra pannello etichetta e tabella dettagliata sono arrotondamenti FDA coerenti (es. calorie 19,8→20 per porzione), nessun valore realmente in conflitto. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169389 e dataType SR Legacy.
+- **Analogia usata**: `food_broccoli_raw` (stessa famiglia botanica reale Brassicaceae, stesso genere *Brassica oleracea* — stessa analogia già usata per il cavolfiore bianco cotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolfiore_verde` ("Cavolfiore verde").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico non separato riportato, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169389 --food-id=food_cavolfiore_verde_raw \
+  --name-it="Cavolfiore verde, crudo" \
+  --matrix-id=cavolfiore_verde --matrix-description-it="Cavolfiore verde" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169389 --food-id=food_cavolfiore_verde_raw \
+  --name-it="Cavolfiore verde, crudo" \
+  --matrix-id=cavolfiore_verde --matrix-description-it="Cavolfiore verde" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pomodoro arancione, crudo — preparato 2026-10-30 dal task (cinquantaseiesimo lotto, bonus)
+
+- **food_id**: `food_pomodoro_arancione_raw`. FDC ID 170502 (SR Legacy, "Tomatoes, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Trovato durante la stessa ricerca del pomodoro giallo in questo lotto (bonus, non conteggiato nel tetto di 12 valutati). Cultivar/colore di *Solanum lycopersicum* distinta dal pomodoro generico e dal pomodoro giallo di questo stesso lotto.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, nessuno riportato sulla pagina consultata, non assunti zero — nonostante la vitamina A RAE sia reale e non nulla, 75,0µg). Per 100g (valori presenti): energia 16,0kcal, proteine 1,16g, grassi 0,19g, carboidrati 3,18g, fibra 0,90g, calcio 5,00mg, ferro 0,47mg, magnesio 8,00mg, zinco 0,14mg, selenio 0,40µg, sodio 42,0mg, vitamina C 16,0mg, folato totale 29,0µg, vitamina B12 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170502 e dataType SR Legacy.
+- **Analogia usata**: `food_tomato_raw` (pomodoro generico, Golden Set/pipeline, già eseguito sul DB reale — stessa specie *Solanum lycopersicum*).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pomodoro_arancione` ("Pomodoro arancione").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (stato crudo, coerente con il pomodoro giallo di questo stesso lotto nonostante il beta-carotene non riportato — stessa convenzione già usata per l'arancia Valencia nel cinquantaquattresimo lotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170502 --food-id=food_pomodoro_arancione_raw \
+  --name-it="Pomodoro arancione, crudo" \
+  --matrix-id=pomodoro_arancione --matrix-description-it="Pomodoro arancione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170502 --food-id=food_pomodoro_arancione_raw \
+  --name-it="Pomodoro arancione, crudo" \
+  --matrix-id=pomodoro_arancione --matrix-description-it="Pomodoro arancione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pomodoro giallo, crudo — preparato 2026-10-30 dal task (cinquantaseiesimo lotto)
+
+- **food_id**: `food_pomodoro_giallo_raw`. FDC ID 170096 (SR Legacy, "Tomatoes, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar/colore di *Solanum lycopersicum* distinta dal pomodoro generico, dal pomodoro Roma del cinquantacinquesimo lotto e dal pomodorino/cherry già ⚠.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, nessuno riportato sulla pagina consultata, non assunti zero; vitamina A RAE 0µg esplicito, coerente con l'assenza di pigmentazione arancione/rossa). Per 100g (valori presenti): energia 15,0kcal, proteine 0,98g, grassi 0,26g, carboidrati 2,98g, fibra 0,70g, calcio 11,0mg, ferro 0,49mg, magnesio 12,0mg, zinco 0,28mg, selenio 0,40µg, sodio 23,0mg, vitamina C 9,00mg, folato totale 30,0µg, vitamina B12 0µg (esplicito). Nota: il pannello etichetta riporta calcio 20mg/porzione contro 15,3mg/porzione della tabella dettagliata (circa 30% di differenza, oltre il semplice arrotondamento) — usato il valore della tabella dettagliata, come da convenzione di questa coda. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170096 e dataType SR Legacy.
+- **Analogia usata**: `food_tomato_raw` (pomodoro generico, già eseguito sul DB reale — stessa specie *Solanum lycopersicum*).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pomodoro_giallo` ("Pomodoro giallo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (stato crudo; beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico non separato riportato, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170096 --food-id=food_pomodoro_giallo_raw \
+  --name-it="Pomodoro giallo, crudo" \
+  --matrix-id=pomodoro_giallo --matrix-description-it="Pomodoro giallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170096 --food-id=food_pomodoro_giallo_raw \
+  --name-it="Pomodoro giallo, crudo" \
+  --matrix-id=pomodoro_giallo --matrix-description-it="Pomodoro giallo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Broccoli cinesi (gai lan/kai-lan), crudi — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
 
 - **food_id**: `food_broccoli_cinesi_raw`. FDC ID 169404 (SR Legacy, "Broccoli, chinese, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente, release FoodData Central 30-04-2026). Specie *Brassica oleracea* var. *alboglabra* (gai lan/kai-lan), distinta dal broccolo comune del Golden Set (*Brassica oleracea* var. *italica*, `food_broccoli_raw`, già eseguito) e dal cavolo cinese/pak choi già eseguito (`food_cavolo_cinese_raw`, FDC 2685572, specie diversa *Brassica rapa* subsp. *chinensis* — non un doppione, specie botanica distinta).
