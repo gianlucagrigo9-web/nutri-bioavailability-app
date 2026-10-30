@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, carne scura, senza pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_tacchino_carne_scura_raw`. FDC ID 171090 (SR Legacy, "Turkey, whole, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita). Composito "carne scura" (coscia + fuso + ali, aggregato per anatomia USDA), distinto dal singolo taglio petto già eseguito (`food_petto_di_tacchino_raw`) — record FDC realmente diverso, mai tentato finora.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 108kcal, proteine 21,3g, grassi 2,50g, carboidrati 0,15g, fibra 0g, calcio 11,0mg, ferro 1,04mg, magnesio 25,0mg, zinco 2,59mg, rame 0,092mg, selenio 22,4µg, sodio 124mg (nel range tipico della carne scura di pollame, confrontato con la coscia con pelle (75mg) e senza pelle cotta della stessa specie (101-104mg); nessuna dicitura "with added solution" nel nome del record, non assunto come segnale di iniezione), vitamina C 0mg (esplicito), vitamina B12 2,05µg, folato totale 7,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Meleagris gallopavo*, stesso attributo `is_heme_iron`; nessun composito "carne scura" già eseguito per questa specie disponibile come analogia più stretta).
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `tacchino_carne_scura` ("Tacchino, carne scura, senza pelle").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171090 --food-id=food_tacchino_carne_scura_raw \
+  --name-it="Tacchino, carne scura, senza pelle, cruda" \
+  --matrix-id=tacchino_carne_scura --matrix-description-it="Tacchino, carne scura, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171090 --food-id=food_tacchino_carne_scura_raw \
+  --name-it="Tacchino, carne scura, senza pelle, cruda" \
+  --matrix-id=tacchino_carne_scura --matrix-description-it="Tacchino, carne scura, senza pelle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pollo, carne scura, senza pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_pollo_carne_scura_cotta`. FDC ID 171069 (SR Legacy, "Chicken, broilers or fryers, dark meat, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita). Composito "carne scura" (coscia + ali + dorso, aggregato per anatomia USDA), distinto dal singolo taglio coscia già eseguito (`food_coscia_di_pollo_cotta`, FDC 172853) — record FDC realmente diverso, mai tentato finora. Nota di trasparenza: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "dark meat, meat only, raw" semplice (solo "Chicken, roasting, dark meat, meat only, raw", FDC 173638, che è una specie USDA diversa, "roasting" non "broilers or fryers"); qui si prepara solo il cotto, voce isolata senza il crudo corrispondente, stesso schema già usato per il fuso di tacchino nel lotto 62.
