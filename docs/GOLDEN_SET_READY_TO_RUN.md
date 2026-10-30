@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, taglio per spezzatino (chuck), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_manzo_spezzatino_cotto`. FDC ID 171204 (SR Legacy, "Beef, chuck for stew, separable lean and fat, select, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, stesso identico trim/qualità "select" del crudo sopra).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 186kcal, proteine 32,3g, grassi 6,34g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 15,0mg, ferro 2,84mg, magnesio 23,0mg, zinco 8,47mg, rame 0,12mg, selenio 32,2µg, sodio 68,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 2,53µg, folato totale 8,00µg, vitamina K (fillochinone 1,60µg), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto, già eseguito sul DB reale — stessa specie, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_spezzatino_cotto` ("Manzo, taglio per spezzatino (chuck), cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "braised"), `is_fortified_folate` omesso (false — folato 8,00µg, valore tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171204 --food-id=food_manzo_spezzatino_cotto \
+  --name-it="Manzo, taglio per spezzatino (chuck), cotto (brasato)" \
+  --matrix-id=manzo_spezzatino_cotto --matrix-description-it="Manzo, taglio per spezzatino (chuck), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171204 --food-id=food_manzo_spezzatino_cotto \
+  --name-it="Manzo, taglio per spezzatino (chuck), cotto (brasato)" \
+  --matrix-id=manzo_spezzatino_cotto --matrix-description-it="Manzo, taglio per spezzatino (chuck), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, taglio per spezzatino (chuck), crudo — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_manzo_spezzatino_raw`. FDC ID 170809 (SR Legacy, "Beef, chuck for stew, separable lean and fat, select, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a pezzi per stufato/spezzatino", distinta dai tagli interi di manzo già coperti — seguendo la raccomandazione del settantunesimo lotto di verificare se USDA traccia "stew meat"/"cubed" come record distinti (manzo e agnello e vitello sì, pollo e maiale no — nessuna pagina getfoodfacts.com dedicata trovata per questi ultimi due).
