@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Grasso d'oca, fuso, crudo — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_grasso_doca_raw`. FDC ID 173572 (SR Legacy, "Fat, goose" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA FoodData Central, SR Legacy, FDC 173572", release USDA 2026-04-30). Secondo tentativo per un grasso d'oca dopo lo scarto del grasso d'anatra (duck fat) nel cinquantottesimo lotto per assenza di un FDC ID verificabile — qui invece una pagina getfoodfacts.com dedicata esiste, specie distinta (oca) mai cercata prima.
+- **Nutrienti**: **12/17**. Per 100g: energia 900kcal, proteine 0g (esplicito), grassi 99,8g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), magnesio 0mg (esplicito), zinco 0mg (esplicito), selenio 0,20µg (reale e non nullo, identico al pattern di strutto/grasso di manzo/grasso di pollo), sodio 0mg (esplicito), vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0µg (esplicito). Mancano (non riportati in pagina, non assunti zero): rame, vitamina K (fillochinone), beta-carotene, alfa-carotene, beta-criptoxantina — gap maggiore rispetto a strutto/grasso di manzo/grasso di pollo (tutti 17/17 in questa pipeline), ma comunque ben sopra la soglia di "match scarso" (~10/17) e coerente con un grasso puro a fonte singola SR Legacy. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173572 e dataType SR Legacy.
+- **Analogia usata**: `food_grasso_bovino_raw` (grasso di manzo/tallow, FDC 171400, già eseguito sul DB reale — stessa categoria funzionale "grasso animale fuso", stessa classificazione dieta `meat_fish`).
+- **Categoria dieta**: `meat_fish` (grasso animale, stessa convenzione già usata per strutto/grasso di manzo/grasso di pollo — non adatto a vegetariani/vegani).
+- **Matrice**: nuova `grasso_di_oca` ("Grasso d'oca, fuso, crudo").
+- **Attributi**: `is_heme_iron=false` (grasso puro, nessun ferro, stesso precedente di `food_grasso_bovino_raw`/`food_grasso_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina, non assunti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (grasso fuso/reso, stessa convenzione di strutto/grasso di manzo/pollo), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173572 --food-id=food_grasso_doca_raw \
+  --name-it="Grasso d'oca, fuso, crudo" \
+  --matrix-id=grasso_di_oca --matrix-description-it="Grasso d'oca, fuso, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_bovino_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173572 --food-id=food_grasso_doca_raw \
+  --name-it="Grasso d'oca, fuso, crudo" \
+  --matrix-id=grasso_di_oca --matrix-description-it="Grasso d'oca, fuso, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_bovino_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Grasso di pollo (schmaltz), fuso — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_grasso_di_pollo_raw`. FDC ID 173564 (SR Legacy, "Fat, chicken" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). Terzo grasso animale fuso di questa pipeline dopo strutto di maiale e grasso di manzo, mai tentato per il pollo.
