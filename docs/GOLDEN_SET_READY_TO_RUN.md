@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rucola (foglia matura, non baby), cruda — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
+
+- **food_id**: `food_rucola_matura_raw`. FDC ID 169387 (SR Legacy, "Arugula, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione**: l'unica rucola già eseguita sul DB reale, `food_rucola_raw`, è un record DIVERSO — FDC 2710822 "Arugula, baby, raw", dataType **Foundation Foods** (non SR Legacy), solo 11/17 nutrienti e senza nemmeno l'energia. Verificato esplicitamente fetchando la pagina della foglia baby: è un secondo record USDA distinto ("uno dei 2 USDA descriptions of arugula"), senza energia nella tabella dettagliata e con dataType diverso — non la stessa foglia a uno stadio diverso rappresentata dallo stesso ID, un prodotto commerciale realmente distinto (foglia baby vs foglia matura standard), stesso tipo di distinzione già accettata in questa pipeline per spinaci/kale baby vs standard quando entrambi i record esistono separatamente in FDC. Questo record (foglia matura/standard, SR Legacy, 17/17) è un miglioramento di qualità netto rispetto a quello già in DB, non solo un'aggiunta.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 25,0kcal, proteine 2,58g, grassi 0,66g, carboidrati 3,65g, fibra 1,60g, calcio 160mg, ferro 1,46mg, magnesio 47,0mg, zinco 0,47mg, selenio 0,30µg, sodio 27,0mg, vitamina C 15,0mg, folato totale 97,0µg, vitamina B12 0µg (esplicito), vitamina K 109µg, vitamina A (RAE) 119µg, beta-carotene 1424µg (reale e non nullo, alto e coerente con una foglia verde scura), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169387 e dataType SR Legacy.
+- **Analogia usata**: `food_broccoli_raw` (verdura a foglia/fiore della famiglia Brassicaceae, già eseguita sul DB reale — la rucola, *Eruca vesicaria*, appartiene alla stessa famiglia botanica reale).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessun ingrediente animale).
+- **Matrice**: nuova `rucola_matura` ("Rucola, foglia matura") — distinta dalla matrice eventualmente già usata per la rucola baby, per non confondere le due forme in futuro.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione già usata per `food_broccoli_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (famiglia botanica reale, *Eruca vesicaria*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con una verdura a foglia, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169387 --food-id=food_rucola_matura_raw \
+  --name-it="Rucola, foglia matura, cruda" \
+  --matrix-id=rucola_matura --matrix-description-it="Rucola, foglia matura" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169387 --food-id=food_rucola_matura_raw \
+  --name-it="Rucola, foglia matura, cruda" \
+  --matrix-id=rucola_matura --matrix-description-it="Rucola, foglia matura" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio cottage (creamed, a grana grossa o fine) — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
 
 - **food_id**: `food_formaggio_cottage_raw`. FDC ID 172179 (SR Legacy, "Cheese, cottage, creamed, large or small curd" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; esiste anche un record Survey/FNDDS distinto per lo stesso nome generico, FDC 2705748, scartato per convenzione già in uso in questa coda — Survey/FNDDS non accettato). Formaggio fresco a pasta granulosa mai tentato in questa pipeline, distinto dai formaggi freschi già coperti (ricotta, caprino fresco, formaggio cremoso tipo Philadelphia, mascarpone già ⚠ per assenza di record FDC).
