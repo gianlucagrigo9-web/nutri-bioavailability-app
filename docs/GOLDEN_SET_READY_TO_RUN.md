@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Filetto di maiale, cotto (arrosto) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_filetto_di_maiale_cotto`. FDC ID 168250 (SR Legacy, "Pork, fresh, loin, tenderloin, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA FoodData Central, SR Legacy, FDC 168250", release USDA 2026-04-30). Versione cotta del filetto di maiale, il cui crudo è già 🟡 in questa stessa coda (`food_filetto_di_maiale_raw`, FDC 168249, non ancora eseguito sul DB reale — quindi non usabile come analogia per la regola del punto 2c del COMPITO) — stesso schema cottura già usato per lonza/coscia di pollo/petto di tacchino in questa pipeline. Scartata esplicitamente la variante "with added solution" (FDC 169180), che indica salamoia/iniezione non rappresentativa dell'alimento "comune" richiesto.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 143kcal, proteine 26,2g, grassi 3,51g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 1,15mg, magnesio 29,0mg, zinco 2,42mg, rame 0,11mg, selenio 38,2µg, sodio 57,0mg (basso, coerente con carne arrosto non salata/non lavorata — non una firma di salamoia), vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,57µg, vitamina K (fillochinone 0µg + diidrofillochinone 0µg, entrambi espliciti), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168250 e dataType SR Legacy.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta/arrosto, FDC 168233, già eseguita sul DB reale — stesso animale, stesso taglio "lombo/muscolo magro di maiale" nella stessa trasformazione raw→roasted, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne, stessa convenzione del filetto crudo e della lonza).
+- **Matrice**: nuova `filetto_di_maiale_cotto` ("Filetto di maiale, cotto (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted` (coerente con "cooked, roasted" nel nome del record), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168250 --food-id=food_filetto_di_maiale_cotto \
+  --name-it="Filetto di maiale, cotto (arrosto)" \
+  --matrix-id=filetto_di_maiale_cotto --matrix-description-it="Filetto di maiale, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168250 --food-id=food_filetto_di_maiale_cotto \
+  --name-it="Filetto di maiale, cotto (arrosto)" \
+  --matrix-id=filetto_di_maiale_cotto --matrix-description-it="Filetto di maiale, cotto (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Grasso di manzo (sugna/tallow), fuso — preparato 2026-10-30 dal task (cinquantottesimo lotto)
 
 - **food_id**: `food_grasso_bovino_raw`. FDC ID 171400 (SR Legacy, "Fat, beef tallow" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). FDC ID adiacente a quello dello strutto di maiale già eseguito (171401, "Lard") — stessa serie USDA, specie animale distinta (bovino vs suino), non un doppione.
