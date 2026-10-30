@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cervo, carne cotta (arrosto) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_cervo_cotto`. FDC ID 175085 (SR Legacy, "Game meat, deer, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_cervo_raw` (FDC 173855) è già "Pronti" dal trentesimo lotto, non ancora eseguito sul DB reale; il cotto non era mai stato tentato.
+- **Nutrienti**: **12/17** (mancano vitamina B12, folato totale, vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati affatto sulla tabella di questa pagina, non assunti zero; gap più ampio del crudo, che su una pagina diversa riportava questi valori per intero). Per 100g: energia 158kcal, proteine 30,2g, grassi 3,19g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 7,00mg, ferro 4,47mg (alto, coerente con carne rossa magra di selvaggina), magnesio 24,0mg, zinco 2,75mg, rame 0,30mg, selenio 12,9µg, sodio 54,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito).
+- **Analogia usata**: `food_capra_cotta` (capra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria USDA "Game meat" cotta/arrosto, stesso attributo `is_heme_iron`; non usato il crudo `food_cervo_raw` della stessa specie perché ancora solo "Pronti", non eseguito sul DB reale — la regola del punto 2c richiede un'analogia a un alimento che esiste davvero nel DB).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cervo_cotto` ("Cervo, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "roasted"), `is_fortified_folate` omesso (false — folato non riportato su questa pagina, nessun dato su cui basare una firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175085 --food-id=food_cervo_cotto \
+  --name-it="Cervo, carne cotta (arrosto)" \
+  --matrix-id=cervo_cotto --matrix-description-it="Cervo, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175085 --food-id=food_cervo_cotto \
+  --name-it="Cervo, carne cotta (arrosto)" \
+  --matrix-id=cervo_cotto --matrix-description-it="Cervo, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, fegato, cotto (bollito) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_fegato_di_tacchino_cotto`. FDC ID 171487 (SR Legacy, "Turkey, all classes, liver, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_fegato_di_tacchino_raw` è già eseguito sul DB reale dal ventiduesimo lotto; il cotto non era mai stato tentato.
