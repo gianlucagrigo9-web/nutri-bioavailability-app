@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Manzo, costine (short ribs), cotte (brasate) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_costine_cotte`. FDC ID 168615 (SR Legacy, "Beef, rib, shortribs, separable lean only, choice, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168615", release USDA 2026-04-30). Versione cotta delle costine di manzo (short ribs, dalla costola — distinte dal "chuck short ribs" boneless, un taglio diverso dalla spalla non scelto qui), la cui cruda è anch'essa 🟡 in questo stesso lotto, stesso grado "choice" per coerenza — taglio mai tentato in questa pipeline per il manzo.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 295kcal, proteine 30,8g, grassi 18,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 11,0mg, ferro 3,36mg, magnesio 22,0mg, zinco 7,80mg, rame 0,11mg, selenio 22,1µg, sodio 58,0mg (basso, coerente con carne brasata non lavorata), vitamina C 0mg (esplicito), folato totale 7,00µg, vitamina B12 3,46µg, vitamina K (fillochinone) 1,90µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_costine_cotte` ("Manzo, costine (short ribs), cotte (brasate)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=braised` (coerente con "cooked, braised" nel nome del record — metodo di cottura tipico di questo taglio), `is_fortified_folate` omesso (false — folato 7,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168615 --food-id=food_manzo_costine_cotte \
+  --name-it="Manzo, costine (short ribs), cotte (brasate)" \
+  --matrix-id=manzo_costine_cotte --matrix-description-it="Manzo, costine (short ribs), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168615 --food-id=food_manzo_costine_cotte \
+  --name-it="Manzo, costine (short ribs), cotte (brasate)" \
+  --matrix-id=manzo_costine_cotte --matrix-description-it="Manzo, costine (short ribs), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, costine (short ribs), crude — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_costine_raw`. FDC ID 168614 (SR Legacy, "Beef, rib, shortribs, separable lean only, choice, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168614", release USDA 2026-04-30). Taglio dalla costola (distinto dal "chuck short ribs" boneless), mai tentato in questa pipeline per il manzo.
+- **Nutrienti**: **14/17**. Per 100g: energia 175kcal, proteine 19,1g, grassi 10,2g, carboidrati 0,40g, fibra 0g (esplicito), calcio 8,00mg, ferro 2,16mg, magnesio 22,0mg, zinco 4,78mg, rame 0,069mg, selenio 14,4µg, sodio 65,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 6,00µg, vitamina B12 3,39µg. Mancano (non riportati in pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A — gap tipico già visto per quasi tutti i tagli crudi di manzo in questa pipeline.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_costine_raw` ("Manzo, costine (short ribs), crude").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 6,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168614 --food-id=food_manzo_costine_raw \
+  --name-it="Manzo, costine (short ribs), crude" \
+  --matrix-id=manzo_costine_raw --matrix-description-it="Manzo, costine (short ribs), crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168614 --food-id=food_manzo_costine_raw \
+  --name-it="Manzo, costine (short ribs), crude" \
+  --matrix-id=manzo_costine_raw --matrix-description-it="Manzo, costine (short ribs), crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, pancia (flank steak), cotta (alla griglia) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_manzo_pancia_cotta`. FDC ID 168611 (SR Legacy, "Beef, flank, steak, separable lean only, trimmed to 0\" fat, choice, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168611", release USDA 2026-04-30). Versione cotta della pancia/bavetta di manzo (flank steak), la cui cruda è anch'essa 🟡 in questo stesso lotto, stesso grado "choice" per coerenza col crudo — taglio mai tentato in questa pipeline per il manzo. Nota sulla forma del taglio: come per lo stinco, il flank è anatomicamente un unico muscolo piatto venduto e tracciato da USDA come "steak" intero (non una frazione come "half"/porzione) — stessa convenzione già accettata per `food_bistecca_di_manzo_raw`/`cotta` (top sirloin steak) in questa pipeline.

@@ -1704,8 +1704,8 @@ Esplicitamente subordinato: non partire prima che Fasi 0-1 siano chiuse.
     - 🟡 Manzo, stinco (shank), cotto (brasato/stufato) (comando preparato in questo stesso run, vedi GOLDEN_SET_READY_TO_RUN.md — FDC 169442 SR Legacy "Beef, shank crosscuts, separable lean only, trimmed to 1/4\" fat, choice, cooked, simmered", **14/17 nutrienti** (stesso gap del crudo), analogia `food_beef_ground_cooked` (già eseguita sul DB reale), diet-category=meat_fish)
     - 🟡 Manzo, pancia (flank steak), cruda (comando preparato in questo stesso run, vedi GOLDEN_SET_READY_TO_RUN.md — FDC 168609 SR Legacy "Beef, flank, steak, separable lean only, trimmed to 0\" fat, choice, raw", **17/17 nutrienti** (record completo), analogia `food_beef_ground_raw` (già eseguita sul DB reale), diet-category=meat_fish)
     - 🟡 Manzo, pancia (flank steak), cotta (alla griglia) (comando preparato in questo stesso run, vedi GOLDEN_SET_READY_TO_RUN.md — FDC 168611 SR Legacy "Beef, flank, steak, separable lean only, trimmed to 0\" fat, choice, cooked, broiled", **17/17 nutrienti** (record completo), analogia `food_beef_ground_cooked` (già eseguita sul DB reale), diet-category=meat_fish)
-    - Manzo, costine (short ribs), crude
-    - Manzo, costine (short ribs), cotte (brasate)
+    - 🟡 Manzo, costine (short ribs), crude (comando preparato in questo stesso run, vedi GOLDEN_SET_READY_TO_RUN.md — FDC 168614 SR Legacy "Beef, rib, shortribs, separable lean only, choice, raw", **14/17 nutrienti** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A), analogia `food_beef_ground_raw` (già eseguita sul DB reale), diet-category=meat_fish)
+    - 🟡 Manzo, costine (short ribs), cotte (brasate) (comando preparato in questo stesso run, vedi GOLDEN_SET_READY_TO_RUN.md — FDC 168615 SR Legacy "Beef, rib, shortribs, separable lean only, choice, cooked, braised", **17/17 nutrienti** (record completo), analogia `food_beef_ground_cooked` (già eseguita sul DB reale), diet-category=meat_fish)
     - Manzo, noce (knuckle/sirloin tip), cruda
     - Manzo, noce (knuckle/sirloin tip), cotta (arrosto)
     - Vitello, stinco (per osso buco), crudo
