@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vitello, macinato, crudo — preparato 2026-10-30 dal task (settantunesimo lotto)
+
+- **food_id**: `food_vitello_macinato_raw`. FDC ID 175290 (SR Legacy, "Veal, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il vitello (macinato) in questa pipeline — con vitello già completo su tutti i sette tagli USDA-tracciati dal lotto 70, questo è un filone distinto ("forma di consumo", non taglio) sulla stessa scia del tacchino macinato. Il vitello è ora anche la quarta specie di carne (dopo manzo, tacchino, e insieme a pollo/maiale/agnello in questo stesso lotto) ad avere il macinato in pipeline.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 197kcal, proteine 18,6g, grassi 13,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 1,37mg, magnesio 31,0mg, zinco 2,51mg, rame 0,088mg, selenio 13,1µg, sodio 103mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 2,28µg, folato totale 3,00µg, vitamina K (fillochinone) 1,40µg, beta-carotene 0µg (esplicito), altri carotenoidi provitaminici A 0µg (esplicito).
+- **Analogia usata**: `food_beef_ground_raw` (Golden Set originale, manzo macinato crudo, già eseguito sul DB reale — stessa forma di consumo "carne macinata cruda", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_macinato_raw` ("Vitello, macinato, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 3,00µg, valore tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175290 --food-id=food_vitello_macinato_raw \
+  --name-it="Vitello, macinato, crudo" \
+  --matrix-id=vitello_macinato_raw --matrix-description-it="Vitello, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175290 --food-id=food_vitello_macinato_raw \
+  --name-it="Vitello, macinato, crudo" \
+  --matrix-id=vitello_macinato_raw --matrix-description-it="Vitello, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, macinato, cotto (alla griglia) — preparato 2026-10-30 dal task (settantunesimo lotto)
 
 - **food_id**: `food_agnello_macinato_cotto`. FDC ID 172544 (SR Legacy, "Lamb, ground, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stessa forma di consumo del crudo sopra.
