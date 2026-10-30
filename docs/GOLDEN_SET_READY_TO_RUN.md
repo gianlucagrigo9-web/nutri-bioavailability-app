@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pancetta di maiale, cotta (in padella) — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
+
+- **food_id**: `food_pancetta_cotta`. FDC ID 168322 (SR Legacy, "Pork, cured, bacon, pre-sliced, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di cottura mai tentata per la pancetta, la cui versione cruda (`food_pancetta_raw`, FDC 168277) è già eseguita sul DB reale. "Pre-sliced" descrive solo la forma commerciale di vendita (la pancetta/bacon USA è tipicamente già affettata), non un ingrediente aggiunto — nessuna lista ingredienti in pagina, nessun additivo dichiarato oltre la curatura già presente nel crudo.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 468kcal, proteine 33,9g, grassi 35,1g, carboidrati 1,70g, fibra 0g (esplicito), calcio 11,0mg, ferro 0,95mg, magnesio 31,0mg, zinco 3,06mg, rame 0,10mg, selenio 50,7µg, sodio 1684mg (alto ma coerente con un salume stagionato/salato dopo cottura: la pancetta cruda di questa pipeline ha già 751mg/100g, e la cottura in padella concentra i nutrienti per perdita di acqua/grasso — non un segnale di arricchimento, lo zucchero/acido folico restano 0g/0µg espliciti), vitamina C 0mg (esplicito), folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 1,09µg, vitamina K (fillochinone) 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168322 e dataType SR Legacy.
+- **Analogia usata**: `food_pancetta_raw` (pancetta cruda, FDC 168277, già eseguita sul DB reale — stesso prodotto, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (salume di maiale).
+- **Matrice**: nuova `pancetta_cotta` ("Pancetta di maiale, cotta (in padella)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale, stesso precedente di `food_pancetta_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (coerente con "pan-fried" nel nome del record — stessa convenzione "cooked" generico già usata per salumi cotti in padella/forno in questa pipeline), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168322 --food-id=food_pancetta_cotta \
+  --name-it="Pancetta di maiale, cotta (in padella)" \
+  --matrix-id=pancetta_cotta --matrix-description-it="Pancetta di maiale, cotta (in padella)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168322 --food-id=food_pancetta_cotta \
+  --name-it="Pancetta di maiale, cotta (in padella)" \
+  --matrix-id=pancetta_cotta --matrix-description-it="Pancetta di maiale, cotta (in padella)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino macinato, cotto — preparato 2026-10-30 dal task (cinquantanovesimo lotto)
 
 - **food_id**: `food_tacchino_macinato_cotto`. FDC ID 171506 (SR Legacy, "Turkey, Ground, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo mai tentata per il tacchino (macinato), sulla stessa scia del manzo macinato già presente nel Golden Set originale. Record generico (non specifica % magro, a differenza di altre varianti "93% lean/7% fat" trovate nella stessa ricerca ma scartate per restare sulla voce più generica/comune).
