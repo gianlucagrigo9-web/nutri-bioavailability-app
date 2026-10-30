@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
+
+- **food_id**: `food_vitello_spezzatino_cotto`. FDC ID 175289 (SR Legacy, "Veal, cubed for stew (leg and shoulder), separable lean only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma di consumo "a cubetti per spezzatino", distinta dai tagli interi di vitello già coperti (vitello ha già tutti i sette tagli USDA standard dal lotto 70).
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati affatto su questa pagina, non assunti zero). Per 100g: energia 188kcal, proteine 34,9g, grassi 4,31g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 29,0mg, ferro 1,44mg, magnesio 28,0mg, zinco 6,01mg, rame 0,15mg, selenio 15,2µg, sodio 93,0mg (basso, nessun segnale di salamoia), vitamina C 0mg (esplicito), vitamina B12 1,67µg, folato totale 16,0µg.
+- **Analogia usata**: `food_vitello_cotto` (vitello cotto, composito generico, già eseguito sul DB reale — stessa specie, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `vitello_spezzatino_cotto` ("Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "braised"), `is_fortified_folate` omesso (false — folato 16,0µg, valore tipico, nessuna firma di arricchimento) — nota di trasparenza: nessuna pagina getfoodfacts.com dedicata trovata per il crudo con lo stesso trim "separable lean only, raw" (solo recipal.com/triagemethod.com/bodbot.com/myfooddata.com/uhhospitals.org, senza un FDC ID verificabile su fonte getfoodfacts.com); quindi qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
+
+```
+npm run add-food -- --fdc-id=175289 --food-id=food_vitello_spezzatino_cotto \
+  --name-it="Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato)" \
+  --matrix-id=vitello_spezzatino_cotto --matrix-description-it="Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175289 --food-id=food_vitello_spezzatino_cotto \
+  --name-it="Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato)" \
+  --matrix-id=vitello_spezzatino_cotto --matrix-description-it="Vitello, a cubetti per spezzatino (coscia e spalla), cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, taglio per spezzatino (chuck), cotto (brasato) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_manzo_spezzatino_cotto`. FDC ID 171204 (SR Legacy, "Beef, chuck for stew, separable lean and fat, select, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, stesso identico trim/qualità "select" del crudo sopra).
