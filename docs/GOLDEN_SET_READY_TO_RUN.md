@@ -16,6 +16,222 @@
 
 ## Pronti
 
+### Pera Bartlett, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_pera_bartlett_raw`. FDC ID 167776 (SR Legacy, "Pears, raw, bartlett (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Cultivar di *Pyrus communis* distinta dalla pera generica del Golden Set originale (`food_pear_raw`, FDC 169118).
+- **Nutrienti**: **16/17** — manca solo vitamina B12 (nessuna riga sulla pagina consultata, non assunta zero). Per 100g (valori presenti): energia 63,0kcal, proteine 0,39g, grassi 0,16g, carboidrati 15,0g, fibra 3,10g, calcio 9,00mg, ferro 0,19mg, zinco 0,080mg, magnesio 6,00mg, selenio 0,10µg, vitamina C 4,40mg, folato totale 6,00µg, vitamina K 3,80µg, beta-carotene 14,0µg, alfa-carotene 2,00µg, beta-criptoxantina 3,00µg (tutti i carotenoidi reali e non nulli). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167776 e dataType SR Legacy.
+- **Analogia usata**: `food_pear_raw` (pera cruda, Golden Set originale, stessa specie *Pyrus communis*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `pera_bartlett` ("Pera Bartlett").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (carotenoidi reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167776 --food-id=food_pera_bartlett_raw \
+  --name-it="Pera Bartlett, cruda" \
+  --matrix-id=pera_bartlett --matrix-description-it="Pera Bartlett" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167776 --food-id=food_pera_bartlett_raw \
+  --name-it="Pera Bartlett, cruda" \
+  --matrix-id=pera_bartlett --matrix-description-it="Pera Bartlett" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Zucca invernale Acorn, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_zucca_acorn_raw`. FDC ID 168472 (SR Legacy, "Squash, winter, acorn, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Cucurbita pepo* distinta dalla zucca butternut (*Cucurbita moschata*) già eseguita.
+- **Nutrienti**: **16/17** — manca solo vitamina K (nessuna riga sulla pagina consultata, non assunta zero). Per 100g (valori presenti): energia 40,0kcal, proteine 0,80g, grassi 0,10g, carboidrati 10,4g, fibra 1,50g, calcio 33,0mg, ferro 0,70mg, zinco 0,13mg, magnesio 32,0mg, selenio 0,50µg, vitamina C 11,0mg, folato totale 17,0µg, vitamina B12 0µg esplicito, beta-carotene 220µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 3,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168472 e dataType SR Legacy.
+- **Analogia usata**: `food_zucca_butternut_raw` (zucca invernale butternut, stessa famiglia Cucurbitaceae, stesso tipo di prodotto "zucca invernale", già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_acorn` ("Zucca invernale Acorn").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168472 --food-id=food_zucca_acorn_raw \
+  --name-it="Zucca invernale Acorn, cruda" \
+  --matrix-id=zucca_acorn --matrix-description-it="Zucca invernale Acorn" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucca_butternut_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168472 --food-id=food_zucca_acorn_raw \
+  --name-it="Zucca invernale Acorn, cruda" \
+  --matrix-id=zucca_acorn --matrix-description-it="Zucca invernale Acorn" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucca_butternut_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Patata bianca, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_patata_bianca_raw`. FDC ID 170028 (SR Legacy, "Potatoes, white, flesh and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Solanum tuberosum* distinta dalla patata generica (`food_potato_raw`, FDC 170026) e dalla patata rossa già fatta nel lotto precedente (FDC 170029).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 69,0kcal, proteine 1,68g, grassi 0,10g, carboidrati 15,7g, fibra 2,40g, calcio 9,00mg, ferro 0,52mg, zinco 0,29mg, magnesio 21,0mg, selenio 0,30µg, vitamina C 9,10mg, folato totale 18,0µg, vitamina B12 0µg esplicito, vitamina K 1,60µg, beta-carotene 5,00µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 16,0mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170028 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, stesso tubero, stessa famiglia botanica, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `patata_bianca` ("Patata bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170028 --food-id=food_patata_bianca_raw \
+  --name-it="Patata bianca, cruda" \
+  --matrix-id=patata_bianca --matrix-description-it="Patata bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170028 --food-id=food_patata_bianca_raw \
+  --name-it="Patata bianca, cruda" \
+  --matrix-id=patata_bianca --matrix-description-it="Patata bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Patata Russet, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_patata_russet_raw`. FDC ID 170027 (SR Legacy, "Potatoes, russet, flesh and skin, raw (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Solanum tuberosum* distinta dalla patata generica (`food_potato_raw`, FDC 170026) e dalla patata rossa già fatta nel lotto precedente (FDC 170029).
+- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 79,0kcal, proteine 2,14g, grassi 0,080g, carboidrati 18,1g, fibra 1,30g, calcio 13,0mg, ferro 0,86mg, zinco 0,29mg, magnesio 23,0mg, selenio 0,40µg, vitamina C 5,70mg, folato totale 14,0µg, vitamina B12 0µg esplicito, vitamina K 1,80µg, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Sodio 5,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170027 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, stesso tubero, stessa famiglia botanica, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `patata_russet` ("Patata Russet").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi tracciati 0µg espliciti, nessun carotenoide reale da qualificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170027 --food-id=food_patata_russet_raw \
+  --name-it="Patata Russet, cruda" \
+  --matrix-id=patata_russet --matrix-description-it="Patata Russet" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170027 --food-id=food_patata_russet_raw \
+  --name-it="Patata Russet, cruda" \
+  --matrix-id=patata_russet --matrix-description-it="Patata Russet" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Mela Fuji, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_mela_fuji_raw`. FDC ID 167793 (SR Legacy, "Apples, raw, fuji, with skin (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Malus domestica* distinta dalla mela generica del Golden Set originale (`food_apple_with_skin_raw`, FDC 171688).
+- **Nutrienti**: **15/17** — mancano vitamina C e vitamina B12 (nessuna riga sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 63,0kcal, proteine 0,20g, grassi 0,18g, carboidrati 15,2g, fibra 2,10g, calcio 7,00mg, ferro 0,10mg, zinco 0,040mg, magnesio 5,00mg, selenio 0µg esplicito, folato totale 3,00µg, vitamina K 1,00µg, beta-carotene 17,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 11,0µg (reale, non nullo). Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167793 e dataType SR Legacy.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mela_fuji` ("Mela Fuji").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167793 --food-id=food_mela_fuji_raw \
+  --name-it="Mela Fuji, cruda" \
+  --matrix-id=mela_fuji --matrix-description-it="Mela Fuji" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167793 --food-id=food_mela_fuji_raw \
+  --name-it="Mela Fuji, cruda" \
+  --matrix-id=mela_fuji --matrix-description-it="Mela Fuji" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Mela Gala, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_mela_gala_raw`. FDC ID 168204 (SR Legacy, "Apples, raw, gala, with skin (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Malus domestica* distinta dalla mela generica e dalle altre cultivar di questo stesso lotto.
+- **Nutrienti**: **15/17** — mancano vitamina C e vitamina B12 (nessuna riga sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 57,0kcal, proteine 0,25g, grassi 0,12g, carboidrati 13,7g, fibra 2,30g, calcio 7,00mg, ferro 0,12mg, zinco 0,050mg, magnesio 5,00mg, selenio 0µg esplicito, folato totale 3,00µg, vitamina K 1,30µg, beta-carotene 11,0µg e beta-criptoxantina 11,0µg (entrambi reali e non nulli), alfa-carotene 0µg esplicito. Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168204 e dataType SR Legacy.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mela_gala` ("Mela Gala").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168204 --food-id=food_mela_gala_raw \
+  --name-it="Mela Gala, cruda" \
+  --matrix-id=mela_gala --matrix-description-it="Mela Gala" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168204 --food-id=food_mela_gala_raw \
+  --name-it="Mela Gala, cruda" \
+  --matrix-id=mela_gala --matrix-description-it="Mela Gala" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Mela Granny Smith, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_mela_granny_smith_raw`. FDC ID 168203 (SR Legacy, "Apples, raw, granny smith, with skin (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Malus domestica* distinta dalla mela generica e dalle altre cultivar di questo stesso lotto.
+- **Nutrienti**: **15/17** — mancano vitamina C e vitamina B12 (nessuna riga sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 58,0kcal, proteine 0,44g, grassi 0,19g, carboidrati 13,6g, fibra 2,80g, calcio 5,00mg, ferro 0,15mg, zinco 0,040mg, magnesio 5,00mg, selenio 0,10µg, folato totale 3,00µg, vitamina K 3,20µg, beta-carotene 59,0µg e beta-criptoxantina 2,00µg (entrambi reali e non nulli), alfa-carotene 0µg esplicito. Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168203 e dataType SR Legacy.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mela_granny_smith` ("Mela Granny Smith").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168203 --food-id=food_mela_granny_smith_raw \
+  --name-it="Mela Granny Smith, cruda" \
+  --matrix-id=mela_granny_smith --matrix-description-it="Mela Granny Smith" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168203 --food-id=food_mela_granny_smith_raw \
+  --name-it="Mela Granny Smith, cruda" \
+  --matrix-id=mela_granny_smith --matrix-description-it="Mela Granny Smith" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Mela Golden Delicious, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_mela_golden_delicious_raw`. FDC ID 168202 (SR Legacy, "Apples, raw, golden delicious, with skin" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar di *Malus domestica* distinta dalla mela generica e dalle altre cultivar di questo stesso lotto.
+- **Nutrienti**: **15/17** — mancano vitamina C e vitamina B12 (nessuna riga sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 57,0kcal, proteine 0,28g, grassi 0,15g, carboidrati 13,6g, fibra 2,40g, calcio 6,00mg, ferro 0,13mg, zinco 0,040mg, magnesio 5,00mg, selenio 0µg esplicito, folato totale 3,00µg, vitamina K 1,80µg, beta-carotene 25,0µg e beta-criptoxantina 12,0µg (entrambi reali e non nulli), alfa-carotene 0µg esplicito. Sodio 2,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168202 e dataType SR Legacy.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mela_golden_delicious` ("Mela Golden Delicious").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168202 --food-id=food_mela_golden_delicious_raw \
+  --name-it="Mela Golden Delicious, cruda" \
+  --matrix-id=mela_golden_delicious --matrix-description-it="Mela Golden Delicious" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168202 --food-id=food_mela_golden_delicious_raw \
+  --name-it="Mela Golden Delicious, cruda" \
+  --matrix-id=mela_golden_delicious --matrix-description-it="Mela Golden Delicious" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Mela Red Delicious, cruda — preparato 2026-10-30 dal task (cinquantitreesimo lotto)
+
+- **food_id**: `food_mela_red_delicious_raw`. FDC ID 168201 (SR Legacy, "Apples, raw, red delicious, with skin (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release FoodData Central 30-04-2026). Cultivar di *Malus domestica* distinta dalla mela generica del Golden Set originale (`food_apple_with_skin_raw`, FDC 171688).
+- **Nutrienti**: **15/17** — mancano vitamina C e vitamina B12 (nessuna riga sulla pagina consultata, non assunte zero). Per 100g (valori presenti): energia 59,0kcal, proteine 0,27g, grassi 0,20g, carboidrati 14,1g, fibra 2,30g, calcio 6,00mg, ferro 0,11mg, zinco 0,040mg, magnesio 5,00mg, selenio 0µg esplicito, folato totale 3,00µg, vitamina K 2,60µg, beta-carotene 27,0µg e beta-criptoxantina 12,0µg (entrambi reali e non nulli), alfa-carotene 0µg esplicito. Sodio 1,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168201 e dataType SR Legacy.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mela_red_delicious` ("Mela Red Delicious").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene e beta-criptoxantina reali non nulli, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168201 --food-id=food_mela_red_delicious_raw \
+  --name-it="Mela Red Delicious, cruda" \
+  --matrix-id=mela_red_delicious --matrix-description-it="Mela Red Delicious" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168201 --food-id=food_mela_red_delicious_raw \
+  --name-it="Mela Red Delicious, cruda" \
+  --matrix-id=mela_red_delicious --matrix-description-it="Mela Red Delicious" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
 ### Fagioli azuki, in scatola, dolci (zuccherati) — preparato 2026-10-30 dal task (cinquantiduesimo lotto)
 
 - **food_id**: `food_fagioli_azuki_in_scatola`. FDC ID 173729 (SR Legacy, "Beans, adzuki, mature seeds, canned, sweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza importante**: l'UNICO record FDC trovato per "fagioli azuki in scatola" in nessuna fonte consultata è questa variante dolce/zuccherata in stile dessert asiatico (an/anko) — nessun record "plain"/salato/semplice trovato. Energia 237kcal e carboidrati 55g/100g sono coerenti con l'aggiunta di zucchero. Rappresenta quindi un prodotto diverso da ciò che un utente italiano immaginerebbe per "fagioli in scatola", ma è l'unico alimento reale esistente sotto questo nome in FDC — stessa logica già accettata per la salsa di mirtilli rossi (necessariamente zuccherata) nel cinquantunesimo lotto. Distinto da `food_fagioli_azuki_raw`/`food_fagioli_azuki_bolliti` (forma secca, già eseguite): qui la conserva in scatola, forma mai tentata.
