@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, collo (neck), con pelle, crudo — preparato 2026-10-30 dal task (sessantanovesimo lotto)
+
+- **food_id**: `food_pollo_collo_con_pelle_raw`. FDC ID 172382 (SR Legacy, "Chicken, broilers or fryers, neck, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte distinta dal collo "meat only" già visto altrove in questa pipeline (collo di tacchino, `food_collo_di_tacchino_raw`/`food_collo_di_tacchino_cotto`, solo "Pronti", non ancora eseguiti sul DB reale) — qui è il collo di pollo, specie e trim diversi ("meat and skin" vs "meat only"), mai tentato finora. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il cotto semplice "neck, meat and skin, cooked, simmered" (solo le varianti fritte in pastella/farina hanno pagina dedicata, oltre a recipal.com/triagemethod.com/fatsecret per il semplice "simmered" senza un FDC ID verificabile su fonte getfoodfacts). Qui si prepara solo il crudo, il cotto resta ⚠ in `docs/PRD.md`.
+- **Nutrienti**: **14/17** (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A — non riportati in pagina, non assunti zero). Per 100g: energia 297kcal, proteine 14,1g, grassi 26,2g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 18,0mg, ferro 1,90mg, magnesio 13,0mg, zinco 1,86mg, rame 0,080mg, selenio 12,0µg, sodio 64,0mg (basso, nessun segnale di salamoia/iniezione), vitamina C 0mg (esplicito), vitamina B12 0,26µg, folato totale 5,00µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stesso attributo `is_heme_iron`, stessa categoria funzionale "carne di pollame crudo").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `pollo_collo_con_pelle_raw` ("Pollo, collo (neck), con pelle, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 5,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172382 --food-id=food_pollo_collo_con_pelle_raw \
+  --name-it="Pollo, collo (neck), con pelle, crudo" \
+  --matrix-id=pollo_collo_con_pelle_raw --matrix-description-it="Pollo, collo (neck), con pelle, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172382 --food-id=food_pollo_collo_con_pelle_raw \
+  --name-it="Pollo, collo (neck), con pelle, crudo" \
+  --matrix-id=pollo_collo_con_pelle_raw --matrix-description-it="Pollo, collo (neck), con pelle, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, dorso (back), con pelle, cotto (arrosto) — preparato 2026-10-30 dal task (sessantanovesimo lotto)
 
 - **food_id**: `food_tacchino_dorso_con_pelle_cotto`. FDC ID 171092 (SR Legacy, "Turkey, all classes, back, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stessa parte "dorso" mai tentata del pollo sopra, qui per il tacchino. **Nota di trasparenza sull'asimmetria crudo/cotto**: nessuna pagina getfoodfacts.com dedicata trovata per il crudo "all classes, back, meat and skin, raw" dello stesso trim (solo recipal.com/bodbot.com/uhhospitals.org, nessun FDC ID su fonte getfoodfacts). Qui si prepara solo il cotto, il crudo resta ⚠ in `docs/PRD.md`.
