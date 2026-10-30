@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tacchino, coscia, con pelle, cotta (arrosto) — preparato 2026-10-30 dal task (sessantottesimo lotto)
+
+- **food_id**: `food_coscia_di_tacchino_con_pelle_cotta`. FDC ID 171137 (SR Legacy, "Turkey, retail parts, thigh, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, stesso trim "carne e pelle" del crudo sopra). A differenza del pollo, qui sia il crudo sia il cotto hanno una pagina dedicata pulita per il trim semplice "arrosto".
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 183kcal, proteine 23,9g, grassi 9,50g, carboidrati 0,41g, fibra 0g, calcio 4,00mg, ferro 1,50mg, magnesio 21,0mg, zinco 3,00mg, rame 0,089mg, selenio 27,3µg, sodio 101mg (basso/borderline — confrontato con la variante "with added solution" della stessa specie, FDC 171131, pari a 201mg/100g, questo valore è coerente con un prodotto non iniettato), vitamina C 0mg (esplicito), vitamina B12 1,67µg, folato totale 8,00µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (petto di tacchino cotto, già eseguito sul DB reale — stessa specie, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`; `food_coscia_di_tacchino_cotta` "meat only" non riusabile come analogia perché solo "Pronti").
+- **Categoria dieta**: `meat_fish` (carne animale).
+- **Matrice**: nuova `coscia_di_tacchino_con_pelle_cotta` ("Tacchino, coscia, con pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_tacchino_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 8,00µg, valore tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171137 --food-id=food_coscia_di_tacchino_con_pelle_cotta \
+  --name-it="Tacchino, coscia, con pelle, cotta (arrosto)" \
+  --matrix-id=coscia_di_tacchino_con_pelle_cotta --matrix-description-it="Tacchino, coscia, con pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171137 --food-id=food_coscia_di_tacchino_con_pelle_cotta \
+  --name-it="Tacchino, coscia, con pelle, cotta (arrosto)" \
+  --matrix-id=coscia_di_tacchino_con_pelle_cotta --matrix-description-it="Tacchino, coscia, con pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tacchino, coscia, con pelle, cruda — preparato 2026-10-30 dal task (sessantottesimo lotto)
 
 - **food_id**: `food_coscia_di_tacchino_con_pelle_raw`. FDC ID 171533 (SR Legacy, "Turkey, retail parts, thigh, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, trovata navigando la pagina di indice "turkey-thigh" di getfoodfacts.com). Variante "carne e pelle" della coscia di tacchino, distinta dalla variante "meat only" già preparata (ma non ancora eseguita sul DB reale) — record FDC realmente distinto.
