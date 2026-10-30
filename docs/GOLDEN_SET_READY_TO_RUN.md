@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pancetta canadese (Canadian bacon, lombo di maiale affumicato non cotto) — preparato 2026-10-30 dal task (cinquantottesimo lotto)
+
+- **food_id**: `food_pancetta_canadese_raw`. FDC ID 167869 (SR Legacy, "Canadian bacon, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Pork Products", release USDA 2026-04-30; la pagina nota esplicitamente "one of 3 USDA descriptions of canadian bacon"). Distinta dalla pancetta italiana già eseguita (`food_pancetta_raw`, FDC 168277 "Pork, cured, bacon, unprepared") — stesso concetto "pancetta di maiale cruda affumicata" ma taglio anatomico diverso (lombo/lonza per la pancetta canadese, pancia per quella italiana), FDC ID distinto, non un doppione.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 110kcal, proteine 20,3g, grassi 2,62g, carboidrati 1,34g, fibra 0g, calcio 6,00mg, ferro 0,44mg, magnesio 20,0mg, zinco 1,23mg, rame 0,053mg, selenio 37,1µg, sodio 751mg (non mappato dal motore, solo per contesto), vitamina C 0mg (esplicito), folato totale 4,00µg, vitamina B12 0,37µg, beta-carotene 0µg (esplicito), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). **Nota di trasparenza sulla vitamina K**: la pagina riporta tre righe distinte per la vitamina K (Menaquinone-4 3,50µg, Dihydrophylloquinone 0µg, Phylloquinone 0µg) invece di un unico totale — tipico dei salumi stagionati/fermentati (già osservato altrove in questa pipeline). Il motore (`lib/fdc/nutrientMapping.ts`) mappa solo FDC #430 "Vitamin K (phylloquinone)", quindi il valore scritto è **0µg esplicito** (non il totale delle tre forme, che sarebbe 3,90µg) — scelta coerente con la mappatura già in uso per ogni altro alimento di questa pipeline, non un'eccezione introdotta qui. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167869 e dataType SR Legacy.
+- **Analogia usata**: `food_pancetta_raw` (pancetta italiana, FDC 168277, già eseguita sul DB reale — stessa categoria "pancetta di maiale cruda affumicata", stesso `is_heme_iron=true`).
+- **Categoria dieta**: `meat_fish` (carne di maiale).
+- **Matrice**: nuova `pancetta_canadese` ("Pancetta canadese, lombo di maiale affumicato").
+- **Attributi**: `is_heme_iron=true` (carne), `matrix_category_calcium` omesso (NULL, stessa convenzione dei salumi già eseguiti), `carotenoid_matrix_state` omesso (NULL, nessun pigmento vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (prodotto animale), `baseline_cooking_state=raw` (FDC "unprepared" = non cotta), `is_fortified_folate` omesso (false — folato 4µg coerente con un salume di carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167869 --food-id=food_pancetta_canadese_raw \
+  --name-it="Pancetta canadese (lombo di maiale affumicato), non cotta" \
+  --matrix-id=pancetta_canadese --matrix-description-it="Pancetta canadese, lombo di maiale affumicato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167869 --food-id=food_pancetta_canadese_raw \
+  --name-it="Pancetta canadese (lombo di maiale affumicato), non cotta" \
+  --matrix-id=pancetta_canadese --matrix-description-it="Pancetta canadese, lombo di maiale affumicato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Knockwurst (knackwurst, wurstel tedesco di maiale e manzo) — preparato 2026-10-30 dal task (cinquantottesimo lotto)
 
 - **food_id**: `food_knockwurst_cotto`. FDC ID 173867 (SR Legacy, "Knackwurst, knockwurst, pork, beef" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Sausages and Luncheon Meats", release USDA 2026-04-30). Primo salume/insaccato tedesco di questa pipeline (wurstel di manzo/pollo restano solo "Pronti" non eseguiti, quindi non utilizzabili come analogia — vedi sotto). **Nota sullo stato di cottura**: la descrizione FDC non riporta esplicitamente "raw"/"cooked", ma il knockwurst/knackwurst è per definizione un insaccato affumicato e precotto in fabbrica (categoria distinta dal bratwurst fresco crudo, che infatti non ha trovato un record FDC generico utilizzabile in questo stesso turno — vedi ⚠ sotto) — `baseline_cooking_state=cooked` dichiarato per questo motivo, non per un dato osservato sulla pagina.
