@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Manzo, noce (tip round roast), cotta (arrosto) — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_noce_cotta`. FDC ID 170233 (SR Legacy, "Beef, round, tip round, roast, separable lean only, trimmed to 0\" fat, all grades, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 170233", release USDA 2026-04-30). Versione cotta della noce di manzo (tip round roast, dalla regione "round" — distinta sia dal girello/top round, scartato ⚠ nel lotto 60 come record Foundation incompleto, sia dal taglio reale/chuck e dalla punta di petto già pronti), la cui cruda è anch'essa 🟡 in questo stesso lotto. "Roast" (arrosto) è la forma di taglio pieno/generica tracciata da USDA per questa regione, stessa convenzione già accettata per il "chuck, clod roast" nel lotto 60 — non una frazione come "side"/"center" (quelle sono le varianti del "knuckle" propriamente detto, scartate qui a favore del "tip round" generico).
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 174kcal, proteine 27,5g, grassi 6,20g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 2,30mg, magnesio 18,0mg, zinco 4,73mg, rame 0,068mg, selenio 31,1µg, sodio 36,0mg (molto basso, coerente con carne arrosto non lavorata/non salata), vitamina C 0mg (esplicito), folato totale 9,00µg, vitamina B12 1,52µg, vitamina K (fillochinone) 1,30µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_cooked` (manzo macinato cotto, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_noce_cotta` ("Manzo, noce (tip round roast), cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_cooked`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 9,00µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170233 --food-id=food_manzo_noce_cotta \
+  --name-it="Manzo, noce (tip round roast), cotta (arrosto)" \
+  --matrix-id=manzo_noce_cotta --matrix-description-it="Manzo, noce (tip round roast), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170233 --food-id=food_manzo_noce_cotta \
+  --name-it="Manzo, noce (tip round roast), cotta (arrosto)" \
+  --matrix-id=manzo_noce_cotta --matrix-description-it="Manzo, noce (tip round roast), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Manzo, noce (tip round roast), cruda — preparato 2026-10-30 dal task (sessantunesimo lotto)
+
+- **food_id**: `food_manzo_noce_raw`. FDC ID 173125 (SR Legacy, "Beef, round, tip round, roast, separable lean only, trimmed to 0\" fat, all grades, raw" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 173125", release USDA 2026-04-30). Taglio mai tentato in questa pipeline per il manzo, distinto dal girello/top round (scartato ⚠ nel lotto 60) — "tip round" è una regione anatomica diversa (vicino alla noce/sirloin tip), tracciata da USDA come "roast" (taglio pieno) con pagina getfoodfacts dedicata sia cruda sia cotta.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 126kcal, proteine 21,1g, grassi 3,95g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 18,0mg, ferro 1,77mg, magnesio 22,0mg, zinco 3,89mg, rame 0,091mg, selenio 26,0µg, sodio 54,0mg (basso, coerente con carne cruda non lavorata), vitamina C 0mg (esplicito), folato totale 12,0µg, vitamina B12 1,47µg, vitamina K (fillochinone) 1,10µg (reale e non nulla), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_beef_ground_raw` (manzo macinato crudo, Golden Set originale, già eseguito sul DB reale — stessa specie, stesso stato crudo).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_noce_raw` ("Manzo, noce (tip round roast), cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_beef_ground_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 12,0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173125 --food-id=food_manzo_noce_raw \
+  --name-it="Manzo, noce (tip round roast), cruda" \
+  --matrix-id=manzo_noce_raw --matrix-description-it="Manzo, noce (tip round roast), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173125 --food-id=food_manzo_noce_raw \
+  --name-it="Manzo, noce (tip round roast), cruda" \
+  --matrix-id=manzo_noce_raw --matrix-description-it="Manzo, noce (tip round roast), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, costine (short ribs), cotte (brasate) — preparato 2026-10-30 dal task (sessantunesimo lotto)
 
 - **food_id**: `food_manzo_costine_cotte`. FDC ID 168615 (SR Legacy, "Beef, rib, shortribs, separable lean only, choice, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, "USDA FoodData Central, SR Legacy, FDC 168615", release USDA 2026-04-30). Versione cotta delle costine di manzo (short ribs, dalla costola — distinte dal "chuck short ribs" boneless, un taglio diverso dalla spalla non scelto qui), la cui cruda è anch'essa 🟡 in questo stesso lotto, stesso grado "choice" per coerenza — taglio mai tentato in questa pipeline per il manzo.
