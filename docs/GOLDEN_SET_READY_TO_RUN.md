@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vitello, milza, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_milza_di_vitello_cotta`. FDC ID 172541 (SR Legacy, "Veal, variety meats and by-products, spleen, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La milza cruda (`food_milza_di_vitello_raw`, FDC 172540) è già eseguita sul DB reale; la cotta non era mai stata tentata.
+- **Nutrienti**: **14/17**. Per 100g: energia 129kcal, proteine 24,1g, grassi 2,89g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 7,00mg, ferro 7,36mg, magnesio 14,0mg, zinco 1,91mg, rame 0,93mg, selenio 81,2µg, sodio 58,0mg (basso), vitamina C 40,0mg, vitamina B12 4,82µg, folato totale 4,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_milza_di_vitello_raw` (milza di vitello cruda, già eseguita sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `milza_di_vitello_cotta` ("Vitello, milza, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172541 --food-id=food_milza_di_vitello_cotta \
+  --name-it="Vitello, milza, cotta (brasata)" \
+  --matrix-id=milza_di_vitello_cotta --matrix-description-it="Vitello, milza, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_milza_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172541 --food-id=food_milza_di_vitello_cotta \
+  --name-it="Vitello, milza, cotta (brasata)" \
+  --matrix-id=milza_di_vitello_cotta --matrix-description-it="Vitello, milza, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_milza_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, milza, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_milza_di_maiale_cotta`. FDC ID 167866 (SR Legacy, "Pork, fresh, variety meats and by-products, spleen, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La milza cruda (`food_milza_di_maiale_raw`, FDC 167865) è già eseguita sul DB reale; la cotta non era mai stata tentata.
