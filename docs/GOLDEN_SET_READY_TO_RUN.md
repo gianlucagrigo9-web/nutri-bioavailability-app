@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vitello, lingua, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_lingua_di_vitello_cotta`. FDC ID 174369 (SR Legacy, "Veal, variety meats and by-products, tongue, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La lingua cruda (`food_lingua_di_vitello_raw`, FDC 174368) è già eseguita sul DB reale; la cotta non era mai stata tentata.
+- **Nutrienti**: **14/17**. Per 100g: energia 202kcal, proteine 25,9g, grassi 10,1g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 9,00mg, ferro 2,09mg, magnesio 18,0mg, zinco 4,51mg, rame 0,21mg, selenio 11,0µg, sodio 64,0mg (basso), vitamina C 6,00mg, vitamina B12 5,30µg, folato totale 9,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_lingua_di_vitello_raw` (lingua di vitello cruda, già eseguita sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `lingua_di_vitello_cotta` ("Vitello, lingua, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 9,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174369 --food-id=food_lingua_di_vitello_cotta \
+  --name-it="Vitello, lingua, cotta (brasata)" \
+  --matrix-id=lingua_di_vitello_cotta --matrix-description-it="Vitello, lingua, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lingua_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174369 --food-id=food_lingua_di_vitello_cotta \
+  --name-it="Vitello, lingua, cotta (brasata)" \
+  --matrix-id=lingua_di_vitello_cotta --matrix-description-it="Vitello, lingua, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lingua_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, milza, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_milza_di_vitello_cotta`. FDC ID 172541 (SR Legacy, "Veal, variety meats and by-products, spleen, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La milza cruda (`food_milza_di_vitello_raw`, FDC 172540) è già eseguita sul DB reale; la cotta non era mai stata tentata.
