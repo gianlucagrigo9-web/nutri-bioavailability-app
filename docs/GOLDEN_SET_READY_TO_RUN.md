@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bufalo (bufalo d'acqua), carne cruda — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_bufalo_raw`. FDC ID 175299 (SR Legacy, "Game meat, buffalo, water, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza**: il "bufalo d'acqua" (*Bubalus bubalis*) tracciato qui da USDA sotto "Game meat" è la stessa specie da cui si ricava la mozzarella di bufala, di cui questa pipeline ha già il solo latte (`food_latte_di_bufala_raw`, FDC 171280, lotto 15) — mai la carne. Candidato bonus individuato durante la stessa ricerca sul wapiti sopra (stesso schema "candidato bonus" già usato nel lotto 65 per piedini/coda di maiale), con pagine getfoodfacts.com dedicate sia per il crudo che per il cotto (nessuna asimmetria).
+- **Nutrienti**: **14/17**. Per 100g: energia 99,0kcal, proteine 20,4g, grassi 1,37g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 1,61mg, magnesio 32,0mg, zinco 1,93mg, rame 0,15mg, selenio 9,00µg, sodio 53,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 1,66µg, folato totale 8,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_capra_raw` (capra cruda, Game meat, già eseguita sul DB reale — stessa categoria USDA "Game meat" cruda, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `bufalo` ("Bufalo (bufalo d'acqua), carne cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 8,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=175299 --food-id=food_bufalo_raw \
+  --name-it="Bufalo (bufalo d'acqua), carne cruda" \
+  --matrix-id=bufalo --matrix-description-it="Bufalo (bufalo d'acqua), carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175299 --food-id=food_bufalo_raw \
+  --name-it="Bufalo (bufalo d'acqua), carne cruda" \
+  --matrix-id=bufalo --matrix-description-it="Bufalo (bufalo d'acqua), carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wapiti (elk nordamericano), carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_wapiti_cotto`. FDC ID 175302 (SR Legacy, "Game meat, elk, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30). Stessa nota di disambiguazione zoologica del crudo sopra (wapiti, non alce).
