@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bufalo (bufalo d'acqua), carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_bufalo_cotto`. FDC ID 175300 (SR Legacy, "Game meat, buffalo, water, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 131kcal, proteine 26,8g, grassi 1,80g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 15,0mg, ferro 2,12mg, magnesio 33,0mg, zinco 2,54mg, rame 0,18mg, selenio 12,0µg, sodio 56,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 1,75µg, folato totale 9,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_capra_cotta` (capra cotta arrosto, Game meat, già eseguita sul DB reale — stessa categoria USDA "Game meat" cotta/arrosto, stesso attributo `is_heme_iron`; non usato `food_bufalo_raw` perché preparato nello stesso run, non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `bufalo_cotto` ("Bufalo (bufalo d'acqua), carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 9,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=175300 --food-id=food_bufalo_cotto \
+  --name-it="Bufalo (bufalo d'acqua), carne cotta (arrosto)" \
+  --matrix-id=bufalo_cotto --matrix-description-it="Bufalo (bufalo d'acqua), carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175300 --food-id=food_bufalo_cotto \
+  --name-it="Bufalo (bufalo d'acqua), carne cotta (arrosto)" \
+  --matrix-id=bufalo_cotto --matrix-description-it="Bufalo (bufalo d'acqua), carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bufalo (bufalo d'acqua), carne cruda — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_bufalo_raw`. FDC ID 175299 (SR Legacy, "Game meat, buffalo, water, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza**: il "bufalo d'acqua" (*Bubalus bubalis*) tracciato qui da USDA sotto "Game meat" è la stessa specie da cui si ricava la mozzarella di bufala, di cui questa pipeline ha già il solo latte (`food_latte_di_bufala_raw`, FDC 171280, lotto 15) — mai la carne. Candidato bonus individuato durante la stessa ricerca sul wapiti sopra (stesso schema "candidato bonus" già usato nel lotto 65 per piedini/coda di maiale), con pagine getfoodfacts.com dedicate sia per il crudo che per il cotto (nessuna asimmetria).
