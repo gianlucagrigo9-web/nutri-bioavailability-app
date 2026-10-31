@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cinghiale, carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_cinghiale_cotto`. FDC ID 175298 (SR Legacy, "Game meat, boar, wild, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato bonus individuato durante la stessa ricerca sul wapiti sopra. Nota di trasparenza: per il crudo non è stata trovata nessuna pagina getfoodfacts.com dedicata (solo recipal.com/uhhospitals.org/foodstruct.com, nessun FDC ID verificabile su fonte primaria) — stessa asimmetria crudo/cotto vista altre volte in questa coda; il crudo resta ⚠ sotto.
+- **Nutrienti**: **17/17** (record completo — unico fra i candidati di questo lotto senza alcun gap). Per 100g: energia 160kcal, proteine 28,3g, grassi 4,38g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,12mg, magnesio 27,0mg, zinco 3,01mg, rame 0,056mg, selenio 13,0µg, sodio 60,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 0,70µg, folato totale 6,00µg, vitamina K (fillochinone) 1,40µg, beta-carotene 0µg (esplicito), altri carotenoidi (alfa-carotene, beta-criptoxantina, licopene, luteina+zeaxantina) tutti 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie/genere *Sus scrofa* del cinghiale selvatico, stesso stato cotto, stesso attributo `is_heme_iron`; analogia più diretta di una specie "Game meat" diversa).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cinghiale_cotto` ("Cinghiale, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_lonza_di_maiale_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 6,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=175298 --food-id=food_cinghiale_cotto \
+  --name-it="Cinghiale, carne cotta (arrosto)" \
+  --matrix-id=cinghiale_cotto --matrix-description-it="Cinghiale, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175298 --food-id=food_cinghiale_cotto \
+  --name-it="Cinghiale, carne cotta (arrosto)" \
+  --matrix-id=cinghiale_cotto --matrix-description-it="Cinghiale, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bufalo (bufalo d'acqua), carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_bufalo_cotto`. FDC ID 175300 (SR Legacy, "Game meat, buffalo, water, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30).
