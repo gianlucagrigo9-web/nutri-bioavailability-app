@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_wapiti_cotto`. FDC ID 175302 (SR Legacy, "Game meat, elk, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30). Stessa nota di disambiguazione zoologica del crudo sopra (wapiti, non alce).
+- **Nutrienti**: **13/17**. Per 100g: energia 146kcal, proteine 30,2g, grassi 1,90g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 5,00mg, ferro 3,63mg, magnesio 24,0mg, zinco 3,16mg, rame 0,14mg, selenio 13,0µg, sodio 61,0mg (basso), vitamina C 0mg (esplicito), folato totale 9,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina B12, vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_capra_cotta` (capra cotta arrosto, Game meat, già eseguita sul DB reale — stessa categoria USDA "Game meat" cotta/arrosto, stesso attributo `is_heme_iron`; non usato `food_wapiti_raw` perché preparato nello stesso run, non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `wapiti_cotto` ("Wapiti (elk nordamericano), carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 9,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=175302 --food-id=food_wapiti_cotto \
+  --name-it="Wapiti (elk nordamericano), carne cotta (arrosto)" \
+  --matrix-id=wapiti_cotto --matrix-description-it="Wapiti (elk nordamericano), carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175302 --food-id=food_wapiti_cotto \
+  --name-it="Wapiti (elk nordamericano), carne cotta (arrosto)" \
+  --matrix-id=wapiti_cotto --matrix-description-it="Wapiti (elk nordamericano), carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wapiti (elk nordamericano), carne cruda — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_wapiti_raw`. FDC ID 175301 (SR Legacy, "Game meat, elk, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di disambiguazione zoologica (importante per non etichettare male l'alimento)**: la specie tracciata da USDA come "elk" (*Cervus canadensis*) si chiama in italiano **wapiti**, non "alce" — l'alce (*Alces alces*) è una specie diversa; la confusione nasce dal fatto che l'inglese nordamericano "elk" indica il wapiti, mentre l'inglese britannico/europeo "elk" indica l'alce. Candidato bonus individuato durante la ricerca sulle frattaglie di agnello (stesso schema "candidato bonus" già usato nel lotto 65 per piedini/coda di maiale): nuova specie di "Game meat" mai tentata in questa pipeline, con pagine getfoodfacts.com dedicate sia per il crudo che per il cotto (nessuna asimmetria, raro in questa coda).
