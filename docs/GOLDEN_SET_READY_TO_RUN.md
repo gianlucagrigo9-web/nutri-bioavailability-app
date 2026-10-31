@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, polmone, cotto (brasato) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_polmone_di_maiale_cotto`. FDC ID 168271 (SR Legacy, "Pork, fresh, variety meats and by-products, lungs, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il polmone crudo (`food_polmone_di_maiale_raw`, FDC 167864) è già eseguito sul DB reale; il cotto non era mai stato tentato.
+- **Nutrienti**: **14/17**. Per 100g: energia 99,0kcal, proteine 16,6g, grassi 3,10g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 8,00mg, ferro 16,4mg, magnesio 12,0mg, zinco 2,45mg, rame 0,080mg, selenio 23,4µg, sodio 81,0mg (basso), vitamina C 7,90mg, vitamina B12 2,03µg, folato totale 2,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_polmone_di_maiale_raw` (polmone di maiale crudo, già eseguito sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `polmone_di_maiale_cotto` ("Maiale, polmone, cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 2,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168271 --food-id=food_polmone_di_maiale_cotto \
+  --name-it="Maiale, polmone, cotto (brasato)" \
+  --matrix-id=polmone_di_maiale_cotto --matrix-description-it="Maiale, polmone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_polmone_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168271 --food-id=food_polmone_di_maiale_cotto \
+  --name-it="Maiale, polmone, cotto (brasato)" \
+  --matrix-id=polmone_di_maiale_cotto --matrix-description-it="Maiale, polmone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_polmone_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, polmone, cotto (brasato) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_polmone_di_manzo_cotto`. FDC ID 168629 (SR Legacy, "Beef, variety meats and by-products, lungs, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il polmone crudo (`food_polmone_di_manzo_raw`, FDC 168628) è già eseguito sul DB reale; il cotto non era mai stato tentato.
