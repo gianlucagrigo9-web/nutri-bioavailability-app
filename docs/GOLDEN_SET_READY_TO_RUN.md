@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello, polmone, cotto (brasato) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_polmone_di_agnello_cotto`. FDC ID 174360 (SR Legacy, "Lamb, variety meats and by-products, lungs, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: stessa asimmetria crudo/cotto della cervella sopra — pagina dedicata trovata solo per il cotto, non per il crudo (solo uhhospitals.org/bodbot.com/recipal.com per il crudo, nessun FDC ID verificabile su fonte getfoodfacts.com primaria); il crudo resta ⚠ sotto. Il polmone di agnello non era mai stato tentato in nessuno stato in questa pipeline, a differenza del polmone di manzo/maiale/vitello (già tutti coperti).
+- **Nutrienti**: **14/17**. Per 100g: energia 113kcal, proteine 19,9g, grassi 3,10g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 4,57mg, magnesio 11,0mg, zinco 1,93mg, rame 0,23mg, selenio 21,1µg, sodio 84,0mg (basso), vitamina C 28,0mg, vitamina B12 2,52µg, folato totale 8,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_polmone_di_manzo_raw` (polmone di manzo crudo, già eseguito sul DB reale — stesso organo "polmone/lung", stesso attributo `is_heme_iron`; nessun polmone di agnello già eseguito da usare come analogia di specie).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `polmone_di_agnello_cotto` ("Agnello, polmone, cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 8,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=174360 --food-id=food_polmone_di_agnello_cotto \
+  --name-it="Agnello, polmone, cotto (brasato)" \
+  --matrix-id=polmone_di_agnello_cotto --matrix-description-it="Agnello, polmone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_polmone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174360 --food-id=food_polmone_di_agnello_cotto \
+  --name-it="Agnello, polmone, cotto (brasato)" \
+  --matrix-id=polmone_di_agnello_cotto --matrix-description-it="Agnello, polmone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_polmone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, cervella, cotta (brasata) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_cervella_di_agnello_cotta`. FDC ID 172526 (SR Legacy, "Lamb, variety meats and by-products, brain, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: per la cervella di agnello esiste una pagina getfoodfacts.com dedicata SOLO per la forma cotta (questa, più una seconda versione "cooked, pan-fried" FDC 174350) nella famiglia generica "variety meats and by-products" — nessuna pagina dedicata trovata per il crudo con lo stesso nome generico (esiste solo "Lamb, New Zealand, imported, brains, raw" FDC 174437, una serie USDA distinta/non comparabile — stesso tipo di asimmetria crudo/cotto già vista molte volte in questa coda; il crudo resta ⚠ sotto).
