@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Vitello, animelle (pancreas), cotte (brasate) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_animelle_di_vitello_cotte`. FDC ID 174363 (SR Legacy, "Veal, variety meats and by-products, pancreas, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Le animelle crude (`food_animelle_di_vitello_raw`, FDC 174362) sono già eseguite sul DB reale; il cotto non era mai stato tentato.
+- **Nutrienti**: **14/17**. Per 100g: energia 256kcal, proteine 29,1g, grassi 14,6g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 18,0mg, ferro 2,38mg, magnesio 24,0mg, zinco 5,20mg, rame 0,10mg, selenio 39,1µg, sodio 68,0mg (basso, nessun segnale di salamoia), vitamina C 6,00mg, vitamina B12 17,3µg, folato totale 3,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_animelle_di_vitello_raw` (animelle di vitello crude, già eseguite sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `animelle_di_vitello_cotte` ("Vitello, animelle (pancreas), cotte (brasate)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 3,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174363 --food-id=food_animelle_di_vitello_cotte \
+  --name-it="Vitello, animelle (pancreas), cotte (brasate)" \
+  --matrix-id=animelle_di_vitello_cotte --matrix-description-it="Vitello, animelle (pancreas), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_animelle_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174363 --food-id=food_animelle_di_vitello_cotte \
+  --name-it="Vitello, animelle (pancreas), cotte (brasate)" \
+  --matrix-id=animelle_di_vitello_cotte --matrix-description-it="Vitello, animelle (pancreas), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_animelle_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, animelle (pancreas), cotte (brasate) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_animelle_di_manzo_cotte`. FDC ID 169453 (SR Legacy, "Beef, variety meats and by-products, pancreas, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Le animelle crude (`food_animelle_di_manzo_raw`, FDC 169452) sono già eseguite sul DB reale; il cotto non era mai stato tentato.
