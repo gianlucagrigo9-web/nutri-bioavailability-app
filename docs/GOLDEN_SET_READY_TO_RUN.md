@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, animelle (pancreas), cotte (brasate) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_animelle_di_manzo_cotte`. FDC ID 169453 (SR Legacy, "Beef, variety meats and by-products, pancreas, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Le animelle crude (`food_animelle_di_manzo_raw`, FDC 169452) sono già eseguite sul DB reale; il cotto non era mai stato tentato.
+- **Nutrienti**: **14/17**. Per 100g: energia 271kcal, proteine 27,1g, grassi 17,2g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 2,61mg, magnesio 21,0mg, zinco 4,60mg, rame 0,089mg, selenio 48,5µg, sodio 60,0mg (basso, nessun segnale di salamoia), vitamina C 20,3mg, vitamina B12 16,6µg, folato totale 3,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_animelle_di_manzo_raw` (animelle di manzo crude, già eseguite sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `animelle_di_manzo_cotte` ("Manzo, animelle (pancreas), cotte (brasate)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 3,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169453 --food-id=food_animelle_di_manzo_cotte \
+  --name-it="Manzo, animelle (pancreas), cotte (brasate)" \
+  --matrix-id=animelle_di_manzo_cotte --matrix-description-it="Manzo, animelle (pancreas), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_animelle_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169453 --food-id=food_animelle_di_manzo_cotte \
+  --name-it="Manzo, animelle (pancreas), cotte (brasate)" \
+  --matrix-id=animelle_di_manzo_cotte --matrix-description-it="Manzo, animelle (pancreas), cotte (brasate)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_animelle_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Manzo, cervella, cotta (bollita) — preparato 2026-10-30 dal task (settantaduesimo lotto)
 
 - **food_id**: `food_cervella_di_manzo_cotta`. FDC ID 168624 (SR Legacy, "Beef, variety meats and by-products, brain, cooked, simmered" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La cruda `food_cervella_di_manzo_raw` è già eseguita sul DB reale dal ventesimo lotto; la cotta non era mai stata tentata.
