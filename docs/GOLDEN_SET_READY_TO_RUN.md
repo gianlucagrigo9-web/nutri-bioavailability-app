@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, milza, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
+
+- **food_id**: `food_milza_di_maiale_cotta`. FDC ID 167866 (SR Legacy, "Pork, fresh, variety meats and by-products, spleen, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La milza cruda (`food_milza_di_maiale_raw`, FDC 167865) è già eseguita sul DB reale; la cotta non era mai stata tentata.
+- **Nutrienti**: **14/17**. Per 100g: energia 149kcal, proteine 28,2g, grassi 3,20g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 22,2mg, magnesio 15,0mg, zinco 3,54mg, rame 0,13mg, selenio 49,6µg, sodio 107mg (basso, ben sotto la soglia ~300mg di salamoia), vitamina C 11,6mg, vitamina B12 2,76µg, folato totale 4,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_milza_di_maiale_raw` (milza di maiale cruda, già eseguita sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `milza_di_maiale_cotta` ("Maiale, milza, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167866 --food-id=food_milza_di_maiale_cotta \
+  --name-it="Maiale, milza, cotta (brasata)" \
+  --matrix-id=milza_di_maiale_cotta --matrix-description-it="Maiale, milza, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167866 --food-id=food_milza_di_maiale_cotta \
+  --name-it="Maiale, milza, cotta (brasata)" \
+  --matrix-id=milza_di_maiale_cotta --matrix-description-it="Maiale, milza, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_milza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, milza, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_milza_di_agnello_cotta`. FDC ID 174365 (SR Legacy, "Lamb, variety meats and by-products, spleen, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La milza cruda (`food_milza_di_agnello_raw`, FDC 174364) è già eseguita sul DB reale; la cotta non era mai stata tentata.
