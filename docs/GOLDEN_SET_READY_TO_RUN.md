@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, cervella, cotta (brasata) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_cervella_di_maiale_cotta`. FDC ID 168265 (SR Legacy, "Pork, fresh, variety meats and by-products, brain, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La cervella cruda (`food_cervella_di_maiale_raw`, FDC 168264) è già eseguita sul DB reale; la cotta non era mai stata tentata.
+- **Nutrienti**: **14/17**. Per 100g: energia 138kcal, proteine 12,1g, grassi 9,51g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 9,00mg, ferro 1,82mg, magnesio 12,0mg, zinco 1,48mg, rame 0,26mg, selenio 18,5µg, sodio 91,0mg (basso), vitamina C 14,0mg, vitamina B12 1,42µg, folato totale 4,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_cervella_di_maiale_raw` (cervella di maiale cruda, già eseguita sul DB reale — stessa specie, stesso organo, stesso attributo `is_heme_iron`, qui nella forma cotta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cervella_di_maiale_cotta` ("Maiale, cervella, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=168265 --food-id=food_cervella_di_maiale_cotta \
+  --name-it="Maiale, cervella, cotta (brasata)" \
+  --matrix-id=cervella_di_maiale_cotta --matrix-description-it="Maiale, cervella, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_cervella_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168265 --food-id=food_cervella_di_maiale_cotta \
+  --name-it="Maiale, cervella, cotta (brasata)" \
+  --matrix-id=cervella_di_maiale_cotta --matrix-description-it="Maiale, cervella, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_cervella_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, rognone, crudo — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_rognone_di_vitello_raw`. FDC ID 174356 (SR Legacy, "Veal, variety meats and by-products, kidneys, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Gap genuinamente nuovo: il rognone di vitello non era mai stato tentato in nessuno stato in questa pipeline (a differenza di fegato/cuore/lingua/polmone/animelle/milza di vitello, già tutti coperti), nonostante il rognone di manzo/maiale/agnello sia già completo (crudo+cotto) per tutte e tre le altre specie da tempo — verificato con grep dedicato su tutti e tre i file prima di procedere, zero occorrenze per nome e per FDC ID.
