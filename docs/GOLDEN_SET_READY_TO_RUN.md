@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), carne cruda — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_wapiti_raw`. FDC ID 175301 (SR Legacy, "Game meat, elk, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di disambiguazione zoologica (importante per non etichettare male l'alimento)**: la specie tracciata da USDA come "elk" (*Cervus canadensis*) si chiama in italiano **wapiti**, non "alce" — l'alce (*Alces alces*) è una specie diversa; la confusione nasce dal fatto che l'inglese nordamericano "elk" indica il wapiti, mentre l'inglese britannico/europeo "elk" indica l'alce. Candidato bonus individuato durante la ricerca sulle frattaglie di agnello (stesso schema "candidato bonus" già usato nel lotto 65 per piedini/coda di maiale): nuova specie di "Game meat" mai tentata in questa pipeline, con pagine getfoodfacts.com dedicate sia per il crudo che per il cotto (nessuna asimmetria, raro in questa coda).
+- **Nutrienti**: **12/17**. Per 100g: energia 111kcal, proteine 22,9g, grassi 1,45g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 4,00mg, ferro 2,76mg, magnesio 23,0mg, zinco 2,40mg, rame 0,12mg, selenio 9,80µg, sodio 58,0mg (basso), vitamina C 0mg (esplicito). Mancano (non riportati sulla pagina, non assunti zero): vitamina B12, folato totale, vitamina K, beta-carotene, altri carotenoidi provitaminici A — gap più ampio del solito (5 nutrienti mancanti invece dei consueti 3), segnalato per trasparenza: questa pagina specifica della selvaggina "elk" ha una tabella vitaminica più scarna delle altre carni già tracciate.
+- **Analogia usata**: `food_capra_raw` (capra cruda, Game meat, già eseguita sul DB reale — stessa categoria USDA "Game meat" cruda, stesso attributo `is_heme_iron`; non usato `food_cervo_raw` perché ancora solo "Pronti", non eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `wapiti` ("Wapiti (elk nordamericano), carne cruda").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non riportato, non assunto zero/arricchito).
+
+```
+npm run add-food -- --fdc-id=175301 --food-id=food_wapiti_raw \
+  --name-it="Wapiti (elk nordamericano), carne cruda" \
+  --matrix-id=wapiti --matrix-description-it="Wapiti (elk nordamericano), carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175301 --food-id=food_wapiti_raw \
+  --name-it="Wapiti (elk nordamericano), carne cruda" \
+  --matrix-id=wapiti --matrix-description-it="Wapiti (elk nordamericano), carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello, polmone, cotto (brasato) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_polmone_di_agnello_cotto`. FDC ID 174360 (SR Legacy, "Lamb, variety meats and by-products, lungs, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: stessa asimmetria crudo/cotto della cervella sopra — pagina dedicata trovata solo per il cotto, non per il crudo (solo uhhospitals.org/bodbot.com/recipal.com per il crudo, nessun FDC ID verificabile su fonte getfoodfacts.com primaria); il crudo resta ⚠ sotto. Il polmone di agnello non era mai stato tentato in nessuno stato in questa pipeline, a differenza del polmone di manzo/maiale/vitello (già tutti coperti).
