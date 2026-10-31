@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Vitello, rognone, crudo — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_rognone_di_vitello_raw`. FDC ID 174356 (SR Legacy, "Veal, variety meats and by-products, kidneys, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Gap genuinamente nuovo: il rognone di vitello non era mai stato tentato in nessuno stato in questa pipeline (a differenza di fegato/cuore/lingua/polmone/animelle/milza di vitello, già tutti coperti), nonostante il rognone di manzo/maiale/agnello sia già completo (crudo+cotto) per tutte e tre le altre specie da tempo — verificato con grep dedicato su tutti e tre i file prima di procedere, zero occorrenze per nome e per FDC ID.
+- **Nutrienti**: **14/17**. Per 100g: energia 99,0kcal, proteine 15,8g, grassi 3,12g, carboidrati 0,85g, fibra 0g (esplicito), calcio 11,0mg, ferro 3,36mg, magnesio 16,0mg, zinco 1,97mg, rame 0,49mg, selenio 80,0µg, sodio 178mg (moderato, in linea con un rognone crudo non salmoiato, nessun segnale di iniezione), vitamina C 5,00mg, vitamina B12 28,2µg, folato totale 21,0µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_rognone_di_manzo_raw` (rognone di manzo crudo, già eseguito sul DB reale — stesso organo "rognone/kidney", stesso attributo `is_heme_iron`; non usato `food_rognone_di_vitello_cotto` perché preparato nello stesso run, non ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `rognone_di_vitello` ("Vitello, rognone, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 21,0µg, valore basso tipico, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174356 --food-id=food_rognone_di_vitello_raw \
+  --name-it="Vitello, rognone, crudo" \
+  --matrix-id=rognone_di_vitello --matrix-description-it="Vitello, rognone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_rognone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174356 --food-id=food_rognone_di_vitello_raw \
+  --name-it="Vitello, rognone, crudo" \
+  --matrix-id=rognone_di_vitello --matrix-description-it="Vitello, rognone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_rognone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Vitello, rognone, cotto (brasato) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_rognone_di_vitello_cotto`. FDC ID 174357 (SR Legacy, "Veal, variety meats and by-products, kidneys, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30). Stesso gap genuinamente nuovo del crudo sopra.
+- **Nutrienti**: **14/17**. Per 100g: energia 163kcal, proteine 26,3g, grassi 5,66g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 29,0mg, ferro 3,04mg, magnesio 24,0mg, zinco 4,25mg, rame 0,36mg, selenio 100µg, sodio 110mg (basso), vitamina C 8,00mg, vitamina B12 36,9µg, folato totale 21,0µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_rognone_di_manzo_cotto` (rognone di manzo cotto, già eseguito sul DB reale — stesso organo, stessa trasformazione raw→cooked, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `rognone_di_vitello_cotto` ("Vitello, rognone, cotto (brasato)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 21,0µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=174357 --food-id=food_rognone_di_vitello_cotto \
+  --name-it="Vitello, rognone, cotto (brasato)" \
+  --matrix-id=rognone_di_vitello_cotto --matrix-description-it="Vitello, rognone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_rognone_di_manzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174357 --food-id=food_rognone_di_vitello_cotto \
+  --name-it="Vitello, rognone, cotto (brasato)" \
+  --matrix-id=rognone_di_vitello_cotto --matrix-description-it="Vitello, rognone, cotto (brasato)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_rognone_di_manzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Vitello, lingua, cotta (brasata) — preparato 2026-10-31 dal task (settantatreesimo lotto)
 
 - **food_id**: `food_lingua_di_vitello_cotta`. FDC ID 174369 (SR Legacy, "Veal, variety meats and by-products, tongue, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La lingua cruda (`food_lingua_di_vitello_raw`, FDC 174368) è già eseguita sul DB reale; la cotta non era mai stata tentata.
