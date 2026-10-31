@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello, cervella, cotta (brasata) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
+
+- **food_id**: `food_cervella_di_agnello_cotta`. FDC ID 172526 (SR Legacy, "Lamb, variety meats and by-products, brain, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: per la cervella di agnello esiste una pagina getfoodfacts.com dedicata SOLO per la forma cotta (questa, più una seconda versione "cooked, pan-fried" FDC 174350) nella famiglia generica "variety meats and by-products" — nessuna pagina dedicata trovata per il crudo con lo stesso nome generico (esiste solo "Lamb, New Zealand, imported, brains, raw" FDC 174437, una serie USDA distinta/non comparabile — stesso tipo di asimmetria crudo/cotto già vista molte volte in questa coda; il crudo resta ⚠ sotto).
+- **Nutrienti**: **14/17**. Per 100g: energia 145kcal, proteine 12,6g, grassi 10,2g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 1,68mg, magnesio 14,0mg, zinco 1,36mg, rame 0,21mg, selenio 12,0µg, sodio 134mg (basso-moderato, nessun segnale di salamoia), vitamina C 12,0mg, vitamina B12 9,25µg, folato totale 5,00µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altri carotenoidi provitaminici A.
+- **Analogia usata**: `food_cervella_di_maiale_raw` (cervella di maiale cruda, già eseguita sul DB reale — stesso organo "cervella/brain", stesso attributo `is_heme_iron`; non usata `food_cervella_di_maiale_cotta` perché preparata nello stesso run, non ancora eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cervella_di_agnello_cotta` ("Agnello, cervella, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=braised` (il record FDC specifica "cooked, braised"), `is_fortified_folate` omesso (false — folato 5,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=172526 --food-id=food_cervella_di_agnello_cotta \
+  --name-it="Agnello, cervella, cotta (brasata)" \
+  --matrix-id=cervella_di_agnello_cotta --matrix-description-it="Agnello, cervella, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_cervella_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172526 --food-id=food_cervella_di_agnello_cotta \
+  --name-it="Agnello, cervella, cotta (brasata)" \
+  --matrix-id=cervella_di_agnello_cotta --matrix-description-it="Agnello, cervella, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_cervella_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, cervella, cotta (brasata) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_cervella_di_maiale_cotta`. FDC ID 168265 (SR Legacy, "Pork, fresh, variety meats and by-products, brain, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). La cervella cruda (`food_cervella_di_maiale_raw`, FDC 168264) è già eseguita sul DB reale; la cotta non era mai stata tentata.
