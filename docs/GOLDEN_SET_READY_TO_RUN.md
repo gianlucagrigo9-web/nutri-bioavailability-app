@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nasello, cotto (calore secco/al forno) — preparato 2026-11-01 dal task (settantaseiesimo lotto)
+
+- **food_id**: `food_nasello_cotto`. FDC ID 175161 (SR Legacy, "Fish, whiting, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Companion della forma cruda già eseguita sul DB reale (`food_nasello_raw`, FDC 173713, stesso genere *Merluccius* usato in questa pipeline per rappresentare il nasello italiano — vedi nota tassonomica già accettata quando il crudo fu preparato). Candidato individuato nel contesto di un pivot deliberato di questo lotto: il settantacinquesimo lotto (specie "Game meat" nordamericane a bassissima rilevanza per la dieta italiana — alce, procione, muskrat, scoiattolo, antilope) aveva chiuso raccomandando esplicitamente di NON continuare su quel filone e di tornare a pesce/funghi/alimenti italiani comuni — vedi nota di apertura di questo lotto in `docs/PRD.md` per il dettaglio completo del pivot e delle verifiche di non-duplicazione.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 116kcal, proteine 23,5g, grassi 1,69g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 62,0mg, ferro 0,42mg, magnesio 27,0mg, zinco 0,53mg, rame 0,040mg, selenio 41,1µg, sodio 132mg (moderato, coerente con pesce cotto non salato), vitamina C 0mg (esplicito), vitamina B12 2,60µg, folato totale 15,0µg, vitamina K (fillochinone) 0,10µg (reale e non nullo), beta-carotene 0µg (esplicito), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti.
+- **Analogia usata**: `food_nasello_raw` (nasello crudo, stessa specie/record USDA "whiting", già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `nasello_cotto` ("Nasello, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, muscolo di pesce, stesso precedente di `food_nasello_raw`), `matrix_category_calcium` omesso (NULL, non applicabile a pesce), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, animale), `baseline_cooking_state=dry_heat_cooked` (il record FDC specifica "cooked, dry heat"), `is_fortified_folate` omesso (false — folato 15,0µg, valore naturale tipico per pesce).
+
+```
+npm run add-food -- --fdc-id=175161 --food-id=food_nasello_cotto \
+  --name-it="Nasello, cotto (calore secco)" \
+  --matrix-id=nasello_cotto --matrix-description-it="Nasello, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_nasello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175161 --food-id=food_nasello_cotto \
+  --name-it="Nasello, cotto (calore secco)" \
+  --matrix-id=nasello_cotto --matrix-description-it="Nasello, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_nasello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Scoiattolo (squirrel), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_scoiattolo_cotto`. FDC ID 172524 (SR Legacy, "Game meat, squirrel, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato individuato durante la stessa ricerca sugli altri piccoli mammiferi "Game meat" di questo lotto, non nella raccomandazione originaria del lotto 74. Rilevanza per la dieta italiana molto bassa, aggiunta per coerenza col filone già sviluppato in questa coda. Nota di trasparenza: il crudo della stessa specie (FDC 172523) ha un match troppo debole (10/17, mancano zinco, rame, B12, folato, vitamina K, beta-carotene, altri carotenoidi) — resta ⚠ sotto, non forzato.
