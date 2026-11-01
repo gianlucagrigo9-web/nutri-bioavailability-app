@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coniglio selvatico (wild rabbit), carne cotta (stufato) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_coniglio_selvatico_cotto`. FDC ID 174348 (SR Legacy, "Game meat, rabbit, wild, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie distinta dal coniglio domestico (`food_coniglio_raw`/`food_coniglio_cotto`, già eseguiti) — USDA traccia "rabbit, wild" come record SR Legacy separato da "rabbit, domesticated". Nota di trasparenza: il crudo della stessa specie (FDC 174347) è stato valutato ma ha un match troppo debole (10/17, mancano zinco, rame, B12, folato, vitamina K, beta-carotene, altri carotenoidi) — resta ⚠ sotto, non forzato.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 173kcal, proteine 33,0g, grassi 3,51g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 18,0mg, ferro 4,85mg, magnesio 31,0mg, zinco 2,38mg, rame 0,18mg, selenio 15,2µg, sodio 45,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 6,51µg, folato totale 8,00µg, vitamina K (fillochinone) 1,50µg, beta-carotene 0µg (esplicito), altri carotenoidi (alfa-carotene, beta-criptoxantina) entrambi 0µg espliciti.
+- **Analogia usata**: `food_coniglio_cotto` (coniglio domestico cotto, già eseguito sul DB reale, stessa famiglia *Leporidae* — analogia più diretta di una specie ungulata diversa).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `coniglio_selvatico_cotto` ("Coniglio selvatico, carne cotta (stufato)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_coniglio_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=stewed` (il record FDC specifica "cooked, stewed"), `is_fortified_folate` omesso (false — folato 8,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=174348 --food-id=food_coniglio_selvatico_cotto \
+  --name-it="Coniglio selvatico, carne cotta (stufato)" \
+  --matrix-id=coniglio_selvatico_cotto --matrix-description-it="Coniglio selvatico, carne cotta (stufato)" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coniglio_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174348 --food-id=food_coniglio_selvatico_cotto \
+  --name-it="Coniglio selvatico, carne cotta (stufato)" \
+  --matrix-id=coniglio_selvatico_cotto --matrix-description-it="Coniglio selvatico, carne cotta (stufato)" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coniglio_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Alce (moose), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_alce_cotto`. FDC ID 174345 (SR Legacy, "Game meat, moose, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30).
