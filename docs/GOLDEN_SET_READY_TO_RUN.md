@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uvetta dorata, senza semi — preparato 2026-11-01 dal task (settantaseiesimo lotto)
+
+- **food_id**: `food_uvetta_dorata_raw`. FDC ID 168164 (SR Legacy, "Raisins, golden, seedless" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar/trattamento distinto dall'uva passa scura già eseguita sul DB reale (`food_uva_passa_raw`, FDC 168165, "Raisins, dark, seedless"): l'uvetta dorata è disidratata con un processo diverso (spesso con anidride solforosa, senza l'ossidazione che scurisce l'uva passa tradizionale) e ha un proprio record FDC dedicato, distinto — non un doppione, un prodotto genuinamente diverso (stesso principio già usato per albicocche secche sulfured vs non-sulfured in questa pipeline). Verificato con grep dedicato su tutti e tre i file che nessuna voce "uvetta dorata"/"raisins golden"/168164 esisteva già (l'uva passa scura, 168165, è invece già presente ed eseguita — non riproposta).
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 301kcal, proteine 3,28g, grassi 0,20g, carboidrati 80,0g, fibra 3,30g, calcio 64,0mg, ferro 0,98mg, magnesio 35,0mg, zinco 0,37mg, rame 0,23mg, selenio 0,70µg, sodio 24,0mg, vitamina C 3,20mg, vitamina B12 0µg (esplicito), folato totale 3,00µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina K (fillochinone) 3,50µg, beta-carotene 0µg (esplicito), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti.
+- **Analogia usata**: `food_uva_passa_raw` (uva passa scura, stesso prodotto base — uva disidratata senza semi — già eseguita sul DB reale, analogia più diretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/disidratata — NON `fresh_fruit`, stessa convenzione già usata per l'uva passa scura, per la definizione restrittiva del PRD §4.9).
+- **Matrice**: nuova `uvetta_dorata` ("Uvetta dorata, senza semi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene e l'altro carotenoide entrambi 0µg espliciti, a differenza dei datteri appena preparati sopra), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Vitaceae` (famiglia botanica reale della vite, *Vitis vinifera*, stesso precedente implicito dell'uva passa scura), `baseline_cooking_state=raw` (secco ma non cotto, stessa convenzione dell'uva passa scura), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168164 --food-id=food_uvetta_dorata_raw \
+  --name-it="Uvetta dorata, senza semi" \
+  --matrix-id=uvetta_dorata --matrix-description-it="Uvetta dorata, senza semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_uva_passa_raw \
+  --botanical-family=Vitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168164 --food-id=food_uvetta_dorata_raw \
+  --name-it="Uvetta dorata, senza semi" \
+  --matrix-id=uvetta_dorata --matrix-description-it="Uvetta dorata, senza semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_uva_passa_raw \
+  --botanical-family=Vitaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Datteri (Deglet Noor), secchi — preparato 2026-11-01 dal task (settantaseiesimo lotto)
 
 - **food_id**: `food_datteri_deglet_noor_raw`. FDC ID 171726 (SR Legacy, "Dates, deglet noor" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar distinta dai datteri Medjool già eseguiti sul DB reale (`food_datteri_medjool_raw`, FDC 168191, 15/17 — mancano selenio e vitamina B12): stessa specie *Phoenix dactylifera*, cultivar diversa, con un proprio record FDC dedicato e copertura nutrienti MIGLIORE (17/17, selenio e B12 entrambi presenti dove il Medjool li omette) — non un doppione, un alimento nuovo e genuino nel suo diritto (stesso principio già usato per altre cultivar distinte in questa pipeline, es. fagioli pinto vs cannellini). Verificato con grep dedicato su tutti e tre i file (food_id, FDC ID, nome italiano/inglese) che nessuna voce "datteri deglet noor"/171726 esisteva già.
