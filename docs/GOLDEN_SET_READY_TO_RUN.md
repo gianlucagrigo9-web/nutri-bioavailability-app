@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Datteri (Deglet Noor), secchi — preparato 2026-11-01 dal task (settantaseiesimo lotto)
+
+- **food_id**: `food_datteri_deglet_noor_raw`. FDC ID 171726 (SR Legacy, "Dates, deglet noor" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar distinta dai datteri Medjool già eseguiti sul DB reale (`food_datteri_medjool_raw`, FDC 168191, 15/17 — mancano selenio e vitamina B12): stessa specie *Phoenix dactylifera*, cultivar diversa, con un proprio record FDC dedicato e copertura nutrienti MIGLIORE (17/17, selenio e B12 entrambi presenti dove il Medjool li omette) — non un doppione, un alimento nuovo e genuino nel suo diritto (stesso principio già usato per altre cultivar distinte in questa pipeline, es. fagioli pinto vs cannellini). Verificato con grep dedicato su tutti e tre i file (food_id, FDC ID, nome italiano/inglese) che nessuna voce "datteri deglet noor"/171726 esisteva già.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 282kcal, proteine 2,45g, grassi 0,39g, carboidrati 75,0g, fibra 8,00g, calcio 39,0mg, ferro 1,02mg, magnesio 43,0mg, zinco 0,29mg, rame 0,21mg, selenio 3,00µg, sodio 2,00mg, vitamina C 0,40mg, vitamina B12 0µg (esplicito), folato totale 19,0µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina K (fillochinone) 2,70µg, beta-carotene 6,00µg (reale e non nullo), alfa-carotene/beta-criptoxantina entrambi 0µg espliciti.
+- **Analogia usata**: `food_datteri_medjool_raw` (datteri Medjool, stessa specie *Phoenix dactylifera*, stesso stato "secco", già eseguito sul DB reale — analogia più diretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/disidratata — NON `fresh_fruit`, per la definizione restrittiva del PRD §4.9 che esclude la frutta disidratata dalla categoria "frutta fresca", stessa convenzione già usata per il Medjool e per fichi/albicocche/prugne secche).
+- **Matrice**: nuova `datteri_deglet_noor` ("Datteri Deglet Noor, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=raw_intact` (stessa convenzione già usata per il Medjool e per albicocche/prugne/fichi secchi — scelta prudente che usa il fattore "crudo", meno generoso, invece di "cotto/disgregato", nonostante l'essiccazione: abbassa la stima di vitamina A piuttosto che alzarla), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (famiglia botanica reale della palma da dattero, stesso precedente implicito del Medjool), `baseline_cooking_state=raw` (secco ma non cotto, stessa convenzione del Medjool/fichi secchi), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171726 --food-id=food_datteri_deglet_noor_raw \
+  --name-it="Datteri (Deglet Noor), secchi" \
+  --matrix-id=datteri_deglet_noor --matrix-description-it="Datteri Deglet Noor, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_datteri_medjool_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171726 --food-id=food_datteri_deglet_noor_raw \
+  --name-it="Datteri (Deglet Noor), secchi" \
+  --matrix-id=datteri_deglet_noor --matrix-description-it="Datteri Deglet Noor, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_datteri_medjool_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Nasello, cotto (calore secco/al forno) — preparato 2026-11-01 dal task (settantaseiesimo lotto)
 
 - **food_id**: `food_nasello_cotto`. FDC ID 175161 (SR Legacy, "Fish, whiting, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Companion della forma cruda già eseguita sul DB reale (`food_nasello_raw`, FDC 173713, stesso genere *Merluccius* usato in questa pipeline per rappresentare il nasello italiano — vedi nota tassonomica già accettata quando il crudo fu preparato). Candidato individuato nel contesto di un pivot deliberato di questo lotto: il settantacinquesimo lotto (specie "Game meat" nordamericane a bassissima rilevanza per la dieta italiana — alce, procione, muskrat, scoiattolo, antilope) aveva chiuso raccomandando esplicitamente di NON continuare su quel filone e di tornare a pesce/funghi/alimenti italiani comuni — vedi nota di apertura di questo lotto in `docs/PRD.md` per il dettaglio completo del pivot e delle verifiche di non-duplicazione.
