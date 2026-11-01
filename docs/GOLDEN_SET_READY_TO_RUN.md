@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Antilope (antelope), carne cruda — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_antilope_raw`. FDC ID 175292 (SR Legacy, "Game meat, antelope, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; già notato come candidato dal settantaquattresimo lotto ma non ancora valutato). Nota di trasparenza: per il cotto non è stata trovata nessuna pagina primaria pulita con valori per 100g dichiarati esplicitamente (solo recipal.com, con valori per porzione da 340g che richiederebbero un calcolo per ottenere il per 100g — non fatto, "zero dati inventati") — il cotto resta ⚠ sotto.
+- **Nutrienti**: **12/17** (stesso profilo di gap già visto per alce/wapiti/bufalo crudi). Per 100g: energia 114kcal, proteine 22,4g, grassi 2,03g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 3,00mg, ferro 3,19mg, magnesio 27,0mg, zinco 1,28mg, rame 0,18mg, selenio 9,70µg, sodio 51,0mg (basso), vitamina C 0mg (esplicito). Mancano in FDC (non assunti zero): vitamina B12, folato totale, vitamina K, beta-carotene, altri carotenoidi (alfa-carotene, beta-criptoxantina).
+- **Analogia usata**: `food_capra_raw` (capra, Game meat ungulato, già eseguita sul DB reale, stesso profilo di attributi categorici).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `antilope_raw` ("Antilope, carne cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in FDC, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non trovato in FDC).
+
+```
+npm run add-food -- --fdc-id=175292 --food-id=food_antilope_raw \
+  --name-it="Antilope, carne cruda" \
+  --matrix-id=antilope_raw --matrix-description-it="Antilope, carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175292 --food-id=food_antilope_raw \
+  --name-it="Antilope, carne cruda" \
+  --matrix-id=antilope_raw --matrix-description-it="Antilope, carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Procione (raccoon), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_procione_cotto`. FDC ID 174349 (SR Legacy, "Game meat, raccoon, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: per il crudo non è stato trovato nessun record FDC di tipo SR Legacy/Foundation (solo un record "USDA Survey"/FNDDS generico, non comparabile) — il crudo resta ⚠ sotto.
