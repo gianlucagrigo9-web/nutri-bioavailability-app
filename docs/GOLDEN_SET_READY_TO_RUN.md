@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Procione (raccoon), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_procione_cotto`. FDC ID 174349 (SR Legacy, "Game meat, raccoon, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota di trasparenza: per il crudo non è stato trovato nessun record FDC di tipo SR Legacy/Foundation (solo un record "USDA Survey"/FNDDS generico, non comparabile) — il crudo resta ⚠ sotto.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 255kcal, proteine 29,2g, grassi 14,5g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 14,0mg, ferro 7,10mg, magnesio 30,0mg, zinco 2,27mg, rame 0,19mg, selenio 18,0µg, sodio 79,0mg (basso), vitamina C 0mg (esplicito), vitamina B12 8,30µg, folato totale 11,0µg, vitamina K (fillochinone) 1,70µg, beta-carotene 0µg (esplicito), altri carotenoidi (alfa-carotene, beta-criptoxantina) entrambi 0µg espliciti.
+- **Analogia usata**: `food_capra_cotta` (dichiarata in trasparenza: il procione è un carnivoro, famiglia *Procyonidae*, non un ungulato — nessun parente più prossimo è ancora eseguito in questo DB; analogia generica sullo stesso profilo di attributi categorici "carne di selvaggina", stesso schema già usato per bufalo/wapiti nel lotto 74 nonostante famiglie zoologiche diverse).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `procione_cotto` ("Procione, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 11,0µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=174349 --food-id=food_procione_cotto \
+  --name-it="Procione, carne cotta (arrosto)" \
+  --matrix-id=procione_cotto --matrix-description-it="Procione, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174349 --food-id=food_procione_cotto \
+  --name-it="Procione, carne cotta (arrosto)" \
+  --matrix-id=procione_cotto --matrix-description-it="Procione, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Coniglio selvatico (wild rabbit), carne cotta (stufato) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_coniglio_selvatico_cotto`. FDC ID 174348 (SR Legacy, "Game meat, rabbit, wild, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie distinta dal coniglio domestico (`food_coniglio_raw`/`food_coniglio_cotto`, già eseguiti) — USDA traccia "rabbit, wild" come record SR Legacy separato da "rabbit, domesticated". Nota di trasparenza: il crudo della stessa specie (FDC 174347) è stato valutato ma ha un match troppo debole (10/17, mancano zinco, rame, B12, folato, vitamina K, beta-carotene, altri carotenoidi) — resta ⚠ sotto, non forzato.
