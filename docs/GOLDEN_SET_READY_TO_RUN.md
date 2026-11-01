@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Muskrat, carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_muskrat_cotto`. FDC ID 172519 (SR Legacy, "Game meat, muskrat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Rilevanza per la dieta italiana molto bassa (specie nordamericana), aggiunta per coerenza con il filone "Game meat USDA" già sviluppato in questa coda (capra/bisonte/cervo/renna/wapiti/bufalo/cinghiale). Nota di trasparenza: il crudo della stessa specie (FDC 172518) ha un match troppo debole (9/17, manca anche il ferro) — resta ⚠ sotto, non forzato.
+- **Nutrienti**: **14/17**. Per 100g: energia 234kcal, proteine 30,1g, grassi 11,7g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 36,0mg, ferro 7,10mg, magnesio 26,0mg, zinco 2,27mg, rame 0,19mg, selenio 14,8µg, sodio 95,0mg (moderato), vitamina C 7,00mg, vitamina B12 8,30µg, folato totale 11,0µg. Mancano in FDC (non assunti zero): vitamina K, beta-carotene, altri carotenoidi (alfa-carotene, beta-criptoxantina).
+- **Analogia usata**: `food_capra_cotta` (dichiarata in trasparenza: il muskrat è un roditore, non un ungulato — nessun parente più prossimo è ancora eseguito in questo DB; analogia generica sullo stesso profilo di attributi categorici "carne di selvaggina").
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `muskrat_cotto` ("Muskrat, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in FDC, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 11,0µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=172519 --food-id=food_muskrat_cotto \
+  --name-it="Muskrat, carne cotta (arrosto)" \
+  --matrix-id=muskrat_cotto --matrix-description-it="Muskrat, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172519 --food-id=food_muskrat_cotto \
+  --name-it="Muskrat, carne cotta (arrosto)" \
+  --matrix-id=muskrat_cotto --matrix-description-it="Muskrat, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Antilope (antelope), carne cruda — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_antilope_raw`. FDC ID 175292 (SR Legacy, "Game meat, antelope, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; già notato come candidato dal settantaquattresimo lotto ma non ancora valutato). Nota di trasparenza: per il cotto non è stata trovata nessuna pagina primaria pulita con valori per 100g dichiarati esplicitamente (solo recipal.com, con valori per porzione da 340g che richiederebbero un calcolo per ottenere il per 100g — non fatto, "zero dati inventati") — il cotto resta ⚠ sotto.
