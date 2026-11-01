@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Alce (moose), carne cruda — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_alce_raw`. FDC ID 174344 (SR Legacy, "Game meat, moose, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Disambiguazione zoologica: l'alce vero (*Alces alces*, inglese nordamericano "moose") è specie distinta dal wapiti (*Cervus canadensis*, inglese nordamericano "elk") già in coda dal lotto 74 — qui tentata per la prima volta.
+- **Nutrienti**: **12/17** (stesso profilo di gap già visto per wapiti/bufalo crudi nel lotto 74). Per 100g: energia 102kcal, proteine 22,2g, grassi 0,74g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 5,00mg, ferro 3,21mg, magnesio 23,0mg, zinco 2,80mg, rame 0,067mg, selenio 9,60µg, sodio 65,0mg (basso), vitamina C 4,00mg. Mancano in FDC (non assunti zero): vitamina B12, folato totale, vitamina K, beta-carotene, altri carotenoidi (alfa-carotene, beta-criptoxantina).
+- **Analogia usata**: `food_capra_raw` (capra, Game meat ungulato, già eseguita sul DB reale, stesso profilo di attributi categorici).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `alce_raw` ("Alce, carne cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non trovato in FDC, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non trovato in FDC).
+
+```
+npm run add-food -- --fdc-id=174344 --food-id=food_alce_raw \
+  --name-it="Alce, carne cruda" \
+  --matrix-id=alce_raw --matrix-description-it="Alce, carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174344 --food-id=food_alce_raw \
+  --name-it="Alce, carne cruda" \
+  --matrix-id=alce_raw --matrix-description-it="Alce, carne cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cinghiale, carne cotta (arrosto) — preparato 2026-10-31 dal task (settantaquattresimo lotto)
 
 - **food_id**: `food_cinghiale_cotto`. FDC ID 175298 (SR Legacy, "Game meat, boar, wild, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato bonus individuato durante la stessa ricerca sul wapiti sopra. Nota di trasparenza: per il crudo non è stata trovata nessuna pagina getfoodfacts.com dedicata (solo recipal.com/uhhospitals.org/foodstruct.com, nessun FDC ID verificabile su fonte primaria) — stessa asimmetria crudo/cotto vista altre volte in questa coda; il crudo resta ⚠ sotto.
