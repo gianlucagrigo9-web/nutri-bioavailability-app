@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Scoiattolo (squirrel), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_scoiattolo_cotto`. FDC ID 172524 (SR Legacy, "Game meat, squirrel, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato individuato durante la stessa ricerca sugli altri piccoli mammiferi "Game meat" di questo lotto, non nella raccomandazione originaria del lotto 74. Rilevanza per la dieta italiana molto bassa, aggiunta per coerenza col filone già sviluppato in questa coda. Nota di trasparenza: il crudo della stessa specie (FDC 172523) ha un match troppo debole (10/17, mancano zinco, rame, B12, folato, vitamina K, beta-carotene, altri carotenoidi) — resta ⚠ sotto, non forzato.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 173kcal, proteine 30,8g, grassi 4,69g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 3,00mg, ferro 6,81mg, magnesio 28,0mg, zinco 1,78mg, rame 0,15mg, selenio 15,1µg, sodio 119mg (moderato), vitamina C 0mg (esplicito), vitamina B12 6,51µg, folato totale 9,00µg, vitamina K (fillochinone) 1,40µg, beta-carotene 0µg (esplicito), altri carotenoidi (alfa-carotene, beta-criptoxantina) entrambi 0µg espliciti.
+- **Analogia usata**: `food_capra_cotta` (dichiarata in trasparenza: lo scoiattolo è un roditore, non un ungulato — nessun parente più prossimo è ancora eseguito in questo DB; analogia generica sullo stesso profilo di attributi categorici "carne di selvaggina").
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `scoiattolo_cotto` ("Scoiattolo, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 9,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=172524 --food-id=food_scoiattolo_cotto \
+  --name-it="Scoiattolo, carne cotta (arrosto)" \
+  --matrix-id=scoiattolo_cotto --matrix-description-it="Scoiattolo, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172524 --food-id=food_scoiattolo_cotto \
+  --name-it="Scoiattolo, carne cotta (arrosto)" \
+  --matrix-id=scoiattolo_cotto --matrix-description-it="Scoiattolo, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Muskrat, carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_muskrat_cotto`. FDC ID 172519 (SR Legacy, "Game meat, muskrat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Rilevanza per la dieta italiana molto bassa (specie nordamericana), aggiunta per coerenza con il filone "Game meat USDA" già sviluppato in questa coda (capra/bisonte/cervo/renna/wapiti/bufalo/cinghiale). Nota di trasparenza: il crudo della stessa specie (FDC 172518) ha un match troppo debole (9/17, manca anche il ferro) — resta ⚠ sotto, non forzato.
