@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Alce (moose), carne cotta (arrosto) — preparato 2026-11-01 dal task (settantacinquesimo lotto)
+
+- **food_id**: `food_alce_cotto`. FDC ID 174345 (SR Legacy, "Game meat, moose, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID consecutivo al crudo sopra, dataType citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 134kcal, proteine 29,3g, grassi 0,97g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 6,00mg, ferro 4,22mg, magnesio 24,0mg, zinco 3,68mg, rame 0,079mg, selenio 12,8µg, sodio 69,0mg (basso), vitamina C 5,00mg, vitamina B12 6,31µg, folato totale 4,00µg, vitamina K (fillochinone) 1,20µg, beta-carotene 0µg (esplicito), altri carotenoidi (alfa-carotene, beta-criptoxantina) entrambi 0µg espliciti.
+- **Analogia usata**: `food_capra_cotta` (capra cotta, Game meat ungulato, già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `alce_cotto` ("Alce, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 4,00µg, valore basso tipico).
+
+```
+npm run add-food -- --fdc-id=174345 --food-id=food_alce_cotto \
+  --name-it="Alce, carne cotta (arrosto)" \
+  --matrix-id=alce_cotto --matrix-description-it="Alce, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174345 --food-id=food_alce_cotto \
+  --name-it="Alce, carne cotta (arrosto)" \
+  --matrix-id=alce_cotto --matrix-description-it="Alce, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Alce (moose), carne cruda — preparato 2026-11-01 dal task (settantacinquesimo lotto)
 
 - **food_id**: `food_alce_raw`. FDC ID 174344 (SR Legacy, "Game meat, moose, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Disambiguazione zoologica: l'alce vero (*Alces alces*, inglese nordamericano "moose") è specie distinta dal wapiti (*Cervus canadensis*, inglese nordamericano "elk") già in coda dal lotto 74 — qui tentata per la prima volta.
