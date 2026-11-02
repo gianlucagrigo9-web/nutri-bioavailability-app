@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tonno rosso (pinna blu), fresco, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
+
+- **food_id**: `food_tonno_rosso_raw`. FDC ID 173706 (SR Legacy, "Fish, tuna, fresh, bluefin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie *Thunnus thynnus* distinta dal tonno pinna gialla (*Thunnus albacares*, già nel Golden Set originale) e dal tonno bianco/alalunga già fatto — verificato con `grep` dedicato su "tonno rosso"/"bluefin", zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 144kcal, proteine 23,3g, grassi 4,90g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 8,00mg, ferro 1,02mg, zinco 0,60mg, magnesio 50,0mg, rame 0,086mg, selenio 36,5µg, vitamina C 0mg (esplicito), folato totale 2,00µg, vitamina B12 9,43µg (alto, coerente con un pesce grasso pregiato), vitamina K 0µg (esplicito), beta-carotene 0µg (esplicito), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito).
+- **Analogia usata**: `food_tonno_fresco_raw` (tonno pinna gialla, fresco, crudo, già eseguito sul DB reale — stesso genere *Thunnus*, stesso trattamento "tonno fresco crudo", specie diversa).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `tonno_rosso` ("Tonno rosso (pinna blu)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_tonno_fresco_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, non una matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un pesce).
+
+```
+npm run add-food -- --fdc-id=173706 --food-id=food_tonno_rosso_raw \
+  --name-it="Tonno rosso (pinna blu), fresco, crudo" \
+  --matrix-id=tonno_rosso --matrix-description-it="Tonno rosso (pinna blu)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173706 --food-id=food_tonno_rosso_raw \
+  --name-it="Tonno rosso (pinna blu), fresco, crudo" \
+  --matrix-id=tonno_rosso --matrix-description-it="Tonno rosso (pinna blu)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tonno_fresco_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salmone atlantico, selvaggio, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
 
 - **food_id**: `food_salmone_atlantico_selvaggio_raw`. FDC ID 173686 (SR Legacy, "Fish, salmon, Atlantic, wild, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dal salmone atlantico ALLEVATO già nel Golden Set originale (`food_salmon_raw`, FDC 175167/169989 "Fish, salmon, Atlantic, farmed, raw") — stessa specie *Salmo salar*, ma record FDC realmente distinto (selvaggio vs allevato hanno profili lipidici diversi, principio già validato in questa pipeline per il salmone coho selvaggio vs l'atlantico allevato). Verificato con `grep` dedicato — singolo — su "salmone selvaggio"/"salmon, wild"/"salmone atlantico selvaggio", zero occorrenze pertinenti prima della ricerca web (il solo salmone selvaggio già fatto è il coho, specie *Oncorhynchus kisutch* diversa).
