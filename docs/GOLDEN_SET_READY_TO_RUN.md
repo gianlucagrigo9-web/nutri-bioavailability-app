@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Cavolfiore, surgelato — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_cavolfiore_surgelato`. FDC ID 170398 (SR Legacy, "Cauliflower, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_cavolfiore_cotto`/`food_cavolfiore_verde_raw`/`food_cavolfiore_verde_cotto` già eseguiti, nessun doppione mascherato (nessuna varietà cultivar/colore in gioco: il record generico "Cauliflower" senza qualificatore corrisponde al cavolfiore bianco comune, stessa pianta di `food_cavolfiore_cotto`). Verificato con `grep` dedicato su "cavolfiore surgelato"/"cavolfiore, surgelato"/"cauliflower frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 24,0kcal, proteine 2,01g, grassi 0,27g, carboidrati 4,68g, fibra 2,30g, calcio 22,0mg, ferro 0,54mg, zinco 0,17mg, magnesio 12,0mg, rame 0,031mg, selenio 0,80µg, vitamina C 48,8mg, folato totale 64,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 14,8µg, beta-carotene 7,00µg (reale, piccolo ma non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_cavolfiore_cotto` (cavolfiore bianco generico cotto, già eseguito sul DB reale — stessa specie *Brassica oleracea*, stessa cultivar/colore, nessuna ambiguità di cultivar come invece per il "verde").
+- **Categoria dieta**: `plant_non_fruit` (ortaggio, nessuna ambiguità).
+- **Matrice**: nuova `cavolfiore_surgelato` ("Cavolfiore surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente degli altri cavolfiori già fatti), **`carotenoid_matrix_state` omesso (NULL) per trasparenza dichiarata, stessa motivazione già scritta per piselli/spinaci/fagiolini surgelati in questo stesso lotto** (ambiguità blanching industriale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stesso precedente degli altri cavolfiori), `baseline_cooking_state=frozen` (stessa convenzione introdotta in questo lotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170398 --food-id=food_cavolfiore_surgelato \
+  --name-it="Cavolfiore, surgelato" \
+  --matrix-id=cavolfiore_surgelato --matrix-description-it="Cavolfiore surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_cavolfiore_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170398 --food-id=food_cavolfiore_surgelato \
+  --name-it="Cavolfiore, surgelato" \
+  --matrix-id=cavolfiore_surgelato --matrix-description-it="Cavolfiore surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_cavolfiore_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Broccoli, surgelati — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_broccoli_surgelati`. FDC ID 169968 (SR Legacy, "Broccoli, frozen, chopped, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quinto alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_broccoli_raw`/`food_broccoli_boiled`/`food_broccoli_cinesi_raw` già eseguiti, nessun doppione mascherato. Verificato con `grep` dedicato su "broccoli surgelati"/"broccoli, surgelati"/"broccoli frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 26,0kcal, proteine 2,81g, grassi 0,29g, carboidrati 4,78g, fibra 3,00g, calcio 56,0mg, ferro 0,81mg, zinco 0,48mg, magnesio 18,0mg, rame 0,038mg, selenio 2,80µg, vitamina C 56,4mg, folato totale 67,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 81,1µg, beta-carotene 610µg e alfa-carotene 20,0µg (entrambi reali, non nulli), beta-criptoxantina 1,00µg (reale, piccolo ma non nullo).
+- **Analogia usata**: `food_broccoli_raw` (broccoli crudi, Golden Set originale, già eseguiti sul DB reale — "unprepared" descrive lo stato come acquistato, non ancora cotto, stessa specie *Brassica oleracea var. italica*).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio, nessuna ambiguità).
+- **Matrice**: nuova `broccoli_surgelati` ("Broccoli surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_broccoli_raw`), **`carotenoid_matrix_state` omesso (NULL) per trasparenza dichiarata, stessa motivazione già scritta per piselli/spinaci/fagiolini/cavolfiore surgelati in questo stesso lotto** (ambiguità blanching industriale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stesso precedente di `food_broccoli_raw`), `baseline_cooking_state=frozen` (stessa convenzione introdotta in questo lotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169968 --food-id=food_broccoli_surgelati \
+  --name-it="Broccoli, surgelati" \
+  --matrix-id=broccoli_surgelati --matrix-description-it="Broccoli surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169968 --food-id=food_broccoli_surgelati \
+  --name-it="Broccoli, surgelati" \
+  --matrix-id=broccoli_surgelati --matrix-description-it="Broccoli surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Spinaci, surgelati — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
 
 - **food_id**: `food_spinaci_surgelati`. FDC ID 169287 (SR Legacy, "Spinach, frozen, chopped or leaf, unprepared (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Secondo alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_spinach_raw`/`food_spinach_boiled` (Golden Set originale) e da `food_spinaci_in_scatola` (già eseguito), nessun doppione mascherato. Verificato con `grep` dedicato su "spinaci surgelati"/"spinaci, surgelati"/"spinach frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
