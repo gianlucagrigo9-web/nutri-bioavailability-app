@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Manioca (cassava), intera, cruda — preparato 2026-11-02 dal task (ottantunesimo lotto)
+
+- **food_id**: `food_manioca_cruda_raw`. FDC ID 169985 (SR Legacy, "Cassava, raw" — pagina getfoodfacts.com dedicata e pulita, titolo "Cassava, raw (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente). Distinta dalla farina di manioca già preparata in un lotto precedente (`food_farina_di_manioca_raw`, FDC 2512377 Foundation Foods, non ancora eseguita sul DB reale): qui il tubero intero crudo, mai tentato in questa pipeline nonostante il gruppo "tuberi/radici" sia già ampiamente coperto (verificato con `grep` dedicato — singolo, non composto — su "manioca, cruda"/"cassava, raw"/"cassava root", zero occorrenze su tutti e tre i file prima della ricerca web).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 160kcal, proteine 1,36g, grassi 0,28g, carboidrati 38,1g, fibra 1,80g, calcio 16,0mg, ferro 0,27mg, zinco 0,34mg, magnesio 21,0mg, rame 0,10mg, selenio 0,70µg, beta-carotene 8,00µg (reale, non nullo, coerente con un tubero chiaro con tracce di pigmento), vitamina C 20,6mg, folato totale 27,0µg, vitamina B12 0µg esplicito, vitamina K 1,90µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169985 e dataType SR Legacy.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguite sul DB reale — stesso trattamento funzionale "tubero amidaceo crudo", stesso precedente già usato per il topinambur in questa pipeline; famiglia botanica reale della manioca, *Manihot esculenta*, Euphorbiaceae, dichiarata separatamente, non derivata dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: nuova `manioca_cruda` ("Manioca, cruda") — distinta dalla matrice `farina_di_manioca` già usata per la farina.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione di `food_potato_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, tubero crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Euphorbiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169985 --food-id=food_manioca_cruda_raw \
+  --name-it="Manioca (cassava), intera, cruda" \
+  --matrix-id=manioca_cruda --matrix-description-it="Manioca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169985 --food-id=food_manioca_cruda_raw \
+  --name-it="Manioca (cassava), intera, cruda" \
+  --matrix-id=manioca_cruda --matrix-description-it="Manioca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Euphorbiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Alga agar agar, secca — preparato 2026-11-02 dal task (ottantunesimo lotto)
+
+- **food_id**: `food_agar_agar_secco_raw`. FDC ID 170090 (SR Legacy, "Seaweed, agar, dried" — pagina getfoodfacts.com dedicata e pulita, titolo "Seaweed, agar, dried (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente; distinta dalla voce "Seaweed, agar, raw" FDC 169280, non usata qui perché la forma di consumo comune in cucina è quella secca/in fiocchi/in polvere). Alga mai tentata in questa pipeline nonostante nori/wakame/spirulina/kombu siano già coperte (verificato con `grep` dedicato — singolo — su "agar agar"/"agar", zero occorrenze pertinenti su tutti e tre i file prima della ricerca web).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 306kcal, proteine 6,21g, grassi 0,30g, carboidrati 80,9g, fibra 7,70g, calcio 625mg (alto, coerente con un'alga secca disidratata, stesso ordine di grandezza di altre alghe secche già eseguite), ferro 21,4mg, zinco 5,80mg, magnesio 770mg, rame 0,61mg, selenio 7,40µg, vitamina C 0mg esplicito, folato totale 580µg (alto, nessuna firma di arricchimento, coerente con un'alga), vitamina B12 0µg esplicito, vitamina K 24,4µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170090 e dataType SR Legacy.
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, già eseguita sul DB reale — stessa categoria funzionale "alga marina secca/disidratata", trattamento già consolidato in questa pipeline per le alghe).
+- **Categoria dieta**: `plant_non_fruit` (alga).
+- **Matrice**: nuova `agar_agar_secco` ("Agar agar, secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questa alga), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito ma prodotto disidratato/processato, non un vegetale crudo in senso stretto, stessa cautela già usata per altri prodotti disidratati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alga, non una pianta terrestre con famiglia botanica convenzionale, stessa scelta già fatta per `food_alga_nori_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170090 --food-id=food_agar_agar_secco_raw \
+  --name-it="Alga agar agar, secca" \
+  --matrix-id=agar_agar_secco --matrix-description-it="Agar agar, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170090 --food-id=food_agar_agar_secco_raw \
+  --name-it="Alga agar agar, secca" \
+  --matrix-id=agar_agar_secco --matrix-description-it="Agar agar, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Vaniglia, estratto — preparato 2026-11-02 dal task (ottantunesimo lotto)
+
+- **food_id**: `food_vaniglia_estratto_raw`. FDC ID 173471 (SR Legacy, "Vanilla extract" — pagina getfoodfacts.com dedicata e pulita, titolo "Vanilla extract (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente). Condimento/aroma mai tentato in questa pipeline (verificato con `grep` dedicato — singolo — su "vaniglia"/"vanilla extract"/"vanilla bean": le uniche occorrenze preesistenti di "vaniglia" riguardano latte di soia aromatizzato alla vaniglia già ⚠, non l'estratto stesso).
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 288kcal (etichetta arrotonda a 290kcal, differenza di arrotondamento non bloccante, stesso tipo già visto altrove in questa coda), proteine 0,060g, grassi 0,060g, carboidrati 12,7g (dalla componente zuccherina/alcolica della preparazione commerciale, non da un alimento solido), fibra 0g, calcio 11,0mg, ferro 0,12mg, zinco 0,11mg, magnesio 12,0mg, rame 0,072mg, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173471 e dataType SR Legacy.
+- **Analogia usata**: `food_zafferano_raw` (zafferano, già eseguito sul DB reale — nessun parente botanico reale della vaniglia, *Vanilla planifolia*, famiglia Orchidaceae, ancora presente nel DB; usato come analogia generica per il trattamento "condimento/aroma concentrato di alto valore", stessa convenzione già usata per il fieno greco con `food_scarola_raw` quando nessuna pianta della stessa famiglia reale è disponibile).
+- **Categoria dieta**: `plant_non_fruit` (estratto vegetale/alcolico; nessuna ambiguità di origine animale).
+- **Matrice**: nuova `vaniglia_estratto` ("Vaniglia, estratto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, estratto liquido), `carotenoid_matrix_state` omesso (NULL — non applicabile, non un vegetale in matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Orchidaceae` (famiglia reale della vaniglia, per riferimento tassonomico — non usata per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173471 --food-id=food_vaniglia_estratto_raw \
+  --name-it="Vaniglia, estratto" \
+  --matrix-id=vaniglia_estratto --matrix-description-it="Vaniglia, estratto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zafferano_raw \
+  --botanical-family=Orchidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173471 --food-id=food_vaniglia_estratto_raw \
+  --name-it="Vaniglia, estratto" \
+  --matrix-id=vaniglia_estratto --matrix-description-it="Vaniglia, estratto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zafferano_raw \
+  --botanical-family=Orchidaceae --diet-category=plant_non_fruit --apply
+```
+
+### Olio di senape — preparato 2026-11-02 dal task (ottantunesimo lotto)
+
+- **food_id**: `food_olio_di_senape_raw`. FDC ID 172337 (SR Legacy, "Oil, mustard" — pagina getfoodfacts.com dedicata e pulita, titolo "Oil, mustard (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente). Olio di nicchia mai tentato in questa pipeline, a differenza di arachidi/sesamo/vinaccioli/lino/canapa (tutti ⚠ per mancanza di FDC ID verificabile) e di colza/palma/cocco/girasole/nocciola/avocado (tutti ✅) — verificato con `grep` dedicato — singolo — su "olio di senape"/"mustard oil", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17** — mancano beta-carotene, vitamina K, l'altro carotenoide provitaminico A (campi assenti dal record, non assunti zero, coerente con un olio vegetale puro già visto per gli altri oli di questa coda). Per 100g: energia 884kcal, grassi 100g, proteine 0g esplicito, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0mg esplicito, zinco 0mg esplicito, magnesio 0mg esplicito, rame 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, vitamina B12 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172337 e dataType SR Legacy.
+- **Analogia usata**: `food_senape_raw` (semi di senape macinati, già eseguiti sul DB reale — stessa pianta, famiglia botanica reale Brassicaceae, olio estratto invece del seme intero).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale puro).
+- **Matrice**: nuova `olio_di_senape` ("Olio di senape").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione degli altri oli vegetali puri già in questa coda), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stesso precedente di `food_senape_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172337 --food-id=food_olio_di_senape_raw \
+  --name-it="Olio di senape" \
+  --matrix-id=olio_di_senape --matrix-description-it="Olio di senape" \
+  --baseline-cooking-state=raw --analogy-food-id=food_senape_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172337 --food-id=food_olio_di_senape_raw \
+  --name-it="Olio di senape" \
+  --matrix-id=olio_di_senape --matrix-description-it="Olio di senape" \
+  --baseline-cooking-state=raw --analogy-food-id=food_senape_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fieno greco, semi secchi — preparato 2026-11-02 dal task (ottantesimo lotto)
 
 - **food_id**: `food_fieno_greco_semi_raw`. FDC ID 171324 (SR Legacy, "Spices, fenugreek seed" — pagina getfoodfacts.com dedicata e pulita, titolo "Spices, fenugreek seed (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente nell'URL stesso — erba/spezia mai tentata in nessuna forma in questa pipeline, verificato con `grep` dedicato (italiano "fieno greco"/"fenugreek", zero occorrenze su tutti e tre i file prima della ricerca web).
