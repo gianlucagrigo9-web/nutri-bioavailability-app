@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fieno greco, semi secchi — preparato 2026-11-02 dal task (ottantesimo lotto)
+
+- **food_id**: `food_fieno_greco_semi_raw`. FDC ID 171324 (SR Legacy, "Spices, fenugreek seed" — pagina getfoodfacts.com dedicata e pulita, titolo "Spices, fenugreek seed (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente nell'URL stesso — erba/spezia mai tentata in nessuna forma in questa pipeline, verificato con `grep` dedicato (italiano "fieno greco"/"fenugreek", zero occorrenze su tutti e tre i file prima della ricerca web).
+- **Nutrienti**: **14/17**. Per 100g: energia 323kcal, proteine 23,0g, grassi 6,41g, carboidrati 58,4g, fibra 24,6g, calcio 176mg, ferro 33,5mg (alto ma coerente col dato noto per questa spezia, stesso ordine di grandezza di cumino/timo già eseguiti), magnesio 191mg, zinco 2,50mg, rame 1,11mg, selenio 6,30µg, vitamina C 3,00mg, vitamina B12 0µg (esplicito), folato totale 57,0µg (nessuna firma di arricchimento). Mancano dal record: vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_scarola_raw` (già eseguita sul DB reale — stesso trattamento "spezia secca macinata/in semi" già usato per cumino/cardamomo/noce moscata/coriandolo in questa pipeline quando nessuna spezia della stessa famiglia botanica reale è ancora nel DB; il fieno greco è un legume, *Trigonella foenum-graecum*, famiglia Fabaceae — diversa da quella di `food_scarola_raw`, Asteraceae — ma usato comunque come analogia generica per il trattamento "spezia secca", stessa scelta già fatta per altre spezie senza un parente botanico reale già presente).
+- **Categoria dieta**: `plant_non_fruit` (spezia, seme secco di origine vegetale).
+- **Matrice**: nuova `fieno_greco_semi` ("Fieno greco, semi secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171324 --food-id=food_fieno_greco_semi_raw \
+  --name-it="Fieno greco, semi secchi" \
+  --matrix-id=fieno_greco_semi --matrix-description-it="Fieno greco, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171324 --food-id=food_fieno_greco_semi_raw \
+  --name-it="Fieno greco, semi secchi" \
+  --matrix-id=fieno_greco_semi --matrix-description-it="Fieno greco, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Menta piperita, fresca, cruda — preparato 2026-11-02 dal task (settantanovesimo lotto)
 
 - **food_id**: `food_menta_piperita_raw`. FDC ID 173474 (SR Legacy, "Peppermint, fresh" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie botanica distinta dalla menta verde/spearmint già eseguita sul DB reale (`food_menta_raw`, FDC 173475 "Spearmint, fresh") — *Mentha piperita* vs *Mentha spicata*, stesso genere ma specie diversa, con un proprio record FDC dedicato e profilo nutrizionale diverso, non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "menta piperita"/"peppermint"/173474 esisteva già (solo la menta verde/spearmint risultava già presente).
