@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salmone atlantico, selvaggio, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
+
+- **food_id**: `food_salmone_atlantico_selvaggio_raw`. FDC ID 173686 (SR Legacy, "Fish, salmon, Atlantic, wild, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dal salmone atlantico ALLEVATO già nel Golden Set originale (`food_salmon_raw`, FDC 175167/169989 "Fish, salmon, Atlantic, farmed, raw") — stessa specie *Salmo salar*, ma record FDC realmente distinto (selvaggio vs allevato hanno profili lipidici diversi, principio già validato in questa pipeline per il salmone coho selvaggio vs l'atlantico allevato). Verificato con `grep` dedicato — singolo — su "salmone selvaggio"/"salmon, wild"/"salmone atlantico selvaggio", zero occorrenze pertinenti prima della ricerca web (il solo salmone selvaggio già fatto è il coho, specie *Oncorhynchus kisutch* diversa).
+- **Nutrienti**: **14/17**. Per 100g: energia 142kcal, proteine 19,8g, grassi 6,34g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 12,0mg, ferro 0,80mg, zinco 0,64mg, magnesio 29,0mg, rame 0,25mg, selenio 36,5µg, vitamina C 0mg (esplicito), folato totale 25,0µg, vitamina B12 3,18µg. Mancano: vitamina K, beta-carotene, l'altro carotenoide provitaminico A — nessuna riga per questi campi nel record (66 nutrienti totali elencati in pagina, ma questi 3 fra i 17 tracciati da questo progetto assenti), non assunti zero. Stesso pattern di lacune già visto per altri pesci magri/semi-grassi già eseguiti.
+- **Analogia usata**: `food_salmon_raw` (salmone atlantico allevato, crudo, Golden Set originale, già eseguito sul DB reale — stessa specie esatta *Salmo salar*, stesso trattamento "pesce crudo", differenza solo nello stato selvaggio/allevato).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_atlantico_selvaggio` ("Salmone atlantico, selvaggio").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_salmon_raw`), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun campo beta-carotene nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un pesce, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173686 --food-id=food_salmone_atlantico_selvaggio_raw \
+  --name-it="Salmone atlantico, selvaggio, crudo" \
+  --matrix-id=salmone_atlantico_selvaggio --matrix-description-it="Salmone atlantico, selvaggio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173686 --food-id=food_salmone_atlantico_selvaggio_raw \
+  --name-it="Salmone atlantico, selvaggio, crudo" \
+  --matrix-id=salmone_atlantico_selvaggio --matrix-description-it="Salmone atlantico, selvaggio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Olio di fegato di merluzzo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
 
 - **food_id**: `food_olio_di_fegato_di_merluzzo_raw`. FDC ID 173577 (SR Legacy, "Fish oil, cod liver" — pagina getfoodfacts.com dedicata e pulita, titolo "Fish oil, cod liver (SR Legacy) nutrition facts", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto storico ben tracciato da USDA, mai cercato in questa pipeline nonostante decine di frattaglie di altre specie già fatte (il filone "frattaglie" finora ha riguardato solo mammiferi/uccelli, mai il fegato/olio di un pesce — verificato con `grep` dedicato — singolo, non composto — su "fegato di merluzzo"/"olio di fegato"/"cod liver", zero occorrenze pertinenti su tutti e tre i file prima della ricerca web).
