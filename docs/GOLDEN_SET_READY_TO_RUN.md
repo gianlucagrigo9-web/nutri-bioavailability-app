@@ -65,6 +65,30 @@ npm run add-food -- --fdc-id=174529 --food-id=food_salsa_di_ostriche \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Salsa di pesce (fish sauce) — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_di_pesce`. FDC ID 174531 (SR Legacy, "Sauce, fish, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terzo alimento del filone "salse e condimenti commerciali USDA generici". Distinto dal record FDC 2706457 (lo stesso nome "fish sauce" ma dataType **USDA Survey/FNDDS**, scartato — fuori dal criterio di questa coda, stesso motivo già usato per scartare un record Survey della mortadella in un lotto precedente). Verificato con `grep` dedicato su "salsa di pesce"/"fish sauce"/174531, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 35,0kcal, proteine 5,06g, grassi 0,010g, carboidrati 3,64g, fibra 0g (esplicito), calcio 43,0mg, ferro 0,78mg, zinco 0,20mg, magnesio 175mg, rame 0,050mg, selenio 9,10µg, vitamina C 0,50mg, folato totale 51,0µg, acido folico 0µg (esplicito), vitamina B12 0,48µg, beta-carotene 0µg (esplicito), alfa-carotene 0µg + beta-criptoxantina 0µg (= "altro carotenoide provitaminico A", entrambi espliciti), vitamina K 0µg (esplicito). Sodio 7.851mg/100g (estremamente alto, coerente con un estratto di pesce fermentato puro e concentrato — più alto di qualunque condimento già visto in questa pipeline).
+- **Analogia usata**: `food_acciughe_raw` (acciughe crude, già eseguite sul DB reale — a differenza del Worcestershire (pesce come aromatizzante minore in un condimento multi-ingrediente), la salsa di pesce è un estratto fermentato di pesce+sale quasi puro, dove il pesce è l'ingrediente quasi esclusivo: `is_heme_iron` eredita quindi dalla classificazione del pesce muscolare, non trattato come traccia).
+- **Categoria dieta**: `meat_fish` (prodotto a base di pesce fermentato — non vegetariano, non vegano).
+- **Matrice**: nuova `salsa_di_pesce` ("Salsa di pesce").
+- **Attributi**: `is_heme_iron=true` (per analogia con `food_acciughe_raw`, vedi nota sopra — il pesce è l'ingrediente dominante, non una traccia come nel Worcestershire), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=fermented` (prodotto fermentato per mesi, tecnica di conservazione tradizionale), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174531 --food-id=food_salsa_di_pesce \
+  --name-it="Salsa di pesce (fish sauce)" \
+  --matrix-id=salsa_di_pesce --matrix-description-it="Salsa di pesce" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_acciughe_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174531 --food-id=food_salsa_di_pesce \
+  --name-it="Salsa di pesce (fish sauce)" \
+  --matrix-id=salsa_di_pesce --matrix-description-it="Salsa di pesce" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_acciughe_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
