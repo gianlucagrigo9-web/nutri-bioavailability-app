@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sciroppo di agave — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_sciroppo_di_agave_raw`. FDC ID 170277 (SR Legacy, "Sweetener, syrup, agave" — pagina getfoodfacts.com dedicata e pulita, titolo "Sweetener, syrup, agave (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dolcificante mai tentato in questa pipeline nonostante miele/zucchero/sciroppo d'acero/melassa già coperti — verificato con `grep` dedicato su "sciroppo di agave"/"agave syrup"/170277, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo, valori reali non tutti nulli). Per 100g: energia 310kcal, proteine 0,090g, grassi 0,45g, carboidrati 76,4g, fibra 0,20g, calcio 1,00mg, ferro 0,090mg, zinco 0,010mg, magnesio 1,00mg, rame 0,0090mg, selenio 1,70µg, vitamina C 17,0mg (reale, non nullo — a differenza di zucchero bianco/sciroppo d'acero), folato totale 30,0µg, vitamina B12 0µg esplicito, vitamina K (fillochinone) 22,5µg (reale), beta-carotene 94,0µg (reale), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A"). Coerenza interna verificata: energia da macro (76,4g carb×4 + 0,45g grassi×9 + 0,090g proteine×4 ≈ 310kcal) corrisponde esattamente al valore dichiarato.
+- **Analogia usata**: `food_sciroppo_di_acero_raw` (sciroppo d'acero, già eseguito sul DB reale — stessa categoria funzionale "sciroppo dolcificante da pianta", stesso precedente di trattamento già usato in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante di origine vegetale — nessuna ambiguità, a differenza del miele che è `egg_dairy` per convenzione del PRD §4.9).
+- **Matrice**: nuova `sciroppo_di_agave` ("Sciroppo di agave").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, sciroppo concentrato), `carotenoid_matrix_state=cooked_or_disrupted` (**scelta dichiarata**: a differenza di un vegetale crudo intatto, lo sciroppo di agave è ottenuto per estrazione della linfa e concentrazione per riscaldamento — matrice vegetale disgregata dal processo, non intatta come in un frutto crudo, nonostante `baseline-cooking-state=raw` descriva lo stato del dato nutrizionale non un processo "a crudo"), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto estratto/concentrato, stessa convenzione già usata per zucchero/melassa/sciroppo d'acero, non il vegetale intero), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un prodotto vegetale non lavorato con acido folico sintetico).
+
+```
+npm run add-food -- --fdc-id=170277 --food-id=food_sciroppo_di_agave_raw \
+  --name-it="Sciroppo di agave" \
+  --matrix-id=sciroppo_di_agave --matrix-description-it="Sciroppo di agave" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sciroppo_di_acero_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170277 --food-id=food_sciroppo_di_agave_raw \
+  --name-it="Sciroppo di agave" \
+  --matrix-id=sciroppo_di_agave --matrix-description-it="Sciroppo di agave" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sciroppo_di_acero_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Funghi ostrica, crudi — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_funghi_ostrica_raw`. FDC ID 168580 (SR Legacy, "Mushrooms, oyster, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo "FoodData Central 168580, SR Legacy", release USDA 2026-04-30). Fungo (Pleurotus ostreatus) mai tentato in questa pipeline nonostante champignon/cremini/shiitake/pioppini già coperti — verificato con `grep` dedicato su "funghi ostrica"/"oyster mushroom"/168580, zero occorrenze su tutti e tre i file prima della ricerca web.
