@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio Gruviera — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_gruviera_raw`. FDC ID 171242 (SR Legacy, "Cheese, gruyere" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio svizzero a pasta dura mai tentato in questa pipeline nonostante emmentaler/formaggio di capra/parmigiano già coperti (mascarpone/halloumi/formaggio blu/provola/scamorza già scartati ⚠ per assenza di record) — verificato con `grep` dedicato su "gruviera"/"gruyere"/171242, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 413kcal, proteine 29,8g, grassi 32,3g, carboidrati 0,36g, fibra 0g esplicito, calcio 1011mg (alto, coerente con un formaggio stagionato a pasta dura — stesso ordine di grandezza del parmigiano/emmentaler già eseguiti), ferro 0,17mg, zinco 3,90mg, magnesio 36,0mg, rame 0,032mg, selenio 14,5µg, vitamina C 0mg esplicito, folato totale 10,0µg, vitamina B12 1,60µg, vitamina K (fillochinone) 2,70µg, beta-carotene 33,0µg (reale, non nullo — tipico del latte/grasso del formaggio), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
+- **Analogia usata**: `food_formaggio_svizzero_raw` (formaggio svizzero/emmentaler, già eseguito sul DB reale — stessa categoria funzionale "formaggio svizzero stagionato a pasta dura", analogia più diretta possibile).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+- **Matrice**: nuova `gruviera` ("Formaggio Gruviera").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di `food_formaggio_svizzero_raw`/`food_formaggio_di_capra_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171242 --food-id=food_gruviera_raw \
+  --name-it="Formaggio Gruviera" \
+  --matrix-id=gruviera --matrix-description-it="Formaggio Gruviera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171242 --food-id=food_gruviera_raw \
+  --name-it="Formaggio Gruviera" \
+  --matrix-id=gruviera --matrix-description-it="Formaggio Gruviera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Crusca di grano, cruda — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_crusca_di_grano_raw`. FDC ID 169722 (SR Legacy, "Wheat bran, crude" — pagina getfoodfacts.com dedicata e pulita, titolo "USDA Standard Reference · Cereal Grains and Pasta", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Sottoprodotto della macinazione del grano mai tentato in questa pipeline (crusca d'avena/mais/segale già coperte: la prima eseguita, mais ✅, segale ⚠ per assenza di record) — verificato con `grep` dedicato su "crusca di grano"/"wheat bran"/169722, zero occorrenze su tutti e tre i file prima della ricerca web.
