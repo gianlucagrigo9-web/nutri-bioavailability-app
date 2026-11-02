@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Aneto, fresco, crudo — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_aneto_fresco_raw`. FDC ID 172233 (SR Legacy, "Dill weed, fresh" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dall'aneto secco già eseguito sul DB reale (`food_aneto_raw`, FDC 171322 "Spices, dill weed, dried", 12/17) — record FDC realmente diverso (fresco vs secco, due alimenti diversi con profilo nutrizionale diverso), non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "aneto fresco"/"dill weed, fresh"/172233 esisteva già.
+- **Nutrienti**: **13/17**. Per 100g: energia 43,0kcal, proteine 3,46g, grassi 1,12g, carboidrati 7,02g, fibra 2,10g, calcio 208mg, ferro 6,59mg, magnesio 55,0mg, zinco 0,91mg, rame 0,15mg, sodio 61,0mg, vitamina C 85,0mg, vitamina B12 0µg (esplicito), folato totale 150µg (acido folico 0µg esplicito, nessuna firma di arricchimento). Mancano dal record: selenio, beta-carotene, vitamina K (fillochinone), l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina) — campi assenti, non assunti zero.
+- **Analogia usata**: `food_prezzemolo_raw` (prezzemolo fresco, FDC 170416 "Parsley, fresh", già eseguito sul DB reale — stesso trattamento "erba aromatica fresca", stessa famiglia botanica reale Apiaceae).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `aneto_fresco` ("Aneto, fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172233 --food-id=food_aneto_fresco_raw \
+  --name-it="Aneto, fresco, crudo" \
+  --matrix-id=aneto_fresco --matrix-description-it="Aneto, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172233 --food-id=food_aneto_fresco_raw \
+  --name-it="Aneto, fresco, crudo" \
+  --matrix-id=aneto_fresco --matrix-description-it="Aneto, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Rosmarino, fresco, crudo — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_rosmarino_fresco_raw`. FDC ID 173473 (SR Legacy, "Rosemary, fresh" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dal rosmarino secco già eseguito sul DB reale (`food_rosmarino_secco_raw`, FDC 171333 "Spices, rosemary, dried", 14/17) — record FDC realmente diverso, non un doppione, stesso principio già validato in questa pipeline per basilico/prezzemolo/menta/timo (fresco e secco hanno entrambi un record FDC proprio con profilo diverso). Verificato con grep dedicato su tutti e tre i file che nessuna voce "rosmarino fresco"/"rosemary, fresh"/173473 esisteva già.
+- **Nutrienti**: **13/17**. Per 100g: energia 131kcal, proteine 3,31g, grassi 5,86g, carboidrati 20,7g, fibra 14,1g, calcio 317mg, ferro 6,65mg, magnesio 91,0mg, zinco 0,93mg, rame 0,30mg, sodio 26,0mg, vitamina C 21,8mg, vitamina B12 0µg (esplicito), folato totale 109µg (acido folico 0µg esplicito, nessuna firma di arricchimento). Mancano dal record: selenio, beta-carotene, vitamina K, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_timo_fresco_raw` (timo fresco, FDC 173470 "Thyme, fresh", già eseguito sul DB reale — stesso trattamento "erba aromatica fresca", stessa famiglia botanica reale Lamiaceae).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `rosmarino_fresco` ("Rosmarino, fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173473 --food-id=food_rosmarino_fresco_raw \
+  --name-it="Rosmarino, fresco, crudo" \
+  --matrix-id=rosmarino_fresco --matrix-description-it="Rosmarino, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_timo_fresco_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173473 --food-id=food_rosmarino_fresco_raw \
+  --name-it="Rosmarino, fresco, crudo" \
+  --matrix-id=rosmarino_fresco --matrix-description-it="Rosmarino, fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_timo_fresco_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Uvetta dorata, senza semi — preparato 2026-11-01 dal task (settantaseiesimo lotto)
 
 - **food_id**: `food_uvetta_dorata_raw`. FDC ID 168164 (SR Legacy, "Raisins, golden, seedless" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cultivar/trattamento distinto dall'uva passa scura già eseguita sul DB reale (`food_uva_passa_raw`, FDC 168165, "Raisins, dark, seedless"): l'uvetta dorata è disidratata con un processo diverso (spesso con anidride solforosa, senza l'ossidazione che scurisce l'uva passa tradizionale) e ha un proprio record FDC dedicato, distinto — non un doppione, un prodotto genuinamente diverso (stesso principio già usato per albicocche secche sulfured vs non-sulfured in questa pipeline). Verificato con grep dedicato su tutti e tre i file che nessuna voce "uvetta dorata"/"raisins golden"/168164 esisteva già (l'uva passa scura, 168165, è invece già presente ed eseguita — non riproposta).
