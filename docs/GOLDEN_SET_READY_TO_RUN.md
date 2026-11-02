@@ -139,6 +139,30 @@ npm run add-food -- --fdc-id=171186 --food-id=food_salsa_sriracha \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Hummus, commerciale — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_hummus`. FDC ID 174289 (SR Legacy, "Hummus, commercial" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, "uno di 5 descrizioni USDA di hummus"). Sesto alimento del filone "salse e condimenti commerciali USDA generici" (qui una crema/salsa da tavola, non un condimento liquido). Esiste anche una voce Foundation Foods per lo stesso alimento (FDC 321358) ma con **15/17 nutrienti** (mancano acido folico e vitamina B12, non riportati) — scelta la versione SR Legacy (174289) per la copertura nutrienti completa. Verificato con `grep` dedicato su "hummus"/174289, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 237kcal, proteine 7,78g, grassi 17,8g, carboidrati 15,0g, fibra 5,50g, calcio 47,0mg, ferro 2,54mg, zinco 1,44mg, magnesio 75,0mg, rame 0,38mg, selenio 4,70µg, vitamina C 0mg (esplicito), folato totale 48,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 12,0µg (reale, basso ma non nullo — residuo dell'olio d'oliva), alfa-carotene 0µg + beta-criptoxantina 3,00µg (= "altro carotenoide provitaminico A"), vitamina K 22,8µg (reale, coerente con l'olio d'oliva).
+- **Analogia usata**: `food_chickpeas_raw` (ceci crudi, Golden Set originale, già eseguito sul DB reale — ingrediente dominante dell'hummus; ricetta standard ceci+tahina (semi di sesamo)+olio d'oliva+aglio+succo di limone, nessun ingrediente animale, stessa famiglia botanica Fabaceae dell'ingrediente principale).
+- **Categoria dieta**: `plant_non_fruit` (ricetta interamente vegetale, nessun ingrediente animale — legume).
+- **Matrice**: nuova `hummus` ("Hummus, commerciale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto multi-ingrediente trasformato), `carotenoid_matrix_state` omesso (NULL — tracce reali di carotenoidi presenti ma verosimilmente residuo dell'olio d'oliva, stesso tipo di ragionamento già usato per la maionese: non un alimento la cui classificazione dipenda dalla matrice carotenoide di un singolo ortaggio/frutto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto ceci (Fabaceae)+sesamo (Pedaliaceae)+oliva, nessuna famiglia botanica singola applicabile, stessa convenzione già usata per la salsa di soia), `baseline_cooking_state=cooked` (i ceci alla base dell'hummus sono cotti/bolliti, coerente con `food_ceci_in_scatola` già eseguito), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174289 --food-id=food_hummus \
+  --name-it="Hummus, commerciale" \
+  --matrix-id=hummus --matrix-description-it="Hummus, commerciale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174289 --food-id=food_hummus \
+  --name-it="Hummus, commerciale" \
+  --matrix-id=hummus --matrix-description-it="Hummus, commerciale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_chickpeas_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
