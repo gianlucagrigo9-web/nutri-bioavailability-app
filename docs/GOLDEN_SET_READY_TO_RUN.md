@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Durian, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto, continuazione)
+
+- **food_id**: `food_durian_raw`. FDC ID 168192 (SR Legacy, "Durian, raw or frozen" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto esotico residuo dopo la saturazione già confermata per il grosso del gruppo (mango/papaya/guava/litchi/pitaya/jackfruit già fatti) — verificato con `grep` dedicato su "durian", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 147kcal, proteine 1,47g, grassi 5,33g, carboidrati 27,1g, fibra 3,80g, calcio 6,00mg, ferro 0,43mg, zinco 0,28mg, magnesio 30,0mg, rame 0,21mg, vitamina C 19,7mg, folato totale 36,0µg, vitamina B12 0µg (esplicito), beta-carotene 23,0µg (reale, non nullo), alfa-carotene 6,00µg + beta-criptoxantina 0µg (= 6,00µg, "altro carotenoide provitaminico A"). Mancano: selenio (nessuna riga sulla pagina), vitamina K (nessuna riga di alcun tipo, phylloquinone incluso) — campi assenti dal record, non assunti zero.
+- **Analogia usata**: `food_mango_raw` (mango crudo, Golden Set pipeline, già eseguito sul DB reale — stesso trattamento funzionale "frutto esotico crudo con carotenoidi reali non nulli", stesso precedente già usato per frutto della passione/guava in questa coda).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca tropicale, consumata cruda — nessuna ambiguità, non un ortaggio botanicamente "frutto").
+- **Matrice**: nuova `durian` ("Durian").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state=raw_intact` (beta-carotene e alfa-carotene reali e non nulli, frutto crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae` (*Durio zibethinus*, classificazione APG moderna — ex Bombacaceae), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un frutto, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168192 --food-id=food_durian_raw \
+  --name-it="Durian, crudo" \
+  --matrix-id=durian --matrix-description-it="Durian" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Malvaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168192 --food-id=food_durian_raw \
+  --name-it="Durian, crudo" \
+  --matrix-id=durian --matrix-description-it="Durian" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Malvaceae --diet-category=fresh_fruit --apply
+```
+
+### Fiocchi di latte (cottage cheese) — preparato 2026-11-02 dal task (ottantaduesimo lotto, continuazione)
+
+- **food_id**: `food_fiocchi_di_latte_raw`. FDC ID 172179 (SR Legacy, "Cheese, cottage, creamed, large or small curd" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Latticino mai tentato in questa pipeline nonostante il gruppo formaggi sia ampiamente coperto — distinto dalla ricotta già eseguita (struttura a grumi/cagliata non filata, processo di produzione diverso). Verificato con `grep` dedicato su "fiocchi di latte"/"cottage cheese", zero occorrenze pertinenti (solo prodotti Branded) su tutti e tre i file prima della ricerca web dedicata al record generico.
+- **Nutrienti**: **17/17**, record completo. Per 100g: energia 98,0kcal, proteine 11,1g, grassi 4,30g, carboidrati 3,38g, fibra 0g (esplicito), calcio 83,0mg, ferro 0,070mg, zinco 0,40mg, magnesio 8,00mg, rame 0,029mg, selenio 9,70µg, vitamina C 0mg (esplicito), folato totale 12,0µg, vitamina B12 0,43µg, vitamina K 0µg (esplicito — il record riporta solo le forme menachinone-4/diidrofillochinone separatamente, la fillochinone mappata da questo progetto è 0µg esplicito), beta-carotene 12,0µg (reale, non nullo), alfa-carotene 0µg + beta-criptoxantina 0µg esplicito (= "altro carotenoide provitaminico A" 0).
+- **Analogia usata**: `food_ricotta` (ricotta di latte intero, Golden Set pipeline, FDC 170851, già eseguita sul DB reale — stessa categoria funzionale "formaggio fresco non stagionato a pasta morbida/granulosa", stesso trattamento già applicato al formaggio cremoso).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `fiocchi_di_latte` ("Fiocchi di latte (cottage cheese)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile a un latticino), `carotenoid_matrix_state` omesso (NULL — stessa convenzione già usata per gli altri latticini con beta-carotene non nullo, es. formaggio cremoso: l'attributo riguarda la disgregazione da cottura delle matrici vegetali, non si applica al latte/formaggio), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw` (non cotto, stessa convenzione di ricotta/formaggio cremoso), `is_fortified_folate` omesso (false — folato coerente con un latticino, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172179 --food-id=food_fiocchi_di_latte_raw \
+  --name-it="Fiocchi di latte (cottage cheese)" \
+  --matrix-id=fiocchi_di_latte --matrix-description-it="Fiocchi di latte (cottage cheese)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172179 --food-id=food_fiocchi_di_latte_raw \
+  --name-it="Fiocchi di latte (cottage cheese)" \
+  --matrix-id=fiocchi_di_latte --matrix-description-it="Fiocchi di latte (cottage cheese)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy --apply
+```
+
 ### Tamarindo, polpa — preparato 2026-11-02 dal task (ottantaduesimo lotto)
 
 - **food_id**: `food_tamarindo_raw`. FDC ID 167763 (SR Legacy, "Tamarinds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto residuo dopo la saturazione già confermata per il grosso delle frutte esotiche (mango/papaya/guava/litchi già fatti) — verificato con `grep` dedicato su "tamarindo"/"tamarind", zero occorrenze prima della ricerca web.
