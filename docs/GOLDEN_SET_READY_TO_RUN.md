@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tamarindo, polpa — preparato 2026-11-02 dal task (ottantaduesimo lotto)
+
+- **food_id**: `food_tamarindo_raw`. FDC ID 167763 (SR Legacy, "Tamarinds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto residuo dopo la saturazione già confermata per il grosso delle frutte esotiche (mango/papaya/guava/litchi già fatti) — verificato con `grep` dedicato su "tamarindo"/"tamarind", zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 239kcal (alta per un "frutto fresco" tipico — coerente con la polpa di tamarindo, densa e poco acquosa, più simile a un frutto disidratato/concentrato che a un frutto fresco succoso), proteine 2,80g, grassi 0,60g, carboidrati 62,5g, fibra 5,10g, calcio 74,0mg, ferro 2,80mg, zinco 0,10mg, magnesio 92,0mg, rame 0,086mg, selenio 1,30µg, vitamina C 3,50mg, folato totale 14,0µg, vitamina B12 0µg (esplicito), vitamina K 2,80µg, beta-carotene 18,0µg (reale, non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito).
+- **Analogia usata**: `food_farina_di_carruba_raw` (farina di carruba, già eseguita sul DB reale — stessa famiglia botanica reale Fabaceae, stesso principio "polpa/baccello di legume arboreo usato come alimento dolce", non un parente diretto ma l'analogia botanica più vicina disponibile nel DB).
+- **Categoria dieta**: `plant_non_fruit` (polpa densa/parzialmente disidratata, energia e consistenza non da "frutta fresca" nella definizione restrittiva del PRD — stessa convenzione già usata per i datteri, frutto "secco"/concentrato anche se non essiccato industrialmente).
+- **Matrice**: nuova `tamarindo` ("Tamarindo, polpa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, nessun dato specifico sugli ossalati per questo alimento), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, polpa non cotta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (*Tamarindus indica*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un frutto, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167763 --food-id=food_tamarindo_raw \
+  --name-it="Tamarindo, polpa" \
+  --matrix-id=tamarindo --matrix-description-it="Tamarindo, polpa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_carruba_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167763 --food-id=food_tamarindo_raw \
+  --name-it="Tamarindo, polpa" \
+  --matrix-id=tamarindo --matrix-description-it="Tamarindo, polpa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_carruba_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Tonno rosso (pinna blu), fresco, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
 
 - **food_id**: `food_tonno_rosso_raw`. FDC ID 173706 (SR Legacy, "Fish, tuna, fresh, bluefin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie *Thunnus thynnus* distinta dal tonno pinna gialla (*Thunnus albacares*, già nel Golden Set originale) e dal tonno bianco/alalunga già fatto — verificato con `grep` dedicato su "tonno rosso"/"bluefin", zero occorrenze prima della ricerca web.
