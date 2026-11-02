@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Olio di palmisto (palm kernel oil) — preparato 2026-11-02 dal task (ottantaquattresimo lotto)
+
+- **food_id**: `food_olio_di_palmisto_raw`. FDC ID 171422 (SR Legacy, "Vegetable oil, palm kernel" — pagina getfoodfacts.com dedicata e pulita, titolo "Vegetable oil, palm kernel (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Olio estratto dal seme/mandorlo della palma da olio, distinto dall'olio di palma (estratto dalla polpa del frutto) già eseguito — composizione in acidi grassi nota per essere diversa (più ricco di acidi grassi a catena più corta), stesso tipo di distinzione già fatta per olio d'oliva/sansa in altre pipeline alimentari, qui confermata da un record FDC realmente distinto (171422 vs 171015 dell'olio di palma). Verificato con `grep` dedicato su "palmisto"/"palm kernel"/171422, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 862kcal, proteine 0g esplicito, grassi 100g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 0mg esplicito, ferro 0mg esplicito, zinco 0mg esplicito, magnesio 0mg esplicito, rame 0mg esplicito, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 24,7µg (reale, non nullo — valore plausibile per un olio vegetale tropicale), beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (olio chiaro, privo di pigmento, coerente con l'assenza di carotenoidi a differenza dell'olio di palma non raffinato).
+- **Analogia usata**: `food_olio_di_palma_raw` (olio di palma, già eseguito sul DB reale — stessa pianta *Elaeis guineensis*, olio estratto da una parte diversa del frutto).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale puro, nessuna ambiguità).
+- **Matrice**: nuova `olio_di_palmisto` ("Olio di palmisto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, olio puro), `carotenoid_matrix_state` omesso (NULL — carotenoidi 0µg espliciti, non un gap ma un dato reale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (famiglia reale della palma da olio, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna dichiarazione di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171422 --food-id=food_olio_di_palmisto_raw \
+  --name-it="Olio di palmisto (palm kernel oil)" \
+  --matrix-id=olio_di_palmisto --matrix-description-it="Olio di palmisto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_palma_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171422 --food-id=food_olio_di_palmisto_raw \
+  --name-it="Olio di palmisto (palm kernel oil)" \
+  --matrix-id=olio_di_palmisto --matrix-description-it="Olio di palmisto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_palma_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
+### Sciroppo di mais, chiaro (light corn syrup) — preparato 2026-11-02 dal task (ottantaquattresimo lotto)
+
+- **food_id**: `food_sciroppo_di_mais_raw`. FDC ID 168837 (SR Legacy, "Syrups, corn, light" — pagina getfoodfacts.com dedicata e pulita, titolo "Syrups, corn, light (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dolcificante industriale da mais mai tentato in questa pipeline, distinto dallo sciroppo d'acero/agave/zucchero già eseguiti (fonte vegetale diversa, stesso principio funzionale "dolcificante liquido isolato"). Verificato con `grep` dedicato su "sciroppo di mais"/"corn syrup"/168837, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 283kcal, proteine 0g esplicito, grassi 0,20g, carboidrati 76,8g, fibra 0g esplicito, calcio 13,0mg, ferro 0mg esplicito, zinco 0,44mg, magnesio 1,00mg, rame 0mg esplicito, selenio 0,70µg, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti — profilo coerente con un dolcificante puro, stesso schema già visto per sciroppo d'acero/zucchero bianco/sciroppo di agave.
+- **Analogia usata**: `food_sciroppo_di_acero_raw` (sciroppo d'acero, già eseguito sul DB reale — stessa categoria funzionale "dolcificante liquido isolato industrialmente", stessa convenzione di attributi già usata per quella voce).
+- **Categoria dieta**: `plant_non_fruit` (dolcificante vegetale puro, nessun ingrediente animale).
+- **Matrice**: nuova `sciroppo_di_mais` ("Sciroppo di mais, chiaro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, dolcificante isolato), `carotenoid_matrix_state` omesso (NULL — carotenoidi 0µg espliciti, non un gap), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — dolcificante industriale senza un'unica pianta di origine univoca nel prodotto finito, stessa convenzione già usata per `food_zucchero_bianco`/`food_sciroppo_di_acero_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna dichiarazione di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168837 --food-id=food_sciroppo_di_mais_raw \
+  --name-it="Sciroppo di mais, chiaro" \
+  --matrix-id=sciroppo_di_mais --matrix-description-it="Sciroppo di mais, chiaro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sciroppo_di_acero_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168837 --food-id=food_sciroppo_di_mais_raw \
+  --name-it="Sciroppo di mais, chiaro" \
+  --matrix-id=sciroppo_di_mais --matrix-description-it="Sciroppo di mais, chiaro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sciroppo_di_acero_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Farina di amaranto, cruda — preparato 2026-11-02 dal task (ottantaquattresimo lotto)
+
+- **food_id**: `food_farina_di_amaranto_raw`. FDC ID 2512371 (Foundation Foods, "Flour, amaranth" — pagina getfoodfacts.com dedicata e pulita, titolo "Flour, amaranth (Foundation)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Farina mai tentata in questa pipeline, distinta dal chicco di amaranto (crudo e cotto) già eseguito. Verificato con `grep` dedicato su "farina di amaranto"/"amaranth flour"/2512371, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **11/17**. Per 100g: energia 378kcal (campo "Calories" separato riporta 380, stessa pagina — presa la tabella nutrienti completa, non il riquadro etichetta arrotondato, come da convenzione di questa pipeline), proteine 13,2g, grassi 6,24g, carboidrati 68,8g, fibra 7,21g, calcio 135mg, ferro 7,56mg, zinco 3,00mg, magnesio 233mg, rame 0,52mg, selenio 21,1µg. **Mancano** (non presenti sulla pagina, non assunti zero): vitamina C, folato totale, vitamina B12, vitamina K, beta-carotene, l'altro carotenoide provitaminico A. 11/17 è sopra la soglia minima di ~10/17, in linea con gli altri cereali/farine antiche di questa pipeline (farina di farro 12/17, farina di sorgo 14/17).
+- **Analogia usata**: `food_amaranto_raw` (chicco di amaranto crudo, Golden Set pipeline, già eseguito sul DB reale — stessa pianta, farina macinata invece del chicco intero).
+- **Categoria dieta**: `plant_non_fruit` (cereale/pseudocereale, nessun ingrediente animale).
+- **Matrice**: nuova `farina_di_amaranto` ("Farina di amaranto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per le altre farine di cereali di questa pipeline), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia reale dell'amaranto, come per l'analogia e per `food_amaranto_cotto`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna dichiarazione di arricchimento sulla pagina).
+
+```
+npm run add-food -- --fdc-id=2512371 --food-id=food_farina_di_amaranto_raw \
+  --name-it="Farina di amaranto, cruda" \
+  --matrix-id=farina_di_amaranto --matrix-description-it="Farina di amaranto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512371 --food-id=food_farina_di_amaranto_raw \
+  --name-it="Farina di amaranto, cruda" \
+  --matrix-id=farina_di_amaranto --matrix-description-it="Farina di amaranto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Burro di arachidi, con sale — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_burro_di_arachidi_raw`. FDC ID 324860 (Foundation Foods, "Peanut butter, smooth style, with salt" — pagina getfoodfacts.com dedicata e pulita, titolo "Peanut butter, smooth style, with salt (Foundation)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prima crema di frutta secca da legume di questa pipeline (burro di anacardi già eseguito, burro di mandorle/arachidi — quest'ultimo solo come seme intero — già scartati ⚠ in lotti precedenti per mancanza di un record FDC generico: questo invece ha un record Foundation pulito e dedicato, distinto da quel gap). **Nota di trasparenza sulla fortificazione**: verificato esplicitamente che il record non sia il tipo "fortificato" — esiste infatti un record FDC distinto "Peanut butter, smooth, vitamin and mineral fortified" (172459) non usato qui; il record scelto (324860) non riporta alcuna dichiarazione di arricchimento, coerente con un burro di arachidi semplice (arachidi + sale). Verificato con `grep` dedicato su "burro di arachidi"/"peanut butter"/324860, zero occorrenze su tutti e tre i file prima della ricerca web.
