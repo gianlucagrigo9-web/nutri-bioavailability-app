@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Lamponi, surgelati (rossi, non zuccherati) — preparato 2026-11-02 dal task (ottantottesimo lotto)
+
+- **food_id**: `food_lamponi_surgelati`. FDC ID 168209 (SR Legacy, "Raspberries, frozen, red, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terzo alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "lamponi surgelati"/"raspberries frozen"/FDC 168209, zero occorrenze su tutti e tre i file prima della ricerca web (solo i lamponi freschi, `food_lamponi_raw`, già eseguiti, risultavano per "lamponi").
+- **Nutrienti**: **15/17**. Per 100g: energia 56,0kcal, proteine 1,15g, grassi 0,81g, carboidrati 12,6g, fibra 4,30g, calcio 24,0mg, ferro 0,76mg, zinco 0,31mg, magnesio 23,0mg, rame 0,090mg, vitamina C 17,6mg, folato totale 28,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 10,0µg e alfa-carotene 68,0µg e beta-criptoxantina 0µg (entrambi reali, `other_provitamin_a_carotenoids_mcg` estraibile e reale). Mancano (non riportati affatto nella pagina, non assunti zero): **selenio**, **vitamina K**.
+- **Analogia usata**: `food_lamponi_raw` (lamponi freschi crudi, stesso alimento/specie *Rubus idaeus*, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit` (stesso trattamento degli altri frutti surgelati di questo lotto).
+- **Matrice**: nuova `lamponi_surgelati` ("Lamponi, surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento del lampone fresco), `carotenoid_matrix_state` omesso (NULL per trasparenza — stessa ambiguità blanching dichiarata per fragole/mirtilli surgelati sopra, i carotenoidi sono reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa del lampone fresco), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168209 --food-id=food_lamponi_surgelati \
+  --name-it="Lamponi, surgelati (rossi, non zuccherati)" \
+  --matrix-id=lamponi_surgelati --matrix-description-it="Lamponi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_lamponi_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168209 --food-id=food_lamponi_surgelati \
+  --name-it="Lamponi, surgelati (rossi, non zuccherati)" \
+  --matrix-id=lamponi_surgelati --matrix-description-it="Lamponi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_lamponi_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Mirtilli, surgelati (non zuccherati) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_mirtilli_surgelati`. FDC ID 173950 (SR Legacy, "Blueberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Secondo alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "mirtilli surgelati"/"blueberries frozen"/FDC 173950, zero occorrenze su tutti e tre i file prima della ricerca web (solo i mirtilli freschi, `food_mirtilli_raw`, già eseguiti, risultavano per "mirtilli").
