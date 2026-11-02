@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagne d'acqua, in scatola — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_castagne_dacqua_in_scatola`. FDC ID 170067 (SR Legacy, "Waterchestnuts, chinese, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verdura asiatica mai tentata in questa pipeline, nonostante il nome non è botanicamente una "castagna" (non è un *Castanea*): è il corno/tubero di una pianta acquatica (*Eleocharis dulcis*, famiglia Cyperaceae, le "cipreacee"), distinto quindi anche concettualmente dalle castagne vere già eseguite. Verificato con `grep` dedicato su "castagne d'acqua"/"water chestnut"/170067, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 50,0kcal, proteine 0,88g, grassi 0,060g, carboidrati 12,3g, fibra 2,50g, calcio 4,00mg, ferro 0,87mg, zinco 0,38mg, magnesio 5,00mg, rame 0,10mg, selenio 0,70µg, vitamina C 1,30mg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 0,20µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un tubero bianco privo di pigmento).
+- **Analogia usata**: `food_taro_raw` (taro, Golden Set pipeline, già eseguito sul DB reale — stessa categoria funzionale "tubero/corno amidaceo a basso contenuto di micronutrienti", pur essendo famiglie botaniche diverse — usata solo a scopo di audit/documentazione, come previsto dallo script, non per calcolare nulla).
+- **Categoria dieta**: `plant_non_fruit` (verdura/tubero, nessuna ambiguità).
+- **Matrice**: nuova `castagne_dacqua_in_scatola` ("Castagne d'acqua, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, non un gap ma un dato reale: nessuna ambiguità blanching qui, a differenza dei surgelati, perché il dato è già zero dichiarato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cyperaceae` (famiglia botanica reale, *Eleocharis dulcis*), `baseline_cooking_state=canned` (valore già in uso in questa pipeline), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170067 --food-id=food_castagne_dacqua_in_scatola \
+  --name-it="Castagne d'acqua, in scatola" \
+  --matrix-id=castagne_dacqua_in_scatola --matrix-description-it="Castagne d'acqua, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_taro_raw \
+  --botanical-family=Cyperaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170067 --food-id=food_castagne_dacqua_in_scatola \
+  --name-it="Castagne d'acqua, in scatola" \
+  --matrix-id=castagne_dacqua_in_scatola --matrix-description-it="Castagne d'acqua, in scatola" \
+  --baseline-cooking-state=canned --analogy-food-id=food_taro_raw \
+  --botanical-family=Cyperaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolfiore, surgelato — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
 
 - **food_id**: `food_cavolfiore_surgelato`. FDC ID 170398 (SR Legacy, "Cauliflower, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_cavolfiore_cotto`/`food_cavolfiore_verde_raw`/`food_cavolfiore_verde_cotto` già eseguiti, nessun doppione mascherato (nessuna varietà cultivar/colore in gioco: il record generico "Cauliflower" senza qualificatore corrisponde al cavolfiore bianco comune, stessa pianta di `food_cavolfiore_cotto`). Verificato con `grep` dedicato su "cavolfiore surgelato"/"cavolfiore, surgelato"/"cauliflower frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
