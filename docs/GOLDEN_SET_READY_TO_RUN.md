@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Mirtilli, surgelati (non zuccherati) — preparato 2026-11-02 dal task (ottantottesimo lotto)
+
+- **food_id**: `food_mirtilli_surgelati`. FDC ID 173950 (SR Legacy, "Blueberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Secondo alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "mirtilli surgelati"/"blueberries frozen"/FDC 173950, zero occorrenze su tutti e tre i file prima della ricerca web (solo i mirtilli freschi, `food_mirtilli_raw`, già eseguiti, risultavano per "mirtilli").
+- **Nutrienti**: **17/17**. Per 100g: energia 51,0kcal, proteine 0,42g, grassi 0,64g, carboidrati 12,2g, fibra 2,70g, calcio 8,00mg, ferro 0,18mg, zinco 0,070mg, magnesio 5,00mg, rame 0,033mg, selenio 0,10µg, vitamina C 2,50mg, folato totale 7,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 28,0µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi esplicitamente zero, `other_provitamin_a_carotenoids_mcg`=0 reale), vitamina K 16,4µg. Nessun nutriente mancante.
+- **Analogia usata**: `food_mirtilli_raw` (mirtilli freschi crudi, stesso alimento/specie *Vaccinium*, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit` (stesso trattamento di fragole surgelate sopra, la forma congelata non cambia la categoria).
+- **Matrice**: nuova `mirtilli_surgelati` ("Mirtilli, surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento del mirtillo fresco), `carotenoid_matrix_state` omesso (NULL per trasparenza — stessa ambiguità blanching dichiarata per le fragole surgelate sopra, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ericaceae` (stessa del mirtillo fresco), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173950 --food-id=food_mirtilli_surgelati \
+  --name-it="Mirtilli, surgelati (non zuccherati)" \
+  --matrix-id=mirtilli_surgelati --matrix-description-it="Mirtilli, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_mirtilli_raw \
+  --botanical-family=Ericaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=173950 --food-id=food_mirtilli_surgelati \
+  --name-it="Mirtilli, surgelati (non zuccherati)" \
+  --matrix-id=mirtilli_surgelati --matrix-description-it="Mirtilli, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_mirtilli_raw \
+  --botanical-family=Ericaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Fragole, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_fragole_surgelate`. FDC ID 168173 (SR Legacy, "Strawberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del filone "frutta surgelata", mai tentato prima in questa pipeline. Verificato con `grep` dedicato su "fragole surgelate"/"strawberries frozen"/FDC 168173, zero occorrenze su tutti e tre i file prima della ricerca web (le uniche occorrenze di "fragole" erano le fragole fresche già eseguite, `food_strawberry_raw`, alimento diverso).
