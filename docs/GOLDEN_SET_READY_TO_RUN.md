@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di arrowroot — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_farina_di_arrowroot_raw`. FDC ID 170684 (SR Legacy, "Arrowroot flour" — pagina getfoodfacts.com dedicata e pulita, titolo "Arrowroot flour (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Amido/farina da rizoma (*Maranta arundinacea*) mai tentato in questa pipeline, distinto da amido di mais/farina di patate/farina di manioca/tapioca già coperti — verificato con `grep` dedicato su "arrowroot"/"maranta"/170684, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 357kcal, proteine 0,30g, grassi 0,10g, carboidrati 88,2g, fibra 3,40g, calcio 40,0mg, ferro 0,33mg, zinco 0,070mg, magnesio 3,00mg, rame 0,040mg, vitamina C 0mg esplicito, folato totale 7,00µg, vitamina B12 0µg esplicito. **Mancano** (non riportati sulla pagina tra i 59 nutrienti elencati, non assunti zero): selenio, vitamina K, beta-carotene, l'altro carotenoide provitaminico A. 13/17 è sopra la soglia di ~10/17 indicata nel COMPITO come segnale di match solido.
+- **Analogia usata**: `food_farina_di_patate_raw` (farina di patate, già eseguita sul DB reale — stessa categoria funzionale "farina/amido puro da radice/rizoma amidaceo", stesso tipo di gap sui micronutrienti già accettato per quel precedente).
+- **Categoria dieta**: `plant_non_fruit` (amido/farina vegetale).
+- **Matrice**: nuova `farina_di_arrowroot` ("Farina di arrowroot").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, amido puro), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati sulla pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Marantaceae` (famiglia reale della pianta *Maranta arundinacea*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato coerente con un amido vegetale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170684 --food-id=food_farina_di_arrowroot_raw \
+  --name-it="Farina di arrowroot" \
+  --matrix-id=farina_di_arrowroot --matrix-description-it="Farina di arrowroot" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_patate_raw \
+  --botanical-family=Marantaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170684 --food-id=food_farina_di_arrowroot_raw \
+  --name-it="Farina di arrowroot" \
+  --matrix-id=farina_di_arrowroot --matrix-description-it="Farina di arrowroot" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_patate_raw \
+  --botanical-family=Marantaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio Gruviera — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_gruviera_raw`. FDC ID 171242 (SR Legacy, "Cheese, gruyere" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio svizzero a pasta dura mai tentato in questa pipeline nonostante emmentaler/formaggio di capra/parmigiano già coperti (mascarpone/halloumi/formaggio blu/provola/scamorza già scartati ⚠ per assenza di record) — verificato con `grep` dedicato su "gruviera"/"gruyere"/171242, zero occorrenze su tutti e tre i file prima della ricerca web.
