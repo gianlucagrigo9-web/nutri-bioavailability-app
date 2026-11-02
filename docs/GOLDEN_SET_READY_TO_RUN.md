@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Burro di arachidi, con sale — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_burro_di_arachidi_raw`. FDC ID 324860 (Foundation Foods, "Peanut butter, smooth style, with salt" — pagina getfoodfacts.com dedicata e pulita, titolo "Peanut butter, smooth style, with salt (Foundation)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prima crema di frutta secca da legume di questa pipeline (burro di anacardi già eseguito, burro di mandorle/arachidi — quest'ultimo solo come seme intero — già scartati ⚠ in lotti precedenti per mancanza di un record FDC generico: questo invece ha un record Foundation pulito e dedicato, distinto da quel gap). **Nota di trasparenza sulla fortificazione**: verificato esplicitamente che il record non sia il tipo "fortificato" — esiste infatti un record FDC distinto "Peanut butter, smooth, vitamin and mineral fortified" (172459) non usato qui; il record scelto (324860) non riporta alcuna dichiarazione di arricchimento, coerente con un burro di arachidi semplice (arachidi + sale). Verificato con `grep` dedicato su "burro di arachidi"/"peanut butter"/324860, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **12/17**. Per 100g: energia 597kcal, proteine 22,5g, grassi 51,1g, carboidrati 22,3g, fibra 4,80g, calcio 49,0mg, ferro 1,73mg, zinco 2,54mg, magnesio 169mg, rame 0,42mg, selenio 4,10µg, folato totale 86,0µg. **Mancano** (non presenti sulla pagina, non assunti zero): vitamina C, vitamina B12, vitamina K, beta-carotene, l'altro carotenoide provitaminico A — coerente con un prodotto senza pigmenti vegetali residui e senza fonte di B12 (legume, non animale). 12/17 è sopra la soglia di ~10/17 indicata nel COMPITO come segnale di match solido.
+- **Analogia usata**: `food_arachidi_raw` (arachidi crude, già eseguite sul DB reale — stessa pianta *Arachis hypogaea*, crema/burro estratto dal seme invece del seme intero, stesso principio già usato per il burro di anacardi rispetto agli anacardi interi).
+- **Categoria dieta**: `plant_non_fruit` (legume/frutta secca, nessun ingrediente animale dichiarato — solo arachidi e sale).
+- **Matrice**: nuova `burro_di_arachidi` ("Burro di arachidi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per arachidi intere/burro di anacardi), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale dell'arachide, legume, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna dichiarazione di arricchimento sulla pagina).
+
+```
+npm run add-food -- --fdc-id=324860 --food-id=food_burro_di_arachidi_raw \
+  --name-it="Burro di arachidi, con sale" \
+  --matrix-id=burro_di_arachidi --matrix-description-it="Burro di arachidi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=324860 --food-id=food_burro_di_arachidi_raw \
+  --name-it="Burro di arachidi, con sale" \
+  --matrix-id=burro_di_arachidi --matrix-description-it="Burro di arachidi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Panna da montare (heavy whipping cream) — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_panna_da_montare_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Latticino ad alto contenuto di grassi mai tentato in questa pipeline, distinto dalla panna da cucina/panna fluida leggera già eseguita (`food_panna_da_cucina_raw`, FDC 170857 "Cream, fluid, light") — record FDC realmente diverso (percentuale di grasso diversa), non un doppione — verificato con `grep` dedicato su "panna montata"/"whipping cream"/"heavy cream"/170859, zero occorrenze su tutti e tre i file prima della ricerca web.
