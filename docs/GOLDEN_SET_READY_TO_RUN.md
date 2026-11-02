@@ -235,6 +235,30 @@ npm run add-food -- --fdc-id=172880 --food-id=food_salsa_pizza \
   --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 ```
 
+### Salsa ranch — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_ranch`. FDC ID 173592 (SR Legacy, "Salad dressing, ranch dressing, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, "uno di 5 descrizioni USDA di salsa ranch"). Decimo e ultimo alimento del filone "salse e condimenti commerciali USDA generici" lavorato in questo lotto. Verificato con `grep` dedicato su "ranch"/173592 — nota metodologica: un `grep` generico su "ranch" avrebbe dato falsi positivi su "granchio" (crab), quindi la verifica di non-duplicazione è stata fatta leggendo il contesto di ogni occorrenza, non solo il conteggio — zero occorrenze reali su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 430kcal, proteine 1,32g, grassi 44,5g, carboidrati 5,90g, fibra 0g (esplicito), calcio 28,0mg, ferro 0,30mg, zinco 0,17mg, magnesio 5,00mg, rame 0,019mg, selenio 3,50µg, vitamina C 0mg (esplicito), folato totale 4,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,17µg, beta-carotene 14,0µg (reale), alfa-carotene 0µg + beta-criptoxantina 1,00µg (= "altro carotenoide provitaminico A"), vitamina K 134µg (reale e alto, coerente con l'olio vegetale usato come base, stesso ordine di grandezza della maionese già eseguita).
+- **Analogia usata**: `food_egg_hard_boiled` (uovo intero cotto, Golden Set originale, già eseguito) — non per il tipo di alimento (la salsa ranch è soprattutto latticello/panna acida+olio, non uovo), ma specificamente per l'attributo `is_heme_iron`: la ricetta standard della salsa ranch (latticello, maionese o panna acida, erbe) contiene al massimo tracce di uovo via la maionese, e il ferro dell'uovo è non-eme — stesso ragionamento già usato per maionese e salsa tartara in questo stesso lotto.
+- **Categoria dieta**: `egg_dairy` (base di latticello/panna acida/maionese — nessun ingrediente di carne/pesce nella ricetta standard).
+- **Matrice**: nuova `salsa_ranch` ("Salsa ranch").
+- **Attributi**: `is_heme_iron=false` (per analogia con l'uovo, non con carne/pesce — vedi nota sopra), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce reali di carotenoidi presenti ma verosimilmente dalle erbe aromatiche, stesso tipo di ragionamento già usato per maionese/salsa tartara: non un alimento la cui classificazione dipenda dalla matrice carotenoide di un singolo ortaggio), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto latticello/panna+olio+erbe, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=raw` (emulsione non cotta, stessa convenzione della maionese), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173592 --food-id=food_salsa_ranch \
+  --name-it="Salsa ranch" \
+  --matrix-id=salsa_ranch --matrix-description-it="Salsa ranch" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173592 --food-id=food_salsa_ranch \
+  --name-it="Salsa ranch" \
+  --matrix-id=salsa_ranch --matrix-description-it="Salsa ranch" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
