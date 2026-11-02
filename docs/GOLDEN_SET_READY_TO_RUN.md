@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Panna da montare (heavy whipping cream) — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_panna_da_montare_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Latticino ad alto contenuto di grassi mai tentato in questa pipeline, distinto dalla panna da cucina/panna fluida leggera già eseguita (`food_panna_da_cucina_raw`, FDC 170857 "Cream, fluid, light") — record FDC realmente diverso (percentuale di grasso diversa), non un doppione — verificato con `grep` dedicato su "panna montata"/"whipping cream"/"heavy cream"/170859, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 340kcal, proteine 2,84g, grassi 36,1g (alto, coerente con una panna "heavy" ad alto contenuto di grasso — quasi il doppio della panna leggera già eseguita), carboidrati 2,84g, fibra 0g esplicito, calcio 66,0mg, ferro 0,10mg, zinco 0,24mg, magnesio 7,00mg, rame 0,011mg, selenio 3,00µg, vitamina C 0,60mg, folato totale 4,00µg, vitamina B12 0,16µg, vitamina K (fillochinone) 3,20µg, beta-carotene 72,0µg (reale, non nullo — tipico del grasso del latte), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
+- **Analogia usata**: `food_panna_da_cucina_raw` (panna da cucina/panna fluida leggera, già eseguita sul DB reale — stessa categoria funzionale "panna di latte", stesso prodotto base con percentuale di grasso diversa, analogia più diretta possibile).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `panna_da_montare` ("Panna da montare").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, latticino), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un latticino nonostante il beta-carotene non nullo, stesso precedente già usato per il formaggio Gruviera in questa stessa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170859 --food-id=food_panna_da_montare_raw \
+  --name-it="Panna da montare (heavy whipping cream), cruda" \
+  --matrix-id=panna_da_montare --matrix-description-it="Panna da montare" \
+  --baseline-cooking-state=raw --analogy-food-id=food_panna_da_cucina_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170859 --food-id=food_panna_da_montare_raw \
+  --name-it="Panna da montare (heavy whipping cream), cruda" \
+  --matrix-id=panna_da_montare --matrix-description-it="Panna da montare" \
+  --baseline-cooking-state=raw --analogy-food-id=food_panna_da_cucina_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Farina di arrowroot — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_farina_di_arrowroot_raw`. FDC ID 170684 (SR Legacy, "Arrowroot flour" — pagina getfoodfacts.com dedicata e pulita, titolo "Arrowroot flour (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Amido/farina da rizoma (*Maranta arundinacea*) mai tentato in questa pipeline, distinto da amido di mais/farina di patate/farina di manioca/tapioca già coperti — verificato con `grep` dedicato su "arrowroot"/"maranta"/170684, zero occorrenze su tutti e tre i file prima della ricerca web.
