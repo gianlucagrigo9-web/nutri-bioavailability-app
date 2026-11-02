@@ -16,6 +16,82 @@
 
 ## Pronti
 
+### Riso selvatico (wild rice), crudo — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_riso_selvatico_raw`. FDC ID 169726 (SR Legacy, "Wild rice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Cereale mai tentato in questa pipeline, distinto da riso bianco/integrale/venere già eseguiti — botanicamente non è nemmeno un riso vero (genere *Zizania*, non *Oryza*), ma una graminacea acquatica nordamericana diversa. Verificato con `grep` dedicato su "riso selvatico"/"wild rice", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 357kcal, proteine 14,7g, grassi 1,08g, carboidrati 74,9g, fibra 6,20g, calcio 21,0mg, ferro 1,96mg, zinco 5,96mg, magnesio 177mg, rame 0,52mg, selenio 2,80µg, vitamina C 0mg esplicito, folato totale 95,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1,90µg, beta-carotene 11,0µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_riso_integrale_raw` (riso integrale crudo, Golden Set pipeline, già eseguito sul DB reale — stessa convenzione "cereale integrale in chicchi crudi", stessa famiglia botanica Poaceae usata anche per riso venere/sorgo/crusca di riso in questa pipeline, pur trattandosi di generi diversi all'interno della stessa famiglia).
+- **Categoria dieta**: `plant_non_fruit` (cereale, nessuna ambiguità).
+- **Matrice**: nuova `riso_selvatico` ("Riso selvatico").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, cereale), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, chicco crudo non trattato termicamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale, *Zizania* è comunque una Poaceae come il riso vero), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169726 --food-id=food_riso_selvatico_raw \
+  --name-it="Riso selvatico (wild rice), crudo" \
+  --matrix-id=riso_selvatico --matrix-description-it="Riso selvatico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169726 --food-id=food_riso_selvatico_raw \
+  --name-it="Riso selvatico (wild rice), crudo" \
+  --matrix-id=riso_selvatico --matrix-description-it="Riso selvatico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_integrale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Graviola (soursop), cruda — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_graviola_raw`. FDC ID 167761 (SR Legacy, "Soursop, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto tropicale (*Annona muricata*) noto in italiano come graviola (o corossolo), mai tentato in questa pipeline — distinto da tutti gli altri frutti esotici già coperti (mango, papaya, guava, durian, frutto della passione, ecc.), famiglia botanica Annonaceae non ancora rappresentata nel Golden Set. Verificato con `grep` dedicato su "graviola"/"soursop"/"guanabana"/"corossolo", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 66,0kcal, proteine 1,00g, grassi 0,30g, carboidrati 16,8g, fibra 3,30g, calcio 14,0mg, ferro 0,60mg, zinco 0,10mg, magnesio 21,0mg, rame 0,086mg, selenio 0,60µg, vitamina C 20,6mg, folato totale 14,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 0,40µg, beta-carotene 1,00µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_papaya_raw` (papaya cruda, Golden Set pipeline, già eseguita sul DB reale — stesso trattamento funzionale "frutto tropicale crudo con carotenoidi reali non nulli", stesso precedente usato come analogia per la guava in questa coda).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, nessuna ambiguità — non è un ortaggio botanicamente "frutto").
+- **Matrice**: nuova `graviola` ("Graviola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, frutto crudo non trattato termicamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Annonaceae` (famiglia botanica reale, *Annona muricata*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167761 --food-id=food_graviola_raw \
+  --name-it="Graviola (soursop), cruda" \
+  --matrix-id=graviola --matrix-description-it="Graviola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Annonaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167761 --food-id=food_graviola_raw \
+  --name-it="Graviola (soursop), cruda" \
+  --matrix-id=graviola --matrix-description-it="Graviola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Annonaceae --diet-category=fresh_fruit --apply
+```
+
+### Piselli, surgelati — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_piselli_surgelati`. FDC ID 170016 (SR Legacy, "Peas, green, frozen, unprepared (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento di questa pipeline nella forma **surgelata industrialmente** (finora sempre e solo crudo/cotto/in scatola) — distinto sia dai piselli freschi crudi (`food_peas_green_raw`, FDC 170419) sia dai piselli bolliti (`food_piselli_bolliti`) sia da quelli in scatola (`food_piselli_in_scatola`, FDC 170104), tutti già eseguiti: la voce originale dei piselli freschi in questo stesso file nota esplicitamente che "non coprono surgelati né in scatola (record diversi)", confermando che non è un doppione mascherato. Verificato con `grep` dedicato su "piselli surgelati"/"piselli, surgelati"/"peas green frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 77,0kcal, proteine 5,22g, grassi 0,40g, carboidrati 13,6g, fibra 4,50g, calcio 22,0mg, ferro 1,53mg, zinco 0,82mg, magnesio 26,0mg, rame 0,12mg, selenio 1,90µg, vitamina C 18,0mg, folato totale 53,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 27,9µg (solo filochinone; menachinone-4 e diidrofillochinone 0µg espliciti), beta-carotene 1225µg e alfa-carotene 20,0µg (entrambi reali, non nulli — valori alti ma coerenti con i piselli verdi anche crudi), beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_peas_green_raw` (piselli freschi crudi, Golden Set originale, già eseguiti sul DB reale — stessa specie *Pisum sativum*, stessa famiglia botanica Fabaceae, stesso prodotto non cotto dal consumatore).
+- **Categoria dieta**: `plant_non_fruit` (legume/verdura, nessuna ambiguità).
+- **Matrice**: nuova `piselli_surgelati` ("Piselli surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), **`carotenoid_matrix_state` omesso (NULL) per trasparenza dichiarata, non indovinato**: i valori di carotenoidi sono reali e alti, ma la congelazione industriale di verdure prevede tipicamente una scottatura/blanching termica prima del congelamento (pratica standard per inattivare gli enzimi) che la sola etichetta USDA "frozen, unprepared" non conferma né esclude esplicitamente — non è quindi possibile distinguere con certezza fra matrice intatta (`raw_intact`, come i piselli crudi) e matrice già parzialmente disgregata dal trattamento industriale (`cooked_or_disrupted`); omesso piuttosto che indovinato, per la Regola 1/6. `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa di `food_peas_green_raw`), **`baseline_cooking_state=frozen`** (valore nuovo, mai usato finora in questa pipeline — descrive accuratamente lo stato "frozen, unprepared" del record FDC, distinto da `raw`/`canned`/`dried` già in uso per altri stati di conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170016 --food-id=food_piselli_surgelati \
+  --name-it="Piselli, surgelati" \
+  --matrix-id=piselli_surgelati --matrix-description-it="Piselli surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_peas_green_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170016 --food-id=food_piselli_surgelati \
+  --name-it="Piselli, surgelati" \
+  --matrix-id=piselli_surgelati --matrix-description-it="Piselli surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_peas_green_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di palmisto (palm kernel oil) — preparato 2026-11-02 dal task (ottantaquattresimo lotto)
 
 - **food_id**: `food_olio_di_palmisto_raw`. FDC ID 171422 (SR Legacy, "Vegetable oil, palm kernel" — pagina getfoodfacts.com dedicata e pulita, titolo "Vegetable oil, palm kernel (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Olio estratto dal seme/mandorlo della palma da olio, distinto dall'olio di palma (estratto dalla polpa del frutto) già eseguito — composizione in acidi grassi nota per essere diversa (più ricco di acidi grassi a catena più corta), stesso tipo di distinzione già fatta per olio d'oliva/sansa in altre pipeline alimentari, qui confermata da un record FDC realmente distinto (171422 vs 171015 dell'olio di palma). Verificato con `grep` dedicato su "palmisto"/"palm kernel"/171422, zero occorrenze su tutti e tre i file prima della ricerca web.
