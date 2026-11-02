@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Funghi ostrica, crudi — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_funghi_ostrica_raw`. FDC ID 168580 (SR Legacy, "Mushrooms, oyster, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo "FoodData Central 168580, SR Legacy", release USDA 2026-04-30). Fungo (Pleurotus ostreatus) mai tentato in questa pipeline nonostante champignon/cremini/shiitake/pioppini già coperti — verificato con `grep` dedicato su "funghi ostrica"/"oyster mushroom"/168580, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 33,0kcal, proteine 3,31g, grassi 0,41g, carboidrati 6,09g, fibra 2,30g, calcio 3,00mg, ferro 1,33mg, zinco 0,77mg, magnesio 18,0mg, rame 0,24mg, selenio 2,60µg, vitamina C 0mg esplicito, folato totale 38,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 0µg esplicito (nessuna riga "totale", solo tre componenti tutti a 0 — trattato come presente/zero, non assente), beta-carotene 29,0µg (reale, non nullo), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon bianchi crudi, Golden Set originale, già eseguito sul DB reale — stessa categoria funzionale "fungo crudo", stesso trattamento già usato per cremini/champignon cotti/in scatola in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (fungo, vegano per definizione — nessuna ambiguità).
+- **Matrice**: nuova `funghi_ostrica` ("Funghi ostrica (Pleurotus ostreatus)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo, stesso precedente di `food_mushroom_white_raw`), `carotenoid_matrix_state` omesso (NULL — **deviazione consapevole dal durian/cime di rapa**: l'attributo è per matrici vegetali, non applicabile a un fungo nonostante il beta-carotene non nullo, stesso principio già usato per i formaggi — es. `food_gruviera_raw` più sotto in questa stessa coda — non per l'assenza di dato come nel caso champignon/cremini, qui il dato c'è ma il fungo non è una pianta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stesso precedente di `food_mushroom_white_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168580 --food-id=food_funghi_ostrica_raw \
+  --name-it="Funghi ostrica, crudi" \
+  --matrix-id=funghi_ostrica --matrix-description-it="Funghi ostrica (Pleurotus ostreatus)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168580 --food-id=food_funghi_ostrica_raw \
+  --name-it="Funghi ostrica, crudi" \
+  --matrix-id=funghi_ostrica --matrix-description-it="Funghi ostrica (Pleurotus ostreatus)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Durian, crudo — preparato 2026-11-02 dal task (ottantaduesimo lotto, continuazione)
 
 - **food_id**: `food_durian_raw`. FDC ID 168192 (SR Legacy, "Durian, raw or frozen" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto esotico residuo dopo la saturazione già confermata per il grosso del gruppo (mango/papaya/guava/litchi/pitaya/jackfruit già fatti) — verificato con `grep` dedicato su "durian", zero occorrenze su tutti e tre i file prima della ricerca web.
