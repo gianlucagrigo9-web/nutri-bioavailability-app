@@ -16,6 +16,214 @@
 
 ## Pronti
 
+### Cavolo collard, surgelato — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_cavolo_collard_surgelato`. FDC ID 170408 (SR Legacy, "Collards, frozen, chopped, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Bonus scoperto cercando alternative al cavolo cappuccio/bok choy surgelati (entrambi scartati ⚠ in questo stesso lotto, nessun record USDA) — distinto dal cavolo collard crudo non ancora eseguito (`food_cavolo_collard_raw`, FDC 170406, solo "Pronti"). Verificato con `grep` dedicato su "cavolo collard surgelato"/"collards frozen"/FDC 170408, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 33,0kcal, proteine 2,69g, grassi 0,37g, carboidrati 6,46g, fibra 3,60g, calcio 201mg, ferro 1,07mg, zinco 0,26mg, magnesio 29,0mg, rame 0,053mg, selenio 1,40µg, vitamina C 40,0mg, folato totale 73,0µg, beta-carotene 5510µg (reale e non nullo), acido folico e vitamina B12 esplicitamente 0µg. Mancano (non riportati nel record, non assunti zero): vitamina K, alfa-carotene e beta-criptoxantina (quindi `other_provitamin_a_carotenoids_mcg` non estraibile pur con beta-carotene presente, poiché lo script richiede entrambi i componenti).
+- **Analogia usata**: `food_kale_raw` (cavolo kale, crudo, Golden Set originale, già eseguito sul DB reale — stessa specie botanica reale *Brassica oleracea*; il cavolo collard crudo stesso, `food_cavolo_collard_raw`, non è ancora eseguito e non può quindi fare da analogia per questa voce, regola 2c).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `cavolo_collard_surgelato` ("Cavolo collard, surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=low_oxalate` (per analogia diretta con kale, stessa specie botanica), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — beta-carotene reale e non nullo ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini/gombo surgelati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa di `food_kale_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170408 --food-id=food_cavolo_collard_surgelato \
+  --name-it="Cavolo collard, surgelato" \
+  --matrix-id=cavolo_collard_surgelato --matrix-description-it="Cavolo collard, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170408 --food-id=food_cavolo_collard_surgelato \
+  --name-it="Cavolo collard, surgelato" \
+  --matrix-id=cavolo_collard_surgelato --matrix-description-it="Cavolo collard, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zucca gialla crookneck, surgelata — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_zucca_gialla_crookneck_surgelata`. FDC ID 168467 (SR Legacy, "Squash, summer, crookneck and straightneck, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Seconda cultivar di zucca trovata in questo lotto dopo che "zucca, surgelata" generica è risultata non tracciata da USDA (nessun record "Pumpkin, frozen" trovato) — distinta dalla zucca gialla crookneck cruda non ancora eseguita (`food_zucca_gialla_crookneck_raw`, FDC 168464, solo "Pronti") e dalla zucchina generica surgelata (voce separata in questo stesso lotto, FDC diverso). Verificato con `grep` dedicato su "crookneck surgelat"/FDC 168467, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 20,0kcal, proteine 0,83g, grassi 0,14g, carboidrati 4,80g, fibra 1,20g, calcio 18,0mg, ferro 0,48mg, zinco 0,37mg, magnesio 23,0mg, rame 0,085mg, selenio 0,20µg, vitamina C 6,40mg, folato totale 12,0µg, acido folico e vitamina B12 esplicitamente 0µg. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A (il record riporta solo "Vitamin A, RAE" 14,0µg, non i singoli carotenoidi mappati da questo progetto).
+- **Analogia usata**: `food_zucca_butternut_raw` (zucca butternut, cruda, già eseguita sul DB reale — stessa famiglia botanica reale Cucurbitaceae, stessa categoria funzionale "zucca/squash"; la cultivar crookneck cruda stessa, `food_zucca_gialla_crookneck_raw`, non è ancora eseguita e non può quindi fare da analogia per questa voce, regola 2c).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `zucca_gialla_crookneck_surgelata` ("Zucca gialla crookneck, surgelata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state` omesso (NULL per trasparenza — nessun carotenoide mappato riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168467 --food-id=food_zucca_gialla_crookneck_surgelata \
+  --name-it="Zucca gialla crookneck, surgelata" \
+  --matrix-id=zucca_gialla_crookneck_surgelata --matrix-description-it="Zucca gialla crookneck, surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucca_butternut_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168467 --food-id=food_zucca_gialla_crookneck_surgelata \
+  --name-it="Zucca gialla crookneck, surgelata" \
+  --matrix-id=zucca_gialla_crookneck_surgelata --matrix-description-it="Zucca gialla crookneck, surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucca_butternut_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zucca butternut, surgelata — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_zucca_butternut_surgelata`. FDC ID 168473 (SR Legacy, "Squash, winter, butternut, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). "Zucca, surgelata" generica non esiste come record USDA (nessuna pagina "Pumpkin, frozen" trovata in nessuna fonte consultata) — risolto con questa cultivar, distinta dalla zucca butternut cruda/cotta già eseguite (`food_zucca_butternut_raw`/`food_zucca_butternut_cotta`). Verificato con `grep` dedicato su "zucca butternut surgelat"/FDC 168473, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 57,0kcal, proteine 1,76g, grassi 0,10g, carboidrati 14,4g, fibra 1,30g, calcio 29,0mg, ferro 0,88mg, zinco 0,17mg, magnesio 14,0mg, rame 0,051mg, selenio 0,70µg, vitamina C 6,20mg, vitamina K 1,40µg, folato totale 24,0µg, beta-carotene 1904µg, alfa-carotene 376µg, beta-criptoxantina 1564µg (carotenoidi reali e non nulli); acido folico e vitamina B12 esplicitamente 0µg.
+- **Analogia usata**: `food_zucca_butternut_raw` (zucca butternut, cruda, già eseguita sul DB reale — stessa cultivar, qui surgelata invece che cruda).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `zucca_butternut_surgelata` ("Zucca butternut, surgelata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_zucca_butternut_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — carotenoidi reali e non nulli ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini/gombo surgelati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa di `food_zucca_butternut_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168473 --food-id=food_zucca_butternut_surgelata \
+  --name-it="Zucca butternut, surgelata" \
+  --matrix-id=zucca_butternut_surgelata --matrix-description-it="Zucca butternut, surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucca_butternut_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168473 --food-id=food_zucca_butternut_surgelata \
+  --name-it="Zucca butternut, surgelata" \
+  --matrix-id=zucca_butternut_surgelata --matrix-description-it="Zucca butternut, surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucca_butternut_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Rape, surgelate — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_rape_surgelate`. FDC ID 170059 (SR Legacy, "Turnips, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dalla raccomandazione dell'ottantaseiesimo lotto — distinto dalla rapa cruda già eseguita (`food_rapa_raw`, FDC 170465, terzo lotto). Verificato con `grep` dedicato su "rape surgelat"/"turnips frozen"/FDC 170059, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 16,0kcal, proteine 1,04g, grassi 0,16g, carboidrati 2,94g, fibra 1,80g, calcio 23,0mg, ferro 0,70mg, zinco 0,14mg, magnesio 10,0mg, rame 0,045mg, selenio 0,40µg, vitamina C 4,40mg, folato totale 8,00µg, acido folico e vitamina B12 esplicitamente 0µg. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A (radice bianca priva di pigmento, coerente con l'assenza di carotenoidi già osservata per rafano/pastinaca, ma qui il record non li riporta affatto, non li dichiara zero).
+- **Analogia usata**: `food_rapa_raw` (rapa cruda, già eseguita sul DB reale — stesso alimento, qui surgelata invece che cruda).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `rape_surgelate` ("Rape, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state` omesso (NULL per trasparenza — nessun carotenoide riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa di `food_rapa_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170059 --food-id=food_rape_surgelate \
+  --name-it="Rape, surgelate" \
+  --matrix-id=rape_surgelate --matrix-description-it="Rape, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_rapa_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170059 --food-id=food_rape_surgelate \
+  --name-it="Rape, surgelate" \
+  --matrix-id=rape_surgelate --matrix-description-it="Rape, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_rapa_raw \
+  --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zucchine, surgelate — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_zucchine_surgelate`. FDC ID 168469 (SR Legacy, "Squash, summer, zucchini, includes skin, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dalla raccomandazione dell'ottantaseiesimo lotto — distinto dalle zucchine crude/cotte già eseguite (`food_zucchine_raw`/`food_zucchine_cotte`). Verificato con `grep` dedicato su "zucchine surgelat"/"zucchini frozen"/FDC 168469, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 17,0kcal, proteine 1,16g, grassi 0,13g, carboidrati 3,58g, fibra 1,30g, calcio 18,0mg, ferro 0,51mg, zinco 0,21mg, magnesio 13,0mg, rame 0,050mg, selenio 0,20µg, vitamina C 5,30mg, vitamina K 4,20µg, folato totale 10,0µg, beta-carotene 119µg (reale e non nullo); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stesso alimento, qui surgelato invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `zucchine_surgelate` ("Zucchine, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_zucchine_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — beta-carotene reale e non nullo ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini/gombo surgelati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa di `food_zucchine_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168469 --food-id=food_zucchine_surgelate \
+  --name-it="Zucchine, surgelate" \
+  --matrix-id=zucchine_surgelate --matrix-description-it="Zucchine, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168469 --food-id=food_zucchine_surgelate \
+  --name-it="Zucchine, surgelate" \
+  --matrix-id=zucchine_surgelate --matrix-description-it="Zucchine, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Peperoni rossi, surgelati — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_peperoni_rossi_surgelati`. FDC ID 168547 (SR Legacy, "Peppers, sweet, red, frozen, chopped, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dalla raccomandazione dell'ottantaseiesimo lotto: cercati prima i peperoni verdi surgelati, ma nessuna pagina getfoodfacts.com con FDC ID citato è stata trovata per quella variante (solo recipal.com/bodbot.com senza FDC ID verificabile) — per i rossi la pagina pulita esiste, scelta quindi questa variante, distinta dai peperoni rossi crudi/cotti già eseguiti (`food_pepper_red_raw`/`food_peperoni_rossi_cotti`). Verificato con `grep` dedicato su "peperoni rossi surgelat"/"peppers red frozen"/FDC 168547, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 20,0kcal, proteine 1,08g, grassi 0,21g, carboidrati 4,45g, fibra 1,60g, calcio 9,00mg, ferro 0,62mg, zinco 0,060mg, magnesio 8,00mg, rame 0,053mg, selenio 0,20µg, vitamina C 58,7mg, vitamina K 3,80µg, folato totale 14,0µg, beta-carotene 1259µg, alfa-carotene 15,0µg, beta-criptoxantina 380µg (carotenoidi reali e non nulli); acido folico e vitamina B12 esplicitamente 0µg.
+- **Analogia usata**: `food_pepper_red_raw` (peperoni rossi, crudi, già eseguiti sul DB reale — stesso alimento, qui surgelato invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `peperoni_rossi_surgelati` ("Peperoni rossi, surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_pepper_red_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — carotenoidi reali e non nulli ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini/gombo surgelati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa di `food_pepper_red_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168547 --food-id=food_peperoni_rossi_surgelati \
+  --name-it="Peperoni rossi, surgelati" \
+  --matrix-id=peperoni_rossi_surgelati --matrix-description-it="Peperoni rossi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_pepper_red_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168547 --food-id=food_peperoni_rossi_surgelati \
+  --name-it="Peperoni rossi, surgelati" \
+  --matrix-id=peperoni_rossi_surgelati --matrix-description-it="Peperoni rossi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_pepper_red_raw \
+  --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cipolle, surgelate — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_cipolle_surgelate`. FDC ID 170410 (SR Legacy, "Onions, frozen, chopped, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dalla raccomandazione dell'ottantaseiesimo lotto — distinto dalle cipolle crude/cotte già eseguite (`food_onion_raw`/`food_cipolle_cotte`). Verificato con `grep` dedicato su "cipolle surgelat"/"onions frozen"/FDC 170410, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 29,0kcal, proteine 0,79g, grassi 0,10g, carboidrati 6,82g, fibra 1,80g, calcio 17,0mg, ferro 0,33mg, zinco 0,070mg, magnesio 7,00mg, rame 0,019mg, selenio 0,40µg, vitamina C 3,30mg, folato totale 17,0µg, acido folico e vitamina B12 esplicitamente 0µg. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A.
+- **Analogia usata**: `food_onion_raw` (cipolla generica, cruda, già eseguita sul DB reale — stesso alimento, qui surgelato invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `cipolle_surgelate` ("Cipolle, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati, stessa convenzione già usata per `food_onion_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza — nessun carotenoide riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (stessa di `food_onion_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170410 --food-id=food_cipolle_surgelate \
+  --name-it="Cipolle, surgelate" \
+  --matrix-id=cipolle_surgelate --matrix-description-it="Cipolle, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_onion_raw \
+  --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170410 --food-id=food_cipolle_surgelate \
+  --name-it="Cipolle, surgelate" \
+  --matrix-id=cipolle_surgelate --matrix-description-it="Cipolle, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_onion_raw \
+  --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cavolo riccio (kale), surgelato — preparato 2026-11-02 dal task (ottantasettesimo lotto)
+
+- **food_id**: `food_kale_surgelato`. FDC ID 169239 (SR Legacy, "Kale, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dalla raccomandazione dell'ottantaseiesimo lotto — distinto dal kale crudo già eseguito (`food_kale_raw`, Golden Set originale). Nota: FDC ID diverso dal 326196 menzionato nel settimo lotto per il kale cotto surgelato ("Kale, frozen, cooked, boiled, drained"); questa voce usa invece la variante "unprepared" (non cotta), coerente con tutte le altre verdure surgelate già fatte in questa coda. Verificato con `grep` dedicato su "kale surgelat"/"cavolo riccio surgelat"/FDC 169239, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 28,0kcal, proteine 2,66g, grassi 0,46g, carboidrati 4,88g, fibra 2,00g, calcio 136mg, ferro 0,93mg, zinco 0,18mg, magnesio 18,0mg, rame 0,046mg, selenio 0,90µg, vitamina C 39,3mg, vitamina K 334µg, folato totale 17,0µg, beta-carotene 2460µg, beta-criptoxantina 23,0µg (carotenoidi reali e non nulli), alfa-carotene esplicitamente 0µg; acido folico e vitamina B12 esplicitamente 0µg.
+- **Analogia usata**: `food_kale_raw` (cavolo kale, crudo, Golden Set originale, già eseguito sul DB reale — stesso alimento, qui surgelato invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `kale_surgelato` ("Cavolo riccio (kale), surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=low_oxalate` (stessa di `food_kale_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — carotenoidi reali e non nulli ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini/gombo surgelati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa di `food_kale_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169239 --food-id=food_kale_surgelato \
+  --name-it="Cavolo riccio (kale), surgelato" \
+  --matrix-id=kale_surgelato --matrix-description-it="Cavolo riccio (kale), surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169239 --food-id=food_kale_surgelato \
+  --name-it="Cavolo riccio (kale), surgelato" \
+  --matrix-id=kale_surgelato --matrix-description-it="Cavolo riccio (kale), surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Carciofi, surgelati — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
 
 - **food_id**: `food_carciofi_surgelati`. FDC ID 168387 (SR Legacy, "Artichokes, (globe or french), frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato nuovo individuato in questo lotto (punto 1b, estensione della coda dopo l'esaurimento degli 8 candidati lasciati aperti dall'ottantacinquesimo) — distinto dai carciofi crudi/cotti già eseguiti (`food_carciofi_raw`/`food_carciofi_cotti`) e dai carciofini in scatola già scartati ⚠ (cinquantunesimo lotto, nessun FDC dedicato trovato allora): qui invece un record surgelato dedicato esiste, record FDC distinto, nessun doppione mascherato. Verificato con `grep` dedicato su "carciofi surgelati"/"artichokes frozen"/FDC 168387, zero occorrenze su tutti e tre i file prima della ricerca web.
