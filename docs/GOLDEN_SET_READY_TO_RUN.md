@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Menta piperita, fresca, cruda — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_menta_piperita_raw`. FDC ID 173474 (SR Legacy, "Peppermint, fresh" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie botanica distinta dalla menta verde/spearmint già eseguita sul DB reale (`food_menta_raw`, FDC 173475 "Spearmint, fresh") — *Mentha piperita* vs *Mentha spicata*, stesso genere ma specie diversa, con un proprio record FDC dedicato e profilo nutrizionale diverso, non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "menta piperita"/"peppermint"/173474 esisteva già (solo la menta verde/spearmint risultava già presente).
+- **Nutrienti**: **13/17**. Per 100g: energia 70,0kcal, proteine 3,75g, grassi 0,94g, carboidrati 14,9g, fibra 8,00g, calcio 243mg, ferro 5,08mg, magnesio 80,0mg, zinco 1,11mg, rame 0,33mg, sodio 31,0mg, vitamina C 31,8mg, vitamina B12 0µg (esplicito), folato totale 114µg (nessuna firma di arricchimento). Mancano dal record: selenio, vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_menta_raw` (menta verde/spearmint, FDC 173475, già eseguita sul DB reale — stesso genere botanico reale *Mentha*, stesso trattamento "erba aromatica fresca").
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `menta_piperita` ("Menta piperita, fresca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173474 --food-id=food_menta_piperita_raw \
+  --name-it="Menta piperita, fresca, cruda" \
+  --matrix-id=menta_piperita --matrix-description-it="Menta piperita, fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_menta_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173474 --food-id=food_menta_piperita_raw \
+  --name-it="Menta piperita, fresca, cruda" \
+  --matrix-id=menta_piperita --matrix-description-it="Menta piperita, fresca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_menta_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pepe della Giamaica (pimento/allspice), macinato — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_pepe_della_giamaica_raw`. FDC ID 171315 (SR Legacy, "Spices, allspice, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Spezia mai tentata in questa pipeline (zero occorrenze per "pepe della Giamaica"/"pimento"/"allspice" su tutti e tre i file, verificato con grep dedicato prima della ricerca web).
+- **Nutrienti**: **14/17**. Per 100g: energia 263kcal, proteine 6,09g, grassi 8,69g, carboidrati 72,1g, fibra 21,6g, calcio 661mg, ferro 7,06mg, magnesio 135mg, zinco 1,01mg, rame 0,55mg, selenio 2,70µg, sodio 77,0mg, vitamina C 39,2mg, vitamina B12 0µg (esplicito), folato totale 36,0µg (nessuna firma di arricchimento). Mancano dal record: vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_chiodi_di_garofano_raw` (chiodi di garofano, FDC 171321, già eseguito sul DB reale — stessa famiglia botanica reale Myrtaceae, stesso trattamento "spezia secca macinata").
+- **Categoria dieta**: `plant_non_fruit` (spezia secca).
+- **Matrice**: nuova `pepe_della_giamaica` ("Pepe della Giamaica, macinato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myrtaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171315 --food-id=food_pepe_della_giamaica_raw \
+  --name-it="Pepe della Giamaica, macinato" \
+  --matrix-id=pepe_della_giamaica --matrix-description-it="Pepe della Giamaica, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chiodi_di_garofano_raw \
+  --botanical-family=Myrtaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171315 --food-id=food_pepe_della_giamaica_raw \
+  --name-it="Pepe della Giamaica, macinato" \
+  --matrix-id=pepe_della_giamaica --matrix-description-it="Pepe della Giamaica, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chiodi_di_garofano_raw \
+  --botanical-family=Myrtaceae --diet-category=plant_non_fruit --apply
+```
+
+### Erba cipollina, liofilizzata — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_erba_cipollina_liofilizzata_raw`. FDC ID 170075 (SR Legacy, "Chives, freeze-dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma "liofilizzata" mai tentata, distinta dall'erba cipollina fresca già eseguita sul DB reale (`food_erba_cipollina_raw`, FDC 169994 "Chives, raw") — record FDC realmente diverso (concentrazione molto più alta per la disidratazione), non un doppione.
+- **Nutrienti**: **14/17**. Per 100g: energia 311kcal, proteine 21,2g, grassi 3,50g, carboidrati 64,3g, fibra 26,2g, calcio 813mg, ferro 20,0mg, magnesio 640mg, zinco 5,12mg, rame 0,69mg, selenio 9,40µg, sodio 70,0mg, vitamina C 660mg, vitamina B12 0µg (esplicito), folato totale 108µg (nessuna firma di arricchimento). Mancano dal record: vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_erba_cipollina_raw` (erba cipollina fresca, FDC 169994, già eseguita sul DB reale — stessa pianta esatta, forma di conservazione diversa, analogia più diretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica disidratata).
+- **Matrice**: nuova `erba_cipollina_liofilizzata` ("Erba cipollina, liofilizzata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170075 --food-id=food_erba_cipollina_liofilizzata_raw \
+  --name-it="Erba cipollina, liofilizzata" \
+  --matrix-id=erba_cipollina_liofilizzata --matrix-description-it="Erba cipollina, liofilizzata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_erba_cipollina_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170075 --food-id=food_erba_cipollina_liofilizzata_raw \
+  --name-it="Erba cipollina, liofilizzata" \
+  --matrix-id=erba_cipollina_liofilizzata --matrix-description-it="Erba cipollina, liofilizzata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_erba_cipollina_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Sedano, semi secchi — preparato 2026-11-02 dal task (settantanovesimo lotto)
 
 - **food_id**: `food_semi_di_sedano_raw`. FDC ID 170920 (SR Legacy, "Spices, celery seed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma "seme secco" mai tentata per il sedano in questa pipeline, distinta dal gambo crudo/cotto già eseguito (`food_sedano_raw`/`food_sedano_cotto`) — record FDC realmente diverso (parte della pianta diversa, profilo nutrizionale molto diverso: seme concentrato vs gambo acquoso), non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "semi di sedano"/"celery seed"/170920 esisteva già.
