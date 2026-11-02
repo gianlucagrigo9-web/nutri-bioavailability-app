@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
+
+- **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
+- **Nutrienti**: **17/17**. Per 100g: energia 64,0kcal, proteine 1,18g, grassi 0,43g, carboidrati 15,7g, fibra 5,00g, calcio 29,0mg, ferro 0,80mg, zinco 0,25mg, magnesio 22,0mg, rame 0,12mg, selenio 0,40µg, vitamina C 3,10mg, folato totale 34,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 68,0µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi esplicitamente zero, `other_provitamin_a_carotenoids_mcg`=0 reale), vitamina K 19,8µg. Nessun nutriente mancante.
+- **Analogia usata**: `food_more_raw` (more fresche crude, stesso alimento/specie *Rubus fruticosus*, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit` (stesso trattamento degli altri frutti surgelati di questo lotto).
+- **Matrice**: nuova `more_surgelate` ("More, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso trattamento della mora fresca), `carotenoid_matrix_state` omesso (NULL per trasparenza — stessa ambiguità blanching dichiarata per gli altri frutti surgelati di questo lotto, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa della mora fresca), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171710 --food-id=food_more_surgelate \
+  --name-it="More, surgelate (non zuccherate)" \
+  --matrix-id=more_surgelate --matrix-description-it="More, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_more_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=171710 --food-id=food_more_surgelate \
+  --name-it="More, surgelate (non zuccherate)" \
+  --matrix-id=more_surgelate --matrix-description-it="More, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_more_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Lamponi, surgelati (rossi, non zuccherati) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_lamponi_surgelati`. FDC ID 168209 (SR Legacy, "Raspberries, frozen, red, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terzo alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "lamponi surgelati"/"raspberries frozen"/FDC 168209, zero occorrenze su tutti e tre i file prima della ricerca web (solo i lamponi freschi, `food_lamponi_raw`, già eseguiti, risultavano per "lamponi").
