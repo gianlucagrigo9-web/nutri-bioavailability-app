@@ -113,6 +113,32 @@ npm run add-food -- --fdc-id=171167 --food-id=food_salsa_teriyaki \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Salsa Sriracha (salsa di peperoncino piccante fermentata) — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_sriracha`. FDC ID 171186 (SR Legacy, "Sauce, hot chile, sriracha" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, "uno di 3 descrizioni USDA di salsa sriracha"). Quinto alimento del filone "salse e condimenti commerciali USDA generici". Scelta la voce generica (171186), non le due varianti di marca sulla stessa pagina di confronto (171187 "CHA! BY TEXAS PETE", 171188 "TUONG OT SRIRACHA"). Verificato con `grep` dedicato su "sriracha"/171186, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 93,0kcal, proteine 1,93g, grassi 0,93g, carboidrati 19,2g, fibra 2,20g, calcio 18,0mg, ferro 1,64mg, zinco 0,24mg, magnesio 16,0mg, rame 0,060mg, selenio 0,40µg, vitamina C 26,9mg (reale, coerente col peperoncino), folato totale 22,0µg, beta-carotene 1.261µg (reale e alto, coerente col peperoncino), alfa-carotene 234µg + beta-criptoxantina 334µg (= "altro carotenoide provitaminico A", entrambi reali), vitamina K 10,9µg (reale). **Mancano**: acido folico e vitamina B12 — nessuna delle due righe è presente nella tabella nutrienti della pagina (non assunte zero, semplicemente non riportate per questo record).
+- **Analogia usata**: `food_peperoncino_piccante_raw` (peperoncino piccante crudo, già eseguito sul DB reale — stesso ingrediente dominante, famiglia botanica Solanaceae; la sriracha è peperoncino fermentato con aglio/zucchero/sale/aceto, nessun ingrediente animale).
+- **Categoria dieta**: `plant_non_fruit` (peperoncino fermentato, nessun ingrediente animale).
+- **Matrice**: nuova `salsa_sriracha` ("Salsa Sriracha").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/alfa-carotene/beta-criptoxantina tutti reali e sostanzialmente alti — peperoncino fermentato e frullato, matrice vegetale disgregata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (stessa famiglia del peperoncino crudo, ingrediente dominante), `baseline_cooking_state=fermented` (peperoncino fermentato, tecnica tradizionale della sriracha), `is_fortified_folate` omesso (false — nessuna firma di arricchimento osservabile, anche se la riga acido folico non è riportata).
+
+```
+npm run add-food -- --fdc-id=171186 --food-id=food_salsa_sriracha \
+  --name-it="Salsa Sriracha (salsa di peperoncino piccante fermentata)" \
+  --matrix-id=salsa_sriracha --matrix-description-it="Salsa Sriracha" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_peperoncino_piccante_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171186 --food-id=food_salsa_sriracha \
+  --name-it="Salsa Sriracha (salsa di peperoncino piccante fermentata)" \
+  --matrix-id=salsa_sriracha --matrix-description-it="Salsa Sriracha" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_peperoncino_piccante_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
