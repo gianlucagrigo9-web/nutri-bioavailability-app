@@ -16,6 +16,126 @@
 
 ## Pronti
 
+### Carciofi, surgelati — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_carciofi_surgelati`. FDC ID 168387 (SR Legacy, "Artichokes, (globe or french), frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato nuovo individuato in questo lotto (punto 1b, estensione della coda dopo l'esaurimento degli 8 candidati lasciati aperti dall'ottantacinquesimo) — distinto dai carciofi crudi/cotti già eseguiti (`food_carciofi_raw`/`food_carciofi_cotti`) e dai carciofini in scatola già scartati ⚠ (cinquantunesimo lotto, nessun FDC dedicato trovato allora): qui invece un record surgelato dedicato esiste, record FDC distinto, nessun doppione mascherato. Verificato con `grep` dedicato su "carciofi surgelati"/"artichokes frozen"/FDC 168387, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 38,0kcal, proteine 2,63g, grassi 0,43g, carboidrati 7,75g, fibra 3,90g, calcio 19,0mg, ferro 0,50mg, zinco 0,32mg, magnesio 27,0mg, rame 0,054mg, selenio 0,20µg, vitamina C 5,30mg, folato totale 126µg, vitamina B12 0µg esplicito. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A.
+- **Analogia usata**: `food_carciofi_raw` (carciofi crudi, già eseguiti sul DB reale — stessa pianta *Cynara cardunculus*, qui surgelati invece che crudi).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `carciofi_surgelati` ("Carciofi, surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_carciofi_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record, non un dato reale zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (stessa di `food_carciofi_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168387 --food-id=food_carciofi_surgelati \
+  --name-it="Carciofi, surgelati" \
+  --matrix-id=carciofi_surgelati --matrix-description-it="Carciofi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_carciofi_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168387 --food-id=food_carciofi_surgelati \
+  --name-it="Carciofi, surgelati" \
+  --matrix-id=carciofi_surgelati --matrix-description-it="Carciofi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_carciofi_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Gombo (okra), surgelato — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_gombo_surgelato`. FDC ID 169262 (SR Legacy, "Okra, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato nuovo individuato in questo lotto (punto 1b) — distinto dal gombo crudo già eseguito (`food_gombo_raw`, FDC 169260), record FDC distinto, nessun doppione mascherato. Verificato con `grep` dedicato su "gombo surgelato"/"okra frozen"/FDC 169262, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 30,0kcal, proteine 1,69g, grassi 0,25g, carboidrati 6,63g, fibra 2,20g, calcio 81,0mg, ferro 0,57mg, zinco 0,53mg, magnesio 43,0mg, rame 0,083mg, selenio 0,60µg, vitamina C 12,4mg, vitamina K 49,4µg, folato totale 148µg, beta-carotene 210µg (reale e non nullo); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina tutti esplicitamente riportati come zero.
+- **Analogia usata**: `food_gombo_raw` (gombo crudo, già eseguito sul DB reale — stessa pianta *Abelmoschus esculentus*, qui surgelato invece che crudo, stesso precedente di famiglia botanica Malvaceae).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `gombo_surgelato` ("Gombo (okra), surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per `food_gombo_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata, non indovinato — beta-carotene reale e non nullo (210µg) ma la congelazione industriale prevede tipicamente una scottatura/blanching termica che la sola etichetta "frozen, unprepared" non conferma né esclude, stesso precedente già usato per piselli/spinaci/fagiolini surgelati nell'ottantacinquesimo lotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae` (stessa di `food_gombo_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169262 --food-id=food_gombo_surgelato \
+  --name-it="Gombo (okra), surgelato" \
+  --matrix-id=gombo_surgelato --matrix-description-it="Gombo (okra), surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_gombo_raw \
+  --botanical-family=Malvaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169262 --food-id=food_gombo_surgelato \
+  --name-it="Gombo (okra), surgelato" \
+  --matrix-id=gombo_surgelato --matrix-description-it="Gombo (okra), surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_gombo_raw \
+  --botanical-family=Malvaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli di Lima (baby), surgelati — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_fagioli_lima_baby_surgelati`. FDC ID 169955 (SR Legacy, "Lima beans, immature seeds, frozen, baby, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato nuovo individuato in questo lotto (punto 1b), stesso filone "verdura/legume surgelato industrialmente" — distinto dai fagioli di Lima secchi crudi/bolliti/in scatola già eseguiti (seme maturo secco, `food_fagioli_lima_raw` FDC 174252): qui il seme immaturo (verde) surgelato, record FDC distinto, nessun doppione mascherato. Esiste anche una variante "fordhook" (cultivar diversa, FDC 169953) non usata qui per evitare ambiguità — scelta la cultivar "baby", più comune nei prodotti surgelati europei. Verificato con `grep` dedicato su "fagioli lima surgelati"/"lima beans frozen"/FDC 169955, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 132kcal, proteine 7,59g, grassi 0,44g, carboidrati 25,1g, fibra 6,00g, calcio 35,0mg, ferro 2,21mg, zinco 0,63mg, magnesio 50,0mg, rame 0,13mg, selenio 2,10µg, vitamina C 8,30mg, folato totale 28,0µg, vitamina B12 0µg esplicito. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A.
+- **Analogia usata**: `food_fagioli_lima_raw` (fagioli di Lima secchi crudi, già eseguiti sul DB reale — stessa specie *Phaseolus lunatus*, qui seme immaturo surgelato invece che maturo secco, stato diverso dichiarato esplicitamente).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessuna ambiguità).
+- **Matrice**: nuova `fagioli_lima_surgelati` ("Fagioli di Lima (baby), surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa di `food_fagioli_lima_raw`), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169955 --food-id=food_fagioli_lima_baby_surgelati \
+  --name-it="Fagioli di Lima (baby), surgelati" \
+  --matrix-id=fagioli_lima_surgelati --matrix-description-it="Fagioli di Lima (baby), surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_fagioli_lima_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169955 --food-id=food_fagioli_lima_baby_surgelati \
+  --name-it="Fagioli di Lima (baby), surgelati" \
+  --matrix-id=fagioli_lima_surgelati --matrix-description-it="Fagioli di Lima (baby), surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_fagioli_lima_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Asparagi, surgelati — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_asparagi_surgelati`. FDC ID 169208 (SR Legacy, "Asparagus, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato nuovo individuato in questo lotto (punto 1b), continuando il filone "verdura surgelata industrialmente" già produttivo nell'ottantacinquesimo lotto — distinto da `food_asparagi_raw`/`food_asparagi_cotti`/`food_asparagi_in_scatola` già eseguiti, nessun doppione mascherato (record FDC distinto, 169208). Verificato con `grep` dedicato su "asparagi surgelati"/"asparagus frozen"/FDC 169208, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 24,0kcal, proteine 3,23g, grassi 0,23g, carboidrati 4,10g, fibra 1,90g, calcio 25,0mg, ferro 0,73mg, zinco 0,59mg, magnesio 14,0mg, rame 0,14mg, selenio 1,70µg, vitamina C 31,8mg, folato totale 191µg, vitamina B12 0µg esplicito. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A — a differenza dei surgelati verdi dell'ottantacinquesimo lotto (piselli/spinaci/fagiolini), qui i carotenoidi non sono riportati affatto nel record (gap di dato, non ambiguità di stato): nessuna analoga cautela sul blanching da dichiarare, il dato semplicemente non c'è.
+- **Analogia usata**: `food_asparagi_raw` (asparagi crudi, Golden Set pipeline, già eseguiti sul DB reale — stessa pianta *Asparagus officinalis*, qui surgelati invece che crudi).
+- **Categoria dieta**: `plant_non_fruit` (verdura, nessuna ambiguità).
+- **Matrice**: nuova `asparagi_surgelati` ("Asparagi, surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record, non un dato reale zero: non classificabile senza il dato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asparagaceae` (stessa di `food_asparagi_raw`), `baseline_cooking_state=frozen` (valore già in uso in questa pipeline dall'ottantacinquesimo lotto), `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169208 --food-id=food_asparagi_surgelati \
+  --name-it="Asparagi, surgelati" \
+  --matrix-id=asparagi_surgelati --matrix-description-it="Asparagi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_asparagi_raw \
+  --botanical-family=Asparagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169208 --food-id=food_asparagi_surgelati \
+  --name-it="Asparagi, surgelati" \
+  --matrix-id=asparagi_surgelati --matrix-description-it="Asparagi, surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_asparagi_raw \
+  --botanical-family=Asparagaceae --diet-category=plant_non_fruit --apply
+```
+
+### Longan, crudo — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_longan_raw`. FDC ID 169089 (SR Legacy, "Longans, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato lasciato aperto dall'ottantacinquesimo lotto (frutta esotica residua, non valutato allora per tetto del turno raggiunto). Verificato con `grep` dedicato su "longan"/FDC 169089, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **12/17**. Per 100g: energia 60,0kcal, proteine 1,31g, grassi 0,10g, carboidrati 15,1g, fibra 1,10g, calcio 1,00mg, ferro 0,13mg, zinco 0,050mg, magnesio 10,0mg, rame 0,17mg, vitamina C 84,0mg, vitamina B12 0µg esplicito. Mancano (non riportati nel record, non assunti zero): selenio, folato totale, vitamina K, beta-carotene, l'altro carotenoide provitaminico A — gap più ampio della media ma sopra la soglia minima di ~10/17, coerente con un record SR Legacy per un frutto di nicchia ma comunque dotato di FDC ID verificabile.
+- **Analogia usata**: `food_litchi_raw` (litchi crudo, Golden Set pipeline, già eseguito sul DB reale — stessa famiglia botanica reale Sapindaceae, stesso trattamento funzionale "frutto esotico asiatico a buccia non edibile").
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, nessuna ambiguità).
+- **Matrice**: nuova `longan` ("Longan").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record, non un dato reale zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapindaceae` (stessa di `food_litchi_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun dato di folato riportato, nessuna firma di arricchimento rilevabile).
+
+```
+npm run add-food -- --fdc-id=169089 --food-id=food_longan_raw \
+  --name-it="Longan, crudo" \
+  --matrix-id=longan --matrix-description-it="Longan" \
+  --baseline-cooking-state=raw --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapindaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169089 --food-id=food_longan_raw \
+  --name-it="Longan, crudo" \
+  --matrix-id=longan --matrix-description-it="Longan" \
+  --baseline-cooking-state=raw --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapindaceae --diet-category=fresh_fruit --apply
+```
+
 ### Mamey sapote, crudo — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
 
 - **food_id**: `food_mamey_sapote_raw`. FDC ID 167760 (SR Legacy, "Sapote, mamey, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato lasciato aperto dall'ottantacinquesimo lotto (frutta esotica residua, non valutato allora per tetto del turno raggiunto) — distinto dal sapote nero (black sapote, *Diospyros digyna*, scartato in questo stesso lotto per assenza di record FDC), specie e famiglia botanica diverse (*Pouteria sapota*, Sapotaceae). Verificato con `grep` dedicato su "mamey"/"sapote, mamey"/FDC 167760, zero occorrenze su tutti e tre i file prima della ricerca web.
