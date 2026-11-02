@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Sedano, semi secchi — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_semi_di_sedano_raw`. FDC ID 170920 (SR Legacy, "Spices, celery seed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma "seme secco" mai tentata per il sedano in questa pipeline, distinta dal gambo crudo/cotto già eseguito (`food_sedano_raw`/`food_sedano_cotto`) — record FDC realmente diverso (parte della pianta diversa, profilo nutrizionale molto diverso: seme concentrato vs gambo acquoso), non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "semi di sedano"/"celery seed"/170920 esisteva già.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 392kcal, proteine 18,1g, grassi 25,3g, carboidrati 41,4g, fibra 11,8g, calcio 1767mg, ferro 44,9mg, magnesio 440mg, zinco 6,93mg, rame 1,37mg, selenio 12,1µg, sodio 160mg, vitamina C 17,1mg, vitamina B12 0µg (esplicito), folato totale 10,0µg (nessuna firma di arricchimento), vitamina K 0µg (esplicito), beta-carotene 31,0µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi espliciti).
+- **Analogia usata**: `food_sedano_raw` (sedano, gambo crudo, FDC già eseguito sul DB reale — stessa specie reale *Apium graveolens*, non solo stessa famiglia botanica, analogia più diretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (spezia/seme secco).
+- **Matrice**: nuova `semi_di_sedano` ("Sedano, semi secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale presente — stessa convenzione prudente già usata per cumino/semi di finocchio, altre spezie secche Apiaceae in questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170920 --food-id=food_semi_di_sedano_raw \
+  --name-it="Sedano, semi secchi" \
+  --matrix-id=semi_di_sedano --matrix-description-it="Sedano, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170920 --food-id=food_semi_di_sedano_raw \
+  --name-it="Sedano, semi secchi" \
+  --matrix-id=semi_di_sedano --matrix-description-it="Sedano, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Santoreggia, secca, macinata — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_santoreggia_secca_raw`. FDC ID 170936 (SR Legacy, "Spices, savory, ground" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Erba mai tentata in nessuna forma in questa pipeline (zero occorrenze per "santoreggia"/"savory" su tutti e tre i file, verificato con grep dedicato prima della ricerca web).
+- **Nutrienti**: **13/17**. Per 100g: energia 272kcal, proteine 6,73g, grassi 5,91g, carboidrati 68,7g, fibra 45,7g, calcio 2132mg, ferro 37,9mg, magnesio 377mg, zinco 4,30mg, rame 0,85mg, selenio 4,60µg, sodio 24,0mg, vitamina C 50,0mg, vitamina B12 0µg (esplicito). Mancano dal record: folato totale, vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_origano_secco_raw` (origano secco, FDC 171328, già eseguito sul DB reale — stesso trattamento "erba secca macinata", stessa famiglia botanica reale Lamiaceae).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `santoreggia_secca` ("Santoreggia, secca, macinata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lamiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170936 --food-id=food_santoreggia_secca_raw \
+  --name-it="Santoreggia, secca, macinata" \
+  --matrix-id=santoreggia_secca --matrix-description-it="Santoreggia, secca, macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170936 --food-id=food_santoreggia_secca_raw \
+  --name-it="Santoreggia, secca, macinata" \
+  --matrix-id=santoreggia_secca --matrix-description-it="Santoreggia, secca, macinata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --botanical-family=Lamiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cerfoglio, secco — preparato 2026-11-02 dal task (settantanovesimo lotto)
+
+- **food_id**: `food_cerfoglio_secco_raw`. FDC ID 171318 (SR Legacy, "Spices, chervil, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Erba mai tentata in nessuna forma in questa pipeline (zero occorrenze per "cerfoglio"/"chervil" su tutti e tre i file, verificato con grep dedicato prima della ricerca web; nessuna forma "fresca" trovata in ricerca mirata, solo questa secca).
+- **Nutrienti**: **14/17**. Per 100g: energia 237kcal, proteine 23,2g, grassi 3,90g, carboidrati 49,1g, fibra 11,3g, calcio 1346mg, ferro 31,9mg, magnesio 130mg, zinco 8,80mg, rame 0,44mg, selenio 29,3µg, sodio 83,0mg, vitamina C 50,0mg, vitamina B12 0µg (esplicito), folato totale 274µg (acido folico 0µg esplicito, nessuna firma di arricchimento). Mancano dal record: vitamina K, beta-carotene, l'altro carotenoide provitaminico A — campi assenti, non assunti zero.
+- **Analogia usata**: `food_cumino_raw` (cumino, FDC 170923, già eseguito sul DB reale — stesso trattamento "spezia/erba secca", stessa famiglia botanica reale Apiaceae).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `cerfoglio_secco` ("Cerfoglio, secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171318 --food-id=food_cerfoglio_secco_raw \
+  --name-it="Cerfoglio, secco" \
+  --matrix-id=cerfoglio_secco --matrix-description-it="Cerfoglio, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cumino_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171318 --food-id=food_cerfoglio_secco_raw \
+  --name-it="Cerfoglio, secco" \
+  --matrix-id=cerfoglio_secco --matrix-description-it="Cerfoglio, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cumino_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Aneto, fresco, crudo — preparato 2026-11-02 dal task (settantanovesimo lotto)
 
 - **food_id**: `food_aneto_fresco_raw`. FDC ID 172233 (SR Legacy, "Dill weed, fresh" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dall'aneto secco già eseguito sul DB reale (`food_aneto_raw`, FDC 171322 "Spices, dill weed, dried", 12/17) — record FDC realmente diverso (fresco vs secco, due alimenti diversi con profilo nutrizionale diverso), non un doppione. Verificato con grep dedicato su tutti e tre i file che nessuna voce "aneto fresco"/"dill weed, fresh"/172233 esisteva già.
