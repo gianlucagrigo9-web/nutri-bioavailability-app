@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fragole, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
+
+- **food_id**: `food_fragole_surgelate`. FDC ID 168173 (SR Legacy, "Strawberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del filone "frutta surgelata", mai tentato prima in questa pipeline. Verificato con `grep` dedicato su "fragole surgelate"/"strawberries frozen"/FDC 168173, zero occorrenze su tutti e tre i file prima della ricerca web (le uniche occorrenze di "fragole" erano le fragole fresche già eseguite, `food_strawberry_raw`, alimento diverso).
+- **Nutrienti**: **17/17**. Per 100g: energia 35,0kcal, proteine 0,43g, grassi 0,11g, carboidrati 9,13g, fibra 2,10g, calcio 16,0mg, ferro 0,75mg, zinco 0,13mg, magnesio 11,0mg, rame 0,049mg, selenio 0,70µg, vitamina C 41,2mg, folato totale 17,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 27,0µg (reale e non nullo), alfa-carotene 0µg e beta-criptoxantina 0µg (entrambi esplicitamente zero, quindi `other_provitamin_a_carotenoids_mcg`=0 è un valore reale, non un gap), vitamina K 2,20µg. Nessun nutriente mancante.
+- **Analogia usata**: `food_strawberry_raw` (fragole fresche crude, stesso alimento/specie *Fragaria*, già eseguito sul DB reale — l'analogia più diretta possibile, stessa pianta solo congelata invece che fresca).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca nella definizione del PRD §4.9 — la forma congelata non cambia la categoria, stesso trattamento già usato per verdura surgelata negli ultimi due lotti rispetto alla verdura cruda).
+- **Matrice**: nuova `fragole_surgelate` ("Fragole, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso trattamento della fragola fresca, le categorie ossalati esistono solo per spinaci/kale/latte), `carotenoid_matrix_state` omesso (NULL per trasparenza dichiarata — beta-carotene reale e non nullo ma la pagina FDC non specifica se il surgelamento industriale include una scottatura, stesso precedente già usato per le verdure surgelate dei lotti 85-87; i frutti di bosco surgelati IQF in genere non vengono scottati, ma non essendo questo confermato esplicitamente dal record FDC stesso si preferisce non assumerlo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa della fragola fresca), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168173 --food-id=food_fragole_surgelate \
+  --name-it="Fragole, surgelate (non zuccherate)" \
+  --matrix-id=fragole_surgelate --matrix-description-it="Fragole, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_strawberry_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168173 --food-id=food_fragole_surgelate \
+  --name-it="Fragole, surgelate (non zuccherate)" \
+  --matrix-id=fragole_surgelate --matrix-description-it="Fragole, surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_strawberry_raw \
+  --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Cavolo collard, surgelato — preparato 2026-11-02 dal task (ottantasettesimo lotto)
 
 - **food_id**: `food_cavolo_collard_surgelato`. FDC ID 170408 (SR Legacy, "Collards, frozen, chopped, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Bonus scoperto cercando alternative al cavolo cappuccio/bok choy surgelati (entrambi scartati ⚠ in questo stesso lotto, nessun record USDA) — distinto dal cavolo collard crudo non ancora eseguito (`food_cavolo_collard_raw`, FDC 170406, solo "Pronti"). Verificato con `grep` dedicato su "cavolo collard surgelato"/"collards frozen"/FDC 170408, zero occorrenze su tutti e tre i file prima della ricerca web.
