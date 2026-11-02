@@ -89,6 +89,30 @@ npm run add-food -- --fdc-id=174531 --food-id=food_salsa_di_pesce \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Salsa teriyaki — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_teriyaki`. FDC ID 171167 (SR Legacy, "Sauce, teriyaki, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "salse e condimenti commerciali USDA generici" — primo interamente vegetale del filone. Verificato con `grep` dedicato su "teriyaki"/171167, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 89,0kcal, proteine 5,93g, grassi 0,020g, carboidrati 15,6g, fibra 0,10g, calcio 25,0mg, ferro 1,70mg, zinco 0,10mg, magnesio 61,0mg, rame 0,10mg, selenio 1,10µg, vitamina C 0mg (esplicito), folato totale 8,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 0µg (esplicito), alfa-carotene 0µg + beta-criptoxantina 0µg (= "altro carotenoide provitaminico A", entrambi espliciti), vitamina K 0µg (esplicito). Sodio 3.833mg/100g (alto, coerente con una base di salsa di soia).
+- **Analogia usata**: `food_soia_secca_cotta` (soia secca cotta, già eseguita sul DB reale — ricetta standard della salsa teriyaki (salsa di soia + zucchero + mirin/sake + zenzero) interamente vegetale, nessun ingrediente animale; usata la soia cotta anziché la salsa di soia stessa perché `food_salsa_di_soia` non è ancora eseguita sul DB reale, quindi non utilizzabile come analogia per la regola 2c).
+- **Categoria dieta**: `plant_non_fruit` (ricetta interamente vegetale, nessun ingrediente animale).
+- **Matrice**: nuova `salsa_teriyaki` ("Salsa teriyaki").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto soia+zucchero+mirin, nessuna famiglia botanica singola applicabile, stessa convenzione già usata per la salsa di soia), `baseline_cooking_state=cooked` (salsa cotta/ridotta, a differenza della salsa di soia che è fermentata), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171167 --food-id=food_salsa_teriyaki \
+  --name-it="Salsa teriyaki" \
+  --matrix-id=salsa_teriyaki --matrix-description-it="Salsa teriyaki" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171167 --food-id=food_salsa_teriyaki \
+  --name-it="Salsa teriyaki" \
+  --matrix-id=salsa_teriyaki --matrix-description-it="Salsa teriyaki" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
