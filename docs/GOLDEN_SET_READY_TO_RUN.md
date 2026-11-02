@@ -187,6 +187,30 @@ npm run add-food -- --fdc-id=171826 --food-id=food_salsa_tartara \
   --diet-category=egg_dairy --apply
 ```
 
+### Salsa al formaggio (cheese sauce) — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_al_formaggio`. FDC ID 171191 (SR Legacy, "Sauce, cheese, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, "uno di 4 descrizioni USDA di salsa al formaggio"). Ottavo alimento del filone "salse e condimenti commerciali USDA generici". Verificato con `grep` dedicato su "salsa al formaggio"/"cheese sauce"/171191, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 174kcal, proteine 6,71g, grassi 13,3g, carboidrati 6,83g, fibra 0,50g, calcio 184mg (alto, coerente con un formaggio fuso), ferro 0,21mg, zinco 0,98mg, magnesio 9,00mg, rame 0,018mg, selenio 3,20µg, vitamina C 0,40mg, folato totale 4,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,14µg. **Mancano**: vitamina K, beta-carotene e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina) — nessuna delle tre righe è presente nella tabella nutrienti della pagina (la pagina riporta solo retinolo 77,0µg e vitamina A RAE 80,0µg, non i singoli carotenoidi); non assunte zero, semplicemente non riportate per questo record.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stesso tipo di prodotto lattiero-caseario fuso/cotto, nessun ingrediente di carne/pesce).
+- **Categoria dieta**: `egg_dairy` (prodotto lattiero-caseario, formaggio+latte/panna — nessun ingrediente di carne/pesce nella ricetta standard).
+- **Matrice**: nuova `salsa_al_formaggio` ("Salsa al formaggio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto lattiero-caseario trasformato, stessa convenzione già usata per gli altri formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — i dati sui singoli carotenoidi non sono riportati per questo record, nessuna base per assegnare uno stato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (salsa a base di roux/formaggio fuso, prodotto cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171191 --food-id=food_salsa_al_formaggio \
+  --name-it="Salsa al formaggio (cheese sauce)" \
+  --matrix-id=salsa_al_formaggio --matrix-description-it="Salsa al formaggio" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171191 --food-id=food_salsa_al_formaggio \
+  --name-it="Salsa al formaggio (cheese sauce)" \
+  --matrix-id=salsa_al_formaggio --matrix-description-it="Salsa al formaggio" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
