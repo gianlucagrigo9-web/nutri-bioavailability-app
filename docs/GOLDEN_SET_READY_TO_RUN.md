@@ -41,6 +41,30 @@ npm run add-food -- --fdc-id=171610 --food-id=food_salsa_worcestershire \
   --diet-category=meat_fish --apply
 ```
 
+### Salsa di ostriche — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_di_ostriche`. FDC ID 174529 (SR Legacy, "Sauce, oyster, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Secondo alimento del filone "salse e condimenti commerciali USDA generici". Verificato con `grep` dedicato su "ostriche"/"oyster sauce"/174529, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 51,0kcal, proteine 1,35g, grassi 0,25g, carboidrati 10,9g, fibra 0,30g, calcio 32,0mg, ferro 0,18mg, zinco 0,090mg, magnesio 4,00mg, rame 0,15mg, selenio 4,40µg, vitamina C 0,10mg, folato totale 15,0µg, acido folico 0µg (esplicito), vitamina B12 0,41µg, beta-carotene 0µg (esplicito), alfa-carotene 0µg + beta-criptoxantina 0µg (= "altro carotenoide provitaminico A", entrambi espliciti), vitamina K 0µg (esplicito). Sodio 2.733mg/100g (molto alto, coerente con un condimento concentrato salato).
+- **Analogia usata**: `food_ostriche_raw` (ostriche crude, già eseguite sul DB reale — a differenza del Worcestershire (dove il pesce è un aromatizzante minore), l'ostrica è l'ingrediente dominante/caratterizzante di questa salsa (estratto di ostrica cotto/ridotto + zucchero + sale + amido), quindi `is_heme_iron` eredita dalla stessa classificazione già usata per l'ostrica cruda in questa pipeline (mollusco, ferro eme), non trattata come traccia aromatizzante).
+- **Categoria dieta**: `meat_fish` (prodotto a base di ostrica — non vegetariano, non vegano).
+- **Matrice**: nuova `salsa_di_ostriche` ("Salsa di ostriche").
+- **Attributi**: `is_heme_iron=true` (per analogia diretta con `food_ostriche_raw`, vedi nota sopra — l'ostrica è l'ingrediente dominante, non una traccia), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (la salsa di ostriche tradizionale si produce riducendo/cuocendo l'estratto di ostrica, non per fermentazione come la salsa di pesce), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174529 --food-id=food_salsa_di_ostriche \
+  --name-it="Salsa di ostriche" \
+  --matrix-id=salsa_di_ostriche --matrix-description-it="Salsa di ostriche" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174529 --food-id=food_salsa_di_ostriche \
+  --name-it="Salsa di ostriche" \
+  --matrix-id=salsa_di_ostriche --matrix-description-it="Salsa di ostriche" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
