@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Mamey sapote, crudo — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_mamey_sapote_raw`. FDC ID 167760 (SR Legacy, "Sapote, mamey, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato lasciato aperto dall'ottantacinquesimo lotto (frutta esotica residua, non valutato allora per tetto del turno raggiunto) — distinto dal sapote nero (black sapote, *Diospyros digyna*, scartato in questo stesso lotto per assenza di record FDC), specie e famiglia botanica diverse (*Pouteria sapota*, Sapotaceae). Verificato con `grep` dedicato su "mamey"/"sapote, mamey"/FDC 167760, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 124kcal, proteine 1,45g, grassi 0,46g, carboidrati 32,1g, fibra 5,40g, calcio 18,0mg, ferro 0,78mg, zinco 0,19mg, magnesio 11,0mg, rame 0,21mg, vitamina C 23,0mg, folato totale 7,00µg, vitamina B12 0µg esplicito, beta-carotene 82,0µg (reale e non nullo), alfa-carotene 0µg esplicito e beta-criptoxantina 7,00µg (entrambi riportati, l'altro carotenoide provitaminico A conteggiato). Mancano (non riportati nel record, non assunti zero): selenio, vitamina K.
+- **Analogia usata**: `food_mango_raw` (mango crudo, Golden Set pipeline, già eseguito sul DB reale — stesso trattamento funzionale "frutto tropicale crudo con carotenoidi reali non nulli", stesso precedente già usato per frutto della passione/guava in questa coda).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, nessuna ambiguità).
+- **Matrice**: nuova `mamey_sapote` ("Mamey sapote").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo 82,0µg, frutto crudo non cotto/non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapotaceae` (famiglia botanica reale, *Pouteria sapota*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato basso e naturale del frutto).
+
+```
+npm run add-food -- --fdc-id=167760 --food-id=food_mamey_sapote_raw \
+  --name-it="Mamey sapote, crudo" \
+  --matrix-id=mamey_sapote --matrix-description-it="Mamey sapote" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Sapotaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167760 --food-id=food_mamey_sapote_raw \
+  --name-it="Mamey sapote, crudo" \
+  --matrix-id=mamey_sapote --matrix-description-it="Mamey sapote" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Sapotaceae --diet-category=fresh_fruit --apply
+```
+
+### Nashi (pera asiatica), cruda — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_nashi_raw`. FDC ID 168177 (SR Legacy, "Pears, asian, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Confermato tramite una seconda fonte indipendente (matvaretabellen.no, tabella nutrizionale norvegese, voce "Nashi, asian pear, raw") che "nashi" e "pera asiatica" sono lo stesso frutto del record FDC "Pears, asian" — nessuna ambiguità di nome. Candidato lasciato aperto dall'ottantacinquesimo lotto (frutta esotica residua, non valutato allora per tetto del turno raggiunto). Verificato con `grep` dedicato su "nashi"/"pera asiatica"/"pears, asian"/FDC 168177, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti (nessun gap). Per 100g: energia 42,0kcal, proteine 0,50g, grassi 0,23g, carboidrati 10,7g, fibra 3,60g, calcio 4,00mg, ferro 0mg esplicito, zinco 0,020mg, magnesio 8,00mg, rame 0,050mg, selenio 0,10µg, vitamina C 3,80mg, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K (fillochinone) 4,50µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con una polpa chiara priva di pigmento, a differenza del cachi/mango già fatti).
+- **Analogia usata**: `food_pear_raw` (pera comune cruda, Golden Set originale, già eseguita sul DB reale — stesso genere *Pyrus*, specie diversa — *Pyrus pyrifolia* contro *Pyrus communis* —, stesso precedente già usato per il kiwi gold rispetto al kiwi verde in questa pipeline).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, nessuna ambiguità).
+- **Matrice**: nuova `pera_nashi` ("Pera nashi (asiatica)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, dato reale e non un gap, stessa convenzione già usata per le castagne d'acqua: nessuna ambiguità da dichiarare quando il valore è già zero dichiarato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa di `food_pear_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168177 --food-id=food_nashi_raw \
+  --name-it="Nashi (pera asiatica), cruda" \
+  --matrix-id=pera_nashi --matrix-description-it="Pera nashi (asiatica)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168177 --food-id=food_nashi_raw \
+  --name-it="Nashi (pera asiatica), cruda" \
+  --matrix-id=pera_nashi --matrix-description-it="Pera nashi (asiatica)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pear_raw \
+  --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
+### Fave, fresche sgranate, crude — preparato 2026-11-02 dal task (ottantaseiesimo lotto)
+
+- **food_id**: `food_fave_fresche_raw`. FDC ID 170377 (SR Legacy, "Broadbeans, immature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato lasciato aperto dall'ottantacinquesimo lotto (coda in estensione, non valutato allora per tetto del turno raggiunto) — distinto dalle fave secche crude/bollite/in scatola già eseguite (semi maturi secchi, FDC 175205/173753/173754): qui il seme immaturo fresco, record FDC distinto (170377), nessun doppione mascherato. Verificato con `grep` dedicato su "fave fresche"/"fave, fresche"/"broad bean immature"/FDC 170377, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 72,0kcal, proteine 5,60g, grassi 0,60g, carboidrati 11,7g, fibra 4,20g, calcio 22,0mg, ferro 1,90mg, zinco 0,58mg, magnesio 38,0mg, rame 0,074mg, selenio 1,20µg, vitamina C 33,0mg, folato totale 96,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A (né alfa-carotene né beta-criptoxantina riportati).
+- **Analogia usata**: `food_peas_green_raw` (piselli freschi crudi, Golden Set pipeline, già eseguiti sul DB reale — stessa categoria funzionale "seme di legume fresco immaturo crudo", stessa famiglia botanica Fabaceae, stesso precedente di stato "fresco non essiccato" distinto dal legume secco).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessuna ambiguità).
+- **Matrice**: nuova `fave_fresche` ("Fave, fresche sgranate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo legume, stessa convenzione già usata per gli altri legumi), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record, non un dato reale zero: non classificabile come `raw_intact` senza il dato, Regola 1/6), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa delle altre fave/legumi già eseguiti), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170377 --food-id=food_fave_fresche_raw \
+  --name-it="Fave, fresche sgranate, crude" \
+  --matrix-id=fave_fresche --matrix-description-it="Fave, fresche sgranate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peas_green_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170377 --food-id=food_fave_fresche_raw \
+  --name-it="Fave, fresche sgranate, crude" \
+  --matrix-id=fave_fresche --matrix-description-it="Fave, fresche sgranate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peas_green_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne d'acqua, in scatola — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
 
 - **food_id**: `food_castagne_dacqua_in_scatola`. FDC ID 170067 (SR Legacy, "Waterchestnuts, chinese, canned, solids and liquids" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verdura asiatica mai tentata in questa pipeline, nonostante il nome non è botanicamente una "castagna" (non è un *Castanea*): è il corno/tubero di una pianta acquatica (*Eleocharis dulcis*, famiglia Cyperaceae, le "cipreacee"), distinto quindi anche concettualmente dalle castagne vere già eseguite. Verificato con `grep` dedicato su "castagne d'acqua"/"water chestnut"/170067, zero occorrenze su tutti e tre i file prima della ricerca web.
