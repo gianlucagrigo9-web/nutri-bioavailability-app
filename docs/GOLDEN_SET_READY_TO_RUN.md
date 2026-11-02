@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Spinaci, surgelati — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_spinaci_surgelati`. FDC ID 169287 (SR Legacy, "Spinach, frozen, chopped or leaf, unprepared (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Secondo alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_spinach_raw`/`food_spinach_boiled` (Golden Set originale) e da `food_spinaci_in_scatola` (già eseguito), nessun doppione mascherato. Verificato con `grep` dedicato su "spinaci surgelati"/"spinaci, surgelati"/"spinach frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 29,0kcal, proteine 3,63g, grassi 0,57g, carboidrati 4,21g, fibra 2,90g, calcio 129mg, ferro 1,89mg, zinco 0,56mg, magnesio 75,0mg, rame 0,14mg, selenio 6,00µg, vitamina C 5,50mg, folato totale 145µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 372µg, beta-carotene 7035µg (molto alto, reale, coerente con lo spinacio anche crudo), alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguiti sul DB reale — "unprepared" descrive lo stato come acquistato dal consumatore, non ancora cotto, più vicino al crudo che al bollito; stessa pianta, stessa famiglia botanica).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia, nessuna ambiguità).
+- **Matrice**: nuova `spinaci_surgelati` ("Spinaci surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=high_oxalate` (stesso precedente di `food_spinach_raw`/`food_spinach_boiled`/`food_spinaci_in_scatola` — foglia ricca di oxalati, nessun motivo per cui la surgelazione lo cambi), **`carotenoid_matrix_state` omesso (NULL) per trasparenza dichiarata, stessa motivazione già scritta per i piselli surgelati in questo stesso lotto**: la scottatura/blanching industriale pre-congelamento non è confermata né esclusa dalla sola etichetta USDA "frozen, unprepared", quindi non indovinato fra `raw_intact`/`cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (stesso precedente di `food_spinach_raw`), `baseline_cooking_state=frozen` (stessa convenzione introdotta per i piselli surgelati in questo lotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169287 --food-id=food_spinaci_surgelati \
+  --name-it="Spinaci, surgelati" \
+  --matrix-id=spinaci_surgelati --matrix-description-it="Spinaci surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169287 --food-id=food_spinaci_surgelati \
+  --name-it="Spinaci, surgelati" \
+  --matrix-id=spinaci_surgelati --matrix-description-it="Spinaci surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagiolini, surgelati — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
+
+- **food_id**: `food_fagiolini_surgelati`. FDC ID 169962 (SR Legacy, "Beans, snap, green, frozen, all styles, unprepared (Includes foods for USDA's Food Distribution Program)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terzo alimento di questa pipeline nella forma surgelata industrialmente — distinto da `food_fagiolini_raw`/`food_fagiolini_cotti` (Golden Set originale) e da `food_fagiolini_in_scatola` (già eseguito), nessun doppione mascherato. Verificato con `grep` dedicato su "fagiolini surgelati"/"fagiolini, surgelati"/"green beans frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, tutti espliciti. Per 100g: energia 33,0kcal, proteine 1,79g, grassi 0,21g, carboidrati 7,54g, fibra 2,60g, calcio 42,0mg, ferro 0,85mg, zinco 0,26mg, magnesio 22,0mg, rame 0,049mg, selenio 0,60µg, vitamina C 12,9mg, folato totale 15,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 44,8µg, beta-carotene 292µg e alfa-carotene 72,0µg (entrambi reali, non nulli), beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_fagiolini_raw` (fagiolini crudi, Golden Set originale, già eseguiti sul DB reale — "unprepared" descrive lo stato come acquistato, non ancora cotto, stessa specie *Phaseolus vulgaris*).
+- **Categoria dieta**: `plant_non_fruit` (legume/verdura, nessuna ambiguità).
+- **Matrice**: nuova `fagiolini_surgelati` ("Fagiolini surgelati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, non un ortaggio a foglia ricco di oxalati), **`carotenoid_matrix_state` omesso (NULL) per trasparenza dichiarata, stessa motivazione già scritta per piselli/spinaci surgelati in questo stesso lotto** (ambiguità blanching industriale non dichiarata da USDA), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia botanica reale, *Phaseolus vulgaris*, stessa convenzione già usata per i legumi in questa pipeline), `baseline_cooking_state=frozen` (stessa convenzione introdotta in questo lotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169962 --food-id=food_fagiolini_surgelati \
+  --name-it="Fagiolini, surgelati" \
+  --matrix-id=fagiolini_surgelati --matrix-description-it="Fagiolini surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169962 --food-id=food_fagiolini_surgelati \
+  --name-it="Fagiolini, surgelati" \
+  --matrix-id=fagiolini_surgelati --matrix-description-it="Fagiolini surgelati" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Riso selvatico (wild rice), crudo — preparato 2026-11-02 dal task (ottantacinquesimo lotto)
 
 - **food_id**: `food_riso_selvatico_raw`. FDC ID 169726 (SR Legacy, "Wild rice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Cereale mai tentato in questa pipeline, distinto da riso bianco/integrale/venere già eseguiti — botanicamente non è nemmeno un riso vero (genere *Zizania*, non *Oryza*), ma una graminacea acquatica nordamericana diversa. Verificato con `grep` dedicato su "riso selvatico"/"wild rice", zero occorrenze su tutti e tre i file prima della ricerca web.
