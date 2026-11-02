@@ -211,6 +211,30 @@ npm run add-food -- --fdc-id=171191 --food-id=food_salsa_al_formaggio \
   --diet-category=egg_dairy --apply
 ```
 
+### Salsa per pizza, in scatola — preparato 2026-11-02 dal task (novantesimo lotto)
+
+- **food_id**: `food_salsa_pizza`. FDC ID 172880 (SR Legacy, "Sauce, pizza, canned, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nono alimento del filone "salse e condimenti commerciali USDA generici". Verificato con `grep` dedicato su "salsa per pizza"/"pizza sauce"/172880, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **12/17**. Per 100g: energia 54,0kcal, proteine 2,18g, grassi 1,15g, carboidrati 8,66g, fibra 2,00g, calcio 54,0mg, ferro 0,90mg, zinco 0,25mg, magnesio 21,0mg, rame 0,14mg, vitamina C 11,3mg (reale, coerente col pomodoro), folato totale 10,0µg, vitamina B12 0,020µg. **Mancano**: selenio, acido folico, beta-carotene, l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina) e vitamina K — nessuna di queste righe è presente nella tabella nutrienti della pagina; non assunte zero, semplicemente non riportate per questo record.
+- **Analogia usata**: `food_pomodori_secchi_raw` (pomodori secchi, già eseguiti sul DB reale — stessa pianta *Solanum lycopersicum*, famiglia botanica reale Solanaceae; prodotto di pomodoro concentrato/trasformato come la salsa per pizza, non il pomodoro fresco; stessa analogia già usata per il ketchup). La pagina FDC non menziona formaggio né alcun ingrediente animale: ricetta tomato+olio+erbe, coerente con una "pizza sauce" (diversa dalla pizza intera, che includerebbe il formaggio).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, ortaggio botanicamente "frutto" ma classificato come verdura per convenzione del PRD §4.9; nessun ingrediente animale menzionato).
+- **Matrice**: nuova `salsa_pizza` ("Salsa per pizza").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto trasformato), `carotenoid_matrix_state` omesso (NULL — i dati sui carotenoidi non sono riportati per questo record, nessuna base per assegnare uno stato, a differenza del ketchup dove il beta-carotene era reale e alto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale del pomodoro, ingrediente dominante, stessa convenzione del ketchup), `baseline_cooking_state=cooked` (pomodoro cotto/concentrato, prodotto in scatola), `is_fortified_folate` omesso (false — nessuna firma di arricchimento osservabile, anche se la riga acido folico non è riportata).
+
+```
+npm run add-food -- --fdc-id=172880 --food-id=food_salsa_pizza \
+  --name-it="Salsa per pizza, in scatola" \
+  --matrix-id=salsa_pizza --matrix-description-it="Salsa per pizza" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172880 --food-id=food_salsa_pizza \
+  --name-it="Salsa per pizza, in scatola" \
+  --matrix-id=salsa_pizza --matrix-description-it="Salsa per pizza" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pomodori_secchi_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
 ### More, surgelate (non zuccherate) — preparato 2026-11-02 dal task (ottantottesimo lotto)
 
 - **food_id**: `food_more_surgelate`. FDC ID 171710 (SR Legacy, "Blackberries, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarto alimento del filone "frutta surgelata". Verificato con `grep` dedicato su "more surgelate"/"blackberries frozen"/FDC 171710, zero occorrenze su tutti e tre i file prima della ricerca web (solo le more fresche, `food_more_raw`, già eseguite, risultavano per "more").
