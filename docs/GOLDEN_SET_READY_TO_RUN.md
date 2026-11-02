@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Crusca di grano, cruda — preparato 2026-11-02 dal task (ottantatreesimo lotto)
+
+- **food_id**: `food_crusca_di_grano_raw`. FDC ID 169722 (SR Legacy, "Wheat bran, crude" — pagina getfoodfacts.com dedicata e pulita, titolo "USDA Standard Reference · Cereal Grains and Pasta", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Sottoprodotto della macinazione del grano mai tentato in questa pipeline (crusca d'avena/mais/segale già coperte: la prima eseguita, mais ✅, segale ⚠ per assenza di record) — verificato con `grep` dedicato su "crusca di grano"/"wheat bran"/169722, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 216kcal, proteine 15,6g, grassi 4,25g, carboidrati 64,5g, fibra 42,8g (molto alta, coerente con una crusca disidratata — stesso ordine di grandezza della crusca d'avena/mais già eseguite), calcio 73,0mg, ferro 10,6mg, zinco 7,27mg, magnesio 611mg (alto, coerente), rame 1,0mg, selenio 77,6µg, vitamina C 0mg esplicito, folato totale 79,0µg (folato DFE 79,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 1,90µg, beta-carotene 6,00µg (reale, non nullo), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
+- **Analogia usata**: `food_germe_di_grano_raw` (germe di grano, già eseguito sul DB reale — stessa pianta *Triticum aestivum*, stesso trattamento funzionale "sottoprodotto della macinazione del grano separato dalla farina").
+- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
+- **Matrice**: nuova `crusca_di_grano` ("Crusca di grano").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato "crudo" dichiarato dal record FDC, stessa convenzione di durian/cime di rapa — a differenza dei funghi/formaggi in questa stessa coda, qui si tratta di un vero tessuto vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del grano, come per l'analogia germe di grano), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_grano_raw \
+  --name-it="Crusca di grano, cruda" \
+  --matrix-id=crusca_di_grano --matrix-description-it="Crusca di grano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germe_di_grano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_grano_raw \
+  --name-it="Crusca di grano, cruda" \
+  --matrix-id=crusca_di_grano --matrix-description-it="Crusca di grano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_germe_di_grano_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Sciroppo di agave — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_sciroppo_di_agave_raw`. FDC ID 170277 (SR Legacy, "Sweetener, syrup, agave" — pagina getfoodfacts.com dedicata e pulita, titolo "Sweetener, syrup, agave (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dolcificante mai tentato in questa pipeline nonostante miele/zucchero/sciroppo d'acero/melassa già coperti — verificato con `grep` dedicato su "sciroppo di agave"/"agave syrup"/170277, zero occorrenze su tutti e tre i file prima della ricerca web.
