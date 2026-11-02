@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Olio di fegato di merluzzo — preparato 2026-11-02 dal task (ottantaduesimo lotto)
+
+- **food_id**: `food_olio_di_fegato_di_merluzzo_raw`. FDC ID 173577 (SR Legacy, "Fish oil, cod liver" — pagina getfoodfacts.com dedicata e pulita, titolo "Fish oil, cod liver (SR Legacy) nutrition facts", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto storico ben tracciato da USDA, mai cercato in questa pipeline nonostante decine di frattaglie di altre specie già fatte (il filone "frattaglie" finora ha riguardato solo mammiferi/uccelli, mai il fegato/olio di un pesce — verificato con `grep` dedicato — singolo, non composto — su "fegato di merluzzo"/"olio di fegato"/"cod liver", zero occorrenze pertinenti su tutti e tre i file prima della ricerca web).
+- **Nutrienti**: **14/17**. Per 100g: energia 902kcal, proteine 0g (esplicito), grassi 100g (esplicito, olio puro), carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), zinco 0mg (esplicito), magnesio 0mg (esplicito), rame 0mg (esplicito), selenio 0µg (esplicito), vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina B12 0µg (esplicito) — tutti valori coerenti con un olio puro privo di frazione proteica/minerale. Mancano: beta-carotene, vitamina K (nessuna riga "Vitamin K" sulla pagina), e l'altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina, nessuna riga) — campi assenti dal record, non assunti zero; stesso identico pattern di assenza già visto per gli altri oli puri (es. olio di senape, 14/17 con le stesse 3 lacune). La pagina riporta anche (non tracciati da questo progetto, solo per contesto) vitamina A (RAE) 30.000µg/100g e vitamina D 250µg/100g, coerenti con la fama storica di questo prodotto come integratore di vitamina A/D.
+- **Analogia usata**: `food_strutto` (strutto di maiale, FDC 171401, già eseguito sul DB reale — stessa categoria "grasso animale puro, nessuna frazione proteica/minerale", stesso trattamento già applicato a grasso di manzo/strutto).
+- **Categoria dieta**: `meat_fish` (derivato del fegato di pesce, non vegetariano/vegano).
+- **Matrice**: nuova `olio_di_fegato_di_merluzzo` ("Olio di fegato di merluzzo").
+- **Attributi**: `is_heme_iron` omesso (false — ferro 0mg esplicito, olio puro senza tessuto muscolare), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun campo beta-carotene nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw` (olio non raffinato/non cotto), `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=173577 --food-id=food_olio_di_fegato_di_merluzzo_raw \
+  --name-it="Olio di fegato di merluzzo" \
+  --matrix-id=olio_di_fegato_di_merluzzo --matrix-description-it="Olio di fegato di merluzzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strutto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173577 --food-id=food_olio_di_fegato_di_merluzzo_raw \
+  --name-it="Olio di fegato di merluzzo" \
+  --matrix-id=olio_di_fegato_di_merluzzo --matrix-description-it="Olio di fegato di merluzzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_strutto \
+  --diet-category=meat_fish --apply
+```
+
 ### Manioca (cassava), intera, cruda — preparato 2026-11-02 dal task (ottantunesimo lotto)
 
 - **food_id**: `food_manioca_cruda_raw`. FDC ID 169985 (SR Legacy, "Cassava, raw" — pagina getfoodfacts.com dedicata e pulita, titolo "Cassava, raw (SR Legacy)", release USDA 2026-04-30, FDC ID citato esplicitamente). Distinta dalla farina di manioca già preparata in un lotto precedente (`food_farina_di_manioca_raw`, FDC 2512377 Foundation Foods, non ancora eseguita sul DB reale): qui il tubero intero crudo, mai tentato in questa pipeline nonostante il gruppo "tuberi/radici" sia già ampiamente coperto (verificato con `grep` dedicato — singolo, non composto — su "manioca, cruda"/"cassava, raw"/"cassava root", zero occorrenze su tutti e tre i file prima della ricerca web).
