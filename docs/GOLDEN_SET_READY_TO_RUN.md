@@ -310,6 +310,31 @@ npm run add-food -- --fdc-id=174066 --food-id=food_salsa_agrodolce \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Salsa Caesar, condimento per insalata — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_caesar`. FDC ID 169055 (SR Legacy, "Salad dressing, caesar dressing, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo di sei condimenti per insalata (dressing) USDA ricercati in questo lotto, filone mai esplorato sistematicamente prima (a parte ranch/tartara nel lotto 90). Verificato con `grep` dedicato su "caesar"/169055, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 542kcal, proteine 2,17g, grassi 57,9g, carboidrati 3,30g, fibra 0,50g, calcio 48,0mg, ferro 1,08mg, zinco 0,11mg, magnesio 2,00mg, rame 0,010mg, selenio 1,60µg, vitamina C 0,30mg, folato totale 2,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,030µg, beta-carotene 2,00µg + alfa-carotene 1,00µg + beta-criptoxantina 1,00µg (= "altro carotenoide provitaminico A", tutti reali), vitamina K (fillochinone) 105µg.
+- **Nota su categoria dieta/is_heme_iron**: la ricetta classica del Caesar dressing contiene acciughe come ingrediente aromatizzante (oltre a olio, uovo e parmigiano) — stesso tipo di ragionamento prudente già usato per il Worcestershire: un condimento con pesce nella ricetta standard non va proposto come vegetariano/vegano anche se molte versioni commerciali in bottiglia le omettono o le sostituiscono con estratti. `diet-category=meat_fish` per questa ragione. `is_heme_iron=false` perché l'acciuga resta un aromatizzante minore in un'emulsione a base di olio/uovo/parmigiano, non muscolo consumato come pietanza — stessa distinzione già fatta per il Worcestershire stesso.
+- **Analogia usata**: `food_acciughe_raw` (acciughe crude, già eseguite sul DB reale — stesso ingrediente animale dichiarato nella ricetta standard, usata per la decisione di diet-category, non per is_heme_iron — vedi nota sopra).
+- **Categoria dieta**: `meat_fish` (vedi nota sopra).
+- **Matrice**: nuova `salsa_caesar` ("Salsa Caesar (condimento per insalata)").
+- **Attributi**: `is_heme_iron=false` (esplicito, vedi nota sopra), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce reali ma verosimilmente da pepe/parmigiano, non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto olio+uovo+formaggio+acciuga), `baseline_cooking_state=raw` (emulsione non cotta, come la maionese), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169055 --food-id=food_salsa_caesar \
+  --name-it="Salsa Caesar (condimento per insalata)" \
+  --matrix-id=salsa_caesar --matrix-description-it="Salsa Caesar (condimento per insalata)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169055 --food-id=food_salsa_caesar \
+  --name-it="Salsa Caesar (condimento per insalata)" \
+  --matrix-id=salsa_caesar --matrix-description-it="Salsa Caesar (condimento per insalata)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
