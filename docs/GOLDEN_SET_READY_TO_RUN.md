@@ -335,6 +335,30 @@ npm run add-food -- --fdc-id=169055 --food-id=food_salsa_caesar \
   --diet-category=meat_fish --apply
 ```
 
+### Salsa al formaggio blu (Roquefort), condimento per insalata — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_formaggio_blu`. FDC ID 173562 (SR Legacy, "Salad dressing, blue or roquefort cheese dressing, commercial, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto diverso dal formaggio blu/Roquefort crudo già ⚠ (trentottesimo lotto, nessun record FDC per il formaggio stagionato) e dalla salsa al formaggio cheddar già pronta (novantesimo lotto, prodotto diverso) — qui è un condimento commerciale a base di formaggio blu+latticello/maionese, categoria distinta con record FDC proprio. Verificato con `grep` dedicato su "formaggio blu"/"blue cheese"/"roquefort"/173562, zero occorrenze reali su tutti e tre i file prima della ricerca web (solo il riferimento al formaggio blu crudo scartato nel lotto 38).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 484kcal, proteine 1,37g, grassi 51,1g, carboidrati 4,77g, fibra 0,40g, calcio 37,0mg, ferro 0,090mg, zinco 0,21mg, magnesio 8,00mg, rame 0,0090mg, selenio 1,00µg, vitamina C 0,70mg, folato totale 5,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,27µg, beta-carotene 4,00µg + alfa-carotene 1,00µg + beta-criptoxantina 1,00µg (= "altro carotenoide provitaminico A", tutti reali), vitamina K (fillochinone) 85,9µg.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa analogia già usata per la salsa al formaggio del lotto 90, prodotto lattiero-caseario composito).
+- **Categoria dieta**: `egg_dairy` (formaggio blu fermentato + latticello/maionese — nessun pesce/carne nella ricetta standard).
+- **Matrice**: nuova `salsa_formaggio_blu` ("Salsa al formaggio blu (Roquefort), condimento per insalata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto lattiero-caseario composito, stessa convenzione già usata per gli altri formaggi/salse di questa pipeline), `carotenoid_matrix_state` omesso (NULL — tracce reali verosimilmente da pepe/erbe, non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale/lattiero-caseario), `baseline_cooking_state=raw` (emulsione non cotta a base di formaggio fermentato), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173562 --food-id=food_salsa_formaggio_blu \
+  --name-it="Salsa al formaggio blu (Roquefort), condimento per insalata" \
+  --matrix-id=salsa_formaggio_blu --matrix-description-it="Salsa al formaggio blu (Roquefort), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173562 --food-id=food_salsa_formaggio_blu \
+  --name-it="Salsa al formaggio blu (Roquefort), condimento per insalata" \
+  --matrix-id=salsa_formaggio_blu --matrix-description-it="Salsa al formaggio blu (Roquefort), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
