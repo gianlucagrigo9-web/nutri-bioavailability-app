@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa Italiana (Italian dressing), senza sale, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_italiana_senza_sale`. FDC ID 171022 (SR Legacy, "Salad dressing, italian dressing, commercial, regular, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante senza sale della ricetta regolare, distinta dalla "reduced calorie" già pronta sopra e dalla "reduced fat, without salt" pronta più sotto in questo stesso lotto. Verificato con `grep` dedicato su 171022, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 292kcal, proteine 0,38g, grassi 28,4g, carboidrati 10,4g, fibra 0g, calcio 7,00mg, ferro 0,63mg, zinco 0,13mg, magnesio 3,00mg, rame 0mg (esplicito), selenio 2,00µg, vitamina C 0mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 21,0µg + alfa-carotene 0µg + beta-criptoxantina 2,00µg, vitamina K (fillochinone) 56,0µg.
+- **Analogia usata**: `food_origano_secco_raw` (origano secco, già eseguito sul DB reale — stessa analogia della versione regolare).
+- **Categoria dieta**: `plant_non_fruit` (stessa ricetta della versione regolare (olio+aceto+erbe/spezie), solo senza sale aggiunto).
+- **Matrice**: nuova `salsa_italiana_senza_sale` ("Salsa Italiana (Italian dressing), senza sale, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171022 --food-id=food_salsa_italiana_senza_sale \
+  --name-it="Salsa Italiana (Italian dressing), senza sale, condimento per insalata" \
+  --matrix-id=salsa_italiana_senza_sale --matrix-description-it="Salsa Italiana (Italian dressing), senza sale, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171022 --food-id=food_salsa_italiana_senza_sale \
+  --name-it="Salsa Italiana (Italian dressing), senza sale, condimento per insalata" \
+  --matrix-id=salsa_italiana_senza_sale --matrix-description-it="Salsa Italiana (Italian dressing), senza sale, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa francese (French dressing), senza sale, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_francese_senza_sale`. FDC ID 171020 (SR Legacy, "Salad dressing, french dressing, commercial, regular, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante senza sale della stessa ricetta regolare (non a basso contenuto di grassi, distinta dalla variante "reduced calorie" già pronta sopra e dalla "reduced fat" pronta più sotto in questo stesso lotto). Verificato con `grep` dedicato su 171020, zero occorrenze reali.
