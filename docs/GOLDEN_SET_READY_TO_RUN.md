@@ -410,6 +410,30 @@ npm run add-food -- --fdc-id=171402 --food-id=food_salsa_mille_isole \
   --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy --apply
 ```
 
+### Vinaigrette olio e aceto, fatta in casa — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_vinaigrette_olio_aceto`. FDC ID 171417 (SR Legacy, "Salad dressing, home recipe, vinegar and oil" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "vinaigrette"/"vinegar and oil"/171417, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 449kcal, proteine 0g (esplicito), grassi 50,1g, carboidrati 2,50g, fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), zinco 0mg (esplicito), magnesio 0mg (esplicito), rame 0mg (esplicito), selenio 1,60µg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K (fillochinone) 98,8µg. Molti valori a 0 esplicito, coerente con un condimento di soli olio+aceto senza altri ingredienti (nessun micronutriente minerale/vitaminico significativo oltre a selenio e vitamina K, entrambi tipici dell'olio vegetale).
+- **Analogia usata**: `food_olio_di_girasole_raw` (olio di girasole, già eseguito sul DB reale — olio vegetale generico, componente dominante di questo condimento).
+- **Categoria dieta**: `plant_non_fruit` (olio+aceto — vegetariano sì, vegano sì).
+- **Matrice**: nuova `vinaigrette_olio_aceto` ("Vinaigrette olio e aceto, fatta in casa").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — olio+aceto, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=raw` (emulsione non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171417 --food-id=food_vinaigrette_olio_aceto \
+  --name-it="Vinaigrette olio e aceto, fatta in casa" \
+  --matrix-id=vinaigrette_olio_aceto --matrix-description-it="Vinaigrette olio e aceto, fatta in casa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171417 --food-id=food_vinaigrette_olio_aceto \
+  --name-it="Vinaigrette olio e aceto, fatta in casa" \
+  --matrix-id=vinaigrette_olio_aceto --matrix-description-it="Vinaigrette olio e aceto, fatta in casa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
