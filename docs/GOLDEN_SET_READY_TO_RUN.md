@@ -235,6 +235,33 @@ npm run add-food -- --fdc-id=172882 --food-id=food_zuppa_di_pomodoro \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Zuppa di pollo con pasta, in scatola (condensata) — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_zuppa_di_pollo_con_pasta`. FDC ID 171543 (SR Legacy, "Soup, chicken noodle, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; valori del prodotto condensato come venduto). Scartato a priori il record getfoodfacts.com FDC 2709148 trovato nella stessa ricerca, dataType **Survey/FNDDS**, stesso motivo di scarto della salsa olandese in questo stesso lotto. Verificato con `grep` dedicato su "zuppa di pollo"/"chicken noodle"/171543, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 48,0kcal, proteine 2,37g, grassi 1,55g, carboidrati 6,07g, fibra 0,90g, calcio 6,00mg, ferro 0,67mg, zinco 0,28mg, magnesio 8,00mg, rame 0,027mg, selenio 6,30µg, vitamina C 0mg (esplicito), folato totale 14,0µg, acido folico 10,0µg (esplicito e NON nullo — vedi nota sotto), vitamina B12 0,12µg, beta-carotene 243µg (reale) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 0µg (esplicito).
+- **Nota di trasparenza sull'acido folico**: 10,0µg/100g riportato esplicitamente e separato dal folato alimentare (14,0µg totale) — stessa firma di farina/pasta arricchita in stile USA già vista per la besciamella in questo stesso lotto (i noodle del prodotto sono fatti con farina di grano arricchita). Stesso ragionamento: la pasta è un ingrediente della zuppa (pollo+brodo+verdure+noodle), non la sua identità esclusiva — accettato con `is_fortified_folate=true` invece di scartare un record altrimenti completo al 17/17.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — ingrediente dominante della zuppa, usato per `is_heme_iron` e categoria dieta).
+- **Categoria dieta**: `meat_fish` (zuppa a base di pollo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_pollo_con_pasta` ("Zuppa di pollo con pasta, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pollo, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, verosimilmente da carota nella zuppa), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — zuppa composita pollo+noodle+verdure), `baseline_cooking_state=cooked`, `is_fortified_folate=true` (vedi nota di trasparenza sopra).
+
+```
+npm run add-food -- --fdc-id=171543 --food-id=food_zuppa_di_pollo_con_pasta \
+  --name-it="Zuppa di pollo con pasta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pollo_con_pasta --matrix-description-it="Zuppa di pollo con pasta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted \
+  --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171543 --food-id=food_zuppa_di_pollo_con_pasta \
+  --name-it="Zuppa di pollo con pasta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pollo_con_pasta --matrix-description-it="Zuppa di pollo con pasta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted \
+  --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
