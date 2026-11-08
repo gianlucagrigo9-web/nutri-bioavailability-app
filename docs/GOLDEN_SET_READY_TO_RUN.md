@@ -185,6 +185,30 @@ npm run add-food -- --fdc-id=174536 --food-id=food_brodo_di_pollo \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Brodo vegetale, in scatola (pronto all'uso) — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_brodo_vegetale`. FDC ID 171583 (SR Legacy, "Soup, vegetable broth, ready to serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "brodo vegetale"/"vegetable broth"/171583, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 5,00kcal, proteine 0,24g, grassi 0,070g, carboidrati 0,93g, fibra 0g (esplicito), calcio 3,00mg, ferro 0,060mg, zinco 0,030mg, magnesio 1,00mg, rame 0,0090mg, selenio 0µg (esplicito), vitamina C 0,40mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 111µg (reale) + alfa-carotene 64,0µg (reale, = "altro carotenoide provitaminico A"), beta-criptoxantina 0µg (esplicito), vitamina K 0,70µg.
+- **Analogia usata**: `food_carrots_raw` (carote, alimento originale del Golden Set — ingrediente tipico del brodo vegetale, coerente con i carotenoidi reali presenti nel record).
+- **Categoria dieta**: `plant_non_fruit` (brodo di sole verdure — vegetariano sì, vegano sì).
+- **Matrice**: nuova `brodo_vegetale` ("Brodo vegetale, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, brodo composito multi-verdura), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e alfa-carotene reali e non trascurabili, da verdure cotte/filtrate), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — mix di verdure, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=cooked` (brodo simmerizzato), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171583 --food-id=food_brodo_vegetale \
+  --name-it="Brodo vegetale, in scatola" \
+  --matrix-id=brodo_vegetale --matrix-description-it="Brodo vegetale, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171583 --food-id=food_brodo_vegetale \
+  --name-it="Brodo vegetale, in scatola" \
+  --matrix-id=brodo_vegetale --matrix-description-it="Brodo vegetale, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
