@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa francese (French dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_francese_light`. FDC ID 167693 (SR Legacy, "Salad dressing, french dressing, reduced calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a calorie ridotte, distinta dalla French dressing regolare già pronta (`food_salsa_francese`, novantunesimo lotto). Verificato con `grep` dedicato su 167693, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 227kcal, proteine 0,40g, grassi 13,0g, carboidrati 27,0g, fibra 0g, calcio 11,0mg, ferro 0,40mg, zinco 0,18mg, magnesio 9,00mg, rame 0,010mg, selenio 1,60µg, vitamina C 0mg, folato totale 2,00µg, acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 120µg + alfa-carotene 4,00µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 4,80µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro, già eseguito sul DB reale — stessa analogia già usata per la versione regolare nel novantunesimo lotto (ricetta a base di pomodoro/ketchup, zucchero, aceto, paprika)).
+- **Categoria dieta**: `plant_non_fruit` (olio+pomodoro/ketchup+zucchero+aceto a calorie ridotte, nessun uovo/latticino nella ricetta standard).
+- **Matrice**: nuova `salsa_francese_light` ("Salsa francese (French dressing), light, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167693 --food-id=food_salsa_francese_light \
+  --name-it="Salsa francese (French dressing), light, condimento per insalata" \
+  --matrix-id=salsa_francese_light --matrix-description-it="Salsa francese (French dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167693 --food-id=food_salsa_francese_light \
+  --name-it="Salsa francese (French dressing), light, condimento per insalata" \
+  --matrix-id=salsa_francese_light --matrix-description-it="Salsa francese (French dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_thousand_island_light`. FDC ID 171008 (SR Legacy, "Salad dressing, thousand island dressing, reduced fat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a basso contenuto di grassi, distinta dalla Thousand Island regolare già pronta (`food_salsa_thousand_island`, novantunesimo lotto). Verificato con `grep` dedicato su 171008, zero occorrenze reali.
