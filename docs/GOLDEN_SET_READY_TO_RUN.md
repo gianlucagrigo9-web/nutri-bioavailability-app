@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa francese (French dressing), senza sale, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_francese_senza_sale`. FDC ID 171020 (SR Legacy, "Salad dressing, french dressing, commercial, regular, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante senza sale della stessa ricetta regolare (non a basso contenuto di grassi, distinta dalla variante "reduced calorie" già pronta sopra e dalla "reduced fat" pronta più sotto in questo stesso lotto). Verificato con `grep` dedicato su 171020, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 459kcal, proteine 0,77g, grassi 44,8g, carboidrati 15,6g, fibra 0g, calcio 24,0mg, ferro 0,80mg, zinco 0,29mg, magnesio 5,00mg, rame 0mg (esplicito), selenio 0µg (esplicito), vitamina C 0mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 232µg + alfa-carotene 0µg + beta-criptoxantina 92,0µg, vitamina K (fillochinone) 121µg (la pagina riporta anche una seconda riga "vitamina K, diidrofillochinone" = 0µg, forma diversa, non sommata).
+- **Analogia usata**: `food_tomato_raw` (pomodoro, già eseguito sul DB reale — stessa analogia della versione regolare con sale).
+- **Categoria dieta**: `plant_non_fruit` (stessa ricetta della versione regolare (pomodoro/ketchup+olio+zucchero+aceto), solo senza sale aggiunto).
+- **Matrice**: nuova `salsa_francese_senza_sale` ("Salsa francese (French dressing), senza sale, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171020 --food-id=food_salsa_francese_senza_sale \
+  --name-it="Salsa francese (French dressing), senza sale, condimento per insalata" \
+  --matrix-id=salsa_francese_senza_sale --matrix-description-it="Salsa francese (French dressing), senza sale, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171020 --food-id=food_salsa_francese_senza_sale \
+  --name-it="Salsa francese (French dressing), senza sale, condimento per insalata" \
+  --matrix-id=salsa_francese_senza_sale --matrix-description-it="Salsa francese (French dressing), senza sale, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Caesar, light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_caesar_light`. FDC ID 169877 (SR Legacy, "Salad dressing, caesar, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, distinta dalla Salsa Caesar regolare già pronta (`food_salsa_caesar`, novantunesimo lotto). Verificato con `grep` dedicato su 169877, zero occorrenze reali.
