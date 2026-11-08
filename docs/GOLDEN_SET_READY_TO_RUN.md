@@ -65,6 +65,30 @@ npm run add-food -- --fdc-id=172473 --food-id=food_salsa_di_soia_basso_sodio \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Gravy di manzo, in scatola — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_gravy_di_manzo`. FDC ID 171564 (SR Legacy, "Gravy, beef, canned, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "gravy di manzo"/"beef gravy"/171564, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 53,0kcal, proteine 3,75g, grassi 2,36g, carboidrati 4,81g, fibra 0,40g, calcio 6,00mg, ferro 0,70mg, zinco 1,00mg, magnesio 2,00mg, rame 0,10mg, selenio 1,00µg, vitamina C 0µg (esplicito), folato totale 2,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,10µg, beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 0,10µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — ingrediente dominante del gravy, carne di manzo/stock).
+- **Categoria dieta**: `meat_fish` (gravy a base di manzo — non vegetariano, non vegano).
+- **Matrice**: nuova `gravy_di_manzo` ("Gravy di manzo, in scatola").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il manzo, ingrediente dominante), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale composito), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (sugo/fondo di cottura addensato), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171564 --food-id=food_gravy_di_manzo \
+  --name-it="Gravy di manzo, in scatola" \
+  --matrix-id=gravy_di_manzo --matrix-description-it="Gravy di manzo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171564 --food-id=food_gravy_di_manzo \
+  --name-it="Gravy di manzo, in scatola" \
+  --matrix-id=gravy_di_manzo --matrix-description-it="Gravy di manzo, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
