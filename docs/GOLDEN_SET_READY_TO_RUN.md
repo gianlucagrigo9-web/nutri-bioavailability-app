@@ -113,6 +113,30 @@ npm run add-food -- --fdc-id=171566 --food-id=food_gravy_di_pollo \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Gravy di tacchino, in scatola — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_gravy_di_tacchino`. FDC ID 171568 (SR Legacy, "Gravy, turkey, canned, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "gravy di tacchino"/"turkey gravy"/171568, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 51,0kcal, proteine 2,60g, grassi 2,10g, carboidrati 5,10g, fibra 0,40g, calcio 4,00mg, ferro 0,70mg, zinco 0,80mg, magnesio 2,00mg, rame 0,10mg, selenio 0,60µg, vitamina C 0µg (esplicito), folato totale 2,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,10µg, beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 0µg (esplicito).
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino, già eseguito sul DB reale — ingrediente dominante del gravy).
+- **Categoria dieta**: `meat_fish` (gravy a base di tacchino — non vegetariano, non vegano).
+- **Matrice**: nuova `gravy_di_tacchino` ("Gravy di tacchino, in scatola").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il tacchino, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171568 --food-id=food_gravy_di_tacchino \
+  --name-it="Gravy di tacchino, in scatola" \
+  --matrix-id=gravy_di_tacchino --matrix-description-it="Gravy di tacchino, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171568 --food-id=food_gravy_di_tacchino \
+  --name-it="Gravy di tacchino, in scatola" \
+  --matrix-id=gravy_di_tacchino --matrix-description-it="Gravy di tacchino, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
