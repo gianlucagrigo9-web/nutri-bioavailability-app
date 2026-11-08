@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa al formaggio blu (Roquefort), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_formaggio_blu_light`. FDC ID 169876 (SR Legacy, "Salad dressing, blue or roquefort cheese, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, distinta dalla salsa al formaggio blu/Roquefort regolare già pronta (`food_salsa_formaggio_blu`, novantunesimo lotto) e dal formaggio blu crudo già ⚠. Verificato con `grep` dedicato su 169876, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 99,0kcal, proteine 5,10g, grassi 7,20g, carboidrati 2,90g, fibra 0g, calcio 89,0mg, ferro 0,50mg, zinco 0,25mg, magnesio 7,00mg, rame 0,010mg, selenio 1,60µg, vitamina C 0,30mg, folato totale 3,00µg, acido folico 0µg (esplicito), vitamina B12 0,23µg, beta-carotene 2,00µg + alfa-carotene 0µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 5,40µg.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa analogia già usata per la versione regolare nel novantunesimo lotto).
+- **Categoria dieta**: `egg_dairy` (formaggio blu fermentato + latticello/maionese a basso contenuto di grassi, nessun pesce/carne nella ricetta standard).
+- **Matrice**: nuova `salsa_formaggio_blu_light` ("Salsa al formaggio blu (Roquefort), light, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169876 --food-id=food_salsa_formaggio_blu_light \
+  --name-it="Salsa al formaggio blu (Roquefort), light, condimento per insalata" \
+  --matrix-id=salsa_formaggio_blu_light --matrix-description-it="Salsa al formaggio blu (Roquefort), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169876 --food-id=food_salsa_formaggio_blu_light \
+  --name-it="Salsa al formaggio blu (Roquefort), light, condimento per insalata" \
+  --matrix-id=salsa_formaggio_blu_light --matrix-description-it="Salsa al formaggio blu (Roquefort), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsa all'anatra (duck sauce), pronta all'uso — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_anatra`. FDC ID 171823 (SR Legacy, "Sauce, duck, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza sul nome**: nonostante il nome "duck sauce", è un condimento agrodolce cinese-americano a base di prugne/albicocche+zucchero+aceto (categoria USDA "Soups, Sauces, and Gravies"), SENZA carne d'anatra — confermato dal profilo nutrizionale stesso (grassi 0,13g/100g, proteine 0,36g/100g, 60,7g di carboidrati di cui 30,5g zuccheri totali, 0mg colesterolo: incompatibile con un prodotto a base di carne). Verificato con `grep` dedicato su "duck sauce"/"salsa anatra"/171823, zero occorrenze reali.
