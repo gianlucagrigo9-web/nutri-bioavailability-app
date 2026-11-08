@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Besciamella (salsa bianca densa) — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_besciamella`. FDC ID 174526 (SR Legacy, "Sauce, homemade, white, thick" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del novantunesimo lotto, continuazione del filone "salse e condimenti commerciali USDA generici" aperto nel lotto 90. Verificato con `grep` dedicato su "besciamella"/"béchamel"/"white sauce"/174526, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 186kcal, proteine 3,99g, grassi 13,8g, carboidrati 11,6g, fibra 0,30g, calcio 111mg, ferro 0,50mg, zinco 0,40mg, magnesio 14,0mg, rame 0,021mg, selenio 5,20µg, vitamina C 0,70mg, folato totale 11,0µg, acido folico 5,00µg (esplicito e NON nullo — vedi nota sotto), vitamina B12 0,26µg, beta-carotene 27,0µg (reale), alfa-carotene 0µg + beta-criptoxantina 0µg (= "altro carotenoide provitaminico A", entrambi espliciti), vitamina K 1,20µg.
+- **Nota di trasparenza sull'acido folico**: 5,00µg/100g riportato esplicitamente e SEPARATO dal folato alimentare (11,0µg totale) — firma di farina arricchita in stile USA, lo stesso tipo di segnale già usato per scartare "pane comune"/"pane integrale"/"pasta di semola comune" in questa coda. Qui NON è motivo di scarto: la farina è un ingrediente minoritario di una salsa composita (burro+farina+latte), non l'identità stessa dell'alimento come lo è per il pane — si usa quindi l'attributo dedicato `is_fortified_folate=true` per documentare il fatto senza perdere un alimento altrimenti completo al 17/17, invece di scartarlo o di ignorare il segnale in silenzio (Regola 6).
+- **Analogia usata**: `food_latte_scremato_raw` (latte scremato, già eseguito sul DB reale — il latte è il componente liquido dominante della besciamella, usata per `is_heme_iron=false` e per la categoria dieta).
+- **Categoria dieta**: `egg_dairy` (burro+farina+latte — vegetariano sì, vegano no).
+- **Matrice**: nuova `besciamella` ("Besciamella (salsa bianca densa)").
+- **Attributi**: `is_heme_iron=false` (esplicito, nessun ingrediente animale non caseario), `matrix_category_calcium` omesso (NULL — non applicabile, salsa composita non classificabile per ossalati), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma verosimilmente dal burro, non riconducibile a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto farina di frumento+latticini, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=cooked` (roux di burro e farina cotto con latte), `is_fortified_folate=true` (vedi nota di trasparenza sopra).
+
+```
+npm run add-food -- --fdc-id=174526 --food-id=food_besciamella \
+  --name-it="Besciamella (salsa bianca densa)" \
+  --matrix-id=besciamella --matrix-description-it="Besciamella (salsa bianca densa)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_latte_scremato_raw \
+  --is-fortified-folate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=174526 --food-id=food_besciamella \
+  --name-it="Besciamella (salsa bianca densa)" \
+  --matrix-id=besciamella --matrix-description-it="Besciamella (salsa bianca densa)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_latte_scremato_raw \
+  --is-fortified-folate --diet-category=egg_dairy --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
