@@ -262,6 +262,30 @@ npm run add-food -- --fdc-id=171543 --food-id=food_zuppa_di_pollo_con_pasta \
   --is-fortified-folate --diet-category=meat_fish --apply
 ```
 
+### Zuppa vegetariana di verdure, in scatola (condensata) — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_zuppa_vegetariana_di_verdure`. FDC ID 171161 (SR Legacy, "Soup, vegetarian vegetable, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Preferita esplicitamente alle varianti "chunky vegetable"/"chicken vegetable" trovate nella stessa ricerca per l'etichetta "vegetarian" nel nome del record, che evita l'ambiguità di un possibile brodo di carne nella ricetta (stesso tipo di cautela già usato per la salsa barbecue nel lotto 90). Verificato con `grep` dedicato su "zuppa vegetariana"/"vegetable soup"/171161, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 59,0kcal, proteine 1,72g, grassi 1,58g, carboidrati 9,78g, fibra 0,50g, calcio 17,0mg, ferro 0,88mg, zinco 0,38mg, magnesio 6,00mg, rame 0,10mg, selenio 3,50µg, vitamina C 1,20mg, folato totale 9,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 1.500µg (reale, alto) + alfa-carotene 410µg (reale, = "altro carotenoide provitaminico A"), beta-criptoxantina 0µg (esplicito), vitamina K 4,20µg.
+- **Analogia usata**: `food_carrots_raw` (carote, alimento originale del Golden Set — ingrediente tipico, coerente con i carotenoidi molto alti nel record).
+- **Categoria dieta**: `plant_non_fruit` (zuppa vegetariana dichiarata — vegetariano sì, vegano sì).
+- **Matrice**: nuova `zuppa_vegetariana_di_verdure` ("Zuppa vegetariana di verdure, in scatola (condensata)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, zuppa composita multi-verdura), `carotenoid_matrix_state=cooked_or_disrupted` (beta/alfa-carotene molto alti, verdure cotte), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — mix di verdure, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171161 --food-id=food_zuppa_vegetariana_di_verdure \
+  --name-it="Zuppa vegetariana di verdure, in scatola (condensata)" \
+  --matrix-id=zuppa_vegetariana_di_verdure --matrix-description-it="Zuppa vegetariana di verdure, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171161 --food-id=food_zuppa_vegetariana_di_verdure \
+  --name-it="Zuppa vegetariana di verdure, in scatola (condensata)" \
+  --matrix-id=zuppa_vegetariana_di_verdure --matrix-description-it="Zuppa vegetariana di verdure, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
