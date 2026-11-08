@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa all'anatra (duck sauce), pronta all'uso — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_anatra`. FDC ID 171823 (SR Legacy, "Sauce, duck, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza sul nome**: nonostante il nome "duck sauce", è un condimento agrodolce cinese-americano a base di prugne/albicocche+zucchero+aceto (categoria USDA "Soups, Sauces, and Gravies"), SENZA carne d'anatra — confermato dal profilo nutrizionale stesso (grassi 0,13g/100g, proteine 0,36g/100g, 60,7g di carboidrati di cui 30,5g zuccheri totali, 0mg colesterolo: incompatibile con un prodotto a base di carne). Verificato con `grep` dedicato su "duck sauce"/"salsa anatra"/171823, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 245kcal, proteine 0,36g, grassi 0,13g, carboidrati 60,7g, fibra 0,60g, calcio 11,0mg, ferro 0,39mg, zinco 0,21mg, magnesio 5,00mg, rame 0,037mg, selenio 1,30µg, vitamina C 0,90mg, folato totale 2,00µg, acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 100µg + alfa-carotene 0µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 0,30µg.
+- **Analogia usata**: `food_melassa` (melassa, già eseguita sul DB reale — stessa analogia già usata per la salsa agrodolce (sweet and sour) nel novantunesimo lotto, condimento dolce a base di frutta/zucchero, nessun ingrediente animale).
+- **Categoria dieta**: `plant_non_fruit` (prugne/albicocche + zucchero + aceto, nessun ingrediente animale nonostante il nome (vedi nota sopra)).
+- **Matrice**: nuova `salsa_anatra` ("Salsa all'anatra (duck sauce), pronta all'uso").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171823 --food-id=food_salsa_anatra \
+  --name-it="Salsa all'anatra (duck sauce), pronta all'uso" \
+  --matrix-id=salsa_anatra --matrix-description-it="Salsa all'anatra (duck sauce), pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_melassa \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171823 --food-id=food_salsa_anatra \
+  --name-it="Salsa all'anatra (duck sauce), pronta all'uso" \
+  --matrix-id=salsa_anatra --matrix-description-it="Salsa all'anatra (duck sauce), pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_melassa \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Green Goddess, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_green_goddess`. FDC ID 169057 (SR Legacy, "Salad dressing, green goddess, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Condimento mai tentato in questa pipeline. Verificato con `grep` dedicato su "green goddess"/169057, zero occorrenze reali.
