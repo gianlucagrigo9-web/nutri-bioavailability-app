@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_thousand_island_light`. FDC ID 171008 (SR Legacy, "Salad dressing, thousand island dressing, reduced fat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a basso contenuto di grassi, distinta dalla Thousand Island regolare già pronta (`food_salsa_thousand_island`, novantunesimo lotto). Verificato con `grep` dedicato su 171008, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 195kcal, proteine 0,83g, grassi 11,3g, carboidrati 24,1g, fibra 1,20g, calcio 27,0mg, ferro 0,90mg, zinco 0,19mg, magnesio 7,00mg, rame 0mg (esplicito), selenio 0µg (esplicito), vitamina C 1,50mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 154µg + alfa-carotene 0µg + beta-criptoxantina 65,0µg, vitamina K (fillochinone) 27,6µg.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo sodo, Golden Set originale, già eseguito — stessa convenzione già usata per la versione regolare nel novantunesimo lotto (base di maionese a basso contenuto di grassi + ketchup/sottaceti)).
+- **Categoria dieta**: `egg_dairy` (stessa ricetta base della versione regolare (maionese+ketchup/sottaceti), a minor contenuto di grassi).
+- **Matrice**: nuova `salsa_thousand_island_light` ("Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171008 --food-id=food_salsa_thousand_island_light \
+  --name-it="Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata" \
+  --matrix-id=salsa_thousand_island_light --matrix-description-it="Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171008 --food-id=food_salsa_thousand_island_light \
+  --name-it="Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata" \
+  --matrix-id=salsa_thousand_island_light --matrix-description-it="Salsa Thousand Island (Mille Isole), a basso contenuto di grassi, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsa Italiana (Italian dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_italiana_light`. FDC ID 168096 (SR Legacy, "Salad dressing, italian dressing, reduced calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a calorie ridotte, distinta dalla Salsa Italiana regolare già pronta (`food_salsa_italiana`, novantunesimo lotto). Verificato con `grep` dedicato su 168096, zero occorrenze reali.
