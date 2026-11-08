@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_francese_grasso_ridotto`. FDC ID 171404 (SR Legacy, "Salad dressing, french dressing, reduced fat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante "reduced fat" (diversa dalla "reduced calorie" già pronta sopra: profilo macro distinto, più carboidrati/fibra e meno grassi) e dalla "without salt" pronta sopra. Verificato con `grep` dedicato su 171404, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 222kcal, proteine 0,58g, grassi 11,5g, carboidrati 31,2g, fibra 1,50g, calcio 11,0mg, ferro 0,73mg, zinco 0,20mg, magnesio 8,00mg, rame 0,16mg, selenio 1,60µg, vitamina C 4,80mg, folato totale 2,00µg, acido folico 0µg (esplicito), vitamina B12 0µg, beta-carotene 289µg + alfa-carotene 0µg + beta-criptoxantina 70,0µg, vitamina K (fillochinone) 17,8µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro, già eseguito sul DB reale — stessa analogia delle altre varianti French dressing di questo lotto).
+- **Categoria dieta**: `plant_non_fruit` (stessa ricetta base (pomodoro/ketchup+olio+zucchero+aceto), a minor contenuto di grassi).
+- **Matrice**: nuova `salsa_francese_grasso_ridotto` ("Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171404 --food-id=food_salsa_francese_grasso_ridotto \
+  --name-it="Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata" \
+  --matrix-id=salsa_francese_grasso_ridotto --matrix-description-it="Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171404 --food-id=food_salsa_francese_grasso_ridotto \
+  --name-it="Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata" \
+  --matrix-id=salsa_francese_grasso_ridotto --matrix-description-it="Salsa francese (French dressing), a basso contenuto di grassi, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Italiana (Italian dressing), senza sale, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_italiana_senza_sale`. FDC ID 171022 (SR Legacy, "Salad dressing, italian dressing, commercial, regular, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante senza sale della ricetta regolare, distinta dalla "reduced calorie" già pronta sopra e dalla "reduced fat, without salt" pronta più sotto in questo stesso lotto. Verificato con `grep` dedicato su 171022, zero occorrenze reali.
