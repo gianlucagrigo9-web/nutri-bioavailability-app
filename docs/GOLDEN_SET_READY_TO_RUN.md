@@ -359,6 +359,33 @@ npm run add-food -- --fdc-id=173562 --food-id=food_salsa_formaggio_blu \
   --diet-category=egg_dairy --apply
 ```
 
+### Salsa francese (French dressing), condimento per insalata — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_francese`. FDC ID 171414 (SR Legacy, "Salad dressing, french dressing, commercial, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "salsa francese"/"french dressing"/171414, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 419kcal, proteine 0,87g, grassi 39,1g, carboidrati 18,8g, fibra 2,40g, calcio 27,0mg, ferro 0,32mg, zinco 0,12mg, magnesio 7,00mg, rame 0,020mg, selenio 0µg (esplicito), vitamina C 0mg (esplicito), folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,14µg, beta-carotene 232µg (reale, alto) + alfa-carotene 0µg (esplicito), beta-criptoxantina 92,0µg (reale, = "altro carotenoide provitaminico A"), vitamina K (fillochinone) 121µg.
+- **Nota su categoria dieta**: a differenza di Caesar/ranch/Thousand Island (tutti a base di maionese/uovo o formaggio), la ricetta classica della French dressing è olio+pomodoro/ketchup+zucchero+aceto+paprika, senza uovo né latticini — coerente con i carotenoidi molto alti nel record (da pomodoro/paprika). Nessun segnale nel record di un ingrediente animale.
+- **Analogia usata**: `food_tomato_raw` (pomodoro crudo, già eseguito sul DB reale — pomodoro/ketchup è l'ingrediente caratterizzante insieme all'olio).
+- **Categoria dieta**: `plant_non_fruit` (vedi nota sopra — vegetariano sì, vegano sì).
+- **Matrice**: nuova `salsa_francese` ("Salsa francese (French dressing), condimento per insalata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e beta-criptoxantina reali e alti, da pomodoro/paprika), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (pomodoro/paprika dominanti nella ricetta, stessa convenzione del ketchup), `baseline_cooking_state=raw` (emulsione non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171414 --food-id=food_salsa_francese \
+  --name-it="Salsa francese (French dressing), condimento per insalata" \
+  --matrix-id=salsa_francese --matrix-description-it="Salsa francese (French dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171414 --food-id=food_salsa_francese \
+  --name-it="Salsa francese (French dressing), condimento per insalata" \
+  --matrix-id=salsa_francese --matrix-description-it="Salsa francese (French dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
