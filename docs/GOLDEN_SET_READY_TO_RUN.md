@@ -209,6 +209,32 @@ npm run add-food -- --fdc-id=171583 --food-id=food_brodo_vegetale \
   --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
 ```
 
+### Zuppa di pomodoro, in scatola (condensata) — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_zuppa_di_pomodoro`. FDC ID 172882 (SR Legacy, "Soup, tomato, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; i valori sono quelli del prodotto condensato come venduto, non diluito). Verificato con `grep` dedicato su "zuppa di pomodoro"/"tomato soup"/172882, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 66,0kcal, proteine 1,46g, grassi 0,44g, carboidrati 15,2g, fibra 1,10g, calcio 13,0mg, ferro 0,59mg, zinco 0,18mg, magnesio 14,0mg, rame 0,050mg, selenio 3,00µg, vitamina C 12,9mg (reale), folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 235µg (reale) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 3,20µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro crudo, già eseguito sul DB reale — ingrediente dominante della zuppa).
+- **Categoria dieta**: `plant_non_fruit` (zuppa di pomodoro — vegetariano sì, vegano sì; nessun segnale di brodo di carne nel record).
+- **Matrice**: nuova `zuppa_di_pomodoro` ("Zuppa di pomodoro, in scatola (condensata)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, zuppa composita), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, pomodoro cotto/concentrato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale del pomodoro, ingrediente dominante — stessa convenzione già usata per il ketchup/salsa per pizza), `baseline_cooking_state=cooked` (pomodoro cotto/concentrato in scatola), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172882 --food-id=food_zuppa_di_pomodoro \
+  --name-it="Zuppa di pomodoro, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pomodoro --matrix-description-it="Zuppa di pomodoro, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172882 --food-id=food_zuppa_di_pomodoro \
+  --name-it="Zuppa di pomodoro, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pomodoro --matrix-description-it="Zuppa di pomodoro, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
