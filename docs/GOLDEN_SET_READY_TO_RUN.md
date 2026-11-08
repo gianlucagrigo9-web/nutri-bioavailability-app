@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa russa (Russian dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_russa_light`. FDC ID 171007 (SR Legacy, "Salad dressing, russian dressing, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light/a basso contenuto calorico dello stesso prodotto, record FDC distinto e proprio (non derivato dal precedente). Verificato con `grep` dedicato su "russa light"/171007, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 141kcal, proteine 0,50g, grassi 4,00g, carboidrati 27,6g, fibra 0,30g, calcio 19,0mg, ferro 0,60mg, zinco 0,10mg, magnesio 0µg (esplicito), rame 0,010mg, selenio 1,60µg, vitamina C 6,00mg, folato totale 3,00µg, acido folico 0µg (esplicito), vitamina B12 0,12µg, beta-carotene 20,0µg + alfa-carotene 1,00µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 6,70µg.
+- **Analogia usata**: `food_egg_hard_boiled` (stessa analogia della voce regolare sopra (maionese/uovo come base)).
+- **Categoria dieta**: `egg_dairy` (stessa ricetta base della versione regolare, solo a minor contenuto di grassi/calorie).
+- **Matrice**: nuova `salsa_russa_light` ("Salsa russa (Russian dressing), light, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171007 --food-id=food_salsa_russa_light \
+  --name-it="Salsa russa (Russian dressing), light, condimento per insalata" \
+  --matrix-id=salsa_russa_light --matrix-description-it="Salsa russa (Russian dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171007 --food-id=food_salsa_russa_light \
+  --name-it="Salsa russa (Russian dressing), light, condimento per insalata" \
+  --matrix-id=salsa_russa_light --matrix-description-it="Salsa russa (Russian dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsa russa (Russian dressing), condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_russa`. FDC ID 171005 (SR Legacy, "Salad dressing, russian dressing" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo di un gruppo di dressing/salse USDA residui mai tentati in questa pipeline, continuazione diretta della raccomandazione di chiusura del novantunesimo lotto ("altri dressing USDA minori: Russian dressing, dressing mayonnaise-type, salsa ranch light"). Verificato con `grep` dedicato su "russa"/"russian"/171005, zero occorrenze reali su tutti e tre i file prima della ricerca web.
