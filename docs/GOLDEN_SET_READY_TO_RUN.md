@@ -434,6 +434,30 @@ npm run add-food -- --fdc-id=171417 --food-id=food_vinaigrette_olio_aceto \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Salsa Italiana (Italian dressing), condimento per insalata — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_italiana`. FDC ID 171019 (SR Legacy, "Salad dressing, italian dressing, commercial, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Ultimo dei sei condimenti per insalata ricercati in questo lotto. Verificato con `grep` dedicato su "salsa italiana"/"italian dressing"/171019, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 240kcal, proteine 0,41g, grassi 21,1g, carboidrati 12,1g, fibra 0g (esplicito), calcio 13,0mg, ferro 0,26mg, zinco 0,070mg, magnesio 5,00mg, rame 0,019mg, selenio 2,00µg, vitamina C 0,40mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 21,0µg (reale) + alfa-carotene 0µg (esplicito), beta-criptoxantina 2,00µg (reale, = "altro carotenoide provitaminico A"), vitamina K (fillochinone) 56,0µg.
+- **Analogia usata**: `food_origano_secco_raw` (origano secco, già eseguito sul DB reale — la ricetta commerciale standard è olio+aceto+erbe/spezie italiane, senza uovo né latticini).
+- **Categoria dieta**: `plant_non_fruit` (olio+aceto+erbe — vegetariano sì, vegano sì; nessun segnale di ingrediente animale nel record).
+- **Matrice**: nuova `salsa_italiana` ("Salsa Italiana (Italian dressing), condimento per insalata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e beta-criptoxantina reali, da erbe/spezie), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — olio+aceto+erbe miste, nessuna famiglia botanica singola applicabile), `baseline_cooking_state=raw` (emulsione non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171019 --food-id=food_salsa_italiana \
+  --name-it="Salsa Italiana (Italian dressing), condimento per insalata" \
+  --matrix-id=salsa_italiana --matrix-description-it="Salsa Italiana (Italian dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171019 --food-id=food_salsa_italiana \
+  --name-it="Salsa Italiana (Italian dressing), condimento per insalata" \
+  --matrix-id=salsa_italiana --matrix-description-it="Salsa Italiana (Italian dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
