@@ -386,6 +386,30 @@ npm run add-food -- --fdc-id=171414 --food-id=food_salsa_francese \
   --diet-category=plant_non_fruit --apply
 ```
 
+### Salsa Thousand Island (Mille Isole), condimento per insalata — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_mille_isole`. FDC ID 171402 (SR Legacy, "Salad dressing, thousand island, commercial, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "mille isole"/"thousand island"/171402, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 379kcal, proteine 1,09g, grassi 35,1g, carboidrati 14,6g, fibra 0,80g, calcio 17,0mg, ferro 1,18mg, zinco 0,26mg, magnesio 8,00mg, rame 0mg (esplicito), selenio 1,50µg, vitamina C 0mg (esplicito), folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 92,0µg (reale) + alfa-carotene 2,00µg + beta-criptoxantina 52,0µg (= "altro carotenoide provitaminico A", entrambi reali), vitamina K (fillochinone) 69,1µg.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo sodo, alimento originale del Golden Set — ricetta a base di maionese (uovo) + ketchup/sottaceti, stessa convenzione già usata per salsa tartara/ranch nel lotto 90).
+- **Categoria dieta**: `egg_dairy` (base di maionese — nessuna carne/pesce nella ricetta standard).
+- **Matrice**: nuova `salsa_mille_isole` ("Salsa Thousand Island (Mille Isole), condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (per analogia con l'uovo, non con carne/pesce — vedi nota sopra), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e beta-criptoxantina reali, da ketchup/paprika), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto uovo+pomodoro+sottaceti), `baseline_cooking_state=raw` (emulsione di maionese non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171402 --food-id=food_salsa_mille_isole \
+  --name-it="Salsa Thousand Island (Mille Isole), condimento per insalata" \
+  --matrix-id=salsa_mille_isole --matrix-description-it="Salsa Thousand Island (Mille Isole), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171402 --food-id=food_salsa_mille_isole \
+  --name-it="Salsa Thousand Island (Mille Isole), condimento per insalata" \
+  --matrix-id=salsa_mille_isole --matrix-description-it="Salsa Thousand Island (Mille Isole), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
