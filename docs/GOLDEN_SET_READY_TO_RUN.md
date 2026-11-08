@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Condimento tipo maionese (mayonnaise-type dressing), light — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_condimento_tipo_maionese_light`. FDC ID 168112 (SR Legacy, "Salad dressing, mayonnaise and mayonnaise-type, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, record FDC distinto e proprio dal precedente (regolare con sale) e dalla maionese vera. Verificato con `grep` dedicato su 168112, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 263kcal, proteine 0,90g, grassi 19,0g, carboidrati 23,9g, fibra 0g, calcio 14,0mg, ferro 0,26mg, zinco 0,18mg, magnesio 2,00mg, rame 0,0010mg, selenio 1,60µg, vitamina C 0mg, folato totale 6,00µg, acido folico 0µg (esplicito), vitamina B12 0,21µg, beta-carotene 94,0µg + alfa-carotene 1,00µg + beta-criptoxantina 27,0µg, vitamina K (fillochinone) 24,7µg.
+- **Analogia usata**: `food_egg_hard_boiled` (stessa analogia della voce regolare sopra).
+- **Categoria dieta**: `egg_dairy` (stessa ricetta base, a minor contenuto calorico).
+- **Matrice**: nuova `condimento_tipo_maionese_light` ("Condimento tipo maionese (mayonnaise-type dressing), light").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168112 --food-id=food_condimento_tipo_maionese_light \
+  --name-it="Condimento tipo maionese (mayonnaise-type dressing), light" \
+  --matrix-id=condimento_tipo_maionese_light --matrix-description-it="Condimento tipo maionese (mayonnaise-type dressing), light" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=168112 --food-id=food_condimento_tipo_maionese_light \
+  --name-it="Condimento tipo maionese (mayonnaise-type dressing), light" \
+  --matrix-id=condimento_tipo_maionese_light --matrix-description-it="Condimento tipo maionese (mayonnaise-type dressing), light" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Condimento tipo maionese (mayonnaise-type dressing), con sale — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_condimento_tipo_maionese`. FDC ID 171403 (SR Legacy, "Salad dressing, mayonnaise type, regular, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto USDA distinto dalla maionese vera (`food_maionese`, ancora solo "pronta" non eseguita, quindi non usabile come analogia per Regola — l'analogia deve riferirsi a un alimento già nel DB reale): il "salad dressing, mayonnaise type" è una categoria USDA a sé, più povera di grassi (21,6g/100g) e più ricca di amido/carboidrati (14,8g/100g, con 4,40g di amido esplicito) della maionese vera (tipicamente 75g+ di grassi/100g) — un prodotto commerciale diverso, non lo stesso alimento sotto un altro nome. Verificato con `grep` dedicato su "maionese tipo"/"mayonnaise type"/171403, zero occorrenze reali (l'unica voce esistente è `food_maionese`, prodotto diverso, non ancora eseguito).
