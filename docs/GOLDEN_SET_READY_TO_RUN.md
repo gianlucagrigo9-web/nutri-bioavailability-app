@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Salsa Caesar, light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_caesar_light`. FDC ID 169877 (SR Legacy, "Salad dressing, caesar, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, distinta dalla Salsa Caesar regolare già pronta (`food_salsa_caesar`, novantunesimo lotto). Verificato con `grep` dedicato su 169877, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 110kcal, proteine 0,30g, grassi 4,40g, carboidrati 18,6g, fibra 0,10g, calcio 24,0mg, ferro 0,18mg, zinco 0,11mg, magnesio 2,00mg, rame 0,010mg, selenio 1,60µg, vitamina C 0mg, folato totale 2,00µg, acido folico 0µg (esplicito), vitamina B12 0,030µg, beta-carotene 1,00µg + alfa-carotene 0µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 1,00µg.
+- **Nota attributi**: is_heme_iron=false, stessa distinzione già fatta per la versione regolare (acciuga aromatizzante minore, non pietanza).
+- **Analogia usata**: `food_acciughe_raw` (acciughe crude, già eseguite sul DB reale — stesso ragionamento prudente già usato per la versione regolare nel novantunesimo lotto (acciuga come aromatizzante minore nella ricetta classica)).
+- **Categoria dieta**: `meat_fish` (stessa ricetta classica della versione regolare (acciuga come aromatizzante, vedi nota)).
+- **Matrice**: nuova `salsa_caesar_light` ("Salsa Caesar, light, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169877 --food-id=food_salsa_caesar_light \
+  --name-it="Salsa Caesar, light, condimento per insalata" \
+  --matrix-id=salsa_caesar_light --matrix-description-it="Salsa Caesar, light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169877 --food-id=food_salsa_caesar_light \
+  --name-it="Salsa Caesar, light, condimento per insalata" \
+  --matrix-id=salsa_caesar_light --matrix-description-it="Salsa Caesar, light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Salsa francese (French dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_francese_light`. FDC ID 167693 (SR Legacy, "Salad dressing, french dressing, reduced calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a calorie ridotte, distinta dalla French dressing regolare già pronta (`food_salsa_francese`, novantunesimo lotto). Verificato con `grep` dedicato su 167693, zero occorrenze reali.
