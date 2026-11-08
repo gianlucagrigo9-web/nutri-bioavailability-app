@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Condimento tipo maionese (mayonnaise-type dressing), con sale — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_condimento_tipo_maionese`. FDC ID 171403 (SR Legacy, "Salad dressing, mayonnaise type, regular, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prodotto USDA distinto dalla maionese vera (`food_maionese`, ancora solo "pronta" non eseguita, quindi non usabile come analogia per Regola — l'analogia deve riferirsi a un alimento già nel DB reale): il "salad dressing, mayonnaise type" è una categoria USDA a sé, più povera di grassi (21,6g/100g) e più ricca di amido/carboidrati (14,8g/100g, con 4,40g di amido esplicito) della maionese vera (tipicamente 75g+ di grassi/100g) — un prodotto commerciale diverso, non lo stesso alimento sotto un altro nome. Verificato con `grep` dedicato su "maionese tipo"/"mayonnaise type"/171403, zero occorrenze reali (l'unica voce esistente è `food_maionese`, prodotto diverso, non ancora eseguito).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 250kcal, proteine 0,65g, grassi 21,6g, carboidrati 14,8g, fibra 0g, calcio 5,00mg, ferro 0,12mg, zinco 0,070mg, magnesio 2,00mg, rame 0,015mg, selenio 0,40µg, vitamina C 0mg, folato totale 6,00µg, acido folico 0µg (esplicito), vitamina B12 0,040µg, beta-carotene 6,00µg + alfa-carotene 0µg + beta-criptoxantina 4,00µg, vitamina K (fillochinone) 42,2µg.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo sodo, Golden Set originale, già eseguito — il "mayonnaise type dressing" resta un'emulsione a base d'uovo (sia pure diluita con amido), stessa convenzione delle altre salse a base maionese di questa pipeline).
+- **Categoria dieta**: `egg_dairy` (emulsione a base d'uovo e amido, nessun ingrediente animale non-uovo).
+- **Matrice**: nuova `condimento_tipo_maionese` ("Condimento tipo maionese (mayonnaise-type dressing), con sale").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171403 --food-id=food_condimento_tipo_maionese \
+  --name-it="Condimento tipo maionese (mayonnaise-type dressing), con sale" \
+  --matrix-id=condimento_tipo_maionese --matrix-description-it="Condimento tipo maionese (mayonnaise-type dressing), con sale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171403 --food-id=food_condimento_tipo_maionese \
+  --name-it="Condimento tipo maionese (mayonnaise-type dressing), con sale" \
+  --matrix-id=condimento_tipo_maionese --matrix-description-it="Condimento tipo maionese (mayonnaise-type dressing), con sale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsa russa (Russian dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_russa_light`. FDC ID 171007 (SR Legacy, "Salad dressing, russian dressing, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light/a basso contenuto calorico dello stesso prodotto, record FDC distinto e proprio (non derivato dal precedente). Verificato con `grep` dedicato su "russa light"/171007, zero occorrenze reali.
