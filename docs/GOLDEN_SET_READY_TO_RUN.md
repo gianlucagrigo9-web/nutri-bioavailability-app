@@ -41,6 +41,30 @@ npm run add-food -- --fdc-id=174526 --food-id=food_besciamella \
   --is-fortified-folate --diet-category=egg_dairy --apply
 ```
 
+### Salsa di soia a basso sodio — preparato 2026-11-08 dal task (novantunesimo lotto)
+
+- **food_id**: `food_salsa_di_soia_basso_sodio`. FDC ID 172473 (SR Legacy, "Soy sauce made from soy and wheat (shoyu), low sodium" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinta dalla salsa di soia normale già in coda (trentunesimo lotto, non ancora eseguita sul DB reale — stesso ingrediente base ma profilo sodio/nutrienti diverso, non un doppione). Verificato con `grep` dedicato su "basso sodio"/"low sodium"/172473, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 57,0kcal, proteine 9,05g, grassi 0,30g, carboidrati 5,59g, fibra 0,70g, calcio 30,0mg, ferro 1,35mg, zinco 0,79mg, magnesio 69,0mg, rame 0,049mg, selenio 0,50µg, vitamina C 0µg (esplicito), folato totale 44,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 0µg (esplicito), alfa-carotene 0µg + beta-criptoxantina 0µg (= "altro carotenoide provitaminico A", entrambi espliciti), vitamina K 0µg (esplicito).
+- **Analogia usata**: `food_soia_secca_cotta` (soia secca cotta, già eseguita sul DB reale — stessa analogia già usata per la salsa teriyaki nel lotto 90, ingrediente base soia).
+- **Categoria dieta**: `plant_non_fruit` (soia+grano fermentati — vegetariano sì, vegano sì).
+- **Matrice**: nuova `salsa_di_soia_basso_sodio` ("Salsa di soia a basso sodio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento fermentato multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto soia+grano, nessuna famiglia botanica singola applicabile, stessa convenzione della salsa di soia normale), `baseline_cooking_state=fermented` (fermentazione tradizionale soia+grano, come la salsa di soia normale), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172473 --food-id=food_salsa_di_soia_basso_sodio \
+  --name-it="Salsa di soia a basso sodio" \
+  --matrix-id=salsa_di_soia_basso_sodio --matrix-description-it="Salsa di soia a basso sodio" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172473 --food-id=food_salsa_di_soia_basso_sodio \
+  --name-it="Salsa di soia a basso sodio" \
+  --matrix-id=salsa_di_soia_basso_sodio --matrix-description-it="Salsa di soia a basso sodio" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Worcestershire — preparato 2026-11-02 dal task (novantesimo lotto)
 
 - **food_id**: `food_salsa_worcestershire`. FDC ID 171610 (SR Legacy, "Sauce, worcestershire" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del nuovo filone "salse e condimenti commerciali USDA generici" (categoria SR Legacy "Soups, Sauces, and Gravies"), apertura motivata dalla raccomandazione esplicita di chiusura dell'ottantanovesimo lotto (abbandonare il filone "surgelato", saturo). Verificato con `grep` dedicato su "worcestershire"/171610, zero occorrenze su tutti e tre i file prima della ricerca web.
