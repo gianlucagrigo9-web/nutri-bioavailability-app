@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa Italiana (Italian dressing), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_italiana_light`. FDC ID 168096 (SR Legacy, "Salad dressing, italian dressing, reduced calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante a calorie ridotte, distinta dalla Salsa Italiana regolare già pronta (`food_salsa_italiana`, novantunesimo lotto). Verificato con `grep` dedicato su 168096, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 200kcal, proteine 0,30g, grassi 20,0g, carboidrati 6,70g, fibra 0,20g, calcio 6,00mg, ferro 0,13mg, zinco 0,040mg, magnesio 2,00mg, rame 0,0050mg, selenio 1,60µg, vitamina C 0,40mg, folato totale 3,00µg, acido folico 0µg (esplicito), vitamina B12 0,070µg, beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 12,5µg.
+- **Analogia usata**: `food_origano_secco_raw` (origano secco, già eseguito sul DB reale — stessa analogia già usata per la versione regolare nel novantunesimo lotto).
+- **Categoria dieta**: `plant_non_fruit` (olio+aceto+erbe/spezie a minor contenuto di grassi, nessun uovo/latticino nella ricetta standard).
+- **Matrice**: nuova `salsa_italiana_light` ("Salsa Italiana (Italian dressing), light, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168096 --food-id=food_salsa_italiana_light \
+  --name-it="Salsa Italiana (Italian dressing), light, condimento per insalata" \
+  --matrix-id=salsa_italiana_light --matrix-description-it="Salsa Italiana (Italian dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168096 --food-id=food_salsa_italiana_light \
+  --name-it="Salsa Italiana (Italian dressing), light, condimento per insalata" \
+  --matrix-id=salsa_italiana_light --matrix-description-it="Salsa Italiana (Italian dressing), light, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa al formaggio blu (Roquefort), light, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_formaggio_blu_light`. FDC ID 169876 (SR Legacy, "Salad dressing, blue or roquefort cheese, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, distinta dalla salsa al formaggio blu/Roquefort regolare già pronta (`food_salsa_formaggio_blu`, novantunesimo lotto) e dal formaggio blu crudo già ⚠. Verificato con `grep` dedicato su 169876, zero occorrenze reali.
