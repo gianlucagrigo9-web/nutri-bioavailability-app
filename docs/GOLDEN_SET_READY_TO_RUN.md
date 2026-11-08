@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salsa russa (Russian dressing), condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_russa`. FDC ID 171005 (SR Legacy, "Salad dressing, russian dressing" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo di un gruppo di dressing/salse USDA residui mai tentati in questa pipeline, continuazione diretta della raccomandazione di chiusura del novantunesimo lotto ("altri dressing USDA minori: Russian dressing, dressing mayonnaise-type, salsa ranch light"). Verificato con `grep` dedicato su "russa"/"russian"/171005, zero occorrenze reali su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 355kcal, proteine 0,69g, grassi 26,2g, carboidrati 31,9g, fibra 0,70g, calcio 13,0mg, ferro 0,60mg, zinco 0,22mg, magnesio 10,0mg, rame 0,058mg, selenio 1,60µg, vitamina C 6,00mg, folato totale 5,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg, beta-carotene 320µg + alfa-carotene 2,00µg + beta-criptoxantina 49,0µg (= "altro carotenoide provitaminico A", tutti reali), vitamina K (fillochinone) 53,7µg.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo sodo, Golden Set originale, già eseguito sul DB reale — la ricetta standard della salsa russa (maionese+ketchup+rafano/senape) è a base di maionese, quindi di uovo, nessun latticino specifico; stessa convenzione già usata per tartara/ranch/Thousand Island in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (maionese (uovo) come base, nessuna carne/pesce nella ricetta standard).
+- **Matrice**: nuova `salsa_russa` ("Salsa russa (Russian dressing), condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171005 --food-id=food_salsa_russa \
+  --name-it="Salsa russa (Russian dressing), condimento per insalata" \
+  --matrix-id=salsa_russa --matrix-description-it="Salsa russa (Russian dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171005 --food-id=food_salsa_russa \
+  --name-it="Salsa russa (Russian dressing), condimento per insalata" \
+  --matrix-id=salsa_russa --matrix-description-it="Salsa russa (Russian dressing), condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Besciamella (salsa bianca densa) — preparato 2026-11-08 dal task (novantunesimo lotto)
 
 - **food_id**: `food_besciamella`. FDC ID 174526 (SR Legacy, "Sauce, homemade, white, thick" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento del novantunesimo lotto, continuazione del filone "salse e condimenti commerciali USDA generici" aperto nel lotto 90. Verificato con `grep` dedicato su "besciamella"/"béchamel"/"white sauce"/174526, zero occorrenze su tutti e tre i file prima della ricerca web.
