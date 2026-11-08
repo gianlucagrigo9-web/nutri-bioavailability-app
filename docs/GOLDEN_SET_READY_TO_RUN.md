@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Salsa Green Goddess, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
+
+- **food_id**: `food_salsa_green_goddess`. FDC ID 169057 (SR Legacy, "Salad dressing, green goddess, regular" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Condimento mai tentato in questa pipeline. Verificato con `grep` dedicato su "green goddess"/169057, zero occorrenze reali.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 427kcal, proteine 1,90g, grassi 43,3g, carboidrati 7,36g, fibra 0,10g, calcio 34,0mg, ferro 0,35mg, zinco 0,25mg, magnesio 7,00mg, rame 0,010mg, selenio 1,60µg, vitamina C 0,20mg, folato totale 4,00µg, acido folico 0µg (esplicito), vitamina B12 0,26µg, beta-carotene 3,00µg + alfa-carotene 1,00µg + beta-criptoxantina 1,00µg, vitamina K (fillochinone) 96,7µg.
+- **Nota attributi**: is_heme_iron=false perché l'acciuga resta un aromatizzante minore in un'emulsione a base di maionese/panna acida/erbe, non muscolo consumato come pietanza — stessa distinzione già fatta per Caesar/Worcestershire.
+- **Analogia usata**: `food_acciughe_raw` (acciughe crude, già eseguite sul DB reale — la ricetta classica del Green Goddess contiene acciughe come ingrediente aromatizzante (oltre a maionese/panna acida ed erbe), stesso ragionamento prudente già usato per Caesar/Worcestershire in questa pipeline: un condimento con pesce nella ricetta standard non va proposto come vegetariano/vegano anche se alcune versioni commerciali le omettono).
+- **Categoria dieta**: `meat_fish` (acciughe come ingrediente aromatizzante nella ricetta classica (vedi nota sopra)).
+- **Matrice**: nuova `salsa_green_goddess` ("Salsa Green Goddess, condimento per insalata").
+- **Attributi**: `is_heme_iron=false` (esplicito), `matrix_category_calcium` omesso (NULL — non applicabile, condimento multi-ingrediente), `carotenoid_matrix_state` omesso (NULL — tracce di carotenoidi reali ma non riconducibili a una singola matrice vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=raw`, `is_fortified_folate=false` (acido folico 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169057 --food-id=food_salsa_green_goddess \
+  --name-it="Salsa Green Goddess, condimento per insalata" \
+  --matrix-id=salsa_green_goddess --matrix-description-it="Salsa Green Goddess, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169057 --food-id=food_salsa_green_goddess \
+  --name-it="Salsa Green Goddess, condimento per insalata" \
+  --matrix-id=salsa_green_goddess --matrix-description-it="Salsa Green Goddess, condimento per insalata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acciughe_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Condimento tipo maionese (mayonnaise-type dressing), light — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_condimento_tipo_maionese_light`. FDC ID 168112 (SR Legacy, "Salad dressing, mayonnaise and mayonnaise-type, low calorie" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Variante light, record FDC distinto e proprio dal precedente (regolare con sale) e dalla maionese vera. Verificato con `grep` dedicato su 168112, zero occorrenze reali.
