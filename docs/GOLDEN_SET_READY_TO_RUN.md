@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Croissant con uovo, formaggio e prosciutto cotto (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_croissant_prosciutto_fast_food`. FDC ID 173270 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, croissant, with egg, cheese, and ham" — pagina getfoodfacts.com dedicata e pulita). Decimo e ultimo alimento di questo lotto nel filone "USDA Fast Foods".
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 261kcal, proteine 12,4g, grassi 14,9g, carboidrati 19,0g, fibra 0,90g, calcio 95,0mg, ferro 1,40mg, zinco 1,43mg, magnesio 17,0mg, rame 0,083mg, selenio 17,9µg, sodio 711mg, vitamina C 0,10mg, folato totale 42,0µg, acido folico 20,0µg (esplicito, firma di croissant arricchito, minoritario: `is_fortified_folate=true`), vitamina B12 0,66µg, beta-carotene 29,0µg (reale) + alfa-carotene 0µg (esplicito) + beta-criptoxantina 3,00µg (reale), vitamina K 2,10µg.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto, già eseguito sul DB reale — stesso ingrediente di carne presente nel nome).
+- **Categoria dieta**: `meat_fish` (prosciutto esplicito nel nome, oltre a uovo/formaggio).
+- **Matrice**: nuova `croissant_prosciutto_fast_food`.
+- **Attributi**: `is_heme_iron=true` (prosciutto cotto reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=173270 --food-id=food_croissant_prosciutto_fast_food \
+  --name-it="Croissant con uovo, formaggio e prosciutto cotto (fast food)" \
+  --matrix-id=croissant_prosciutto_fast_food --matrix-description-it="Croissant con uovo, formaggio e prosciutto cotto (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173270 --food-id=food_croissant_prosciutto_fast_food \
+  --name-it="Croissant con uovo, formaggio e prosciutto cotto (fast food)" \
+  --matrix-id=croissant_prosciutto_fast_food --matrix-description-it="Croissant con uovo, formaggio e prosciutto cotto (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_nachos_manzo_fast_food`. FDC ID 170292 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, nachos, with cheese, beans, ground beef, and tomatoes" — pagina getfoodfacts.com dedicata e pulita).
