@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sandwich di pesce con salsa tartara (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_sandwich_pesce_fast_food`. FDC ID 170296 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, fish sandwich, with tartar sauce" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 257kcal, proteine 10,3g, grassi 12,4g, carboidrati 26,7g, fibra 1,00g, calcio 37,0mg, ferro 1,50mg, zinco 0,49mg, magnesio 25,0mg, rame 0,075mg, selenio 18,0µg, sodio 602mg, vitamina C 1,80mg, folato totale 46,0µg, acido folico 30,0µg (esplicito, firma di pane arricchito, minoritario: `is_fortified_folate=true`), vitamina B12 0,68µg, beta-carotene 44,0µg + alfa-carotene 3,00µg + beta-criptoxantina 7,00µg (reali, probabilmente dalla salsa tartara), vitamina K 13,6µg.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo, già eseguito sul DB reale — filetto di pesce bianco, tipico ingrediente di questo sandwich).
+- **Categoria dieta**: `meat_fish` (pesce esplicito nel nome; la salsa tartara è a base d'uovo ma il pesce è l'identità dominante dell'alimento).
+- **Matrice**: nuova `sandwich_pesce_fast_food`.
+- **Attributi**: `is_heme_iron=true` (stessa convenzione già usata per tonno/salmone crudi in questa pipeline), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=170296 --food-id=food_sandwich_pesce_fast_food \
+  --name-it="Sandwich di pesce con salsa tartara (fast food)" \
+  --matrix-id=sandwich_pesce_fast_food --matrix-description-it="Sandwich di pesce con salsa tartara (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170296 --food-id=food_sandwich_pesce_fast_food \
+  --name-it="Sandwich di pesce con salsa tartara (fast food)" \
+  --matrix-id=sandwich_pesce_fast_food --matrix-description-it="Sandwich di pesce con salsa tartara (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Taco, guscio rigido, con manzo, formaggio e lattuga (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_taco_manzo_formaggio_fast_food`. FDC ID 170689 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, taco with beef, cheese and lettuce, hard shell" — pagina getfoodfacts.com dedicata e pulita). Esiste anche la variante "soft" (FDC 170763), non usata qui per evitare ambiguità (nessuna pagina getfoodfacts.com dedicata trovata per quella, solo aggregatori senza FDC ID visibile).
