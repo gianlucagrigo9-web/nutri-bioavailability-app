@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Burrito con fagioli e formaggio (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_burrito_fagioli_formaggio_fast_food`. FDC ID 172039 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, burrito, with beans and cheese" — pagina getfoodfacts.com dedicata e pulita). Distinto dal burrito "con fagioli" semplice (stesso lotto, scartato ⚠ sotto per ambiguità dieta — qui il formaggio è dichiarato esplicitamente nel nome, nessuna ambiguità).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 205kcal, proteine 7,35g, grassi 6,05g, carboidrati 31,2g, fibra 4,20g, calcio 124mg, ferro 2,37mg, zinco 0,86mg, magnesio 34,0mg, rame 0,16mg, selenio 11,7µg, sodio 563mg, vitamina C 0,40mg, folato totale 104µg, acido folico 33,0µg (esplicito, firma di tortilla arricchita, minoritario: `is_fortified_folate=true`), vitamina B12 0,16µg, beta-carotene 24,0µg (reale), alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 3,20µg.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa analogia già usata per la salsa al formaggio del lotto 90).
+- **Categoria dieta**: `egg_dairy` (fagioli + formaggio, esplicito nel nome — nessuna carne).
+- **Matrice**: nuova `burrito_fagioli_formaggio_fast_food`.
+- **Attributi**: `is_heme_iron=false` (nessun ingrediente di carne/pesce), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=172039 --food-id=food_burrito_fagioli_formaggio_fast_food \
+  --name-it="Burrito con fagioli e formaggio (fast food)" \
+  --matrix-id=burrito_fagioli_formaggio_fast_food --matrix-description-it="Burrito con fagioli e formaggio (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_cheddar_raw \
+  --is-fortified-folate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172039 --food-id=food_burrito_fagioli_formaggio_fast_food \
+  --name-it="Burrito con fagioli e formaggio (fast food)" \
+  --matrix-id=burrito_fagioli_formaggio_fast_food --matrix-description-it="Burrito con fagioli e formaggio (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_cheddar_raw \
+  --is-fortified-folate --diet-category=egg_dairy --apply
+```
+
 ### Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_sandwich_sub_affettati_fast_food`. FDC ID 170696 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, submarine sandwich, cold cut on white bread with lettuce and tomato" — pagina getfoodfacts.com dedicata e pulita).
