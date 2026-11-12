@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_sandwich_sub_affettati_fast_food`. FDC ID 170696 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, submarine sandwich, cold cut on white bread with lettuce and tomato" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 213kcal, proteine 10,5g, grassi 10,0g, carboidrati 20,4g, fibra 1,20g, calcio 171mg, ferro 1,81mg, zinco 1,05mg, magnesio 20,0mg, rame 0,084mg, selenio 19,9µg, sodio 575mg, vitamina C 7,50mg, folato totale 66,0µg, acido folico 57,0µg (esplicito, firma marcata di pane arricchito, minoritario rispetto all'identità "affettati misti" dell'alimento: `is_fortified_folate=true`), vitamina B12 0,22µg, beta-carotene 61,0µg + alfa-carotene 2,00µg + beta-criptoxantina 18,0µg (reali, da lattuga/pomodoro), vitamina K 4,50µg.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto, già eseguito sul DB reale — affettato di maiale cotto, tipico "cold cut" USA).
+- **Categoria dieta**: `meat_fish` (affettati misti di carne, esplicito nel nome).
+- **Matrice**: nuova `sandwich_sub_affettati_fast_food`.
+- **Attributi**: `is_heme_iron=true` (affettati di carne reali), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=170696 --food-id=food_sandwich_sub_affettati_fast_food \
+  --name-it="Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food)" \
+  --matrix-id=sandwich_sub_affettati_fast_food --matrix-description-it="Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170696 --food-id=food_sandwich_sub_affettati_fast_food \
+  --name-it="Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food)" \
+  --matrix-id=sandwich_sub_affettati_fast_food --matrix-description-it="Panino sub con affettati misti, lattuga e pomodoro, pane bianco (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Sandwich di pesce con salsa tartara (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_sandwich_pesce_fast_food`. FDC ID 170296 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, fish sandwich, with tartar sauce" — pagina getfoodfacts.com dedicata e pulita).
