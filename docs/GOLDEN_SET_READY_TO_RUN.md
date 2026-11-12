@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Banana, chips (snack essiccato/fritto) — preparato 2026-11-12 dal task (novantatreesimo lotto)
+
+- **food_id**: `food_banana_chips_raw`. FDC ID 168849 (SR Legacy, "Snacks, banana chips" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento a base di banana in questa intera pipeline (nessuna banana fresca o lavorata è mai stata aggiunta prima — verificato con `grep` dedicato, zero occorrenze per "banana"/"banane" eccetto il peperoncino "a banana", cultivar di *Capsicum* non collegata). Filone "frutta disidratata ancora non tentata" (punto 1b), unico successo su undici candidati di questo tipo valutati in questo lotto — stesso pattern già visto per i dressing/gravy USDA: uno snack con lunga tradizione commerciale USA ha un record SR Legacy dedicato dove la frutta "semplicemente secca" spesso non lo ha.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 519kcal, proteine 2,30g, grassi 33,6g, carboidrati 58,4g, fibra 7,70g, calcio 18,0mg, ferro 1,25mg, zinco 0,75mg, magnesio 76,0mg, rame 0,20mg, selenio 1,50µg, sodio 6,00mg, vitamina C 6,30mg, folato totale 14,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg, beta-carotene 34,0µg + alfa-carotene 32,0µg + beta-criptoxantina 0µg, vitamina K (fillochinone) 1,30µg.
+- **Analogia usata**: `food_dates_raw` (datteri, già eseguiti sul DB reale — snack di frutta concentrata/disidratata più vicino disponibile; limite dichiarato: i datteri non sono fritti e hanno un profilo lipidico molto diverso, 0g vs 33,6g di grassi — nessun'altra frutta, fresca o lavorata, è ancora presente in questa pipeline per un'analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit` (snack di frutta disidratata/fritta, NON `fresh_fruit` per la definizione restrittiva del PRD §4.9 — stessa convenzione di datteri/uvetta/fichi/albicocche secche).
+- **Matrice**: nuova `banana_chips` ("Banana, chips (snack essiccato/fritto)").
+- **Attributi**: `is_heme_iron=false` (default), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 34µg e alfa-carotene 32µg presenti ma frittura/disidratazione rompono la matrice, stessa logica già usata per il succo d'arancia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Musaceae` (famiglia botanica reale della banana — nessun'altra pianta di questa famiglia ancora eseguita), `baseline_cooking_state=raw` (consumato nella forma acquistata, stessa convenzione dei dressing/snack commerciali), `is_fortified_folate=false` (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168849 --food-id=food_banana_chips_raw \
+  --name-it="Banana, chips (snack essiccato/fritto)" \
+  --matrix-id=banana_chips --matrix-description-it="Banana, chips (snack essiccato/fritto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_dates_raw \
+  --botanical-family=Musaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168849 --food-id=food_banana_chips_raw \
+  --name-it="Banana, chips (snack essiccato/fritto)" \
+  --matrix-id=banana_chips --matrix-description-it="Banana, chips (snack essiccato/fritto)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_dates_raw \
+  --botanical-family=Musaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Mela, secca (disidratata, solforata) — preparato 2026-11-12 dal task (novantatreesimo lotto)
+
+- **food_id**: `food_mela_secca_raw`. FDC ID 171691 (SR Legacy, "Apples, dried, sulfured, uncooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Forma disidratata della mela, distinta dalle cinque cultivar fresche già pronte/eseguite (Fuji/Gala/Granny Smith/Golden Delicious/Red Delicious) e dalla mela generica con buccia del Golden Set originale.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 243kcal, proteine 0,93g, grassi 0,32g, carboidrati 65,9g, fibra 8,70g, calcio 14,0mg, ferro 1,40mg, zinco 0,20mg, magnesio 16,0mg, rame 0,19mg, selenio 1,30µg, sodio 87,0mg, vitamina C 3,90mg, folato totale 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg, beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K (fillochinone) 3,00µg.
+- **Analogia usata**: `food_apple_with_skin_raw` (mela cruda con buccia, Golden Set originale, stessa specie *Malus domestica*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/disidratata — NON `fresh_fruit` per la definizione restrittiva del PRD §4.9, stessa convenzione di datteri/uvetta/fichi/albicocche/prugne secche).
+- **Matrice**: nuova `mela_secca` ("Mela, secca (disidratata, solforata)").
+- **Attributi**: `is_heme_iron=false` (default), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene e gli altri carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (famiglia botanica reale del melo, stesso precedente implicito delle cultivar di mela fresca già eseguite), `baseline_cooking_state=raw` (secco ma non cotto, stessa convenzione dell'uvetta/dei datteri), `is_fortified_folate=false` (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171691 --food-id=food_mela_secca_raw \
+  --name-it="Mela, secca (disidratata, solforata)" \
+  --matrix-id=mela_secca --matrix-description-it="Mela, secca (disidratata, solforata)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171691 --food-id=food_mela_secca_raw \
+  --name-it="Mela, secca (disidratata, solforata)" \
+  --matrix-id=mela_secca --matrix-description-it="Mela, secca (disidratata, solforata)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa Italiana (Italian dressing), a basso contenuto di grassi e senza sale, condimento per insalata — preparato 2026-11-08 dal task (novantiduesimo lotto)
 
 - **food_id**: `food_salsa_italiana_grasso_ridotto_senza_sale`. FDC ID 171023 (SR Legacy, "Salad dressing, italian dressing, reduced fat, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Quarta e ultima variante dell'Italian dressing in questo lotto (regolare già pronta nel novantunesimo lotto, "reduced calorie" e "without salt" pronte sopra in questo stesso lotto) — combina entrambe le riduzioni (grassi e sale), record FDC proprio e distinto. Verificato con `grep` dedicato su 171023, zero occorrenze reali.
