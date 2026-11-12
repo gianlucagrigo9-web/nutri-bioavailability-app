@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Biscuit con filetto di pollo croccante (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_biscuit_pollo_fast_food`. FDC ID 173268 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, biscuit, with crispy chicken fillet" — pagina getfoodfacts.com dedicata e pulita). "Biscuit" = panino lievitato all'americana (non biscotto dolce).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 300kcal, proteine 11,9g, grassi 14,9g, carboidrati 30,6g, fibra 1,40g, calcio 44,0mg, ferro 1,76mg, zinco 0,49mg, magnesio 18,0mg, rame 0,060mg, selenio 10,1µg, sodio 868mg, vitamina C 0,70mg, folato totale 64,0µg, acido folico 36,0µg (esplicito, firma di biscuit arricchito, minoritario: `is_fortified_folate=true`), vitamina B12 0,15µg, beta-carotene 1,00µg (reale), alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 6,60µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — filetto di pollo ingrediente dominante).
+- **Categoria dieta**: `meat_fish` (pollo esplicito nel nome).
+- **Matrice**: nuova `biscuit_pollo_fast_food`.
+- **Attributi**: `is_heme_iron=true` (pollo reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=173268 --food-id=food_biscuit_pollo_fast_food \
+  --name-it="Biscuit con filetto di pollo croccante (fast food)" \
+  --matrix-id=biscuit_pollo_fast_food --matrix-description-it="Biscuit con filetto di pollo croccante (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173268 --food-id=food_biscuit_pollo_fast_food \
+  --name-it="Biscuit con filetto di pollo croccante (fast food)" \
+  --matrix-id=biscuit_pollo_fast_food --matrix-description-it="Biscuit con filetto di pollo croccante (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Burrito con fagioli e formaggio (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_burrito_fagioli_formaggio_fast_food`. FDC ID 172039 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, burrito, with beans and cheese" — pagina getfoodfacts.com dedicata e pulita). Distinto dal burrito "con fagioli" semplice (stesso lotto, scartato ⚠ sotto per ambiguità dieta — qui il formaggio è dichiarato esplicitamente nel nome, nessuna ambiguità).
