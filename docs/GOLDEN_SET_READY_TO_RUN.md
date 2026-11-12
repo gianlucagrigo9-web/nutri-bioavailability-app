@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, impanato e fritto, pezzi senza osso, semplice (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_pollo_fritto_fast_food`. FDC ID 170718 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, chicken, breaded and fried, boneless pieces, plain" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Primo alimento del filone "USDA Fast Foods" mai esplorato sistematicamente in questa pipeline (filone diverso da "Soups, Sauces, and Gravies" dei lotti 90-92, ora saturo).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 307kcal, proteine 15,9g, grassi 20,4g, carboidrati 14,9g (impanatura), fibra 0,90g, calcio 11,0mg, ferro 0,83mg, zinco 0,59mg, magnesio 24,0mg, rame 0,051mg, selenio 17,2µg, sodio 594mg, vitamina C 0,60mg, folato totale 11,0µg, acido folico 5,00µg (esplicito e separato — firma di farina arricchita nell'impanatura, ingrediente minoritario, non l'identità dell'alimento: `is_fortified_folate=true`, stessa convenzione di besciamella/zuppa di pollo dei lotti precedenti), vitamina B12 0,33µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 7,00µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — carne di pollo ingrediente dominante).
+- **Categoria dieta**: `meat_fish` (pollo, non ambiguo — nome esplicito, nessuna variabilità di ricetta).
+- **Matrice**: nuova `pollo_fritto_fast_food`.
+- **Attributi**: `is_heme_iron=true` (carne di pollo reale, non solo aromatizzante — stessa convenzione di tonno/salmone), `matrix_category_calcium`/`carotenoid_matrix_state`/`botanical_family` omessi (NULL, non applicabile a un prodotto animale composito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (fritto), `is_fortified_folate=true` (vedi nota sopra).
+
+```
+npm run add-food -- --fdc-id=170718 --food-id=food_pollo_fritto_fast_food \
+  --name-it="Pollo, impanato e fritto, pezzi senza osso, semplice (fast food)" \
+  --matrix-id=pollo_fritto_fast_food --matrix-description-it="Pollo, impanato e fritto, pezzi senza osso, semplice (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170718 --food-id=food_pollo_fritto_fast_food \
+  --name-it="Pollo, impanato e fritto, pezzi senza osso, semplice (fast food)" \
+  --matrix-id=pollo_fritto_fast_food --matrix-description-it="Pollo, impanato e fritto, pezzi senza osso, semplice (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Banana, chips (snack essiccato/fritto) — preparato 2026-11-12 dal task (novantatreesimo lotto)
 
 - **food_id**: `food_banana_chips_raw`. FDC ID 168849 (SR Legacy, "Snacks, banana chips" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo alimento a base di banana in questa intera pipeline (nessuna banana fresca o lavorata è mai stata aggiunta prima — verificato con `grep` dedicato, zero occorrenze per "banana"/"banane" eccetto il peperoncino "a banana", cultivar di *Capsicum* non collegata). Filone "frutta disidratata ancora non tentata" (punto 1b), unico successo su undici candidati di questo tipo valutati in questo lotto — stesso pattern già visto per i dressing/gravy USDA: uno snack con lunga tradizione commerciale USA ha un record SR Legacy dedicato dove la frutta "semplicemente secca" spesso non lo ha.
