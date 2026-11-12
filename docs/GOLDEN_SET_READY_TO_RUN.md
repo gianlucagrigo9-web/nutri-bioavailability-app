@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Patatine fritte in olio vegetale (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_patatine_fritte_fast_food`. FDC ID 170698 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, potato, french fried in vegetable oil" — pagina getfoodfacts.com dedicata e pulita). Distinto dalla patata surgelata non cotta già ⚠ in un lotto precedente (categoria "Vegetables and Vegetable Products") — questo è il prodotto pronto al consumo, già fritto.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 312kcal, proteine 3,43g, grassi 14,7g, carboidrati 41,4g, fibra 3,80g, calcio 18,0mg, ferro 0,81mg, zinco 0,50mg, magnesio 35,0mg, rame 0,12mg, selenio 0,90µg, sodio 210mg, vitamina C 4,70mg, folato totale 30,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 11,2µg.
+- **Analogia usata**: `food_potato_raw` (patate crude con buccia, Golden Set originale, già eseguite sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (patata, nessuna ambiguità).
+- **Matrice**: nuova `patatine_fritte_fast_food`.
+- **Attributi**: `is_heme_iron=false` (default), altri attributi categorici omessi (NULL, non applicabile a un prodotto fritto in olio), `baseline_cooking_state=cooked` (fritto), `is_fortified_folate=false` (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170698 --food-id=food_patatine_fritte_fast_food \
+  --name-it="Patatine fritte in olio vegetale (fast food)" \
+  --matrix-id=patatine_fritte_fast_food --matrix-description-it="Patatine fritte in olio vegetale (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_potato_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170698 --food-id=food_patatine_fritte_fast_food \
+  --name-it="Patatine fritte in olio vegetale (fast food)" \
+  --matrix-id=patatine_fritte_fast_food --matrix-description-it="Patatine fritte in olio vegetale (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_potato_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pollo, impanato e fritto, pezzi senza osso, semplice (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_pollo_fritto_fast_food`. FDC ID 170718 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, chicken, breaded and fried, boneless pieces, plain" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Primo alimento del filone "USDA Fast Foods" mai esplorato sistematicamente in questa pipeline (filone diverso da "Soups, Sauces, and Gravies" dei lotti 90-92, ora saturo).
