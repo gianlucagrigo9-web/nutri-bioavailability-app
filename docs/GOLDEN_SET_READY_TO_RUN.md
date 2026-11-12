@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sandwich di roast beef, semplice (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_sandwich_roast_beef_fast_food`. FDC ID 170695 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, roast beef sandwich, plain" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 244kcal, proteine 15,2g, grassi 10,3g, carboidrati 22,2g, fibra 1,30g, calcio 55,0mg, ferro 2,64mg, zinco 2,27mg, magnesio 23,0mg, rame 0,11mg, selenio 18,2µg, sodio 653mg, vitamina C 0mg (esplicito), folato totale 51,0µg, acido folico 12,0µg (esplicito e separato — firma di pane arricchito, ingrediente minoritario: `is_fortified_folate=true`), vitamina B12 0,96µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 2,80µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — carne di manzo ingrediente dominante).
+- **Categoria dieta**: `meat_fish` (manzo, non ambiguo — "plain", nessun condimento/formaggio).
+- **Matrice**: nuova `sandwich_roast_beef_fast_food`.
+- **Attributi**: `is_heme_iron=true` (carne di manzo reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true` (vedi sopra).
+
+```
+npm run add-food -- --fdc-id=170695 --food-id=food_sandwich_roast_beef_fast_food \
+  --name-it="Sandwich di roast beef, semplice (fast food)" \
+  --matrix-id=sandwich_roast_beef_fast_food --matrix-description-it="Sandwich di roast beef, semplice (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170695 --food-id=food_sandwich_roast_beef_fast_food \
+  --name-it="Sandwich di roast beef, semplice (fast food)" \
+  --matrix-id=sandwich_roast_beef_fast_food --matrix-description-it="Sandwich di roast beef, semplice (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Patatine fritte in olio vegetale (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_patatine_fritte_fast_food`. FDC ID 170698 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, potato, french fried in vegetable oil" — pagina getfoodfacts.com dedicata e pulita). Distinto dalla patata surgelata non cotta già ⚠ in un lotto precedente (categoria "Vegetables and Vegetable Products") — questo è il prodotto pronto al consumo, già fritto.
