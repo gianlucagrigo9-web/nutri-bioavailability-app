@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Taco, guscio rigido, con manzo, formaggio e lattuga (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_taco_manzo_formaggio_fast_food`. FDC ID 170689 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, taco with beef, cheese and lettuce, hard shell" — pagina getfoodfacts.com dedicata e pulita). Esiste anche la variante "soft" (FDC 170763), non usata qui per evitare ambiguità (nessuna pagina getfoodfacts.com dedicata trovata per quella, solo aggregatori senza FDC ID visibile).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 226kcal, proteine 8,86g, grassi 12,7g, carboidrati 19,9g, fibra 3,90g, calcio 89,0mg, ferro 1,19mg, zinco 1,75mg, magnesio 32,0mg, rame 0,077mg, selenio 9,20µg, sodio 397mg, vitamina C 0,40mg, folato totale 19,0µg, acido folico 2,00µg (esplicito, minoritario — tortilla: `is_fortified_folate=true`), vitamina B12 0,93µg, beta-carotene 46,0µg (reale), alfa-carotene/beta-criptoxantina 0µg (espliciti), vitamina K 15,3µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — carne macinata di manzo ingrediente dominante del ripieno).
+- **Categoria dieta**: `meat_fish` (manzo esplicito nel nome, non ambiguo).
+- **Matrice**: nuova `taco_manzo_formaggio_fast_food`.
+- **Attributi**: `is_heme_iron=true` (manzo reale), altri attributi categorici omessi (NULL, prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=170689 --food-id=food_taco_manzo_formaggio_fast_food \
+  --name-it="Taco, guscio rigido, con manzo, formaggio e lattuga (fast food)" \
+  --matrix-id=taco_manzo_formaggio_fast_food --matrix-description-it="Taco, guscio rigido, con manzo, formaggio e lattuga (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170689 --food-id=food_taco_manzo_formaggio_fast_food \
+  --name-it="Taco, guscio rigido, con manzo, formaggio e lattuga (fast food)" \
+  --matrix-id=taco_manzo_formaggio_fast_food --matrix-description-it="Taco, guscio rigido, con manzo, formaggio e lattuga (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Sandwich di roast beef, semplice (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_sandwich_roast_beef_fast_food`. FDC ID 170695 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, roast beef sandwich, plain" — pagina getfoodfacts.com dedicata e pulita).
