@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
+
+- **food_id**: `food_nachos_manzo_fast_food`. FDC ID 170292 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, nachos, with cheese, beans, ground beef, and tomatoes" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 219kcal, proteine 6,21g, grassi 12,5g, carboidrati 21,4g, fibra 3,70g, calcio 47,0mg, ferro 1,01mg, zinco 1,05mg, magnesio 33,0mg, rame 0,10mg, selenio 8,10µg, sodio 348mg, vitamina C 0mg (esplicito), folato totale 14,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,31µg, beta-carotene 64,0µg + alfa-carotene 1,00µg + beta-criptoxantina 19,0µg (reali, da pomodoro), vitamina K 5,40µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — carne macinata di manzo ingrediente caratterizzante).
+- **Categoria dieta**: `meat_fish` (manzo esplicito nel nome).
+- **Matrice**: nuova `nachos_manzo_fast_food`.
+- **Attributi**: `is_heme_iron=true` (manzo reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=false` (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170292 --food-id=food_nachos_manzo_fast_food \
+  --name-it="Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food)" \
+  --matrix-id=nachos_manzo_fast_food --matrix-description-it="Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170292 --food-id=food_nachos_manzo_fast_food \
+  --name-it="Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food)" \
+  --matrix-id=nachos_manzo_fast_food --matrix-description-it="Nachos con formaggio, fagioli, carne macinata e pomodoro (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Biscuit con filetto di pollo croccante (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_biscuit_pollo_fast_food`. FDC ID 173268 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, biscuit, with crispy chicken fillet" — pagina getfoodfacts.com dedicata e pulita). "Biscuit" = panino lievitato all'americana (non biscotto dolce).
