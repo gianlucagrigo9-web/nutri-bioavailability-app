@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Jicama, cotta (bollita, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_jicama_cotta`. FDC ID 170074 (SR Legacy, "Yambean (jicama), cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (la jicama cruda è già "pronta" da un lotto precedente, non ancora eseguita). Verificato con `grep` su "jicama.*cott"/"jicama.*cook"/170074, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **12/17**. Per 100g: energia 38,0kcal, proteine 0,72g, grassi 0,090g, carboidrati 8,82g, calcio 11,0mg, ferro 0,57mg, zinco 0,15mg, magnesio 11,0mg, rame 0,046mg, selenio 0,70µg, sodio 4,00mg (coerente con "senza sale"), vitamina C 14,1mg, folato totale 8,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano** (non riportati nel record): fibra, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguite — stessa categoria funzionale "radice/tubero cotto"; il crudo `food_jicama_raw` non è ancora eseguito, usava a sua volta `food_carrots_raw` come analogia, stesso precedente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `jicama_cotta` ("Jicama, cotta (bollita, senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170074 --food-id=food_jicama_cotta \
+  --name-it="Jicama, cotta (bollita, senza sale)" \
+  --matrix-id=jicama_cotta --matrix-description-it="Jicama, cotta (bollita, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170074 --food-id=food_jicama_cotta \
+  --name-it="Jicama, cotta (bollita, senza sale)" \
+  --matrix-id=jicama_cotta --matrix-description-it="Jicama, cotta (bollita, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Spinacio d'acqua (kangkong), cotto (bollito, con sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_spinacio_acqua_cotto`. FDC ID 170132 (SR Legacy, "Water convolvulus, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Completa la coppia crudo/cotto per il kangkong (crudo preparato nel centoduesimo lotto, non ancora eseguito) — gap "stato di cottura mancante su specie già coperta" segnalato come filone residuo dal centoduesimo lotto. Verificato con `grep` su "kangkong.*cott"/"water convolvulus.*cook"/170132, zero occorrenze prima della ricerca web.
