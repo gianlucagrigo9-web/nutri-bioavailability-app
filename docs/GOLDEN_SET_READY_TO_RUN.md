@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Foglie di taro, cotte (steamed, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_foglie_di_taro_cotte`. FDC ID 168488 (SR Legacy, "Taro leaves, cooked, steamed, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Completa la coppia crudo/cotto per le foglie di taro (crudo preparato nello stesso lotto, non ancora eseguito). Verificato con `grep` su "foglie di taro.*cott"/"taro leaves.*cooked"/168488, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 24,0kcal, proteine 2,72g, grassi 0,41g, carboidrati 4,02g, fibra 2,00g, calcio 86,0mg, ferro 1,18mg, zinco 0,21mg, magnesio 20,0mg, rame 0,14mg, selenio 0,90µg, sodio 2,00mg (coerente con "senza sale"), vitamina C 35,5mg, folato totale 48,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano** (non riportati nel record): beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_spinach_boiled` (spinaci bolliti, Golden Set originale, già eseguiti — stessa categoria funzionale "foglia verde cotta"; il crudo `food_foglie_di_taro_raw` è preparato nello stesso lotto ma non ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_taro_cotte` ("Foglie di taro, cotte (steamed, senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa cautela della voce cruda), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato nel record cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae`, `baseline_cooking_state=steamed`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168488 --food-id=food_foglie_di_taro_cotte \
+  --name-it="Foglie di taro, cotte (steamed, senza sale)" \
+  --matrix-id=foglie_di_taro_cotte --matrix-description-it="Foglie di taro, cotte (steamed, senza sale)" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Araceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168488 --food-id=food_foglie_di_taro_cotte \
+  --name-it="Foglie di taro, cotte (steamed, senza sale)" \
+  --matrix-id=foglie_di_taro_cotte --matrix-description-it="Foglie di taro, cotte (steamed, senza sale)" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Araceae --diet-category=plant_non_fruit --apply
+```
+
 ### Foglie di taro, crude — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_foglie_di_taro_raw`. FDC ID 168487 (SR Legacy, "Taro leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Parte della pianta (foglia) distinta dal tubero già eseguito (`food_taro_raw`, FDC 169308) — stessa specie *Colocasia esculenta*, organo diverso, non un doppione. Primo candidato del filone "verdura a foglia asiatica ancora mancante" raccomandato dal centoduesimo lotto. Verificato con `grep` su "foglie di taro"/"taro leaves"/168487, zero occorrenze su tutti e tre i file prima della ricerca web.
