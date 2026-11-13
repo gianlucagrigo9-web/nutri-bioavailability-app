@@ -16,6 +16,82 @@
 
 ## Pronti
 
+### Galette di riso integrale, non salate — preparato 2026-11-13 dal task (novantanovesimo lotto)
+
+- **food_id**: `food_galette_di_riso`. FDC ID 170250 (SR Legacy, "Snacks, rice cakes, brown rice, plain, unsalted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch (nessuna discrepanza canonical), release USDA 2026-04-30). Primo alimento del gruppo "snack da cereali soffiati" in questa pipeline. Verificato con `grep` dedicato su "galette di riso"/"rice cake"/170250, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 387kcal, proteine 8,20g, grassi 2,80g, carboidrati 81,5g, fibra 4,20g, calcio 11,0mg, ferro 1,49mg, zinco 3,00mg, magnesio 131mg, rame 0,45mg, selenio 24,6µg, sodio 26,0mg, vitamina C 0mg (esplicito), folato totale 21,0µg, acido folico 0µg (esplicito, folato alimentare = folato totale, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 1,90µg.
+- **Analogia usata**: `food_rice_brown_raw` (riso integrale crudo, ingrediente dominante — ID riservato, già presente nel DB reale originale).
+- **Categoria dieta**: `plant_non_fruit` (snack a base di riso soffiato — vegetariano sì, vegano sì).
+- **Matrice**: nuova `galette_di_riso` ("Galette di riso integrale, non salate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del riso), `baseline_cooking_state=cooked` (riso soffiato/espanso con calore), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato = solo quello alimentare).
+
+```
+npm run add-food -- --fdc-id=170250 --food-id=food_galette_di_riso \
+  --name-it="Galette di riso integrale, non salate" \
+  --matrix-id=galette_di_riso --matrix-description-it="Galette di riso integrale, non salate" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_rice_brown_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170250 --food-id=food_galette_di_riso \
+  --name-it="Galette di riso integrale, non salate" \
+  --matrix-id=galette_di_riso --matrix-description-it="Galette di riso integrale, non salate" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_rice_brown_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Salsa messicana tipo salsa/pico, pronta all'uso — preparato 2026-11-13 dal task (novantanovesimo lotto)
+
+- **food_id**: `food_salsa_messicana`. FDC ID 174524 (SR Legacy, "Sauce, salsa, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch (nessuna discrepanza canonical), release USDA 2026-04-30). Distinta dal ketchup e dalla salsa di pomodoro già coperti (ricetta diversa, con cipolla/peperoncino, non addensata/dolcificata come il ketchup). Verificato con `grep` dedicato su "salsa messicana"/"salsa ready-to-serve"/174524, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 29,0kcal, proteine 1,52g, grassi 0,17g, carboidrati 6,64g, fibra 1,90g, calcio 30,0mg, ferro 0,42mg, zinco 0,18mg, magnesio 15,0mg, rame 0,066mg, selenio 0,90µg, sodio 711mg, vitamina C 1,90mg (reale), folato totale 4,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 276µg (reale) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 4,30µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro crudo, ingrediente dominante della salsa).
+- **Categoria dieta**: `plant_non_fruit` (salsa di pomodoro/cipolla/peperoncino — vegetariano sì, vegano sì; nessun segnale di ingrediente animale nel record).
+- **Matrice**: nuova `salsa_messicana` ("Salsa messicana tipo salsa/pico, pronta all'uso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, salsa composita), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, pomodoro cotto/processato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale del pomodoro, ingrediente dominante — stessa convenzione già usata per ketchup/salsa di pomodoro/salsa per pizza), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174524 --food-id=food_salsa_messicana \
+  --name-it="Salsa messicana tipo salsa/pico, pronta all'uso" \
+  --matrix-id=salsa_messicana --matrix-description-it="Salsa messicana tipo salsa/pico, pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174524 --food-id=food_salsa_messicana \
+  --name-it="Salsa messicana tipo salsa/pico, pronta all'uso" \
+  --matrix-id=salsa_messicana --matrix-description-it="Salsa messicana tipo salsa/pico, pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Salsa per pasta tipo marinara, pronta all'uso — preparato 2026-11-13 dal task (novantanovesimo lotto)
+
+- **food_id**: `food_salsa_marinara`. FDC ID 171192 (SR Legacy, "Sauce, pasta, spaghetti/marinara, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch (nessuna discrepanza canonical), release USDA 2026-04-30). Filone "Soups, Sauces, and Gravies" (già produttivo nei lotti 90-92/98). Verificato con `grep` dedicato su "salsa marinara"/"spaghetti sauce"/171192, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 50,0kcal, proteine 1,39g, grassi 1,61g, carboidrati 7,43g, fibra 1,80g, calcio 26,0mg, ferro 0,73mg, zinco 0,20mg, magnesio 18,0mg, rame 0,082mg, selenio 1,40µg, sodio 437mg, vitamina C 2,00mg (reale), folato totale 13,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 370µg (reale) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 13,9µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro crudo, ingrediente dominante della salsa).
+- **Categoria dieta**: `plant_non_fruit` (salsa di pomodoro/erbe per pasta — vegetariano sì, vegano sì; nessun segnale di carne nel record).
+- **Matrice**: nuova `salsa_marinara` ("Salsa per pasta tipo marinara, pronta all'uso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, salsa composita), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, pomodoro cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale del pomodoro, ingrediente dominante — stessa convenzione già usata per ketchup/salsa di pomodoro/salsa per pizza), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171192 --food-id=food_salsa_marinara \
+  --name-it="Salsa per pasta tipo marinara, pronta all'uso" \
+  --matrix-id=salsa_marinara --matrix-description-it="Salsa per pasta tipo marinara, pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171192 --food-id=food_salsa_marinara \
+  --name-it="Salsa per pasta tipo marinara, pronta all'uso" \
+  --matrix-id=salsa_marinara --matrix-description-it="Salsa per pasta tipo marinara, pronta all'uso" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Zuppa di pollo, crema, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
 
 - **food_id**: `food_zuppa_di_pollo_crema`. FDC ID 171146 (SR Legacy, "Soup, cream of chicken, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "Soups, Sauces, and Gravies" (già produttivo nei lotti 90-92), ripreso dopo la saturazione confermata di spezie/frattaglie/formaggi USA nei lotti 96-97. Verificato con `grep` dedicato su "zuppa di pollo crema"/"cream of chicken"/171146, zero occorrenze su tutti e tre i file prima della ricerca web.
