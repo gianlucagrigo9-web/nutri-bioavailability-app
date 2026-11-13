@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cavolo collard, cotto (bollito, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_cavolo_collard_cotto`. FDC ID 170407 (SR Legacy, "Collards, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_cavolo_collard_raw`, FDC 170406, è già "pronto" dal quarantaseiesimo lotto; il surgelato `food_cavolo_collard_surgelato` è già eseguito con analogia diversa). Verificato con `grep` su "cavolo collard.*cott"/"collard.*cook"/170407, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 33,0kcal, proteine 2,71g, grassi 0,72g, carboidrati 5,65g, fibra 4,00g, calcio 141mg, ferro 1,13mg, zinco 0,23mg, magnesio 21,0mg, rame 0,051mg, selenio 0,50µg, sodio 15,0mg (coerente con "senza sale"), vitamina C 18,2mg, folato totale 16,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 4513µg (reale, alto, coerente con foglia verde scura), alfa-carotene 68,0µg (reale), beta-criptoxantina 26,0µg (reale), vitamina K 407µg.
+- **Analogia usata**: `food_broccoli_boiled` (broccoli bolliti, Golden Set originale, già eseguiti — stessa famiglia Brassicaceae, stesso stato di cottura; non `food_kale_raw`, che esiste solo crudo nel Golden Set, nessuna coppia cotta disponibile come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolo_collard_cotto` ("Cavolo collard, cotto (bollito, senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi reali, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170407 --food-id=food_cavolo_collard_cotto \
+  --name-it="Cavolo collard, cotto (bollito, senza sale)" \
+  --matrix-id=cavolo_collard_cotto --matrix-description-it="Cavolo collard, cotto (bollito, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170407 --food-id=food_cavolo_collard_cotto \
+  --name-it="Cavolo collard, cotto (bollito, senza sale)" \
+  --matrix-id=cavolo_collard_cotto --matrix-description-it="Cavolo collard, cotto (bollito, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Broccoli cinesi (gai lan), cotti — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_broccoli_cinesi_cotti`. FDC ID 169392 (SR Legacy, "Broccoli, chinese, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_broccoli_cinesi_raw`, FDC 169404, è già "pronto" dal cinquantacinquesimo lotto, non ancora eseguito). Verificato con `grep` su "broccoli cinesi.*cott"/"gai lan.*cook"/169392, zero occorrenze prima della ricerca web.
