@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Formaggio spalmabile americano, processato, pastorizzato (cheese spread) — preparato 2026-11-13 dal task (novantasettesimo lotto)
+
+- **food_id**: `food_formaggio_spalmabile_americano_raw`. FDC ID 171254 (SR Legacy, "Cheese spread, pasteurized process, American" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dal "cheese product"/formaggio americano fuso in fette già preparato nel lotto 96 (`food_formaggio_americano_raw`, FDC 171289): qui è il prodotto spalmabile da vasetto, standard d'identità USDA diverso (più umidità, grasso minimo più basso). Verificato con `grep` dedicato ("cheese spread"/"formaggio spalmabile americano"/FDC 171254), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 290kcal, proteine 16,4g, grassi 21,2g, carboidrati 8,73g, fibra 0g esplicito, calcio 562mg, ferro 0,33mg, zinco 2,59mg, magnesio 29,0mg, rame 0,033mg, selenio 11,3µg, sodio 1.625mg, vitamina C 0mg esplicito, vitamina B12 0,40µg, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 1,80µg, beta-carotene 55,0µg (reale) + alfa-carotene 0µg esplicito + beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino USA", stessa analogia già usata con successo per americano/svizzero processati nel lotto 96).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_spalmabile_americano` ("Formaggio spalmabile americano, processato, pastorizzato").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171254 --food-id=food_formaggio_spalmabile_americano_raw \
+  --name-it="Formaggio spalmabile americano, processato, pastorizzato" \
+  --matrix-id=formaggio_spalmabile_americano --matrix-description-it="Formaggio spalmabile americano, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171254 --food-id=food_formaggio_spalmabile_americano_raw \
+  --name-it="Formaggio spalmabile americano, processato, pastorizzato" \
+  --matrix-id=formaggio_spalmabile_americano --matrix-description-it="Formaggio spalmabile americano, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Ricotta, parzialmente scremata — preparato 2026-11-13 dal task (novantasettesimo lotto)
+
+- **food_id**: `food_ricotta_parzialmente_scremata_raw`. FDC ID 171248 (SR Legacy, "Cheese, ricotta, part skim milk" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalla ricotta di latte intero già nel Golden Set (`food_ricotta`, FDC 170851): contenuto di grasso dichiarato nettamente inferiore (7,91g vs atteso ~11g/100g per la ricotta di latte intero), stesso schema già validato per il latte parzialmente scremato distinto dal latte intero. Verificato con `grep` dedicato ("ricotta parzialmente scremata"/"part skim ricotta"/FDC 171248), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 138kcal, proteine 11,4g, grassi 7,91g, carboidrati 5,14g, fibra 0g esplicito, calcio 272mg, ferro 0,44mg, zinco 1,34mg, magnesio 15,0mg, rame 0,034mg, selenio 16,7µg, sodio 99,0mg, vitamina C 0mg esplicito, vitamina B12 0,29µg, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 0,70µg, beta-carotene 20,0µg (reale) + alfa-carotene 0µg esplicito + beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_ricotta` (ricotta di latte intero, già eseguita sul DB reale, FDC 170851 — stessa categoria "formaggio fresco non stagionato a pasta morbida/granulosa").
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `ricotta_parzialmente_scremata` ("Ricotta, parzialmente scremata").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente usato per `food_ricotta`), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171248 --food-id=food_ricotta_parzialmente_scremata_raw \
+  --name-it="Ricotta, parzialmente scremata" \
+  --matrix-id=ricotta_parzialmente_scremata --matrix-description-it="Ricotta, parzialmente scremata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171248 --food-id=food_ricotta_parzialmente_scremata_raw \
+  --name-it="Ricotta, parzialmente scremata" \
+  --matrix-id=ricotta_parzialmente_scremata --matrix-description-it="Ricotta, parzialmente scremata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio cottage, magro (2% di grassi) — preparato 2026-11-13 dal task (novantasettesimo lotto)
+
+- **food_id**: `food_formaggio_cottage_magro_raw`. FDC ID 328841 (**Foundation Foods**, "Cheese, cottage, lowfat, 2% milkfat" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Distinto dal formaggio cottage "creamed" già 🟡 preparato nel decimo lotto (FDC 172179, non ancora eseguito sul DB reale): record FDC diverso, variante specificamente a basso contenuto di grassi. Verificato con `grep` dedicato ("formaggio cottage magro"/"cottage cheese lowfat"/FDC 328841), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **12/17**. Per 100g: energia 84,0kcal, proteine 11,0g, grassi 2,30g, carboidrati 4,31g, calcio 103mg, ferro 0,13mg, zinco 0,61mg, magnesio 8,90mg, rame 0,030mg, selenio 14,6µg, sodio 321mg, vitamina B12 0,42µg, folato totale 10,0µg. **Mancano**: fibra (la pagina mostra due indicazioni contraddittorie — "Dietary Fiber not declared" nel riquadro etichetta e "0g" in un riquadro riassuntivo — trattata con cautela come non riportata, non assunta zero), vitamina C, acido folico, vitamina K; nessun dato sui carotenoidi (beta-carotene, alfa-carotene, beta-criptoxantina non riportati per questo record Foundation).
+- **Analogia usata**: `food_ricotta` (altro formaggio fresco non stagionato a pasta morbida, già eseguito sul DB reale — stessa categoria funzionale).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_cottage_magro` ("Formaggio cottage, magro, 2% di grassi").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi per questo record, non c'è base per assegnare uno stato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento osservata, acido folico non riportato ma folato totale basso e coerente con un latticino non arricchito).
+
+```
+npm run add-food -- --fdc-id=328841 --food-id=food_formaggio_cottage_magro_raw \
+  --name-it="Formaggio cottage, magro (2% di grassi)" \
+  --matrix-id=formaggio_cottage_magro --matrix-description-it="Formaggio cottage, magro, 2% di grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=328841 --food-id=food_formaggio_cottage_magro_raw \
+  --name-it="Formaggio cottage, magro (2% di grassi)" \
+  --matrix-id=formaggio_cottage_magro --matrix-description-it="Formaggio cottage, magro, 2% di grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
+  --diet-category=egg_dairy --apply
+```
+
 ### Formaggio svizzero, processato, pastorizzato — preparato 2026-11-13 dal task (novantaseiesimo lotto)
 
 - **food_id**: `food_formaggio_svizzero_processato_raw`. FDC ID 170855 (SR Legacy, "Cheese, pasteurized process, swiss" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dal formaggio svizzero/emmental naturale già eseguito (`food_formaggio_svizzero_raw`, record diverso, pasta naturale non processata): qui il formaggio fuso/processato in fette tipo "deli", stesso filone del formaggio americano processato appena aperto in questo stesso lotto. Verificato con `grep` dedicato ("formaggio svizzero processato"/FDC 170855), zero occorrenze su tutti e tre i file prima della ricerca web.
