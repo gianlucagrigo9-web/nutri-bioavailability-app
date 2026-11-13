@@ -16,6 +16,150 @@
 
 ## Pronti
 
+### Zuppa di pollo, crema, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_zuppa_di_pollo_crema`. FDC ID 171146 (SR Legacy, "Soup, cream of chicken, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "Soups, Sauces, and Gravies" (già produttivo nei lotti 90-92), ripreso dopo la saturazione confermata di spezie/frattaglie/formaggi USA nei lotti 96-97. Verificato con `grep` dedicato su "zuppa di pollo crema"/"cream of chicken"/171146, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 90,0kcal, proteine 2,38g, grassi 5,77g, carboidrati 7,16g, fibra 0g (esplicito), calcio 14,0mg, ferro 1,06mg, zinco 0,29mg, magnesio 4,00mg, rame 0,13mg, selenio 1,90µg, sodio 702mg, vitamina C 0,10mg, folato totale 2,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 28,0µg (reale) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K (fillochinone) 4,10µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — ingrediente dominante della zuppa).
+- **Categoria dieta**: `meat_fish` (zuppa a base di pollo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_pollo_crema` ("Zuppa di pollo, crema, in scatola condensata").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pollo, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma non riconducibile a una singola matrice vegetale in una zuppa composita), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171146 --food-id=food_zuppa_di_pollo_crema \
+  --name-it="Zuppa di pollo, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_pollo_crema --matrix-description-it="Zuppa di pollo, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171146 --food-id=food_zuppa_di_pollo_crema \
+  --name-it="Zuppa di pollo, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_pollo_crema --matrix-description-it="Zuppa di pollo, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Zuppa di patate, crema, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_zuppa_di_patate_crema`. FDC ID 171158 (SR Legacy, "Soup, cream of potato, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "zuppa di patate crema"/"cream of potato"/171158, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 74,0kcal, proteine 1,51g, grassi 1,88g, carboidrati 12,8g, fibra 1,30g, calcio 17,0mg, ferro 0,34mg, zinco 0,15mg, magnesio 13,0mg, rame 0,20mg, selenio 1,90µg, sodio 604mg, vitamina C 0,20mg, folato totale 2,00µg, acido folico 0µg (esplicito), vitamina B12 0,040µg, beta-carotene 4,00µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 1,10µg.
+- **Analogia usata**: `food_potato_raw` (patata, già eseguita sul DB reale — ingrediente dominante nel nome del prodotto; la categoria dieta è comunque determinata dalla base di panna/latte, stessa logica già usata per la besciamella).
+- **Categoria dieta**: `egg_dairy` (base di panna/latte — vegetariano sì, vegano no; nessun ingrediente di carne).
+- **Matrice**: nuova `zuppa_di_patate_crema` ("Zuppa di patate, crema, in scatola condensata").
+- **Attributi**: `is_heme_iron` omesso (false — nessun ingrediente animale non caseario), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma non riconducibile a una singola matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto patata+latticini), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171158 --food-id=food_zuppa_di_patate_crema \
+  --name-it="Zuppa di patate, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_patate_crema --matrix-description-it="Zuppa di patate, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_potato_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171158 --food-id=food_zuppa_di_patate_crema \
+  --name-it="Zuppa di patate, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_patate_crema --matrix-description-it="Zuppa di patate, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_potato_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Zuppa di fagioli neri, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_zuppa_di_fagioli_neri`. FDC ID 171141 (SR Legacy, "Soup, black bean, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Verificato con `grep` dedicato su "zuppa di fagioli neri"/"black bean soup"/171141, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **16/17** — manca il selenio (non riportato nella pagina, non assunto zero). Per 100g: energia 91,0kcal, proteine 4,83g, grassi 1,32g, carboidrati 15,4g, fibra 6,80g, calcio 35,0mg, ferro 1,50mg, zinco 1,10mg, magnesio 33,0mg, rame 0,30mg, sodio 970mg, vitamina C 0,20mg, folato totale 66,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 219µg + alfa-carotene 80,0µg + beta-criptoxantina 12,0µg (reali, da verdure del soffritto), vitamina K 1,80µg.
+- **Analogia usata**: `food_fagioli_neri_raw` (fagioli neri, già pronti/eseguiti sul DB — ingrediente dominante della zuppa, nessun segnale di brodo di carne nel record generico).
+- **Categoria dieta**: `plant_non_fruit` (zuppa di legumi — vegetariano sì, vegano sì; nessun segnale di carne/brodo animale nel record SR Legacy).
+- **Matrice**: nuova `zuppa_di_fagioli_neri` ("Zuppa di fagioli neri, in scatola condensata").
+- **Attributi**: `is_heme_iron` omesso (false — legume, nessun segnale di carne), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi reali ma da una zuppa composita, non una singola matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171141 --food-id=food_zuppa_di_fagioli_neri \
+  --name-it="Zuppa di fagioli neri, in scatola condensata" \
+  --matrix-id=zuppa_di_fagioli_neri --matrix-description-it="Zuppa di fagioli neri, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_neri_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171141 --food-id=food_zuppa_di_fagioli_neri \
+  --name-it="Zuppa di fagioli neri, in scatola condensata" \
+  --matrix-id=zuppa_di_fagioli_neri --matrix-description-it="Zuppa di fagioli neri, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_neri_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Funghi shiitake, secchi — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_funghi_shiitake_secchi`. FDC ID 168436 (SR Legacy, "Mushrooms, shiitake, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone diverso dalle zuppe: forma SECCA mai tentata per nessun fungo in questa pipeline (shiitake fresco già ✅ dal settimo lotto, FDC diverso). Verificato con `grep` dedicato su "funghi shiitake secchi"/"shiitake dried"/168436, zero occorrenze su tutti e tre i file prima della ricerca web (il fresco usa un FDC ID diverso, 169242).
+- **Nutrienti**: **17/17**, nessun valore mancante (tutti i carotenoidi/vitamina K/B12/acido folico espliciti a 0µg, coerente con un fungo disidratato). Per 100g: energia 296kcal, proteine 9,58g, grassi 0,99g, carboidrati 75,4g, fibra 11,5g, calcio 11,0mg, ferro 1,72mg, zinco 7,66mg, magnesio 132mg, rame 5,17mg, selenio 46,1µg, sodio 13,0mg, vitamina C 3,50mg, folato totale 163µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 0µg (esplicito). Valori molto concentrati rispetto al fresco per la disidratazione (stesso schema già visto per erbe/spezie secche vs fresche).
+- **Analogia usata**: `food_funghi_shiitake_raw` (funghi shiitake crudi, già pronti/eseguiti sul DB — stessa specie, forma secca invece che fresca).
+- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
+- **Matrice**: nuova `funghi_shiitake_secchi` ("Funghi shiitake, secchi").
+- **Attributi**: `is_heme_iron` omesso (false — fungo), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti, non applicabile a un fungo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — un fungo non ha famiglia botanica), `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168436 --food-id=food_funghi_shiitake_secchi \
+  --name-it="Funghi shiitake, secchi" \
+  --matrix-id=funghi_shiitake_secchi --matrix-description-it="Funghi shiitake, secchi" \
+  --baseline-cooking-state=dried --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168436 --food-id=food_funghi_shiitake_secchi \
+  --name-it="Funghi shiitake, secchi" \
+  --matrix-id=funghi_shiitake_secchi --matrix-description-it="Funghi shiitake, secchi" \
+  --baseline-cooking-state=dried --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zuppa di piselli verdi, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_zuppa_di_piselli`. FDC ID 171554 (SR Legacy, "Soup, pea, green, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinta dalla variante "split pea with ham" (composita con prosciutto, categoria dieta ambigua, scartata a priori per questo motivo — vedi ⚠ sotto); questa è la variante semplice di piselli verdi, senza carne. Verificato con `grep` dedicato su "zuppa di piselli"/"pea soup"/171554, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 125kcal (nota: il riquadro etichetta arrotondato della pagina mostra 130kcal per 100g, incongruenza interna della pagina — usato il valore della tabella dettagliata "per 100g", non quello arrotondato, come da convenzione di questa pipeline), proteine 6,54g, grassi 2,23g, carboidrati 20,2g, fibra 3,90g, calcio 21,0mg, ferro 1,48mg, zinco 1,30mg, magnesio 30,0mg, rame 0,29mg, selenio 7,40µg, sodio 680mg, vitamina C 1,30mg, folato totale 1,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 2,00µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 0,40µg.
+- **Analogia usata**: `food_peas_green_raw` (piselli verdi, già eseguiti sul DB reale — ingrediente dominante della zuppa, nessun segnale di carne nel record).
+- **Categoria dieta**: `plant_non_fruit` (zuppa di piselli — vegetariano sì, vegano sì).
+- **Matrice**: nuova `zuppa_di_piselli` ("Zuppa di piselli verdi, in scatola condensata").
+- **Attributi**: `is_heme_iron` omesso (false — legume, nessun segnale di carne), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi reali ma da una zuppa composita), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171554 --food-id=food_zuppa_di_piselli \
+  --name-it="Zuppa di piselli verdi, in scatola condensata" \
+  --matrix-id=zuppa_di_piselli --matrix-description-it="Zuppa di piselli verdi, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peas_green_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171554 --food-id=food_zuppa_di_piselli \
+  --name-it="Zuppa di piselli verdi, in scatola condensata" \
+  --matrix-id=zuppa_di_piselli --matrix-description-it="Zuppa di piselli verdi, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_peas_green_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Zuppa di cipolle, crema, in scatola condensata — preparato 2026-11-13 dal task (novantottesimo lotto)
+
+- **food_id**: `food_zuppa_di_cipolla_crema`. FDC ID 171552 (SR Legacy, "Soup, cream of onion, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinta dalla "zuppa di cipolle alla francese" (French onion, brodo chiaro non cremoso), per cui non è stato trovato un record USDA generico dedicato — vedi ⚠ sotto; questa è la variante "cream of onion" con base di panna/latte. Verificato con `grep` dedicato su "zuppa di cipolla crema"/"cream of onion"/171552, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 88,0kcal, proteine 2,20g, grassi 4,20g, carboidrati 10,4g, fibra 0,40g, calcio 27,0mg, ferro 0,50mg, zinco 0,12mg, magnesio 5,00mg, rame 0,11mg, selenio 2,30µg, sodio 637mg, vitamina C 1,00mg, folato totale 6,00µg, acido folico 0µg (esplicito), vitamina B12 0,040µg, beta-carotene 13,0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 2,20µg.
+- **Analogia usata**: `food_onion_raw` (cipolla, già eseguita sul DB reale — ingrediente dominante nel nome del prodotto; la categoria dieta è comunque determinata dalla base di panna/latte, stessa logica già usata per la besciamella/zuppa di patate crema sopra).
+- **Categoria dieta**: `egg_dairy` (base di panna/latte — vegetariano sì, vegano no; nessun ingrediente di carne).
+- **Matrice**: nuova `zuppa_di_cipolla_crema` ("Zuppa di cipolle, crema, in scatola condensata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma non riconducibile a una singola matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto cipolla+latticini), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171552 --food-id=food_zuppa_di_cipolla_crema \
+  --name-it="Zuppa di cipolle, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_cipolla_crema --matrix-description-it="Zuppa di cipolle, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_onion_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171552 --food-id=food_zuppa_di_cipolla_crema \
+  --name-it="Zuppa di cipolle, crema, in scatola condensata" \
+  --matrix-id=zuppa_di_cipolla_crema --matrix-description-it="Zuppa di cipolle, crema, in scatola condensata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_onion_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Formaggio spalmabile americano, processato, pastorizzato (cheese spread) — preparato 2026-11-13 dal task (novantasettesimo lotto)
 
 - **food_id**: `food_formaggio_spalmabile_americano_raw`. FDC ID 171254 (SR Legacy, "Cheese spread, pasteurized process, American" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto dal "cheese product"/formaggio americano fuso in fette già preparato nel lotto 96 (`food_formaggio_americano_raw`, FDC 171289): qui è il prodotto spalmabile da vasetto, standard d'identità USDA diverso (più umidità, grasso minimo più basso). Verificato con `grep` dedicato ("cheese spread"/"formaggio spalmabile americano"/FDC 171254), zero occorrenze su tutti e tre i file prima della ricerca web.
