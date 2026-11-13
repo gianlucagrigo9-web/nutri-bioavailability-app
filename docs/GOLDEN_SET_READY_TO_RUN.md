@@ -16,6 +16,266 @@
 
 ## Pronti
 
+### Tonno rosso (pinna blu), fresco, cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_tonno_rosso_cotto`. FDC ID 173707 (SR Legacy, "Fish, tuna, fresh, bluefin, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_tonno_rosso_raw`, FDC 173706, lotto 82) era già "pronto"; stesso lineage FDC, mai tentato il cotto finora.
+- **Nutrienti**: **14/17**. Per 100g: energia 184kcal, proteine 29,9g, grassi 6,28g, carboidrati 0g, fibra 0g, calcio 10,0mg, ferro 1,31mg, zinco 0,77mg, magnesio 64,0mg, rame 0,11mg, selenio 46,8µg, sodio 50,0mg, vitamina C 0mg esplicito, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 10,9µg. **Mancano** (assenti dalla pagina, non zero): beta-carotene, altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina), vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo cotto a calore secco, già eseguito sul DB reale — stessa categoria "pesce cotto a calore secco").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `tonno_rosso_cotto` ("Tonno rosso (pinna blu), fresco, cotto").
+- **Attributi**: `is_heme_iron` true (per analogia con `food_merluzzo_cotto`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173707 --food-id=food_tonno_rosso_cotto \
+  --name-it="Tonno rosso (pinna blu), fresco, cotto" \
+  --matrix-id=tonno_rosso_cotto --matrix-description-it="Tonno rosso (pinna blu), fresco, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173707 --food-id=food_tonno_rosso_cotto \
+  --name-it="Tonno rosso (pinna blu), fresco, cotto" \
+  --matrix-id=tonno_rosso_cotto --matrix-description-it="Tonno rosso (pinna blu), fresco, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Salmone atlantico, selvaggio, cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_salmone_atlantico_selvaggio_cotto`. FDC ID 171998 (SR Legacy, "Fish, salmon, Atlantic, wild, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_salmone_atlantico_selvaggio_raw`, FDC 173686, lotto 82) era già "pronto", distinto dal salmone atlantico allevato del Golden Set originale.
+- **Nutrienti**: **14/17**. Per 100g: energia 182kcal, proteine 25,4g, grassi 8,13g, carboidrati 0g, fibra 0g, calcio 15,0mg, ferro 1,03mg, zinco 0,82mg, magnesio 37,0mg, rame 0,32mg, selenio 46,8µg, sodio 56,0mg, vitamina C 0mg esplicito, folato totale 29,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 3,05µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_atlantico_selvaggio_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171998 --food-id=food_salmone_atlantico_selvaggio_cotto \
+  --name-it="Salmone atlantico, selvaggio, cotto" \
+  --matrix-id=salmone_atlantico_selvaggio_cotto --matrix-description-it="Salmone atlantico, selvaggio, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171998 --food-id=food_salmone_atlantico_selvaggio_cotto \
+  --name-it="Salmone atlantico, selvaggio, cotto" \
+  --matrix-id=salmone_atlantico_selvaggio_cotto --matrix-description-it="Salmone atlantico, selvaggio, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Salmone coho (selvaggio), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_salmone_coho_cotto`. FDC ID 173719 (SR Legacy, "Fish, salmon, coho, wild, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Esiste anche una variante "cooked, moist heat" (FDC 175137) con valori diversi: scelta la variante "dry heat" per coerenza con l'analogia e con le altre voci cotte di questa pipeline. Il crudo (`food_salmone_coho_raw`, FDC 175136, lotto 49) era già "pronto".
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 139kcal, proteine 23,4g, grassi 4,30g, carboidrati 0g, fibra 0g, calcio 45,0mg, ferro 0,61mg, zinco 0,56mg, magnesio 33,0mg, rame 0,071mg, selenio 38,0µg, sodio 58,0mg, vitamina C 1,40mg, folato totale 13,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 5,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti, vitamina K 0,10µg.
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_coho_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso (carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173719 --food-id=food_salmone_coho_cotto \
+  --name-it="Salmone coho (selvaggio), cotto" \
+  --matrix-id=salmone_coho_cotto --matrix-description-it="Salmone coho (selvaggio), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173719 --food-id=food_salmone_coho_cotto \
+  --name-it="Salmone coho (selvaggio), cotto" \
+  --matrix-id=salmone_coho_cotto --matrix-description-it="Salmone coho (selvaggio), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pesce lupo atlantico (wolffish), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_pesce_lupo_cotto`. FDC ID 174247 (SR Legacy, "Fish, wolffish, Atlantic, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_pesce_lupo_raw`, FDC 175162, lotto 48) era già "pronto".
+- **Nutrienti**: **14/17**. Per 100g: energia 123kcal, proteine 22,4g, grassi 3,06g, carboidrati 0g, fibra 0g, calcio 8,00mg, ferro 0,12mg, zinco 1,00mg, magnesio 38,0mg, rame 0,037mg, selenio 46,8µg, sodio 109mg, vitamina C 0mg esplicito, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,35µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K (stesso gap già visto sul crudo).
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_lupo_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174247 --food-id=food_pesce_lupo_cotto \
+  --name-it="Pesce lupo atlantico (wolffish), cotto" \
+  --matrix-id=pesce_lupo_cotto --matrix-description-it="Pesce lupo atlantico (wolffish), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174247 --food-id=food_pesce_lupo_cotto \
+  --name-it="Pesce lupo atlantico (wolffish), cotto" \
+  --matrix-id=pesce_lupo_cotto --matrix-description-it="Pesce lupo atlantico (wolffish), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pesce persico oceanico (ocean perch atlantico), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_persico_oceanico_cotto`. FDC ID 175126 (SR Legacy, "Fish, ocean perch, Atlantic, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_persico_oceanico_raw`, FDC 175125, lotto 48) era già "pronto".
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 96,0kcal, proteine 18,5g, grassi 1,87g, carboidrati 0g, fibra 0g, calcio 34,0mg, ferro 0,27mg, zinco 0,35mg, magnesio 27,0mg, rame 0,026mg, selenio 34,6µg, sodio 347mg, vitamina C 0mg esplicito, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 1,72µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti, vitamina K (fillochinone 0,10µg + menachinone-4 0,20µg).
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `persico_oceanico_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso (carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false). Sodio 347mg/100g più alto della media pesce ma coerente col nome del record (nessuna menzione di sale aggiunto); nessuna firma di arricchimento rilevata altrove.
+
+```
+npm run add-food -- --fdc-id=175126 --food-id=food_persico_oceanico_cotto \
+  --name-it="Pesce persico oceanico (ocean perch atlantico), cotto" \
+  --matrix-id=persico_oceanico_cotto --matrix-description-it="Pesce persico oceanico (ocean perch atlantico), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175126 --food-id=food_persico_oceanico_cotto \
+  --name-it="Pesce persico oceanico (ocean perch atlantico), cotto" \
+  --matrix-id=persico_oceanico_cotto --matrix-description-it="Pesce persico oceanico (ocean perch atlantico), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pompano della Florida, cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_pompano_cotto`. FDC ID 173683 (SR Legacy, "Fish, pompano, florida, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_pompano_raw`, FDC 173682, lotto 49) era già "pronto" — ID FDC adiacente, stesso lineage.
+- **Nutrienti**: **14/17**. Per 100g: energia 211kcal, proteine 23,7g, grassi 12,1g, carboidrati 0g, fibra 0g, calcio 43,0mg, ferro 0,67mg, zinco 0,69mg, magnesio 31,0mg, rame 0,078mg, selenio 46,8µg, sodio 76,0mg, vitamina C 0mg esplicito, folato totale 17,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 1,20µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pompano_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173683 --food-id=food_pompano_cotto \
+  --name-it="Pompano della Florida, cotto" \
+  --matrix-id=pompano_cotto --matrix-description-it="Pompano della Florida, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173683 --food-id=food_pompano_cotto \
+  --name-it="Pompano della Florida, cotto" \
+  --matrix-id=pompano_cotto --matrix-description-it="Pompano della Florida, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Coregone, cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_coregone_cotto`. FDC ID 174246 (SR Legacy, "Fish, whitefish, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_coregone_raw`, FDC 173711, lotto 32) era già "pronto".
+- **Nutrienti**: **14/17**. Per 100g: energia 172kcal, proteine 24,5g, grassi 7,51g, carboidrati 0g, fibra 0g, calcio 33,0mg, ferro 0,47mg, zinco 1,27mg, magnesio 42,0mg, rame 0,092mg, selenio 16,2µg, sodio 65,0mg, vitamina C 0mg esplicito, folato totale 17,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,96µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `coregone_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174246 --food-id=food_coregone_cotto \
+  --name-it="Coregone, cotto" \
+  --matrix-id=coregone_cotto --matrix-description-it="Coregone, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174246 --food-id=food_coregone_cotto \
+  --name-it="Coregone, cotto" \
+  --matrix-id=coregone_cotto --matrix-description-it="Coregone, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Rombo (turbot europeo), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_rombo_cotto`. FDC ID 174245 (SR Legacy, "Fish, turbot, european, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_rombo_raw`, FDC 173710, lotto 30) era già "pronto".
+- **Nutrienti**: **14/17**. Per 100g: energia 122kcal, proteine 20,6g, grassi 3,78g, carboidrati 0g, fibra 0g, calcio 23,0mg, ferro 0,46mg, zinco 0,28mg, magnesio 65,0mg, rame 0,047mg, selenio 46,8µg, sodio 192mg, vitamina C 1,70mg, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,54µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K (stesso gap già visto sul crudo).
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `rombo_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174245 --food-id=food_rombo_cotto \
+  --name-it="Rombo (turbot europeo), cotto" \
+  --matrix-id=rombo_cotto --matrix-description-it="Rombo (turbot europeo), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174245 --food-id=food_rombo_cotto \
+  --name-it="Rombo (turbot europeo), cotto" \
+  --matrix-id=rombo_cotto --matrix-description-it="Rombo (turbot europeo), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Cefalo (muggine), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_cefalo_cotto`. FDC ID 175124 (SR Legacy, "Fish, mullet, striped, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_cefalo_raw`, FDC 175123, lotto 49) era già "pronto".
+- **Nutrienti**: **14/17**. Per 100g: energia 150kcal, proteine 24,8g, grassi 4,86g, carboidrati 0g, fibra 0g, calcio 31,0mg, ferro 1,41mg, zinco 0,88mg, magnesio 33,0mg, rame 0,14mg, selenio 46,8µg, sodio 71,0mg, vitamina C 1,20mg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,25µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cefalo_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175124 --food-id=food_cefalo_cotto \
+  --name-it="Cefalo (muggine), cotto" \
+  --matrix-id=cefalo_cotto --matrix-description-it="Cefalo (muggine), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175124 --food-id=food_cefalo_cotto \
+  --name-it="Cefalo (muggine), cotto" \
+  --matrix-id=cefalo_cotto --matrix-description-it="Cefalo (muggine), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pesce persico (d'acqua dolce), cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
+
+- **food_id**: `food_pesce_persico_cotto`. FDC ID 173679 (SR Legacy, "Fish, perch, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Specie d'acqua dolce (*Perca* spp.), distinta dal persico oceanico (*Sebastes* spp.) sopra. Il crudo (`food_pesce_persico_raw`, FDC 173678, lotto 06) era già eseguito sul DB reale.
+- **Nutrienti**: **14/17**. Per 100g: energia 117kcal, proteine 24,9g, grassi 1,18g, carboidrati 0g, fibra 0g, calcio 102mg, ferro 1,16mg, zinco 1,43mg, magnesio 38,0mg, rame 0,19mg, selenio 16,1µg, sodio 79,0mg, vitamina C 1,70mg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,20µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K. Calcio 102mg/100g più alto della media dei pesci di questa pipeline ma valore diretto dalla tabella FDC, non derivato.
+- **Analogia usata**: `food_pesce_persico_raw` (persico d'acqua dolce crudo, già eseguito sul DB reale — stessa specie, permette un'analogia più precisa di `food_merluzzo_cotto` per gli attributi categorici).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_persico_cotto`.
+- **Attributi**: `is_heme_iron` true (per analogia con `food_pesce_persico_raw`), `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173679 --food-id=food_pesce_persico_cotto \
+  --name-it="Pesce persico (d'acqua dolce), cotto" \
+  --matrix-id=pesce_persico_cotto --matrix-description-it="Pesce persico (d'acqua dolce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pesce_persico_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173679 --food-id=food_pesce_persico_cotto \
+  --name-it="Pesce persico (d'acqua dolce), cotto" \
+  --matrix-id=pesce_persico_cotto --matrix-description-it="Pesce persico (d'acqua dolce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pesce_persico_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Trota (iridea), allevata, cotta (calore secco) — preparato 2026-11-13 dal task (centoquattresimo lotto)
 
 - **food_id**: `food_trota_cotta`. FDC ID 173718 (SR Legacy, "Fish, trout, rainbow, farmed, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). **Risolve anche un gap dichiarato in precedenza**: la voce cruda `food_trota_raw` (FDC 173717, "pronto" dal lotto 46) aveva solo inferito il dataType per adiacenza numerica col cotto 173718, mai confermato direttamente — oggi confermato "SR Legacy" esplicitamente sulla pagina del cotto, stesso range id.
