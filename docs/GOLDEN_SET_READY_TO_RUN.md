@@ -16,6 +16,246 @@
 
 ## Pronti
 
+### Zucca a fiasco (calabash / bottle gourd), cruda — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zucca_a_fiasco_raw`. FDC ID 169232 (SR Legacy, "Gourd, white-flowered (calabash), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Quinto candidato mono-ingrediente non lavorato di questo lotto, stesso filone Cucurbitaceae asiatico di momordica/zucca cinese/luffa appena fatte sopra. Verificato con `grep` su "zucca a fiasco"/"calabash"/"bottle gourd"/169232, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 14,0kcal, proteine 0,62g, grassi 0,020g, carboidrati 3,39g, fibra 0,50g, calcio 26,0mg, ferro 0,20mg, zinco 0,70mg, magnesio 11,0mg, rame 0,026mg, selenio 0,20µg, sodio 2,00mg, vitamina C 10,1mg, folato totale 6,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano** (non riportati nel record, non assunti zero): beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stessa famiglia botanica Cucurbitaceae, stessa categoria funzionale "verdura-frutto cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura, stessa convenzione già usata per zucchine/momordica/zucca cinese/luffa).
+- **Matrice**: nuova `zucca_a_fiasco` ("Zucca a fiasco (calabash / bottle gourd), cruda").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — calcio modesto, non una matrice nota), `carotenoid_matrix_state` omesso (NULL — nessun dato diretto sui singoli carotenoidi nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169232 --food-id=food_zucca_a_fiasco_raw \
+  --name-it="Zucca a fiasco (calabash / bottle gourd), cruda" \
+  --matrix-id=zucca_a_fiasco --matrix-description-it="Zucca a fiasco (calabash / bottle gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169232 --food-id=food_zucca_a_fiasco_raw \
+  --name-it="Zucca a fiasco (calabash / bottle gourd), cruda" \
+  --matrix-id=zucca_a_fiasco --matrix-description-it="Zucca a fiasco (calabash / bottle gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Luffa (zucca spugna / towelgourd), cruda — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_luffa_raw`. FDC ID 168414 (SR Legacy, "Gourd, dishcloth (towelgourd), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Quarto candidato mono-ingrediente non lavorato di questo lotto, stesso filone Cucurbitaceae asiatico di momordica/zucca cinese appena fatte sopra. Verificato con `grep` su "luffa"/"loofah"/"towelgourd"/168414, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 20,0kcal, proteine 1,20g, grassi 0,20g, carboidrati 4,35g, fibra 1,10g, calcio 20,0mg, ferro 0,36mg, zinco 0,070mg, magnesio 14,0mg, rame 0,035mg, selenio 0,20µg, sodio 3,00mg, vitamina C 12,0mg, folato totale 7,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), vitamina K 0,70µg. **Mancano** (non riportati nel record, non assunti zero): beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stessa famiglia botanica Cucurbitaceae, stessa categoria funzionale "verdura-frutto cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura, stessa convenzione già usata per zucchine/momordica/zucca cinese).
+- **Matrice**: nuova `luffa` ("Luffa (zucca spugna / towelgourd), cruda").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — calcio modesto, non una matrice nota), `carotenoid_matrix_state` omesso (NULL — nessun dato diretto sui singoli carotenoidi nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168414 --food-id=food_luffa_raw \
+  --name-it="Luffa (zucca spugna / towelgourd), cruda" \
+  --matrix-id=luffa --matrix-description-it="Luffa (zucca spugna / towelgourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168414 --food-id=food_luffa_raw \
+  --name-it="Luffa (zucca spugna / towelgourd), cruda" \
+  --matrix-id=luffa --matrix-description-it="Luffa (zucca spugna / towelgourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca cinese / fagiolo bianco (wax gourd), cruda — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zucca_cinese_raw`. FDC ID 170069 (SR Legacy, "Waxgourd, (chinese preserving melon), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Terzo candidato mono-ingrediente non lavorato di questo lotto, stesso filone Cucurbitaceae asiatico della momordica appena fatta sopra. Verificato con `grep` su "zucca cinese"/"wax gourd"/"winter melon"/170069, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 13,0kcal, proteine 0,40g, grassi 0,20g, carboidrati 3,00g, fibra 2,90g, calcio 19,0mg, ferro 0,40mg, zinco 0,61mg, magnesio 10,0mg, rame 0,023mg, selenio 0,20µg, sodio 111mg, vitamina C 13,0mg, folato totale 5,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano** (non riportati nel record, non assunti zero; il record riporta "Vitamina A, RAE" 0µg, segnale indiretto di carotenoidi trascurabili ma non un dato diretto): beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stessa famiglia botanica Cucurbitaceae, stessa categoria funzionale "verdura-frutto cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura, stessa convenzione già usata per zucchine/pomodori/melanzane/momordica).
+- **Matrice**: nuova `zucca_cinese` ("Zucca cinese / fagiolo bianco (wax gourd), cruda").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — calcio modesto, non una matrice nota), `carotenoid_matrix_state` omesso (NULL — nessun dato diretto sui singoli carotenoidi nel record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170069 --food-id=food_zucca_cinese_raw \
+  --name-it="Zucca cinese / fagiolo bianco (wax gourd), cruda" \
+  --matrix-id=zucca_cinese --matrix-description-it="Zucca cinese / fagiolo bianco (wax gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170069 --food-id=food_zucca_cinese_raw \
+  --name-it="Zucca cinese / fagiolo bianco (wax gourd), cruda" \
+  --matrix-id=zucca_cinese --matrix-description-it="Zucca cinese / fagiolo bianco (wax gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Momordica (melone amaro / bitter gourd), cruda — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_momordica_raw`. FDC ID 168393 (SR Legacy, "Balsam pear (bitter gourd), pods, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Secondo candidato mono-ingrediente non lavorato di questo lotto (verdura asiatica, filone Cucurbitaceae mai tracciato in questa pipeline per questa specie). Verificato con `grep` su "momordica"/"bitter melon"/"bitter gourd"/168393, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 17,0kcal, proteine 1,00g, grassi 0,17g, carboidrati 3,70g, fibra 2,80g, calcio 19,0mg, ferro 0,43mg, zinco 0,80mg, magnesio 17,0mg, rame 0,034mg, selenio 0,20µg, sodio 5,00mg, vitamina C 84,0mg, folato totale 72,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito, coerente con alimento vegetale), beta-carotene 190µg + alfa-carotene 185µg (reali). **Mancano** (non riportati nel record, non assunti zero): beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude, già eseguite sul DB reale — stessa famiglia botanica Cucurbitaceae, stessa categoria funzionale "verdura-frutto cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura, stessa convenzione già usata per zucchine/pomodori/melanzane/peperoni).
+- **Matrice**: nuova `momordica` ("Momordica (melone amaro / bitter gourd), cruda").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — calcio modesto, non una matrice nota), `carotenoid_matrix_state=raw_intact` (beta-carotene/alfa-carotene reali, alimento crudo non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168393 --food-id=food_momordica_raw \
+  --name-it="Momordica (melone amaro / bitter gourd), cruda" \
+  --matrix-id=momordica --matrix-description-it="Momordica (melone amaro / bitter gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168393 --food-id=food_momordica_raw \
+  --name-it="Momordica (melone amaro / bitter gourd), cruda" \
+  --matrix-id=momordica --matrix-description-it="Momordica (melone amaro / bitter gourd), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Radice di loto, cruda — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_radice_di_loto_raw`. FDC ID 169250 (SR Legacy, "Lotus root, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Candidato mono-ingrediente non lavorato (punto 1b, verdura/radice asiatica), seguito dopo 3 ⚠ consecutivi sulle zuppe in scatola (split pea, egg drop per ambiguità dieta, corn chowder senza record generico). Verificato con `grep` su "radice di loto"/"lotus root"/169250, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **16/17**. Per 100g: energia 74,0kcal, proteine 2,60g, grassi 0,10g, carboidrati 17,2g, fibra 4,90g, calcio 45,0mg, ferro 1,16mg, zinco 0,39mg, magnesio 23,0mg, rame 0,26mg, selenio 0,70µg, sodio 40,0mg, vitamina C 44,0mg, folato totale 13,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito, coerente con alimento vegetale), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti, nessun carotenoide). **Manca** (non riportata nel record, non assunta zero): vitamina K.
+- **Analogia usata**: `food_sedano_rapa_raw` (sedano rapa crudo, già eseguito sul DB reale — stessa categoria funzionale "radice/tubero amidaceo crudo").
+- **Categoria dieta**: `plant_non_fruit` (radice/tubero vegetale).
+- **Matrice**: nuova `radice_di_loto` ("Radice di loto, cruda").
+- **Attributi**: `is_heme_iron` omesso (false, alimento vegetale), `matrix_category_calcium` omesso (NULL — non applicabile, non è una matrice ad alto calcio nota), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi espliciti a zero, nessuna base), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Nelumbonaceae` (loto, famiglia distinta dalle altre radici/tuberi già coperte), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169250 --food-id=food_radice_di_loto_raw \
+  --name-it="Radice di loto, cruda" \
+  --matrix-id=radice_di_loto --matrix-description-it="Radice di loto, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_rapa_raw \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169250 --food-id=food_radice_di_loto_raw \
+  --name-it="Radice di loto, cruda" \
+  --matrix-id=radice_di_loto --matrix-description-it="Radice di loto, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sedano_rapa_raw \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zuppa di tacchino a pezzi, in scatola (pronta all'uso) — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zuppa_di_tacchino_a_pezzi`. FDC ID 171558 (SR Legacy, "Soup, turkey, chunky, canned, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Distinta dalla "zuppa di tacchino con pasta" (turkey noodle, scartata ⚠ nel centesimo lotto per mancanza di variante condensata) — record FDC separato, senza pasta. Verificato con `grep` su "zuppa di tacchino a pezzi"/"turkey chunky"/171558, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 57,0kcal, proteine 4,33g, grassi 1,87g, carboidrati 5,96g, calcio 21,0mg, ferro 0,81mg, zinco 0,90mg, magnesio 10,0mg, rame 0,10mg, sodio 391mg, vitamina C 2,70mg, folato totale 5,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,90µg. **Mancano** (non riportati nel record, non assunti zero): fibra, selenio, beta-carotene, vitamina K — ben sopra la soglia minima di questa coda (~10/17), e la vitamina B12 (micronutriente chiave tracciato) è presente.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (petto di tacchino, già eseguito sul DB reale — ingrediente dominante del nome del prodotto).
+- **Categoria dieta**: `meat_fish` (zuppa a base di tacchino — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_tacchino_a_pezzi` ("Zuppa di tacchino a pezzi, in scatola (pronta all'uso)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il tacchino, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — dato non riportato nel record, nessuna base per dedurlo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171558 --food-id=food_zuppa_di_tacchino_a_pezzi \
+  --name-it="Zuppa di tacchino a pezzi, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_tacchino_a_pezzi --matrix-description-it="Zuppa di tacchino a pezzi, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171558 --food-id=food_zuppa_di_tacchino_a_pezzi \
+  --name-it="Zuppa di tacchino a pezzi, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_tacchino_a_pezzi --matrix-description-it="Zuppa di tacchino a pezzi, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Zuppa di pollo e verdure, in scatola (pronta all'uso) — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zuppa_di_pollo_e_verdure`. FDC ID 171546 (SR Legacy, "Soup, chicken and vegetable, canned, ready-to-serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Distinta sia dalla zuppa di pollo e riso (171545, già pronta in questo stesso lotto) sia dalla crema di pollo (171146, lotto 98) — record FDC separato, verdure miste senza riso. Verificato con `grep` su "zuppa di pollo e verdure"/"chicken and vegetable"/171546, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 33,0kcal, proteine 1,97g, grassi 0,73g, carboidrati 4,68g, fibra 0,90g, calcio 14,0mg, ferro 0,25mg, zinco 0,22mg, magnesio 8,00mg, rame 0,023mg, selenio 3,00µg, sodio 229mg, vitamina C 0mg (esplicito), folato totale 13,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,11µg, beta-carotene 512µg + alfa-carotene 224µg (reali e significativi, da carota/verdure) + beta-criptoxantina 3,00µg (reale, minima), vitamina K 2,20µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — ingrediente dominante del nome del prodotto, stessa convenzione delle altre zuppe di pollo di questa pipeline).
+- **Categoria dieta**: `meat_fish` (zuppa a base di pollo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_pollo_e_verdure` ("Zuppa di pollo e verdure, in scatola (pronta all'uso)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pollo, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/alfa-carotene reali e significativi, verdure abbondanti — stessa logica delle altre zuppe di verdure di questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171546 --food-id=food_zuppa_di_pollo_e_verdure \
+  --name-it="Zuppa di pollo e verdure, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_pollo_e_verdure --matrix-description-it="Zuppa di pollo e verdure, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171546 --food-id=food_zuppa_di_pollo_e_verdure \
+  --name-it="Zuppa di pollo e verdure, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_pollo_e_verdure --matrix-description-it="Zuppa di pollo e verdure, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish --apply
+```
+
+### Zuppa wonton, stile ristorante cinese — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zuppa_wonton`. FDC ID 171821 (SR Legacy, "Soup, wonton, chinese restaurant" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). **Corregge il falso negativo del centesimo lotto**: quella sessione aveva trovato questa stessa pagina/FDC ID solo in un confronto e il fetch diretto era stato bloccato da un controllo di permesso dominio; un nuovo tentativo di fetch diretto in questo lotto è riuscito senza alcun blocco. Verificato con `grep` su "zuppa wonton"/"wonton"/171821, unica occorrenza preesistente era la nota ⚠ del centesimo lotto stesso (nessun'altra voce, non un doppione).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 32,0kcal, proteine 2,08g, grassi 0,26g, carboidrati 5,25g, fibra 0,20g, calcio 5,00mg, ferro 0,21mg, zinco 0,12mg, magnesio 3,00mg, rame 0,024mg, selenio 1,10µg, sodio 406mg, vitamina C 0,70mg, folato totale 13,0µg, acido folico 7,00µg (esplicito e separato dal folato totale — firma di farina arricchita stile USA nell'involucro del wonton, stessa convenzione già usata per altre zuppe con pasta/noodle: `is_fortified_folate=true`), vitamina B12 0,090µg, beta-carotene 6,00µg (reale ma modesto) + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 0,90µg.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — ripieno tradizionale del wonton a base di maiale, ingrediente che rende il prodotto non vegetariano anche se minoritario per massa, stessa convenzione già usata per la zuppa di fagioli con pancetta).
+- **Categoria dieta**: `meat_fish` (ripieno di carne di maiale — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_wonton` ("Zuppa wonton, stile ristorante cinese").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il maiale, anche se ingrediente minoritario — stessa convenzione della zuppa di fagioli con pancetta), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma troppo modesto per essere attribuito a una matrice vegetale dominante), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate=true` (vedi nota sopra).
+
+```
+npm run add-food -- --fdc-id=171821 --food-id=food_zuppa_wonton \
+  --name-it="Zuppa wonton, stile ristorante cinese" \
+  --matrix-id=zuppa_wonton --matrix-description-it="Zuppa wonton, stile ristorante cinese" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171821 --food-id=food_zuppa_wonton \
+  --name-it="Zuppa wonton, stile ristorante cinese" \
+  --matrix-id=zuppa_wonton --matrix-description-it="Zuppa wonton, stile ristorante cinese" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
+### Zuppa di verdure con brodo di manzo, in scatola (condensata) — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zuppa_di_verdure_con_brodo_di_manzo`. FDC ID 171164 (SR Legacy, "Soup, vegetable with beef broth, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30; **attenzione**: il pannello "Nutrition Facts" in testa alla pagina mostra valori leggermente diversi (70kcal, 1,5g grassi...) dalla tabella "Per 100g" — presi solo i valori della tabella, come da convenzione). Distinta dalla "zuppa di manzo e verdure" (vegetable beef, FDC 171163, già ✅ nel centesimo lotto) — quella ha manzo a pezzi come ingrediente, questa ha solo brodo di manzo come base liquida con verdure, due record FDC separati. Verificato con `grep` su "zuppa di verdure con brodo"/"vegetable with beef broth"/171164, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 66,0kcal, proteine 2,42g, grassi 1,56g, carboidrati 10,7g, fibra 1,30g, calcio 14,0mg, ferro 0,79mg, zinco 0,65mg, magnesio 5,00mg, rame 0,13mg, selenio 2,20µg, sodio 515mg, vitamina C 1,90mg, folato totale 9,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), beta-carotene 831µg + alfa-carotene 387µg (reali e molto alti, verdure abbondanti) + beta-criptoxantina 0µg (esplicito), vitamina K 2,30µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — stessa convenzione delle altre zuppe a base di manzo di questa pipeline, per `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (zuppa a base di brodo di manzo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_verdure_con_brodo_di_manzo` ("Zuppa di verdure con brodo di manzo, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il manzo, anche se solo come brodo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/alfa-carotene molto alti, verdure abbondanti — stessa logica già usata per le altre zuppe di verdure di questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — zuppa composita di verdure miste), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171164 --food-id=food_zuppa_di_verdure_con_brodo_di_manzo \
+  --name-it="Zuppa di verdure con brodo di manzo, in scatola (condensata)" \
+  --matrix-id=zuppa_di_verdure_con_brodo_di_manzo --matrix-description-it="Zuppa di verdure con brodo di manzo, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171164 --food-id=food_zuppa_di_verdure_con_brodo_di_manzo \
+  --name-it="Zuppa di verdure con brodo di manzo, in scatola (condensata)" \
+  --matrix-id=zuppa_di_verdure_con_brodo_di_manzo --matrix-description-it="Zuppa di verdure con brodo di manzo, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish --apply
+```
+
+### Zuppa di pollo e riso, in scatola (condensata) — preparato 2026-11-13 dal task (centounesimo lotto)
+
+- **food_id**: `food_zuppa_di_pollo_e_riso`. FDC ID 171545 (SR Legacy, "Soup, chicken with rice, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Residuo raccomandato dal centesimo lotto (filone "zuppe in scatola USDA"). Verificato con `grep` su "zuppa di pollo e riso"/"chicken rice"/171545, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 68,0kcal, proteine 1,84g, grassi 1,56g, carboidrati 11,6g, fibra 0,90g, calcio 41,0mg, ferro 0,25mg, zinco 0,18mg, magnesio 10,0mg, rame 0,096mg, selenio 4,10µg, sodio 645mg, vitamina C 0mg (esplicito), folato totale 1,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,13µg, beta-carotene 257µg + alfa-carotene 84,0µg (reali, da carota/verdure del soffritto) + beta-criptoxantina 0µg (esplicito), vitamina K 0,30µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — ingrediente dominante del nome del prodotto, stessa convenzione già usata per la zuppa di pollo crema).
+- **Categoria dieta**: `meat_fish` (zuppa a base di pollo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_pollo_e_riso` ("Zuppa di pollo e riso, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pollo, ingrediente dominante), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/alfa-carotene reali e significativi, verosimilmente da carota nel soffritto — stessa logica già usata per la zuppa di manzo e verdure), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171545 --food-id=food_zuppa_di_pollo_e_riso \
+  --name-it="Zuppa di pollo e riso, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pollo_e_riso --matrix-description-it="Zuppa di pollo e riso, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171545 --food-id=food_zuppa_di_pollo_e_riso \
+  --name-it="Zuppa di pollo e riso, in scatola (condensata)" \
+  --matrix-id=zuppa_di_pollo_e_riso --matrix-description-it="Zuppa di pollo e riso, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish --apply
+```
+
 ### Zuppa di manzo e verdure, in scatola (condensata) — preparato 2026-11-13 dal task (centesimo lotto)
 
 - **food_id**: `food_zuppa_di_manzo_e_verdure`. FDC ID 171163 (SR Legacy, "Soup, vegetable beef, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID canonical confermato dopo fetch (combacia con l'URL), release USDA 2026-04-30). **Corregge un falso negativo del novantottesimo lotto**: quella sessione aveva cercato "zuppa di manzo e verdure"/"beef and vegetables" e segnato ⚠ per assenza di pagina getfoodfacts.com; il nome USDA reale è invece "vegetable beef" (ordine invertito), trovato con una ricerca dedicata su questo termine. Verificato con `grep` su "zuppa di manzo e verdure"/"vegetable beef"/171163, zero occorrenze su tutti e tre i file prima della ricerca web (la riga ⚠ del lotto 98 citava "beef and vegetables", termine diverso da quello che ha dato il match).
