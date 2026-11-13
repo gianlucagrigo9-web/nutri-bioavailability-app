@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Spinacio d'acqua (kangkong), cotto (bollito, con sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_spinacio_acqua_cotto`. FDC ID 170132 (SR Legacy, "Water convolvulus, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Completa la coppia crudo/cotto per il kangkong (crudo preparato nel centoduesimo lotto, non ancora eseguito) — gap "stato di cottura mancante su specie già coperta" segnalato come filone residuo dal centoduesimo lotto. Verificato con `grep` su "kangkong.*cott"/"water convolvulus.*cook"/170132, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 20,0kcal, proteine 2,08g, grassi 0,24g, carboidrati 3,70g, fibra 1,90g, calcio 54,0mg, ferro 1,32mg, zinco 0,16mg, magnesio 30,0mg, rame 0,021mg, selenio 0,90µg, sodio 358mg (coerente con "with salt" esplicito nel nome USDA), vitamina C 16,0mg, folato totale 35,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_spinach_boiled` (spinaci bolliti, Golden Set originale, già eseguiti — stessa categoria funzionale "foglia verde cotta"; il crudo `food_spinacio_acqua_raw` è solo "pronto", non ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `spinacio_acqua_cotto` ("Spinacio d'acqua (kangkong), cotto (bollito, con sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa cautela del crudo), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Convolvulaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170132 --food-id=food_spinacio_acqua_cotto \
+  --name-it="Spinacio d'acqua (kangkong), cotto (bollito, con sale)" \
+  --matrix-id=spinacio_acqua_cotto --matrix-description-it="Spinacio d'acqua (kangkong), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170132 --food-id=food_spinacio_acqua_cotto \
+  --name-it="Spinacio d'acqua (kangkong), cotto (bollito, con sale)" \
+  --matrix-id=spinacio_acqua_cotto --matrix-description-it="Spinacio d'acqua (kangkong), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Foglie di taro, cotte (steamed, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_foglie_di_taro_cotte`. FDC ID 168488 (SR Legacy, "Taro leaves, cooked, steamed, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Completa la coppia crudo/cotto per le foglie di taro (crudo preparato nello stesso lotto, non ancora eseguito). Verificato con `grep` su "foglie di taro.*cott"/"taro leaves.*cooked"/168488, zero occorrenze prima della ricerca web.
