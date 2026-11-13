@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Foglie di taro, crude — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_foglie_di_taro_raw`. FDC ID 168487 (SR Legacy, "Taro leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Parte della pianta (foglia) distinta dal tubero già eseguito (`food_taro_raw`, FDC 169308) — stessa specie *Colocasia esculenta*, organo diverso, non un doppione. Primo candidato del filone "verdura a foglia asiatica ancora mancante" raccomandato dal centoduesimo lotto. Verificato con `grep` su "foglie di taro"/"taro leaves"/168487, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 42,0kcal, proteine 4,98g, grassi 0,74g, carboidrati 6,70g, fibra 3,70g, calcio 107mg, ferro 2,25mg, zinco 0,41mg, magnesio 45,0mg, rame 0,27mg, selenio 0,90µg, sodio 3,00mg, vitamina C 52,0mg, folato totale 126µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 2895µg (reale, foglia verde scura), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito), vitamina K 109µg.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguiti — stessa categoria funzionale "foglia verde cruda"; famiglia botanica diversa, Araceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_taro` ("Foglie di taro, crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio moderato ma nessuna fonte diretta sul rapporto oxalato/calcio per questa specie, non assunto per analogia senza verifica dedicata, stessa cautela già applicata a foglie di amaranto/spinacio d'acqua nel centoduesimo lotto), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168487 --food-id=food_foglie_di_taro_raw \
+  --name-it="Foglie di taro, crude" \
+  --matrix-id=foglie_di_taro --matrix-description-it="Foglie di taro, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Araceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168487 --food-id=food_foglie_di_taro_raw \
+  --name-it="Foglie di taro, crude" \
+  --matrix-id=foglie_di_taro --matrix-description-it="Foglie di taro, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Araceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
 
 - **food_id**: `food_fagiolini_lunghi_cotti`. FDC ID 169359 (SR Legacy, "Yardlong bean, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Candidato bonus trovato nella stessa ricerca del crudo sotto, stesso filone "legumi/ortaggi asiatici mono-ingrediente mai tentati" (punto 1b, dopo la saturazione confermata dei filoni frattaglie/funghi/alghe nei lotti 65-66/97-99). Verificato con `grep` su "yardlong"/"fagiolini lunghi"/169359, zero occorrenze su tutti e tre i file prima della ricerca web.
