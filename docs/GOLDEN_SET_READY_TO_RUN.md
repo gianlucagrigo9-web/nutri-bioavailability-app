@@ -16,6 +16,126 @@
 
 ## Pronti
 
+### Zuppa di manzo e verdure, in scatola (condensata) — preparato 2026-11-13 dal task (centesimo lotto)
+
+- **food_id**: `food_zuppa_di_manzo_e_verdure`. FDC ID 171163 (SR Legacy, "Soup, vegetable beef, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID canonical confermato dopo fetch (combacia con l'URL), release USDA 2026-04-30). **Corregge un falso negativo del novantottesimo lotto**: quella sessione aveva cercato "zuppa di manzo e verdure"/"beef and vegetables" e segnato ⚠ per assenza di pagina getfoodfacts.com; il nome USDA reale è invece "vegetable beef" (ordine invertito), trovato con una ricerca dedicata su questo termine. Verificato con `grep` su "zuppa di manzo e verdure"/"vegetable beef"/171163, zero occorrenze su tutti e tre i file prima della ricerca web (la riga ⚠ del lotto 98 citava "beef and vegetables", termine diverso da quello che ha dato il match).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 63,0kcal, proteine 4,45g, grassi 1,51g, carboidrati 8,11g, fibra 1,60g, calcio 13,0mg, ferro 0,89mg, zinco 1,23mg, magnesio 5,00mg, rame 0,14mg, selenio 2,20µg, sodio 706mg, vitamina C 1,90mg, folato totale 8,00µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,25µg, beta-carotene 1618µg (reale, alto) + alfa-carotene 489µg (reale) + beta-criptoxantina 0µg (esplicito), vitamina K 5,60µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — carne di manzo ingrediente dominante del nome/identità del prodotto).
+- **Categoria dieta**: `meat_fish` (zuppa a base di manzo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_manzo_e_verdure` ("Zuppa di manzo e verdure, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il manzo), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene/alfa-carotene reali e molto alti, verosimilmente da carota/pomodoro nella zuppa — valore troppo alto per essere ignorato, stessa logica già usata per la zuppa di pollo con pasta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — zuppa composita manzo+verdure), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171163 --food-id=food_zuppa_di_manzo_e_verdure \
+  --name-it="Zuppa di manzo e verdure, in scatola (condensata)" \
+  --matrix-id=zuppa_di_manzo_e_verdure --matrix-description-it="Zuppa di manzo e verdure, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171163 --food-id=food_zuppa_di_manzo_e_verdure \
+  --name-it="Zuppa di manzo e verdure, in scatola (condensata)" \
+  --matrix-id=zuppa_di_manzo_e_verdure --matrix-description-it="Zuppa di manzo e verdure, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --carotenoid-matrix-state=cooked_or_disrupted --diet-category=meat_fish --apply
+```
+
+### Zuppa di fagioli con pancetta, in scatola (condensata) — preparato 2026-11-13 dal task (centesimo lotto)
+
+- **food_id**: `food_zuppa_di_fagioli_con_pancetta`. FDC ID 171142 (SR Legacy, "Soup, bean with pork, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Corrisponde al prodotto commerciale "bean with bacon" (Campbell's), USDA usa "pork" generico. Verificato con `grep` su "zuppa di fagioli con pancetta"/"bean with pork"/"bean with bacon"/171142, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 129kcal, proteine 5,88g, grassi 4,42g, carboidrati 17,0g, fibra 5,90g, calcio 60,0mg, ferro 1,53mg, zinco 0,77mg, magnesio 33,0mg, rame 0,30mg, selenio 6,40µg, sodio 672mg, vitamina C 1,20mg, folato totale 24,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,030µg, beta-carotene 336µg + alfa-carotene 118µg (reali, da verdure del soffritto) + beta-criptoxantina 0µg (esplicito), vitamina K 2,40µg.
+- **Analogia usata**: `food_pancetta_raw` (pancetta/bacon di maiale, già eseguita sul DB reale — ingrediente di carne che rende il prodotto non vegetariano, stessa convenzione già usata per zuppa di pollo con pasta: analogia di carne usata per `is_heme_iron` anche quando il legume è l'ingrediente dominante per massa).
+- **Categoria dieta**: `meat_fish` (contiene pancetta/maiale — non vegetariano, non vegano; non ambiguo, ingrediente di carne dichiarato nel nome del prodotto USDA).
+- **Matrice**: nuova `zuppa_di_fagioli_con_pancetta` ("Zuppa di fagioli con pancetta, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (presenza di pancetta/maiale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — zuppa composita legumi+verdure+carne, non riconducibile a una singola matrice, stessa logica già usata per la zuppa di fagioli neri), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171142 --food-id=food_zuppa_di_fagioli_con_pancetta \
+  --name-it="Zuppa di fagioli con pancetta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_fagioli_con_pancetta --matrix-description-it="Zuppa di fagioli con pancetta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171142 --food-id=food_zuppa_di_fagioli_con_pancetta \
+  --name-it="Zuppa di fagioli con pancetta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_fagioli_con_pancetta --matrix-description-it="Zuppa di fagioli con pancetta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Zuppa di manzo con pasta, in scatola (condensata) — preparato 2026-11-13 dal task (centesimo lotto)
+
+- **food_id**: `food_zuppa_di_manzo_con_pasta`. FDC ID 171539 (SR Legacy, "Soup, beef noodle, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Verificato con `grep` su "zuppa di manzo con pasta"/"beef noodle"/171539, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 67,0kcal, proteine 3,85g, grassi 2,46g, carboidrati 7,16g, fibra 0,60g, calcio 12,0mg, ferro 0,88mg, zinco 1,23mg, magnesio 5,00mg, rame 0,11mg, selenio 5,90µg, sodio 653mg, vitamina C 0,30mg, folato totale 15,0µg, acido folico 12,0µg (esplicito e separato dal folato totale — firma di pasta/noodle di farina arricchita stile USA, stessa convenzione già usata per la zuppa di pollo con pasta: `is_fortified_folate=true`, ingrediente minoritario, non l'identità dell'alimento), vitamina B12 0,16µg, beta-carotene 120µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 1,60µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — ingrediente dominante del nome del prodotto).
+- **Categoria dieta**: `meat_fish` (zuppa a base di manzo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_manzo_con_pasta` ("Zuppa di manzo con pasta, in scatola (condensata)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il manzo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma modesto, zuppa composita non riconducibile a una singola matrice), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate=true` (vedi nota sopra).
+
+```
+npm run add-food -- --fdc-id=171539 --food-id=food_zuppa_di_manzo_con_pasta \
+  --name-it="Zuppa di manzo con pasta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_manzo_con_pasta --matrix-description-it="Zuppa di manzo con pasta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171539 --food-id=food_zuppa_di_manzo_con_pasta \
+  --name-it="Zuppa di manzo con pasta, in scatola (condensata)" \
+  --matrix-id=zuppa_di_manzo_con_pasta --matrix-description-it="Zuppa di manzo con pasta, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
+### Zuppa di manzo e orzo, in scatola (pronta all'uso) — preparato 2026-11-13 dal task (centesimo lotto)
+
+- **food_id**: `food_zuppa_di_manzo_e_orzo`. FDC ID 174073 (SR Legacy, "Soup, beef barley, ready to serve" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30; a differenza delle altre zuppe di questo lotto è "ready to serve", non "condensed" — nessun record condensed trovato per questa variante). Verificato con `grep` su "zuppa di manzo e orzo"/"beef barley"/174073, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 52,0kcal, proteine 2,81g, grassi 0,96g, carboidrati 7,94g, fibra 0,90g, calcio 11,0mg, ferro 0,45mg, zinco 0,50mg, magnesio 9,00mg, rame 0,058mg, selenio 2,20µg, sodio 297mg, vitamina C 0,50mg, folato totale 11,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento — l'orzo non è una farina arricchita stile USA), vitamina B12 0,15µg, beta-carotene 139µg + alfa-carotene 58,0µg (reali, da verdure del soffritto) + beta-criptoxantina 0µg (esplicito), vitamina K 0,40µg.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo, già eseguita sul DB reale — ingrediente dominante del nome del prodotto).
+- **Categoria dieta**: `meat_fish` (zuppa a base di manzo — non vegetariano, non vegano).
+- **Matrice**: nuova `zuppa_di_manzo_e_orzo` ("Zuppa di manzo e orzo, in scatola (pronta all'uso)").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il manzo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma modesto, zuppa composita non riconducibile a una singola matrice, stessa logica della zuppa di manzo con pasta sopra), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto composito), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174073 --food-id=food_zuppa_di_manzo_e_orzo \
+  --name-it="Zuppa di manzo e orzo, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_manzo_e_orzo --matrix-description-it="Zuppa di manzo e orzo, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174073 --food-id=food_zuppa_di_manzo_e_orzo \
+  --name-it="Zuppa di manzo e orzo, in scatola (pronta all'uso)" \
+  --matrix-id=zuppa_di_manzo_e_orzo --matrix-description-it="Zuppa di manzo e orzo, in scatola (pronta all'uso)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Zuppa di asparagi, crema, in scatola (condensata) — preparato 2026-11-13 dal task (centesimo lotto)
+
+- **food_id**: `food_zuppa_di_asparagi_crema`. FDC ID 171537 (SR Legacy, "Soup, cream of asparagus, canned, condensed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Verificato con `grep` su "zuppa di asparagi crema"/"cream of asparagus"/171537, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 69,0kcal, proteine 1,82g, grassi 3,26g, carboidrati 8,52g, fibra 0,40g, calcio 23,0mg, ferro 0,64mg, zinco 0,70mg, magnesio 3,00mg, rame 0,10mg, selenio 1,90µg, sodio 669mg, vitamina C 2,20mg, folato totale 19,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0,040µg, beta-carotene 256µg + alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 22,0µg.
+- **Analogia usata**: `food_asparagi_raw` (asparagi, già eseguiti sul DB reale — ingrediente dominante nel nome del prodotto; la categoria dieta è comunque determinata dalla base di panna/latte, stessa logica già usata per besciamella/zuppa di patate crema/zuppa di cipolla crema).
+- **Categoria dieta**: `egg_dairy` (base di panna/latte — vegetariano sì, vegano no; nessun ingrediente di carne).
+- **Matrice**: nuova `zuppa_di_asparagi_crema` ("Zuppa di asparagi, crema, in scatola (condensata)").
+- **Attributi**: `is_heme_iron` omesso (false — nessun ingrediente animale non caseario), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma non riconducibile a una singola matrice, prodotto misto asparagi+latticini, stessa logica già usata per zuppa di patate/cipolla crema), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto asparagi+latticini), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171537 --food-id=food_zuppa_di_asparagi_crema \
+  --name-it="Zuppa di asparagi, crema, in scatola (condensata)" \
+  --matrix-id=zuppa_di_asparagi_crema --matrix-description-it="Zuppa di asparagi, crema, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171537 --food-id=food_zuppa_di_asparagi_crema \
+  --name-it="Zuppa di asparagi, crema, in scatola (condensata)" \
+  --matrix-id=zuppa_di_asparagi_crema --matrix-description-it="Zuppa di asparagi, crema, in scatola (condensata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Galette di riso integrale, non salate — preparato 2026-11-13 dal task (novantanovesimo lotto)
 
 - **food_id**: `food_galette_di_riso`. FDC ID 170250 (SR Legacy, "Snacks, rice cakes, brown rice, plain, unsalted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch (nessuna discrepanza canonical), release USDA 2026-04-30). Primo alimento del gruppo "snack da cereali soffiati" in questa pipeline. Verificato con `grep` dedicato su "galette di riso"/"rice cake"/170250, zero occorrenze su tutti e tre i file prima della ricerca web.
