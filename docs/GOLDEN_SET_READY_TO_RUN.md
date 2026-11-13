@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Foglie di rapa, cotte (bollite, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_foglie_di_rapa_cotte`. FDC ID 170466 (SR Legacy, "Turnip greens, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_foglie_di_rapa_raw`, FDC 170061, è già "pronto" dal quarantaseiesimo lotto, non ancora eseguito). Verificato con `grep` su "foglie di rapa.*cott"/"turnip greens.*cook"/170466, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 20,0kcal, proteine 1,14g, grassi 0,23g, carboidrati 4,36g, fibra 3,50g, calcio 137mg, ferro 0,80mg, zinco 0,14mg, magnesio 22,0mg, rame 0,25mg, selenio 0,90µg, sodio 29,0mg (coerente con "senza sale"), vitamina C 27,4mg, folato totale 118µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 4575µg (reale, alto, coerente con foglia verde scura), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito), vitamina K 368µg.
+- **Analogia usata**: `food_broccoli_boiled` (broccoli bolliti, Golden Set originale, già eseguiti — stessa famiglia Brassicaceae, stesso stato di cottura; il crudo di questa specie è solo "pronto", usava `food_kale_raw` come analogia, nessuna coppia cotta di kale disponibile come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_rapa_cotte` ("Foglie di rapa, cotte (bollite, senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170466 --food-id=food_foglie_di_rapa_cotte \
+  --name-it="Foglie di rapa, cotte (bollite, senza sale)" \
+  --matrix-id=foglie_di_rapa_cotte --matrix-description-it="Foglie di rapa, cotte (bollite, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170466 --food-id=food_foglie_di_rapa_cotte \
+  --name-it="Foglie di rapa, cotte (bollite, senza sale)" \
+  --matrix-id=foglie_di_rapa_cotte --matrix-description-it="Foglie di rapa, cotte (bollite, senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolo cinese (pak choi), cotto (bollito, con sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_cavolo_cinese_cotto`. FDC ID 168517 (SR Legacy, "Cabbage, chinese (pak-choi), cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo già eseguito (`food_cavolo_cinese_raw`, FDC 2685572 "Cabbage, bok choy, raw") è un record Foundation Foods, mentre questo cotto è un record SR Legacy distinto — stessa specie (*Brassica rapa* subsp. *chinensis*), lineage FDC diverso, non un problema (già visto altrove in questa pipeline per crudo/cotto della stessa specie). Verificato con `grep` su "pak choi.*cott"/"bok choy.*cook"/"cavolo cinese.*cott"/168517, zero occorrenze prima della ricerca web.
