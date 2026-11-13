@@ -16,6 +16,294 @@
 
 ## Pronti
 
+### Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_fagiolini_lunghi_cotti`. FDC ID 169359 (SR Legacy, "Yardlong bean, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Candidato bonus trovato nella stessa ricerca del crudo sotto, stesso filone "legumi/ortaggi asiatici mono-ingrediente mai tentati" (punto 1b, dopo la saturazione confermata dei filoni frattaglie/funghi/alghe nei lotti 65-66/97-99). Verificato con `grep` su "yardlong"/"fagiolini lunghi"/169359, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 47,0kcal, proteine 2,53g, grassi 0,10g, carboidrati 9,17g, calcio 44,0mg, ferro 0,98mg, zinco 0,36mg, magnesio 42,0mg, rame 0,047mg, selenio 1,50µg, sodio 240mg (coerente con "with salt" esplicito nel nome USDA, non un segnale anomalo), vitamina C 16,2mg, folato totale 45,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano** (non riportati nel record, non assunti zero): fibra, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_chickpeas_boiled` (ceci bolliti, già eseguiti sul DB reale — stessa famiglia botanica Fabaceae, stessa categoria funzionale "legume cotto"; non usato il crudo `food_fagiolini_lunghi_raw` perché preparato nello stesso run, non ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit` (legume/ortaggio).
+- **Matrice**: nuova `fagiolini_lunghi_cotti` ("Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169359 --food-id=food_fagiolini_lunghi_cotti \
+  --name-it="Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale)" \
+  --matrix-id=fagiolini_lunghi_cotti --matrix-description-it="Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169359 --food-id=food_fagiolini_lunghi_cotti \
+  --name-it="Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale)" \
+  --matrix-id=fagiolini_lunghi_cotti --matrix-description-it="Fagiolini lunghi (yardlong bean), cotti (bolliti, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Rafano (daikon), cotto (bollito, con sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_rafano_cotto`. FDC ID 170122 (SR Legacy, "Radishes, oriental, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Solo la variante "with salt" ha una pagina getfoodfacts.com dedicata; nessuna pagina indicizzata trovata per "without salt" nonostante il record esista secondo fonti secondarie — segnalato con trasparenza, sodio 249mg coerente col nome esplicito, non un segnale di salamoia nascosta. Verificato con `grep` su "rafano.*cotto"/"daikon.*cooked"/170122, zero occorrenze reali (il falso positivo del lotto 24 era un refuso di lettura, non una voce vera) su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 17,0kcal, proteine 0,67g, grassi 0,24g, carboidrati 3,43g, fibra 1,60g, calcio 17,0mg, ferro 0,15mg, zinco 0,13mg, magnesio 9,00mg, rame 0,10mg, selenio 0,70µg, sodio 249mg, vitamina C 15,1mg, folato totale 17,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 0,30µg.
+- **Analogia usata**: `food_rafano_raw` (rafano/daikon crudo, già eseguito sul DB reale — stessa specie *Raphanus sativus*, stessa famiglia Brassicaceae).
+- **Categoria dieta**: `plant_non_fruit` (radice vegetale).
+- **Matrice**: nuova `rafano_cotto` ("Rafano (daikon), cotto (bollito, con sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170122 --food-id=food_rafano_cotto \
+  --name-it="Rafano (daikon), cotto (bollito, con sale)" \
+  --matrix-id=rafano_cotto --matrix-description-it="Rafano (daikon), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_rafano_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170122 --food-id=food_rafano_cotto \
+  --name-it="Rafano (daikon), cotto (bollito, con sale)" \
+  --matrix-id=rafano_cotto --matrix-description-it="Rafano (daikon), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_rafano_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Funghi shiitake, cotti (senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_funghi_shiitake_cotti`. FDC ID 168437 (SR Legacy, "Mushrooms, shiitake, cooked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Il crudo (`food_funghi_shiitake_raw`) è già eseguito sul DB reale ma il cotto non era mai stato tentato in questa pipeline nonostante il filone funghi/alghe sia stato dichiarato saturo nei lotti 97-99 — gap genuinamente residuo (stato di cottura mancante, non una nuova specie). Verificato con `grep` su "shiitake.*cott"/"shiitake, cooked"/168437, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 56,0kcal, proteine 1,56g, grassi 0,22g, carboidrati 14,4g, fibra 2,10g, calcio 3,00mg, ferro 0,44mg, zinco 1,33mg, magnesio 14,0mg, rame 0,90mg, selenio 24,8µg, sodio 4,00mg, vitamina C 0,30mg, folato totale 21,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito, coerente con alimento non animale), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti, coerente con un fungo), vitamina K 0µg (esplicito).
+- **Analogia usata**: `food_funghi_shiitake_raw` (shiitake crudo, già eseguito sul DB reale — stessa specie, stesso ciclo raw→cooked già usato per altre verdure in questa coda).
+- **Categoria dieta**: `plant_non_fruit` (convenzione già usata per gli altri funghi di questa pipeline).
+- **Matrice**: nuova `funghi_shiitake_cotti` ("Funghi shiitake, cotti (senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — funghi, nessun carotenoide; tutti espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — funghi non sono piante, stessa convenzione già usata per champignon/shiitake crudo), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168437 --food-id=food_funghi_shiitake_cotti \
+  --name-it="Funghi shiitake, cotti (senza sale)" \
+  --matrix-id=funghi_shiitake_cotti --matrix-description-it="Funghi shiitake, cotti (senza sale)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168437 --food-id=food_funghi_shiitake_cotti \
+  --name-it="Funghi shiitake, cotti (senza sale)" \
+  --matrix-id=funghi_shiitake_cotti --matrix-description-it="Funghi shiitake, cotti (senza sale)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_funghi_shiitake_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Momordica (melone amaro / bitter gourd), cotta (bollita senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_momordica_cotta`. FDC ID 168394 (SR Legacy, "Balsam-pear (bitter gourd), pods, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Il crudo (`food_momordica_raw`) è pronto dal centounesimo lotto ma non ancora eseguito; seguendo la raccomandazione di chiusura di quel lotto (varianti "cotte" delle 5 Cucurbitacee asiatiche appena fatte), questo è il primo dei quattro trovati con record dedicato. Verificato con `grep`, zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 19,0kcal, proteine 0,84g, grassi 0,18g, carboidrati 4,32g, fibra 2,00g, calcio 9,00mg, ferro 0,38mg, zinco 0,77mg, magnesio 16,0mg, rame 0,033mg, selenio 0,20µg, sodio 6,00mg, vitamina C 33,0mg, folato totale 51,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 68,0µg (reale), alfa-carotene 0µg + beta-criptoxantina 0µg (espliciti), vitamina K 4,80µg.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguite — stessa categoria funzionale "verdura cotta con carotenoidi reali").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `momordica_cotta` ("Momordica (melone amaro / bitter gourd), cotta (bollita senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, alimento cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168394 --food-id=food_momordica_cotta \
+  --name-it="Momordica (melone amaro / bitter gourd), cotta (bollita senza sale)" \
+  --matrix-id=momordica_cotta --matrix-description-it="Momordica (melone amaro / bitter gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168394 --food-id=food_momordica_cotta \
+  --name-it="Momordica (melone amaro / bitter gourd), cotta (bollita senza sale)" \
+  --matrix-id=momordica_cotta --matrix-description-it="Momordica (melone amaro / bitter gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_zucca_a_fiasco_cotta`. FDC ID 169233 (SR Legacy, "Gourd, white-flowered (calabash), cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Secondo dei quattro "cotti" Cucurbitacee trovati seguendo la raccomandazione del centounesimo lotto. Verificato con `grep`, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 15,0kcal, proteine 0,60g, grassi 0,020g, carboidrati 3,69g, fibra 1,20g, calcio 24,0mg, ferro 0,25mg, zinco 0,70mg, magnesio 11,0mg, rame 0,026mg, selenio 0,20µg, sodio 2,00mg, vitamina C 8,50mg, folato totale 4,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_carrots_boiled` (già eseguita, stessa categoria funzionale "verdura cotta").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_a_fiasco_cotta` ("Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169233 --food-id=food_zucca_a_fiasco_cotta \
+  --name-it="Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale)" \
+  --matrix-id=zucca_a_fiasco_cotta --matrix-description-it="Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169233 --food-id=food_zucca_a_fiasco_cotta \
+  --name-it="Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale)" \
+  --matrix-id=zucca_a_fiasco_cotta --matrix-description-it="Zucca a fiasco (calabash / bottle gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Luffa (zucca spugna / towelgourd), cotta (bollita senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_luffa_cotta`. FDC ID 168415 (SR Legacy, "Gourd, dishcloth (towelgourd), cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Terzo dei quattro "cotti" Cucurbitacee di questo lotto. Verificato con `grep`, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 56,0kcal, proteine 0,66g, grassi 0,34g, carboidrati 14,3g, fibra 2,90g, calcio 9,00mg, ferro 0,36mg, zinco 0,17mg, magnesio 20,0mg, rame 0,085mg, selenio 0,20µg, sodio 21,0mg, vitamina C 5,70mg, folato totale 12,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), vitamina K 1,70µg. **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_carrots_boiled` (già eseguita).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `luffa_cotta` ("Luffa (zucca spugna / towelgourd), cotta (bollita senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168415 --food-id=food_luffa_cotta \
+  --name-it="Luffa (zucca spugna / towelgourd), cotta (bollita senza sale)" \
+  --matrix-id=luffa_cotta --matrix-description-it="Luffa (zucca spugna / towelgourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168415 --food-id=food_luffa_cotta \
+  --name-it="Luffa (zucca spugna / towelgourd), cotta (bollita senza sale)" \
+  --matrix-id=luffa_cotta --matrix-description-it="Luffa (zucca spugna / towelgourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_zucca_cinese_cotta`. FDC ID 170475 (SR Legacy, "Waxgourd, (chinese preserving melon), cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Quarto dei "cotti" Cucurbitacee di questo lotto. Verificato con `grep`, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 14,0kcal, proteine 0,40g, grassi 0,20g, carboidrati 3,04g, fibra 1,00g, calcio 18,0mg, ferro 0,38mg, zinco 0,59mg, magnesio 10,0mg, rame 0,022mg, selenio 0,20µg, sodio 107mg, vitamina C 10,5mg, folato totale 4,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 2,80µg.
+- **Analogia usata**: `food_carrots_boiled` (già eseguita).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_cinese_cotta` ("Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170475 --food-id=food_zucca_cinese_cotta \
+  --name-it="Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale)" \
+  --matrix-id=zucca_cinese_cotta --matrix-description-it="Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170475 --food-id=food_zucca_cinese_cotta \
+  --name-it="Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale)" \
+  --matrix-id=zucca_cinese_cotta --matrix-description-it="Zucca cinese / fagiolo bianco (wax gourd), cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Radice di loto, cotta (bollita senza sale) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_radice_di_loto_cotta`. FDC ID 168430 (SR Legacy, "Lotus root, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Seguendo la raccomandazione esplicita di chiusura del centounesimo lotto ("verdura Cucurbitaceae ha ancora 1-2 varietà non tentate... zucca amara cinese cotta, se un record 'cooked' distinto esiste"): verificata la disponibilità di un record "cooked" distinto per tutte le 5 Cucurbitacee/radice asiatiche appena fatte crude — trovato per tutte le 5 (radice di loto, momordica, zucca cinese, luffa, zucca a fiasco), filone "cotto" interamente produttivo. Verificato con `grep`, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 66,0kcal, proteine 1,58g, grassi 0,070g, carboidrati 16,0g, fibra 3,10g, calcio 26,0mg, ferro 0,90mg, zinco 0,33mg, magnesio 22,0mg, rame 0,22mg, selenio 0,60µg, sodio 45,0mg, vitamina C 27,4mg, folato totale 8,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 0µg + alfa-carotene 0µg + beta-criptoxantina 0µg (tutti espliciti), vitamina K 0,10µg.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguite — il crudo `food_radice_di_loto_raw` non è ancora eseguito, resta solo "pronto" dal centounesimo lotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `radice_di_loto_cotta` ("Radice di loto, cotta (bollita senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Nelumbonaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168430 --food-id=food_radice_di_loto_cotta \
+  --name-it="Radice di loto, cotta (bollita senza sale)" \
+  --matrix-id=radice_di_loto_cotta --matrix-description-it="Radice di loto, cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168430 --food-id=food_radice_di_loto_cotta \
+  --name-it="Radice di loto, cotta (bollita senza sale)" \
+  --matrix-id=radice_di_loto_cotta --matrix-description-it="Radice di loto, cotta (bollita senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit --apply
+```
+
+### Foglie di amaranto, crude — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_foglie_di_amaranto_raw`. FDC ID 168385 (SR Legacy, "Amaranth leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Verdura a foglia asiatica/africana mai tentata in questa pipeline (filone "verdura a foglia non ancora tracciata", seguendo punto 1b dopo la saturazione di frattaglie/funghi/alghe). Verificato con `grep` su "amaranto"/"amaranth leaves"/168385, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 23,0kcal, proteine 2,46g, grassi 0,33g, carboidrati 4,02g, calcio 215mg (alto, coerente con una foglia verde scura), ferro 2,32mg, zinco 0,90mg, magnesio 55,0mg, rame 0,16mg, selenio 0,90µg, sodio 20,0mg, vitamina C 43,3mg, folato totale 85,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito, coerente con alimento vegetale), vitamina K 1140µg (molto alta, coerente con la letteratura nota su questa specie). **Mancano** (non riportati nel record): fibra, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguiti — stessa famiglia botanica Amaranthaceae, stessa categoria funzionale "foglia verde cruda").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_amaranto` ("Foglie di amaranto, crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio alto ma nessuna fonte diretta sul rapporto oxalato/calcio per questa specie, non assunto per analogia con gli spinaci senza una verifica dedicata), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168385 --food-id=food_foglie_di_amaranto_raw \
+  --name-it="Foglie di amaranto, crude" \
+  --matrix-id=foglie_di_amaranto --matrix-description-it="Foglie di amaranto, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168385 --food-id=food_foglie_di_amaranto_raw \
+  --name-it="Foglie di amaranto, crude" \
+  --matrix-id=foglie_di_amaranto --matrix-description-it="Foglie di amaranto, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Spinacio malabar, cotto (bollito) — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_spinacio_malabar_cotto`. FDC ID 169400 (SR Legacy, "Malabar spinach, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Nessun record "raw" trovato per questa specie in nessuna fonte consultata (solo il cotto è tracciato da USDA) — stessa asimmetria crudo/cotto già documentata più volte in questa pipeline (es. milza di manzo, lotto 65), non un problema di ricerca. Verificato con `grep` su "malabar", zero occorrenze prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 23,0kcal, proteine 2,98g, grassi 0,78g, carboidrati 2,71g, fibra 2,10g, calcio 124mg, ferro 1,48mg, zinco 0,30mg, magnesio 48,0mg, rame 0,11mg, selenio 0,90µg, sodio 55,0mg, vitamina C 5,90mg, folato totale 114µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_spinach_boiled` (spinaci bolliti, Golden Set originale, già eseguiti — stessa categoria funzionale "foglia verde cotta").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `spinacio_malabar` ("Spinacio malabar, cotto (bollito)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Basellaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169400 --food-id=food_spinacio_malabar_cotto \
+  --name-it="Spinacio malabar, cotto (bollito)" \
+  --matrix-id=spinacio_malabar --matrix-description-it="Spinacio malabar, cotto (bollito)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Basellaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169400 --food-id=food_spinacio_malabar_cotto \
+  --name-it="Spinacio malabar, cotto (bollito)" \
+  --matrix-id=spinacio_malabar --matrix-description-it="Spinacio malabar, cotto (bollito)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_spinach_boiled \
+  --botanical-family=Basellaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagiolini lunghi (yardlong bean), crudi — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_fagiolini_lunghi_raw`. FDC ID 169222 (SR Legacy, "Yardlong bean, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Legume a baccello asiatico (*Vigna unguiculata* subsp. *sesquipedalis*) mai tentato in questa pipeline, distinto dai fagiolini verdi comuni (snap beans, non ancora presenti nemmeno loro) e dai fagioli dall'occhio secchi già eseguiti (stessa specie, parte diversa della pianta). Verificato con `grep` su "yardlong"/"fagiolini lunghi"/169222, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 47,0kcal, proteine 2,80g, grassi 0,40g, carboidrati 8,35g, calcio 50,0mg, ferro 0,47mg, zinco 0,37mg, magnesio 44,0mg, rame 0,048mg, selenio 1,50µg, sodio 4,00mg, vitamina C 18,8mg, folato totale 62,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano**: fibra, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_chickpeas_raw` (ceci crudi, Golden Set originale, già eseguiti — stessa famiglia botanica Fabaceae, nessun legume a baccello fresco ancora eseguito da usare come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagiolini_lunghi` ("Fagiolini lunghi (yardlong bean), crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169222 --food-id=food_fagiolini_lunghi_raw \
+  --name-it="Fagiolini lunghi (yardlong bean), crudi" \
+  --matrix-id=fagiolini_lunghi --matrix-description-it="Fagiolini lunghi (yardlong bean), crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169222 --food-id=food_fagiolini_lunghi_raw \
+  --name-it="Fagiolini lunghi (yardlong bean), crudi" \
+  --matrix-id=fagiolini_lunghi --matrix-description-it="Fagiolini lunghi (yardlong bean), crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_chickpeas_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Spinacio d'acqua (water spinach / kangkong), crudo — preparato 2026-11-13 dal task (centoduesimo lotto)
+
+- **food_id**: `food_spinacio_acqua_raw`. FDC ID 169301 (SR Legacy, "Water convolvulus, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Verdura a foglia acquatica asiatica (*Ipomoea aquatica*) mai tentata in questa pipeline, primo candidato del centoduesimo lotto dopo la verifica che i filoni "frattaglie di carne esotiche residue" e "alghe/funghi di nicchia" (entrambi suggeriti dal centounesimo lotto) sono in realtà già dichiarati saturi nei lotti 20/65-66/97-99 — pivot a un filone genuinamente nuovo (verdura a foglia/legumi asiatici mai tracciati). Verificato con `grep` su "spinacio d'acqua"/"water spinach"/"kangkong"/169301, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 19,0kcal, proteine 2,60g, grassi 0,20g, carboidrati 3,13g, fibra 2,10g, calcio 77,0mg, ferro 1,67mg, zinco 0,18mg, magnesio 71,0mg, rame 0,023mg, selenio 0,90µg, sodio 113mg, vitamina C 55,0mg, folato totale 57,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito). **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K (il record riporta Vitamina A RAE 315µg come segnale indiretto, ma nessun carotenoide singolo).
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguiti — stessa categoria funzionale "foglia verde cruda", famiglia botanica diversa Convolvulaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `spinacio_acqua` ("Spinacio d'acqua (water spinach / kangkong), crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio moderato, nessuna fonte diretta sul rapporto oxalato per questa specie), `carotenoid_matrix_state` omesso (NULL — nessun dato sui carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Convolvulaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169301 --food-id=food_spinacio_acqua_raw \
+  --name-it="Spinacio d'acqua (water spinach / kangkong), crudo" \
+  --matrix-id=spinacio_acqua --matrix-description-it="Spinacio d'acqua (water spinach / kangkong), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169301 --food-id=food_spinacio_acqua_raw \
+  --name-it="Spinacio d'acqua (water spinach / kangkong), crudo" \
+  --matrix-id=spinacio_acqua --matrix-description-it="Spinacio d'acqua (water spinach / kangkong), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Zucca a fiasco (calabash / bottle gourd), cruda — preparato 2026-11-13 dal task (centounesimo lotto)
 
 - **food_id**: `food_zucca_a_fiasco_raw`. FDC ID 169232 (SR Legacy, "Gourd, white-flowered (calabash), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Quinto candidato mono-ingrediente non lavorato di questo lotto, stesso filone Cucurbitaceae asiatico di momordica/zucca cinese/luffa appena fatte sopra. Verificato con `grep` su "zucca a fiasco"/"calabash"/"bottle gourd"/169232, zero occorrenze su tutti e tre i file prima della ricerca web.
