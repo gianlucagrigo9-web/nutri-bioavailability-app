@@ -16,6 +16,188 @@
 
 ## Pronti
 
+### Trota (iridea), allevata, cotta (calore secco) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_trota_cotta`. FDC ID 173718 (SR Legacy, "Fish, trout, rainbow, farmed, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). **Risolve anche un gap dichiarato in precedenza**: la voce cruda `food_trota_raw` (FDC 173717, "pronto" dal lotto 46) aveva solo inferito il dataType per adiacenza numerica col cotto 173718, mai confermato direttamente — oggi confermato "SR Legacy" esplicitamente sulla pagina del cotto, stesso range id.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 168kcal, proteine 23,8g, grassi 7,38g, carboidrati 0g, fibra 0g, calcio 30,0mg, ferro 0,36mg, zinco 0,54mg, magnesio 30,0mg, rame 0,055mg, selenio 28,1µg, sodio 61,0mg, vitamina C 2,90mg, folato totale 12,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 4,11µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (coerente con un pesce), vitamina K 0,10µg.
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo cotto a calore secco, già eseguito sul DB reale — stessa categoria "pesce cotto a calore secco", 17/17 come la trota; il crudo di questa specie è solo "pronto", quindi non usabile come analogia eseguita).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `trota_cotta` ("Trota (iridea), allevata, cotta").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_merluzzo_cotto`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile — prodotto animale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173718 --food-id=food_trota_cotta \
+  --name-it="Trota (iridea), allevata, cotta" \
+  --matrix-id=trota_cotta --matrix-description-it="Trota (iridea), allevata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173718 --food-id=food_trota_cotta \
+  --name-it="Trota (iridea), allevata, cotta" \
+  --matrix-id=trota_cotta --matrix-description-it="Trota (iridea), allevata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Ostrica del Pacifico, cotta (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_ostrica_pacifico_cotta`. FDC ID 174250 (SR Legacy, "Mollusks, oyster, Pacific, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_ostrica_pacifico_raw` (FDC 174219) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 163kcal, proteine 18,9g, grassi 4,60g, carboidrati 9,90g, fibra 0g, calcio 16,0mg, ferro 9,20mg, zinco 33,2mg (molto alto, coerente con la specie — il crudo era già 16,6mg, la concentrazione per perdita d'acqua in cottura è plausibile), magnesio 44,0mg, rame 2,68mg, selenio 154µg, sodio 212mg, vitamina C 12,8mg, folato totale 15,0µg, acido folico 0µg (esplicito), vitamina B12 28,8µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti, vitamina K 0,10µg.
+- **Analogia usata**: `food_ostriche_cotte` (ostrica orientale/atlantica, cotta a calore secco, già eseguita sul DB reale — stesso genere *Crassostrea*, stessa categoria "mollusco bivalve cotto"; il crudo della specie del Pacifico è solo "pronto", non usabile come analogia eseguita).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ostrica_pacifico_cotta` ("Ostrica del Pacifico, cotta").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_ostriche_cotte`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174250 --food-id=food_ostrica_pacifico_cotta \
+  --name-it="Ostrica del Pacifico, cotta" \
+  --matrix-id=ostrica_pacifico_cotta --matrix-description-it="Ostrica del Pacifico, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174250 --food-id=food_ostrica_pacifico_cotta \
+  --name-it="Ostrica del Pacifico, cotta" \
+  --matrix-id=ostrica_pacifico_cotta --matrix-description-it="Ostrica del Pacifico, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Buccina (whelk), cotta (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_buccina_cotta`. FDC ID 171984 (SR Legacy, "Mollusks, whelk, unspecified, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_buccina_raw` (FDC 171983) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **13/17** — mancano `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` e `vitamin_k_mcg` (non riportati sul record, coerente con un mollusco — il crudo aveva invece questi valori 0µg espliciti; qui semplicemente assenti dalla tabella, non assunti zero). Per 100g: energia 275kcal, proteine 47,7g, grassi 0,80g, carboidrati 15,5g, fibra 0g, calcio 113mg, ferro 10,1mg, zinco 3,26mg, magnesio 172mg, rame 2,06mg, selenio 89,6µg, sodio 412mg, vitamina C 6,80mg, folato totale 11,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 18,1µg.
+- **Analogia usata**: `food_ostriche_cotte` (ostrica cotta, già eseguita sul DB reale — stessa categoria "mollusco cotto", stesso identico gap di carotenoidi/vitamina K).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `buccina_cotta` ("Buccina, cotta").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_ostriche_cotte`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171984 --food-id=food_buccina_cotta \
+  --name-it="Buccina, cotta" \
+  --matrix-id=buccina_cotta --matrix-description-it="Buccina, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171984 --food-id=food_buccina_cotta \
+  --name-it="Buccina, cotta" \
+  --matrix-id=buccina_cotta --matrix-description-it="Buccina, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Granchio Dungeness, cotto (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_granchio_dungeness_cotto`. FDC ID 172007 (SR Legacy, "Crustaceans, crab, dungeness, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_granchio_dungeness_raw` (FDC 171968) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **13/17** — mancano `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` e `vitamin_k_mcg` (non riportati sul record, coerente con un crostaceo, stesso identico gap del crudo). Per 100g: energia 110kcal, proteine 22,3g, grassi 1,24g, carboidrati 0,95g, fibra 0g, calcio 59,0mg, ferro 0,43mg, zinco 5,47mg, magnesio 58,0mg, rame 0,73mg, selenio 47,6µg, sodio 378mg, vitamina C 3,60mg, folato totale 42,0µg, acido folico 0µg (esplicito), vitamina B12 10,4µg.
+- **Analogia usata**: `food_granchio_cotto` (granchio blu, cotto, già eseguito sul DB reale — stessa categoria "granchio cotto", stesso identico gap; il crudo Dungeness stesso resta solo "pronto", non usabile come analogia eseguita).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `granchio_dungeness_cotto` ("Granchio Dungeness, cotto").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_granchio_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172007 --food-id=food_granchio_dungeness_cotto \
+  --name-it="Granchio Dungeness, cotto" \
+  --matrix-id=granchio_dungeness_cotto --matrix-description-it="Granchio Dungeness, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172007 --food-id=food_granchio_dungeness_cotto \
+  --name-it="Granchio Dungeness, cotto" \
+  --matrix-id=granchio_dungeness_cotto --matrix-description-it="Granchio Dungeness, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Granchio reale (Alaska king crab), cotto (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_granchio_reale_cotto`. FDC ID 174202 (SR Legacy, "Crustaceans, crab, alaska king, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_granchio_reale_raw` (FDC 175164) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **13/17** — mancano `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` e `vitamin_k_mcg` (non riportati, stesso identico gap del crudo). Per 100g: energia 97,0kcal, proteine 19,4g, grassi 1,54g, carboidrati 0g, fibra 0g, calcio 59,0mg, ferro 0,76mg, zinco 7,62mg, magnesio 63,0mg, rame 1,18mg, selenio 40,0µg, sodio 1072mg (alto ma coerente con un crostaceo cotto in acqua salata), vitamina C 7,60mg, folato totale 51,0µg, acido folico 0µg (esplicito), vitamina B12 11,5µg.
+- **Analogia usata**: `food_granchio_cotto` (granchio blu, cotto, già eseguito sul DB reale — stessa categoria "granchio cotto", stesso identico gap; il crudo king crab resta solo "pronto").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `granchio_reale_cotto` ("Granchio reale (Alaska king crab), cotto").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_granchio_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174202 --food-id=food_granchio_reale_cotto \
+  --name-it="Granchio reale (Alaska king crab), cotto" \
+  --matrix-id=granchio_reale_cotto --matrix-description-it="Granchio reale (Alaska king crab), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174202 --food-id=food_granchio_reale_cotto \
+  --name-it="Granchio reale (Alaska king crab), cotto" \
+  --matrix-id=granchio_reale_cotto --matrix-description-it="Granchio reale (Alaska king crab), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Aragosta, cotta (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_aragosta_cotta`. FDC ID 172009 (SR Legacy, "Crustaceans, spiny lobster, mixed species, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_aragosta_raw` (FDC 174211) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **13/17** — mancano `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` e `vitamin_k_mcg` (non riportati, stesso identico gap del crudo). Per 100g: energia 143kcal, proteine 26,4g, grassi 1,94g, carboidrati 3,12g, fibra 0g, calcio 63,0mg, ferro 1,41mg, zinco 7,27mg, magnesio 51,0mg, rame 0,41mg, selenio 59,2µg, sodio 227mg, vitamina C 2,10mg, folato totale 1,00µg, acido folico 0µg (esplicito), vitamina B12 4,04µg.
+- **Analogia usata**: `food_astice_cotto` (astice, cotto, già eseguito sul DB reale — stesso ordine Decapoda, categoria "crostaceo marino cotto senza guscio calcificato come i molluschi", stesso identico gap; il crudo aragosta resta solo "pronto", lo stesso ragionamento già usato per il crudo stesso).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `aragosta_cotta` ("Aragosta, cotta").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_astice_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172009 --food-id=food_aragosta_cotta \
+  --name-it="Aragosta, cotta" \
+  --matrix-id=aragosta_cotta --matrix-description-it="Aragosta, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_astice_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172009 --food-id=food_aragosta_cotta \
+  --name-it="Aragosta, cotta" \
+  --matrix-id=aragosta_cotta --matrix-description-it="Aragosta, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_astice_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Gambero di fiume (crayfish), cotto (calore umido) — preparato 2026-11-13 dal task (centoquattresimo lotto)
+
+- **food_id**: `food_gambero_di_fiume_cotto`. FDC ID 175170 (SR Legacy, "Crustaceans, crayfish, mixed species, farmed, cooked, moist heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Gap "stato di cottura mancante": il crudo `food_gambero_di_fiume_raw` (FDC 175169) è già "pronto" dal quarantasettesimo lotto, non ancora eseguito.
+- **Nutrienti**: **13/17** — mancano `beta_carotene_mcg`, `other_provitamin_a_carotenoids_mcg` e `vitamin_k_mcg` (non riportati, stesso identico gap del crudo). Per 100g: energia 87,0kcal, proteine 17,5g, grassi 1,30g, carboidrati 0g, fibra 0g, calcio 51,0mg, ferro 1,11mg, zinco 1,48mg, magnesio 33,0mg, rame 0,58mg, selenio 34,2µg, sodio 97,0mg, vitamina C 0,50mg, folato totale 11,0µg, acido folico 0µg (esplicito), vitamina B12 3,10µg.
+- **Analogia usata**: `food_granchio_cotto` (granchio, cotto, già eseguito sul DB reale — stesso ordine Decapoda, categoria "crostaceo cotto", stesso identico gap; il crudo gambero di fiume resta solo "pronto", stesso ragionamento già usato per il crudo stesso).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `gambero_di_fiume_cotto` ("Gambero di fiume, cotto").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_granchio_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175170 --food-id=food_gambero_di_fiume_cotto \
+  --name-it="Gambero di fiume, cotto" \
+  --matrix-id=gambero_di_fiume_cotto --matrix-description-it="Gambero di fiume, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175170 --food-id=food_gambero_di_fiume_cotto \
+  --name-it="Gambero di fiume, cotto" \
+  --matrix-id=gambero_di_fiume_cotto --matrix-description-it="Gambero di fiume, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Foglie di rapa, cotte (bollite, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_foglie_di_rapa_cotte`. FDC ID 170466 (SR Legacy, "Turnip greens, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_foglie_di_rapa_raw`, FDC 170061, è già "pronto" dal quarantaseiesimo lotto, non ancora eseguito). Verificato con `grep` su "foglie di rapa.*cott"/"turnip greens.*cook"/170466, zero occorrenze prima della ricerca web.
