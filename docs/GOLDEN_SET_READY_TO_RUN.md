@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cavolo cinese (pak choi), cotto (bollito, con sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_cavolo_cinese_cotto`. FDC ID 168517 (SR Legacy, "Cabbage, chinese (pak-choi), cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo già eseguito (`food_cavolo_cinese_raw`, FDC 2685572 "Cabbage, bok choy, raw") è un record Foundation Foods, mentre questo cotto è un record SR Legacy distinto — stessa specie (*Brassica rapa* subsp. *chinensis*), lineage FDC diverso, non un problema (già visto altrove in questa pipeline per crudo/cotto della stessa specie). Verificato con `grep` su "pak choi.*cott"/"bok choy.*cook"/"cavolo cinese.*cott"/168517, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 12,0kcal, proteine 1,56g, grassi 0,16g, carboidrati 1,78g, fibra 1,00g, calcio 93,0mg, ferro 1,04mg, zinco 0,17mg, magnesio 11,0mg, rame 0,019mg, selenio 0,40µg, sodio 270mg (coerente con "with salt" esplicito nel nome USDA), vitamina C 26,0mg, folato totale 41,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 2549µg (reale), alfa-carotene 1,00µg (reale), beta-criptoxantina 0µg (esplicito), vitamina K 34,0µg.
+- **Analogia usata**: `food_broccoli_boiled` (broccoli bolliti, Golden Set originale, già eseguiti — stessa famiglia Brassicaceae, stesso stato di cottura; il crudo `food_cavolo_cinese_raw`, già eseguito sul DB reale, usava a sua volta `food_broccoli_raw` come analogia, stesso precedente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cavolo_cinese_cotto` ("Cavolo cinese (pak choi), cotto (bollito, con sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (carotenoidi reali, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168517 --food-id=food_cavolo_cinese_cotto \
+  --name-it="Cavolo cinese (pak choi), cotto (bollito, con sale)" \
+  --matrix-id=cavolo_cinese_cotto --matrix-description-it="Cavolo cinese (pak choi), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168517 --food-id=food_cavolo_cinese_cotto \
+  --name-it="Cavolo cinese (pak choi), cotto (bollito, con sale)" \
+  --matrix-id=cavolo_cinese_cotto --matrix-description-it="Cavolo cinese (pak choi), cotto (bollito, con sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cavolo collard, cotto (bollito, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_cavolo_collard_cotto`. FDC ID 170407 (SR Legacy, "Collards, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_cavolo_collard_raw`, FDC 170406, è già "pronto" dal quarantaseiesimo lotto; il surgelato `food_cavolo_collard_surgelato` è già eseguito con analogia diversa). Verificato con `grep` su "cavolo collard.*cott"/"collard.*cook"/170407, zero occorrenze prima della ricerca web.
