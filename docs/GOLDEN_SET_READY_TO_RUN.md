@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Formaggio svizzero, processato, pastorizzato — preparato 2026-11-13 dal task (novantaseiesimo lotto)
+
+- **food_id**: `food_formaggio_svizzero_processato_raw`. FDC ID 170855 (SR Legacy, "Cheese, pasteurized process, swiss" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinto dal formaggio svizzero/emmental naturale già eseguito (`food_formaggio_svizzero_raw`, record diverso, pasta naturale non processata): qui il formaggio fuso/processato in fette tipo "deli", stesso filone del formaggio americano processato appena aperto in questo stesso lotto. Verificato con `grep` dedicato ("formaggio svizzero processato"/FDC 170855), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 334kcal, proteine 24,7g, grassi 25,0g, carboidrati 2,10g, fibra 0g esplicito, calcio 772mg, ferro 0,61mg, zinco 3,61mg, magnesio 29,0mg, rame 0,027mg, selenio 15,9µg, sodio 1.370mg, vitamina C 0mg esplicito, vitamina B12 1,23µg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 2,20µg, beta-carotene 63,0µg (reale) + alfa-carotene 0µg esplicito + beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino USA", stessa analogia già usata con successo per Monterey Jack/Colby/americano in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_svizzero_processato` ("Formaggio svizzero, processato, pastorizzato").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170855 --food-id=food_formaggio_svizzero_processato_raw \
+  --name-it="Formaggio svizzero, processato, pastorizzato" \
+  --matrix-id=formaggio_svizzero_processato --matrix-description-it="Formaggio svizzero, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170855 --food-id=food_formaggio_svizzero_processato_raw \
+  --name-it="Formaggio svizzero, processato, pastorizzato" \
+  --matrix-id=formaggio_svizzero_processato --matrix-description-it="Formaggio svizzero, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Prosciutto di tacchino, affettato, extra lean (deli) — preparato 2026-11-13 dal task (novantaseiesimo lotto)
+
+- **food_id**: `food_prosciutto_di_tacchino`. FDC ID 168092 (SR Legacy, "Ham, turkey, sliced, extra lean, prepackaged or deli" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Filone nuovo (salume/cold-cut mono-specie mai tentato per il tacchino, nonostante prosciutto cotto di maiale, mortadella, wurstel e tacchino affumicato petto/dorso già ✅): verificato con `grep` dedicato ("prosciutto di tacchino"/"turkey ham"/FDC 168092), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 134kcal, proteine 19,6g, grassi 5,80g, carboidrati 0,93g, fibra 0g esplicito, calcio 5,00mg, ferro 1,35mg, zinco 2,36mg, magnesio 20,0mg, rame 0,11mg, selenio 37,0µg, sodio 1.038mg (alto, coerente con un salume cotto/salato pronto al consumo), vitamina C 0mg esplicito, vitamina B12 0,26µg, folato totale 6,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto di maiale, già eseguito sul DB reale — stessa categoria funzionale "salume cotto/affumicato pronto al consumo, affettato", stessa analogia già usata con successo per knockwurst/sub sandwich/croissant in questa pipeline).
+- **Categoria dieta**: `meat_fish` (carne di tacchino, esplicita nel nome).
+- **Matrice**: nuova `prosciutto_di_tacchino` ("Prosciutto di tacchino, affettato, extra lean").
+- **Attributi**: `is_heme_iron` (flag attivo — carne, per analogia con `food_prosciutto_cotto`), `matrix_category_calcium` omesso (NULL — non applicabile, salume), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale, carotenoidi comunque tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (salume cotto pronto al consumo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168092 --food-id=food_prosciutto_di_tacchino \
+  --name-it="Prosciutto di tacchino, affettato, extra lean (deli)" \
+  --matrix-id=prosciutto_di_tacchino --matrix-description-it="Prosciutto di tacchino, affettato, extra lean" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168092 --food-id=food_prosciutto_di_tacchino \
+  --name-it="Prosciutto di tacchino, affettato, extra lean (deli)" \
+  --matrix-id=prosciutto_di_tacchino --matrix-description-it="Prosciutto di tacchino, affettato, extra lean" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Formaggio americano, processato, pastorizzato — preparato 2026-11-13 dal task (novantaseiesimo lotto)
+
+- **food_id**: `food_formaggio_americano_raw`. FDC ID 171289 (SR Legacy, "Cheese product, pasteurized process, American, vitamin D fortified" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Filone nuovo (formaggio USA processato mai tentato, distinto da cheddar/Colby/Monterey Jack/svizzero/gouda/edam/gruyère/Muenster già ✅, stesso genere di prodotto "formaggio da banco USA" ma processato/fuso invece che a pasta naturale): verificato con `grep` dedicato ("formaggio americano"/"american cheese"/FDC 171289), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 307kcal, proteine 16,1g, grassi 23,1g, carboidrati 8,85g, fibra 0g esplicito, calcio 1.375mg, ferro 0,95mg, zinco 2,21mg, magnesio 34,0mg, rame 0,027mg, selenio 16,2µg, sodio 1.279mg, vitamina C 0mg esplicito, vitamina B12 1,52µg, folato totale 18,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento folato — il prodotto è fortificato in vitamina D, 6,50µg/100g, non in folato/acido folico, quindi `is_fortified_folate=false`), vitamina K (fillochinone) 3,10µg, beta-carotene 248µg (reale) + alfa-carotene 1,00µg (reale) + beta-criptoxantina 23,0µg (reale).
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino USA a pasta semidura", stessa analogia già usata con successo per Monterey Jack/Colby in questa pipeline).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_americano` ("Formaggio americano, processato, pastorizzato").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di Monterey Jack/Colby/svizzero/capra), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (stesso precedente usato per gli altri formaggi non stagionati a lungo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito; la fortificazione dichiarata nel nome del record riguarda la vitamina D, non tracciata da questa pipeline, non il folato).
+
+```
+npm run add-food -- --fdc-id=171289 --food-id=food_formaggio_americano_raw \
+  --name-it="Formaggio americano, processato, pastorizzato" \
+  --matrix-id=formaggio_americano --matrix-description-it="Formaggio americano, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171289 --food-id=food_formaggio_americano_raw \
+  --name-it="Formaggio americano, processato, pastorizzato" \
+  --matrix-id=formaggio_americano --matrix-description-it="Formaggio americano, processato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Panino di pollo, filetto croccante con lattuga e maionese (fast food) — preparato 2026-11-13 dal task (novantacinquesimo lotto)
 
 - **food_id**: `food_panino_pollo_crispy_lattuga_fast_food`. FDC ID 170318 (SR Legacy, categoria USDA "Fast Foods", "Fast Foods, crispy chicken filet sandwich, with lettuce and mayonnaise" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
