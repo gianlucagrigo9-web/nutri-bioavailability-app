@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Panino di pollo, filetto croccante con lattuga e maionese (fast food) — preparato 2026-11-13 dal task (novantacinquesimo lotto)
+
+- **food_id**: `food_panino_pollo_crispy_lattuga_fast_food`. FDC ID 170318 (SR Legacy, categoria USDA "Fast Foods", "Fast Foods, crispy chicken filet sandwich, with lettuce and mayonnaise" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 276kcal, proteine 10,9g, grassi 13,6g, carboidrati 27,4g, fibra 1,40g, calcio 72,0mg, ferro 1,71mg, zinco 0,62mg, magnesio 20,0mg, rame 0,082mg, selenio 19,3µg, sodio 617mg, vitamina C 0,30mg, folato totale 29,0µg, acido folico 20,0µg (esplicito e separato — firma di pane arricchito, ingrediente minoritario, non l'identità dell'alimento: `is_fortified_folate=true`), vitamina B12 0,33µg, beta-carotene 44,0µg (reale, da lattuga/maionese) + alfa-carotene 1,00µg (reale) + beta-criptoxantina 0µg (esplicito), vitamina K 4,60µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — stesso ingrediente di carne, filetto di pollo esplicito nel nome).
+- **Categoria dieta**: `meat_fish` (pollo esplicito nel nome).
+- **Matrice**: nuova `panino_pollo_crispy_lattuga_fast_food`.
+- **Attributi**: `is_heme_iron=true` (pollo reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=170318 --food-id=food_panino_pollo_crispy_lattuga_fast_food \
+  --name-it="Panino di pollo, filetto croccante con lattuga e maionese (fast food)" \
+  --matrix-id=panino_pollo_crispy_lattuga_fast_food --matrix-description-it="Panino di pollo, filetto croccante con lattuga e maionese (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170318 --food-id=food_panino_pollo_crispy_lattuga_fast_food \
+  --name-it="Panino di pollo, filetto croccante con lattuga e maionese (fast food)" \
+  --matrix-id=panino_pollo_crispy_lattuga_fast_food --matrix-description-it="Panino di pollo, filetto croccante con lattuga e maionese (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
+### Panino di pollo, filetto semplice con sottaceti (fast food) — preparato 2026-11-13 dal task (novantacinquesimo lotto)
+
+- **food_id**: `food_panino_pollo_sottaceti_fast_food`. FDC ID 170295 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, chicken fillet sandwich, plain with pickles" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 250kcal, proteine 16,3g, grassi 11,2g, carboidrati 20,9g, fibra 1,40g, calcio 58,0mg, ferro 1,77mg, zinco 0,61mg, magnesio 24,0mg, rame 0,067mg, selenio 19,9µg, sodio 753mg, vitamina C 0,80mg, folato totale 47,0µg, acido folico 12,0µg (esplicito e separato — firma di pane arricchito, ingrediente minoritario: `is_fortified_folate=true`), vitamina B12 0,13µg, beta-carotene 12,0µg + alfa-carotene 2,00µg + beta-criptoxantina 6,00µg (reali, da sottaceti/condimento), vitamina K 8,50µg.
+- **Analogia usata**: `food_petto_di_pollo_raw`.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `panino_pollo_sottaceti_fast_food`.
+- **Attributi**: `is_heme_iron=true`, altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=170295 --food-id=food_panino_pollo_sottaceti_fast_food \
+  --name-it="Panino di pollo, filetto semplice con sottaceti (fast food)" \
+  --matrix-id=panino_pollo_sottaceti_fast_food --matrix-description-it="Panino di pollo, filetto semplice con sottaceti (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170295 --food-id=food_panino_pollo_sottaceti_fast_food \
+  --name-it="Panino di pollo, filetto semplice con sottaceti (fast food)" \
+  --matrix-id=panino_pollo_sottaceti_fast_food --matrix-description-it="Panino di pollo, filetto semplice con sottaceti (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
+### Hamburger, patty unico grande, con condimenti/verdure/maionese (fast food) — preparato 2026-11-13 dal task (novantacinquesimo lotto)
+
+- **food_id**: `food_hamburger_condimenti_fast_food`. FDC ID 173317 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, hamburger; single, large patty; with condiments, vegetables and mayonnaise" — pagina getfoodfacts.com dedicata e pulita).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 226kcal, proteine 11,3g, grassi 12,4g, carboidrati 17,3g, fibra 1,50g, calcio 46,0mg, ferro 2,99mg, zinco 2,46mg, magnesio 18,0mg, rame 0,081mg, selenio 18,2µg, sodio 342mg, vitamina C 0,90mg, folato totale 64,0µg, acido folico 33,0µg (esplicito e separato — firma di pane arricchito, ingrediente minoritario, non l'identità dell'alimento: `is_fortified_folate=true`), vitamina B12 1,21µg, beta-carotene 103µg (reale, da verdure/maionese) + alfa-carotene 15,0µg (reale) + beta-criptoxantina 2,00µg (reale), vitamina K 14,3µg (filloquinone).
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (manzo macinato, carne di manzo esplicita nel nome).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `hamburger_condimenti_fast_food`.
+- **Attributi**: `is_heme_iron=true` (manzo reale), altri attributi categorici omessi (NULL), `baseline_cooking_state=cooked`, `is_fortified_folate=true`.
+
+```
+npm run add-food -- --fdc-id=173317 --food-id=food_hamburger_condimenti_fast_food \
+  --name-it="Hamburger, patty unico grande, con condimenti, verdure e maionese (fast food)" \
+  --matrix-id=hamburger_condimenti_fast_food --matrix-description-it="Hamburger, patty unico grande, con condimenti, verdure e maionese (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173317 --food-id=food_hamburger_condimenti_fast_food \
+  --name-it="Hamburger, patty unico grande, con condimenti, verdure e maionese (fast food)" \
+  --matrix-id=hamburger_condimenti_fast_food --matrix-description-it="Hamburger, patty unico grande, con condimenti, verdure e maionese (fast food)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
 ### Croissant con uovo, formaggio e prosciutto cotto (fast food) — preparato 2026-11-12 dal task (novantaquattresimo lotto)
 
 - **food_id**: `food_croissant_prosciutto_fast_food`. FDC ID 173270 (SR Legacy, categoria USDA "Fast Foods", "Fast foods, croissant, with egg, cheese, and ham" — pagina getfoodfacts.com dedicata e pulita). Decimo e ultimo alimento di questo lotto nel filone "USDA Fast Foods".
