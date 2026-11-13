@@ -16,6 +16,136 @@
 
 ## Pronti
 
+### Fagiano, carne cotta (total edible) — preparato 2026-11-13 dal task (centoseiesimo lotto)
+
+- **food_id**: `food_fagiano_cotto`. FDC ID 169903 (SR Legacy, "Pheasant, cooked, total edible" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo a quello della quaglia cotta già eseguita, FDC 169902). Il crudo (`food_fagiano_raw`, FDC 174473, "meat only", trentaduesimo lotto) era già "pronto"; cotto mai tentato finora. Nota di trasparenza: il cotto è "total edible" (non specificato se con pelle), trim distinto dal "meat only" del crudo — nessun record "meat only, cooked" trovato per questa specie, stessa asimmetria di trim già accettata altre volte in questa pipeline.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 239kcal, proteine 32,4g, grassi 12,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 16,0mg, ferro 1,43mg, zinco 1,37mg, magnesio 22,0mg, rame 0,084mg, selenio 20,7µg, sodio 43,0mg, vitamina C 2,30mg, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,72µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito, vitamina K (fillochinone) 4,90µg.
+- **Analogia usata**: `food_quaglia_carne_cotta` (quaglia, cotta, total edible, FDC 169902, già eseguita sul DB reale — stessa identica convenzione di nome FDC "X, cooked, total edible", ID consecutivo, stesso ordine Galliformes/piccolo volatile da selvaggina).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `fagiano_cotto` ("Fagiano, carne cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_quaglia_carne_cotta`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (il record FDC non specifica un metodo più preciso di "cooked"), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169903 --food-id=food_fagiano_cotto \
+  --name-it="Fagiano, carne cotta (total edible)" \
+  --matrix-id=fagiano_cotto --matrix-description-it="Fagiano, carne cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_quaglia_carne_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169903 --food-id=food_fagiano_cotto \
+  --name-it="Fagiano, carne cotta (total edible)" \
+  --matrix-id=fagiano_cotto --matrix-description-it="Fagiano, carne cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_quaglia_carne_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Struzzo, carne macinata cotta (pan-broiled) — preparato 2026-11-13 dal task (centoseiesimo lotto)
+
+- **food_id**: `food_struzzo_cotto`. FDC ID 174482 (SR Legacy, "Ostrich, ground, cooked, pan-broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo già eseguito... cioè già "pronto", FDC 174481). Stessa forma di consumo (macinato) del crudo sopra, mai tentato il cotto finora.
+- **Nutrienti**: **17/17** (record completo, migliore del crudo che restava 16/17 per la vitamina K mancante). Per 100g: energia 175kcal, proteine 26,1g, grassi 7,07g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,00mg, ferro 3,43mg, zinco 4,33mg, magnesio 23,0mg, rame 0,14mg, selenio 33,5µg, sodio 80,0mg, vitamina C 0mg esplicito, folato totale 14,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 5,74µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito, vitamina K (fillochinone) 3,50µg.
+- **Analogia usata**: `food_beef_ground_cooked` (Golden Set originale, manzo macinato cotto, già eseguito sul DB reale — stessa forma "carne macinata cotta", stessa classificazione nutrizionale "carne rossa per alto contenuto di mioglobina" già dichiarata per `food_struzzo_raw` nel trentaduesimo lotto, qui riconfermata dal ferro 3,43mg/100g).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_cotto` ("Struzzo, carne macinata cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_beef_ground_cooked`/`food_struzzo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (il record FDC specifica "pan-broiled", mappato sul generico "cooked" per coerenza con la stessa convenzione già usata per il pollo macinato "pan-browned" nel settantunesimo lotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174482 --food-id=food_struzzo_cotto \
+  --name-it="Struzzo, carne macinata cotta (pan-broiled)" \
+  --matrix-id=struzzo_cotto --matrix-description-it="Struzzo, carne macinata cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174482 --food-id=food_struzzo_cotto \
+  --name-it="Struzzo, carne macinata cotta (pan-broiled)" \
+  --matrix-id=struzzo_cotto --matrix-description-it="Struzzo, carne macinata cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Emu, carne macinata cotta (pan-broiled) — preparato 2026-11-13 dal task (centoseiesimo lotto)
+
+- **food_id**: `food_emu_cotto`. FDC ID 172833 (SR Legacy, "Emu, ground, cooked, pan-broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo già "pronto", FDC 172832). Stessa forma di consumo (macinato) del crudo sopra, mai tentato il cotto finora.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 163kcal, proteine 28,4g, grassi 4,65g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,00mg, ferro 5,01mg, zinco 4,56mg, magnesio 29,0mg, rame 0,24mg, selenio 43,5µg, sodio 65,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 8,52µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito, vitamina K (fillochinone) 3,60µg.
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile cotta", coerente con la scelta già fatta per `food_emu_raw` nel quarantanovesimo lotto, che preferì l'anatra allo struzzo per lo stesso motivo; qui NON si riusa l'analogia "carne rossa" dello struzzo perché l'emu raw era già stato classificato come pollame, non carne rossa).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `emu_cotto` ("Emu, carne macinata cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=cooked` (stessa mappatura "pan-broiled → cooked" dello struzzo sopra), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172833 --food-id=food_emu_cotto \
+  --name-it="Emu, carne macinata cotta (pan-broiled)" \
+  --matrix-id=emu_cotto --matrix-description-it="Emu, carne macinata cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172833 --food-id=food_emu_cotto \
+  --name-it="Emu, carne macinata cotta (pan-broiled)" \
+  --matrix-id=emu_cotto --matrix-description-it="Emu, carne macinata cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Gallina Cornish (pollo nano), carne cruda (senza pelle) — preparato 2026-11-13 dal task (centoseiesimo lotto)
+
+- **food_id**: `food_gallina_cornish_raw`. FDC ID 171108 (SR Legacy, "Chicken, cornish game hens, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Razza di pollo distinta (Cornish/Cornish Cross, pollo nano da arrosto) mai tentata in questa pipeline nonostante pollo/tacchino/oca/anatra/faraona/quaglia/piccione/fagiano già coperti — verificato con `grep` dedicato su "cornish"/171108/171109, zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 116kcal, proteine 20,0g, grassi 3,33g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 0,74mg, zinco 1,31mg, magnesio 21,0mg, rame 0,053mg, selenio 15,8µg, sodio 68,0mg, vitamina C 0,60mg, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,40µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito, vitamina K (fillochinone) 2,40µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, già eseguito sul DB reale — stessa specie *Gallus gallus*, stessa convenzione già usata per faraona/quaglia/piccione in questa pipeline).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `gallina_cornish` ("Gallina Cornish (pollo nano)").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171108 --food-id=food_gallina_cornish_raw \
+  --name-it="Gallina Cornish (pollo nano), carne cruda (senza pelle)" \
+  --matrix-id=gallina_cornish --matrix-description-it="Gallina Cornish (pollo nano)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171108 --food-id=food_gallina_cornish_raw \
+  --name-it="Gallina Cornish (pollo nano), carne cruda (senza pelle)" \
+  --matrix-id=gallina_cornish --matrix-description-it="Gallina Cornish (pollo nano)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Gallina Cornish (pollo nano), carne e pelle, cotta (arrosto) — preparato 2026-11-13 dal task (centoseiesimo lotto)
+
+- **food_id**: `food_gallina_cornish_con_pelle_cotta`. FDC ID 171107 (SR Legacy, "Chicken, cornish game hens, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Candidato bonus trovato nella stessa ricerca del crudo sopra: nessun record "meat only, cooked" trovato per questa specie/razza (solo "meat and skin, cooked" FDC 171107), stessa asimmetria di trim già vista per il fagiano in questo stesso lotto — non forzato un trim diverso, usato quello realmente disponibile.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 259kcal, proteine 22,3g, grassi 18,2g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 13,0mg, ferro 0,91mg, zinco 1,49mg, magnesio 18,0mg, rame 0,061mg, selenio 15,5µg, sodio 64,0mg, vitamina C 0,50mg, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,28µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito, vitamina K (fillochinone 2,40µg, diidrofillochinone 0µg).
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile cotta"; non disponibile un'analogia "pollo con pelle cotto" già eseguita, tutte le varianti "con pelle" di pollo/tacchino/oca/anatra di questa pipeline sono ancora solo "pronte", non eseguite).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `gallina_cornish_con_pelle_cotta` ("Gallina Cornish (pollo nano), carne e pelle, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted` (il record FDC specifica esplicitamente "roasted", stesso precedente di `food_anatra_cotta`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171107 --food-id=food_gallina_cornish_con_pelle_cotta \
+  --name-it="Gallina Cornish (pollo nano), carne e pelle, cotta (arrosto)" \
+  --matrix-id=gallina_cornish_con_pelle_cotta --matrix-description-it="Gallina Cornish (pollo nano), carne e pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171107 --food-id=food_gallina_cornish_con_pelle_cotta \
+  --name-it="Gallina Cornish (pollo nano), carne e pelle, cotta (arrosto)" \
+  --matrix-id=gallina_cornish_con_pelle_cotta --matrix-description-it="Gallina Cornish (pollo nano), carne e pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Tonno rosso (pinna blu), fresco, cotto (calore secco) — preparato 2026-11-13 dal task (centocinquesimo lotto)
 
 - **food_id**: `food_tonno_rosso_cotto`. FDC ID 173707 (SR Legacy, "Fish, tuna, fresh, bluefin, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Il crudo (`food_tonno_rosso_raw`, FDC 173706, lotto 82) era già "pronto"; stesso lineage FDC, mai tentato il cotto finora.
