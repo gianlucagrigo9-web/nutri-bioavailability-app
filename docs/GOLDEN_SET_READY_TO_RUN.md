@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Broccoli cinesi (gai lan), cotti — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_broccoli_cinesi_cotti`. FDC ID 169392 (SR Legacy, "Broccoli, chinese, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il crudo `food_broccoli_cinesi_raw`, FDC 169404, è già "pronto" dal cinquantacinquesimo lotto, non ancora eseguito). Verificato con `grep` su "broccoli cinesi.*cott"/"gai lan.*cook"/169392, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 22,0kcal, proteine 1,14g, grassi 0,72g, carboidrati 3,81g, fibra 2,50g, calcio 100mg, ferro 0,56mg, zinco 0,39mg, magnesio 18,0mg, rame 0,061mg, selenio 1,30µg, sodio 7,00mg, vitamina C 28,2mg, folato totale 99,0µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 983µg (reale), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito), vitamina K 84,8µg.
+- **Analogia usata**: `food_broccoli_boiled` (broccoli bolliti, Golden Set originale, già eseguiti — stessa famiglia Brassicaceae, stesso stato di cottura; il crudo di questa specie è solo "pronto", non ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `broccoli_cinesi_cotti` ("Broccoli cinesi (gai lan), cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169392 --food-id=food_broccoli_cinesi_cotti \
+  --name-it="Broccoli cinesi (gai lan), cotti" \
+  --matrix-id=broccoli_cinesi_cotti --matrix-description-it="Broccoli cinesi (gai lan), cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169392 --food-id=food_broccoli_cinesi_cotti \
+  --name-it="Broccoli cinesi (gai lan), cotti" \
+  --matrix-id=broccoli_cinesi_cotti --matrix-description-it="Broccoli cinesi (gai lan), cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Nopal (fico d'India, pala), cotto (senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_nopal_cotto`. FDC ID 169388 (SR Legacy, "Nopales, cooked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il nopal crudo è già "pronto" dal quarantaseiesimo lotto, non ancora eseguito). Verificato con `grep` su "nopal.*cott"/"nopales.*cook"/169388, zero occorrenze prima della ricerca web.
