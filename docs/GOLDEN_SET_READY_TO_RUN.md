@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Nopal (fico d'India, pala), cotto (senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
+
+- **food_id**: `food_nopal_cotto`. FDC ID 169388 (SR Legacy, "Nopales, cooked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (il nopal crudo è già "pronto" dal quarantaseiesimo lotto, non ancora eseguito). Verificato con `grep` su "nopal.*cott"/"nopales.*cook"/169388, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 nutrienti completo**. Per 100g: energia 15,0kcal, proteine 1,35g, grassi 0,050g, carboidrati 3,28g, fibra 2,00g, calcio 164mg, ferro 0,50mg, zinco 0,21mg, magnesio 47,0mg, rame 0,049mg, selenio 0,70µg, sodio 20,0mg (coerente con "senza sale", valore naturale non anomalo), vitamina C 5,30mg, folato totale 3,00µg, acido folico 0µg (esplicito), vitamina B12 0µg (esplicito), beta-carotene 242µg (reale), alfa-carotene 47,0µg (reale), beta-criptoxantina 0µg (esplicito), vitamina K 5,10µg.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguite — stessa categoria funzionale "verdura cotta con carotenoidi reali"; il crudo `food_nopal_raw` non è ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `nopal_cotto` ("Nopal (fico d'India, pala), cotto (senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene e alfa-carotene reali, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cactaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169388 --food-id=food_nopal_cotto \
+  --name-it="Nopal (fico d'India, pala), cotto (senza sale)" \
+  --matrix-id=nopal_cotto --matrix-description-it="Nopal (fico d'India, pala), cotto (senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Cactaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169388 --food-id=food_nopal_cotto \
+  --name-it="Nopal (fico d'India, pala), cotto (senza sale)" \
+  --matrix-id=nopal_cotto --matrix-description-it="Nopal (fico d'India, pala), cotto (senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Cactaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Jicama, cotta (bollita, senza sale) — preparato 2026-11-13 dal task (centotreesimo lotto)
 
 - **food_id**: `food_jicama_cotta`. FDC ID 170074 (SR Legacy, "Yambean (jicama), cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta" (la jicama cruda è già "pronta" da un lotto precedente, non ancora eseguita). Verificato con `grep` su "jicama.*cott"/"jicama.*cook"/170074, zero occorrenze prima della ricerca web.
