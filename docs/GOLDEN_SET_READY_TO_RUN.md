@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Formaggio tilsit — preparato 2026-11-14 dal task (centoventiduesimo lotto)
+
+- **food_id**: `food_formaggio_tilsit_raw`. FDC ID 170852 (SR Legacy, "Cheese, tilsit" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, link diretto a `fdc.nal.usda.gov/food-details/170852/nutrients` riportato sulla pagina stessa). Formaggio vaccino a pasta semidura (origine Tilsit/Baltico, diffuso anche in Scandinavia/Svizzera) mai tentato in questa pipeline — verificato con `grep` dedicato, zero occorrenze su tutti i file prima della ricerca web. Nello stesso filone, reblochon/raclette/jarlsberg/appenzeller/chaource/esrom/danbo/comté/stilton/cheshire/wensleydale/morbier/beaufort/vacherin: nessuna pagina getfoodfacts.com dedicata trovata per nessuno (solo Branded monomarca, aggregatori senza FDC ID citato, o record USDA Survey/FNDDS non accettati da questa pipeline — port du salut, FDC 2705732, è "USDA Survey" e scartato per lo stesso motivo) — tutti ⚠, non forzati. Munster (grafia francese) risultato un falso candidato: stesso identico record già usato come `food_formaggio_muenster_*` (grafia americana), già presente nei lotti precedenti — doppione intercettato, zero slot aggiuntivo.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene e beta-criptoxantina (nessuno dei quattro riportato sulla pagina, nonostante la vitamina A RAE sia presente e non nulla a 249µg/100g — stessa incoerenza interna già segnalata per le bacche di sambuco del lotto 116, non forzata). Per 100g: energia 340kcal, proteine 24,4g, grassi 26,0g, carboidrati 1,88g, fibra 0g esplicito, calcio 700mg, ferro 0,23mg, magnesio 13,0mg, zinco 3,50mg, rame 0,026mg, selenio 14,5µg, sodio 753mg (non mappato dal motore, solo per contesto), vitamina C 0mg esplicito, tiamina 0,061mg, riboflavina 0,36mg, niacina 0,20mg, vitamina B6 0,065mg, folato totale 20,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,10µg, vitamina A (RAE) 249µg. Non usato il blocco "Nutrition Facts" per porzione/oncia della pagina (es. calcio 200mg/oz), solo la tabella nativa per 100g.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino a pasta semidura", stessa analogia già usata con successo per limburger nel lotto 121).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_tilsit` ("Formaggio tilsit").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di tutti gli altri formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio, nessun carotenoide comunque riportato qui), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170852 --food-id=food_formaggio_tilsit_raw \
+  --name-it="Formaggio tilsit" \
+  --matrix-id=formaggio_tilsit --matrix-description-it="Formaggio tilsit" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170852 --food-id=food_formaggio_tilsit_raw \
+  --name-it="Formaggio tilsit" \
+  --matrix-id=formaggio_tilsit --matrix-description-it="Formaggio tilsit" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+---
+
 ### Alga musco irlandese (Irish moss), cruda — preparato 2026-11-14 dal task (centoventunesimo lotto)
 
 - **food_id**: `food_alga_musco_irlandese_raw`. FDC ID 168456 (SR Legacy, "Seaweed, irishmoss, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Alga rossa (*Chondrus crispus*, famiglia Gigartinaceae) mai tentata in questa pipeline, distinta da nori/kombu/wakame/dulse/arame già coperti (tutte alghe brune o altre rosse). Verificato con `grep` dedicato ("musco irlandese"/"irish moss"/"sea moss", tutte zero occorrenze) su tutti i file prima della ricerca web.
