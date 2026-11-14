@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Tempeh, crudo — preparato 2026-11-14 dal task (centoventitreesimo lotto)
+
+- **food_id**: `food_tempeh_raw`. FDC ID 174272 (SR Legacy, "Tempeh" — pagina getfoodfacts.com dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente, release USDA 2026-04-30, link diretto a `fdc.nal.usda.gov/food-details/174272/nutrients`). Legume storicamente mai tentato in questa pipeline (gap dichiarato da più lotti: "legumi — nessuna soia/tofu/tempeh" poi "tofu/tempeh già in coda" — qui effettivamente valutato per la prima volta), verificato con `grep` dedicato zero occorrenze prima della ricerca. Trovato dopo che un intero filone di formaggi di capra/pecora europei di nicchia (crottin de Chavignol, picodon, valençay, sainte-maure de touraine, rocamadour, idiazabal, pecorino sardo, pecorino toscano, chabichou du Poitou, selles-sur-cher, ossau-iraty, banon — 12 candidati) ha dato **zero pronti**: per nessuno dei dodici esiste una pagina getfoodfacts.com con un record SR Legacy/Foundation dedicato (solo prodotti Branded monomarca, aggregatori senza FDC ID/dataType citato, o — per idiazabal — un record Branded generico "Cheese" con brand "Quesos La Ricura" del tutto estraneo, solo 2/17 nutrienti) — tutti ⚠, non forzati, confermando lo schema già visto nei lotti 119-122 per le varianti regionali senza un nome di mercato USA consolidato.
+- **Nutrienti**: **13/17** — manca fibra (pagina ambigua: un blocco dice "Dietary Fiber not declared", un altro mostra "0g" — trattata come non dichiarata con certezza, non assunta zero), beta-carotene, vitamina K, e il campo combinato alfa-carotene+beta-criptoxantina (nessuno dei tre riportato). Per 100g: energia 192kcal, proteine 20,3g, grassi 10,8g, carboidrati 7,64g, calcio 111mg, ferro 2,70mg, magnesio 81,0mg, zinco 1,14mg, rame 0,56mg, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 24,0µg, vitamina B12 0,080µg, vitamina A (RAE) 0µg esplicito.
+- **Analogia usata**: `food_tofu_raw` (altro derivato della soia già eseguito sul DB reale, stessa famiglia botanica Fabaceae — nessun altro prodotto fermentato di soia ancora eseguito da usare come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit` (prodotto a base di semi di soia fermentati, nessun ingrediente animale).
+- **Matrice**: nuova `tempeh` ("Tempeh").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL — non coagulato con sali di calcio come alcuni tofu, nessun segnale in tal senso sulla pagina), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174272 --food-id=food_tempeh_raw \
+  --name-it="Tempeh, crudo" \
+  --matrix-id=tempeh --matrix-description-it="Tempeh" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174272 --food-id=food_tempeh_raw \
+  --name-it="Tempeh, crudo" \
+  --matrix-id=tempeh --matrix-description-it="Tempeh" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+---
+
+### Tempeh, cotto — preparato 2026-11-14 dal task (centoventitreesimo lotto)
+
+- **food_id**: `food_tempeh_cooked`. FDC ID 172467 (SR Legacy, "Tempeh, cooked" — pagina getfoodfacts.com dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente, release USDA 2026-04-30, link diretto a `fdc.nal.usda.gov/food-details/172467/nutrients`). Stesso matrix del tempeh crudo sopra, stato di cottura distinto genuinamente tracciato da USDA con un record separato (stesso pattern già usato in questa pipeline per patata/vitello/agnello/quaglia crudo vs cotto).
+- **Nutrienti**: **12/17** — manca fibra (stessa ambiguità della versione cruda), vitamina C (assente dalla tabella, diversamente dalla versione cruda dove era 0 esplicito — non assunta zero), beta-carotene, vitamina K, e il campo combinato alfa-carotene+beta-criptoxantina. Per 100g: energia 195kcal, proteine 19,9g, grassi 11,4g, carboidrati 7,62g, calcio 96,0mg, ferro 2,13mg, magnesio 77,0mg, zinco 1,57mg, rame 0,54mg, selenio 0µg esplicito, folato totale 21,0µg, vitamina B12 0,14µg.
+- **Analogia usata**: `food_tofu_raw` (stessa scelta della versione cruda, stessa famiglia botanica Fabaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `tempeh_cotto` ("Tempeh, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=cooked` (FDC non specifica il metodo — bollito/al vapore — solo "cooked" generico, riportato così senza inventare il metodo), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172467 --food-id=food_tempeh_cooked \
+  --name-it="Tempeh, cotto" \
+  --matrix-id=tempeh_cotto --matrix-description-it="Tempeh, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172467 --food-id=food_tempeh_cooked \
+  --name-it="Tempeh, cotto" \
+  --matrix-id=tempeh_cotto --matrix-description-it="Tempeh, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Formaggio tilsit — preparato 2026-11-14 dal task (centoventiduesimo lotto)
 
 - **food_id**: `food_formaggio_tilsit_raw`. FDC ID 170852 (SR Legacy, "Cheese, tilsit" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, link diretto a `fdc.nal.usda.gov/food-details/170852/nutrients` riportato sulla pagina stessa). Formaggio vaccino a pasta semidura (origine Tilsit/Baltico, diffuso anche in Scandinavia/Svizzera) mai tentato in questa pipeline — verificato con `grep` dedicato, zero occorrenze su tutti i file prima della ricerca web. Nello stesso filone, reblochon/raclette/jarlsberg/appenzeller/chaource/esrom/danbo/comté/stilton/cheshire/wensleydale/morbier/beaufort/vacherin: nessuna pagina getfoodfacts.com dedicata trovata per nessuno (solo Branded monomarca, aggregatori senza FDC ID citato, o record USDA Survey/FNDDS non accettati da questa pipeline — port du salut, FDC 2705732, è "USDA Survey" e scartato per lo stesso motivo) — tutti ⚠, non forzati. Munster (grafia francese) risultato un falso candidato: stesso identico record già usato come `food_formaggio_muenster_*` (grafia americana), già presente nei lotti precedenti — doppione intercettato, zero slot aggiuntivo.
