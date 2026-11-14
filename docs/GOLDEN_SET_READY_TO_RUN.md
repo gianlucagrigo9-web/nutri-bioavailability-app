@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Formaggio limburger — preparato 2026-11-14 dal task (centoventunesimo lotto)
+
+- **food_id**: `food_formaggio_limburger_raw`. FDC ID 171243 (SR Legacy, "Cheese, limburger" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; la pagina nota "uno dei 2 record USDA per il limburger" — la seconda descrizione non consultata, non necessaria dato il record completo trovato). Formaggio vaccino a pasta molle mai tentato in questa pipeline — verificato con `grep` dedicato (sia "limburger" che forma plurale, lezione delle false negative singolare/plurale già note in questa coda), zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 327kcal, proteine 20,1g, grassi 27,3g, carboidrati 0,49g, fibra 0g esplicito, calcio 497mg, ferro 0,13mg, magnesio 21,0mg, zinco 2,10mg, rame 0,021mg, selenio 14,5µg, sodio 800mg (non mappato dal motore, solo per contesto — alto ma plausibile per un formaggio stagionato salato), vitamina C 0mg esplicito, tiamina 0,080mg, riboflavina 0,50mg, niacina 0,16mg, vitamina B6 0,086mg, folato totale 58,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 1,04µg, vitamina K (fillochinone) 2,30µg, vitamina A (RAE) 340µg, beta-carotene 15,0µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio cheddar, già eseguito sul DB reale — stessa categoria funzionale "formaggio vaccino", stessa analogia già usata con successo per gli altri formaggi processati/stagionati di questa pipeline).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_limburger` ("Formaggio limburger").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di tutti gli altri formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio, stesso precedente anche quando il beta-carotene è reale e non nullo, come qui), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171243 --food-id=food_formaggio_limburger_raw \
+  --name-it="Formaggio limburger" \
+  --matrix-id=formaggio_limburger --matrix-description-it="Formaggio limburger" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171243 --food-id=food_formaggio_limburger_raw \
+  --name-it="Formaggio limburger" \
+  --matrix-id=formaggio_limburger --matrix-description-it="Formaggio limburger" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+---
+
 ### Semi di loto, secchi — preparato 2026-11-14 dal task (centoventunesimo lotto)
 
 - **food_id**: `food_semi_di_loto_secchi_raw`. FDC ID 170149 (SR Legacy, "Seeds, lotus seeds, dried" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, verificata con WebFetch dopo passare per `WebSearch` — nota di metodo: il fetch diretto su un URL non comparso in un risultato di ricerca di questa sessione ha dato errore ambientale `PROVENANCE_REQUIRED`, risolto ripetendo la stessa identica richiesta ma passando prima da `WebSearch` sullo stesso URL, poi fetch riuscito — conferma il pattern già diagnosticato dal task il 2026-10-30, vedi `docs/PENDING_HUMAN_ACTIONS.md`). Genere *Nelumbo*, famiglia Nelumbonaceae. Distinto da `food_radice_di_loto_raw`/`food_radice_di_loto_cotta` (già pronti, è il tubero/rizoma, non il seme) — mai tentato il seme in questa pipeline. Il record per il seme fresco/crudo (FDC 168591, citato solo da fonti aggregate) non ha una pagina getfoodfacts.com propria trovata in questa ricerca — non forzato, resta non verificato; questo è il solo record pulito trovato, per la forma secca.
