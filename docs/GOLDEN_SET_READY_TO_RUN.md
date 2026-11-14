@@ -16,6 +16,150 @@
 
 ## Pronti
 
+### Malanga (yautia), cruda — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_malanga_raw`. FDC ID 169401 (SR Legacy, "Yautia (tannier), raw" — pagina getfoodfacts.com dedicata "USDA reference food", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Xanthosoma*, famiglia Araceae (stessa famiglia del taro, mai tentato prima in questa pipeline — distinto da taro genere *Colocasia*, "pronto" ma non eseguito, non usabile come analogia).
+- **Nutrienti**: **16/17** — manca solo vitamina K (nessuna riga per quel nutriente sulla pagina, non assunta zero). Per 100g: energia 98,0kcal, proteine 1,46g, grassi 0,40g, carboidrati 23,6g, fibra 1,50g, calcio 9,00mg, ferro 0,98mg, zinco 0,50mg, magnesio 24,0mg, rame 0,26mg, selenio 0,70µg, sodio 21,0mg, vitamina C 5,20mg, folato totale 17,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, beta-carotene 5,00µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicita, vitamina A (RAE) 0µg esplicito.
+- **Analogia usata**: `food_potato_raw` (patata cruda, già eseguita sul DB reale — tubero amidaceo generico, stesso tipo di matrice fitati/minerali di un tubero tropicale amidaceo).
+- **Categoria dieta**: `plant_non_fruit` (tubero/radice, nessun ingrediente animale).
+- **Matrice**: nuova `malanga` ("Malanga (yautia), cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, nessun dato di letteratura specifico sugli oxalati per questo tubero), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, tubero crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169401 --food-id=food_malanga_raw \
+  --name-it="Malanga (yautia), cruda" \
+  --matrix-id=malanga --matrix-description-it="Malanga (yautia), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169401 --food-id=food_malanga_raw \
+  --name-it="Malanga (yautia), cruda" \
+  --matrix-id=malanga --matrix-description-it="Malanga (yautia), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Araceae --diet-category=plant_non_fruit --apply
+```
+
+### Piselli del Congo (pigeon peas), immaturi, crudi — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_piselli_del_congo_raw`. FDC ID 170025 (SR Legacy, "Pigeonpeas, immature seeds, raw" — pagina getfoodfacts.com dedicata "USDA Standard Reference", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Cajanus*, famiglia Fabaceae — mai tentato in questa pipeline (distinto da piselli secchi spezzati e lenticchie già eseguiti, legume diverso).
+- **Nutrienti**: **17/17**, nessun valore mancante (3 a zero esplicito). Per 100g: energia 136kcal, proteine 7,20g, grassi 1,64g, carboidrati 23,9g, fibra 5,10g, calcio 42,0mg, ferro 1,60mg, zinco 1,04mg, magnesio 68,0mg, rame 0,13mg, selenio 1,50µg, sodio 5,00mg, vitamina C 39,0mg, folato totale 173µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 24,0µg, beta-carotene 40,0µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicita, vitamina A (RAE) 3,00µg.
+- **Analogia usata**: `food_edamame_raw` (edamame crudo, già eseguito sul DB reale — stesso tipo di matrice: semi immaturi/freschi di un legume, non il seme secco maturo).
+- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
+- **Matrice**: nuova `piselli_del_congo` ("Piselli del Congo, immaturi, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, legume crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170025 --food-id=food_piselli_del_congo_raw \
+  --name-it="Piselli del Congo, immaturi, crudi" \
+  --matrix-id=piselli_del_congo --matrix-description-it="Piselli del Congo, immaturi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_edamame_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170025 --food-id=food_piselli_del_congo_raw \
+  --name-it="Piselli del Congo, immaturi, crudi" \
+  --matrix-id=piselli_del_congo --matrix-description-it="Piselli del Congo, immaturi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_edamame_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Piselli del Congo (pigeon peas), immaturi, bolliti senza sale — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_piselli_del_congo_boiled`. FDC ID 170430 (SR Legacy, "Pigeonpeas, immature seeds, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata "USDA reference food", FDC ID e dataType citati esplicitamente, sodio 5,00mg/100g confermato basso = non salato, release 30-04-2026). Stato di cottura mancante sulla stessa specie appena aggiunta cruda in questo stesso lotto.
+- **Nutrienti**: **17/17**, nessun valore mancante (3 a zero esplicito). Per 100g: energia 111kcal, proteine 5,96g, grassi 1,36g, carboidrati 19,5g, fibra 4,20g, calcio 41,0mg, ferro 1,57mg, zinco 0,82mg, magnesio 40,0mg, rame 0,10mg, selenio 1,20µg, sodio 5,00mg, vitamina C 28,1mg, folato totale 100µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 19,8µg, beta-carotene 30,0µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicita, vitamina A (RAE) 2,00µg.
+- **Analogia usata**: `food_edamame_cotto` (edamame cotto, già eseguito sul DB reale — stesso tipo di matrice, stato di cottura corrispondente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `piselli_del_congo_cotti` (distinta dalla matrice cruda, stesso alimento stato diverso).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (bollitura, beta-carotene reale ma matrice cotta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170430 --food-id=food_piselli_del_congo_boiled \
+  --name-it="Piselli del Congo, immaturi, bolliti (senza sale)" \
+  --matrix-id=piselli_del_congo_cotti --matrix-description-it="Piselli del Congo, immaturi, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_edamame_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170430 --food-id=food_piselli_del_congo_boiled \
+  --name-it="Piselli del Congo, immaturi, bolliti (senza sale)" \
+  --matrix-id=piselli_del_congo_cotti --matrix-description-it="Piselli del Congo, immaturi, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_edamame_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Piselli del Congo (pigeon peas), maturi, secchi crudi — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_piselli_del_congo_maturi_raw`. FDC ID 172436 (SR Legacy, "Pigeon peas (red gram), mature seeds, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, release 30-04-2026). Matrice distinta dai semi immaturi appena aggiunti sopra: seme secco maturo, non legume fresco (profilo energetico/proteico molto più alto: 343kcal/100g e 21,7g proteine vs 136kcal/7,20g dell'immaturo, coerente con la disidratazione).
+- **Nutrienti**: **16/17** — manca solo vitamina K (nessuna riga sulla pagina). Per 100g: energia 343kcal, proteine 21,7g, grassi 1,49g, carboidrati 62,8g, fibra 15,0g, calcio 130mg, ferro 5,23mg, zinco 2,76mg, magnesio 183mg, rame 1,06mg, selenio 8,20µg, sodio 17,0mg, vitamina C 0mg esplicito, folato totale 456µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 1,00µg (beta-carotene/alfa-carotene/beta-criptoxantina non riportati sulla pagina — incoerenza interna del record, segnalata qui, `carotenoid_matrix_state` omesso di conseguenza).
+- **Analogia usata**: `food_piselli_secchi_spezzati_raw` (piselli secchi spezzati crudi, già eseguiti sul DB reale — stessa categoria: legume secco maturo, non fresco).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `piselli_del_congo_maturi` (distinta dalla matrice immatura, stesso genere *Cajanus*, forma del prodotto diversa).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — vitamina A RAE presente ma nessun valore di carotenoide specifico riportato, non derivabile senza indovinare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172436 --food-id=food_piselli_del_congo_maturi_raw \
+  --name-it="Piselli del Congo, maturi, secchi crudi" \
+  --matrix-id=piselli_del_congo_maturi --matrix-description-it="Piselli del Congo, maturi, secchi crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_piselli_secchi_spezzati_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172436 --food-id=food_piselli_del_congo_maturi_raw \
+  --name-it="Piselli del Congo, maturi, secchi crudi" \
+  --matrix-id=piselli_del_congo_maturi --matrix-description-it="Piselli del Congo, maturi, secchi crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_piselli_secchi_spezzati_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli alati (winged bean), immaturi, crudi — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_fagioli_alati_raw`. FDC ID 170476 (SR Legacy, "Winged beans, immature seeds, raw" — pagina getfoodfacts.com dedicata "USDA Standard Reference", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Psophocarpus*, famiglia Fabaceae — mai tentato in questa pipeline, legume tropicale del sud-est asiatico, baccello/seme immaturo consumato come fagiolino.
+- **Nutrienti**: **14/17** — mancano fibra (riga non presente in tabella, pannello etichetta la segnala esplicitamente "not declared", non assunta zero), vitamina K e vitamina A (RAE) (nessuna riga per nessuno dei carotenoidi, `carotenoid_matrix_state` omesso di conseguenza). Per 100g: energia 49,0kcal, proteine 6,95g, grassi 0,87g, carboidrati 4,31g, calcio 84,0mg, ferro 1,50mg, zinco 0,39mg, magnesio 34,0mg, rame 0,051mg, selenio 1,50µg, sodio 4,00mg, vitamina C 18,3mg, folato totale 66,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_fagiolini_raw` (fagiolini verdi crudi, già eseguiti sul DB reale — stessa matrice: baccello/seme immaturo fresco di legume, non seme secco).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_alati` ("Fagioli alati, immaturi, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun dato carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170476 --food-id=food_fagioli_alati_raw \
+  --name-it="Fagioli alati, immaturi, crudi" \
+  --matrix-id=fagioli_alati --matrix-description-it="Fagioli alati, immaturi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170476 --food-id=food_fagioli_alati_raw \
+  --name-it="Fagioli alati, immaturi, crudi" \
+  --matrix-id=fagioli_alati --matrix-description-it="Fagioli alati, immaturi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli alati (winged bean), immaturi, bolliti senza sale — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
+
+- **food_id**: `food_fagioli_alati_boiled`. FDC ID 170477 (SR Legacy, "Winged beans, immature seeds, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, sodio 4,00mg/100g basso = non salato, release 30-04-2026). Stato di cottura mancante sulla stessa specie appena aggiunta cruda in questo stesso lotto.
+- **Nutrienti**: **15/17** — mancano fibra (stesso gap della versione cruda, non dichiarata sulla pagina) e vitamina K; vitamina A (RAE) presente (4,00µg) ma nessun beta-carotene/altri carotenoidi riportati, `carotenoid_matrix_state` omesso. Per 100g: energia 38,0kcal, proteine 5,31g, grassi 0,66g, carboidrati 3,21g, calcio 61,0mg, ferro 1,09mg, zinco 0,28mg, magnesio 30,0mg, rame 0,037mg, selenio 1,10µg, sodio 4,00mg, vitamina C 9,80mg, folato totale 35,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 4,00µg.
+- **Analogia usata**: `food_fagiolini_cotti` (fagiolini verdi bolliti, già eseguiti sul DB reale — stesso tipo di matrice, stato di cottura corrispondente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_alati_cotti` (distinta dalla matrice cruda).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — vitamina A RAE presente ma nessun carotenoide specifico riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170477 --food-id=food_fagioli_alati_boiled \
+  --name-it="Fagioli alati, immaturi, bolliti (senza sale)" \
+  --matrix-id=fagioli_alati_cotti --matrix-description-it="Fagioli alati, immaturi, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagiolini_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170477 --food-id=food_fagioli_alati_boiled \
+  --name-it="Fagioli alati, immaturi, bolliti (senza sale)" \
+  --matrix-id=fagioli_alati_cotti --matrix-description-it="Fagioli alati, immaturi, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagiolini_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### More di gelso, crude — preparato 2026-11-14 dal task (centosedicesimo lotto)
 
 - **food_id**: `food_gelso_raw`. FDC ID 169913 (SR Legacy, "Mulberries, raw" — pagina getfoodfacts.com dedicata "USDA Standard Reference", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Morus*, famiglia Moraceae — mai tentato in questa pipeline (distinto da fichi/fichi secchi/fichi d'India, stesso filone frutta di bosco/selvatica mai esplorato a fondo finora).
