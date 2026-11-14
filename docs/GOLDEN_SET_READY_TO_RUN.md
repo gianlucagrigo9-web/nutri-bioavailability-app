@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Semi di ginkgo, crudi — preparato 2026-11-14 dal task (centoventesimo lotto)
+
+- **food_id**: `food_semi_di_ginkgo_raw`. FDC ID 170584 (SR Legacy, "Nuts, ginkgo nuts, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026, verificata con WebFetch diretto). Genere *Ginkgo*, famiglia Ginkgoaceae — mai tentato in questa pipeline.
+- **Nutrienti**: **13/17** — mancano selenio, vitamina E, vitamina K, beta-carotene/altri carotenoidi provitaminici A (nessuna riga su questi nutrienti sulla pagina, non assunti zero); fibra trattata come mancante per cautela (la pagina si contraddice: tabella nutrienti "not declared", ma una card riassuntiva mostra "0g" — nessun valore reale assunto). Per 100g: energia 182kcal, proteine 4,32g, grassi 1,68g, carboidrati 37,6g, calcio 2,00mg, ferro 1,00mg, magnesio 27,0mg, fosforo 124mg, potassio 510mg, sodio 7,00mg, zinco 0,34mg, rame 0,27mg, manganese 0,11mg, vitamina C 15,0mg, tiamina 0,22mg, riboflavina 0,090mg, niacina 6,00mg, vitamina B6 0,33mg, folato totale 54,0µg, vitamina B12 0µg esplicito, vitamina A (RAE) 28,0µg, retinolo 0µg esplicito, colesterolo 0mg.
+- **Analogia usata**: `food_castagne_raw` (castagne crude, già eseguite sul DB reale — stesso tipo di matrice: seme/frutto a guscio amidaceo a basso contenuto di grassi, stesso identico gap categorico su fibra/selenio/vitamina K/carotenoidi). **Nota di trasparenza**: la famiglia botanica reale del ginkgo (Ginkgoaceae) è diversa da quella dell'analogia (Fagaceae, castagno) — l'analogia riguarda solo il pattern di attributi categorici (calcio/zinco/carotenoidi), non la famiglia botanica, che è impostata al valore reale e noto del ginkgo.
+- **Categoria dieta**: `plant_non_fruit` (seme, nessun ingrediente animale).
+- **Matrice**: nuova `semi_di_ginkgo` ("Semi di ginkgo, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio molto basso, stesso precedente di `food_castagne_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, vitamina A (RAE) presente ma nessun carotenoide specifico da classificare, stesso precedente già usato per i legumi del centodiciannovesimo lotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Ginkgoaceae` (valore reale, non dall'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170584 --food-id=food_semi_di_ginkgo_raw \
+  --name-it="Semi di ginkgo, crudi" \
+  --matrix-id=semi_di_ginkgo --matrix-description-it="Semi di ginkgo, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Ginkgoaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170584 --food-id=food_semi_di_ginkgo_raw \
+  --name-it="Semi di ginkgo, crudi" \
+  --matrix-id=semi_di_ginkgo --matrix-description-it="Semi di ginkgo, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Ginkgoaceae --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di felce (fiddlehead), crudi — preparato 2026-11-14 dal task (centoventesimo lotto)
+
+- **food_id**: `food_germogli_di_felce_raw`. FDC ID 169405 (SR Legacy, "Fiddlehead ferns, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026, verificata con WebFetch diretto). **Nota di trasparenza (Regola 6)**: la pagina USDA non specifica la specie botanica — il nome commerciale "fiddlehead" nel Nord America designa quasi sempre i germogli della felce struzzo (*Matteuccia struthiopteris*, famiglia Onocleaceae), distinta dalla felce aquilina (*Pteridium aquilinum*) che non si vende come "fiddlehead" comune; famiglia impostata su questa base, non su un dato esplicito della pagina.
+- **Nutrienti**: **~16/22 rilevati** (mancano fibra — pagina contraddittoria "not declared" vs card "0g", trattata come mancante —, selenio, vitamina B6, folato, vitamina E, vitamina K; nessuno di questi assunto zero). Per 100g: energia 34,0kcal, proteine 4,55g, grassi 0,40g, carboidrati 5,54g, calcio 32,0mg, ferro 1,31mg, magnesio 34,0mg, fosforo 101mg, potassio 370mg, sodio 1,00mg, zinco 0,83mg, rame 0,32mg, manganese 0,51mg, vitamina C 26,6mg, tiamina 0,020mg, riboflavina 0,21mg, niacina 4,98mg, vitamina B12 0µg esplicito, vitamina A (RAE) 181µg, retinolo 0µg esplicito, vitamina D 0µg esplicito, **beta-carotene 2040µg (reale, non nullo)**, **alfa-carotene 261µg (reale, non nullo)** — raro caso in questa pipeline di un carotenoide realmente classificabile invece di NULL per assenza di dato.
+- **Analogia usata**: `food_carrots_raw` (carote crude, già eseguite — stesso pattern "ortaggio crudo con beta-carotene reale non nullo, matrice intatta", `carotenoid_matrix_state=raw_intact`; l'analogia riguarda solo questo pattern categorico, non la famiglia botanica, che resta quella reale della felce).
+- **Categoria dieta**: `plant_non_fruit` (verdura/germoglio, nessun ingrediente animale).
+- **Matrice**: nuova `germogli_di_felce` ("Germogli di felce (fiddlehead), crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questo ortaggio), `carotenoid_matrix_state=raw_intact` (beta-carotene e alfa-carotene reali, crudo, matrice non disgregata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Onocleaceae` (specie commerciale prevalente, vedi nota di trasparenza sopra), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun dato di folato riportato, nessuna firma di arricchimento possibile da valutare).
+
+```
+npm run add-food -- --fdc-id=169405 --food-id=food_germogli_di_felce_raw \
+  --name-it="Germogli di felce (fiddlehead), crudi" \
+  --matrix-id=germogli_di_felce --matrix-description-it="Germogli di felce (fiddlehead), crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Onocleaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169405 --food-id=food_germogli_di_felce_raw \
+  --name-it="Germogli di felce (fiddlehead), crudi" \
+  --matrix-id=germogli_di_felce --matrix-description-it="Germogli di felce (fiddlehead), crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_carrots_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Onocleaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Malanga (yautia), cruda — preparato 2026-11-14 dal task (centodiciannovesimo lotto)
 
 - **food_id**: `food_malanga_raw`. FDC ID 169401 (SR Legacy, "Yautia (tannier), raw" — pagina getfoodfacts.com dedicata "USDA reference food", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Xanthosoma*, famiglia Araceae (stessa famiglia del taro, mai tentato prima in questa pipeline — distinto da taro genere *Colocasia*, "pronto" ma non eseguito, non usabile come analogia).
