@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Gombo (okra), cotto (bollito, senza sale) — preparato 2026-11-14 dal task (centoquattordicesimo lotto)
+
+- **food_id**: `food_gombo_cotto`. FDC ID 169261 (SR Legacy, "Okra, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Companion del crudo già eseguito (`food_gombo_raw`, FDC 169260), mai tentato finora (distinto dal surgelato `food_gombo_surgelato`, già fatto, FDC diverso).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 22,0kcal, proteine 1,87g, grassi 0,21g, carboidrati 4,51g, fibra 2,50g, calcio 77,0mg, ferro 0,28mg, zinco 0,43mg, magnesio 36,0mg, rame 0,085mg, selenio 0,40µg, sodio 6,00mg (coerente con "without salt"), vitamina C 16,3mg, folato totale 46,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K (fillochinone) 40,0µg, beta-carotene 170µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito, vitamina A (RAE) 14,0µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID e dataType SR Legacy.
+- **Analogia usata**: `food_gombo_raw` (gombo crudo, già eseguito sul DB reale — stessa pianta *Abelmoschus esculentus*, famiglia Malvaceae, qui bollito invece che crudo).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `gombo_cotto` ("Gombo (okra), cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169261 --food-id=food_gombo_cotto \
+  --name-it="Gombo (okra), cotto (bollito, senza sale)" \
+  --matrix-id=gombo_cotto --matrix-description-it="Gombo (okra), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_gombo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Malvaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169261 --food-id=food_gombo_cotto \
+  --name-it="Gombo (okra), cotto (bollito, senza sale)" \
+  --matrix-id=gombo_cotto --matrix-description-it="Gombo (okra), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_gombo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Malvaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fave, fresche sgranate, cotte (bollite, con sale) — preparato 2026-11-14 dal task (centoquattordicesimo lotto)
+
+- **food_id**: `food_fave_fresche_cotte`. FDC ID 169328 (SR Legacy, "Broadbeans, immature seeds, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Companion del crudo già "pronto" ma non ancora eseguito sul DB reale (`food_fave_fresche_raw`, FDC 170377, ottantaseiesimo lotto) — per questo **non utilizzabile come analogia** (regola del COMPITO: mai un'analogia non ancora presente nel DB reale). Solo la variante "con sale" ha una pagina getfoodfacts.com dedicata con FDC ID citato esplicitamente; nessuna pagina equivalente trovata per "without salt" (solo recipal.com, non ammesso come fonte primaria).
+- **Nutrienti**: **13/17**. Per 100g: energia 62,0kcal, proteine 4,80g, grassi 0,50g, carboidrati 10,1g, calcio 18,0mg, ferro 1,50mg, zinco 0,47mg, magnesio 31,0mg, rame 0,060mg, selenio 1,00µg, sodio 277mg (coerente con "with salt"), vitamina C 19,8mg, folato totale 58,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina A (RAE) 14,0µg. Mancano (non riportati sulla pagina, non assunti zero): fibra (dato interno discordante fra pannello e tabella dettagliata, trattata come assente per trasparenza), vitamina K, beta-carotene, l'altro carotenoide provitaminico A (né alfa-carotene né beta-criptoxantina riportati). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169328 e dataType SR Legacy.
+- **Analogia usata**: `food_chickpeas_boiled` (ceci bolliti, già eseguiti sul DB reale — stessa famiglia botanica Fabaceae, stessa categoria funzionale "legume fresco/immaturo cotto", analogia già usata con lo stesso motivo per i fagiolini lunghi in un lotto precedente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fave_fresche_cotte` ("Fave, fresche sgranate, cotte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL per trasparenza — nessun carotenoide riportato sulla pagina, non assunto zero né "disgregato"), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169328 --food-id=food_fave_fresche_cotte \
+  --name-it="Fave, fresche sgranate, cotte (bollite, con sale)" \
+  --matrix-id=fave_fresche_cotte --matrix-description-it="Fave, fresche sgranate, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169328 --food-id=food_fave_fresche_cotte \
+  --name-it="Fave, fresche sgranate, cotte (bollite, con sale)" \
+  --matrix-id=fave_fresche_cotte --matrix-description-it="Fave, fresche sgranate, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_chickpeas_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fegato di manzo, crudo — preparato 2026-11-14 dal task (centoundicesimo lotto)
 
 - **food_id**: `food_fegato_di_manzo_raw`. FDC ID 169451 (SR Legacy, "Beef, variety meats and by-products, liver, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA reference food"). Buco genuino individuato per inventario diretto degli id `food_fegato_*` già presenti (vitello/maiale/pollo/tacchino/agnello/anatra/oca tutti ✅/🟡, ma **manzo mai tentato** — nonostante cuore/rognone/lingua/trippa di manzo siano già tutti presenti): fegato di manzo adulto, distinto dal fegato di vitello (`food_fegato_di_vitello_raw`, già eseguito) per età dell'animale, stesso genere *Bos taurus*.
