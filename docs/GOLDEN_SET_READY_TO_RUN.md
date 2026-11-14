@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Alga musco irlandese (Irish moss), cruda — preparato 2026-11-14 dal task (centoventunesimo lotto)
+
+- **food_id**: `food_alga_musco_irlandese_raw`. FDC ID 168456 (SR Legacy, "Seaweed, irishmoss, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Alga rossa (*Chondrus crispus*, famiglia Gigartinaceae) mai tentata in questa pipeline, distinta da nori/kombu/wakame/dulse/arame già coperti (tutte alghe brune o altre rosse). Verificato con `grep` dedicato ("musco irlandese"/"irish moss"/"sea moss", tutte zero occorrenze) su tutti i file prima della ricerca web.
+- **Nutrienti**: **17/17** — record completo. Per 100g: energia 49,0kcal, proteine 1,51g, grassi 0,16g, carboidrati 12,3g, fibra 1,30g, calcio 72,0mg, ferro 8,90mg (notevolmente alto, plausibile per un'alga), magnesio 144mg, zinco 1,95mg, rame 0,15mg, selenio 0,70µg, sodio 67,0mg (non mappato dal motore, solo per contesto), vitamina C 3,00mg, tiamina 0,015mg, riboflavina 0,47mg, niacina 0,59mg, vitamina B6 0,069mg, folato totale 182µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 5,00µg, vitamina A (RAE) 6,00µg, beta-carotene 71,0µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. Iodio non riportato sulla pagina (non assunto, nonostante sia il micronutriente più rilevante per un'alga).
+- **Analogia usata**: `food_alga_nori_raw` (alga nori, già eseguita sul DB reale — stesso tipo di matrice: alga marina cruda con carotenoidi reali riportati, stesso schema categorico).
+- **Categoria dieta**: `plant_non_fruit` (alga, nessun ingrediente animale).
+- **Matrice**: nuova `alga_musco_irlandese` ("Alga musco irlandese (Irish moss), cruda").
+- **Attributi**: `is_heme_iron` omesso (false — alimento vegetale, nonostante il ferro alto), `matrix_category_calcium` omesso (NULL — nessuna fonte sull'oxalato, stesso precedente di `food_alga_nori_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, alga cruda non trattata — stesso precedente genuino già usato per `food_alga_nori_raw` e per i germogli di felce del lotto 120), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Gigartinaceae` (valore reale, famiglia dell'alga rossa *Chondrus crispus*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168456 --food-id=food_alga_musco_irlandese_raw \
+  --name-it="Alga musco irlandese (Irish moss), cruda" \
+  --matrix-id=alga_musco_irlandese --matrix-description-it="Alga musco irlandese (Irish moss), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --botanical-family=Gigartinaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168456 --food-id=food_alga_musco_irlandese_raw \
+  --name-it="Alga musco irlandese (Irish moss), cruda" \
+  --matrix-id=alga_musco_irlandese --matrix-description-it="Alga musco irlandese (Irish moss), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
+  --botanical-family=Gigartinaceae --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Formaggio limburger — preparato 2026-11-14 dal task (centoventunesimo lotto)
 
 - **food_id**: `food_formaggio_limburger_raw`. FDC ID 171243 (SR Legacy, "Cheese, limburger" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; la pagina nota "uno dei 2 record USDA per il limburger" — la seconda descrizione non consultata, non necessaria dato il record completo trovato). Formaggio vaccino a pasta molle mai tentato in questa pipeline — verificato con `grep` dedicato (sia "limburger" che forma plurale, lezione delle false negative singolare/plurale già note in questa coda), zero occorrenze su tutti i file prima della ricerca web.
