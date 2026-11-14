@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Carote, surgelate — preparato 2026-11-14 dal task (centottesimo lotto)
+
+- **food_id**: `food_carote_surgelate`. FDC ID 746764 (Foundation Foods, "Carrots, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "verdura surgelata industrialmente" (già produttivo nei lotti 85-87/94-107, 21 voci) esteso a un ortaggio radice mai tentato in questa forma — distinto da `food_carrots_raw`/`food_carrots_boiled`/`food_carote_baby_raw`/`food_carote_in_scatola`/`food_succo_di_carota_raw` già eseguiti. Verificato con `grep` dedicato su "carote surgelate"/"carrots, frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 37,0kcal, proteine 0,81g, grassi 0,47g, carboidrati 7,92g, fibra 3,20g, calcio 33,0mg, ferro 0,43mg, zinco 0,28mg, magnesio 10,8mg, rame 0,080mg, vitamina C 2,20mg, folato totale 7,00µg, vitamina K (fillochinone) 15,0µg, sodio 66,0mg (plausibile, non salamoia). Mancano (non riportati sulla pagina, non assunti zero): selenio, vitamina B12, beta-carotene, altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina) — gap dichiarato in trasparenza, sopra la soglia indicativa di match debole (~10/17).
+- **Analogia usata**: `food_carrots_raw` (carote crude, Golden Set originale, già eseguite sul DB reale — stessa specie *Daucus carota*, solo congelata invece che fresca).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio radice, nessuna ambiguità).
+- **Matrice**: nuova `carote_surgelate` ("Carote, surgelate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente di `food_carrots_raw`), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene assente dal record, non assumibile; stessa cautela già usata per le altre verdure surgelate di questo filone), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (stessa della carota fresca), `baseline_cooking_state=frozen` (convenzione del filone), `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato in linea con la carota fresca).
+
+```
+npm run add-food -- --fdc-id=746764 --food-id=food_carote_surgelate \
+  --name-it="Carote, surgelate" \
+  --matrix-id=carote_surgelate --matrix-description-it="Carote surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_carrots_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=746764 --food-id=food_carote_surgelate \
+  --name-it="Carote, surgelate" \
+  --matrix-id=carote_surgelate --matrix-description-it="Carote surgelate" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_carrots_raw \
+  --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Gallina Cornish, carne e pelle, cruda — preparato 2026-11-14 dal task (centosettesimo lotto)
 
 - **food_id**: `food_gallina_cornish_con_pelle_raw`. FDC ID 171507 (SR Legacy, "Chicken, cornish game hens, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Variante "carne e pelle" distinta dal "meat only" crudo (171108) e dal "meat and skin" cotto (171107) già preparati nel centoseiesimo lotto — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo in lotti precedenti (67/68) per pollo/tacchino/anatra/oca/gallina da brodo, qui esteso alla gallina Cornish.
