@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Semi di loto, secchi — preparato 2026-11-14 dal task (centoventunesimo lotto)
+
+- **food_id**: `food_semi_di_loto_secchi_raw`. FDC ID 170149 (SR Legacy, "Seeds, lotus seeds, dried" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, verificata con WebFetch dopo passare per `WebSearch` — nota di metodo: il fetch diretto su un URL non comparso in un risultato di ricerca di questa sessione ha dato errore ambientale `PROVENANCE_REQUIRED`, risolto ripetendo la stessa identica richiesta ma passando prima da `WebSearch` sullo stesso URL, poi fetch riuscito — conferma il pattern già diagnosticato dal task il 2026-10-30, vedi `docs/PENDING_HUMAN_ACTIONS.md`). Genere *Nelumbo*, famiglia Nelumbonaceae. Distinto da `food_radice_di_loto_raw`/`food_radice_di_loto_cotta` (già pronti, è il tubero/rizoma, non il seme) — mai tentato il seme in questa pipeline. Il record per il seme fresco/crudo (FDC 168591, citato solo da fonti aggregate) non ha una pagina getfoodfacts.com propria trovata in questa ricerca — non forzato, resta non verificato; questo è il solo record pulito trovato, per la forma secca.
+- **Nutrienti**: **12/17** — mancano fibra (pagina contraddittoria: tabella nutrienti "not declared" ma una card riassuntiva mostra "0g" — trattata come mancante per cautela, stesso tipo di gap già visto per i semi di ginkgo), selenio, vitamina K, beta-carotene, altri carotenoidi provitaminici A (nessuna riga su questi nutrienti, non assunti zero). Per 100g: energia 332kcal, proteine 15,4g, grassi 1,97g, carboidrati 64,5g, calcio 163mg, ferro 3,53mg, magnesio 210mg, zinco 1,05mg, rame 0,35mg, vitamina C 0mg esplicito, tiamina 0,64mg, riboflavina 0,15mg, niacina 1,60mg, vitamina B6 0,63mg, folato totale 104µg, vitamina B12 0µg esplicito, vitamina A (RAE) 3,00µg.
+- **Analogia usata**: `food_castagne_raw` (castagne crude, già eseguite sul DB reale — stesso precedente già usato per i semi di ginkgo nel lotto precedente: seme/frutto secco amidaceo a basso contenuto di grassi, stesso identico gap categorico su fibra/selenio/vitamina K/carotenoidi). **Nota di trasparenza**: famiglia botanica reale (Nelumbonaceae) diversa dall'analogia (Fagaceae) — l'analogia riguarda solo il pattern di attributi categorici, non la famiglia botanica, impostata al valore reale.
+- **Categoria dieta**: `plant_non_fruit` (seme, nessun ingrediente animale).
+- **Matrice**: nuova `semi_di_loto_secchi` ("Semi di loto, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna fonte sull'oxalato, per analogia diretta con `food_castagne_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Nelumbonaceae` (valore reale, non dall'analogia), `baseline_cooking_state=raw` (secco/disidratato, non cotto — stessa convenzione di `food_castagne_secche_raw`), `is_fortified_folate` omesso (false — nessuna firma di arricchimento, acido folico non riportato separatamente).
+
+```
+npm run add-food -- --fdc-id=170149 --food-id=food_semi_di_loto_secchi_raw \
+  --name-it="Semi di loto, secchi" \
+  --matrix-id=semi_di_loto_secchi --matrix-description-it="Semi di loto, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170149 --food-id=food_semi_di_loto_secchi_raw \
+  --name-it="Semi di loto, secchi" \
+  --matrix-id=semi_di_loto_secchi --matrix-description-it="Semi di loto, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Semi di ginkgo, crudi — preparato 2026-11-14 dal task (centoventesimo lotto)
 
 - **food_id**: `food_semi_di_ginkgo_raw`. FDC ID 170584 (SR Legacy, "Nuts, ginkgo nuts, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026, verificata con WebFetch diretto). Genere *Ginkgo*, famiglia Ginkgoaceae — mai tentato in questa pipeline.
