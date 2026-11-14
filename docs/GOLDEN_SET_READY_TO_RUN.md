@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Fegato di manzo, crudo — preparato 2026-11-14 dal task (centoundicesimo lotto)
+
+- **food_id**: `food_fegato_di_manzo_raw`. FDC ID 169451 (SR Legacy, "Beef, variety meats and by-products, liver, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, "USDA reference food"). Buco genuino individuato per inventario diretto degli id `food_fegato_*` già presenti (vitello/maiale/pollo/tacchino/agnello/anatra/oca tutti ✅/🟡, ma **manzo mai tentato** — nonostante cuore/rognone/lingua/trippa di manzo siano già tutti presenti): fegato di manzo adulto, distinto dal fegato di vitello (`food_fegato_di_vitello_raw`, già eseguito) per età dell'animale, stesso genere *Bos taurus*.
+- **Nutrienti**: **17/17**, nessun valore mancante — caso raro per un fegato in questa pipeline (tutti gli altri fegati già fatti sono 14/17, senza vitamina K/carotenoidi). Per 100g: energia 135kcal, proteine 20,4g, grassi 3,63g, carboidrati 3,89g, fibra 0g, calcio 5,00mg, ferro 4,90mg, zinco 4,00mg, magnesio 18,0mg, rame 9,76mg, selenio 39,7µg, sodio 69,0mg, vitamina C 1,30mg, vitamina B12 59,3µg, folato totale 290µg (acido folico 0µg esplicito, separato — nessuna firma di arricchimento), vitamina K (fillochinone) 3,10µg, beta-carotene 232µg, alfa-carotene 11,0µg, beta-criptoxantina 13,0µg, vitamina A (RAE) 4968µg. Valori incrociati e confermati su una seconda fonte indipendente (recipal.com, stesso NDB legacy 13325): proteine/grassi/ferro/B12/folato/vitamina A/vitamina K tutti coincidenti — nessun dato inventato, doppia verifica fatta apposta per l'anomalia (vedi sotto).
+- **Nota di trasparenza (anomalia rispetto al resto della pipeline)**: tutti gli altri fegati crudi già preparati (maiale, pollo, anatra, oca, agnello) risultano 14/17 con vitamina K e i 3 carotenoidi "non riportati sulla pagina" — qui invece il record SR Legacy del fegato di manzo li riporta esplicitamente, con valori non nulli e plausibili (il fegato accumula vitamina A/carotenoidi dalla dieta dell'animale; non un'anomalia di origine, verificata su due fonti indipendenti). **`carotenoid_matrix_state` comunque omesso (NULL)**, non per mancanza del dato ma per scelta esplicita: questo attributo descrive la bioaccessibilità dei carotenoidi in una matrice vegetale (parete cellulare intatta vs disgregata da cottura) — nessun precedente in questa pipeline lo applica a una carne/frattaglia (verificato su `food_sgombro_cotto`/`food_fegato_di_vitello_cotto`, entrambi senza questo campo pur avendo altri nutrienti completi), ed estenderlo a tessuto animale senza una base scientifica dichiarata nel PRD sarebbe un'interpretazione non verificata, non un dato mancante — quindi NULL per trasparenza (Regola 6), non un default silenzioso.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, già eseguito sul DB reale — stesso organo, stessa specie *Bos taurus*, solo età diversa dell'animale: l'analogia più precisa possibile, più stretta di quella usata per maiale/pollame che hanno usato fegato di pollo/vitello come proxy cross-specie).
+- **Categoria dieta**: `meat_fish` (frattaglia di origine animale, nessuna ambiguità).
+- **Matrice**: nuova `fegato_di_manzo` ("Fegato di manzo").
+- **Attributi**: `is_heme_iron` presente (true — ferro eme, come tutte le frattaglie/carni già fatte), `matrix_category_calcium` omesso (NULL — non applicabile, stesso trattamento di tutte le altre frattaglie), `carotenoid_matrix_state` omesso (NULL, vedi nota sopra), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — alimento animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169451 --food-id=food_fegato_di_manzo_raw \
+  --name-it="Fegato di manzo, crudo" \
+  --matrix-id=fegato_di_manzo --matrix-description-it="Fegato di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169451 --food-id=food_fegato_di_manzo_raw \
+  --name-it="Fegato di manzo, crudo" \
+  --matrix-id=fegato_di_manzo --matrix-description-it="Fegato di manzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Carote, surgelate — preparato 2026-11-14 dal task (centottesimo lotto)
 
 - **food_id**: `food_carote_surgelate`. FDC ID 746764 (Foundation Foods, "Carrots, frozen, unprepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "verdura surgelata industrialmente" (già produttivo nei lotti 85-87/94-107, 21 voci) esteso a un ortaggio radice mai tentato in questa forma — distinto da `food_carrots_raw`/`food_carrots_boiled`/`food_carote_baby_raw`/`food_carote_in_scatola`/`food_succo_di_carota_raw` già eseguiti. Verificato con `grep` dedicato su "carote surgelate"/"carrots, frozen", zero occorrenze su tutti e tre i file prima della ricerca web.
