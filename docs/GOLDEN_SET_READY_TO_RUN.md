@@ -16,6 +16,110 @@
 
 ## Pronti
 
+### Gallina Cornish, carne e pelle, cruda — preparato 2026-11-14 dal task (centosettesimo lotto)
+
+- **food_id**: `food_gallina_cornish_con_pelle_raw`. FDC ID 171507 (SR Legacy, "Chicken, cornish game hens, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Variante "carne e pelle" distinta dal "meat only" crudo (171108) e dal "meat and skin" cotto (171107) già preparati nel centoseiesimo lotto — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo in lotti precedenti (67/68) per pollo/tacchino/anatra/oca/gallina da brodo, qui esteso alla gallina Cornish.
+- **Nutrienti**: **17/17** (record completo). Per 100g: energia 200kcal, proteine 17,1g, grassi 14,0g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,78mg, zinco 1,15mg, magnesio 18,0mg, rame 0,049mg, selenio 11,8µg, sodio 61,0mg (plausibile per pollame crudo senza salamoia), vitamina C 0,50mg, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,33µg, vitamina K (fillochinone) 2,40µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa specie *Gallus gallus*, stessa categoria funzionale "carne di pollame crudo"; `food_gallina_cornish_raw`/`food_gallina_cornish_con_pelle_cotta` non riusabili come analogia perché solo "pronti" dal centoseiesimo lotto, non ancora eseguiti sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `gallina_cornish_con_pelle_raw` ("Gallina Cornish (pollo nano), carne e pelle, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_petto_di_pollo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171507 --food-id=food_gallina_cornish_con_pelle_raw \
+  --name-it="Gallina Cornish, carne e pelle, cruda" \
+  --matrix-id=gallina_cornish_con_pelle_raw --matrix-description-it="Gallina Cornish (pollo nano), carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171507 --food-id=food_gallina_cornish_con_pelle_raw \
+  --name-it="Gallina Cornish, carne e pelle, cruda" \
+  --matrix-id=gallina_cornish_con_pelle_raw --matrix-description-it="Gallina Cornish (pollo nano), carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Faraona, carne e pelle, cruda — preparato 2026-11-14 dal task (centosettesimo lotto)
+
+- **food_id**: `food_faraona_con_pelle_raw`. FDC ID 172416 (SR Legacy, "Guinea hen, meat and skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Variante "carne E pelle" distinta dal composito "carne senza pelle" già eseguito sul DB reale (`food_faraona_raw`, FDC 174471) — record FDC realmente distinto, stesso filone "meat and skin vs meat only" già produttivo in questa pipeline per anatra/oca/gallina/pollo/tacchino, qui esteso alla faraona (gap residuo segnalato dal centosesto lotto).
+- **Nutrienti**: **14/17**. Per 100g: energia 158kcal, proteine 23,4g, grassi 6,45g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,84mg, zinco 1,13mg, magnesio 22,0mg, rame 0,043mg, selenio 16,3µg, sodio 67,0mg (plausibile, nessuna firma di salamoia), vitamina C 1,30mg, folato totale 5,00µg, acido folico 0µg esplicito, vitamina B12 0,34µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A — stesso gap tipico già visto per `food_faraona_raw`/`food_quaglia_carne_raw`/`food_piccione_raw` in questa pipeline.
+- **Analogia usata**: `food_faraona_raw` (faraona, carne senza pelle, cruda, FDC 174471, già eseguita sul DB reale — stessa specie, stesso individuo anatomico "carne di faraona cruda", analogia più precisa possibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `faraona_con_pelle_raw` ("Faraona, carne e pelle, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_faraona_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172416 --food-id=food_faraona_con_pelle_raw \
+  --name-it="Faraona, carne e pelle, cruda" \
+  --matrix-id=faraona_con_pelle_raw --matrix-description-it="Faraona, carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_faraona_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172416 --food-id=food_faraona_con_pelle_raw \
+  --name-it="Faraona, carne e pelle, cruda" \
+  --matrix-id=faraona_con_pelle_raw --matrix-description-it="Faraona, carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_faraona_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Fagiano, carne e pelle, cruda — preparato 2026-11-14 dal task (centosettesimo lotto)
+
+- **food_id**: `food_fagiano_con_pelle_raw`. FDC ID 174472 (SR Legacy, "Pheasant, raw, meat and skin" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Variante "carne e pelle" già individuata ma scartata nel trentaduesimo lotto a favore del generico "meat only" (`food_fagiano_raw`, ancora solo "pronto", non eseguito) — qui ripresa come voce a sé, record FDC realmente distinto, stesso filone "meat and skin vs meat only".
+- **Nutrienti**: **14/17**. Per 100g: energia 181kcal, proteine 22,7g, grassi 9,29g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,15mg, zinco 0,96mg, magnesio 20,0mg, rame 0,065mg, selenio 15,7µg, sodio 40,0mg, vitamina C 5,30mg, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0,77µg. Mancano (non riportati, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A — stesso gap tipico della carne di selvaggina in questa pipeline.
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — `food_fagiano_raw` non riusabile come analogia perché solo "pronto", non ancora eseguito; stessa convenzione già usata per faraona/quaglia/piccione in questa pipeline).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `fagiano_con_pelle_raw` ("Fagiano, carne e pelle, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174472 --food-id=food_fagiano_con_pelle_raw \
+  --name-it="Fagiano, carne e pelle, cruda" \
+  --matrix-id=fagiano_con_pelle_raw --matrix-description-it="Fagiano, carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174472 --food-id=food_fagiano_con_pelle_raw \
+  --name-it="Fagiano, carne e pelle, cruda" \
+  --matrix-id=fagiano_con_pelle_raw --matrix-description-it="Fagiano, carne e pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Fagiano, coscia, carne senza pelle, cruda — preparato 2026-11-14 dal task (centosettesimo lotto)
+
+- **food_id**: `food_fagiano_coscia_raw`. FDC ID 172417 (SR Legacy, "Pheasant, leg, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, già citato di striscio nel trentaduesimo lotto ma mai usato). Parte anatomica distinta dal composito "meat only" intero (`food_fagiano_raw`, ancora solo "pronto") e dalla variante "carne e pelle" intera appena preparata sopra — record FDC realmente distinto.
+- **Nutrienti**: **14/17**. Per 100g: energia 134kcal, proteine 22,2g, grassi 4,30g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 29,0mg, ferro 1,78mg, zinco 1,53mg, magnesio 20,0mg, rame 0,11mg, selenio 15,3µg, sodio 45,0mg, vitamina C 6,00mg, folato totale 10,0µg, acido folico 0µg esplicito, vitamina B12 0,84µg. Mancano (non riportati, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A — stesso gap tipico della carne di selvaggina in questa pipeline.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (coscia di pollo, carne senza pelle, cruda, FDC 173627, già eseguita sul DB reale — stessa parte anatomica "coscia/leg", stesso attributo `is_heme_iron`, più precisa di `food_petto_di_pollo_raw` per questa parte specifica).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `fagiano_coscia_raw` ("Fagiano, coscia, carne senza pelle, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172417 --food-id=food_fagiano_coscia_raw \
+  --name-it="Fagiano, coscia, carne senza pelle, cruda" \
+  --matrix-id=fagiano_coscia_raw --matrix-description-it="Fagiano, coscia, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172417 --food-id=food_fagiano_coscia_raw \
+  --name-it="Fagiano, coscia, carne senza pelle, cruda" \
+  --matrix-id=fagiano_coscia_raw --matrix-description-it="Fagiano, coscia, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Fagiano, carne cotta (total edible) — preparato 2026-11-13 dal task (centoseiesimo lotto)
 
 - **food_id**: `food_fagiano_cotto`. FDC ID 169903 (SR Legacy, "Pheasant, cooked, total edible" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo a quello della quaglia cotta già eseguita, FDC 169902). Il crudo (`food_fagiano_raw`, FDC 174473, "meat only", trentaduesimo lotto) era già "pronto"; cotto mai tentato finora. Nota di trasparenza: il cotto è "total edible" (non specificato se con pelle), trim distinto dal "meat only" del crudo — nessun record "meat only, cooked" trovato per questa specie, stessa asimmetria di trim già accettata altre volte in questa pipeline.
