@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### More di gelso, crude — preparato 2026-11-14 dal task (centosedicesimo lotto)
+
+- **food_id**: `food_gelso_raw`. FDC ID 169913 (SR Legacy, "Mulberries, raw" — pagina getfoodfacts.com dedicata "USDA Standard Reference", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Morus*, famiglia Moraceae — mai tentato in questa pipeline (distinto da fichi/fichi secchi/fichi d'India, stesso filone frutta di bosco/selvatica mai esplorato a fondo finora).
+- **Nutrienti**: **17/17**, nessun valore mancante (3 a zero esplicito). Per 100g: energia 43,0kcal, proteine 1,44g, grassi 0,39g, carboidrati 9,80g, fibra 1,70g, calcio 39,0mg, ferro 1,85mg, zinco 0,12mg, magnesio 18,0mg, rame 0,060mg, selenio 0,60µg, sodio 10,0mg, vitamina C 36,4mg, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 7,80µg, beta-carotene 9,00µg (reale), alfa-carotene 12,0µg (reale), beta-criptoxantina 0µg esplicito, vitamina A (RAE) 1,00µg.
+- **Analogia usata**: `food_fig_raw` (fico fresco crudo, già eseguito sul DB reale — stessa famiglia botanica Moraceae, entrambi frutti freschi non lavorati).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `gelso` ("More di gelso, crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile — convenzione già usata per mirtilli/uva spina), `carotenoid_matrix_state=raw_intact` (beta-carotene e alfa-carotene reali non nulli, frutto crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Moraceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169913 --food-id=food_gelso_raw \
+  --name-it="More di gelso, crude" \
+  --matrix-id=gelso --matrix-description-it="More di gelso, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Moraceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169913 --food-id=food_gelso_raw \
+  --name-it="More di gelso, crude" \
+  --matrix-id=gelso --matrix-description-it="More di gelso, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fig_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Moraceae --diet-category=fresh_fruit --apply
+```
+
+### Bacche di sambuco, crude — preparato 2026-11-14 dal task (centosedicesimo lotto)
+
+- **food_id**: `food_bacche_di_sambuco_raw`. FDC ID 171727 (SR Legacy, "Elderberries, raw" — pagina getfoodfacts.com dedicata "USDA reference food", FDC ID e dataType citati esplicitamente, release 30-04-2026). Genere *Sambucus*, famiglia Adoxaceae — mai tentato finora.
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (assenti dalla tabella della pagina, non a zero). Per 100g: energia 73,0kcal, proteine 0,66g, grassi 0,50g, carboidrati 18,4g, fibra 7,00g, calcio 38,0mg, ferro 1,60mg, zinco 0,11mg, magnesio 5,00mg, rame 0,061mg, selenio 0,60µg, sodio 6,00mg, vitamina C 36,0mg, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 30,0µg. **Nota di qualità dato**: la vitamina A (RAE) è presente e non nulla nonostante tutti e tre i carotenoidi provitaminici A sorgente siano assenti dalla stessa pagina — incoerenza interna del record SR Legacy (non editabile da qui), segnalata per trasparenza, non corretta né nascosta. **Nota d'uso**: le bacche di sambuco crude contengono glicosidi cianogenici e non sono normalmente consumate crude (si consumano cotte, in sciroppo/marmellata) — questo record riflette il dato USDA "raw" così come riportato, non un giudizio di sicurezza alimentare dell'app.
+- **Analogia usata**: `food_mirtilli_raw` (mirtilli, già eseguiti sul DB reale — stessa categoria "piccolo frutto di bosco fresco", famiglia botanica diversa).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco, definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `bacche_di_sambuco` ("Bacche di sambuco, crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=raw_intact` (frutto crudo, per convenzione anche con carotenoidi non riportati dalla fonte — stesso precedente di `food_datteri_medjool_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Adoxaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171727 --food-id=food_bacche_di_sambuco_raw \
+  --name-it="Bacche di sambuco, crude" \
+  --matrix-id=bacche_di_sambuco --matrix-description-it="Bacche di sambuco, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Adoxaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=171727 --food-id=food_bacche_di_sambuco_raw \
+  --name-it="Bacche di sambuco, crude" \
+  --matrix-id=bacche_di_sambuco --matrix-description-it="Bacche di sambuco, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Adoxaceae --diet-category=fresh_fruit --apply
+```
+
 ### Gombo (okra), cotto (bollito, senza sale) — preparato 2026-11-14 dal task (centoquattordicesimo lotto)
 
 - **food_id**: `food_gombo_cotto`. FDC ID 169261 (SR Legacy, "Okra, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Companion del crudo già eseguito (`food_gombo_raw`, FDC 169260), mai tentato finora (distinto dal surgelato `food_gombo_surgelato`, già fatto, FDC diverso).
