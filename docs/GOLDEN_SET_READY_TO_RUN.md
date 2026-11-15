@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sapodilla, cruda — preparato 2026-11-15 dal task (centoventiseiesimo lotto)
+
+- **food_id**: `food_sapodilla_raw`. FDC ID 167759 (SR Legacy, "Sapodilla, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Prima specie della famiglia Sapotaceae mai tentata in questa pipeline (distinta dal mamey sapote, *Pouteria sapota*, già in coda come "Pronti" ma non ancora eseguito — non usabile come analogia per la stessa regola di metodo già applicata altrove). Verificato con `grep` dedicato su "sapodilla"/FDC 167759, zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 83,0kcal, proteine 0,44g, grassi 1,10g, carboidrati 20,0g, fibra 5,30g, calcio 21,0mg, ferro 0,80mg, zinco 0,10mg, magnesio 12,0mg, rame 0,086mg, selenio 0,60µg, vitamina C 14,7mg, folato totale 14,0µg, vitamina B12 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento, non conteggiato nei 17 ma verificato). Mancano (non riportati nel record, non assunti zero): vitamina K, beta-carotene, l'altro carotenoide provitaminico A — gap di dato puro (pagina non li riporta affatto), stessa situazione già vista per longan/asparagi surgelati.
+- **Analogia usata**: `food_litchi_raw` (litchi crudo, Golden Set pipeline, già eseguito sul DB reale — stesso trattamento funzionale "frutto esotico a buccia non edibile, carotenoidi non riportati nel record", stesso precedente già usato per il longan in questa coda).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, nessuna ambiguità).
+- **Matrice**: nuova `sapodilla` ("Sapodilla").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene non riportato nel record, non un dato reale zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapotaceae` (*Manilkara zapota*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167759 --food-id=food_sapodilla_raw \
+  --name-it="Sapodilla, cruda" \
+  --matrix-id=sapodilla --matrix-description-it="Sapodilla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapotaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167759 --food-id=food_sapodilla_raw \
+  --name-it="Sapodilla, cruda" \
+  --matrix-id=sapodilla --matrix-description-it="Sapodilla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapotaceae --diet-category=fresh_fruit --apply
+```
+
 ### Tartaruga verde, carne cruda — preparato 2026-11-15 dal task (centoventicinquesimo lotto)
 
 - **food_id**: `food_tartaruga_verde_raw`. FDC ID 167745 (SR Legacy, "Turtle, green, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima specie di rettile mai tentata in questa pipeline; nessun record generico "turtle meat" esiste (solo questa specie precisa, SR Legacy, e un record Survey/FNDDS distinto "Turtle" FDC 2706335 non usato).
