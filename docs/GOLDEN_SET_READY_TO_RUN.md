@@ -112,6 +112,30 @@ npm run add-food -- --fdc-id=174228 --food-id=food_pesce_spigola_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Rockfish del Pacifico, misto (includa bocaccio), crudo — preparato 2026-11-15 dal task (centotrentaquattresimo lotto)
+
+- **food_id**: `food_pesce_rockfish_pacifico_raw`. FDC ID 173684 (SR Legacy, "Fish, rockfish, Pacific, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza (Regola 6)**: cercato inizialmente "bocaccio" (*Sebastes paucispinis*, raccomandazione del lotto 133 "pesce USA da banco pescheria"), ma nessuna pagina FDC è specifica per quella singola specie — il record USDA copre il genere *Sebastes* ("rockfish") a livello di specie miste, stessa convenzione già usata per yellowtail/snapper mixed species in lotti precedenti. Specie distinta dal persico oceanico atlantico (*Sebastes* sp. ma diversa, `food_persico_oceanico_raw`) già eseguito — stesso genere, pagine FDC separate.
+- **Nutrienti**: **17/17, nessun valore mancante**. Per 100g: energia 90,0kcal, proteine 18,4g, grassi 1,34g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 0,30mg, zinco 0,36mg, magnesio 27,0mg, rame 0,034mg, selenio 63,0µg, vitamina C 0mg esplicito, folato totale 9,00µg, vitamina B12 1,39µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 0µg esplicito.
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro crudo già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_rockfish_pacifico`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173684 --food-id=food_pesce_rockfish_pacifico_raw \
+  --name-it="Rockfish del Pacifico, misto (includa bocaccio), crudo" \
+  --matrix-id=pesce_rockfish_pacifico --matrix-description-it="Rockfish del Pacifico, misto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173684 --food-id=food_pesce_rockfish_pacifico_raw \
+  --name-it="Rockfish del Pacifico, misto (includa bocaccio), crudo" \
+  --matrix-id=pesce_rockfish_pacifico --matrix-description-it="Rockfish del Pacifico, misto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Orange roughy, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
 
 - **food_id**: `food_pesce_roughy_arancione_raw`. FDC ID 175133 (SR Legacy, "Fish, roughy, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA comune da banco pescheria per nome inglese esatto, non ancora provato" (raccomandazione del centotrentaduesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
