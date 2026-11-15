@@ -16,6 +16,104 @@
 
 ## Pronti
 
+### Broccolo, foglie, crude — preparato 2026-11-15 dal task (centoquarantasettesimo lotto)
+
+- **food_id**: `food_broccolo_foglie_raw`. FDC ID 169329 (SR Legacy, "Broccoli, leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Filone "parte della pianta non ancora tentata" (già produttivo al 142° lotto per patata dolce): il broccolo (`food_broccoli_raw`, cimette) è già eseguito, le foglie no. Verificato con `grep` dedicato sui tre file: zero occorrenze per "foglie di broccolo"/"broccoli leaves"/169329 prima della ricerca web.
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (non riportati dal record, non assunti zero, gap dichiarato come per fiori di zucca al 142° lotto). Per 100g: energia 28,0kcal, proteine 2,98g, grassi 0,35g, carboidrati 5,06g, fibra 2,30g, calcio 48,0mg, ferro 0,88mg, zinco 0,40mg, magnesio 25,0mg, rame 0,045mg, selenio 3,00µg, sodio 27,0mg, vitamina C 93,2mg, folato totale 71,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_broccoli_raw` (broccolo, cimette crude, già eseguito sul DB reale — stessa specie *Brassica oleracea*, stesso stato crudo, organo diverso: foglia invece di cimetta/infiorescenza; stessa analogia già usata per `food_cime_di_rapa_raw`).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `broccolo_foglie`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, non assunto senza conferma, stesso principio di fiori di zucca), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa famiglia reale già usata per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169329 --food-id=food_broccolo_foglie_raw \
+  --name-it="Broccolo, foglie, crude" \
+  --matrix-id=broccolo_foglie --matrix-description-it="Broccolo, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169329 --food-id=food_broccolo_foglie_raw \
+  --name-it="Broccolo, foglie, crude" \
+  --matrix-id=broccolo_foglie --matrix-description-it="Broccolo, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_broccoli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Patata, buccia, cruda — preparato 2026-11-15 dal task (centoquarantasettesimo lotto)
+
+- **food_id**: `food_patata_buccia_raw`. FDC ID 170032 (SR Legacy, "Potatoes, raw, skin" — pagina getfoodfacts.com dedicata e pulita, distinta dal record "flesh and skin" FDC 170026 già alla base di `food_potatoes_raw`). Stesso filone "parte della pianta non ancora tentata": la patata intera è già eseguita, la sola buccia (scarto alimentare rilevante, spesso rivalutato nelle diete a basso spreco) no. Verificato con `grep` dedicato: zero occorrenze per "buccia di patata"/"potato skin"/170032 prima della ricerca web.
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (non riportati dal record, non assunti zero). Per 100g: energia 58,0kcal, proteine 2,57g, grassi 0,10g, carboidrati 12,4g, fibra 2,50g, calcio 30,0mg, ferro 3,24mg, zinco 0,35mg, magnesio 23,0mg, rame 0,42mg, selenio 0,30µg, sodio 10,0mg, vitamina C 11,4mg, folato totale 17,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_potatoes_raw` (patata cruda, già presente sul DB reale — stessa specie *Solanum tuberosum*, stesso stato crudo, organo diverso: buccia invece di tubero con buccia e polpa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/tubero).
+- **Matrice**: nuova `patata_buccia`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia botanica reale, dichiarata esplicitamente), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170032 --food-id=food_patata_buccia_raw \
+  --name-it="Patata, buccia, cruda" \
+  --matrix-id=patata_buccia --matrix-description-it="Patata, buccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potatoes_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170032 --food-id=food_patata_buccia_raw \
+  --name-it="Patata, buccia, cruda" \
+  --matrix-id=patata_buccia --matrix-description-it="Patata, buccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potatoes_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Vite, foglie, crude — preparato 2026-11-15 dal task (centoquarantasettesimo lotto)
+
+- **food_id**: `food_vite_foglie_raw`. FDC ID 168575 (SR Legacy, "Grape leaves, raw" — pagina getfoodfacts.com dedicata e pulita). Foglia comune nella cucina mediorientale/mediterranea (involtini), mai tentata; distinta dall'uva (frutto) già eseguita e dalla versione in scatola FDC 169393 (non usata, preferita la cruda a fonte singola). Verificato con `grep` dedicato: zero occorrenze per "foglie di vite"/"grape leaves"/168575 prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 93,0kcal, proteine 5,60g, grassi 2,12g, carboidrati 17,3g, fibra 11,0g, calcio 363mg, ferro 2,63mg, zinco 0,67mg, magnesio 95,0mg, rame 0,41mg, selenio 0,90µg, sodio 9,00mg, vitamina C 11,1mg, folato totale 83,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 109µg, beta-carotene 16194µg (valore alto ma reale, coerente con una foglia verde scura).
+- **Analogia usata**: `food_kale_raw` (cavolo riccio/kale crudo, già eseguito sul DB reale — stesso fallback già usato per `food_alga_nori_raw`: nessuna foglia verde della famiglia botanica reale Vitaceae ancora eseguita, nessun attributo categorico speciale di famiglia da ereditare).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia, non il frutto).
+- **Matrice**: nuova `vite_foglie`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato nonostante il calcio elevato), `carotenoid_matrix_state=raw_intact` (cruda, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Vitaceae` (famiglia botanica reale, dichiarata esplicitamente, diversa da quella dell'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168575 --food-id=food_vite_foglie_raw \
+  --name-it="Vite, foglie, crude" \
+  --matrix-id=vite_foglie --matrix-description-it="Vite, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Vitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168575 --food-id=food_vite_foglie_raw \
+  --name-it="Vite, foglie, crude" \
+  --matrix-id=vite_foglie --matrix-description-it="Vite, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Vitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Zucca, foglie, crude — preparato 2026-11-15 dal task (centoquarantasettesimo lotto)
+
+- **food_id**: `food_zucca_foglie_raw`. FDC ID 169272 (SR Legacy, "Pumpkin leaves, raw" — pagina getfoodfacts.com dedicata e pulita). Stesso filone: fiori di zucca già `Pronti` (non ancora eseguiti) dal 142° lotto, zucchine/zucca già eseguite — le foglie no. Verificato con `grep` dedicato: zero occorrenze per "foglie di zucca"/"pumpkin leaves"/169272 prima della ricerca web (nota: durante la stessa verifica è stato scartato come quasi-doppione "musco irlandese/irish moss", già presente in Pronti sotto `food_alga_musco_irlandese_raw` — zero voci duplicate scritte).
+- **Nutrienti**: **14/17** — mancano fibra, vitamina K e beta-carotene (non riportati dal record, non assunti zero; nota: la pagina mostra anche un'intestazione "Fiber 0g" in conflitto con l'assenza del nutriente nella tabella dettagliata — trattato come dato mancante, non zero, per cautela). Per 100g: energia 19,0kcal, proteine 3,15g, grassi 0,40g, carboidrati 2,33g, calcio 39,0mg, ferro 2,22mg, zinco 0,20mg, magnesio 38,0mg, rame 0,13mg, selenio 0,90µg, sodio 11,0mg, vitamina C 11,0mg, folato totale 36,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito. Il record riporta anche vitamina A (RAE) 97,0µg senza scomposizione in carotenoidi singoli.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude con buccia, già eseguite sul DB reale — stessa famiglia botanica reale Cucurbitaceae, organo diverso: foglia invece di frutto; stessa analogia già usata per il candidato "fiori di zucca" non ancora eseguito).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `zucca_foglie`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, non assunto senza conferma nonostante la vitamina A RAE presente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169272 --food-id=food_zucca_foglie_raw \
+  --name-it="Zucca, foglie, crude" \
+  --matrix-id=zucca_foglie --matrix-description-it="Zucca, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169272 --food-id=food_zucca_foglie_raw \
+  --name-it="Zucca, foglie, crude" \
+  --matrix-id=zucca_foglie --matrix-description-it="Zucca, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Patata dolce, foglie, cotte (a vapore, con sale) — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
 
 - **food_id**: `food_patata_dolce_foglie_cotte`. FDC ID 170133 (SR Legacy, "Sweet potato leaves, cooked, steamed, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte della pianta mai tentata: la patata dolce radice è già eseguita (cruda e cotta, `food_patata_dolce_raw`/`food_patata_dolce_cotta`), ma le foglie — ortaggio a foglia verde comune nella cucina africana/asiatica e tracciato da USDA, mai cercato prima in questa pipeline nonostante il filone "radice coperta, foglia non ancora" fosse stato segnalato a bassa probabilità dai lotti 140-141 (qui invece produttivo, a differenza di sedano rapa/pastinaca/carota). Verificato con `grep` dedicato su tutti e tre i file: zero occorrenze per "patata dolce.*foglie"/"sweet potato leaves"/169303/170133 prima della ricerca web.
