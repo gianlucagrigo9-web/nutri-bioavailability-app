@@ -16,6 +16,154 @@
 
 ## Pronti
 
+### Fegato grasso d'oca, patè affumicato, in scatola — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_pate_di_fegato_doca_affumicato`. FDC ID 171100 (SR Legacy, "Pate de foie gras, canned (goose liver pate), smoked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "frattaglie/salumi/formaggi di nicchia: foie gras/fegato grasso d'oca". Verificato con `grep`: zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (pagina riporta solo retinolo/vitamina A RAE, coerente trattandosi di prodotto animale, non assunto come beta-carotene). Per 100g: energia 462kcal, proteine 11,4g, grassi 43,8g, carboidrati 4,67g, fibra 0g esplicito, calcio 70,0mg, ferro 5,50mg, zinco 0,92mg, magnesio 13,0mg, rame 0,40mg, selenio 44,0µg, sodio 697mg, vitamina C 2,00mg, folato totale 60,0µg, vitamina B12 9,40µg.
+- **Analogia usata**: `food_fegato_di_oca_raw` (fegato d'oca crudo, già eseguito sul DB reale — stesso organo, stessa specie, differisce solo per la preparazione: crudo vs patè in scatola affumicato).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `pate_fegato_oca`.
+- **Attributi**: `is_heme_iron=true` (fegato), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, vitamina A da retinolo non da carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (prodotto animale), `baseline_cooking_state=canned` (patè affumicato in scatola, pronto al consumo), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171100 --food-id=food_pate_di_fegato_doca_affumicato \
+  --name-it="Fegato grasso d'oca, patè affumicato, in scatola" \
+  --matrix-id=pate_fegato_oca --matrix-description-it="Patè di fegato d'oca affumicato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fegato_di_oca_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171100 --food-id=food_pate_di_fegato_doca_affumicato \
+  --name-it="Fegato grasso d'oca, patè affumicato, in scatola" \
+  --matrix-id=pate_fegato_oca --matrix-description-it="Patè di fegato d'oca affumicato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_fegato_di_oca_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Taro, cotto (bollito, senza sale) — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_taro_cotto`. FDC ID 168486 (SR Legacy, "Taro, cooked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa lo stato di cottura mancante sul taro: il crudo (`food_taro_raw`, FDC 169308) è già "pronto" (non eseguito) dal ventisettesimo lotto. Verificato con `grep`: zero occorrenze per "taro.*cott"/"taro cooked"/168486 prima della ricerca web.
+- **Nutrienti**: **17/17** completo. Per 100g: energia 142kcal, proteine 0,52g, grassi 0,11g, carboidrati 34,6g, fibra 5,10g, calcio 18,0mg, ferro 0,72mg, zinco 0,27mg, magnesio 30,0mg, rame 0,20mg, selenio 0,90µg, sodio 15,0mg, vitamina C 5,00mg, folato totale 19,0µg, vitamina B12 0µg esplicito, vitamina K 1,20µg, beta-carotene 39,0µg (reale e non nullo).
+- **Analogia usata**: `food_patata_dolce_cotta` (patata dolce cotta, Golden Set, già eseguita — stessa categoria "tubero tropicale cotto con carotenoidi reali non nulli", stessa convenzione già usata per il taro crudo).
+- **Categoria dieta**: `plant_non_fruit` (tubero).
+- **Matrice**: riusa `taro` (stessa matrice del taro crudo, stesso alimento).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale non nullo ma matrice alterata dalla cottura, a differenza del crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae` (stessa famiglia del crudo), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168486 --food-id=food_taro_cotto \
+  --name-it="Taro, cotto (bollito, senza sale)" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_patata_dolce_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Araceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168486 --food-id=food_taro_cotto \
+  --name-it="Taro, cotto (bollito, senza sale)" \
+  --matrix-id=taro --matrix-description-it="Taro" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_patata_dolce_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Araceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Loto, radice (rizoma), cotta (bollita, senza sale) — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_radice_di_loto_cotta`. FDC ID 168430 (SR Legacy, "Lotus root, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "stelo di loto (lotus stem, distinto dal seme/radice)". **Nota di trasparenza sul nome**: l'unico record USDA trovato è etichettato "root" (radice); botanicamente la parte edibile del loto comunemente chiamata "stelo"/"radice" nelle cucine asiatiche è lo stesso organo, un rizoma (fusto sotterraneo) — stessa struttura a cui ci si riferisce sia con "stelo" che con "radice di loto" nel linguaggio comune, nessun record distinto trovato per un eventuale "vero stelo" aereo. Verificato con `grep`: zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** completo. Per 100g: energia 66,0kcal, proteine 1,58g, grassi 0,070g, carboidrati 16,0g, fibra 3,10g, calcio 26,0mg, ferro 0,90mg, zinco 0,33mg, magnesio 22,0mg, rame 0,22mg, selenio 0,60µg, sodio 45,0mg, vitamina C 27,4mg, folato totale 8,00µg, vitamina B12 0µg esplicito, vitamina K 0,10µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_sedano_rapa_cotto` (sedano rapa cotto, Golden Set pipeline, già eseguito — stessa categoria "rizoma/radice acquatica amidacea cotta", nessuna parentela botanica reale).
+- **Categoria dieta**: `plant_non_fruit` (radice/rizoma).
+- **Matrice**: nuova `radice_di_loto`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Nelumbonaceae` (famiglia botanica reale, *Nelumbo nucifera*), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168430 --food-id=food_radice_di_loto_cotta \
+  --name-it="Loto, radice (rizoma), cotta (bollita, senza sale)" \
+  --matrix-id=radice_di_loto --matrix-description-it="Radice di loto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_rapa_cotto \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168430 --food-id=food_radice_di_loto_cotta \
+  --name-it="Loto, radice (rizoma), cotta (bollita, senza sale)" \
+  --matrix-id=radice_di_loto --matrix-description-it="Radice di loto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_sedano_rapa_cotto \
+  --botanical-family=Nelumbonaceae --diet-category=plant_non_fruit --apply
+```
+
+### Bardana, radice, cruda — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_bardana_raw`. FDC ID 169974 (SR Legacy, "Burdock root, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "radice di bardana (burdock root/gobo)". Verificato con `grep`: zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17** completo. Per 100g: energia 72,0kcal, proteine 1,53g, grassi 0,15g, carboidrati 17,3g, fibra 3,30g, calcio 41,0mg, ferro 0,80mg, zinco 0,33mg, magnesio 38,0mg, rame 0,077mg, selenio 0,70µg, sodio 5,00mg, vitamina C 3,00mg, folato totale 23,0µg, vitamina B12 0µg esplicito, vitamina K 1,60µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_pastinaca_raw` (pastinaca cruda, Golden Set pipeline, già eseguita — stessa categoria "radice bianca fibrosa non amidaceo-dolce", nessuna parentela botanica reale).
+- **Categoria dieta**: `plant_non_fruit` (radice).
+- **Matrice**: nuova `bardana`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (famiglia botanica reale, *Arctium lappa*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169974 --food-id=food_bardana_raw \
+  --name-it="Bardana, radice, cruda" \
+  --matrix-id=bardana --matrix-description-it="Bardana, radice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pastinaca_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169974 --food-id=food_bardana_raw \
+  --name-it="Bardana, radice, cruda" \
+  --matrix-id=bardana --matrix-description-it="Bardana, radice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pastinaca_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Einkorn, chicco intero secco, crudo — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_einkorn_chicco_raw`. FDC ID 2710827 (**Foundation**, "Einkorn, grain, dry, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza**: la voce coda chiedeva "farina di einkorn" — nessun record USDA generico per la FARINA (solo prodotti Branded Jovial/altri); il chicco intero crudo invece ha un record Foundation dedicato, genuinamente nuovo (zero occorrenze "einkorn" su tutti i file prima della ricerca web), quindi proposto come sostituto trasparente, non la farina richiesta.
+- **Nutrienti**: **11/17** — mancano selenio, vitamina C, folato totale, vitamina B12, vitamina K e beta-carotene (non riportati dal record, non assunti zero). Per 100g (tabella dettagliata): energia 346kcal, proteine 15,1g, grassi 3,81g, carboidrati 68,7g, fibra 8,91g, calcio 41,4mg, ferro 3,69mg, zinco 5,23mg, magnesio 140mg, rame 0,55mg, sodio 0mg esplicito. 11/17 è sopra la soglia minima, in linea con altri cereali antichi di questa pipeline (farina di farro 12/17, farina di sorgo 14/17).
+- **Analogia usata**: `food_segale_raw` (segale cruda in chicchi, Golden Set pipeline, già eseguita — stessa convenzione "cereale antico in chicco intero crudo", stessa famiglia Poaceae, genere diverso).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `einkorn_chicco`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale, *Triticum monococcum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2710827 --food-id=food_einkorn_chicco_raw \
+  --name-it="Einkorn, chicco intero secco, crudo" \
+  --matrix-id=einkorn_chicco --matrix-description-it="Einkorn, chicco intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_segale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710827 --food-id=food_einkorn_chicco_raw \
+  --name-it="Einkorn, chicco intero secco, crudo" \
+  --matrix-id=einkorn_chicco --matrix-description-it="Einkorn, chicco intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_segale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Epazote, crudo — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
+
+- **food_id**: `food_epazote_raw`. FDC ID 169398 (SR Legacy, "Epazote, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "erbe/foglie aromatiche di nicchia non occidentali: epazote". Verificato con `grep`: zero occorrenze prima della ricerca web.
+- **Nutrienti**: **16/17** — manca solo vitamina K (non riportata dal record). Per 100g: energia 32,0kcal, proteine 0,33g, grassi 0,52g, carboidrati 7,44g, fibra 3,80g, calcio 275mg, ferro 1,88mg, zinco 1,10mg, magnesio 121mg, rame 0,19mg, selenio 0,90µg, sodio 43,0mg, vitamina C 3,60mg, folato totale 215µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito, beta-carotene 38,0µg (reale e non nullo). **Nota**: la pagina mostra una lieve incongruenza fra il riquadro etichetta arrotondato ("30 calorie"/45mg sodio) e la tabella nutrienti completa (32,0kcal/43,0mg) — presa la tabella completa, come da convenzione di questa pipeline.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, Golden Set originale, già eseguito — stessa famiglia botanica reale Amaranthaceae/Chenopodiaceae, stesso profilo "erba a foglia ricca di calcio e oxalati").
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `epazote`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=high_oxalate` (per analogia con gli spinaci, stessa famiglia Chenopodiaceae notoriamente ad alto oxalato), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, erba cruda non alterata da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (famiglia botanica reale, *Dysphania ambrosioides*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169398 --food-id=food_epazote_raw \
+  --name-it="Epazote, crudo" \
+  --matrix-id=epazote --matrix-description-it="Epazote" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169398 --food-id=food_epazote_raw \
+  --name-it="Epazote, crudo" \
+  --matrix-id=epazote --matrix-description-it="Epazote" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Anguria, semi, secchi — preparato 2026-11-15 dal task (centoquarantasettesimo lotto, addendum)
 
 - **food_id**: `food_semi_di_anguria_raw`. FDC ID 169407 (SR Legacy, "Seeds, watermelon seed kernels, dried" — pagina getfoodfacts.com dedicata e pulita). Stesso filone "parte della pianta non ancora tentata": l'anguria (frutto) non è ancora tracciata in questa pipeline per il frutto, ma i semi, snack comune in molte cucine (mediorientale/africana), hanno un record SR Legacy proprio, distinto dai semi di zucca già eseguiti. Verificato con `grep` dedicato: zero occorrenze per "semi di anguria"/"watermelon seed"/169407 prima della ricerca web.
