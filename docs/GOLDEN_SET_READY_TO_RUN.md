@@ -16,6 +16,134 @@
 
 ## Pronti
 
+### Patata dolce, foglie, cotte (a vapore, con sale) — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
+
+- **food_id**: `food_patata_dolce_foglie_cotte`. FDC ID 170133 (SR Legacy, "Sweet potato leaves, cooked, steamed, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte della pianta mai tentata: la patata dolce radice è già eseguita (cruda e cotta, `food_patata_dolce_raw`/`food_patata_dolce_cotta`), ma le foglie — ortaggio a foglia verde comune nella cucina africana/asiatica e tracciato da USDA, mai cercato prima in questa pipeline nonostante il filone "radice coperta, foglia non ancora" fosse stato segnalato a bassa probabilità dai lotti 140-141 (qui invece produttivo, a differenza di sedano rapa/pastinaca/carota). Verificato con `grep` dedicato su tutti e tre i file: zero occorrenze per "patata dolce.*foglie"/"sweet potato leaves"/169303/170133 prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 35,0kcal, proteine 2,18g, grassi 0,34g, carboidrati 7,38g, fibra 1,90g, calcio 33,0mg, ferro 0,63mg, zinco 0,26mg, magnesio 48,0mg, rame 0,033mg, selenio 0,90µg, sodio 249mg (coerente col nome esplicito "with salt", nessuna anomalia), vitamina C 1,50mg, folato totale 49,0µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 109µg, beta-carotene 1725µg, alfa-carotene 33,0µg + beta-criptoxantina 45,0µg (entrambi reali, non nulli).
+- **Analogia usata**: `food_patata_dolce_cotta` (patata dolce, cotta con sale, FDC 170134, già eseguita sul DB reale — stessa specie *Ipomoea batatas*, stesso stato di cottura "bollita/al vapore con sale", organo omologo cotto della stessa pianta).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `patata_dolce_foglie_cotte`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente di categoria ossalati per la famiglia Convolvulaceae in questa pipeline, non forzato), `carotenoid_matrix_state=cooked_or_disrupted` (cotta a vapore, beta-carotene/alfa-carotene/beta-criptoxantina tutti reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Convolvulaceae` (stessa famiglia reale usata per `food_patata_dolce_raw`/`food_patata_dolce_cotta`), `baseline_cooking_state=steamed`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170133 --food-id=food_patata_dolce_foglie_cotte \
+  --name-it="Patata dolce, foglie, cotte (a vapore, con sale)" \
+  --matrix-id=patata_dolce_foglie_cotte --matrix-description-it="Patata dolce, foglie, cotte" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_patata_dolce_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170133 --food-id=food_patata_dolce_foglie_cotte \
+  --name-it="Patata dolce, foglie, cotte (a vapore, con sale)" \
+  --matrix-id=patata_dolce_foglie_cotte --matrix-description-it="Patata dolce, foglie, cotte" \
+  --baseline-cooking-state=steamed --analogy-food-id=food_patata_dolce_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+```
+
+### Patata dolce, foglie, crude — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
+
+- **food_id**: `food_patata_dolce_foglie_raw`. FDC ID 169303 (SR Legacy, "Sweet potato leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone della voce cotta sopra, stesso controllo di non-duplicazione (zero occorrenze).
+- **Nutrienti**: **15/17** — mancano zinco e rame (non riportati dal record SR Legacy, non assunti zero). Per 100g: energia 42,0kcal, proteine 2,49g, grassi 0,51g, carboidrati 8,82g, fibra 5,30g, calcio 78,0mg, ferro 0,97mg, sodio 6,00mg, selenio 0,90µg, vitamina C 11,0mg, folato totale 1,00µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 302µg, beta-carotene 2217µg, alfa-carotene 42,0µg + beta-criptoxantina 58,0µg (entrambi reali, non nulli).
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce, cruda, già eseguita sul DB reale — stessa specie *Ipomoea batatas*, foglie come organo omologo crudo della stessa pianta, stesso principio già usato per le foglie di barbabietola rispetto alla radice).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `patata_dolce_foglie`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso motivo della voce cotta sopra), `carotenoid_matrix_state=raw_intact` (cruda, beta-carotene/alfa-carotene/beta-criptoxantina tutti reali e non nulli), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Convolvulaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169303 --food-id=food_patata_dolce_foglie_raw \
+  --name-it="Patata dolce, foglie, crude" \
+  --matrix-id=patata_dolce_foglie --matrix-description-it="Patata dolce, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169303 --food-id=food_patata_dolce_foglie_raw \
+  --name-it="Patata dolce, foglie, crude" \
+  --matrix-id=patata_dolce_foglie --matrix-description-it="Patata dolce, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Convolvulaceae --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di ravanello (semi germogliati), crudi — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
+
+- **food_id**: `food_germogli_di_ravanello_raw`. FDC ID 170095 (SR Legacy, "Radish seeds, sprouted, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Germoglio mai tentato, distinto dal ravanello radice (`food_ravanelli_raw`, già eseguito) e dai germogli di soia/fagiolo mungo già fatti (specie diversa, famiglia Brassicaceae invece di Fabaceae). Verificato con `grep` dedicato: zero occorrenze per "germogli di ravanello"/"radish sprout"/170095.
+- **Nutrienti**: **14/17** — mancano fibra, vitamina K e beta-carotene (non riportati dal record, non assunti zero). Per 100g: energia 43,0kcal, proteine 3,81g, grassi 2,53g, carboidrati 3,60g, calcio 51,0mg, ferro 0,86mg, zinco 0,56mg, magnesio 44,0mg, rame 0,12mg, selenio 0,60µg, sodio 6,00mg, vitamina C 28,9mg, folato totale 95,0µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_kale_raw` (cavolo kale, crudo, Golden Set originale — stessa famiglia botanica reale Brassicaceae, stessa categoria "verdura crucifera cruda a basso ossalato" già usata per crescione/cime di rapa/foglie di rapa in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/germoglio).
+- **Matrice**: nuova `germogli_di_ravanello`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=low_oxalate` (stesso precedente crucifere di `food_kale_raw`/`food_crescione_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, non assunto `raw_intact` senza conferma, Regola 1), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170095 --food-id=food_germogli_di_ravanello_raw \
+  --name-it="Germogli di ravanello (semi germogliati), crudi" \
+  --matrix-id=germogli_di_ravanello --matrix-description-it="Germogli di ravanello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170095 --food-id=food_germogli_di_ravanello_raw \
+  --name-it="Germogli di ravanello (semi germogliati), crudi" \
+  --matrix-id=germogli_di_ravanello --matrix-description-it="Germogli di ravanello" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --matrix-category-calcium=low_oxalate \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fiori di zucca, crudi — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
+
+- **food_id**: `food_fiori_di_zucca_raw`. FDC ID 169270 (SR Legacy, "Pumpkin flowers, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo fiore comestibile mai tentato in questa pipeline — alimento comune nella cucina italiana (fiori di zucca fritti/ripieni), distinto dalla zucchina/zucca frutto e dai semi già coperti. Verificato con `grep` dedicato: zero occorrenze per "fiori di zucca"/"pumpkin flower"/"zucchini flower"/169270.
+- **Nutrienti**: **12/17** — mancano fibra, zinco, rame, vitamina K e beta-carotene (non riportati dal record SR Legacy nonostante il resto sia completo e coerente, non assunti zero — gap dichiarato, sotto la soglia di ricchezza tipica di altri record SR Legacy di verdura ma sopra la soglia "match scarso" di ~10/17 indicata dal COMPITO). Per 100g: energia 15,0kcal, proteine 1,03g, grassi 0,070g, carboidrati 3,28g, calcio 39,0mg, ferro 0,70mg, magnesio 24,0mg, selenio 0,70µg, sodio 5,00mg, vitamina C 28,0mg, folato totale 59,0µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_zucchine_raw` (zucchine crude con buccia, già eseguita sul DB reale — stessa famiglia botanica reale Cucurbitaceae, stessa pianta nel caso della zucchina comune, organo diverso — fiore invece di frutto).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/fiore).
+- **Matrice**: nuova `fiori_di_zucca`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, non assunto senza conferma, Regola 1, nonostante il colore giallo del fiore suggerisca carotenoidi reali non misurati da questo specifico record SR Legacy), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169270 --food-id=food_fiori_di_zucca_raw \
+  --name-it="Fiori di zucca, crudi" \
+  --matrix-id=fiori_di_zucca --matrix-description-it="Fiori di zucca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169270 --food-id=food_fiori_di_zucca_raw \
+  --name-it="Fiori di zucca, crudi" \
+  --matrix-id=fiori_di_zucca --matrix-description-it="Fiori di zucca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Citronella (lemon grass), cruda — preparato 2026-11-15 dal task (centoquarantaduesimo lotto)
+
+- **food_id**: `food_citronella_raw`. FDC ID 168573 (SR Legacy, "Lemon grass (citronella), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Erba/spezia fresca mai tentata, estensione autorizzata dal mandato ad alimenti di altre cucine per cui FDC ha un record (cucina del sud-est asiatico, ma ormai di uso comune anche in Italia). Verificato con `grep` dedicato: zero occorrenze per "citronella"/"lemon grass"/"lemongrass"/168573 in nessuno dei tre file.
+- **Nutrienti**: **15/17** — mancano fibra e vitamina K (non riportati dal record, non assunti zero). Per 100g: energia 99,0kcal, proteine 1,82g, grassi 0,49g, carboidrati 25,3g, calcio 65,0mg, ferro 8,17mg, zinco 2,23mg, magnesio 60,0mg, rame 0,27mg, selenio 0,70µg, sodio 6,00mg, vitamina C 2,60mg, folato totale 75,0µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito, beta-carotene 3,00µg, alfa-carotene 0µg + beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_scarola_raw` (scarola, già eseguita sul DB reale — stesso fallback già usato per prezzemolo/basilico/menta in questa pipeline: nessuna erba fresca eseguita della famiglia botanica reale Poaceae della citronella, nessun attributo categorico speciale da ereditare per questo tipo di pianta, stessa convenzione "nessun ossalato/zinco speciale" già applicata alle altre erbe fresche).
+- **Categoria dieta**: `plant_non_fruit` (erba/spezia).
+- **Matrice**: nuova `citronella`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso motivo delle altre erbe fresche in questa pipeline), `carotenoid_matrix_state=raw_intact` (cruda, beta-carotene reale e non nullo seppur basso, alfa-carotene/beta-criptoxantina entrambi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia botanica reale, *Cymbopogon citratus* — diversa da quella dell'analogia, dichiarata esplicitamente), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168573 --food-id=food_citronella_raw \
+  --name-it="Citronella (lemon grass), cruda" \
+  --matrix-id=citronella --matrix-description-it="Citronella" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168573 --food-id=food_citronella_raw \
+  --name-it="Citronella (lemon grass), cruda" \
+  --matrix-id=citronella --matrix-description-it="Citronella" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Barbabietola, foglie, cotte (con sale) — preparato 2026-11-15 dal task (centoquarantesimo lotto)
 
 - **food_id**: `food_foglie_di_barbabietola_cotte`. FDC ID 168508 (SR Legacy, "Beet greens, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte della pianta mai tentata in questa pipeline sotto questo nome: la barbabietola radice è già eseguita (`food_barbabietola_rossa_raw`), ma le foglie — un ortaggio a foglia verde distinto, comune anche in Italia, spesso cucinato come le bietole — non erano mai state cercate. Verificato con `grep` dedicato su PRD/GOLDEN_SET_READY_TO_RUN/golden_set_foods ("barbabietola.*fogli", "beet greens", "168508", "2747653") prima della ricerca web: zero occorrenze.
