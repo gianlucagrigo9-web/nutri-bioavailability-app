@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Funghi lion's mane (criniera di leone), crudi — preparato 2026-11-15 dal task (centotrentacinquesimo lotto)
+
+- **food_id**: `food_funghi_lions_mane_raw`. FDC ID 1999626 (Foundation Foods, "Mushroom, lion's mane" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie distinta (*Hericium erinaceus*) da champignon/cremini/shiitake/pleurotus/finferli/funghi paglia già coperti, mai tentata in questa pipeline. **Nota di qualità dati**: individuata durante questa ricerca una serie di record Foundation Foods più recenti (FDC 2003598-2003604: portabella/maitake/king oyster/crimini/beech/pioppini) con un valore energia **incoerente tra sezioni della stessa pagina** su ogni voce controllata (es. king oyster 40 vs 38 vs 38,5kcal, portabella 25 vs 26kcal, maitake 30 vs 31kcal) — tutte scartate (vedi ⚠ sotto), non forzata una scelta arbitraria tra valori in conflitto (Regola 1). Il record del lion's mane (FDC 1999626, numerazione Foundation precedente/diversa da quella incoerente) non presenta questo problema: unico valore energia coerente in tutte le sezioni della pagina (35 / 35,1kcal).
+- **Nutrienti**: **12/17**. Per 100g: energia 35,0kcal, proteine 2,50g, grassi 0,26g, carboidrati 7,59g, fibra 4,38g, calcio 0mg esplicito, ferro 0,69mg, zinco 0,74mg, magnesio 11,7mg, rame 0,18mg, selenio 1,77µg, folato totale 29,6µg. **Mancano** (non riportati sulla pagina): vitamina C, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon bianchi crudi, Golden Set originale, già eseguito sul DB reale — stesso trattamento "fungo crudo, non pianta" già usato per cremini/finferli/funghi paglia in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
+- **Matrice**: nuova `funghi_lions_mane` ("Funghi lion's mane (criniera di leone)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=1999626 --food-id=food_funghi_lions_mane_raw \
+  --name-it="Funghi lion's mane (criniera di leone), crudi" \
+  --matrix-id=funghi_lions_mane --matrix-description-it="Funghi lion's mane (criniera di leone)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=1999626 --food-id=food_funghi_lions_mane_raw \
+  --name-it="Funghi lion's mane (criniera di leone), crudi" \
+  --matrix-id=funghi_lions_mane --matrix-description-it="Funghi lion's mane (criniera di leone)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Funghi enoki, crudi — preparato 2026-11-15 dal task (centotrentacinquesimo lotto)
+
+- **food_id**: `food_funghi_enoki_raw`. FDC ID 169382 (SR Legacy, "Mushrooms, enoki, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie distinta (*Flammulina velutipes*) da champignon/cremini/shiitake/pleurotus/finferli/funghi paglia/lion's mane già coperti, mai tentata in questa pipeline.
+- **Nutrienti**: **14/17**. Per 100g: energia 37,0kcal, proteine 2,66g, grassi 0,29g, carboidrati 7,81g, fibra 2,70g, calcio 0mg esplicito, ferro 1,15mg, zinco 0,65mg, magnesio 16,0mg, rame 0,11mg, selenio 2,20µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 48,0µg. **Mancano**: vitamina K (solo forme separate riportate — menachinone-4 0µg, diidrofillochinone 0,50µg, fillochinone 0µg — nessun totale combinato dichiarato dalla pagina, non somma arbitrariamente le forme), beta-carotene, altro carotenoide provitaminico A (nessuna riga su quella pagina).
+- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon bianchi crudi, Golden Set originale, già eseguito sul DB reale — stesso trattamento "fungo crudo, non pianta" già usato per cremini/finferli/funghi paglia/lion's mane in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
+- **Matrice**: nuova `funghi_enoki` ("Funghi enoki").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169382 --food-id=food_funghi_enoki_raw \
+  --name-it="Funghi enoki, crudi" \
+  --matrix-id=funghi_enoki --matrix-description-it="Funghi enoki" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169382 --food-id=food_funghi_enoki_raw \
+  --name-it="Funghi enoki, crudi" \
+  --matrix-id=funghi_enoki --matrix-description-it="Funghi enoki" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Tilefish, crudo — preparato 2026-11-15 dal task (centotrentaquattresimo lotto)
 
 - **food_id**: `food_pesce_tilefish_raw`. FDC ID 173705 (SR Legacy, "Fish, tilefish, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA da banco pescheria per nome inglese esatto" (prosecuzione raccomandazione centotrentatreesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
