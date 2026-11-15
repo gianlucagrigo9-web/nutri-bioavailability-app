@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anguilla, cotta (al forno, calore secco) — preparato 2026-11-15 dal task (centoventinovesimo lotto)
+
+- **food_id**: `food_anguilla_cotto`. FDC ID 174194 (SR Legacy, "Fish, eel, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo della stessa specie (`food_anguilla_raw`, FDC 174193) è già eseguito sul DB reale; il cotto non era mai stato cercato in questa pipeline.
+- **Nutrienti**: **13/17**. Per 100g: energia 236kcal, proteine 23,6g, grassi 14,9g, carboidrati 0g (esplicito), calcio 26,0mg, ferro 0,64mg, zinco 2,08mg, magnesio 26,0mg, fosforo 277mg, potassio 349mg, sodio 65,0mg, rame 0,029mg, selenio 8,30µg, vitamina B12 2,89µg, folato totale 17,0µg, vitamina A (RAE) 1137µg. Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina — stesso gap tipico già visto su pesce serra/salmone/tonno cotti.
+- **Analogia usata**: `food_anguilla_raw` (stessa specie, stesso matrix, già eseguita sul DB reale — cambia solo lo stato di cottura).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `anguilla_cotta` ("Anguilla, cotta").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_anguilla_raw`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — prodotto animale, nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=174194 --food-id=food_anguilla_cotto \
+  --name-it="Anguilla, cotta (al forno)" \
+  --matrix-id=anguilla_cotta --matrix-description-it="Anguilla, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anguilla_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174194 --food-id=food_anguilla_cotto \
+  --name-it="Anguilla, cotta (al forno)" \
+  --matrix-id=anguilla_cotta --matrix-description-it="Anguilla, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anguilla_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Navone (rutabaga), cotto (bollito, senza sale) — preparato 2026-11-15 dal task (centoventottesimo lotto)
 
 - **food_id**: `food_navone_cotto`. FDC ID 168455 (SR Legacy, "Rutabagas, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Ortaggio a radice della famiglia Brassicaceae (*Brassica napus*) mai tentato in questa pipeline, distinto dalla rapa comune (*Brassica rapa*) già fatta. Il crudo della stessa specie (FDC 2727580, Foundation Foods "Rutabaga, peeled, raw") resta `⚠` sotto — solo 7/17, manca anche energia/grassi/carboidrati, record Foundation incompleto.
