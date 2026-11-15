@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Opossum, carne cotta (arrosto) — preparato 2026-11-15 dal task (centoventisettesimo lotto)
+
+- **food_id**: `food_opossum_cotto`. FDC ID 172520 (SR Legacy, "Game meat, opossum, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Rilevanza per la dieta italiana molto bassa (specie nordamericana), aggiunta per coerenza con il filone "Game meat USDA" già sviluppato in questa coda (capra/bisonte/cervo/renna/wapiti/bufalo/cinghiale/muskrat/scoiattolo/alce/antilope). Nessun record "raw" dedicato trovato per la stessa specie (solo un record USDA Survey/FNDDS "opossum" 2705922, fuori criterio) — non proposto, non forzato.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 221kcal, proteine 30,2g, grassi 10,2g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 17,0mg, ferro 4,64mg, zinco 2,28mg, magnesio 34,0mg, rame 0,19mg, selenio 18,2µg, vitamina C 0mg (esplicito), folato totale 10,0µg, vitamina B12 8,30µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 1,60µg, beta-carotene 0µg esplicito, alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_capra_cotta` (capra cotta, Golden Set, già eseguita sul DB reale — stesso trattamento funzionale "carne di selvaggina cotta, lean", stesso precedente già usato per muskrat/scoiattolo cotti in questa coda).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `opossum_cotto` ("Opossum, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso precedente di `food_capra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL per trasparenza — beta-carotene riportato esplicitamente a 0, non un dato mancante, ma trattato come gli altri record "Game meat" di questa coda per coerenza), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172520 --food-id=food_opossum_cotto \
+  --name-it="Opossum, carne cotta (arrosto)" \
+  --matrix-id=opossum_cotto --matrix-description-it="Opossum, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172520 --food-id=food_opossum_cotto \
+  --name-it="Opossum, carne cotta (arrosto)" \
+  --matrix-id=opossum_cotto --matrix-description-it="Opossum, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Castoro, carne cotta (arrosto) — preparato 2026-11-15 dal task (centoventisettesimo lotto)
+
+- **food_id**: `food_castoro_cotto`. FDC ID 175295 (SR Legacy, "Game meat, beaver, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone "Game meat USDA" di cui sopra. Il crudo della stessa specie (FDC 175294) ha solo 10/17 (manca comunque zinco, rame, B12, folato, vitamina K, carotenoidi — stesso pattern debole già confermato per scoiattolo/coniglio selvatico crudi in lotti precedenti) — resta ⚠ sotto, non forzato nonostante sia esattamente alla soglia numerica minima, per coerenza con quel precedente.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 212kcal, proteine 34,9g, grassi 6,96g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 22,0mg, ferro 10,0mg, zinco 2,27mg, magnesio 29,0mg, rame 0,19mg, selenio 43,1µg, vitamina C 3,00mg, folato totale 11,0µg, vitamina B12 8,30µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K (fillochinone) 1,60µg, beta-carotene 0µg esplicito, alfa-carotene/beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_capra_cotta` (stesso motivo funzionale di sopra, già usato per muskrat/scoiattolo/opossum cotti).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `castoro_cotto` ("Castoro, carne cotta (arrosto)").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175295 --food-id=food_castoro_cotto \
+  --name-it="Castoro, carne cotta (arrosto)" \
+  --matrix-id=castoro_cotto --matrix-description-it="Castoro, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175295 --food-id=food_castoro_cotto \
+  --name-it="Castoro, carne cotta (arrosto)" \
+  --matrix-id=castoro_cotto --matrix-description-it="Castoro, carne cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sapodilla, cruda — preparato 2026-11-15 dal task (centoventiseiesimo lotto)
 
 - **food_id**: `food_sapodilla_raw`. FDC ID 167759 (SR Legacy, "Sapodilla, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30). Prima specie della famiglia Sapotaceae mai tentata in questa pipeline (distinta dal mamey sapote, *Pouteria sapota*, già in coda come "Pronti" ma non ancora eseguito — non usabile come analogia per la stessa regola di metodo già applicata altrove). Verificato con `grep` dedicato su "sapodilla"/FDC 167759, zero occorrenze su tutti i file prima della ricerca web.
