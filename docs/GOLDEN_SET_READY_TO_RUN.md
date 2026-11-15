@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Navone (rutabaga), cotto (bollito, senza sale) — preparato 2026-11-15 dal task (centoventottesimo lotto)
+
+- **food_id**: `food_navone_cotto`. FDC ID 168455 (SR Legacy, "Rutabagas, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Ortaggio a radice della famiglia Brassicaceae (*Brassica napus*) mai tentato in questa pipeline, distinto dalla rapa comune (*Brassica rapa*) già fatta. Il crudo della stessa specie (FDC 2727580, Foundation Foods "Rutabaga, peeled, raw") resta `⚠` sotto — solo 7/17, manca anche energia/grassi/carboidrati, record Foundation incompleto.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 30,0kcal, proteine 0,93g, grassi 0,18g, carboidrati 6,84g, fibra 1,80g, calcio 18,0mg, ferro 0,18mg, zinco 0,12mg, magnesio 10,0mg, rame 0,029mg, selenio 0,70µg, vitamina C 18,8mg, folato totale 15,0µg, vitamina B12 0µg (esplicito), acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina K (fillochinone) 0,20µg, beta-carotene 1,00µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_carrots_boiled` (carote bollite, Golden Set originale, già eseguite sul DB reale — stessa categoria funzionale "ortaggio a radice bollito con carotenoidi reali", stesso precedente già usato per `food_nopal_cotto`).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio radice).
+- **Matrice**: nuova `navone_cotto` ("Navone (rutabaga), cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna fonte sull'ossalato del navone, non indovinato), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non-zero, stato cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168455 --food-id=food_navone_cotto \
+  --name-it="Navone (rutabaga), cotto (bollito, senza sale)" \
+  --matrix-id=navone_cotto --matrix-description-it="Navone (rutabaga), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168455 --food-id=food_navone_cotto \
+  --name-it="Navone (rutabaga), cotto (bollito, senza sale)" \
+  --matrix-id=navone_cotto --matrix-description-it="Navone (rutabaga), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carrots_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pesce serra (bluefish), cotto (al forno, calore secco) — preparato 2026-11-15 dal task (centoventottesimo lotto)
+
+- **food_id**: `food_pesce_serra_cotto`. FDC ID 174229 (SR Legacy, "Fish, bluefish, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie *Pomatomus saltatrix*, nome italiano "pesce serra", pesce atlantico/mediterraneo mai tracciato in questa pipeline sotto nessun nome. Il crudo della stessa specie (FDC 171949, "Fish, bluefish, raw") non ha pagina getfoodfacts.com dedicata trovata — solo myfooddata/triagemethod/recipal senza una pagina getfoodfacts verificabile — resta `⚠`, non forzato.
+- **Nutrienti**: **13/17**. Per 100g: energia 159kcal, proteine 25,7g, grassi 5,44g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 9,00mg, ferro 0,62mg, zinco 1,04mg, magnesio 42,0mg, rame 0,068mg, selenio 46,8µg, vitamina C 0mg (esplicito), folato totale 2,00µg, vitamina B12 6,22µg, acido folico 0µg esplicito (nessuna firma di arricchimento). Mancano (non riportati sulla pagina, non assunti zero): vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina — gap dichiarato in trasparenza, tipico dei record SR Legacy di pesce.
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo cotto a calore secco, già eseguito sul DB reale — stessa categoria "pesce magro cotto a calore secco").
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `pesce_serra_cotto` ("Pesce serra, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_merluzzo_cotto`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174229 --food-id=food_pesce_serra_cotto \
+  --name-it="Pesce serra, cotto (al forno)" \
+  --matrix-id=pesce_serra_cotto --matrix-description-it="Pesce serra, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174229 --food-id=food_pesce_serra_cotto \
+  --name-it="Pesce serra, cotto (al forno)" \
+  --matrix-id=pesce_serra_cotto --matrix-description-it="Pesce serra, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Opossum, carne cotta (arrosto) — preparato 2026-11-15 dal task (centoventisettesimo lotto)
 
 - **food_id**: `food_opossum_cotto`. FDC ID 172520 (SR Legacy, "Game meat, opossum, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Rilevanza per la dieta italiana molto bassa (specie nordamericana), aggiunta per coerenza con il filone "Game meat USDA" già sviluppato in questa coda (capra/bisonte/cervo/renna/wapiti/bufalo/cinghiale/muskrat/scoiattolo/alce/antilope). Nessun record "raw" dedicato trovato per la stessa specie (solo un record USDA Survey/FNDDS "opossum" 2705922, fuori criterio) — non proposto, non forzato.
