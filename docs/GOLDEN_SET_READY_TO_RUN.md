@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coriandolo, foglie secche — preparato 2026-11-15 dal task (centotrentanovesimo lotto)
+
+- **food_id**: `food_coriandolo_secco_raw`. FDC ID 170921 (SR Legacy, "Spices, coriander leaf, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nell'URL stesso, release USDA 2026-04-30). Distinto dal coriandolo semi secchi già eseguito (`food_coriandolo_raw`, FDC 170922, parte della pianta diversa — seme vs foglia) e dal coriandolo foglie FRESCHE già `⚠` dal lotto 83/115 (nessun FDC ID verificabile per quella forma): questo è il record della foglia essiccata, non un doppione di nessuno dei due.
+- **Nutrienti**: **17/17** (record completo, nessun gap). Per 100g: energia 279kcal (pannello riepilogo arrotonda a 280kcal, solo arrotondamento), proteine 21,9g, grassi 4,78g, carboidrati 52,1g, fibra 10,4g, calcio 1246mg, ferro 42,5mg, zinco 4,72mg, magnesio 694mg, sodio 211mg, selenio 29,3µg, vitamina C 567mg, folato totale 274µg (acido folico 0µg esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1360µg, beta-carotene 3407µg, alfa-carotene 31,0µg, beta-criptoxantina 175µg (tutti reali e non nulli, coerenti con un'erba a foglia verde disidratata). **Nota di trasparenza dichiarata**: la pagina mostra un'incongruenza interna fra il riepilogo energetico (kcal/percentuali macro) e la tabella dettagliata dei nutrienti — i grammi di proteine/carboidrati/grassi della tabella non si ricompongono esattamente nell'energia totale dichiarata (differenza ~60kcal, verificata con il calcolo Atwater standard) — stesso tipo di imprecisione di visualizzazione lato sito già tollerato altrove in questa pipeline quando i valori per nutriente restano comunque quelli della fonte primaria SR Legacy e non richiedono nessuna scelta arbitraria da parte nostra (i 17 valori usati sono letti direttamente dalla tabella dettagliata, non dal riepilogo).
+- **Analogia usata**: `food_origano_secco_raw` (origano secco, già eseguito sul DB reale — stessa categoria "erba aromatica secca macinata/sfaldata", stesso tipo di trattamento).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica secca).
+- **Matrice**: nuova `coriandolo_secco` ("Coriandolo, foglie secche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene/alfa-carotene/beta-criptoxantina tutti reali e non nulli — stessa convenzione già usata per le altre erbe/spezie secche Apiaceae/Lamiaceae di questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Coriandrum sativum*, stessa famiglia reale di sedano/aneto/cumino/finocchio/semi di coriandolo già eseguiti), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170921 --food-id=food_coriandolo_secco_raw \
+  --name-it="Coriandolo, foglie secche" \
+  --matrix-id=coriandolo_secco --matrix-description-it="Coriandolo, foglie secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170921 --food-id=food_coriandolo_secco_raw \
+  --name-it="Coriandolo, foglie secche" \
+  --matrix-id=coriandolo_secco --matrix-description-it="Coriandolo, foglie secche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Aringa, marinata (pickled) — preparato 2026-11-15 dal task (centotrentasettesimo lotto)
 
 - **food_id**: `food_aringa_marinata`. FDC ID 175118 (SR Legacy, "Fish, herring, Atlantic, pickled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terza forma di conservazione dell'aringa atlantica mai tentata in questa pipeline, distinta dal crudo (`food_aringa_raw`, FDC 175116, già eseguito) e dall'affumicata/kippered (`food_aringa_affumicata_raw`, FDC 173668, già eseguita) — qui la marinatura in salamoia/aceto, prodotto da banco gastronomia comune anche in Italia (aringhe marinate), FDC ID diverso da entrambi, nessun doppione mascherato.
