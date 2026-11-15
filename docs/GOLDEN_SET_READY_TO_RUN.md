@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Orange roughy, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
+
+- **food_id**: `food_pesce_roughy_arancione_raw`. FDC ID 175133 (SR Legacy, "Fish, roughy, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA comune da banco pescheria per nome inglese esatto, non ancora provato" (raccomandazione del centotrentaduesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **17/17, nessun valore mancante** — il miglior match di questo lotto. Per 100g: energia 76,0kcal, proteine 16,4g, grassi 0,70g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 9,00mg, ferro 1,01mg, zinco 0,23mg, magnesio 17,0mg, rame 0,075mg, selenio 66,7µg, vitamina C 0mg esplicito, folato totale 26,0µg, vitamina K 0,70µg, vitamina B12 0,38µg, beta-carotene 0µg esplicito, alfa-carotene 0µg + beta-criptoxantina 0µg esplicito (campo combinato = 0).
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro crudo già eseguito sul DB reale — stessa categoria funzionale "pesce bianco/magro crudo", stesso `is_heme_iron` già usato per questa categoria).
+- **Categoria dieta**: `meat_fish` (prodotto animale, pesce).
+- **Matrice**: nuova `roughy_arancione` ("Orange roughy, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di pesce), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto animale), `carotenoid_matrix_state` omesso (NULL — carotenoidi riportati 0µg espliciti, non ambigui), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale di pesce, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=175133 --food-id=food_pesce_roughy_arancione_raw \
+  --name-it="Orange roughy, crudo" \
+  --matrix-id=roughy_arancione --matrix-description-it="Orange roughy, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175133 --food-id=food_pesce_roughy_arancione_raw \
+  --name-it="Orange roughy, crudo" \
+  --matrix-id=roughy_arancione --matrix-description-it="Orange roughy, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Lingcod, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
+
+- **food_id**: `food_pesce_lingcod_raw`. FDC ID 173671 (SR Legacy, "Fish, lingcod, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone del roughy sopra. Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 85,0kcal, proteine 17,7g, grassi 1,06g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 0,32mg, zinco 0,45mg, magnesio 26,0mg, rame 0,027mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 9,00µg, vitamina B12 3,60µg. Mancano: vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina (non riportati sulla pagina, non assunti zero).
+- **Analogia usata**: `food_merluzzo_raw` (stessa categoria funzionale "pesce bianco/magro crudo").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `lingcod` ("Lingcod, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato, non zero assunto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173671 --food-id=food_pesce_lingcod_raw \
+  --name-it="Lingcod, crudo" \
+  --matrix-id=lingcod --matrix-description-it="Lingcod, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173671 --food-id=food_pesce_lingcod_raw \
+  --name-it="Lingcod, crudo" \
+  --matrix-id=lingcod --matrix-description-it="Lingcod, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Sheepshead (pesce), crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
+
+- **food_id**: `food_pesce_sheepshead_raw`. FDC ID 175144 (SR Legacy, "Fish, sheepshead, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nessun nome italiano comune (*Archosargus probatocephalus*, famiglia Sparidae come orata/dentice, ma specie USA senza equivalente locale) — mantenuto il nome inglese per non creare un falso equivalente italiano. Stesso filone del roughy sopra. Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 108kcal, proteine 20,2g, grassi 2,41g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 21,0mg, ferro 0,46mg, zinco 0,39mg, magnesio 32,0mg, rame 0,031mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 2,00µg. Mancano: vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina (non riportati, non assunti zero).
+- **Analogia usata**: `food_merluzzo_raw` (stessa categoria funzionale "pesce bianco/magro crudo").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sheepshead` ("Sheepshead (pesce), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175144 --food-id=food_pesce_sheepshead_raw \
+  --name-it="Sheepshead (pesce), crudo" \
+  --matrix-id=sheepshead --matrix-description-it="Sheepshead (pesce), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175144 --food-id=food_pesce_sheepshead_raw \
+  --name-it="Sheepshead (pesce), crudo" \
+  --matrix-id=sheepshead --matrix-description-it="Sheepshead (pesce), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Yellowtail (Seriola spp., mixed species), crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
+
+- **food_id**: `food_pesce_yellowtail_raw`. FDC ID 175163 (SR Legacy, "Fish, yellowtail, mixed species, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Mantenuto il nome inglese "yellowtail" invece di "ricciola": il record USDA è "mixed species" del genere *Seriola* (tipicamente *S. quinqueradiata*/*S. lalandi*, pesce da sushi/hamachi), non necessariamente la stessa specie della ricciola mediterranea (*Seriola dumerili*, già scartata come "amberjack" in questo stesso lotto per assenza di record) — nome mantenuto letterale per non creare un falso equivalente di specie, stesso principio già applicato a croaker/weakfish/porgy vs orata/triglia nei lotti 18-20. Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 146kcal, proteine 23,1g, grassi 5,24g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 23,0mg, ferro 0,49mg, zinco 0,52mg, magnesio 30,0mg, rame 0,045mg, selenio 36,5µg, vitamina C 2,80mg, folato totale 4,00µg, vitamina K 0,10µg, vitamina B12 1,30µg. Mancano: beta-carotene, alfa-carotene/beta-criptoxantina (non riportati, non assunti zero; la pagina riporta invece retinolo 29,0µg e vitamina A RAE 29,0µg, non tracciati da questa pipeline).
+- **Analogia usata**: `food_merluzzo_raw` (stessa categoria funzionale "pesce crudo"; nessuna specie *Seriola* già eseguita da usare come analogia più stretta).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `yellowtail` ("Yellowtail (Seriola spp.), crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175163 --food-id=food_pesce_yellowtail_raw \
+  --name-it="Yellowtail (Seriola spp., mixed species), crudo" \
+  --matrix-id=yellowtail --matrix-description-it="Yellowtail (Seriola spp.), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175163 --food-id=food_pesce_yellowtail_raw \
+  --name-it="Yellowtail (Seriola spp., mixed species), crudo" \
+  --matrix-id=yellowtail --matrix-description-it="Yellowtail (Seriola spp.), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Naranjilla (lulo), polpa surgelata non zuccherata — preparato 2026-11-15 dal task (centotrentaduesimo lotto)
 
 - **food_id**: `food_naranjilla_surgelata`. FDC ID 167790 (SR Legacy, "Naranjilla (lulo) pulp, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone genuinamente nuovo (frutta/pesce con nome scientifico/inglese non tradotto, mai cercato per nome esatto in questa pipeline — stesso tipo di filone produttivo del centodiciannovesimo lotto su legumi/tuberi tropicali). Zero occorrenze su tutti e tre i file prima della ricerca web.
