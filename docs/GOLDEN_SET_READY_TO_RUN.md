@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anguria, semi, secchi — preparato 2026-11-15 dal task (centoquarantasettesimo lotto, addendum)
+
+- **food_id**: `food_semi_di_anguria_raw`. FDC ID 169407 (SR Legacy, "Seeds, watermelon seed kernels, dried" — pagina getfoodfacts.com dedicata e pulita). Stesso filone "parte della pianta non ancora tentata": l'anguria (frutto) non è ancora tracciata in questa pipeline per il frutto, ma i semi, snack comune in molte cucine (mediorientale/africana), hanno un record SR Legacy proprio, distinto dai semi di zucca già eseguiti. Verificato con `grep` dedicato: zero occorrenze per "semi di anguria"/"watermelon seed"/169407 prima della ricerca web.
+- **Nutrienti**: **13/17** — mancano fibra, selenio, vitamina K e beta-carotene (non riportati dal record, non assunti zero). Per 100g: energia 557kcal, proteine 28,3g, grassi 47,4g, carboidrati 15,3g, calcio 54,0mg, ferro 7,28mg, zinco 10,2mg, magnesio 515mg, rame 0,69mg, sodio 99,0mg, vitamina C 0mg esplicito, folato totale 58,0µg (nessuna firma di arricchimento), vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_semi_di_zucca_raw` (semi di zucca secchi, già eseguiti sul DB reale — stessa famiglia botanica reale Cucurbitaceae, stesso tipo di alimento: seme secco di un frutto della stessa famiglia usato come snack).
+- **Categoria dieta**: `plant_non_fruit` (seme/snack, non il frutto).
+- **Matrice**: nuova `semi_di_anguria`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente per questo organo, non forzato), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, non assunto senza conferma), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (famiglia botanica reale, stessa dell'analogia), `baseline_cooking_state=raw` (secco, non cotto, stessa convenzione già usata per altri semi/frutta secca di questa pipeline), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169407 --food-id=food_semi_di_anguria_raw \
+  --name-it="Anguria, semi, secchi" \
+  --matrix-id=semi_di_anguria --matrix-description-it="Anguria, semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_zucca_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169407 --food-id=food_semi_di_anguria_raw \
+  --name-it="Anguria, semi, secchi" \
+  --matrix-id=semi_di_anguria --matrix-description-it="Anguria, semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_zucca_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Broccolo, foglie, crude — preparato 2026-11-15 dal task (centoquarantasettesimo lotto)
 
 - **food_id**: `food_broccolo_foglie_raw`. FDC ID 169329 (SR Legacy, "Broccoli, leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Filone "parte della pianta non ancora tentata" (già produttivo al 142° lotto per patata dolce): il broccolo (`food_broccoli_raw`, cimette) è già eseguito, le foglie no. Verificato con `grep` dedicato sui tre file: zero occorrenze per "foglie di broccolo"/"broccoli leaves"/169329 prima della ricerca web.
