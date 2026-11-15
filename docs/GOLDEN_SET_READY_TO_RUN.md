@@ -88,6 +88,30 @@ npm run add-food -- --fdc-id=175141 --food-id=food_pesce_scup_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Spigola americana a righe (striped bass), cotta (calore secco) — preparato 2026-11-15 dal task (centotrentaquattresimo lotto)
+
+- **food_id**: `food_pesce_spigola_cotto`. FDC ID 174228 (SR Legacy, "Fish, bass, striped, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza**: la versione cruda era già stata valutata e scartata ⚠ in un lotto precedente (nessuna pagina getfoodfacts.com indicizza il crudo, solo questo cotto) — qui si prepara solo la forma cotta, effettivamente indicizzata.
+- **Nutrienti**: **14/17**. Per 100g: energia 124kcal, proteine 22,7g, grassi 2,99g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 19,0mg, ferro 1,08mg, zinco 0,51mg, magnesio 51,0mg, rame 0,040mg, selenio 46,8µg, vitamina C 0mg esplicito, folato totale 10,0µg, vitamina B12 4,41µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K (nessuna riga su quella pagina).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce magro cotto già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_spigola_cotto`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174228 --food-id=food_pesce_spigola_cotto \
+  --name-it="Spigola americana a righe (striped bass), cotta" \
+  --matrix-id=pesce_spigola_cotto --matrix-description-it="Spigola americana a righe (striped bass), cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174228 --food-id=food_pesce_spigola_cotto \
+  --name-it="Spigola americana a righe (striped bass), cotta" \
+  --matrix-id=pesce_spigola_cotto --matrix-description-it="Spigola americana a righe (striped bass), cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Orange roughy, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
 
 - **food_id**: `food_pesce_roughy_arancione_raw`. FDC ID 175133 (SR Legacy, "Fish, roughy, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA comune da banco pescheria per nome inglese esatto, non ancora provato" (raccomandazione del centotrentaduesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
