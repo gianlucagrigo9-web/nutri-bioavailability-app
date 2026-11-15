@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Aringa, marinata (pickled) — preparato 2026-11-15 dal task (centotrentasettesimo lotto)
+
+- **food_id**: `food_aringa_marinata`. FDC ID 175118 (SR Legacy, "Fish, herring, Atlantic, pickled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Terza forma di conservazione dell'aringa atlantica mai tentata in questa pipeline, distinta dal crudo (`food_aringa_raw`, FDC 175116, già eseguito) e dall'affumicata/kippered (`food_aringa_affumicata_raw`, FDC 173668, già eseguita) — qui la marinatura in salamoia/aceto, prodotto da banco gastronomia comune anche in Italia (aringhe marinate), FDC ID diverso da entrambi, nessun doppione mascherato.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 262kcal, proteine 14,2g, grassi 18,0g, carboidrati 9,64g (zuccheri della marinatura, coerente con il prodotto reale, non un errore), fibra 0g esplicito, calcio 77,0mg, ferro 1,22mg, zinco 0,53mg, magnesio 8,00mg, rame 0,10mg, selenio 58,5µg, vitamina C 0mg esplicito, folato totale 2,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 4,27µg, vitamina K 0,20µg, beta-carotene 0µg esplicito, alfa-carotene 0µg + beta-criptoxantina 0µg esplicito (= 0µg altro carotenoide provitaminico A). Sodio 870mg/100g (alto per la salamoia, valore reale del prodotto conservato, non un'anomalia). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 175118 e dataType SR Legacy.
+- **Analogia usata**: `food_aringa_affumicata_raw` (aringa affumicata/kippered, già eseguita sul DB reale — stesso pesce, altra tecnica di conservazione invece di carne fresca, stesso attributo is_heme_iron).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `aringa_marinata` ("Aringa, marinata").
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL, non applicabile — pesce), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile, pesce), `baseline_cooking_state=pickled` (descrive la marinatura, stato a cui si riferiscono questi valori — carboidrati e sodio alti sono reali, non un errore di categoria), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175118 --food-id=food_aringa_marinata \
+  --name-it="Aringa, marinata" \
+  --matrix-id=aringa_marinata --matrix-description-it="Aringa, marinata" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_aringa_affumicata_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175118 --food-id=food_aringa_marinata \
+  --name-it="Aringa, marinata" \
+  --matrix-id=aringa_marinata --matrix-description-it="Aringa, marinata" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_aringa_affumicata_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Funghi lion's mane (criniera di leone), crudi — preparato 2026-11-15 dal task (centotrentacinquesimo lotto)
 
 - **food_id**: `food_funghi_lions_mane_raw`. FDC ID 1999626 (Foundation Foods, "Mushroom, lion's mane" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie distinta (*Hericium erinaceus*) da champignon/cremini/shiitake/pleurotus/finferli/funghi paglia già coperti, mai tentata in questa pipeline. **Nota di qualità dati**: individuata durante questa ricerca una serie di record Foundation Foods più recenti (FDC 2003598-2003604: portabella/maitake/king oyster/crimini/beech/pioppini) con un valore energia **incoerente tra sezioni della stessa pagina** su ogni voce controllata (es. king oyster 40 vs 38 vs 38,5kcal, portabella 25 vs 26kcal, maitake 30 vs 31kcal) — tutte scartate (vedi ⚠ sotto), non forzata una scelta arbitraria tra valori in conflitto (Regola 1). Il record del lion's mane (FDC 1999626, numerazione Foundation precedente/diversa da quella incoerente) non presenta questo problema: unico valore energia coerente in tutte le sezioni della pagina (35 / 35,1kcal).
