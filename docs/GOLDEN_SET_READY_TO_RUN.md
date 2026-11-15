@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Khorasan (grano Kamut), chicco secco crudo — preparato 2026-11-15 dal task (centoventiquattresimo lotto)
+
+- **food_id**: `food_grano_khorasan_raw`. FDC ID 2710830 (Foundation Foods, "Khorasan, grain, dry, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cereale mai tentato in questa pipeline (noto commercialmente come "Kamut", nome di marca registrata per il grano khorasan, *Triticum turgidum* ssp. *turanicum*), verificato con `grep` dedicato ("kamut"/"khorasan"), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **10/17** — esattamente alla soglia minima già accettata in questa coda (precedente: farro monococco scartato a 9/17). Mancano selenio, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (nessuno riportato sulla pagina Foundation Foods, nessuno assunto zero — gap ampio ma dello stesso tipo già visto per altri record Foundation Foods di cereali poco comuni in questa coda). Per 100g: energia 348kcal, proteine 14,8g, grassi 2,80g, carboidrati 71,8g, fibra 10,5g, calcio 24,1mg, ferro 3,87mg, zinco 4,46mg, magnesio 130mg, rame 0,59mg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2710830 e dataType Foundation Foods.
+- **Analogia usata**: `food_farina_di_frumento_integrale_raw` (farina di frumento integrale, già eseguita sul DB reale — stesso genere *Triticum*, cereale a chicco intero crudo invece che macinato, nessun'altra specie di grano a chicco intero già eseguita da usare come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit` (cereale, nessun ingrediente animale).
+- **Matrice**: nuova `grano_khorasan` ("Khorasan (Kamut), chicco secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, cereale a chicco intero), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun dato su acido folico, nessuna firma di arricchimento essendo un chicco intero non processato).
+
+```
+npm run add-food -- --fdc-id=2710830 --food-id=food_grano_khorasan_raw \
+  --name-it="Khorasan (Kamut), chicco secco crudo" \
+  --matrix-id=grano_khorasan --matrix-description-it="Khorasan (Kamut), chicco secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710830 --food-id=food_grano_khorasan_raw \
+  --name-it="Khorasan (Kamut), chicco secco crudo" \
+  --matrix-id=grano_khorasan --matrix-description-it="Khorasan (Kamut), chicco secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_frumento_integrale_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Tamari (salsa di soia fermentata, poco o senza grano) — preparato 2026-11-15 dal task (centoventiquattresimo lotto)
+
+- **food_id**: `food_tamari`. FDC ID 174278 (SR Legacy, "Soy sauce made from soy (tamari)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Variante di salsa di soia distinta dalla salsa di soia normale (`food_salsa_di_soia`, shoyu, soia+frumento) e dalla versione a basso sodio già pronte in coda — raccomandazione esplicita del centoventitreesimo lotto, verificata con `grep` dedicato ("tamari"), zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **17/17**, record completo. Per 100g: energia 60,0kcal, proteine 10,5g, grassi 0,10g, carboidrati 5,57g, fibra 0,80g, calcio 20,0mg, ferro 2,38mg, zinco 0,43mg, magnesio 40,0mg, rame 0,14mg, selenio 0,80µg, vitamina C 0mg esplicito, folato totale 18,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti, vitamina K 0µg esplicito. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174278 e dataType SR Legacy.
+- **Analogia usata**: `food_soia_secca_cotta` (soia secca cotta/bollita, già eseguita sul DB reale — stessa analogia già usata per la salsa di soia normale e per la salsa teriyaki in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (condimento fermentato a base di soia, nessun ingrediente animale).
+- **Matrice**: nuova `tamari` ("Tamari").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, condimento fermentato), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — il nome FDC non specifica se contiene tracce di grano, ma la composizione dichiarata è "soy" senza frumento esplicito; per prudenza, stessa convenzione già usata per la salsa di soia mista, nessuna famiglia botanica singola assegnata), `baseline_cooking_state=fermented`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174278 --food-id=food_tamari \
+  --name-it="Tamari (salsa di soia fermentata)" \
+  --matrix-id=tamari --matrix-description-it="Tamari" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174278 --food-id=food_tamari \
+  --name-it="Tamari (salsa di soia fermentata)" \
+  --matrix-id=tamari --matrix-description-it="Tamari" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_soia_secca_cotta \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Tempeh, crudo — preparato 2026-11-14 dal task (centoventitreesimo lotto)
 
 - **food_id**: `food_tempeh_raw`. FDC ID 174272 (SR Legacy, "Tempeh" — pagina getfoodfacts.com dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente, release USDA 2026-04-30, link diretto a `fdc.nal.usda.gov/food-details/174272/nutrients`). Legume storicamente mai tentato in questa pipeline (gap dichiarato da più lotti: "legumi — nessuna soia/tofu/tempeh" poi "tofu/tempeh già in coda" — qui effettivamente valutato per la prima volta), verificato con `grep` dedicato zero occorrenze prima della ricerca. Trovato dopo che un intero filone di formaggi di capra/pecora europei di nicchia (crottin de Chavignol, picodon, valençay, sainte-maure de touraine, rocamadour, idiazabal, pecorino sardo, pecorino toscano, chabichou du Poitou, selles-sur-cher, ossau-iraty, banon — 12 candidati) ha dato **zero pronti**: per nessuno dei dodici esiste una pagina getfoodfacts.com con un record SR Legacy/Foundation dedicato (solo prodotti Branded monomarca, aggregatori senza FDC ID/dataType citato, o — per idiazabal — un record Branded generico "Cheese" con brand "Quesos La Ricura" del tutto estraneo, solo 2/17 nutrienti) — tutti ⚠, non forzati, confermando lo schema già visto nei lotti 119-122 per le varianti regionali senza un nome di mercato USA consolidato.
