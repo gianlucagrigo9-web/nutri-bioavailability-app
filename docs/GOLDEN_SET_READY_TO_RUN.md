@@ -64,6 +64,30 @@ npm run add-food -- --fdc-id=171953 --food-id=food_pesce_cisco_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Scup (porgy), crudo — preparato 2026-11-15 dal task (centotrentaquattresimo lotto)
+
+- **food_id**: `food_pesce_scup_raw`. FDC ID 175141 (SR Legacy, "Fish, scup, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nome italiano comune "scup"/"porgy" mantenuto in inglese (nessun nome unico in italiano, specie *Stenotomus chrysops* distinta dall'orata mediterranea già scartata come ⚠ in lotto precedente). Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **17/17, nessun valore mancante**. Per 100g: energia 105kcal, proteine 18,9g, grassi 2,73g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 40,0mg, ferro 0,53mg, zinco 0,48mg, magnesio 23,0mg, rame 0,051mg, selenio 36,5µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 1,40µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 0,10µg.
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro crudo già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_scup`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175141 --food-id=food_pesce_scup_raw \
+  --name-it="Scup (porgy), crudo" \
+  --matrix-id=pesce_scup --matrix-description-it="Scup (porgy), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175141 --food-id=food_pesce_scup_raw \
+  --name-it="Scup (porgy), crudo" \
+  --matrix-id=pesce_scup --matrix-description-it="Scup (porgy), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Orange roughy, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
 
 - **food_id**: `food_pesce_roughy_arancione_raw`. FDC ID 175133 (SR Legacy, "Fish, roughy, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA comune da banco pescheria per nome inglese esatto, non ancora provato" (raccomandazione del centotrentaduesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
