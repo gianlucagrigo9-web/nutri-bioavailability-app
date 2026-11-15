@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Tartaruga verde, carne cruda — preparato 2026-11-15 dal task (centoventicinquesimo lotto)
+
+- **food_id**: `food_tartaruga_verde_raw`. FDC ID 167745 (SR Legacy, "Turtle, green, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima specie di rettile mai tentata in questa pipeline; nessun record generico "turtle meat" esiste (solo questa specie precisa, SR Legacy, e un record Survey/FNDDS distinto "Turtle" FDC 2706335 non usato).
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 89,0kcal, proteine 19,8g, grassi 0,50g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 118mg, ferro 1,40mg, zinco 1,00mg, magnesio 20,0mg, rame 0,25mg, sodio 68,0mg, potassio 230mg, vitamina C 0mg esplicito, folato totale 15,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 1,00µg, vitamina K 0,10µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 167745 e dataType SR Legacy.
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale — stessa categoria funzionale "carne magra a basso contenuto di grasso", stesso attributo `is_heme_iron` già usato per rane/pesce in questa pipeline; nessuna specie di rettile ancora eseguita da usare come analogia più stretta).
+- **Categoria dieta**: `meat_fish` (prodotto animale, carne di rettile).
+- **Matrice**: nuova `tartaruga_verde` ("Tartaruga verde, carne").
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo animale), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi riportati 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167745 --food-id=food_tartaruga_verde_raw \
+  --name-it="Tartaruga verde, carne cruda" \
+  --matrix-id=tartaruga_verde --matrix-description-it="Tartaruga verde, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167745 --food-id=food_tartaruga_verde_raw \
+  --name-it="Tartaruga verde, carne cruda" \
+  --matrix-id=tartaruga_verde --matrix-description-it="Tartaruga verde, carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --diet-category=meat_fish --apply
+```
+
+### Agnello, cervella, cotte (in padella) — preparato 2026-11-15 dal task (centoventicinquesimo lotto)
+
+- **food_id**: `food_cervella_di_agnello_padella`. FDC ID 174350 (SR Legacy, "Lamb, variety meats and by-products, brain, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalla forma braised (`food_cervella_di_agnello_cotta`, FDC 172526) già presente più sotto in questa stessa sezione "Pronti" (non ancora eseguita sul DB reale, quindi non usabile come analogia per Regola di metodo già applicata altrove in questa coda) — seconda forma di cottura della cervella d'agnello, mai preparata finora. La forma cruda resta `⚠` (nessuna pagina getfoodfacts.com dedicata trovata per "Lamb, variety meats and by-products, brain, raw": solo citazioni indirette su aggregatori terzi di un FDC ID 172525 mai verificato su fonte primaria, e un record distinto "Lamb, New Zealand, imported, brains, raw" FDC 174437 non comparabile).
+- **Nutrienti**: **13/17** — mancano vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non riportati sulla pagina, non assunti zero; stesso gap già visto per le altre cervella di questa pipeline). Per 100g: energia 273kcal, proteine 17,0g, grassi 22,2g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 21,0mg, ferro 2,04mg, zinco 2,00mg, magnesio 22,0mg, rame 0,48mg, sodio 157mg, potassio 358mg, vitamina C 23,0mg, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 24,1µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174350 e dataType SR Legacy.
+- **Analogia usata**: `food_cervella_di_maiale_raw` (cervella di maiale cruda, già eseguita sul DB reale — stesso organo "cervella/brain", categoria "variety meats and by-products" di specie da cortile/ovina di taglia simile, stesso attributo `is_heme_iron`; nessuna cervella d'agnello già eseguita da usare come analogia più stretta).
+- **Categoria dieta**: `meat_fish` (prodotto animale, frattaglia).
+- **Matrice**: nuova `cervella_di_agnello_padella` ("Agnello, cervella, cotte in padella").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (pan-fried), `is_fortified_folate` omesso (false — folato naturale, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174350 --food-id=food_cervella_di_agnello_padella \
+  --name-it="Agnello, cervella, cotte in padella" \
+  --matrix-id=cervella_di_agnello_padella --matrix-description-it="Agnello, cervella, cotte in padella" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cervella_di_maiale_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174350 --food-id=food_cervella_di_agnello_padella \
+  --name-it="Agnello, cervella, cotte in padella" \
+  --matrix-id=cervella_di_agnello_padella --matrix-description-it="Agnello, cervella, cotte in padella" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cervella_di_maiale_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Khorasan (grano Kamut), chicco secco crudo — preparato 2026-11-15 dal task (centoventiquattresimo lotto)
 
 - **food_id**: `food_grano_khorasan_raw`. FDC ID 2710830 (Foundation Foods, "Khorasan, grain, dry, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Cereale mai tentato in questa pipeline (noto commercialmente come "Kamut", nome di marca registrata per il grano khorasan, *Triticum turgidum* ssp. *turanicum*), verificato con `grep` dedicato ("kamut"/"khorasan"), zero occorrenze su tutti e tre i file prima della ricerca web.
