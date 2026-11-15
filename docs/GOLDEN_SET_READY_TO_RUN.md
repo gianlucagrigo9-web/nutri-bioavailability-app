@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Naranjilla (lulo), polpa surgelata non zuccherata — preparato 2026-11-15 dal task (centotrentaduesimo lotto)
+
+- **food_id**: `food_naranjilla_surgelata`. FDC ID 167790 (SR Legacy, "Naranjilla (lulo) pulp, frozen, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone genuinamente nuovo (frutta/pesce con nome scientifico/inglese non tradotto, mai cercato per nome esatto in questa pipeline — stesso tipo di filone produttivo del centodiciannovesimo lotto su legumi/tuberi tropicali). Zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **16/17**. Per 100g: energia 25,0kcal, proteine 0,44g, grassi 0,22g, carboidrati 5,90g, fibra 1,10g, calcio 8,00mg, ferro 0,35mg, zinco 0,10mg, magnesio 11,0mg, rame 0,028mg, selenio 0,40µg, beta-carotene 333µg, vitamina C 3,20mg, folato totale 3,00µg, vitamina K 14,6µg, alfa-carotene 4,00µg + beta-criptoxantina 10,0µg (campo combinato = 14µg). Manca solo vitamina B12 (non riportata sulla pagina, non assunta zero) — match quasi completo, il migliore di questo lotto.
+- **Analogia usata**: `food_pomodoro_roma_raw` (stesso genere botanico *Solanum*, famiglia Solanaceae — nessun alimento della stessa specie/famiglia già eseguito più vicino).
+- **Categoria dieta**: `fresh_fruit` (polpa di frutto surgelata non zuccherata, stesso precedente di fragole/mirtilli/more surgelati dell'ottantottesimo lotto — non è un ortaggio nella definizione PRD §4.9 nonostante la famiglia botanica Solanaceae condivisa col pomodoro).
+- **Matrice**: nuova `naranjilla_surgelata` ("Naranjilla (lulo), polpa surgelata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state` omesso (NULL per trasparenza — stessa ambiguità blanching già dichiarata per fragole/mirtilli/more surgelati, i carotenoidi sono reali e non nulli ma lo stato "surgelato" non è né raw_intact né cooked_or_disrupted in modo inequivocabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (famiglia reale, per analogia con `food_pomodoro_roma_raw`), `baseline_cooking_state=frozen` (convenzione del filone surgelati), `is_fortified_folate` omesso (false — folato 3µg in linea con un frutto fresco, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167790 --food-id=food_naranjilla_surgelata \
+  --name-it="Naranjilla (lulo), polpa surgelata" \
+  --matrix-id=naranjilla_surgelata --matrix-description-it="Naranjilla (lulo), polpa surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_pomodoro_roma_raw \
+  --botanical-family=Solanaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167790 --food-id=food_naranjilla_surgelata \
+  --name-it="Naranjilla (lulo), polpa surgelata" \
+  --matrix-id=naranjilla_surgelata --matrix-description-it="Naranjilla (lulo), polpa surgelata" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_pomodoro_roma_raw \
+  --botanical-family=Solanaceae --diet-category=fresh_fruit --apply
+```
+
+### Pummelo (pomelo), crudo — preparato 2026-11-15 dal task (centotrentaduesimo lotto)
+
+- **food_id**: `food_pummelo_raw`. FDC ID 167754 (SR Legacy, "Pummelo, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Agrume distinto dal pompelmo comune (*Citrus maxima*, l'ancestrale del pompelmo *Citrus × paradisi* già coperto bianco/rosa) — mai cercato per nome esatto in questa pipeline. Zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 38,0kcal, proteine 0,76g, grassi 0,040g, carboidrati 9,62g, fibra 1,00g, calcio 4,00mg, ferro 0,11mg, zinco 0,080mg, magnesio 6,00mg, rame (presente sulla pagina, valore non ricontrollato singolarmente — vedi nota), beta-carotene 0µg esplicito, vitamina C 61,0mg, vitamina B12 0µg esplicito, alfa-carotene 0µg + beta-criptoxantina 10,0µg (campo combinato = 10µg, reale non nullo). Mancano (non riportati, non assunti zero): selenio, folato, vitamina K.
+- **Analogia usata**: `food_pompelmo_bianco_raw` (stesso genere *Citrus*, agrume crudo già eseguito — il pummelo è l'ancestrale botanico del pompelmo).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione PRD §4.9).
+- **Matrice**: nuova `pummelo_raw` ("Pummelo, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta, stesso precedente di `food_pompelmo_bianco_raw`), `carotenoid_matrix_state=raw_intact` (carotenoide reale non nullo via beta-criptoxantina 10µg, frutto crudo intero — stesso precedente delle amarene in scatola/musco irlandese per "valore reale presente → non omettere"), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rutaceae` (famiglia reale degli agrumi, stesso precedente di `food_pompelmo_bianco_raw`/`food_pompelmo_rosa_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167754 --food-id=food_pummelo_raw \
+  --name-it="Pummelo, crudo" \
+  --matrix-id=pummelo_raw --matrix-description-it="Pummelo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_bianco_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167754 --food-id=food_pummelo_raw \
+  --name-it="Pummelo, crudo" \
+  --matrix-id=pummelo_raw --matrix-description-it="Pummelo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pompelmo_bianco_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rutaceae --diet-category=fresh_fruit --apply
+```
+
+### Acerola (ciliegia delle Antille), cruda — preparato 2026-11-15 dal task (centotrentaduesimo lotto)
+
+- **food_id**: `food_acerola_raw`. FDC ID 171686 (SR Legacy, "Acerola, (west indian cherry), raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Frutto mai cercato per nome esatto in questa pipeline, noto soprattutto per il contenuto eccezionale di vitamina C. Zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 32,0kcal, proteine 0,40g, grassi 0,30g, carboidrati 7,69g, fibra 1,10g, calcio 12,0mg, ferro 0,20mg, zinco 0,10mg, magnesio 18,0mg, rame 0,086mg, selenio 0,60µg, vitamina C 1678mg (valore reale eccezionalmente alto, caratteristico della specie — non un errore di trascrizione), folato totale 14,0µg, vitamina B12 0µg esplicito. Mancano (non riportati, non assunti zero): beta-carotene, vitamina K, alfa-carotene/beta-criptoxantina (campo combinato assente, nessuna riga carotenoidi sulla pagina — solo vitamina A RAE 38µg riportata, non mappata in questo schema).
+- **Analogia usata**: `food_ciliegie_raw` (analogia nominale/dimensionale — "west indian cherry", frutto a drupa di piccola taglia — famiglia botanica reale diversa, dichiarata separatamente, non dedotta dall'analogia).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione PRD §4.9).
+- **Matrice**: nuova `acerola_raw` ("Acerola, cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato sulla pagina, gap di dato puro, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malpighiaceae` (famiglia reale, distinta da quella della ciliegia usata solo come analogia nominale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 14µg naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171686 --food-id=food_acerola_raw \
+  --name-it="Acerola, cruda" \
+  --matrix-id=acerola_raw --matrix-description-it="Acerola, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ciliegie_raw \
+  --botanical-family=Malpighiaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=171686 --food-id=food_acerola_raw \
+  --name-it="Acerola, cruda" \
+  --matrix-id=acerola_raw --matrix-description-it="Acerola, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ciliegie_raw \
+  --botanical-family=Malpighiaceae --diet-category=fresh_fruit --apply
+```
+
+### Snapper (pesce, specie miste), surgelato — preparato 2026-11-15 dal task (centotrentaduesimo lotto)
+
+- **food_id**: `food_snapper_surgelato`. FDC ID 2747669 (**Foundation**, "Snapper, frozen, wild caught" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza sul nome**: "snapper" è un nome collettivo USA per diverse specie della famiglia Lutjanidae, non equivalente al dentice mediterraneo (Sparidae) né ad altra specie italiana comune — tenuto in inglese per evitare un mismatch di specie come già scartato altrove in questa pipeline (es. tamarillo/tamarindo). Mai cercato per nome esatto in questa pipeline. Zero occorrenze su tutti e tre i file prima della ricerca web.
+- **Nutrienti**: **11/17** — match nel range accettabile ma non ricco, coerente con i record Foundation Foods "frozen, wild caught" già visti per altre specie in questa pipeline (meno nutrienti dei record SR Legacy "raw" più vecchi e completi). Per 100g: energia 89,5kcal, proteine 20,7g, grassi 0,57g, carboidrati 0,44g, calcio 13,9mg, ferro 0,20mg, zinco 0,36mg, magnesio 27,5mg, rame 0,019mg, selenio 71,4µg, vitamina B12 1,57µg. Mancano (non riportati, non assunti zero): fibra (dichiarazione incoerente sulla pagina stessa tra etichetta e tabella — trattata come assente, non affidabile), beta-carotene, vitamina C, folato, vitamina K, alfa-carotene/beta-criptoxantina (campo combinato assente).
+- **Analogia usata**: `food_tilapia_raw` (pesce bianco magro già eseguito, stesso tipo di matrice — cambia solo la specie e lo stato surgelato/crudo).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `snapper_surgelato` ("Snapper, surgelato").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia con `food_tilapia_raw` — ferro eme tipico del pesce), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile, pesce), `baseline_cooking_state=frozen`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2747669 --food-id=food_snapper_surgelato \
+  --name-it="Snapper (pesce), surgelato" \
+  --matrix-id=snapper_surgelato --matrix-description-it="Snapper, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_tilapia_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2747669 --food-id=food_snapper_surgelato \
+  --name-it="Snapper (pesce), surgelato" \
+  --matrix-id=snapper_surgelato --matrix-description-it="Snapper, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_tilapia_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Anguilla, cotta (al forno, calore secco) — preparato 2026-11-15 dal task (centoventinovesimo lotto)
 
 - **food_id**: `food_anguilla_cotto`. FDC ID 174194 (SR Legacy, "Fish, eel, mixed species, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo della stessa specie (`food_anguilla_raw`, FDC 174193) è già eseguito sul DB reale; il cotto non era mai stato cercato in questa pipeline.
