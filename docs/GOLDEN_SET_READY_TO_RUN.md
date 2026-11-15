@@ -40,6 +40,30 @@ npm run add-food -- --fdc-id=173705 --food-id=food_pesce_tilefish_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Cisco, crudo — preparato 2026-11-15 dal task (centotrentaquattresimo lotto)
+
+- **food_id**: `food_pesce_cisco_raw`. FDC ID 171953 (SR Legacy, "Fish, cisco, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Pesce d'acqua dolce dei Grandi Laghi (*Coregonus artedi*), distinto dal coregone generico (`food_coregone_cotto`, "whitefish, mixed species") già eseguito. Zero occorrenze su tutti i file prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 98,0kcal, proteine 19,0g, grassi 1,91g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 0,40mg, zinco 0,37mg, magnesio 17,0mg, rame 0,072mg, selenio 12,6µg, vitamina C 0mg esplicito, folato totale 15,0µg, vitamina B12 1,00µg. **Mancano**: beta-carotene, altro carotenoide provitaminico A, vitamina K.
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro crudo già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_cisco`.
+- **Attributi**: `is_heme_iron` true, `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171953 --food-id=food_pesce_cisco_raw \
+  --name-it="Cisco, crudo" \
+  --matrix-id=pesce_cisco --matrix-description-it="Cisco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171953 --food-id=food_pesce_cisco_raw \
+  --name-it="Cisco, crudo" \
+  --matrix-id=pesce_cisco --matrix-description-it="Cisco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Orange roughy, crudo — preparato 2026-11-15 dal task (centotrentatreesimo lotto)
 
 - **food_id**: `food_pesce_roughy_arancione_raw`. FDC ID 175133 (SR Legacy, "Fish, roughy, orange, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Filone "pesce USA comune da banco pescheria per nome inglese esatto, non ancora provato" (raccomandazione del centotrentaduesimo lotto). Zero occorrenze su tutti i file prima della ricerca web.
