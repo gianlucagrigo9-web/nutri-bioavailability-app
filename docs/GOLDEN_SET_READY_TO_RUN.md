@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Barbabietola, foglie, cotte (con sale) — preparato 2026-11-15 dal task (centoquarantesimo lotto)
+
+- **food_id**: `food_foglie_di_barbabietola_cotte`. FDC ID 168508 (SR Legacy, "Beet greens, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Parte della pianta mai tentata in questa pipeline sotto questo nome: la barbabietola radice è già eseguita (`food_barbabietola_rossa_raw`), ma le foglie — un ortaggio a foglia verde distinto, comune anche in Italia, spesso cucinato come le bietole — non erano mai state cercate. Verificato con `grep` dedicato su PRD/GOLDEN_SET_READY_TO_RUN/golden_set_foods ("barbabietola.*fogli", "beet greens", "168508", "2747653") prima della ricerca web: zero occorrenze.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 27,0kcal, proteine 2,57g, grassi 0,20g, carboidrati 5,46g, fibra 2,90g, calcio 114mg, ferro 1,90mg, zinco 0,50mg, magnesio 68,0mg, rame 0,25mg, selenio 0,90µg, vitamina C 24,9mg, folato totale 14,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 484µg, beta-carotene 4590µg, alfa-carotene 4,00µg + beta-criptoxantina 0µg esplicito (entrambi reali, non nulli). **Sodio 477mg/100g** — alto ma coerente col nome esplicito del record ("with salt"), non un'anomalia (nessun record "without salt" dedicato trovato su getfoodfacts.com per questo stato di cottura, solo il "with salt" ha una pagina pulita con FDC ID).
+- **Analogia usata**: `food_bietole_da_costa_raw` (bietole da costa crude, già eseguite sul DB reale — stessa specie botanica *Beta vulgaris* delle barbabietole: la bietola da costa è la stessa pianta coltivata per la foglia, le foglie di barbabietola sono l'organo omologo della radice da orto; stesso trattamento "foglia verde cotta ricca di ossalati" già usato per spinaci/bietole).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a foglia).
+- **Matrice**: nuova `foglie_di_barbabietola_cotte`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=high_oxalate` (stesso precedente di `food_spinach_raw`/`food_bietole_da_costa_raw` — foglia della stessa famiglia Amaranthaceae, nessun motivo per cui la cottura lo cambi), `carotenoid_matrix_state=cooked_or_disrupted` (bollita, beta-carotene/alfa-carotene reali e non nulli, stesso precedente di `food_bietole_da_costa_cotte`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168508 --food-id=food_foglie_di_barbabietola_cotte \
+  --name-it="Barbabietola, foglie, cotte (con sale)" \
+  --matrix-id=foglie_di_barbabietola_cotte --matrix-description-it="Barbabietola, foglie, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bietole_da_costa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --matrix-category-calcium=high_oxalate \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168508 --food-id=food_foglie_di_barbabietola_cotte \
+  --name-it="Barbabietola, foglie, cotte (con sale)" \
+  --matrix-id=foglie_di_barbabietola_cotte --matrix-description-it="Barbabietola, foglie, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bietole_da_costa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --matrix-category-calcium=high_oxalate \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Barbabietola, foglie, crude — preparato 2026-11-15 dal task (centoquarantesimo lotto)
+
+- **food_id**: `food_foglie_di_barbabietola_raw`. FDC ID 2747653 (Foundation Foods, "Beet greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso gap della voce cotta sopra (parte della pianta mai tentata), stesso controllo di non-duplicazione fatto.
+- **Nutrienti**: **11/17**. Per 100g: proteine 1,61g, grassi 0,14g, carboidrati 4,66g, fibra 2,58g, calcio 72,8mg, ferro 3,16mg, zinco 0,32mg, magnesio 74,4mg, rame 0,076mg, vitamina C 8,58mg, folato totale 152µg. **Mancano** (non riportati sulla tabella dettagliata del record Foundation, non assunti a zero): energia, selenio, vitamina B12, vitamina K, beta-carotene, altro carotenoide provitaminico A (alfa-carotene/beta-criptoxantina). Acido folico non riportato (nessun segnale di arricchimento rilevabile, ma nessun segnale nemmeno contrario). Nessuna incongruenza rilevante fra riepilogo e tabella (solo arrotondamenti minori su calcio/sodio).
+- **Analogia usata**: `food_bietole_da_costa_raw` (stessa ragione della voce cotta sopra — stessa specie *Beta vulgaris*).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_barbabietola`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium=high_oxalate` (stesso precedente di sopra), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record Foundation, non assunto `raw_intact` senza conferma, Regola 1), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2747653 --food-id=food_foglie_di_barbabietola_raw \
+  --name-it="Barbabietola, foglie, crude" \
+  --matrix-id=foglie_di_barbabietola --matrix-description-it="Barbabietola, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bietole_da_costa_raw \
+  --matrix-category-calcium=high_oxalate --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2747653 --food-id=food_foglie_di_barbabietola_raw \
+  --name-it="Barbabietola, foglie, crude" \
+  --matrix-id=foglie_di_barbabietola --matrix-description-it="Barbabietola, foglie" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bietole_da_costa_raw \
+  --matrix-category-calcium=high_oxalate --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Coriandolo, foglie secche — preparato 2026-11-15 dal task (centotrentanovesimo lotto)
 
 - **food_id**: `food_coriandolo_secco_raw`. FDC ID 170921 (SR Legacy, "Spices, coriander leaf, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente nell'URL stesso, release USDA 2026-04-30). Distinto dal coriandolo semi secchi già eseguito (`food_coriandolo_raw`, FDC 170922, parte della pianta diversa — seme vs foglia) e dal coriandolo foglie FRESCHE già `⚠` dal lotto 83/115 (nessun FDC ID verificabile per quella forma): questo è il record della foglia essiccata, non un doppione di nessuno dei due.
