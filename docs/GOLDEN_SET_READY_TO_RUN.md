@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rigaglie di pollo (cappone), crude — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_rigaglie_pollo_raw`. FDC ID **174465** (**SR Legacy**, "Chicken, capons, giblets, raw" — pagina `getfoodfacts.com/food/chicken-capons-giblets-raw-174465` dedicata, FDC ID e dataType citati esplicitamente nel titolo pagina, release USDA FoodData Central 30-04-2026, record a 67 nutrienti). Scoperto nello sweep sistematico della categoria FDC "Poultry Products" (getfoodfacts.com/category/poultry-products, 37 nomi comuni, 395 record totali) — distinto da fegato/cuore/ventriglio di pollo già presenti (prodotto misto "giblets" = frattaglie miste, voce USDA propria con FDC ID proprio). Verificato con `grep` dedicato su FDC ID e food_id, zero occorrenze.
+- **Nutrienti**: **14/17**. Per 100g: energia 130kcal, proteine 18,3g, grassi 5,18g, carboidrati 1,42g, fibra 0g esplicito, calcio 10,0mg, ferro 6,25mg, magnesio 18,0mg, zinco 3,38mg, rame 0,27mg, selenio 55,3µg, vitamina C 18,4mg, folato totale 394µg (DFE 394µg, acido folico 0µg esplicito), vitamina B12 12,9µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record — non assunti zero).
+- **Analogia usata**: `food_ventriglio_di_pollo_raw` (ventriglio di pollo crudo, già eseguito sul DB reale — stessa categoria "frattaglie di pollo crude", stesso organo-prodotto misto ricco di ferro eme e selenio).
+- **Categoria dieta**: `meat_fish` (frattaglie di carne — vegetariano NO).
+- **Matrice**: nuova `rigaglie_pollo_raw` ("Rigaglie di pollo, crude").
+- **Attributi**: `is_heme_iron` impostato (true — frattaglie di pollo), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL, non applicabile a un prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174465 --food-id=food_rigaglie_pollo_raw \
+  --name-it="Rigaglie di pollo, crude" \
+  --matrix-id=rigaglie_pollo_raw --matrix-description-it="Rigaglie di pollo, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ventriglio_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174465 --food-id=food_rigaglie_pollo_raw \
+  --name-it="Rigaglie di pollo, crude" \
+  --matrix-id=rigaglie_pollo_raw --matrix-description-it="Rigaglie di pollo, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ventriglio_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Pesce succhiatore bianco (white sucker), crudo — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_pesce_succhiatore_raw`. FDC ID **175150** (**SR Legacy**, "Fish, sucker, white, raw" — pagina `getfoodfacts.com/food/fish-sucker-white-raw-175150` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, record a 65 nutrienti). Scoperto nello sweep sistematico della categoria FDC "Finfish and Shellfish Products" (getfoodfacts.com, 76 nomi comuni, 288 record totali). Specie *Catostomus commersonii* (pesce d'acqua dolce nordamericano), mai tentata in questa pipeline — verificato con `grep` dedicato, zero occorrenze.
