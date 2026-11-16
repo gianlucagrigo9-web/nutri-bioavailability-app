@@ -16,6 +16,84 @@
 
 ## Pronti
 
+### Coregone (whitefish), essiccato — preparato 2026-11-16 dal task (centocinquantaquattresimo lotto)
+
+- **food_id**: `food_coregone_secco`. FDC ID 168052 (categoria "American Indian/Alaska Native Foods", "Fish, whitefish, dried (Alaska Native)" — dataType non mostrato esplicitamente sulla pagina myfooddata.com, ma coerente come SR Legacy con tutte le altre voci della stessa categoria già verificate in questa pipeline; pagina getfoodfacts.com bloccata da errore di permesso (PROVENANCE_REQUIRED) in questo turno, ID e nome incrociati su tools.myfooddata.com e caloriefriend.azurewebsites.net, entrambi concordanti). Distinto da `food_coregone_raw`/`food_coregone_cotto` (forme non essiccate, FDC diversi, entrambe ancora "pronte" non eseguite — quindi non riusabili come analogia per Regola 6). Verificato con `grep` dedicato: zero occorrenze per "whitefish.*dried"/"coregone.*secco"/168052 prima della ricerca web.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 371kcal, proteine 62,4g, grassi 13,4g, carboidrati 0g, fibra 0g, calcio 810mg, ferro 4,1mg, zinco 5mg, magnesio 85mg, rame 0,18mg, selenio 113µg, sodio 200mg, vitamina C 0mg esplicito, folato totale 11µg, acido folico 0µg esplicito, vitamina B12 18,4µg, vitamina K 1,3µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_baccala_salato_secco` (baccalà, merluzzo salato ed essiccato, già eseguito sul DB reale — stessa categoria funzionale "pesce essiccato"; nota di trasparenza: il baccalà è anche salato mentre il record USDA di questa voce non specifica salatura, ma è l'analogia di pesce essiccato più vicina già eseguita, nessuna più specifica disponibile).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `coregone_secco` ("Coregone (whitefish), essiccato").
+- **Attributi**: `is_heme_iron` presente (true, muscolo di pesce), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false — folato 11µg, valore naturale tipico per pesce).
+
+```
+npm run add-food -- --fdc-id=168052 --food-id=food_coregone_secco \
+  --name-it="Coregone (whitefish), essiccato" \
+  --matrix-id=coregone_secco --matrix-description-it="Coregone (whitefish), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168052 --food-id=food_coregone_secco \
+  --name-it="Coregone (whitefish), essiccato" \
+  --matrix-id=coregone_secco --matrix-description-it="Coregone (whitefish), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Eperlano (smelt), essiccato — preparato 2026-11-16 dal task (centocinquantaquattresimo lotto)
+
+- **food_id**: `food_eperlano_secco`. FDC ID 167654 (categoria "American Indian/Alaska Native Foods", "Smelt, dried (Alaska Native)" — dataType non mostrato esplicitamente sulla pagina myfooddata.com, ma coerente come SR Legacy con tutte le altre voci della stessa categoria già verificate in questa pipeline; pagina getfoodfacts.com bloccata da errore di permesso (PROVENANCE_REQUIRED) in questo turno, ID e nome incrociati su tools.myfooddata.com e caloriefriend.azurewebsites.net, entrambi concordanti). Verificato con `grep` dedicato: zero occorrenze per "smelt.*dried"/"eperlano" prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 386kcal, proteine 56,2g, grassi 17,9g, carboidrati 0g, fibra 0g, calcio 1600mg, ferro 5,4mg, zinco 6,7mg, magnesio 89mg, rame 0,15mg, selenio 194µg, sodio 420mg, vitamina B12 19,1µg, vitamina K 0µg esplicito (K1; menachinone-4/K2 1,6µg riportato separatamente, non incluso nel campo standard), beta-carotene 0µg esplicito. Mancano: vitamina C, folato totale, acido folico (non riportati sulla pagina).
+- **Analogia usata**: `food_baccala_salato_secco` (stesso motivo dichiarato sopra per il coregone essiccato — pesce essiccato, già eseguito sul DB reale, analogia più vicina disponibile).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `eperlano_secco` ("Eperlano (smelt), essiccato").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167654 --food-id=food_eperlano_secco \
+  --name-it="Eperlano (smelt), essiccato" \
+  --matrix-id=eperlano_secco --matrix-description-it="Eperlano (smelt), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167654 --food-id=food_eperlano_secco \
+  --name-it="Eperlano (smelt), essiccato" \
+  --matrix-id=eperlano_secco --matrix-description-it="Eperlano (smelt), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Fegato di leone marino di Steller, crudo — preparato 2026-11-16 dal task (centocinquantaquattresimo lotto)
+
+- **food_id**: `food_fegato_leone_marino_raw`. FDC ID 169000 (SR Legacy, "Sea lion, Steller, liver (Alaska Native)" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Distinto da `food_cuore_leone_marino_raw` (cuore, già ✅ dal centocinquantatreesimo lotto, FDC diverso 169002) — qui l'organo fegato. Verificato con `grep` dedicato: zero occorrenze per "steller.*liver"/"leone marino.*fegato" prima della ricerca web.
+- **Nutrienti**: **11/17**. Per 100g: energia 137kcal, proteine 22,9g, grassi 5,0g, carboidrati 0g, calcio 6,0mg, ferro 9,0mg, zinco 4,1mg, magnesio 22,0mg, rame 1,89mg, selenio 693µg, sodio 88,0mg. Mancano: fibra, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene (non riportati sulla pagina). Nota di trasparenza: la pagina mostra discrepanze minori tra il riepilogo in testa (140kcal, 10mg calcio) e la tabella nutrienti per 100g (137kcal, 6,0mg calcio) — qui riportata la tabella, più specifica.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, già eseguito sul DB reale — stesso organo, frattaglia di mammifero, analogia funzionale più stretta disponibile per un fegato di mammifero marino).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `fegato_leone_marino` ("Fegato di leone marino di Steller, crudo").
+- **Attributi**: `is_heme_iron` presente (true, fegato), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non applicabile a tessuto animale — stesso precedente di `food_fegato_di_manzo_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169000 --food-id=food_fegato_leone_marino_raw \
+  --name-it="Fegato di leone marino di Steller, crudo" \
+  --matrix-id=fegato_leone_marino --matrix-description-it="Fegato di leone marino di Steller, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169000 --food-id=food_fegato_leone_marino_raw \
+  --name-it="Fegato di leone marino di Steller, crudo" \
+  --matrix-id=fegato_leone_marino --matrix-description-it="Fegato di leone marino di Steller, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Renna/caribù, spalla, carne secca — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_renna_secca`. FDC ID 168049 (SR Legacy, "Caribou, shoulder meat, dried (Alaska Native)" — ID confermato come coerente su più fonti indipendenti che citano il record USDA, tools.myfooddata.com e caloriefriend.azurewebsites.net; nessuna pagina getfoodfacts.com raggiungibile per questa voce in questo turno, ma l'ID è coerente su tutte le fonti consultate). **Nota**: distinto da `food_renna_raw` (già "pronto" ma non ancora eseguito, FDC 173853 "Game meat, caribou, raw", lotto 32) — qui la versione SECCA/essiccata, FDC diverso. Verificato con `grep` dedicato, zero occorrenze per "caribou.*dried"/"caribù.*secco"/168049 prima della ricerca web.
