@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### 🟡 Noci pili (pili nuts), secche — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_noci_pili_raw`. FDC ID **170590** ("Nuts, pilinuts, dried") — confermato esplicitamente da `foodstruct.com/food/pilinuts`, link References a `https://fdc.nal.usda.gov/food-details/170590/nutrients`. Frutto a guscio delle Filippine (*Canarium ovatum*), mai tentato prima — verificato con grep dedicato, zero occorrenze. Stessa lacuna dichiarata delle altre voci di questo lotto (dataType non etichettato testualmente) — 🟡.
+- **Nutrienti**: **13/17**, cross-validati da due fonti indipendenti concordanti (recipal.com 1cup/120g scalato vs foodstruct.com 100g diretto — ferro 3,5mg su entrambe identico, zinco 3,0mg su entrambe identico, calcio 141,7/145mg, magnesio 300/302mg, folato 58,3/60µg, tutti entro il 3%): energia 719kcal, proteine 10,8/11g, grassi 79,6/80g, carboidrati 4,0g, fibra 0g (da recipal, "dietary fiber 0g"), calcio, ferro, magnesio, zinco, rame, vitamina C, folato, vitamina B12. **Non confermabile**: selenio e vitamina K (assenti da entrambe le fonti, non solo dalla sezione "coverage" incoerente come nelle altre voci — qui mancano proprio dalla tabella principale), beta-carotene, altri carotenoidi provitamina A.
+- **Analogia usata**: `food_noci_raw` (nessun alimento della stessa famiglia botanica *Burseraceae* già presente in Golden Set; stessa convenzione già usata per noci macadamia/Brasile/cocco, famiglie diverse ma stessa categoria "frutto a guscio secco crudo").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noci_pili` ("Noci pili").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Burseraceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170590 --food-id=food_noci_pili_raw \
+  --name-it="Noci pili, secche" \
+  --matrix-id=noci_pili --matrix-description-it="Noci pili" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Burseraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170590 --food-id=food_noci_pili_raw \
+  --name-it="Noci pili, secche" \
+  --matrix-id=noci_pili --matrix-description-it="Noci pili" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Burseraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Noce bianca (butternut), secca — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_noce_bianca_raw`. FDC ID **170570** (**SR Legacy**, "Nuts, butternuts, dried" — pagina `getfoodfacts.com/food/nuts-butternuts-dried-170570` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026, 73 nutrienti totali nel record). Noce bianca americana (*Juglans cinerea*), distinta dalla "zucca butternut" (`food_zucca_butternut_raw`/`_cotta`, già eseguite — omonimia pura, nessuna relazione botanica) e dalle noci comuni già presenti — verificato con grep dedicato, zero occorrenze prima di questa ricerca.
