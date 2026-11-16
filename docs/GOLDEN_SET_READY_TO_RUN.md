@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Latte di soia, non arricchito — preparato 2026-11-16 dal task (centocinquantesimo lotto)
+
+- **food_id**: `food_latte_di_soia_raw`. FDC ID 172446 (SR Legacy, "Soymilk, original and vanilla, unfortified" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prima bevanda vegetale della pipeline (gruppo "bevande vegetali", già notato come buco dal terzo lotto, mai risolto finora). Verificato con `grep` dedicato, zero occorrenze per "latte di soia"/"soy milk"/"soymilk"/172446 su tutti i file prima della ricerca web. **Nota di trasparenza importante**: per questo stesso filone sono stati trovati anche record Foundation per "Almond milk, unsweetened, plain, refrigerated" (FDC 2257045) e "Oat milk, unsweetened, plain, refrigerated" (FDC 2257046) — scartati entrambi (restano `⚠`) perché, nonostante il nome generico "unsweetened/plain" senza menzione di arricchimento, riportano vitamina B12 non nulla (0,45µg e 0,51µg/100g) — fisiologicamente impossibile per una bevanda di origine 100% vegetale non supplementata — insieme a un calcio implausibilmente alto per un'infusione diluita di mandorle/avena (158mg e 149mg/100g): stessa firma di arricchimento nascosto già incontrata per pane/pasta/cereali USA in questa coda, qui non dichiarata nel nome del record. Il latte di soia qui preparato non ha questo problema: l'FDC esplicita "unfortified" nel nome stesso, e i valori sono coerenti con un prodotto naturale (vitamina B12 0µg esplicito, acido folico 0µg esplicito, calcio 25mg/100g plausibile).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 54,0kcal, proteine 3,27g, grassi 1,75g, carboidrati 6,28g, fibra 0,60g, calcio 25,0mg, ferro 0,64mg, zinco 0,12mg, magnesio 25,0mg, rame 0,13mg, selenio 4,80µg, sodio 51,0mg, vitamina C 0mg esplicito, folato totale 18,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 3,00µg, beta-carotene 2,00µg.
+- **Analogia usata**: `food_soia_secca_cotta` (soia secca cotta/bollita, già eseguita sul DB reale — stesso legume *Glycine max*, stessa famiglia botanica reale Fabaceae, stessa analogia già usata per salsa di soia e salsa teriyaki in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (bevanda vegetale, legume).
+- **Matrice**: nuova `latte_di_soia` ("Latte di soia, non arricchito").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come per `food_soia_secca_cotta`), `carotenoid_matrix_state=raw_intact` (beta-carotene 2,00µg reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw` (bevanda non cotta per questo piatto, stessa convenzione già usata per latte/kefir/yogurt in questa pipeline), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, record esplicitamente "unfortified").
+
+```
+npm run add-food -- --fdc-id=172446 --food-id=food_latte_di_soia_raw \
+  --name-it="Latte di soia, non arricchito" \
+  --matrix-id=latte_di_soia --matrix-description-it="Latte di soia, non arricchito" \
+  --baseline-cooking-state=raw --analogy-food-id=food_soia_secca_cotta \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172446 --food-id=food_latte_di_soia_raw \
+  --name-it="Latte di soia, non arricchito" \
+  --matrix-id=latte_di_soia --matrix-description-it="Latte di soia, non arricchito" \
+  --baseline-cooking-state=raw --analogy-food-id=food_soia_secca_cotta \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cipolla in polvere — preparato 2026-11-16 dal task (centocinquantesimo lotto)
 
 - **food_id**: `food_cipolla_polvere_raw`. FDC ID 171327 (SR Legacy, "Spices, onion powder"). Candidato individuato durante l'inventario spezie/condimenti disidratati (gruppo "spezie/erbe" del punto 1b): verificato con `grep` dedicato, zero occorrenze su tutti i file per "cipolla.*polvere"/"onion powder"/171327 prima della ricerca web (da notare: una ricerca precedente aveva erroneamente incluso "pepe nero macinato" come candidato nuovo — in realtà già eseguito sul DB reale come `food_pepe_nero_raw`, FDC 170931, lotto 7; scoperto solo verificando l'FDC ID oltre alla frase con spazio "pepe nero", che non matchava il testo "pepe_nero" con underscore nella tabella Eseguiti — nessun comando duplicato preparato, lezione di Regola 6 confermata ancora). **Nota sulla fonte**: nessuna pagina getfoodfacts.com dedicata trovata per questo FDC ID; il record è confermato da due fonti indipendenti concordanti — triagemethod.com (ogni riga nutriente etichettata esplicitamente "SR (USDA Standard Reference Legacy)") e foodstruct.com, che cita esplicitamente il link FDC `fdc.nal.usda.gov/food-details/171327/nutrients` nella sezione Riferimenti — stessi valori su tutti i 17 nutrienti dopo arrotondamento, nessuna discrepanza.
