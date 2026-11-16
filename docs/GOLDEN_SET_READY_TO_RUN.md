@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Strombo (conch), cotto (al forno/alla griglia) — preparato 2026-11-16 dal task (centocinquantesimo lotto)
+
+- **food_id**: `food_strombo_cotto`. FDC ID 173720 (SR Legacy, "Mollusks, conch, baked or broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "strombo/conch". Verificato con `grep` su tutti i file (frase italiana/inglese e FDC ID), zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17 completo** — tutti i 17 nutrienti tracciati presenti con valore esplicito. Per 100g: energia 130kcal, proteine 26,3g, grassi 1,20g, carboidrati 1,70g, fibra 0g esplicito, calcio 98,0mg, ferro 1,41mg, zinco 1,71mg, magnesio 238mg, rame 0,43mg, selenio 40,3µg, sodio 153mg, vitamina C 0mg esplicito, folato totale 179µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 5,25µg, vitamina K 0,20µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_ostriche_cotte` (ostrica cotta a calore secco, già eseguita sul DB reale — stessa categoria "mollusco gasteropode/bivalve cotto", stessa convenzione già usata per la buccina/whelk cotta nel centoquattresimo lotto).
+- **Categoria dieta**: `meat_fish` (mollusco).
+- **Matrice**: nuova `strombo_cotto` ("Strombo, cotto").
+- **Attributi**: `is_heme_iron` impostato (true, per analogia con `food_ostriche_cotte`), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non applicabile, prodotto animale), `baseline_cooking_state=dry_heat_cooked` (al forno/alla griglia), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173720 --food-id=food_strombo_cotto \
+  --name-it="Strombo (conch), cotto al forno/alla griglia" \
+  --matrix-id=strombo_cotto --matrix-description-it="Strombo, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173720 --food-id=food_strombo_cotto \
+  --name-it="Strombo (conch), cotto al forno/alla griglia" \
+  --matrix-id=strombo_cotto --matrix-description-it="Strombo, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_ostriche_cotte \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Fegato grasso d'oca, patè affumicato, in scatola — preparato 2026-11-16 dal task (centoquarantanovesimo lotto)
 
 - **food_id**: `food_pate_di_fegato_doca_affumicato`. FDC ID 171100 (SR Legacy, "Pate de foie gras, canned (goose liver pate), smoked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "frattaglie/salumi/formaggi di nicchia: foie gras/fegato grasso d'oca". Verificato con `grep`: zero occorrenze su tutti i file prima della ricerca web.
