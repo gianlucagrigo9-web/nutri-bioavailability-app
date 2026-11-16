@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Coregone (whitefish), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_coregone_cotto`. FDC ID **174246** (**SR Legacy**, "Fish, whitefish, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-whitefish-mixed-species-cooked-dry-heat-174246` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del coregone crudo già eseguito sul DB reale (`food_coregone_raw`, FDC 173711).
+- **Nutrienti**: **14/17**. Per 100g: energia 172kcal, proteine 24,5g, grassi 7,51g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 33,0mg, ferro 0,47mg, magnesio 42,0mg, zinco 1,27mg, rame 0,092mg, selenio 16,2µg, vitamina C 0mg esplicito, folato totale 17,0µg (DFE 17,0µg, acido folico 0µg esplicito), vitamina B12 0,96µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (non riportati in pagina). Sodio 65,0mg/100g (basso, nessun segnale di salamoia).
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo/cod cotto a secco, già eseguito sul DB reale — stessa categoria "pesce cotto a secco").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `coregone_cotto` ("Coregone, cotto").
+- **Attributi**: `is_heme_iron` impostato (true), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=174246 --food-id=food_coregone_cotto \
+  --name-it="Coregone, cotto" \
+  --matrix-id=coregone_cotto --matrix-description-it="Coregone, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174246 --food-id=food_coregone_cotto \
+  --name-it="Coregone, cotto" \
+  --matrix-id=coregone_cotto --matrix-description-it="Coregone, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Nasello (whiting), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_nasello_cotto`. FDC ID **175161** (**SR Legacy**, "Fish, whiting, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-whiting-mixed-species-cooked-dry-heat-175161` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del nasello crudo già eseguito sul DB reale (`food_nasello_raw`, FDC 173713).
