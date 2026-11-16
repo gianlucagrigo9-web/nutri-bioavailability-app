@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Erba freccia (arrowhead), cruda — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_erba_freccia_raw`. FDC ID **169203** (**SR Legacy**, "Arrowhead, raw" — pagina `getfoodfacts.com/food/arrowhead-raw-169203` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026). Tubero acquatico (*Sagittaria* spp., erba freccia/duck potato), comune nella cucina asiatica, mai tentato prima — scoperta dallo stesso elenco sistematico USDA "Vegetables and Vegetable Products" del crisantemo sopra, verificato con grep dedicato zero occorrenze.
+- **Nutrienti**: **13/17** dalla tabella ufficiale FDC: energia 99,0kcal, proteine 5,33g, grassi 0,29g, carboidrati 20,2g, calcio 10,0mg, ferro 2,57mg, magnesio 51,0mg, zinco 0,28mg, rame 0,17mg, selenio 0,70µg, vitamina C 1,10mg, folato 14,0µg (DFE), vitamina B12 0µg. **Mancano**: fibra (pagina indica "not declared", un indicatore interno della pagina mostra "0g" in conflitto — trattata come assente, non zero), vitamina K, beta-carotene, altri carotenoidi provitamina A (vitamina A RAE indicata 0µg, ma non è il componente richiesto dal nostro schema).
+- **Analogia usata**: `food_potato_raw` (stessa convenzione già usata per il topinambur — tubero, famiglia botanica diversa ma categoria culinaria più simile fra quelle già presenti).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `erba_freccia` ("Erba freccia").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Alismataceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=169203 --food-id=food_erba_freccia_raw \
+  --name-it="Erba freccia (arrowhead), cruda" \
+  --matrix-id=erba_freccia --matrix-description-it="Erba freccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Alismataceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169203 --food-id=food_erba_freccia_raw \
+  --name-it="Erba freccia (arrowhead), cruda" \
+  --matrix-id=erba_freccia --matrix-description-it="Erba freccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_potato_raw \
+  --botanical-family=Alismataceae --diet-category=plant_non_fruit --apply
+```
+
+### Farfaraccio (butterbur/fuki), crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_farfaraccio_raw`. FDC ID **170385** (**SR Legacy**, "Butterbur, (fuki), raw" — pagina `getfoodfacts.com/food/butterbur-fuki-raw-170385` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Pianta erbacea (*Petasites japonicus*, farfaraccio/fuki), picciolo consumato nella cucina giapponese, mai tentata prima — stesso elenco sistematico del crisantemo/erba freccia sopra.
+- **Nutrienti**: **13/17** dalla tabella ufficiale FDC: energia 14,0kcal, proteine 0,39g, grassi 0,040g, carboidrati 3,61g, calcio 103mg, ferro 0,10mg, magnesio 14,0mg, zinco 0,16mg, rame 0,10mg, selenio 0,90µg, vitamina C 31,5mg, folato 10,0µg (DFE), vitamina B12 0µg. **Mancano**: fibra ("not declared" in pagina), vitamina K, beta-carotene, altri carotenoidi provitamina A.
+- **Analogia usata**: `food_radicchio_raw` (già eseguita — stessa famiglia botanica *Asteraceae* del crisantemo sopra, l'analogia più stretta disponibile).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farfaraccio` ("Farfaraccio").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Asteraceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170385 --food-id=food_farfaraccio_raw \
+  --name-it="Farfaraccio (butterbur/fuki), crudo" \
+  --matrix-id=farfaraccio --matrix-description-it="Farfaraccio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_radicchio_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170385 --food-id=food_farfaraccio_raw \
+  --name-it="Farfaraccio (butterbur/fuki), crudo" \
+  --matrix-id=farfaraccio --matrix-description-it="Farfaraccio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_radicchio_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Crisantemo da foglia (tong ho), crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_crisantemo_raw`. FDC ID **169995** (**SR Legacy**, "Chrysanthemum, garland, raw" — pagina `getfoodfacts.com/food/chrysanthemum-garland-raw-169995` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Verdura a foglia molto comune nelle cucine asiatiche (*Glebionis coronaria*, crisantemo da foglia/tong ho/shungiku), mai tentata prima — scoperta scorrendo l'elenco sistematico USDA categoria "Vegetables and Vegetable Products" (non brainstorm per nome), verificato con grep dedicato zero occorrenze prima di questa ricerca.
