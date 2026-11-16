@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli gialli, secchi cotti (bolliti, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_fagioli_gialli_cotti`. FDC ID **175248** (**SR Legacy**, "Beans, yellow, mature seeds, cooked, boiled, with salt" — pagina `getfoodfacts.com/food/beans-yellow-mature-seeds-cooked-boiled-with-salt-175248` dedicata, FDC ID e dataType citati esplicitamente, sodio 241mg/100g). Controparte cotta dei fagioli gialli secchi crudi già preparati nel 170° lotto (FDC 173751, ancora solo "pronto"); nessuna pagina pulita trovata per la variante "without salt" su questa fonte.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 144kcal, proteine 9,16g, grassi 1,08g, carboidrati 25,3g, fibra 10,4g, calcio 62,0mg, ferro 2,48mg, magnesio 74,0mg, zinco 1,06mg, rame 0,19mg, selenio 1,30µg, vitamina C 1,80mg, folato totale 81,0µg (DFE 81,0µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito, beta-carotene 0µg esplicito, vitamina K 3,50µg, alfa-carotene e beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_fagioli_neri_cotti` (fagioli neri secchi cotti con sale, già eseguiti sul DB reale — stesso genere *Phaseolus vulgaris*, stesso stato "mature seeds, cooked, boiled, with salt").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_gialli_cotti` ("Fagioli gialli, secchi cotti").
+- **Attributi**: `botanical_family=Fabaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=175248 --food-id=food_fagioli_gialli_cotti \
+  --name-it="Fagioli gialli, secchi cotti" \
+  --matrix-id=fagioli_gialli_cotti --matrix-description-it="Fagioli gialli, secchi cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_neri_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175248 --food-id=food_fagioli_gialli_cotti \
+  --name-it="Fagioli gialli, secchi cotti" \
+  --matrix-id=fagioli_gialli_cotti --matrix-description-it="Fagioli gialli, secchi cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_neri_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Spinacio della Nuova Zelanda, cotto (bollito, senza sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_spinacio_neozelandese_cotto`. FDC ID **168441** (**SR Legacy**, "New Zealand spinach, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/new-zealand-spinach-cooked-boiled-drained-without-salt-168441` dedicata, FDC ID e dataType citati esplicitamente, sodio 107mg/100g — versione "senza sale", non "with salt"). Controparte cotta dello spinacio neozelandese crudo già preparato nel 170° lotto (FDC 168440, ancora solo "pronto").
