@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rigaglie di pollo (cappone), cotte (bollite) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_rigaglie_pollo_cotte`. FDC ID **174466** (**SR Legacy**, "Chicken, capons, giblets, cooked, simmered" — pagina `getfoodfacts.com/food/chicken-capons-giblets-cooked-simmered-174466` dedicata, FDC ID e dataType citati esplicitamente nel titolo pagina, release USDA FoodData Central 30-04-2026), stesso stato cotto del crudo appena preparato sopra (FDC 174465), trovato nella stessa pagina hub `getfoodfacts.com/nutrition/chicken-giblets`.
+- **Nutrienti**: **14/17**. Per 100g: energia 164kcal, proteine 26,4g, grassi 5,40g, carboidrati 0,76g, fibra 0g esplicito, calcio 13,0mg, ferro 6,80mg, magnesio 20,0mg, zinco 4,67mg, rame 0,29mg, selenio 95,0µg, vitamina C 9,00mg, folato totale 414µg (DFE 414µg, acido folico 0µg esplicito), vitamina B12 1,14µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record — non assunti zero).
+- **Analogia usata**: `food_fegato_di_pollo_cotto` (fegato di pollo cotto, già eseguito sul DB reale — stessa categoria "frattaglia di pollo cotta", non `food_rigaglie_pollo_raw` perché ancora solo "pronto" non eseguito).
+- **Categoria dieta**: `meat_fish` (frattaglie di carne — vegetariano NO).
+- **Matrice**: nuova `rigaglie_pollo_cotte` ("Rigaglie di pollo, cotte (bollite)").
+- **Attributi**: `is_heme_iron` impostato (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=simmered`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174466 --food-id=food_rigaglie_pollo_cotte \
+  --name-it="Rigaglie di pollo, cotte (bollite)" \
+  --matrix-id=rigaglie_pollo_cotte --matrix-description-it="Rigaglie di pollo, cotte (bollite)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_pollo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174466 --food-id=food_rigaglie_pollo_cotte \
+  --name-it="Rigaglie di pollo, cotte (bollite)" \
+  --matrix-id=rigaglie_pollo_cotte --matrix-description-it="Rigaglie di pollo, cotte (bollite)" \
+  --baseline-cooking-state=simmered --analogy-food-id=food_fegato_di_pollo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rigaglie di pollo (cappone), crude — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_rigaglie_pollo_raw`. FDC ID **174465** (**SR Legacy**, "Chicken, capons, giblets, raw" — pagina `getfoodfacts.com/food/chicken-capons-giblets-raw-174465` dedicata, FDC ID e dataType citati esplicitamente nel titolo pagina, release USDA FoodData Central 30-04-2026, record a 67 nutrienti). Scoperto nello sweep sistematico della categoria FDC "Poultry Products" (getfoodfacts.com/category/poultry-products, 37 nomi comuni, 395 record totali) — distinto da fegato/cuore/ventriglio di pollo già presenti (prodotto misto "giblets" = frattaglie miste, voce USDA propria con FDC ID proprio). Verificato con `grep` dedicato su FDC ID e food_id, zero occorrenze.
