@@ -16,6 +16,110 @@
 
 ## Pronti
 
+### Coregone (whitefish), affumicato — preparato 2026-11-16 dal task (centocinquantacinquesimo lotto)
+
+- **food_id**: `food_coregone_affumicato`. FDC ID 173712 (SR Legacy, "Fish, whitefish, mixed species, smoked" — categoria **"Finfish and Shellfish Products", GENERICA, non "American Indian/Alaska Native Foods"** — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la terna crudo/cotto/affumicato per il coregone generico: il crudo (`food_coregone_raw`, FDC 173711, lotto 32) e il cotto (`food_coregone_cotto`, FDC 174246, lotto 154) sono entrambi record Finfish generici già "pronti" — questo è il terzo, stesso filone, nessun dubbio di rappresentatività (a differenza della variante "Alaska Native" della stessa specie, scartata in questo stesso lotto, vedi nota sotto). Verificato con `grep` dedicato: zero occorrenze per "173712"/"whitefish.*smoked" prima della ricerca web.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 108kcal, proteine 23,4g, grassi 0,93g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 18,0mg, ferro 0,50mg, zinco 0,49mg, magnesio 23,0mg, rame 0,32mg, selenio 13,5µg, sodio 1019mg (alto ma coerente con un prodotto affumicato/salato reale, stesso ordine di grandezza già accettato per salmone/aringa affumicati), vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 3,26µg, vitamina K (fillochinone) 0,10µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_salmon_cooked` (Golden Set originale, già eseguito sul DB reale) — stessa convenzione "pesce affumicato" già usata per salmone (lox) e aringa (kippered) in questa pipeline, nessuna analogia più specifica eseguita disponibile (`food_coregone_raw`/`food_coregone_cotto` sono solo "pronti", non eseguiti, quindi non validi per Regola 6).
+- **Categoria dieta**: `meat_fish` (motivo: pesce).
+- **Matrice**: nuova `coregone_affumicato` ("Coregone (whitefish), affumicato").
+- **Attributi**: `is_heme_iron` presente (true, muscolo di pesce), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=smoked`, `is_fortified_folate` omesso (false — folato 7µg, valore naturale tipico).
+
+```
+npm run add-food -- --fdc-id=173712 --food-id=food_coregone_affumicato \
+  --name-it="Coregone (whitefish), affumicato" \
+  --matrix-id=coregone_affumicato --matrix-description-it="Coregone (whitefish), affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173712 --food-id=food_coregone_affumicato \
+  --name-it="Coregone (whitefish), affumicato" \
+  --matrix-id=coregone_affumicato --matrix-description-it="Coregone (whitefish), affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Sheefish (Stenodus leucichthys, pesce bianco nativo dell'Alaska/Siberia), crudo — preparato 2026-11-16 dal task (centocinquantacinquesimo lotto)
+
+- **food_id**: `food_sheefish_raw`. FDC ID 167648 (categoria "American Indian/Alaska Native Foods" — specie accettata nonostante la categoria, vedi nota metodologica sotto: nessuna specie "sheefish"/*Stenodus* tracciata altrove da USDA, nessun record generico concorrente, quindi nessun dubbio di "doppione mascherato"; FDC ID incrociato su caloriefriend.azurewebsites.net (titolo pagina "167648-fish-sheefish-raw-(alaska-native)"), valori letti da recipal.com che cita invece un NBD ID 35169 — stesso alimento, fonti diverse concordanti su nome e valori, nessuna incoerenza numerica tra le due). **Corregge un `⚠` del centocinquantaquattresimo lotto** ("sheefish crudo: nessuna fonte con pannello nutrienti") — qui risolto con una fonte diversa (recipal.com) non provata in quel turno.
+- **Nutrienti**: **15/17** — mancano acido folico (solo folato totale 10µg DFE riportato) e beta-carotene. Per 100g: energia 115kcal, proteine 22g, grassi 3g, carboidrati 0g, fibra 0g, calcio 140mg, ferro 0,5mg, zinco 0,6mg, magnesio 25mg, rame 0,1mg, selenio 42µg, sodio 52mg, vitamina C 0mg esplicito, folato totale 10µg DFE, vitamina B12 5,9µg, vitamina K 0µg esplicito (**nota di trasparenza**: la fonte riporta un unico valore "Vitamin K" non scorporato in fillochinone/menachinone come altre voci di questa pipeline — riportato comunque come fillochinone per coerenza, essendo l'unica forma tracciata nei record SR Legacy senza fortificazione).
+- **Analogia usata**: `food_merluzzo_raw` (merluzzo crudo, già eseguito sul DB reale) — stessa convenzione "pesce magro d'acqua dolce/salmastra crudo" già usata per nasello/whiting in questa pipeline, nessuna analogia più specifica disponibile (sheefish è un salmonide ma nessun salmone/trota crudo risulta ancora eseguito sul DB reale al momento di questa voce).
+- **Categoria dieta**: `meat_fish` (motivo: pesce).
+- **Matrice**: nuova `sheefish_raw`.
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso (beta-carotene non riportato, nessun dato per stimarlo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=167648 --food-id=food_sheefish_raw \
+  --name-it="Sheefish, crudo" \
+  --matrix-id=sheefish_raw --matrix-description-it="Sheefish, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167648 --food-id=food_sheefish_raw \
+  --name-it="Sheefish, crudo" \
+  --matrix-id=sheefish_raw --matrix-description-it="Sheefish, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Salmone chum (dog salmon), essiccato — preparato 2026-11-16 dal task (centocinquantacinquesimo lotto)
+
+- **food_id**: `food_salmone_chum_secco`. FDC ID 168054 (categoria "American Indian/Alaska Native Foods", "Fish, salmon, chum, dried (Alaska Native)" — dataType non confermato esplicitamente in questo turno (pagina getfoodfacts.com non raggiunta), ma coerente come SR Legacy con tutte le altre voci della stessa categoria già verificate in questa pipeline, stessa logica già accettata per il coregone secco). **Corregge un `⚠` del centocinquantaquattresimo lotto** ("solo macronutrienti/sodio, nessun micronutriente, fonte alternativa bloccata da errore di permesso") — qui risolto con una fonte diversa (happyforks.com) che espone il pannello completo, non raggiungibile in quel turno.
+- **Nutrienti**: **15/17** — mancano acido folico (solo folato totale 12µg riportato) e beta-carotene (non mostrati sulla fonte). Per 100g: energia 378kcal, proteine 62,09g, grassi 14,38g, carboidrati 0g, fibra 0g, calcio 155mg, ferro 2,2mg, zinco 1,4mg, magnesio 68mg, rame 0,254mg, selenio 103,8µg, sodio 190mg, vitamina C 0mg esplicito, folato totale 12µg, vitamina B12 28,6µg, vitamina K 0µg esplicito.
+- **Analogia usata**: `food_baccala_salato_secco` (già eseguito sul DB reale) — stessa convenzione "pesce essiccato" già usata per coregone/eperlano secchi in questa pipeline.
+- **Categoria dieta**: `meat_fish` (motivo: pesce).
+- **Matrice**: nuova `salmone_chum_secco`. Distinto da `food_salmone_in_scatola` (chum in scatola, FDC diverso, già eseguito) e da altre forme di salmone chum di questa pipeline — stato di cottura "essiccato" mai tentato per questa specie.
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso (beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dried`.
+
+```
+npm run add-food -- --fdc-id=168054 --food-id=food_salmone_chum_secco \
+  --name-it="Salmone chum (dog salmon), essiccato" \
+  --matrix-id=salmone_chum_secco --matrix-description-it="Salmone chum (dog salmon), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168054 --food-id=food_salmone_chum_secco \
+  --name-it="Salmone chum (dog salmon), essiccato" \
+  --matrix-id=salmone_chum_secco --matrix-description-it="Salmone chum (dog salmon), essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Salmone sockeye (red), in scatola, affumicato — preparato 2026-11-16 dal task (centocinquantacinquesimo lotto)
+
+- **food_id**: `food_salmone_sockeye_affumicato_in_scatola`. FDC ID 167645 (SR Legacy, "Fish, salmon, red, (sockeye), canned, smoked (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota metodologica importante (vedi anche nota generale di questo lotto nel PRD)**: categoria "American Indian/Alaska Native Foods", accettata qui perché la combinazione specifica "in scatola **e** affumicato" non risulta tracciata da nessun record generico/non-etnico in nessuna fonte consultata (distinta sia da `food_salmon_cooked` lox — affumicato ma non in scatola — sia da `food_salmone_sockeye_in_scatola` FDC 173693 — in scatola ma non affumicato, entrambi già "pronti"/eseguiti in questa pipeline) — diverso dal caso dell'halibut "Alaska Native" scartato in questo stesso lotto, dove un record generico della STESSA identica preparazione (crudo) esisteva già.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 206kcal, proteine 35,2g, grassi 7,26g (saturi 1,48g), carboidrati 0g esplicito, fibra 0g esplicito, calcio 69,0mg, ferro 1,50mg, zinco 1,10mg, magnesio 39,0mg, rame 0,15mg, selenio 44,8µg, sodio 600mg (coerente con prodotto in scatola e affumicato), vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 7,43µg, vitamina K (fillochinone) 0µg esplicito (il record scorpora anche menachinone-4 0,50µg e diidrofillochinone 0µg, riportati qui come nota: il fillochinone propriamente detto, valore tracciato altrove in questa pipeline, è 0), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_salmon_cooked` (Golden Set originale, già eseguito) — stessa specie *Oncorhynchus* (sockeye vs atlantico, genere diverso ma convenzione "salmone" già in uso), nessuna analogia più specifica eseguita disponibile per "salmone in scatola affumicato".
+- **Categoria dieta**: `meat_fish` (motivo: pesce).
+- **Matrice**: nuova `salmone_sockeye_affumicato_scatola`.
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso, `carotenoid_matrix_state` omesso (beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=smoked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167645 --food-id=food_salmone_sockeye_affumicato_in_scatola \
+  --name-it="Salmone sockeye (red), in scatola, affumicato" \
+  --matrix-id=salmone_sockeye_affumicato_scatola --matrix-description-it="Salmone sockeye (red), in scatola, affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167645 --food-id=food_salmone_sockeye_affumicato_in_scatola \
+  --name-it="Salmone sockeye (red), in scatola, affumicato" \
+  --matrix-id=salmone_sockeye_affumicato_scatola --matrix-description-it="Salmone sockeye (red), in scatola, affumicato" \
+  --baseline-cooking-state=smoked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Coregone (whitefish), essiccato — preparato 2026-11-16 dal task (centocinquantaquattresimo lotto)
 
 - **food_id**: `food_coregone_secco`. FDC ID 168052 (categoria "American Indian/Alaska Native Foods", "Fish, whitefish, dried (Alaska Native)" — dataType non mostrato esplicitamente sulla pagina myfooddata.com, ma coerente come SR Legacy con tutte le altre voci della stessa categoria già verificate in questa pipeline; pagina getfoodfacts.com bloccata da errore di permesso (PROVENANCE_REQUIRED) in questo turno, ID e nome incrociati su tools.myfooddata.com e caloriefriend.azurewebsites.net, entrambi concordanti). Distinto da `food_coregone_raw`/`food_coregone_cotto` (forme non essiccate, FDC diversi, entrambe ancora "pronte" non eseguite — quindi non riusabili come analogia per Regola 6). Verificato con `grep` dedicato: zero occorrenze per "whitefish.*dried"/"coregone.*secco"/168052 prima della ricerca web.
