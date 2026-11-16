@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cipolla bianca, cruda — preparato 2026-11-16 dal task (centosessantesimo lotto)
+
+- **food_id**: `food_cipolla_bianca_raw`. FDC ID 1104962 (**Foundation**, "Onions, white, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalle cipolle già presenti (`food_onion_raw` generica/gialla, `food_cipolla_dolce_raw` FDC 170008, `food_cipolla_rossa_raw`): nessuna delle tre è "bianca" — verificato con `grep` dedicato sul testo intero di `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md` e `golden_set_foods.sql`, zero occorrenze di "cipolla bianca"/"cipolla dorata"/FDC 1104962 prima di questa ricerca.
+- **Nutrienti**: **11/17** — record Foundation incompleto per disegno (USDA non ha analizzato il pannello vitaminico su questo campione specifico, non un limite della ricerca). Per 100g: energia 35,0kcal, proteine 0,89g, grassi 0,13g, carboidrati 7,68g, fibra 1,20g, calcio 21,0mg, ferro 0,15mg, zinco 0,12mg, magnesio 9,30mg, potassio 141mg, sodio 2,00mg. **Mancano del tutto** (non presenti in pagina, non zero esplicito): vitamina A, vitamina C, vitamina D, vitamina B12, folato, vitamina K — questi 6 campi resteranno "n.d." in app, coerente con la decisione del 2026-10-22 di accettare alimenti con pannello incompleto.
+- **Analogia usata**: `food_onion_raw` (cipolla generica cruda, Golden Set originale, già eseguita sul DB reale — stessa specie *Allium cepa*, stesso genere botanico).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `cipolla_bianca` ("Cipolla bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (coerente con porri/scalogno, stessa famiglia, crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun segnale di arricchimento, il campo è semplicemente assente).
+
+```
+npm run add-food -- --fdc-id=1104962 --food-id=food_cipolla_bianca_raw \
+  --name-it="Cipolla bianca, cruda" \
+  --matrix-id=cipolla_bianca --matrix-description-it="Cipolla bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=1104962 --food-id=food_cipolla_bianca_raw \
+  --name-it="Cipolla bianca, cruda" \
+  --matrix-id=cipolla_bianca --matrix-description-it="Cipolla bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Maiale, lingua, cruda — preparato 2026-11-16 dal task (centocinquantasettesimo lotto)
 
 - **food_id**: `food_lingua_di_maiale_raw`. FDC ID 168275 (SR Legacy, "Pork, fresh, variety meats and by-products, tongue, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Gap genuinamente nuovo: la lingua di maiale cotta (`food_lingua_di_maiale_cotta`) era già "pronta", la cruda mai tentata — verificato con grep dedicato su tutti e tre i file, zero occorrenze prima della ricerca web.
