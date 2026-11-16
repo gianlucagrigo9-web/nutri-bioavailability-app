@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cipolla in polvere — preparato 2026-11-16 dal task (centocinquantesimo lotto)
+
+- **food_id**: `food_cipolla_polvere_raw`. FDC ID 171327 (SR Legacy, "Spices, onion powder"). Candidato individuato durante l'inventario spezie/condimenti disidratati (gruppo "spezie/erbe" del punto 1b): verificato con `grep` dedicato, zero occorrenze su tutti i file per "cipolla.*polvere"/"onion powder"/171327 prima della ricerca web (da notare: una ricerca precedente aveva erroneamente incluso "pepe nero macinato" come candidato nuovo — in realtà già eseguito sul DB reale come `food_pepe_nero_raw`, FDC 170931, lotto 7; scoperto solo verificando l'FDC ID oltre alla frase con spazio "pepe nero", che non matchava il testo "pepe_nero" con underscore nella tabella Eseguiti — nessun comando duplicato preparato, lezione di Regola 6 confermata ancora). **Nota sulla fonte**: nessuna pagina getfoodfacts.com dedicata trovata per questo FDC ID; il record è confermato da due fonti indipendenti concordanti — triagemethod.com (ogni riga nutriente etichettata esplicitamente "SR (USDA Standard Reference Legacy)") e foodstruct.com, che cita esplicitamente il link FDC `fdc.nal.usda.gov/food-details/171327/nutrients` nella sezione Riferimenti — stessi valori su tutti i 17 nutrienti dopo arrotondamento, nessuna discrepanza.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 341kcal, proteine 10,4g, grassi 1,0g, carboidrati 79,1g, fibra 15,2g, calcio 384mg, ferro 3,9mg, zinco 4,0mg, magnesio 113mg, rame 0,59mg, selenio 14,3µg, sodio 73,0mg, vitamina C 23,4mg, folato totale 64,0µg, acido folico 0µg (esplicito, nessuna firma di arricchimento), vitamina B12 0µg (esplicito), vitamina K 4,1µg, beta-carotene 0µg (esplicito, concordante su entrambe le fonti).
+- **Analogia usata**: `food_aglio_polvere_raw` (aglio in polvere, già eseguito sul DB reale — stesso genere botanico reale *Allium* (cipolla = *Allium cepa*, aglio = *Allium sativum*), stessa famiglia Amaryllidaceae, stesso trattamento "spezia/condimento disidratato in polvere").
+- **Categoria dieta**: `plant_non_fruit` (spezia/condimento secco).
+- **Matrice**: nuova `cipolla_polvere` ("Cipolla in polvere").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come per `food_aglio_polvere_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito su entrambe le fonti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171327 --food-id=food_cipolla_polvere_raw \
+  --name-it="Cipolla in polvere" \
+  --matrix-id=cipolla_polvere --matrix-description-it="Cipolla in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aglio_polvere_raw \
+  --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171327 --food-id=food_cipolla_polvere_raw \
+  --name-it="Cipolla in polvere" \
+  --matrix-id=cipolla_polvere --matrix-description-it="Cipolla in polvere" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aglio_polvere_raw \
+  --botanical-family=Amaryllidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Strombo (conch), cotto (al forno/alla griglia) — preparato 2026-11-16 dal task (centocinquantesimo lotto)
 
 - **food_id**: `food_strombo_cotto`. FDC ID 173720 (SR Legacy, "Mollusks, conch, baked or broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Dalla voce coda "strombo/conch". Verificato con `grep` su tutti i file (frase italiana/inglese e FDC ID), zero occorrenze prima della ricerca web.
