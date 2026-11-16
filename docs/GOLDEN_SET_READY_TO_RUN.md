@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Farinello (Chenopodium album), crudo — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_farinello_raw`. FDC ID 169244 (SR Legacy, "Lambsquarters, raw" — pagina getfoodfacts.com dedicata, categoria "Vegetables and Vegetable Products", FDC ID citato esplicitamente). Verdura spontanea/selvatica (erbaccia comune anche in Italia, consumata occasionalmente come spinaci selvatici). Verificato con `grep` dedicato, zero occorrenze per "farinello"/"lambsquarters"/169244 prima della ricerca web.
+- **Nutrienti**: **15/17** (mancano: vitamina K, beta-carotene — pur essendo presente vitamina A RAE 580µg, il record non riporta una voce beta-carotene separata, stesso pattern già visto per altre verdure a foglia in questa pipeline). Per 100g: energia 43,0kcal, proteine 4,20g, grassi 0,80g, carboidrati 7,30g, fibra 4,00g, calcio 309mg, ferro 1,20mg, zinco 0,44mg, magnesio 34,0mg, rame 0,29mg, selenio 0,90µg, sodio 43,0mg, vitamina C 80,0mg, folato totale 30,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_spinach_raw` (spinaci crudi, già eseguiti sul DB reale — stessa famiglia botanica reale Amaranthaceae, *Chenopodium album* e *Spinacia oleracea* entrambe Amaranthaceae, stesso tipo di verdura a foglia ricca di calcio/ferro con probabile alto contenuto di oxalati).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farinello` ("Farinello (Chenopodium album), crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, nessun dato di categoria oxalati pubblicato per questo specifico record), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato separatamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169244 --food-id=food_farinello_raw \
+  --name-it="Farinello (Chenopodium album), crudo" \
+  --matrix-id=farinello --matrix-description-it="Farinello (Chenopodium album), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169244 --food-id=food_farinello_raw \
+  --name-it="Farinello (Chenopodium album), crudo" \
+  --matrix-id=farinello --matrix-description-it="Farinello (Chenopodium album), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Amaranthaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Foca barbuta (Oogruk), carne, quarto inferiore, cruda — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_foca_barbuta_raw`. FDC ID 168053 (SR Legacy, "Seal, bearded (Oogruk), meat, low quadrant, raw (Alaska Native)" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente nell'URL e nel testo, release USDA 2026-04-30). Primo alimento della categoria FDC "American Indian/Alaska Native Foods" in questa pipeline — filone mai tentato prima, individuato dopo che i lotti 148-152 avevano esaurito il canale "brainstorm da conoscenza comune" su carni/pesci/verdure comuni. Verificato con `grep` dedicato, zero occorrenze per "foca"/"seal"/168053 su tutti i file prima della ricerca web. **Nota di trasparenza**: il record FDC si riferisce specificamente al "quarto inferiore" (low quadrant), un taglio specifico della foca barbuta — nessun record FDC per "carne di foca" generica è stato trovato; usato come il miglior proxy disponibile.
