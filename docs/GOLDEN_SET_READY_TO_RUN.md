@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Fagioli kidney "california red", secchi crudi — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_fagioli_kidney_california_red_raw`. FDC ID **173742** (**SR Legacy**, "Beans, kidney, california red, mature seeds, raw" — pagina `getfoodfacts.com/food/beans-kidney-california-red-mature-seeds-raw-173742` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo/corpo, release USDA FoodData Central 30-04-2026, record completo a 59 righe). Scoperto riprendendo lo sweep sistematico della categoria FDC "Legumes and Legume Products" (recipeland.com, 234 alimenti totali, pagina 1 di più: Bacon/Beans A-P) dal punto lasciato dal lotto precedente. Cultivar di *Phaseolus vulgaris* distinta da `food_kidney_beans_raw` già nel DB (valori per 100g diversi: calcio 143→195mg, magnesio 140→160mg, zinco 2,79→2,55mg, ferro 8,2→9,35mg, energia 333→330kcal — non lo stesso record, nonostante fibra/folato/selenio/vitamina C quasi identici per coincidenza tipica fra cultivar della stessa specie). Verificato con `grep` dedicato sia sul nome italiano che sull'FDC ID 173742: zero occorrenze prima di questa voce.
+- **Nutrienti**: **14/17**. Per 100g: energia 330kcal, proteine 24,4g, grassi 0,25g, carboidrati 59,8g, fibra 24,9g, calcio 195mg, ferro 9,35mg, magnesio 160mg, zinco 2,55mg, rame 1,10mg, selenio 3,20µg, vitamina C 4,50mg, folato totale 394µg (DFE 394µg, acido folico 0µg esplicito — nessuna firma di arricchimento). Vitamina B12 0µg esplicito. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record a 59 campi — non assunti zero). Riquadro "per porzione" (1 cup/184g) coerente con la tabella per 100g dopo arrotondamento (nessuna incoerenza tipo "coverage chart").
+- **Nota metodologica — 4 candidati scartati nello stesso sweep (⚠, vedi coda PRD)**: fagioli "navy", "french", "pink" e kidney "royal red" (stessi 234 elencati) non avevano una pagina getfoodfacts.com dedicata reperibile via `WebSearch` (solo varianti "cooked" indicizzate) — fetch diretto del guess URL getfoodfacts bloccato da `PROVENANCE_REQUIRED` (confermato: solo URL comparsi in un risultato `WebSearch` vengono approvati, coerente con la correzione metodologica del lotto precedente). Le uniche pagine raggiungibili (recipal.com, tools.myfooddata.com) non citano né FDC ID né dataType e riportano solo valori "per porzione" con diversi nutrienti assenti — non promossi per non rischiare un dato derivato/non verificato.
+- **Analogia usata**: `food_kidney_beans_raw` (già eseguita — stessa specie *Phaseolus vulgaris*, famiglia Fabaceae, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_kidney_california_red_secchi` ("Fagioli kidney \"california red\", secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume secco), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non zero esplicito, stesso trattamento già usato per altri legumi secchi senza carotenoidi in tabella), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173742 --food-id=food_fagioli_kidney_california_red_raw \
+  --name-it="Fagioli kidney \"california red\", secchi crudi" \
+  --matrix-id=fagioli_kidney_california_red_secchi --matrix-description-it="Fagioli kidney \"california red\", secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173742 --food-id=food_fagioli_kidney_california_red_raw \
+  --name-it="Fagioli kidney \"california red\", secchi crudi" \
+  --matrix-id=fagioli_kidney_california_red_secchi --matrix-description-it="Fagioli kidney \"california red\", secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli "great northern", secchi crudi — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_fagioli_great_northern_raw`. FDC ID **175190** (**SR Legacy**, "Beans, great northern, mature seeds, raw (Includes foods for USDA's Food Distribution Program)" — pagina `getfoodfacts.com/food/beans-great-northern-mature-seeds-raw-includes-foods-for-usdas-food-distribution-175190` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Legumes and Legume Products" (pagina recipeland.com, 234 alimenti totali). Cultivar di *Phaseolus vulgaris* distinta da tutte quelle già eseguite/pronte in questa pipeline (cannellini FDC 175202/175203/175204, borlotti FDC 175189/173736, neri/tartaruga FDC 175188/175239, pinto FDC 175199, kidney, lima, azuki, mung, lupini) — record FDC dedicato e non ambiguo. **Nota metodologica**: durante questo stesso sweep altri due candidati della stessa pagina ("Beans, cranberry (roman), mature seeds, raw" FDC 175189 e "Beans, black turtle soup, mature seeds, raw") sono risultati DOPPIONI già eseguiti sul DB reale (rispettivamente `food_fagioli_borlotti_secchi_raw` e lo stesso concetto di `food_fagioli_neri_raw`/`food_fagioli_neri_in_scatola` FDC 175188 "black turtle") — scoperti solo con un secondo giro di `grep` più specifico (sul nome inglese esatto e sull'FDC ID, non solo sul nome italiano colloquiale "fagiolo romano"/"tartaruga" che non compare nei file) prima di scrivere qualunque comando: nessun doppione aggiunto, nessuno slot di valutazione sprecato in scrittura.
