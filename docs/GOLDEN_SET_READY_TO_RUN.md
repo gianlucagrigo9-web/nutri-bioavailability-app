@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Romice (dock), cruda — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_romice_raw`. FDC ID **170076** (**SR Legacy**, "Dock, raw" — pagina `getfoodfacts.com/food/dock-raw-170076` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Verdura a foglia selvatica (*Rumex* spp., romice), mai tentata prima — stesso elenco sistematico USDA "Vegetables and Vegetable Products" delle voci precedenti di questo lotto.
+- **Nutrienti**: **14/17** dalla tabella ufficiale FDC: energia 22,0kcal, proteine 2,00g, grassi 0,70g, carboidrati 3,20g, fibra 2,90g, calcio 44,0mg, ferro 2,40mg, magnesio 103mg, zinco 0,20mg, rame 0,13mg, selenio 0,90µg, vitamina C 48,0mg, folato 13,0µg (DFE), vitamina B12 0µg. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitamina A (vitamina A RAE 200µg mostrata ma non il componente richiesto).
+- **Analogia usata**: `food_spinach_raw` (già eseguita — nessun alimento della stessa famiglia *Polygonaceae* già presente, stessa convenzione di analogia "verdura a foglia cruda" già usata per lo spinacio d'acqua).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `romice` ("Romice").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Polygonaceae`, `carotenoid_matrix_state=raw_intact`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170076 --food-id=food_romice_raw \
+  --name-it="Romice (dock), cruda" \
+  --matrix-id=romice --matrix-description-it="Romice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Polygonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170076 --food-id=food_romice_raw \
+  --name-it="Romice (dock), cruda" \
+  --matrix-id=romice --matrix-description-it="Romice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Polygonaceae --diet-category=plant_non_fruit --apply
+```
+
+### Spinacio senape (komatsuna/tendergreen), crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_komatsuna_raw`. FDC ID **168438** (**SR Legacy**, "Mustard spinach, (tendergreen), raw" — pagina `getfoodfacts.com/food/mustard-spinach-tendergreen-raw-168438` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Verdura a foglia molto comune nella cucina giapponese (*Brassica rapa* var. *perviridis*, komatsuna), mai tentata prima.
+- **Nutrienti**: **14/17** dalla tabella ufficiale FDC: energia 22,0kcal, proteine 2,20g, grassi 0,30g, carboidrati 3,90g, fibra 2,80g, calcio 210mg, ferro 1,50mg, magnesio 11,0mg, zinco 0,17mg, rame 0,075mg, selenio 0,80µg, vitamina C 130mg, folato 159µg (DFE), vitamina B12 0µg. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitamina A.
+- **Analogia usata**: `food_kale_raw` (già eseguita — stessa famiglia botanica *Brassicaceae*, stesso genere *Brassica*).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `komatsuna` ("Spinacio senape / komatsuna").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Brassicaceae`, `carotenoid_matrix_state=raw_intact` (coerente con le altre Brassicaceae a foglia cruda già classificate), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=168438 --food-id=food_komatsuna_raw \
+  --name-it="Spinacio senape (komatsuna/tendergreen), crudo" \
+  --matrix-id=komatsuna --matrix-description-it="Spinacio senape / komatsuna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168438 --food-id=food_komatsuna_raw \
+  --name-it="Spinacio senape (komatsuna/tendergreen), crudo" \
+  --matrix-id=komatsuna --matrix-description-it="Spinacio senape / komatsuna" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Erba freccia (arrowhead), cruda — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_erba_freccia_raw`. FDC ID **169203** (**SR Legacy**, "Arrowhead, raw" — pagina `getfoodfacts.com/food/arrowhead-raw-169203` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026). Tubero acquatico (*Sagittaria* spp., erba freccia/duck potato), comune nella cucina asiatica, mai tentato prima — scoperta dallo stesso elenco sistematico USDA "Vegetables and Vegetable Products" del crisantemo sopra, verificato con grep dedicato zero occorrenze.
