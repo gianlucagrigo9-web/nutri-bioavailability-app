@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Surimi (imitazione gamberetto a base di polpa di pesce) — preparato 2026-11-17 dal task (centosettantatreesimo lotto)
+
+- **food_id**: `food_surimi`. FDC ID **171973** (**SR Legacy**, "Crustaceans, shrimp, mixed species, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-imitation-made-from-surimi-171973` dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente in più punti della pagina — titolo, paragrafo introduttivo e riga "Source:" — nonostante l'etichetta generica "USDA reference food" sopra il titolo, risultata ambigua e non indicativa del tier reale su questo sito, vedi nota metodologica sotto). Prodotto genuinamente nuovo (categoria "prodotti trasformati mono-ingrediente a base di pesce"): verificato con `grep` dedicato su "surimi"/"imitation" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web.
+- **Nota di trasparenza**: il surimi è polpa di pesce bianco (tipicamente merluzzo dell'Alaska/pollock) lavorata e aromatizzata per imitare gamberetto/granchio — USDA lo classifica comunque sotto "Crustaceans" per il suo uso alimentare. I carboidrati (9,13g/100g, da amido/fecola usati come legante) sono molto più alti di un crostaceo o pesce reale (es. `food_merluzzo_cotto` ha 0g carboidrati): dato reale della fonte, non un errore, ma segnalato esplicitamente come caratteristica del prodotto trasformato.
+- **Nutrienti**: **14/17**. Per 100g: energia 101kcal, proteine 12,4g, grassi 1,47g, carboidrati 9,13g, fibra 0g (esplicito), calcio 19,0mg, ferro 0,60mg, magnesio 43,0mg, zinco 0,33mg, rame 0,032mg, selenio 22,9µg, vitamina C 0mg (esplicito), folato totale 2,00µg (DFE 2,00µg, acido folico 0µg esplicito), vitamina B12 1,60µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (non riportati in pagina — coerente con un prodotto di pesce senza ingredienti vegetali pigmentati). Sodio 705mg/100g (alto, coerente con un prodotto trasformato/salato — nessuna sorpresa, non preso come segnale di arricchimento).
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo/cod cotto, già eseguito sul DB reale — stessa categoria funzionale "pesce bianco magro lavorato/cotto", base reale del surimi).
+- **Categoria dieta**: `meat_fish` (prodotto a base di pesce, non vegetariano nonostante il nome "gamberetto" fuorvianti).
+- **Matrice**: nuova `surimi` ("Surimi, imitazione gamberetto").
+- **Attributi**: `is_heme_iron=true` (muscolo di pesce, stesso precedente degli altri prodotti ittici di questa pipeline), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina, non espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (pasta di pesce precotta/formata, pronta al consumo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+- **Nota metodologica per i prossimi lotti**: l'etichetta "USDA reference food" mostrata da getfoodfacts.com sopra il titolo NON è un indicatore affidabile del tier dataset (SR Legacy vs Foundation vs Survey/FNDDS) — su questa pagina compare nonostante il record sia SR Legacy, confermato da titolo/meta/paragrafo introduttivo/riga Source tutti concordi su "SR Legacy, FDC 171973". Verificare sempre questi campi specifici, non la sola etichetta generica, prima di scartare un candidato per presunto tier basso. **Correzione viceversa**: FDC 175121 "Fish, mackerel, jack, canned, drained solids" (17/17, SR Legacy confermato con lo stesso metodo) è stato scartato perché già valutato e respinto nel lotto del 2026-10-19 — mismatch di specie, *Trachurus* (sugarello/jack mackerel) ≠ *Scomber scombrus* (sgombro, già usato per `food_sgombro_raw`) — individuato solo grazie al controllo `grep` sull'FDC ID prima della stesura finale (Regola del punto 0.6, lezione già segnalata dal 172° lotto): da NON riproporre in futuro.
+
+```
+npm run add-food -- --fdc-id=171973 --food-id=food_surimi \
+  --name-it="Surimi, imitazione gamberetto" \
+  --matrix-id=surimi --matrix-description-it="Surimi, imitazione gamberetto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171973 --food-id=food_surimi \
+  --name-it="Surimi, imitazione gamberetto" \
+  --matrix-id=surimi --matrix-description-it="Surimi, imitazione gamberetto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Coregone (whitefish), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_coregone_cotto`. FDC ID **174246** (**SR Legacy**, "Fish, whitefish, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-whitefish-mixed-species-cooked-dry-heat-174246` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del coregone crudo già eseguito sul DB reale (`food_coregone_raw`, FDC 173711).
