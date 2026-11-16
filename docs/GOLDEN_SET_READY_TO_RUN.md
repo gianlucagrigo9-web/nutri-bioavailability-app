@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Kanpyo (strisce di zucca secca giapponese), secco — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_kanpyo_secco`. FDC ID **169241** (**SR Legacy**, "Kanpyo, (dried gourd strips)" — pagina `getfoodfacts.com/food/kanpyo-dried-gourd-strips-169241` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Vegetables and Vegetable Products" (recipeland.com, 789 alimenti totali, pagina con intervallo K-M). Strisce secche di zucca calabash/bottle gourd (*Lagenaria siceraria*, famiglia Cucurbitaceae) usate nella cucina giapponese (es. per l'involtino makizushi) — mai tentato in nessuna forma in questa pipeline, verificato con `grep` dedicato (nome e FDC ID), zero occorrenze.
+- **Nutrienti**: **13/17**. Per 100g: energia 258kcal, proteine 8,58g, grassi 0,56g, carboidrati 65,0g, fibra 9,80g, calcio 280mg, ferro 5,12mg, magnesio 125mg, zinco 5,86mg, rame 0,43mg, selenio 2,60µg, vitamina C 0,20mg, folato totale 61,0µg (DFE 61,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina B12 0µg esplicito. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record — non assunti zero; nota di trasparenza: la pagina dichiara "ogni nutriente in questo record (42)" ma le tabelle visibili ne mostrano solo 40, quindi questi 4 "mancanti" potrebbero in parte essere presenti nel record USDA originale e solo omessi dalla pagina — non forzato comunque, trattati come mancanti per cautela). Riquadro "per porzione" (1/2 cup/27g) coerente con la tabella per 100g dopo arrotondamento, nessuna incoerenza di dato.
+- **Analogia usata**: `food_zucchine_raw` (già eseguita — stessa famiglia botanica reale Cucurbitaceae, organo diverso e stato secco invece di crudo, dichiarato esplicitamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `kanpyo_secco` ("Kanpyo, secco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169241 --food-id=food_kanpyo_secco \
+  --name-it="Kanpyo (strisce di zucca secca giapponese), secco" \
+  --matrix-id=kanpyo_secco --matrix-description-it="Kanpyo, secco" \
+  --baseline-cooking-state=dried --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169241 --food-id=food_kanpyo_secco \
+  --name-it="Kanpyo (strisce di zucca secca giapponese), secco" \
+  --matrix-id=kanpyo_secco --matrix-description-it="Kanpyo, secco" \
+  --baseline-cooking-state=dried --analogy-food-id=food_zucchine_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Igname di montagna hawaiano, crudo — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_igname_montano_hawaii_raw`. FDC ID **168432** (**SR Legacy**, "Mountain yam, hawaii, raw" — pagina `getfoodfacts.com/food/mountain-yam-hawaii-raw-168432` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026; la pagina stessa dichiara "una delle 3 descrizioni USDA di mountain yam", confermando che è un record distinto e non un sinonimo). Stessa pagina K-M della categoria "Vegetables and Vegetable Products" del kanpyo sopra. **Distinto dall'igname generico già usato (`food_igname_raw`, FDC 170071 "Yam, raw")**: FDC ID diverso, descrizione USDA diversa — non lo stesso record. Nessuna specie botanica (*Dioscorea* sp.) dichiarata esplicitamente sulla pagina — trattato con la stessa famiglia botanica reale del genere (tutti gli "yam"/igname sono Dioscoreaceae), nota di trasparenza sulla specie non specificata.
+- **Nutrienti**: **13/17**. Per 100g: energia 67,0kcal, proteine 1,34g, grassi 0,10g, carboidrati 16,3g, fibra 2,50g, calcio 26,0mg, ferro 0,44mg, magnesio 12,0mg, zinco 0,27mg, rame 0,11mg, selenio 0,70µg, vitamina C 2,60mg, folato totale 14,0µg (DFE 14,0µg, acido folico 0µg esplicito), vitamina K 1,40µg, vitamina B12 0µg esplicito. **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina (nessuna riga carotenoidi nel record — non assunti zero). Riquadro "per porzione" (1/2 cup cubetti/68g) coerente con la tabella per 100g dopo arrotondamento, nessuna incoerenza di dato (unico scostamento dichiarato: zuccheri totali 0g a pannello vs 0,21g/porzione in tabella, arrotondamento FDA sotto 0,5g, non un'incoerenza).
+- **Analogia usata**: `food_patata_dolce_raw` (patata dolce cruda, Golden Set, già eseguita sul DB reale — stessa categoria "tubero crudo", stesso precedente già usato per `food_igname_raw`; non usato `food_igname_raw` stesso perché non confermato eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `igname_montano_hawaii` ("Igname di montagna hawaiano").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi assenti dal record, non zero esplicito, diversamente dall'igname generico che li riporta reali), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Dioscoreaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168432 --food-id=food_igname_montano_hawaii_raw \
+  --name-it="Igname di montagna hawaiano, crudo" \
+  --matrix-id=igname_montano_hawaii --matrix-description-it="Igname di montagna hawaiano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --botanical-family=Dioscoreaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168432 --food-id=food_igname_montano_hawaii_raw \
+  --name-it="Igname di montagna hawaiano, crudo" \
+  --matrix-id=igname_montano_hawaii --matrix-description-it="Igname di montagna hawaiano" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_dolce_raw \
+  --botanical-family=Dioscoreaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli mungo neri ("urad dal"), bolliti senza sale — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_fagioli_mungo_neri_bolliti`. FDC ID **172427** (**SR Legacy**, "Mungo beans, mature seeds, cooked, boiled, without salt" — pagina `getfoodfacts.com/food/mungo-beans-mature-seeds-cooked-boiled-without-salt-172427` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Specie *Vigna mungo* ("black gram"/"urad dal", legume cardine della cucina indiana) — **distinta da *Vigna radiata* (fagiolo mung/"mung bean", già coperto in questa pipeline sia crudo che germogliato)**: specie botanica diversa nonostante il nome simile, non un doppione mascherato (verificato: nessuna occorrenza "mungo"/"urad"/"black gram"/FDC 172427 in nessun file prima di questa voce). **Nessun record raw trovato con FDC ID/dataType confermati**: l'unica pagina per la versione cruda (myfooddata.com, FDC 174259 implicito dall'URL) non cita né FDC ID né dataType sulla pagina stessa — scartata, non promossa (vedi ⚠ in coda PRD). Usata quindi la versione **cotta bollita senza sale**, unica con fonte primaria pulita e verificabile — stesso precedente già accettato per felce arborea e fiore di sesbania nel 169° lotto.
