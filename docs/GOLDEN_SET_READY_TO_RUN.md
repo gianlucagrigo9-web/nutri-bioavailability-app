@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Felce arborea, cotta (senza sale) — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_felce_arborea_cotta`. FDC ID **170464** (**SR Legacy**, "Tree fern, cooked, without salt" — pagina `getfoodfacts.com/food/tree-fern-cooked-without-salt-170464` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Felce arborea (Cyatheaceae, consumata nella cucina delle isole del Pacifico), mai tentata prima. **Solo versione cotta disponibile in FDC** (nessun record "raw" trovato in nessuna fonte) — scelta la variante "senza sale" per coerenza con la convenzione di non aggiungere sale come deviazione implicita.
+- **Nutrienti**: **14/17** dalla tabella ufficiale FDC: energia 40,0kcal, proteine 0,29g, grassi 0,070g, carboidrati 11,0g, fibra 3,70g, calcio 8,00mg, ferro 0,16mg, magnesio 5,00mg, zinco 0,31mg, rame 0,20mg, selenio 0,90µg, vitamina C 30,0mg, folato 15,0µg (DFE), vitamina B12 0µg. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitamina A.
+- **Analogia usata**: `food_germogli_di_felce_raw` (già eseguita — stessa categoria "felce", famiglia botanica diversa, l'unica felce già presente in Golden Set).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `felce_arborea_cotta` ("Felce arborea, cotta").
+- **Attributi**: `baseline_cooking_state=boiled` (convenzione già usata per altri alimenti "cotti a vapore/bolliti" del progetto), `botanical_family=Cyatheaceae`, `carotenoid_matrix_state=cooked_or_disrupted`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170464 --food-id=food_felce_arborea_cotta \
+  --name-it="Felce arborea, cotta (senza sale)" \
+  --matrix-id=felce_arborea_cotta --matrix-description-it="Felce arborea, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_germogli_di_felce_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cyatheaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170464 --food-id=food_felce_arborea_cotta \
+  --name-it="Felce arborea, cotta (senza sale)" \
+  --matrix-id=felce_arborea_cotta --matrix-description-it="Felce arborea, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_germogli_di_felce_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cyatheaceae --diet-category=plant_non_fruit --apply
+```
+
+### 🟡 Fiore di sesbania, cotto (al vapore, senza sale) — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_fiore_di_sesbania_cotto`. FDC ID **169281** (**SR Legacy**, "Sesbania flower, cooked, steamed, without salt" — pagina `getfoodfacts.com/food/sesbania-flower-cooked-steamed-without-salt-169281` dedicata, FDC ID e dataType citati esplicitamente). Fiore di un albero leguminoso (*Sesbania grandiflora*), consumato in Thailandia/Filippine/Sud-est asiatico, mai tentato prima. **Solo versione cotta disponibile** (nessun record "raw" con pagina dedicata trovata). Marcato 🟡 perché il pannello nutrienti è più debole delle altre voci di questo lotto (vedi sotto).
+- **Nutrienti**: **11/17** dalla tabella ufficiale FDC: energia 22,0kcal, proteine 1,14g, grassi 0,050g, carboidrati 5,23g, calcio 22,0mg, ferro 0,56mg, magnesio 12,0mg, selenio 0,70µg, vitamina C 37,0mg, folato 57,0µg (DFE), vitamina B12 0µg. **Mancano**: fibra (pagina mostra "Dietary Fiber not declared" in un punto e "0g" in un altro — incoerenza interna, trattata come assente non zero), **zinco e rame (assenti dalla pagina, a differenza di tutte le altre voci di questo lotto)**, vitamina K, beta-carotene, altri carotenoidi provitamina A.
+- **Analogia usata**: `food_fave_bollite` (già eseguita — stessa famiglia botanica *Fabaceae*, stessa categoria "legume/fiore di leguminosa cotto").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fiore_di_sesbania_cotto` ("Fiore di sesbania, cotto").
+- **Attributi**: `baseline_cooking_state=boiled`, `botanical_family=Fabaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=169281 --food-id=food_fiore_di_sesbania_cotto \
+  --name-it="Fiore di sesbania, cotto (al vapore, senza sale)" \
+  --matrix-id=fiore_di_sesbania_cotto --matrix-description-it="Fiore di sesbania, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fave_bollite \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169281 --food-id=food_fiore_di_sesbania_cotto \
+  --name-it="Fiore di sesbania, cotto (al vapore, senza sale)" \
+  --matrix-id=fiore_di_sesbania_cotto --matrix-description-it="Fiore di sesbania, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fave_bollite \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Romice (dock), cruda — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_romice_raw`. FDC ID **170076** (**SR Legacy**, "Dock, raw" — pagina `getfoodfacts.com/food/dock-raw-170076` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Verdura a foglia selvatica (*Rumex* spp., romice), mai tentata prima — stesso elenco sistematico USDA "Vegetables and Vegetable Products" delle voci precedenti di questo lotto.
