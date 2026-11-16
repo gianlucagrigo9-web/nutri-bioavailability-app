@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Komatsuna (senape giapponese), cotta (bollita, senza sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_komatsuna_cotto`. FDC ID **168439** (**SR Legacy**, "Mustard spinach, tendergreen, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/mustard-spinach-tendergreen-cooked-boiled-drained-without-salt-168439` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del komatsuna crudo già preparato nel 169° lotto (FDC 168438, ancora solo "pronto" non eseguito).
+- **Nutrienti**: **14/17**. Per 100g: energia 16,0kcal, proteine 1,70g, grassi 0,20g, carboidrati 2,80g, fibra 2,00g, calcio 158mg, ferro 0,80mg, magnesio 7,00mg, zinco 0,11mg, rame 0,050mg, selenio 0,60µg, vitamina C 65,0mg, folato totale 73,0µg (DFE 73,0µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record nonostante vitamina A RAE 410µg presente — non assunti zero).
+- **Analogia usata**: `food_cavolfiore_cotto` (cavolfiore bollito, già eseguito sul DB reale — stessa famiglia botanica *Brassicaceae*, stesso stato `cooked_or_disrupted`).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `komatsuna_cotto` ("Komatsuna, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — categorie ossalati riservate a spinaci/kale/latte), `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Brassicaceae`, `zinc_bioaccessibility_bucket=none`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168439 --food-id=food_komatsuna_cotto \
+  --name-it="Komatsuna, cotto" \
+  --matrix-id=komatsuna_cotto --matrix-description-it="Komatsuna, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolfiore_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168439 --food-id=food_komatsuna_cotto \
+  --name-it="Komatsuna, cotto" \
+  --matrix-id=komatsuna_cotto --matrix-description-it="Komatsuna, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_cavolfiore_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Persico sole (pumpkinseed sunfish), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_persico_sole_cotto`. FDC ID **172003** (**SR Legacy**, "Fish, sunfish, pumpkin seed, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-sunfish-pumpkin-seed-cooked-dry-heat-172003` dedicata, FDC ID e dataType citati esplicitamente, release USDA FoodData Central). Controparte cotta del persico sole crudo già preparato nel 170° lotto (FDC 175151, ancora solo "pronto" non eseguito — seguendo la raccomandazione interna della coda di riempire i buchi crudo/cotto sui pesci già trovati solo crudi).
