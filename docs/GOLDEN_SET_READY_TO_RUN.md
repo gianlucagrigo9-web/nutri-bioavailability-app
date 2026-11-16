@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Cuore di leone marino di Steller, crudo — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_cuore_leone_marino_raw`. FDC ID 169002 (SR Legacy, "Sea lion, Steller, heart (Alaska Native)" — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente). Verificato con `grep` dedicato, zero occorrenze per "leone marino"/"sea lion"/169002 prima della ricerca web.
+- **Nutrienti**: **11/17** (mancano: fibra, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene). Per 100g: energia 102kcal, proteine 17,0g, grassi 3,30g, carboidrati 1,00g, calcio 5,00mg, ferro 6,70mg, zinco 2,24mg, magnesio 22,0mg, rame 0,31mg, selenio 122µg, sodio 115mg.
+- **Analogia usata**: `food_cuore_di_pollo_raw` (cuore di pollo crudo, già eseguito sul DB reale — stesso organo (cuore), stesso tipo di carne ricca di ferro eme e selenio, nonostante specie/classe diverse, stesso precedente di analogia organo-su-organo cross-specie già usato nella pipeline per fegato/cuore di varie specie).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cuore_leone_marino` ("Cuore di leone marino di Steller, crudo").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169002 --food-id=food_cuore_leone_marino_raw \
+  --name-it="Cuore di leone marino di Steller, crudo" \
+  --matrix-id=cuore_leone_marino --matrix-description-it="Cuore di leone marino di Steller, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuore_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169002 --food-id=food_cuore_leone_marino_raw \
+  --name-it="Cuore di leone marino di Steller, crudo" \
+  --matrix-id=cuore_leone_marino --matrix-description-it="Cuore di leone marino di Steller, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuore_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Rapa di prateria (prairie turnip, Pediomelum esculentum), bollita — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_rapa_di_prateria_cotta`. FDC ID 168996 (SR Legacy, "Prairie Turnips, boiled (Northern Plains Indians)" — pagina getfoodfacts.com dedicata, categoria "American Indian/Alaska Native Foods", FDC ID citato esplicitamente nell'URL e nel testo). Radice/tubero tradizionale dei nativi delle Grandi Pianure nordamericane (*Pediomelum esculentum*, Fabaceae); nessun record FDC trovato per la versione cruda. Verificato con `grep` dedicato, zero occorrenze per "rapa di prateria"/"prairie turnip"/168996 prima della ricerca web.
