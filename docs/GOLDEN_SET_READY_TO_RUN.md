@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Noce bianca (butternut), secca — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_noce_bianca_raw`. FDC ID **170570** (**SR Legacy**, "Nuts, butternuts, dried" — pagina `getfoodfacts.com/food/nuts-butternuts-dried-170570` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026, 73 nutrienti totali nel record). Noce bianca americana (*Juglans cinerea*), distinta dalla "zucca butternut" (`food_zucca_butternut_raw`/`_cotta`, già eseguite — omonimia pura, nessuna relazione botanica) e dalle noci comuni già presenti — verificato con grep dedicato, zero occorrenze prima di questa ricerca.
+- **Nutrienti**: **14/17** mappabili sui nostri 17 codici (per 100g, dalla tabella ufficiale FDC): energia 612kcal, proteine 24,9g, grassi 57,0g, carboidrati 12,1g, fibra 4,70g, calcio 53,0mg, ferro 4,02mg, magnesio 237mg, zinco 3,13mg, rame 0,45mg, selenio 17,2µg, vitamina C 3,20mg, folato 66,0µg (DFE), vitamina B12 0µg. **Mancano del tutto** (assenti dal record, non zero esplicito): beta-carotene, altri carotenoidi provitamina A (alfa-carotene/criptoxantina), vitamina K — plausibile per un frutto a guscio secco (carotenoidi tipicamente assenti/trascurabili), ma dichiarato come lacuna FDC, non assunto.
+- **Analogia usata**: `food_noci_raw` (noci comuni, Golden Set, già eseguita sul DB reale — stesso genere botanico *Juglans*, l'analogia più stretta possibile).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noce_bianca` ("Noce bianca / butternut").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Juglandaceae`, resto omesso/default (come le altre noci già eseguite con analogia `food_noci_raw`).
+
+```
+npm run add-food -- --fdc-id=170570 --food-id=food_noce_bianca_raw \
+  --name-it="Noce bianca (butternut), secca" \
+  --matrix-id=noce_bianca --matrix-description-it="Noce bianca / butternut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170570 --food-id=food_noce_bianca_raw \
+  --name-it="Noce bianca (butternut), secca" \
+  --matrix-id=noce_bianca --matrix-description-it="Noce bianca / butternut" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
+```
+
+### 🟡 Noce nera (black walnut), secca — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_noce_nera_raw`. FDC ID **170186** ("Nuts, walnuts, black, dried") — confermato esplicitamente da `foodstruct.com/food/nuts-walnuts-black-dried`, link References a `https://fdc.nal.usda.gov/food-details/170186/nutrients`. Noce nera americana (*Juglans nigra*), specie distinta dalla noce comune (*Juglans regia*, già `food_noci_raw`) e dalla noce bianca/butternut sopra. **Stessa lacuna dichiarata delle voci Fagaceae/Juglandaceae precedenti in questo lotto**: dataType non etichettato testualmente su `foodstruct.com` (nessuna pagina `getfoodfacts.com` dedicata trovata per questo FDC ID, a differenza del butternut) — marcato 🟡.
+- **Nutrienti**: almeno **14/17** dalla tabella principale di `foodstruct.com` (coerente con le label del sito, sezioni "coverage" scartate perché incoerenti ~3x come di consueto su questo sito): energia 619kcal, proteine 24g, grassi 59g, carboidrati 9,6g, fibra 6,8g, calcio 61mg, ferro 3,1mg, magnesio 201mg, zinco 3,4mg, rame 1,4mg, selenio 17µg, vitamina C 1,7mg, folato 31µg, vitamina B12 0µg, **vitamina K 2,7µg** (presente qui, a differenza delle altre voci del lotto). **Non confermabile**: beta-carotene/altri carotenoidi provitamina A (la pagina mostra solo "Vitamina A" 2µg, verosimilmente RAE/retinolo equivalente, non il singolo componente beta-carotene richiesto dal nostro schema — non assimilabile senza il dato FDC reale).
+- **Analogia usata**: `food_noci_raw` (stesso genere *Juglans* della noce comune).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noce_nera` ("Noce nera").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Juglandaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170186 --food-id=food_noce_nera_raw \
+  --name-it="Noce nera (black walnut), secca" \
+  --matrix-id=noce_nera --matrix-description-it="Noce nera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170186 --food-id=food_noce_nera_raw \
+  --name-it="Noce nera (black walnut), secca" \
+  --matrix-id=noce_nera --matrix-description-it="Noce nera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
+```
+
 ### 🟡 Ghiande (acorns), crude — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_ghiande_raw`. FDC ID **170157** ("Nuts, acorns, raw") — confermato esplicitamente da `foodstruct.com/food/acorns`, che linka `https://fdc.nal.usda.gov/food-details/170157/nutrients` nella sezione References (link verificato, non un ID indovinato). **Marcato 🟡 non ⚠ perché il dato è solido ma con una lacuna metodologica dichiarata**: nessuna delle pagine raggiunte (`foodstruct.com`, `recipal.com` — cita solo "NBD ID: 12058", numerazione legacy pre-FDC) etichetta esplicitamente il `dataType` (SR Legacy/Foundation); l'intervallo dell'FDC ID (170xxx, stesso blocco di castagne 170575, pecan 170182, noci macadamia 170178 già eseguite) e l'esistenza di un NDB legacy corrispondente rendono SR Legacy quasi certo ma non è una citazione esplicita sulla pagina — lo script stesso lo confermerà ri-scaricando il record reale al momento dell'esecuzione (si ferma se l'ID non esiste/è di tipo incoerente). `getfoodfacts.com` non ha una pagina dedicata trovata (solo un generico "nuts-2671477" non specifico); `caloriefriend.azurewebsites.net` (dominio diverso, mai usato prima in questa sessione) bloccato da `PROVENANCE_REQUIRED` al primo tentativo — vedi nota di correzione nella coda del 169° lotto in `docs/PRD.md`.
