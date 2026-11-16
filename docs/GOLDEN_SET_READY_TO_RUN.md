@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Pesce succhiatore bianco (white sucker), crudo — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_pesce_succhiatore_raw`. FDC ID **175150** (**SR Legacy**, "Fish, sucker, white, raw" — pagina `getfoodfacts.com/food/fish-sucker-white-raw-175150` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, record a 65 nutrienti). Scoperto nello sweep sistematico della categoria FDC "Finfish and Shellfish Products" (getfoodfacts.com, 76 nomi comuni, 288 record totali). Specie *Catostomus commersonii* (pesce d'acqua dolce nordamericano), mai tentata in questa pipeline — verificato con `grep` dedicato, zero occorrenze.
+- **Nutrienti**: **14/17**. Per 100g: energia 92,0kcal, proteine 16,8g, grassi 2,32g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 70,0mg, ferro 1,30mg, magnesio 30,0mg, zinco 0,75mg, rame 0,20mg, selenio 12,6µg, vitamina C 0mg esplicito, folato totale 15,0µg (DFE 15,0µg, acido folico 0µg esplicito), vitamina B12 2,00µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record — non assunti zero; i carotenoidi sono comunque non plausibili per un pesce, ma trattati come mancanti per cautela, non come NULL "non applicabile" senza conferma della convenzione script). Riquadro "per porzione" (3oz/85g) coerente con la tabella per 100g dopo arrotondamento FDA (unico scostamento dichiarato: grasso saturo 0g a pannello vs 0,38g/porzione in tabella, sotto soglia di arrotondamento FDA, non un'incoerenza di dato).
+- **Analogia usata**: `food_pesce_gatto_americano_raw` (pesce gatto americano crudo, già eseguito sul DB reale — stesso gruppo funzionale "pesce d'acqua dolce magro crudo nordamericano").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_succhiatore_raw` ("Pesce succhiatore bianco, crudo").
+- **Attributi**: `is_heme_iron` impostato (true — carne di pesce), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL, non applicabile a un prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175150 --food-id=food_pesce_succhiatore_raw \
+  --name-it="Pesce succhiatore bianco, crudo" \
+  --matrix-id=pesce_succhiatore_raw --matrix-description-it="Pesce succhiatore bianco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_gatto_americano_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175150 --food-id=food_pesce_succhiatore_raw \
+  --name-it="Pesce succhiatore bianco, crudo" \
+  --matrix-id=pesce_succhiatore_raw --matrix-description-it="Pesce succhiatore bianco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_gatto_americano_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Persico sole (pumpkinseed sunfish), crudo — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_persico_sole_raw`. FDC ID **175151** (**SR Legacy**, "Fish, sunfish, pumpkin seed, raw" — pagina `getfoodfacts.com/food/fish-sunfish-pumpkin-seed-raw-175151` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, record a 64 nutrienti). Stessa categoria/stesso sweep del pesce succhiatore sopra. Specie *Lepomis gibbosus* (persico sole, pesce d'acqua dolce nordamericano/europeo per introduzione) — distinto dal persico comune (*Perca fluviatilis*, già eseguito come `food_pesce_persico_raw`), genere diverso. Verificato con `grep` dedicato, zero occorrenze.
+- **Nutrienti**: **14/17**. Per 100g: energia 89,0kcal, proteine 19,4g, grassi 0,70g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 80,0mg, ferro 1,20mg, magnesio 30,0mg, zinco 1,55mg, rame 0,30mg, selenio 12,6µg, vitamina C 1,00mg, folato totale 15,0µg (DFE 15,0µg, acido folico 0µg esplicito), vitamina B12 2,00µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record). **Nota di trasparenza**: il riquadro "per porzione" (3oz/85g) riporta valori non perfettamente coerenti con la tabella per 100g scalata (energia pannello 80kcal vs 75,7kcal calcolato, grasso 0,5g vs 0,59g) — scostamento dichiarato dalla pagina stessa come "valori USDA per 100g scalati alla porzione" senza spiegazione del disallineamento, trattato come arrotondamento di etichetta non verificabile oltre, non come motivo di rigetto (stesso ordine di grandezza degli scostamenti già accettati altrove in questa pipeline).
+- **Analogia usata**: `food_pesce_persico_raw` (persico comune crudo, già eseguito sul DB reale — stessa famiglia Centrarchidae/Percidae di pesci d'acqua dolce magri, specie diversa dichiarata esplicitamente).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `persico_sole_raw` ("Persico sole, crudo").
+- **Attributi**: `is_heme_iron` impostato (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175151 --food-id=food_persico_sole_raw \
+  --name-it="Persico sole, crudo" \
+  --matrix-id=persico_sole_raw --matrix-description-it="Persico sole, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_persico_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175151 --food-id=food_persico_sole_raw \
+  --name-it="Persico sole, crudo" \
+  --matrix-id=persico_sole_raw --matrix-description-it="Persico sole, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pesce_persico_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Giuta (jute, "molokhia"), cotta bollita con sale — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_giuta_bollita`. FDC ID **169354** (**SR Legacy**, "Jute, potherb, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/jute-potherb-cooked-boiled-drained-with-salt-169354` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, record a 73 nutrienti). Scoperto via elenco completo (169 nomi comuni) della categoria "Vegetables and Vegetable Products" su getfoodfacts.com. *Corchorus olitorius*, foglia nota anche come "molokhia"/"saluyot", cucina mediorientale/africana/asiatica — mai tentato in questa pipeline, verificato con `grep` dedicato (nome e FDC ID), zero occorrenze.
