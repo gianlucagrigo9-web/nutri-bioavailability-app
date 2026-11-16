@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Crisantemo da foglia (tong ho), cotto (bollito, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_crisantemo_cotto`. FDC ID **168522** (**SR Legacy**, "Chrysanthemum, garland, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/chrysanthemum-garland-cooked-boiled-drained-with-salt-168522` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del crisantemo crudo già preparato nel 169° lotto (FDC 169995, ancora solo "pronto"). Nota di trasparenza: unica versione cotta con pagina getfoodfacts.com dedicata è "with salt" (sodio 289mg/100g) — nessuna pagina pulita trovata per la variante "no salt added"; stesso trattamento già accettato in questa pipeline per `food_sedano_rapa_cotto` (FDC 169341, anch'esso "with salt", già eseguito).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 20,0kcal, proteine 1,64g, grassi 0,090g, carboidrati 4,31g, fibra 2,30g, calcio 69,0mg, ferro 3,74mg, magnesio 18,0mg, zinco 0,20mg, rame 0,13mg, selenio 0,30µg, vitamina C 23,9mg, folato totale 50,0µg (DFE 50,0µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito, beta-carotene 1543µg, vitamina K 143µg, alfa-carotene e beta-criptoxantina 0µg espliciti.
+- **Analogia usata**: `food_scarola_cotta` (scarola bollita, già eseguita sul DB reale — stessa famiglia botanica *Asteraceae*, stesso stato `cooked_or_disrupted`).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `crisantemo_cotto` ("Crisantemo da foglia, cotto").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Asteraceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=168522 --food-id=food_crisantemo_cotto \
+  --name-it="Crisantemo da foglia (tong ho), cotto" \
+  --matrix-id=crisantemo_cotto --matrix-description-it="Crisantemo da foglia, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168522 --food-id=food_crisantemo_cotto \
+  --name-it="Crisantemo da foglia (tong ho), cotto" \
+  --matrix-id=crisantemo_cotto --matrix-description-it="Crisantemo da foglia, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Romice, cotta (bollita, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_romice_cotto`. FDC ID **169371** (**SR Legacy**, "Dock, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/dock-cooked-boiled-drained-with-salt-169371` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta della romice cruda già preparata nel 169° lotto (FDC 170076, ancora solo "pronto"). Stessa nota di trasparenza del crisantemo sopra: unica pagina getfoodfacts.com pulita è "with salt" (sodio 239mg/100g).
+- **Nutrienti**: **13/17**. Per 100g: energia 20,0kcal, proteine 1,83g, grassi 0,64g, carboidrati 2,93g, calcio 38,0mg, ferro 2,08mg, magnesio 89,0mg, zinco 0,17mg, rame 0,11mg, selenio 0,90µg, vitamina C 26,3mg, folato totale 8,00µg (DFE 8,00µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito. **Mancano**: fibra (pagina fonte contraddittoria — un box dice "non dichiarata", un altro mostra 0g: trattata come mancante per cautela, non assunta zero, Regola 1), beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (non riportati in pagina).
+- **Analogia usata**: `food_scarola_cotta` (scarola bollita, già eseguita sul DB reale — stessa categoria "verdura a foglia selvatica/amara cotta").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `romice_cotto` ("Romice, cotta").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, resto omesso/default (botanical_family omesso: *Polygonaceae*, famiglia non ancora usata altrove in questa pipeline, nessuna analogia di famiglia disponibile).
+
+```
+npm run add-food -- --fdc-id=169371 --food-id=food_romice_cotto \
+  --name-it="Romice, cotta" \
+  --matrix-id=romice_cotto --matrix-description-it="Romice, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169371 --food-id=food_romice_cotto \
+  --name-it="Romice, cotta" \
+  --matrix-id=romice_cotto --matrix-description-it="Romice, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Komatsuna (senape giapponese), cotta (bollita, senza sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_komatsuna_cotto`. FDC ID **168439** (**SR Legacy**, "Mustard spinach, tendergreen, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/mustard-spinach-tendergreen-cooked-boiled-drained-without-salt-168439` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del komatsuna crudo già preparato nel 169° lotto (FDC 168438, ancora solo "pronto" non eseguito).
