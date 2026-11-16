@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pout oceanico, crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_pesce_pout_raw`. FDC ID **173677** (**SR Legacy**, "Fish, pout, ocean, raw" — pagina `getfoodfacts.com/food/fish-pout-ocean-raw-173677` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, 59 nutrienti totali). Pesce nordatlantico (*Zoarces americanus*, "ocean pout"), specie distinta da tutte quelle già presenti — scoperto dall'elenco generico di categoria "Finfish and Shellfish Products" (76 nomi comuni), verificato con grep dedicato zero occorrenze prima di questa ricerca (distinto da cusk/ling/seatrout/sturgeon, già in coda come bloccati da `PROVENANCE_REQUIRED` su URL specifici — vedi correzione metodologica in fondo a questo lotto).
+- **Nutrienti**: **14/17** dalla tabella ufficiale FDC: energia 79,0kcal, proteine 16,6g, grassi 0,91g, carboidrati 0g, fibra 0g, calcio 10,0mg, ferro 0,28mg, magnesio 13,0mg, zinco 1,03mg, rame 0,032mg, selenio 36,5µg, vitamina C 0mg, folato 7,00µg (DFE), vitamina B12 0,90µg. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitamina A (vitamina A RAE 12,0µg mostrata ma non il componente richiesto).
+- **Analogia usata**: `food_merluzzo_raw` (già eseguita — stessa categoria "pesce bianco magro", stessa convenzione già usata per branzino/altri pesci).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pout_oceanico` ("Pout oceanico").
+- **Attributi**: `baseline_cooking_state=raw`, `is_heme_iron` impostato (come tutti i pesci già classificati), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=173677 --food-id=food_pesce_pout_raw \
+  --name-it="Pout oceanico, crudo" \
+  --matrix-id=pout_oceanico --matrix-description-it="Pout oceanico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173677 --food-id=food_pesce_pout_raw \
+  --name-it="Pout oceanico, crudo" \
+  --matrix-id=pout_oceanico --matrix-description-it="Pout oceanico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Felce arborea, cotta (senza sale) — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_felce_arborea_cotta`. FDC ID **170464** (**SR Legacy**, "Tree fern, cooked, without salt" — pagina `getfoodfacts.com/food/tree-fern-cooked-without-salt-170464` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Felce arborea (Cyatheaceae, consumata nella cucina delle isole del Pacifico), mai tentata prima. **Solo versione cotta disponibile in FDC** (nessun record "raw" trovato in nessuna fonte) — scelta la variante "senza sale" per coerenza con la convenzione di non aggiungere sale come deviazione implicita.
