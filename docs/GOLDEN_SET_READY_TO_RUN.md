@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Burro chiarificato (ghee) — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_ghee_raw`. FDC ID 173412 (SR Legacy, "Butter oil, anhydrous" — categoria "Dairy and Egg Products", nome generico USDA equivalente al ghee/burro chiarificato, confermato su getfoodfacts.com e recipal.com, fonte dati happyforks.com/food/butter-oil/5039). Grasso di nicchia mai tentato in questa pipeline (verificato con grep dedicato su "ghee"/"burro chiarificato"/"butter oil", zero occorrenze).
+- **Nutrienti**: **15/17**. Per 100g: energia 876kcal, proteine 0,28g, grassi 99,48g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 4,0mg, ferro 0mg esplicito, zinco 0,01mg, magnesio 0mg esplicito, rame 0,001mg, selenio 0µg esplicito, vitamina C 0mg esplicito, folato totale 0µg esplicito, vitamina B12 0,01µg, vitamina K 8,6µg. Mancano (non riportati, non assunti zero): beta-carotene, altro carotenoide provitaminico A — gap atteso per un grasso puro anidro (stesso pattern già visto per lo strutto, 17/17 ma con quasi tutti i micronutrienti espliciti a 0).
+- **Analogia usata**: `food_burro` (burro senza sale, già eseguito sul DB reale la notte 2026-10-13/14 — stessa categoria "grasso lattiero concentrato", analogia funzionale più stretta possibile per un derivato del burro).
+- **Categoria dieta**: `egg_dairy` (grasso lattiero).
+- **Matrice**: nuova `ghee` ("Burro chiarificato (ghee)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati, nonostante vitamina A 3069 IU presente, nessuna scomposizione in beta-carotene fornita dalla fonte), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw` (convenzione già usata per burro/strutto: stato naturale, non cotto), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173412 --food-id=food_ghee_raw \
+  --name-it="Burro chiarificato (ghee)" \
+  --matrix-id=ghee --matrix-description-it="Burro chiarificato (ghee)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173412 --food-id=food_ghee_raw \
+  --name-it="Burro chiarificato (ghee)" \
+  --matrix-id=ghee --matrix-description-it="Burro chiarificato (ghee)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=egg_dairy --apply
+```
+
+### Uovo d'oca, intero, fresco, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_uovo_oca_raw`. FDC ID 172190 (SR Legacy, "Egg, goose, whole, fresh, raw" — confermato via pagina di confronto getfoodfacts.com che cita esplicitamente FDC 172190, fonte dati happyforks.com/food/egg/4099). Uovo di oca mai tentato in questa pipeline (già coperti pollo/anatra/quaglia; oca mancava — verificato con grep dedicato).
+- **Nutrienti**: **15/17**. Per 100g: energia 185kcal, proteine 13,87g, grassi 13,27g, carboidrati 1,35g, fibra 0g esplicito, calcio 60,0mg, ferro 3,64mg, zinco 1,33mg, magnesio 16,0mg, rame 0,062mg, selenio 36,9µg, vitamina C 0mg esplicito, folato totale 76,0µg, vitamina B12 5,1µg, vitamina K 0,4µg. Mancano: beta-carotene, altro carotenoide provitaminico A (vitamina A riportata solo in IU, 650, senza scomposizione).
+- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo di gallina crudo, già eseguito sul DB reale — stessa categoria "uovo intero crudo").
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uovo_oca_raw` ("Uovo d'oca, intero, fresco, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172190 --food-id=food_uovo_oca_raw \
+  --name-it="Uovo d'oca, intero, fresco, crudo" \
+  --matrix-id=uovo_oca_raw --matrix-description-it="Uovo d'oca, intero, fresco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172190 --food-id=food_uovo_oca_raw \
+  --name-it="Uovo d'oca, intero, fresco, crudo" \
+  --matrix-id=uovo_oca_raw --matrix-description-it="Uovo d'oca, intero, fresco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Uovo d'anatra, intero, fresco, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_uovo_anatra_raw`. FDC ID 172189 (SR Legacy, "Egg, duck, whole, fresh, raw" — confermato via pagina di confronto getfoodfacts.com che cita esplicitamente FDC 172189, fonte dati happyforks.com/food/egg/26). Stesso buco del precedente, uovo di anatra mai tentato.
+- **Nutrienti**: **15/17**. Per 100g: energia 185kcal, proteine 12,81g, grassi 13,77g, carboidrati 1,45g, fibra 0g esplicito, calcio 64,0mg, ferro 3,85mg, zinco 1,41mg, magnesio 17,0mg, rame 0,062mg, selenio 36,4µg, vitamina C 0mg esplicito, folato totale 80,0µg, vitamina B12 5,4µg, vitamina K 0,4µg. Mancano: beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo di gallina crudo, già eseguito sul DB reale).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uovo_anatra_raw` ("Uovo d'anatra, intero, fresco, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172189 --food-id=food_uovo_anatra_raw \
+  --name-it="Uovo d'anatra, intero, fresco, crudo" \
+  --matrix-id=uovo_anatra_raw --matrix-description-it="Uovo d'anatra, intero, fresco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172189 --food-id=food_uovo_anatra_raw \
+  --name-it="Uovo d'anatra, intero, fresco, crudo" \
+  --matrix-id=uovo_anatra_raw --matrix-description-it="Uovo d'anatra, intero, fresco, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Uova di pesce (roe), miste, cotte (calore secco) — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_uova_di_pesce_cotte`. FDC ID 174239 (SR Legacy, "Fish, roe, mixed species, cooked, dry heat" — confermato via URL getfoodfacts.com che cita esplicitamente FDC 174239, fonte dati happyforks.com/food/roe/1219). **Nota di trasparenza**: la versione CRUDA dello stesso alimento ("Fish, roe, mixed species, raw") ha dati completi su happyforks.com/recipal.com ma nessun FDC ID moderno verificabile (solo ID legacy NDB 15072, non utilizzabile per lo script) — non proposta in questo lotto, resta un ⚠ per blocco di provenienza, non di qualità dato.
+- **Nutrienti**: **14/17**. Per 100g: energia 204kcal, proteine 28,62g, grassi 8,23g, carboidrati 1,92g, fibra 0g esplicito, calcio 28,0mg, ferro 0,77mg, zinco 1,28mg, magnesio 26,0mg, rame 0,128mg, selenio 51,7µg, vitamina C 16,4mg, folato totale 92,0µg, vitamina B12 11,54µg. Mancano: vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_salmon_cooked` (Golden Set originale, pesce cotto, già eseguito sul DB reale — stessa categoria funzionale "prodotto ittico cotto", nessuna analogia più specifica per uova di pesce disponibile).
+- **Categoria dieta**: `meat_fish` (prodotto ittico).
+- **Matrice**: nuova `uova_di_pesce_cotte` ("Uova di pesce (roe), miste, cotte").
+- **Attributi**: `is_heme_iron` omesso (false, non muscolo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked_dry_heat`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174239 --food-id=food_uova_di_pesce_cotte \
+  --name-it="Uova di pesce (roe), miste, cotte (calore secco)" \
+  --matrix-id=uova_di_pesce_cotte --matrix-description-it="Uova di pesce (roe), miste, cotte" \
+  --baseline-cooking-state=cooked_dry_heat --analogy-food-id=food_salmon_cooked \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174239 --food-id=food_uova_di_pesce_cotte \
+  --name-it="Uova di pesce (roe), miste, cotte (calore secco)" \
+  --matrix-id=uova_di_pesce_cotte --matrix-description-it="Uova di pesce (roe), miste, cotte" \
+  --baseline-cooking-state=cooked_dry_heat --analogy-food-id=food_salmon_cooked \
+  --diet-category=meat_fish --apply
+```
+
 ### Prezzemolo, essiccato — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
 
 - **food_id**: `food_prezzemolo_secco_raw`. FDC ID 170930 (SR Legacy, "Spices, parsley, dried" — valori incrociati su myfooddata.com/nutrition-facts/170930, numero ID coerente con il blocco di ID adiacenti di altre spezie secche già eseguite in questa pipeline, 170930-171333-171328-171317, rispettivamente prezzemolo/rosmarino/origano/basilico essiccati, tutti nello stesso range "Spices and Herbs" SR Legacy). **Nota**: il basilico essiccato (`food_basilico_secco_raw`) e la salvia (`food_salvia_raw`) e il timo essiccato (`food_timo_secco_raw`) sono GIÀ eseguiti sul DB reale per lo stesso filone "erbe secche" — verificato con grep dedicato prima di proporre, inizialmente scartati per errore di ricerca con termine sbagliato ("secco" invece di "essiccato"/food_id con underscore), poi confermato correttamente assente solo il prezzemolo essiccato (il prezzemolo fresco `food_prezzemolo_raw` è già eseguito ma è alimento diverso).
