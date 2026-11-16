@@ -16,6 +16,136 @@
 
 ## Pronti
 
+### Prezzemolo, essiccato — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_prezzemolo_secco_raw`. FDC ID 170930 (SR Legacy, "Spices, parsley, dried" — valori incrociati su myfooddata.com/nutrition-facts/170930, numero ID coerente con il blocco di ID adiacenti di altre spezie secche già eseguite in questa pipeline, 170930-171333-171328-171317, rispettivamente prezzemolo/rosmarino/origano/basilico essiccati, tutti nello stesso range "Spices and Herbs" SR Legacy). **Nota**: il basilico essiccato (`food_basilico_secco_raw`) e la salvia (`food_salvia_raw`) e il timo essiccato (`food_timo_secco_raw`) sono GIÀ eseguiti sul DB reale per lo stesso filone "erbe secche" — verificato con grep dedicato prima di proporre, inizialmente scartati per errore di ricerca con termine sbagliato ("secco" invece di "essiccato"/food_id con underscore), poi confermato correttamente assente solo il prezzemolo essiccato (il prezzemolo fresco `food_prezzemolo_raw` è già eseguito ma è alimento diverso).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 292kcal, proteine 26,6g, grassi 5,5g, carboidrati 50,6g, fibra 26,7g, calcio 1140mg, ferro 22,0mg, zinco 5,4mg, magnesio 400mg, rame 0,78mg, selenio 14,1µg, vitamina C 125mg, folato totale 180µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 1359,5µg (valore alto ma coerente con erbe secche concentrate, stesso ordine di grandezza già accettato per origano/basilico/cannella essiccati), beta-carotene 1152µg, carotene alfa 17µg, criptoxantina beta 4µg.
+- **Analogia usata**: `food_origano_secco_raw` (origano essiccato, già eseguito sul DB reale, stessa categoria "erba aromatica secca macinata" — stessa convenzione già usata per basilico/salvia/timo essiccati in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `prezzemolo_secco` ("Prezzemolo, essiccato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene e carotenoidi presenti ed espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Petroselinum crispum*, stessa famiglia del prezzemolo fresco), `baseline_cooking_state=raw` (convenzione già usata per le altre erbe secche: "raw" = non sottoposto a cottura, solo essiccazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170930 --food-id=food_prezzemolo_secco_raw \
+  --name-it="Prezzemolo, essiccato" \
+  --matrix-id=prezzemolo_secco --matrix-description-it="Prezzemolo, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --botanical-family=Apiaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170930 --food-id=food_prezzemolo_secco_raw \
+  --name-it="Prezzemolo, essiccato" \
+  --matrix-id=prezzemolo_secco --matrix-description-it="Prezzemolo, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --botanical-family=Apiaceae --carotenoid-matrix-state=raw_intact \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Rognone di vitello, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_rognone_di_vitello_raw`. FDC ID 174356 (SR Legacy, "Veal, variety meats and by-products, kidneys, raw" — fonte happyforks.com/food/veal/1641, valori incrociati con getfoodfacts.com che conferma FDC ID 174356 e dataType SR Legacy). Colma un buco segnalato esplicitamente dal centotrentaseiesimo lotto (inventario organo×specie su vitello/maiale/capra): il rene di vitello non risultava mai tentato in nessuna forma in questa pipeline (zero occorrenze grep dedicate prima della ricerca).
+- **Nutrienti**: **14/17**. Per 100g: energia 99kcal, proteine 15,76g, grassi 3,12g, carboidrati 0,85g, fibra 0g esplicito, calcio 11,0mg, ferro 3,36mg, zinco 1,97mg, magnesio 16,0mg, rame 0,494mg, selenio 80,0µg, vitamina C 5,00mg, folato totale 21,0µg, vitamina B12 28,2µg. Mancano (non riportati, non assunti zero): vitamina K, beta-carotene, altro carotenoide provitaminico A — stesso gap tipico delle frattaglie/organi in questa pipeline (già visto su fegato/cuore/milza di varie specie).
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, stessa specie, già eseguito sul DB reale — confermato in `lotti_alimenti/esito_lotto_05_applica.txt` — stessa categoria "frattaglia/organo crudo").
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_vitello` ("Rognone di vitello, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174356 --food-id=food_rognone_di_vitello_raw \
+  --name-it="Rognone di vitello, crudo" \
+  --matrix-id=rognone_di_vitello --matrix-description-it="Rognone di vitello, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174356 --food-id=food_rognone_di_vitello_raw \
+  --name-it="Rognone di vitello, crudo" \
+  --matrix-id=rognone_di_vitello --matrix-description-it="Rognone di vitello, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Rognone di maiale, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_rognone_di_maiale_raw`. FDC ID 168270 (SR Legacy, "Pork, fresh, variety meats and by-products, kidneys, raw" — fonte happyforks.com/food/pork/6725, confermato ID e dataType su getfoodfacts.com). Stesso buco segnalato dal centotrentaseiesimo lotto, rene di maiale mai tentato prima (zero occorrenze grep dedicate).
+- **Nutrienti**: **14/17**. Per 100g: energia 100kcal, proteine 16,46g, grassi 3,25g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 9,0mg, ferro 4,89mg, zinco 2,75mg, magnesio 17,0mg, rame 0,622mg, selenio 190µg, vitamina C 13,3mg, folato totale 42,0µg, vitamina B12 8,49µg. Mancano: vitamina K, beta-carotene, altro carotenoide provitaminico A — stesso gap tipico delle frattaglie.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, già eseguito sul DB reale — stessa categoria funzionale "frattaglia/organo crudo di mammifero", nessuna analogia più specifica di specie suina già eseguita disponibile per un rene).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_maiale` ("Rognone di maiale, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168270 --food-id=food_rognone_di_maiale_raw \
+  --name-it="Rognone di maiale, crudo" \
+  --matrix-id=rognone_di_maiale --matrix-description-it="Rognone di maiale, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168270 --food-id=food_rognone_di_maiale_raw \
+  --name-it="Rognone di maiale, crudo" \
+  --matrix-id=rognone_di_maiale --matrix-description-it="Rognone di maiale, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Rognone di agnello, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_rognone_di_agnello_raw`. FDC ID 174354 (SR Legacy, "Lamb, variety meats and by-products, kidneys, raw" — fonte happyforks.com/food/lamb/793, ID confermato su getfoodfacts.com). Unico buco rimasto nell'inventario organo×specie per l'agnello: fegato/cuore/lingua/polmone di agnello risultavano già tutti coperti, solo il rene mancava (verificato con grep dedicato).
+- **Nutrienti**: **14/17**. Per 100g: energia 97kcal, proteine 15,74g, grassi 2,95g, carboidrati 0,82g, fibra 0g esplicito, calcio 13,0mg, ferro 6,38mg, zinco 2,24mg, magnesio 17,0mg, rame 0,446mg, selenio 126,9µg, vitamina C 11,0mg, folato totale 28,0µg, vitamina B12 52,41µg. Mancano: vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_fegato_di_vitello_raw` (fegato di vitello crudo, già eseguito sul DB reale, stessa categoria "frattaglia/organo crudo di mammifero").
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `rognone_di_agnello` ("Rognone di agnello, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174354 --food-id=food_rognone_di_agnello_raw \
+  --name-it="Rognone di agnello, crudo" \
+  --matrix-id=rognone_di_agnello --matrix-description-it="Rognone di agnello, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174354 --food-id=food_rognone_di_agnello_raw \
+  --name-it="Rognone di agnello, crudo" \
+  --matrix-id=rognone_di_agnello --matrix-description-it="Rognone di agnello, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_vitello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Francolino di monte (ruffed grouse), petto, carne senza pelle, cruda — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
+
+- **food_id**: `food_francolino_di_monte_raw`. FDC ID 172831 (SR Legacy, "Ruffed Grouse, breast meat, skinless, raw" — fonte happyforks.com/food/ruffed-grouse/8499, ID confermato su getfoodfacts.com). Specie di selvaggina da penna mai tentata in questa pipeline (fagiano, quaglia, faraona, struzzo, emu già coperti; francolino di monte/gallo cedrone no — verificato con grep dedicato).
+- **Nutrienti**: **11/17**. Per 100g: energia 112kcal, proteine 25,94g, grassi 0,88g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,0mg, ferro 0,58mg, zinco 0,51mg, magnesio 32,0mg, rame 0,058mg, vitamina C 0mg esplicito, vitamina B12 2,9µg. Mancano (non riportati, non assunti zero): selenio, folato totale, vitamina K, beta-carotene, altro carotenoide provitaminico A — gap più ampio del solito per una carne magra di selvaggina, ma coerente con il pattern già visto per altra selvaggina da penna in questa pipeline (fagiano con pelle 14/17, altri casi simili).
+- **Analogia usata**: `food_petto_di_pollo_raw` (petto di pollo, carne senza pelle, cruda, già eseguita sul DB reale — stessa convenzione già usata per fagiano/faraona/quaglia/piccione in questa pipeline).
+- **Categoria dieta**: `meat_fish` (carne di selvaggina da penna).
+- **Matrice**: nuova `francolino_di_monte_raw` ("Francolino di monte, petto, carne senza pelle, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172831 --food-id=food_francolino_di_monte_raw \
+  --name-it="Francolino di monte, petto, carne senza pelle, cruda" \
+  --matrix-id=francolino_di_monte_raw --matrix-description-it="Francolino di monte, petto, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172831 --food-id=food_francolino_di_monte_raw \
+  --name-it="Francolino di monte, petto, carne senza pelle, cruda" \
+  --matrix-id=francolino_di_monte_raw --matrix-description-it="Francolino di monte, petto, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Coregone (whitefish), affumicato — preparato 2026-11-16 dal task (centocinquantacinquesimo lotto)
 
 - **food_id**: `food_coregone_affumicato`. FDC ID 173712 (SR Legacy, "Fish, whitefish, mixed species, smoked" — categoria **"Finfish and Shellfish Products", GENERICA, non "American Indian/Alaska Native Foods"** — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la terna crudo/cotto/affumicato per il coregone generico: il crudo (`food_coregone_raw`, FDC 173711, lotto 32) e il cotto (`food_coregone_cotto`, FDC 174246, lotto 154) sono entrambi record Finfish generici già "pronti" — questo è il terzo, stesso filone, nessun dubbio di rappresentatività (a differenza della variante "Alaska Native" della stessa specie, scartata in questo stesso lotto, vedi nota sotto). Verificato con `grep` dedicato: zero occorrenze per "173712"/"whitefish.*smoked" prima della ricerca web.
