@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli "great northern", secchi crudi — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_fagioli_great_northern_raw`. FDC ID **175190** (**SR Legacy**, "Beans, great northern, mature seeds, raw (Includes foods for USDA's Food Distribution Program)" — pagina `getfoodfacts.com/food/beans-great-northern-mature-seeds-raw-includes-foods-for-usdas-food-distribution-175190` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Legumes and Legume Products" (pagina recipeland.com, 234 alimenti totali). Cultivar di *Phaseolus vulgaris* distinta da tutte quelle già eseguite/pronte in questa pipeline (cannellini FDC 175202/175203/175204, borlotti FDC 175189/173736, neri/tartaruga FDC 175188/175239, pinto FDC 175199, kidney, lima, azuki, mung, lupini) — record FDC dedicato e non ambiguo. **Nota metodologica**: durante questo stesso sweep altri due candidati della stessa pagina ("Beans, cranberry (roman), mature seeds, raw" FDC 175189 e "Beans, black turtle soup, mature seeds, raw") sono risultati DOPPIONI già eseguiti sul DB reale (rispettivamente `food_fagioli_borlotti_secchi_raw` e lo stesso concetto di `food_fagioli_neri_raw`/`food_fagioli_neri_in_scatola` FDC 175188 "black turtle") — scoperti solo con un secondo giro di `grep` più specifico (sul nome inglese esatto e sull'FDC ID, non solo sul nome italiano colloquiale "fagiolo romano"/"tartaruga" che non compare nei file) prima di scrivere qualunque comando: nessun doppione aggiunto, nessuno slot di valutazione sprecato in scrittura.
+- **Nutrienti**: **17/17 completo** — nessun valore mancante, inclusi gli zero espliciti. Per 100g: energia 339kcal, proteine 21,9g, grassi 1,14g, carboidrati 62,4g, fibra 20,2g, calcio 175mg, ferro 5,47mg, magnesio 189mg, zinco 2,31mg, rame 0,84mg, selenio 12,9µg, beta-carotene 0µg (esplicito), vitamina C 5,30mg, folato totale 482µg (DFE 482µg, acido folico 0µg — nessuna firma di arricchimento, folato naturale del legume secco), vitamina B12 0µg (esplicito), vitamina K 6,00µg, alfa-carotene 0µg + beta-criptoxantina 0µg (campo combinato = 0µg, esplicito). Nessuna incoerenza interna rilevata (tabella "per porzione" coerente con la tabella "per 100g" scalata ×1,83; unico scostamento, arrotondamento potassio/sodio nel pannello etichetta, non nella tabella completa).
+- **Analogia usata**: `food_fagioli_neri_raw` (già eseguita — stessa specie *Phaseolus vulgaris*, famiglia Fabaceae, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_great_northern_secchi` ("Fagioli \"great northern\", secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume secco), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, nessun pigmento reale nel seme, stesso precedente di `food_fagioli_neri_in_scatola`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, per analogia con `food_fagioli_neri_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato 482µg naturale del legume).
+
+```
+npm run add-food -- --fdc-id=175190 --food-id=food_fagioli_great_northern_raw \
+  --name-it="Fagioli \"great northern\", secchi crudi" \
+  --matrix-id=fagioli_great_northern_secchi --matrix-description-it="Fagioli \"great northern\", secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_neri_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175190 --food-id=food_fagioli_great_northern_raw \
+  --name-it="Fagioli \"great northern\", secchi crudi" \
+  --matrix-id=fagioli_great_northern_secchi --matrix-description-it="Fagioli \"great northern\", secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_neri_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Nance, surgelato non zuccherato — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_nance_surgelato`. FDC ID **167789** (**SR Legacy**, "Nance, frozen, unsweetened" — pagina `getfoodfacts.com/food/nance-frozen-unsweetened-167789` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Fruits and Fruit Juices" (pagina getfoodfacts.com, 92 alimenti comuni elencati). **Nessun record "raw" trovato per questo frutto in nessuna fonte consultata** — solo questa versione surgelata, esplicitamente "unsweetened" (zuccheri: saccarosio/lattosio/maltosio tutti 0g, zuccheri totali 8,31g = glucosio 3,58g + fruttosio 4,73g esattamente, coerente con nessuno zucchero aggiunto nonostante l'etichetta "Includes Added Sugars not declared" — non una dichiarazione di zero, ma i dati di dettaglio la confermano). Stesso filone "frutta tropicale surgelata non zuccherata" già produttivo per naranjilla/lulo (centotrentaduesimo lotto). Verificato con `grep` dedicato (confine di parola) su "nance" in tutti i file del progetto, zero occorrenze prima della ricerca web.
