@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Persico sole (pumpkinseed sunfish), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_persico_sole_cotto`. FDC ID **172003** (**SR Legacy**, "Fish, sunfish, pumpkin seed, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-sunfish-pumpkin-seed-cooked-dry-heat-172003` dedicata, FDC ID e dataType citati esplicitamente, release USDA FoodData Central). Controparte cotta del persico sole crudo già preparato nel 170° lotto (FDC 175151, ancora solo "pronto" non eseguito — seguendo la raccomandazione interna della coda di riempire i buchi crudo/cotto sui pesci già trovati solo crudi).
+- **Nutrienti**: **14/17**. Per 100g: energia 114kcal, proteine 24,9g, grassi 0,90g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 103mg, ferro 1,54mg, magnesio 38,0mg, zinco 1,99mg, rame 0,39mg, selenio 16,2µg, vitamina C 1,00mg, folato totale 17,0µg (DFE 17,0µg, acido folico 0µg esplicito), vitamina B12 2,31µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record — non assunti zero).
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo/cod cotto a secco, già eseguito sul DB reale — stessa categoria "pesce magro cotto a secco", non `food_persico_sole_raw` perché ancora solo "pronto" non eseguito).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `persico_sole_cotto` ("Persico sole, cotto").
+- **Attributi**: `is_heme_iron` impostato (true — carne di pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172003 --food-id=food_persico_sole_cotto \
+  --name-it="Persico sole, cotto" \
+  --matrix-id=persico_sole_cotto --matrix-description-it="Persico sole, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172003 --food-id=food_persico_sole_cotto \
+  --name-it="Persico sole, cotto" \
+  --matrix-id=persico_sole_cotto --matrix-description-it="Persico sole, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rigaglie di pollo (cappone), cotte (bollite) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_rigaglie_pollo_cotte`. FDC ID **174466** (**SR Legacy**, "Chicken, capons, giblets, cooked, simmered" — pagina `getfoodfacts.com/food/chicken-capons-giblets-cooked-simmered-174466` dedicata, FDC ID e dataType citati esplicitamente nel titolo pagina, release USDA FoodData Central 30-04-2026), stesso stato cotto del crudo appena preparato sopra (FDC 174465), trovato nella stessa pagina hub `getfoodfacts.com/nutrition/chicken-giblets`.
