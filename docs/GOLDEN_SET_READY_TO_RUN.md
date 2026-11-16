@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Maiale, lingua, cruda — preparato 2026-11-16 dal task (centocinquantasettesimo lotto)
+
+- **food_id**: `food_lingua_di_maiale_raw`. FDC ID 168275 (SR Legacy, "Pork, fresh, variety meats and by-products, tongue, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Gap genuinamente nuovo: la lingua di maiale cotta (`food_lingua_di_maiale_cotta`) era già "pronta", la cruda mai tentata — verificato con grep dedicato su tutti e tre i file, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **16/17**. Per 100g: energia 225kcal, proteine 16,3g, grassi 17,2g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 16,0mg, ferro 3,35mg, zinco 3,01mg, magnesio 18,0mg, rame 0,070mg, selenio 10,4µg, vitamina C 4,40mg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,84µg, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito (quindi "altro carotenoide provitaminico A" = 0, reale non assunto). Manca solo: vitamina K (non riportata sulla pagina, non assunta zero).
+- **Analogia usata**: `food_fegato_di_maiale_raw` (fegato di maiale crudo, già eseguito sul DB reale, lotto 10 — stessa specie, stesso attributo `is_heme_iron`; nessuna lingua di maiale già eseguita da usare come analogia di organo più stretta).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `lingua_di_maiale_raw` ("Maiale, lingua, cruda").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168275 --food-id=food_lingua_di_maiale_raw \
+  --name-it="Maiale, lingua, cruda" \
+  --matrix-id=lingua_di_maiale_raw --matrix-description-it="Maiale, lingua, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168275 --food-id=food_lingua_di_maiale_raw \
+  --name-it="Maiale, lingua, cruda" \
+  --matrix-id=lingua_di_maiale_raw --matrix-description-it="Maiale, lingua, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fegato_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Agnello, polmone, crudo — preparato 2026-11-16 dal task (centocinquantasettesimo lotto)
+
+- **food_id**: `food_polmone_di_agnello_raw`. FDC ID 174359 (SR Legacy, "Lamb, variety meats and by-products, lungs, raw"). **Nota di trasparenza sul tipo di fonte**: nessuna pagina getfoodfacts.com dedicata trovata per questo specifico record (stesso gap già segnalato dal settantaquattresimo lotto, che per questo aveva lasciato il crudo ⚠); risolto in questo lotto con rawpawiq.com (pagina "Lamb, variety meats and by-products, lungs, raw - USDA Nutrient Data (FDC 174359)", sezione "Source details" con "Primary Source: USDA FoodData Central, USDA SR Legacy Database, FoodData Central ID 174359" citata esplicitamente) — valori incrociati e perfettamente concordanti con happyforks.com/food/lamb/6918 (stessi numeri esatti su tutti i nutrienti in comune), quindi FDC ID e dataType considerati verificati da fonte primaria dichiarata, non da coincidenza di ID interno di terzi. Il polmone di agnello cotto (`food_polmone_di_agnello_cotto`, FDC 174360) era già "pronto" dal settantaquattresimo lotto.
+- **Nutrienti**: **12/17**. Per 100g: energia 95kcal, proteine 16,7g, grassi 2,60g, calcio 10,0mg, ferro 6,40mg, zinco 1,80mg, magnesio 14,0mg, rame 0,25mg, selenio 17,7µg, vitamina C 31,0mg, folato totale 12,0µg, vitamina B12 3,93µg. Mancano (non riportati su nessuna delle due fonti, non assunti zero): carboidrati, fibra, vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_polmone_di_manzo_raw` (polmone di manzo crudo, già eseguito sul DB reale — stesso organo "polmone/lung", stesso attributo `is_heme_iron`; stessa analogia già usata per il polmone di agnello cotto nel settantaquattresimo lotto).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `polmone_di_agnello_raw` ("Agnello, polmone, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun segno di arricchimento in nessuna delle due fonti).
+
+```
+npm run add-food -- --fdc-id=174359 --food-id=food_polmone_di_agnello_raw \
+  --name-it="Agnello, polmone, crudo" \
+  --matrix-id=polmone_di_agnello_raw --matrix-description-it="Agnello, polmone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_polmone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174359 --food-id=food_polmone_di_agnello_raw \
+  --name-it="Agnello, polmone, crudo" \
+  --matrix-id=polmone_di_agnello_raw --matrix-description-it="Agnello, polmone, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_polmone_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Burro chiarificato (ghee) — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
 
 - **food_id**: `food_ghee_raw`. FDC ID 173412 (SR Legacy, "Butter oil, anhydrous" — categoria "Dairy and Egg Products", nome generico USDA equivalente al ghee/burro chiarificato, confermato su getfoodfacts.com e recipal.com, fonte dati happyforks.com/food/butter-oil/5039). Grasso di nicchia mai tentato in questa pipeline (verificato con grep dedicato su "ghee"/"burro chiarificato"/"butter oil", zero occorrenze).
