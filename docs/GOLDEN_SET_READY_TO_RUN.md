@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Foca barbuta (Oogruk), carne, quarto inferiore, cruda — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_foca_barbuta_raw`. FDC ID 168053 (SR Legacy, "Seal, bearded (Oogruk), meat, low quadrant, raw (Alaska Native)" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente nell'URL e nel testo, release USDA 2026-04-30). Primo alimento della categoria FDC "American Indian/Alaska Native Foods" in questa pipeline — filone mai tentato prima, individuato dopo che i lotti 148-152 avevano esaurito il canale "brainstorm da conoscenza comune" su carni/pesci/verdure comuni. Verificato con `grep` dedicato, zero occorrenze per "foca"/"seal"/168053 su tutti i file prima della ricerca web. **Nota di trasparenza**: il record FDC si riferisce specificamente al "quarto inferiore" (low quadrant), un taglio specifico della foca barbuta — nessun record FDC per "carne di foca" generica è stato trovato; usato come il miglior proxy disponibile.
+- **Nutrienti**: **12/17** (mancano: selenio, vitamina C, folato totale, acido folico, vitamina B12). Per 100g: energia 186kcal, proteine 23,6g, grassi 10,2g, carboidrati 0g, fibra 0g, calcio 4,00mg, ferro 17,0mg, zinco 2,60mg, magnesio 17,0mg, rame 0,15mg, sodio 57,0mg, vitamina K (fillochinone) 0µg esplicito (il record riporta anche menachinone-4 0,60µg come nutriente distinto, non usato per il campo standard), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_capra_raw` (capra cruda, già eseguita sul DB reale — stesso precedente già usato per renna/moose/bufalo/wapiti/antilope in questa pipeline per carni rosse di selvaggina/mammiferi non standard, nonostante famiglie zoologiche diverse: qui un mammifero marino invece di un ungulato, ma stesso profilo funzionale di carne magra rossa ricca di ferro eme).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `foca_barbuta` ("Foca barbuta (Oogruk), carne, quarto inferiore, cruda").
+- **Attributi**: `is_heme_iron` presente (true — carne rossa di mammifero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168053 --food-id=food_foca_barbuta_raw \
+  --name-it="Foca barbuta (Oogruk), carne, quarto inferiore, cruda" \
+  --matrix-id=foca_barbuta --matrix-description-it="Foca barbuta (Oogruk), carne, quarto inferiore, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168053 --food-id=food_foca_barbuta_raw \
+  --name-it="Foca barbuta (Oogruk), carne, quarto inferiore, cruda" \
+  --matrix-id=foca_barbuta --matrix-description-it="Foca barbuta (Oogruk), carne, quarto inferiore, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Latte di soia, non arricchito — preparato 2026-11-16 dal task (centocinquantesimo lotto)
 
 - **food_id**: `food_latte_di_soia_raw`. FDC ID 172446 (SR Legacy, "Soymilk, original and vanilla, unfortified" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Prima bevanda vegetale della pipeline (gruppo "bevande vegetali", già notato come buco dal terzo lotto, mai risolto finora). Verificato con `grep` dedicato, zero occorrenze per "latte di soia"/"soy milk"/"soymilk"/172446 su tutti i file prima della ricerca web. **Nota di trasparenza importante**: per questo stesso filone sono stati trovati anche record Foundation per "Almond milk, unsweetened, plain, refrigerated" (FDC 2257045) e "Oat milk, unsweetened, plain, refrigerated" (FDC 2257046) — scartati entrambi (restano `⚠`) perché, nonostante il nome generico "unsweetened/plain" senza menzione di arricchimento, riportano vitamina B12 non nulla (0,45µg e 0,51µg/100g) — fisiologicamente impossibile per una bevanda di origine 100% vegetale non supplementata — insieme a un calcio implausibilmente alto per un'infusione diluita di mandorle/avena (158mg e 149mg/100g): stessa firma di arricchimento nascosto già incontrata per pane/pasta/cereali USA in questa coda, qui non dichiarata nel nome del record. Il latte di soia qui preparato non ha questo problema: l'FDC esplicita "unfortified" nel nome stesso, e i valori sono coerenti con un prodotto naturale (vitamina B12 0µg esplicito, acido folico 0µg esplicito, calcio 25mg/100g plausibile).
