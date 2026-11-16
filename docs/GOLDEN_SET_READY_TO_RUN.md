@@ -16,6 +16,57 @@
 
 ## Pronti
 
+### Giuta (jute, "molokhia"), cotta bollita con sale — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_giuta_bollita`. FDC ID **169354** (**SR Legacy**, "Jute, potherb, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/jute-potherb-cooked-boiled-drained-with-salt-169354` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, record a 73 nutrienti). Scoperto via elenco completo (169 nomi comuni) della categoria "Vegetables and Vegetable Products" su getfoodfacts.com. *Corchorus olitorius*, foglia nota anche come "molokhia"/"saluyot", cucina mediorientale/africana/asiatica — mai tentato in questa pipeline, verificato con `grep` dedicato (nome e FDC ID), zero occorrenze.
+- **Nota di trasparenza — versione "con sale"**: nessuna pagina getfoodfacts.com dedicata trovata per la versione "without salt" (solo recipal.com/myfooddata.com, senza FDC ID/dataType confermati sulla pagina) — usata quindi questa versione con sale, unica con fonte primaria verificabile. Sodio 247mg/100g è un additivo di cottura, non un valore intrinseco della foglia.
+- **Nutrienti**: **17/17 completo**, nessun valore mancante. Per 100g: energia 37,0kcal, proteine 3,68g, grassi 0,20g, carboidrati 7,29g, fibra 2,00g, calcio 211mg, ferro 3,14mg, magnesio 62,0mg, zinco 0,79mg, rame 0,26mg, selenio 0,90µg, beta-carotene 3111µg (reale, non nullo), vitamina C 33,0mg, folato totale 104µg (DFE 104µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 108µg, alfa-carotene 0µg + beta-criptoxantina 0µg (entrambi espliciti). Riquadro "per porzione" (1 cup/87g) coerente con la tabella per 100g dopo arrotondamento FDA, nessuna incoerenza di dato.
+- **Analogia usata**: `food_gombo_raw` (gombo crudo, già eseguito sul DB reale — stessa famiglia botanica reale Malvaceae, qui foglia cotta invece di frutto crudo, dichiarato esplicitamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `giuta_bollita` ("Giuta, bollita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, foglia cotta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malvaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169354 --food-id=food_giuta_bollita \
+  --name-it="Giuta (jute, \"molokhia\"), cotta bollita con sale" \
+  --matrix-id=giuta_bollita --matrix-description-it="Giuta, bollita" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_gombo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Malvaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169354 --food-id=food_giuta_bollita \
+  --name-it="Giuta (jute, \"molokhia\"), cotta bollita con sale" \
+  --matrix-id=giuta_bollita --matrix-description-it="Giuta, bollita" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_gombo_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Malvaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Spinacio della Nuova Zelanda, crudo — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_spinacio_neozelandese_raw`. FDC ID **168440** (**SR Legacy**, "New Zealand spinach, raw" — pagina `getfoodfacts.com/food/new-zealand-spinach-raw-168440` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). *Tetragonia tetragonioides*, famiglia Aizoaceae — **specie botanica distinta dallo spinacio comune** (*Spinacia oleracea*, famiglia Amaranthaceae, già eseguito come `food_spinach_raw`), nonostante il nome commerciale simile. Verificato con `grep` dedicato, zero occorrenze prima di questa voce.
+- **Nutrienti**: **14/17**. Per 100g: energia 14,0kcal, proteine 1,50g, grassi 0,20g, carboidrati 2,50g, fibra 1,50g, calcio 58,0mg, ferro 0,80mg, magnesio 39,0mg, zinco 0,38mg, rame 0,093mg, selenio 0,70µg, vitamina C 30,0mg, folato totale 15,0µg (DFE 15,0µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito, vitamina K 337µg (molto alta, coerente con una foglia verde). **Mancano**: beta-carotene, alfa-carotene, beta-criptoxantina (nessuna riga carotenoidi nel record — non assunti zero). **Nota di trasparenza**: il valore di energia dichiarato (14kcal) non corrisponde esattamente alla somma Atwater generica dei macronutrienti (4×1,50+4×2,50+9×0,20=17,8kcal) — scostamento di circa 4kcal, probabilmente dovuto a fattori di conversione specifici USDA per questo alimento (comune per verdure a foglia a bassissimo contenuto calorico), non trattato come errore di trascrizione ma segnalato per trasparenza. `matrix_category_calcium` lasciato NULL (non assunto `high_oxalate` come lo spinacio comune, nessuna fonte consultata conferma un contenuto di oxalati per questa specie diversa).
+- **Analogia usata**: `food_spinach_raw` (spinacio comune, già eseguito sul DB reale — stessa categoria funzionale "verdura a foglia cruda", famiglia botanica reale diversa dichiarata esplicitamente: Aizoaceae invece di Amaranthaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `spinacio_neozelandese` ("Spinacio della Nuova Zelanda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — vedi nota sopra), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Aizoaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168440 --food-id=food_spinacio_neozelandese_raw \
+  --name-it="Spinacio della Nuova Zelanda, crudo" \
+  --matrix-id=spinacio_neozelandese --matrix-description-it="Spinacio della Nuova Zelanda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Aizoaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168440 --food-id=food_spinacio_neozelandese_raw \
+  --name-it="Spinacio della Nuova Zelanda, crudo" \
+  --matrix-id=spinacio_neozelandese --matrix-description-it="Spinacio della Nuova Zelanda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --botanical-family=Aizoaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Kanpyo (strisce di zucca secca giapponese), secco — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_kanpyo_secco`. FDC ID **169241** (**SR Legacy**, "Kanpyo, (dried gourd strips)" — pagina `getfoodfacts.com/food/kanpyo-dried-gourd-strips-169241` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Vegetables and Vegetable Products" (recipeland.com, 789 alimenti totali, pagina con intervallo K-M). Strisce secche di zucca calabash/bottle gourd (*Lagenaria siceraria*, famiglia Cucurbitaceae) usate nella cucina giapponese (es. per l'involtino makizushi) — mai tentato in nessuna forma in questa pipeline, verificato con `grep` dedicato (nome e FDC ID), zero occorrenze.
