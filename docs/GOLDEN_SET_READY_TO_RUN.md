@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nance, surgelato non zuccherato — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_nance_surgelato`. FDC ID **167789** (**SR Legacy**, "Nance, frozen, unsweetened" — pagina `getfoodfacts.com/food/nance-frozen-unsweetened-167789` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Scoperto nello sweep sistematico della categoria FDC "Fruits and Fruit Juices" (pagina getfoodfacts.com, 92 alimenti comuni elencati). **Nessun record "raw" trovato per questo frutto in nessuna fonte consultata** — solo questa versione surgelata, esplicitamente "unsweetened" (zuccheri: saccarosio/lattosio/maltosio tutti 0g, zuccheri totali 8,31g = glucosio 3,58g + fruttosio 4,73g esattamente, coerente con nessuno zucchero aggiunto nonostante l'etichetta "Includes Added Sugars not declared" — non una dichiarazione di zero, ma i dati di dettaglio la confermano). Stesso filone "frutta tropicale surgelata non zuccherata" già produttivo per naranjilla/lulo (centotrentaduesimo lotto). Verificato con `grep` dedicato (confine di parola) su "nance" in tutti i file del progetto, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **16/17** dalla tabella ufficiale FDC (per 100g): energia 73,0kcal, proteine 0,66g, grassi 1,16g, carboidrati 17,0g, fibra 7,50g, calcio 46,0mg, ferro 0,38mg, magnesio 20,0mg, zinco 0,090mg, rame 0,041mg, selenio 0,40µg, beta-carotene 40,0µg, vitamina C 92,5mg, folato totale 8,00µg, vitamina K 11,9µg, alfa-carotene 3,00µg + beta-criptoxantina 5,00µg (campo combinato = 8µg). **Manca solo vitamina B12** (nessuna riga nel record, non assunta zero). Nota di trasparenza: il riquadro "per porzione" della pagina riporta un valore di grassi (1,5g/porzione) non perfettamente coerente con la tabella completa (1,16g/100g × 1,12 = 1,30g/porzione) — uno scostamento minore di arrotondamento tra sezioni della stessa pagina (non il tipo di incoerenza ~3x del "coverage chart" foodstruct.com già scartato altrove), non trattato come motivo di rigetto. Nessun'altra incoerenza interna rilevata.
+- **Analogia usata**: `food_acerola_raw` (già eseguita — stessa famiglia botanica reale *Malpighiaceae*, unico alimento di questa famiglia già presente nel Golden Set).
+- **Categoria dieta**: `fresh_fruit` (polpa di frutto surgelata non zuccherata, stesso precedente di fragole/mirtilli/more/lamponi/naranjilla surgelati già in questa coda — non un ortaggio nella definizione PRD §4.9).
+- **Matrice**: nuova `nance_surgelato` ("Nance, surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state` omesso (NULL per trasparenza — stessa ambiguità blanching già dichiarata per fragole/mirtilli/more/lamponi/naranjilla surgelati, carotenoidi reali non nulli ma stato "surgelato" non univocamente raw_intact/cooked_or_disrupted), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Malpighiaceae` (famiglia reale, per analogia con `food_acerola_raw`), `baseline_cooking_state=frozen` (convenzione del filone surgelati), `is_fortified_folate` omesso (false — folato 8µg in linea con un frutto fresco, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=167789 --food-id=food_nance_surgelato \
+  --name-it="Nance, surgelato non zuccherato" \
+  --matrix-id=nance_surgelato --matrix-description-it="Nance, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_acerola_raw \
+  --botanical-family=Malpighiaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167789 --food-id=food_nance_surgelato \
+  --name-it="Nance, surgelato non zuccherato" \
+  --matrix-id=nance_surgelato --matrix-description-it="Nance, surgelato" \
+  --baseline-cooking-state=frozen --analogy-food-id=food_acerola_raw \
+  --botanical-family=Malpighiaceae --diet-category=fresh_fruit --apply
+```
+
 ### Pout oceanico, crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_pesce_pout_raw`. FDC ID **173677** (**SR Legacy**, "Fish, pout, ocean, raw" — pagina `getfoodfacts.com/food/fish-pout-ocean-raw-173677` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026, 59 nutrienti totali). Pesce nordatlantico (*Zoarces americanus*, "ocean pout"), specie distinta da tutte quelle già presenti — scoperto dall'elenco generico di categoria "Finfish and Shellfish Products" (76 nomi comuni), verificato con grep dedicato zero occorrenze prima di questa ricerca (distinto da cusk/ling/seatrout/sturgeon, già in coda come bloccati da `PROVENANCE_REQUIRED` su URL specifici — vedi correzione metodologica in fondo a questo lotto).
