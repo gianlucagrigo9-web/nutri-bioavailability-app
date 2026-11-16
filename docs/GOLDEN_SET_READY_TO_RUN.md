@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Spinacio della Nuova Zelanda, cotto (bollito, senza sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_spinacio_neozelandese_cotto`. FDC ID **168441** (**SR Legacy**, "New Zealand spinach, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/new-zealand-spinach-cooked-boiled-drained-without-salt-168441` dedicata, FDC ID e dataType citati esplicitamente, sodio 107mg/100g — versione "senza sale", non "with salt"). Controparte cotta dello spinacio neozelandese crudo già preparato nel 170° lotto (FDC 168440, ancora solo "pronto").
+- **Nutrienti**: **15/17**. Per 100g: energia 12,0kcal, proteine 1,30g, grassi 0,17g, carboidrati 2,13g, fibra 1,40g, calcio 48,0mg, ferro 0,66mg, magnesio 32,0mg, zinco 0,31mg, rame 0,077mg, selenio 0,90µg, vitamina C 16,0mg, folato totale 8,00µg (DFE 8,00µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito, **vitamina K 292µg**. **Mancano**: beta-carotene, alfa-carotene+beta-criptoxantina (non riportati in pagina).
+- **Analogia usata**: `food_scarola_cotta` (scarola bollita, già eseguita sul DB reale — stessa categoria "verdura a foglia cotta"; non esiste ancora un'analogia eseguita della stessa famiglia *Aizoaceae*).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `spinacio_neozelandese_cotto` ("Spinacio della Nuova Zelanda, cotto").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Aizoaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=168441 --food-id=food_spinacio_neozelandese_cotto \
+  --name-it="Spinacio della Nuova Zelanda, cotto" \
+  --matrix-id=spinacio_neozelandese_cotto --matrix-description-it="Spinacio della Nuova Zelanda, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Aizoaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168441 --food-id=food_spinacio_neozelandese_cotto \
+  --name-it="Spinacio della Nuova Zelanda, cotto" \
+  --matrix-id=spinacio_neozelandese_cotto --matrix-description-it="Spinacio della Nuova Zelanda, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Aizoaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Farfaraccio (fuki), cotto (bollito, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_farfaraccio_cotto`. FDC ID **169334** (**SR Legacy**, "Butterbur, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/butterbur-cooked-boiled-drained-with-salt-169334` dedicata, FDC ID e dataType citati esplicitamente, sodio 240mg/100g). Controparte cotta del farfaraccio crudo già preparato nel 169° lotto (FDC 170385, ancora solo "pronto"); nessuna pagina pulita trovata per la variante "without salt".
+- **Nutrienti**: **13/17**. Per 100g: energia 8,00kcal, proteine 0,23g, grassi 0,020g, carboidrati 2,16g, calcio 59,0mg, ferro 0,10mg, magnesio 8,00mg, zinco 0,090mg, rame 0,059mg, selenio 0,90µg, vitamina C 18,9mg, folato totale 4,00µg (DFE 4,00µg, acido folico 0µg esplicito), vitamina B12 0µg esplicito. **Mancano**: fibra (pagina dichiara esplicitamente "non dichiarata", non assunta zero), beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (non riportati in pagina).
+- **Analogia usata**: `food_scarola_cotta` (scarola bollita, già eseguita sul DB reale — stessa categoria "verdura a foglia/stelo cotta").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farfaraccio_cotto` ("Farfaraccio, cotto").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Asteraceae` (*Petasites* spp., stessa famiglia del crisantemo/scarola), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=169334 --food-id=food_farfaraccio_cotto \
+  --name-it="Farfaraccio (fuki), cotto" \
+  --matrix-id=farfaraccio_cotto --matrix-description-it="Farfaraccio, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169334 --food-id=food_farfaraccio_cotto \
+  --name-it="Farfaraccio (fuki), cotto" \
+  --matrix-id=farfaraccio_cotto --matrix-description-it="Farfaraccio, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Crisantemo da foglia (tong ho), cotto (bollito, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_crisantemo_cotto`. FDC ID **168522** (**SR Legacy**, "Chrysanthemum, garland, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/chrysanthemum-garland-cooked-boiled-drained-with-salt-168522` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del crisantemo crudo già preparato nel 169° lotto (FDC 169995, ancora solo "pronto"). Nota di trasparenza: unica versione cotta con pagina getfoodfacts.com dedicata è "with salt" (sodio 289mg/100g) — nessuna pagina pulita trovata per la variante "no salt added"; stesso trattamento già accettato in questa pipeline per `food_sedano_rapa_cotto` (FDC 169341, anch'esso "with salt", già eseguito).
