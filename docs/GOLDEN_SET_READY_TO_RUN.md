@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli gialli, secchi crudi — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_fagioli_gialli_raw`. FDC ID **173751** (**SR Legacy**, "Beans, yellow, mature seeds, raw" — pagina `getfoodfacts.com/food/beans-yellow-mature-seeds-raw-173751` dedicata e pulita, FDC ID e dataType citati esplicitamente nel testo, release USDA FoodData Central 30-04-2026, record a 60 righe). Scoperto nello stesso sweep sistematico della categoria "Legumes and Legume Products" (recipeland.com, pagina 2/4, voci 61-120 di 234). Cultivar di *Phaseolus vulgaris* distinta da tutte quelle già coperte (kidney, cannellini, borlotti, neri, pinto, great northern, california red). Verificato con `grep` dedicato sia sul nome italiano "fagiolo giallo" sia sull'FDC ID 173751: zero occorrenze prima di questa voce.
+- **Nutrienti**: **14/17**. Per 100g: energia 345kcal, proteine 22,0g, grassi 2,60g, carboidrati 60,7g, fibra 25,1g, calcio 166mg, ferro 7,01mg, magnesio 222mg, zinco 2,83mg, rame 0,64mg, selenio 12,8µg, folato totale 389µg (DFE 389µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina C 0mg esplicito, vitamina B12 0µg esplicito. **Mancano**: beta-carotene, vitamina K, alfa-carotene+beta-criptoxantina (nessuna riga nel record a 60 campi — non assunti zero). Riquadro "per porzione" (1 cup/196g) coerente con la tabella per 100g dopo arrotondamento (unico scostamento minore: calcio pannello 330mg vs 325mg calcolato, arrotondamento etichetta FDA, non un'incoerenza di dato).
+- **Analogia usata**: `food_kidney_beans_raw` (già eseguita — stessa specie *Phaseolus vulgaris*, famiglia Fabaceae, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_gialli_secchi` ("Fagioli gialli, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume secco), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173751 --food-id=food_fagioli_gialli_raw \
+  --name-it="Fagioli gialli, secchi crudi" \
+  --matrix-id=fagioli_gialli_secchi --matrix-description-it="Fagioli gialli, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173751 --food-id=food_fagioli_gialli_raw \
+  --name-it="Fagioli gialli, secchi crudi" \
+  --matrix-id=fagioli_gialli_secchi --matrix-description-it="Fagioli gialli, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli kidney "california red", secchi crudi — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_fagioli_kidney_california_red_raw`. FDC ID **173742** (**SR Legacy**, "Beans, kidney, california red, mature seeds, raw" — pagina `getfoodfacts.com/food/beans-kidney-california-red-mature-seeds-raw-173742` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo/corpo, release USDA FoodData Central 30-04-2026, record completo a 59 righe). Scoperto riprendendo lo sweep sistematico della categoria FDC "Legumes and Legume Products" (recipeland.com, 234 alimenti totali, pagina 1 di più: Bacon/Beans A-P) dal punto lasciato dal lotto precedente. Cultivar di *Phaseolus vulgaris* distinta da `food_kidney_beans_raw` già nel DB (valori per 100g diversi: calcio 143→195mg, magnesio 140→160mg, zinco 2,79→2,55mg, ferro 8,2→9,35mg, energia 333→330kcal — non lo stesso record, nonostante fibra/folato/selenio/vitamina C quasi identici per coincidenza tipica fra cultivar della stessa specie). Verificato con `grep` dedicato sia sul nome italiano che sull'FDC ID 173742: zero occorrenze prima di questa voce.
