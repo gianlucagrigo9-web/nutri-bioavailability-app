@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Epilobio (fireweed), foglie crude — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_epilobio_raw`. FDC ID 169399 (SR Legacy, "Fireweed, leaves, raw" — pagina getfoodfacts.com dedicata, categoria "Vegetables and Vegetable Products", FDC ID citato esplicitamente; esiste anche una variante "Alaska Native" con FDC 168988 per le foglie giovani, non usata qui per preferire il record generico). Verificato con `grep` dedicato, zero occorrenze per "epilobio"/"fireweed"/169399 prima della ricerca web.
+- **Nutrienti**: **15/17** (mancano: vitamina K, beta-carotene — stesso pattern del farinello). Per 100g: energia 103kcal, proteine 4,71g, grassi 2,75g, carboidrati 19,2g, fibra 10,6g, calcio 429mg, ferro 2,40mg, zinco 2,66mg, magnesio 156mg, rame 0,32mg, selenio 0,90µg, sodio 34,0mg, vitamina C 2,20mg, folato totale 112µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_scarola_raw` (scarola cruda, già eseguita sul DB reale — stesso precedente già usato per prezzemolo/basilico/menta/cicoria in questa pipeline per verdure a foglia/erbe senza un corrispettivo eseguito nella stessa famiglia botanica: qui Onagraceae, famiglia distinta dalla scarola/Asteraceae, ma stessa categoria funzionale "verdura a foglia cruda").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `epilobio` ("Epilobio (fireweed), foglie crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Onagraceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169399 --food-id=food_epilobio_raw \
+  --name-it="Epilobio (fireweed), foglie crude" \
+  --matrix-id=epilobio --matrix-description-it="Epilobio (fireweed), foglie crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Onagraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169399 --food-id=food_epilobio_raw \
+  --name-it="Epilobio (fireweed), foglie crude" \
+  --matrix-id=epilobio --matrix-description-it="Epilobio (fireweed), foglie crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_scarola_raw \
+  --botanical-family=Onagraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Farinello (Chenopodium album), crudo — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_farinello_raw`. FDC ID 169244 (SR Legacy, "Lambsquarters, raw" — pagina getfoodfacts.com dedicata, categoria "Vegetables and Vegetable Products", FDC ID citato esplicitamente). Verdura spontanea/selvatica (erbaccia comune anche in Italia, consumata occasionalmente come spinaci selvatici). Verificato con `grep` dedicato, zero occorrenze per "farinello"/"lambsquarters"/169244 prima della ricerca web.
