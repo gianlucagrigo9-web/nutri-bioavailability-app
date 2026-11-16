@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Nasello (whiting), cotto (al forno/dry heat) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
+
+- **food_id**: `food_nasello_cotto`. FDC ID **175161** (**SR Legacy**, "Fish, whiting, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-whiting-mixed-species-cooked-dry-heat-175161` dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del nasello crudo già eseguito sul DB reale (`food_nasello_raw`, FDC 173713).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 116kcal, proteine 23,5g, grassi 1,69g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 62,0mg, ferro 0,42mg, magnesio 27,0mg, zinco 0,53mg, rame 0,040mg, selenio 41,1µg, vitamina C 0mg esplicito, folato totale 15,0µg (DFE 15,0µg, acido folico 0µg esplicito), vitamina B12 2,60µg, beta-carotene 0µg esplicito, vitamina K 0,10µg, alfa-carotene e beta-criptoxantina 0µg espliciti. Sodio 132mg/100g (nessun segnale di salamoia).
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo/cod cotto a secco, già eseguito sul DB reale — stessa categoria "pesce magro cotto a secco", stesso genere *Merlangius/Gadidae*).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `nasello_cotto` ("Nasello, cotto").
+- **Attributi**: `is_heme_iron` impostato (true), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=175161 --food-id=food_nasello_cotto \
+  --name-it="Nasello, cotto" \
+  --matrix-id=nasello_cotto --matrix-description-it="Nasello, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175161 --food-id=food_nasello_cotto \
+  --name-it="Nasello, cotto" \
+  --matrix-id=nasello_cotto --matrix-description-it="Nasello, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Fagioli gialli, secchi cotti (bolliti, con sale) — preparato 2026-11-16 dal task (centosettantaduesimo lotto)
 
 - **food_id**: `food_fagioli_gialli_cotti`. FDC ID **175248** (**SR Legacy**, "Beans, yellow, mature seeds, cooked, boiled, with salt" — pagina `getfoodfacts.com/food/beans-yellow-mature-seeds-cooked-boiled-with-salt-175248` dedicata, FDC ID e dataType citati esplicitamente, sodio 241mg/100g). Controparte cotta dei fagioli gialli secchi crudi già preparati nel 170° lotto (FDC 173751, ancora solo "pronto"); nessuna pagina pulita trovata per la variante "without salt" su questa fonte.
