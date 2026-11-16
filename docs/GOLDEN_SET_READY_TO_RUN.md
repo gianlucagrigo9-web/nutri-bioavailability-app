@@ -112,54 +112,6 @@ npm run add-food -- --fdc-id=173412 --food-id=food_ghee_raw \
   --diet-category=egg_dairy --apply
 ```
 
-### Uovo d'oca, intero, fresco, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
-
-- **food_id**: `food_uovo_oca_raw`. FDC ID 172190 (SR Legacy, "Egg, goose, whole, fresh, raw" — confermato via pagina di confronto getfoodfacts.com che cita esplicitamente FDC 172190, fonte dati happyforks.com/food/egg/4099). Uovo di oca mai tentato in questa pipeline (già coperti pollo/anatra/quaglia; oca mancava — verificato con grep dedicato).
-- **Nutrienti**: **15/17**. Per 100g: energia 185kcal, proteine 13,87g, grassi 13,27g, carboidrati 1,35g, fibra 0g esplicito, calcio 60,0mg, ferro 3,64mg, zinco 1,33mg, magnesio 16,0mg, rame 0,062mg, selenio 36,9µg, vitamina C 0mg esplicito, folato totale 76,0µg, vitamina B12 5,1µg, vitamina K 0,4µg. Mancano: beta-carotene, altro carotenoide provitaminico A (vitamina A riportata solo in IU, 650, senza scomposizione).
-- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo di gallina crudo, già eseguito sul DB reale — stessa categoria "uovo intero crudo").
-- **Categoria dieta**: `egg_dairy` (uovo).
-- **Matrice**: nuova `uovo_oca_raw` ("Uovo d'oca, intero, fresco, crudo").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=172190 --food-id=food_uovo_oca_raw \
-  --name-it="Uovo d'oca, intero, fresco, crudo" \
-  --matrix-id=uovo_oca_raw --matrix-description-it="Uovo d'oca, intero, fresco, crudo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=172190 --food-id=food_uovo_oca_raw \
-  --name-it="Uovo d'oca, intero, fresco, crudo" \
-  --matrix-id=uovo_oca_raw --matrix-description-it="Uovo d'oca, intero, fresco, crudo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
-  --diet-category=egg_dairy --apply
-```
-
-### Uovo d'anatra, intero, fresco, crudo — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
-
-- **food_id**: `food_uovo_anatra_raw`. FDC ID 172189 (SR Legacy, "Egg, duck, whole, fresh, raw" — confermato via pagina di confronto getfoodfacts.com che cita esplicitamente FDC 172189, fonte dati happyforks.com/food/egg/26). Stesso buco del precedente, uovo di anatra mai tentato.
-- **Nutrienti**: **15/17**. Per 100g: energia 185kcal, proteine 12,81g, grassi 13,77g, carboidrati 1,45g, fibra 0g esplicito, calcio 64,0mg, ferro 3,85mg, zinco 1,41mg, magnesio 17,0mg, rame 0,062mg, selenio 36,4µg, vitamina C 0mg esplicito, folato totale 80,0µg, vitamina B12 5,4µg, vitamina K 0,4µg. Mancano: beta-carotene, altro carotenoide provitaminico A.
-- **Analogia usata**: `food_egg_raw` (Golden Set originale, uovo di gallina crudo, già eseguito sul DB reale).
-- **Categoria dieta**: `egg_dairy` (uovo).
-- **Matrice**: nuova `uovo_anatra_raw` ("Uovo d'anatra, intero, fresco, crudo").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=172189 --food-id=food_uovo_anatra_raw \
-  --name-it="Uovo d'anatra, intero, fresco, crudo" \
-  --matrix-id=uovo_anatra_raw --matrix-description-it="Uovo d'anatra, intero, fresco, crudo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=172189 --food-id=food_uovo_anatra_raw \
-  --name-it="Uovo d'anatra, intero, fresco, crudo" \
-  --matrix-id=uovo_anatra_raw --matrix-description-it="Uovo d'anatra, intero, fresco, crudo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw \
-  --diet-category=egg_dairy --apply
-```
-
 ### Uova di pesce (roe), miste, cotte (calore secco) — preparato 2026-11-16 dal task (centocinquantaseiesimo lotto)
 
 - **food_id**: `food_uova_di_pesce_cotte`. FDC ID 174239 (SR Legacy, "Fish, roe, mixed species, cooked, dry heat" — confermato via URL getfoodfacts.com che cita esplicitamente FDC 174239, fonte dati happyforks.com/food/roe/1219). **Nota di trasparenza**: la versione CRUDA dello stesso alimento ("Fish, roe, mixed species, raw") ha dati completi su happyforks.com/recipal.com ma nessun FDC ID moderno verificabile (solo ID legacy NDB 15072, non utilizzabile per lo script) — non proposta in questo lotto, resta un ⚠ per blocco di provenienza, non di qualità dato.
@@ -6492,30 +6444,6 @@ npm run add-food -- --fdc-id=324860 --food-id=food_burro_di_arachidi_raw \
   --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
 ```
 
-### Panna da montare (heavy whipping cream) — preparato 2026-11-02 dal task (ottantatreesimo lotto)
-
-- **food_id**: `food_panna_da_montare_raw`. FDC ID 170859 (SR Legacy, "Cream, fluid, heavy whipping" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Latticino ad alto contenuto di grassi mai tentato in questa pipeline, distinto dalla panna da cucina/panna fluida leggera già eseguita (`food_panna_da_cucina_raw`, FDC 170857 "Cream, fluid, light") — record FDC realmente diverso (percentuale di grasso diversa), non un doppione — verificato con `grep` dedicato su "panna montata"/"whipping cream"/"heavy cream"/170859, zero occorrenze su tutti e tre i file prima della ricerca web.
-- **Nutrienti**: **17/17** (record completo). Per 100g: energia 340kcal, proteine 2,84g, grassi 36,1g (alto, coerente con una panna "heavy" ad alto contenuto di grasso — quasi il doppio della panna leggera già eseguita), carboidrati 2,84g, fibra 0g esplicito, calcio 66,0mg, ferro 0,10mg, zinco 0,24mg, magnesio 7,00mg, rame 0,011mg, selenio 3,00µg, vitamina C 0,60mg, folato totale 4,00µg, vitamina B12 0,16µg, vitamina K (fillochinone) 3,20µg, beta-carotene 72,0µg (reale, non nullo — tipico del grasso del latte), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
-- **Analogia usata**: `food_panna_da_cucina_raw` (panna da cucina/panna fluida leggera, già eseguita sul DB reale — stessa categoria funzionale "panna di latte", stesso prodotto base con percentuale di grasso diversa, analogia più diretta possibile).
-- **Categoria dieta**: `egg_dairy` (latticino).
-- **Matrice**: nuova `panna_da_montare` ("Panna da montare").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, latticino), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un latticino nonostante il beta-carotene non nullo, stesso precedente già usato per il formaggio Gruviera in questa stessa coda), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
-
-```
-npm run add-food -- --fdc-id=170859 --food-id=food_panna_da_montare_raw \
-  --name-it="Panna da montare (heavy whipping cream), cruda" \
-  --matrix-id=panna_da_montare --matrix-description-it="Panna da montare" \
-  --baseline-cooking-state=raw --analogy-food-id=food_panna_da_cucina_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=170859 --food-id=food_panna_da_montare_raw \
-  --name-it="Panna da montare (heavy whipping cream), cruda" \
-  --matrix-id=panna_da_montare --matrix-description-it="Panna da montare" \
-  --baseline-cooking-state=raw --analogy-food-id=food_panna_da_cucina_raw \
-  --diet-category=egg_dairy --apply
-```
-
 ### Farina di arrowroot — preparato 2026-11-02 dal task (ottantatreesimo lotto)
 
 - **food_id**: `food_farina_di_arrowroot_raw`. FDC ID 170684 (SR Legacy, "Arrowroot flour" — pagina getfoodfacts.com dedicata e pulita, titolo "Arrowroot flour (SR Legacy)", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Amido/farina da rizoma (*Maranta arundinacea*) mai tentato in questa pipeline, distinto da amido di mais/farina di patate/farina di manioca/tapioca già coperti — verificato con `grep` dedicato su "arrowroot"/"maranta"/170684, zero occorrenze su tutti e tre i file prima della ricerca web.
@@ -6538,54 +6466,6 @@ npm run add-food -- --fdc-id=170684 --food-id=food_farina_di_arrowroot_raw \
   --matrix-id=farina_di_arrowroot --matrix-description-it="Farina di arrowroot" \
   --baseline-cooking-state=raw --analogy-food-id=food_farina_di_patate_raw \
   --botanical-family=Marantaceae --diet-category=plant_non_fruit --apply
-```
-
-### Formaggio Gruviera — preparato 2026-11-02 dal task (ottantatreesimo lotto)
-
-- **food_id**: `food_gruviera_raw`. FDC ID 171242 (SR Legacy, "Cheese, gruyere" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio svizzero a pasta dura mai tentato in questa pipeline nonostante emmentaler/formaggio di capra/parmigiano già coperti (mascarpone/halloumi/formaggio blu/provola/scamorza già scartati ⚠ per assenza di record) — verificato con `grep` dedicato su "gruviera"/"gruyere"/171242, zero occorrenze su tutti e tre i file prima della ricerca web.
-- **Nutrienti**: **17/17** (record completo). Per 100g: energia 413kcal, proteine 29,8g, grassi 32,3g, carboidrati 0,36g, fibra 0g esplicito, calcio 1011mg (alto, coerente con un formaggio stagionato a pasta dura — stesso ordine di grandezza del parmigiano/emmentaler già eseguiti), ferro 0,17mg, zinco 3,90mg, magnesio 36,0mg, rame 0,032mg, selenio 14,5µg, vitamina C 0mg esplicito, folato totale 10,0µg, vitamina B12 1,60µg, vitamina K (fillochinone) 2,70µg, beta-carotene 33,0µg (reale, non nullo — tipico del latte/grasso del formaggio), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
-- **Analogia usata**: `food_formaggio_svizzero_raw` (formaggio svizzero/emmentaler, già eseguito sul DB reale — stessa categoria funzionale "formaggio svizzero stagionato a pasta dura", analogia più diretta possibile).
-- **Categoria dieta**: `egg_dairy` (formaggio).
-- **Matrice**: nuova `gruviera` ("Formaggio Gruviera").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di `food_formaggio_svizzero_raw`/`food_formaggio_di_capra_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
-
-```
-npm run add-food -- --fdc-id=171242 --food-id=food_gruviera_raw \
-  --name-it="Formaggio Gruviera" \
-  --matrix-id=gruviera --matrix-description-it="Formaggio Gruviera" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=171242 --food-id=food_gruviera_raw \
-  --name-it="Formaggio Gruviera" \
-  --matrix-id=gruviera --matrix-description-it="Formaggio Gruviera" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
-  --diet-category=egg_dairy --apply
-```
-
-### Crusca di grano, cruda — preparato 2026-11-02 dal task (ottantatreesimo lotto)
-
-- **food_id**: `food_crusca_di_grano_raw`. FDC ID 169722 (SR Legacy, "Wheat bran, crude" — pagina getfoodfacts.com dedicata e pulita, titolo "USDA Standard Reference · Cereal Grains and Pasta", FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Sottoprodotto della macinazione del grano mai tentato in questa pipeline (crusca d'avena/mais/segale già coperte: la prima eseguita, mais ✅, segale ⚠ per assenza di record) — verificato con `grep` dedicato su "crusca di grano"/"wheat bran"/169722, zero occorrenze su tutti e tre i file prima della ricerca web.
-- **Nutrienti**: **17/17** (record completo). Per 100g: energia 216kcal, proteine 15,6g, grassi 4,25g, carboidrati 64,5g, fibra 42,8g (molto alta, coerente con una crusca disidratata — stesso ordine di grandezza della crusca d'avena/mais già eseguite), calcio 73,0mg, ferro 10,6mg, zinco 7,27mg, magnesio 611mg (alto, coerente), rame 1,0mg, selenio 77,6µg, vitamina C 0mg esplicito, folato totale 79,0µg (folato DFE 79,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 1,90µg, beta-carotene 6,00µg (reale, non nullo), alfa-carotene 0µg + beta-criptoxantina 0µg (= 0µg, "altro carotenoide provitaminico A").
-- **Analogia usata**: `food_germe_di_grano_raw` (germe di grano, già eseguito sul DB reale — stessa pianta *Triticum aestivum*, stesso trattamento funzionale "sottoprodotto della macinazione del grano separato dalla farina").
-- **Categoria dieta**: `plant_non_fruit` (cereale/derivato).
-- **Matrice**: nuova `crusca_di_grano` ("Crusca di grano").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna base per una categoria ossalati), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, stato "crudo" dichiarato dal record FDC, stessa convenzione di durian/cime di rapa — a differenza dei funghi/formaggi in questa stessa coda, qui si tratta di un vero tessuto vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del grano, come per l'analogia germe di grano), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento).
-
-```
-npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_grano_raw \
-  --name-it="Crusca di grano, cruda" \
-  --matrix-id=crusca_di_grano --matrix-description-it="Crusca di grano" \
-  --baseline-cooking-state=raw --analogy-food-id=food_germe_di_grano_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=169722 --food-id=food_crusca_di_grano_raw \
-  --name-it="Crusca di grano, cruda" \
-  --matrix-id=crusca_di_grano --matrix-description-it="Crusca di grano" \
-  --baseline-cooking-state=raw --analogy-food-id=food_germe_di_grano_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
 ```
 
 ### Sciroppo di agave — preparato 2026-11-02 dal task (ottantatreesimo lotto)
@@ -10885,30 +10765,6 @@ npm run add-food -- --fdc-id=169387 --food-id=food_rucola_matura_raw \
   --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
 ```
 
-### Formaggio cottage (creamed, a grana grossa o fine) — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
-
-- **food_id**: `food_formaggio_cottage_raw`. FDC ID 172179 (SR Legacy, "Cheese, cottage, creamed, large or small curd" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; esiste anche un record Survey/FNDDS distinto per lo stesso nome generico, FDC 2705748, scartato per convenzione già in uso in questa coda — Survey/FNDDS non accettato). Formaggio fresco a pasta granulosa mai tentato in questa pipeline, distinto dai formaggi freschi già coperti (ricotta, caprino fresco, formaggio cremoso tipo Philadelphia, mascarpone già ⚠ per assenza di record FDC).
-- **Nutrienti**: **17/17** — record completo. Per 100g: energia 98,0kcal, proteine 11,1g, grassi 4,30g, carboidrati 3,38g, fibra 0g (esplicito), calcio 83,0mg, ferro 0,070mg, magnesio 8,00mg, zinco 0,40mg, selenio 9,70µg, sodio 315mg (coerente con un formaggio fresco salato), vitamina C 0mg (esplicito), folato totale 12,0µg, vitamina B12 0,43µg, vitamina K 0,90µg (menachinone-4, unica forma non nulla delle tre riportate separatamente sulla pagina), vitamina A (RAE) 37,0µg, beta-carotene 12,0µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 172179 e dataType SR Legacy.
-- **Analogia usata**: `food_ricotta` (formaggio fresco a pasta morbida, già eseguito sul DB reale — stessa categoria "formaggio fresco non stagionato").
-- **Categoria dieta**: `egg_dairy` (formaggio, nessun altro ingrediente animale).
-- **Matrice**: nuova `formaggio_cottage` ("Formaggio cottage").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile ai formaggi in questa pipeline), `carotenoid_matrix_state` omesso (NULL — stessa convenzione già usata per gli altri formaggi, il beta-carotene deriva dal latte non da una matrice vegetale classificabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non un vegetale), `baseline_cooking_state=raw` (formaggio fresco, non cotto), `is_fortified_folate` omesso (false — folato coerente con un latticino).
-
-```
-npm run add-food -- --fdc-id=172179 --food-id=food_formaggio_cottage_raw \
-  --name-it="Formaggio cottage (creamed, a grana grossa o fine)" \
-  --matrix-id=formaggio_cottage --matrix-description-it="Formaggio cottage" \
-  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=172179 --food-id=food_formaggio_cottage_raw \
-  --name-it="Formaggio cottage (creamed, a grana grossa o fine)" \
-  --matrix-id=formaggio_cottage --matrix-description-it="Formaggio cottage" \
-  --baseline-cooking-state=raw --analogy-food-id=food_ricotta \
-  --diet-category=egg_dairy --apply
-```
-
 ### Formaggio Muenster — preparato 2026-10-30 dal task (cinquantasettesimo lotto)
 
 - **food_id**: `food_formaggio_muenster_raw`. FDC ID 171245 (SR Legacy, "Cheese, muenster" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Formaggio semiduro vaccino americano mai tentato in questa pipeline, distinto dai formaggi semiduri già coperti (cheddar, Colby, Monterey Jack, svizzero, gouda, edam, gruyère).
@@ -11099,54 +10955,6 @@ npm run add-food -- --fdc-id=168515 --food-id=food_cavolo_rosso_cotto \
   --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
   --baseline-cooking-state=boiled --analogy-food-id=food_broccoli_boiled \
   --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
-```
-
-### Cavolo rosso, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
-
-- **food_id**: `food_cavolo_rosso_raw`. FDC ID 169977 (SR Legacy, "Cabbage, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar pigmentata di *Brassica oleracea*, distinta dal cavolo verza/savoy già eseguito (`food_verza_raw`) e da tutte le altre Brassicaceae già coperte — mai tentata in questa pipeline nonostante l'alta probabilità di match FDC pulito.
-- **Nutrienti**: **17/17** — record completo. Per 100g: energia 31,0kcal, proteine 1,43g, grassi 0,16g, carboidrati 7,37g, fibra 2,10g, calcio 45,0mg, ferro 0,80mg, rame 0,017mg, magnesio 16,0mg, zinco 0,22mg, selenio 0,60µg, vitamina C 57,0mg, folato totale 18,0µg, vitamina B12 0µg (esplicito), vitamina K 38,2µg, beta-carotene 670µg (reale e non nullo), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Sodio 27,0mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169977 e dataType SR Legacy.
-- **Analogia usata**: `food_verza_raw` (cavolo verza/savoy, già eseguito sul DB reale — stessa specie *Brassica oleracea*, cultivar diversa).
-- **Categoria dieta**: `plant_non_fruit`.
-- **Matrice**: nuova `cavolo_rosso` ("Cavolo rosso").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_rosso_raw \
-  --name-it="Cavolo rosso, crudo" \
-  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
-  --baseline-cooking-state=raw --analogy-food-id=food_verza_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=169977 --food-id=food_cavolo_rosso_raw \
-  --name-it="Cavolo rosso, crudo" \
-  --matrix-id=cavolo_rosso --matrix-description-it="Cavolo rosso" \
-  --baseline-cooking-state=raw --analogy-food-id=food_verza_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
-```
-
-### Peperone giallo, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
-
-- **food_id**: `food_peperone_giallo_raw`. FDC ID 169383 (SR Legacy, "Peppers, sweet, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType SR Legacy citati esplicitamente). Cultivar/colore distinto dal peperone rosso già eseguito (`food_pepper_red_raw`) e dal peperone verde già eseguito — distinto anche dal peperone arancione (già ⚠, Foundation troppo lacunoso) e dal peperone jalapeño/a banana (cultivar diverse, già eseguiti).
-- **Nutrienti**: **15/17** — mancano vitamina K (nessuna riga fillochinone sulla pagina consultata, non assunta zero) e `other_provitamin_a_carotenoids_mcg` (alfa-carotene e beta-criptoxantina entrambi assenti dalla tabella, non calcolabile per intero — richiede entrambi i componenti). Per 100g (valori presenti): energia 27,0kcal, proteine 1,00g, grassi 0,21g, carboidrati 6,32g, fibra 0,90g, calcio 11,0mg, ferro 0,46mg, rame 0,11mg, magnesio 12,0mg, zinco 0,17mg, selenio 0,30µg, vitamina C 184mg, folato totale 26,0µg, vitamina B12 0µg (esplicito), beta-carotene 120µg (reale e non nullo). Sodio 2,00mg/100g — non salato. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169383 e dataType SR Legacy.
-- **Analogia usata**: `food_pepper_red_raw` (peperone rosso, già eseguito sul DB reale — stesso genere *Capsicum*, stessa famiglia Solanaceae, colore/cultivar diverso).
-- **Categoria dieta**: `plant_non_fruit`.
-- **Matrice**: nuova `peperone_giallo` ("Peperone giallo").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale non nullo, stato crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=169383 --food-id=food_peperone_giallo_raw \
-  --name-it="Peperone giallo, crudo" \
-  --matrix-id=peperone_giallo --matrix-description-it="Peperone giallo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=169383 --food-id=food_peperone_giallo_raw \
-  --name-it="Peperone giallo, crudo" \
-  --matrix-id=peperone_giallo --matrix-description-it="Peperone giallo" \
-  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 ```
 
 ### Pomodoro Roma, crudo — preparato 2026-10-30 dal task (cinquantacinquesimo lotto)
@@ -11919,32 +11727,6 @@ npm run add-food -- --fdc-id=170168 --food-id=food_castagne_bollite \
   --matrix-id=castagne_bollite --matrix-description-it="Castagne, bollite al vapore" \
   --baseline-cooking-state=boiled --analogy-food-id=food_castagne_raw \
   --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
-```
-
-### Semi di soia, secchi, crudi, interi — preparato 2026-10-29 dal task (cinquantunesimo lotto)
-
-- **food_id**: `food_semi_di_soia_secchi_raw`. FDC ID 174270 (SR Legacy, "Soybeans, mature seeds, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Prima forma del seme di soia intero non germinato di questa pipeline: farina di soia (`food_farina_di_soia_raw`), germogli (`food_germogli_di_soia_raw`/cotti) ed edamame (`food_edamame_bollito`) già fatti, ma non ancora il seme secco crudo.
-- **Nutrienti**: **17/17** — nessun valore mancante. Per 100g: energia 446kcal, proteine 36,5g, grassi 19,9g, carboidrati 30,2g, fibra 9,30g, calcio 277mg, ferro 15,7mg, zinco 4,89mg, magnesio 280mg, rame 1,66mg, selenio 17,8µg, vitamina C 6,00mg, folato totale 375µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K (fillochinone) 47,0µg, beta-carotene 13,0µg (reale, non nullo), alfa-carotene/beta-criptoxantina 0µg espliciti. Sodio 2,00mg/100g — non salato (seme crudo non lavorato). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 174270 e dataType SR Legacy.
-- **Analogia usata**: `food_kidney_beans_raw` (fagioli rossi secchi crudi, Golden Set originale, già eseguiti sul DB reale — stessa convenzione già usata per i nuovi legumi secchi di questa pipeline, es. fagioli lima/pinto/mung/azuki/dall'occhio/fave).
-- **Categoria dieta**: `plant_non_fruit` (legume, nessun ingrediente animale).
-- **Matrice**: nuova `semi_di_soia_secchi` ("Semi di soia, secchi, crudi").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (seme secco crudo non disgregato, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
-
-```
-npm run add-food -- --fdc-id=174270 --food-id=food_semi_di_soia_secchi_raw \
-  --name-it="Semi di soia, secchi, crudi" \
-  --matrix-id=semi_di_soia_secchi --matrix-description-it="Semi di soia, secchi, crudi" \
-  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
-  --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=174270 --food-id=food_semi_di_soia_secchi_raw \
-  --name-it="Semi di soia, secchi, crudi" \
-  --matrix-id=semi_di_soia_secchi --matrix-description-it="Semi di soia, secchi, crudi" \
-  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Fabaceae \
-  --diet-category=plant_non_fruit --apply
 ```
 
 ### Fagioli dall'occhio (cowpea), in scatola, semplici — preparato 2026-10-29 dal task (cinquantunesimo lotto)
@@ -14225,32 +14007,6 @@ npm run add-food -- --fdc-id=2262075 --food-id=food_semi_di_lino_macinati_raw \
 
 *(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
 
-### Alga agar, secca — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
-
-- **food_id**: `food_alga_agar_raw`. FDC ID 170090 (SR Legacy, "Seaweed, agar, dried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quarta alga di questa pipeline dopo nori (già eseguita)/wakame/spirulina (già preparate), mai tentata sotto questo nome — distinta dalle altre per uso tipico come gelificante (agente addensante vegano, sostituto della gelatina) piuttosto che come alimento a sé.
-- **Nutrienti**: **17/17** (completo). Per 100g (valori dalla tabella nutrienti completa, non dal pannello etichetta arrotondato — pannello 310kcal/630mg calcio/6g proteine, tabella 306kcal/625mg/6,21g): energia 306kcal, proteine 6,21g, grassi 0,30g, carboidrati 80,9g, fibra 7,70g, calcio 625mg (molto alto, coerente con la concentrazione per disidratazione, stesso ordine di grandezza già visto per le altre alghe secche di questa pipeline), ferro 21,4mg, zinco 5,80mg, magnesio 770mg, rame 0,61mg, selenio 7,40µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 580µg (alto ma coerente con un'alga secca concentrata, nessuna firma di arricchimento: acido folico 0µg esplicito separato), vitamina K 24,4µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti (a differenza di wakame/spirulina, che avevano carotenoidi reali e non nulli). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170090 e dataType SR Legacy.
-- **Analogia usata**: `food_alga_nori_raw` (alga nori, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "alga marina cruda/secca", stessa convenzione già usata per wakame/spirulina).
-- **Categoria dieta**: `plant_non_fruit` (alga, nessun ingrediente animale).
-- **Matrice**: nuova `alga_agar` ("Alga agar, secca").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per le altre alghe), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti, a differenza di wakame/spirulina dove erano reali e avevano giustificato `raw_intact`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` NULL (nessuna vera famiglia botanica per un'alga, stessa convenzione di `food_alga_nori_raw`/`food_alga_wakame_raw`/`food_alga_spirulina_raw`), `baseline_cooking_state=raw` (secca ma non cotta), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato alto ma naturale dell'alga concentrata).
-
-```
-npm run add-food -- --fdc-id=170090 --food-id=food_alga_agar_raw \
-  --name-it="Alga agar, secca" \
-  --matrix-id=alga_agar --matrix-description-it="Alga agar, secca" \
-  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
-  --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=170090 --food-id=food_alga_agar_raw \
-  --name-it="Alga agar, secca" \
-  --matrix-id=alga_agar --matrix-description-it="Alga agar, secca" \
-  --baseline-cooking-state=raw --analogy-food-id=food_alga_nori_raw \
-  --diet-category=plant_non_fruit --apply
-```
-
-*(Le voci nuove del task si aggiungono in cima a questa sezione; quelle già eseguite stanno in "Eseguiti" in fondo.)*
-
 ### Rafano piccante (salsa di rafano), preparato — preparato 2026-10-26 dal task (trentasettesimo lotto, bonus oltre la quota)
 
 - **food_id**: `food_rafano_piccante_preparato`. FDC ID 173472 (SR Legacy, "Horseradish, prepared" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza sul match**: il vero rafano piccante (*Armoracia rusticana*, distinto dal daikon/*Raphanus sativus* già eseguito come `food_rafano_raw`) non ha un record USDA generico per la radice fresca cruda (l'unico risultato per "Horseradish, raw" è un record USDA Survey/FNDDS, FDC 2710083, fuori dal criterio SR Legacy/Foundation di questa coda) — l'unico record a fonte singola pulita trovato è questo, il prodotto preparato/condimento (radice grattugiata con aceto e sale), rappresenta quindi il condimento commerciale standard, non la radice fresca, stessa convenzione già accettata per capperi in salamoia/ketchup/maionese in questa pipeline (prodotti processati ma mono-ingrediente standard).
@@ -15412,30 +15168,6 @@ npm run add-food -- --fdc-id=170005 --food-id=food_cipollotto_raw \
   --diet-category=plant_non_fruit --apply
 ```
 
-### Formaggio di capra, fresco (tipo soft) — preparato 2026-10-23 dal task (trentesimo lotto)
-
-- **food_id**: `food_formaggio_di_capra_raw`. FDC ID 173435 (SR Legacy, "Cheese, goat, soft type" — pagina getfoodfacts.com dedicata e pulita). Primo formaggio di capra della pipeline (finora solo latte di capra e formaggi vaccini).
-- **Nutrienti**: **17/17**. Per 100g: energia 264kcal, proteine 18,5g, grassi 21,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 140mg, ferro 1,90mg, zinco 0,92mg, magnesio 16,0mg, rame 0,73mg, selenio 2,80µg, vitamina C 0mg esplicito, vitamina B12 0,19µg, folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 1,80µg, beta-carotene 54,0µg, alfa-carotene/beta-criptoxantina 0µg espliciti. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 173435 e dataType SR Legacy.
-- **Analogia usata**: `food_formaggio_svizzero_raw` (formaggio vaccino a pasta dura/semidura, già eseguito sul DB reale — stessa categoria funzionale "formaggio", nessun attributo categorico oltre a cottura/matrice usato per quella voce).
-- **Categoria dieta**: `egg_dairy` (formaggio, nessun ingrediente non-lattiero-caseario).
-- **Matrice**: nuova `formaggio_di_capra` ("Formaggio di capra, fresco").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di `food_formaggio_svizzero_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
-
-```
-npm run add-food -- --fdc-id=173435 --food-id=food_formaggio_di_capra_raw \
-  --name-it="Formaggio di capra, fresco" \
-  --matrix-id=formaggio_di_capra --matrix-description-it="Formaggio di capra, fresco" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=173435 --food-id=food_formaggio_di_capra_raw \
-  --name-it="Formaggio di capra, fresco" \
-  --matrix-id=formaggio_di_capra --matrix-description-it="Formaggio di capra, fresco" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
-  --diet-category=egg_dairy --apply
-```
-
 ### Zucchero a velo (zucchero in polvere) — preparato 2026-10-23 dal task (ventinovesimo lotto, bonus)
 
 - **food_id**: `food_zucchero_a_velo_raw`. FDC ID 169656 (SR Legacy, "Sugars, powdered" — pagina getfoodfacts.com dedicata e pulita). Candidato scoperto durante la ricerca di questo lotto per completare la quota, non previsto originariamente.
@@ -15608,30 +15340,6 @@ npm run add-food -- --fdc-id=174188 --food-id=food_caviale_raw \
   --matrix-id=caviale --matrix-description-it="Caviale (uova di storione)" \
   --baseline-cooking-state=raw --analogy-food-id=food_egg_hard_boiled \
   --diet-category=meat_fish --apply
-```
-
-### Funghi pleurotus (ostrica), crudi — preparato 2026-10-23 dal task (ventottesimo lotto)
-
-- **food_id**: `food_funghi_pleurotus_raw`. FDC ID 168580 (SR Legacy, "Mushrooms, oyster, raw" — pagina getfoodfacts.com dedicata e pulita).
-- **Nutrienti**: **17/17**. Per 100g: energia 33,0kcal, proteine 3,31g, grassi 0,41g, carboidrati 6,09g, fibra 2,30g, calcio 3,00mg, ferro 1,33mg, zinco 0,77mg, magnesio 18,0mg, rame 0,24mg, selenio 2,60µg, vitamina C 0mg esplicito, vitamina B12 0µg esplicito, folato totale 38,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina K 0µg esplicito, beta-carotene 29,0µg (basso ma reale, non assunto zero), altro carotenoide provitaminico A (alfa-carotene+beta-criptoxantina) 0µg. Sodio 18,0mg/100g (riferimento). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 168580 e dataType SR Legacy.
-- **Analogia usata**: `food_mushroom_white_raw` (funghi champignon crudi, Golden Set originale, già eseguito — stessa categoria "fungo crudo", non pianta, nessuna famiglia botanica applicabile, stessa convenzione già usata per shiitake/lievito di birra in questa pipeline).
-- **Categoria dieta**: `plant_non_fruit` (fungo, nessun ingrediente animale).
-- **Matrice**: nuova `funghi_pleurotus` ("Funghi pleurotus (ostrica)").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo), `carotenoid_matrix_state=raw_intact` (beta-carotene basso ma reale e non nullo, fungo crudo non disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, nessuna famiglia botanica, stessa convenzione già usata per champignon/shiitake in questa pipeline), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna firma di arricchimento).
-
-```
-npm run add-food -- --fdc-id=168580 --food-id=food_funghi_pleurotus_raw \
-  --name-it="Funghi pleurotus (ostrica), crudi" \
-  --matrix-id=funghi_pleurotus --matrix-description-it="Funghi pleurotus (ostrica)" \
-  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
-  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=168580 --food-id=food_funghi_pleurotus_raw \
-  --name-it="Funghi pleurotus (ostrica), crudi" \
-  --matrix-id=funghi_pleurotus --matrix-description-it="Funghi pleurotus (ostrica)" \
-  --baseline-cooking-state=raw --analogy-food-id=food_mushroom_white_raw \
-  --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --apply
 ```
 
 ### Ketchup (salsa di pomodoro) — preparato 2026-10-23 dal task (ventottesimo lotto)
