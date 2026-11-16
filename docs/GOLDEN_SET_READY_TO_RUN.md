@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pinoli pinyon (pino americano), secchi — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_pinoli_pinyon_raw`. FDC ID **170592** (**SR Legacy**, "Nuts, pine nuts, pinyon, dried" — pagina `getfoodfacts.com/food/nuts-pine-nuts-pinyon-dried-170592` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). **Distinto dai pinoli già presenti** (`food_pinoli_raw`, FDC **170591**, "Nuts, pine nuts, dried" — record generico, verosimilmente *Pinus pinea* mediterraneo): questo è il pino pinyon nordamericano (*Pinus edulis*/*monophylla*), un record FDC separato con valori nutrizionali diversi (es. fibra 10,7g vs un valore diverso nel generico) — scoperto scorrendo l'elenco sistematico USDA categoria "Nut and Seed Products" (non brainstorm per nome), verificato con grep dedicato zero occorrenze di "pinyon" prima di questa ricerca.
+- **Nutrienti**: **13/17**, dalla tabella ufficiale FDC (via getfoodfacts.com): energia 629kcal, proteine 11,6g, grassi 61,0g, carboidrati 19,3g, fibra 10,7g, calcio 8,00mg, ferro 3,06mg, magnesio 234mg, zinco 4,28mg, rame 1,03mg, vitamina C 2,00mg, folato 58,0µg (DFE), vitamina B12 0µg. **Mancano dal record** (59 nutrienti totali in pagina, non tutti i 17 nostri): selenio, vitamina K, beta-carotene, altri carotenoidi provitamina A (pagina mostra solo Vitamina A RAE 1,00µg, non il componente beta-carotene grezzo richiesto dal nostro schema).
+- **Analogia usata**: `food_pinoli_raw` (stessa famiglia *Pinaceae*, stessa categoria "pinoli", specie diversa — l'analogia più stretta possibile).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `pinoli_pinyon` ("Pinoli pinyon").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Pinaceae`, resto omesso/default (come `food_pinoli_raw`).
+
+```
+npm run add-food -- --fdc-id=170592 --food-id=food_pinoli_pinyon_raw \
+  --name-it="Pinoli pinyon (pino americano), secchi" \
+  --matrix-id=pinoli_pinyon --matrix-description-it="Pinoli pinyon" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pinoli_raw \
+  --botanical-family=Pinaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170592 --food-id=food_pinoli_pinyon_raw \
+  --name-it="Pinoli pinyon (pino americano), secchi" \
+  --matrix-id=pinoli_pinyon --matrix-description-it="Pinoli pinyon" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pinoli_raw \
+  --botanical-family=Pinaceae --diet-category=plant_non_fruit --apply
+```
+
 ### 🟡 Noci pili (pili nuts), secche — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_noci_pili_raw`. FDC ID **170590** ("Nuts, pilinuts, dried") — confermato esplicitamente da `foodstruct.com/food/pilinuts`, link References a `https://fdc.nal.usda.gov/food-details/170590/nutrients`. Frutto a guscio delle Filippine (*Canarium ovatum*), mai tentato prima — verificato con grep dedicato, zero occorrenze. Stessa lacuna dichiarata delle altre voci di questo lotto (dataType non etichettato testualmente) — 🟡.
