@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### 🟡 Ghiande (acorns), crude — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_ghiande_raw`. FDC ID **170157** ("Nuts, acorns, raw") — confermato esplicitamente da `foodstruct.com/food/acorns`, che linka `https://fdc.nal.usda.gov/food-details/170157/nutrients` nella sezione References (link verificato, non un ID indovinato). **Marcato 🟡 non ⚠ perché il dato è solido ma con una lacuna metodologica dichiarata**: nessuna delle pagine raggiunte (`foodstruct.com`, `recipal.com` — cita solo "NBD ID: 12058", numerazione legacy pre-FDC) etichetta esplicitamente il `dataType` (SR Legacy/Foundation); l'intervallo dell'FDC ID (170xxx, stesso blocco di castagne 170575, pecan 170182, noci macadamia 170178 già eseguite) e l'esistenza di un NDB legacy corrispondente rendono SR Legacy quasi certo ma non è una citazione esplicita sulla pagina — lo script stesso lo confermerà ri-scaricando il record reale al momento dell'esecuzione (si ferma se l'ID non esiste/è di tipo incoerente). `getfoodfacts.com` non ha una pagina dedicata trovata (solo un generico "nuts-2671477" non specifico); `caloriefriend.azurewebsites.net` (dominio diverso, mai usato prima in questa sessione) bloccato da `PROVENANCE_REQUIRED` al primo tentativo — vedi nota di correzione nella coda del 169° lotto in `docs/PRD.md`.
+- **Nutrienti**: almeno **13/17** confermati da due fonti indipendenti concordanti (recipal.com per 1 oz/28g scalato, foodstruct.com per 100g diretto — energia 387/392,8kcal, grassi ~24g, carboidrati ~41g, proteine ~6,2g, valori coerenti fra loro entro il 2%): energia, proteine, grassi, carboidrati, fibra, calcio, ferro, magnesio, zinco, rame, vitamina C, folato, vitamina B12. **Non confermabili da queste fonti** (assenti o solo nelle sezioni "coverage" delle pagine, risultate internamente incoerenti di un fattore ~3x rispetto alla tabella principale su entrambi i siti — scartate, non usate): selenio, beta-carotene, altri carotenoidi provitamina A, vitamina K. Il comando ri-scaricherà il record FDC reale, che potrebbe avere un pannello più completo (es. noci pecan FDC 170182 ha dato 17/17 alla scrittura reale nonostante fonti secondarie meno complete).
+- **Analogia usata**: `food_castagne_raw` (FDC 170575, già eseguita sul DB reale — stessa famiglia botanica *Fagaceae*, stesso tipo "frutto a guscio secco crudo").
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/semi, come castagne/pecan/macadamia).
+- **Matrice**: nuova `ghiande` ("Ghiande").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Fagaceae`, resto omesso/default (come l'analogia castagne: nessun `carotenoid-matrix-state`/`matrix-category-calcium` impostato).
+
+```
+npm run add-food -- --fdc-id=170157 --food-id=food_ghiande_raw \
+  --name-it="Ghiande, crude" \
+  --matrix-id=ghiande --matrix-description-it="Ghiande" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170157 --food-id=food_ghiande_raw \
+  --name-it="Ghiande, crude" \
+  --matrix-id=ghiande --matrix-description-it="Ghiande" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
+### 🟡 Faggiole (noci di faggio), secche — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_faggiole_raw`. FDC ID **170161** ("Nuts, beechnuts, dried") — confermato esplicitamente da `foodstruct.com/food/beechnuts`, link References a `https://fdc.nal.usda.gov/fdc-app.html#/food-details/170161/nutrients`. **Stessa lacuna dichiarata dell'voce ghiande sopra** (dataType non etichettato esplicitamente su nessuna pagina raggiunta, solo NDB legacy 12077 su recipal.com; stesso blocco FDC ID 170xxx delle noci già eseguite rende SR Legacy quasi certo ma non citato testualmente) — marcato 🟡, non ⚠, per lo stesso motivo.
+- **Nutrienti**: almeno **13/17** confermati da due fonti indipendenti concordanti (recipal.com 1oz/28g scalato vs foodstruct.com 100g diretto — energia 576kcal su entrambe le fonti, identico; grassi 50g su entrambe, identico; carboidrati ~33,5g, proteine ~6,2g): energia, proteine, grassi, carboidrati, fibra, calcio, ferro, magnesio, zinco, rame, vitamina C, folato, vitamina B12. **Non confermabili** per lo stesso motivo delle ghiande (sezioni "coverage" incoerenti ~3x, scartate): selenio, beta-carotene, altri carotenoidi provitamina A, vitamina K.
+- **Analogia usata**: `food_castagne_raw` (FDC 170575, già eseguita — stessa famiglia *Fagaceae*, genere diverso ma stesso tipo di frutto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `faggiole` ("Faggiole").
+- **Attributi**: `baseline_cooking_state=raw` (il campione "dried" non è cotto, stessa convenzione delle noci pecan/pistacchi "secche crude"), `botanical_family=Fagaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170161 --food-id=food_faggiole_raw \
+  --name-it="Faggiole (noci di faggio), secche" \
+  --matrix-id=faggiole --matrix-description-it="Faggiole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170161 --food-id=food_faggiole_raw \
+  --name-it="Faggiole (noci di faggio), secche" \
+  --matrix-id=faggiole --matrix-description-it="Faggiole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
+### 🟡 Noci hickory, secche — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_noci_hickory_raw`. FDC ID **170177** ("Nuts, hickorynuts, dried") — confermato esplicitamente da `foodstruct.com/food/hickorynuts`, link References a `https://fdc.nal.usda.gov/food-details/170177/nutrients`. Stessa lacuna dichiarata delle due voci sopra (dataType non etichettato testualmente, solo NDB legacy 12130 su recipal.com) — 🟡.
+- **Nutrienti**: almeno **14/17** confermati da due fonti indipendenti concordanti (recipal.com 1cup/120g scalato vs foodstruct.com 100g diretto — energia 657/656,7kcal, grassi 64/64,17g, carboidrati 18/18,33g, proteine 12,7/12,5g, tutte entro l'1%): energia, proteine, grassi, carboidrati, fibra, calcio, ferro, magnesio, zinco, rame, **selenio** (unica delle tre voci con selenio presente su entrambe le fonti: 10mcg recipal, 8,1mcg foodstruct — valori vicini ma non identici, verrà il dato FDC reale a decidere), vitamina C, folato, vitamina B12. **Non confermabili**: beta-carotene, altri carotenoidi provitamina A, vitamina K (sezioni "coverage" di foodstruct incoerenti ~3x come per le altre due, scartate).
+- **Analogia usata**: `food_noci_pecan_raw` (FDC 170182, già eseguita sul DB reale — stessa famiglia *Juglandaceae*, **stesso genere botanico** *Carya* di pecan e hickory, l'analogia più stretta delle tre voci di questo lotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noci_hickory` ("Noci hickory").
+- **Attributi**: `baseline_cooking_state=raw`, `carotenoid_matrix_state=raw_intact` (come l'analogia pecan), `botanical_family=Juglandaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170177 --food-id=food_noci_hickory_raw \
+  --name-it="Noci hickory, secche" \
+  --matrix-id=noci_hickory --matrix-description-it="Noci hickory" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_pecan_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170177 --food-id=food_noci_hickory_raw \
+  --name-it="Noci hickory, secche" \
+  --matrix-id=noci_hickory --matrix-description-it="Noci hickory" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_pecan_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cipolla bianca, cruda — preparato 2026-11-16 dal task (centosessantesimo lotto)
 
 - **food_id**: `food_cipolla_bianca_raw`. FDC ID 1104962 (**Foundation**, "Onions, white, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Distinta dalle cipolle già presenti (`food_onion_raw` generica/gialla, `food_cipolla_dolce_raw` FDC 170008, `food_cipolla_rossa_raw`): nessuna delle tre è "bianca" — verificato con `grep` dedicato sul testo intero di `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md` e `golden_set_foods.sql`, zero occorrenze di "cipolla bianca"/"cipolla dorata"/FDC 1104962 prima di questa ricerca.
