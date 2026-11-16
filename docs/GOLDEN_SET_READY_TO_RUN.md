@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Renna/caribù, spalla, carne secca — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_renna_secca`. FDC ID 168049 (SR Legacy, "Caribou, shoulder meat, dried (Alaska Native)" — ID confermato come coerente su più fonti indipendenti che citano il record USDA, tools.myfooddata.com e caloriefriend.azurewebsites.net; nessuna pagina getfoodfacts.com raggiungibile per questa voce in questo turno, ma l'ID è coerente su tutte le fonti consultate). **Nota**: distinto da `food_renna_raw` (già "pronto" ma non ancora eseguito, FDC 173853 "Game meat, caribou, raw", lotto 32) — qui la versione SECCA/essiccata, FDC diverso. Verificato con `grep` dedicato, zero occorrenze per "caribou.*dried"/"caribù.*secco"/168049 prima della ricerca web.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 271kcal, proteine 59,4g, grassi 3,7g, carboidrati 0g, fibra 0g, calcio 14mg, ferro 11mg, zinco 9,4mg, magnesio 62mg, rame 0,78mg, selenio 36,8µg, sodio 950mg, vitamina C 0mg esplicito, folato totale 8µg, acido folico 0µg esplicito, vitamina B12 15,1µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_capra_raw` (capra cruda, già eseguita sul DB reale — stesso precedente di analogia "carne rossa di selvaggina" già usato per il caribù crudo stesso in questa pipeline, dato che `food_renna_raw` non è ancora eseguito e non può essere usato come analogia per Regola 6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `renna_secca` ("Renna/caribù, spalla, carne secca").
+- **Attributi**: `is_heme_iron` presente (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168049 --food-id=food_renna_secca \
+  --name-it="Renna/caribù, spalla, carne secca" \
+  --matrix-id=renna_secca --matrix-description-it="Renna/caribù, spalla, carne secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168049 --food-id=food_renna_secca \
+  --name-it="Renna/caribù, spalla, carne secca" \
+  --matrix-id=renna_secca --matrix-description-it="Renna/caribù, spalla, carne secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Cuore di leone marino di Steller, crudo — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_cuore_leone_marino_raw`. FDC ID 169002 (SR Legacy, "Sea lion, Steller, heart (Alaska Native)" — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente). Verificato con `grep` dedicato, zero occorrenze per "leone marino"/"sea lion"/169002 prima della ricerca web.
