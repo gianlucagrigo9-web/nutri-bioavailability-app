@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Crisantemo da foglia (tong ho), crudo — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
+
+- **food_id**: `food_crisantemo_raw`. FDC ID **169995** (**SR Legacy**, "Chrysanthemum, garland, raw" — pagina `getfoodfacts.com/food/chrysanthemum-garland-raw-169995` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Verdura a foglia molto comune nelle cucine asiatiche (*Glebionis coronaria*, crisantemo da foglia/tong ho/shungiku), mai tentata prima — scoperta scorrendo l'elenco sistematico USDA categoria "Vegetables and Vegetable Products" (non brainstorm per nome), verificato con grep dedicato zero occorrenze prima di questa ricerca.
+- **Nutrienti**: **15/17** dalla tabella ufficiale FDC (via getfoodfacts.com) — pannello fra i più completi trovati in questo lotto: energia 24,0kcal, proteine 3,36g, grassi 0,56g, carboidrati 3,02g, fibra 3,00g, calcio 117mg, ferro 2,29mg, magnesio 32,0mg, zinco 0,71mg, rame 0,14mg, vitamina C 1,40mg, folato 177µg (DFE), vitamina B12 0µg, **vitamina K 350µg**, **beta-carotene 1380µg**. **Manca solo**: selenio (non presente in pagina, non zero esplicito) e gli altri carotenoidi provitamina A (alfa-carotene/criptoxantina, non riportati separatamente — solo "luteina+zeaxantina" 3834µg, volutamente esclusa dal nostro schema perché priva di attività provitaminica A).
+- **Analogia usata**: `food_radicchio_raw` (già eseguita sul DB reale — stessa famiglia botanica *Asteraceae*, stesso tipo "verdura a foglia cruda").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `crisantemo` ("Crisantemo da foglia").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Asteraceae`, `carotenoid_matrix_state=raw_intact` (coerente con le altre verdure a foglia crude già classificate), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=169995 --food-id=food_crisantemo_raw \
+  --name-it="Crisantemo da foglia (tong ho), crudo" \
+  --matrix-id=crisantemo --matrix-description-it="Crisantemo da foglia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_radicchio_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169995 --food-id=food_crisantemo_raw \
+  --name-it="Crisantemo da foglia (tong ho), crudo" \
+  --matrix-id=crisantemo --matrix-description-it="Crisantemo da foglia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_radicchio_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pinoli pinyon (pino americano), secchi — preparato 2026-11-16 dal task (centosessantanovesimo lotto)
 
 - **food_id**: `food_pinoli_pinyon_raw`. FDC ID **170592** (**SR Legacy**, "Nuts, pine nuts, pinyon, dried" — pagina `getfoodfacts.com/food/nuts-pine-nuts-pinyon-dried-170592` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). **Distinto dai pinoli già presenti** (`food_pinoli_raw`, FDC **170591**, "Nuts, pine nuts, dried" — record generico, verosimilmente *Pinus pinea* mediterraneo): questo è il pino pinyon nordamericano (*Pinus edulis*/*monophylla*), un record FDC separato con valori nutrizionali diversi (es. fibra 10,7g vs un valore diverso nel generico) — scoperto scorrendo l'elenco sistematico USDA categoria "Nut and Seed Products" (non brainstorm per nome), verificato con grep dedicato zero occorrenze di "pinyon" prima di questa ricerca.
