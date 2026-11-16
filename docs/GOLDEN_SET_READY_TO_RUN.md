@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli mungo neri ("urad dal"), bolliti senza sale — preparato 2026-11-16 dal task (centosettantesimo lotto)
+
+- **food_id**: `food_fagioli_mungo_neri_bolliti`. FDC ID **172427** (**SR Legacy**, "Mungo beans, mature seeds, cooked, boiled, without salt" — pagina `getfoodfacts.com/food/mungo-beans-mature-seeds-cooked-boiled-without-salt-172427` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA FoodData Central 30-04-2026). Specie *Vigna mungo* ("black gram"/"urad dal", legume cardine della cucina indiana) — **distinta da *Vigna radiata* (fagiolo mung/"mung bean", già coperto in questa pipeline sia crudo che germogliato)**: specie botanica diversa nonostante il nome simile, non un doppione mascherato (verificato: nessuna occorrenza "mungo"/"urad"/"black gram"/FDC 172427 in nessun file prima di questa voce). **Nessun record raw trovato con FDC ID/dataType confermati**: l'unica pagina per la versione cruda (myfooddata.com, FDC 174259 implicito dall'URL) non cita né FDC ID né dataType sulla pagina stessa — scartata, non promossa (vedi ⚠ in coda PRD). Usata quindi la versione **cotta bollita senza sale**, unica con fonte primaria pulita e verificabile — stesso precedente già accettato per felce arborea e fiore di sesbania nel 169° lotto.
+- **Nutrienti**: **17/17 completo**, nessun valore mancante. Per 100g: energia 105kcal, proteine 7,54g, grassi 0,55g, carboidrati 18,3g, fibra 6,40g, calcio 53,0mg, ferro 1,75mg, magnesio 63,0mg, zinco 0,83mg, rame 0,14mg, selenio 2,50µg, beta-carotene 19,0µg (reale, non nullo — coerente con un legume cotto), vitamina C 1,00mg, folato totale 94,0µg (DFE 94,0µg, acido folico 0µg esplicito — nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina K 2,70µg, alfa-carotene 0µg + beta-criptoxantina 0µg (entrambi espliciti). Riquadro "per porzione" (1 cup/180g) con alcuni scostamenti di arrotondamento etichetta rispetto alla tabella per 100g (calcio 100mg pannello vs 95,4mg×1,8 calcolato, sodio 15mg vs 12,6mg) — differenze dichiarate dalla pagina come arrotondamento FDA (21 CFR 101.9), non trattate come incoerenza di dato; la tabella per 100g resta la fonte usata.
+- **Analogia usata**: `food_kidney_beans_boiled` (già eseguita — stessa famiglia botanica reale Fabaceae, stesso stato di cottura bollito senza sale, specie diversa dichiarata esplicitamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_mungo_neri_bolliti` ("Fagioli mungo neri, bolliti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 19,0µg reale e non nullo, legume cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172427 --food-id=food_fagioli_mungo_neri_bolliti \
+  --name-it="Fagioli mungo neri (\"urad dal\"), bolliti senza sale" \
+  --matrix-id=fagioli_mungo_neri_bolliti --matrix-description-it="Fagioli mungo neri, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172427 --food-id=food_fagioli_mungo_neri_bolliti \
+  --name-it="Fagioli mungo neri (\"urad dal\"), bolliti senza sale" \
+  --matrix-id=fagioli_mungo_neri_bolliti --matrix-description-it="Fagioli mungo neri, bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli gialli, secchi crudi — preparato 2026-11-16 dal task (centosettantesimo lotto)
 
 - **food_id**: `food_fagioli_gialli_raw`. FDC ID **173751** (**SR Legacy**, "Beans, yellow, mature seeds, raw" — pagina `getfoodfacts.com/food/beans-yellow-mature-seeds-raw-173751` dedicata e pulita, FDC ID e dataType citati esplicitamente nel testo, release USDA FoodData Central 30-04-2026, record a 60 righe). Scoperto nello stesso sweep sistematico della categoria "Legumes and Legume Products" (recipeland.com, pagina 2/4, voci 61-120 di 234). Cultivar di *Phaseolus vulgaris* distinta da tutte quelle già coperte (kidney, cannellini, borlotti, neri, pinto, great northern, california red). Verificato con `grep` dedicato sia sul nome italiano "fagiolo giallo" sia sull'FDC ID 173751: zero occorrenze prima di questa voce.
