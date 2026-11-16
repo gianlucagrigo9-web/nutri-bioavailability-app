@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Rapa di prateria (prairie turnip, Pediomelum esculentum), bollita — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
+
+- **food_id**: `food_rapa_di_prateria_cotta`. FDC ID 168996 (SR Legacy, "Prairie Turnips, boiled (Northern Plains Indians)" — pagina getfoodfacts.com dedicata, categoria "American Indian/Alaska Native Foods", FDC ID citato esplicitamente nell'URL e nel testo). Radice/tubero tradizionale dei nativi delle Grandi Pianure nordamericane (*Pediomelum esculentum*, Fabaceae); nessun record FDC trovato per la versione cruda. Verificato con `grep` dedicato, zero occorrenze per "rapa di prateria"/"prairie turnip"/168996 prima della ricerca web.
+- **Nutrienti**: **12/17** (mancano: selenio, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene). Per 100g: energia 129kcal, proteine 1,64g, grassi 0,32g, carboidrati 30,0g, fibra 7,20g, calcio 103mg, ferro 0,95mg, zinco 0,28mg, magnesio 49,0mg, rame 0,038mg, sodio 4,00mg, vitamina C 2,00mg.
+- **Analogia usata**: `food_potato_boiled_in_skin` (patata bollita in buccia, già eseguita sul DB reale — stessa categoria funzionale "tubero/radice amidacea bollita"; famiglia botanica diversa, Fabaceae contro Solanaceae, ma nessun tubero Fabaceae già eseguito nel DB).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `rapa_di_prateria` ("Rapa di prateria (prairie turnip), bollita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168996 --food-id=food_rapa_di_prateria_cotta \
+  --name-it="Rapa di prateria (prairie turnip), bollita" \
+  --matrix-id=rapa_di_prateria --matrix-description-it="Rapa di prateria (prairie turnip), bollita" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_boiled_in_skin \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168996 --food-id=food_rapa_di_prateria_cotta \
+  --name-it="Rapa di prateria (prairie turnip), bollita" \
+  --matrix-id=rapa_di_prateria --matrix-description-it="Rapa di prateria (prairie turnip), bollita" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_potato_boiled_in_skin \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Epilobio (fireweed), foglie crude — preparato 2026-11-16 dal task (centocinquantatreesimo lotto)
 
 - **food_id**: `food_epilobio_raw`. FDC ID 169399 (SR Legacy, "Fireweed, leaves, raw" — pagina getfoodfacts.com dedicata, categoria "Vegetables and Vegetable Products", FDC ID citato esplicitamente; esiste anche una variante "Alaska Native" con FDC 168988 per le foglie giovani, non usata qui per preferire il record generico). Verificato con `grep` dedicato, zero occorrenze per "epilobio"/"fireweed"/169399 prima della ricerca web.
