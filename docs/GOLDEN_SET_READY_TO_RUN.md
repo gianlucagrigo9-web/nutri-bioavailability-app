@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Agave, secca (Southwest) — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_agave_secca` (distinto da `food_agave_raw` FDC 169814 e `food_agave_cotta` FDC 168992, entrambi già "pronti" in coda dal lotto citato — stessa pianta, terzo stato/preparazione, FDC diverso; verificato con grep, nessuna collisione). FDC ID 168993 (**SR Legacy**, "Agave, dried (Southwest)" — categoria "American Indian/Alaska Native Foods", confermato via `tools.myfooddata.com/nutrition-facts/168993/100g/1` che cita esplicitamente il link alla pagina ufficiale `fdc.nal.usda.gov/food-details/168993/nutrients`; nessuna pagina getfoodfacts.com dedicata trovata per questo specifico FDC, fonte comunque verificata e univoca).
+- **Nutrienti**: **17/17 completo**, nessun valore mancante. Per 100g: energia 341kcal, proteine 1,7g, grassi 0,69g, carboidrati 82g (molto concentrati, coerente con un prodotto essiccato), fibra 15,6g, calcio 770mg (ancora più elevato della versione cruda, 417mg — coerente con la concentrazione per essiccazione, stessa pianta ricca di ossalato di calcio), ferro 3,6mg, magnesio 207mg, zinco 12,1mg, rame 0,19mg, selenio 0,6µg, beta-carotene 11µg (reale, non nullo), vitamina C 0,3mg, folato totale 7µg, vitamina B12 0µg esplicito, vitamina K (fillochinone, riga "Vitamin K1") 0µg esplicito — distinta dalla riga generica "Vitamin K" della stessa fonte (0,5µg), non usata per lo stesso motivo di trasparenza già applicato altrove in questa pipeline (il motore mappa solo FDC #430 phylloquinone) —, altri carotenoidi provitaminici A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_kale_raw` (stesso precedente dichiarato per `food_agave_raw`/`food_agave_cotta`, per il comportamento del campo calcio).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `agave_secca`.
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo; stessa convenzione già usata in questa pipeline per altri essiccati come albicocche/prugne/fichi secchi/datteri), `botanical_family=Asparagaceae`, `baseline_cooking_state=dried`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=168993 --food-id=food_agave_secca \
+  --name-it="Agave, secca (Southwest)" \
+  --matrix-id=agave_secca --matrix-description-it="Agave, secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168993 --food-id=food_agave_secca \
+  --name-it="Agave, secca (Southwest)" \
+  --matrix-id=agave_secca --matrix-description-it="Agave, secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Sale da cucina — preparato 2026-11-17 dal task (193° lotto)
 
 - **food_id**: `food_sale_da_cucina` (verificato con grep, nessuna voce di sale presente in nessun formato prima di questa). FDC ID 173468 (**SR Legacy**, "Salt, table" — pagina `getfoodfacts.com/food/salt-table-173468` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026).
