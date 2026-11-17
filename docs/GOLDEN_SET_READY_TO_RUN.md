@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Mandorle, intere, crude — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_mandorle_raw` (id descrittivo distinto dal riservato `food_almonds_raw`, riga legacy del primo seed demo mai riusata in questa pipeline — verificato con grep dedicato su PRD/GOLDEN_SET/golden_set_foods.sql, zero occorrenze di `food_mandorle_raw` prima di questa voce). FDC ID 2346393 (**Foundation Foods**, "Nuts, almonds, whole, raw" — pagina `getfoodfacts.com/food/nuts-almonds-whole-raw-2346393` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026).
+- **Nutrienti**: **11/17**. Per 100g: energia 584kcal (nota di trasparenza: la pagina mostra due valori leggermente diversi, "584" nel riquadro statistico e un arrotondamento a "580" nell'intestazione/pannello etichetta — stesso tipo di piccola discrepanza interna già accettata altrove in questa pipeline, uso il valore del riquadro statistico "per 100g"), proteine 21,5g, grassi 51,1g, carboidrati 20,0g, fibra 10,8g, calcio 254mg, ferro 3,74mg, magnesio 258mg, zinco 2,87mg, rame 0,91mg, vitamina K (phylloquinone) 0µg esplicito. **Mancano** (assenti dal record, non zero esplicito): selenio, beta-carotene, vitamina C, folato totale, vitamina B12, altri carotenoidi provitaminici A (alfa-carotene/beta-criptoxantina) — gap plausibile per un frutto a guscio crudo, dichiarato come lacuna FDC, non assunto.
+- **Analogia usata**: `food_noci_raw` (noci comuni, Golden Set originale, già eseguita sul DB reale — stessa categoria "frutta a guscio cruda", nessuna mandorla ancora presente nel DB reale per un'analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `mandorle` ("Mandorle").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Rosaceae` (*Prunus dulcis*), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2346393 --food-id=food_mandorle_raw \
+  --name-it="Mandorle, intere, crude" \
+  --matrix-id=mandorle --matrix-description-it="Mandorle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346393 --food-id=food_mandorle_raw \
+  --name-it="Mandorle, intere, crude" \
+  --matrix-id=mandorle --matrix-description-it="Mandorle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Burro di mandorle, naturale (senza sale) — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_burro_di_mandorle` (verificato con grep, nessuna occorrenza precedente). FDC ID 168588 (**SR Legacy**, "Nuts, almond butter, plain, without salt added" — pagina confermata via `tools.myfooddata.com/nutrition-facts/168588/100g`, che cita esplicitamente FDC 168588 e linka la pagina ufficiale `fdc.nal.usda.gov/food-details/168588/nutrients`; nessuna pagina getfoodfacts.com dedicata trovata, fonte comunque verificata e univoca). Questo è l'equivalente SR Legacy del candidato Foundation originale della checklist ("Almond butter, creamy", FDC 2262074), per cui nessuna fonte con FDC ID verificabile è stata trovata — stesso tipo di sostituzione già accettata altrove in questa pipeline quando il record SR Legacy mappato ha una fonte più pulita del Foundation originale.
+- **Nutrienti**: **16/17**. Per 100g: energia 614kcal, proteine 21g, grassi 55,5g, carboidrati 18,8g, fibra 10,3g, calcio 347mg, ferro 3,5mg, magnesio 279mg, zinco 3,3mg, rame 0,93mg, selenio 2,4µg, beta-carotene 1µg, vitamina C 0mg esplicito, folato totale 53µg, vitamina B12 0µg esplicito, altri carotenoidi provitaminici A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca** solo la vitamina K: la fonte riporta una riga "Vitamin K1" (phylloquinone, il nutriente mappato dal nostro motore) come dato mancante ("--"), distinta da una riga generica "Vitamin K" totale a 0µg — per trasparenza non uso quel valore totale per il campo phylloquinone-specifico, resta `null`.
+- **Analogia usata**: `food_noci_raw` (noci comuni, Golden Set originale, già eseguita sul DB reale — stessa categoria funzionale "frutto a guscio trasformato in crema/burro", nessun'altra crema di frutta a guscio ancora presente nel DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `burro_di_mandorle` ("Burro di mandorle").
+- **Attributi**: `baseline_cooking_state=raw`, `botanical_family=Rosaceae`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=168588 --food-id=food_burro_di_mandorle \
+  --name-it="Burro di mandorle, naturale (senza sale)" \
+  --matrix-id=burro_di_mandorle --matrix-description-it="Burro di mandorle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168588 --food-id=food_burro_di_mandorle \
+  --name-it="Burro di mandorle, naturale (senza sale)" \
+  --matrix-id=burro_di_mandorle --matrix-description-it="Burro di mandorle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Burro, salato — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_burro_salato` (verificato con grep, nessuna occorrenza precedente; distinto da `food_burro`, già eseguito sul DB reale, che è SENZA sale — FDC 173430 "Butter, without salt"). FDC ID 790508 (**Foundation Foods**, "Butter, stick, salted" — pagina `getfoodfacts.com/food/butter-stick-salted-790508` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **11/17**. Per 100g: grassi 82,2g, calcio 21,0mg, ferro 0,060mg, magnesio 1,60mg, zinco 0,070mg, rame 0,0060mg, selenio 0µg esplicito, beta-carotene 168µg, folato totale 5,00µg, vitamina B12 0µg esplicito, altri carotenoidi provitaminici A (alfa-carotene 2,00 + beta-criptoxantina 8,00) = 10,00µg. **Nota di trasparenza — gap inusuale**: a differenza del burro senza sale già eseguito (17/17), questo record Foundation più recente **non riporta affatto** proteine, carboidrati, energia, fibra e vitamina C (il blocco etichetta della pagina li marca esplicitamente "not declared", non zero) — un pannello macro/energia incompleto non comune per un grasso puro, ma coerente con il pattern già osservato in questa pipeline per altre voci Foundation recentissime (es. le bistecche di manzo Foundation valutate in questo stesso lotto, vedi coda sotto): il pannello vitaminico/minerale è completo ma quello macro no. Sodio 524mg (non uno dei 17 nutrienti tracciati, riportato solo per contesto — coerente con un burro salato).
+- **Analogia usata**: `food_burro` (burro senza sale, Golden Set originale, già eseguito sul DB reale — stesso prodotto, variante con sale aggiunto).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `burro_salato` ("Burro salato").
+- **Attributi**: resto omesso/default (come `food_burro`).
+
+```
+npm run add-food -- --fdc-id=790508 --food-id=food_burro_salato \
+  --name-it="Burro, salato" \
+  --matrix-id=burro_salato --matrix-description-it="Burro salato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=790508 --food-id=food_burro_salato \
+  --name-it="Burro, salato" \
+  --matrix-id=burro_salato --matrix-description-it="Burro salato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro \
+  --diet-category=egg_dairy --apply
+```
+
+### Latticello (buttermilk), magro — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_latticello_magro_raw` (distinto da `food_latticello_raw`, già "pronto" in coda ma non eseguito — FDC 172225 "Milk, buttermilk, fluid, WHOLE", prodotto a diverso contenuto di grasso; verificato con grep, nessuna collisione). FDC ID 170874 (**SR Legacy**, "Milk, buttermilk, fluid, cultured, lowfat" — pagina `getfoodfacts.com/food/milk-buttermilk-fluid-cultured-lowfat-170874` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026). Equivalente SR Legacy del candidato Foundation originale della checklist ("Buttermilk, low fat", FDC 2259792), sostituzione per fonte più pulita, stessa convenzione già usata altrove in questa pipeline.
+- **Nutrienti**: **17/17 completo**, nessun valore mancante. Per 100g: energia 40,0kcal, proteine 3,31g, grassi 1,07g, carboidrati 4,79g, fibra 0g esplicito, calcio 116mg, ferro 0,050mg, magnesio 11,0mg, zinco 0,42mg, rame 0,011mg, selenio 2,00µg, beta-carotene 1,00µg, vitamina C 1,00mg, folato totale 5,00µg, vitamina B12 0,22µg, vitamina K (phylloquinone) 0,10µg, altri carotenoidi provitaminici A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_latte_scremato_raw` (latte scremato, Golden Set, già eseguito sul DB reale — stessa categoria "liquido lattiero-caseario magro", stessa analogia già usata per la besciamella in questa pipeline).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `latticello_magro` ("Latticello magro").
+- **Attributi**: resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=170874 --food-id=food_latticello_magro_raw \
+  --name-it="Latticello (buttermilk), magro" \
+  --matrix-id=latticello_magro --matrix-description-it="Latticello magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170874 --food-id=food_latticello_magro_raw \
+  --name-it="Latticello (buttermilk), magro" \
+  --matrix-id=latticello_magro --matrix-description-it="Latticello magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Balena beluga, carne, secca — preparato 2026-11-17 dal task (192° lotto)
 
 - **food_id**: `food_balena_beluga_secca`. FDC ID 169795 (SR Legacy, "Whale, beluga, meat, dried (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, titolo "Whale, beluga, meat, dried (Alaska Native) (SR Legacy) nutrition facts", FDC ID e dataType citati esplicitamente, trovata tramite `WebSearch` fresca su `https://getfoodfacts.com/food/whale-beluga-meat-dried-alaska-native-169795`). Risolve uno dei lead aperti in `docs/PENDING_HUMAN_ACTIONS.md` dal 185°/186° lotto (intorno FDC 169795-169796 "da verificare se la pagina diventa raggiungibile"). Distinto dalla carne di balena beluga CRUDA, già valutata e scartata `⚠` ai lotti precedenti (nessun FDC ID verificabile per quella variante, solo un ID NDB legacy su recipal.com) — questa è una preparazione diversa (secca/essiccata) con un record FDC reale e verificabile, prima voce di balena di questa pipeline. Gli altri lead collegati (occhi FDC 169796, pinna cruda FDC 168979, fegato FDC~168980/168983) restano bloccati da `PROVENANCE_REQUIRED` o non confermati — dettaglio in `docs/PENDING_HUMAN_ACTIONS.md`.
