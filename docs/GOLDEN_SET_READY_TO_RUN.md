@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Struzzo, filetto (tenderloin), crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_filetto_raw`. FDC ID 172845 (SR Legacy, "Ostrich, tenderloin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Secondo taglio specifico di struzzo di questo stesso lotto (vedi lombata/top loin sopra), stesso filone mai sfruttato prima. Verificato con `grep` su "struzzo"/"ostrich"/"172845": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 123kcal, proteine 22,1g, grassi 3,19g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 4,88mg (il più alto fra i tagli di struzzo valutati in questo lotto), magnesio 22,0mg, zinco 3,87mg, rame 0,14mg, selenio 36,4µg, sodio 86,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 5,03µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record).
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — ancora solo "Pronti" non eseguito, unica voce della stessa specie disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_filetto_raw` ("Struzzo, filetto, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172845 --food-id=food_struzzo_filetto_raw \
+  --name-it="Struzzo, filetto (tenderloin), crudo" \
+  --matrix-id=struzzo_filetto_raw --matrix-description-it="Struzzo, filetto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172845 --food-id=food_struzzo_filetto_raw \
+  --name-it="Struzzo, filetto (tenderloin), crudo" \
+  --matrix-id=struzzo_filetto_raw --matrix-description-it="Struzzo, filetto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, lombata (top loin), cruda — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_lombata_raw`. FDC ID 174489 (SR Legacy, "Ostrich, top loin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Taglio specifico distinto dal generico `food_struzzo_raw` (FDC 174481, "Ostrich, ground, raw", ancora solo "Pronti" non eseguito) — nota già presente in questa pipeline per lo struzzo ("FDC traccia solo tagli specifici... più il generico macinato") ma finora mai sfruttata per un taglio a sé: la lombata/controfiletto è il taglio magro pregiato più noto della carne di struzzo, record molto più completo del macinato (16/17 contro il gap tipico). Verificato con `grep` su "struzzo"/"ostrich"/"174489": nessuna occorrenza per questo FDC ID o taglio specifico prima di questa aggiunta (solo il generico macinato crudo/cotto già presente come "Pronti").
