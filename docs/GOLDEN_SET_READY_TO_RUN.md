@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Soia verde fresca (soybean verde, non congelata), cruda — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_soia_verde_fresca_raw`. FDC ID 169282 (SR Legacy, "Soybeans, green, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente sulla pagina). Record distinto da `food_edamame_raw` (FDC 168410, "Edamame, frozen, unprepared", **13/17**, già eseguito sul DB reale): questo è il seme di soia verde **fresco/non congelato**, non la preparazione "edamame" surgelata — stato di conservazione diverso, più completo su micronutrienti (vitamina C 29,0mg presente qui, assente nel record frozen). Verificato con `grep` su "169282"/"soybeans green": zero occorrenze prima di questa aggiunta (solo il record frozen 168410/168411 risultava già coperto).
+- **Nutrienti**: **14/17**. Per 100g: energia 147kcal (lieve discrepanza con l'etichetta della pagina che mostra 150kcal, arrotondamento non significativo — Regola 6), proteine 12,9g, grassi 6,80g, carboidrati 11,1g, fibra 4,20g, calcio 197mg, ferro 3,55mg, magnesio 65,0mg, zinco 0,99mg, rame 0,13mg, selenio 1,50µg, sodio 15,0mg, vitamina C 29,0mg, folato totale 165µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A (non riportati nel record).
+- **Analogia usata**: `food_edamame_raw` (edamame crudo surgelato, già eseguito sul DB reale — stessa specie *Glycine max*, stesso seme immaturo/verde, stato di conservazione diverso).
+- **Categoria dieta**: `plant_non_fruit` (legumi).
+- **Matrice**: nuova `soia_verde_fresca_raw` ("Soia verde fresca, cruda").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169282 --food-id=food_soia_verde_fresca_raw \
+  --name-it="Soia verde fresca (non congelata), cruda" \
+  --matrix-id=soia_verde_fresca_raw --matrix-description-it="Soia verde fresca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_edamame_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169282 --food-id=food_soia_verde_fresca_raw \
+  --name-it="Soia verde fresca (non congelata), cruda" \
+  --matrix-id=soia_verde_fresca_raw --matrix-description-it="Soia verde fresca, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_edamame_raw \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Fagioli kidney "royal red", cotti (bolliti, senza sale) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_fagioli_kidney_royal_red_bolliti`. FDC ID 175197 (SR Legacy, "Beans, kidney, royal red, mature seeds, cooked, boiled, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza (Regola 6)**: stesso filone lasciato aperto dal 170° lotto (vedi nota sul fagiolo rosa in questo stesso lotto) — il kidney "royal red" crudo era stato scartato ⚠ per assenza di pagina getfoodfacts.com, ma il cotto (questo record) ne ha una, mai promossa prima. Cultivar di kidney distinta da `food_kidney_beans_boiled` (Golden Set originale) e da `food_fagioli_kidney_california_red_raw` (170° lotto) — valori per 100g differenti su calcio/magnesio/sodio, non lo stesso record. Verificato con `grep` su "royal red"/"175197": zero occorrenze prima di questa aggiunta.
