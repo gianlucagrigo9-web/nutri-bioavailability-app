@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Black bass / persico trota d'acqua dolce, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_pesce_black_bass_cotto`. FDC ID 171989 (SR Legacy, "Fish, bass, freshwater, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-bass-freshwater-mixed-species-cooked-dry-heat-171989` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del black bass già `food_pesce_black_bass_raw` (FDC 174184, "Fish, bass, fresh water, mixed species, raw", 134° lotto, non ancora eseguito — stesso record USDA a specie miste, solo lo spazio "fresh water"/"freshwater" differisce fra le due pagine getfoodfacts).
+- **Nutrienti**: **14/17**. Per 100g: energia 146kcal, proteine 24,2g, grassi 4,73g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 103mg, ferro 1,91mg, magnesio 38,0mg, zinco 0,83mg, rame 0,12mg, selenio 16,2µg, vitamina C 2,10mg, folato totale 17,0µg, vitamina B12 2,31µg, vitamina A/retinolo 35,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_luccio_cotto` (pesce d'acqua dolce cotto, già eseguito sul DB reale — stesso ambiente acqua dolce, analogia funzionale più vicina disponibile; non usata l'analogia col crudo omonimo perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_black_bass_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171989 --food-id=food_pesce_black_bass_cotto \
+  --name-it="Black bass / persico trota d'acqua dolce, misto, cotto (calore secco)" \
+  --matrix-id=pesce_black_bass_cotto --matrix-description-it="Black bass / persico trota d'acqua dolce, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_luccio_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171989 --food-id=food_pesce_black_bass_cotto \
+  --name-it="Black bass / persico trota d'acqua dolce, misto, cotto (calore secco)" \
+  --matrix-id=pesce_black_bass_cotto --matrix-description-it="Black bass / persico trota d'acqua dolce, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_luccio_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sheepshead (pesce), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_pesce_sheepshead_cotto`. FDC ID 175145 (SR Legacy, "Fish, sheepshead, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-sheepshead-cooked-dry-heat-175145` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo 175144). Completa la coppia crudo/cotto del sheepshead già `food_pesce_sheepshead_raw` (FDC 175144, 133° lotto, non ancora eseguito).
