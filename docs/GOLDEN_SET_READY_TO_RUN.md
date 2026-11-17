@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Fagioli rosa (pink beans), cotti (bolliti, con sale) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_fagioli_rosa_bolliti`. FDC ID 173795 (SR Legacy, "Beans, pink, mature seeds, cooked, boiled, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Varietà mai tentata in questa pipeline. **Nota di trasparenza (Regola 6)**: il 170° lotto (2026-11-16) aveva già cercato il fagiolo rosa ma solo nella versione **crudo** ("Beans, pink, mature seeds, raw"), scartata ⚠ per assenza di pagina getfoodfacts.com dedicata — segnalando esplicitamente che "solo le varianti cooked sono indicizzate" senza però proseguire su quella pista; questo lotto raccoglie quel filone lasciato aperto, verificando che il **cotto** ha davvero una pagina primaria pulita (173795), mai promossa prima. **Voce "con sale" dichiarata esplicitamente** (sodio 238mg/100g, valore alto coerente con l'aggiunta di sale in cottura, non con salamoia industriale) — nessuna versione "without salt" con pagina getfoodfacts.com dedicata reperibile, stesso tipo di compromesso già accettato altrove in questa pipeline per prodotti in scatola/salati quando è l'unica fonte primaria pulita disponibile. Verificato con `grep` su "fagioli rosa"/"pink bean"/"173795": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta.
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 149kcal, proteine 9,06g, grassi 0,49g, carboidrati 27,9g, fibra 5,30g, calcio 52,0mg, ferro 2,30mg, magnesio 65,0mg, zinco 0,96mg, rame 0,27mg, selenio 1,40µg, sodio 238mg (con sale, vedi nota sopra), vitamina C 0mg esplicito, folato totale 168µg (valore alto, coerente con i legumi), acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina K 3,70µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_kidney_beans_boiled` (Golden Set originale, fagioli rossi cotti bolliti, già eseguito sul DB reale — stesso genere *Phaseolus*, stesso stato cotto bollito, stessa famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legumi).
+- **Matrice**: nuova `fagioli_rosa_bolliti` ("Fagioli rosa, cotti, con sale").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173795 --food-id=food_fagioli_rosa_bolliti \
+  --name-it="Fagioli rosa, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_rosa_bolliti --matrix-description-it="Fagioli rosa, cotti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173795 --food-id=food_fagioli_rosa_bolliti \
+  --name-it="Fagioli rosa, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_rosa_bolliti --matrix-description-it="Fagioli rosa, cotti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Fagioli navy (navy beans), cotti (bolliti) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_fagioli_navy_bolliti`. FDC ID 173746 (SR Legacy, "Beans, navy, mature seeds, cooked, boiled, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Varietà di fagiolo (*Phaseolus vulgaris*) mai tentata in questa pipeline nonostante l'ampia copertura di altre varietà (borlotti, cannellini, lima, neri, pinto, azuki, mung, alati, dall'occhio, gialli). **Voce cotto-only deliberata**: il crudo generico "Beans, navy, mature seeds, raw" non ha una pagina getfoodfacts.com dedicata indicizzata (solo aggregatori secondari), mentre il cotto sì — stesso schema già accettato altrove in questa pipeline quando solo uno dei due stati ha una fonte primaria pulita. Verificato con `grep` su "navy"/"173746": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (nessun fagiolo navy tentato finora).
