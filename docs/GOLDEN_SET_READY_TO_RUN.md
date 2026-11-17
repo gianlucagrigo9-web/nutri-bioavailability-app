@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Ling (pesce), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **RIAPERTURA parziale di un candidato "incagliato" (voce in `docs/PENDING_HUMAN_ACTIONS.md`, URL stuck su `PROVENANCE_REQUIRED`)**: il crudo "ling, raw" (FDC 173670) resta bloccato sulla stessa URL già nota `fish-ling-raw-173670`, mai riuscita in nessuna sessione — **non preparato in questo lotto**. Il **cotto** vive però su una URL diversa e mai richiesta prima (`fish-ling-cooked-dry-heat-174234`), riuscita al primo tentativo — stessa lezione del 169°/174° lotto: il blocco è per URL specifica già incagliata, non per la specie o la sessione nel suo complesso.
+- **food_id**: `food_pesce_ling_cotto`. FDC ID 174234 (SR Legacy, "Fish, ling, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-ling-cooked-dry-heat-174234` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie *Molva molva*/*Genypterus* (gadiforme), distinta dal lingcod già eseguito (`food_pesce_lingcod_raw`, *Ophiodon elongatus*, famiglia Hexagrammidae — nome simile ma specie non collegata).
+- **Nutrienti**: **14/17**. Per 100g: energia 111kcal, proteine 24,4g, grassi 0,82g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 44,0mg, ferro 0,83mg, magnesio 81,0mg, zinco 1,00mg, rame 0,14mg, selenio 46,8µg, vitamina C 0mg (esplicito), folato totale 8,00µg, vitamina B12 0,65µg, vitamina A/retinolo 35,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco magro cotto, già eseguito sul DB reale — stesso ordine Gadiformes).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_ling_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174234 --food-id=food_pesce_ling_cotto \
+  --name-it="Ling (pesce), cotto (calore secco)" \
+  --matrix-id=pesce_ling_cotto --matrix-description-it="Ling (pesce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174234 --food-id=food_pesce_ling_cotto \
+  --name-it="Ling (pesce), cotto (calore secco)" \
+  --matrix-id=pesce_ling_cotto --matrix-description-it="Ling (pesce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Eperlano arcobaleno (rainbow smelt), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **RIAPERTURA di un ⚠ precedente (Regola 6, con fonte genuinamente diversa)**: "eperlano arcobaleno (rainbow smelt), crudo" era già stato scartato ⚠ il 2026-10-29 perché l'unica fonte trovata allora (triagemethod.com) non dichiarava un FDC ID. In questo lotto `getfoodfacts.com` espone pagine dedicate e pulite sia per il crudo (FDC 175146) sia per il cotto (FDC 175147, confermato anche dal link di confronto `getfoodfacts.com/compare/fish-smelt-rainbow-raw-175146/...`) — fonte diversa e migliore di quella del 2026-10-29, non un retry della stessa fonte già scartata.
