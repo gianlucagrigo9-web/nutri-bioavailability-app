@@ -93,6 +93,30 @@ npm run add-food -- --fdc-id=174352 --food-id=food_cervella_di_vitello_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Lingua di agnello, cotta (brasata) — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+
+- **food_id**: `food_lingua_di_agnello_cotta`. FDC ID **174367** (**SR Legacy**, "Lamb, variety meats and by-products, tongue, cooked, braised" — pagina `getfoodfacts.com/food/lamb-variety-meats-and-by-products-tongue-cooked-braised-174367` dedicata, riga "Source" esplicita "SR Legacy, FDC 174367"). Buco segnalato dal 162° lotto senza essere mai colmato: quel lotto cercava la lingua d'agnello CRUDA (FDC 174366, solo 10/17 su fonte secondaria, resta ⚠) e aveva notato di passaggio che getfoodfacts.com indicizza invece la versione COTTA/braised (174367) — mai effettivamente fetchata né valutata finché questo lotto non l'ha verificata con `grep` (zero occorrenze dell'FDC ID 174367 prima della ricerca) e recuperata.
+- **Nutrienti**: **14/17**. Per 100g: energia 275kcal, proteine 21,6g, grassi 20,3g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 10,0mg, ferro 2,63mg, magnesio 16,0mg, zinco 2,99mg, rame 0,21mg, selenio 28,0µg, vitamina C 7,00mg, folato totale 3,00µg (acido folico 0µg esplicito), vitamina B12 6,30µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene/beta-criptoxantina (non riportati). Sodio 67,0mg/100g (basso, nessun segnale di salamoia/iniezione). Colesterolo 189mg/100g (coerente con una frattaglia muscolare cotta, non anomalo).
+- **Analogia usata**: `food_fegato_di_agnello_cotto` (fegato d'agnello cotto, stessa specie ovina, già eseguito sul DB reale — stessa categoria funzionale "frattaglia ovina cotta").
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `lingua_di_agnello_cotta` ("Lingua di agnello, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso standard delle altre lingue/frattaglie), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174367 --food-id=food_lingua_di_agnello_cotta \
+  --name-it="Lingua di agnello, cotta (brasata)" \
+  --matrix-id=lingua_di_agnello_cotta --matrix-description-it="Lingua di agnello, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174367 --food-id=food_lingua_di_agnello_cotta \
+  --name-it="Lingua di agnello, cotta (brasata)" \
+  --matrix-id=lingua_di_agnello_cotta --matrix-description-it="Lingua di agnello, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_agnello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Surimi (imitazione gamberetto a base di polpa di pesce) — preparato 2026-11-17 dal task (centosettantatreesimo lotto)
 
 - **food_id**: `food_surimi`. FDC ID **171973** (**SR Legacy**, "Crustaceans, shrimp, mixed species, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-imitation-made-from-surimi-171973` dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente in più punti della pagina — titolo, paragrafo introduttivo e riga "Source:" — nonostante l'etichetta generica "USDA reference food" sopra il titolo, risultata ambigua e non indicativa del tier reale su questo sito, vedi nota metodologica sotto). Prodotto genuinamente nuovo (categoria "prodotti trasformati mono-ingrediente a base di pesce"): verificato con `grep` dedicato su "surimi"/"imitation" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web.
