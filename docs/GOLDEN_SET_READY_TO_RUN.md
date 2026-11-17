@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, fegato, cotto in padella (pan-fried) — preparato 2026-11-17 dal task (188° lotto)
+
+- **food_id**: `food_fegato_di_manzo_cotto_padella`. FDC ID 168627 (SR Legacy, "Beef, variety meats and by-products, liver, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). **Nota di trasparenza (Regola 6)**: il fegato di manzo cotto esiste già nel DB reale come `food_beef_liver_cooked` (FDC 168626, "cooked, braised", uno dei 30 alimenti originali del Golden Set) — questa è una voce **a sé stante, metodo di cottura distinto** (pan-fried vs braised), stesso principio già applicato più volte in questa pipeline per varianti di cottura con FDC ID realmente diverso (es. bistecca di manzo griglia/padella, coscia di pollo arrosto/brasata). Non un doppione: FDC ID diverso, valori nutrizionali diversi (vedi sotto), nome esplicitamente distinto nel food_id (`_padella`) per evitare ambiguità con l'entry esistente.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 175kcal, proteine 26,5g, grassi 4,68g, fibra 0g (esplicito), calcio 6,00mg, ferro 6,17mg, zinco 5,23mg, magnesio 22,0mg, rame 14,6mg, selenio 32,8µg, sodio 77,0mg (basso, nessun segnale di salamoia), folato totale 260µg (endogeno, tipico del fegato, nessuna firma di arricchimento), vitamina C 0,70mg, vitamina B12 83,1µg, vitamina K 3,90µg, beta-carotene 182µg, beta-criptoxantina 21,0µg.
+- **Analogia usata**: `food_beef_liver_cooked` (già eseguita sul DB reale — stessa specie, stesso organo, stesso stato cotto, trim/metodo di cottura diverso ma attributi categorici identici).
+- **Categoria dieta**: `meat_fish` (carne/frattaglia).
+- **Matrice**: nuova `fegato_di_manzo_cotto_padella`.
+- **Attributi**: `is_heme_iron` (flag attivo — fegato di mammifero, stesso valore di `food_beef_liver_cooked`), `matrix_category_calcium` omesso (NULL, stesso precedente), `carotenoid_matrix_state` omesso (NULL — prodotto animale, beta-carotene/criptoxantina qui presenti come valori di tabella ma non trattati come carotenoidi vegetali da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile), `baseline_cooking_state=pan_fried`, `is_fortified_folate` omesso (false — folato endogeno tipico del fegato, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168627 --food-id=food_fegato_di_manzo_cotto_padella \
+  --name-it="Manzo, fegato, cotto in padella" \
+  --matrix-id=fegato_di_manzo_cotto_padella --matrix-description-it="Manzo, fegato, cotto in padella" \
+  --baseline-cooking-state=pan_fried --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168627 --food-id=food_fegato_di_manzo_cotto_padella \
+  --name-it="Manzo, fegato, cotto in padella" \
+  --matrix-id=fegato_di_manzo_cotto_padella --matrix-description-it="Manzo, fegato, cotto in padella" \
+  --baseline-cooking-state=pan_fried --analogy-food-id=food_beef_liver_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, spalla (arm picnic), separable lean and fat, cotta (arrosto) — preparato 2026-11-17 dal task (prosecuzione del centottantasettesimo lotto)
 
 - **food_id**: `food_maiale_spalla_picnic_cotta`. FDC ID 168257 (SR Legacy, "Pork, fresh, shoulder, arm picnic, separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). **Nota di trasparenza (Regola 6), riapertura esplicita**: il sessantunesimo lotto (2026-10-30) aveva scartato ⚠ questo stesso FDC ID perché il suo trim ("separable lean and fat") non si accoppia con il crudo già pronto `food_maiale_spalla_picnic_raw` (FDC 168258, trim "separable lean only") — stesso tipo di disallineamento crudo/cotto segnalato per vitello stinco/petto nello stesso lotto. Il crudo è però stato successivamente promosso come **voce a sé stante** ("crudo-only deliberata", vedi sopra/§180° lotto) proprio superando il requisito di accoppiamento rigido; questa voce applica lo stesso principio in modo simmetrico: FDC 168257 è un record primario pulito e completo nel suo trim proprio, promosso come voce "cotto-only" a sé, non come controparte esatta del crudo 168258. Nessun dato derivato da pannello arrotondato: tutti i valori sotto sono dalla tabella dettagliata "per 100g" (63 nutrienti), non dal pannello riepilogo per porzione da 85g (differenze solo da arrotondamento, eccetto il calcio: pannello 20mg vs tabella 19,0mg/100g — usata la tabella, come da convenzione).
