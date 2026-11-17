@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Ciliegia selvatica americana (chokecherry), cruda, denocciolata (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
+
+- **food_id**: `food_ciliegia_selvatica_raw`. FDC ID 168058 (SR Legacy, "Chokecherries, raw, pitted (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie botanica distinta (*Prunus virginiana*, ciliegia selvatica nordamericana) dalla ciliegia dolce già eseguita (`food_ciliegie_raw`, *Prunus avium*) — non un doppione, specie e record FDC diversi. **Nota sul secondo record trovato per lo stesso alimento**: esiste anche FDC 168999 "Chokecherries, raw, pitted (Northern Plains Indians)" — stessa specie/preparazione, stessa fonte etnografica USDA ma popolazione nativa diversa (15/17 nutrienti, mancano selenio e B12) — **scartato come quasi-doppione mascherato** (stesso identico alimento, due sole fonti campione tribali distinte, non due preparazioni realmente diverse) a favore del record più completo (168058, 17/17), stessa logica già applicata ai casi nespola/nespole e funghi ostrica/pleurotus in `docs/PENDING_HUMAN_ACTIONS.md`. Verificato con `grep` dedicato, zero occorrenze per "chokecherr"/"ciliegia selvatica" prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 156kcal (nota: pannello etichetta/meta-descrizione riportano 160kcal, piccola discrepanza di arrotondamento sulla stessa pagina — usato il valore della tabella "per 100g"), proteine 2,89g, grassi 0,98g, fibra 17,0g, calcio 40,0mg, ferro 0,40mg, zinco 0,19mg, magnesio 21,0mg, rame 0,068mg, selenio 1,70µg, sodio 2,00mg, vitamina C 0,70mg, vitamina B12 0µg esplicito, folato totale 10,0µg, beta-carotene 26,0µg (reale, non nullo), beta-criptoxantina 0µg esplicito, vitamina K (fillochinone) 29,3µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 168058 e SR Legacy.
+- **Analogia usata**: `food_ciliegie_raw` (ciliegie dolci crude, già eseguite sul DB reale — stesso genere *Prunus*, frutto a drupa).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `ciliegia_selvatica_denocciolata`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile — frutta, stesso trattamento di `food_ciliegie_raw`/`food_amarene_in_scatola`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico non in firma di arricchimento, folato 10,0µg coerente con frutta fresca).
+
+```
+npm run add-food -- --fdc-id=168058 --food-id=food_ciliegia_selvatica_raw \
+  --name-it="Ciliegia selvatica americana (chokecherry), cruda, denocciolata" \
+  --matrix-id=ciliegia_selvatica_denocciolata --matrix-description-it="Ciliegia selvatica americana, cruda, denocciolata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168058 --food-id=food_ciliegia_selvatica_raw \
+  --name-it="Ciliegia selvatica americana (chokecherry), cruda, denocciolata" \
+  --matrix-id=ciliegia_selvatica_denocciolata --matrix-description-it="Ciliegia selvatica americana, cruda, denocciolata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ciliegie_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Prugna selvatica americana (wild plum), cruda (Northern Plains Indians) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
 
 - **food_id**: `food_prugna_selvatica_raw`. FDC ID 169820 (SR Legacy, "Plums, wild (Northern Plains Indians)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie botanica distinta (*Prunus americana*, prugna selvatica nordamericana) dalla prugna comune già eseguita (`food_prugne_raw`, *Prunus domestica*) — non un doppione, specie e record FDC diversi. Verificato con `grep` dedicato, zero occorrenze prima della ricerca web.
