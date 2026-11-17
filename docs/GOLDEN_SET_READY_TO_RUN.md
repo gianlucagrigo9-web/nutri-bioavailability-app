@@ -16,6 +16,136 @@
 
 ## Pronti
 
+### Merluzzo del Pacifico, congelato — preparato 2026-11-17 dal task (194° lotto)
+
+- **food_id**: `food_merluzzo_pacifico_raw` (distinto da `food_merluzzo_raw`, FDC 171955 "Fish, cod, Atlantic, raw" SR Legacy, già eseguito sul DB reale — specie diversa, *Gadus macrocephalus* vs *Gadus morhua*, non un doppione; verificato con grep dedicato, zero collisioni). FDC ID 2747654 (**Foundation Foods**, "Cod, Pacific or Alaskan, frozen, wild caught" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente nel titolo/intro, release USDA FoodData Central 30-04-2026).
+- **Nutrienti**: **11/17**. Per 100g (dalla tabella dettagliata della fonte): energia ~60kcal (il riepilogo della stessa pagina mostra valori leggermente diversi, 60/61/60,8 — usata la tabella nutrienti dettagliata), proteine 14,2g, grassi 0,22g, carboidrati 0,52g, calcio 9,01mg, ferro 0mg esplicito, magnesio 17,9mg, zinco 0,27mg, rame ~0,0086mg, selenio 22,3µg, vitamina B12 0,59µg. **Mancano** (non riportati sulla pagina, non assunti zero): fibra (la pagina è internamente contraddittoria, "not declared" vs riquadro "0g" — trattata come non riportata), beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K — gap atteso per un pesce magro (nessun carotenoide/vitamina C nella carne di pesce).
+- **Analogia usata**: `food_merluzzo_raw` (stessa famiglia Gadidae, stesso genere *Gadus*, già eseguito sul DB reale), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `merluzzo_pacifico`.
+- **Attributi**: `baseline_cooking_state=raw` (congelato ma non cotto), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2747654 --food-id=food_merluzzo_pacifico_raw \
+  --name-it="Merluzzo del Pacifico, congelato" \
+  --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2747654 --food-id=food_merluzzo_pacifico_raw \
+  --name-it="Merluzzo del Pacifico, congelato" \
+  --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Semi di girasole, tostati, salati — preparato 2026-11-17 dal task (194° lotto)
+
+- **food_id**: `food_semi_di_girasole_tostati_salati` (distinto da `food_semi_di_girasole_tostati`, FDC 170563 "senza sale", già eseguito sul DB reale — variante CON sale, sodio significativamente diverso, non un doppione; verificato con grep dedicato). FDC ID 325524 (**Foundation Foods**, "Seeds, sunflower seed kernels, dry roasted, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **16/17** — manca solo vitamina B12 (atteso, nessun alimento vegetale ne contiene, non assunta zero ma non riportata). Per 100g: energia 612kcal (tabella dettagliata; l'etichetta riassuntiva mostra 610kcal), proteine 21,0g, grassi 56,1g, carboidrati 17,1g, fibra 10,3g, calcio 78,0mg, ferro 5,21mg, magnesio 358mg, zinco 6,00mg, rame 1,83mg, selenio 80,4µg, beta-carotene 10,0µg, alfa-carotene 0µg esplicito, beta-criptoxantina 1,00µg, vitamina C 0mg esplicito, folato totale 169µg, vitamina K 1,20µg.
+- **Analogia usata**: `food_semi_di_girasole_tostati` (stesso seme *Helianthus annuus*, stessa tostatura, differisce solo per il sale aggiunto — già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `semi_di_girasole_tostati_salati`.
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (seme tostato, stessa convenzione già usata per mandorle/nocciole/pistacchi/anacardi/semi di zucca tostati), `botanical_family=Asteraceae` (coerente con la voce già eseguita), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=325524 --food-id=food_semi_di_girasole_tostati_salati \
+  --name-it="Semi di girasole, tostati, salati" \
+  --matrix-id=semi_di_girasole_tostati_salati --matrix-description-it="Semi di girasole tostati salati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_girasole_tostati \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=325524 --food-id=food_semi_di_girasole_tostati_salati \
+  --name-it="Semi di girasole, tostati, salati" \
+  --matrix-id=semi_di_girasole_tostati_salati --matrix-description-it="Semi di girasole tostati salati" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_semi_di_girasole_tostati \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### More selvatiche dell'Alaska, crude — preparato 2026-11-17 dal task (194° lotto)
+
+- **food_id**: `food_more_selvatiche_alaska_raw` (distinto da `food_more_raw`, FDC 173946 "Blackberries, raw" SR Legacy generico, già eseguito sul DB reale — variante selvatica/regionale con FDC proprio, non un doppione; verificato con grep dedicato). FDC ID 168982 (**SR Legacy**, "Blackberries, wild, raw (Alaska Native)" — pagina getfoodfacts.com e tools.myfooddata.com dedicate e concordanti, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **16/17** — manca solo selenio (non riportato sulla pagina, non assunto zero). Per 100g: energia 52,0kcal, proteine 0,84g, grassi 1,07g, carboidrati 9,84g, fibra 3,20g, calcio 5,00mg, ferro 0,21mg, magnesio 4,00mg, zinco 0,15mg, rame 0,22mg, beta-carotene 27,0µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito, vitamina C 4,70mg, folato totale 11,0µg, vitamina B12 0µg esplicito, vitamina K 5,90µg.
+- **Analogia usata**: `food_more_raw` (stesso genere *Rubus*, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `more_selvatiche_alaska`.
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo), `botanical_family=Rosaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168982 --food-id=food_more_selvatiche_alaska_raw \
+  --name-it="More selvatiche dell'Alaska, crude" \
+  --matrix-id=more_selvatiche_alaska --matrix-description-it="More selvatiche dell'Alaska" \
+  --baseline-cooking-state=raw --analogy-food-id=food_more_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168982 --food-id=food_more_selvatiche_alaska_raw \
+  --name-it="More selvatiche dell'Alaska, crude" \
+  --matrix-id=more_selvatiche_alaska --matrix-description-it="More selvatiche dell'Alaska" \
+  --baseline-cooking-state=raw --analogy-food-id=food_more_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
+### Manzo, controfiletto (top loin/strip steak), crudo — preparato 2026-11-17 dal task (194° lotto)
+
+- **food_id**: `food_manzo_controfiletto_raw` (taglio "top loin"/strip steak, dal lombo corto — distinto dal "top sirloin" già valutato ⚠ nel 193° lotto, muscolo diverso; verificato con grep dedicato, zero collisioni). FDC ID 746759 (**Foundation Foods**, "Beef, loin, top loin steak, boneless, lip-on, separable lean only, trimmed to 1/8" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, grado "choice" confermato nel testo, release USDA 30-04-2026).
+- **Nutrienti**: **11/17** — pattern già osservato nel 193° lotto per altri tagli Foundation recenti (pannello minerali completo, selenio e B12 presenti, pannello vitaminico/carotenoidi assente), qui sopra la soglia di qualità ~10/17 grazie a selenio+B12 presenti (a differenza di chuck/flank/ribeye/NY strip scartati nel lotto precedente a 9/17). Per 100g (tabella dettagliata): energia 155kcal (etichetta riassuntiva 160kcal, usata la tabella), proteine 22,8g, grassi 6,39g, carboidrati 0g esplicito, calcio 15,0mg, ferro 1,90mg, magnesio 11,3mg, zinco 3,76mg, rame 0,043mg, selenio 21,3µg, vitamina B12 1,72µg. **Mancano** (non riportati, non assunti zero): fibra (ambigua sulla fonte, "not declared" vs riquadro "0g"), beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K — gap atteso per carne rossa.
+- **Analogia usata**: `food_beef_ground_raw` (stessa specie *Bos taurus*, già eseguito sul DB reale, convenzione standard per i tagli di manzo crudo in questa pipeline), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `manzo_controfiletto`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=746759 --food-id=food_manzo_controfiletto_raw \
+  --name-it="Manzo, controfiletto (top loin steak), crudo" \
+  --matrix-id=manzo_controfiletto --matrix-description-it="Manzo, controfiletto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=746759 --food-id=food_manzo_controfiletto_raw \
+  --name-it="Manzo, controfiletto (top loin steak), crudo" \
+  --matrix-id=manzo_controfiletto --matrix-description-it="Manzo, controfiletto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Granchio, polpa pastorizzata (lump meat) — preparato 2026-11-17 dal task (194° lotto)
+
+- **food_id**: `food_granchio_pastorizzato` (distinto da `food_granchio_cotto`, FDC 174205 "Crustaceans, crab, blue, cooked, moist heat" SR Legacy, già eseguito sul DB reale — stessa specie (granchio blu), preparazione industriale diversa: pastorizzato/refrigerato pronto all'uso invece di cotto in casa, non un doppione; verificato con grep dedicato). FDC ID 2684446 (**Foundation Foods**, "Crustaceans, crab, blue swimming, lump, pasteurized, refrigerated" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **11/17**, stesso pattern Foundation già osservato (minerali+selenio+B12 presenti, vitamine/carotenoidi assenti). Per 100g (tabella dettagliata): energia 86kcal (una tabella di confronto sulla stessa pagina mostra 90kcal, usata la tabella nutrienti), proteine 18,6g, grassi 0,81g, carboidrati 0g esplicito, calcio 111mg, ferro 0,63mg, magnesio 43,1mg, zinco 3,48mg, rame 1,09mg, selenio 45,8µg, vitamina B12 3,12µg, retinolo 0µg esplicito. **Mancano**: fibra, beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K.
+- **Analogia usata**: `food_granchio_cotto` (stessa specie, granchio blu *Callinectes sapidus*, già eseguito sul DB reale), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `granchio_pastorizzato`.
+- **Attributi**: `baseline_cooking_state=cooked` (la polpa è cotta/bollita prima della pastorizzazione, prodotto pronto all'uso, non crudo), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2684446 --food-id=food_granchio_pastorizzato \
+  --name-it="Granchio, polpa pastorizzata (lump meat)" \
+  --matrix-id=granchio_pastorizzato --matrix-description-it="Granchio, polpa pastorizzata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2684446 --food-id=food_granchio_pastorizzato \
+  --name-it="Granchio, polpa pastorizzata (lump meat)" \
+  --matrix-id=granchio_pastorizzato --matrix-description-it="Granchio, polpa pastorizzata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Agave, secca (Southwest) — preparato 2026-11-17 dal task (193° lotto)
 
 - **food_id**: `food_agave_secca` (distinto da `food_agave_raw` FDC 169814 e `food_agave_cotta` FDC 168992, entrambi già "pronti" in coda dal lotto citato — stessa pianta, terzo stato/preparazione, FDC diverso; verificato con grep, nessuna collisione). FDC ID 168993 (**SR Legacy**, "Agave, dried (Southwest)" — categoria "American Indian/Alaska Native Foods", confermato via `tools.myfooddata.com/nutrition-facts/168993/100g/1` che cita esplicitamente il link alla pagina ufficiale `fdc.nal.usda.gov/food-details/168993/nutrients`; nessuna pagina getfoodfacts.com dedicata trovata per questo specifico FDC, fonte comunque verificata e univoca).
