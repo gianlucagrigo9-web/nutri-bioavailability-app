@@ -16,6 +16,62 @@
 
 ## Pronti
 
+### Struzzo, tip trimmed, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_tip_trimmed_raw`. FDC ID 172846 (SR Legacy, "Ostrich, tip trimmed, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Settimo taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "172846": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 114kcal, proteine 21,9g, grassi 2,30g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 2,86mg, magnesio 22,0mg, zinco 3,74mg, rame 0,14mg, selenio 35,2µg, sodio 67,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 4,98µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (assente dalla tabella vitamine della pagina). Nota: il pannello Nutrition Facts per porzione mostra il calcio come "0mg" mentre la tabella per 100g dà 5,00mg — valore qui preso dalla tabella completa, non dal pannello; tutti gli altri valori del pannello sono coerenti.
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — ancora solo "Pronti" non eseguito, unica voce della stessa specie disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_tip_trimmed_raw` ("Struzzo, tip trimmed, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172846 --food-id=food_struzzo_tip_trimmed_raw \
+  --name-it="Struzzo, tip trimmed, crudo" \
+  --matrix-id=struzzo_tip_trimmed_raw --matrix-description-it="Struzzo, tip trimmed, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172846 --food-id=food_struzzo_tip_trimmed_raw \
+  --name-it="Struzzo, tip trimmed, crudo" \
+  --matrix-id=struzzo_tip_trimmed_raw --matrix-description-it="Struzzo, tip trimmed, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
+### Struzzo, inside strip, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_inside_strip_raw`. FDC ID 172841 (SR Legacy, "Ostrich, inside strip, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Ottavo taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "172841": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 127kcal, proteine 23,7g, grassi 2,87g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 4,20mg, magnesio 23,0mg, zinco 3,98mg, rame 0,14mg, selenio 37,5µg, sodio 76,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 5,40µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (assente dalla tabella vitamine della pagina). Nota: il pannello Nutrition Facts per porzione mostra il calcio come "0mg" e i grassi saturi come "1g" (vs 0,92g/100g attesi) mentre la tabella per 100g dà valori leggermente diversi — valori qui presi dalla tabella completa, non dal pannello.
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — ancora solo "Pronti" non eseguito, unica voce della stessa specie disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_inside_strip_raw` ("Struzzo, inside strip, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172841 --food-id=food_struzzo_inside_strip_raw \
+  --name-it="Struzzo, inside strip, crudo" \
+  --matrix-id=struzzo_inside_strip_raw --matrix-description-it="Struzzo, inside strip, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172841 --food-id=food_struzzo_inside_strip_raw \
+  --name-it="Struzzo, inside strip, crudo" \
+  --matrix-id=struzzo_inside_strip_raw --matrix-description-it="Struzzo, inside strip, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, oyster, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_oyster_raw`. FDC ID 174487 (SR Legacy, "Ostrich, oyster, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Sesto taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "174487": nessuna occorrenza prima di questa aggiunta.
