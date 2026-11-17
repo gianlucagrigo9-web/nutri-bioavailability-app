@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Emu, full rump, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_emu_full_rump_raw`. FDC ID 174479 (SR Legacy, "Emu, full rump, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Terzo taglio specifico di emu di questo stesso lotto (vedi outside/inside drum sopra). Verificato con `grep` su "174479": nessuna occorrenza prima di questa aggiunta. Nota: "emu, fan fillet, raw" (FDC 174476) e "emu, flat fillet, raw" (FDC 174478) valutati ma scartati ⚠ in questo stesso lotto — nessuna pagina getfoodfacts.com dedicata trovata per questi due tagli (solo una pagina `/compare/` che li cita insieme senza fornire la tabella nutrienti completa come fonte primaria), a differenza di questo full rump che ha una pagina `/food/` individuale.
+- **Nutrienti**: **16/17**. Per 100g: energia 112kcal, proteine 22,8g, grassi 1,64g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 4,00mg, ferro 4,96mg, magnesio 40,0mg, zinco 3,59mg, rame 0,21mg, selenio 32,5µg, sodio 90,0mg, vitamina C 0mg esplicito, folato totale 13,0µg, acido folico 0µg esplicito, vitamina B12 2,24µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Pannello Nutrition Facts per porzione coerente con la tabella per 100g dopo arrotondamento FDA (unica piccola discrepanza: calorie pannello 100kcal vs 95,2kcal/porzione attese dalla tabella, differenza non spiegabile dal solo arrotondamento ma non rilevante per i valori per 100g qui riportati, presi dalla tabella completa).
+- **Analogia usata**: `food_anatra_raw` (anatra domestica, carne senza pelle, cruda — già eseguita sul DB reale, stesso pattern già usato per `food_emu_raw`, outside drum e inside drum sopra).
+- **Categoria dieta**: `meat_fish` (carne/pollame).
+- **Matrice**: nuova `emu_full_rump_raw` ("Emu, full rump, cruda").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174479 --food-id=food_emu_full_rump_raw \
+  --name-it="Emu, full rump, crudo" \
+  --matrix-id=emu_full_rump_raw --matrix-description-it="Emu, full rump, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174479 --food-id=food_emu_full_rump_raw \
+  --name-it="Emu, full rump, crudo" \
+  --matrix-id=emu_full_rump_raw --matrix-description-it="Emu, full rump, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Emu, outside drum, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_emu_outside_drum_raw`. FDC ID 172837 (SR Legacy, "Emu, outside drum, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Seconda ratite tracciata dalla pipeline con tagli specifici FDC (dopo lo struzzo): FDC traccia per l'emu full rump, inside/outside drum, fan/flat fillet oltre al generico "ground" già eseguito come `food_emu_raw`. Verificato con `grep` su "172837": nessuna occorrenza prima di questa aggiunta.
