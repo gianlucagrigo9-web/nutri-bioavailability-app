@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sale da cucina — preparato 2026-11-17 dal task (193° lotto)
+
+- **food_id**: `food_sale_da_cucina` (verificato con grep, nessuna voce di sale presente in nessun formato prima di questa). FDC ID 173468 (**SR Legacy**, "Salt, table" — pagina `getfoodfacts.com/food/salt-table-173468` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **17/17 completo**, nessun valore mancante — quasi tutti zero esplicito (coerente con un minerale puro): proteine 0g, grassi 0g, carboidrati 0g, energia 0kcal, fibra 0g, calcio 24,0mg, ferro 0,33mg, magnesio 1,00mg, zinco 0,10mg, rame 0,030mg, selenio 0,10µg, beta-carotene 0µg, vitamina C 0mg, folato totale 0µg, vitamina B12 0µg, vitamina K 0µg, altri carotenoidi provitaminici A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg. Sodio 38.758mg/100g (non uno dei 17 tracciati, riportato per contesto — coerente con cloruro di sodio quasi puro).
+- **Analogia usata**: `food_zucchero_bianco` (zucchero bianco, Golden Set, già eseguito sul DB reale — stessa categoria funzionale "sostanza pura/condimento minerale, profilo nutrizionale quasi integralmente a zero", nessun'altra sostanza minerale pura ancora presente nel DB reale per un'analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit` (sostanza minerale, non di origine animale né frutto).
+- **Matrice**: nuova `sale` ("Sale da cucina").
+- **Attributi**: resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=173468 --food-id=food_sale_da_cucina \
+  --name-it="Sale da cucina" \
+  --matrix-id=sale --matrix-description-it="Sale da cucina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173468 --food-id=food_sale_da_cucina \
+  --name-it="Sale da cucina" \
+  --matrix-id=sale --matrix-description-it="Sale da cucina" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mandorle, intere, crude — preparato 2026-11-17 dal task (193° lotto)
 
 - **food_id**: `food_mandorle_raw` (id descrittivo distinto dal riservato `food_almonds_raw`, riga legacy del primo seed demo mai riusata in questa pipeline — verificato con grep dedicato su PRD/GOLDEN_SET/golden_set_foods.sql, zero occorrenze di `food_mandorle_raw` prima di questa voce). FDC ID 2346393 (**Foundation Foods**, "Nuts, almonds, whole, raw" — pagina `getfoodfacts.com/food/nuts-almonds-whole-raw-2346393` dedicata e pulita, FDC ID e dataType citati esplicitamente nel titolo, release USDA FoodData Central 30-04-2026).
