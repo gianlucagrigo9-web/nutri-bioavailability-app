@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, spalla (arm picnic), separable lean and fat, cotta (arrosto) — preparato 2026-11-17 dal task (prosecuzione del centottantasettesimo lotto)
+
+- **food_id**: `food_maiale_spalla_picnic_cotta`. FDC ID 168257 (SR Legacy, "Pork, fresh, shoulder, arm picnic, separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). **Nota di trasparenza (Regola 6), riapertura esplicita**: il sessantunesimo lotto (2026-10-30) aveva scartato ⚠ questo stesso FDC ID perché il suo trim ("separable lean and fat") non si accoppia con il crudo già pronto `food_maiale_spalla_picnic_raw` (FDC 168258, trim "separable lean only") — stesso tipo di disallineamento crudo/cotto segnalato per vitello stinco/petto nello stesso lotto. Il crudo è però stato successivamente promosso come **voce a sé stante** ("crudo-only deliberata", vedi sopra/§180° lotto) proprio superando il requisito di accoppiamento rigido; questa voce applica lo stesso principio in modo simmetrico: FDC 168257 è un record primario pulito e completo nel suo trim proprio, promosso come voce "cotto-only" a sé, non come controparte esatta del crudo 168258. Nessun dato derivato da pannello arrotondato: tutti i valori sotto sono dalla tabella dettagliata "per 100g" (63 nutrienti), non dal pannello riepilogo per porzione da 85g (differenze solo da arrotondamento, eccetto il calcio: pannello 20mg vs tabella 19,0mg/100g — usata la tabella, come da convenzione).
+- **Nutrienti**: **14/17**. Per 100g: energia 317kcal, proteine 23,5g, grassi 24,0g, fibra 0g (esplicito), calcio 19,0mg, ferro 1,18mg, zinco 3,45mg, magnesio 17,0mg, rame 0,11mg, selenio 33,6µg, sodio 70,0mg, folato totale 4,00µg, vitamina C 0,20mg, vitamina B12 0,71µg. **Mancano**: vitamina K (fillochinone, nessuna riga nella tabella vitamine), beta-carotene, beta-criptoxantina (nessuna riga, a differenza di altri tagli di maiale cotti dove compaiono espliciti a 0µg — qui semplicemente assenti dalla tabella).
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie *Sus scrofa*, stesso stato cotto, stesso attributo `is_heme_iron`; non usato `food_maiale_spalla_picnic_raw` come analogia perché non ancora eseguito sul DB reale, solo "Pronto").
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_spalla_picnic_cotta`.
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — dato assente, non un esplicito 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 4,00µg è un valore endogeno plausibile per carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168257 --food-id=food_maiale_spalla_picnic_cotta \
+  --name-it="Maiale, spalla (arm picnic), cotta (arrosto)" \
+  --matrix-id=maiale_spalla_picnic_cotta --matrix-description-it="Maiale, spalla (arm picnic), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168257 --food-id=food_maiale_spalla_picnic_cotta \
+  --name-it="Maiale, spalla (arm picnic), cotta (arrosto)" \
+  --matrix-id=maiale_spalla_picnic_cotta --matrix-description-it="Maiale, spalla (arm picnic), cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto) — preparato 2026-11-17 dal task (centottantasettesimo lotto, verifica fonte conclusa dopo la chiusura del lotto)
 
 - **food_id**: `food_maiale_lonza_sirloin_disossata_cotta`. FDC ID 168311 (SR Legacy, "Pork, fresh, loin, sirloin (roasts), boneless, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata via agente di fetch dedicato dopo che il lotto principale si era chiuso senza poterla verificare). Taglio distinto dal `food_maiale_lonza_sirloin_cotta` già eseguito (FDC 168248, stesso sirloin ma **con osso** — "bone-in" vs questo "boneless") — mai duplicato, trim diverso con FDC ID diverso.
