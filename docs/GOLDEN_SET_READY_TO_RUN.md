@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Salmone rosa (pink salmon), cotto (al forno) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_salmone_rosa_cotto`. FDC ID 172001 (SR Legacy, "Fish, salmon, pink, cooked, dry heat" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del crudo preparato in questo stesso lotto (FDC 175138). Verificato con `grep` su "172001"/"salmone rosa cotto": zero occorrenze prima di questa aggiunta.
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 153kcal, proteine 24,6g, grassi 5,28g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,00mg, ferro 0,45mg, magnesio 32,0mg, zinco 0,46mg, rame 0,075mg, selenio 37,6µg, sodio 90,0mg, vitamina C 0mg esplicito, folato totale 5,00µg, acido folico 0µg esplicito, vitamina B12 4,73µg, vitamina K 0,50µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. Nota: l'etichetta per porzione (85g) della pagina riporta calcio 10mg, incoerente con la tabella (6,80mg/porzione = 8,00mg/100g × 0,85) — stesso tipo di arrotondamento impreciso del pannello FDA già visto altrove in questa pipeline, non un problema dei valori per 100g usati qui.
+- **Analogia usata**: `food_salmon_cooked` (salmone atlantico allevato cotto, Golden Set originale, già eseguito sul DB reale — stesso genere, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_rosa_cotto` ("Salmone rosa, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172001 --food-id=food_salmone_rosa_cotto \
+  --name-it="Salmone rosa, cotto (al forno)" \
+  --matrix-id=salmone_rosa_cotto --matrix-description-it="Salmone rosa, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172001 --food-id=food_salmone_rosa_cotto \
+  --name-it="Salmone rosa, cotto (al forno)" \
+  --matrix-id=salmone_rosa_cotto --matrix-description-it="Salmone rosa, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Salmone rosa (pink salmon), crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_salmone_rosa_raw`. FDC ID 175138 (SR Legacy, "Fish, salmon, pink, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Specie distinta dal salmone atlantico/coho/chum/sockeye già coperti; finora il "rosa" esisteva solo come `food_salmone_rosa_in_scatola` (in scatola), mai come crudo. Verificato con `grep` su "175138"/"salmone rosa"/"salmon pink": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta. **Nota di trasparenza (Regola 6)**: ricercato anche il sockeye crudo (candidato FDC 2684440, Foundation, "Fish, salmon, sockeye, wild caught, raw") — scartato ⚠ perché la pagina getfoodfacts.com mostra valori interni incoerenti tra pannello e tabella per energia (140 vs 136kcal), calcio (14,8 vs 10mg) e sodio (53,3 vs 55mg), oltre a fibra dichiarata sia "non declared" che "0g" in sezioni diverse della stessa pagina — segnale di record Foundation poco affidabile, non usato. Il salmone rosa (SR Legacy, record più maturo) non presenta le stesse incoerenze: le uniche differenze sono fra il pannello per porzione (3oz, arrotondato) e la tabella per 100g (arrotondamento normale, non un'incoerenza di fonte).
