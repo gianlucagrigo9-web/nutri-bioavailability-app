@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sheepshead (pesce), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_pesce_sheepshead_cotto`. FDC ID 175145 (SR Legacy, "Fish, sheepshead, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-sheepshead-cooked-dry-heat-175145` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo 175144). Completa la coppia crudo/cotto del sheepshead già `food_pesce_sheepshead_raw` (FDC 175144, 133° lotto, non ancora eseguito).
+- **Nutrienti**: **14/17**. Per 100g: energia 126kcal, proteine 26,0g, grassi 1,63g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 37,0mg, ferro 0,67mg, magnesio 35,0mg, zinco 0,63mg, rame 0,12mg, selenio 51,3µg, vitamina C 0mg (esplicito), folato totale 17,0µg, vitamina B12 2,30µg, vitamina A/retinolo 35,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_branzino_cotto` (pesce marino magro cotto, già eseguito sul DB reale — stessa famiglia Sparidae dell'orata, analogia funzionale più vicina disponibile; non usata l'analogia col crudo omonimo perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sheepshead_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175145 --food-id=food_pesce_sheepshead_cotto \
+  --name-it="Sheepshead (pesce), cotto (calore secco)" \
+  --matrix-id=sheepshead_cotto --matrix-description-it="Sheepshead (pesce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175145 --food-id=food_pesce_sheepshead_cotto \
+  --name-it="Sheepshead (pesce), cotto (calore secco)" \
+  --matrix-id=sheepshead_cotto --matrix-description-it="Sheepshead (pesce), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Tilefish, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_pesce_tilefish_cotto`. FDC ID 175152 (SR Legacy, "Fish, tilefish, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-tilefish-cooked-dry-heat-175152` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del tilefish già `food_pesce_tilefish_raw` (FDC 173705, 133° lotto, non ancora eseguito).
