@@ -16,6 +16,110 @@
 
 ## Pronti
 
+### Piccione (squab), carne chiara senza pelle, cruda — preparato 2026-11-17 dal task (centosettantanovesimo lotto)
+
+- **food_id**: `food_piccione_carne_chiara_raw`. FDC ID 171080 (SR Legacy, "Squab, (pigeon), light meat without skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Trim realmente distinto da `food_piccione_raw` (FDC 171079, "Squab, (pigeon), meat only, raw", già eseguito sul DB reale): qui il record specifica "light meat" (carne chiara, petto), non il generico "meat only". Scoperto per caso durante la verifica di candidati cotti per il piccione (nessuna versione cotta trovata per nessun trim, resta `⚠`, vedi coda sotto) — verificato con `grep` sull'FDC ID: nessun doppione.
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (non riportati nel record, non assunti zero; pagina mostra invece vitamina A RAE 17,0µg/retinolo, non richiesti). Per 100g: energia 134kcal, proteine 21,8g, grassi 4,52g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10,0mg, ferro 2,31mg, magnesio 28,0mg, zinco 2,70mg, rame 0,43mg, selenio 15,5µg, sodio 55,0mg, vitamina C 5,10mg, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,47µg.
+- **Analogia usata**: `food_piccione_raw` (piccione, carne cruda — già eseguita sul DB reale, stessa specie, trim diverso).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `piccione_carne_chiara_raw` ("Piccione, carne chiara senza pelle, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171080 --food-id=food_piccione_carne_chiara_raw \
+  --name-it="Piccione (squab), carne chiara senza pelle, cruda" \
+  --matrix-id=piccione_carne_chiara_raw --matrix-description-it="Piccione, carne chiara senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_piccione_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171080 --food-id=food_piccione_carne_chiara_raw \
+  --name-it="Piccione (squab), carne chiara senza pelle, cruda" \
+  --matrix-id=piccione_carne_chiara_raw --matrix-description-it="Piccione, carne chiara senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_piccione_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Anatra selvatica, petto, carne senza pelle, cruda — preparato 2026-11-17 dal task (centosettantanovesimo lotto)
+
+- **food_id**: `food_anatra_selvatica_petto_raw`. FDC ID 174469 (SR Legacy, "Duck, wild, breast, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Categoria USDA "Duck, wild" mai tentata**, distinta da "Duck, domesticated" (già usata per `food_anatra_raw`/`food_anatra_con_pelle_raw`/varianti cotte) — specie/categoria zootecnica diversa (selvatica vs allevata), non un doppione. Verificato con `grep` sull'FDC ID. Nessuna controparte cotta trovata per questa categoria "wild" in questo lotto (due ricerche dedicate, nessuna pagina getfoodfacts.com): resta voce isolata cruda, il cotto `⚠` in coda sotto.
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (non riportati nel record, non assunti zero; vitamina A RAE 16,0µg mostrata ma non richiesta). Per 100g: energia 123kcal, proteine 19,9g, grassi 4,25g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 3,00mg, ferro 4,51mg (notevolmente alto, coerente con selvaggina da penna ricca di mioglobina), magnesio 22,0mg, zinco 0,74mg, rame 0,33mg, selenio 13,9µg, sodio 57,0mg, vitamina C 6,20mg, folato totale 25,0µg, acido folico 0µg esplicito, vitamina B12 0,76µg.
+- **Analogia usata**: `food_anatra_raw` (anatra domestica, carne senza pelle, cruda — già eseguita sul DB reale, stessa specie *Anas*, categoria zootecnica diversa ma stesso concetto funzionale "carne di anatra senza pelle").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `anatra_selvatica_petto_raw` ("Anatra selvatica, petto, carne senza pelle, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174469 --food-id=food_anatra_selvatica_petto_raw \
+  --name-it="Anatra selvatica, petto, carne senza pelle, cruda" \
+  --matrix-id=anatra_selvatica_petto_raw --matrix-description-it="Anatra selvatica, petto, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174469 --food-id=food_anatra_selvatica_petto_raw \
+  --name-it="Anatra selvatica, petto, carne senza pelle, cruda" \
+  --matrix-id=anatra_selvatica_petto_raw --matrix-description-it="Anatra selvatica, petto, carne senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "stewing", gallina da brodo), carne scura, cotta (in umido) — preparato 2026-11-17 dal task (centosettantanovesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_scura_cotta`. FDC ID 172405 (SR Legacy, "Chicken, stewing, dark meat, meat only, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta di `food_pollo_tipo_stewing_carne_scura_raw` (FDC 172404, preparato nel 178° lotto, solo "pronto" non eseguito), stesso filone "stewing" del 178° lotto. Verificato con `grep` sull'FDC ID: nessun doppione.
+- **Nutrienti**: **16/17** — manca solo vitamina K (non riportata nel record; beta-carotene nemmeno riportato ma la pagina mostra Vitamina A RAE/retinolo invece). Per 100g: energia 258kcal, proteine 28,1g, grassi 15,3g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,64mg, magnesio 22,0mg, zinco 3,12mg, rame 0,14mg, selenio 21,8µg, sodio 95,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 0,25µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, carne scura, cotta — già eseguita sul DB reale, stesso concetto "carne scura cotta"; nessun "pollo stewing" cotto ancora eseguito per un'analogia più precisa).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_scura_cotta` ("Pollo (gallina da brodo), carne scura, cotta").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=172405 --food-id=food_pollo_tipo_stewing_carne_scura_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne scura, cotta (in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_scura_cotta --matrix-description-it="Pollo (gallina da brodo), carne scura, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172405 --food-id=food_pollo_tipo_stewing_carne_scura_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne scura, cotta (in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_scura_cotta --matrix-description-it="Pollo (gallina da brodo), carne scura, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "stewing", gallina da brodo), carne chiara, cotta (in umido) — preparato 2026-11-17 dal task (centosettantanovesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_chiara_cotta`. FDC ID 173644 (SR Legacy, "Chicken, stewing, light meat, meat only, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta di `food_pollo_tipo_stewing_carne_chiara_raw` (FDC 173643, preparato nel 178° lotto, solo "pronto" non eseguito), stesso filone. Verificato con `grep` sull'FDC ID: nessun doppione.
+- **Nutrienti**: **16/17** — manca solo vitamina K (beta-carotene non riportato, Vitamina A RAE/retinolo mostrati invece). Per 100g: energia 213kcal, proteine 33,0g, grassi 7,98g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 1,19mg, magnesio 23,0mg, zinco 0,83mg, rame 0,085mg, selenio 28,7µg, sodio 58,0mg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0,27µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, cotto — già eseguita sul DB reale; nessun "pollo chiaro cotto" ancora eseguito per un'analogia più precisa sul tipo di carne, stessa scelta già fatta per `food_pollo_tipo_stewing_carne_cotta` nel 178° lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_chiara_cotta` ("Pollo (gallina da brodo), carne chiara, cotta").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=173644 --food-id=food_pollo_tipo_stewing_carne_chiara_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne chiara, cotta (in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_chiara_cotta --matrix-description-it="Pollo (gallina da brodo), carne chiara, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173644 --food-id=food_pollo_tipo_stewing_carne_chiara_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne chiara, cotta (in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_chiara_cotta --matrix-description-it="Pollo (gallina da brodo), carne chiara, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo, fuso (stinco), senza pelle, cotto (fritto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_fuso_di_pollo_cotto_fritto`. FDC ID 172375 (SR Legacy, "Chicken, broilers or fryers, drumstick, meat only, cooked, fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo fuso (stinco) di pollo mai tentato in questa pipeline — nuova parte anatomica, non solo un nuovo metodo di cottura per un taglio già coperto. Nessuna pagina crudo corrispondente trovata in questo lotto: voce isolata, cotta, senza controparte cruda — stesso schema già accettato altrove in questa pipeline (es. fuso di tacchino nel 62° lotto). Nessuna indicazione di impanatura/infarinatura nel nome del record USDA (a differenza di record "fried, flour" o "fried, batter" nella stessa famiglia), coerente con lo standard di evidenza basato sul nome già usato in questa pipeline per distinguere preparazioni "semplici" da quelle impanate.
