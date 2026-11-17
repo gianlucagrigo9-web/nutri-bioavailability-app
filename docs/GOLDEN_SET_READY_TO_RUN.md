@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, spalla (shoulder clod), cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_bisonte_spalla_raw`. FDC ID 172566 (SR Legacy, "Game meat, bison, shoulder clod, separable lean only, trimmed to 0" fat, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Stesso filone del controfiletto sopra.
+- **Nutrienti**: **12/17**. Per 100g: energia 109kcal, proteine 21,1g, grassi 2,10g, carboidrati 0g esplicito, calcio 4,00mg, ferro 3,00mg, zinco 5,00mg, magnesio 24,0mg, rame 0,15mg, selenio 26,4µg, vitamina B12 2,20µg, vitamina C 0mg esplicito. **Mancano** (stessa incoerenza fibra della voce precedente, trattata come mancante): fibra, folato totale, vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_capra_raw` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_spalla_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172566 --food-id=food_bisonte_spalla_raw \
+  --name-it="Bisonte, spalla (shoulder clod), cruda" \
+  --matrix-id=bisonte_spalla_raw --matrix-description-it="Bisonte, spalla (shoulder clod), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172566 --food-id=food_bisonte_spalla_raw \
+  --name-it="Bisonte, spalla (shoulder clod), cruda" \
+  --matrix-id=bisonte_spalla_raw --matrix-description-it="Bisonte, spalla (shoulder clod), cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, controfiletto (top sirloin), crudo — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_bisonte_controfiletto_raw`. FDC ID 172564 (SR Legacy, "Game meat, bison, top sirloin, separable lean only, trimmed to 0" fat, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Primo taglio specifico di bisonte mai tentato: finora solo il generico `food_bisonte_raw` (separable lean only, non per taglio). Filone: specie minori con tagli anatomici specifici nella stessa release USDA 2026-04-30 che ha dato il filone ratiti del 182° lotto, qui estesa a bisonte/wapiti/cervo come raccomandato.
