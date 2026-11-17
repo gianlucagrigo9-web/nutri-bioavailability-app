@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cervo, carne macinata, cotta (in padella) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_cervo_macinato_cotto`. FDC ID 172603 (SR Legacy, "Game meat, deer, ground, cooked, pan-broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Taglio "macinato" distinto dal generico `food_cervo_cotto` già eseguito (che è "cooked, roasted" non macinato). Filone: specie minori con tagli specifici scoperti nella stessa release USDA 2026-04-30 che ha dato il filone ratiti del 182° lotto (qui estesa a cervo/wapiti/bisonte).
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 187kcal, proteine 26,4g, grassi 8,22g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 3,35mg, zinco 5,20mg, magnesio 24,0mg, rame 0,10mg, selenio 10,3µg, vitamina C 0mg esplicito, vitamina B12 2,32µg, folato totale 8,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito, vitamina K (fillochinone) 1,40µg.
+- **Analogia usata**: `food_capra_cotta` (capra cotta, già eseguita sul DB reale — stesso profilo funzionale "carne di selvaggina/ungulato cotta").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cervo_macinato_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default (NULL/none), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172603 --food-id=food_cervo_macinato_cotto \
+  --name-it="Cervo, carne macinata, cotta (in padella)" \
+  --matrix-id=cervo_macinato_cotto --matrix-description-it="Cervo, carne macinata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172603 --food-id=food_cervo_macinato_cotto \
+  --name-it="Cervo, carne macinata, cotta (in padella)" \
+  --matrix-id=cervo_macinato_cotto --matrix-description-it="Cervo, carne macinata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Struzzo, top loin (lombata), cotto — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_top_loin_cotto`. FDC ID 174490 (SR Legacy, "Ostrich, top loin, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta della lombata/top loin cruda (`food_struzzo_lombata_raw` o analogo, già "Pronti" in questo lotto). Metodo di cottura non specificato sulla pagina. Verificato con `grep` su "174490": nessuna occorrenza prima di questa aggiunta.
