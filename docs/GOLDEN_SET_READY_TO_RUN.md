@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Seatrout, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **RIAPERTURA parziale di un candidato "incagliato"** (voce in `docs/PENDING_HUMAN_ACTIONS.md`): stesso schema del ling sopra. Il crudo resta su una URL non ancora riuscita in questa sessione — **non preparato in questo lotto**. Il **cotto** vive su una URL diversa e mai richiesta prima (`fish-seatrout-mixed-species-cooked-dry-heat-174242`), riuscita al primo tentativo.
+- **food_id**: `food_pesce_seatrout_cotto`. FDC ID 174242 (SR Legacy, "Fish, seatrout, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-seatrout-mixed-species-cooked-dry-heat-174242` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Specie *Cynoscion* spp. (famiglia Sciaenidae), mai tracciata in questa pipeline.
+- **Nutrienti**: **14/17**. Per 100g: energia 133kcal, proteine 21,5g, grassi 4,63g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 22,0mg, ferro 0,35mg, magnesio 40,0mg, zinco 0,58mg, rame 0,038mg, selenio 46,8µg, vitamina C 0mg (esplicito), folato totale 6,00µg, vitamina B12 3,46µg, vitamina A/retinolo 35,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_branzino_cotto` (pesce marino cotto, già eseguito sul DB reale — categoria funzionale "pesce marino cotto").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_seatrout_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174242 --food-id=food_pesce_seatrout_cotto \
+  --name-it="Seatrout, misto, cotto (calore secco)" \
+  --matrix-id=pesce_seatrout_cotto --matrix-description-it="Seatrout, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174242 --food-id=food_pesce_seatrout_cotto \
+  --name-it="Seatrout, misto, cotto (calore secco)" \
+  --matrix-id=pesce_seatrout_cotto --matrix-description-it="Seatrout, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Ling (pesce), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **RIAPERTURA parziale di un candidato "incagliato" (voce in `docs/PENDING_HUMAN_ACTIONS.md`, URL stuck su `PROVENANCE_REQUIRED`)**: il crudo "ling, raw" (FDC 173670) resta bloccato sulla stessa URL già nota `fish-ling-raw-173670`, mai riuscita in nessuna sessione — **non preparato in questo lotto**. Il **cotto** vive però su una URL diversa e mai richiesta prima (`fish-ling-cooked-dry-heat-174234`), riuscita al primo tentativo — stessa lezione del 169°/174° lotto: il blocco è per URL specifica già incagliata, non per la specie o la sessione nel suo complesso.
