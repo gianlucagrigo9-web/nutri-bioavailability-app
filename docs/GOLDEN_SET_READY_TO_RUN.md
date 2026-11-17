@@ -16,6 +16,158 @@
 
 ## Pronti
 
+### Pollo, fuso (drumstick), carne magra, cotto brasato — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_pollo_fuso_cotto` (distinto da tutte le voci pollo già eseguite — nessuna è specificamente il fuso/drumstick cotto; verificato con grep dedicato su tutti i `food_pollo_*` esistenti, zero collisioni). FDC ID 331897 (**Foundation Foods**, "Chicken, broilers or fryers, drumstick, meat only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA FoodData Central 30-04-2026).
+- **Nutrienti**: **11/17**. Per 100g (tabella dettagliata): energia 156kcal (la pagina mostra anche 150kcal per porzione, usata la tabella), proteine 23,9g, grassi 5,95g, carboidrati 0g esplicito, calcio 12,0mg, ferro 0,94mg, magnesio 22,4mg, zinco 2,54mg, rame 0,063mg, selenio 27,9µg, vitamina B12 0,41µg. **Mancano** (non riportati, non assunti zero): fibra (la fonte è internamente contraddittoria, "not declared" vs riquadro "0g" — trattata come non riportata), beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K — gap atteso per carne di pollo.
+- **Analogia usata**: `food_pollo_carne_scura_cotta` (stessa specie, carne scura cotta già eseguita sul DB reale — il fuso è anatomicamente carne scura), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_fuso_cotto`.
+- **Attributi**: `baseline_cooking_state=cooked` (brasato), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=331897 --food-id=food_pollo_fuso_cotto \
+  --name-it="Pollo, fuso (drumstick), carne magra, cotto brasato" \
+  --matrix-id=pollo_fuso_cotto --matrix-description-it="Pollo, fuso, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pollo_carne_scura_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=331897 --food-id=food_pollo_fuso_cotto \
+  --name-it="Pollo, fuso (drumstick), carne magra, cotto brasato" \
+  --matrix-id=pollo_fuso_cotto --matrix-description-it="Pollo, fuso, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_pollo_carne_scura_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Cavolo kale, surgelato, cotto bollito e scolato — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_kale_cotto` (distinto da `food_kale_raw`, già eseguito sul DB reale — stato surgelato+cotto invece di crudo, stessa convenzione già usata per gli altri filoni "frutta/verdura surgelata+cotta" di questa pipeline; verificato con grep dedicato, zero collisioni). FDC ID 326196 (**Foundation Foods**, non SR Legacy come ci si aspetterebbe per un alimento così comune — "Kale, frozen, cooked, boiled, drained, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **13/17**. Per 100g (tabella dettagliata): energia 36,0kcal, proteine 2,94g, grassi 1,21g, carboidrati 5,30g, calcio 150mg, ferro 0,84mg, magnesio 25,0mg, zinco 0,27mg, rame 0,067mg, beta-carotene 1730µg, altro carotenoide provitaminico A presente (alfa-carotene 10,0µg + beta-criptoxantina 26,0µg, entrambi riportati), vitamina C 17,8mg, folato totale 65,0µg, vitamina K 418µg. **Mancano**: fibra (la fonte è internamente contraddittoria, "0g" vs "n/a" — trattata come non riportata), selenio, vitamina B12.
+- **Analogia usata**: `food_kale_raw` (stesso ortaggio, *Brassica oleracea* var. sabellica, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `kale_cotto`.
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (cottura, coerente con la convenzione già usata per le verdure cotte), `matrix_category_calcium=low_oxalate` (stessa famiglia/stesso valore già dichiarato per `food_kale_raw`), `botanical_family=Brassicaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=326196 --food-id=food_kale_cotto \
+  --name-it="Cavolo kale, surgelato, cotto (bollito, scolato)" \
+  --matrix-id=kale_cotto --matrix-description-it="Cavolo kale, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=326196 --food-id=food_kale_cotto \
+  --name-it="Cavolo kale, surgelato, cotto (bollito, scolato)" \
+  --matrix-id=kale_cotto --matrix-description-it="Cavolo kale, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --matrix-category-calcium=low_oxalate --botanical-family=Brassicaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Manzo, porterhouse (bistecca con osso a T), select, crudo — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_manzo_porterhouse_raw` (taglio "porterhouse" — bistecca con osso a T dal lombo corto, comprende sia il controfiletto che una porzione di filetto; distinto dal "top loin"/controfiletto senza osso appena aggiunto in questo stesso lotto, FDC 746759 — taglio anatomicamente diverso, non un doppione; verificato con grep dedicato, zero collisioni). FDC ID 746762 (**Foundation Foods**, "Beef, short loin, porterhouse steak, separable lean only, trimmed to 1/8\" fat, select, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, grado "select" confermato nel testo — diverso dal grado "choice" del controfiletto appena aggiunto, coerente con record FDC distinti, release USDA 30-04-2026).
+- **Nutrienti**: **11/17** — stesso pattern Foundation già osservato in questo lotto (minerali+selenio+B12 presenti, vitamine/carotenoidi assenti). Per 100g (tabella dettagliata): energia 145kcal, proteine 22,7g, grassi 5,32g, carboidrati 0g esplicito, calcio 19,0mg, ferro 2,26mg, magnesio 10,7mg, zinco 3,52mg, rame 0,075mg, selenio 21,4µg, vitamina B12 1,98µg. **Mancano**: fibra (non riportata in tabella), beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K.
+- **Analogia usata**: `food_manzo_controfiletto_raw` (stesso primale/lombo corto, stesso trim "separable lean only", appena eseguito in questo lotto), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `manzo_porterhouse`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=746762 --food-id=food_manzo_porterhouse_raw \
+  --name-it="Manzo, porterhouse (bistecca con osso a T), select, crudo" \
+  --matrix-id=manzo_porterhouse --matrix-description-it="Manzo, porterhouse" \
+  --baseline-cooking-state=raw --analogy-food-id=food_manzo_controfiletto_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=746762 --food-id=food_manzo_porterhouse_raw \
+  --name-it="Manzo, porterhouse (bistecca con osso a T), select, crudo" \
+  --matrix-id=manzo_porterhouse --matrix-description-it="Manzo, porterhouse" \
+  --baseline-cooking-state=raw --analogy-food-id=food_manzo_controfiletto_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Mirtilli selvatici dell'Alaska (Alaska Native), crudi — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_mirtilli_selvatici_alaska_raw` (distinto da `food_mirtilli_raw`, FDC 171711 "Blueberries, raw" SR Legacy generico, già eseguito sul DB reale — variante selvatica/regionale con FDC proprio, stesso precedente già applicato in questo lotto per le more selvatiche dell'Alaska, non un doppione; verificato con grep dedicato, zero collisioni). FDC ID 167640 (**SR Legacy**, "Blueberries, wild, raw (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "American Indian/Alaska Native Foods", release USDA 30-04-2026).
+- **Nutrienti**: **16/17** — manca solo selenio (non riportato sulla pagina, non assunto zero). Per 100g: energia 61,0kcal (l'etichetta riassuntiva arrotonda a 60), proteine 1,22g, grassi 0,76g, carboidrati 12,3g, fibra 2,60g, calcio 13,0mg, ferro 0,37mg, magnesio 7,00mg, zinco 0,20mg, rame 0,030mg, beta-carotene 69,0µg (reale, non nullo), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito, vitamina C 18,3mg, folato totale 33,0µg, vitamina B12 0µg esplicito, vitamina K 17,2µg.
+- **Analogia usata**: `food_mirtilli_raw` (stesso genere *Vaccinium*, già eseguito sul DB reale).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `mirtilli_selvatici_alaska`.
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo), `botanical_family=Ericaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=167640 --food-id=food_mirtilli_selvatici_alaska_raw \
+  --name-it="Mirtilli selvatici dell'Alaska (Alaska Native), crudi" \
+  --matrix-id=mirtilli_selvatici_alaska --matrix-description-it="Mirtilli selvatici dell'Alaska" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Ericaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167640 --food-id=food_mirtilli_selvatici_alaska_raw \
+  --name-it="Mirtilli selvatici dell'Alaska (Alaska Native), crudi" \
+  --matrix-id=mirtilli_selvatici_alaska --matrix-description-it="Mirtilli selvatici dell'Alaska" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mirtilli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Ericaceae \
+  --diet-category=fresh_fruit --apply
+```
+
+### Succo di pompelmo rosso, non arricchito, non da concentrato, refrigerato — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_succo_di_pompelmo_rosso_raw` (distinto da `food_succo_di_pompelmo_rosa_raw`, FDC 167774 "pink", già eseguito sul DB reale — varietà di colore/cultivar diversa, "red" vs "pink", con profilo vitamina C/carotenoidi diverso; non un doppione, verificato con grep dedicato). FDC ID 2003595 (**Foundation Foods**, "Grapefruit juice, red, not fortified, not from concentrate, refrigerated" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **11/17**. Per 100g (tabella dettagliata, 2 decimali): energia 39,8kcal (etichetta/riepilogo arrotonda a 40), proteine 0,57g, grassi 0,27g, carboidrati 9,10g, calcio 8,88mg, ferro 0,015mg, magnesio 7,75mg, zinco 0,027mg, rame 0,024mg, vitamina C 24,1mg, folato totale 19,0µg. **Mancano**: fibra (la fonte è internamente contraddittoria, "not declared" vs riquadro "0g" vs "n/a" — trattata come non riportata), selenio, beta-carotene, altro carotenoide provitaminico A, vitamina B12, vitamina K.
+- **Analogia usata**: `food_succo_di_pompelmo_rosa_raw` (stesso tipo di prodotto — succo di pompelmo — già eseguito sul DB reale, convenzione standard per i succhi in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (succo, prodotto trasformato — stessa convenzione già usata per tutti i succhi di frutta in questa pipeline, non `fresh_fruit` nonostante il frutto di origine fresco).
+- **Matrice**: nuova `succo_di_pompelmo_rosso`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2003595 --food-id=food_succo_di_pompelmo_rosso_raw \
+  --name-it="Succo di pompelmo rosso, refrigerato" \
+  --matrix-id=succo_di_pompelmo_rosso --matrix-description-it="Succo di pompelmo rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_pompelmo_rosa_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2003595 --food-id=food_succo_di_pompelmo_rosso_raw \
+  --name-it="Succo di pompelmo rosso, refrigerato" \
+  --matrix-id=succo_di_pompelmo_rosso --matrix-description-it="Succo di pompelmo rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_pompelmo_rosa_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Succo di pompelmo bianco, in scatola o in bottiglia, non zuccherato — preparato 2026-11-17 dal task (194° lotto, secondo giro)
+
+- **food_id**: `food_succo_di_pompelmo_bianco` (distinto dal succo di pompelmo rosa (`food_succo_di_pompelmo_rosa_raw`) e rosso (appena aggiunto in questo stesso lotto) — varietà bianca, profilo vitamina C/carotenoidi diverso; non un doppione, verificato con grep dedicato). FDC ID 325287 (**Foundation Foods**, "Grapefruit juice, white, canned or bottled, unsweetened" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 30-04-2026).
+- **Nutrienti**: **12/17**. Per 100g: energia 37,0kcal, proteine 0,55g, grassi 0,70g, carboidrati 7,59g, fibra 0,20g (riportata in modo pulito, non ambigua), calcio 16,0mg, ferro 0,070mg, magnesio 9,60mg, zinco 0,040mg, rame 0,032mg, vitamina C 39,4mg, folato totale 12,0µg. **Mancano**: selenio, beta-carotene, altro carotenoide provitaminico A, vitamina B12, vitamina K.
+- **Analogia usata**: `food_succo_di_pompelmo_rosa_raw` (stesso tipo di prodotto — succo di pompelmo — già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (succo/prodotto in scatola, stessa convenzione dei succhi già fatti).
+- **Matrice**: nuova `succo_di_pompelmo_bianco`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=325287 --food-id=food_succo_di_pompelmo_bianco \
+  --name-it="Succo di pompelmo bianco, in scatola, non zuccherato" \
+  --matrix-id=succo_di_pompelmo_bianco --matrix-description-it="Succo di pompelmo bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_pompelmo_rosa_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=325287 --food-id=food_succo_di_pompelmo_bianco \
+  --name-it="Succo di pompelmo bianco, in scatola, non zuccherato" \
+  --matrix-id=succo_di_pompelmo_bianco --matrix-description-it="Succo di pompelmo bianco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_pompelmo_rosa_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Merluzzo del Pacifico, congelato — preparato 2026-11-17 dal task (194° lotto)
 
 - **food_id**: `food_merluzzo_pacifico_raw` (distinto da `food_merluzzo_raw`, FDC 171955 "Fish, cod, Atlantic, raw" SR Legacy, già eseguito sul DB reale — specie diversa, *Gadus macrocephalus* vs *Gadus morhua*, non un doppione; verificato con grep dedicato, zero collisioni). FDC ID 2747654 (**Foundation Foods**, "Cod, Pacific or Alaskan, frozen, wild caught" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente nel titolo/intro, release USDA FoodData Central 30-04-2026).
