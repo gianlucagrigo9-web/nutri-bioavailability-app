@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Maiale, spalla (picnic/arm), carne magra, cruda — preparato 2026-11-17 dal task (centottantunesimo lotto)
+
+- **food_id**: `food_maiale_spalla_picnic_raw`. FDC ID 168258 (SR Legacy, "Pork, fresh, shoulder, arm picnic, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, titolo verificato DIRETTAMENTE sulla pagina con un fetch mirato). **Voce crudo-only deliberata**, stesso filone "crudo-only o cotto-only" raccomandato dal 180° lotto: il sessantunesimo lotto (2026-10-30) aveva scartato questo stesso taglio ⚠ per la COPPIA (trim incoerente fra crudo "lean only" e cotto "lean and fat"/"lean and fat roasted"), ma il crudo preso da solo è un record primario pulito e completo, mai preparato come voce a sé. **Nota di trasparenza (Regola 6)**: il sessantunesimo lotto riportava anche un dubbio che FDC 168258 fosse in realtà lo "shoulder whole" e non lo specifico "arm picnic" — verificato qui con un fetch diretto e mirato sulla pagina stessa (non su uno snippet di ricerca): il titolo mostrato sulla pagina getfoodfacts.com è inequivocabilmente "Pork, fresh, shoulder, **arm picnic**, separable lean only, raw", nessuna menzione di "whole" — il dubbio del 61° lotto non trova conferma in questa verifica diretta, segnalato qui per completezza ma non bloccante. Verificato con `grep` su "168258"/"spalla picnic"/"arm picnic": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (solo la discussione ⚠ del 61° lotto).
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 120kcal, proteine 20,3g, grassi 3,77g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,62mg, magnesio 20,0mg, zinco 2,41mg, rame 0,073mg, selenio 24,0µg, sodio 90,0mg (coerente con altri tagli di maiale crudi già accettati in questa pipeline, nessun segnale di salamoia/iniezione), vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,55µg, vitamina K (fillochinone) 0µg esplicito, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale cruda, già eseguita sul DB reale — stessa specie *Sus scrofa*, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_spalla_picnic_raw` ("Maiale, spalla (picnic/arm), carne magra, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168258 --food-id=food_maiale_spalla_picnic_raw \
+  --name-it="Maiale, spalla (picnic/arm), carne magra, cruda" \
+  --matrix-id=maiale_spalla_picnic_raw --matrix-description-it="Maiale, spalla (picnic/arm), carne magra, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168258 --food-id=food_maiale_spalla_picnic_raw \
+  --name-it="Maiale, spalla (picnic/arm), carne magra, cruda" \
+  --matrix-id=maiale_spalla_picnic_raw --matrix-description-it="Maiale, spalla (picnic/arm), carne magra, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Maiale, costine (spare ribs), magre e grasse, cotte (arrosto) — preparato 2026-11-17 dal task (centottantunesimo lotto)
 
 - **food_id**: `food_maiale_costine_cotte`. FDC ID 169178 (SR Legacy, "Pork, fresh, spareribs, separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Voce cotto-only deliberata**: il sessantunesimo lotto (2026-10-30) aveva già cercato questo taglio ma lo aveva marcato `⚠` perché cercava una **coppia** crudo+cotto con trim coerente — il crudo "separable lean and fat, raw" non ha una pagina getfoodfacts.com dedicata (solo fonti secondarie con dati da pannello arrotondato, FDC 167853 secondo myfooddata.com, non verificabile su fonte primaria per questa pipeline), ma il **cotto esiste** su fonte primaria pulita e non era mai stato preparato come voce a sé. Segue esattamente il filone raccomandato dal 180° lotto ("variante di cottura/trim mancante su carni già coperte solo in un singolo stato, crudo-only o cotto-only"). Verificato con `grep` su "169178"/"spareribs"/"costine di maiale": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (solo la discussione ⚠ del 61° lotto, che riguardava il crudo).
