@@ -16,6 +16,84 @@
 
 ## Pronti
 
+### Zucca invernale acorn, cotta (al forno, senza sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
+
+- **food_id**: `food_zucca_acorn_cotta`. FDC ID 169293 (SR Legacy, "Squash, winter, acorn, cooked, baked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_zucca_acorn_raw` (FDC 168472) è già "pronto" dal lotto che lo ha introdotto, non ancora eseguito — individuato con filone "crudo fatto, cotto mai tentato" estteso al gruppo Vegetables (raccomandazione del 175° lotto), `grep` dedicato zero occorrenze prima della ricerca.
+- **Nutrienti**: **15/17**. Per 100g: energia 56,0kcal, proteine 1,12g, grassi 0,14g, carboidrati 14,6g, fibra 4,40g, calcio 44,0mg, ferro 0,93mg, magnesio 43,0mg, zinco 0,17mg, rame 0,086mg, selenio 0,70µg, sodio 4,00mg (coerente con "senza sale"), vitamina C 10,8mg, folato totale 19,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 21,0µg (retinolo 0µg esplicito). **Mancano** (non dichiarati in pagina, non assunti zero): beta-carotene, vitamina K (la tabella vitamine della pagina elenca solo 14 voci, nessuna delle due presente).
+- **Analogia usata**: `food_zucca_butternut_cotta` (zucca invernale butternut, cotta al forno, stessa famiglia Cucurbitaceae, stesso tipo di prodotto "zucca invernale cotta", già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `zucca_acorn_cotta` ("Zucca invernale acorn, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (stato cotto, stesso precedente dell'analogia, pur senza un valore di beta-carotene dichiarato su questo specifico record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=baked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169293 --food-id=food_zucca_acorn_cotta \
+  --name-it="Zucca invernale acorn, cotta (al forno, senza sale)" \
+  --matrix-id=zucca_acorn_cotta --matrix-description-it="Zucca invernale acorn, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_zucca_butternut_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169293 --food-id=food_zucca_acorn_cotta \
+  --name-it="Zucca invernale acorn, cotta (al forno, senza sale)" \
+  --matrix-id=zucca_acorn_cotta --matrix-description-it="Zucca invernale acorn, cotta" \
+  --baseline-cooking-state=baked --analogy-food-id=food_zucca_butternut_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Tarassaco (dente di leone), cotto (bollito, con sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
+
+- **food_id**: `food_tarassaco_cotto`. FDC ID 169351 (SR Legacy, "Dandelion greens, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_tarassaco_raw` (FDC 169226) è già "pronto", non ancora eseguito — stesso filone Vegetables di cui sopra.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 33,0kcal, proteine 2,00g, grassi 0,60g, carboidrati 6,40g, fibra 2,90g, calcio 140mg, ferro 1,80mg, magnesio 24,0mg, zinco 0,28mg, rame 0,12mg, selenio 0,30µg, sodio 280mg (coerente con "con sale"), vitamina C 18,0mg, folato totale 13,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 727µg (retinolo 0µg esplicito), beta-carotene **8727µg** (reale, altissimo, coerente con una foglia verde scura ricchissima — tarassaco è notoriamente fra le verdure a foglia con più provitamina A), vitamina K 359µg.
+- **Analogia usata**: `food_scarola_cotta` (scarola cotta, già eseguita sul DB reale — stessa famiglia botanica reale Asteraceae, stessa categoria "verdura a foglia cotta").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `tarassaco_cotto` ("Tarassaco, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato specifico sull'acido ossalico per questa foglia nel record FDC), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e molto alto, ma foglia cotta/bollita), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (stessa dell'analogia e del crudo `food_tarassaco_raw`), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169351 --food-id=food_tarassaco_cotto \
+  --name-it="Tarassaco (dente di leone), cotto (bollito, con sale)" \
+  --matrix-id=tarassaco_cotto --matrix-description-it="Tarassaco, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169351 --food-id=food_tarassaco_cotto \
+  --name-it="Tarassaco (dente di leone), cotto (bollito, con sale)" \
+  --matrix-id=tarassaco_cotto --matrix-description-it="Tarassaco, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_scarola_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Barbabietola rossa, cotta (bollita, con sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
+
+- **food_id**: `food_barbabietola_rossa_cotta`. FDC ID 168506 (SR Legacy, "Beets, cooked, boiled, drained, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_barbabietola_rossa_raw` (FDC 169145) è già eseguito sul DB reale. **Nota metodologica**: un lotto precedente (voce `food_barbabietola_in_scatola`, FDC 168507) aveva cercato la variante "sgocciolata" della barbabietola cotta senza trovare un FDC ID per quella specifica, ripiegando sul prodotto in scatola — non aveva verificato la variante "con sale" qui trovata (nessuna occorrenza di "168506" in tutto il repo prima di questa ricerca), quindi non un doppione, un genuino buco residuo.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 44,0kcal, proteine 1,68g, grassi 0,18g, carboidrati 9,96g, fibra 2,00g, calcio 16,0mg, ferro 0,79mg, magnesio 23,0mg, zinco 0,35mg, rame 0,074mg, selenio 0,70µg, sodio 285mg (coerente con "con sale"), vitamina C 3,60mg, folato totale 80,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 2,00µg (retinolo 0µg esplicito), beta-carotene 21,0µg (reale, basso ma non nullo, coerente con un ortaggio a radice pigmentato cotto), vitamina K 0,20µg.
+- **Analogia usata**: `food_barbabietola_rossa_raw` (stessa specie, già eseguita sul DB reale — stesso precedente di famiglia botanica, differisce solo per stato di cottura dichiarato separatamente).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `barbabietola_cotta` ("Barbabietola rossa, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente di `food_barbabietola_rossa_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale ma radice cotta/bollita), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaranthaceae` (stessa dell'analogia), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168506 --food-id=food_barbabietola_rossa_cotta \
+  --name-it="Barbabietola rossa, cotta (bollita, con sale)" \
+  --matrix-id=barbabietola_cotta --matrix-description-it="Barbabietola rossa, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_barbabietola_rossa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168506 --food-id=food_barbabietola_rossa_cotta \
+  --name-it="Barbabietola rossa, cotta (bollita, con sale)" \
+  --matrix-id=barbabietola_cotta --matrix-description-it="Barbabietola rossa, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_barbabietola_rossa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Seatrout, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **RIAPERTURA parziale di un candidato "incagliato"** (voce in `docs/PENDING_HUMAN_ACTIONS.md`): stesso schema del ling sopra. Il crudo resta su una URL non ancora riuscita in questa sessione — **non preparato in questo lotto**. Il **cotto** vive su una URL diversa e mai richiesta prima (`fish-seatrout-mixed-species-cooked-dry-heat-174242`), riuscita al primo tentativo.
