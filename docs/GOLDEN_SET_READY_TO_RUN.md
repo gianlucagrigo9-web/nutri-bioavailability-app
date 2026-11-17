@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Pollo, fuso (stinco), senza pelle, cotto (fritto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_fuso_di_pollo_cotto_fritto`. FDC ID 172375 (SR Legacy, "Chicken, broilers or fryers, drumstick, meat only, cooked, fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Primo fuso (stinco) di pollo mai tentato in questa pipeline — nuova parte anatomica, non solo un nuovo metodo di cottura per un taglio già coperto. Nessuna pagina crudo corrispondente trovata in questo lotto: voce isolata, cotta, senza controparte cruda — stesso schema già accettato altrove in questa pipeline (es. fuso di tacchino nel 62° lotto). Nessuna indicazione di impanatura/infarinatura nel nome del record USDA (a differenza di record "fried, flour" o "fried, batter" nella stessa famiglia), coerente con lo standard di evidenza basato sul nome già usato in questa pipeline per distinguere preparazioni "semplici" da quelle impanate.
+- **Nutrienti**: **15/17** — mancano beta-carotene e vitamina K (non riportati nel record, non assunti zero). Per 100g: energia 195kcal, proteine 28,6g, grassi 8,08g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,32mg, magnesio 24,0mg, zinco 3,22mg, rame 0,080mg, selenio 19,6µg, sodio 96,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,35µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, cotto — già eseguita sul DB reale; nessun "pollo fuso, cotto" ancora eseguito per un'analogia più precisa sul taglio).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `fuso_di_pollo_cotto_fritto` ("Pollo, fuso, senza pelle, cotto/fritto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (fritto).
+
+```
+npm run add-food -- --fdc-id=172375 --food-id=food_fuso_di_pollo_cotto_fritto \
+  --name-it="Pollo, fuso (stinco), senza pelle, cotto (fritto)" \
+  --matrix-id=fuso_di_pollo_cotto_fritto --matrix-description-it="Pollo, fuso, senza pelle, cotto/fritto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172375 --food-id=food_fuso_di_pollo_cotto_fritto \
+  --name-it="Pollo, fuso (stinco), senza pelle, cotto (fritto)" \
+  --matrix-id=fuso_di_pollo_cotto_fritto --matrix-description-it="Pollo, fuso, senza pelle, cotto/fritto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo, coscia, senza pelle, cotta (fritta) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_coscia_di_pollo_cotta_fritta`. FDC ID 172387 (SR Legacy, "Chicken, broilers or fryers, thigh, meat only, cooked, fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_coscia_di_pollo_cotta` (FDC 172853, già eseguita sul DB reale, metodo "braised"/brasato): stesso taglio, metodo di cottura diverso ("fried"/fritto), record FDC realmente distinto, verificato con `grep` sull'FDC ID. Nessuna indicazione di impanatura/infarinatura nel nome del record (a differenza di "fried, flour"/"fried, batter" nella stessa famiglia), preparazione semplice.
+- **Nutrienti**: **15/17** — mancano beta-carotene e vitamina K (non riportati nel record, non assunti zero). Per 100g: energia 218kcal, proteine 28,2g, grassi 10,3g, carboidrati 1,18g (presente, non zero), fibra 0g esplicito, calcio 13,0mg, ferro 1,46mg, magnesio 26,0mg, zinco 2,79mg, rame 0,090mg, selenio 20,5µg, sodio 95,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,33µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, coscia, cotta — già eseguita sul DB reale, stesso taglio, metodo di cottura diverso).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `coscia_di_pollo_cotta_fritta` ("Pollo, coscia, senza pelle, cotta/fritta").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (fritto).
+
+```
+npm run add-food -- --fdc-id=172387 --food-id=food_coscia_di_pollo_cotta_fritta \
+  --name-it="Pollo, coscia, senza pelle, cotta (fritta)" \
+  --matrix-id=coscia_di_pollo_cotta_fritta --matrix-description-it="Pollo, coscia, senza pelle, cotta/fritta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172387 --food-id=food_coscia_di_pollo_cotta_fritta \
+  --name-it="Pollo, coscia, senza pelle, cotta (fritta)" \
+  --matrix-id=coscia_di_pollo_cotta_fritta --matrix-description-it="Pollo, coscia, senza pelle, cotta/fritta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Tacchino, ala, senza pelle (solo carne), cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_ala_di_tacchino_senza_pelle_raw`. FDC ID 174517 (SR Legacy, "Turkey, retail parts, wing, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_ala_di_tacchino_raw` (FDC 171132, "pronto", trim "meat and skin"): qui il trim "meat only" (senza pelle), mai tentato per l'ala di tacchino, record FDC realmente distinto (grassi 2,49g/100g contro un trim con pelle tipicamente più alto), verificato con `grep`.
