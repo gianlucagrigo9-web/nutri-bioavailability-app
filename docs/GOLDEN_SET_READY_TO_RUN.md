@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto) — preparato 2026-11-17 dal task (centottantasettesimo lotto, verifica fonte conclusa dopo la chiusura del lotto)
+
+- **food_id**: `food_maiale_lonza_sirloin_disossata_cotta`. FDC ID 168311 (SR Legacy, "Pork, fresh, loin, sirloin (roasts), boneless, separable lean only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata via agente di fetch dedicato dopo che il lotto principale si era chiuso senza poterla verificare). Taglio distinto dal `food_maiale_lonza_sirloin_cotta` già eseguito (FDC 168248, stesso sirloin ma **con osso** — "bone-in" vs questo "boneless") — mai duplicato, trim diverso con FDC ID diverso.
+- **Nutrienti**: **17/17** — record completo. Per 100g (valori della tabella dettagliata "per 100g", non del pannello riepilogo per porzione da 85g — differenze fra i due solo a livello di arrotondamento, es. 178 vs ~176kcal convertito, nessuna incoerenza sostanziale): energia 178kcal, proteine 30,4g, grassi 5,31g, fibra 0g (esplicito), calcio 12,0mg, ferro 0,66mg, zinco 2,25mg, magnesio 28,0mg, rame 0,11mg, selenio 45,9µg, sodio 66,0mg, folato totale 0µg (esplicito, nessuna firma di arricchimento), vitamina C 0mg (esplicito), vitamina K (fillochinone) 0µg (esplicito), vitamina B12 0,94µg, beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie *Sus scrofa*, stesso trim funzionale "separable lean only", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_lonza_sirloin_disossata_cotta`.
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero, stesso precedente di `food_lonza_di_maiale_cotta`/`food_maiale_lonza_sirloin_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168311 --food-id=food_maiale_lonza_sirloin_disossata_cotta \
+  --name-it="Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto)" \
+  --matrix-id=maiale_lonza_sirloin_disossata_cotta --matrix-description-it="Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168311 --food-id=food_maiale_lonza_sirloin_disossata_cotta \
+  --name-it="Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto)" \
+  --matrix-id=maiale_lonza_sirloin_disossata_cotta --matrix-description-it="Maiale, lonza (parte posteriore/sirloin), disossata, cotta (arrosto)" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Melone banana (Navajo), crudo — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
 
 - **food_id**: `food_melone_banana_raw`. FDC ID 167629 (SR Legacy, "Melon, banana (Navajo)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Cultivar di melone (*Cucumis melo*) distinta dal melone verde generico già eseguito, mai tentata in questa pipeline. **Nota di trasparenza**: alcune cifre del pannello riepilogo sono arrotondate rispetto alla tabella dettagliata (energia 20 vs 21,0kcal, sodio 10 vs 11,0mg, calcio 10 vs 13,0mg) — usati i valori della tabella. Verificato con `grep` dedicato, zero occorrenze per "melone banana"/"banana melon"/167629 prima della ricerca web.
