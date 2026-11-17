@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Struzzo, fan, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_fan_raw`. FDC ID 174483 (SR Legacy, "Ostrich, fan, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quinto taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "174483": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 117kcal, proteine 21,8g, grassi 2,65g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 4,38mg, magnesio 22,0mg, zinco 3,71mg, rame 0,14mg, selenio 34,9µg, sodio 75,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 4,97µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Nota: il pannello Nutrition Facts per porzione (85g) di questa pagina mostra alcuni valori leggermente incoerenti con la tabella completa per 100g (es. calcio, grassi, sodio, grassi saturi, colesterolo) — i valori qui riportati vengono dalla tabella "Every nutrient in this record", non dal pannello.
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — ancora solo "Pronti" non eseguito, unica voce della stessa specie disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_fan_raw` ("Struzzo, fan, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174483 --food-id=food_struzzo_fan_raw \
+  --name-it="Struzzo, fan, crudo" \
+  --matrix-id=struzzo_fan_raw --matrix-description-it="Struzzo, fan, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174483 --food-id=food_struzzo_fan_raw \
+  --name-it="Struzzo, fan, crudo" \
+  --matrix-id=struzzo_fan_raw --matrix-description-it="Struzzo, fan, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, coscia esterna (outside leg), cruda — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_coscia_esterna_raw`. FDC ID 174484 (SR Legacy, "Ostrich, outside leg, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quarto taglio specifico di struzzo di questo stesso lotto (vedi lombata/filetto/coscia interna sopra). Verificato con `grep` su "174484": nessuna occorrenza prima di questa aggiunta.
