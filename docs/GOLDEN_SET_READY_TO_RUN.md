@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Coriandolo (cilantro), foglie fresche, crudo — preparato 2026-11-17 dal task (191° lotto)
+
+- **food_id**: `food_coriandolo_fresco_raw`. FDC ID 169997 (SR Legacy, "Coriander (cilantro) leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente: `https://getfoodfacts.com/food/coriander-cilantro-leaves-raw-169997`). **Nota di trasparenza importante**: questo alimento era stato segnato `⚠` per ben tre volte in lotti precedenti (83°, 115°, 157°) con la motivazione "nessuna pagina getfoodfacts.com trovata, FDC non traccia questa erba nella forma fresca". Questo lotto ha trovato la pagina dedicata (verificata con `WebFetch`) più due fonti indipendenti (foodstruct.com, nutrivore.com) che citano lo stesso identico FDC ID 169997 con valori concordanti — evidenza più solida di qualunque tentativo precedente, non un'ipotesi. Possibile che getfoodfacts.com abbia indicizzato questa pagina dopo il 2026-11-02 (data dei tentativi precedenti), oppure che le ricerche precedenti abbiano usato termini diversi. Non un doppione: distinto dal coriandolo semi secchi già eseguito sul DB reale (`food_coriandolo_raw`, FDC 170922) — parte della pianta diversa (foglia fresca vs seme secco), record FDC realmente diverso.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 23,0kcal, proteine 2,13g, grassi 0,52g, fibra 2,80g, calcio 67,0mg, ferro 1,77mg, zinco 0,50mg, magnesio 26,0mg, rame 0,23mg, selenio 0,90µg, sodio 46,0mg, folato totale 62,0µg (nessuna firma di arricchimento), vitamina C 27,0mg, vitamina B12 0µg (esplicito), vitamina K 310µg, beta-carotene 3930µg, beta-criptoxantina 202µg.
+- **Analogia usata**: `food_prezzemolo_raw` (prezzemolo fresco, FDC 170416 "Parsley, fresh", già eseguito sul DB reale — stessa famiglia botanica reale Apiaceae, stesso trattamento "erba aromatica fresca", stessa analogia già usata per aneto fresco in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (erba aromatica).
+- **Matrice**: nuova `coriandolo_fresco` ("Coriandolo, foglie fresche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene/beta-criptoxantina reali e non nulli, stessa convenzione già usata per il coriandolo in semi e altre erbe/spezie Apiaceae di questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Apiaceae` (*Coriandrum sativum*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169997 --food-id=food_coriandolo_fresco_raw \
+  --name-it="Coriandolo, foglie fresche, crudo" \
+  --matrix-id=coriandolo_fresco --matrix-description-it="Coriandolo, foglie fresche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169997 --food-id=food_coriandolo_fresco_raw \
+  --name-it="Coriandolo, foglie fresche, crudo" \
+  --matrix-id=coriandolo_fresco --matrix-description-it="Coriandolo, foglie fresche" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prezzemolo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Apiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Salsiccia polacca (kielbasa), maiale, cotta/affumicata — preparato 2026-11-17 dal task (191° lotto)
+
+- **food_id**: `food_salsiccia_polacca_cotta`. FDC ID 174577 (SR Legacy, "Polish sausage, pork" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente: `https://getfoodfacts.com/food/polish-sausage-pork-174577`). Primo insaccato polacco/kielbasa di questa pipeline, individuato dall'elenco completo USDA "Sausages and Luncheon Meats" (219 nomi via bodbot.com, categoria mai scorsa per intero da getfoodfacts.com stesso in questo lotto — due tentativi diretti sulla pagina categoria hanno dato `PROVENANCE_REQUIRED`). Verificato con `grep` dedicato ("kielbasa"/"polish sausage"/"salsiccia polacca"/174577) che non esisteva già. **Nota sullo stato di cottura**: la descrizione FDC non dichiara esplicitamente "raw"/"cooked", ma il kielbasa/salsiccia polacca è per definizione un insaccato affumicato e precotto in fabbrica (stesso principio categorico già usato per il knockwurst nel 58° lotto, non un dato osservato sulla pagina) — `baseline_cooking_state=cooked` per questo motivo.
+- **Nutrienti**: **14/17**. Per 100g: energia 326kcal, proteine 14,1g, grassi 28,7g, fibra 0g (esplicito), calcio 12,0mg, ferro 1,44mg, zinco 1,93mg, magnesio 14,0mg, rame 0,090mg, selenio 17,7µg, sodio 876mg (alto, coerente con un salume affumicato), folato totale 2,00µg, vitamina C 1,00mg, vitamina B12 0,98µg. **Mancano**: vitamina K, beta-carotene, beta-criptoxantina — campi assenti dalla pagina, non assunti zero.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto di maiale, già eseguito sul DB reale — stessa categoria funzionale "salume cotto/affumicato pronto al consumo", stessa analogia già usata con successo per prosciutto di tacchino/knockwurst in questa pipeline).
+- **Categoria dieta**: `meat_fish` (salume di maiale, vegetariano no).
+- **Matrice**: nuova `salsiccia_polacca` ("Salsiccia polacca (kielbasa), maiale").
+- **Attributi**: `is_heme_iron` (flag attivo — prodotto di carne di mammifero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale, carotenoidi assenti dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174577 --food-id=food_salsiccia_polacca_cotta \
+  --name-it="Salsiccia polacca (kielbasa), maiale, cotta/affumicata" \
+  --matrix-id=salsiccia_polacca --matrix-description-it="Salsiccia polacca (kielbasa), maiale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174577 --food-id=food_salsiccia_polacca_cotta \
+  --name-it="Salsiccia polacca (kielbasa), maiale, cotta/affumicata" \
+  --matrix-id=salsiccia_polacca --matrix-description-it="Salsiccia polacca (kielbasa), maiale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio bianco secco (queso seco), crudo — preparato 2026-11-17 dal task (189° lotto)
 
 - **food_id**: `food_queso_seco_raw`. FDC ID 746765 (**Foundation Foods**, "Cheese, dry white, queso seco" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). Formaggio latino-americano a pasta dura/secca e sapore salato (tipo "queso seco"/"queso añejo"), categoria FDC "Dairy and Egg Products" — gap genuino individuato dall'elenco completo "common foods" di quella categoria (75 nomi via `getfoodfacts.com/foods/dairy-and-egg-products`), incrociato con `grep` su tutti e tre i file prima della ricerca: **74/75 nomi di quella categoria già ✅/⚠ da lotti precedenti**, questo era l'unico genuinamente nuovo (l'altro buco residuo, "Brick cheese", verificato nello stesso lotto ma scartato ⚠ — vedi sotto).
