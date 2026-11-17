@@ -142,6 +142,30 @@ npm run add-food -- --fdc-id=172005 --food-id=food_tonno_striato_cotto \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Sugarello (suro/jack mackerel), in scatola, sgocciolato — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+
+- **food_id**: `food_sugarello_in_scatola`. FDC ID **175121** (**SR Legacy**, "Fish, mackerel, jack, canned, drained solids" — pagina `getfoodfacts.com/food/fish-mackerel-jack-canned-drained-solids-175121` dedicata, intro e riga "Source" esplicite "SR Legacy, FDC 175121"). **Secondo lead "dimenticato" trovato in questo lotto** (stesso filone dello skipjack sopra): questo FDC ID era già stato valutato il 2026-10-19 come possibile "sgombro in scatola" e scartato per mismatch di specie (*Trachurus*, sugarello/suro, famiglia Carangidae ≠ *Scomber scombrus*, sgombro vero, famiglia Scombridae, già `food_sgombro_raw`) — riconfermato ⚠ per quello scopo anche nel 173° lotto. Il sugarello/suro è però un pesce reale e comunemente consumato (Mediterraneo, Sud Italia, Spagna) mai aggiunto come specie a sé: verificato con `grep` dedicato su "sugarello"/"suro"/"jack mackerel"/"horse mackerel" (zero occorrenze come alimento proprio, solo come specie scartata per il confronto con lo sgombro) prima di procedere.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 156kcal, proteine 23,2g, grassi 6,30g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 241mg (alto, coerente con pesce in scatola con lische ammorbidite dalla cottura/sterilizzazione — stesso pattern già visto per sardine/salmone in scatola), ferro 2,04mg, magnesio 37,0mg, zinco 1,02mg, rame 0,15mg, selenio 37,7µg, vitamina C 0,90mg, folato totale 5,00µg (acido folico 0µg esplicito), vitamina B12 6,94µg, beta-carotene 0µg (esplicito), vitamina K 0,10µg (esplicito, non zero), alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). Sodio 379mg/100g (moderato-alto, coerente con un prodotto in scatola — stesso ordine di grandezza già accettato per tonno/sardine in scatola, non preso come segno di arricchimento). **Nota di trasparenza**: la pagina non specifica il liquido di governo (olio/acqua/salamoia) né riporta una lista ingredienti — solo "drained solids" (solidi sgocciolati); i grassi (6,30g/100g) sono coerenti con un pesce grasso sgocciolato, non necessariamente con olio aggiunto.
+- **Analogia usata**: `food_sgombro_raw` (sgombro crudo, già eseguito sul DB reale — stesso nome comune inglese "mackerel" e categoria funzionale "pesce grasso", nessun pesce della famiglia Carangidae ancora eseguito da usare come analogia più precisa).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sugarello_in_scatola` ("Sugarello (suro), in scatola, sgocciolato").
+- **Attributi**: `is_heme_iron=true` (muscolo di pesce), `matrix_category_calcium` omesso (NULL — non applicabile a questo schema per il pesce, nonostante il calcio alto da lische), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero, non un prodotto vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175121 --food-id=food_sugarello_in_scatola \
+  --name-it="Sugarello (suro), in scatola, sgocciolato" \
+  --matrix-id=sugarello_in_scatola --matrix-description-it="Sugarello (suro), in scatola, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175121 --food-id=food_sugarello_in_scatola \
+  --name-it="Sugarello (suro), in scatola, sgocciolato" \
+  --matrix-id=sugarello_in_scatola --matrix-description-it="Sugarello (suro), in scatola, sgocciolato" \
+  --baseline-cooking-state=canned --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Surimi (imitazione gamberetto a base di polpa di pesce) — preparato 2026-11-17 dal task (centosettantatreesimo lotto)
 
 - **food_id**: `food_surimi`. FDC ID **171973** (**SR Legacy**, "Crustaceans, shrimp, mixed species, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-imitation-made-from-surimi-171973` dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente in più punti della pagina — titolo, paragrafo introduttivo e riga "Source:" — nonostante l'etichetta generica "USDA reference food" sopra il titolo, risultata ambigua e non indicativa del tier reale su questo sito, vedi nota metodologica sotto). Prodotto genuinamente nuovo (categoria "prodotti trasformati mono-ingrediente a base di pesce"): verificato con `grep` dedicato su "surimi"/"imitation" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web.
