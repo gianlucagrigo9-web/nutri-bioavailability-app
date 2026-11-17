@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Scup (porgy), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_pesce_scup_cotto`. FDC ID 174241 (SR Legacy, "Fish, scup, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-scup-cooked-dry-heat-174241` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto dello scup già `food_pesce_scup_raw` (FDC 175141, 134° lotto, non ancora eseguito).
+- **Nutrienti**: **14/17**. Per 100g: energia 135kcal, proteine 24,2g, grassi 3,50g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 51,0mg, ferro 0,68mg, magnesio 29,0mg, zinco 0,62mg, rame 0,065mg, selenio 46,8µg, vitamina C 0mg (esplicito), folato totale 17,0µg, vitamina B12 1,62µg, vitamina A/retinolo 31,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_branzino_cotto` (pesce marino cotto, già eseguito sul DB reale — non usata l'analogia col crudo omonimo perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_scup_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174241 --food-id=food_pesce_scup_cotto \
+  --name-it="Scup (porgy), cotto (calore secco)" \
+  --matrix-id=pesce_scup_cotto --matrix-description-it="Scup (porgy), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174241 --food-id=food_pesce_scup_cotto \
+  --name-it="Scup (porgy), cotto (calore secco)" \
+  --matrix-id=pesce_scup_cotto --matrix-description-it="Scup (porgy), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sgombro spagnolo (Spanish mackerel), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_sgombro_spagnolo_cotto`. FDC ID 173674 (SR Legacy, "Fish, mackerel, spanish, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-mackerel-spanish-cooked-dry-heat-173674` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo 173673). Completa la coppia crudo/cotto dello sgombro spagnolo già `food_sgombro_spagnolo_raw` (FDC 173673, 134° lotto, non ancora eseguito).
