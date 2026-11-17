@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Struzzo, top loin (lombata), cotto — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_top_loin_cotto`. FDC ID 174490 (SR Legacy, "Ostrich, top loin, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta della lombata/top loin cruda (`food_struzzo_lombata_raw` o analogo, già "Pronti" in questo lotto). Metodo di cottura non specificato sulla pagina. Verificato con `grep` su "174490": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **17/17 — record completo**, unico fra tutti i tagli di struzzo/emu valutati in questo lotto a riportare esplicitamente la vitamina K. Per 100g: energia 155kcal, proteine 28,1g, grassi 3,87g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 3,31mg, magnesio 25,0mg, zinco 4,72mg, rame 0,15mg, selenio 36,6µg, sodio 77,0mg, vitamina C 0mg esplicito, folato totale 15,0µg, acido folico 0µg esplicito, vitamina B12 6,17µg, vitamina K (fillochinone) 3,40µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. Nota: il pannello Nutrition Facts per porzione mostra grassi "3,5g" (vs 3,29g/porzione attesi) e calcio "10mg" (vs 5,10mg/porzione attesi dalla tabella per 100g) — discrepanze non spiegate dal solo arrotondamento; valori qui presi dalla tabella completa "Every nutrient in this record", non dal pannello.
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile/ratite cotta", stesso pattern usato sopra per gli altri tagli di struzzo cotti).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_top_loin_cotto` ("Struzzo, top loin (lombata), cotto").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (metodo non specificato dalla fonte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174490 --food-id=food_struzzo_top_loin_cotto \
+  --name-it="Struzzo, top loin (lombata), cotto" \
+  --matrix-id=struzzo_top_loin_cotto --matrix-description-it="Struzzo, top loin (lombata), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174490 --food-id=food_struzzo_top_loin_cotto \
+  --name-it="Struzzo, top loin (lombata), cotto" \
+  --matrix-id=struzzo_top_loin_cotto --matrix-description-it="Struzzo, top loin (lombata), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, inside strip, cotto — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_inside_strip_cotto`. FDC ID 172842 (SR Legacy, "Ostrich, inside strip, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta di `food_struzzo_inside_strip_raw` (FDC 172841) sopra in questo stesso lotto. Metodo di cottura non specificato sulla pagina (solo "cooked", non "broiled"/"roasted"/"braised"). Verificato con `grep` su "172842": nessuna occorrenza prima di questa aggiunta.
