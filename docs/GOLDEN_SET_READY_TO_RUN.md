@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pollo (tipo "roasting", non "broiler/fryer"), carne e pelle, cotto (arrosto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_roasting_carne_e_pelle_cotta`. FDC ID 173635 (SR Legacy, "Chicken, roasting, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente come "SR Legacy", release USDA 2026-04-30). Stesso filone "categoria USDA alternativa" del 177° lotto (categoria "roasting" distinta da "broilers or fryers"): qui il composito "carne e pelle" (non separato in scura/chiara), cotto — nessuna delle due voci "roasting" già pronte (carne scura/chiara crude, FDC 173638/172398) è un doppione: taglio e stato diversi, record FDC realmente distinto, verificato con `grep` sull'FDC ID prima di scrivere la voce.
+- **Nutrienti**: **14/17**. Mancano beta-carotene, altri carotenoidi provitaminici A, vitamina K (assenti dal record — pagina con 67 nutrienti totali tracciati, nessuno dei 3 compare; coerente con un record di sola carne, senza componente vegetale). Per 100g: energia 223kcal, proteine 24,0g, grassi 13,4g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,26mg, magnesio 20,0mg, zinco 1,45mg, rame 0,058mg, selenio 23,6µg, sodio 73,0mg, vitamina C 0mg esplicito, folato totale 5,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,27µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, cotto — già eseguito sul DB reale; nessun alimento "pollo con pelle, cotto" ancora eseguito in questa pipeline per un'analogia più precisa, stesso animale e stato "cotto" comunque coerenti).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_roasting_carne_e_pelle_cotta` ("Pollo, tipo roasting, carne e pelle, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carne, nessun carotenoide vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=173635 --food-id=food_pollo_tipo_roasting_carne_e_pelle_cotta \
+  --name-it="Pollo (tipo roasting), carne e pelle, cotto (arrosto)" \
+  --matrix-id=pollo_tipo_roasting_carne_e_pelle_cotta --matrix-description-it="Pollo, tipo roasting, carne e pelle, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173635 --food-id=food_pollo_tipo_roasting_carne_e_pelle_cotta \
+  --name-it="Pollo (tipo roasting), carne e pelle, cotto (arrosto)" \
+  --matrix-id=pollo_tipo_roasting_carne_e_pelle_cotta --matrix-description-it="Pollo, tipo roasting, carne e pelle, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Agnello australiano importato, fresco, composto di tagli al dettaglio, crudo (solo magro) — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
 
 - **food_id**: `food_agnello_australiano_raw`. FDC ID 174399 (SR Legacy, "Lamb, Australian, imported, fresh, composite of trimmed retail cuts, separable lean only, trimmed to 1/8\" fat, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione**: l'agnello generico già eseguito (`food_agnello_raw`) è un record FDC diverso, FDC 174338/174339 "Lamb, **New Zealand**, imported, **frozen**, composite..." — origine e stato di conservazione diversi (Australia/fresco vs Nuova Zelanda/surgelato), stessa distinzione per origine già accettata in questa pipeline (es. manzo Wagyu importato dal Giappone vs domestico, in principio; qui concretamente verificato con due FDC ID distinti e due pagine getfoodfacts.com separate).
