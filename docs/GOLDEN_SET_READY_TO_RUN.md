@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Renna/caribù, quarto posteriore, carne cotta (Alaska Native) — preparato 2026-11-17 dal task (centottantaquattresimo lotto)
+
+- **food_id**: `food_renna_quarto_posteriore_cotto`. FDC ID 169822 (SR Legacy, "Caribou, hind quarter, meat, cooked (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Categoria FDC "American Indian/Alaska Native Foods", filone già produttivo nei lotti 153°-158° (criterio di accettazione stabilito dal 155° lotto: taglio/preparazione senza alternativa generica non-etnica). Nessun record generico "caribou hind quarter" esiste fuori da questa categoria — distinto da `food_renna_raw`/`food_renna_cotto` (generici, lotto 32) e da `food_renna_secca` (spalla, lotto 153°). Verificato con `grep` dedicato su tutti i file, zero occorrenze per "quarto posteriore"/"hind quarter"/169822 prima della ricerca web.
+- **Nutrienti**: **16/17**. Per 100g: energia 159kcal, proteine 28,8g, grassi 4,82g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 4,80mg, zinco 4,30mg, magnesio 24,0mg, rame 0,33mg, selenio 16,5µg, sodio 45,0mg, vitamina C 0mg esplicito, vitamina B12 6,47µg, folato totale 4,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (beta-criptoxantina) 0µg esplicito. **Manca** (non riportata come totale, solo componenti separate menachinone-4/filochinone): vitamina K. Nota: piccola discrepanza fra etichetta per porzione (160kcal/10mg calcio) e tabella nutrienti per 100g (159kcal/5,00mg) — tipico arrotondamento fra formati della stessa pagina, non un'incoerenza sui dati di base usati qui.
+- **Analogia usata**: `food_capra_cotta` (capra cotta, già eseguita sul DB reale — stesso profilo funzionale "carne rossa di selvaggina cotta").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `renna_quarto_posteriore_cotto`.
+- **Attributi**: `is_heme_iron` presente (true), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169822 --food-id=food_renna_quarto_posteriore_cotto \
+  --name-it="Renna/caribù, quarto posteriore, carne cotta" \
+  --matrix-id=renna_quarto_posteriore_cotto --matrix-description-it="Renna/caribù, quarto posteriore, carne cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169822 --food-id=food_renna_quarto_posteriore_cotto \
+  --name-it="Renna/caribù, quarto posteriore, carne cotta" \
+  --matrix-id=renna_quarto_posteriore_cotto --matrix-description-it="Renna/caribù, quarto posteriore, carne cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Renna/caribù, natica (rump), carne semisecca (Alaska Native) — preparato 2026-11-17 dal task (centottantaquattresimo lotto)
+
+- **food_id**: `food_renna_natica_semisecca`. FDC ID 167644 (SR Legacy, "Caribou, rump meat, half dried (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone/criterio del taglio precedente in questa stessa coda: nessun record generico "caribou rump" esiste fuori da questa categoria, distinto da `food_renna_secca` (spalla, FDC diverso 168049). Verificato con `grep` dedicato, zero occorrenze per "natica"/"rump meat"/167644 prima della ricerca web.
+- **Nutrienti**: **16/17**. Per 100g: energia 255kcal, proteine 52,1g, grassi 5,23g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 11,0mg, zinco 9,40mg, magnesio 60,0mg, rame 0,60mg, selenio 30,5µg, sodio 390mg, vitamina C 0mg esplicito, vitamina B12 7,16µg, folato totale 3,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. **Manca** (non riportata come totale, solo componenti separate): vitamina K. Nota: piccola discrepanza fra etichetta (260kcal/10mg calcio) e tabella per 100g (255kcal/14,0mg), stesso tipo di arrotondamento già visto sopra.
+- **Analogia usata**: `food_capra_raw` (capra cruda, già eseguita sul DB reale — stesso precedente di analogia "carne di selvaggina conservata/non standard" già usato per `food_renna_secca` al 153° lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `renna_natica_semisecca`.
+- **Attributi**: `is_heme_iron` presente (true), resto omesso/default, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167644 --food-id=food_renna_natica_semisecca \
+  --name-it="Renna/caribù, natica (rump), carne semisecca" \
+  --matrix-id=renna_natica_semisecca --matrix-description-it="Renna/caribù, natica (rump), carne semisecca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167644 --food-id=food_renna_natica_semisecca \
+  --name-it="Renna/caribù, natica (rump), carne semisecca" \
+  --matrix-id=renna_natica_semisecca --matrix-description-it="Renna/caribù, natica (rump), carne semisecca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Foca barbuta (Oogruk), carne essiccata in olio (Alaska Native) — preparato 2026-11-17 dal task (centottantaquattresimo lotto)
+
+- **food_id**: `food_foca_barbuta_secca_olio`. FDC ID 168051 (SR Legacy, "Seal, bearded (Oogruk), meat, dried, in oil (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Distinto da `food_foca_barbuta_raw` (FDC 168053, "low quadrant, raw", già "pronto" dal 153° lotto) e dalla preparazione "essiccata" semplice senza olio (FDC 168020, scartata ⚠ al 154° lotto per dati troppo poveri, 7/17) — qui una terza preparazione con pagina getfoodfacts.com propria e pannello nutrienti molto più ricco. Verificato con `grep` dedicato, zero occorrenze per "essiccata in olio"/"dried, in oil"/168051 prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 367kcal, proteine 35,3g, grassi 25,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 7,00mg, ferro 17,0mg, zinco 3,10mg, magnesio 29,0mg, rame 0,27mg, selenio 90,8µg, sodio 120mg, vitamina C 0mg esplicito, vitamina B12 5,85µg, folato totale 11,0µg. **Mancano**: vitamina K (solo componenti separate, nessun totale), beta-carotene, altro carotenoide provitaminico A (non riportati).
+- **Analogia usata**: `food_capra_cotta` (capra cotta, già eseguita sul DB reale — stesso profilo funzionale "carne di mammifero/selvaggina conservata", nessuna carne marina eseguita disponibile come analogia più stretta).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `foca_barbuta_secca_olio`.
+- **Attributi**: `is_heme_iron` presente (true), resto omesso/default, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168051 --food-id=food_foca_barbuta_secca_olio \
+  --name-it="Foca barbuta (Oogruk), carne essiccata in olio" \
+  --matrix-id=foca_barbuta_secca_olio --matrix-description-it="Foca barbuta (Oogruk), carne essiccata in olio" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168051 --food-id=food_foca_barbuta_secca_olio \
+  --name-it="Foca barbuta (Oogruk), carne essiccata in olio" \
+  --matrix-id=foca_barbuta_secca_olio --matrix-description-it="Foca barbuta (Oogruk), carne essiccata in olio" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wapiti (elk nordamericano), lombata (loin), cotta (grigliata) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_wapiti_lombata_cotta`. FDC ID 174427 (SR Legacy, "Game meat, elk, loin, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30).
