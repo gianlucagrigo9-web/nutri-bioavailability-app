@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Struzzo, oyster, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_oyster_raw`. FDC ID 174487 (SR Legacy, "Ostrich, oyster, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Sesto taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "174487": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 125kcal, proteine 21,6g, grassi 3,67g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 3,86mg, magnesio 21,0mg, zinco 3,59mg, rame 0,13mg, selenio 33,8µg, sodio 83,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito, vitamina B12 4,91µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (assente dalla tabella vitamine della pagina). Nota: il pannello Nutrition Facts per porzione (85g) di questa pagina mostra il calcio incoerente (10mg vs 5,10mg attesi dalla tabella per 100g) — il valore di calcio qui riportato viene dalla tabella "Every nutrient in this record", non dal pannello; tutti gli altri nutrienti del pannello sono coerenti con la tabella per 100g.
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — ancora solo "Pronti" non eseguito, unica voce della stessa specie disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_oyster_raw` ("Struzzo, oyster, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174487 --food-id=food_struzzo_oyster_raw \
+  --name-it="Struzzo, oyster, crudo" \
+  --matrix-id=struzzo_oyster_raw --matrix-description-it="Struzzo, oyster, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174487 --food-id=food_struzzo_oyster_raw \
+  --name-it="Struzzo, oyster, crudo" \
+  --matrix-id=struzzo_oyster_raw --matrix-description-it="Struzzo, oyster, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, fan, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_fan_raw`. FDC ID 174483 (SR Legacy, "Ostrich, fan, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Quinto taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "174483": nessuna occorrenza prima di questa aggiunta.
