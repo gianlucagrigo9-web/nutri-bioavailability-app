@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Pollo (tipo "roasting"), intero con frattaglie e collo, carne e pelle, crudo — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_roasting_intero_con_frattaglie_raw`. FDC ID 172394 (SR Legacy, "Chicken, roasting, meat and skin and giblets and neck, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone "roasting" del 177°/di questo lotto, qui il composito "intero con frattaglie e collo" (diverso dalle voci "carne scura"/"carne chiara"/"carne e pelle" già pronte per questa categoria).
+- **Nutrienti**: **14/17**. Mancano beta-carotene, altri carotenoidi provitaminici A, vitamina K (nessuna riga nella pagina, non assunti a zero — record con 67 nutrienti totali tracciati). Per 100g: energia 213kcal, proteine 17,1g, grassi 15,5g, carboidrati 0,090g, fibra 0g esplicito, calcio 10,0mg, ferro 1,37mg, magnesio 19,0mg, zinco 1,28mg, rame 0,060mg, selenio 11,6µg, sodio 69,0mg, vitamina C 2,40mg, folato totale 26,0µg, acido folico 0µg esplicito, vitamina B12 0,99µg.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (pollo, crudo — già eseguita sul DB reale; nessun "pollo con pelle, crudo" ancora eseguito per un'analogia più precisa sul trim).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_roasting_intero_con_frattaglie_raw` ("Pollo tipo roasting, intero con frattaglie e collo, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172394 --food-id=food_pollo_tipo_roasting_intero_con_frattaglie_raw \
+  --name-it="Pollo (tipo roasting), intero con frattaglie e collo, carne e pelle, crudo" \
+  --matrix-id=pollo_tipo_roasting_intero_con_frattaglie_raw --matrix-description-it="Pollo tipo roasting, intero con frattaglie e collo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172394 --food-id=food_pollo_tipo_roasting_intero_con_frattaglie_raw \
+  --name-it="Pollo (tipo roasting), intero con frattaglie e collo, carne e pelle, crudo" \
+  --matrix-id=pollo_tipo_roasting_intero_con_frattaglie_raw --matrix-description-it="Pollo tipo roasting, intero con frattaglie e collo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Cappone, intero con frattaglie e collo, carne e pelle, cotto (arrosto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_cappone_intero_con_frattaglie_cotto`. FDC ID 172407 (SR Legacy, "Chicken, capons, meat and skin and giblets and neck, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Estende il filone "cappone" apertosi al 67° lotto (`food_cappone_cotto`, FDC 173646, solo carne e pelle senza frattaglie): qui il composito con frattaglie e collo, record FDC realmente diverso, mai tentato finora (verificato con `grep`, nessun doppione). Il crudo corrispondente (FDC 172406) resta `⚠`: pagina getfoodfacts.com bloccata da permesso mai risposto in questo turno, nessuna fonte alternativa con FDC verificabile tentata; voce isolata senza crudo, stesso schema già usato altre volte in questa pipeline.
+- **Nutrienti**: **14/17**. Mancano beta-carotene, altri carotenoidi provitaminici A, vitamina K (assenti dal record — 67 nutrienti totali tracciati, nessuno dei 3 compare). Per 100g: energia 226kcal, proteine 28,4g, grassi 11,7g, carboidrati 0,040g, fibra 0g esplicito, calcio 15,0mg, ferro 1,79mg, magnesio 23,0mg, zinco 1,94mg, rame 0,081mg, selenio 19,3µg, sodio 50,0mg, vitamina C 0,40mg, folato totale 26,0µg, acido folico 0µg esplicito, vitamina B12 0,36µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (pollo, carne cruda — già eseguita sul DB reale; stessa analogia già usata per `food_cappone_cotto` al 67° lotto, stessa specie *Gallus gallus*).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cappone_intero_con_frattaglie_cotto` ("Cappone, intero con frattaglie e collo, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=172407 --food-id=food_cappone_intero_con_frattaglie_cotto \
+  --name-it="Cappone, intero con frattaglie e collo, carne e pelle, cotto (arrosto)" \
+  --matrix-id=cappone_intero_con_frattaglie_cotto --matrix-description-it="Cappone, intero con frattaglie e collo, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172407 --food-id=food_cappone_intero_con_frattaglie_cotto \
+  --name-it="Cappone, intero con frattaglie e collo, carne e pelle, cotto (arrosto)" \
+  --matrix-id=cappone_intero_con_frattaglie_cotto --matrix-description-it="Cappone, intero con frattaglie e collo, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo (tipo "stewing", gallina da brodo), carne scura, cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_pollo_tipo_stewing_carne_scura_raw`. FDC ID 172404 (SR Legacy, "Chicken, stewing, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Terza categoria USDA alternativa** scoperta in questo lotto (dopo "roasting" del 177°): "stewing" = gallina da brodo, animale più vecchio/magro rispetto a "broilers or fryers"/"roasting". Verificato con `grep` sull'FDC ID: nessun doppione. Nota: FDC 172400 ("Chicken, stewing, meat and skin, raw") risulta già usato altrove nel repo come `food_gallina_raw` — stessa categoria USDA, taglio diverso (con pelle vs solo carne scura), non un doppione.
