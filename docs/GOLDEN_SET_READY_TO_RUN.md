@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cervo, carne macinata, cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_cervo_macinato_raw`. FDC ID 172602 (SR Legacy, "Game meat, deer, ground, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Controparte cruda della voce cotta sopra; taglio "macinato" distinto dal generico `food_cervo_raw` già eseguito.
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 157kcal, proteine 21,8g, grassi 7,13g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 2,92mg, zinco 4,20mg, magnesio 21,0mg, rame 0,14mg, selenio 10,0µg, vitamina C 0mg esplicito, vitamina B12 1,87µg, folato totale 4,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito, vitamina K (fillochinone) 1,20µg.
+- **Analogia usata**: `food_capra_raw` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cervo_macinato_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172602 --food-id=food_cervo_macinato_raw \
+  --name-it="Cervo, carne macinata, cruda" \
+  --matrix-id=cervo_macinato_raw --matrix-description-it="Cervo, carne macinata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172602 --food-id=food_cervo_macinato_raw \
+  --name-it="Cervo, carne macinata, cruda" \
+  --matrix-id=cervo_macinato_raw --matrix-description-it="Cervo, carne macinata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervo, carne macinata, cotta (in padella) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_cervo_macinato_cotto`. FDC ID 172603 (SR Legacy, "Game meat, deer, ground, cooked, pan-broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Taglio "macinato" distinto dal generico `food_cervo_cotto` già eseguito (che è "cooked, roasted" non macinato). Filone: specie minori con tagli specifici scoperti nella stessa release USDA 2026-04-30 che ha dato il filone ratiti del 182° lotto (qui estesa a cervo/wapiti/bisonte).
