@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Fagioli navy (navy beans), cotti (bolliti) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_fagioli_navy_bolliti`. FDC ID 173746 (SR Legacy, "Beans, navy, mature seeds, cooked, boiled, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Varietà di fagiolo (*Phaseolus vulgaris*) mai tentata in questa pipeline nonostante l'ampia copertura di altre varietà (borlotti, cannellini, lima, neri, pinto, azuki, mung, alati, dall'occhio, gialli). **Voce cotto-only deliberata**: il crudo generico "Beans, navy, mature seeds, raw" non ha una pagina getfoodfacts.com dedicata indicizzata (solo aggregatori secondari), mentre il cotto sì — stesso schema già accettato altrove in questa pipeline quando solo uno dei due stati ha una fonte primaria pulita. Verificato con `grep` su "navy"/"173746": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (nessun fagiolo navy tentato finora).
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 140kcal, proteine 8,23g, grassi 0,62g, carboidrati 26,1g, fibra 10,5g, calcio 69,0mg, ferro 2,36mg, magnesio 53,0mg, zinco 1,03mg, rame 0,21mg, selenio 2,90µg, sodio 0mg esplicito, vitamina C 0,90mg, folato totale 140µg (valore alto, coerente con i legumi già coperti in questa pipeline), acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito (coerente con un alimento vegetale), vitamina K 0,60µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_kidney_beans_boiled` (Golden Set originale, fagioli rossi cotti bolliti, già eseguito sul DB reale — stesso genere *Phaseolus*, stesso stato cotto bollito, stessa famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legumi).
+- **Matrice**: nuova `fagioli_navy_bolliti` ("Fagioli navy, cotti").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale alto tipico del legume).
+
+```
+npm run add-food -- --fdc-id=173746 --food-id=food_fagioli_navy_bolliti \
+  --name-it="Fagioli navy, cotti (bolliti)" \
+  --matrix-id=fagioli_navy_bolliti --matrix-description-it="Fagioli navy, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173746 --food-id=food_fagioli_navy_bolliti \
+  --name-it="Fagioli navy, cotti (bolliti)" \
+  --matrix-id=fagioli_navy_bolliti --matrix-description-it="Fagioli navy, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Salmone reale (chinook/king salmon), cotto (al forno) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_salmone_reale_cotto`. FDC ID 171999 (SR Legacy, "Fish, salmon, chinook, cooked, dry heat" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Finora il chinook esisteva solo come versione affumicata (`food_salmone_affumicato_raw`, FDC 171985, lox); il filetto fresco cotto non era ancora stato tentato. Verificato con `grep` su "171999"/"chinook": nessuna occorrenza come voce fresca (solo lo smoked già coperto) prima di questa aggiunta.
