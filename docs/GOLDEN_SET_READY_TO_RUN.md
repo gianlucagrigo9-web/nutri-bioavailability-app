@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), macinato, crudo (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
+
+- **food_id**: `food_wapiti_macinato_raw`. FDC ID 168056 (SR Legacy, "Elk, free range, ground, raw (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Preparazione macinata cruda, distinta dai tagli lombata/girello/filetto cotti e dal generico `food_wapiti_cotto` già eseguiti in lotti precedenti. Verificato con `grep` dedicato, zero occorrenze per "macinato"/"ground"/168056 prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 97,0kcal, proteine 20,1g, grassi 1,80g, fibra 0g esplicito, calcio 4,00mg, ferro 7,17mg, zinco 5,82mg, magnesio 22,0mg, rame 0,16mg, selenio 14,3µg, sodio 49,0mg, vitamina B12 3,45µg, beta-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. **Mancano**: folato totale, vitamina C, vitamina K.
+- **Analogia usata**: `food_capra_raw` (già eseguita sul DB reale — stessa convenzione già usata per i tagli crudi di bisonte nel 183° lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `wapiti_macinato_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168056 --food-id=food_wapiti_macinato_raw \
+  --name-it="Wapiti, macinato, crudo" \
+  --matrix-id=wapiti_macinato_raw --matrix-description-it="Wapiti, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168056 --food-id=food_wapiti_macinato_raw \
+  --name-it="Wapiti, macinato, crudo" \
+  --matrix-id=wapiti_macinato_raw --matrix-description-it="Wapiti, macinato, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, girello (top round steak), cotto (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
 
 - **food_id**: `food_bisonte_girello_cotto`. FDC ID 167651 (SR Legacy, "Buffalo, free range, top round steak, cooked (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"; "buffalo" qui è il nome comune nativo-americano del bisonte americano, *Bison bison*, stessa specie già tracciata come `food_bisonte_*` dal 183° lotto). Taglio specifico (girello/top round) distinto dai tagli bisonte già coperti (controfiletto, spalla, macinato). **Nota di trasparenza**: la pagina mostra alcune incoerenze fra pannello riepilogo e tabella nutrienti (energia 150 vs 146kcal, proteine 33 vs 32,5g, calcio 0 vs 4,00mg) — usati i valori della tabella dettagliata, non del pannello arrotondato, stessa convenzione già adottata in lotti precedenti per casi analoghi. La controparte cruda (FDC 167649) è bloccata da `PROVENANCE_REQUIRED`, accodata in `docs/PENDING_HUMAN_ACTIONS.md`.
