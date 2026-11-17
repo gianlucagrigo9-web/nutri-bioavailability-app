@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Prugna selvatica americana (wild plum), cruda (Northern Plains Indians) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
+
+- **food_id**: `food_prugna_selvatica_raw`. FDC ID 169820 (SR Legacy, "Plums, wild (Northern Plains Indians)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie botanica distinta (*Prunus americana*, prugna selvatica nordamericana) dalla prugna comune già eseguita (`food_prugne_raw`, *Prunus domestica*) — non un doppione, specie e record FDC diversi. Verificato con `grep` dedicato, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **15/17**. Per 100g: energia 91,0kcal, proteine 0,43g, grassi 0,17g, fibra 6,00g, calcio 11,0mg, ferro 0,17mg, zinco 0,090mg, magnesio 8,00mg, rame 0,035mg, sodio 4,00mg, vitamina C 10,3mg, folato totale 1,00µg, beta-carotene 1930µg (reale e consistente, non nullo), beta-criptoxantina 157µg, vitamina K (fillochinone) 11,2µg. **Mancano**: selenio, vitamina B12 (entrambi assenti dal record, non riportati nemmeno a zero).
+- **Analogia usata**: `food_prugne_raw` (prugna comune cruda, già eseguita sul DB reale — stesso genere *Prunus*, frutto a drupa).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `prugna_selvatica_raw`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile — frutta, stesso trattamento di `food_prugne_raw`), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e consistente, crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (stessa di `food_prugne_raw`/`food_ciliegie_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169820 --food-id=food_prugna_selvatica_raw \
+  --name-it="Prugna selvatica americana (wild plum), cruda" \
+  --matrix-id=prugna_selvatica_raw --matrix-description-it="Prugna selvatica americana, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prugne_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169820 --food-id=food_prugna_selvatica_raw \
+  --name-it="Prugna selvatica americana (wild plum), cruda" \
+  --matrix-id=prugna_selvatica_raw --matrix-description-it="Prugna selvatica americana, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_prugne_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Agave, cotta (Southwest) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
 
 - **food_id**: `food_agave_cotta`. FDC ID 168992 (SR Legacy, "Agave, cooked (Southwest)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Stesso filone/pianta di `food_agave_raw` sopra, record FDC distinto per la preparazione cotta — non un doppione, FDC ID diverso. Verificato con `grep` dedicato, zero occorrenze prima della ricerca web.
