@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), filetto (tenderloin), cotto (grigliato) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_wapiti_filetto_cotto`. FDC ID 174429 (SR Legacy, "Game meat, elk, tenderloin, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Primo taglio specifico di wapiti mai tentato, oltre al generico `food_wapiti_cotto` già eseguito.
+- **Nutrienti**: **16/17**. Per 100g: energia 162kcal, proteine 30,8g, grassi 3,41g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 4,07mg, zinco 4,12mg, magnesio 29,0mg, rame 0,35mg, selenio 10,5µg, vitamina C 0mg esplicito, vitamina B12 2,96µg, folato totale 9,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. **Manca** (non riportata): vitamina K.
+- **Analogia usata**: `food_capra_cotta` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `wapiti_filetto_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174429 --food-id=food_wapiti_filetto_cotto \
+  --name-it="Wapiti, filetto (tenderloin), cotto" \
+  --matrix-id=wapiti_filetto_cotto --matrix-description-it="Wapiti, filetto (tenderloin), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174429 --food-id=food_wapiti_filetto_cotto \
+  --name-it="Wapiti, filetto (tenderloin), cotto" \
+  --matrix-id=wapiti_filetto_cotto --matrix-description-it="Wapiti, filetto (tenderloin), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, spalla (shoulder clod), cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_bisonte_spalla_raw`. FDC ID 172566 (SR Legacy, "Game meat, bison, shoulder clod, separable lean only, trimmed to 0" fat, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Stesso filone del controfiletto sopra.
