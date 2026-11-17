@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Agave, cotta (Southwest) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
+
+- **food_id**: `food_agave_cotta`. FDC ID 168992 (SR Legacy, "Agave, cooked (Southwest)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Stesso filone/pianta di `food_agave_raw` sopra, record FDC distinto per la preparazione cotta — non un doppione, FDC ID diverso. Verificato con `grep` dedicato, zero occorrenze prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 135kcal, proteine 0,99g, grassi 0,29g, fibra 10,6g, calcio 460mg (ancora più elevato del crudo, stessa nota sull'ossalato di calcio), ferro 3,55mg, zinco 0,25mg, magnesio 39,0mg, rame 0,11mg, selenio 0,20µg, sodio 13,0mg, vitamina C 0,30mg, vitamina B12 0µg esplicito, folato totale 3,00µg, beta-carotene 68,0µg (reale, non nullo), beta-criptoxantina 0µg esplicito, vitamina K (fillochinone) 4,90µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 168992 e SR Legacy.
+- **Analogia usata**: `food_kale_raw` (stesso precedente dichiarato per `food_agave_raw`, per il comportamento del campo calcio).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `agave_cotta`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa nota di `food_agave_raw`), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, prodotto cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asparagaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168992 --food-id=food_agave_cotta \
+  --name-it="Agave, cotta (Southwest)" \
+  --matrix-id=agave_cotta --matrix-description-it="Agave, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168992 --food-id=food_agave_cotta \
+  --name-it="Agave, cotta (Southwest)" \
+  --matrix-id=agave_cotta --matrix-description-it="Agave, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Agave, cruda (Southwest) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
 
 - **food_id**: `food_agave_raw`. FDC ID 169814 (SR Legacy, "Agave, raw (Southwest)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Pianta/cuore di agave come alimento tradizionale dei nativi del Southwest, distinto dallo sciroppo/nettare d'agave (già ⚠ dal ventesimo lotto per assenza di record generico non di marca) — qui un record SR Legacy genuino per la pianta stessa. Verificato con `grep` dedicato, zero occorrenze per "agave" in questa forma (raw/cooked Southwest) prima della ricerca web.
