@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, carne macinata, grass-fed, cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_bisonte_macinato_grassfed_raw`. FDC ID 175293 (SR Legacy, "Bison, ground, grass-fed, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Controparte cruda della voce cotta sopra.
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 146kcal, proteine 20,2g, grassi 7,21g, carboidrati 0,050g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 2,78mg, zinco 4,59mg, magnesio 21,0mg, rame 0,14mg, selenio 20,0µg, vitamina C 0mg esplicito, vitamina B12 1,94µg, folato totale 12,0µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito, vitamina K (fillochinone) 1,20µg.
+- **Analogia usata**: `food_capra_raw` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_macinato_grassfed_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175293 --food-id=food_bisonte_macinato_grassfed_raw \
+  --name-it="Bisonte, carne macinata, grass-fed, cruda" \
+  --matrix-id=bisonte_macinato_grassfed_raw --matrix-description-it="Bisonte, carne macinata, grass-fed, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175293 --food-id=food_bisonte_macinato_grassfed_raw \
+  --name-it="Bisonte, carne macinata, grass-fed, cruda" \
+  --matrix-id=bisonte_macinato_grassfed_raw --matrix-description-it="Bisonte, carne macinata, grass-fed, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, carne macinata, grass-fed, cotta — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_bisonte_macinato_grassfed_cotto`. FDC ID 173847 (SR Legacy, "Bison, ground, grass-fed, cooked" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Linea di prodotto "grass-fed" distinta dal generico `food_bisonte_raw` (separable lean only, non grass-fed) già eseguito; nessuna controparte cotta generica trovata finora per il bisonte.
