@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Salmone rosa (pink salmon), crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_salmone_rosa_raw`. FDC ID 175138 (SR Legacy, "Fish, salmon, pink, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Specie distinta dal salmone atlantico/coho/chum/sockeye già coperti; finora il "rosa" esisteva solo come `food_salmone_rosa_in_scatola` (in scatola), mai come crudo. Verificato con `grep` su "175138"/"salmone rosa"/"salmon pink": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta. **Nota di trasparenza (Regola 6)**: ricercato anche il sockeye crudo (candidato FDC 2684440, Foundation, "Fish, salmon, sockeye, wild caught, raw") — scartato ⚠ perché la pagina getfoodfacts.com mostra valori interni incoerenti tra pannello e tabella per energia (140 vs 136kcal), calcio (14,8 vs 10mg) e sodio (53,3 vs 55mg), oltre a fibra dichiarata sia "non declared" che "0g" in sezioni diverse della stessa pagina — segnale di record Foundation poco affidabile, non usato. Il salmone rosa (SR Legacy, record più maturo) non presenta le stesse incoerenze: le uniche differenze sono fra il pannello per porzione (3oz, arrotondato) e la tabella per 100g (arrotondamento normale, non un'incoerenza di fonte).
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 127kcal, proteine 20,5g, grassi 4,40g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 7,00mg, ferro 0,38mg, magnesio 27,0mg, zinco 0,39mg, rame 0,063mg, selenio 31,4µg, sodio 75,0mg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 4,15µg, vitamina K (fillochinone) 0,40µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_salmon_raw` (salmone atlantico allevato crudo, Golden Set originale, già eseguito sul DB reale — stesso genere *Oncorhynchus/Salmo*, stesso stato crudo, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_rosa_raw` ("Salmone rosa, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175138 --food-id=food_salmone_rosa_raw \
+  --name-it="Salmone rosa, crudo" \
+  --matrix-id=salmone_rosa_raw --matrix-description-it="Salmone rosa, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175138 --food-id=food_salmone_rosa_raw \
+  --name-it="Salmone rosa, crudo" \
+  --matrix-id=salmone_rosa_raw --matrix-description-it="Salmone rosa, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Noci del Brasile, crude — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_noci_brasile_raw`. FDC ID 2515373 (**Foundation**, "Nuts, brazilnuts, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Verificato con `grep` su "brasile"/"brazilnut"/"2515373": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (frutta secca già coperta: mandorle, noci, pecan, macadamia, nocciole, anacardi, pistacchi, pinoli, ghiande — nessuna noce del Brasile).
