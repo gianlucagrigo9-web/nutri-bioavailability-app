@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Balena beluga, carne, secca — preparato 2026-11-17 dal task (192° lotto)
+
+- **food_id**: `food_balena_beluga_secca`. FDC ID 169795 (SR Legacy, "Whale, beluga, meat, dried (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, titolo "Whale, beluga, meat, dried (Alaska Native) (SR Legacy) nutrition facts", FDC ID e dataType citati esplicitamente, trovata tramite `WebSearch` fresca su `https://getfoodfacts.com/food/whale-beluga-meat-dried-alaska-native-169795`). Risolve uno dei lead aperti in `docs/PENDING_HUMAN_ACTIONS.md` dal 185°/186° lotto (intorno FDC 169795-169796 "da verificare se la pagina diventa raggiungibile"). Distinto dalla carne di balena beluga CRUDA, già valutata e scartata `⚠` ai lotti precedenti (nessun FDC ID verificabile per quella variante, solo un ID NDB legacy su recipal.com) — questa è una preparazione diversa (secca/essiccata) con un record FDC reale e verificabile, prima voce di balena di questa pipeline. Gli altri lead collegati (occhi FDC 169796, pinna cruda FDC 168979, fegato FDC~168980/168983) restano bloccati da `PROVENANCE_REQUIRED` o non confermati — dettaglio in `docs/PENDING_HUMAN_ACTIONS.md`.
+- **Nutrienti**: **17/17 completo**, tutti valori stated espliciti (nessun N/D). Per 100g: energia 327kcal, proteine 69,9g, grassi 5,34g, fibra 0g (esplicito), calcio 22,0mg, ferro 72,3mg (molto alto — coerente con una carne di mammifero marino essiccata/disidratata, stessa logica già osservata per renna/caribù secca FDC 168049 di questa pipeline, lì 11mg ma su una matrice diversa; valore riportato così com'è sulla fonte, non arrotondato né corretto), zinco 7,80mg, magnesio 63,0mg, rame 0,32mg, selenio 103µg, sodio 220mg, folato totale 10,0µg, vitamina C 0mg (esplicito), vitamina B12 7,31µg. **Nota di trasparenza sulla vitamina K** (stesso tipo di nota già usata altrove in questa pipeline, es. FDC 167869): la pagina riporta due righe distinte, "Vitamin K (Dihydrophylloquinone)" 1,30µg e "Vitamin K (phylloquinone)" 0µg, invece di un unico totale — il motore (`lib/fdc/nutrientMapping.ts`) mappa solo FDC #430 "Vitamin K (phylloquinone)", quindi il valore effettivamente scritto dallo script sarà **0µg esplicito** (non 1,30µg, che è la dihydrophylloquinone non mappata dal motore), coerente con la mappatura già in uso per ogni altro alimento di questa pipeline — non un'eccezione introdotta qui. Beta-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito).
+- **Analogia usata**: `food_capra_raw` (capra cruda, già eseguita sul DB reale — stesso precedente di analogia "carne rossa di selvaggina/mammifero" già usato per `food_renna_secca` al 153° lotto per una preparazione secca/essiccata).
+- **Categoria dieta**: `meat_fish` (carne di mammifero marino, vegetariano no).
+- **Matrice**: nuova `balena_beluga_secca` ("Balena beluga, carne secca").
+- **Attributi**: `is_heme_iron` presente (true — prodotto di carne di mammifero), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale, beta-carotene/criptoxantina esplicitamente 0), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169795 --food-id=food_balena_beluga_secca \
+  --name-it="Balena beluga, carne, secca" \
+  --matrix-id=balena_beluga_secca --matrix-description-it="Balena beluga, carne secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169795 --food-id=food_balena_beluga_secca \
+  --name-it="Balena beluga, carne, secca" \
+  --matrix-id=balena_beluga_secca --matrix-description-it="Balena beluga, carne secca" \
+  --baseline-cooking-state=dried --analogy-food-id=food_capra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Coriandolo (cilantro), foglie fresche, crudo — preparato 2026-11-17 dal task (191° lotto)
 
 - **food_id**: `food_coriandolo_fresco_raw`. FDC ID 169997 (SR Legacy, "Coriander (cilantro) leaves, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente: `https://getfoodfacts.com/food/coriander-cilantro-leaves-raw-169997`). **Nota di trasparenza importante**: questo alimento era stato segnato `⚠` per ben tre volte in lotti precedenti (83°, 115°, 157°) con la motivazione "nessuna pagina getfoodfacts.com trovata, FDC non traccia questa erba nella forma fresca". Questo lotto ha trovato la pagina dedicata (verificata con `WebFetch`) più due fonti indipendenti (foodstruct.com, nutrivore.com) che citano lo stesso identico FDC ID 169997 con valori concordanti — evidenza più solida di qualunque tentativo precedente, non un'ipotesi. Possibile che getfoodfacts.com abbia indicizzato questa pagina dopo il 2026-11-02 (data dei tentativi precedenti), oppure che le ricerche precedenti abbiano usato termini diversi. Non un doppione: distinto dal coriandolo semi secchi già eseguito sul DB reale (`food_coriandolo_raw`, FDC 170922) — parte della pianta diversa (foglia fresca vs seme secco), record FDC realmente diverso.
