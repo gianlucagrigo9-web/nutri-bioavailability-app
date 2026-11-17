@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sgombro spagnolo (Spanish mackerel), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_sgombro_spagnolo_cotto`. FDC ID 173674 (SR Legacy, "Fish, mackerel, spanish, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-mackerel-spanish-cooked-dry-heat-173674` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo 173673). Completa la coppia crudo/cotto dello sgombro spagnolo già `food_sgombro_spagnolo_raw` (FDC 173673, 134° lotto, non ancora eseguito).
+- **Nutrienti**: **14/17**. Per 100g: energia 158kcal, proteine 23,6g, grassi 6,32g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 13,0mg, ferro 0,74mg, magnesio 38,0mg, zinco 0,62mg, rame 0,065mg, selenio 40,6µg, vitamina C 1,60mg, folato totale 1,00µg, vitamina B12 7,00µg, vitamina A/retinolo 33,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_sgombro_cotto` (sgombro atlantico cotto, già eseguito sul DB reale — stessa famiglia Scombridae, pesce grasso, analogia più precisa; non usata l'analogia col crudo omonimo appena citato perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sgombro_spagnolo_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173674 --food-id=food_sgombro_spagnolo_cotto \
+  --name-it="Sgombro spagnolo (Spanish mackerel), cotto (calore secco)" \
+  --matrix-id=sgombro_spagnolo_cotto --matrix-description-it="Sgombro spagnolo (Spanish mackerel), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173674 --food-id=food_sgombro_spagnolo_cotto \
+  --name-it="Sgombro spagnolo (Spanish mackerel), cotto (calore secco)" \
+  --matrix-id=sgombro_spagnolo_cotto --matrix-description-it="Sgombro spagnolo (Spanish mackerel), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Yellowtail (Seriola spp., mixed species), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_pesce_yellowtail_cotto`. FDC ID 174248 (SR Legacy, "Fish, yellowtail, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-yellowtail-mixed-species-cooked-dry-heat-174248` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del yellowtail già `food_pesce_yellowtail_raw` (FDC 175163, 133° lotto, non ancora eseguito).
