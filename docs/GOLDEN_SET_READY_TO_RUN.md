@@ -16,6 +16,62 @@
 
 ## Pronti
 
+### Fagioli kidney "royal red", cotti (bolliti, senza sale) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_fagioli_kidney_royal_red_bolliti`. FDC ID 175197 (SR Legacy, "Beans, kidney, royal red, mature seeds, cooked, boiled, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Nota di trasparenza (Regola 6)**: stesso filone lasciato aperto dal 170° lotto (vedi nota sul fagiolo rosa in questo stesso lotto) — il kidney "royal red" crudo era stato scartato ⚠ per assenza di pagina getfoodfacts.com, ma il cotto (questo record) ne ha una, mai promossa prima. Cultivar di kidney distinta da `food_kidney_beans_boiled` (Golden Set originale) e da `food_fagioli_kidney_california_red_raw` (170° lotto) — valori per 100g differenti su calcio/magnesio/sodio, non lo stesso record. Verificato con `grep` su "royal red"/"175197": zero occorrenze prima di questa aggiunta.
+- **Nutrienti**: **14/17**. Per 100g: energia 123kcal, proteine 9,49g, grassi 0,17g, carboidrati 21,9g, fibra 9,30g, calcio 44,0mg, ferro 2,77mg, magnesio 42,0mg, zinco 0,90mg, rame 0,26mg, selenio 1,20µg, sodio 5,00mg (versione "senza sale", coerente con un legume bollito non salato), vitamina C 1,20mg, folato totale 74,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A (non riportati nel record, gap tipico dei legumi in questa pipeline).
+- **Analogia usata**: `food_kidney_beans_boiled` (Golden Set originale, fagioli rossi cotti bolliti, già eseguito sul DB reale — stesso genere *Phaseolus*, stesso stato cotto bollito, stessa famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legumi).
+- **Matrice**: nuova `fagioli_kidney_royal_red_bolliti` ("Fagioli kidney royal red, cotti").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175197 --food-id=food_fagioli_kidney_royal_red_bolliti \
+  --name-it="Fagioli kidney royal red, cotti (bolliti)" \
+  --matrix-id=fagioli_kidney_royal_red_bolliti --matrix-description-it="Fagioli kidney royal red, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175197 --food-id=food_fagioli_kidney_royal_red_bolliti \
+  --name-it="Fagioli kidney royal red, cotti (bolliti)" \
+  --matrix-id=fagioli_kidney_royal_red_bolliti --matrix-description-it="Fagioli kidney royal red, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
+### Fagioli francesi (french beans), cotti (bolliti, con sale) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_fagioli_francesi_bolliti`. FDC ID 175241 (SR Legacy, "Beans, french, mature seeds, cooked, boiled, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Terzo fagiolo recuperato dallo stesso filone lasciato aperto dal 170° lotto (vedi note sul fagiolo rosa/kidney royal red in questo stesso lotto): il crudo era ⚠, il cotto ha una pagina primaria pulita mai promossa prima. Verificato con `grep` su "francesi"/"french bean"/"175241": zero occorrenze prima di questa aggiunta.
+- **Nutrienti**: **14/17**. Per 100g: energia 129kcal, proteine 7,05g, grassi 0,76g, carboidrati 24,0g, fibra 9,40g, calcio 63,0mg, ferro 1,08mg, magnesio 56,0mg, zinco 0,64mg, rame 0,12mg, selenio 1,20µg, sodio 242mg (versione "con sale", valore alto coerente con l'aggiunta in cottura), vitamina C 1,20mg, folato totale 75,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A (non riportati nel record).
+- **Analogia usata**: `food_kidney_beans_boiled` (Golden Set originale, fagioli rossi cotti bolliti, già eseguito sul DB reale — stesso genere *Phaseolus*, stesso stato cotto bollito, stessa famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legumi).
+- **Matrice**: nuova `fagioli_francesi_bolliti` ("Fagioli francesi, cotti, con sale").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175241 --food-id=food_fagioli_francesi_bolliti \
+  --name-it="Fagioli francesi, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_francesi_bolliti --matrix-description-it="Fagioli francesi, cotti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175241 --food-id=food_fagioli_francesi_bolliti \
+  --name-it="Fagioli francesi, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_francesi_bolliti --matrix-description-it="Fagioli francesi, cotti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Fagioli rosa (pink beans), cotti (bolliti, con sale) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_fagioli_rosa_bolliti`. FDC ID 173795 (SR Legacy, "Beans, pink, mature seeds, cooked, boiled, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Varietà mai tentata in questa pipeline. **Nota di trasparenza (Regola 6)**: il 170° lotto (2026-11-16) aveva già cercato il fagiolo rosa ma solo nella versione **crudo** ("Beans, pink, mature seeds, raw"), scartata ⚠ per assenza di pagina getfoodfacts.com dedicata — segnalando esplicitamente che "solo le varianti cooked sono indicizzate" senza però proseguire su quella pista; questo lotto raccoglie quel filone lasciato aperto, verificando che il **cotto** ha davvero una pagina primaria pulita (173795), mai promossa prima. **Voce "con sale" dichiarata esplicitamente** (sodio 238mg/100g, valore alto coerente con l'aggiunta di sale in cottura, non con salamoia industriale) — nessuna versione "without salt" con pagina getfoodfacts.com dedicata reperibile, stesso tipo di compromesso già accettato altrove in questa pipeline per prodotti in scatola/salati quando è l'unica fonte primaria pulita disponibile. Verificato con `grep` su "fagioli rosa"/"pink bean"/"173795": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta.
