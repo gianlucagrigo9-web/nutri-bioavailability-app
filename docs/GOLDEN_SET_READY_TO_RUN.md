@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Agnello australiano importato, fresco, composto di tagli al dettaglio, crudo (solo magro) — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
+
+- **food_id**: `food_agnello_australiano_raw`. FDC ID 174399 (SR Legacy, "Lamb, Australian, imported, fresh, composite of trimmed retail cuts, separable lean only, trimmed to 1/8\" fat, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione**: l'agnello generico già eseguito (`food_agnello_raw`) è un record FDC diverso, FDC 174338/174339 "Lamb, **New Zealand**, imported, **frozen**, composite..." — origine e stato di conservazione diversi (Australia/fresco vs Nuova Zelanda/surgelato), stessa distinzione per origine già accettata in questa pipeline (es. manzo Wagyu importato dal Giappone vs domestico, in principio; qui concretamente verificato con due FDC ID distinti e due pagine getfoodfacts.com separate).
+- **Nutrienti**: **10/17**. Mancano fibra (non dichiarata in modo univoco sulla pagina), vitamina C, folato totale, vitamina A (RAE), beta-carotene, altri carotenoidi provitaminici A, vitamina K (tutti assenti dal record, non a zero — 59 nutrienti totali tracciati sulla pagina, nessuno dei 7 compare). Per 100g: energia 142kcal, proteine 20,3g, grassi 6,18g, carboidrati 0g esplicito, calcio 12,0mg, ferro 1,59mg, magnesio 22,0mg, zinco 4,21mg, rame 0,17mg, selenio 8,60µg, sodio 83,0mg, vitamina B12 2,77µg.
+- **Analogia usata**: `food_agnello_raw` (agnello generico composito, crudo — già eseguito sul DB reale, stessa categoria "agnello, composto di tagli al dettaglio, magro, crudo", stesso gap tipico di micronutrienti).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `agnello_australiano_raw` ("Agnello australiano, composto di tagli al dettaglio, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174399 --food-id=food_agnello_australiano_raw \
+  --name-it="Agnello australiano, composto di tagli al dettaglio, crudo (solo magro)" \
+  --matrix-id=agnello_australiano_raw --matrix-description-it="Agnello australiano, composto di tagli al dettaglio, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174399 --food-id=food_agnello_australiano_raw \
+  --name-it="Agnello australiano, composto di tagli al dettaglio, crudo (solo magro)" \
+  --matrix-id=agnello_australiano_raw --matrix-description-it="Agnello australiano, composto di tagli al dettaglio, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Agnello australiano importato, fresco, composto di tagli al dettaglio, cotto (solo magro) — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
+
+- **food_id**: `food_agnello_australiano_cotto`. FDC ID 174400 (SR Legacy, "Lamb, Australian, imported, fresh, composite of trimmed retail cuts, separable lean only, trimmed to 1/8\" fat, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, ID consecutivo al crudo sopra 174399). Stesso trim del crudo. Metodo di cottura non specificato dal nome USDA (solo "cooked"), stessa convenzione già accettata per `food_agnello_cotto` generico.
+- **Nutrienti**: **10/17**. Stesso gap del crudo (fibra, vitamina C, folato, vitamina A, beta-carotene, altri carotenoidi, vitamina K assenti). Per 100g: energia 201kcal, proteine 26,7g, grassi 9,63g, carboidrati 0g esplicito, calcio 16,0mg, ferro 2,05mg, magnesio 24,0mg, zinco 5,14mg, rame 0,15mg, selenio 11,0µg, sodio 80,0mg, vitamina B12 3,01µg.
+- **Analogia usata**: `food_agnello_cotto` (agnello generico composito, cotto — già eseguito sul DB reale, stesso gap tipico).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `agnello_australiano_cotto` ("Agnello australiano, composto di tagli al dettaglio, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (metodo di cottura non specificato dal record, stessa convenzione già usata per `food_agnello_cotto`).
+
+```
+npm run add-food -- --fdc-id=174400 --food-id=food_agnello_australiano_cotto \
+  --name-it="Agnello australiano, composto di tagli al dettaglio, cotto (solo magro)" \
+  --matrix-id=agnello_australiano_cotto --matrix-description-it="Agnello australiano, composto di tagli al dettaglio, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174400 --food-id=food_agnello_australiano_cotto \
+  --name-it="Agnello australiano, composto di tagli al dettaglio, cotto (solo magro)" \
+  --matrix-id=agnello_australiano_cotto --matrix-description-it="Agnello australiano, composto di tagli al dettaglio, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo (tipo "roasting", non "broiler/fryer"), carne scura, cruda — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
 
 - **food_id**: `food_pollo_tipo_roasting_carne_scura_raw`. FDC ID 173638 (SR Legacy, "Chicken, roasting, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Categoria USDA "roasting" (pollo da arrosto, macellato più adulto) distinta da "broilers or fryers" già usata per `food_pollo_carne_chiara_raw`/`food_coscia_di_pollo_raw`/`food_petto_di_pollo_raw` — record FDC realmente diverso (composito "carne scura" = coscia+fuso aggregati, non il solo taglio coscia), mai tentato nei 176 lotti precedenti. Individuato cercando sistematicamente "chicken breast cooked" (gap segnalato dal settimo lotto, mai risolto): quella ricerca specifica è rimasta ⚠ (sotto), ma ha portato a scoprire la categoria "roasting" come filone a sé.
