@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), lombata (loin), cotta (grigliata) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_wapiti_lombata_cotta`. FDC ID 174427 (SR Legacy, "Game meat, elk, loin, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 167kcal, proteine 31,0g, grassi 3,84g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 3,96mg, zinco 5,10mg, magnesio 28,0mg, rame 0,17mg, selenio 10,5µg, vitamina C 0mg esplicito, vitamina B12 0,83µg, folato totale 9,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. **Manca** (non riportata): vitamina K.
+- **Analogia usata**: `food_capra_cotta` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `wapiti_lombata_cotta`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174427 --food-id=food_wapiti_lombata_cotta \
+  --name-it="Wapiti, lombata (loin), cotta" \
+  --matrix-id=wapiti_lombata_cotta --matrix-description-it="Wapiti, lombata (loin), cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174427 --food-id=food_wapiti_lombata_cotta \
+  --name-it="Wapiti, lombata (loin), cotta" \
+  --matrix-id=wapiti_lombata_cotta --matrix-description-it="Wapiti, lombata (loin), cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wapiti (elk nordamericano), girello (round), cotto (grigliato) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_wapiti_girello_cotto`. FDC ID 174428 (SR Legacy, "Game meat, elk, round, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30).
