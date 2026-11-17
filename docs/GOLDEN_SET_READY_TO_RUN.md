@@ -16,6 +16,84 @@
 
 ## Pronti
 
+### Pollo (tipo "roasting", non "broiler/fryer"), carne scura, cruda — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
+
+- **food_id**: `food_pollo_tipo_roasting_carne_scura_raw`. FDC ID 173638 (SR Legacy, "Chicken, roasting, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Categoria USDA "roasting" (pollo da arrosto, macellato più adulto) distinta da "broilers or fryers" già usata per `food_pollo_carne_chiara_raw`/`food_coscia_di_pollo_raw`/`food_petto_di_pollo_raw` — record FDC realmente diverso (composito "carne scura" = coscia+fuso aggregati, non il solo taglio coscia), mai tentato nei 176 lotti precedenti. Individuato cercando sistematicamente "chicken breast cooked" (gap segnalato dal settimo lotto, mai risolto): quella ricerca specifica è rimasta ⚠ (sotto), ma ha portato a scoprire la categoria "roasting" come filone a sé.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 113kcal, proteine 18,7g, grassi 3,61g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 9,00mg, ferro 1,15mg, magnesio 21,0mg, zinco 1,65mg, rame 0,059mg, selenio 13,5µg, sodio 95,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,34µg, vitamina A (RAE) 18,0µg (retinolo 18,0µg), beta-carotene 0µg esplicito, vitamina K (fillochinone) 2,40µg.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (pollo, carne scura/coscia, cruda — già eseguita sul DB reale, stesso concetto "carne scura", stesso animale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_roasting_carne_scura_raw` ("Pollo, tipo roasting, carne scura, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carne, nessun carotenoide vegetale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (omesso), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=173638 --food-id=food_pollo_tipo_roasting_carne_scura_raw \
+  --name-it="Pollo (tipo roasting), carne scura, cruda" \
+  --matrix-id=pollo_tipo_roasting_carne_scura_raw --matrix-description-it="Pollo, tipo roasting, carne scura, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173638 --food-id=food_pollo_tipo_roasting_carne_scura_raw \
+  --name-it="Pollo (tipo roasting), carne scura, cruda" \
+  --matrix-id=pollo_tipo_roasting_carne_scura_raw --matrix-description-it="Pollo, tipo roasting, carne scura, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "roasting", non "broiler/fryer"), carne chiara, cruda — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
+
+- **food_id**: `food_pollo_tipo_roasting_carne_chiara_raw`. FDC ID 172398 (SR Legacy, "Chicken, roasting, light meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Stesso filone "roasting" della voce precedente, controparte "carne chiara" (petto+ali aggregati). Distinto da `food_pollo_carne_chiara_raw` (categoria "broilers or fryers", FDC 171464, già "pronto").
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 109kcal, proteine 22,2g, grassi 1,63g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,89mg, magnesio 25,0mg, zinco 0,66mg, rame 0,038mg, selenio 17,8µg, sodio 51,0mg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0,39µg, vitamina A (RAE) 8,00µg (retinolo 8,00µg), beta-carotene 0µg esplicito, vitamina K (fillochinone) 2,40µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (pollo, carne chiara/petto, cruda — già eseguita sul DB reale, stesso concetto "carne chiara", stesso animale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_roasting_carne_chiara_raw` ("Pollo, tipo roasting, carne chiara, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172398 --food-id=food_pollo_tipo_roasting_carne_chiara_raw \
+  --name-it="Pollo (tipo roasting), carne chiara, cruda" \
+  --matrix-id=pollo_tipo_roasting_carne_chiara_raw --matrix-description-it="Pollo, tipo roasting, carne chiara, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172398 --food-id=food_pollo_tipo_roasting_carne_chiara_raw \
+  --name-it="Pollo (tipo roasting), carne chiara, cruda" \
+  --matrix-id=pollo_tipo_roasting_carne_chiara_raw --matrix-description-it="Pollo, tipo roasting, carne chiara, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Teff, cotto (non tostato) — preparato 2026-11-17 dal task (centosettantasettesimo lotto)
+
+- **food_id**: `food_teff_cotto`. FDC ID 168918 (SR Legacy, "Teff, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Il crudo `food_teff_raw` (FDC 169747) è già "pronto"; cotto mai tentato finora (gap "stato di cottura mancante" esteso al filone cereali antichi dopo il successo analogo di miglio/quinoa/amaranto/orzo cotti).
+- **Nutrienti**: **13/17**. Mancano selenio, vitamina C, beta-carotene, vitamina K (assenti dal record, non a zero — 46 nutrienti totali tracciati, nessuno dei 4 compare). Per 100g: energia 101kcal, proteine 3,87g, grassi 0,65g, carboidrati 19,9g, fibra 2,80g, calcio 49,0mg, ferro 2,05mg, magnesio 50,0mg, zinco 1,11mg, rame 0,23mg, sodio 8,00mg, folato totale 18,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, vitamina A (RAE) 0µg esplicito (retinolo 0µg esplicito).
+- **Analogia usata**: `food_miglio_cotto` (altro piccolo cereale antico della famiglia Poaceae, cotto bollito, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `teff_cotto` ("Teff, cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168918 --food-id=food_teff_cotto \
+  --name-it="Teff, cotto" \
+  --matrix-id=teff_cotto --matrix-description-it="Teff, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_miglio_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168918 --food-id=food_teff_cotto \
+  --name-it="Teff, cotto" \
+  --matrix-id=teff_cotto --matrix-description-it="Teff, cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_miglio_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli mung, secchi, cotti (bolliti, con sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
 
 - **food_id**: `food_fagioli_mung_bolliti`. FDC ID 175255 (SR Legacy, "Mung beans, mature seeds, cooked, boiled, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_fagioli_mung_secchi_raw` (FDC 174256, "Mung beans, mature seeds, raw") è già "pronto", non ancora eseguito. Distinto da `food_fagioli_mungo_neri_bolliti` (cultivar *Vigna mungo*/urad nero, diverso) e da germogli/noodles già coperti: stesso seme (*Vigna radiata*, mung verde) del crudo, mai tentato cotto. Individuato nello stesso filone legumi secchi "crudo fatto, cotto mai tentato" esteso in questo lotto (verificati anche borlotti/cannellini/fave/piselli del congo: tutti già coperti cotti sotto altro nome, nessun doppione scritto).
