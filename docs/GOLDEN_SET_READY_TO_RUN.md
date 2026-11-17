@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, carne macinata, grass-fed, cotta — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_bisonte_macinato_grassfed_cotto`. FDC ID 173847 (SR Legacy, "Bison, ground, grass-fed, cooked" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Linea di prodotto "grass-fed" distinta dal generico `food_bisonte_raw` (separable lean only, non grass-fed) già eseguito; nessuna controparte cotta generica trovata finora per il bisonte.
+- **Nutrienti**: **17/17 — record completo**. Per 100g: energia 179kcal, proteine 25,4g, grassi 8,62g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 3,19mg, zinco 5,34mg, magnesio 23,0mg, rame 0,15mg, selenio 31,1µg, vitamina C 0mg esplicito, vitamina B12 2,44µg, folato totale 16,0µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito, vitamina K (fillochinone) 1,30µg.
+- **Analogia usata**: `food_capra_cotta` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_macinato_grassfed_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173847 --food-id=food_bisonte_macinato_grassfed_cotto \
+  --name-it="Bisonte, carne macinata, grass-fed, cotta" \
+  --matrix-id=bisonte_macinato_grassfed_cotto --matrix-description-it="Bisonte, carne macinata, grass-fed, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173847 --food-id=food_bisonte_macinato_grassfed_cotto \
+  --name-it="Bisonte, carne macinata, grass-fed, cotta" \
+  --matrix-id=bisonte_macinato_grassfed_cotto --matrix-description-it="Bisonte, carne macinata, grass-fed, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cervo, carne macinata, cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_cervo_macinato_raw`. FDC ID 172602 (SR Legacy, "Game meat, deer, ground, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Controparte cruda della voce cotta sopra; taglio "macinato" distinto dal generico `food_cervo_raw` già eseguito.
