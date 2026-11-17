@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Struzzo, lombata (top loin), cruda — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_lombata_raw`. FDC ID 174489 (SR Legacy, "Ostrich, top loin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Taglio specifico distinto dal generico `food_struzzo_raw` (FDC 174481, "Ostrich, ground, raw", ancora solo "Pronti" non eseguito) — nota già presente in questa pipeline per lo struzzo ("FDC traccia solo tagli specifici... più il generico macinato") ma finora mai sfruttata per un taglio a sé: la lombata/controfiletto è il taglio magro pregiato più noto della carne di struzzo, record molto più completo del macinato (16/17 contro il gap tipico). Verificato con `grep` su "struzzo"/"ostrich"/"174489": nessuna occorrenza per questo FDC ID o taglio specifico prima di questa aggiunta (solo il generico macinato crudo/cotto già presente come "Pronti").
+- **Nutrienti**: **16/17** — il più completo trovato in questo lotto. Per 100g: energia 119kcal, proteine 21,7g, grassi 2,95g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 3,13mg (alto, coerente con una carne rossa magra ricca di mioglobina), magnesio 22,0mg, zinco 3,76mg, rame 0,14mg, selenio 35,4µg, sodio 81,0mg, vitamina C 0mg esplicito, folato totale 8,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 4,94µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record).
+- **Analogia usata**: `food_struzzo_raw` (struzzo macinato crudo, stessa specie *Struthio camelus*, stesso stato crudo — pur essendo anch'esso ancora solo "Pronti" non eseguito, è l'unica voce della stessa specie disponibile in questa pipeline, convenzione già accettata per l'emu in questo stesso filone).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_lombata_raw` ("Struzzo, lombata (top loin), cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174489 --food-id=food_struzzo_lombata_raw \
+  --name-it="Struzzo, lombata (top loin), cruda" \
+  --matrix-id=struzzo_lombata_raw --matrix-description-it="Struzzo, lombata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174489 --food-id=food_struzzo_lombata_raw \
+  --name-it="Struzzo, lombata (top loin), cruda" \
+  --matrix-id=struzzo_lombata_raw --matrix-description-it="Struzzo, lombata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_struzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Soia verde fresca (soybean verde, non congelata), cruda — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_soia_verde_fresca_raw`. FDC ID 169282 (SR Legacy, "Soybeans, green, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente sulla pagina). Record distinto da `food_edamame_raw` (FDC 168410, "Edamame, frozen, unprepared", **13/17**, già eseguito sul DB reale): questo è il seme di soia verde **fresco/non congelato**, non la preparazione "edamame" surgelata — stato di conservazione diverso, più completo su micronutrienti (vitamina C 29,0mg presente qui, assente nel record frozen). Verificato con `grep` su "169282"/"soybeans green": zero occorrenze prima di questa aggiunta (solo il record frozen 168410/168411 risultava già coperto).
