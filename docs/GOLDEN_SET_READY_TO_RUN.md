@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Tacchino, ala, senza pelle (solo carne), cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_ala_di_tacchino_senza_pelle_raw`. FDC ID 174517 (SR Legacy, "Turkey, retail parts, wing, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_ala_di_tacchino_raw` (FDC 171132, "pronto", trim "meat and skin"): qui il trim "meat only" (senza pelle), mai tentato per l'ala di tacchino, record FDC realmente distinto (grassi 2,49g/100g contro un trim con pelle tipicamente più alto), verificato con `grep`.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 112kcal, proteine 22,5g, grassi 2,49g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 0,60mg, magnesio 19,0mg, zinco 2,61mg, rame 0,047mg, selenio 21,6µg, sodio 69,0mg, vitamina C 0mg esplicito, folato totale 7,00µg, vitamina B12 0,92µg, beta-carotene 0µg esplicito, vitamina K 0µg esplicito.
+- **Analogia usata**: `food_petto_di_tacchino_raw` (tacchino, senza pelle, crudo — già eseguita sul DB reale, stesso trim "meat only").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ala_di_tacchino_senza_pelle_raw` ("Tacchino, ala, senza pelle, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174517 --food-id=food_ala_di_tacchino_senza_pelle_raw \
+  --name-it="Tacchino, ala, senza pelle (solo carne), cruda" \
+  --matrix-id=ala_di_tacchino_senza_pelle_raw --matrix-description-it="Tacchino, ala, senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174517 --food-id=food_ala_di_tacchino_senza_pelle_raw \
+  --name-it="Tacchino, ala, senza pelle (solo carne), cruda" \
+  --matrix-id=ala_di_tacchino_senza_pelle_raw --matrix-description-it="Tacchino, ala, senza pelle, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_tacchino_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Tacchino, ala, senza pelle (solo carne), cotta (arrosto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_ala_di_tacchino_senza_pelle_cotta`. FDC ID 172872 (SR Legacy, "Turkey, retail parts, wing, meat only, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Controparte cotta della voce precedente, coppia crudo/cotto completa su fonte primaria.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 170kcal, proteine 30,2g, grassi 5,51g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 0,82mg, magnesio 21,0mg, zinco 3,24mg, rame 0,059mg, selenio 30,6µg, sodio 103mg, vitamina C 0mg esplicito, folato totale 10,0µg, acido folico 0µg esplicito, vitamina B12 1,25µg, beta-carotene 0µg esplicito, vitamina K 0µg esplicito.
+- **Analogia usata**: `food_petto_di_tacchino_cotto` (tacchino, senza pelle, cotto — già eseguita sul DB reale, stesso trim "meat only").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ala_di_tacchino_senza_pelle_cotta` ("Tacchino, ala, senza pelle, cotta").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=172872 --food-id=food_ala_di_tacchino_senza_pelle_cotta \
+  --name-it="Tacchino, ala, senza pelle (solo carne), cotta (arrosto)" \
+  --matrix-id=ala_di_tacchino_senza_pelle_cotta --matrix-description-it="Tacchino, ala, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172872 --food-id=food_ala_di_tacchino_senza_pelle_cotta \
+  --name-it="Tacchino, ala, senza pelle (solo carne), cotta (arrosto)" \
+  --matrix-id=ala_di_tacchino_senza_pelle_cotta --matrix-description-it="Tacchino, ala, senza pelle, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_petto_di_tacchino_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo, ala, carne e pelle, cotta (bollita) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_ala_di_pollo_con_pelle_cotta_bollita`. FDC ID 173631 (SR Legacy, "Chicken, broilers or fryers, wing, meat and skin, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_ala_di_pollo_con_pelle_cotta` (FDC 173630, "pronto" dal 68° lotto): stesso taglio ma metodo di cottura diverso ("stewed"/bollita vs "roasted"/arrosto), record FDC realmente distinto, verificato con `grep` sull'FDC ID. Stesso filone "metodo di cottura alternativo" già produttivo in questo lotto per il dorso.
