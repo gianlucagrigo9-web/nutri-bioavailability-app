@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Rockfish del Pacifico, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_pesce_rockfish_pacifico_cotto`. FDC ID 175131 (SR Legacy, "Fish, rockfish, Pacific, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-rockfish-pacific-mixed-species-cooked-dry-heat-175131` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del rockfish del Pacifico già `food_pesce_rockfish_pacifico_raw` (FDC 173684, 133° lotto, non ancora eseguito) — stesso filone "buchi crudo/cotto" produttivo nei lotti precedenti.
+- **Nutrienti**: **17/17, nessun valore mancante**. Per 100g: energia 109kcal, proteine 22,2g, grassi 1,62g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 17,0mg, ferro 0,36mg, magnesio 33,0mg, zinco 0,43mg, rame 0,041mg, selenio 76,2µg, vitamina C 0mg (esplicito), folato totale 10,0µg, vitamina B12 1,59µg, vitamina A/retinolo 5,00µg, beta-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito), vitamina K 0µg (esplicito — menachinone-4, diidrofillochinone e fillochinone tutti riportati 0).
+- **Analogia usata**: `food_branzino_cotto` (pesce marino magro cotto, già eseguito sul DB reale — non usata l'analogia col crudo omonimo appena citato sopra perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_rockfish_pacifico_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175131 --food-id=food_pesce_rockfish_pacifico_cotto \
+  --name-it="Rockfish del Pacifico, misto, cotto (calore secco)" \
+  --matrix-id=pesce_rockfish_pacifico_cotto --matrix-description-it="Rockfish del Pacifico, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175131 --food-id=food_pesce_rockfish_pacifico_cotto \
+  --name-it="Rockfish del Pacifico, misto, cotto (calore secco)" \
+  --matrix-id=pesce_rockfish_pacifico_cotto --matrix-description-it="Rockfish del Pacifico, misto, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Animella di gola (timo), bovina, cruda — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
 
 - **ATTENZIONE TERMINOLOGICA (controllo fatto DOPO il primo fetch, prima di scrivere il comando finale)**: il termine "animelle" è già usato in questo DB per il **pancreas** (food_id plurale `food_animelle_di_manzo_raw` ecc., FDC 169452/168273/174362/174363, lotti 20°-21°-73°) — un gap diverso dal "vero" timo/sweetbread, scelto allora come proxy più vicino per le specie dove FDC non traccia il timo separatamente. Qui invece FDC **traccia il timo come record distinto** (FDC 173093/170195, "thymus" esplicito nel nome, non "pancreas"): per evitare un quasi-doppione nome singolare/plurale (stesso tipo di trappola già vista per nespola/nespole), questa voce usa il nome anatomico/culinario distinto "**animella di gola**" (il timo, detto anche "animella del collo" in macelleria, distinto dall'"animella del cuore/pancreas" già coperta) con `food_id` **singolare e un'ulteriore parola** (`animella_gola_manzo`, non `animella_di_manzo`) per restare inequivocabile anche a un controllo grep superficiale.
