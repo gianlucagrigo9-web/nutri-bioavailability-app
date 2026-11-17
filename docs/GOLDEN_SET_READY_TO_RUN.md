@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Maiale, costine (spare ribs), magre e grasse, cotte (arrosto) — preparato 2026-11-17 dal task (centottantunesimo lotto)
+
+- **food_id**: `food_maiale_costine_cotte`. FDC ID 169178 (SR Legacy, "Pork, fresh, spareribs, separable lean and fat, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Voce cotto-only deliberata**: il sessantunesimo lotto (2026-10-30) aveva già cercato questo taglio ma lo aveva marcato `⚠` perché cercava una **coppia** crudo+cotto con trim coerente — il crudo "separable lean and fat, raw" non ha una pagina getfoodfacts.com dedicata (solo fonti secondarie con dati da pannello arrotondato, FDC 167853 secondo myfooddata.com, non verificabile su fonte primaria per questa pipeline), ma il **cotto esiste** su fonte primaria pulita e non era mai stato preparato come voce a sé. Segue esattamente il filone raccomandato dal 180° lotto ("variante di cottura/trim mancante su carni già coperte solo in un singolo stato, crudo-only o cotto-only"). Verificato con `grep` su "169178"/"spareribs"/"costine di maiale": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (solo la discussione ⚠ del 61° lotto, che riguardava il crudo).
+- **Nutrienti**: **17/17 (record completo)**. Per 100g: energia 361kcal, proteine 20,9g, grassi 30,9g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 19,0mg, ferro 1,43mg, magnesio 18,0mg, zinco 3,26mg, rame 0,11mg, selenio 30,6µg, sodio 91,0mg, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico non riportato come voce separata (nessuna firma di arricchimento, "Folate, food" anch'esso 0µg), vitamina B12 0,45µg, vitamina K (fillochinone) 0µg esplicito, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie *Sus scrofa*, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_costine_cotte` ("Maiale, costine (spare ribs), magre e grasse, cotte").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=roasted` (il record FDC specifica "cooked, roasted"), `is_fortified_folate` omesso (false — folato 0µg esplicito, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=169178 --food-id=food_maiale_costine_cotte \
+  --name-it="Maiale, costine (spare ribs), magre e grasse, cotte (arrosto)" \
+  --matrix-id=maiale_costine_cotte --matrix-description-it="Maiale, costine (spare ribs), magre e grasse, cotte" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169178 --food-id=food_maiale_costine_cotte \
+  --name-it="Maiale, costine (spare ribs), magre e grasse, cotte (arrosto)" \
+  --matrix-id=maiale_costine_cotte --matrix-description-it="Maiale, costine (spare ribs), magre e grasse, cotte" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Agnello (categoria USDA "domestic"), composto di tagli al dettaglio, magro e grasso, crudo — preparato 2026-11-17 dal task (centottantunesimo lotto)
 
 - **food_id**: `food_agnello_domestico_raw`. FDC ID 172545 (SR Legacy, "Lamb, composite of trimmed retail cuts, separable lean and fat, trimmed to 1/8\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Categoria USDA "Lamb, domestic" mai tentata in questa pipeline**, distinta sia da "Lamb, New Zealand, imported, frozen" (FDC 174338/174339, già eseguita sul DB reale come `food_agnello_raw`/`food_agnello_cotto`) sia da "Lamb, Australian, imported, fresh" (FDC 174399/174400, già "pronto" dal 177° lotto) — il titolo mostrato da getfoodfacts.com omette la parola "domestic" (troncamento noto di questo sito per alcuni titoli lunghi), **confermata l'appartenenza alla categoria "domestic"** per incrocio indipendente con tre fonti esterne concordanti sullo stesso FDC ID/stessa combinazione di trim ("1/8\" fat, choice"): recipal.com, recipetips.com (slug `t--17226`) e happyforks.com, tutte e tre esplicite "Lamb, domestic, composite...". Nessun doppione: verificato con `grep` sia per nome (agnello/lamb/domestico/domestic) sia per FDC ID 172545/172546 su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` prima della ricerca web — zero occorrenze. Recuperato seguendo la raccomandazione esplicita del 180° lotto (tentativo precedente bloccato due volte da `PROVENANCE_REQUIRED` sul `WebFetch`): qui l'URL è comparso direttamente nei risultati `WebSearch`, nessun blocco di permesso.
