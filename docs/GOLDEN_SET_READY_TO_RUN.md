@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Melone banana (Navajo), crudo — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
+
+- **food_id**: `food_melone_banana_raw`. FDC ID 167629 (SR Legacy, "Melon, banana (Navajo)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Cultivar di melone (*Cucumis melo*) distinta dal melone verde generico già eseguito, mai tentata in questa pipeline. **Nota di trasparenza**: alcune cifre del pannello riepilogo sono arrotondate rispetto alla tabella dettagliata (energia 20 vs 21,0kcal, sodio 10 vs 11,0mg, calcio 10 vs 13,0mg) — usati i valori della tabella. Verificato con `grep` dedicato, zero occorrenze per "melone banana"/"banana melon"/167629 prima della ricerca web.
+- **Nutrienti**: **14/17**. Per 100g: energia 21,0kcal, proteine 0,84g, grassi 0,20g, fibra 0,30g, calcio 13,0mg, ferro 0,21mg, zinco 0,14mg, magnesio 10,0mg, rame 0,035mg, selenio 0,40µg, sodio 11,0mg, folato totale 20,0µg, vitamina C 8,10mg, vitamina K 4,90µg (come fillochinone, dicroidrofillochinone 0µg). **Mancano**: vitamina B12 (atteso, frutto), beta-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_melone_verde_raw` (già eseguito sul DB reale — stesso genere *Cucumis melo*, cultivar diversa).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `melone_banana_raw`.
+- **Attributi**: `botanical_family=Cucurbitaceae`, `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun valore su cui basare un bucket), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167629 --food-id=food_melone_banana_raw \
+  --name-it="Melone banana (Navajo), crudo" \
+  --matrix-id=melone_banana_raw --matrix-description-it="Melone banana (Navajo), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_verde_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=167629 --food-id=food_melone_banana_raw \
+  --name-it="Melone banana (Navajo), crudo" \
+  --matrix-id=melone_banana_raw --matrix-description-it="Melone banana (Navajo), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_verde_raw \
+  --botanical-family=Cucurbitaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Wapiti (elk nordamericano), macinato, crudo (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
 
 - **food_id**: `food_wapiti_macinato_raw`. FDC ID 168056 (SR Legacy, "Elk, free range, ground, raw (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Preparazione macinata cruda, distinta dai tagli lombata/girello/filetto cotti e dal generico `food_wapiti_cotto` già eseguiti in lotti precedenti. Verificato con `grep` dedicato, zero occorrenze per "macinato"/"ground"/168056 prima della ricerca web.
