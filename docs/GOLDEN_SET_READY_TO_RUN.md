@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Wocas (ninfea gialla, Nuphar polysepala), semi secchi (Klamath, Pacific Northwest Indians) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
+
+- **food_id**: `food_wocas_semi_secchi`. FDC ID 169826 (SR Legacy, "Wocas, dried seeds, Oregon, yellow pond lily (Klamath)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Seme essiccato della ninfea gialla (*Nuphar polysepala*, famiglia Nymphaeaceae), pianta acquatica tradizionalmente raccolta dai nativi Klamath del Pacific Northwest — alimento mai tentato in questa pipeline, nessuna specie affine presente. Verificato con `grep` dedicato, zero occorrenze per "wocas"/"yellow pond lily" prima della ricerca web.
+- **Nutrienti**: **13/17**. Per 100g: energia 361kcal, proteine 7,90g, grassi 1,07g, fibra 19,2g, calcio 27,0mg, ferro 1,47mg, zinco 6,33mg, magnesio 86,0mg, rame 0,073mg, selenio 0,70µg, sodio 25,0mg, vitamina B12 0µg esplicito, folato totale 5,00µg. **Mancano** (non presenti nel record, non riportati nemmeno a zero): vitamina C, beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_quinoa_dry_raw` (quinoa secca cruda, già eseguita sul DB reale — analogia funzionale per seme secco ad alto contenuto di carboidrati/proteine/fibra, non per parentela botanica reale — famiglia reale *Nymphaeaceae*, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (seme di pianta, non frutto né derivato animale).
+- **Matrice**: nuova `wocas_semi_secchi`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, nessun precedente diretto), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, nessun valore reale su cui basare un bucket), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Nymphaeaceae`, `baseline_cooking_state=raw` (il record descrive il seme essiccato, non cotto — trattato come stato "grezzo" per analogia con altri semi secchi di questa pipeline), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169826 --food-id=food_wocas_semi_secchi \
+  --name-it="Wocas (ninfea gialla), semi secchi" \
+  --matrix-id=wocas_semi_secchi --matrix-description-it="Wocas, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Nymphaeaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169826 --food-id=food_wocas_semi_secchi \
+  --name-it="Wocas (ninfea gialla), semi secchi" \
+  --matrix-id=wocas_semi_secchi --matrix-description-it="Wocas, semi secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_quinoa_dry_raw \
+  --botanical-family=Nymphaeaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Ciliegia selvatica americana (chokecherry), cruda, denocciolata (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
 
 - **food_id**: `food_ciliegia_selvatica_raw`. FDC ID 168058 (SR Legacy, "Chokecherries, raw, pitted (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie botanica distinta (*Prunus virginiana*, ciliegia selvatica nordamericana) dalla ciliegia dolce già eseguita (`food_ciliegie_raw`, *Prunus avium*) — non un doppione, specie e record FDC diversi. **Nota sul secondo record trovato per lo stesso alimento**: esiste anche FDC 168999 "Chokecherries, raw, pitted (Northern Plains Indians)" — stessa specie/preparazione, stessa fonte etnografica USDA ma popolazione nativa diversa (15/17 nutrienti, mancano selenio e B12) — **scartato come quasi-doppione mascherato** (stesso identico alimento, due sole fonti campione tribali distinte, non due preparazioni realmente diverse) a favore del record più completo (168058, 17/17), stessa logica già applicata ai casi nespola/nespole e funghi ostrica/pleurotus in `docs/PENDING_HUMAN_ACTIONS.md`. Verificato con `grep` dedicato, zero occorrenze per "chokecherr"/"ciliegia selvatica" prima della ricerca web.
