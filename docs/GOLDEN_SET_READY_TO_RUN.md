@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio bianco secco (queso seco), crudo — preparato 2026-11-17 dal task (189° lotto)
+
+- **food_id**: `food_queso_seco_raw`. FDC ID 746765 (**Foundation Foods**, "Cheese, dry white, queso seco" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente nel testo, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). Formaggio latino-americano a pasta dura/secca e sapore salato (tipo "queso seco"/"queso añejo"), categoria FDC "Dairy and Egg Products" — gap genuino individuato dall'elenco completo "common foods" di quella categoria (75 nomi via `getfoodfacts.com/foods/dairy-and-egg-products`), incrociato con `grep` su tutti e tre i file prima della ricerca: **74/75 nomi di quella categoria già ✅/⚠ da lotti precedenti**, questo era l'unico genuinamente nuovo (l'altro buco residuo, "Brick cheese", verificato nello stesso lotto ma scartato ⚠ — vedi sotto).
+- **Nutrienti**: **14/17**. Per 100g (dalla tabella dettagliata): energia 326kcal, proteine 24,5g, grassi 24,3g, calcio 661mg, ferro 0,18mg, zinco 3,28mg, magnesio 26,7mg, rame 0,027mg, selenio 22,4µg, sodio 1810mg (alto, tipico di un formaggio salato/stagionato), vitamina B12 1,70µg, vitamina K 7,50µg (somma fillochinone 1,60 + menachinone-4 5,90, entrambi dichiarati), beta-carotene 33,0µg, beta-criptoxantina 2,00µg. **Mancano**: folato totale e vitamina C (nessun valore dichiarato su nessuna sezione della pagina). **Fibra trattata come mancante per cautela (Regola 1)**, non impostata a 0: la pagina è internamente ambigua/contraddittoria su questo singolo campo (etichetta "Dietary Fiber not declared", un'altra sezione riepilogo indica "0g", la tabella nutrienti dettagliata non ha affatto una riga fibra) — invece di scegliere arbitrariamente fra le due dichiarazioni diverse, il valore resta NULL. **Nota di trasparenza aggiuntiva**: energia/proteine/grassi mostrano un piccolo scarto fra il pannello per porzione-etichetta (330kcal/25g/24g) e la tabella dettagliata per 100g qui riportata (326kcal/24,5g/24,3g) — scarto nell'ordine dell'1-2%, coerente con il normale arrotondamento da etichetta FDA (porzioni/cifre intere) più che con un'incoerenza di fonte; usati i valori della tabella dettagliata, come da convenzione di questa pipeline.
+- **Analogia usata**: `food_parmigiano_reggiano` (già eseguito sul DB reale — stesso principio già applicato a tutti i formaggi a pasta dura/stagionata di questa pipeline, indipendentemente dal paese d'origine: cheddar, gruyere, gouda, edam, formaggio svizzero usano tutti la stessa analogia).
+- **Categoria dieta**: `egg_dairy` (formaggio, vegetariano sì, vegano no).
+- **Matrice**: nuova `queso_seco`.
+- **Attributi**: `is_heme_iron` omesso (false — prodotto lattiero-caseario), `matrix_category_calcium` omesso (NULL — stessa convenzione già usata per tutti gli altri formaggi di questa pipeline, nessuno ha mai ricevuto un valore in questo campo), `carotenoid_matrix_state` omesso (NULL — prodotto animale, beta-carotene/criptoxantina qui presenti come valori di tabella ma non carotenoidi vegetali da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — non pertinente, folato qui assente dal pannello, non arricchito).
+
+```
+npm run add-food -- --fdc-id=746765 --food-id=food_queso_seco_raw \
+  --name-it="Formaggio bianco secco (queso seco), crudo" \
+  --matrix-id=queso_seco --matrix-description-it="Formaggio bianco secco (queso seco)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=746765 --food-id=food_queso_seco_raw \
+  --name-it="Formaggio bianco secco (queso seco), crudo" \
+  --matrix-id=queso_seco --matrix-description-it="Formaggio bianco secco (queso seco)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Manzo, fegato, cotto in padella (pan-fried) — preparato 2026-11-17 dal task (188° lotto)
 
 - **food_id**: `food_fegato_di_manzo_cotto_padella`. FDC ID 168627 (SR Legacy, "Beef, variety meats and by-products, liver, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType dichiarati esplicitamente, release USDA 2026-04-30, verificata con `WebFetch` via agente dedicato). **Nota di trasparenza (Regola 6)**: il fegato di manzo cotto esiste già nel DB reale come `food_beef_liver_cooked` (FDC 168626, "cooked, braised", uno dei 30 alimenti originali del Golden Set) — questa è una voce **a sé stante, metodo di cottura distinto** (pan-fried vs braised), stesso principio già applicato più volte in questa pipeline per varianti di cottura con FDC ID realmente diverso (es. bistecca di manzo griglia/padella, coscia di pollo arrosto/brasata). Non un doppione: FDC ID diverso, valori nutrizionali diversi (vedi sotto), nome esplicitamente distinto nel food_id (`_padella`) per evitare ambiguità con l'entry esistente.
