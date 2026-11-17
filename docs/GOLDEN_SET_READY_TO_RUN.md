@@ -16,54 +16,55 @@
 
 ## Pronti
 
-### Animella di manzo (timo), cruda — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+### Animella di gola (timo), bovina, cruda — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
 
-- **food_id**: `food_animella_di_manzo_raw`. FDC ID **173093** (**SR Legacy**, "Beef, New Zealand, imported, sweetbread, raw" — pagina `getfoodfacts.com/food/beef-new-zealand-imported-sweetbread-raw-173093` dedicata, titolo/intro/riga "Source" concordano esplicitamente su "SR Legacy (FDC 173093)"). Categoria "frattaglia" genuinamente nuova: verificato con `grep` dedicato su "sweetbread"/"animella" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web (a differenza di rognone/trippa/cervella/lingua/ventriglio, già tutti valutati per varie specie nei lotti precedenti).
+- **ATTENZIONE TERMINOLOGICA (controllo fatto DOPO il primo fetch, prima di scrivere il comando finale)**: il termine "animelle" è già usato in questo DB per il **pancreas** (food_id plurale `food_animelle_di_manzo_raw` ecc., FDC 169452/168273/174362/174363, lotti 20°-21°-73°) — un gap diverso dal "vero" timo/sweetbread, scelto allora come proxy più vicino per le specie dove FDC non traccia il timo separatamente. Qui invece FDC **traccia il timo come record distinto** (FDC 173093/170195, "thymus" esplicito nel nome, non "pancreas"): per evitare un quasi-doppione nome singolare/plurale (stesso tipo di trappola già vista per nespola/nespole), questa voce usa il nome anatomico/culinario distinto "**animella di gola**" (il timo, detto anche "animella del collo" in macelleria, distinto dall'"animella del cuore/pancreas" già coperta) con `food_id` **singolare e un'ulteriore parola** (`animella_gola_manzo`, non `animella_di_manzo`) per restare inequivocabile anche a un controllo grep superficiale.
+- **food_id**: `food_animella_gola_manzo_raw`. FDC ID **173093** (**SR Legacy**, "Beef, New Zealand, imported, sweetbread, raw" — pagina `getfoodfacts.com/food/beef-new-zealand-imported-sweetbread-raw-173093` dedicata, titolo/intro/riga "Source" concordano esplicitamente su "SR Legacy (FDC 173093)"). Verificato con `grep` dedicato su "sweetbread"/"thymus"/"timo" — zero occorrenze prima della ricerca web (diverso dal pancreas "animelle", già coperto, vedi sopra).
 - **Nutrienti**: **15/17**. Per 100g: energia 303kcal, proteine 11,5g, grassi 28,6g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 4,00mg, ferro 1,15mg, magnesio 15,0mg, zinco 1,00mg, rame 5,10mg (molto alto, **640% VNR** — valore reale della fonte, non un errore: il timo/animella è notoriamente la frattaglia più ricca di rame, valore confermato internamente su più punti della stessa pagina — tabella minerali, riepilogo "Also rich in", %DV — tutti concordanti, ri-verificato con un secondo fetch dedicato), selenio 9,00µg, vitamina C 0mg (esplicito), vitamina B12 2,10µg, vitamina A/retinolo 19,0µg, beta-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito). **Mancano** (non riportati in pagina, non assunti zero): folato totale/acido folico, vitamina K.
 - **Analogia usata**: `food_beef_liver_raw` (fegato di manzo crudo, stessa specie bovina, già eseguito sul DB reale — originale Golden Set — stessa categoria funzionale "frattaglia bovina cruda").
 - **Categoria dieta**: `meat_fish` (frattaglia).
-- **Matrice**: nuova `animella_di_manzo` ("Animella di manzo (timo), cruda").
+- **Matrice**: nuova `animella_gola_manzo` ("Animella di gola (timo), bovina, cruda").
 - **Attributi**: `is_heme_iron` (flag attivo, tessuto animale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
 
 ```
-npm run add-food -- --fdc-id=173093 --food-id=food_animella_di_manzo_raw \
-  --name-it="Animella di manzo (timo), cruda" \
-  --matrix-id=animella_di_manzo --matrix-description-it="Animella di manzo (timo), cruda" \
+npm run add-food -- --fdc-id=173093 --food-id=food_animella_gola_manzo_raw \
+  --name-it="Animella di gola (timo), bovina, cruda" \
+  --matrix-id=animella_gola_manzo --matrix-description-it="Animella di gola (timo), bovina, cruda" \
   --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
   --is-heme-iron \
   --diet-category=meat_fish
 ```
 ```
-npm run add-food -- --fdc-id=173093 --food-id=food_animella_di_manzo_raw \
-  --name-it="Animella di manzo (timo), cruda" \
-  --matrix-id=animella_di_manzo --matrix-description-it="Animella di manzo (timo), cruda" \
+npm run add-food -- --fdc-id=173093 --food-id=food_animella_gola_manzo_raw \
+  --name-it="Animella di gola (timo), bovina, cruda" \
+  --matrix-id=animella_gola_manzo --matrix-description-it="Animella di gola (timo), bovina, cruda" \
   --baseline-cooking-state=raw --analogy-food-id=food_beef_liver_raw \
   --is-heme-iron \
   --diet-category=meat_fish --apply
 ```
 
-### Animella di manzo (timo), cotta (brasata) — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+### Animella di gola (timo), bovina, cotta (brasata) — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
 
-- **food_id**: `food_animella_di_manzo_cotta`. FDC ID **170195** (**SR Legacy**, "Beef, variety meats and by-products, thymus, cooked, braised" — pagina `getfoodfacts.com/food/beef-variety-meats-and-by-products-thymus-cooked-braised-170195` dedicata, riga "Source" esplicita "FoodData Central 170195, SR Legacy"). Completa la coppia crudo/cotto dell'animella di manzo nello stesso lotto.
+- **food_id**: `food_animella_gola_manzo_cotta`. FDC ID **170195** (**SR Legacy**, "Beef, variety meats and by-products, thymus, cooked, braised" — pagina `getfoodfacts.com/food/beef-variety-meats-and-by-products-thymus-cooked-braised-170195` dedicata, riga "Source" esplicita "FoodData Central 170195, SR Legacy"). Completa la coppia crudo/cotto dell'animella di manzo nello stesso lotto.
 - **Nutrienti**: **14/17**. Per 100g: energia 319kcal, proteine 21,9g, grassi 25,0g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 10,0mg, ferro 1,49mg, magnesio 10,0mg, zinco 2,20mg, rame 0,043mg, selenio 21,6µg, vitamina C 30,2mg, folato totale 1,00µg (acido folico 0µg esplicito), vitamina B12 1,51µg, vitamina A/retinolo 0µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene/beta-criptoxantina (non riportati). **Nota di trasparenza importante**: il rame crolla da 5,10mg/100g (crudo) a 0,043mg/100g (cotto, brasato) — un calo del 99%, molto più marcato della normale concentrazione per perdita d'acqua in cottura. Trattato come dato reale della fonte (stesso standard "non correggere, segnalare" già usato per il surimi) perché le due pagine sono ciascuna internamente coerente al proprio interno (nessuna incoerenza fra sezioni della STESSA pagina, il criterio già usato per scartare la serie funghi Foundation 2003598-2003604) — ma il calo resta anomalo e va riletto con cautela se il dato verrà usato in analisi comparative rame crudo/cotto.
-- **Analogia usata**: `food_animella_di_manzo_raw` (stesso alimento, voce cruda appena preparata in questo stesso lotto — eccezione dichiarata alla regola "mai analogia a un altro 'pronto' dello stesso lotto": qui è la stessa identica matrice crudo/cotto, non un alimento diverso, stesso pattern già usato per coppie crudo/cotto in lotti precedenti quando la cruda era preparata immediatamente prima nello stesso lotto).
+- **Analogia usata**: `food_beef_liver_cooked` (fegato di manzo cotto, stessa specie bovina, Golden Set originale già eseguito sul DB reale — scelto invece della voce cruda appena preparata in questo stesso lotto, non ancora eseguita, per rispettare la regola 0.6 "mai un'analogia non ancora presente nel DB").
 - **Categoria dieta**: `meat_fish` (frattaglia).
-- **Matrice**: nuova `animella_di_manzo_cotta` ("Animella di manzo (timo), cotta/brasata") — oppure stessa matrice `animella_di_manzo` con `baseline_cooking_state=cooked` se lo script lo consente; verificare in esecuzione.
+- **Matrice**: nuova `animella_gola_manzo_cotta` ("Animella di gola (timo), bovina, cotta/brasata") — oppure stessa matrice `animella_gola_manzo` con `baseline_cooking_state=cooked` se lo script lo consente; verificare in esecuzione.
 - **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
 
 ```
-npm run add-food -- --fdc-id=170195 --food-id=food_animella_di_manzo_cotta \
-  --name-it="Animella di manzo (timo), cotta (brasata)" \
-  --matrix-id=animella_di_manzo_cotta --matrix-description-it="Animella di manzo (timo), cotta (brasata)" \
-  --baseline-cooking-state=cooked --analogy-food-id=food_animella_di_manzo_raw \
+npm run add-food -- --fdc-id=170195 --food-id=food_animella_gola_manzo_cotta \
+  --name-it="Animella di gola (timo), bovina, cotta (brasata)" \
+  --matrix-id=animella_gola_manzo_cotta --matrix-description-it="Animella di gola (timo), bovina, cotta (brasata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_liver_cooked \
   --is-heme-iron \
   --diet-category=meat_fish
 ```
 ```
-npm run add-food -- --fdc-id=170195 --food-id=food_animella_di_manzo_cotta \
-  --name-it="Animella di manzo (timo), cotta (brasata)" \
-  --matrix-id=animella_di_manzo_cotta --matrix-description-it="Animella di manzo (timo), cotta (brasata)" \
-  --baseline-cooking-state=cooked --analogy-food-id=food_animella_di_manzo_raw \
+npm run add-food -- --fdc-id=170195 --food-id=food_animella_gola_manzo_cotta \
+  --name-it="Animella di gola (timo), bovina, cotta (brasata)" \
+  --matrix-id=animella_gola_manzo_cotta --matrix-description-it="Animella di gola (timo), bovina, cotta (brasata)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_beef_liver_cooked \
   --is-heme-iron \
   --diet-category=meat_fish --apply
 ```
