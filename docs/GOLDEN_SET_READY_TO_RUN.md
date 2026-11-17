@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pollo, ala, carne e pelle, cotta (bollita) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_ala_di_pollo_con_pelle_cotta_bollita`. FDC ID 173631 (SR Legacy, "Chicken, broilers or fryers, wing, meat and skin, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_ala_di_pollo_con_pelle_cotta` (FDC 173630, "pronto" dal 68° lotto): stesso taglio ma metodo di cottura diverso ("stewed"/bollita vs "roasted"/arrosto), record FDC realmente distinto, verificato con `grep` sull'FDC ID. Stesso filone "metodo di cottura alternativo" già produttivo in questo lotto per il dorso.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 249kcal, proteine 22,8g, grassi 16,8g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,13mg, magnesio 16,0mg, zinco 1,63mg, rame 0,046mg, selenio 18,5µg, sodio 67,0mg, vitamina C 0mg esplicito, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,18µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 0,20µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, cotto — già eseguita sul DB reale; nessun "pollo ala, cotto" ancora eseguito per un'analogia più precisa sul taglio).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ala_di_pollo_con_pelle_cotta_bollita` ("Pollo, ala, carne e pelle, cotta/bollita").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=stewed`.
+
+```
+npm run add-food -- --fdc-id=173631 --food-id=food_ala_di_pollo_con_pelle_cotta_bollita \
+  --name-it="Pollo, ala, carne e pelle, cotta (bollita)" \
+  --matrix-id=ala_di_pollo_con_pelle_cotta_bollita --matrix-description-it="Pollo, ala, carne e pelle, cotta/bollita" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173631 --food-id=food_ala_di_pollo_con_pelle_cotta_bollita \
+  --name-it="Pollo, ala, carne e pelle, cotta (bollita)" \
+  --matrix-id=ala_di_pollo_con_pelle_cotta_bollita --matrix-description-it="Pollo, ala, carne e pelle, cotta/bollita" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo, dorso, carne e pelle, cotta (bollita) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_pollo_dorso_con_pelle_cotto_bollito`. FDC ID 171072 (SR Legacy, "Chicken, broilers or fryers, back, meat and skin, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Non un doppione** di `food_pollo_dorso_con_pelle_cotto` (FDC 171071, già "pronto" dal 69° lotto): stesso taglio ma metodo di cottura diverso ("stewed"/bollito vs "roasted"/arrosto), record FDC realmente distinto con profilo nutrizionale diverso (più umidità, meno concentrazione), verificato con `grep` sull'FDC ID prima di scrivere la voce.
