@@ -117,6 +117,31 @@ npm run add-food -- --fdc-id=174367 --food-id=food_lingua_di_agnello_cotta \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
 
+### Tonno striato (skipjack), cotto (al forno/calore secco) — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+
+- **food_id**: `food_tonno_striato_cotto`. FDC ID **172005** (**SR Legacy**, "Fish, tuna, skipjack, fresh, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-tuna-skipjack-fresh-cooked-dry-heat-172005` dedicata, intro e riga "Source" esplicite "SR Legacy, FDC 172005"). Specie *Katsuwonus pelamis* (tonno striato/tonnetto), distinta dal tonno pinna gialla (*Thunnus albacares*, Golden Set originale) e dal tonno rosso/bluefin (*Thunnus thynnus*, già `food_tonno_rosso_raw/cotto`): verificato con `grep` dedicato su "skipjack"/"tonno striato" — zero occorrenze prima della ricerca. Lead segnalato di passaggio dal lotto del 2026-10-15 (cercava il cotto per il pinna gialla, trovava solo skipjack e bluefin come specie diverse, mai seguito perché "non lo stesso alimento" — qui invece aggiunto come specie a sé).
+- **Nutrienti**: **14/17**. Per 100g: energia 132kcal, proteine 28,2g, grassi 1,29g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 37,0mg, ferro 1,60mg, magnesio 44,0mg, zinco 1,05mg, rame 0,11mg, selenio 46,8µg, vitamina C 1,00mg, folato totale 10,0µg (acido folico 0µg esplicito), vitamina B12 2,19µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene/beta-criptoxantina (non riportati). Sodio 47,0mg/100g (basso, nessun segnale di salamoia).
+- **Nota sul crudo**: il crudo (FDC 175156, "Fish, tuna, fresh, skipjack, raw") **non ha una pagina getfoodfacts.com dedicata** — l'unica fonte con dati completi (foodstruct.com) mostra un'incoerenza interna fra la tabella principale e i "coverage chart" (fattore ~3x su quasi ogni minerale/vitamina, es. calcio 29mg in tabella vs 87mg nel grafico) — stesso tipo di incoerenza interna già usato per scartare la serie funghi Foundation 2003598-2003604. **Resta ⚠**, non preparato qui; solo il cotto, a fonte singola pulita e coerente, viene aggiunto.
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo/cod cotto, già eseguito sul DB reale — stessa categoria funzionale "pesce cotto a calore secco", nessun tonno cotto ancora eseguito da usare come analogia di specie più vicina).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `tonno_striato_cotto` ("Tonno striato (skipjack), cotto").
+- **Attributi**: `is_heme_iron=true` (muscolo di pesce, stesso standard degli altri tonni/pesci di questa pipeline), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172005 --food-id=food_tonno_striato_cotto \
+  --name-it="Tonno striato (skipjack), cotto (al forno)" \
+  --matrix-id=tonno_striato_cotto --matrix-description-it="Tonno striato (skipjack), cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172005 --food-id=food_tonno_striato_cotto \
+  --name-it="Tonno striato (skipjack), cotto (al forno)" \
+  --matrix-id=tonno_striato_cotto --matrix-description-it="Tonno striato (skipjack), cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Surimi (imitazione gamberetto a base di polpa di pesce) — preparato 2026-11-17 dal task (centosettantatreesimo lotto)
 
 - **food_id**: `food_surimi`. FDC ID **171973** (**SR Legacy**, "Crustaceans, shrimp, mixed species, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-imitation-made-from-surimi-171973` dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente in più punti della pagina — titolo, paragrafo introduttivo e riga "Source:" — nonostante l'etichetta generica "USDA reference food" sopra il titolo, risultata ambigua e non indicativa del tier reale su questo sito, vedi nota metodologica sotto). Prodotto genuinamente nuovo (categoria "prodotti trasformati mono-ingrediente a base di pesce"): verificato con `grep` dedicato su "surimi"/"imitation" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web.
