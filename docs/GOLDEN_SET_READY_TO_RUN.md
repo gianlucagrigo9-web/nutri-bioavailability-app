@@ -16,6 +16,62 @@
 
 ## Pronti
 
+### Emu, outside drum, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_emu_outside_drum_raw`. FDC ID 172837 (SR Legacy, "Emu, outside drum, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Seconda ratite tracciata dalla pipeline con tagli specifici FDC (dopo lo struzzo): FDC traccia per l'emu full rump, inside/outside drum, fan/flat fillet oltre al generico "ground" già eseguito come `food_emu_raw`. Verificato con `grep` su "172837": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 103kcal, proteine 23,1g, grassi 0,48g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 3,00mg, ferro 4,50mg, magnesio 29,0mg, zinco 4,50mg, rame 0,20mg, selenio 36,3µg, sodio 100mg, vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 6,92µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Pannello Nutrition Facts per porzione coerente con la tabella per 100g dopo arrotondamento FDA (nessuna incoerenza reale).
+- **Analogia usata**: `food_anatra_raw` (anatra domestica, carne senza pelle, cruda — già eseguita sul DB reale, stessa categoria funzionale "carne di volatile/ratite", stesso pattern già usato per `food_emu_raw` nel quarantanovesimo lotto, che preferì l'anatra allo struzzo proprio perché le altre ratiti non erano ancora eseguite sul DB reale — qui `food_emu_raw` stesso è ancora solo 🟡 "Pronti" non eseguito, quindi non riusabile come analogia per lo stesso motivo).
+- **Categoria dieta**: `meat_fish` (carne/pollame).
+- **Matrice**: nuova `emu_outside_drum_raw` ("Emu, outside drum, cruda").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172837 --food-id=food_emu_outside_drum_raw \
+  --name-it="Emu, outside drum, crudo" \
+  --matrix-id=emu_outside_drum_raw --matrix-description-it="Emu, outside drum, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172837 --food-id=food_emu_outside_drum_raw \
+  --name-it="Emu, outside drum, crudo" \
+  --matrix-id=emu_outside_drum_raw --matrix-description-it="Emu, outside drum, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
+### Emu, inside drum, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_emu_inside_drum_raw`. FDC ID 172835 (SR Legacy, "Emu, inside drum, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Verificato con `grep` su "172835": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 108kcal, proteine 22,2g, grassi 1,49g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 4,00mg, ferro 5,23mg, magnesio 26,0mg, zinco 4,33mg, rame 0,20mg, selenio 31,4µg, sodio 102mg, vitamina C 0mg esplicito, folato totale 12,0µg, acido folico 0µg esplicito, vitamina B12 2,26µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Pannello Nutrition Facts per porzione mostra il calcio come "0mg" (vs 3,40mg/porzione attesi, 4,00mg/100g) — valore qui preso dalla tabella completa, non dal pannello; gli altri valori sono coerenti dopo arrotondamento FDA.
+- **Analogia usata**: `food_anatra_raw` (anatra domestica, carne senza pelle, cruda — già eseguita sul DB reale, stessa categoria funzionale "carne di volatile/ratite", stesso pattern già usato per `food_emu_raw` e per l'outside drum sopra).
+- **Categoria dieta**: `meat_fish` (carne/pollame).
+- **Matrice**: nuova `emu_inside_drum_raw` ("Emu, inside drum, cruda").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172835 --food-id=food_emu_inside_drum_raw \
+  --name-it="Emu, inside drum, crudo" \
+  --matrix-id=emu_inside_drum_raw --matrix-description-it="Emu, inside drum, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172835 --food-id=food_emu_inside_drum_raw \
+  --name-it="Emu, inside drum, crudo" \
+  --matrix-id=emu_inside_drum_raw --matrix-description-it="Emu, inside drum, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_anatra_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Struzzo, tip trimmed, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_struzzo_tip_trimmed_raw`. FDC ID 172846 (SR Legacy, "Ostrich, tip trimmed, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Settimo taglio specifico di struzzo di questo stesso lotto. Verificato con `grep` su "172846": nessuna occorrenza prima di questa aggiunta.
