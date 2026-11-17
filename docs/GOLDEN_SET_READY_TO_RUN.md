@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Yellowtail (Seriola spp., mixed species), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **food_id**: `food_pesce_yellowtail_cotto`. FDC ID 174248 (SR Legacy, "Fish, yellowtail, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-yellowtail-mixed-species-cooked-dry-heat-174248` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del yellowtail già `food_pesce_yellowtail_raw` (FDC 175163, 133° lotto, non ancora eseguito).
+- **Nutrienti**: **14/17**. Per 100g: energia 187kcal, proteine 29,7g, grassi 6,72g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 29,0mg, ferro 0,63mg, magnesio 38,0mg, zinco 0,67mg, rame 0,058mg, selenio 46,8µg, vitamina C 2,90mg, folato totale 4,00µg, vitamina B12 1,25µg, vitamina A/retinolo 31,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_branzino_cotto` (pesce marino cotto, già eseguito sul DB reale — non usata l'analogia col crudo omonimo perché non ancora eseguito, Regola 0.6).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `yellowtail_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174248 --food-id=food_pesce_yellowtail_cotto \
+  --name-it="Yellowtail (Seriola spp., mixed species), cotto (calore secco)" \
+  --matrix-id=yellowtail_cotto --matrix-description-it="Yellowtail (Seriola spp.), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174248 --food-id=food_pesce_yellowtail_cotto \
+  --name-it="Yellowtail (Seriola spp., mixed species), cotto (calore secco)" \
+  --matrix-id=yellowtail_cotto --matrix-description-it="Yellowtail (Seriola spp.), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Rockfish del Pacifico, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_pesce_rockfish_pacifico_cotto`. FDC ID 175131 (SR Legacy, "Fish, rockfish, Pacific, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-rockfish-pacific-mixed-species-cooked-dry-heat-175131` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del rockfish del Pacifico già `food_pesce_rockfish_pacifico_raw` (FDC 173684, 133° lotto, non ancora eseguito) — stesso filone "buchi crudo/cotto" produttivo nei lotti precedenti.
