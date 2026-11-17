@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Salmone reale (chinook/king salmon), cotto (al forno) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_salmone_reale_cotto`. FDC ID 171999 (SR Legacy, "Fish, salmon, chinook, cooked, dry heat" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Finora il chinook esisteva solo come versione affumicata (`food_salmone_affumicato_raw`, FDC 171985, lox); il filetto fresco cotto non era ancora stato tentato. Verificato con `grep` su "171999"/"chinook": nessuna occorrenza come voce fresca (solo lo smoked già coperto) prima di questa aggiunta.
+- **Nutrienti**: **14/17**. Per 100g: energia 231kcal, proteine 25,7g, grassi 13,4g (specie più grassa degli altri salmoni già coperti, coerente con la nota reputazione del chinook/king salmon come varietà più ricca di grassi), carboidrati 0g esplicito, fibra 0g esplicito, calcio 28,0mg, ferro 0,91mg, magnesio 122mg, zinco 0,56mg, rame 0,053mg, selenio 46,8µg, sodio 60,0mg, vitamina C 4,10mg, folato totale 35,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,87µg. **Mancano**: vitamina K, beta-carotene, altri carotenoidi provitaminici A (gap tipico già visto per gli altri salmoni/pesci di questa pipeline).
+- **Analogia usata**: `food_salmon_cooked` (salmone atlantico allevato cotto, Golden Set originale, già eseguito sul DB reale — stesso genere, stesso stato cotto, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_reale_cotto` ("Salmone reale, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171999 --food-id=food_salmone_reale_cotto \
+  --name-it="Salmone reale (chinook), cotto (al forno)" \
+  --matrix-id=salmone_reale_cotto --matrix-description-it="Salmone reale, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171999 --food-id=food_salmone_reale_cotto \
+  --name-it="Salmone reale (chinook), cotto (al forno)" \
+  --matrix-id=salmone_reale_cotto --matrix-description-it="Salmone reale, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Salmone rosa (pink salmon), cotto (al forno) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_salmone_rosa_cotto`. FDC ID 172001 (SR Legacy, "Fish, salmon, pink, cooked, dry heat" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Controparte cotta del crudo preparato in questo stesso lotto (FDC 175138). Verificato con `grep` su "172001"/"salmone rosa cotto": zero occorrenze prima di questa aggiunta.
