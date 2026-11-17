@@ -16,6 +16,33 @@
 
 ## Pronti
 
+### Agave, cruda (Southwest) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
+
+- **food_id**: `food_agave_raw`. FDC ID 169814 (SR Legacy, "Agave, raw (Southwest)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Pianta/cuore di agave come alimento tradizionale dei nativi del Southwest, distinto dallo sciroppo/nettare d'agave (già ⚠ dal ventesimo lotto per assenza di record generico non di marca) — qui un record SR Legacy genuino per la pianta stessa. Verificato con `grep` dedicato, zero occorrenze per "agave" in questa forma (raw/cooked Southwest) prima della ricerca web.
+- **Nutrienti**: **17/17**, nessun valore mancante. Per 100g: energia 68,0kcal, proteine 0,52g, grassi 0,15g, fibra 6,60g, calcio 417mg (molto elevato, coerente con il contenuto noto di ossalato di calcio della pianta Agave), ferro 1,80mg, zinco 0,15mg, magnesio 55,0mg, rame 0,14mg, selenio 0,40µg, sodio 14,0mg, vitamina C 4,00mg, vitamina B12 0µg esplicito, folato totale 7,00µg, beta-carotene 22,0µg (reale, non nullo), beta-criptoxantina 0µg esplicito, vitamina K (fillochinone) 5,30µg. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC 169814 e SR Legacy.
+- **Nota di trasparenza**: il calcio molto elevato (417mg/100g) è coerente con la letteratura botanica nota sui cristalli di ossalato di calcio (rafidi) presenti nel genere *Agave* (causa nota di irritazione da maneggio della pianta cruda) — `matrix_category_calcium` comunque **omesso** (non assegnato per analogia a un alimento già eseguito con lo stesso trattamento, per non indovinare un bucket senza precedente diretto in questa pipeline).
+- **Analogia usata**: `food_kale_raw` (cavolo riccio crudo, già eseguito sul DB reale — analogia dichiarata per il comportamento del campo calcio/alimento vegetale ad alto contenuto di calcio, non per parentela botanica reale — famiglia reale *Asparagaceae*, dichiarata separatamente).
+- **Categoria dieta**: `plant_non_fruit` (pianta/vegetale, non frutto né derivato animale).
+- **Matrice**: nuova `agave_raw`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, vedi nota sopra), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asparagaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169814 --food-id=food_agave_raw \
+  --name-it="Agave, cruda (Southwest)" \
+  --matrix-id=agave_raw --matrix-description-it="Agave, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169814 --food-id=food_agave_raw \
+  --name-it="Agave, cruda (Southwest)" \
+  --matrix-id=agave_raw --matrix-description-it="Agave, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Renna/caribù, quarto posteriore, carne cotta (Alaska Native) — preparato 2026-11-17 dal task (centottantaquattresimo lotto)
 
 - **food_id**: `food_renna_quarto_posteriore_cotto`. FDC ID 169822 (SR Legacy, "Caribou, hind quarter, meat, cooked (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Categoria FDC "American Indian/Alaska Native Foods", filone già produttivo nei lotti 153°-158° (criterio di accettazione stabilito dal 155° lotto: taglio/preparazione senza alternativa generica non-etnica). Nessun record generico "caribou hind quarter" esiste fuori da questa categoria — distinto da `food_renna_raw`/`food_renna_cotto` (generici, lotto 32) e da `food_renna_secca` (spalla, lotto 153°). Verificato con `grep` dedicato su tutti i file, zero occorrenze per "quarto posteriore"/"hind quarter"/169822 prima della ricerca web.
