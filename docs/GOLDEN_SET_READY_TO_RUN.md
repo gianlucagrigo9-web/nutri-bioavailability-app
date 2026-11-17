@@ -16,6 +16,110 @@
 
 ## Pronti
 
+### Pollo (tipo "stewing", gallina da brodo), carne scura, cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_scura_raw`. FDC ID 172404 (SR Legacy, "Chicken, stewing, dark meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Terza categoria USDA alternativa** scoperta in questo lotto (dopo "roasting" del 177°): "stewing" = gallina da brodo, animale più vecchio/magro rispetto a "broilers or fryers"/"roasting". Verificato con `grep` sull'FDC ID: nessun doppione. Nota: FDC 172400 ("Chicken, stewing, meat and skin, raw") risulta già usato altrove nel repo come `food_gallina_raw` — stessa categoria USDA, taglio diverso (con pelle vs solo carne scura), non un doppione.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 157kcal, proteine 19,7g, grassi 8,12g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10,0mg, ferro 1,22mg, magnesio 23,0mg, zinco 2,08mg, rame 0,11mg, selenio 13,5µg, sodio 101mg, vitamina C 4,60mg, folato totale 10,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,37µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 2,40µg.
+- **Analogia usata**: `food_coscia_di_pollo_raw` (pollo, carne scura, cruda — già eseguita sul DB reale, stesso concetto "carne scura").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_scura_raw` ("Pollo (gallina da brodo), carne scura, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172404 --food-id=food_pollo_tipo_stewing_carne_scura_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne scura, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_scura_raw --matrix-description-it="Pollo (gallina da brodo), carne scura, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172404 --food-id=food_pollo_tipo_stewing_carne_scura_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne scura, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_scura_raw --matrix-description-it="Pollo (gallina da brodo), carne scura, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_coscia_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "stewing", gallina da brodo), carne chiara, cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_chiara_raw`. FDC ID 173643 (SR Legacy, "Chicken, stewing, light meat, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Controparte "carne chiara" della voce precedente, stesso filone "stewing".
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 137kcal, proteine 23,1g, grassi 4,21g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,92mg, magnesio 26,0mg, zinco 0,60mg, rame 0,067mg, selenio 17,8µg, sodio 53,0mg, vitamina C 1,80mg, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0,40µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 2,40µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (pollo, carne chiara, cruda — già eseguita sul DB reale, stesso concetto "carne chiara").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_chiara_raw` ("Pollo (gallina da brodo), carne chiara, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=173643 --food-id=food_pollo_tipo_stewing_carne_chiara_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne chiara, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_chiara_raw --matrix-description-it="Pollo (gallina da brodo), carne chiara, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173643 --food-id=food_pollo_tipo_stewing_carne_chiara_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne chiara, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_chiara_raw --matrix-description-it="Pollo (gallina da brodo), carne chiara, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "stewing", gallina da brodo), carne (solo muscolo, non distinta scura/chiara), cruda — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_raw`. FDC ID 172402 (SR Legacy, "Chicken, stewing, meat only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Composito "meat only" non distinto in scura/chiara (diverso dalle due voci precedenti), stesso filone "stewing".
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 148kcal, proteine 21,3g, grassi 6,32g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10,0mg, ferro 1,09mg, magnesio 24,0mg, zinco 1,40mg, rame 0,089mg, selenio 15,7µg, sodio 79,0mg, vitamina C 3,30mg, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 0,38µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 2,00µg.
+- **Analogia usata**: `food_petto_di_pollo_raw` (pollo, carne cruda — già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_raw` ("Pollo (gallina da brodo), carne, cruda").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172402 --food-id=food_pollo_tipo_stewing_carne_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_raw --matrix-description-it="Pollo (gallina da brodo), carne, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172402 --food-id=food_pollo_tipo_stewing_carne_raw \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne, cruda" \
+  --matrix-id=pollo_tipo_stewing_carne_raw --matrix-description-it="Pollo (gallina da brodo), carne, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo (tipo "stewing", gallina da brodo), carne (solo muscolo), cotta (bollita/in umido) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
+
+- **food_id**: `food_pollo_tipo_stewing_carne_cotta`. FDC ID 172403 (SR Legacy, "Chicken, stewing, meat only, cooked, stewed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Controparte cotta della voce precedente (172402), coppia crudo/cotto completa su fonte primaria.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 237kcal, proteine 30,4g, grassi 11,9g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 13,0mg, ferro 1,43mg, magnesio 22,0mg, zinco 2,06mg, rame 0,12mg, selenio 25,2µg, sodio 78,0mg, vitamina C 0mg esplicito, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0,26µg, beta-carotene 0µg esplicito, vitamina K (fillochinone) 3,10µg.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo, cotto — già eseguita sul DB reale; nessun "pollo stewing" cotto ancora eseguito per un'analogia più precisa).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_tipo_stewing_carne_cotta` ("Pollo (gallina da brodo), carne, cotta").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=stewed`.
+
+```
+npm run add-food -- --fdc-id=172403 --food-id=food_pollo_tipo_stewing_carne_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne, cotta (bollita/in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_cotta --matrix-description-it="Pollo (gallina da brodo), carne, cotta" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172403 --food-id=food_pollo_tipo_stewing_carne_cotta \
+  --name-it="Pollo (tipo stewing, gallina da brodo), carne, cotta (bollita/in umido)" \
+  --matrix-id=pollo_tipo_stewing_carne_cotta --matrix-description-it="Pollo (gallina da brodo), carne, cotta" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Pollo (tipo "roasting", non "broiler/fryer"), carne e pelle, cotto (arrosto) — preparato 2026-11-17 dal task (centosettantottesimo lotto)
 
 - **food_id**: `food_pollo_tipo_roasting_carne_e_pelle_cotta`. FDC ID 173635 (SR Legacy, "Chicken, roasting, meat and skin, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente come "SR Legacy", release USDA 2026-04-30). Stesso filone "categoria USDA alternativa" del 177° lotto (categoria "roasting" distinta da "broilers or fryers"): qui il composito "carne e pelle" (non separato in scura/chiara), cotto — nessuna delle due voci "roasting" già pronte (carne scura/chiara crude, FDC 173638/172398) è un doppione: taglio e stato diversi, record FDC realmente distinto, verificato con `grep` sull'FDC ID prima di scrivere la voce.
