@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salmone coho (argenteo), crudo (Alaska Native) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
+
+- **food_id**: `food_salmone_coho_raw`. FDC ID 167639 (SR Legacy, "Fish, salmon, coho (silver), raw (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie distinta dal salmone generico (`food_salmon_raw`), dal re/chinook, rosa, sockeye e chum già coperti in lotti precedenti. Verificato con `grep` dedicato, zero occorrenze per "coho"/"silver"/167639 prima della ricerca web.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 140kcal, proteine 22,6g, grassi 5,57g, fibra 0g esplicito, calcio 5,00mg, ferro 0,55mg, zinco 0,41mg, magnesio 28,0mg, rame 0,051mg, selenio 27,6µg, sodio 58,0mg, vitamina B12 8,52µg, folato totale 13,0µg, vitamina C 0mg esplicito, beta-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito, vitamina K 0,20µg (come fillochinone, dicroidrofillochinone 0µg).
+- **Analogia usata**: `food_salmon_raw` (Golden Set originale, già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_coho_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167639 --food-id=food_salmone_coho_raw \
+  --name-it="Salmone coho (argenteo), crudo" \
+  --matrix-id=salmone_coho_raw --matrix-description-it="Salmone coho (argenteo), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167639 --food-id=food_salmone_coho_raw \
+  --name-it="Salmone coho (argenteo), crudo" \
+  --matrix-id=salmone_coho_raw --matrix-description-it="Salmone coho (argenteo), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmon_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wocas (ninfea gialla, Nuphar polysepala), semi secchi (Klamath, Pacific Northwest Indians) — preparato 2026-11-17 dal task (centottantacinquesimo lotto)
 
 - **food_id**: `food_wocas_semi_secchi`. FDC ID 169826 (SR Legacy, "Wocas, dried seeds, Oregon, yellow pond lily (Klamath)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Seme essiccato della ninfea gialla (*Nuphar polysepala*, famiglia Nymphaeaceae), pianta acquatica tradizionalmente raccolta dai nativi Klamath del Pacific Northwest — alimento mai tentato in questa pipeline, nessuna specie affine presente. Verificato con `grep` dedicato, zero occorrenze per "wocas"/"yellow pond lily" prima della ricerca web.
