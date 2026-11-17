@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, controfiletto (top sirloin), crudo — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_bisonte_controfiletto_raw`. FDC ID 172564 (SR Legacy, "Game meat, bison, top sirloin, separable lean only, trimmed to 0" fat, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Primo taglio specifico di bisonte mai tentato: finora solo il generico `food_bisonte_raw` (separable lean only, non per taglio). Filone: specie minori con tagli anatomici specifici nella stessa release USDA 2026-04-30 che ha dato il filone ratiti del 182° lotto, qui estesa a bisonte/wapiti/cervo come raccomandato.
+- **Nutrienti**: **12/17**. Per 100g: energia 113kcal, proteine 21,4g, grassi 2,40g, carboidrati 0g esplicito, calcio 5,00mg, ferro 3,00mg, zinco 3,40mg, magnesio 24,0mg, rame 0,15mg, selenio 25,1µg, vitamina B12 2,30µg, vitamina C 0mg esplicito. **Mancano** (non riportati sulla pagina, non assunti zero — pagina con incoerenza fibra "non dichiarata" vs intestazione "0g", trattata qui come mancante per trasparenza): fibra, folato totale, vitamina K, beta-carotene, altro carotenoide provitaminico A.
+- **Analogia usata**: `food_capra_raw` (già eseguita sul DB reale — stesso profilo "carne di selvaggina/ungulato magro crudo").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_controfiletto_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172564 --food-id=food_bisonte_controfiletto_raw \
+  --name-it="Bisonte, controfiletto (top sirloin), crudo" \
+  --matrix-id=bisonte_controfiletto_raw --matrix-description-it="Bisonte, controfiletto (top sirloin), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172564 --food-id=food_bisonte_controfiletto_raw \
+  --name-it="Bisonte, controfiletto (top sirloin), crudo" \
+  --matrix-id=bisonte_controfiletto_raw --matrix-description-it="Bisonte, controfiletto (top sirloin), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_capra_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, carne macinata, grass-fed, cruda — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_bisonte_macinato_grassfed_raw`. FDC ID 175293 (SR Legacy, "Bison, ground, grass-fed, raw" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Controparte cruda della voce cotta sopra.
