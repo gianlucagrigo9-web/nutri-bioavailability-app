@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, girello (top round steak), cotto (Shoshone Bannock) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
+
+- **food_id**: `food_bisonte_girello_cotto`. FDC ID 167651 (SR Legacy, "Buffalo, free range, top round steak, cooked (Shoshone Bannock)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"; "buffalo" qui è il nome comune nativo-americano del bisonte americano, *Bison bison*, stessa specie già tracciata come `food_bisonte_*` dal 183° lotto). Taglio specifico (girello/top round) distinto dai tagli bisonte già coperti (controfiletto, spalla, macinato). **Nota di trasparenza**: la pagina mostra alcune incoerenze fra pannello riepilogo e tabella nutrienti (energia 150 vs 146kcal, proteine 33 vs 32,5g, calcio 0 vs 4,00mg) — usati i valori della tabella dettagliata, non del pannello arrotondato, stessa convenzione già adottata in lotti precedenti per casi analoghi. La controparte cruda (FDC 167649) è bloccata da `PROVENANCE_REQUIRED`, accodata in `docs/PENDING_HUMAN_ACTIONS.md`.
+- **Nutrienti**: **12/17**. Per 100g: energia 146kcal, proteine 32,5g, grassi 1,80g, calcio 4,00mg, ferro 3,76mg, zinco 5,06mg, magnesio 27,0mg, rame 0,19mg, selenio 10,5µg, sodio 41,0mg, vitamina B12 1,67µg, folato totale 8,00µg. **Mancano**: fibra, vitamina C, beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_capra_cotta` (già eseguita sul DB reale — stessa convenzione già usata per i tagli cotti di wapiti nel 183° lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_girello_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167651 --food-id=food_bisonte_girello_cotto \
+  --name-it="Bisonte, girello (top round), cotto" \
+  --matrix-id=bisonte_girello_cotto --matrix-description-it="Bisonte, girello (top round), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167651 --food-id=food_bisonte_girello_cotto \
+  --name-it="Bisonte, girello (top round), cotto" \
+  --matrix-id=bisonte_girello_cotto --matrix-description-it="Bisonte, girello (top round), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salmone coho (argenteo), crudo (Alaska Native) — preparato 2026-11-17 dal task (centottantaseiesimo lotto)
 
 - **food_id**: `food_salmone_coho_raw`. FDC ID 167639 (SR Legacy, "Fish, salmon, coho (silver), raw (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria "American Indian/Alaska Native Foods"). Specie distinta dal salmone generico (`food_salmon_raw`), dal re/chinook, rosa, sockeye e chum già coperti in lotti precedenti. Verificato con `grep` dedicato, zero occorrenze per "coho"/"silver"/167639 prima della ricerca web.
