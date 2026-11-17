@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wapiti (elk nordamericano), girello (round), cotto (grigliato) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
+
+- **food_id**: `food_wapiti_girello_cotto`. FDC ID 174428 (SR Legacy, "Game meat, elk, round, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 156kcal, proteine 30,9g, grassi 2,64g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 4,08mg, zinco 5,64mg, magnesio 28,0mg, rame 0,22mg, selenio 10,6µg, vitamina C 0mg esplicito, vitamina B12 1,50µg, folato totale 9,00µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A 0µg esplicito. **Manca** (non riportata): vitamina K.
+- **Analogia usata**: `food_capra_cotta` (già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `wapiti_girello_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174428 --food-id=food_wapiti_girello_cotto \
+  --name-it="Wapiti, girello (round), cotto" \
+  --matrix-id=wapiti_girello_cotto --matrix-description-it="Wapiti, girello (round), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174428 --food-id=food_wapiti_girello_cotto \
+  --name-it="Wapiti, girello (round), cotto" \
+  --matrix-id=wapiti_girello_cotto --matrix-description-it="Wapiti, girello (round), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_capra_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Wapiti (elk nordamericano), filetto (tenderloin), cotto (grigliato) — preparato 2026-11-17 dal task (centottantatreesimo lotto)
 
 - **food_id**: `food_wapiti_filetto_cotto`. FDC ID 174429 (SR Legacy, "Game meat, elk, tenderloin, separable lean only, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, release 2026-04-30). Primo taglio specifico di wapiti mai tentato, oltre al generico `food_wapiti_cotto` già eseguito.
