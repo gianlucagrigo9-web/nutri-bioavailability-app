@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Agnello (categoria USDA "domestic"), composto di tagli al dettaglio, magro e grasso, crudo — preparato 2026-11-17 dal task (centottantunesimo lotto)
+
+- **food_id**: `food_agnello_domestico_raw`. FDC ID 172545 (SR Legacy, "Lamb, composite of trimmed retail cuts, separable lean and fat, trimmed to 1/8\" fat, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). **Categoria USDA "Lamb, domestic" mai tentata in questa pipeline**, distinta sia da "Lamb, New Zealand, imported, frozen" (FDC 174338/174339, già eseguita sul DB reale come `food_agnello_raw`/`food_agnello_cotto`) sia da "Lamb, Australian, imported, fresh" (FDC 174399/174400, già "pronto" dal 177° lotto) — il titolo mostrato da getfoodfacts.com omette la parola "domestic" (troncamento noto di questo sito per alcuni titoli lunghi), **confermata l'appartenenza alla categoria "domestic"** per incrocio indipendente con tre fonti esterne concordanti sullo stesso FDC ID/stessa combinazione di trim ("1/8\" fat, choice"): recipal.com, recipetips.com (slug `t--17226`) e happyforks.com, tutte e tre esplicite "Lamb, domestic, composite...". Nessun doppione: verificato con `grep` sia per nome (agnello/lamb/domestico/domestic) sia per FDC ID 172545/172546 su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` prima della ricerca web — zero occorrenze. Recuperato seguendo la raccomandazione esplicita del 180° lotto (tentativo precedente bloccato due volte da `PROVENANCE_REQUIRED` sul `WebFetch`): qui l'URL è comparso direttamente nei risultati `WebSearch`, nessun blocco di permesso.
+- **Nutrienti**: **14/17** — mancano vitamina K, beta-carotene e altri carotenoidi provitaminici A (non riportati nel record, non assunti zero) — **stesso identico gap già accettato per `food_agnello_raw`/`food_agnello_cotto`** già eseguiti sul DB reale. Per 100g: energia 243kcal, proteine 17,5g, grassi 18,7g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 12,0mg, ferro 1,62mg, magnesio 22,0mg, zinco 3,52mg, rame 0,11mg, selenio 19,7µg, sodio 59,0mg, vitamina C 0mg esplicito, folato totale 19,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 2,44µg.
+- **Analogia usata**: `food_agnello_raw` (agnello generico composito, crudo — già eseguito sul DB reale, stessa specie *Ovis aries*, stesso concetto "composto di tagli al dettaglio, crudo", stesso gap tipico di micronutrienti).
+- **Categoria dieta**: `meat_fish` (carne di mammifero).
+- **Matrice**: nuova `agnello_domestico_raw` ("Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, crudo").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172545 --food-id=food_agnello_domestico_raw \
+  --name-it="Agnello (categoria USDA \"domestic\"), composto di tagli al dettaglio, magro e grasso, crudo" \
+  --matrix-id=agnello_domestico_raw --matrix-description-it="Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172545 --food-id=food_agnello_domestico_raw \
+  --name-it="Agnello (categoria USDA \"domestic\"), composto di tagli al dettaglio, magro e grasso, crudo" \
+  --matrix-id=agnello_domestico_raw --matrix-description-it="Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Agnello (categoria USDA "domestic"), composto di tagli al dettaglio, magro e grasso, cotto — preparato 2026-11-17 dal task (centottantunesimo lotto)
+
+- **food_id**: `food_agnello_domestico_cotto`. FDC ID 172546 (SR Legacy, "Lamb, composite of trimmed retail cuts, separable lean and fat, trimmed to 1/8\" fat, choice, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, ID consecutivo al crudo sopra). Controparte cotta dello stesso record, stessa categoria "domestic" e stesso trim del crudo. Metodo di cottura non specificato dal nome USDA (solo "cooked"), stessa convenzione già accettata per `food_agnello_cotto` generico. Verificato con `grep` sull'FDC ID 172546: nessun doppione.
+- **Nutrienti**: **14/17** — stesso gap del crudo sopra (mancano vitamina K, beta-carotene, altri carotenoidi provitaminici A). Per 100g (dalla tabella dettagliata della pagina, non dal pannello etichetta arrotondato): energia 230kcal, proteine 21,7g, grassi 15,3g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 13,6mg, ferro 1,64mg, magnesio 20,4mg, zinco 4,03mg, rame 0,10mg, selenio 23,1µg, sodio 61,2mg, vitamina C 0mg esplicito, folato totale 16,1µg, acido folico 0µg esplicito, vitamina B12 2,18µg.
+- **Analogia usata**: `food_agnello_cotto` (agnello generico composito, cotto — già eseguito sul DB reale, stesso concetto "composto di tagli al dettaglio, cotto", stesso gap tipico).
+- **Categoria dieta**: `meat_fish` (carne di mammifero).
+- **Matrice**: nuova `agnello_domestico_cotto` ("Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, cotto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (metodo di cottura non specificato dal record, stessa convenzione già usata per `food_agnello_cotto`).
+
+```
+npm run add-food -- --fdc-id=172546 --food-id=food_agnello_domestico_cotto \
+  --name-it="Agnello (categoria USDA \"domestic\"), composto di tagli al dettaglio, magro e grasso, cotto" \
+  --matrix-id=agnello_domestico_cotto --matrix-description-it="Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172546 --food-id=food_agnello_domestico_cotto \
+  --name-it="Agnello (categoria USDA \"domestic\"), composto di tagli al dettaglio, magro e grasso, cotto" \
+  --matrix-id=agnello_domestico_cotto --matrix-description-it="Agnello, categoria USDA domestic, composto di tagli al dettaglio, magro e grasso, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Piccione (squab), carne chiara senza pelle, cruda — preparato 2026-11-17 dal task (centosettantanovesimo lotto)
 
 - **food_id**: `food_piccione_carne_chiara_raw`. FDC ID 171080 (SR Legacy, "Squab, (pigeon), light meat without skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Trim realmente distinto da `food_piccione_raw` (FDC 171079, "Squab, (pigeon), meat only, raw", già eseguito sul DB reale): qui il record specifica "light meat" (carne chiara, petto), non il generico "meat only". Scoperto per caso durante la verifica di candidati cotti per il piccione (nessuna versione cotta trovata per nessun trim, resta `⚠`, vedi coda sotto) — verificato con `grep` sull'FDC ID: nessun doppione.
