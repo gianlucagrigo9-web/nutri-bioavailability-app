@@ -16,6 +16,90 @@
 
 ## Pronti
 
+### Struzzo, inside strip, cotto — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_inside_strip_cotto`. FDC ID 172842 (SR Legacy, "Ostrich, inside strip, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta di `food_struzzo_inside_strip_raw` (FDC 172841) sopra in questo stesso lotto. Metodo di cottura non specificato sulla pagina (solo "cooked", non "broiled"/"roasted"/"braised"). Verificato con `grep` su "172842": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 164kcal, proteine 29,4g, grassi 4,26g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5,00mg, ferro 4,80mg, magnesio 26,0mg, zinco 4,90mg, rame 0,15mg, selenio 37,9µg, sodio 73,0mg, vitamina C 0mg esplicito, folato totale 16,0µg, acido folico 0µg esplicito, vitamina B12 6,44µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Nota: pannello Nutrition Facts per porzione mostra i grassi totali come "3,5g" (vs 3,62g/porzione attesi dalla tabella) — piccola discrepanza, valori qui presi dalla tabella completa.
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile/ratite cotta", stesso pattern già documentato per l'emu cotto in lotti precedenti, che preferì l'anatra allo struzzo perché il generico "struzzo cotto" non è ancora eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_inside_strip_cotto` ("Struzzo, inside strip, cotto").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (metodo non specificato dalla fonte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172842 --food-id=food_struzzo_inside_strip_cotto \
+  --name-it="Struzzo, inside strip, cotto" \
+  --matrix-id=struzzo_inside_strip_cotto --matrix-description-it="Struzzo, inside strip, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172842 --food-id=food_struzzo_inside_strip_cotto \
+  --name-it="Struzzo, inside strip, cotto" \
+  --matrix-id=struzzo_inside_strip_cotto --matrix-description-it="Struzzo, inside strip, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
+### Struzzo, tip trimmed, cotto — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_struzzo_tip_trimmed_cotto`. FDC ID 174488 (SR Legacy, "Ostrich, tip trimmed, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Controparte cotta di `food_struzzo_tip_trimmed_raw` (FDC 172846) sopra in questo stesso lotto. Metodo di cottura non specificato sulla pagina. Verificato con `grep` su "174488": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 145kcal, proteine 28,5g, grassi 2,57g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 2,79mg, magnesio 25,0mg, zinco 4,85mg, rame 0,15mg, selenio 37,5µg, sodio 80,0mg, vitamina C 0mg esplicito, folato totale 15,0µg, acido folico 0µg esplicito, vitamina B12 6,25µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Nota: pannello Nutrition Facts per porzione mostra il calcio come "10mg" (vs 5,10mg/porzione attesi dalla tabella per 100g) — valore qui preso dalla tabella completa, non dal pannello.
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile/ratite cotta", stesso pattern usato sopra per l'inside strip cotto).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `struzzo_tip_trimmed_cotto` ("Struzzo, tip trimmed, cotto").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (metodo non specificato dalla fonte), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174488 --food-id=food_struzzo_tip_trimmed_cotto \
+  --name-it="Struzzo, tip trimmed, cotto" \
+  --matrix-id=struzzo_tip_trimmed_cotto --matrix-description-it="Struzzo, tip trimmed, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174488 --food-id=food_struzzo_tip_trimmed_cotto \
+  --name-it="Struzzo, tip trimmed, cotto" \
+  --matrix-id=struzzo_tip_trimmed_cotto --matrix-description-it="Struzzo, tip trimmed, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
+### Emu, fan fillet, cotto (broiled) — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_emu_fan_fillet_cotto`. FDC ID 174477 (SR Legacy, "Emu, fan fillet, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Trovata grazie allo stesso giro di ricerca del fan fillet crudo (scartato ⚠ sopra per assenza di pagina individuale) — qui invece la variante cotta ha una pagina getfoodfacts.com dedicata trovata direttamente. Verificato con `grep` su "174477": nessuna occorrenza prima di questa aggiunta.
+- **Nutrienti**: **16/17**. Per 100g: energia 154kcal, proteine 31,3g, grassi 2,30g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 4,56mg, magnesio 30,0mg, zinco 3,19mg, rame 0,23mg, selenio 46,1µg, sodio 53,0mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 9,37µg, beta-carotene 0µg esplicito, altro carotenoide provitaminico A (alfa-carotene 0 + beta-criptoxantina 0) = 0µg esplicito. **Manca solo**: vitamina K (non riportata nel record). Nota: pannello Nutrition Facts per porzione mostra il calcio come "10mg" (vs 5,10mg/porzione attesi dalla tabella per 100g) — valore qui preso dalla tabella completa.
+- **Analogia usata**: `food_anatra_cotta` (anatra, carne cotta arrosto, già eseguita sul DB reale — stessa categoria funzionale "carne di volatile cotta", metodo "broiled" mappato sul generico `cooked`, stessa convenzione già usata per lo struzzo/emu macinato "pan-broiled → cooked" nel centoseiesimo lotto).
+- **Categoria dieta**: `meat_fish` (carne/pollame).
+- **Matrice**: nuova `emu_fan_fillet_cotto` ("Emu, fan fillet, cotto").
+- **Attributi**: `is_heme_iron` presente (per analogia con `food_anatra_cotta`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked` (fonte: "broiled"), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174477 --food-id=food_emu_fan_fillet_cotto \
+  --name-it="Emu, fan fillet, cotto (broiled)" \
+  --matrix-id=emu_fan_fillet_cotto --matrix-description-it="Emu, fan fillet, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174477 --food-id=food_emu_fan_fillet_cotto \
+  --name-it="Emu, fan fillet, cotto (broiled)" \
+  --matrix-id=emu_fan_fillet_cotto --matrix-description-it="Emu, fan fillet, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_anatra_cotta \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+---
+
 ### Emu, full rump, crudo — preparato 2026-11-17 dal task (centottantaduesimo lotto)
 
 - **food_id**: `food_emu_full_rump_raw`. FDC ID 174479 (SR Legacy, "Emu, full rump, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente). Terzo taglio specifico di emu di questo stesso lotto (vedi outside/inside drum sopra). Verificato con `grep` su "174479": nessuna occorrenza prima di questa aggiunta. Nota: "emu, fan fillet, raw" (FDC 174476) e "emu, flat fillet, raw" (FDC 174478) valutati ma scartati ⚠ in questo stesso lotto — nessuna pagina getfoodfacts.com dedicata trovata per questi due tagli (solo una pagina `/compare/` che li cita insieme senza fornire la tabella nutrienti completa come fonte primaria), a differenza di questo full rump che ha una pagina `/food/` individuale.
