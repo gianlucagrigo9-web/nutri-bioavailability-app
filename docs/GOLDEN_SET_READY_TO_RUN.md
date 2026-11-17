@@ -69,6 +69,30 @@ npm run add-food -- --fdc-id=170195 --food-id=food_animella_gola_manzo_cotta \
   --diet-category=meat_fish --apply
 ```
 
+### Cervella di vitello, cotta (brasata) — preparato 2026-11-17 dal task (centosettantaquattresimo lotto)
+
+- **food_id**: `food_cervella_di_vitello_cotta`. FDC ID **174352** (**SR Legacy**, "Veal, variety meats and by-products, brain, cooked, braised" — pagina `getfoodfacts.com/food/veal-variety-meats-and-by-products-brain-cooked-braised-174352` dedicata, riga "Source" esplicita "FoodData Central 174352, SR Legacy"). Buco segnalato esplicitamente dal ventunesimo lotto (2026-10-20): la cervella di vitello CRUDA era già stata scartata ⚠ per mancanza di FDC ID verificabile (myfooddata.com rifiuta il fetch, altre fonti senza FDC ID citato), ma la pagina getfoodfacts.com dedicata esiste solo per le due versioni COTTE (braised 174352, pan-fried 174353) — mai verificate finché questo lotto non ha controllato con `grep` che non fossero già presenti (zero occorrenze di "174352"/"174353"/"cervella di vitello" cotta prima della ricerca).
+- **Nutrienti**: **14/17**. Per 100g: energia 136kcal, proteine 11,5g, grassi 9,63g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 16,0mg, ferro 1,67mg, magnesio 16,0mg, zinco 1,61mg, rame 0,26mg, selenio 11,0µg, vitamina C 13,0mg, folato totale 3,00µg (acido folico 0µg esplicito), vitamina B12 9,65µg. **Mancano**: beta-carotene, vitamina K, alfa-carotene/beta-criptoxantina (non riportati). Sodio 156mg/100g (basso-moderato, coerente con una cottura brasata senza salamoia — nessun segnale di arricchimento). Colesterolo 3100mg/100g (altissimo ma coerente con la letteratura nota sul tessuto cerebrale, non trattato come anomalia).
+- **Analogia usata**: `food_fegato_di_vitello_cotto` (fegato di vitello cotto, stessa specie vitello, già eseguito sul DB reale — stessa categoria funzionale "frattaglia di vitello cotta", nessun'altra cervella di vitello già eseguita da usare come analogia più specifica).
+- **Categoria dieta**: `meat_fish` (frattaglia).
+- **Matrice**: nuova `cervella_di_vitello_cotta` ("Cervella di vitello, cotta (brasata)").
+- **Attributi**: `is_heme_iron` (flag attivo, stesso standard già usato per le altre cervella/frattaglie), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174352 --food-id=food_cervella_di_vitello_cotta \
+  --name-it="Cervella di vitello, cotta (brasata)" \
+  --matrix-id=cervella_di_vitello_cotta --matrix-description-it="Cervella di vitello, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174352 --food-id=food_cervella_di_vitello_cotta \
+  --name-it="Cervella di vitello, cotta (brasata)" \
+  --matrix-id=cervella_di_vitello_cotta --matrix-description-it="Cervella di vitello, cotta (brasata)" \
+  --baseline-cooking-state=braised --analogy-food-id=food_fegato_di_vitello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Surimi (imitazione gamberetto a base di polpa di pesce) — preparato 2026-11-17 dal task (centosettantatreesimo lotto)
 
 - **food_id**: `food_surimi`. FDC ID **171973** (**SR Legacy**, "Crustaceans, shrimp, mixed species, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-imitation-made-from-surimi-171973` dedicata, FDC ID e dataType "SR Legacy" citati esplicitamente in più punti della pagina — titolo, paragrafo introduttivo e riga "Source:" — nonostante l'etichetta generica "USDA reference food" sopra il titolo, risultata ambigua e non indicativa del tier reale su questo sito, vedi nota metodologica sotto). Prodotto genuinamente nuovo (categoria "prodotti trasformati mono-ingrediente a base di pesce"): verificato con `grep` dedicato su "surimi"/"imitation" — zero occorrenze su `docs/PRD.md`, `docs/GOLDEN_SET_READY_TO_RUN.md`, `golden_set_foods.sql` e `lotti_alimenti/*.txt` prima della ricerca web.
