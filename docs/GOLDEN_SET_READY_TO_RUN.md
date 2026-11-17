@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Fagioli mung, secchi, cotti (bolliti, con sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
+
+- **food_id**: `food_fagioli_mung_bolliti`. FDC ID 175255 (SR Legacy, "Mung beans, mature seeds, cooked, boiled, with salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_fagioli_mung_secchi_raw` (FDC 174256, "Mung beans, mature seeds, raw") è già "pronto", non ancora eseguito. Distinto da `food_fagioli_mungo_neri_bolliti` (cultivar *Vigna mungo*/urad nero, diverso) e da germogli/noodles già coperti: stesso seme (*Vigna radiata*, mung verde) del crudo, mai tentato cotto. Individuato nello stesso filone legumi secchi "crudo fatto, cotto mai tentato" esteso in questo lotto (verificati anche borlotti/cannellini/fave/piselli del congo: tutti già coperti cotti sotto altro nome, nessun doppione scritto).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 105kcal, proteine 7,02g, grassi 0,38g, carboidrati 19,1g, fibra 7,60g, calcio 27,0mg, ferro 1,40mg, magnesio 48,0mg, zinco 0,84mg, rame 0,16mg, selenio 2,50µg, sodio 238mg (coerente con "con sale"), vitamina C 1,00mg, folato totale 159µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina A (RAE) 1,00µg (retinolo 0µg esplicito), beta-carotene 14,0µg, vitamina K 2,70µg.
+- **Analogia usata**: `food_fagioli_cannellini_bolliti` (legume secco cotto, già eseguito sul DB reale — stessa categoria "fagiolo secco bollito", nessuna coppia cotta della stessa specie disponibile come analogia più stretta).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_mung_bolliti` ("Fagioli mung, secchi, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175255 --food-id=food_fagioli_mung_bolliti \
+  --name-it="Fagioli mung, secchi, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_mung_bolliti --matrix-description-it="Fagioli mung, secchi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175255 --food-id=food_fagioli_mung_bolliti \
+  --name-it="Fagioli mung, secchi, cotti (bolliti, con sale)" \
+  --matrix-id=fagioli_mung_bolliti --matrix-description-it="Fagioli mung, secchi, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --carotenoid-matrix-state=cooked_or_disrupted \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Zucca invernale acorn, cotta (al forno, senza sale) — preparato 2026-11-17 dal task (centosettantaseiesimo lotto)
 
 - **food_id**: `food_zucca_acorn_cotta`. FDC ID 169293 (SR Legacy, "Squash, winter, acorn, cooked, baked, without salt" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30). Gap "stato di cottura mancante su specie già coperta": il crudo `food_zucca_acorn_raw` (FDC 168472) è già "pronto" dal lotto che lo ha introdotto, non ancora eseguito — individuato con filone "crudo fatto, cotto mai tentato" estteso al gruppo Vegetables (raccomandazione del 175° lotto), `grep` dedicato zero occorrenze prima della ricerca.
