@@ -16,6 +16,31 @@
 
 ## Pronti
 
+### Eperlano arcobaleno (rainbow smelt), cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
+
+- **RIAPERTURA di un ⚠ precedente (Regola 6, con fonte genuinamente diversa)**: "eperlano arcobaleno (rainbow smelt), crudo" era già stato scartato ⚠ il 2026-10-29 perché l'unica fonte trovata allora (triagemethod.com) non dichiarava un FDC ID. In questo lotto `getfoodfacts.com` espone pagine dedicate e pulite sia per il crudo (FDC 175146) sia per il cotto (FDC 175147, confermato anche dal link di confronto `getfoodfacts.com/compare/fish-smelt-rainbow-raw-175146/...`) — fonte diversa e migliore di quella del 2026-10-29, non un retry della stessa fonte già scartata.
+- **food_id**: `food_eperlano_arcobaleno_cotto`. FDC ID 175147 (SR Legacy, "Fish, smelt, rainbow, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-smelt-rainbow-cooked-dry-heat-175147` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota di trasparenza**: il crudo (FDC 175146, pagina `getfoodfacts.com/food/fish-smelt-rainbow-raw-175146`, confermata esistere dal link di confronto ma non ancora leggibile in questo turno — URL "incagliata" per `PROVENANCE_REQUIRED` su 2 tentativi; **non preparato come voce separata in questo lotto**, solo il cotto il cui fetch è riuscito). Da riprovare per il crudo in un lotto futuro con una nuova richiesta (stessa lezione del 169°/174° lotto: URL specifica incagliata, non blocco di sessione).
+- **Nutrienti**: **14/17**. Per 100g: energia 124kcal, proteine 22,6g, grassi 3,10g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 77,0mg, ferro 1,15mg, magnesio 38,0mg, zinco 2,12mg, rame 0,18mg, selenio 46,8µg, vitamina C 0mg (esplicito), folato totale 5,00µg, vitamina B12 3,97µg, vitamina A/retinolo 17,0µg. **Mancano** (non riportati in pagina, non assunti zero): beta-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_branzino_cotto` (pesce marino cotto, già eseguito sul DB reale — nessuna specie anadroma/d'acqua dolce più vicina già eseguita in forma cotta disponibile oltre al luccio, usato per il black bass sopra; scelto branzino per coerenza con le altre voci pesce di questo stesso lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `eperlano_arcobaleno_cotto`.
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175147 --food-id=food_eperlano_arcobaleno_cotto \
+  --name-it="Eperlano arcobaleno (rainbow smelt), cotto (calore secco)" \
+  --matrix-id=eperlano_arcobaleno_cotto --matrix-description-it="Eperlano arcobaleno (rainbow smelt), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175147 --food-id=food_eperlano_arcobaleno_cotto \
+  --name-it="Eperlano arcobaleno (rainbow smelt), cotto (calore secco)" \
+  --matrix-id=eperlano_arcobaleno_cotto --matrix-description-it="Eperlano arcobaleno (rainbow smelt), cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_branzino_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Black bass / persico trota d'acqua dolce, misto, cotto (calore secco) — preparato 2026-11-17 dal task (centosettantacinquesimo lotto)
 
 - **food_id**: `food_pesce_black_bass_cotto`. FDC ID 171989 (SR Legacy, "Fish, bass, freshwater, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-bass-freshwater-mixed-species-cooked-dry-heat-171989` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Completa la coppia crudo/cotto del black bass già `food_pesce_black_bass_raw` (FDC 174184, "Fish, bass, fresh water, mixed species, raw", 134° lotto, non ancora eseguito — stesso record USDA a specie miste, solo lo spazio "fresh water"/"freshwater" differisce fra le due pagine getfoodfacts).
