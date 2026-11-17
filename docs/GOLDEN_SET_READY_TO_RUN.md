@@ -16,6 +16,34 @@
 
 ## Pronti
 
+### Noci del Brasile, crude — preparato 2026-11-17 dal task (centottantaduesimo lotto)
+
+- **food_id**: `food_noci_brasile_raw`. FDC ID 2515373 (**Foundation**, "Nuts, brazilnuts, raw" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente). Verificato con `grep` su "brasile"/"brazilnut"/"2515373": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (frutta secca già coperta: mandorle, noci, pecan, macadamia, nocciole, anacardi, pistacchi, pinoli, ghiande — nessuna noce del Brasile).
+- **Nutrienti**: **11/17**. Per 100g: energia 620kcal (la tabella nutrienti della stessa pagina riporta 621kcal, lieve discrepanza interna non significativa, segnalata per trasparenza — Regola 6), proteine 15,0g, grassi 57,4g, carboidrati 21,6g, fibra 5,98g, calcio 168mg, ferro 2,47mg, magnesio 351mg, zinco 3,82mg, rame 1,74mg, selenio 280µg (valore molto alto, coerente con la nota notorietà della noce del Brasile come alimento più ricco di selenio in assoluto), sodio 0mg esplicito. **Mancano** (pannello vitaminico assente per disegno del record Foundation, non per limite di ricerca — stesso pattern già accettato per `food_cipolla_bianca_raw` nel 160° lotto): vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, altri carotenoidi provitaminici A (alfa-carotene, beta-criptoxantina).
+- **Analogia usata**: `food_noci_macadamia_raw` (noci macadamia crude, già eseguita sul DB reale — stessa categoria "frutta secca cruda", stesso stato, nessun ferro eme).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca).
+- **Matrice**: nuova `noci_brasile_raw` ("Noci del Brasile, crude").
+- **Attributi**: `is_heme_iron` assente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (per analogia con `food_noci_pecan_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Lecythidaceae` (*Bertholletia excelsa*, famiglia distinta da macadamia/pecan/noci comuni), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun folato riportato, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2515373 --food-id=food_noci_brasile_raw \
+  --name-it="Noci del Brasile, crude" \
+  --matrix-id=noci_brasile_raw --matrix-description-it="Noci del Brasile, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_macadamia_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Lecythidaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2515373 --food-id=food_noci_brasile_raw \
+  --name-it="Noci del Brasile, crude" \
+  --matrix-id=noci_brasile_raw --matrix-description-it="Noci del Brasile, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_macadamia_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Lecythidaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+---
+
 ### Maiale, spalla (picnic/arm), carne magra, cruda — preparato 2026-11-17 dal task (centottantunesimo lotto)
 
 - **food_id**: `food_maiale_spalla_picnic_raw`. FDC ID 168258 (SR Legacy, "Pork, fresh, shoulder, arm picnic, separable lean only, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, titolo verificato DIRETTAMENTE sulla pagina con un fetch mirato). **Voce crudo-only deliberata**, stesso filone "crudo-only o cotto-only" raccomandato dal 180° lotto: il sessantunesimo lotto (2026-10-30) aveva scartato questo stesso taglio ⚠ per la COPPIA (trim incoerente fra crudo "lean only" e cotto "lean and fat"/"lean and fat roasted"), ma il crudo preso da solo è un record primario pulito e completo, mai preparato come voce a sé. **Nota di trasparenza (Regola 6)**: il sessantunesimo lotto riportava anche un dubbio che FDC 168258 fosse in realtà lo "shoulder whole" e non lo specifico "arm picnic" — verificato qui con un fetch diretto e mirato sulla pagina stessa (non su uno snippet di ricerca): il titolo mostrato sulla pagina getfoodfacts.com è inequivocabilmente "Pork, fresh, shoulder, **arm picnic**, separable lean only, raw", nessuna menzione di "whole" — il dubbio del 61° lotto non trova conferma in questa verifica diretta, segnalato qui per completezza ma non bloccante. Verificato con `grep` su "168258"/"spalla picnic"/"arm picnic": zero occorrenze come voce "Pronti"/"Eseguiti" prima di questa aggiunta (solo la discussione ⚠ del 61° lotto).
