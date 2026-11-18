@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Aceto distillato — preparato 2026-11-18 dal task (196° lotto)
+
+- **food_id**: `food_aceto_distillato` (mai coperto — solo `food_aceto_di_mele` esisteva finora, verificato con grep dedicato). FDC ID 172237 (**SR Legacy**, "Vinegar, distilled" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente nel titolo e nel testo, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**, tutti i valori espliciti nella tabella "ogni nutriente di questo record" (nessuno dedotto). Per 100g: energia 18,0kcal, proteine 0g, grassi 0g, carboidrati 0,040g, fibra 0g, calcio 6,00mg, ferro 0,030mg, magnesio 1,00mg, zinco 0,010mg, rame 0,0060mg, selenio 0,50µg, vitamina B12 0µg, beta-carotene 0µg, altro carotenoide provA (carotene alfa 0µg + criptoxantina beta 0µg, entrambi dichiarati) 0µg, vitamina C 0mg, folato totale 0µg, vitamina K 0µg — valori quasi tutti zero espliciti, coerente con un condimento a base d'acqua/acido acetico senza residuo organico misurabile (stesso pattern già visto per sale/zucchero puri). Nota di qualità: i valori "per porzione" (1 tazza/238g) sulla pagina sono internamente incoerenti con la tabella per-100g (es. calcio 10mg vs 14,3mg) — non rilevante per questa voce, presi solo i valori della tabella per-100g, non quelli di porzione.
+- **Analogia usata**: `food_zucchero_bianco` (stesso riferimento semplice già usato per `food_aceto_di_mele`, nessun attributo categorico di rilievo per un condimento acquoso).
+- **Categoria dieta**: `plant_non_fruit` (condimento fermentato, nessun ingrediente animale — stessa categoria già usata per l'aceto di mele).
+- **Matrice**: nuova `aceto_distillato`.
+- **Attributi**: `baseline_cooking_state=fermented`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=172237 --food-id=food_aceto_distillato \
+  --name-it="Aceto distillato" \
+  --matrix-id=aceto_distillato --matrix-description-it="Aceto distillato" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172237 --food-id=food_aceto_distillato \
+  --name-it="Aceto distillato" \
+  --matrix-id=aceto_distillato --matrix-description-it="Aceto distillato" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_zucchero_bianco \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Formaggio parmesan grattugiato (tipo USA, refrigerato) — preparato 2026-11-18 dal task (196° lotto)
+
+- **food_id**: `food_formaggio_parmesan_grattugiato_raw`. **Attenzione denominazione**: distinto deliberatamente da `food_parmigiano_reggiano` già in DB — questo è un prodotto USA generico "Cheese, parmesan, grated, refrigerated" (FDC Foundation Foods, probabilmente latte vaccino pastorizzato lavorazione industriale), non necessariamente il Parmigiano Reggiano DOP italiano a latte crudo; stessa cautela già usata in lotti precedenti per il formaggio "Romano" USA ≠ Pecorino Romano DOP. FDC ID 2259795 (**Foundation Foods**, "Cheese, parmesan, grated, refrigerated" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/17**. Per 100g (valori di tabella, non dell'etichetta arrotondata): energia 405kcal (la pagina mostra anche 400kcal nell'etichetta arrotondata — usato il valore non arrotondato), proteine 30,1g, grassi 29,5g, carboidrati 4,33g, calcio 950mg, ferro 0,14mg, magnesio 35,4mg, zinco 4,62mg, rame 0,042mg, vitamina K (fillochinone) 1,70µg (la pagina riporta anche menachinone-4 7,00µg, forma distinta non sommata). **Mancano**: fibra (etichetta "non dichiarata", nessuna riga in tabella), selenio, vitamina B12, beta-carotene, altro carotenoide provA, vitamina C, folato totale — gap coerente con lo stesso pattern Foundation "macro+minerali senza pannello vitaminico" già documentato per altri formaggi/carni recenti in questa pipeline.
+- **Analogia usata**: `food_parmigiano_reggiano` (stessa famiglia di formaggio stagionato a pasta dura per gli attributi categorici, pur trattandosi di prodotti distinti — vedi nota denominazione sopra), `matrix_category_calcium=medium_oxalate` per analogia con `food_provolone` (altro formaggio stagionato già classificato così in questa pipeline).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_parmesan_grattugiato`.
+- **Attributi**: `baseline_cooking_state=fresh` (consumato così com'è, nessuna cottura — stessa convenzione di `food_provolone`), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2259795 --food-id=food_formaggio_parmesan_grattugiato_raw \
+  --name-it="Formaggio parmesan grattugiato (tipo USA, refrigerato)" \
+  --matrix-id=formaggio_parmesan_grattugiato --matrix-description-it="Formaggio parmesan grattugiato (tipo USA)" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_parmigiano_reggiano \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2259795 --food-id=food_formaggio_parmesan_grattugiato_raw \
+  --name-it="Formaggio parmesan grattugiato (tipo USA, refrigerato)" \
+  --matrix-id=formaggio_parmesan_grattugiato --matrix-description-it="Formaggio parmesan grattugiato (tipo USA)" \
+  --baseline-cooking-state=fresh --analogy-food-id=food_parmigiano_reggiano \
+  --matrix-category-calcium=medium_oxalate \
+  --diet-category=egg_dairy --apply
+```
+
 ### Lampuga (mahi mahi), surgelata, pesca selvaggia — preparato 2026-11-18 dal task (195° lotto)
 
 - **food_id**: `food_lampuga_raw` (specie mai coperta — nessun "lampuga"/"mahi mahi" esistente, verificato con grep dedicato sia inglese sia italiano; distinta dal tentativo ⚠ del quarantanovesimo lotto che era per "mahimahi, raw" generico senza FDC, questo è un record Foundation Foods dedicato mai valutato). FDC ID 2747658 (**Foundation Foods**, "Mahi mahi, frozen, wild caught" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente).
