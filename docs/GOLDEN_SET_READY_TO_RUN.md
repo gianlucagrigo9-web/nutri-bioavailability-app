@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Spezie, condimento per pollame (poultry seasoning) — preparato 2026-11-18 dal task (195° lotto)
+
+- **food_id**: `food_spezie_per_pollame` (zero collisioni verificate, grep dedicato sia su FDC/nome inglese sia su nome italiano prima di scrivere — nessuna voce precedente copre questa miscela). FDC ID 171331 (**SR Legacy**, "Spices, poultry seasoning" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 307kcal (la pagina mostra anche 310kcal nel riquadro Nutrition Facts arrotondato per porzione — usata 307kcal, tabella nutrienti completa), proteine 9,59g, grassi 7,53g, carboidrati 65,6g, fibra 11,3g, calcio 996mg, ferro 35,3mg, magnesio 224mg, zinco 3,14mg, rame 0,84mg, selenio 7,20µg, vitamina B12 0µg esplicito, beta-carotene 1568µg, altro carotenoide provA (beta-criptoxantina 23,0µg; alfa-carotene 0µg esplicito), vitamina C 12,0mg, folato totale 138µg, vitamina K 805µg. Nessun nutriente mancante — miscela di spezie/erbe secche, classe già nota per pannelli vitaminici eccezionalmente completi (stesso tipo di sale/vaniglia già viste con dati completi).
+- **Analogia usata**: `food_origano_secco_raw` (erba/spezia secca, stessa categoria generale "Spices and Herbs").
+- **Categoria dieta**: `plant_non_fruit` (miscela di spezie/erbe essiccate, tutte di origine vegetale — salvia, timo, maggiorana, rosmarino, pepe nero tipicamente).
+- **Matrice**: nuova `spezie_pollame`.
+- **Attributi**: `baseline_cooking_state=raw` (prodotto secco, nessuna cottura), resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=171331 --food-id=food_spezie_per_pollame \
+  --name-it="Spezie, condimento per pollame (poultry seasoning)" \
+  --matrix-id=spezie_pollame --matrix-description-it="Condimento per pollame, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171331 --food-id=food_spezie_per_pollame \
+  --name-it="Spezie, condimento per pollame (poultry seasoning)" \
+  --matrix-id=spezie_pollame --matrix-description-it="Condimento per pollame, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_origano_secco_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pollo, fuso (drumstick), carne magra, cotto brasato — preparato 2026-11-17 dal task (194° lotto, secondo giro)
 
 - **food_id**: `food_pollo_fuso_cotto` (distinto da tutte le voci pollo già eseguite — nessuna è specificamente il fuso/drumstick cotto; verificato con grep dedicato su tutti i `food_pollo_*` esistenti, zero collisioni). FDC ID 331897 (**Foundation Foods**, "Chicken, broilers or fryers, drumstick, meat only, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente, release USDA FoodData Central 30-04-2026).
