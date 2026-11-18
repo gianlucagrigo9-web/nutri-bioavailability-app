@@ -16,6 +16,58 @@
 
 ## Pronti
 
+### Lampuga (mahi mahi), surgelata, pesca selvaggia — preparato 2026-11-18 dal task (195° lotto)
+
+- **food_id**: `food_lampuga_raw` (specie mai coperta — nessun "lampuga"/"mahi mahi" esistente, verificato con grep dedicato sia inglese sia italiano; distinta dal tentativo ⚠ del quarantanovesimo lotto che era per "mahimahi, raw" generico senza FDC, questo è un record Foundation Foods dedicato mai valutato). FDC ID 2747658 (**Foundation Foods**, "Mahi mahi, frozen, wild caught" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **11/17**. Per 100g: energia (tre valori sulla pagina, 80kcal riquadro/84kcal evidenza/83,7kcal tabella di riferimento — usata 83,7kcal, valore non arrotondato), proteine 19,8g, grassi 0,38g, carboidrati 0,29g, calcio 6,00mg, ferro 0,052mg, magnesio 28,0mg, zinco 0,30mg, rame 0,029mg, selenio 50,2µg, vitamina B12 1,34µg. **Mancano**: fibra, beta-carotene, altro carotenoide provA, vitamina C, folato totale, vitamina K — gap atteso per pesce, stesso pattern già visto per cod/aragosta/capesante di questa stessa serie Foundation "frozen wild caught".
+- **Analogia usata**: `food_merluzzo_raw` (pesce magro bianco crudo, già eseguito), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `lampuga`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2747658 --food-id=food_lampuga_raw \
+  --name-it="Lampuga (mahi mahi), surgelata, pesca selvaggia" \
+  --matrix-id=lampuga --matrix-description-it="Lampuga (mahi mahi)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2747658 --food-id=food_lampuga_raw \
+  --name-it="Lampuga (mahi mahi), surgelata, pesca selvaggia" \
+  --matrix-id=lampuga --matrix-description-it="Lampuga (mahi mahi)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Cernia cilena (Chilean sea bass / Patagonian toothfish), surgelata, pesca selvaggia — preparato 2026-11-18 dal task (195° lotto)
+
+- **food_id**: `food_cernia_cilena_raw` (specie mai coperta — distinta dal branzino europeo `food_branzino_raw` già eseguito, specie biologicamente diversa, *Dissostichus eleginoides* vs *Dicentrarchus labrax*; verificato con grep dedicato, zero collisioni). FDC ID 2747668 (**Foundation Foods**, "Sea bass, Chilean, frozen, wild caught" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **11/17**. Per 100g: energia (tre valori, 210kcal riquadro/209kcal evidenza/209kcal tabella di riferimento — usata 209kcal), proteine 14,9g, grassi 16,6g, carboidrati 0,14g, calcio 6,82mg, ferro 0mg esplicito, magnesio 16,6mg, zinco 0,29mg, rame 0mg esplicito, selenio 69,4µg, vitamina B12 0,59µg. **Mancano**: fibra, beta-carotene, altro carotenoide provA, vitamina C, folato totale, vitamina K.
+- **Analogia usata**: `food_branzino_raw` (pesce marino crudo, famiglia diversa ma stessa categoria generale "branzino/spigola"), `is_heme_iron` presente.
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `cernia_cilena`.
+- **Attributi**: `baseline_cooking_state=raw`, resto omesso/default.
+
+```
+npm run add-food -- --fdc-id=2747668 --food-id=food_cernia_cilena_raw \
+  --name-it="Cernia cilena (Chilean sea bass), surgelata, pesca selvaggia" \
+  --matrix-id=cernia_cilena --matrix-description-it="Cernia cilena (Chilean sea bass)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_branzino_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2747668 --food-id=food_cernia_cilena_raw \
+  --name-it="Cernia cilena (Chilean sea bass), surgelata, pesca selvaggia" \
+  --matrix-id=cernia_cilena --matrix-description-it="Cernia cilena (Chilean sea bass)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_branzino_raw \
+  --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Spezie, condimento per pollame (poultry seasoning) — preparato 2026-11-18 dal task (195° lotto)
 
 - **food_id**: `food_spezie_per_pollame` (zero collisioni verificate, grep dedicato sia su FDC/nome inglese sia su nome italiano prima di scrivere — nessuna voce precedente copre questa miscela). FDC ID 171331 (**SR Legacy**, "Spices, poultry seasoning" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente).
