@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Maiale, girello della coscia (sirloin tip), crudo — preparato 2026-11-22 dal task (197° lotto)
+
+- **food_id**: `food_maiale_coscia_girello_raw` (mai coperto, verificato con grep dedicato). FDC ID 168371 (**SR Legacy**, "Pork, Leg sirloin tip roast, boneless, separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 113kcal, proteine 22,9g, grassi 1,71g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 5,00mg, ferro 0,80mg, magnesio 25,0mg, zinco 2,05mg, rame 0,067mg, selenio 26,4µg, vitamina B12 0,53µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti, vitamina C 0mg, folato totale 0µg, vitamina K (fillochinone e diidrofillochinone) 0µg espliciti.
+- **Analogia usata**: `food_maiale_coscia_raw` (coscia di maiale cruda, già eseguita sul DB reale — stessa specie, stesso trim "separable lean and fat", stesso attributo `is_heme_iron`; taglio diverso, nessun'altra analogia più stretta disponibile).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_coscia_girello_raw`.
+- **Attributi**: `is_heme_iron` (flag attivo — muscolo di mammifero), resto omesso/default, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168371 --food-id=food_maiale_coscia_girello_raw \
+  --name-it="Maiale, girello della coscia (sirloin tip), crudo" \
+  --matrix-id=maiale_coscia_girello_raw --matrix-description-it="Maiale, girello della coscia, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_maiale_coscia_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168371 --food-id=food_maiale_coscia_girello_raw \
+  --name-it="Maiale, girello della coscia (sirloin tip), crudo" \
+  --matrix-id=maiale_coscia_girello_raw --matrix-description-it="Maiale, girello della coscia, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_maiale_coscia_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, punta di spalla (breast), cotta alla griglia — preparato 2026-11-22 dal task (197° lotto)
+
+- **food_id**: `food_maiale_spalla_petto_cotta` (mai coperto, verificato con grep dedicato — distinto da `food_maiale_spalla_boston_cotta`/`food_maiale_spalla_picnic_cotta` già eseguiti, sub-taglio diverso della spalla). FDC ID 169188 (**SR Legacy**, "Pork, Shoulder breast, boneless, separable lean and fat, cooked, broiled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 162kcal, proteine 28,5g, grassi 4,49g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 7,00mg, ferro 0,92mg, magnesio 26,0mg, zinco 2,43mg, rame 0,070mg, selenio 33,7µg, vitamina B12 0,61µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti, vitamina C 0mg, folato totale 2,00µg, vitamina K 0µg esplicito. Nota di qualità: il pannello "Nutrition Facts" della pagina mostra calcio 10mg/porzione (85g), incoerente con la tabella dettagliata per-100g (7,00mg/100g → 5,95mg/85g) — preso il valore della tabella per-100g, non quello del pannello, stessa convenzione già usata per altre voci di questa coda.
+- **Analogia usata**: `food_maiale_coscia_cotta` (coscia di maiale cotta, già eseguita sul DB reale — stessa specie, stesso stato "cotta", stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `maiale_spalla_petto_cotta`.
+- **Attributi**: `is_heme_iron` (flag attivo), resto omesso/default, `baseline_cooking_state=broiled`.
+
+```
+npm run add-food -- --fdc-id=169188 --food-id=food_maiale_spalla_petto_cotta \
+  --name-it="Maiale, punta di spalla (breast), cotta alla griglia" \
+  --matrix-id=maiale_spalla_petto_cotta --matrix-description-it="Maiale, punta di spalla, cotta alla griglia" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_maiale_coscia_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169188 --food-id=food_maiale_spalla_petto_cotta \
+  --name-it="Maiale, punta di spalla (breast), cotta alla griglia" \
+  --matrix-id=maiale_spalla_petto_cotta --matrix-description-it="Maiale, punta di spalla, cotta alla griglia" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_maiale_coscia_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Olio di aringa — preparato 2026-11-22 dal task (197° lotto)
+
+- **food_id**: `food_olio_di_aringa_raw` (mai coperto, verificato con grep dedicato — nessun olio di pesce di questa specie già presente, solo `food_olio_di_fegato_di_merluzzo_raw`). FDC ID 172340 (**SR Legacy**, "Fish oil, herring" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 902kcal, proteine 0g (esplicito), grassi 100g (esplicito, olio puro), carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), magnesio 0mg (esplicito), zinco 0mg (esplicito), rame 0mg (esplicito), selenio 0µg (esplicito), vitamina B12 0µg (esplicito), vitamina C 0mg (esplicito), folato totale 0µg (esplicito) — stesso identico pattern di zero espliciti già visto per l'olio di fegato di merluzzo. Mancano (assenti dal record, non assunti zero): beta-carotene, l'altro carotenoide provA (alfa-carotene/beta-criptoxantina, nessuna riga), vitamina K (nessuna riga). Nota di qualità minore: il valore energia per porzione (1 cucchiaio, 13,6g) è riportato come 120kcal nel pannello/intro ma 123kcal nella tabella dettagliata — il valore per-100g (902kcal) è coerente fra le sezioni, usato quello.
+- **Analogia usata**: `food_olio_di_fegato_di_merluzzo_raw` (olio di fegato di merluzzo, già eseguito sul DB reale — stessa categoria "olio di pesce puro, nessuna frazione proteica/minerale", analogia più stretta disponibile di `food_strutto`).
+- **Categoria dieta**: `meat_fish` (derivato di pesce, non vegetariano/vegano).
+- **Matrice**: nuova `olio_di_aringa`.
+- **Attributi**: `is_heme_iron` omesso (false — ferro 0mg esplicito, olio puro), resto omesso/default, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=172340 --food-id=food_olio_di_aringa_raw \
+  --name-it="Olio di aringa" \
+  --matrix-id=olio_di_aringa --matrix-description-it="Olio di aringa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_fegato_di_merluzzo_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172340 --food-id=food_olio_di_aringa_raw \
+  --name-it="Olio di aringa" \
+  --matrix-id=olio_di_aringa --matrix-description-it="Olio di aringa" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_fegato_di_merluzzo_raw \
+  --diet-category=meat_fish --apply
+```
+
+### Farina di avena integrale — preparato 2026-11-22 dal task (197° lotto)
+
+- **food_id**: `food_farina_di_avena_integrale_raw` (mai coperto, verificato con grep dedicato — distinto da `food_farina_di_avena_raw`, FDC 169741 "Oat flour, partially debranned", già eseguito: prodotto diverso, farina integrale non debranned vs parzialmente debranned). FDC ID 2261421 (**Foundation Foods**, "Flour, oat, whole grain" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/17**. Per 100g (tabella per-100g della pagina): energia 386kcal, proteine 13,2g, grassi 6,31g, carboidrati 69,9g, fibra 10,5g, calcio 42,8mg, ferro 4,00mg, magnesio 125mg, zinco 2,75mg, rame 0,44mg, selenio 38,2µg, folato totale 34,7µg. Mancanti (assenti dal record, non assunti zero): vitamina B12, beta-carotene, l'altro carotenoide provA, vitamina C, vitamina K. Nota di qualità minore: energia riportata come 390kcal nel pannello/intro ma 386kcal nella tabella/box di confronto per-100g — usato il valore della tabella per-100g, stessa convenzione delle altre voci.
+- **Analogia usata**: `food_farina_di_avena_raw` (farina d'avena parzialmente debranned, già eseguita sul DB reale — stessa specie *Avena sativa*, differisce solo per il grado di raffinazione).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `farina_di_avena_integrale_raw`.
+- **Attributi**: `botanical_family=Poaceae`, resto omesso/default, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=2261421 --food-id=food_farina_di_avena_integrale_raw \
+  --name-it="Farina di avena integrale" \
+  --matrix-id=farina_di_avena_integrale_raw --matrix-description-it="Farina di avena integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_avena_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2261421 --food-id=food_farina_di_avena_integrale_raw \
+  --name-it="Farina di avena integrale" \
+  --matrix-id=farina_di_avena_integrale_raw --matrix-description-it="Farina di avena integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_avena_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Aceto distillato — preparato 2026-11-18 dal task (196° lotto)
 
 - **food_id**: `food_aceto_distillato` (mai coperto — solo `food_aceto_di_mele` esisteva finora, verificato con grep dedicato). FDC ID 172237 (**SR Legacy**, "Vinegar, distilled" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente nel titolo e nel testo, release USDA 2026-04-30).
