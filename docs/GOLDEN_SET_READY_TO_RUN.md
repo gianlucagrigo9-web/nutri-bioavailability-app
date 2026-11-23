@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_beef_chuck_roast_raw` (mai coperto, verificato con `grep` dedicato; `food_beef_raw` esiste già ed è nella lista ID riservati — non riusato). FDC ID 2646174 (**Foundation**, "Beef, chuck, roast, boneless, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/18**. Per 100g: energia 240kcal (pannello Nutrition Facts; stat box riporta 237 — divergenza minore, uso il pannello), proteine 18,4g, grassi 17,8g, carboidrati 0g, calcio 4,58mg, ferro 2,06mg, magnesio 17,0mg, zinco 5,39mg, rame 0,054mg, sodio 48,4mg — **mancano**: fibra (pagina contraddittoria fra pannello "non dichiarata" e stat box "0g", non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A (RAE), vitamina D, vitamina K (nessuno riportato in pagina, non assunti zero).
+- **Analogia usata**: `food_beef_raw` (stesso animale, stesso stato crudo, già presente nel DB reale — solo taglio diverso).
+- **Categoria dieta**: `meat_fish` (carne bovina).
+- **Attributi**: `is-heme-iron` (carne rossa).
+
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
+  --name-it="Manzo, chuck roast, senza osso, choice, crudo" \
+  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
+  --name-it="Manzo, chuck roast, senza osso, choice, crudo" \
+  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Caribou, quarto posteriore, crudo (Alaska Native) — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_caribou_hind_quarter_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 168050 (**SR Legacy**, "Caribou, hind quarter meat, raw (Alaska Native)", NDB 35162). Pagina recipal.com non mostra il numero FDC ma riporta "NBD ID: 35162", che coincide esattamente con l'`ndb_number` della riga USDA_CHECKLIST.csv per questo FDC ID — identificazione incrociata solida anche senza il numero FDC in chiaro.
