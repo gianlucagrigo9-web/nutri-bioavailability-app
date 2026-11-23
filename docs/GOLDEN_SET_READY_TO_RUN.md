@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Estratto di vaniglia, imitazione (con alcool) — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_estratto_di_vaniglia_imitazione`. FDC ID 172235 (**SR Legacy**, "Vanilla extract, imitation, alcohol", Spices and Herbs — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **13/18** (molti espliciti a zero, non assunti — valori di tabella, non la label arrotondata). Per 100g: energia 237kcal, proteine 0,050g, grassi 0g, carboidrati 2,41g, fibra 0g, calcio 0mg, ferro 0,13mg, magnesio 5,00mg, zinco 0,060mg, rame 0,023mg, folato totale 0µg, vitamina B12 0µg, vitamina C 0mg. **Mancano**: selenio, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K. Profilo nutrizionale quasi nullo per design (prodotto = acqua + alcool etilico + aromi sintetici, nessuna vaniglia vera — "imitation").
+- **Analogia usata**: `food_aceto_di_mele` (condimento/aroma liquido vegetale già nel DB, categoria più vicina disponibile — nessun altro estratto/aroma liquido esiste ancora).
+- **Categoria dieta**: `plant_non_fruit` (aroma sintetico, nessun ingrediente animale).
+- **Matrice**: nuova `estratto_vaniglia_imitazione` ("Estratto di vaniglia, imitazione").
+- **Attributi**: nessun flag categorico aggiuntivo (`botanical_family` omesso: "imitation" = vanillina sintetica, non vaniglia vera, famiglia botanica non applicabile).
+
+```
+npm run add-food -- --fdc-id=172235 --food-id=food_estratto_di_vaniglia_imitazione \
+  --name-it="Estratto di vaniglia, imitazione (con alcool)" \
+  --matrix-id=estratto_vaniglia_imitazione --matrix-description-it="Estratto di vaniglia, imitazione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aceto_di_mele \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172235 --food-id=food_estratto_di_vaniglia_imitazione \
+  --name-it="Estratto di vaniglia, imitazione (con alcool)" \
+  --matrix-id=estratto_vaniglia_imitazione --matrix-description-it="Estratto di vaniglia, imitazione" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aceto_di_mele \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa di mele (applesauce), non zuccherata, con vitamina C aggiunta — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_salsa_di_mele_cotta`. FDC ID 2346414 (**Foundation Foods**, "Applesauce, unsweetened, with added vitamin C", Fruits and Fruit Juices — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
