@@ -14,7 +14,7 @@
 
 ---
 
-### Succo di pomodoro, con ingredienti aggiunti, da concentrato, shelf-stable — preparato 2026-11-23 dal task (214° lotto)
+### Succo di pomodoro, con ingredienti aggiunti, da concentrato, shelf-stable — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_succo_di_pomodoro_raw` (verificato non coperto sia per FDC che per nome — nessun `food_succo_di_pomodoro*`/`food_tomato_juice*` esistente). FDC ID 2003596 (**Foundation**, "Tomato juice, with added ingredients, from concentrate, shelf stable" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
 - **Nutrienti**: **12/18**. Per 100g: energia 20kcal, proteine 0,86g, grassi 0,29g, carboidrati 4,32g, calcio 9,74mg, ferro 0,30mg, magnesio 10,4mg, zinco 0,10mg, rame 0,057mg, sodio 236mg, folato totale 18,9µg, vitamina C 49,8mg — **mancano**: fibra (pagina contraddittoria, non usata), selenio, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K. **Nota di trasparenza**: sodio 236mg/100g è molto più alto del pomodoro fresco (~5-10mg) — coerente col nome "with added ingredients", probabile sale aggiunto, ma la pagina non ha una lista ingredienti verificabile; nessun ingrediente animale o ambiguità sulla categoria dieta (resta vegetale).
@@ -37,7 +37,7 @@ npm run add-food -- --fdc-id=2003596 --food-id=food_succo_di_pomodoro_raw \
   --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 ```
 
-### Platano, non maturo (underripe), crudo — preparato 2026-11-23 dal task (213° lotto)
+### Platano, non maturo (underripe), crudo — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_platano_non_maturo_raw` (verificato non coperto sia per FDC che per nome — nessun `food_platano*`/`food_plantain*` esistente, distinto da `food_banana_raw` già nel DB, genere *Musa* ma specie/varietà "da cottura" diversa). FDC ID 2710818 (**Foundation**, "Plantains, underripe, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
 - **Nutrienti**: **12/18**. Per 100g: energia 140kcal (pannello; scheda di confronto/tabella riportano 145, divergenza minore, uso il pannello), proteine 1,23g, grassi 0,69g, carboidrati 33,6g, fibra 2,53g, calcio 4,83mg, ferro 0,33mg, magnesio 29,5mg, zinco 0,18mg, rame 0,11mg, sodio 0mg (dichiarato), vitamina C 18,5mg — **mancano**: selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K, beta-carotene (nessuno riportato in pagina nonostante la polpa gialla, non assunti).
