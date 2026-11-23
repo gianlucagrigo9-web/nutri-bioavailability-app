@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Formaggio cotija — preparato 2026-11-23 dal task (204° lotto)
+
+- **food_id**: `food_formaggio_cotija`. FDC ID 2647443 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina; piccola discrepanza interna fra stat box ed etichetta su energia/sodio, valori di tabella usati).
+- **Nutrienti**: **11/18**. Per 100g: energia 352kcal, proteine 23,8g, grassi 27,2g, carboidrati 2,72g, calcio 700mg, ferro 0mg (esplicito), magnesio 29,9mg, zinco 3,60mg, rame 0mg (esplicito), sodio 1625mg, vitamina A (retinolo) 167µg. **Mancano**: fibra (ambigua/non dichiarata), selenio, vitamina C, folato, acido folico, vitamina B12, vitamina K, beta-carotene.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (stesso tipo, formaggio semi-stagionato salato; stesso precedente già usato per cheddar via parmigiano reggiano → `is_heme_iron=false`, nessun matrix-category-calcium/carotenoid/zinc-bucket/botanical-family).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+- **Matrice**: nuova `formaggio_cotija` ("Formaggio cotija").
+
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija \
+  --name-it="Formaggio cotija" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija \
+  --name-it="Formaggio cotija" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (204° lotto)
 
 - **food_id**: `food_beef_chuck_roast_raw`. FDC ID 2646174 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato esplicitamente in pagina).
