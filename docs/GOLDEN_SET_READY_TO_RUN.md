@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Applesauce, non zuccherata, con vitamina C aggiunta — preparato 2026-11-23 dal task (211° lotto)
+
+- **food_id**: `food_applesauce_unsweetened` (mai coperto, verificato con `grep` dedicato). FDC ID 2346414 (**Foundation**, "Applesauce, unsweetened, with added vitamin C" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 45kcal (pannello; divergenze minori 46/46,4 su altre sezioni, uso pannello), proteine 0,27g, grassi 0,16g, carboidrati 12,3g, calcio 3,82mg, ferro 0,045mg, magnesio 3,94mg, zinco 0,0026mg, rame 0,039mg, sodio 0,50mg, vitamina C 43,7mg — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K.
+- **Analogia usata**: `food_mela_secca_raw` (stesso frutto/famiglia botanica, già classificato come mela trasformata non-fresca).
+- **Categoria dieta**: `plant_non_fruit` (frutta cotta/trasformata in purea, non "frutta fresca" nella definizione restrittiva PRD §4.9 — stesso trattamento della mela secca già nel DB).
+- **Attributi**: `botanical_family=Rosaceae`, `baseline-cooking-state=cooked` (salsa di mele, prodotto cotto).
+
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_applesauce_unsweetened \
+  --name-it="Applesauce, non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=applesauce_unsweetened --matrix-description-it="Applesauce, non zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mela_secca_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_applesauce_unsweetened \
+  --name-it="Applesauce, non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=applesauce_unsweetened --matrix-description-it="Applesauce, non zuccherata" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mela_secca_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio cotija, solido — preparato 2026-11-23 dal task (210° lotto)
 
 - **food_id**: `food_formaggio_cotija_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 2647443 (**Foundation**, "Cheese, cotija, solid" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
