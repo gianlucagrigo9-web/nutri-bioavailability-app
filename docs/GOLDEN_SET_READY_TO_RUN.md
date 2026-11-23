@@ -16,6 +16,84 @@
 
 ## Pronti
 
+### Mango, cultivar Tommy Atkins, pelato, crudo — preparato 2026-11-23 dal task (200° lotto)
+
+- **food_id**: `food_mango_tommy_atkins_raw` (mai coperto, verificato con `grep` dedicato — distinto dal mango generico `food_mango_raw` già eseguito, FDC 169910: Tommy Atkins è il cultivar da esportazione commerciale dominante negli USA, con profilo misurabile diverso). FDC ID 2710833 (**Foundation Foods**, "Mango, Tommy Atkins, peeled, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 61,6kcal, proteine 0,56g, grassi 0,57g, carboidrati 15,3g, fibra 1,75g, calcio 12,4mg, ferro 0mg esplicito, magnesio 10,3mg, zinco 0,066mg, rame 0,091mg, vitamina C 25,5mg. **Mancano** (non riportati sulla pagina, non assunti zero): selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_mango_raw` (mango generico, già eseguito sul DB reale — stessa specie *Mangifera indica*, stesso frutto solo cultivar diverso).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `mango_tommy_atkins` ("Mango Tommy Atkins").
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (per analogia con `food_mango_raw`), `botanical_family=Anacardiaceae`, `baseline_cooking_state=raw`, `is_heme_iron`/`matrix_category_calcium`/`is_fortified_folate` omessi (non applicabili a frutta fresca, per analogia).
+
+```
+npm run add-food -- --fdc-id=2710833 --food-id=food_mango_tommy_atkins_raw \
+  --name-it="Mango, cultivar Tommy Atkins, pelato, crudo" \
+  --matrix-id=mango_tommy_atkins --matrix-description-it="Mango Tommy Atkins" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Anacardiaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=2710833 --food-id=food_mango_tommy_atkins_raw \
+  --name-it="Mango, cultivar Tommy Atkins, pelato, crudo" \
+  --matrix-id=mango_tommy_atkins --matrix-description-it="Mango Tommy Atkins" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Anacardiaceae \
+  --diet-category=fresh_fruit --apply
+```
+
+### Farina di segale (non integrale), cruda — preparato 2026-11-23 dal task (200° lotto)
+
+- **food_id**: `food_farina_di_segale_raw` (mai coperto, verificato con `grep` dedicato — distinto dalla farina di segale INTEGRALE già eseguita, `food_farina_di_segale_integrale_raw` FDC 168885 "Rye flour, dark": questo record Foundation generico "Flour, rye" non specifica "dark/whole", rappresenta la farina di segale più comune/chiara, prodotto distinto per convenzione USDA SR Legacy che distingue light/medium/dark). FDC ID 2512375 (**Foundation Foods**, "Flour, rye" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 350kcal (pagina riporta anche 351kcal in un riquadro diverso, incongruenza interna della pagina terza parte, non del dato USDA — valore principale della tabella nutrienti usato), proteine 8,40g, grassi 1,91g, carboidrati 77,2g, fibra 13,7g, calcio 32,2mg, ferro 2,54mg, magnesio 95,4mg, zinco 2,33mg, rame 0,34mg, selenio 16,6µg. **Mancano**: folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_farina_di_segale_integrale_raw` (farina di segale integrale, già eseguita sul DB reale — stesso cereale, stessa famiglia botanica, prodotto più vicino già nel DB).
+- **Categoria dieta**: `plant_non_fruit` (cereale/farina).
+- **Matrice**: nuova `farina_di_segale` ("Farina di segale").
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (per analogia), `botanical_family=Poaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=2512375 --food-id=food_farina_di_segale_raw \
+  --name-it="Farina di segale (non integrale), cruda" \
+  --matrix-id=farina_di_segale --matrix-description-it="Farina di segale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_segale_integrale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2512375 --food-id=food_farina_di_segale_raw \
+  --name-it="Farina di segale (non integrale), cruda" \
+  --matrix-id=farina_di_segale --matrix-description-it="Farina di segale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_segale_integrale_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Passata di pomodoro, in scatola — preparato 2026-11-23 dal task (200° lotto)
+
+- **food_id**: `food_passata_di_pomodoro_raw` (mai coperto, verificato con `grep` dedicato — distinta dal concentrato di pomodoro già eseguito `food_concentrato_di_pomodoro` FDC 170459: la passata/puree è meno concentrata del doppio concentrato, prodotto diverso). FDC ID 2685582 (**Foundation Foods**, "Tomato, puree, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 34,8kcal, proteine 1,58g, grassi 0,27g, carboidrati 8,04g, fibra 1,97g, calcio 17,6mg, ferro 1,24mg, magnesio 19,3mg, zinco 0,21mg, rame 0,12mg, vitamina C 10,4mg. **Mancano**: selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_concentrato_di_pomodoro` (concentrato di pomodoro, già eseguito sul DB reale — stesso prodotto di base, pomodoro cotto/trasformato in scatola, stessa pianta *Solanum lycopersicum*).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, convenzione PRD §4.9).
+- **Matrice**: nuova `passata_di_pomodoro` ("Passata di pomodoro").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto/in scatola, per analogia), `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=2685582 --food-id=food_passata_di_pomodoro_raw \
+  --name-it="Passata di pomodoro, in scatola" \
+  --matrix-id=passata_di_pomodoro --matrix-description-it="Passata di pomodoro" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_concentrato_di_pomodoro \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2685582 --food-id=food_passata_di_pomodoro_raw \
+  --name-it="Passata di pomodoro, in scatola" \
+  --matrix-id=passata_di_pomodoro --matrix-description-it="Passata di pomodoro" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_concentrato_di_pomodoro \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Bacon canadese, cotto in padella — preparato 2026-11-23 dal task (199° lotto)
 
 - **food_id**: `food_bacon_canadese_cotto` (mai coperto, verificato con `grep` dedicato — distinto da `food_pancetta_raw` già eseguita: il bacon canadese è un taglio magro della lonza affumicata/stagionata, non la pancetta classica, qui già cotto). FDC ID 168383 (**SR Legacy**, "Canadian bacon, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
