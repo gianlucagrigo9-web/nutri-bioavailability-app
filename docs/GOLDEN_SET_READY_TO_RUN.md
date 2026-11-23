@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Celtuce (lattuga a stelo asparago), cruda — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_celtuce_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 169990 (**SR Legacy**, "Celtuce, raw" — pagina `getfoodfacts.com/food/celtuce-raw-169990` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **17/18**. Per 100g: energia 18,0kcal, proteine 0,85g, grassi 0,30g, carboidrati 3,65g, fibra 1,70g, calcio 39,0mg, ferro 0,55mg, magnesio 28,0mg, zinco 0,27mg, rame 0,040mg, selenio 0,90µg, sodio 11,0mg, folato totale 46,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 19,5mg, vitamina A (RAE) 175µg, vitamina D 0µg (dichiarato). **Manca**: vitamina K. **Nota trasparenza**: la pagina mostra 20kcal nel pannello etichetta ma 18,0kcal nella tabella nutrienti per 100g — usato il valore di tabella, coerente con la convenzione di questa pipeline.
+- **Analogia usata**: `food_lattuga_foglia_verde_raw` (stessa specie *Lactuca sativa*, varietà a stelo/asparago invece che a foglia — stessa famiglia Asteraceae).
+- **Categoria dieta**: `plant_non_fruit` (verdura).
+- **Matrice**: nuova `celtuce` ("Celtuce, lattuga a stelo").
+- **Attributi**: `botanical-family=Asteraceae`, `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=169990 --food-id=food_celtuce_raw \
+  --name-it="Celtuce (lattuga a stelo asparago), cruda" \
+  --matrix-id=celtuce --matrix-description-it="Celtuce, lattuga a stelo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lattuga_foglia_verde_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169990 --food-id=food_celtuce_raw \
+  --name-it="Celtuce (lattuga a stelo asparago), cruda" \
+  --matrix-id=celtuce --matrix-description-it="Celtuce, lattuga a stelo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lattuga_foglia_verde_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Cicoria, radice, cruda — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_cicoria_radice_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_cicoria_selvatica_raw` già eseguita, quella la foglia, qui la radice, organo diverso della stessa pianta). FDC ID 169993 (**SR Legacy**, "Chicory roots, raw" — pagina `getfoodfacts.com/food/chicory-roots-raw-169993` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **17/18**. Per 100g: energia 72,0kcal, proteine 1,40g, grassi 0,20g, carboidrati 17,5g, fibra 1,50g, calcio 41,0mg, ferro 0,80mg, magnesio 22,0mg, zinco 0,33mg, rame 0,077mg, selenio 0,70µg, sodio 50,0mg, folato totale 23,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 5,00mg, vitamina A 0µg (dichiarato), vitamina D 0µg (dichiarato). **Manca**: vitamina K.
+- **Analogia usata**: `food_cicoria_selvatica_raw` (stessa pianta *Cichorium intybus*, stessa famiglia Asteraceae, qui la radice invece della foglia).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio a radice).
+- **Matrice**: nuova `cicoria_radice` ("Cicoria, radice").
+- **Attributi**: `botanical-family=Asteraceae`, `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=169993 --food-id=food_cicoria_radice_raw \
+  --name-it="Cicoria, radice, cruda" \
+  --matrix-id=cicoria_radice --matrix-description-it="Cicoria, radice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169993 --food-id=food_cicoria_radice_raw \
+  --name-it="Cicoria, radice, cruda" \
+  --matrix-id=cicoria_radice --matrix-description-it="Cicoria, radice" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cicoria_selvatica_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne cinesi, crude — preparato 2026-11-23 dal task (205° lotto)
 
 - **food_id**: `food_castagne_cinesi_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_castagne_cinesi_bollite` già eseguita (stesso FDC range, stato bollito) e da `food_castagne_raw` europea già eseguita (specie diversa, *Castanea mollissima* vs *Castanea sativa*)). FDC ID 170164 (**SR Legacy**, "Nuts, chestnuts, chinese, raw" — pagina `getfoodfacts.com/food/nuts-chestnuts-chinese-raw-170164` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
