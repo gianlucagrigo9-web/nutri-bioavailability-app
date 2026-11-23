@@ -14,6 +14,29 @@
 
 ---
 
+### Castagne europee, tostate — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_castagne_europee_tostate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_raw` FDC 170575, crude sbucciate, già eseguito, e dalle castagne cinesi già eseguite in questo stesso lotto). FDC ID 170190 (**SR Legacy**, "Nuts, chestnuts, european, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 245kcal, proteine 3,17g, grassi 2,20g, carboidrati 53,0g, fibra 5,10g, calcio 29,0mg, ferro 0,91mg, magnesio 33,0mg, zinco 0,57mg, rame 0,51mg, selenio 1,20µg, sodio 2,00mg, folato totale 70,0µg, acido folico 0µg, vitamina B12 0µg, vitamina A (RAE) 1,00µg, vitamina D 0µg, vitamina K 7,80µg. Coerenza verificata: beta-carotene 14,0µg/100g coerente con RAE 1,00µg (~1,17µg atteso, scostamento minore di arrotondamento).
+- **Analogia usata**: `food_castagne_raw` (stesso genere botanico *Castanea*, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Attributi**: `botanical_family=Fagaceae` (famiglia reale, per analogia con `food_castagne_raw`).
+
+```
+npm run add-food -- --fdc-id=170190 --food-id=food_castagne_europee_tostate \
+  --name-it="Castagne europee, tostate" \
+  --matrix-id=castagne_europee_tostate --matrix-description-it="Castagne europee, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170190 --food-id=food_castagne_europee_tostate \
+  --name-it="Castagne europee, tostate" \
+  --matrix-id=castagne_europee_tostate --matrix-description-it="Castagne europee, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di acerola, crudo — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_succo_di_acerola_raw` (verificato non coperto per FDC né per nome — distinto da `food_acerola_raw` FDC 171686, frutto intero, e dall'acerola surgelata, entrambi già eseguiti). FDC ID 171687 (**SR Legacy**, "Acerola juice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
