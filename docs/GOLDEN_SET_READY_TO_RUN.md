@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Anacardi, tostati in olio, senza sale — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_anacardi_tostati_olio` (mai coperto, verificato con `grep` dedicato — distinto da `food_anacardi_tostati` già eseguito, FDC 169421 "dry roasted, with salt added": qui tostatura in olio invece che a secco, e senza sale invece che con sale, profilo grassi/sodio diverso). FDC ID 170572 (**SR Legacy**, "Nuts, cashew nuts, oil roasted, without salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/18**, record completo. Per 100g: energia 580kcal, proteine 16,8g, grassi 47,8g, carboidrati 29,9g, fibra 3,30g, calcio 43,0mg, ferro 6,05mg, magnesio 273mg, zinco 5,35mg, rame 2,04mg, selenio 20,3µg, folato totale 25,0µg, vitamina B12 0µg (dichiarato), beta-carotene 0µg (dichiarato), alfa-carotene 0µg (dichiarato), beta-criptoxantina 0µg (dichiarato), vitamina C 0,30mg, vitamina K 34,7µg. **Manca solo**: nessun vero mancante — tutti i 18 campi hanno un valore dichiarato (gli zero sono valori reali del record, non assenze).
+- **Analogia usata**: `food_anacardi_raw` (anacardi crudi, già eseguito sul DB reale — stesso frutto, stessa famiglia Anacardiaceae, qui tostato in olio invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca).
+- **Matrice**: nuova `anacardi_tostati_olio` ("Anacardi, tostati in olio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, come il precedente `food_anacardi_tostati` nonostante lo stato tostato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Anacardiaceae` (come l'analogia), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — folato 25µg coerente con un seme naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170572 --food-id=food_anacardi_tostati_olio \
+  --name-it="Anacardi, tostati in olio, senza sale" \
+  --matrix-id=anacardi_tostati_olio --matrix-description-it="Anacardi, tostati in olio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170572 --food-id=food_anacardi_tostati_olio \
+  --name-it="Anacardi, tostati in olio, senza sale" \
+  --matrix-id=anacardi_tostati_olio --matrix-description-it="Anacardi, tostati in olio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_raw \
+  --botanical-family=Anacardiaceae --diet-category=plant_non_fruit --apply
+```
+
+### Maiale, fesa (punta di sottofesa), brasata — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_maiale_fesa_brasata` (mai coperto, verificato con `grep` dedicato). FDC ID 168370 (**SR Legacy**, "Pork, Leg sirloin tip roast, boneless, separable lean and fat, cooked, braised" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18**, record completo. Per 100g: energia 156kcal, proteine 31,1g, grassi 2,56g, carboidrati 0g, fibra 0g, calcio 5,00mg, ferro 1,06mg, magnesio 25,0mg, zinco 2,86mg, rame 0,068mg, selenio 37,7µg, folato totale 1,00µg, vitamina B12 0,58µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg, vitamina C 0mg, vitamina K 0µg. Tutti i campi hanno un valore dichiarato (gli zero per carboidrati/carotenoidi/vitC/vitK sono reali per un taglio di carne magro, non assenze).
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (lonza di maiale cotta, già eseguita sul DB reale — stessa specie, taglio magro cotto, `is_heme_iron=true` come precedente).
+- **Categoria dieta**: `meat_fish` (carne di maiale).
+- **Matrice**: nuova `maiale_fesa_brasata` ("Maiale, fesa, brasata").
+- **Attributi**: `is_heme_iron` **attivo** (true, come l'analogia — carne rossa), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non applicabile), `baseline_cooking_state=braised`, `is_fortified_folate` omesso (false — folato 1µg, valore naturale basso tipico della carne).
+
+```
+npm run add-food -- --fdc-id=168370 --food-id=food_maiale_fesa_brasata \
+  --name-it="Maiale, fesa (punta di sottofesa), brasata" \
+  --matrix-id=maiale_fesa_brasata --matrix-description-it="Maiale, fesa, brasata" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168370 --food-id=food_maiale_fesa_brasata \
+  --name-it="Maiale, fesa (punta di sottofesa), brasata" \
+  --matrix-id=maiale_fesa_brasata --matrix-description-it="Maiale, fesa, brasata" \
+  --baseline-cooking-state=braised --analogy-food-id=food_lonza_di_maiale_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Peperone rosso, crudo — preparato 2026-11-23 dal task (199° lotto)
 
 - **food_id**: `food_peperone_rosso_raw` (mai coperto, verificato con `grep` dedicato — distinto dai peperoni rossi in scatola già coperti, `food_peperoni_rossi_in_scatola` FDC 168546). FDC ID 2258590 (**Foundation**, "Peppers, bell, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
