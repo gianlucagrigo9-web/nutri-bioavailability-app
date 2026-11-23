@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Mango, cultivar Ataulfo, pelato, crudo — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_mango_ataulfo_raw` (distinto dal mango generico `food_mango_raw` e dal cultivar Tommy Atkins `food_mango_tommy_atkins_raw`, già in coda nel 200° lotto — Ataulfo è un secondo cultivar commerciale diffuso, profilo misurabile diverso, specialmente vitamina C molto più alta). FDC ID 2710834 (**Foundation Foods**, "Mango, Ataulfo, peeled, raw" — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g (valore di tabella, non la label arrotondata): energia 70,6kcal, proteine 0,69g, grassi 0,68g, carboidrati 17,4g, fibra 1,29g, calcio 10,0mg, ferro 0mg esplicito, magnesio 10,6mg, zinco 0,10mg, rame 0,10mg, vitamina C 168mg (molto più alta del Tommy Atkins, 25,5mg — coerente con la reputazione di questo cultivar). **Mancano**: selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_mango_raw` (mango generico, già eseguito sul DB reale — stessa specie *Mangifera indica*).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `mango_ataulfo` ("Mango Ataulfo").
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (per analogia), `botanical_family=Anacardiaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=2710834 --food-id=food_mango_ataulfo_raw \
+  --name-it="Mango, cultivar Ataulfo, pelato, crudo" \
+  --matrix-id=mango_ataulfo --matrix-description-it="Mango Ataulfo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Anacardiaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=2710834 --food-id=food_mango_ataulfo_raw \
+  --name-it="Mango, cultivar Ataulfo, pelato, crudo" \
+  --matrix-id=mango_ataulfo --matrix-description-it="Mango Ataulfo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_mango_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Anacardiaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Estratto di vaniglia, imitazione (con alcool) — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_estratto_di_vaniglia_imitazione`. FDC ID 172235 (**SR Legacy**, "Vanilla extract, imitation, alcohol", Spices and Herbs — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
