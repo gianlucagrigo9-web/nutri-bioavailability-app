@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte vaccino, parzialmente scremato 1% grassi, con vitamina A e D aggiunte — preparato 2026-11-23 dal task (204° lotto)
+
+- **food_id**: `food_latte_lowfat_1pct_raw` (distinto da `food_latte_scremato_raw` FDC 171269, scremato/nonfat fortificato, e da `food_latte_parzialmente_scremato_raw` FDC 172205, 2% grassi SENZA vitamine aggiunte — verificato per FDC esatto, nessuna delle due coincide con questo record). FDC ID 746772 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina).
+- **Nutrienti**: **15/18**. Per 100g: energia 43,0kcal, proteine 3,38g, grassi 0,95g, carboidrati 5,18g, calcio 126mg, ferro 0mg (esplicito), magnesio 12,0mg, zinco 0,43mg, rame 0,0010mg, selenio 2,10µg, sodio 39,0mg, folato totale 2,00µg, vitamina B12 0,61µg, vitamina A (retinolo) 58,0µg, vitamina D 1,06µg. **Mancano**: fibra (ambigua/non dichiarata), vitamina C, acido folico, vitamina K.
+- **Analogia usata**: `food_milk_whole` (Golden Set originale, latte vaccino intero, già eseguito — stessa convenzione già usata per `food_latte_scremato_raw`/`food_latte_parzialmente_scremato_raw`).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: nuova `latte_lowfat_1pct` ("Latte vaccino, 1% grassi, vitaminizzato").
+- **Nota trasparenza**: fortificazione dichiarata in etichetta riguarda solo vitamina A e D (non folato/acido folico) — `is-fortified-folate` non impostato, folato 2µg è un valore naturale di traccia, nessuna firma di arricchimento su quel nutriente.
+
+```
+npm run add-food -- --fdc-id=746772 --food-id=food_latte_lowfat_1pct_raw \
+  --name-it="Latte vaccino, parzialmente scremato 1% grassi, con vitamina A e D aggiunte" \
+  --matrix-id=latte_lowfat_1pct --matrix-description-it="Latte vaccino, 1% grassi, vitaminizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=746772 --food-id=food_latte_lowfat_1pct_raw \
+  --name-it="Latte vaccino, parzialmente scremato 1% grassi, con vitamina A e D aggiunte" \
+  --matrix-id=latte_lowfat_1pct --matrix-description-it="Latte vaccino, 1% grassi, vitaminizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Fagioli neri, in scatola, sgocciolati e risciacquati — preparato 2026-11-23 dal task (204° lotto)
 
 - **food_id**: `food_fagioli_neri_scatolati` (distinto da `food_fagioli_neri_cotti` già eseguito — stesso legume ma processo di conservazione diverso, sodio aggiunto in lavorazione). FDC ID 2644285 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina; piccola discrepanza energia 120kcal tabella vs 115kcal box comparativo, usato il valore di tabella nutrienti).
