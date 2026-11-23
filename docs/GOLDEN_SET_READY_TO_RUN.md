@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, macinato, crudo — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_bisonte_macinato_raw` (prima voce di bisonte nel DB). FDC ID 2727571 (**Foundation Foods**, "Bison, ground, raw", Lamb/Veal/Game Products — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **8/18**. Per 100g: energia 164kcal, proteine 19,9g, grassi 8,88g, carboidrati 0g (pagina mostra -0,15g per arrotondamento del "by difference", trattato come 0 per coerenza con la label, non un valore misurato indipendente), calcio 6,83mg, ferro 2,17mg, magnesio 18,5mg, zinco 3,76mg, rame 0,078mg. **Mancano**: fibra, selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (carne rossa di ruminante già nel DB, stessa famiglia Bovidae — nessun altro game meat/bisonte disponibile come analogia più stretta).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_macinato` ("Bisonte macinato").
+- **Attributi**: `is_heme_iron`, resto omesso (non applicabile a carne).
+
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio cotija (messicano, stagionato, grattugiabile) — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_formaggio_cotija`. FDC ID 2647443 (**Foundation Foods**, "Cheese, cotija, solid", Dairy and Egg Products — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
