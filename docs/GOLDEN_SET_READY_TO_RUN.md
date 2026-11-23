@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Castagne cinesi, crude — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_castagne_cinesi_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_castagne_cinesi_bollite` già eseguita (stesso FDC range, stato bollito) e da `food_castagne_raw` europea già eseguita (specie diversa, *Castanea mollissima* vs *Castanea sativa*)). FDC ID 170164 (**SR Legacy**, "Nuts, chestnuts, chinese, raw" — pagina `getfoodfacts.com/food/nuts-chestnuts-chinese-raw-170164` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **16/18**. Per 100g: energia 224kcal, proteine 4,20g, grassi 1,11g, carboidrati 49,1g, calcio 18,0mg, ferro 1,41mg, magnesio 84,0mg, zinco 0,87mg, rame 0,36mg, sodio 3,00mg, folato totale 68,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 36,0mg, vitamina A (RAE) 10,0µg, vitamina D 0µg (dichiarato). **Mancano**: fibra (la pagina mostra sia "not declared" sia una tile "0g" in contraddizione interna — trattata come assente per trasparenza, non assunta zero), selenio, vitamina K.
+- **Analogia usata**: `food_castagne_raw` (stesso genere *Castanea*, stessa famiglia Fagaceae — stessa analogia già usata per `food_castagne_cinesi_bollite`).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca).
+- **Matrice**: nuova `castagne_cinesi_raw` ("Castagne cinesi, crude").
+- **Attributi**: `botanical-family=Fagaceae`, `baseline-cooking-state=raw`, `is-fortified-folate` omesso (folato 68µg coerente con frutto a guscio naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170164 --food-id=food_castagne_cinesi_raw \
+  --name-it="Castagne cinesi, crude" \
+  --matrix-id=castagne_cinesi_raw --matrix-description-it="Castagne cinesi, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170164 --food-id=food_castagne_cinesi_raw \
+  --name-it="Castagne cinesi, crude" \
+  --matrix-id=castagne_cinesi_raw --matrix-description-it="Castagne cinesi, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
+### Semi di ginkgo, secchi — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_semi_di_ginkgo_secchi_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_semi_di_ginkgo_raw` già eseguita, quella crudi non secchi, FDC diverso). FDC ID 170175 (**SR Legacy**, "Nuts, ginkgo nuts, dried" — pagina `getfoodfacts.com/food/nuts-ginkgo-nuts-dried-170175` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **16/18**. Per 100g: energia 348kcal, proteine 10,3g, grassi 2,00g, carboidrati 72,5g, calcio 20,0mg, ferro 1,60mg, magnesio 53,0mg, zinco 0,67mg, rame 0,54mg, sodio 13,0mg, folato totale 106µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 29,3mg, vitamina A (RAE) 55,0µg, vitamina D 0µg (dichiarato). **Mancano**: fibra (stessa contraddizione interna "not declared" vs tile "0g" già vista per le castagne cinesi sopra — trattata come assente), selenio, vitamina K.
+- **Analogia usata**: `food_semi_di_ginkgo_raw` (stessa specie *Ginkgo biloba*, già eseguita sul DB reale, qui essiccato invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio/seme).
+- **Matrice**: nuova `semi_di_ginkgo_secchi` ("Semi di ginkgo, secchi").
+- **Attributi**: `botanical-family=Ginkgoaceae` (come l'analogia), `baseline-cooking-state=raw` (essiccato ma non cotto, stessa convenzione già usata per castagne secche), `is-fortified-folate` omesso (folato 106µg coerente con concentrazione da disidratazione, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170175 --food-id=food_semi_di_ginkgo_secchi_raw \
+  --name-it="Semi di ginkgo, secchi" \
+  --matrix-id=semi_di_ginkgo_secchi --matrix-description-it="Semi di ginkgo, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_ginkgo_raw \
+  --botanical-family=Ginkgoaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170175 --food-id=food_semi_di_ginkgo_secchi_raw \
+  --name-it="Semi di ginkgo, secchi" \
+  --matrix-id=semi_di_ginkgo_secchi --matrix-description-it="Semi di ginkgo, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_ginkgo_raw \
+  --botanical-family=Ginkgoaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Latte vaccino, parzialmente scremato 1% grassi, con vitamina A e D aggiunte — preparato 2026-11-23 dal task (204° lotto)
 
 - **food_id**: `food_latte_lowfat_1pct_raw` (distinto da `food_latte_scremato_raw` FDC 171269, scremato/nonfat fortificato, e da `food_latte_parzialmente_scremato_raw` FDC 172205, 2% grassi SENZA vitamine aggiunte — verificato per FDC esatto, nessuna delle due coincide con questo record). FDC ID 746772 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina).
