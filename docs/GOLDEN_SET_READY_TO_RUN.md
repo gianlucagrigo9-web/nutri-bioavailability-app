@@ -14,6 +14,8 @@
 
 ---
 
+## Pronti
+
 ### Castagne giapponesi, bollite e cotte a vapore — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_castagne_giapponesi_bollite` (verificato non coperto per FDC né per nome — specie distinta, *Castanea crenata*, mai tracciata in questa pipeline). FDC ID 168589 (**SR Legacy**, "Nuts, chestnuts, japanese, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
