@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Salsa di mele (applesauce), non zuccherata, con vitamina C aggiunta — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_salsa_di_mele_cotta`. FDC ID 2346414 (**Foundation Foods**, "Applesauce, unsweetened, with added vitamin C", Fruits and Fruit Juices — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **10/18**. Per 100g (valori di tabella, non la label arrotondata): energia 46,4kcal, proteine 0,27g, grassi 0,16g, carboidrati 12,3g, calcio 3,82mg, ferro 0,045mg, magnesio 3,94mg, zinco 0,0026mg, rame 0,039mg, vitamina C 43,7mg (vitamina C aggiunta, non solo naturale — nome prodotto lo dichiara esplicitamente). **Mancano**: fibra (non dichiarata sulla pagina), selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_succo_di_mela_raw` (stesso frutto, stessa famiglia botanica, già nel DB — unico derivato di mela trasformato disponibile).
+- **Categoria dieta**: `plant_non_fruit` (prodotto trasformato/cotto, non "frutta fresca" nella definizione restrittiva PRD §4.9 — stessa scelta già fatta per `food_succo_di_arancia_raw`).
+- **Matrice**: nuova `salsa_di_mele` ("Salsa di mele / applesauce").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (per analogia, prodotto cotto/frullato), `botanical_family=Rosaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_salsa_di_mele_cotta \
+  --name-it="Salsa di mele (applesauce), non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=salsa_di_mele --matrix-description-it="Salsa di mele" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_succo_di_mela_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_salsa_di_mele_cotta \
+  --name-it="Salsa di mele (applesauce), non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=salsa_di_mele --matrix-description-it="Salsa di mele" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_succo_di_mela_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Manzo, taglio da spalla (chuck), disossato, scelta/choice, crudo — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_manzo_spalla_chuck_raw` (cut diverso da `food_bistecca_di_manzo_raw`, già nel DB: quel taglio è magro tipo controfiletto, questo è più grasso/marmorizzato, grado USDA Choice). FDC ID 2646174 (**Foundation Foods**, "Beef, chuck, roast, boneless, choice, raw", Beef Products — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
