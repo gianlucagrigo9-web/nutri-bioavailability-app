@@ -39,6 +39,29 @@ npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija \
   --diet-category=egg_dairy --apply
 ```
 
+### Bisonte, macinato, crudo — preparato 2026-11-23 dal task (204° lotto)
+
+- **food_id**: `food_bisonte_ground_raw`. FDC ID 2727571 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina; piccola discrepanza energia fra tabella 160kcal e sezione comparativa 164kcal, usato il valore di tabella nutrienti).
+- **Nutrienti**: **9/18** (fibra non dichiarata/ambigua, carboidrati -0,15g per differenza trattato come ~0, non contato come dato utile separato). Per 100g: energia 160kcal, proteine 19,9g, grassi 8,88g, calcio 6,83mg, ferro 2,17mg, magnesio 18,5mg, zinco 3,76mg, rame 0,078mg, sodio 55,7mg. **Mancano**: fibra, selenio, vitamina C, folato, acido folico, vitamina B12, vitamina K.
+- **Analogia usata**: `food_beef_ground_raw` (stesso tipo, carne di selvaggina/bovino crudo macinato; stesso precedente già usato per vitello/agnello/coniglio/bisonte-affine → `is_heme_iron=true`, calcio/carotenoidi/zinco-bucket/botanical_family=NULL).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `bisonte_macinato` ("Bisonte, macinato").
+
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_ground_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_ground_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (204° lotto)
 
 - **food_id**: `food_beef_chuck_roast_raw`. FDC ID 2646174 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato esplicitamente in pagina).
