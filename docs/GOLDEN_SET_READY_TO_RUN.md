@@ -16,6 +16,132 @@
 
 ## Pronti
 
+### Spinaci, foglia baby, crudi — preparato 2026-11-23 dal task (203° lotto)
+
+- **food_id**: `food_spinaci_baby_raw` (distinto da `food_spinach_raw` già eseguito sul DB reale — stessa specie, stadio di raccolta "baby leaf" diverso, stesso precedente già accettato in questa pipeline per rucola baby/matura e cavolo cinese baby/maturo). FDC ID 1999632 (**Foundation Foods**, "Spinach, baby" — pagina getfoodfacts.com dedicata e pulita, FDC ID confermato esplicitamente in pagina, release USDA 2026-04-30; **attenzione**: esiste un secondo record "Spinach, baby" a FDC 1750352 nei risultati di ricerca — non usato, verificato che la pagina fetchata riporti proprio 1999632).
+- **Nutrienti**: **15/18**. Per 100g (valore di tabella): energia 21kcal, proteine 2,85g, grassi 0,62g, carboidrati 2,41g, fibra 1,56g, calcio 68,3mg, ferro 1,26mg, magnesio 92,9mg, zinco 0,45mg, rame 0,082mg, selenio 0µg esplicito, sodio 111mg, vitamina C 26,5mg, folato totale 117µg, beta-carotene 3400µg (reale, non nullo). **Mancano**: acido folico, vitamina B12, vitamina K (non presenti sulla pagina).
+- **Analogia usata**: `food_spinach_raw` (stessa specie *Spinacia oleracea*, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `spinaci_baby` ("Spinaci, foglia baby").
+- **Attributi**: `matrix-category-calcium=high_oxalate` (stesso precedente di `food_spinach_raw`, foglia ricca di oxalati), `carotenoid-matrix-state=raw_intact` (beta-carotene reale e non nullo, crudo), `botanical-family=Amaranthaceae` (stesso precedente di `food_spinach_raw`), `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=1999632 --food-id=food_spinaci_baby_raw \
+  --name-it="Spinaci, foglia baby, crudi" \
+  --matrix-id=spinaci_baby --matrix-description-it="Spinaci, foglia baby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=1999632 --food-id=food_spinaci_baby_raw \
+  --name-it="Spinaci, foglia baby, crudi" \
+  --matrix-id=spinaci_baby --matrix-description-it="Spinaci, foglia baby" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Olive verdi Manzanilla, farcite con pimiento — preparato 2026-11-23 dal task (203° lotto)
+
+- **food_id**: `food_olive_verdi_farcite_pimiento_raw` (distinto da `food_olive_verdi` già eseguito sul DB reale, FDC 169096 "Olives, pickled, canned or bottled, green" — qui prodotto diverso: farcito con peperone pimiento, cluster lasciato aperto dal 199° lotto per verifica individuale futura, ora verificato con WebFetch). FDC ID 332791 (**Foundation Foods**, "Olives, green, Manzanilla, stuffed with pimiento" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/18**. Per 100g (valore di tabella): energia 130kcal, proteine 1,15g, grassi 12,9g, carboidrati 4,96g, fibra 4,00g, calcio 121mg, ferro 0,31mg, magnesio 12,4mg, zinco 0,090mg, rame 0,11mg, sodio 1620mg, vitamina C 0mg esplicito, folato totale 0µg esplicito, vitamina K 16,6µg, beta-carotene 272µg (reale), alfa-carotene 2,00µg (reale), beta-criptoxantina 48,0µg (reale). **Mancano**: selenio, acido folico, vitamina B12.
+- **Analogia usata**: `food_olive_verdi` (stessa specie *Olea europaea*, già eseguito sul DB reale — qui cambia solo la farcitura con pimiento, non la base olive).
+- **Categoria dieta**: `plant_non_fruit` (prodotto vegetale in salamoia, nessun ingrediente animale; farcitura minima e standardizzata, non una ricetta composita variabile).
+- **Matrice**: nuova `olive_verdi_farcite` ("Olive verdi, farcite con pimiento").
+- **Attributi**: `carotenoid-matrix-state=cooked_or_disrupted` (stesso precedente di `food_olive_verdi`, in salamoia/pastorizzate, carotenoidi reali e non nulli), `botanical-family=Oleaceae` (stesso precedente di `food_olive_verdi`), `baseline-cooking-state=pickled`.
+
+```
+npm run add-food -- --fdc-id=332791 --food-id=food_olive_verdi_farcite_pimiento_raw \
+  --name-it="Olive verdi Manzanilla, farcite con pimiento" \
+  --matrix-id=olive_verdi_farcite --matrix-description-it="Olive verdi, farcite con pimiento" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_olive_verdi \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Oleaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=332791 --food-id=food_olive_verdi_farcite_pimiento_raw \
+  --name-it="Olive verdi Manzanilla, farcite con pimiento" \
+  --matrix-id=olive_verdi_farcite --matrix-description-it="Olive verdi, farcite con pimiento" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_olive_verdi \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Oleaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Farina di frumento tipo "00" (bianca), arricchita, cruda — preparato 2026-11-23 dal task (203° lotto)
+
+- **food_id**: `food_farina_frumento_00_arricchita_raw` (distinto da `food_farina_frumento_00_raw` già eseguito sul DB reale, FDC 169761 "Wheat flour, white, all-purpose, UNenriched" — qui versione ARRICCHITA, fortificazione obbligatoria USA con ferro/tiamina/riboflavina/niacina/acido folico, non la stessa riga). FDC ID 789951 (**Foundation Foods**, "Flour, wheat, all-purpose, enriched, unbleached" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g (valore di tabella): energia 358kcal, proteine 13,1g, grassi 1,48g, carboidrati 73,2g, calcio 21,0mg, ferro 5,41mg (coerente con fortificazione, vs ~1,2mg tipico non arricchito), magnesio 33,3mg, zinco 0,90mg, rame 0,17mg, selenio 14,2µg, sodio 4,00mg, folato totale 159µg (molto superiore al non arricchito ~30µg, coerente con fortificazione con acido folico). **Mancano**: fibra, vitamina C, acido folico (non scorporato separatamente sulla pagina pur con folato totale elevato), vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_farina_frumento_00_raw` (stesso prodotto base, già eseguito sul DB reale — qui cambia solo lo stato di arricchimento).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `farina_frumento_00_arricchita` ("Farina di frumento tipo 00, arricchita").
+- **Attributi**: `botanical-family=Poaceae` (stesso precedente dei cereali già eseguiti), `baseline-cooking-state=raw`, `is-fortified-folate` impostato (ferro e folato totale nettamente sopra il livello naturale del grano, coerenti con l'etichetta "enriched" e la fortificazione obbligatoria USA — non un valore indovinato, una conseguenza dichiarata della denominazione del prodotto stesso).
+
+```
+npm run add-food -- --fdc-id=789951 --food-id=food_farina_frumento_00_arricchita_raw \
+  --name-it="Farina di frumento tipo 00 (bianca), arricchita, cruda" \
+  --matrix-id=farina_frumento_00_arricchita --matrix-description-it="Farina di frumento tipo 00, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --is-fortified-folate \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=789951 --food-id=food_farina_frumento_00_arricchita_raw \
+  --name-it="Farina di frumento tipo 00 (bianca), arricchita, cruda" \
+  --matrix-id=farina_frumento_00_arricchita --matrix-description-it="Farina di frumento tipo 00, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --is-fortified-folate \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Yogurt bianco magro, naturale (non greco) — preparato 2026-11-23 dal task (203° lotto)
+
+- **food_id**: `food_yogurt_bianco_magro_raw` (distinto da `food_yogurt_greco` — tipo diverso, non colato/denso, già verificato per nome che non esiste doppione). FDC ID 2647437 (**Foundation Foods**, "Yogurt, plain, nonfat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/18** (soglia minima, stesso livello già accettato in questa pipeline per `food_formaggio_parmesan_grattugiato_raw` nel 196° lotto). Per 100g (valore di tabella): energia 50kcal, proteine 4,23g, grassi 0,087g, carboidrati 8,08g, calcio 167mg, ferro 0mg esplicito, magnesio 15,2mg, zinco 0,60mg, rame 0mg esplicito, sodio 51,5mg. **Mancano**: fibra (dato incoerente in pagina, non riportato nella tabella dei nutrienti), selenio, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_latte_scremato_raw` (latte scremato, già eseguito sul DB reale — stessa categoria "latticino magro", stessa analogia già usata per besciamella/latticello magro in questa pipeline).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `yogurt_bianco_magro` ("Yogurt bianco magro, naturale").
+- **Attributi**: nessun flag categorico aggiuntivo oltre a `baseline-cooking-state=raw` (latticino, famiglia botanica non applicabile).
+
+```
+npm run add-food -- --fdc-id=2647437 --food-id=food_yogurt_bianco_magro_raw \
+  --name-it="Yogurt bianco magro, naturale" \
+  --matrix-id=yogurt_bianco_magro --matrix-description-it="Yogurt bianco magro, naturale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647437 --food-id=food_yogurt_bianco_magro_raw \
+  --name-it="Yogurt bianco magro, naturale" \
+  --matrix-id=yogurt_bianco_magro --matrix-description-it="Yogurt bianco magro, naturale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Estratto di vaniglia, imitazione (senza alcool) — preparato 2026-11-23 dal task (203° lotto)
+
+- **food_id**: `food_estratto_di_vaniglia_imitazione_no_alcol` (distinto da `food_estratto_di_vaniglia_imitazione` già "pronto" dal 201° lotto, FDC 172235 "Vanilla extract, imitation, ALCOHOL" — qui la variante SENZA alcool, FDC diverso, cluster lasciato aperto dal 199°/202° lotto e ora distinto esplicitamente). FDC ID 172236 (**SR Legacy**, "Vanilla extract, imitation, no alcohol", Spices and Herbs — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo** (molti espliciti a zero, non assunti — valori di tabella, non la label arrotondata). Per 100g: energia 56,0kcal, proteine 0,030g, grassi 0g, carboidrati 14,4g, fibra 0g, calcio 3,00mg, ferro 0,050mg, magnesio 1,00mg, zinco 0,010mg, rame 0,0030mg, selenio 0µg, sodio 3,00mg, vitamina C 0mg, folato totale 0µg, acido folico 0µg, vitamina B12 0µg, vitamina K 0µg, beta-carotene/alfa-carotene/beta-criptoxantina 0µg. Profilo quasi nullo per design (acqua + aromi sintetici, senza alcool etilico, "imitation" = nessuna vaniglia vera).
+- **Analogia usata**: `food_aceto_di_mele` (stessa analogia già usata per la variante con alcool, condimento/aroma liquido vegetale già nel DB).
+- **Categoria dieta**: `plant_non_fruit` (aroma sintetico, nessun ingrediente animale).
+- **Matrice**: nuova `estratto_vaniglia_imitazione_no_alcol` ("Estratto di vaniglia, imitazione, senza alcool").
+- **Attributi**: nessun flag categorico aggiuntivo (`botanical_family` omesso, stesso motivo già scritto per la variante con alcool).
+
+```
+npm run add-food -- --fdc-id=172236 --food-id=food_estratto_di_vaniglia_imitazione_no_alcol \
+  --name-it="Estratto di vaniglia, imitazione (senza alcool)" \
+  --matrix-id=estratto_vaniglia_imitazione_no_alcol --matrix-description-it="Estratto di vaniglia, imitazione, senza alcool" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aceto_di_mele \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172236 --food-id=food_estratto_di_vaniglia_imitazione_no_alcol \
+  --name-it="Estratto di vaniglia, imitazione (senza alcool)" \
+  --matrix-id=estratto_vaniglia_imitazione_no_alcol --matrix-description-it="Estratto di vaniglia, imitazione, senza alcool" \
+  --baseline-cooking-state=raw --analogy-food-id=food_aceto_di_mele \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Semi di girasole, crudi — preparato 2026-11-23 dal task (202° lotto)
 
 - **food_id**: `food_semi_di_girasole_raw` (distinto da `food_semi_di_girasole_tostati`, FDC 170563, SR Legacy, già eseguito sul DB reale, e da "tostati, salati" del 194° lotto — qui lo stato crudo, non ancora tostato, mancante nella pipeline). FDC ID 2515381 (**Foundation Foods**, "Seeds, sunflower seed, kernel, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
