@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli neri, in scatola, sgocciolati e risciacquati — preparato 2026-11-23 dal task (204° lotto)
+
+- **food_id**: `food_fagioli_neri_scatolati` (distinto da `food_fagioli_neri_cotti` già eseguito — stesso legume ma processo di conservazione diverso, sodio aggiunto in lavorazione). FDC ID 2644285 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato in pagina; piccola discrepanza energia 120kcal tabella vs 115kcal box comparativo, usato il valore di tabella nutrienti).
+- **Nutrienti**: **10/18** (soglia minima, stesso livello già accettato per yogurt bianco magro/queso fresco in lotti precedenti). Per 100g: energia 120kcal, proteine 6,91g, grassi 1,27g, carboidrati 19,8g, calcio 43,3mg, ferro 1,69mg, magnesio 32,5mg, zinco 0,74mg, rame 0,34mg, sodio 218mg. **Mancano**: fibra (ambigua/non dichiarata), selenio, vitamina C, folato, acido folico, vitamina B12, vitamina K.
+- **Analogia usata**: `food_fagioli_neri_cotti` (stesso legume, forma pronta al consumo, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_neri_scatolati` ("Fagioli neri, in scatola").
+- **Attributi**: `baseline-cooking-state=boiled` (stessa convenzione dei fagioli cotti), `botanical-family=Fabaceae`.
+
+```
+npm run add-food -- --fdc-id=2644285 --food-id=food_fagioli_neri_scatolati \
+  --name-it="Fagioli neri, in scatola, sgocciolati e risciacquati" \
+  --matrix-id=fagioli_neri_scatolati --matrix-description-it="Fagioli neri, in scatola" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_neri_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2644285 --food-id=food_fagioli_neri_scatolati \
+  --name-it="Fagioli neri, in scatola, sgocciolati e risciacquati" \
+  --matrix-id=fagioli_neri_scatolati --matrix-description-it="Fagioli neri, in scatola" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_neri_cotti \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Spinaci, foglia baby, crudi — preparato 2026-11-23 dal task (203° lotto)
 
 - **food_id**: `food_spinaci_baby_raw` (distinto da `food_spinach_raw` già eseguito sul DB reale — stessa specie, stadio di raccolta "baby leaf" diverso, stesso precedente già accettato in questa pipeline per rucola baby/matura e cavolo cinese baby/maturo). FDC ID 1999632 (**Foundation Foods**, "Spinach, baby" — pagina getfoodfacts.com dedicata e pulita, FDC ID confermato esplicitamente in pagina, release USDA 2026-04-30; **attenzione**: esiste un secondo record "Spinach, baby" a FDC 1750352 nei risultati di ricerca — non usato, verificato che la pagina fetchata riporti proprio 1999632).
