@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Hominy (mais trattato con calce), in scatola, bianco — preparato 2026-11-23 dal task (206° lotto)
+
+- **food_id**: `food_hominy_bianco_in_scatola` (mai coperto, verificato con `grep` dedicato — distinto da `food_masa_harina_raw` (stesso trattamento alcalino/nixtamalizzazione ma prodotto finito diverso: qui chicco intero in scatola, non farina macinata) e da `food_farina_di_mais_raw` (mais semplice non trattato)). FDC ID 169701 (**SR Legacy**, "Hominy, canned, white" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 72,0kcal, proteine 1,48g, grassi 0,88g, carboidrati 14,3g, fibra 2,50g, calcio 10,0mg, ferro 0,62mg, magnesio 16,0mg, zinco 1,05mg, rame 0,030mg, selenio 3,00µg, sodio 267mg, folato totale 1,00µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 0,30mg, vitamina A (RAE) 0µg (dichiarato, beta-carotene 0µg dichiarato), vitamina D 0µg (dichiarato), vitamina K 0,20µg.
+- **Analogia usata**: `food_masa_harina_raw` (stesso trattamento alcalino/nixtamalizzazione del mais, già preparata nel 199° lotto odierno — stessa specie *Zea mays*, stessa famiglia Poaceae, qui chicco intero invece di farina).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `hominy_bianco` ("Hominy, mais trattato con calce, bianco").
+- **Attributi**: `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, già trattato/cotto).
+
+```
+npm run add-food -- --fdc-id=169701 --food-id=food_hominy_bianco_in_scatola \
+  --name-it="Hominy (mais trattato con calce), in scatola, bianco" \
+  --matrix-id=hominy_bianco --matrix-description-it="Hominy, mais trattato con calce, bianco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169701 --food-id=food_hominy_bianco_in_scatola \
+  --name-it="Hominy (mais trattato con calce), in scatola, bianco" \
+  --matrix-id=hominy_bianco --matrix-description-it="Hominy, mais trattato con calce, bianco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Ippoglosso della Groenlandia, crudo — preparato 2026-11-23 dal task (206° lotto)
 
 - **food_id**: `food_halibut_groenlandia_raw` (mai coperto, verificato con `grep` dedicato — distinto da `food_halibut_raw` FDC 174200 "Atlantic and Pacific" già eseguito: specie diversa, *Reinhardtius hippoglossoides* contro *Hippoglossus* spp.). FDC ID 171965 (**SR Legacy**, "Fish, halibut, Greenland, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota: il 195° lotto aveva scartato la forma COTTA di questa specie per assenza di pagina getfoodfacts dedicata — questa è la forma CRUDA, record distinto, con fonte pulita trovata.
