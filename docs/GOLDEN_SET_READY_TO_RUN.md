@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagne cinesi, bollite e cotte a vapore — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_castagne_cinesi_bollite` (mai coperto, verificato con `grep` dedicato — distinta da `food_castagne_raw` già eseguita: specie diversa, *Castanea mollissima* (cinese) invece di *Castanea sativa* (europea), e stato cotto invece che crudo). FDC ID 170166 (**SR Legacy**, "Nuts, chestnuts, chinese, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g: energia 153kcal, proteine 2,88g, grassi 0,76g, carboidrati 33,6g, calcio 12,0mg, ferro 0,97mg, magnesio 58,0mg, zinco 0,60mg, rame 0,25mg, folato totale 46,0µg, vitamina B12 0µg (dichiarato), vitamina C 24,7mg. **Mancano**: fibra (dato interno alla pagina incoerente, trattato come assente per trasparenza), selenio, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_castagne_raw` (castagne europee crude, già eseguite sul DB reale — stesso genere *Castanea*, stessa famiglia Fagaceae, qui specie cinese e stato bollito/cotto a vapore invece che crudo).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca, come l'analogia).
+- **Matrice**: nuova `castagne_cinesi_bollite` ("Castagne cinesi, bollite").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, come l'analogia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fagaceae` (come l'analogia), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — folato 46µg coerente con un frutto a guscio naturale, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=170166 --food-id=food_castagne_cinesi_bollite \
+  --name-it="Castagne cinesi, bollite e cotte a vapore" \
+  --matrix-id=castagne_cinesi_bollite --matrix-description-it="Castagne cinesi, bollite" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170166 --food-id=food_castagne_cinesi_bollite \
+  --name-it="Castagne cinesi, bollite e cotte a vapore" \
+  --matrix-id=castagne_cinesi_bollite --matrix-description-it="Castagne cinesi, bollite" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Farina di mais nixtamalizzato (masa harina), cruda — preparato 2026-11-23 dal task (199° lotto)
 
 - **food_id**: `food_masa_harina_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_farina_di_mais_raw` già eseguita: prodotto nixtamalizzato, non farina di mais semplice, profilo calcio/niacina diverso per il trattamento alcalino). FDC ID 2710835 (**Foundation**, "Corn flour, masa harina, white or yellow, dry, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
