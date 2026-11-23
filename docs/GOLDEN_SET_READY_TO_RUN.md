@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio cotija (messicano, stagionato, grattugiabile) — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_formaggio_cotija`. FDC ID 2647443 (**Foundation Foods**, "Cheese, cotija, solid", Dairy and Egg Products — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **9/18**. Per 100g: energia 352kcal, proteine 23,8g, grassi 27,2g, carboidrati 2,72g, calcio 700mg, ferro 0mg esplicito, magnesio 29,9mg, zinco 3,60mg, rame 0mg esplicito. **Mancano**: fibra (non dichiarata), selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio semi-duro già nel DB, verificato creato — evitato `food_parmigiano_reggiano`, usato come analogia in molti lotti storici ma mai trovato come `--food-id=` creato, quindi non verificabile da questa sessione).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_cotija` ("Formaggio cotija").
+- **Attributi**: nessun flag categorico aggiuntivo (coerente con gli altri formaggi già nel DB: no heme iron, no botanical family, no calcium category).
+
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija \
+  --name-it="Formaggio cotija (messicano, stagionato)" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija \
+  --name-it="Formaggio cotija (messicano, stagionato)" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Petto di pollo, disossato, senza pelle, crudo — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_petto_di_pollo_raw` (gap importante: nessun petto/coscia di pollo crudo in forma di carne muscolare esisteva ancora nel DB, solo organi — cuore, fegato, ventriglio — e coscia già cotta). FDC ID 2646170 (**Foundation Foods**, "Chicken, breast, boneless, skinless, raw", Poultry Products — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
