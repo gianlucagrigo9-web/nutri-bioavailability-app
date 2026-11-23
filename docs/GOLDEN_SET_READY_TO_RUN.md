@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Petto di pollo, disossato, senza pelle, crudo — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_petto_di_pollo_raw` (gap importante: nessun petto/coscia di pollo crudo in forma di carne muscolare esisteva ancora nel DB, solo organi — cuore, fegato, ventriglio — e coscia già cotta). FDC ID 2646170 (**Foundation Foods**, "Chicken, breast, boneless, skinless, raw", Poultry Products — pagina getfoodfacts.com dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **9/18**. Per 100g (valore "per 100g" della pagina, non la label arrotondata): energia 112kcal, proteine 22,5g, grassi 1,93g, carboidrati 0g, calcio 3,94mg, ferro 0,35mg, magnesio 26,2mg, zinco 0,65mg, rame 0,0036mg. **Mancano**: fibra (non dichiarata, atteso per carne — non assunta 0), selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_cuore_di_pollo_raw` (stessa specie, crudo — unico pollo-muscolo crudo verificato esistente nel DB; `food_petto_di_tacchino_raw` compare come analogia in lotti storici ma NON risulta mai creato con `--food-id=`, quindi non verificabile — evitato).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `petto_di_pollo` ("Petto di pollo").
+- **Attributi**: `is_heme_iron` (per analogia con altri alimenti di carne/pollo già nel DB), `botanical_family`/`matrix_category_calcium`/`carotenoid_matrix_state` omessi (non applicabili a carne).
+
+```
+npm run add-food -- --fdc-id=2646170 --food-id=food_petto_di_pollo_raw \
+  --name-it="Petto di pollo, disossato, senza pelle, crudo" \
+  --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuore_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2646170 --food-id=food_petto_di_pollo_raw \
+  --name-it="Petto di pollo, disossato, senza pelle, crudo" \
+  --matrix-id=petto_di_pollo --matrix-description-it="Petto di pollo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuore_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Mango, cultivar Tommy Atkins, pelato, crudo — preparato 2026-11-23 dal task (200° lotto)
 
 - **food_id**: `food_mango_tommy_atkins_raw` (mai coperto, verificato con `grep` dedicato — distinto dal mango generico `food_mango_raw` già eseguito, FDC 169910: Tommy Atkins è il cultivar da esportazione commerciale dominante negli USA, con profilo misurabile diverso). FDC ID 2710833 (**Foundation Foods**, "Mango, Tommy Atkins, peeled, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
