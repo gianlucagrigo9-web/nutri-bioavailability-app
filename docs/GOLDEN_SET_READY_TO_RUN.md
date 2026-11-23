@@ -16,116 +16,25 @@
 
 ## Pronti
 
-### Bisonte, macinato, crudo (generico, non grass-fed) — preparato 2026-11-23 dal task (212° lotto)
+### Renna (caribù), quarto posteriore, crudo (Alaska Native) — preparato 2026-11-23 dal task (208° lotto)
 
-- **food_id**: `food_bisonte_macinato_raw` (verificato non coperto: distinto da `food_bisonte_macinato_grassfed_raw`, FDC 175293 SR Legacy, già in "Pronti" ma non ancora eseguito — qui invece un record **Foundation** nuovo e generico, senza qualificatore "grass-fed"). FDC ID 2727571 (**Foundation**, "Bison, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
-- **Nutrienti**: **10/18**. Per 100g: energia 160kcal (pannello; stat box 164, uso pannello), proteine 19,9g, grassi 8,88g, carboidrati 0g (pannello; la tabella dettagliata riporta un valore negativo anomalo −0,15g, non usato), calcio 6,83mg, ferro 2,17mg, magnesio 18,5mg, zinco 3,76mg, rame 0,078mg, sodio 55,7mg — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A (RAE), vitamina D, vitamina K.
-- **Analogia usata**: `food_bisonte_raw` (stessa specie *Bison bison*, già nel DB reale).
-- **Categoria dieta**: `meat_fish` (carne di bisonte).
-- **Attributi**: `is-heme-iron` (carne rossa).
-
-```
-npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
-  --name-it="Bisonte, macinato, crudo" \
-  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
-  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
-  --is-heme-iron --diet-category=meat_fish
-```
-```
-npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
-  --name-it="Bisonte, macinato, crudo" \
-  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
-  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
-  --is-heme-iron --diet-category=meat_fish --apply
-```
-
-### Applesauce, non zuccherata, con vitamina C aggiunta — preparato 2026-11-23 dal task (211° lotto)
-
-- **food_id**: `food_applesauce_unsweetened` (mai coperto, verificato con `grep` dedicato). FDC ID 2346414 (**Foundation**, "Applesauce, unsweetened, with added vitamin C" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
-- **Nutrienti**: **11/18**. Per 100g: energia 45kcal (pannello; divergenze minori 46/46,4 su altre sezioni, uso pannello), proteine 0,27g, grassi 0,16g, carboidrati 12,3g, calcio 3,82mg, ferro 0,045mg, magnesio 3,94mg, zinco 0,0026mg, rame 0,039mg, sodio 0,50mg, vitamina C 43,7mg — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K.
-- **Analogia usata**: `food_mela_secca_raw` (stesso frutto/famiglia botanica, già classificato come mela trasformata non-fresca).
-- **Categoria dieta**: `plant_non_fruit` (frutta cotta/trasformata in purea, non "frutta fresca" nella definizione restrittiva PRD §4.9 — stesso trattamento della mela secca già nel DB).
-- **Attributi**: `botanical_family=Rosaceae`, `baseline-cooking-state=cooked` (salsa di mele, prodotto cotto).
-
-```
-npm run add-food -- --fdc-id=2346414 --food-id=food_applesauce_unsweetened \
-  --name-it="Applesauce, non zuccherata, con vitamina C aggiunta" \
-  --matrix-id=applesauce_unsweetened --matrix-description-it="Applesauce, non zuccherata" \
-  --baseline-cooking-state=cooked --analogy-food-id=food_mela_secca_raw \
-  --botanical-family=Rosaceae --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=2346414 --food-id=food_applesauce_unsweetened \
-  --name-it="Applesauce, non zuccherata, con vitamina C aggiunta" \
-  --matrix-id=applesauce_unsweetened --matrix-description-it="Applesauce, non zuccherata" \
-  --baseline-cooking-state=cooked --analogy-food-id=food_mela_secca_raw \
-  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
-```
-
-### Formaggio cotija, solido — preparato 2026-11-23 dal task (210° lotto)
-
-- **food_id**: `food_formaggio_cotija_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 2647443 (**Foundation**, "Cheese, cotija, solid" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
-- **Nutrienti**: **11/18**. Per 100g: energia 350kcal (pannello; stat box divergente a 352, uso pannello), proteine 24g, grassi 27g, carboidrati 3g, calcio 700mg, ferro 0mg (dichiarato), magnesio 29,9mg, zinco 3,60mg, rame 0mg (dichiarato), sodio 1630mg, vitamina D 0µg (dichiarato) — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A RAE (pagina riporta solo "Retinol 167µg", non RAE, non usato per non rischiare un'unità sbagliata), vitamina K.
-- **Analogia usata**: `food_parmigiano_reggiano` (stesso precedente già applicato a formaggi semi-duri/stagionati non italiani — svizzero, cheddar, gruyère).
-- **Categoria dieta**: `egg_dairy` (formaggio).
-
-```
-npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija_raw \
-  --name-it="Formaggio cotija, solido" \
-  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
-  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija_raw \
-  --name-it="Formaggio cotija, solido" \
-  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
-  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
-  --diet-category=egg_dairy --apply
-```
-
-### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (209° lotto)
-
-- **food_id**: `food_beef_chuck_roast_raw` (mai coperto, verificato con `grep` dedicato; `food_beef_raw` esiste già ed è nella lista ID riservati — non riusato). FDC ID 2646174 (**Foundation**, "Beef, chuck, roast, boneless, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
-- **Nutrienti**: **10/18**. Per 100g: energia 240kcal (pannello Nutrition Facts; stat box riporta 237 — divergenza minore, uso il pannello), proteine 18,4g, grassi 17,8g, carboidrati 0g, calcio 4,58mg, ferro 2,06mg, magnesio 17,0mg, zinco 5,39mg, rame 0,054mg, sodio 48,4mg — **mancano**: fibra (pagina contraddittoria fra pannello "non dichiarata" e stat box "0g", non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A (RAE), vitamina D, vitamina K (nessuno riportato in pagina, non assunti zero).
-- **Analogia usata**: `food_beef_raw` (stesso animale, stesso stato crudo, già presente nel DB reale — solo taglio diverso).
-- **Categoria dieta**: `meat_fish` (carne bovina).
-- **Attributi**: `is-heme-iron` (carne rossa).
-
-```
-npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
-  --name-it="Manzo, chuck roast, senza osso, choice, crudo" \
-  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
-  --baseline-cooking-state=raw --analogy-food-id=food_beef_raw \
-  --is-heme-iron --diet-category=meat_fish
-```
-```
-npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
-  --name-it="Manzo, chuck roast, senza osso, choice, crudo" \
-  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
-  --baseline-cooking-state=raw --analogy-food-id=food_beef_raw \
-  --is-heme-iron --diet-category=meat_fish --apply
-```
-
-### Caribou, quarto posteriore, crudo (Alaska Native) — preparato 2026-11-23 dal task (208° lotto)
-
-- **food_id**: `food_caribou_hind_quarter_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 168050 (**SR Legacy**, "Caribou, hind quarter meat, raw (Alaska Native)", NDB 35162). Pagina recipal.com non mostra il numero FDC ma riporta "NBD ID: 35162", che coincide esattamente con l'`ndb_number` della riga USDA_CHECKLIST.csv per questo FDC ID — identificazione incrociata solida anche senza il numero FDC in chiaro.
+- **food_id**: `food_renna_quarto_posteriore_raw` (controparte cruda di `food_renna_quarto_posteriore_cotto`, FDC 169822, già "pronto" — rinominato da `food_caribou_hind_quarter_raw` per coerenza con la convenzione `food_renna_*` già in uso in questo progetto per *Rangifer tarandus*, mai coperto, verificato con `grep` dedicato). FDC ID 168050 (**SR Legacy**, "Caribou, hind quarter meat, raw (Alaska Native)", NDB 35162). **Nota di trasparenza**: questo FDC fa parte del cluster "Alaska Native a provenienza debole" segnalato e deliberatamente non riaperto da più turni di oggi (199°, 203° lotto) — qui invece verificato individualmente con esito positivo: la pagina recipal.com non mostra il numero FDC in chiaro ma riporta "NBD ID: 35162", che coincide esattamente con l'`ndb_number` della riga USDA_CHECKLIST.csv per questo FDC ID — identificazione incrociata solida anche senza il numero FDC in chiaro.
 - **Nutrienti**: **15/18** (circa, schema a 18-19 voci). Per 100g: energia 122kcal, proteine 22,63g, grassi 3,37g, carboidrati 0g, fibra 0g, calcio 10mg, ferro 4,1mg, magnesio 25mg, zinco 2,1mg, rame 0,3mg, sodio 52mg, selenio 13µg, vitamina B12 7,1µg, vitamina C 0mg (dichiarato), vitamina K 1µg — **mancano/ambigui**: folato totale (pagina riporta solo "5µg DFE", non un totale netto, non usato), acido folico (assente), vitamina A (pagina riporta "90µg" senza qualificatore RAE, non usato per non rischiare un'unità sbagliata), vitamina D (riga presente ma valore "-", non assunta zero).
 - **Analogia usata**: `food_beef_ground_raw` (stesso precedente già applicato ad altre carni di selvaggina/rosse crude non bovine — vitello, agnello, coniglio — nei lotti eseguiti).
 - **Categoria dieta**: `meat_fish` (carne di selvaggina).
 - **Attributi**: `is-heme-iron` (carne rossa).
 
 ```
-npm run add-food -- --fdc-id=168050 --food-id=food_caribou_hind_quarter_raw \
-  --name-it="Caribou, quarto posteriore, crudo (Alaska Native)" \
-  --matrix-id=caribou_hind_quarter --matrix-description-it="Caribou, quarto posteriore" \
+npm run add-food -- --fdc-id=168050 --food-id=food_renna_quarto_posteriore_raw \
+  --name-it="Renna (caribù), quarto posteriore, crudo (Alaska Native)" \
+  --matrix-id=renna_quarto_posteriore_raw --matrix-description-it="Renna, quarto posteriore" \
   --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
   --is-heme-iron --diet-category=meat_fish
 ```
 ```
-npm run add-food -- --fdc-id=168050 --food-id=food_caribou_hind_quarter_raw \
-  --name-it="Caribou, quarto posteriore, crudo (Alaska Native)" \
-  --matrix-id=caribou_hind_quarter --matrix-description-it="Caribou, quarto posteriore" \
+npm run add-food -- --fdc-id=168050 --food-id=food_renna_quarto_posteriore_raw \
+  --name-it="Renna (caribù), quarto posteriore, crudo (Alaska Native)" \
+  --matrix-id=renna_quarto_posteriore_raw --matrix-description-it="Renna, quarto posteriore" \
   --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
   --is-heme-iron --diet-category=meat_fish --apply
 ```
