@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Fagioli great northern, in scatola, con sale aggiunto, scolati e sciacquati — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_fagioli_great_northern_in_scatola` (verificato non coperto per FDC né per nome — distinto da `food_fagioli_great_northern_raw` FDC 175190, secco, già eseguito; stessa convenzione secco/in scatola già usata per neri e cannellini). FDC ID 2644294 (**Foundation**, "Beans, great northern, canned, sodium added, drained and rinsed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/18** (soglia minima, come già accettato per `food_queso_fresco` nel 202° lotto). Per 100g (uso i valori della tabella dettagliata, più precisi del pannello arrotondato): energia ~110kcal (pannello; box riferimento 114, divergenza minore, uso il pannello), proteine 7,03g, grassi 1,27g, carboidrati 19,3g, calcio 67,2mg, ferro 1,38mg, magnesio 29,3mg, zinco 0,63mg, rame 0,26mg, sodio 223mg — **mancano**: fibra (pagina contraddittoria: "not declared" vs "0g", non usata), selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K. Sodio 223mg/100g coerente col nome "sodium added" (fagioli in scatola standard, non "no salt added").
+- **Analogia usata**: `food_fagioli_great_northern_raw` (stessa cultivar, secco, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume in scatola, nessun ingrediente animale nel nome/categoria USDA).
+- **Attributi**: nessuno specifico oltre ai default (nessuna analogia convincente per matrix_category_calcium/carotenoid_matrix_state su un legume in scatola, omessi per trasparenza).
+
+```
+npm run add-food -- --fdc-id=2644294 --food-id=food_fagioli_great_northern_in_scatola \
+  --name-it="Fagioli great northern, in scatola, con sale aggiunto, scolati e sciacquati" \
+  --matrix-id=fagioli_great_northern_in_scatola --matrix-description-it="Fagioli great northern, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_great_northern_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2644294 --food-id=food_fagioli_great_northern_in_scatola \
+  --name-it="Fagioli great northern, in scatola, con sale aggiunto, scolati e sciacquati" \
+  --matrix-id=fagioli_great_northern_in_scatola --matrix-description-it="Fagioli great northern, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_great_northern_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne cinesi, tostate — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_castagne_cinesi_tostate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_cinesi_raw` FDC 170164 e `food_castagne_cinesi_bollite` FDC 170166, già eseguiti). FDC ID 170573 (**SR Legacy**, "Nuts, chestnuts, chinese, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dal cluster "varianti tostatura castagne/mandorle/anacardi" lasciato aperto senza verifica individuale dal centonovantanovesimo lotto — qui riaperto e verificato singolarmente come richiesto.
