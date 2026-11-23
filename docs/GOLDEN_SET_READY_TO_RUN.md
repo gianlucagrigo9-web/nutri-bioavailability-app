@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (204° lotto)
+
+- **food_id**: `food_beef_chuck_roast_raw`. FDC ID 2646174 (**Foundation Foods**, pagina getfoodfacts.com dedicata, FDC confermato esplicitamente in pagina).
+- **Nutrienti**: **10/18** (ambiguo su fibra: la pagina mostra sia "0g" in un box statistico sia "not declared" nell'etichetta — non contata come presente). Per 100g: energia 237kcal (etichetta riporta 240, discrepanza minore non risolvibile da qui), proteine 18,4g, grassi 17,8g, carboidrati 0g, calcio 4,58mg, ferro 2,06mg, magnesio 17,0mg, zinco 5,39mg, rame 0,054mg, sodio 48,4mg. **Mancano**: fibra (ambigua), selenio, vitamina C, folato, acido folico, vitamina B12, vitamina K.
+- **Analogia usata**: `food_beef_ground_raw` (stessa specie, carne bovina cruda; stesso precedente già usato per vitello/agnello/coniglio in questa pipeline → `is_heme_iron=true`, calcio/carotenoidi/zinco-bucket/botanical_family=NULL).
+- **Categoria dieta**: `meat_fish` (carne bovina).
+- **Matrice**: nuova `beef_chuck_roast` ("Manzo, chuck roast").
+- **Attributi**: `is-heme-iron` (flag), nessun matrix-category-calcium/carotenoid-matrix-state/zinc-bioaccessibility-bucket/botanical-family (NULL per analogia con carne).
+
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
+  --name-it="Manzo, chuck roast, disossato, choice, crudo" \
+  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_beef_chuck_roast_raw \
+  --name-it="Manzo, chuck roast, disossato, choice, crudo" \
+  --matrix-id=beef_chuck_roast --matrix-description-it="Manzo, chuck roast" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Spinaci, foglia baby, crudi — preparato 2026-11-23 dal task (203° lotto)
 
 - **food_id**: `food_spinaci_baby_raw` (distinto da `food_spinach_raw` già eseguito sul DB reale — stessa specie, stadio di raccolta "baby leaf" diverso, stesso precedente già accettato in questa pipeline per rucola baby/matura e cavolo cinese baby/maturo). FDC ID 1999632 (**Foundation Foods**, "Spinach, baby" — pagina getfoodfacts.com dedicata e pulita, FDC ID confermato esplicitamente in pagina, release USDA 2026-04-30; **attenzione**: esiste un secondo record "Spinach, baby" a FDC 1750352 nei risultati di ricerca — non usato, verificato che la pagina fetchata riporti proprio 1999632).
