@@ -16,6 +16,76 @@
 
 ## Pronti
 
+### Uovo intero, Grado A, grande, crudo — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_uovo_intero_grado_a_raw` (mai coperto, verificato con grep dedicato — distinto da `food_egg_raw` FDC 173423 SR Legacy già eseguito, `food_egg_white_raw`/`food_egg_yolk_raw` già eseguiti). FDC ID 748967 (**Foundation**, "Eggs, Grade A, Large, egg whole" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 148kcal, proteine 12,4g, grassi 9,96g, carboidrati 0,96g, fibra 0g (esplicito), calcio 48,0mg, ferro 1,67mg, magnesio 11,4mg, zinco 1,24mg, rame 0mg (esplicito), selenio 31,1µg, vitamina B12 1,02µg, beta-carotene 0µg (esplicito), alfa-carotene 0µg (esplicito), beta-criptoxantina 13,0µg, folato totale 71,0µg. **Mancano del tutto**: vitamina C, vitamina K (coerente con l'alimento, non un limite della ricerca).
+- **Analogia usata**: `food_egg_raw` (uovo intero crudo generico, Golden Set originale, già eseguito sul DB reale — stessa specie/prodotto, solo dataset USDA diverso: Foundation più recente vs SR Legacy).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `uovo_intero_grado_a` ("Uovo intero, Grado A, grande").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (non pertinente/NULL, come l'analogia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessun segnale di arricchimento).
+
+```
+npm run add-food -- --fdc-id=748967 --food-id=food_uovo_intero_grado_a_raw \
+  --name-it="Uovo intero, Grado A, grande, crudo" \
+  --matrix-id=uovo_intero_grado_a --matrix-description-it="Uovo intero, Grado A, grande" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=748967 --food-id=food_uovo_intero_grado_a_raw \
+  --name-it="Uovo intero, Grado A, grande, crudo" \
+  --matrix-id=uovo_intero_grado_a --matrix-description-it="Uovo intero, Grado A, grande" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_raw --diet-category=egg_dairy --apply
+```
+
+### Peperone banana/cera ungherese, crudo (senza semi) — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_pepperone_banana_raw` (mai coperto, verificato con grep dedicato — distinto da `food_pepper_green_raw`/`food_pepper_red_raw`/`food_pepper_yellow_raw` già eseguiti, varietà diversa *Capsicum annuum* "banana/Hungarian wax"). FDC ID 2747660 (**Foundation**, "Peppers, banana or Hungarian wax, seeded, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **12/17**. Per 100g: energia 23,9kcal, proteine 0,72g, grassi 0,13g, carboidrati 4,97g, fibra 1,79g, calcio 9,82mg, ferro 0,16mg, magnesio 10,2mg, zinco 0,13mg, rame 0,061mg, vitamina C 112mg, folato totale 31,8µg. **Mancano del tutto**: selenio, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K (record Foundation senza pannello carotenoidi/B12/K completo, non un limite della ricerca).
+- **Analogia usata**: `food_pepper_yellow_raw` (peperone generico crudo, Golden Set, già eseguito sul DB reale — stessa specie *Capsicum annuum*, colore/varietà diversa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio-frutto, non frutta fresca per definizione PRD §4.9).
+- **Matrice**: nuova `peperone_banana` ("Peperone banana/cera ungherese").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (crudo, coerente con gli altri peperoni), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2747660 --food-id=food_pepperone_banana_raw \
+  --name-it="Peperone banana/cera ungherese, crudo (senza semi)" \
+  --matrix-id=peperone_banana --matrix-description-it="Peperone banana/cera ungherese" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_yellow_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2747660 --food-id=food_pepperone_banana_raw \
+  --name-it="Peperone banana/cera ungherese, crudo (senza semi)" \
+  --matrix-id=peperone_banana --matrix-description-it="Peperone banana/cera ungherese" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_yellow_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Kiwi verde, pelato, crudo — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_kiwi_verde_pelato_raw` (mai coperto, verificato con grep dedicato — distinto da `food_kiwi_green_raw` FDC 168153 SR Legacy già eseguito, specie uguale *Actinidia deliciosa* ma record diverso: Foundation più recente, descrizione esplicitamente "peeled"). FDC ID 2710831 (**Foundation**, "Kiwifruit (kiwi), green, peeled, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **12/17**. Per 100g: energia 58kcal (coerente fra pannello e tabella comparativa, 58 vs 58,5, arrotondamento minore non bloccante), proteine 1,01g, grassi 0,64g, carboidrati 13,8g, fibra 2,13g, calcio 24,4mg, ferro 0,037mg, magnesio 14,8mg, zinco 0,45mg, rame 0,13mg, vitamina C 58,8mg, folato totale 32,9µg. **Mancano del tutto**: selenio, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_kiwi_green_raw` (kiwi verde, Golden Set originale, stessa specie, già eseguito sul DB reale — stesso genere e specie, solo dataset/preparazione "pelato" diversa).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca).
+- **Matrice**: nuova `kiwi_verde_pelato` ("Kiwi verde, pelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Actinidiaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2710831 --food-id=food_kiwi_verde_pelato_raw \
+  --name-it="Kiwi verde, pelato, crudo" \
+  --matrix-id=kiwi_verde_pelato --matrix-description-it="Kiwi verde, pelato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=2710831 --food-id=food_kiwi_verde_pelato_raw \
+  --name-it="Kiwi verde, pelato, crudo" \
+  --matrix-id=kiwi_verde_pelato --matrix-description-it="Kiwi verde, pelato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kiwi_green_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Actinidiaceae --diet-category=fresh_fruit --apply
+```
+
 ### Cipolla gialla, cruda — preparato 2026-11-23 dal task (198° lotto)
 
 - **food_id**: `food_cipolla_gialla_raw` (mai coperto, verificato con grep dedicato — distinta da `food_onion_raw` generica, `food_cipolla_bianca_raw` FDC 1104962, `food_cipolla_dolce_raw` FDC 170008, `food_cipolla_rossa_raw`). FDC ID 790646 (**Foundation**, "Onions, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
