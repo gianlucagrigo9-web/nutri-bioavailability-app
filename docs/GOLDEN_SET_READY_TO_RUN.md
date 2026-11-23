@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Castagne cinesi, tostate — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_castagne_cinesi_tostate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_cinesi_raw` FDC 170164 e `food_castagne_cinesi_bollite` FDC 170166, già eseguiti). FDC ID 170573 (**SR Legacy**, "Nuts, chestnuts, chinese, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Candidato dal cluster "varianti tostatura castagne/mandorle/anacardi" lasciato aperto senza verifica individuale dal centonovantanovesimo lotto — qui riaperto e verificato singolarmente come richiesto.
+- **Nutrienti**: **15/18**. Per 100g: energia 239kcal, proteine 4,48g, grassi 1,19g, carboidrati 52,4g, calcio 19,0mg, ferro 1,50mg, magnesio 90,0mg, zinco 0,93mg, rame 0,39mg, sodio 4,00mg, folato totale 72,0µg, acido folico 0µg, vitamina B12 0µg, vitamina A (RAE) 0µg, vitamina D 0µg — **mancano**: fibra (pagina contraddittoria: riepilogo dice 0g ma l'etichetta dice "not declared", non usata), selenio, vitamina K. Coerenza interna verificata: energia da macronutrienti (~238kcal) combacia con il valore dichiarato (239kcal); folato totale/DFE/alimentare tutti 72,0µg.
+- **Analogia usata**: `food_castagne_cinesi_raw` (stessa specie, già nel DB reale, stessa convenzione delle altre castagne cinesi già eseguite).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio, stessa convenzione delle altre castagne).
+- **Attributi**: `botanical_family=Fagaceae` (famiglia reale del castagno, nota con certezza).
+
+```
+npm run add-food -- --fdc-id=170573 --food-id=food_castagne_cinesi_tostate \
+  --name-it="Castagne cinesi, tostate" \
+  --matrix-id=castagne_cinesi_tostate --matrix-description-it="Castagne cinesi, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_cinesi_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170573 --food-id=food_castagne_cinesi_tostate \
+  --name-it="Castagne cinesi, tostate" \
+  --matrix-id=castagne_cinesi_tostate --matrix-description-it="Castagne cinesi, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_cinesi_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di pomodoro, con ingredienti aggiunti, da concentrato, shelf-stable — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_succo_di_pomodoro_raw` (verificato non coperto sia per FDC che per nome — nessun `food_succo_di_pomodoro*`/`food_tomato_juice*` esistente). FDC ID 2003596 (**Foundation**, "Tomato juice, with added ingredients, from concentrate, shelf stable" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
