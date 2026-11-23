@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Peperone rosso, crudo — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_peperone_rosso_raw` (mai coperto, verificato con `grep` dedicato — distinto dai peperoni rossi in scatola già coperti, `food_peperoni_rossi_in_scatola` FDC 168546). FDC ID 2258590 (**Foundation**, "Peppers, bell, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/18**. Per 100g (dalla tabella dettagliata della pagina, più precisa del riquadro riassuntivo che riporta valori leggermente diversi per energia/calcio — discrepanza della fonte stessa, non nostra): proteine 0,90g, grassi 0,13g, carboidrati 6,65g, fibra 1,16g, calcio 6,36mg, ferro 0,35mg, magnesio 11,0mg, zinco 0,20mg, rame 0,040mg, selenio 0µg, folato totale 47,3µg, vitamina C 142mg. Energia non in tabella dettagliata (pannello: 25-27kcal, valori incoerenti tra loro sulla stessa pagina, omessa per trasparenza). **Mancano**: vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina (nonostante il peperone rosso ne sia notoriamente ricco — assenti dal record Foundation, non assunti), vitamina K.
+- **Analogia usata**: `food_peperoncino_verde_raw` (peperoncino verde piccante, stesso genere *Capsicum*, stessa famiglia Solanaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio-frutto, esempio esplicito nella convenzione del progetto).
+- **Matrice**: nuova `peperone_rosso` ("Peperone rosso").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (crudo non processato, come l'analogia, anche se il beta-carotene non è riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato 47,3µg coerente con un ortaggio fresco, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=2258590 --food-id=food_peperone_rosso_raw \
+  --name-it="Peperone rosso, crudo" \
+  --matrix-id=peperone_rosso --matrix-description-it="Peperone rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2258590 --food-id=food_peperone_rosso_raw \
+  --name-it="Peperone rosso, crudo" \
+  --matrix-id=peperone_rosso --matrix-description-it="Peperone rosso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Farina per pane, bianca, arricchita, non sbiancata — preparato 2026-11-23 dal task (198° lotto)
 
 - **food_id**: `food_farina_pane_raw` (mai coperto, verificato con grep dedicato — distinta da `food_farina_frumento_00_raw` FDC 169761 SR Legacy "all-purpose", prodotto funzionale diverso: farina per pane ad alto contenuto proteico/glutine). FDC ID 790146 (**Foundation**, "Flour, bread, white, enriched, unbleached" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
