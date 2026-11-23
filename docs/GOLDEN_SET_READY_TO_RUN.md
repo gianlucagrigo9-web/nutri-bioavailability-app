@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di mais nixtamalizzato (masa harina), cruda — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_masa_harina_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_farina_di_mais_raw` già eseguita: prodotto nixtamalizzato, non farina di mais semplice, profilo calcio/niacina diverso per il trattamento alcalino). FDC ID 2710835 (**Foundation**, "Corn flour, masa harina, white or yellow, dry, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/18**. Per 100g (tabella dettagliata, più precisa del riepilogo che riporta 366kcal invece di 370 — discrepanza della fonte stessa, non nostra): energia 370kcal, proteine 7,56g, grassi 4,34g, carboidrati 76,7g, fibra 7,04g, calcio 112mg, ferro 1,70mg, magnesio 93,3mg, zinco 1,62mg, rame 0,13mg. **Mancano**: selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K (record Foundation con pannello vitaminico limitato, solo tiamina/niacina/B6/biotina riportate, non richieste).
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais semplice, già eseguita sul DB reale — stessa specie *Zea mays*, stessa famiglia Poaceae, qui nixtamalizzata invece che semplice).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `masa_harina` ("Farina di mais nixtamalizzato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 112mg presente per via del trattamento con calce, ma nessun precedente di categoria calcica per questo prodotto, non forzato), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non riportato, nessuna firma di arricchimento dichiarata).
+
+```
+npm run add-food -- --fdc-id=2710835 --food-id=food_masa_harina_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), cruda" \
+  --matrix-id=masa_harina --matrix-description-it="Farina di mais nixtamalizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710835 --food-id=food_masa_harina_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), cruda" \
+  --matrix-id=masa_harina --matrix-description-it="Farina di mais nixtamalizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Anacardi, tostati in olio, senza sale — preparato 2026-11-23 dal task (199° lotto)
 
 - **food_id**: `food_anacardi_tostati_olio` (mai coperto, verificato con `grep` dedicato — distinto da `food_anacardi_tostati` già eseguito, FDC 169421 "dry roasted, with salt added": qui tostatura in olio invece che a secco, e senza sale invece che con sale, profilo grassi/sodio diverso). FDC ID 170572 (**SR Legacy**, "Nuts, cashew nuts, oil roasted, without salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
