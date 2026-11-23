@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Farina per pane, bianca, arricchita, non sbiancata — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_farina_pane_raw` (mai coperto, verificato con grep dedicato — distinta da `food_farina_frumento_00_raw` FDC 169761 SR Legacy "all-purpose", prodotto funzionale diverso: farina per pane ad alto contenuto proteico/glutine). FDC ID 790146 (**Foundation**, "Flour, bread, white, enriched, unbleached" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **11/17**. Per 100g: energia 363kcal, proteine 14,3g, grassi 1,65g, carboidrati 72,8g, calcio 19,0mg, ferro 5,55mg, magnesio 35,9mg, zinco 1,06mg, rame 0,19mg, selenio 33,3µg, folato totale 145µg (arricchita, coerente col nome "enriched"). **Mancano del tutto**: fibra, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_farina_frumento_00_raw` (farina di frumento bianca generica, già eseguita sul DB reale — stessa specie *Triticum aestivum*, prodotto funzionale diverso).
+- **Categoria dieta**: `plant_non_fruit` (cereale/farina).
+- **Matrice**: nuova `farina_pane` ("Farina per pane, bianca, arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, come l'analogia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (folato elevato 145µg, nome esplicito "enriched" — coerente con la convenzione farine arricchite già usata nel progetto).
+
+```
+npm run add-food -- --fdc-id=790146 --food-id=food_farina_pane_raw \
+  --name-it="Farina per pane, bianca, arricchita, non sbiancata" \
+  --matrix-id=farina_pane --matrix-description-it="Farina per pane, bianca, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=790146 --food-id=food_farina_pane_raw \
+  --name-it="Farina per pane, bianca, arricchita, non sbiancata" \
+  --matrix-id=farina_pane --matrix-description-it="Farina per pane, bianca, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Farina per pasticceria, non arricchita, non sbiancata — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_farina_pasticceria_raw` (mai coperto, verificato con grep dedicato — distinta da `food_farina_frumento_00_raw` FDC 169761 SR Legacy "all-purpose", prodotto funzionale diverso: farina per pasticceria a basso contenuto proteico/glutine, non arricchita). FDC ID 1104913 (**Foundation**, "Flour, pastry, unenriched, unbleached" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **10/17** (soglia minima di un match accettabile). Per 100g: energia 358kcal, proteine 8,75g, grassi 1,64g, carboidrati 77,2g, calcio 17,0mg, ferro 0,87mg, magnesio 22,4mg, zinco 0,74mg, rame 0,16mg, selenio 5,00µg. **Mancano del tutto**: fibra, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, folato totale, vitamina K — coerente col nome "unenriched" per il folato.
+- **Analogia usata**: `food_farina_frumento_00_raw` (farina di frumento bianca generica, già eseguita sul DB reale — stessa specie *Triticum aestivum*, prodotto funzionale diverso).
+- **Categoria dieta**: `plant_non_fruit` (cereale/farina).
+- **Matrice**: nuova `farina_pasticceria` ("Farina per pasticceria, non arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, come l'analogia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — "unenriched" esplicito, folato assente dal record).
+
+```
+npm run add-food -- --fdc-id=1104913 --food-id=food_farina_pasticceria_raw \
+  --name-it="Farina per pasticceria, non arricchita, non sbiancata" \
+  --matrix-id=farina_pasticceria --matrix-description-it="Farina per pasticceria, non arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=1104913 --food-id=food_farina_pasticceria_raw \
+  --name-it="Farina per pasticceria, non arricchita, non sbiancata" \
+  --matrix-id=farina_pasticceria --matrix-description-it="Farina per pasticceria, non arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_frumento_00_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Grasso di tacchino, fuso — preparato 2026-11-23 dal task (198° lotto)
 
 - **food_id**: `food_grasso_di_tacchino_raw` (mai coperto, verificato con grep dedicato). FDC ID 173571 (**SR Legacy**, "Fat, turkey" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). Quarto grasso animale fuso di questa pipeline dopo strutto di maiale, grasso di manzo e grasso di pollo.
