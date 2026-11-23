@@ -14,7 +14,28 @@
 
 ---
 
-## Pronti
+### Succo di acerola, crudo — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_succo_di_acerola_raw` (verificato non coperto per FDC né per nome — distinto da `food_acerola_raw` FDC 171686, frutto intero, e dall'acerola surgelata, entrambi già eseguiti). FDC ID 171687 (**SR Legacy**, "Acerola juice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/18** (manca solo vitamina D, "not declared" sulla fonte). Per 100g: energia 23,0kcal, proteine 0,40g, grassi 0,30g, carboidrati 4,80g, fibra 0,30g, calcio 10,0mg, ferro 0,50mg, magnesio 12,0mg, zinco 0,10mg, rame 0,086mg, selenio 0,10µg, sodio 3,00mg, folato totale 14,0µg, acido folico 0µg, vitamina B12 0µg, vitamina A (RAE) 25,0µg, vitamina K 1,40µg. **Nota di trasparenza**: vitamina C riportata a 1600mg/100g, valore eccezionalmente alto ma coerente con la nota biologia dell'acerola (il frutto a più alto contenuto di vitamina C conosciuto, tipicamente 1000-4500mg/100g in letteratura secondo cultivar/maturazione) — non è uno dei 18 nutrienti tracciati, riportato solo per trasparenza, nessun segnale di errore sulla pagina per questo valore specifico.
+- **Analogia usata**: `food_acerola_raw` (stesso frutto, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (succo di frutta, forma trasformata — stessa convenzione già usata per succo di pompelmo/mela/pomodoro, non "frutta fresca" per la definizione restrittiva del PRD §4.9).
+- **Attributi**: `botanical_family=Malpighiaceae` (famiglia reale, per analogia con `food_acerola_raw`).
+
+```
+npm run add-food -- --fdc-id=171687 --food-id=food_succo_di_acerola_raw \
+  --name-it="Succo di acerola, crudo" \
+  --matrix-id=succo_di_acerola --matrix-description-it="Succo di acerola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acerola_raw \
+  --botanical-family=Malpighiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171687 --food-id=food_succo_di_acerola_raw \
+  --name-it="Succo di acerola, crudo" \
+  --matrix-id=succo_di_acerola --matrix-description-it="Succo di acerola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_acerola_raw \
+  --botanical-family=Malpighiaceae --diet-category=plant_non_fruit --apply
+```
 
 ### Fagioli great northern, in scatola, con sale aggiunto, scolati e sciacquati — preparato 2026-11-23 dal task (209° lotto)
 
