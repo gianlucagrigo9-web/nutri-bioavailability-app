@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, taglio da spalla (chuck), disossato, scelta/choice, crudo — preparato 2026-11-23 dal task (201° lotto)
+
+- **food_id**: `food_manzo_spalla_chuck_raw` (cut diverso da `food_bistecca_di_manzo_raw`, già nel DB: quel taglio è magro tipo controfiletto, questo è più grasso/marmorizzato, grado USDA Choice). FDC ID 2646174 (**Foundation Foods**, "Beef, chuck, roast, boneless, choice, raw", Beef Products — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
+- **Nutrienti**: **9/18**. Per 100g (valore "per 100g", non la label arrotondata): energia 237kcal, proteine 18,4g, grassi 17,8g, carboidrati 0g, calcio 4,58mg, ferro 2,06mg, magnesio 17,0mg, zinco 5,39mg, rame 0,054mg. **Mancano**: fibra (non dichiarata), selenio, folato totale, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (stesso animale/specie, già nel DB).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `manzo_spalla_chuck` ("Manzo, taglio da spalla (chuck)").
+- **Attributi**: `is_heme_iron`, resto omesso.
+
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_manzo_spalla_chuck_raw \
+  --name-it="Manzo, taglio da spalla (chuck), disossato, crudo" \
+  --matrix-id=manzo_spalla_chuck --matrix-description-it="Manzo, taglio da spalla (chuck)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2646174 --food-id=food_manzo_spalla_chuck_raw \
+  --name-it="Manzo, taglio da spalla (chuck), disossato, crudo" \
+  --matrix-id=manzo_spalla_chuck --matrix-description-it="Manzo, taglio da spalla (chuck)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, macinato, crudo — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_bisonte_macinato_raw` (prima voce di bisonte nel DB). FDC ID 2727571 (**Foundation Foods**, "Bison, ground, raw", Lamb/Veal/Game Products — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
