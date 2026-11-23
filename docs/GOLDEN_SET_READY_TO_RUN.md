@@ -16,6 +16,56 @@
 
 ## Pronti
 
+### Cuori di palma, crudi — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_cuori_di_palma_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_cuori_di_palma_in_scatola` già eseguita, quella in scatola/sterilizzata, qui il prodotto fresco crudo). FDC ID 167714 (**SR Legacy**, "Hearts of palm, raw" — pagina `getfoodfacts.com/food/hearts-of-palm-raw-167714` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 115kcal, proteine 2,70g, grassi 0,20g, carboidrati 25,6g, fibra 1,50g, calcio 18,0mg, ferro 1,69mg, magnesio 10,0mg, zinco 3,73mg, rame 0,64mg, selenio 0,70µg, sodio 14,0mg, folato totale 24,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 8,00mg, vitamina A (RAE) 3,00µg (beta-carotene 41,0µg), vitamina D 0µg (dichiarato), vitamina K 0µg (dichiarato). **Nota trasparenza**: il pannello etichetta della pagina mostra 120kcal/15mg sodio, la tabella nutrienti per 100g mostra 115kcal/14,0mg — usato il valore di tabella, coerente con la convenzione di questa pipeline.
+- **Analogia usata**: `food_cuori_di_palma_in_scatola` (stesso prodotto/pianta, già eseguita sul DB reale, qui fresco crudo invece che in scatola — stessa famiglia botanica Arecaceae).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/germoglio).
+- **Matrice**: nuova `cuori_di_palma_raw` ("Cuori di palma, crudi").
+- **Attributi**: `botanical-family=Arecaceae`, `carotenoid-matrix-state=raw_intact` (beta-carotene reale non nullo, crudo), `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=167714 --food-id=food_cuori_di_palma_raw \
+  --name-it="Cuori di palma, crudi" \
+  --matrix-id=cuori_di_palma_raw --matrix-description-it="Cuori di palma, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuori_di_palma_in_scatola \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167714 --food-id=food_cuori_di_palma_raw \
+  --name-it="Cuori di palma, crudi" \
+  --matrix-id=cuori_di_palma_raw --matrix-description-it="Cuori di palma, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cuori_di_palma_in_scatola \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Arecaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Cipolla gallese (negi), cruda — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_cipolla_gallese_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_cipollotto_raw` (cipolla novella, *Allium cepa* immatura, FDC 170005, già eseguita) e da `food_onion_raw`: specie diversa, *Allium fistulosum* invece di *Allium cepa*). FDC ID 170007 (**SR Legacy**, "Onions, welsh, raw" — pagina `getfoodfacts.com/food/onions-welsh-raw-170007` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **17/18**. Per 100g: energia 34,0kcal, proteine 1,90g, grassi 0,40g, carboidrati 6,50g, fibra 2,40g, calcio 18,0mg, ferro 1,22mg, magnesio 23,0mg, zinco 0,52mg, rame 0,070mg, selenio 0,60µg, sodio 17,0mg, folato totale 16,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 27,0mg, vitamina D 0µg (dichiarato), vitamina K 193µg. **Manca**: vitamina A/beta-carotene (nessuna riga riportata sulla pagina, solo retinolo 0µg esplicito — non assunto zero per il composito).
+- **Analogia usata**: `food_cipollotto_raw` (stesso genere *Allium*, forma/uso simile — cipolla verde a bulbo e foglie — già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `cipolla_gallese` ("Cipolla gallese, negi").
+- **Attributi**: `botanical-family=Amaryllidaceae` (come l'analogia), `carotenoid-matrix-state` omesso (NULL — beta-carotene non riportato), `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=170007 --food-id=food_cipolla_gallese_raw \
+  --name-it="Cipolla gallese (negi), cruda" \
+  --matrix-id=cipolla_gallese --matrix-description-it="Cipolla gallese, negi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cipollotto_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170007 --food-id=food_cipolla_gallese_raw \
+  --name-it="Cipolla gallese (negi), cruda" \
+  --matrix-id=cipolla_gallese --matrix-description-it="Cipolla gallese, negi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cipollotto_raw \
+  --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Celtuce (lattuga a stelo asparago), cruda — preparato 2026-11-23 dal task (205° lotto)
 
 - **food_id**: `food_celtuce_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 169990 (**SR Legacy**, "Celtuce, raw" — pagina `getfoodfacts.com/food/celtuce-raw-169990` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
