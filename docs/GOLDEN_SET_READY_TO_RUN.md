@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Peperoncino ungherese (wax pepper), crudo — preparato 2026-11-23 dal task (205° lotto)
+
+- **food_id**: `food_peperone_ungherese_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_pepper_red_raw`/`food_peperoni_rossi_cotti`/`food_peperoncino_piccante_raw` già eseguiti, cultivar diversa di *Capsicum annuum*). FDC ID 168578 (**SR Legacy**, "Peppers, hungarian, raw" — pagina `getfoodfacts.com/food/peppers-hungarian-raw-168578` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 29,0kcal, proteine 0,80g, grassi 0,41g, carboidrati 6,70g, fibra 1,00g, calcio 12,0mg, ferro 0,46mg, magnesio 16,0mg, zinco 0,30mg, rame 0,12mg, selenio 0,30µg, sodio 1,00mg, folato totale 53,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 92,9mg, vitamina A (RAE) 41,0µg (beta-carotene 465µg), vitamina D 0µg (dichiarato), vitamina K 9,90µg.
+- **Analogia usata**: `food_pepper_red_raw` (stessa specie *Capsicum annuum*, già eseguita sul DB reale, stesso precedente già usato per le altre cultivar di peperone).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio-frutto, come l'analogia).
+- **Matrice**: nuova `peperone_ungherese` ("Peperoncino ungherese, wax pepper").
+- **Attributi**: `botanical-family=Solanaceae` (come l'analogia), `carotenoid-matrix-state=raw_intact` (beta-carotene reale non nullo, crudo), `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=168578 --food-id=food_peperone_ungherese_raw \
+  --name-it="Peperoncino ungherese (wax pepper), crudo" \
+  --matrix-id=peperone_ungherese --matrix-description-it="Peperoncino ungherese, wax pepper" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168578 --food-id=food_peperone_ungherese_raw \
+  --name-it="Peperoncino ungherese (wax pepper), crudo" \
+  --matrix-id=peperone_ungherese --matrix-description-it="Peperoncino ungherese, wax pepper" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pepper_red_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Cuori di palma, crudi — preparato 2026-11-23 dal task (205° lotto)
 
 - **food_id**: `food_cuori_di_palma_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_cuori_di_palma_in_scatola` già eseguita, quella in scatola/sterilizzata, qui il prodotto fresco crudo). FDC ID 167714 (**SR Legacy**, "Hearts of palm, raw" — pagina `getfoodfacts.com/food/hearts-of-palm-raw-167714` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
