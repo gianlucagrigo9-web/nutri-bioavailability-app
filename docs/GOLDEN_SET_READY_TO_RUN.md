@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Medusa (jellyfish), secca e salata — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_medusa_secca_salata` (mai coperto — distinto dalla "medusa cruda" già tentata e scartata ⚠ nel 120° lotto per assenza di record SR Legacy/Foundation pulito: qui invece prodotto diverso, secco e salato, con un record SR Legacy dedicato esistente, non lo stesso tentativo ripetuto). FDC ID 168129 (**SR Legacy**, "Jellyfish, dried, salted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 36,0kcal, proteine 5,50g, grassi 1,40g, carboidrati 0g, fibra 0g, calcio 2,00mg, ferro 2,27mg, magnesio 2,00mg, zinco 0,42mg, rame 0,14mg, selenio 42,2µg, sodio **9690mg (molto alto, coerente con un prodotto secco salato per conservazione)**, folato totale 1,00µg, acido folico 0µg (dichiarato), vitamina B12 0,020µg, vitamina C 0mg (dichiarato), vitamina A (RAE) 2,00µg (beta-carotene 0µg dichiarato), vitamina D 0µg (dichiarato), vitamina K 0,10µg.
+- **Analogia usata**: `food_baccala_salato_secco` (merluzzo secco salato, FDC 174190, già eseguito sul DB reale — stesso processo di conservazione "essiccazione+salatura", stessa categoria funzionale, specie animale diversa ma unico precedente di questo trattamento nel DB).
+- **Categoria dieta**: `meat_fish` (prodotto animale).
+- **Matrice**: nuova `medusa_secca_salata` ("Medusa secca e salata").
+- **Attributi**: `is_heme_iron` (flag attivo, per coerenza con gli altri invertebrati marini già nel DB come vongole/ostriche), `baseline_cooking_state=dried_salted` (come l'analogia).
+
+```
+npm run add-food -- --fdc-id=168129 --food-id=food_medusa_secca_salata \
+  --name-it="Medusa (jellyfish), secca e salata" \
+  --matrix-id=medusa_secca_salata --matrix-description-it="Medusa secca e salata" \
+  --baseline-cooking-state=dried_salted --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168129 --food-id=food_medusa_secca_salata \
+  --name-it="Medusa (jellyfish), secca e salata" \
+  --matrix-id=medusa_secca_salata --matrix-description-it="Medusa secca e salata" \
+  --baseline-cooking-state=dried_salted --analogy-food-id=food_baccala_salato_secco \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salmone atlantico, allevato, cotto (calore secco) — preparato 2026-11-23 dal task (207° lotto)
 
 - **food_id**: `food_salmone_atlantico_allevato_cotto` (mai coperto — distinto da `food_salmone_atlantico_selvaggio_cotto`/`_raw` già eseguiti, che sono la variante SELVAGGIA; l'allevato ha un profilo lipidico notevolmente diverso, non un duplicato). FDC ID 175168 (**SR Legacy**, "Fish, salmon, Atlantic, farmed, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
