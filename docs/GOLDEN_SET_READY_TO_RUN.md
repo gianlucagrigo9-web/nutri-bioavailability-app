@@ -14,6 +14,29 @@
 
 ---
 
+### Castagne europee, secche, non sbucciate — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_castagne_europee_secche_non_sbucciate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_raw` FDC 170575 (crude sbucciate) e da `food_castagne_europee_tostate` FDC 170190 preparata in questo stesso lotto). FDC ID 170576 (**SR Legacy**, "Nuts, chestnuts, european, dried, unpeeled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/18** (manca solo vitamina K, assente dalla tabella di 73 nutrienti della fonte). Per 100g: energia 374kcal, proteine 6,39g, grassi 4,45g, carboidrati 77,3g, fibra 11,7g, calcio 67,0mg, ferro 2,38mg, magnesio 74,0mg, zinco 0,35mg, rame 0,65mg, selenio 1,80µg, sodio 37,0mg, folato totale 109µg, acido folico 0µg, vitamina B12 0µg, vitamina A (RAE) 0µg, vitamina D 0µg. Coerenza verificata: energia da macronutrienti (~375kcal) combacia col valore dichiarato (374kcal).
+- **Analogia usata**: `food_castagne_raw` (stesso genere botanico *Castanea*, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Attributi**: `botanical_family=Fagaceae` (famiglia reale, per analogia con `food_castagne_raw`).
+
+```
+npm run add-food -- --fdc-id=170576 --food-id=food_castagne_europee_secche_non_sbucciate \
+  --name-it="Castagne europee, secche, non sbucciate" \
+  --matrix-id=castagne_europee_secche --matrix-description-it="Castagne europee, secche" \
+  --baseline-cooking-state=dried --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170576 --food-id=food_castagne_europee_secche_non_sbucciate \
+  --name-it="Castagne europee, secche, non sbucciate" \
+  --matrix-id=castagne_europee_secche --matrix-description-it="Castagne europee, secche" \
+  --baseline-cooking-state=dried --analogy-food-id=food_castagne_raw \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne europee, tostate — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_castagne_europee_tostate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_raw` FDC 170575, crude sbucciate, già eseguito, e dalle castagne cinesi già eseguite in questo stesso lotto). FDC ID 170190 (**SR Legacy**, "Nuts, chestnuts, european, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
