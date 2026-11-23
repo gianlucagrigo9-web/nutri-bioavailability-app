@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Grasso di tacchino, fuso — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_grasso_di_tacchino_raw` (mai coperto, verificato con grep dedicato). FDC ID 173571 (**SR Legacy**, "Fat, turkey" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, categoria "Fats and Oils", release USDA 2026-04-30). Quarto grasso animale fuso di questa pipeline dopo strutto di maiale, grasso di manzo e grasso di pollo.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 900kcal, proteine 0g (esplicito), grassi 99,8g, carboidrati 0g (esplicito), fibra 0g (esplicito), calcio 0mg (esplicito), ferro 0mg (esplicito), magnesio 0mg (esplicito), zinco 0mg (esplicito), rame 0mg (esplicito), selenio 0,20µg (reale e non nullo, identico al pattern grasso di manzo/pollo), vitamina B12 0µg (esplicito), beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti, vitamina C 0mg (esplicito), folato totale 0µg (esplicito), vitamina K 0µg (esplicito). Stesso profilo già visto per gli altri grassi animali fusi.
+- **Analogia usata**: `food_grasso_di_pollo_raw` (grasso di pollo/schmaltz, FDC 173564, già eseguito sul DB reale — stessa categoria funzionale "grasso animale fuso", stessa classificazione dieta `meat_fish`, stesso profilo nutrienti quasi tutto a zero).
+- **Categoria dieta**: `meat_fish` (grasso animale, stessa convenzione già usata per strutto/grasso di manzo/pollo).
+- **Matrice**: nuova `grasso_di_tacchino` ("Grasso di tacchino, fuso").
+- **Attributi**: `is_heme_iron=false` (grasso puro, nessun ferro), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi tutti 0µg espliciti), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (grasso fuso/reso, stessa convenzione degli altri grassi animali), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173571 --food-id=food_grasso_di_tacchino_raw \
+  --name-it="Grasso di tacchino, fuso" \
+  --matrix-id=grasso_di_tacchino --matrix-description-it="Grasso di tacchino, fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_di_pollo_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173571 --food-id=food_grasso_di_tacchino_raw \
+  --name-it="Grasso di tacchino, fuso" \
+  --matrix-id=grasso_di_tacchino --matrix-description-it="Grasso di tacchino, fuso" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grasso_di_pollo_raw \
+  --diet-category=meat_fish --apply
+```
+
+### Patata gold (Yukon), senza buccia, cruda — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_patata_gold_raw` (mai coperto, verificato con grep dedicato — distinta da `food_patata_russet_raw`, `food_patate_rosse_raw` FDC 170029 "flesh and skin", `food_potato_raw` generica). FDC ID 2346403 (**Foundation**, "Potatoes, gold, without skin, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **11/17**. Per 100g: energia 70kcal (pannello etichetta; tabella comparativa 71,6 — leggera discrepanza di arrotondamento, non bloccante, preso il valore etichetta), proteine 1,81g, grassi 0,26g, carboidrati 16,0g, calcio 5,94mg, ferro 0,37mg, magnesio 22,3mg, zinco 0,37mg, rame 0,13mg, selenio 0µg (esplicito), vitamina C 23,3mg. **Mancano del tutto**: fibra, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, folato totale, vitamina K (totale non riportato, solo le 3 componenti singole a 0/assenti) — record Foundation senza pannello completo, non un limite della ricerca.
+- **Analogia usata**: `food_patata_russet_raw` (patata generica cruda, già eseguita sul DB reale — stessa specie *Solanum tuberosum*, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit` (tubero/ortaggio).
+- **Matrice**: nuova `patata_gold` ("Patata gold (Yukon), senza buccia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, come l'analogia), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2346403 --food-id=food_patata_gold_raw \
+  --name-it="Patata gold (Yukon), senza buccia, cruda" \
+  --matrix-id=patata_gold --matrix-description-it="Patata gold (Yukon), senza buccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_russet_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346403 --food-id=food_patata_gold_raw \
+  --name-it="Patata gold (Yukon), senza buccia, cruda" \
+  --matrix-id=patata_gold --matrix-description-it="Patata gold (Yukon), senza buccia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_patata_russet_raw \
+  --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
+### Ravanelli rossi, crudi — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_ravanelli_rossi_raw` (mai coperto, verificato con grep dedicato — distinto da `food_ravanelli_raw` FDC 170095 SR Legacy generico già eseguito). FDC ID 2747665 (**Foundation**, "Radishes, red, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
+- **Nutrienti**: **12/17**. Per 100g: energia 19,6kcal, proteine 0,66g, grassi 0,083g, carboidrati 4,06g, fibra 1,31g, calcio 21,5mg, ferro 0mg (esplicito), magnesio 8,94mg, zinco 0,10mg, rame 0,0017mg, vitamina C 17,8mg, folato totale 63,2µg. **Mancano del tutto**: selenio, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_ravanelli_raw` (ravanelli generici crudi, già eseguiti sul DB reale — stessa specie *Raphanus sativus*, solo dataset USDA diverso: Foundation più recente vs SR Legacy, cultivar rossa esplicita).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `ravanelli_rossi` ("Ravanelli rossi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2747665 --food-id=food_ravanelli_rossi_raw \
+  --name-it="Ravanelli rossi, crudi" \
+  --matrix-id=ravanelli_rossi --matrix-description-it="Ravanelli rossi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2747665 --food-id=food_ravanelli_rossi_raw \
+  --name-it="Ravanelli rossi, crudi" \
+  --matrix-id=ravanelli_rossi --matrix-description-it="Ravanelli rossi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Uovo intero, Grado A, grande, crudo — preparato 2026-11-23 dal task (198° lotto)
 
 - **food_id**: `food_uovo_intero_grado_a_raw` (mai coperto, verificato con grep dedicato — distinto da `food_egg_raw` FDC 173423 SR Legacy già eseguito, `food_egg_white_raw`/`food_egg_yolk_raw` già eseguiti). FDC ID 748967 (**Foundation**, "Eggs, Grade A, Large, egg whole" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
@@ -36,30 +108,6 @@ npm run add-food -- --fdc-id=748967 --food-id=food_uovo_intero_grado_a_raw \
   --name-it="Uovo intero, Grado A, grande, crudo" \
   --matrix-id=uovo_intero_grado_a --matrix-description-it="Uovo intero, Grado A, grande" \
   --baseline-cooking-state=raw --analogy-food-id=food_egg_raw --diet-category=egg_dairy --apply
-```
-
-### Peperone banana/cera ungherese, crudo (senza semi) — preparato 2026-11-23 dal task (198° lotto)
-
-- **food_id**: `food_pepperone_banana_raw` (mai coperto, verificato con grep dedicato — distinto da `food_pepper_green_raw`/`food_pepper_red_raw`/`food_pepper_yellow_raw` già eseguiti, varietà diversa *Capsicum annuum* "banana/Hungarian wax"). FDC ID 2747660 (**Foundation**, "Peppers, banana or Hungarian wax, seeded, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release 2026-04-30).
-- **Nutrienti**: **12/17**. Per 100g: energia 23,9kcal, proteine 0,72g, grassi 0,13g, carboidrati 4,97g, fibra 1,79g, calcio 9,82mg, ferro 0,16mg, magnesio 10,2mg, zinco 0,13mg, rame 0,061mg, vitamina C 112mg, folato totale 31,8µg. **Mancano del tutto**: selenio, vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K (record Foundation senza pannello carotenoidi/B12/K completo, non un limite della ricerca).
-- **Analogia usata**: `food_pepper_yellow_raw` (peperone generico crudo, Golden Set, già eseguito sul DB reale — stessa specie *Capsicum annuum*, colore/varietà diversa).
-- **Categoria dieta**: `plant_non_fruit` (ortaggio-frutto, non frutta fresca per definizione PRD §4.9).
-- **Matrice**: nuova `peperone_banana` ("Peperone banana/cera ungherese").
-- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (crudo, coerente con gli altri peperoni), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
-
-```
-npm run add-food -- --fdc-id=2747660 --food-id=food_pepperone_banana_raw \
-  --name-it="Peperone banana/cera ungherese, crudo (senza semi)" \
-  --matrix-id=peperone_banana --matrix-description-it="Peperone banana/cera ungherese" \
-  --baseline-cooking-state=raw --analogy-food-id=food_pepper_yellow_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit
-```
-```
-npm run add-food -- --fdc-id=2747660 --food-id=food_pepperone_banana_raw \
-  --name-it="Peperone banana/cera ungherese, crudo (senza semi)" \
-  --matrix-id=peperone_banana --matrix-description-it="Peperone banana/cera ungherese" \
-  --baseline-cooking-state=raw --analogy-food-id=food_pepper_yellow_raw \
-  --carotenoid-matrix-state=raw_intact --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
 ```
 
 ### Kiwi verde, pelato, crudo — preparato 2026-11-23 dal task (198° lotto)
