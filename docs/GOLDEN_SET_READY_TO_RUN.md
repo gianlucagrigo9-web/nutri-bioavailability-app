@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Salmone atlantico, allevato, cotto (calore secco) — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_salmone_atlantico_allevato_cotto` (mai coperto — distinto da `food_salmone_atlantico_selvaggio_cotto`/`_raw` già eseguiti, che sono la variante SELVAGGIA; l'allevato ha un profilo lipidico notevolmente diverso, non un duplicato). FDC ID 175168 (**SR Legacy**, "Fish, salmon, Atlantic, farmed, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 206kcal, proteine 22,1g, grassi 12,3g, carboidrati 0g, fibra 0g, calcio 15,0mg, ferro 0,34mg, magnesio 30,0mg, zinco 0,43mg, rame 0,049mg, selenio 41,4µg, sodio 61,0mg, folato totale 34,0µg, acido folico 0µg (dichiarato), vitamina B12 2,80µg, vitamina C 3,70mg, vitamina A (RAE) 69,0µg (beta-carotene 0µg dichiarato), vitamina D 13,1µg, vitamina K 0,10µg.
+- **Analogia usata**: `food_salmone_atlantico_selvaggio_cotto` (stessa specie *Salmo salar*, stesso trattamento "cotto a calore secco", già eseguito sul DB reale — qui solo allevato invece di selvaggio, stesso precedente già usato per distinguere coho allevato/selvaggio).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_atlantico_allevato_cotto` ("Salmone atlantico, allevato, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo, per analogia), resto omesso/default, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=175168 --food-id=food_salmone_atlantico_allevato_cotto \
+  --name-it="Salmone atlantico, allevato, cotto (calore secco)" \
+  --matrix-id=salmone_atlantico_allevato_cotto --matrix-description-it="Salmone atlantico, allevato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmone_atlantico_selvaggio_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175168 --food-id=food_salmone_atlantico_allevato_cotto \
+  --name-it="Salmone atlantico, allevato, cotto (calore secco)" \
+  --matrix-id=salmone_atlantico_allevato_cotto --matrix-description-it="Salmone atlantico, allevato, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmone_atlantico_selvaggio_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Tahina, da semi di sesamo crudi non tostati, macinati a pietra — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_tahina_cruda` (mai coperto — distinto da `food_tahina` già eseguita, che è la tahina tradizionale da semi TOSTATI, FDC 170189; qui semi crudi non tostati, profilo nutrizionale diverso, non un duplicato). FDC ID 169410 (**SR Legacy**, "Seeds, sesame butter, tahini, from raw and stone ground kernels" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/18**. Per 100g: energia 570kcal, proteine 17,8g, grassi 48,0g, carboidrati 26,2g, fibra 9,30g, calcio 420mg, ferro 2,51mg, magnesio 96,0mg, zinco 4,64mg, rame 1,62mg, sodio 74,0mg, folato totale 98,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 0mg (dichiarato), vitamina A (RAE) 3,00µg, vitamina D 0µg (dichiarato) — **mancano**: selenio, beta-carotene, vitamina K (non riportati in pagina, non assunti zero).
+- **Analogia usata**: `food_tahina` (tahina tradizionale da semi tostati, già eseguita sul DB reale — stesso prodotto/matrice "pasta di semi di sesamo macinati", qui semi crudi invece di tostati).
+- **Categoria dieta**: `plant_non_fruit` (derivato di semi oleosi).
+- **Matrice**: nuova `tahina_cruda` ("Tahina da semi crudi").
+- **Attributi**: `botanical_family=Pedaliaceae` (come l'analogia), `baseline_cooking_state=raw`, resto omesso (NULL/default — carotenoidi non riportati, non assunti).
+
+```
+npm run add-food -- --fdc-id=169410 --food-id=food_tahina_cruda \
+  --name-it="Tahina, da semi di sesamo crudi non tostati, macinati a pietra" \
+  --matrix-id=tahina_cruda --matrix-description-it="Tahina da semi crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tahina \
+  --botanical-family=Pedaliaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169410 --food-id=food_tahina_cruda \
+  --name-it="Tahina, da semi di sesamo crudi non tostati, macinati a pietra" \
+  --matrix-id=tahina_cruda --matrix-description-it="Tahina da semi crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tahina \
+  --botanical-family=Pedaliaceae --diet-category=plant_non_fruit --apply
+```
+
+### Mandorle, tostate in olio, senza sale — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_mandorle_tostate_olio` (mai coperto — distinto da `food_mandorle_tostate` già eseguita, che è tostata A SECCO CON sale, FDC 168596; qui tostatura in olio e senza sale, entrambe le variabili diverse). FDC ID 170159 (**SR Legacy**, "Nuts, almonds, oil roasted, without salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; cluster lasciato aperto "per parsimonia" dal 199° lotto, ora verificato).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 607kcal, proteine 21,2g, grassi 55,2g, carboidrati 17,7g, fibra 10,5g, calcio 291mg, ferro 3,68mg, magnesio 274mg, zinco 3,07mg, rame 0,95mg, selenio 4,10µg, sodio 1,00mg, folato totale 27,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 0mg (dichiarato), vitamina A (RAE) 0µg (dichiarato, beta-carotene 1,00µg), vitamina D 0µg (dichiarato), vitamina K 0µg (dichiarato).
+- **Analogia usata**: `food_mandorle_tostate` (mandorle tostate a secco con sale, già eseguita sul DB reale — stessa specie, stesso genere di trattamento "mandorla tostata", qui in olio e senza sale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `mandorle_tostate_olio` ("Mandorle tostate in olio").
+- **Attributi**: `botanical_family=Rosaceae` (come l'analogia), `carotenoid_matrix_state=cooked_or_disrupted` (come l'analogia), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=170159 --food-id=food_mandorle_tostate_olio \
+  --name-it="Mandorle, tostate in olio, senza sale" \
+  --matrix-id=mandorle_tostate_olio --matrix-description-it="Mandorle tostate in olio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170159 --food-id=food_mandorle_tostate_olio \
+  --name-it="Mandorle, tostate in olio, senza sale" \
+  --matrix-id=mandorle_tostate_olio --matrix-description-it="Mandorle tostate in olio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Noci pecan, tostate a secco, senza sale — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_noci_pecan_tostate` (mai coperto — distinto da `food_noci_pecan_raw` già eseguita, crudo vs tostato). FDC ID 170183 (**SR Legacy**, "Nuts, pecans, dry roasted, without salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; già tentata e scartata ⚠ nel 205° lotto per presunta assenza di pagina dedicata — pagina trovata questa sessione con ricerca mirata su getfoodfacts.com).
+- **Nutrienti**: **17/18**. Per 100g: energia 710kcal, proteine 9,50g, grassi 74,3g, carboidrati 13,6g, fibra 9,40g, calcio 72,0mg, ferro 2,80mg, magnesio 132mg, zinco 5,07mg, rame 1,17mg, selenio 4,00µg, sodio 1,00mg, folato totale 16,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 0,70mg, vitamina A (RAE) 7,00µg (beta-carotene 84,0µg), vitamina D 0µg (dichiarato) — **manca**: vitamina K (non riportata in pagina, non assunta zero).
+- **Analogia usata**: `food_noci_pecan_raw` (FDC 170182, stessa specie *Carya illinoinensis*, famiglia Juglandaceae, già eseguita sul DB reale — qui tostata a secco invece di cruda).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noci_pecan_tostate` ("Noci pecan tostate").
+- **Attributi**: `botanical_family=Juglandaceae` (come l'analogia), `carotenoid_matrix_state=raw_intact` (per analogia con `food_noci_pecan_raw`), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=170183 --food-id=food_noci_pecan_tostate \
+  --name-it="Noci pecan, tostate a secco, senza sale" \
+  --matrix-id=noci_pecan_tostate --matrix-description-it="Noci pecan tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170183 --food-id=food_noci_pecan_tostate \
+  --name-it="Noci pecan, tostate a secco, senza sale" \
+  --matrix-id=noci_pecan_tostate --matrix-description-it="Noci pecan tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Hominy (mais trattato con calce), in scatola, bianco — preparato 2026-11-23 dal task (206° lotto)
 
 - **food_id**: `food_hominy_bianco_in_scatola` (mai coperto, verificato con `grep` dedicato — distinto da `food_masa_harina_raw` (stesso trattamento alcalino/nixtamalizzazione ma prodotto finito diverso: qui chicco intero in scatola, non farina macinata) e da `food_farina_di_mais_raw` (mais semplice non trattato)). FDC ID 169701 (**SR Legacy**, "Hominy, canned, white" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
