@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Bacon canadese, cotto in padella — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_bacon_canadese_cotto` (mai coperto, verificato con `grep` dedicato — distinto da `food_pancetta_raw` già eseguita: il bacon canadese è un taglio magro della lonza affumicata/stagionata, non la pancetta classica, qui già cotto). FDC ID 168383 (**SR Legacy**, "Canadian bacon, cooked, pan-fried" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18**, record completo. Per 100g: energia 146kcal, proteine 28,3g, grassi 2,78g, carboidrati 1,80g, fibra 0g, calcio 7,00mg, ferro 0,56mg, magnesio 27,0mg, zinco 1,73mg, rame 0,063mg, selenio 50,4µg, folato totale 4,00µg, vitamina B12 0,43µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg, vitamina C 0mg, vitamina K 5,10µg (somma di menachinone-4 4,90µg e fillochinone 0,20µg riportati separatamente dalla pagina, calcolo nostro non un valore unico della fonte). Tutti i campi hanno un valore dichiarato.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (lonza di maiale, già eseguita sul DB reale — stesso taglio anatomico di origine del bacon canadese, qui affumicato/stagionato e cotto).
+- **Categoria dieta**: `meat_fish` (carne di maiale lavorata).
+- **Matrice**: nuova `bacon_canadese_cotto` ("Bacon canadese, cotto").
+- **Attributi**: `is_heme_iron` **attivo** (true, carne rossa come l'analogia), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non applicabile), `baseline_cooking_state=roasted` (cotto in padella, categoria più vicina a "cotto per calore secco" nelle convenzioni del progetto), `is_fortified_folate` omesso (false — folato 4µg basso, tipico della carne, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168383 --food-id=food_bacon_canadese_cotto \
+  --name-it="Bacon canadese, cotto in padella" \
+  --matrix-id=bacon_canadese_cotto --matrix-description-it="Bacon canadese, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168383 --food-id=food_bacon_canadese_cotto \
+  --name-it="Bacon canadese, cotto in padella" \
+  --matrix-id=bacon_canadese_cotto --matrix-description-it="Bacon canadese, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Grasso di pancetta reso (strutto da bacon), cotto — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_grasso_di_pancetta_cotto` (mai coperto, verificato con `grep` dedicato — prodotto distinto dalla carne di pancetta `food_pancetta_raw`: qui solo il grasso reso/colato durante la cottura, non la carne). FDC ID 168324 (**SR Legacy**, "Pork, bacon, rendered fat, cooked" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18**, record completo. Per 100g: energia 898kcal, proteine 0,070g, grassi 99,5g, carboidrati 0g, fibra 0g, calcio 1,00mg, ferro 0,13mg, magnesio 0mg, zinco 0,060mg, rame 0,022mg, selenio 5,70µg, folato totale 0µg, vitamina B12 0,090µg, beta-carotene 0µg, alfa-carotene 0µg, beta-criptoxantina 0µg, vitamina C 0mg, vitamina K 0µg. Tutti i campi hanno un valore dichiarato (grasso quasi puro: 99,5g/100g, coerente con il nome).
+- **Analogia usata**: `food_pancetta_raw` (pancetta cruda, già eseguita sul DB reale — stessa carne di origine, qui solo il grasso separato e reso per cottura).
+- **Categoria dieta**: `meat_fish` (grasso animale, origine suina).
+- **Matrice**: nuova `grasso_di_pancetta_cotto` ("Grasso di pancetta, reso").
+- **Attributi**: `is_heme_iron` omesso (false — il grasso puro non trasporta ferro eme significativo, coerente con ferro 0,13mg/100g, valore residuo minimo), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non applicabile), `baseline_cooking_state=roasted` (reso per cottura), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168324 --food-id=food_grasso_di_pancetta_cotto \
+  --name-it="Grasso di pancetta reso (strutto da bacon), cotto" \
+  --matrix-id=grasso_di_pancetta_cotto --matrix-description-it="Grasso di pancetta, reso" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_pancetta_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168324 --food-id=food_grasso_di_pancetta_cotto \
+  --name-it="Grasso di pancetta reso (strutto da bacon), cotto" \
+  --matrix-id=grasso_di_pancetta_cotto --matrix-description-it="Grasso di pancetta, reso" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_pancetta_raw \
+  --diet-category=meat_fish --apply
+```
+
+### Farina di mais gialla a grana fine, arricchita — preparato 2026-11-23 dal task (199° lotto)
+
+- **food_id**: `food_farina_di_mais_arricchita_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_farina_di_mais_raw` già eseguita: qui arricchita/fortificata, con folato elevato coerente con "enriched", profilo vitaminico diverso). FDC ID 790276 (**Foundation**, "Flour, corn, yellow, fine meal, enriched" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g: energia 364kcal, proteine 6,20g, grassi 1,74g, carboidrati 80,8g, fibra 4,30g, calcio 0mg, ferro 4,44mg, magnesio 30,1mg, zinco 0,62mg, rame 0,082mg, selenio 8,30µg, folato totale 155µg (elevato, coerente con "enriched"). **Mancano**: vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina K.
+- **Analogia usata**: `food_farina_di_mais_raw` (farina di mais semplice, già eseguita sul DB reale — stessa specie *Zea mays*, qui arricchita invece che semplice).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_mais_arricchita` ("Farina di mais gialla, arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio 0mg esplicito), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato dal record nonostante il mais giallo ne contenga tipicamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (folato 155µg elevato, nome esplicito "enriched" — coerente con la convenzione farine arricchite già usata nel progetto, es. farina_pane).
+
+```
+npm run add-food -- --fdc-id=790276 --food-id=food_farina_di_mais_arricchita_raw \
+  --name-it="Farina di mais gialla a grana fine, arricchita" \
+  --matrix-id=farina_di_mais_arricchita --matrix-description-it="Farina di mais gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=790276 --food-id=food_farina_di_mais_arricchita_raw \
+  --name-it="Farina di mais gialla a grana fine, arricchita" \
+  --matrix-id=farina_di_mais_arricchita --matrix-description-it="Farina di mais gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne cinesi, bollite e cotte a vapore — preparato 2026-11-23 dal task (199° lotto)
 
 - **food_id**: `food_castagne_cinesi_bollite` (mai coperto, verificato con `grep` dedicato — distinta da `food_castagne_raw` già eseguita: specie diversa, *Castanea mollissima* (cinese) invece di *Castanea sativa* (europea), e stato cotto invece che crudo). FDC ID 170166 (**SR Legacy**, "Nuts, chestnuts, chinese, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
