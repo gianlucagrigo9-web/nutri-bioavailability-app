@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cipolla gialla, cruda — preparato 2026-11-23 dal task (198° lotto)
+
+- **food_id**: `food_cipolla_gialla_raw` (mai coperto, verificato con grep dedicato — distinta da `food_onion_raw` generica, `food_cipolla_bianca_raw` FDC 1104962, `food_cipolla_dolce_raw` FDC 170008, `food_cipolla_rossa_raw`). FDC ID 790646 (**Foundation**, "Onions, yellow, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **12/17**. Per 100g: energia 38,0kcal, proteine 0,83g, grassi 0,050g, carboidrati 8,61g, fibra 1,90g, calcio 15,0mg, ferro 0,28mg, magnesio 9,00mg, zinco 0,20mg, rame 0,035mg, selenio 0µg (esplicito), vitamina C 8,20mg. **Mancano del tutto** (non presenti in pagina, non zero esplicito): vitamina B12, beta-carotene, alfa-carotene, beta-criptoxantina, folato totale, vitamina K — record Foundation incompleto per disegno (pannello vitaminico non analizzato su questo campione), non un limite della ricerca.
+- **Analogia usata**: `food_onion_raw` (cipolla generica cruda, Golden Set originale, già eseguita sul DB reale — stessa specie *Allium cepa*).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `cipolla_gialla` ("Cipolla gialla").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (coerente con cipolla bianca/porri/scalogno, stessa famiglia, crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Amaryllidaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=790646 --food-id=food_cipolla_gialla_raw \
+  --name-it="Cipolla gialla, cruda" \
+  --matrix-id=cipolla_gialla --matrix-description-it="Cipolla gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=790646 --food-id=food_cipolla_gialla_raw \
+  --name-it="Cipolla gialla, cruda" \
+  --matrix-id=cipolla_gialla --matrix-description-it="Cipolla gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_onion_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Amaryllidaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Maiale, girello della coscia (sirloin tip), crudo — preparato 2026-11-22 dal task (197° lotto)
 
 - **food_id**: `food_maiale_coscia_girello_raw` (mai coperto, verificato con grep dedicato). FDC ID 168371 (**SR Legacy**, "Pork, Leg sirloin tip roast, boneless, separable lean and fat, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
