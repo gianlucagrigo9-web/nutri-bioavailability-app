@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Platano, non maturo (underripe), crudo — preparato 2026-11-23 dal task (213° lotto)
+
+- **food_id**: `food_platano_non_maturo_raw` (verificato non coperto sia per FDC che per nome — nessun `food_platano*`/`food_plantain*` esistente, distinto da `food_banana_raw` già nel DB, genere *Musa* ma specie/varietà "da cottura" diversa). FDC ID 2710818 (**Foundation**, "Plantains, underripe, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g: energia 140kcal (pannello; scheda di confronto/tabella riportano 145, divergenza minore, uso il pannello), proteine 1,23g, grassi 0,69g, carboidrati 33,6g, fibra 2,53g, calcio 4,83mg, ferro 0,33mg, magnesio 29,5mg, zinco 0,18mg, rame 0,11mg, sodio 0mg (dichiarato), vitamina C 18,5mg — **mancano**: selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), vitamina D, vitamina K, beta-carotene (nessuno riportato in pagina nonostante la polpa gialla, non assunti).
+- **Analogia usata**: `food_banana_raw` (stesso genere botanico *Musa*, già eseguito sul DB reale, stessa classificazione dieta già accettata).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco crudo, stessa convenzione della banana).
+- **Attributi**: `botanical_family=Musaceae`.
+
+```
+npm run add-food -- --fdc-id=2710818 --food-id=food_platano_non_maturo_raw \
+  --name-it="Platano, non maturo, crudo" \
+  --matrix-id=platano_non_maturo --matrix-description-it="Platano, non maturo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_banana_raw \
+  --botanical-family=Musaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=2710818 --food-id=food_platano_non_maturo_raw \
+  --name-it="Platano, non maturo, crudo" \
+  --matrix-id=platano_non_maturo --matrix-description-it="Platano, non maturo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_banana_raw \
+  --botanical-family=Musaceae --diet-category=fresh_fruit --apply
+```
+
 ### Renna (caribù), quarto posteriore, crudo (Alaska Native) — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_renna_quarto_posteriore_raw` (controparte cruda di `food_renna_quarto_posteriore_cotto`, FDC 169822, già "pronto" — rinominato da `food_caribou_hind_quarter_raw` per coerenza con la convenzione `food_renna_*` già in uso in questo progetto per *Rangifer tarandus*, mai coperto, verificato con `grep` dedicato). FDC ID 168050 (**SR Legacy**, "Caribou, hind quarter meat, raw (Alaska Native)", NDB 35162). **Nota di trasparenza**: questo FDC fa parte del cluster "Alaska Native a provenienza debole" segnalato e deliberatamente non riaperto da più turni di oggi (199°, 203° lotto) — qui invece verificato individualmente con esito positivo: la pagina recipal.com non mostra il numero FDC in chiaro ma riporta "NBD ID: 35162", che coincide esattamente con l'`ndb_number` della riga USDA_CHECKLIST.csv per questo FDC ID — identificazione incrociata solida anche senza il numero FDC in chiaro.
