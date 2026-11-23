@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Caribou, quarto posteriore, crudo (Alaska Native) — preparato 2026-11-23 dal task (208° lotto)
+
+- **food_id**: `food_caribou_hind_quarter_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 168050 (**SR Legacy**, "Caribou, hind quarter meat, raw (Alaska Native)", NDB 35162). Pagina recipal.com non mostra il numero FDC ma riporta "NBD ID: 35162", che coincide esattamente con l'`ndb_number` della riga USDA_CHECKLIST.csv per questo FDC ID — identificazione incrociata solida anche senza il numero FDC in chiaro.
+- **Nutrienti**: **15/18** (circa, schema a 18-19 voci). Per 100g: energia 122kcal, proteine 22,63g, grassi 3,37g, carboidrati 0g, fibra 0g, calcio 10mg, ferro 4,1mg, magnesio 25mg, zinco 2,1mg, rame 0,3mg, sodio 52mg, selenio 13µg, vitamina B12 7,1µg, vitamina C 0mg (dichiarato), vitamina K 1µg — **mancano/ambigui**: folato totale (pagina riporta solo "5µg DFE", non un totale netto, non usato), acido folico (assente), vitamina A (pagina riporta "90µg" senza qualificatore RAE, non usato per non rischiare un'unità sbagliata), vitamina D (riga presente ma valore "-", non assunta zero).
+- **Analogia usata**: `food_beef_ground_raw` (stesso precedente già applicato ad altre carni di selvaggina/rosse crude non bovine — vitello, agnello, coniglio — nei lotti eseguiti).
+- **Categoria dieta**: `meat_fish` (carne di selvaggina).
+- **Attributi**: `is-heme-iron` (carne rossa).
+
+```
+npm run add-food -- --fdc-id=168050 --food-id=food_caribou_hind_quarter_raw \
+  --name-it="Caribou, quarto posteriore, crudo (Alaska Native)" \
+  --matrix-id=caribou_hind_quarter --matrix-description-it="Caribou, quarto posteriore" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168050 --food-id=food_caribou_hind_quarter_raw \
+  --name-it="Caribou, quarto posteriore, crudo (Alaska Native)" \
+  --matrix-id=caribou_hind_quarter --matrix-description-it="Caribou, quarto posteriore" \
+  --baseline-cooking-state=raw --analogy-food-id=food_beef_ground_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Salmonberries, crude (Alaska Native) — preparato 2026-11-23 dal task (207° lotto)
 
 - **food_id**: `food_salmonberries_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 168048 (**SR Legacy**, "Salmonberries, raw (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
