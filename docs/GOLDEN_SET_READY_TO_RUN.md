@@ -16,6 +16,29 @@
 
 ## Pronti
 
+### Bisonte, macinato, crudo (generico, non grass-fed) — preparato 2026-11-23 dal task (212° lotto)
+
+- **food_id**: `food_bisonte_macinato_raw` (verificato non coperto: distinto da `food_bisonte_macinato_grassfed_raw`, FDC 175293 SR Legacy, già in "Pronti" ma non ancora eseguito — qui invece un record **Foundation** nuovo e generico, senza qualificatore "grass-fed"). FDC ID 2727571 (**Foundation**, "Bison, ground, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/18**. Per 100g: energia 160kcal (pannello; stat box 164, uso pannello), proteine 19,9g, grassi 8,88g, carboidrati 0g (pannello; la tabella dettagliata riporta un valore negativo anomalo −0,15g, non usato), calcio 6,83mg, ferro 2,17mg, magnesio 18,5mg, zinco 3,76mg, rame 0,078mg, sodio 55,7mg — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A (RAE), vitamina D, vitamina K.
+- **Analogia usata**: `food_bisonte_raw` (stessa specie *Bison bison*, già nel DB reale).
+- **Categoria dieta**: `meat_fish` (carne di bisonte).
+- **Attributi**: `is-heme-iron` (carne rossa).
+
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2727571 --food-id=food_bisonte_macinato_raw \
+  --name-it="Bisonte, macinato, crudo" \
+  --matrix-id=bisonte_macinato --matrix-description-it="Bisonte, macinato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Applesauce, non zuccherata, con vitamina C aggiunta — preparato 2026-11-23 dal task (211° lotto)
 
 - **food_id**: `food_applesauce_unsweetened` (mai coperto, verificato con `grep` dedicato). FDC ID 2346414 (**Foundation**, "Applesauce, unsweetened, with added vitamin C" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
