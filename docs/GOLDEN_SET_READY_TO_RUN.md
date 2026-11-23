@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salmonberries, crude (Alaska Native) — preparato 2026-11-23 dal task (207° lotto)
+
+- **food_id**: `food_salmonberries_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 168048 (**SR Legacy**, "Salmonberries, raw (Alaska Native)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **16/18**. Per 100g: energia 47,0kcal, proteine 0,85g, grassi 0,33g, carboidrati 10,1g, fibra 1,90g, calcio 13,0mg, ferro 0,40mg, magnesio 15,0mg, zinco 0,28mg, rame 0,030mg, sodio 14,0mg, folato totale 17,0µg, acido folico 0µg (dichiarato), vitamina C 9,20mg, vitamina A (RAE) 50,0µg (beta-carotene 277µg, dato realmente riportato in pagina), vitamina K 14,8µg — **mancano**: selenio, vitamina B12, vitamina D (non riportati in pagina, non assunti zero).
+- **Analogia usata**: `food_more_selvatiche_alaska_raw` (more selvatiche dell'Alaska, crude, già eseguite sul DB reale — stesso genere botanico *Rubus*, stesso pattern "frutto di bosco selvatico Alaska Native crudo").
+- **Categoria dieta**: `fresh_fruit` (frutto di bosco fresco).
+- **Matrice**: nuova `salmonberries` ("Salmonberries").
+- **Attributi**: `botanical_family=Rosaceae` (genere *Rubus*, come l'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene realmente riportato in pagina, non assunto), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=168048 --food-id=food_salmonberries_raw \
+  --name-it="Salmonberries, crude (Alaska Native)" \
+  --matrix-id=salmonberries --matrix-description-it="Salmonberries" \
+  --baseline-cooking-state=raw --analogy-food-id=food_more_selvatiche_alaska_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168048 --food-id=food_salmonberries_raw \
+  --name-it="Salmonberries, crude (Alaska Native)" \
+  --matrix-id=salmonberries --matrix-description-it="Salmonberries" \
+  --baseline-cooking-state=raw --analogy-food-id=food_more_selvatiche_alaska_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Rosaceae --diet-category=fresh_fruit --apply
+```
+
 ### Medusa (jellyfish), secca e salata — preparato 2026-11-23 dal task (207° lotto)
 
 - **food_id**: `food_medusa_secca_salata` (mai coperto — distinto dalla "medusa cruda" già tentata e scartata ⚠ nel 120° lotto per assenza di record SR Legacy/Foundation pulito: qui invece prodotto diverso, secco e salato, con un record SR Legacy dedicato esistente, non lo stesso tentativo ripetuto). FDC ID 168129 (**SR Legacy**, "Jellyfish, dried, salted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
