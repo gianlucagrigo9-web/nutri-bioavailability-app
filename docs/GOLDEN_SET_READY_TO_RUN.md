@@ -16,6 +16,106 @@
 
 ## Pronti
 
+### Semi di girasole, crudi — preparato 2026-11-23 dal task (202° lotto)
+
+- **food_id**: `food_semi_di_girasole_raw` (distinto da `food_semi_di_girasole_tostati`, FDC 170563, SR Legacy, già eseguito sul DB reale, e da "tostati, salati" del 194° lotto — qui lo stato crudo, non ancora tostato, mancante nella pipeline). FDC ID 2515381 (**Foundation Foods**, "Seeds, sunflower seed, kernel, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g (valore di tabella): energia 571kcal, proteine 18,9g, grassi 48,4g, carboidrati 24,5g, fibra 7,21g, calcio 116mg, ferro 4,37mg, magnesio 302mg, zinco 5,58mg, rame 1,88mg, selenio 17,8µg, sodio 0mg esplicito. **Mancano**: vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina (non presenti sulla pagina, non necessariamente assenti nel record USDA completo).
+- **Analogia usata**: `food_semi_di_girasole_tostati` (stessa specie, già eseguito sul DB reale — qui cambia solo lo stato di cottura, crudo invece di tostato).
+- **Categoria dieta**: `plant_non_fruit` (semi oleosi).
+- **Matrice**: nuova `semi_di_girasole_raw` ("Semi di girasole, crudi").
+- **Attributi**: `carotenoid-matrix-state=raw_intact`, `botanical-family=Asteraceae` (per analogia con la versione tostata), `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=2515381 --food-id=food_semi_di_girasole_raw \
+  --name-it="Semi di girasole, crudi" \
+  --matrix-id=semi_di_girasole_raw --matrix-description-it="Semi di girasole, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_girasole_tostati \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2515381 --food-id=food_semi_di_girasole_raw \
+  --name-it="Semi di girasole, crudi" \
+  --matrix-id=semi_di_girasole_raw --matrix-description-it="Semi di girasole, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_semi_di_girasole_tostati \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Asteraceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Barbabietola, foglie, crude — preparato 2026-11-23 dal task (202° lotto)
+
+- **food_id**: `food_foglie_di_barbabietola_raw` (distinto da `food_foglie_di_barbabietola_cotte`, cotte con sale, 140° lotto — qui lo stato crudo, mai tentato). FDC ID 2747653 (**Foundation Foods**, "Beet greens, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/18**. Per 100g (valore di tabella): energia 26,4kcal (riga energia assente dalla tabella principale della pagina, valore ricavato dalla tabella di confronto — label arrotondata a 25kcal), proteine 1,61g, grassi 0,14g, carboidrati 4,66g, fibra 2,58g, calcio 72,8mg, ferro 3,16mg, magnesio 74,4mg, zinco 0,32mg, rame 0,076mg, sodio 281mg, vitamina C 8,58mg, folato totale 152µg. **Mancano**: selenio, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_spinach_raw` (verdura a foglia, già eseguita sul DB reale — stessa famiglia botanica *Amaranthaceae* della barbabietola rossa già in pipeline, `matrix_category_calcium=high_oxalate` per analogia: le foglie di barbabietola sono notoriamente fra le verdure più ricche di oxalati, come lo spinacio).
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `foglie_di_barbabietola_raw` ("Barbabietola, foglie, crude").
+- **Attributi**: `matrix-category-calcium=high_oxalate`, `carotenoid-matrix-state=raw_intact`, `botanical-family=Amaranthaceae`, `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=2747653 --food-id=food_foglie_di_barbabietola_raw \
+  --name-it="Barbabietola, foglie, crude" \
+  --matrix-id=foglie_di_barbabietola_raw --matrix-description-it="Barbabietola, foglie, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2747653 --food-id=food_foglie_di_barbabietola_raw \
+  --name-it="Barbabietola, foglie, crude" \
+  --matrix-id=foglie_di_barbabietola_raw --matrix-description-it="Barbabietola, foglie, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_spinach_raw \
+  --matrix-category-calcium=high_oxalate --carotenoid-matrix-state=raw_intact \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
+### Queso fresco (formaggio fresco messicano) — preparato 2026-11-23 dal task (202° lotto)
+
+- **food_id**: `food_queso_fresco` (mai tentato in questa pipeline, verificato con `grep` dedicato, zero occorrenze prima di questa aggiunta — non confondere con `food_cotija`, già valutato/eseguito, formaggio messicano diverso, più stagionato e salato). FDC ID 2647442 (**Foundation Foods**, "Cheese, queso fresco, solid" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nessuna lista ingredienti sulla pagina, ma il nome USDA e la categoria "Dairy and Egg Products" non lasciano dubbi: formaggio fresco a latte vaccino, nessun segnale di ingredienti non caseari.
+- **Nutrienti**: **10/18**. Per 100g (valore di tabella): energia 297kcal, proteine 18,9g, grassi 23,4g, carboidrati 2,96g, calcio 602mg, ferro 0mg esplicito, magnesio 27,6mg, zinco 2,91mg, rame 0mg esplicito, sodio 627mg. **Fibra omessa**: la pagina la riporta in tre modi contraddittori ("non dichiarata" / "0g" / "n/a") senza un valore di tabella affidabile — non inventato. **Mancano**: selenio, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_parmigiano_reggiano` (stessa convenzione già usata per svizzero/cheddar/gruyère/edam — analogia funzionale "formaggio", non di tipo specifico, già eseguito sul DB reale).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+- **Matrice**: nuova `queso_fresco` ("Queso fresco").
+- **Attributi**: `baseline-cooking-state=raw` (convenzione già usata per ricotta/mozzarella/formaggi freschi non stagionati).
+
+```
+npm run add-food -- --fdc-id=2647442 --food-id=food_queso_fresco \
+  --name-it="Queso fresco (formaggio fresco messicano)" \
+  --matrix-id=queso_fresco --matrix-description-it="Queso fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647442 --food-id=food_queso_fresco \
+  --name-it="Queso fresco (formaggio fresco messicano)" \
+  --matrix-id=queso_fresco --matrix-description-it="Queso fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
+### Oaxaca (formaggio messicano da fusione) — preparato 2026-11-23 dal task (202° lotto)
+
+- **food_id**: `food_oaxaca` (mai tentato in questa pipeline, verificato con `grep` dedicato, zero occorrenze prima di questa aggiunta). FDC ID 2647441 (**Foundation Foods**, "Cheese, oaxaca, solid" — pagina getfoodfacts.com dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nessuna lista ingredienti sulla pagina; nome USDA e categoria "Dairy and Egg Products" coerenti con formaggio a latte vaccino standard, nessun segnale di ingredienti non caseari.
+- **Nutrienti**: **10/18**. Per 100g (valore di tabella): energia 298kcal, proteine 22,1g, grassi 22,1g, carboidrati 2,40g, calcio 532mg, ferro 0mg esplicito, magnesio 21,6mg, zinco 3,51mg, rame 0mg esplicito, sodio 734mg. **Fibra omessa** (pagina: "non dichiarata", nessun valore di tabella). **Mancano**: selenio, vitamina C, folato totale, acido folico, vitamina B12, vitamina K, beta-carotene, alfa-carotene, beta-criptoxantina.
+- **Analogia usata**: `food_parmigiano_reggiano` (stessa convenzione funzionale "formaggio" già usata per svizzero/cheddar/gruyère/edam/queso fresco in questo stesso lotto, già eseguito sul DB reale).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+- **Matrice**: nuova `oaxaca` ("Oaxaca").
+- **Attributi**: `baseline-cooking-state=raw`.
+
+```
+npm run add-food -- --fdc-id=2647441 --food-id=food_oaxaca \
+  --name-it="Oaxaca (formaggio messicano da fusione)" \
+  --matrix-id=oaxaca --matrix-description-it="Oaxaca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647441 --food-id=food_oaxaca \
+  --name-it="Oaxaca (formaggio messicano da fusione)" \
+  --matrix-id=oaxaca --matrix-description-it="Oaxaca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Mango, cultivar Ataulfo, pelato, crudo — preparato 2026-11-23 dal task (201° lotto)
 
 - **food_id**: `food_mango_ataulfo_raw` (distinto dal mango generico `food_mango_raw` e dal cultivar Tommy Atkins `food_mango_tommy_atkins_raw`, già in coda nel 200° lotto — Ataulfo è un secondo cultivar commerciale diffuso, profilo misurabile diverso, specialmente vitamina C molto più alta). FDC ID 2710834 (**Foundation Foods**, "Mango, Ataulfo, peeled, raw" — pagina getfoodfacts.com dedicata, release USDA 2026-04-30).
