@@ -16,6 +16,104 @@
 
 ## Pronti
 
+### Ippoglosso della Groenlandia, crudo — preparato 2026-11-23 dal task (206° lotto)
+
+- **food_id**: `food_halibut_groenlandia_raw` (mai coperto, verificato con `grep` dedicato — distinto da `food_halibut_raw` FDC 174200 "Atlantic and Pacific" già eseguito: specie diversa, *Reinhardtius hippoglossoides* contro *Hippoglossus* spp.). FDC ID 171965 (**SR Legacy**, "Fish, halibut, Greenland, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota: il 195° lotto aveva scartato la forma COTTA di questa specie per assenza di pagina getfoodfacts dedicata — questa è la forma CRUDA, record distinto, con fonte pulita trovata.
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 186kcal, proteine 14,4g, grassi 13,8g, carboidrati 0g, fibra 0g, calcio 3,00mg, ferro 0,66mg, magnesio 26,0mg, zinco 0,40mg, rame 0,030mg, selenio 36,5µg, sodio 80,0mg, folato totale 1,00µg, acido folico 0µg (dichiarato), vitamina B12 1,00µg, vitamina C 0mg (dichiarato), vitamina A (RAE) 14,0µg (beta-carotene 0µg dichiarato), vitamina D 27,4µg (valore alto, coerente con pesce grasso di acque fredde), vitamina K 0,10µg.
+- **Analogia usata**: `food_halibut_raw` (ippoglosso Atlantico/Pacifico, già eseguito sul DB reale — stesso genere funzionale "pesce piatto grasso di acque fredde", stesso `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `halibut_groenlandia` ("Ippoglosso della Groenlandia").
+- **Attributi**: `is_heme_iron` **attivo** (true, come l'analogia), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171965 --food-id=food_halibut_groenlandia_raw \
+  --name-it="Ippoglosso della Groenlandia, crudo" \
+  --matrix-id=halibut_groenlandia --matrix-description-it="Ippoglosso della Groenlandia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_halibut_raw --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171965 --food-id=food_halibut_groenlandia_raw \
+  --name-it="Ippoglosso della Groenlandia, crudo" \
+  --matrix-id=halibut_groenlandia --matrix-description-it="Ippoglosso della Groenlandia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_halibut_raw --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Latte di cocco, in scatola — preparato 2026-11-23 dal task (206° lotto)
+
+- **food_id**: `food_latte_di_cocco_in_scatola_raw` (distinto da `food_latte_di_cocco_raw` FDC 170172 "raw, liquido spremuto fresco" già eseguito: qui prodotto da conserva in scatola, processo diverso, FDC distinto verificato). FDC ID 170173 (**SR Legacy**, "Nuts, coconut milk, canned (liquid expressed from grated meat and water)" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/18**. Per 100g: energia 197kcal, proteine 2,02g, grassi 21,3g, carboidrati 2,81g, calcio 18,0mg, ferro 3,30mg, magnesio 46,0mg, zinco 0,56mg, rame 0,22mg, sodio 13,0mg, folato totale 14,0µg, acido folico 0µg (dichiarato), vitamina B12 0µg (dichiarato), vitamina C 1,00mg, vitamina A (RAE) 0µg (dichiarato), vitamina D 0µg (dichiarato). **Mancano**: fibra (ambigua/non dichiarata), selenio, beta-carotene, vitamina K.
+- **Analogia usata**: `food_latte_di_cocco_raw` (stesso prodotto, versione fresca, già eseguita sul DB reale — stessa pianta *Cocos nucifera*).
+- **Categoria dieta**: `plant_non_fruit` (derivato vegetale, convenzione già usata per il latte di cocco fresco).
+- **Matrice**: nuova `latte_di_cocco_in_scatola` ("Latte di cocco, in scatola").
+- **Attributi**: `botanical_family=Arecaceae` (come l'analogia), `baseline_cooking_state=raw` (stessa convenzione dell'analogia, liquido spremuto non cotto).
+
+```
+npm run add-food -- --fdc-id=170173 --food-id=food_latte_di_cocco_in_scatola_raw \
+  --name-it="Latte di cocco, in scatola" \
+  --matrix-id=latte_di_cocco_in_scatola --matrix-description-it="Latte di cocco, in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170173 --food-id=food_latte_di_cocco_in_scatola_raw \
+  --name-it="Latte di cocco, in scatola" \
+  --matrix-id=latte_di_cocco_in_scatola --matrix-description-it="Latte di cocco, in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_cocco_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
+### Latte vaccino, parzialmente scremato 2% grassi, con vitamina A e D aggiunte — preparato 2026-11-23 dal task (206° lotto)
+
+- **food_id**: `food_latte_parzialmente_scremato_vitaminizzato_raw` (distinto da `food_latte_parzialmente_scremato_raw` FDC 172205, stesso 2% SENZA vitamine aggiunte, già eseguito — verificato per FDC esatto, nessuna coincidenza; distinto anche da `food_latte_lowfat_1pct_raw` FDC 746772, 1% con vitamine, preparato nel 204° lotto). FDC ID 746778 (**Foundation Foods**, "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/18**. Per 100g: energia 50,0kcal, proteine 3,36g, grassi 1,90g, carboidrati 4,90g, calcio 126mg, ferro 0mg (esplicito), magnesio 12,0mg, zinco 0,43mg, rame 0,0010mg, selenio 1,80µg, sodio 39,0mg, folato totale 2,00µg, vitamina B12 0,55µg, vitamina A (RAE) 83,0µg (beta-carotene 3,00µg), vitamina D 1,13µg. **Mancano**: fibra (ambigua/non dichiarata), acido folico, vitamina C, vitamina K.
+- **Analogia usata**: `food_latte_parzialmente_scremato_raw` (stesso 2% grassi senza vitamine aggiunte, già eseguito sul DB reale — stessa convenzione già usata per il gemello 1% nel 204° lotto).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: nuova `latte_parzialmente_scremato_vitaminizzato` ("Latte vaccino, 2% grassi, vitaminizzato").
+- **Nota trasparenza**: fortificazione dichiarata in etichetta riguarda solo vitamina A e D (non folato/acido folico) — `is-fortified-folate` non impostato, folato 2µg trattato come valore naturale di traccia, nessuna firma di arricchimento su quel nutriente (stessa nota già usata per il gemello 1%).
+
+```
+npm run add-food -- --fdc-id=746778 --food-id=food_latte_parzialmente_scremato_vitaminizzato_raw \
+  --name-it="Latte vaccino, parzialmente scremato 2% grassi, con vitamina A e D aggiunte" \
+  --matrix-id=latte_parzialmente_scremato_vitaminizzato --matrix-description-it="Latte vaccino, 2% grassi, vitaminizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_parzialmente_scremato_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=746778 --food-id=food_latte_parzialmente_scremato_vitaminizzato_raw \
+  --name-it="Latte vaccino, parzialmente scremato 2% grassi, con vitamina A e D aggiunte" \
+  --matrix-id=latte_parzialmente_scremato_vitaminizzato --matrix-description-it="Latte vaccino, 2% grassi, vitaminizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_parzialmente_scremato_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Pomodori a pezzi (schiacciati), in scatola — preparato 2026-11-23 dal task (206° lotto)
+
+- **food_id**: `food_pomodori_schiacciati_in_scatola` (mai coperto, verificato con `grep` dedicato — distinto dalla passata (`food_passata_di_pomodoro_raw` FDC 2685582, preparata nel 200° lotto odierno, consistenza liscia da puree) e dal concentrato (`food_concentrato_di_pomodoro` già eseguito): i pomodori a pezzi/schiacciati mantengono una consistenza più grossolana, prodotto distinto con FDC proprio). FDC ID 2685581 (**Foundation Foods**, "Tomatoes, crushed, canned" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **12/18**. Per 100g: energia 30,0kcal (etichetta; tabella di confronto sulla stessa pagina riporta 32,3kcal, discrepanza interna segnalata per trasparenza — Regola 6), proteine 1,44g, grassi 0,40g, carboidrati 7,14g, fibra 1,94g, calcio 19,2mg, ferro 2,27mg, magnesio 18,6mg, zinco 0,20mg, rame 0,10mg, sodio 140mg, vitamina C 9,10mg. **Mancano**: selenio, folato totale, acido folico, vitamina B12, vitamina A (RAE), beta-carotene, vitamina D (dichiarata "non declared"), vitamina K.
+- **Analogia usata**: `food_passata_di_pomodoro_raw` (stesso prodotto di base, pomodoro in scatola, già preparata nello stesso turno di oggi — stessa pianta *Solanum lycopersicum*, stesso processo di conservazione).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, convenzione PRD §4.9).
+- **Matrice**: nuova `pomodori_schiacciati_in_scatola` ("Pomodori a pezzi, in scatola").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto/in scatola, per analogia), `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=2685581 --food-id=food_pomodori_schiacciati_in_scatola \
+  --name-it="Pomodori a pezzi (schiacciati), in scatola" \
+  --matrix-id=pomodori_schiacciati_in_scatola --matrix-description-it="Pomodori a pezzi, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2685581 --food-id=food_pomodori_schiacciati_in_scatola \
+  --name-it="Pomodori a pezzi (schiacciati), in scatola" \
+  --matrix-id=pomodori_schiacciati_in_scatola --matrix-description-it="Pomodori a pezzi, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Peperoncino ungherese (wax pepper), crudo — preparato 2026-11-23 dal task (205° lotto)
 
 - **food_id**: `food_peperone_ungherese_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_pepper_red_raw`/`food_peperoni_rossi_cotti`/`food_peperoncino_piccante_raw` già eseguiti, cultivar diversa di *Capsicum annuum*). FDC ID 168578 (**SR Legacy**, "Peppers, hungarian, raw" — pagina `getfoodfacts.com/food/peppers-hungarian-raw-168578` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, verificata con WebFetch diretto via agente dedicato).
