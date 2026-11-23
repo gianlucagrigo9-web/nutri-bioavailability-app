@@ -14,6 +14,29 @@
 
 ---
 
+### Castagne giapponesi, bollite e cotte a vapore — preparato 2026-11-23 dal task (209° lotto)
+
+- **food_id**: `food_castagne_giapponesi_bollite` (verificato non coperto per FDC né per nome — specie distinta, *Castanea crenata*, mai tracciata in questa pipeline). FDC ID 168589 (**SR Legacy**, "Nuts, chestnuts, japanese, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/18**. Per 100g: energia 56,0kcal, proteine 0,82g, grassi 0,19g, carboidrati 12,6g, calcio 11,0mg, ferro 0,53mg, magnesio 18,0mg, zinco 0,40mg, rame 0,20mg, sodio 5,00mg, folato totale 17,0µg, acido folico 0µg, vitamina B12 0µg, vitamina A (RAE) 1,00µg, vitamina D 0µg — **mancano**: fibra (pagina contraddittoria: "not declared" vs "0g" nel riepilogo, non usata), selenio, vitamina K. Coerenza verificata: folato totale/DFE/alimentare tutti 17,0µg; ripartizione macronutrienti (91% carb/3% grassi/6% proteine) coerente con l'energia dichiarata.
+- **Analogia usata**: `food_castagne_cinesi_bollite` (stesso genere *Castanea*, stessa preparazione bollita/vapore, già nel DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Attributi**: `botanical_family=Fagaceae` (famiglia reale, per analogia).
+
+```
+npm run add-food -- --fdc-id=168589 --food-id=food_castagne_giapponesi_bollite \
+  --name-it="Castagne giapponesi, bollite e cotte a vapore" \
+  --matrix-id=castagne_giapponesi_bollite --matrix-description-it="Castagne giapponesi, bollite" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_cinesi_bollite \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168589 --food-id=food_castagne_giapponesi_bollite \
+  --name-it="Castagne giapponesi, bollite e cotte a vapore" \
+  --matrix-id=castagne_giapponesi_bollite --matrix-description-it="Castagne giapponesi, bollite" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_castagne_cinesi_bollite \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne europee, secche, non sbucciate — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_castagne_europee_secche_non_sbucciate` (verificato non coperto per FDC né per nome — distinto da `food_castagne_raw` FDC 170575 (crude sbucciate) e da `food_castagne_europee_tostate` FDC 170190 preparata in questo stesso lotto). FDC ID 170576 (**SR Legacy**, "Nuts, chestnuts, european, dried, unpeeled" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
