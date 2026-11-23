@@ -16,6 +16,28 @@
 
 ## Pronti
 
+### Formaggio cotija, solido — preparato 2026-11-23 dal task (210° lotto)
+
+- **food_id**: `food_formaggio_cotija_raw` (mai coperto, verificato con `grep` dedicato). FDC ID 2647443 (**Foundation**, "Cheese, cotija, solid" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 350kcal (pannello; stat box divergente a 352, uso pannello), proteine 24g, grassi 27g, carboidrati 3g, calcio 700mg, ferro 0mg (dichiarato), magnesio 29,9mg, zinco 3,60mg, rame 0mg (dichiarato), sodio 1630mg, vitamina D 0µg (dichiarato) — **mancano**: fibra (pagina contraddittoria, non usata), selenio, folato totale, acido folico, vitamina B12, vitamina C, vitamina A RAE (pagina riporta solo "Retinol 167µg", non RAE, non usato per non rischiare un'unità sbagliata), vitamina K.
+- **Analogia usata**: `food_parmigiano_reggiano` (stesso precedente già applicato a formaggi semi-duri/stagionati non italiani — svizzero, cheddar, gruyère).
+- **Categoria dieta**: `egg_dairy` (formaggio).
+
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija_raw \
+  --name-it="Formaggio cotija, solido" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=2647443 --food-id=food_formaggio_cotija_raw \
+  --name-it="Formaggio cotija, solido" \
+  --matrix-id=formaggio_cotija --matrix-description-it="Formaggio cotija" \
+  --baseline-cooking-state=raw --analogy-food-id=food_parmigiano_reggiano \
+  --diet-category=egg_dairy --apply
+```
+
 ### Beef, chuck, roast, boneless, choice, crudo — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_beef_chuck_roast_raw` (mai coperto, verificato con `grep` dedicato; `food_beef_raw` esiste già ed è nella lista ID riservati — non riusato). FDC ID 2646174 (**Foundation**, "Beef, chuck, roast, boneless, choice, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
