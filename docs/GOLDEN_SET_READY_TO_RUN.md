@@ -14,6 +14,8 @@
 
 ---
 
+## Pronti
+
 ### Succo di pomodoro, con ingredienti aggiunti, da concentrato, shelf-stable — preparato 2026-11-23 dal task (208° lotto)
 
 - **food_id**: `food_succo_di_pomodoro_raw` (verificato non coperto sia per FDC che per nome — nessun `food_succo_di_pomodoro*`/`food_tomato_juice*` esistente). FDC ID 2003596 (**Foundation**, "Tomato juice, with added ingredients, from concentrate, shelf stable" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
