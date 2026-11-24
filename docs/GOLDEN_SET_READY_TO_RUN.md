@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Succo di mela, da concentrato surgelato, diluito, con acido ascorbico aggiunto — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_succo_di_mela_da_concentrato_surgelato_vitc` (distinto da `food_succo_di_mela_da_concentrato_surgelato` già in "Pronti", FDC 173935 — quello è SENZA acido ascorbico aggiunto, questo è CON, FDC diverso 167775; verificato zero occorrenze precedenti con `grep`). FDC ID 167775 (**SR Legacy**, "Apple juice, frozen concentrate, unsweetened, diluted with 3 volume water, with added ascorbic acid" — pagina `getfoodfacts.com/food/apple-juice-frozen-concentrate-unsweetened-diluted-with-3-volume-water-with-adde-167775` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 47,0kcal, proteine 0,14g, grassi 0,10g, carboidrati 11,5g, fibra 0,10g, calcio 6,00mg, ferro 0,26mg, magnesio 5,00mg, zinco 0,040mg, rame 0,014mg, vitamina C 25,0mg (alta — coerente con l'acido ascorbico aggiunto dichiarato nel nome del record), folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,10µg. Mancano (non riportati nel record): vitamina K, beta-carotene.
+- **Analogia usata**: `food_succo_di_mela_da_concentrato_surgelato` (stesso prodotto base, già in coda "Pronti", qui variante con vitamina C aggiunta).
+- **Categoria dieta**: `plant_non_fruit` (succo di frutta trasformato, non frutta fresca nella definizione restrittiva PRD §4.9 — stesso criterio già usato per gli altri succhi di mela della pipeline).
+- **Matrice**: nuova `succo_di_mela_da_concentrato_vitc` ("Succo di mela da concentrato surgelato, diluito, con acido ascorbico aggiunto").
+- **Attributi**: `botanical_family=Rosaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=167775 --food-id=food_succo_di_mela_da_concentrato_surgelato_vitc \
+  --name-it="Succo di mela, da concentrato surgelato, diluito, con acido ascorbico aggiunto" \
+  --matrix-id=succo_di_mela_da_concentrato_vitc --matrix-description-it="Succo di mela da concentrato surgelato, diluito, con acido ascorbico aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_da_concentrato_surgelato \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167775 --food-id=food_succo_di_mela_da_concentrato_surgelato_vitc \
+  --name-it="Succo di mela, da concentrato surgelato, diluito, con acido ascorbico aggiunto" \
+  --matrix-id=succo_di_mela_da_concentrato_vitc --matrix-description-it="Succo di mela da concentrato surgelato, diluito, con acido ascorbico aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_da_concentrato_surgelato \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Granchio, polpette (crab cakes), ricetta casalinga, cotte — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_polpette_di_granchio_cotte` (distinto da `food_granchio_raw`/`food_granchio_cotto`, FDC 174204/174205, già eseguiti — qui ricetta composita con panatura, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 171967 (**SR Legacy**, "Crustaceans, crab, blue, crab cakes, home recipe" — pagina `getfoodfacts.com/food/crustaceans-crab-blue-crab-cakes-home-recipe-171967` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
