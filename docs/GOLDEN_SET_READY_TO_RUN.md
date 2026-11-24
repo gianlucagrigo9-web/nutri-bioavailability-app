@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Noci miste, tostate a secco, con arachidi e sale, blend pistacchio (PLANTERS) — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_noci_miste_pistacchio_tostate_salate` (categoria interamente nuova per questo DB — nessuna "noci miste" composita preesistente, solo frutta secca singola; verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170586 (**SR Legacy**, "Nuts, mixed nuts, dry roasted, with peanuts, salt added, PLANTERS pistachio blend" — pagina `getfoodfacts.com/food/nuts-mixed-nuts-dry-roasted-with-peanuts-salt-added-planters-pistachio-blend-170586` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 572kcal, proteine 23,3g, grassi 47,5g, carboidrati 23,1g, fibra 8,10g, calcio 129mg, ferro 3,43mg, magnesio 209mg, zinco 3,42mg, rame 1,01mg, folato totale 60,0µg, selenio 11,0µg, vitamina K 8,90µg (solo fillochinone riportato, nessun totale nel record — stesso trattamento già accettato altrove in questa pipeline), beta-carotene 54,0µg. Mancano (non riportati nel record): vitamina C, acido folico (solo folato totale/da cibo, nessuna riga separata), vitamina B12.
+- **Analogia usata**: `food_nocciole_tostate` (analogia **funzionale**, non botanica: frutta secca tostata già eseguita sul DB reale — "noci miste" è un composito di più specie, nessuna famiglia botanica unica applicabile).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/semi, vegano sì).
+- **Matrice**: nuova `noci_miste_pistacchio_tostate_salate` ("Noci miste, tostate a secco, con arachidi e sale, blend pistacchio").
+- **Attributi**: `botanical_family` omesso (NULL — composito multi-specie, nessuna famiglia unica).
+
+```
+npm run add-food -- --fdc-id=170586 --food-id=food_noci_miste_pistacchio_tostate_salate \
+  --name-it="Noci miste, tostate a secco, con arachidi e sale, blend pistacchio" \
+  --matrix-id=noci_miste_pistacchio_tostate_salate --matrix-description-it="Noci miste, tostate a secco, con arachidi e sale, blend pistacchio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_tostate \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170586 --food-id=food_noci_miste_pistacchio_tostate_salate \
+  --name-it="Noci miste, tostate a secco, con arachidi e sale, blend pistacchio" \
+  --matrix-id=noci_miste_pistacchio_tostate_salate --matrix-description-it="Noci miste, tostate a secco, con arachidi e sale, blend pistacchio" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_tostate \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_succo_di_mela_concentrato_surgelato_non_diluito_vitc` (distinto dalle versioni diluite già pronte/eseguite — qui concentrato non diluito, densità nutrizionale molto maggiore, FDC diverso; verificato zero occorrenze precedenti con `grep`). FDC ID 168188 (**SR Legacy**, "Apple juice, frozen concentrate, unsweetened, undiluted, with added ascorbic acid" — pagina `getfoodfacts.com/food/apple-juice-frozen-concentrate-unsweetened-undiluted-with-added-ascorbic-acid-168188` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
