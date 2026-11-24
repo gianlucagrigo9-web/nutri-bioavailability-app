@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Mandorle, tostate al miele, non sbucciate — preparato 2026-11-24 dal task (212° lotto)
+
+- **food_id**: `food_mandorle_tostate_miele` (mai coperto, verificato con `grep` dedicato — distinto da `food_mandorle_tostate` (a secco con sale, FDC 168596), `food_mandorle_tostate_olio` (in olio senza sale, FDC 170159) e `food_mandorle_tostate_olio_sale` (in olio con sale, FDC 169419), tutte già eseguite/preparate: qui tostatura al miele, non sbucciate, variabile ancora assente in questa pipeline). FDC ID 168592 (**SR Legacy**, "Nuts, almonds, honey roasted, unblanched" — pagina `getfoodfacts.com/food/nuts-almonds-honey-roasted-unblanched-168592` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 594kcal, proteine 18,2g, grassi 49,9g, carboidrati 27,9g, fibra 13,7g, calcio 263mg, ferro 2,83mg, magnesio 240mg, zinco 2,60mg, rame 0,97mg, vitamina C 0,70mg, folato totale 32,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. **Mancano** (assenti dalla pagina): selenio, vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina.
+- **Analogia usata**: `food_mandorle_tostate` (stessa specie *Prunus dulcis*, già eseguita sul DB reale — qui tostatura al miele anziché a secco).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca, stessa convenzione delle altre mandorle già in pipeline).
+- **Matrice**: nuova `mandorle_tostate_miele` ("Mandorle, tostate al miele, non sbucciate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione delle altre mandorle), `carotenoid_matrix_state=cooked_or_disrupted` (tostatura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (*Prunus dulcis*, stessa famiglia già usata per le mandorle), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168592 --food-id=food_mandorle_tostate_miele \
+  --name-it="Mandorle, tostate al miele, non sbucciate" \
+  --matrix-id=mandorle_tostate_miele --matrix-description-it="Mandorle, tostate al miele, non sbucciate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168592 --food-id=food_mandorle_tostate_miele \
+  --name-it="Mandorle, tostate al miele, non sbucciate" \
+  --matrix-id=mandorle_tostate_miele --matrix-description-it="Mandorle, tostate al miele, non sbucciate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pancetta (bacon), cotta al microonde — preparato 2026-11-24 dal task (212° lotto)
+
+- **food_id**: `food_pancetta_cotta_microonde` (mai coperto, verificato con `grep` dedicato — distinto da `food_pancetta_cotta` (cotta in padella/pan-browned, FDC 168322) e `food_bacon_canadese_cotto` (bacon canadese, cotto in padella, FDC 168383), già eseguite: qui bacon normale (non canadese) cotto al microonde, metodo di cottura diverso). FDC ID 168321 (**SR Legacy**, "Pork, cured, bacon, cooked, microwaved" — pagina `getfoodfacts.com/food/pork-cured-bacon-cooked-microwaved-168321` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 476kcal, proteine 39,0g, grassi 34,1g, carboidrati 0,48g, fibra 0g esplicito, calcio 13,0mg, ferro 1,14mg, magnesio 34,0mg, zinco 3,51mg, rame 0,12mg, selenio 65,1µg, vitamina C 0mg esplicito, vitamina B12 1,00µg, beta-carotene/alfa-carotene/beta-criptoxantina tutti 0µg espliciti. Sodio 1783mg/100g, coerente con un prodotto conservato/cotto. **Mancano** (assenti dalla pagina, solo "acido folico" 0µg è presente, non il folato totale): folato totale, vitamina K.
+- **Analogia usata**: `food_pancetta_cotta` (stesso taglio/prodotto, metodo di cottura diverso — microonde anziché padella).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pancetta_cotta_microonde` ("Pancetta (bacon), cotta al microonde").
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`), `matrix_category_calcium` omesso (NULL, non pertinente), `carotenoid_matrix_state` omesso (non pertinente a carne), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=microwaved`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168321 --food-id=food_pancetta_cotta_microonde \
+  --name-it="Pancetta (bacon), cotta al microonde" \
+  --matrix-id=pancetta_cotta_microonde --matrix-description-it="Pancetta (bacon), cotta al microonde" \
+  --baseline-cooking-state=microwaved --analogy-food-id=food_pancetta_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168321 --food-id=food_pancetta_cotta_microonde \
+  --name-it="Pancetta (bacon), cotta al microonde" \
+  --matrix-id=pancetta_cotta_microonde --matrix-description-it="Pancetta (bacon), cotta al microonde" \
+  --baseline-cooking-state=microwaved --analogy-food-id=food_pancetta_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### HORMEL, Cure 81 Ham (prosciutto cotto a marchio) — preparato 2026-11-24 dal task (212° lotto)
+
+- **food_id**: `food_prosciutto_hormel_cure81` (mai coperto, verificato con `grep` dedicato — distinto dal generico `food_prosciutto_cotto` (FDC 167872), già eseguito: qui prodotto a marchio specifico). FDC ID 167909 (**SR Legacy**, "HORMEL, Cure 81 Ham" — pagina `getfoodfacts.com/food/hormel-cure-81-ham-167909` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/17** (soglia minima, stesso livello già accettato per `food_queso_fresco` nel 202° lotto). Per 100g: energia 106kcal, proteine 18,4g, grassi 3,59g, carboidrati 0,21g, calcio 4,00mg, ferro 0,80mg, magnesio 20,0mg, zinco 2,00mg, rame 0,10mg, vitamina C 1,60mg. Sodio 1038mg/100g, coerente con un prosciutto cotto conservato a marchio. **Mancano** (assenti dalla pagina): fibra (pannello mostra sia "not declared" sia un riquadro "0g" in conflitto — trattata come mancante), selenio, folato totale, vitamina B12, vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina.
+- **Analogia usata**: `food_prosciutto_cotto` (stesso prodotto funzionale, prosciutto cotto — qui a marchio specifico anziché generico).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_hormel_cure81` ("HORMEL, Cure 81 Ham").
+- **Attributi**: `is_heme_iron` (flag `--is-heme-iron`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (non pertinente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (non pertinente), `baseline_cooking_state=cured` (prodotto già cotto/stagionato a marchio, nessuna ulteriore cottura dichiarata), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167909 --food-id=food_prosciutto_hormel_cure81 \
+  --name-it="HORMEL, Cure 81 Ham (prosciutto cotto a marchio)" \
+  --matrix-id=prosciutto_hormel_cure81 --matrix-description-it="HORMEL, Cure 81 Ham" \
+  --baseline-cooking-state=cured --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167909 --food-id=food_prosciutto_hormel_cure81 \
+  --name-it="HORMEL, Cure 81 Ham (prosciutto cotto a marchio)" \
+  --matrix-id=prosciutto_hormel_cure81 --matrix-description-it="HORMEL, Cure 81 Ham" \
+  --baseline-cooking-state=cured --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Chilchen (bevanda di bacche rosse, Navajo) — preparato 2026-11-24 dal task (212° lotto)
 
 - **food_id**: `food_chilchen_navajo_raw` (mai coperto, verificato con `grep` dedicato su "chilchen" — nessun doppione). FDC ID 167630 (**SR Legacy**, "Chilchen (Red Berry Beverage) (Navajo)" — pagina `getfoodfacts.com/food/chilchen-red-berry-beverage-navajo-167630` dedicata e pulita, FDC ID e dataType citati esplicitamente, con link diretto a `fdc.nal.usda.gov/food-details/167630/nutrients`).
