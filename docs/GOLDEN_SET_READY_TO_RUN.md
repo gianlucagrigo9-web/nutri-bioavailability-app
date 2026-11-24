@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Banana, troppo matura, cruda — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_banana_troppo_matura_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_banana_raw` (matura standard) e `food_platano_non_maturo_raw` (platano acerbo), già eseguite: qui stadio di maturazione specifico "overripe", profilo zuccheri/amido diverso). FDC ID 1105073 (**Foundation Foods**, "Bananas, overripe, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 85,0kcal, proteine 0,73g, grassi 0,22g, carboidrati 20,1g, fibra 1,70g, beta-carotene 10,0µg, alfa-carotene 8,00µg, beta-criptoxantina 0µg, vitamina C 9,70mg, folato totale 25,0µg, vitamina K 0,20µg, vitamina A (RAE) 1,00µg. **Mancano** (confermato "not declared" su due fonti indipendenti — getfoodfacts.com e nutritionvalue.org, non un limite di visualizzazione): calcio, ferro, magnesio, zinco, rame, selenio, vitamina B12, acido folico (non separato), sodio.
+- **Analogia usata**: `food_banana_raw` (banana matura standard, già eseguita sul DB reale — stesso genere *Musa*, stadio di maturazione diverso).
+- **Categoria dieta**: `fresh_fruit`.
+- **Matrice**: nuova `banana_troppo_matura` ("Banana, troppo matura").
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (per analogia, frutto fresco crudo), `botanical_family=Musaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=1105073 --food-id=food_banana_troppo_matura_raw \
+  --name-it="Banana, troppo matura, cruda" \
+  --matrix-id=banana_troppo_matura --matrix-description-it="Banana, troppo matura" \
+  --baseline-cooking-state=raw --analogy-food-id=food_banana_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae \
+  --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=1105073 --food-id=food_banana_troppo_matura_raw \
+  --name-it="Banana, troppo matura, cruda" \
+  --matrix-id=banana_troppo_matura --matrix-description-it="Banana, troppo matura" \
+  --baseline-cooking-state=raw --analogy-food-id=food_banana_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae \
+  --diet-category=fresh_fruit --apply
+```
+
 ### Foglie di amaranto, cotte (bollite, con sale) — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_foglie_di_amaranto_cotte` (mai coperto, verificato con `grep` dedicato — distinto da `food_foglie_di_amaranto_raw` FDC 168385, già eseguito: qui cotto/bollito invece che crudo). FDC ID 168492 (**SR Legacy**, "Amaranth leaves, cooked, boiled, drained, with salt"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata per questo specifico FDC ID; verificato invece su `tools.myfooddata.com/nutrition-facts/168492/wt1`, che cita esplicitamente FDC 168492 e linka `fdc.nal.usda.gov/food-details/168492/nutrients` — stessa convenzione già accettata altrove in questa pipeline (es. `food_burro_salato`) quando getfoodfacts non indicizza il record.
