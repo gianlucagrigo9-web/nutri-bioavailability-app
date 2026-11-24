@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Beefalo, composto di tagli, cotto (arrosto) — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_beefalo_cotto` (mai coperto, verificato con `grep` dedicato — controparte cotta di `food_beefalo_raw`, preparata nello stesso turno). FDC ID 173848 (**SR Legacy**, "Game meat, beefalo, composite of cuts, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18 verificati** (fibra e i 3 carotenoidi non controllati in questa verifica — tipicamente assenti/non applicabili per la carne). Per 100g: energia 188kcal, proteine 30,7g, grassi 6,32g, carboidrati 0g, calcio 24,0mg, ferro 3,05mg, zinco 6,40mg, selenio 13,1µg, vitamina C 9,00mg, folato totale 18,0µg, vitamina B12 2,55µg, sodio 82,0mg. **Mancano** (assenti dal record, 38 nutrienti totali elencati): magnesio, rame, vitamina K.
+- **Analogia usata**: `food_bisonte_girello_cotto` (bisonte top round cotto, già eseguito sul DB reale — stessa famiglia Bovidae, carne rossa magra cotta, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `beefalo_cotto` ("Beefalo, composto di tagli, cotto").
+- **Attributi**: `is_heme_iron` (carne rossa), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=173848 --food-id=food_beefalo_cotto \
+  --name-it="Beefalo, composto di tagli, cotto (arrosto)" \
+  --matrix-id=beefalo_cotto --matrix-description-it="Beefalo, composto di tagli, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_bisonte_girello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173848 --food-id=food_beefalo_cotto \
+  --name-it="Beefalo, composto di tagli, cotto (arrosto)" \
+  --matrix-id=beefalo_cotto --matrix-description-it="Beefalo, composto di tagli, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_bisonte_girello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Beefalo, composto di tagli, crudo — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_beefalo_raw` (mai coperto, verificato con `grep` dedicato — prima voce "beefalo" in questa pipeline, ibrido bovino-bisonte distinto dal bisonte puro già ampiamente coperto). FDC ID 175296 (**SR Legacy**, "Game meat, beefalo, composite of cuts, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
