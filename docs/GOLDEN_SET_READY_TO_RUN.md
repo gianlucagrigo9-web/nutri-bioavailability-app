@@ -16,6 +16,28 @@
 
 ## Pronti
 
+### Latte vaccino, scremato, arricchito di calcio — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_latte_scremato_calcio_arricchito_raw` (nuovo — distinto da `food_latte_scremato_raw` (FDC 171269, scremato con vit A/D, già eseguito) e da `food_latte_lowfat_1pct_raw` (FDC 746772, 1%, già eseguito): qui fortificazione specifica di calcio, 204mg/100g contro i ~120-125mg tipici del latte scremato non arricchito (+63-70%), prodotto distinto con proprio FDC. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169868 (**SR Legacy**, "Milk, fluid, nonfat, calcium fortified (fat free or skim)" — pagina `getfoodfacts.com/food/milk-fluid-nonfat-calcium-fortified-fat-free-or-skim-169868` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 35,0kcal, proteine 3,40g, grassi 0,18g, carboidrati 4,85g, fibra 0g esplicito, calcio 204mg (arricchito, reale), ferro 0,040mg, magnesio 11,0mg, zinco 0,40mg, rame 0,011mg, vitamina C 1,00mg, folato totale 5,00µg, acido folico 0µg esplicito, vitamina B12 0,38µg, selenio 2,10µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_latte_scremato_raw` (latte scremato, Golden Set pipeline, già eseguito sul DB reale — stesso prodotto base, qui con fortificazione di calcio aggiuntiva).
+- **Categoria dieta**: `egg_dairy` (latte).
+- **Matrice**: nuova `latte_scremato_calcio_arricchito` ("Latte vaccino, scremato, arricchito di calcio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, latte non è una matrice vegetale a ossalato), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, la fortificazione qui è di calcio non di folato).
+
+```
+npm run add-food -- --fdc-id=169868 --food-id=food_latte_scremato_calcio_arricchito_raw \
+  --name-it="Latte vaccino, scremato, arricchito di calcio" \
+  --matrix-id=latte_scremato_calcio_arricchito --matrix-description-it="Latte vaccino, scremato, arricchito di calcio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169868 --food-id=food_latte_scremato_calcio_arricchito_raw \
+  --name-it="Latte vaccino, scremato, arricchito di calcio" \
+  --matrix-id=latte_scremato_calcio_arricchito --matrix-description-it="Latte vaccino, scremato, arricchito di calcio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_scremato_raw --diet-category=egg_dairy --apply
+```
+
 ### Navone (rutabaga), crudo — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_navone_raw` (nuovo — **corregge un gap dichiarato nel centoventottesimo lotto**: lì si era trovato solo un record Foundation (FDC 2727580, "Rutabaga, peeled, raw") con 7/17 nutrienti, scartato come `⚠`. Questa ricerca ha trovato un record **SR Legacy diverso** (FDC 168454) con dati completi, mai notato prima — verificato con `grep` dedicato, zero occorrenze precedenti per questo FDC specifico). FDC ID 168454 (**SR Legacy**, "Rutabagas, raw" — pagina `getfoodfacts.com/food/rutabagas-raw-168454` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
