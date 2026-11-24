@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Prosciutto cotto (fetta), non riscaldato, con acqua aggiunta — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_prosciutto_fetta_non_riscaldato` (nuovo — taglio "slice/fetta" mai coperto in questa pipeline, distinto da `food_prosciutto_girello_non_riscaldato` (FDC 168348, taglio "rump/girello") e `food_prosciutto_stinco_non_riscaldato` (FDC 168347, taglio "shank/stinco"), già eseguiti. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168346 (**SR Legacy**, "Pork, cured, ham -- water added, slice, bone-in, separable lean and fat, unheated" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-slice-bone-in-separable-lean-and-fat-unheated-168346` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 164kcal, proteine 15,7g, grassi 10,8g, carboidrati 1,10g, fibra 0g esplicito, calcio 8,00mg, ferro 0,98mg, magnesio 16,0mg, zinco 1,74mg, rame 0,18mg, vitamina C 0mg esplicito, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,38µg, selenio 32,0µg, vitamina K 0µg esplicito (fillochinone/menachinone-4/diidrofillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_prosciutto_girello_non_riscaldato` (stesso tipo di prosciutto cotto con acqua aggiunta, già eseguito sul DB reale — taglio diverso, stesso stato "unheated").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_fetta_non_riscaldato` ("Prosciutto cotto, fetta, non riscaldato").
+- **Attributi**: `is_heme_iron` attivo (true — carne suina), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=unheated` (FDC dichiara esplicitamente "unheated"), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168346 --food-id=food_prosciutto_fetta_non_riscaldato \
+  --name-it="Prosciutto cotto (fetta), non riscaldato" \
+  --matrix-id=prosciutto_fetta_non_riscaldato --matrix-description-it="Prosciutto cotto, fetta, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_girello_non_riscaldato --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168346 --food-id=food_prosciutto_fetta_non_riscaldato \
+  --name-it="Prosciutto cotto (fetta), non riscaldato" \
+  --matrix-id=prosciutto_fetta_non_riscaldato --matrix-description-it="Prosciutto cotto, fetta, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_girello_non_riscaldato --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Ippoglosso (halibut), con pelle, cotto — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_halibut_con_pelle_cotto` (nuovo — distinto da `food_halibut_raw` già eseguito, FDC 174200, "Atlantic and Pacific, raw"; qui forma COTTA con pelle, preparazione Alaska Native. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169812 (**SR Legacy**, "Fish, halibut, cooked, with skin (Alaska Native)" — pagina `getfoodfacts.com/food/fish-halibut-cooked-with-skin-alaska-native-169812` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
