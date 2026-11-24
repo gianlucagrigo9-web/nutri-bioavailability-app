@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Formaggio cheddar, nonfat o senza grassi — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_formaggio_cheddar_nonfat_raw` (distinto dal cheddar naturale già eseguito `food_formaggio_cheddar_raw` — qui versione specificamente "nonfat/senza grassi", FDC diverso, macro profilo molto diverso; verificato con `grep` dedicato, zero occorrenze precedenti sui tre file. Stessa logica appena applicata al formaggio svizzero nonfat in questo stesso lotto). FDC ID 171295 (**SR Legacy**, "Cheese, cheddar, nonfat or fat free" — pagina `getfoodfacts.com/food/cheese-cheddar-nonfat-or-fat-free-171295` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 157kcal, proteine 32,1g, grassi 0g esplicito, carboidrati 7,14g, fibra 0g esplicito, calcio 893mg, ferro 0mg esplicito, magnesio 16,0mg, zinco 1,82mg, rame 0,021mg, vitamina C 0mg esplicito, folato totale 11,0µg, acido folico 0µg esplicito (nessuna fortificazione), vitamina B12 0,49µg, selenio 14,5µg, vitamina K 0,60µg, beta-carotene 4,00µg. Record completo, nessun nutriente mancante.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (stesso formaggio di base, già eseguito sul DB reale — qui solo la variante nonfat).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_cheddar_nonfat` ("Formaggio cheddar, nonfat o senza grassi").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente dell'intera famiglia), `carotenoid_matrix_state` omesso (NULL — non applicabile a un formaggio nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (stesso precedente usato per gli altri formaggi non stagionati a lungo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171295 --food-id=food_formaggio_cheddar_nonfat_raw \
+  --name-it="Formaggio cheddar, nonfat o senza grassi" \
+  --matrix-id=formaggio_cheddar_nonfat --matrix-description-it="Formaggio cheddar, nonfat o senza grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171295 --food-id=food_formaggio_cheddar_nonfat_raw \
+  --name-it="Formaggio cheddar, nonfat o senza grassi" \
+  --matrix-id=formaggio_cheddar_nonfat --matrix-description-it="Formaggio cheddar, nonfat o senza grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Pesce tamburo d'acqua dolce (freshwater drum), cotto (calore secco) — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_pesce_tamburo_dacqua_dolce_cotto` (specie mai tentata in questa pipeline — *Aplodinotus grunniens*, verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 171993 (**SR Legacy**, "Fish, drum, freshwater, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-drum-freshwater-cooked-dry-heat-171993` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 153kcal, proteine 22,5g, grassi 6,32g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 77,0mg, ferro 1,15mg, magnesio 38,0mg, zinco 0,85mg, rame 0,30mg, vitamina C 1,00mg, folato totale 17,0µg, acido folico 0µg esplicito, vitamina B12 2,31µg, selenio 16,2µg. Mancano (non riportati nel record): vitamina K, beta-carotene (il record riporta solo retinolo/vitamina A RAE 59,0µg, nessuna riga beta-carotene).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco cotto, già eseguito sul DB reale — stessa convenzione funzionale già usata per altre specie ittiche d'acqua dolce/mare prive di un'analogia più specifica).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_tamburo_dacqua_dolce` ("Pesce tamburo d'acqua dolce").
+- **Attributi**: `is_heme_iron` attivo (true — pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171993 --food-id=food_pesce_tamburo_dacqua_dolce_cotto \
+  --name-it="Pesce tamburo d'acqua dolce, cotto (calore secco)" \
+  --matrix-id=pesce_tamburo_dacqua_dolce --matrix-description-it="Pesce tamburo d'acqua dolce, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171993 --food-id=food_pesce_tamburo_dacqua_dolce_cotto \
+  --name-it="Pesce tamburo d'acqua dolce, cotto (calore secco)" \
+  --matrix-id=pesce_tamburo_dacqua_dolce --matrix-description-it="Pesce tamburo d'acqua dolce, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Gefiltefish, commerciale, ricetta dolce — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_gefiltefish_dolce` (prodotto ittico lavorato mai tentato in questa pipeline — polpettone di pesce macinato tipico della cucina ebraica ashkenazita, uovo/matzo/zucchero; verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 171961 (**SR Legacy**, "Fish, gefiltefish, commercial, sweet recipe" — pagina `getfoodfacts.com/food/fish-gefiltefish-commercial-sweet-recipe-171961` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 84,0kcal, proteine 9,07g, grassi 1,73g, carboidrati 7,41g, fibra 0g esplicito, calcio 23,0mg, ferro 2,48mg, magnesio 9,00mg, zinco 0,82mg, rame 0,20mg, vitamina C 0,80mg, folato totale 3,00µg, acido folico 0µg esplicito, vitamina B12 0,84µg, selenio 10,5µg. Mancano (non riportati nel record): vitamina K, beta-carotene (il record riporta solo retinolo/vitamina A RAE 27,0µg, nessuna riga beta-carotene).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco cotto, già eseguito sul DB reale — analogia funzionale per prodotto ittico lavorato/cotto, nessuna analogia più specifica disponibile per un polpettone di pesce misto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `gefiltefish_dolce` ("Gefiltefish, commerciale, ricetta dolce").
+- **Attributi**: `is_heme_iron` attivo (true — pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (prodotto cotto/poché), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171961 --food-id=food_gefiltefish_dolce \
+  --name-it="Gefiltefish, commerciale, ricetta dolce" \
+  --matrix-id=gefiltefish_dolce --matrix-description-it="Gefiltefish, commerciale, ricetta dolce" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171961 --food-id=food_gefiltefish_dolce \
+  --name-it="Gefiltefish, commerciale, ricetta dolce" \
+  --matrix-id=gefiltefish_dolce --matrix-description-it="Gefiltefish, commerciale, ricetta dolce" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Germogli di bambù, cotti (bolliti, scolati), con sale — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_germogli_di_bambu_bolliti` (categoria interamente nuova per questo DB — nessun germoglio di bambù preesistente in nessuna forma; verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168497 (**SR Legacy**, "Bamboo shoots, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/bamboo-shoots-cooked-boiled-drained-with-salt-168497` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 11,0kcal, proteine 1,53g, grassi 0,22g, carboidrati 1,52g, fibra 1,00g, calcio 12,0mg, ferro 0,24mg, magnesio 3,00mg, zinco 0,47mg, rame 0,082mg, vitamina C 0mg esplicito, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,40µg. Mancano (non riportati nel record): vitamina K, beta-carotene (il record riporta solo vitamina A RAE/retinolo a 0µg, nessuna riga beta-carotene).
+- **Analogia usata**: `food_asparagi_cotti` (ortaggio a germoglio/turione cotto, già eseguito sul DB reale — stessa categoria funzionale "verdura bollita a basso contenuto calorico", nessuna analogia botanica più specifica disponibile, famiglia Poaceae non ancora rappresentata tra le verdure).
+- **Categoria dieta**: `plant_non_fruit` (verdura, vegano sì).
+- **Matrice**: nuova `germogli_di_bambu_bolliti` ("Germogli di bambù, cotti (bolliti, scolati), con sale").
+- **Attributi**: `botanical_family=Poaceae` (bambù, famiglia delle graminacee), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati nel record), `baseline_cooking_state=boiled`.
+
+```
+npm run add-food -- --fdc-id=168497 --food-id=food_germogli_di_bambu_bolliti \
+  --name-it="Germogli di bambù, cotti (bolliti, scolati), con sale" \
+  --matrix-id=germogli_di_bambu_bolliti --matrix-description-it="Germogli di bambù, cotti (bolliti, scolati), con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_asparagi_cotti \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168497 --food-id=food_germogli_di_bambu_bolliti \
+  --name-it="Germogli di bambù, cotti (bolliti, scolati), con sale" \
+  --matrix-id=germogli_di_bambu_bolliti --matrix-description-it="Germogli di bambù, cotti (bolliti, scolati), con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_asparagi_cotti \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio svizzero, nonfat o senza grassi — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_formaggio_svizzero_nonfat_raw` (distinto dal formaggio svizzero naturale già eseguito `food_formaggio_svizzero_raw`, FDC 171251, e dalla versione processata già eseguita `food_formaggio_svizzero_processato_raw`, FDC 170855 — qui versione specificamente "nonfat/senza grassi", FDC diverso, macro profilo molto diverso (0g grassi dichiarato); verificato con `grep` dedicato, zero occorrenze precedenti sui tre file). FDC ID 170897 (**SR Legacy**, "Cheese, swiss, nonfat or fat free" — pagina `getfoodfacts.com/food/cheese-swiss-nonfat-or-fat-free-170897` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
