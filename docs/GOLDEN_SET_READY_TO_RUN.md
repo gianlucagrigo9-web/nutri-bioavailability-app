@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Tahina cruda, da semi non tostati con buccia non rimossa chimicamente (integrale) — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_tahina_cruda_integrale` (mai coperto, verificato con `grep` dedicato sui `food_tahina*` esistenti: distinto da `food_tahina` (FDC 170189, semi tostati) e da `food_tahina_cruda` (FDC 169410, "from raw and stone ground kernels", buccia rimossa per macinazione a pietra) — qui semi crudi con buccia NON rimossa chimicamente, metodo di lavorazione distinto, profilo minerale nettamente diverso, non un doppione). FDC ID 169406 (**SR Legacy**, "Seeds, sesame butter, tahini, from unroasted kernels (non-chemically removed seed coat)" — pagina `getfoodfacts.com/food/seeds-sesame-butter-tahini-from-unroasted-kernels-non-chemically-removed-seed-co-169406` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 607kcal, proteine 17,9g, grassi 56,4g, carboidrati 17,9g, fibra 9,30g, calcio 141mg, ferro 6,35mg, magnesio 353mg, zinco 10,4mg, rame 1,49mg, vitamina C 0mg esplicito, folato totale 98,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. **Mancano** (assenti dalla pagina, non assunti zero): selenio, vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina. **Verificato esplicitamente contro il quasi-omonimo FDC 169410 (`food_tahina_cruda`)**: valori nettamente diversi nonostante entrambi "tahina da semi crudi" — calcio 141mg vs 420mg, magnesio 353mg vs 96,0mg (quasi 4×), zinco 10,4mg vs 4,64mg (oltre 2×), ferro 6,35mg vs 2,51mg: coerente con la buccia del seme (ricca di minerali, specialmente ossalato di calcio e zinco) NON rimossa in questo record, a differenza della versione "stone ground" già in coda — non un duplicato mascherato. **Nota data-quality**: l'energia dichiarata (607kcal) non torna esattamente con la stima 4/4/9 dai macronutrienti dichiarati (~651kcal) — scarto del ~7%, attribuibile ai fattori Atwater specifici USDA (diversi dal 4/4/9 generico) più che a un errore, diverso dal caso (realmente respinto) del cavolfiore dove la STESSA voce "energia" mostrava tre valori diversi sulla stessa pagina; qui c'è un solo valore di energia dichiarato, nessuna contraddizione diretta sullo stesso campo.
+- **Analogia usata**: `food_tahina_cruda` (tahina da semi crudi, buccia rimossa, già eseguita sul DB reale — stesso prodotto base, metodo di lavorazione del seme diverso).
+- **Categoria dieta**: `plant_non_fruit` (derivato di semi oleosi).
+- **Matrice**: nuova `tahina_cruda_integrale` ("Tahina cruda, da semi con buccia non rimossa chimicamente").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente di `food_tahina_cruda`/`food_tahina`), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato in pagina), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — stesso precedente usato per `food_tahina_cruda`, non tracciato per questo seme), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169406 --food-id=food_tahina_cruda_integrale \
+  --name-it="Tahina cruda, da semi non tostati con buccia non rimossa chimicamente" \
+  --matrix-id=tahina_cruda_integrale --matrix-description-it="Tahina cruda, da semi con buccia non rimossa chimicamente" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tahina_cruda \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169406 --food-id=food_tahina_cruda_integrale \
+  --name-it="Tahina cruda, da semi non tostati con buccia non rimossa chimicamente" \
+  --matrix-id=tahina_cruda_integrale --matrix-description-it="Tahina cruda, da semi con buccia non rimossa chimicamente" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tahina_cruda \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Sgombro, salato — preparato 2026-11-24 dal task (213° lotto)
 
 - **food_id**: `food_sgombro_salato_raw` (mai coperto, verificato con `grep` dedicato sui `food_sgombro_*` esistenti: distinto da `food_sgombro_raw`/`food_sgombro_cotto` (sgombro atlantico crudo/cotto, non salato) e da `food_sgombro_spagnolo_raw`/`_cotto` (specie diversa) — forma di conservazione "salato" mai tentata su questa specie, sulla scia del successo già visto per aringa affumicata/marinata). FDC ID 168149 (**SR Legacy**, "Fish, mackerel, salted" — pagina `getfoodfacts.com/food/fish-mackerel-salted-168149` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
