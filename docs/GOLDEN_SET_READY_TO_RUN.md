@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Momordica (melone amaro / bitter gourd), foglie, cotte (bollite senza sale) — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_momordica_foglie_cotte` (nuovo — distinto da `food_momordica_cotta` già eseguito, FDC 168394, parte "pods" (baccelli); qui invece "leafy tips" (cime di foglie), parte della pianta diversa con profilo nutrizionale molto diverso (es. beta-carotene 1.450µg/100g contro 68µg/100g dei baccelli). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168392 (**SR Legacy**, "Balsam-pear (bitter gourd), leafy tips, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/balsam-pear-bitter-gourd-leafy-tips-cooked-boiled-drained-without-salt-168392` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 34,0kcal, proteine 3,60g, grassi 0,20g, carboidrati 6,68g, fibra 1,90g, calcio 42,0mg, ferro 1,02mg, magnesio 94,0mg, zinco 0,30mg, rame 0,20mg, vitamina C 55,6mg, folato totale 88,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,90µg, vitamina K 163µg (fillochinone), beta-carotene 1.450µg (reale, molto alto — foglia verde a foglia larga).
+- **Analogia usata**: `food_momordica_cotta` (stessa pianta *Momordica charantia*, già eseguita sul DB reale — parte diversa, foglie invece di baccelli).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `momordica_foglie_cotte` ("Momordica, foglie, cotte (bollite senza sale)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e molto alto, alimento cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (come l'analogia), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168392 --food-id=food_momordica_foglie_cotte \
+  --name-it="Momordica (melone amaro / bitter gourd), foglie, cotte (bollite senza sale)" \
+  --matrix-id=momordica_foglie_cotte --matrix-description-it="Momordica, foglie, cotte (bollite senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_momordica_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168392 --food-id=food_momordica_foglie_cotte \
+  --name-it="Momordica (melone amaro / bitter gourd), foglie, cotte (bollite senza sale)" \
+  --matrix-id=momordica_foglie_cotte --matrix-description-it="Momordica, foglie, cotte (bollite senza sale)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_momordica_cotta \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
+### Salsa di mele (applesauce), in scatola, zuccherata, con sale — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_salsa_di_mele_zuccherata_in_scatola` (nuovo — distinto da `food_salsa_di_mele_in_scatola` già eseguito, FDC 171695, "unsweetened, without added ascorbic acid"; qui versione zuccherata e salata, FDC diverso, macro profilo diverso — carboidrati quasi doppi. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 167773 (**SR Legacy**, "Applesauce, canned, sweetened, with salt" — pagina `getfoodfacts.com/food/applesauce-canned-sweetened-with-salt-167773` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 76,0kcal, proteine 0,18g, grassi 0,18g, carboidrati 19,9g, fibra 1,20g, calcio 4,00mg, ferro 0,35mg, magnesio 3,00mg, zinco 0,040mg, rame 0,043mg, vitamina C 1,70mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,30µg. **Mancano** (assenti dalla pagina): vitamina K, beta-carotene (solo vitamina A RAE 1,00µg e retinolo 0µg riportati).
+- **Analogia usata**: `food_salsa_di_mele_in_scatola` (stessa conserva di mela, già eseguita sul DB reale — qui zuccherata e salata invece di non zuccherata).
+- **Categoria dieta**: `plant_non_fruit` (per convenzione conserve/trasformati di questa pipeline, stessa dell'analogia).
+- **Matrice**: nuova `salsa_di_mele_zuccherata_in_scatola` ("Salsa di mele, in scatola, zuccherata, con sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, frutta), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, a differenza dell'analogia non zuccherata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae` (come l'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, cotto durante la conservazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=167773 --food-id=food_salsa_di_mele_zuccherata_in_scatola \
+  --name-it="Salsa di mele, in scatola, zuccherata, con sale" \
+  --matrix-id=salsa_di_mele_zuccherata_in_scatola --matrix-description-it="Salsa di mele, in scatola, zuccherata, con sale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salsa_di_mele_in_scatola \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167773 --food-id=food_salsa_di_mele_zuccherata_in_scatola \
+  --name-it="Salsa di mele, in scatola, zuccherata, con sale" \
+  --matrix-id=salsa_di_mele_zuccherata_in_scatola --matrix-description-it="Salsa di mele, in scatola, zuccherata, con sale" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salsa_di_mele_in_scatola \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Noci miste, tostate in olio, con arachidi e sale aggiunto — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_noci_miste_tostate_olio_salate` (nuovo — distinto da `food_noci_miste_pistacchio_tostate_salate` già eseguito, FDC 170586, blend commerciale PLANTERS tostato a secco; qui prodotto generico SR Legacy, tostato in olio. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168600 (**SR Legacy**, "Nuts, mixed nuts, oil roasted, with peanuts, with salt added" — pagina `getfoodfacts.com/food/nuts-mixed-nuts-oil-roasted-with-peanuts-with-salt-added-168600` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
