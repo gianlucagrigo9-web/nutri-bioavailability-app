@@ -16,6 +16,28 @@
 
 ## Pronti
 
+### Albume d'uovo, essiccato (in polvere) — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_albume_uovo_secco` (nuovo — distinto da `food_egg_white_raw`/`food_albume_uovo_raw` (liquido crudo, già eseguiti): prodotto essiccato, densità nutrizionale molto più alta per la rimozione dell'acqua (proteine 81,1g contro ~10g del liquido crudo), uso comune in polvere proteica/prodotti da forno. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 172204 (**SR Legacy**, "Egg, white, dried" — pagina `getfoodfacts.com/food/egg-white-dried-172204` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 382kcal, proteine 81,1g, grassi 0g esplicito, carboidrati 7,80g, fibra 0g esplicito, calcio 62,0mg, ferro 0,15mg, magnesio 88,0mg, zinco 0,10mg, rame 0,11mg, vitamina C 0mg esplicito, folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 0,18µg, selenio 125µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_egg_white_raw` (albume d'uovo crudo liquido, Golden Set originale, già eseguito sul DB reale — stesso prodotto, qui essiccato invece di liquido).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `albume_uovo_secco` ("Albume d'uovo, essiccato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, non pertinente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (prodotto animale), `baseline_cooking_state=raw` (nessun trattamento termico, solo essiccazione), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172204 --food-id=food_albume_uovo_secco \
+  --name-it="Albume d'uovo, essiccato (in polvere)" \
+  --matrix-id=albume_uovo_secco --matrix-description-it="Albume d'uovo, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_white_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172204 --food-id=food_albume_uovo_secco \
+  --name-it="Albume d'uovo, essiccato (in polvere)" \
+  --matrix-id=albume_uovo_secco --matrix-description-it="Albume d'uovo, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_egg_white_raw --diet-category=egg_dairy --apply
+```
+
 ### Manzo, corned beef (salato/curato), punta di petto, crudo — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_manzo_corned_beef_raw` (nuovo — categoria "carne bovina curata/salata" mai coperta in questa pipeline, distinta dai tagli freschi di manzo già eseguiti (`food_manzo_spezzatino_raw` ecc.): processo di cura (salamoia/nitrito) altera significativamente il profilo (sodio e vitamina C aggiunta tipici della cura, 27,0mg di vitamina C non naturale nella carne cruda è un segnale di conservante). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170199 (**SR Legacy**, "Beef, cured, corned beef, brisket, raw" — pagina `getfoodfacts.com/food/beef-cured-corned-beef-brisket-raw-170199` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
