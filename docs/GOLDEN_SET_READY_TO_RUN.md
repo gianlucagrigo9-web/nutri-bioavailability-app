@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Hominy (mais trattato con calce), in scatola, giallo — preparato 2026-11-24 dal task (221° lotto)
+
+- **food_id**: `food_hominy_giallo_in_scatola` (nuovo — distinto da `food_hominy_bianco_in_scatola` già eseguito (FDC 169701, stesso trattamento ma mais bianco): qui mais giallo, colore/varietà diversa con profilo carotenoidi atteso diverso. Verificato con `grep` dedicato, zero occorrenze precedenti per "hominy...giallo"/FDC 169752). FDC ID 169752 (**SR Legacy**, "Hominy, canned, yellow" — pagina `getfoodfacts.com/food/hominy-canned-yellow-169752` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 72,0kcal, proteine 1,48g, grassi 0,88g, carboidrati 14,3g, fibra 2,50g, calcio 10,0mg, ferro 0,62mg, magnesio 16,0mg, zinco 1,05mg, rame 0,030mg, vitamina C 0mg esplicito, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 3,00µg. Mancano: vitamina K, beta-carotene (assenti dalla pagina consultata, non assunti zero — possibile limite di rendering dell'aggregatore più che assenza reale nel record USDA, coerente col pattern già osservato più volte in questo turno per pagine getfoodfacts.com su record con molte righe).
+- **Analogia usata**: `food_masa_harina_raw` (stesso trattamento alcalino/nixtamalizzazione del mais, già eseguito sul DB reale — stessa specie *Zea mays*, famiglia Poaceae; stessa analogia già usata per `food_hominy_bianco_in_scatola`).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `hominy_giallo` ("Hominy, mais trattato con calce, giallo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato sulla pagina, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, già trattato/cotto — stessa convenzione di `food_hominy_bianco_in_scatola`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169752 --food-id=food_hominy_giallo_in_scatola \
+  --name-it="Hominy (mais trattato con calce), in scatola, giallo" \
+  --matrix-id=hominy_giallo --matrix-description-it="Hominy, mais trattato con calce, giallo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169752 --food-id=food_hominy_giallo_in_scatola \
+  --name-it="Hominy (mais trattato con calce), in scatola, giallo" \
+  --matrix-id=hominy_giallo --matrix-description-it="Hominy, mais trattato con calce, giallo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Arachidi spagnole, crude — preparato 2026-11-24 dal task (221° lotto)
 
 - **food_id**: `food_arachidi_spagnole_raw` (nuovo — varietà distinta da `food_arachidi_raw` già eseguito (arachidi generiche); verificato con `grep` dedicato, zero occorrenze precedenti per "arachidi spagnole"/"spanish peanut"/FDC 174263). FDC ID 174263 (**SR Legacy**, "Peanuts, spanish, raw" — pagina `getfoodfacts.com/food/peanuts-spanish-raw-174263` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
