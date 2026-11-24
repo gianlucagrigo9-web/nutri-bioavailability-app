@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Navone (rutabaga), crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_navone_raw` (nuovo — **corregge un gap dichiarato nel centoventottesimo lotto**: lì si era trovato solo un record Foundation (FDC 2727580, "Rutabaga, peeled, raw") con 7/17 nutrienti, scartato come `⚠`. Questa ricerca ha trovato un record **SR Legacy diverso** (FDC 168454) con dati completi, mai notato prima — verificato con `grep` dedicato, zero occorrenze precedenti per questo FDC specifico). FDC ID 168454 (**SR Legacy**, "Rutabagas, raw" — pagina `getfoodfacts.com/food/rutabagas-raw-168454` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 37,0kcal, proteine 1,08g, grassi 0,16g, carboidrati 8,62g, fibra 2,30g, calcio 43,0mg, ferro 0,44mg, magnesio 20,0mg, zinco 0,24mg, rame 0,032mg, vitamina C 25,0mg, folato totale 21,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,70µg, vitamina K 0,30µg (fillochinone), beta-carotene 1,00µg (reale).
+- **Analogia usata**: `food_navone_cotto` (navone cotto, Golden Set pipeline, già eseguito sul DB reale — stessa specie *Brassica napus*, qui crudo invece di bollito).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio radice).
+- **Matrice**: nuova `navone_raw` ("Navone (rutabaga), crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessuna fonte sull'ossalato del navone, stessa convenzione del cotto), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, ortaggio crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (stessa di `food_navone_cotto`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168454 --food-id=food_navone_raw \
+  --name-it="Navone (rutabaga), crudo" \
+  --matrix-id=navone_raw --matrix-description-it="Navone (rutabaga), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_navone_cotto \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168454 --food-id=food_navone_raw \
+  --name-it="Navone (rutabaga), crudo" \
+  --matrix-id=navone_raw --matrix-description-it="Navone (rutabaga), crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_navone_cotto \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Zucca invernale, hubbard, cruda — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_zucca_hubbard_raw` (nuovo — varietà mai coperta in questa pipeline, distinta da `food_zucca_acorn_raw`/`food_zucca_butternut_raw`/`food_zucca_a_fiasco_raw`/`food_zucca_cinese_raw` già eseguite (cultivar diversa, *Cucurbita maxima*, FDC proprio). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168475 (**SR Legacy**, "Squash, winter, hubbard, raw" — pagina `getfoodfacts.com/food/squash-winter-hubbard-raw-168475` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
