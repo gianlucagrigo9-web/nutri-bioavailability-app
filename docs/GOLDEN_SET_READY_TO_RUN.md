@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Platano, maturo (giallo), crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_platano_maturo_raw` (nuovo — distinto da `food_platano_non_maturo_raw` (FDC 2710818, Foundation, "underripe") già eseguito: stadio di maturazione diverso (giallo vs verde/acerbo), profilo nutrizionale molto diverso — beta-carotene 457µg reale (contro assente/non riportato nell'acerbo) e vitamina K 28,8µg presente, coerente con la letteratura sulla maturazione del platano. Verificato con `grep` dedicato, nessun `food_platano_maturo*` precedente). FDC ID 169130 (**SR Legacy**, "Plantains, yellow, raw" — pagina `getfoodfacts.com/food/plantains-yellow-raw-169130` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 122kcal, proteine 1,30g, grassi 0,35g, carboidrati 31,9g, fibra 1,70g, calcio 3,00mg, ferro 0,55mg, magnesio 36,0mg, zinco 0,19mg, rame 0,074mg, vitamina C 18,4mg, folato totale 22,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 1,50µg, vitamina K 28,8µg (fillochinone), beta-carotene 457µg.
+- **Analogia usata**: `food_platano_non_maturo_raw` (platano acerbo, Golden Set pipeline, già eseguito sul DB reale — stesso genere *Musa*, stadio di maturazione diverso).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco crudo).
+- **Matrice**: nuova `platano_maturo` ("Platano, maturo, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, 457µg, frutto crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Musaceae` (stessa di `food_platano_non_maturo_raw`), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, folato naturale del frutto).
+
+```
+npm run add-food -- --fdc-id=169130 --food-id=food_platano_maturo_raw \
+  --name-it="Platano, maturo (giallo), crudo" \
+  --matrix-id=platano_maturo --matrix-description-it="Platano, maturo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_platano_non_maturo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169130 --food-id=food_platano_maturo_raw \
+  --name-it="Platano, maturo (giallo), crudo" \
+  --matrix-id=platano_maturo --matrix-description-it="Platano, maturo, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_platano_non_maturo_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Musaceae --diet-category=fresh_fruit --apply
+```
+
+### Giuggiola (jujube), cruda — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_giuggiola_raw` (nuovo — frutto mai coperto in questa pipeline, famiglia botanica Rhamnaceae mai usata prima. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168151 (**SR Legacy**, "Jujube, raw" — pagina `getfoodfacts.com/food/jujube-raw-168151` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/17**. Per 100g: energia 79,0kcal, proteine 1,20g, grassi 0,20g, carboidrati 20,2g, calcio 21,0mg, ferro 0,48mg, magnesio 10,0mg, zinco 0,050mg, rame 0,073mg, vitamina C 69,0mg, vitamina B12 0µg esplicito. Mancano: fibra, folato totale, acido folico, selenio, vitamina K, beta-carotene (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_guava_raw` (guava cruda, Golden Set pipeline, già eseguita sul DB reale — stessa categoria "frutto crudo con vitamina C molto alta", famiglia botanica diversa ma nessun'altra analogia reale più vicina disponibile sul DB).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco crudo).
+- **Matrice**: nuova `giuggiola` ("Giuggiola, cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non verificabile come zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rhamnaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — non applicabile, frutto fresco).
+
+```
+npm run add-food -- --fdc-id=168151 --food-id=food_giuggiola_raw \
+  --name-it="Giuggiola, cruda" \
+  --matrix-id=giuggiola --matrix-description-it="Giuggiola, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --botanical-family=Rhamnaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=168151 --food-id=food_giuggiola_raw \
+  --name-it="Giuggiola, cruda" \
+  --matrix-id=giuggiola --matrix-description-it="Giuggiola, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --botanical-family=Rhamnaceae --diet-category=fresh_fruit --apply
+```
+
 ### Riso bianco, glutinoso (appiccicoso), non arricchito, crudo — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_riso_glutinoso_raw` (nuovo — distinto da `food_riso_bianco_raw`/`food_riso_integrale_raw`/`food_riso_venere_raw`/`food_riso_selvatico_raw` già eseguiti: varietà *Oryza sativa* var. *glutinosa* (riso appiccicoso/"sticky rice", amido quasi tutto amilopectina, uso culinario e profilo diverso dal riso comune), non un trim/grado dello stesso prodotto. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168883 (**SR Legacy**, "Rice, white, glutinous, unenriched, uncooked" — pagina `getfoodfacts.com/food/rice-white-glutinous-unenriched-uncooked-168883` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
