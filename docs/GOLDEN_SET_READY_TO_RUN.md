@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Prosciutto cotto (stinco), cotto (arrosto), con acqua aggiunta — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_prosciutto_stinco_cotto` (nuovo — distinto da `food_prosciutto_stinco_non_riscaldato` già eseguito, FDC 168347, stesso taglio "stinco" ma stato "unheated"; qui invece lo stato "heated, roasted". Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 167917 (**SR Legacy**, "Pork, cured, ham -- water added, shank, bone-in, separable lean only, heated, roasted" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-shank-bone-in-separable-lean-only-heated-roasted-167917` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Trim "separable lean only" (la controparte "lean and fat" FDC 169165 non ha una fonte primaria verificabile su getfoodfacts.com — solo fonti secondarie — quindi non utilizzata).
+- **Nutrienti**: **17/17**. Per 100g: energia 128kcal, proteine 20,9g, grassi 4,43g, carboidrati 1,20g, fibra 0g esplicito, calcio 9,00mg, ferro 1,56mg, magnesio 18,0mg, zinco 3,09mg, rame 0,12mg, vitamina C 0mg esplicito, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,60µg, selenio 26,2µg, vitamina K 0µg esplicito (fillochinone/diidrofillochinone; menachinone-4 5,60µg riportato separatamente, non sommato, stessa convenzione delle voci girello sopra), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_prosciutto_girello_cotto` (stesso tipo di prosciutto cotto con acqua aggiunta, già eseguito sul DB reale — taglio diverso, stesso stato "heated, roasted").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_stinco_cotto` ("Prosciutto cotto, stinco, arrosto").
+- **Attributi**: `is_heme_iron` attivo (true — carne suina), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=roasted` (FDC dichiara esplicitamente "heated, roasted"), `is_fortified_folate` omesso (false — folato 1,00µg naturale, basso).
+
+```
+npm run add-food -- --fdc-id=167917 --food-id=food_prosciutto_stinco_cotto \
+  --name-it="Prosciutto cotto (stinco), cotto (arrosto)" \
+  --matrix-id=prosciutto_stinco_cotto --matrix-description-it="Prosciutto cotto, stinco, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_girello_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=167917 --food-id=food_prosciutto_stinco_cotto \
+  --name-it="Prosciutto cotto (stinco), cotto (arrosto)" \
+  --matrix-id=prosciutto_stinco_cotto --matrix-description-it="Prosciutto cotto, stinco, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_girello_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Formaggio cheddar, nonfat o senza grassi — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_formaggio_cheddar_nonfat_raw` (distinto dal cheddar naturale già eseguito `food_formaggio_cheddar_raw` — qui versione specificamente "nonfat/senza grassi", FDC diverso, macro profilo molto diverso; verificato con `grep` dedicato, zero occorrenze precedenti sui tre file. Stessa logica appena applicata al formaggio svizzero nonfat in questo stesso lotto). FDC ID 171295 (**SR Legacy**, "Cheese, cheddar, nonfat or fat free" — pagina `getfoodfacts.com/food/cheese-cheddar-nonfat-or-fat-free-171295` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
