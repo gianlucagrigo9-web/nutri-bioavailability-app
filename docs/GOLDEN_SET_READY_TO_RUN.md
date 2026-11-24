@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Formaggio "cheese food" americano, processato, pastorizzato, senza vitamina D aggiunta — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_formaggio_food_americano_raw` (mai coperto, verificato con `grep` dedicato: distinto da `food_formaggio_americano_raw` (FDC 171289, standard d'identità "cheese PRODUCT", fortificato vit.D — lotto 96) e da `food_formaggio_spalmabile_americano_raw` (FDC 171254, "cheese SPREAD" da vasetto — lotto 97); questo è un terzo standard d'identità USDA distinto, "cheese FOOD", senza vit.D aggiunta — FDC diverso da entrambi, zero occorrenze su tutti e tre i file prima della ricerca). FDC ID 171291 (**SR Legacy**, "Cheese food, pasteurized process, American, without added vitamin D" — pagina `getfoodfacts.com/food/cheese-food-pasteurized-process-american-without-added-vitamin-d-171291` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 330kcal, proteine 16,9g, grassi 25,6g, carboidrati 8,56g, fibra 0g esplicito, calcio 682mg, ferro 0,26mg, magnesio 27,0mg, zinco 2,31mg, rame 0,034mg, selenio 19,6µg, vitamina C 0mg esplicito, vitamina K (nessuna riga totale, componenti: menachinone-4 8,90µg + fillochinone 2,60µg + diidrofillochinone 0µg), folato totale 7,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento folato), vitamina B12 1,33µg, beta-carotene 58,0µg (reale), alfa-carotene 1,00µg + beta-criptoxantina 11,0µg (reali). **Verificato esplicitamente contro il quasi-doppione FDC 171289**: valori sostanzialmente diversi, non un duplicato mascherato da nome simile — calcio 682mg vs 1.375mg (quasi la metà), ferro 0,26mg vs 0,95mg (quasi 1/4), folato 7,0µg vs 18,0µg, beta-carotene 58µg vs 248µg: i due standard d'identità USDA "cheese food" e "cheese product" hanno composizione realmente diversa (più siero/meno solidi di formaggio nel "food"), non solo un'etichetta vit.D diversa (la vitamina D non è comunque tracciata da questa pipeline).
+- **Analogia usata**: `food_formaggio_americano_raw` (cheese product americano processato, già eseguito sul DB reale — stessa categoria funzionale "formaggio fuso USA da banco", stesso precedente di cheese product/cheese spread già distinti nei lotti 96-97).
+- **Categoria dieta**: `egg_dairy` (formaggio vaccino, nessun ingrediente di carne/pesce).
+- **Matrice**: nuova `formaggio_food_americano` ("Formaggio 'cheese food' americano, processato, pastorizzato, senza vitamina D aggiunta").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, stesso precedente formaggi processati USA), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un formaggio nonostante carotenoidi reali non nulli, stesso precedente di `food_formaggio_americano_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (stesso precedente usato per gli altri formaggi processati non stagionati), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171291 --food-id=food_formaggio_food_americano_raw \
+  --name-it="Formaggio 'cheese food' americano, processato, pastorizzato, senza vitamina D aggiunta" \
+  --matrix-id=formaggio_food_americano --matrix-description-it="Formaggio 'cheese food' americano, processato, pastorizzato, senza vitamina D aggiunta" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171291 --food-id=food_formaggio_food_americano_raw \
+  --name-it="Formaggio 'cheese food' americano, processato, pastorizzato, senza vitamina D aggiunta" \
+  --matrix-id=formaggio_food_americano --matrix-description-it="Formaggio 'cheese food' americano, processato, pastorizzato, senza vitamina D aggiunta" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Maiale, spalla, blade roll (arrotolato, cured), separabile magro+grasso, arrosto — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_maiale_spalla_blade_roll_cotta` (mai coperto, verificato con `grep` dedicato sui `food_maiale_spalla_*`/`food_pancetta_*`/`food_prosciutto_*` esistenti: taglio "blade roll" — spalla arrotolata e salmistrata — distinto da `food_maiale_lonza_blade_cotta` (lombo/blade CHOP, non la spalla arrotolata), da `food_maiale_spalla_boston_cotta`/`food_maiale_spalla_picnic_cotta` (tagli di spalla non salmistrati) e da `food_prosciutto_cotto`/`food_pancetta_*` (altri salumi, altro taglio). Variante "unheated" FDC 168288 (sorella non salmistrata/non cotta nella stessa serie) **non preparata in questo lotto per parsimonia** — nota come possibile estensione "crudo" futura, non uno scarto). FDC ID 168289 (**SR Legacy**, "Pork, cured, shoulder, blade roll, separable lean and fat, roasted" — pagina `getfoodfacts.com/food/pork-cured-shoulder-blade-roll-separable-lean-and-fat-roasted-168289` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 287kcal, proteine 17,3g, grassi 23,5g, carboidrati 0,37g (coerente con residui della salamoia di cura, non anomalia), fibra 0g esplicito, calcio 7,00mg, ferro 0,89mg, magnesio 13,0mg, zinco 2,45mg, rame 0,076mg, selenio 28,6µg, vitamina C 3,20mg (coerente con ascorbato/eritorbato usato nella cura, come già visto per altri salumi di questa pipeline), folato totale 3,00µg, acido folico 0µg esplicito, vitamina B12 1,05µg. **Mancano** (assenti dalla pagina, non assunti zero): vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto, salmistrato e cotto, già eseguito sul DB reale — stessa categoria funzionale "salume di maiale salmistrato e cotto").
+- **Categoria dieta**: `meat_fish` (carne di maiale, non vegetariana/vegana/fruttariana).
+- **Matrice**: nuova `maiale_spalla_blade_roll_cotto` ("Maiale, spalla, blade roll, arrosto").
+- **Attributi**: `is_heme_iron` attivo (true — carne rossa, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, carne), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked` (record "roasted"), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168289 --food-id=food_maiale_spalla_blade_roll_cotta \
+  --name-it="Maiale, spalla, blade roll, separabile magro e grasso, arrosto" \
+  --matrix-id=maiale_spalla_blade_roll_cotto --matrix-description-it="Maiale, spalla, blade roll, arrosto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168289 --food-id=food_maiale_spalla_blade_roll_cotta \
+  --name-it="Maiale, spalla, blade roll, separabile magro e grasso, arrosto" \
+  --matrix-id=maiale_spalla_blade_roll_cotto --matrix-description-it="Maiale, spalla, blade roll, arrosto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_prosciutto_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Maiale, cured, salt pork (lardo salmistrato), crudo — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_lardo_salato_raw` (mai coperto, verificato con `grep` dedicato sui `food_pancetta_*`/`food_maiale_*`/"lardo"/"salt pork" esistenti: distinto da `food_pancetta_raw` (pancetta/bacon, taglio ventresca affumicato-salmistrato più magro) e da `food_grasso_di_pancetta_cotto` (strutto reso da bacon COTTO) — "salt pork" è grasso dorsale/ventresca salmistrato crudo non affumicato, quasi puro grasso, mai tentato). FDC ID 168287 (**SR Legacy**, "Pork, cured, salt pork, raw" — pagina `getfoodfacts.com/food/pork-cured-salt-pork-raw-168287` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 748kcal (coerente con prodotto quasi-puro grasso), proteine 5,05g, grassi 80,5g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 6,00mg, ferro 0,44mg, magnesio 7,00mg, zinco 0,90mg, rame 0,050mg, selenio 5,80µg, vitamina C 0mg esplicito, vitamina K (nessuna riga totale, componenti diidrofillochinone 0µg + fillochinone 0µg, quindi 0 esplicito), folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,29µg, beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito.
+- **Analogia usata**: `food_pancetta_raw` (pancetta/bacon crudo, già eseguito sul DB reale — stessa categoria funzionale "taglio di maiale salmistrato crudo ad alto contenuto di grasso").
+- **Categoria dieta**: `meat_fish` (carne di maiale, non vegetariana/vegana/fruttariana).
+- **Matrice**: nuova `lardo_salato_crudo` ("Maiale, cured, salt pork, crudo").
+- **Attributi**: `is_heme_iron` attivo (true — carne rossa, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, carne), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168287 --food-id=food_lardo_salato_raw \
+  --name-it="Maiale, cured, salt pork (lardo salmistrato), crudo" \
+  --matrix-id=lardo_salato_crudo --matrix-description-it="Maiale, cured, salt pork, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168287 --food-id=food_lardo_salato_raw \
+  --name-it="Maiale, cured, salt pork (lardo salmistrato), crudo" \
+  --matrix-id=lardo_salato_crudo --matrix-description-it="Maiale, cured, salt pork, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pancetta_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Latte di cocco, surgelato — preparato 2026-11-24 dal task (213° lotto)
 
 - **food_id**: `food_latte_di_cocco_surgelato` (mai coperto, verificato con `grep` dedicato — distinto da `food_latte_di_cocco_raw` (FDC 170172, liquido spremuto fresco, già eseguito) e `food_latte_di_cocco_in_scatola_raw` (FDC 170173, conserva in scatola, già eseguito): qui terza forma di conservazione, surgelata, FDC distinto da entrambe). FDC ID 169409 (**SR Legacy**, "Nuts, coconut milk, frozen (liquid expressed from grated meat and water)" — pagina `getfoodfacts.com/food/nuts-coconut-milk-frozen-liquid-expressed-from-grated-meat-and-water-169409` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
