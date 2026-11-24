@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Semi di frutto del pane (breadfruit seeds), crudi — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_semi_frutto_del_pane_raw` (nuovo — seme mai coperto in questa pipeline, famiglia botanica Moraceae mai usata prima, categoria USDA "Nut and Seed Products". Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170144 (**SR Legacy**, "Seeds, breadfruit seeds, raw" — pagina `getfoodfacts.com/food/seeds-breadfruit-seeds-raw-170144` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 191kcal, proteine 7,40g, grassi 5,59g, carboidrati 29,2g, fibra 5,20g, calcio 36,0mg, ferro 3,67mg, magnesio 54,0mg, zinco 0,90mg, rame 1,15mg, vitamina C 6,60mg (reale), folato totale 53,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. Mancano: selenio, vitamina K, beta-carotene (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_noci_raw` (noci crude, Golden Set originale, già eseguite sul DB reale — stessa categoria funzionale "seme/frutto a guscio crudo").
+- **Categoria dieta**: `plant_non_fruit` (seme).
+- **Matrice**: nuova `semi_frutto_del_pane` ("Semi di frutto del pane, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non verificabile come zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Moraceae` (genere *Artocarpus*), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170144 --food-id=food_semi_frutto_del_pane_raw \
+  --name-it="Semi di frutto del pane (breadfruit seeds), crudi" \
+  --matrix-id=semi_frutto_del_pane --matrix-description-it="Semi di frutto del pane, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Moraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170144 --food-id=food_semi_frutto_del_pane_raw \
+  --name-it="Semi di frutto del pane (breadfruit seeds), crudi" \
+  --matrix-id=semi_frutto_del_pane --matrix-description-it="Semi di frutto del pane, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_noci_raw \
+  --botanical-family=Moraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Lenticchie, germogliate, crude — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_lenticchie_germogliate_raw` (nuovo — distinto da `food_lenticchie_rosse_raw` già eseguito: germogliazione altera significativamente il profilo (vitamina C 16,5mg reale, assente nel seme secco non germogliato), stessa convenzione già usata per fagioli rossi germogliati in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168427 (**SR Legacy**, "Lentils, sprouted, raw" — pagina `getfoodfacts.com/food/lentils-sprouted-raw-168427` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
