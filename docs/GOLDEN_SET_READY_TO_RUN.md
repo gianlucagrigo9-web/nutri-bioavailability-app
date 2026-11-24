@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte di soia, zuccherato, refrigerato — preparato 2026-11-24 dal task (215° lotto)
+
+- **food_id**: `food_latte_di_soia_zuccherato` (distinto da `food_latte_di_soia_raw` già eseguito — quello è "Soymilk, original and vanilla, UNFORTIFIED" FDC 172446; qui versione zuccherata commerciale, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 2257044 (**Foundation Foods**, "Soy milk, sweetened, plain, refrigerated" — pagina `getfoodfacts.com/food/soy-milk-sweetened-plain-refrigerated-2257044` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 41kcal (pannello nutrizionale; riquadro statistico 40,7kcal, lieve discrepanza di arrotondamento), proteine 2,78g, grassi 1,96g, carboidrati 3,00g, fibra 0g esplicito, calcio 155mg, ferro 0,37mg, magnesio 17,5mg, zinco 0,26mg, rame 0,096mg, folato totale 15,8µg, vitamina B12 1,33µg, selenio 0µg esplicito, vitamina K (fillochinone/K1) 2,80µg. Mancanti: vitamina C, acido folico (nessuna riga separata), beta-carotene e gli altri carotenoidi. **Nota di trasparenza importante**: a differenza del latte di mandorla/avena scartati in un lotto precedente (B12/calcio presenti nonostante l'etichetta "unsweetened/plain" senza menzione di arricchimento — firma di arricchimento nascosto), qui il nome FDC stesso è "sweetened" (zuccherato, non "plain/unfortified"): B12 1,33µg, vitamina D 4,63µg e calcio 155mg sono coerenti con la pratica standard di arricchimento del latte di soia commerciale zuccherato, non un'incongruenza nascosta — nessun valore indovinato, solo quelli riportati dalla fonte.
+- **Analogia usata**: `food_latte_di_soia_raw` (stesso prodotto di base, versione non zuccherata/non arricchita già eseguita).
+- **Categoria dieta**: `plant_non_fruit` (vegetariano e vegano sì — bevanda 100% vegetale di soia; fruttariano no).
+- **Matrice**: nuova `latte_di_soia_zuccherato` ("Latte di soia, zuccherato, refrigerato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una bevanda), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide dichiarato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (bevanda pronta al consumo, nessuna cottura), `is_fortified_folate` omesso (false — folato 15,8µg coerente con contenuto naturale di soia, nessun segnale di arricchimento specifico per il folato), `botanical_family=Fabaceae` (soia, stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=2257044 --food-id=food_latte_di_soia_zuccherato \
+  --name-it="Latte di soia, zuccherato, refrigerato" \
+  --matrix-id=latte_di_soia_zuccherato --matrix-description-it="Latte di soia, zuccherato, refrigerato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_soia_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2257044 --food-id=food_latte_di_soia_zuccherato \
+  --name-it="Latte di soia, zuccherato, refrigerato" \
+  --matrix-id=latte_di_soia_zuccherato --matrix-description-it="Latte di soia, zuccherato, refrigerato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_soia_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Margarina, classica (80% grassi), a panetto, salata — preparato 2026-11-24 dal task (214° lotto)
 
 - **food_id**: `food_margarina_classica_salata` (categoria interamente nuova per questo DB — verificato con `grep` dedicato su `food_margarin*`: zero occorrenze precedenti in nessun file). FDC ID 172346 (**SR Legacy**, "Margarine, regular, 80% fat, composite, stick, with salt" — pagina `getfoodfacts.com/food/margarine-regular-80-fat-composite-stick-with-salt-172346` dedicata, FDC ID e dataType citati esplicitamente nel titolo/corpo pagina, release USDA 2026-04-30).
