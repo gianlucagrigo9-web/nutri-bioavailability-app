@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Pomodori interi in scatola, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_pomodori_interi_in_scatola` (mai coperto, verificato con `grep` dedicato — distinto da `food_passata_di_pomodoro_raw`/`food_pomodori_schiacciati_in_scatola`/`food_concentrato_di_pomodoro`/`food_salsa_di_pomodoro_in_scatola`, già eseguiti/preparati: qui i pomodori restano interi, solidi e liquido di governo, non trasformati in purea/pezzi/salsa). FDC ID 2685578 (**Foundation Foods**, "Tomatoes, whole, canned, solids and liquids, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 19,1kcal, proteine 0,87g, grassi 0,21g, carboidrati 4,29g, fibra 0,87g, calcio 19,8mg, ferro 0,93mg, magnesio 10,8mg, zinco 0,12mg, rame 0,059mg, vitamina C 7,70mg, sodio 112mg (sale aggiunto, dichiarato nel nome). **Mancano**: selenio, beta-carotene, alfa-carotene, beta-criptoxantina, folato totale, vitamina B12, vitamina K. **Nota**: pannello riepilogo mostra 20kcal/110mg sodio contro 19,1kcal/112mg della tabella dettagliata — usati i valori della tabella.
+- **Analogia usata**: `food_passata_di_pomodoro_raw` (stesso prodotto di base, pomodoro in scatola, già preparata in questa pipeline — stessa pianta *Solanum lycopersicum*, stesso processo di conservazione).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, convenzione PRD §4.9).
+- **Matrice**: nuova `pomodori_interi_in_scatola` ("Pomodori interi in scatola").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto/in scatola, per analogia), `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=2685578 --food-id=food_pomodori_interi_in_scatola \
+  --name-it="Pomodori interi in scatola, con sale aggiunto" \
+  --matrix-id=pomodori_interi_in_scatola --matrix-description-it="Pomodori interi in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2685578 --food-id=food_pomodori_interi_in_scatola \
+  --name-it="Pomodori interi in scatola, con sale aggiunto" \
+  --matrix-id=pomodori_interi_in_scatola --matrix-description-it="Pomodori interi in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Salsa di pomodoro in scatola, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_salsa_di_pomodoro_in_scatola` (mai coperto, verificato con `grep` dedicato — distinta da `food_passata_di_pomodoro_raw` FDC 2685582 "tomato puree", `food_pomodori_schiacciati_in_scatola` FDC 2685581 "tomatoes, crushed" e `food_concentrato_di_pomodoro`, già eseguiti/preparati: "tomato sauce" USDA è un prodotto a sé, più liquido/condito della passata). FDC ID 2685579 (**Foundation Foods**, "Tomato, sauce, canned, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
