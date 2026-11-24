@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Foglie di amaranto, cotte (bollite, con sale) — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_foglie_di_amaranto_cotte` (mai coperto, verificato con `grep` dedicato — distinto da `food_foglie_di_amaranto_raw` FDC 168385, già eseguito: qui cotto/bollito invece che crudo). FDC ID 168492 (**SR Legacy**, "Amaranth leaves, cooked, boiled, drained, with salt"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata per questo specifico FDC ID; verificato invece su `tools.myfooddata.com/nutrition-facts/168492/wt1`, che cita esplicitamente FDC 168492 e linka `fdc.nal.usda.gov/food-details/168492/nutrients` — stessa convenzione già accettata altrove in questa pipeline (es. `food_burro_salato`) quando getfoodfacts non indicizza il record.
+- **Nutrienti**: **13/18**. **Nota di trasparenza (Regola 6)**: la pagina mostra i valori per porzione da 132g (1 tazza), non per 100g; i valori sotto sono una mia conversione (÷1,32), non valori dichiarati direttamente dalla fonte per 100g — in fase di scrittura reale lo script userà comunque l'API FDC diretta, non questa pagina. Per 100g (convertito): energia 21,2kcal, proteine 2,12g, grassi 0,18g, carboidrati 4,09g, calcio 209mg (alto, coerente con foglia verde scura, cfr. il crudo 215mg), ferro 2,27mg, magnesio 55,0mg, zinco 0,91mg, rame 0,16mg, selenio 0,91µg, vitamina C 41,1mg, folato totale 57,0µg, vitamina B12 0µg (esplicito), vitamina A (RAE) 139µg, sodio 257mg (sale aggiunto in cottura, dichiarato nel nome). **Mancano**: fibra, beta-carotene, alfa-carotene, beta-criptoxantina, vitamina K.
+- **Analogia usata**: `food_foglie_di_amaranto_raw` (foglie di amaranto crude, già eseguite sul DB reale — stessa specie, qui cotta/bollita invece che cruda).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `foglie_di_amaranto_cotte` ("Foglie di amaranto, cotte").
+- **Attributi**: `botanical_family=Amaranthaceae` (per analogia, stessa del crudo), `baseline_cooking_state=boiled`; `matrix_category_calcium`/`carotenoid_matrix_state` omessi (NULL, stessa scelta prudente già fatta per il crudo — nessun dato diretto).
+
+```
+npm run add-food -- --fdc-id=168492 --food-id=food_foglie_di_amaranto_cotte \
+  --name-it="Foglie di amaranto, cotte (bollite, con sale)" \
+  --matrix-id=foglie_di_amaranto_cotte --matrix-description-it="Foglie di amaranto, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_foglie_di_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168492 --food-id=food_foglie_di_amaranto_cotte \
+  --name-it="Foglie di amaranto, cotte (bollite, con sale)" \
+  --matrix-id=foglie_di_amaranto_cotte --matrix-description-it="Foglie di amaranto, cotte" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_foglie_di_amaranto_raw \
+  --botanical-family=Amaranthaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pomodori interi in scatola, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_pomodori_interi_in_scatola` (mai coperto, verificato con `grep` dedicato — distinto da `food_passata_di_pomodoro_raw`/`food_pomodori_schiacciati_in_scatola`/`food_concentrato_di_pomodoro`/`food_salsa_di_pomodoro_in_scatola`, già eseguiti/preparati: qui i pomodori restano interi, solidi e liquido di governo, non trasformati in purea/pezzi/salsa). FDC ID 2685578 (**Foundation Foods**, "Tomatoes, whole, canned, solids and liquids, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
