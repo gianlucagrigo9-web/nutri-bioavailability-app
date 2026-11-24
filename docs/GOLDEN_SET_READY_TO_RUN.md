@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagne giapponesi, secche — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_castagne_giapponesi_secche_raw` (mai coperto, verificato con `grep` dedicato — distinto da `food_castagne_giapponesi_bollite` (bollite/vapore, FDC 168589), preparato oggi stesso nel 209° lotto: qui forma secca). FDC ID 169408 (**SR Legacy**, "Nuts, chestnuts, japanese, dried"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/169408/100g/1`, pagina nativamente per 100g che linka esplicitamente `fdc.nal.usda.gov/food-details/169408/nutrients`.
+- **Nutrienti**: **12/18**. Per 100g: energia 360kcal, proteine 5,30g, grassi 1,20g, carboidrati 81,4g, calcio 72,0mg, ferro 3,40mg, magnesio 115mg, zinco 2,60mg, rame 1,30mg, vitamina C 61,3mg, folato totale 109µg, vitamina B12 0µg, sodio 34,0mg. **Mancano**: fibra, selenio, vitamina K (mostrati come non disponibili sulla fonte).
+- **Analogia usata**: `food_castagne_giapponesi_bollite` (castagne giapponesi bollite/vapore, preparata nello stesso turno — stessa specie *Castanea crenata*, qui essiccata invece che bollita).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `castagne_giapponesi_secche` ("Castagne giapponesi, secche").
+- **Attributi**: `botanical_family=Fagaceae` (come l'analogia), `baseline_cooking_state=dried`.
+
+```
+npm run add-food -- --fdc-id=169408 --food-id=food_castagne_giapponesi_secche_raw \
+  --name-it="Castagne giapponesi, secche" \
+  --matrix-id=castagne_giapponesi_secche --matrix-description-it="Castagne giapponesi, secche" \
+  --baseline-cooking-state=dried --analogy-food-id=food_castagne_giapponesi_bollite \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169408 --food-id=food_castagne_giapponesi_secche_raw \
+  --name-it="Castagne giapponesi, secche" \
+  --matrix-id=castagne_giapponesi_secche --matrix-description-it="Castagne giapponesi, secche" \
+  --baseline-cooking-state=dried --analogy-food-id=food_castagne_giapponesi_bollite \
+  --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cocco, polpa essiccata (disidratata), cremosa — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_cocco_cremoso_essiccato` (mai coperto, verificato con `grep` dedicato — distinto da `food_cocco_disidratato_raw` (non zuccherato, FDC 170170), già eseguito: qui forma "creamed", macinazione più fine/oleosa tipo burro di cocco, prodotto diverso). FDC ID 168585 (**SR Legacy**, "Nuts, coconut meat, dried (desiccated), creamed"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/print/168585/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/168585/nutrients`.
