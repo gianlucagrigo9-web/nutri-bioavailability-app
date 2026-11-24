@@ -16,6 +16,246 @@
 
 ## Pronti
 
+### Margarina, classica (80% grassi), a panetto, salata — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_margarina_classica_salata` (categoria interamente nuova per questo DB — verificato con `grep` dedicato su `food_margarin*`: zero occorrenze precedenti in nessun file). FDC ID 172346 (**SR Legacy**, "Margarine, regular, 80% fat, composite, stick, with salt" — pagina `getfoodfacts.com/food/margarine-regular-80-fat-composite-stick-with-salt-172346` dedicata, FDC ID e dataType citati esplicitamente nel titolo/corpo pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 717kcal, proteine 0,16g (un riquadro mostra 0,2g, arrotondamento), grassi 80,7g, carboidrati 0,70g, fibra 0g esplicito, calcio 3,00mg, ferro 0,060mg, magnesio 3,00mg, zinco 0mg esplicito, rame 0mg esplicito, vitamina C 0,20mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,10µg, selenio 0µg esplicito, vitamina K 93,0µg (valore alto ma plausibile: i grassi vegetali idrogenati/margarine sono una fonte nota di fillochinone), beta-carotene 610µg (plausibile: le margarine sono tipicamente colorate con beta-carotene), alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina 0µg espliciti. **Nota di trasparenza**: la pagina non specifica se gli "0" sono valori misurati-e-assenti o non analizzati — stesso tipo di ambiguità già accettato altrove in questa pipeline quando il resto del record è coerente e completo.
+- **Analogia usata**: `food_olio_di_girasole_raw` (analogia **funzionale**, non botanica: grasso vegetale già eseguito sul DB reale — nessuna margarina preesistente a cui ancorarsi, "composite" nel nome FDC non specifica la miscela di oli esatta, quindi nessuna analogia più precisa è possibile senza indovinare).
+- **Categoria dieta**: `plant_non_fruit` (prodotto a base di oli vegetali, non lattiero-caseario né di origine animale — nessun ingrediente animale dichiarato nel nome FDC).
+- **Matrice**: nuova `margarina_classica_salata` ("Margarina, classica (80% grassi), a panetto, salata").
+- **Attributi**: `is_heme_iron` omesso (false — prodotto vegetale), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — nessun precedente di matrice per questa categoria nuova), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (prodotto pronto al consumo, nessuna cottura), `is_fortified_folate` omesso (false — folato 1,00µg, valore basso non da fortificazione).
+
+```
+npm run add-food -- --fdc-id=172346 --food-id=food_margarina_classica_salata \
+  --name-it="Margarina, classica (80% grassi), a panetto, salata" \
+  --matrix-id=margarina_classica_salata --matrix-description-it="Margarina, classica (80% grassi), a panetto, salata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172346 --food-id=food_margarina_classica_salata \
+  --name-it="Margarina, classica (80% grassi), a panetto, salata" \
+  --matrix-id=margarina_classica_salata --matrix-description-it="Margarina, classica (80% grassi), a panetto, salata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Burro, montato (whipped), salato — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_burro_montato_salato` (distinto da `food_burro_salato`, già eseguito sul DB reale, FDC 790508 Foundation "Butter, stick, salted" — qui forma montata/areata, record SR Legacy separato, non un doppione). FDC ID 173411 (**SR Legacy**, "Butter, whipped, with salt" — pagina `getfoodfacts.com/food/butter-whipped-with-salt-173411` dedicata, FDC ID e dataType citati esplicitamente nel titolo ("SR Legacy"), release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo** (ogni nutriente richiesto è presente in pagina, nessuno assente). Per 100g: energia 731kcal, proteine 0,49g, grassi 78,3g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 23,0mg, ferro 0,050mg, magnesio 1,00mg, zinco 0,050mg, rame 0,010mg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0,070µg, selenio 0µg esplicito, vitamina K (fillochinone 4,60µg + menachinone-4 20,9µg, nessun totale unico riportato), beta-carotene 135µg, alfa-carotene 1,00µg, beta-criptoxantina 6,00µg, licopene 0µg, luteina+zeaxantina 13,0µg.
+- **Analogia usata**: `food_burro_salato` (burro salato a panetto, già eseguito sul DB reale — stesso prodotto base, forma fisica diversa per montatura/areazione).
+- **Categoria dieta**: `egg_dairy` (burro, derivato del latte).
+- **Matrice**: nuova `burro_montato_salato` ("Burro, montato, salato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente di `food_burro_salato`), `carotenoid_matrix_state` omesso (NULL — carotenoidi presenti ma nessuna matrice categorica tracciata per questo prodotto in questa pipeline), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (nessuna cottura), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173411 --food-id=food_burro_montato_salato \
+  --name-it="Burro, montato (whipped), salato" \
+  --matrix-id=burro_montato_salato --matrix-description-it="Burro, montato, salato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro_salato \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173411 --food-id=food_burro_montato_salato \
+  --name-it="Burro, montato (whipped), salato" \
+  --matrix-id=burro_montato_salato --matrix-description-it="Burro, montato, salato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_burro_salato \
+  --diet-category=egg_dairy --apply
+```
+
+### Cappesante (capesante) Patagoniche, congelate, crude — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_cappesante_patagoniche_raw` (categoria mollusco/capasanta interamente nuova per questo DB — verificato con `grep` dedicato, zero occorrenze di `scallop`/`cappesant`/`capesant`/`pettine` in nessun file). FDC ID 2747666 (**Foundation Foods**, "Scallops, bay, Patagonian, frozen, wild caught" — pagina `getfoodfacts.com/food/scallops-bay-patagonian-frozen-wild-caught-2747666` dedicata, FDC ID e dataType "Foundation" citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/17**. Per 100g: energia 78,5kcal, proteine 16,4g, grassi 0,42g, carboidrati 2,28g, calcio 14,0mg, ferro 0,17mg, magnesio 46,4mg, zinco 1,02mg, rame 0mg esplicito, vitamina B12 0,67µg, selenio 28,4µg. **Mancano** (assenti dalla pagina, non assunti zero): fibra, vitamina C, folato totale, acido folico, vitamina K, tutti i carotenoidi.
+- **Analogia usata**: `food_vongole_raw` (analogia funzionale, mollusco già eseguito sul DB reale — stessa convenzione già usata per le lumache in questa pipeline, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish` (mollusco, non vegetariano/vegano/fruttariano).
+- **Matrice**: nuova `cappesante_patagoniche_raw` ("Cappesante Patagoniche, congelate, crude").
+- **Attributi**: `is_heme_iron` attivo (true — mollusco, stesso precedente di `food_vongole_raw`), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati in pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (congelate crude, nessuna cottura), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=2747666 --food-id=food_cappesante_patagoniche_raw \
+  --name-it="Cappesante (capesante) Patagoniche, congelate, crude" \
+  --matrix-id=cappesante_patagoniche_raw --matrix-description-it="Cappesante Patagoniche, congelate, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=2747666 --food-id=food_cappesante_patagoniche_raw \
+  --name-it="Cappesante (capesante) Patagoniche, congelate, crude" \
+  --matrix-id=cappesante_patagoniche_raw --matrix-description-it="Cappesante Patagoniche, congelate, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_vongole_raw \
+  --diet-category=meat_fish --apply
+```
+
+### Granchio, imitazione (a base di surimi, stile Alaska King) — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_granchio_surimi` (distinto da `food_surimi`, già eseguito sul DB reale, FDC 171973 "imitation shrimp made from surimi" — qui stile "granchio/Alaska king", NDB 15138 diverso da NDB del surimi-gambero, non un doppione). FDC ID 174203 (**SR Legacy**, "Crustaceans, crab, alaska king, imitation, made from surimi" — pagina `getfoodfacts.com/food/crustaceans-crab-alaska-king-imitation-made-from-surimi-174203` dedicata, FDC ID e dataType citati esplicitamente nel titolo/corpo, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo** (nessun valore assente dalla tabella). Per 100g: energia 95,0kcal, proteine 7,62g, grassi 0,46g, carboidrati 15,0g, fibra 0,50g, calcio 13,0mg, ferro 0,39mg, magnesio 43,0mg, zinco 0,33mg, rame 0,032mg, vitamina C 0mg esplicito, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0,57µg, selenio 22,3µg, vitamina K (fillochinone 0,40µg, menachinone-4/diidrofillochinone 0µg), beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_surimi` (imitazione gambero da surimi, già eseguita sul DB reale — stessa categoria "prodotto trasformato a base di surimi di pesce", stile crostaceo imitato diverso).
+- **Categoria dieta**: `meat_fish` (ingrediente base: surimi di pesce — pollock/merluzzo).
+- **Matrice**: nuova `granchio_surimi` ("Granchio, imitazione, a base di surimi").
+- **Attributi**: `is_heme_iron` attivo (true — base ittica, stesso precedente di `food_surimi`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero, prodotto animale/processato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (il surimi è un prodotto già cotto/pastorizzato in lavorazione), `is_fortified_folate` omesso (false — folato 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174203 --food-id=food_granchio_surimi \
+  --name-it="Granchio, imitazione (a base di surimi, stile Alaska King)" \
+  --matrix-id=granchio_surimi --matrix-description-it="Granchio, imitazione, a base di surimi" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_surimi \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174203 --food-id=food_granchio_surimi \
+  --name-it="Granchio, imitazione (a base di surimi, stile Alaska King)" \
+  --matrix-id=granchio_surimi --matrix-description-it="Granchio, imitazione, a base di surimi" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_surimi \
+  --diet-category=meat_fish --apply
+```
+
+### Coniglio, cotto (in umido/stufato) — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_coniglio_stufato` (distinto da `food_coniglio_cotto`, già eseguito sul DB reale, FDC 172522 "cooked, roasted" — qui metodo di cottura diverso, "cooked, stewed", stesso animale/domesticazione del coniglio già pronto, non un doppione; distinto anche da `food_coniglio_selvatico_cotto`, coniglio selvatico non domestico). FDC ID 174346 (**SR Legacy**, "Game meat, rabbit, domesticated, composite of cuts, cooked, stewed" — pagina `getfoodfacts.com/food/game-meat-rabbit-domesticated-composite-of-cuts-cooked-stewed-174346` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 206kcal, proteine 30,4g, grassi 8,41g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 20,0mg, ferro 2,37mg, magnesio 20,0mg, zinco 2,37mg, rame 0,18mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 6,51µg, selenio 38,5µg, vitamina K (fillochinone 1,60µg, diidrofillochinone 0µg, nessun totale unico), beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_coniglio_cotto` (coniglio domestico cotto, già eseguito sul DB reale — stessa specie/domesticazione, metodo di cottura diverso, tracciato separatamente da `baseline_cooking_state`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `coniglio_stufato` ("Coniglio, cotto, in umido/stufato").
+- **Attributi**: `is_heme_iron` attivo (true — stesso precedente di `food_coniglio_cotto`/`food_coniglio_selvatico_cotto`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=stewed`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174346 --food-id=food_coniglio_stufato \
+  --name-it="Coniglio, cotto (in umido/stufato)" \
+  --matrix-id=coniglio_stufato --matrix-description-it="Coniglio, cotto, in umido/stufato" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coniglio_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174346 --food-id=food_coniglio_stufato \
+  --name-it="Coniglio, cotto (in umido/stufato)" \
+  --matrix-id=coniglio_stufato --matrix-description-it="Coniglio, cotto, in umido/stufato" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_coniglio_cotto \
+  --diet-category=meat_fish --apply
+```
+
+### Prosciutto cotto (girello), cotto (arrosto) — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_prosciutto_girello_cotto` (distinto da `food_prosciutto_cotto` generico già eseguito e da `food_maiale_coscia_girello_raw`, maiale fresco non cured — qui taglio specifico "girello" di prosciutto cotto con acqua aggiunta, già riscaldato/arrostito). FDC ID 169164 (**SR Legacy**, "Pork, cured, ham -- water added, rump, bone-in, separable lean and fat, heated, roasted" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-rump-bone-in-separable-lean-and-fat-heated-roasted-169164` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 161kcal, proteine 20,1g, grassi 8,56g, carboidrati 0,99g, fibra 0g esplicito, calcio 8,00mg, ferro 0,69mg, magnesio 18,0mg, zinco 1,74mg, rame 0,12mg, vitamina C 0mg esplicito, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0,35µg, selenio 26,3µg, vitamina K (menachinone-4 2,30µg, diidrofillochinone/fillochinone 0µg), beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_prosciutto_cotto` (prosciutto cotto generico, già eseguito sul DB reale — stessa categoria "prosciutto cotto con acqua aggiunta", taglio specifico diverso).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_girello_cotto` ("Prosciutto cotto, girello, arrosto").
+- **Attributi**: `is_heme_iron` attivo (true — carne suina), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=roasted` (FDC dichiara esplicitamente "heated, roasted"), `is_fortified_folate` omesso (false — folato 4,00µg naturale, basso).
+
+```
+npm run add-food -- --fdc-id=169164 --food-id=food_prosciutto_girello_cotto \
+  --name-it="Prosciutto cotto (girello), cotto (arrosto)" \
+  --matrix-id=prosciutto_girello_cotto --matrix-description-it="Prosciutto cotto, girello, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169164 --food-id=food_prosciutto_girello_cotto \
+  --name-it="Prosciutto cotto (girello), cotto (arrosto)" \
+  --matrix-id=prosciutto_girello_cotto --matrix-description-it="Prosciutto cotto, girello, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish --apply
+```
+
+### Prosciutto cotto (girello), non riscaldato (con acqua aggiunta) — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_prosciutto_girello_non_riscaldato` (controparte non riscaldata di `food_prosciutto_girello_cotto` sopra, FDC diverso — stesso taglio "girello", fase di lavorazione precedente alla cottura finale). FDC ID 168348 (**SR Legacy**, "Pork, cured, ham -- water added, rump, bone-in, separable lean and fat, unheated" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-rump-bone-in-separable-lean-and-fat-unheated-168348` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 172kcal, proteine 14,0g, grassi 12,5g, carboidrati 0,80g, fibra 0g esplicito, calcio 6,00mg, ferro 1,02mg, magnesio 15,0mg, zinco 1,33mg, rame 0,092mg, vitamina C 0mg esplicito, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0,50µg, selenio 26,4µg, vitamina K 0µg esplicito (tutte le forme), beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_prosciutto_cotto` (stessa convenzione usata sopra per il girello arrosto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_girello_non_riscaldato` ("Prosciutto cotto, girello, non riscaldato").
+- **Attributi**: `is_heme_iron` attivo (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=unheated` (FDC dichiara esplicitamente "unheated", nessuna cottura applicata, solo curatura/acqua aggiunta), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168348 --food-id=food_prosciutto_girello_non_riscaldato \
+  --name-it="Prosciutto cotto (girello), non riscaldato (con acqua aggiunta)" \
+  --matrix-id=prosciutto_girello_non_riscaldato --matrix-description-it="Prosciutto cotto, girello, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168348 --food-id=food_prosciutto_girello_non_riscaldato \
+  --name-it="Prosciutto cotto (girello), non riscaldato (con acqua aggiunta)" \
+  --matrix-id=prosciutto_girello_non_riscaldato --matrix-description-it="Prosciutto cotto, girello, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish --apply
+```
+
+### Prosciutto cotto (stinco), non riscaldato (con acqua aggiunta) — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_prosciutto_stinco_non_riscaldato` (distinto da `food_maiale_stinco_raw`/`_cotta`, stinco di maiale fresco non cured — qui taglio "stinco" di prosciutto cotto con acqua aggiunta, non ancora riscaldato). FDC ID 168347 (**SR Legacy**, "Pork, cured, ham -- water added, shank, bone-in, separable lean and fat, unheated" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-shank-bone-in-separable-lean-and-fat-unheated-168347` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo** ("nessun valore assente dal record", per dichiarazione esplicita della fonte). Per 100g: energia 167kcal, proteine 16,6g (un riquadro mostra 16,7g, arrotondamento), grassi 11,0g, carboidrati 0,66g, fibra 0g esplicito, calcio 7,00mg, ferro 0,72mg, magnesio 17,0mg, zinco 1,84mg, rame 0,097mg, vitamina C 0mg esplicito, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,31µg, selenio 35,7µg, vitamina K 0µg esplicito (tutte le forme), beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti.
+- **Analogia usata**: `food_prosciutto_cotto` (stessa convenzione dei due girello sopra).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_stinco_non_riscaldato` ("Prosciutto cotto, stinco, non riscaldato").
+- **Attributi**: `is_heme_iron` attivo (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=unheated`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168347 --food-id=food_prosciutto_stinco_non_riscaldato \
+  --name-it="Prosciutto cotto (stinco), non riscaldato (con acqua aggiunta)" \
+  --matrix-id=prosciutto_stinco_non_riscaldato --matrix-description-it="Prosciutto cotto, stinco, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168347 --food-id=food_prosciutto_stinco_non_riscaldato \
+  --name-it="Prosciutto cotto (stinco), non riscaldato (con acqua aggiunta)" \
+  --matrix-id=prosciutto_stinco_non_riscaldato --matrix-description-it="Prosciutto cotto, stinco, non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo, fuso (coscia inferiore), rosticceria BBQ, solo carne, cotto — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_fuso_di_pollo_bbq_senza_pelle_cotto` (distinto da `food_fuso_di_pollo_cotto_fritto` e `food_pollo_fuso_cotto` già esistenti — qui preparazione "rosticceria BBQ" specifica, solo carne senza pelle). FDC ID 171114 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, drumstick, meat only" — pagina `getfoodfacts.com/food/chicken-broiler-rotisserie-bbq-drumstick-meat-only-171114` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 172kcal, proteine 27,7g, grassi 6,76g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 20,0mg, ferro 1,05mg, magnesio 23,0mg, zinco 2,86mg, rame 0,089mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 0,47µg, selenio 27,4µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti (nessun campo assente dal record).
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (coscia di pollo cotta, carne scura, già eseguita sul DB reale — stessa categoria "pollame, carne scura, cotta").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `fuso_di_pollo_bbq_senza_pelle_cotto` ("Pollo, fuso, rosticceria BBQ, solo carne, cotto").
+- **Attributi**: `is_heme_iron` attivo (true — pollame), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (descrizione FDC "rotisserie, BBQ" non corrisponde a un termine standard dell'enum, trattato come cottura generica), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171114 --food-id=food_fuso_di_pollo_bbq_senza_pelle_cotto \
+  --name-it="Pollo, fuso, rosticceria BBQ, solo carne, cotto" \
+  --matrix-id=fuso_di_pollo_bbq_senza_pelle_cotto --matrix-description-it="Pollo, fuso, rosticceria BBQ, solo carne, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171114 --food-id=food_fuso_di_pollo_bbq_senza_pelle_cotto \
+  --name-it="Pollo, fuso, rosticceria BBQ, solo carne, cotto" \
+  --matrix-id=fuso_di_pollo_bbq_senza_pelle_cotto --matrix-description-it="Pollo, fuso, rosticceria BBQ, solo carne, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_coscia_di_pollo_cotta \
+  --diet-category=meat_fish --apply
+```
+
+### Pollo, ala, rosticceria BBQ, solo carne, cotta — preparato 2026-11-24 dal task (214° lotto)
+
+- **food_id**: `food_ala_di_pollo_bbq_senza_pelle_cotto` (distinto da `food_ala_di_pollo_cotta`/`food_ala_di_pollo_con_pelle_cotta`/`_con_pelle_cotta_bollita`/`_raw` già esistenti — qui preparazione "rosticceria BBQ" specifica, solo carne senza pelle). FDC ID 171516 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, wing, meat only" — pagina `getfoodfacts.com/food/chicken-broiler-rotisserie-bbq-wing-meat-only-171516` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 186kcal, proteine 28,3g, grassi 7,79g, carboidrati 0,54g, fibra 0g esplicito, calcio 32,0mg, ferro 0,97mg, magnesio 24,0mg, zinco 2,05mg, rame 0,066mg, vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 0,39µg, selenio 51,1µg, vitamina K 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina tutti 0µg espliciti (nessun campo assente, nessun totale carotenoidi separato ma ogni singolo valore riportato).
+- **Analogia usata**: `food_ala_di_pollo_cotta` (ala di pollo cotta, già eseguita sul DB reale — stesso taglio, preparazione diversa).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `ala_di_pollo_bbq_senza_pelle_cotto` ("Pollo, ala, rosticceria BBQ, solo carne, cotta").
+- **Attributi**: `is_heme_iron` attivo (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (stessa nota del fuso BBQ sopra), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171516 --food-id=food_ala_di_pollo_bbq_senza_pelle_cotto \
+  --name-it="Pollo, ala, rosticceria BBQ, solo carne, cotta" \
+  --matrix-id=ala_di_pollo_bbq_senza_pelle_cotto --matrix-description-it="Pollo, ala, rosticceria BBQ, solo carne, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ala_di_pollo_cotta \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171516 --food-id=food_ala_di_pollo_bbq_senza_pelle_cotto \
+  --name-it="Pollo, ala, rosticceria BBQ, solo carne, cotta" \
+  --matrix-id=ala_di_pollo_bbq_senza_pelle_cotto --matrix-description-it="Pollo, ala, rosticceria BBQ, solo carne, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_ala_di_pollo_cotta \
+  --diet-category=meat_fish --apply
+```
+
 ### Tahina cruda, da semi non tostati con buccia non rimossa chimicamente (integrale) — preparato 2026-11-24 dal task (213° lotto)
 
 - **food_id**: `food_tahina_cruda_integrale` (mai coperto, verificato con `grep` dedicato sui `food_tahina*` esistenti: distinto da `food_tahina` (FDC 170189, semi tostati) e da `food_tahina_cruda` (FDC 169410, "from raw and stone ground kernels", buccia rimossa per macinazione a pietra) — qui semi crudi con buccia NON rimossa chimicamente, metodo di lavorazione distinto, profilo minerale nettamente diverso, non un doppione). FDC ID 169406 (**SR Legacy**, "Seeds, sesame butter, tahini, from unroasted kernels (non-chemically removed seed coat)" — pagina `getfoodfacts.com/food/seeds-sesame-butter-tahini-from-unroasted-kernels-non-chemically-removed-seed-co-169406` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
