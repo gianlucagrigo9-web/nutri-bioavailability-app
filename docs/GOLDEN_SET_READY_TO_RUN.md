@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Farina di mais blu integrale (harina de maiz morado) — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_farina_di_mais_blu_raw` (distinto da `food_farina_di_mais_raw`/mais giallo già eseguito — varietà/cultivar di mais diversa, pigmentazione antocianica; verificato zero occorrenze precedenti con `grep`). FDC ID 168921 (**SR Legacy**, "Corn flour, whole-grain, blue (harina de maiz morado)" — pagina `getfoodfacts.com/food/corn-flour-whole-grain-blue-harina-de-maiz-morado-168921` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
+- **Nutrienti**: **11/17** — mancano vitamina C, folato totale, acido folico, vitamina B12, selenio, vitamina K, beta-carotene (il record cita in totale 23 nutrienti ma nessuno di questi 6 è tra essi). Per 100g: energia 364kcal, proteine 8,75g, grassi 5,09g, carboidrati 73,9g, fibra 8,40g, calcio 5,00mg, ferro 1,74mg, magnesio 110mg, zinco 2,24mg, rame 0,15mg, selenio 2,20µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa filiera, farina di mais, varietà/colore diversi già eseguita).
+- **Categoria dieta**: `plant_non_fruit` (cereale, vegetariano e vegano sì).
+- **Matrice**: nuova `farina_di_mais_blu` ("Farina di mais blu integrale (harina de maiz morado)").
+- **Attributi**: `botanical_family=Poaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=168921 --food-id=food_farina_di_mais_blu_raw \
+  --name-it="Farina di mais blu, integrale (harina de maiz morado)" \
+  --matrix-id=farina_di_mais_blu --matrix-description-it="Farina di mais blu integrale (harina de maiz morado)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168921 --food-id=food_farina_di_mais_blu_raw \
+  --name-it="Farina di mais blu, integrale (harina de maiz morado)" \
+  --matrix-id=farina_di_mais_blu --matrix-description-it="Farina di mais blu integrale (harina de maiz morado)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fiocchi di latte magri 1%, senza sodio aggiunto — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_fiocchi_di_latte_magri_senza_sodio` (distinto da `food_fiocchi_di_latte_raw` già eseguito — quello è "creamed, large or small curd" intero/cremoso FDC 172179, questo è magro 1% senza sodio aggiunto, record FDC diverso e composizione grassi/sodio molto diversa; verificato zero occorrenze precedenti con `grep`). FDC ID 168114 (**SR Legacy**, "Cheese, cottage, lowfat, 1% milkfat, no sodium added" — pagina `getfoodfacts.com/food/cheese-cottage-lowfat-1-milkfat-no-sodium-added-168114` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 72,0kcal, proteine 12,4g, grassi 1,00g, carboidrati 2,70g, fibra 0g, calcio 61,0mg, ferro 0,14mg, magnesio 5,00mg, zinco 0,38mg, rame 0,028mg, vitamina C 0mg esplicito, folato totale 12,0µg, acido folico 0µg esplicito, vitamina B12 0,63µg, selenio 8,40µg, vitamina K 0,10µg, beta-carotene 3,00µg.
+- **Analogia usata**: `food_fiocchi_di_latte_raw` (stesso latticino, contenuto di grassi e sodio distinti).
+- **Categoria dieta**: `egg_dairy` (latticino, vegetariano sì, vegano no).
+- **Matrice**: nuova `fiocchi_di_latte_magri_senza_sodio` ("Fiocchi di latte magri 1%, senza sodio aggiunto").
+- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia (non applicabile calcio/carotenoidi a un latticino magro processato).
+
+```
+npm run add-food -- --fdc-id=168114 --food-id=food_fiocchi_di_latte_magri_senza_sodio \
+  --name-it="Fiocchi di latte magri 1%, senza sodio aggiunto" \
+  --matrix-id=fiocchi_di_latte_magri_senza_sodio --matrix-description-it="Fiocchi di latte magri 1%, senza sodio aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fiocchi_di_latte_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=168114 --food-id=food_fiocchi_di_latte_magri_senza_sodio \
+  --name-it="Fiocchi di latte magri 1%, senza sodio aggiunto" \
+  --matrix-id=fiocchi_di_latte_magri_senza_sodio --matrix-description-it="Fiocchi di latte magri 1%, senza sodio aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fiocchi_di_latte_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Albicocche, in scatola, sciroppo leggero, con buccia e liquido — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_albicocche_sciroppo_leggero_in_scatola` (distinto da `food_albicocche_in_scatola` già eseguito — quello è "heavy syrup, drained" FDC 167768, questo è "extra light syrup pack, with skin, solids and liquids" FDC diverso, con carboidrati quasi dimezzati per la minore concentrazione di sciroppo e la presenza del liquido; verificato zero occorrenze precedenti con `grep`). FDC ID 173938 (**SR Legacy**, "Apricots, canned, extra light syrup pack, with skin, solids and liquids (Includes foods for USDA's Food Distribution Program)" — pagina `getfoodfacts.com/food/apricots-canned-extra-light-syrup-pack-with-skin-solids-and-liquids-includes-foo-173938` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17** — mancano selenio, vitamina K, beta-carotene (nessuna riga in pagina, a differenza del congenere a sciroppo pesante già eseguito che li riportava). Per 100g: energia 49,0kcal, proteine 0,60g, grassi 0,10g, carboidrati 12,5g, fibra 1,60g, calcio 10,0mg, ferro 0,30mg, magnesio 6,00mg, zinco 0,080mg, rame 0,040mg, vitamina C 4,00mg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito.
+- **Analogia usata**: `food_albicocche_in_scatola` (stesso frutto conservato, concentrazione di sciroppo e scolatura diverse).
+- **Categoria dieta**: `plant_non_fruit` (frutta cotta/in conserva, non rientra nella definizione restrittiva di frutta fresca del PRD §4.9 — stessa motivazione già usata per il congenere a sciroppo pesante).
+- **Matrice**: nuova `albicocche_sciroppo_leggero` ("Albicocche in scatola, sciroppo leggero, con buccia e liquido").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Rosaceae` (coerenti con l'analogia).
+
+```
+npm run add-food -- --fdc-id=173938 --food-id=food_albicocche_sciroppo_leggero_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo leggero, con buccia e liquido" \
+  --matrix-id=albicocche_sciroppo_leggero --matrix-description-it="Albicocche in scatola, sciroppo leggero, con buccia e liquido" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173938 --food-id=food_albicocche_sciroppo_leggero_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo leggero, con buccia e liquido" \
+  --matrix-id=albicocche_sciroppo_leggero --matrix-description-it="Albicocche in scatola, sciroppo leggero, con buccia e liquido" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Mais in chicco secco, giallo, crudo — preparato 2026-11-24 dal task (218° lotto)
 
 - **food_id**: `food_mais_in_chicco_secco_raw` (distinto da `food_mais_dolce_raw`/granturco dolce fresco già eseguito — specie/varietà diversa, mais da granella vs mais dolce — e da `food_farina_di_mais_raw` già eseguito — chicco intero vs farina macinata; verificato zero occorrenze precedenti con `grep`). FDC ID 170288 (**SR Legacy**, "Corn grain, yellow" — pagina `getfoodfacts.com/food/corn-grain-yellow-170288` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
