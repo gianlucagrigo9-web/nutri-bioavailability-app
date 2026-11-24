@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Granchio, polpette (crab cakes), ricetta casalinga, cotte — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_polpette_di_granchio_cotte` (distinto da `food_granchio_raw`/`food_granchio_cotto`, FDC 174204/174205, già eseguiti — qui ricetta composita con panatura, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 171967 (**SR Legacy**, "Crustaceans, crab, blue, crab cakes, home recipe" — pagina `getfoodfacts.com/food/crustaceans-crab-blue-crab-cakes-home-recipe-171967` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 155kcal, proteine 20,2g, grassi 7,52g, carboidrati 0,48g, fibra 0g esplicito, calcio 105mg, ferro 1,08mg, magnesio 33,0mg, zinco 4,09mg, rame 0,61mg, vitamina C 2,80mg, folato totale 53,0µg, acido folico 12,0µg (presente — coerente con la panatura a base di farina arricchita, non un'anomalia: ricetta USA con breadcrumbs, non un alimento semplice italiano travisato), vitamina B12 5,94µg, selenio 40,7µg. Mancano (non riportati nel record): vitamina K, beta-carotene.
+- **Analogia usata**: `food_granchio_cotto` (stesso crostaceo, già eseguito sul DB reale, qui ricetta composita cotta).
+- **Categoria dieta**: `meat_fish` (crostaceo, vegetariano no — la componente di panatura/frittura non cambia la categoria dell'alimento principale, stesso criterio già usato per il pollo rosticceria BBQ).
+- **Matrice**: nuova `polpette_di_granchio` ("Granchio, polpette, ricetta casalinga").
+- **Attributi**: `is_heme_iron` attivo (true — crostaceo, stesso criterio di `food_granchio_cotto`), resto omesso (NULL/default) per coerenza con l'analogia.
+
+```
+npm run add-food -- --fdc-id=171967 --food-id=food_polpette_di_granchio_cotte \
+  --name-it="Granchio, polpette (crab cakes), ricetta casalinga, cotte" \
+  --matrix-id=polpette_di_granchio --matrix-description-it="Granchio, polpette, ricetta casalinga" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171967 --food-id=food_polpette_di_granchio_cotte \
+  --name-it="Granchio, polpette (crab cakes), ricetta casalinga, cotte" \
+  --matrix-id=polpette_di_granchio --matrix-description-it="Granchio, polpette, ricetta casalinga" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_granchio_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Formaggio spalmabile, base crema di formaggio — preparato 2026-11-24 dal task (218° lotto)
 
 - **food_id**: `food_formaggio_spalmabile_base_crema_raw` (distinto da `food_formaggio_spalmabile_americano_raw` già eseguito — quello ha base American/cheddar FDC 171254, questo ha base cream cheese, record FDC e composizione diversi; verificato zero occorrenze precedenti con `grep`). FDC ID 169081 (**SR Legacy**, "Cheese spread, cream cheese base" — pagina `getfoodfacts.com/food/cheese-spread-cream-cheese-base-169081` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
