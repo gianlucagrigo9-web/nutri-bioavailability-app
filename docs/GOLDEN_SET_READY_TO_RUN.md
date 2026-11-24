@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Pollo, schiena, solo carne, cruda — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_pollo_schiena_raw` (taglio mai coperto finora nella pipeline — verificato zero occorrenze precedenti con `grep`, nessun "schiena di pollo" o equivalente). FDC ID 171073 (**SR Legacy**, "Chicken, broilers or fryers, back, meat only, raw" — pagina `getfoodfacts.com/food/chicken-broilers-or-fryers-back-meat-only-raw-171073` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 137kcal, proteine 19,6g, grassi 5,92g, carboidrati 0g, fibra 0g, calcio 17,0mg, ferro 1,04mg, magnesio 22,0mg, zinco 1,85mg, rame 0,060mg, vitamina C 0mg esplicito, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 0,36µg, selenio 13,5µg, vitamina K 2,40µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_petto_di_pollo_raw` (stesso animale, taglio diverso, già eseguito).
+- **Categoria dieta**: `meat_fish` (pollame, vegetariano no).
+- **Matrice**: nuova `pollo_schiena` ("Pollo, schiena, solo carne").
+- **Attributi**: `is_heme_iron` presente (coerente con le altre carni di pollo già eseguite).
+
+```
+npm run add-food -- --fdc-id=171073 --food-id=food_pollo_schiena_raw \
+  --name-it="Pollo, schiena, solo carne, cruda" \
+  --matrix-id=pollo_schiena --matrix-description-it="Pollo, schiena, solo carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171073 --food-id=food_pollo_schiena_raw \
+  --name-it="Pollo, schiena, solo carne, cruda" \
+  --matrix-id=pollo_schiena --matrix-description-it="Pollo, schiena, solo carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_petto_di_pollo_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Fagioli rossi (kidney), germogliati, crudi — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_fagioli_rossi_germogliati_raw` (distinto da `food_kidney_beans_raw` già eseguito — stato germogliato, record FDC diverso e composizione molto diversa dal seme secco; verificato zero occorrenze precedenti con `grep`). FDC ID 169213 (**SR Legacy**, "Beans, kidney, mature seeds, sprouted, raw" — pagina `getfoodfacts.com/food/beans-kidney-mature-seeds-sprouted-raw-169213` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17** — mancano fibra (pagina con dato interno contraddittorio: "not declared" in un punto, "0g" in un altro — non assunta come zero per non inventare un valore incerto), vitamina K (nessuna riga in tabella) e beta-carotene (pagina riporta solo vitamina A RAE e retinolo, entrambi 0). Per 100g: energia 29,0kcal, proteine 4,20g, grassi 0,50g, carboidrati 4,10g, calcio 17,0mg, ferro 0,81mg, magnesio 21,0mg, zinco 0,40mg, rame 0,16mg, vitamina C 38,7mg, folato totale 59,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,60µg.
+- **Analogia usata**: `food_kidney_beans_raw` (stesso legume, stato germogliato vs seme secco).
+- **Categoria dieta**: `plant_non_fruit` (legume, vegetariano e vegano sì).
+- **Matrice**: nuova `fagioli_rossi_germogliati` ("Fagioli rossi (kidney), germogliati").
+- **Attributi**: `botanical_family=Fabaceae` (coerente con l'analogia).
+
+```
+npm run add-food -- --fdc-id=169213 --food-id=food_fagioli_rossi_germogliati_raw \
+  --name-it="Fagioli rossi (kidney), germogliati, crudi" \
+  --matrix-id=fagioli_rossi_germogliati --matrix-description-it="Fagioli rossi (kidney), germogliati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169213 --food-id=food_fagioli_rossi_germogliati_raw \
+  --name-it="Fagioli rossi (kidney), germogliati, crudi" \
+  --matrix-id=fagioli_rossi_germogliati --matrix-description-it="Fagioli rossi (kidney), germogliati" \
+  --baseline-cooking-state=raw --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Farina di mais blu integrale (harina de maiz morado) — preparato 2026-11-24 dal task (218° lotto)
 
 - **food_id**: `food_farina_di_mais_blu_raw` (distinto da `food_farina_di_mais_raw`/mais giallo già eseguito — varietà/cultivar di mais diversa, pigmentazione antocianica; verificato zero occorrenze precedenti con `grep`). FDC ID 168921 (**SR Legacy**, "Corn flour, whole-grain, blue (harina de maiz morado)" — pagina `getfoodfacts.com/food/corn-flour-whole-grain-blue-harina-de-maiz-morado-168921` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
