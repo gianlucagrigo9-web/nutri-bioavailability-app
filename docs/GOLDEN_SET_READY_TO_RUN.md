@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Salsa di pomodoro in scatola, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_salsa_di_pomodoro_in_scatola` (mai coperto, verificato con `grep` dedicato — distinta da `food_passata_di_pomodoro_raw` FDC 2685582 "tomato puree", `food_pomodori_schiacciati_in_scatola` FDC 2685581 "tomatoes, crushed" e `food_concentrato_di_pomodoro`, già eseguiti/preparati: "tomato sauce" USDA è un prodotto a sé, più liquido/condito della passata). FDC ID 2685579 (**Foundation Foods**, "Tomato, sauce, canned, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 29,1kcal, proteine 1,35g, grassi 0,38g, carboidrati 6,33g, fibra 1,64g, calcio 17,1mg, ferro 1,11mg, magnesio 18,7mg, zinco 0,18mg, rame 0,089mg, vitamina C 9,20mg, sodio 417mg (sale aggiunto, dichiarato nel nome). **Mancano**: selenio, beta-carotene, alfa-carotene, beta-criptoxantina, folato totale, vitamina B12, vitamina K. **Nota**: energia/sodio nel pannello riepilogo arrotondati a 30kcal/420mg rispetto alla tabella dettagliata — usati i valori della tabella, stessa convenzione di altre voci in questa coda.
+- **Analogia usata**: `food_passata_di_pomodoro_raw` (stesso prodotto di base, pomodoro cotto/in scatola, già preparata in questa pipeline — stessa pianta *Solanum lycopersicum*).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di pomodoro, convenzione PRD §4.9).
+- **Matrice**: nuova `salsa_di_pomodoro_in_scatola` ("Salsa di pomodoro in scatola").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (pomodoro cotto/in scatola, per analogia), `botanical_family=Solanaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=2685579 --food-id=food_salsa_di_pomodoro_in_scatola \
+  --name-it="Salsa di pomodoro in scatola, con sale aggiunto" \
+  --matrix-id=salsa_di_pomodoro_in_scatola --matrix-description-it="Salsa di pomodoro in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2685579 --food-id=food_salsa_di_pomodoro_in_scatola \
+  --name-it="Salsa di pomodoro in scatola, con sale aggiunto" \
+  --matrix-id=salsa_di_pomodoro_in_scatola --matrix-description-it="Salsa di pomodoro in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_passata_di_pomodoro_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Yogurt greco alla fragola, magro — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_yogurt_greco_fragola_magro` (mai coperto, verificato con `grep` dedicato — distinto da `food_yogurt_greco_magro` (nonfat, plain, FDC 170894) e `food_yogurt_greco` (whole milk, plain, FDC 171304), già eseguiti: qui gusto fragola, zuccheri aggiunti). FDC ID 330415 (**Foundation Foods**, "Yogurt, Greek, strawberry, nonfat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
