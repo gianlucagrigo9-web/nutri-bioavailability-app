@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Anacardi, tostati in olio, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_anacardi_tostati_olio_sale` (mai coperto, verificato con `grep` dedicato — distinto da `food_anacardi_tostati` (a secco, con sale, FDC 169421) e `food_anacardi_tostati_olio` (in olio, senza sale, FDC 170572), già eseguiti: qui completa la combinazione tostatura in olio + sale). FDC ID 169422 (**SR Legacy**, "Nuts, cashew nuts, oil roasted, with salt added"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata per questo FDC ID; verificato invece su `tools.myfooddata.com/nutrition-comparison/169422/wt1`, che nomina esplicitamente il prodotto e linka `fdc.nal.usda.gov/food-details/169422` come fonte.
+- **Nutrienti**: **16/18**. **Nota di trasparenza (Regola 6)**: la pagina mostra i valori per porzione da 129g (1 tazza intera), non per 100g; i valori sotto sono una mia conversione (÷1,29), non valori dichiarati direttamente per 100g dalla fonte. Per 100g (convertito): energia 581kcal, proteine 16,8g, grassi 47,8g, carboidrati 30,2g, fibra 3,33g, calcio 43,0mg, ferro 6,05mg, magnesio 273mg, zinco 5,35mg, rame 2,02mg, selenio 20,3µg, beta-carotene 0µg (esplicito), vitamina C 0,30mg, folato totale 25,0µg, vitamina B12 0µg (esplicito), vitamina K 34,7µg, sodio 308mg. **Mancano**: alfa-carotene, beta-criptoxantina (non riportati separatamente da questa fonte).
+- **Analogia usata**: `food_anacardi_tostati_olio` (anacardi tostati in olio senza sale, già eseguito sul DB reale — stessa specie, stesso metodo di tostatura, qui con sale aggiunto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `anacardi_tostati_olio_sale` ("Anacardi tostati in olio, con sale").
+- **Attributi**: `botanical_family=Anacardiaceae` (come l'analogia), `carotenoid_matrix_state=cooked_or_disrupted` (per analogia), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=169422 --food-id=food_anacardi_tostati_olio_sale \
+  --name-it="Anacardi, tostati in olio, con sale aggiunto" \
+  --matrix-id=anacardi_tostati_olio_sale --matrix-description-it="Anacardi tostati in olio, con sale" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_tostati_olio \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Anacardiaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169422 --food-id=food_anacardi_tostati_olio_sale \
+  --name-it="Anacardi, tostati in olio, con sale aggiunto" \
+  --matrix-id=anacardi_tostati_olio_sale --matrix-description-it="Anacardi tostati in olio, con sale" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_anacardi_tostati_olio \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Anacardiaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Mandorle, tostate in olio, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_mandorle_tostate_olio_sale` (mai coperto, verificato con `grep` dedicato — distinto da `food_mandorle_tostate` (a secco, con sale, FDC 168596) e `food_mandorle_tostate_olio` (in olio, senza sale, FDC 170159), già eseguite/preparate: qui completa la combinazione tostatura in olio + sale, variabile ancora mancante in questa pipeline). FDC ID 169419 (**SR Legacy**, "Nuts, almonds, oil roasted, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
