@@ -16,6 +16,104 @@
 
 ## Pronti
 
+### Cocco, polpa essiccata, zuccherata, a fiocchi, confezionata — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_cocco_zuccherato_fiocchi` (mai coperto, verificato con `grep` dedicato — distinto da `food_cocco_disidratato_raw` (non zuccherato, FDC 170170) e `food_cocco_cremoso_essiccato` (forma "creamed", FDC 168585), entrambi già eseguiti: qui forma zuccherata a fiocchi confezionata, tipica per pasticceria, mai tentata). FDC ID 170577 (**SR Legacy**, "Nuts, coconut meat, dried (desiccated), sweetened, flaked, packaged" — pagina `getfoodfacts.com/food/nuts-coconut-meat-dried-desiccated-sweetened-flaked-packaged-170577` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo** — nessun valore mancante. Per 100g: energia 456kcal, proteine 3,13g, grassi 28,0g, carboidrati 51,9g, fibra 9,90g, calcio 11,0mg, ferro 1,51mg, magnesio 51,0mg, zinco 0,71mg, rame 0,29mg, selenio 16,1µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0µg esplicito, folato totale 3,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, beta-carotene/alfa-carotene/beta-criptoxantina 0µg espliciti (coerente con un frutto non fotosintetico, zero plausibile). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 170577 e dataType SR Legacy.
+- **Analogia usata**: `food_cocco_disidratato_raw` (cocco essiccato non zuccherato, già eseguito sul DB reale — stesso frutto/processo di essiccazione, qui zuccherato e tagliato a fiocchi).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/derivato di frutto non da consumarsi come frutta fresca).
+- **Matrice**: nuova `cocco_zuccherato_fiocchi` ("Cocco, essiccato, zuccherato, a fiocchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione delle altre voci cocco), `carotenoid_matrix_state` omesso (NULL — tutti i carotenoidi tracciati sono esplicitamente zero, non un caso di matrice da classificare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (come l'analogia, *Cocos nucifera*), `baseline_cooking_state=dried` (stessa convenzione di `food_cocco_cremoso_essiccato`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170577 --food-id=food_cocco_zuccherato_fiocchi \
+  --name-it="Cocco, polpa essiccata, zuccherata, a fiocchi" \
+  --matrix-id=cocco_zuccherato_fiocchi --matrix-description-it="Cocco, essiccato, zuccherato, a fiocchi" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cocco_disidratato_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170577 --food-id=food_cocco_zuccherato_fiocchi \
+  --name-it="Cocco, polpa essiccata, zuccherata, a fiocchi" \
+  --matrix-id=cocco_zuccherato_fiocchi --matrix-description-it="Cocco, essiccato, zuccherato, a fiocchi" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cocco_disidratato_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
+### Asparagi, in scatola, senza sale aggiunto, con liquido di governo — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_asparagi_in_scatola_senza_sale` (mai coperto, verificato con `grep` dedicato — distinto da `food_asparagi_in_scatola` (FDC 169207 "canned, drained solids", già eseguito) e da `food_asparagi_raw`/`food_asparagi_cotti`/`food_asparagi_surgelati` già eseguiti: qui FDC diverso, "no salt added, solids and liquids" — include il liquido di governo, non solo i solidi sgocciolati, e senza sale). FDC ID 169314 (**SR Legacy**, "Asparagus, canned, no salt added, solids and liquids" — pagina `getfoodfacts.com/food/asparagus-canned-no-salt-added-solids-and-liquids-169314` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo** — nessun valore mancante. Per 100g: energia 15,0kcal, proteine 1,80g, grassi 0,18g, carboidrati 2,48g, fibra 1,00g, calcio 15,0mg, ferro 0,60mg, magnesio 9,00mg, zinco 0,47mg, rame 0,11mg, selenio 1,60µg, vitamina C 16,5mg, vitamina K (fillochinone) 39,0µg, folato totale 85,0µg, beta-carotene 465µg (reale e coerente con l'ortaggio verde); acido folico, vitamina B12, alfa-carotene e beta-criptoxantina esplicitamente riportati come zero (non assunti, non mancanti). Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169314 e dataType SR Legacy.
+- **Analogia usata**: `food_asparagi_in_scatola` (asparagi in scatola sgocciolati, già eseguiti sul DB reale — stesso ortaggio, stesso processo di conservazione in scatola, differisce solo per sale/liquido di governo).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `asparagi_in_scatola_senza_sale` ("Asparagi, in scatola, senza sale aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stesso precedente di `food_asparagi_raw`/`food_asparagi_cotti`/`food_asparagi_in_scatola`), `carotenoid_matrix_state=cooked_or_disrupted` (conserva sterilizzata a calore, beta-carotene reale e non nullo, stesso precedente della voce in scatola già eseguita), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asparagaceae` (come l'analogia), `baseline_cooking_state=cooked` (prodotto in scatola, sterilizzato durante la conservazione, stessa convenzione di `food_asparagi_in_scatola`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169314 --food-id=food_asparagi_in_scatola_senza_sale \
+  --name-it="Asparagi, in scatola, senza sale aggiunto, con liquido di governo" \
+  --matrix-id=asparagi_in_scatola_senza_sale --matrix-description-it="Asparagi, in scatola, senza sale aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169314 --food-id=food_asparagi_in_scatola_senza_sale \
+  --name-it="Asparagi, in scatola, senza sale aggiunto, con liquido di governo" \
+  --matrix-id=asparagi_in_scatola_senza_sale --matrix-description-it="Asparagi, in scatola, senza sale aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asparagaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Farina di sorgo, perlata, non arricchita, cruda — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_farina_di_sorgo_perlata_raw` (mai coperto, verificato con `grep` dedicato — distinto da `food_farina_di_sorgo_raw` (FDC 168943, "whole-grain", già eseguita) e da `food_sorgo_raw` (chicco intero, già eseguito): qui farina da sorgo PERLATO (crusca rimossa), record Foundation Foods distinto, fibra/minerali più bassi coerenti con la rimozione della crusca). FDC ID 2710840 (**Foundation Foods**, "Sorghum flour, white, pearled, unenriched, dry, raw" — pagina `getfoodfacts.com/food/sorghum-flour-white-pearled-unenriched-dry-raw-2710840` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/17** (soglia minima, stesso livello già accettato per altre voci Foundation recenti nella pipeline). Per 100g: energia 350kcal, proteine 10,2g, grassi 3,24g, carboidrati 73,5g, fibra 3,30g, calcio 7,89mg, ferro 2,23mg, magnesio 107mg, zinco 1,32mg, rame 0,21mg. **Mancano** (assenti dalla pagina, non assunti zero): selenio, vitamina C, vitamina K, folato totale, acido folico, vitamina B12, beta-carotene, alfa-carotene/beta-criptoxantina. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2710840 e dataType Foundation Foods.
+- **Analogia usata**: `food_farina_di_sorgo_raw` (farina di sorgo whole-grain, già eseguita sul DB reale — stessa pianta *Sorghum bicolor*, qui farina perlata/raffinata invece di integrale).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_di_sorgo_perlata` ("Farina di sorgo, perlata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile a una farina di cereale, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati sulla pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del sorgo, come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — "unenriched" esplicito nel nome FDC).
+
+```
+npm run add-food -- --fdc-id=2710840 --food-id=food_farina_di_sorgo_perlata_raw \
+  --name-it="Farina di sorgo, perlata, non arricchita, cruda" \
+  --matrix-id=farina_di_sorgo_perlata --matrix-description-it="Farina di sorgo, perlata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710840 --food-id=food_farina_di_sorgo_perlata_raw \
+  --name-it="Farina di sorgo, perlata, non arricchita, cruda" \
+  --matrix-id=farina_di_sorgo_perlata --matrix-description-it="Farina di sorgo, perlata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Crusca di sorgo, non arricchita, cruda — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_crusca_di_sorgo_raw` (mai coperto, verificato con `grep` dedicato — prima crusca di cereale di questa specie nella pipeline, distinta da `food_sorgo_raw`/`food_farina_di_sorgo_raw`/`food_farina_di_sorgo_perlata_raw`: qui la frazione di crusca, fibra/minerali molto più alti coerenti con la concentrazione nella crusca). FDC ID 2710839 (**Foundation Foods**, "Sorghum bran, white, unenriched, dry, raw" — pagina `getfoodfacts.com/food/sorghum-bran-white-unenriched-dry-raw-2710839` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **10/17** (soglia minima). Per 100g: energia 365kcal, proteine 11,2g, grassi 9,26g, carboidrati 68,7g, fibra 35,0g (molto alta, coerente con una crusca), calcio 61,7mg, ferro 14,2mg (molto alto, coerente con la concentrazione di minerali nella crusca), magnesio 274mg, zinco 4,40mg, rame 0,84mg. **Mancano** (assenti dalla pagina, non assunti zero): selenio, vitamina C, vitamina K, folato totale, acido folico, vitamina B12, beta-carotene, alfa-carotene/beta-criptoxantina. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 2710839 e dataType Foundation Foods.
+- **Analogia usata**: `food_sorgo_raw` (sorgo in chicco intero crudo, già eseguito sul DB reale — stessa pianta *Sorghum bicolor*, qui la sola frazione di crusca).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `crusca_di_sorgo` ("Crusca di sorgo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione delle altre voci cereale), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati sulla pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale del sorgo, come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — "unenriched" esplicito nel nome FDC).
+
+```
+npm run add-food -- --fdc-id=2710839 --food-id=food_crusca_di_sorgo_raw \
+  --name-it="Crusca di sorgo, non arricchita, cruda" \
+  --matrix-id=crusca_di_sorgo --matrix-description-it="Crusca di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2710839 --food-id=food_crusca_di_sorgo_raw \
+  --name-it="Crusca di sorgo, non arricchita, cruda" \
+  --matrix-id=crusca_di_sorgo --matrix-description-it="Crusca di sorgo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_sorgo_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Mandorle, tostate al miele, non sbucciate — preparato 2026-11-24 dal task (212° lotto)
 
 - **food_id**: `food_mandorle_tostate_miele` (mai coperto, verificato con `grep` dedicato — distinto da `food_mandorle_tostate` (a secco con sale, FDC 168596), `food_mandorle_tostate_olio` (in olio senza sale, FDC 170159) e `food_mandorle_tostate_olio_sale` (in olio con sale, FDC 169419), tutte già eseguite/preparate: qui tostatura al miele, non sbucciate, variabile ancora assente in questa pipeline). FDC ID 168592 (**SR Legacy**, "Nuts, almonds, honey roasted, unblanched" — pagina `getfoodfacts.com/food/nuts-almonds-honey-roasted-unblanched-168592` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
