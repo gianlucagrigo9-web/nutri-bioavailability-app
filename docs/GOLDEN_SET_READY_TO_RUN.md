@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Wasabi, radice, crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_wasabi_raw` (nuovo — radice/rizoma mai coperta in questa pipeline, distinta da `food_zenzero_raw` (altro rizoma, già eseguito, famiglia botanica diversa). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168583 (**SR Legacy**, "Wasabi, root, raw" — pagina `getfoodfacts.com/food/wasabi-root-raw-168583` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 109kcal, proteine 4,80g, grassi 0,63g, carboidrati 23,5g, fibra 7,80g, calcio 128mg, ferro 1,03mg, magnesio 69,0mg, zinco 1,62mg, rame 0,15mg, vitamina C 41,9mg (reale), folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, beta-carotene 21,0µg (reale). Mancano: selenio, vitamina K (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_zenzero_raw` (zenzero crudo, Golden Set pipeline, già eseguito sul DB reale — stessa categoria funzionale "rizoma/radice aromatica cruda").
+- **Categoria dieta**: `plant_non_fruit` (radice/rizoma).
+- **Matrice**: nuova `wasabi_radice` ("Wasabi, radice, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, radice cruda non alterata da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (*Eutrema japonicum*, stessa famiglia di ravanelli/rucola già usate in questa pipeline), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168583 --food-id=food_wasabi_raw \
+  --name-it="Wasabi, radice, crudo" \
+  --matrix-id=wasabi_radice --matrix-description-it="Wasabi, radice, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zenzero_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168583 --food-id=food_wasabi_raw \
+  --name-it="Wasabi, radice, crudo" \
+  --matrix-id=wasabi_radice --matrix-description-it="Wasabi, radice, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zenzero_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Semi di frutto del pane (breadfruit seeds), crudi — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_semi_frutto_del_pane_raw` (nuovo — seme mai coperto in questa pipeline, famiglia botanica Moraceae mai usata prima, categoria USDA "Nut and Seed Products". Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170144 (**SR Legacy**, "Seeds, breadfruit seeds, raw" — pagina `getfoodfacts.com/food/seeds-breadfruit-seeds-raw-170144` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
