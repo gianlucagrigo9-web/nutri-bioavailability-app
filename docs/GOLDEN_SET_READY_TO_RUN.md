@@ -16,6 +16,126 @@
 
 ## Pronti
 
+### Bulgur, cotto — preparato 2026-11-24 dal task (217° lotto)
+
+- **food_id**: `food_bulgur_cotto` (distinto da `food_bulgur_raw` già eseguito, FDC 170688, crudo — qui FDC diverso, stato cotto, verificato zero occorrenze precedenti con `grep`). FDC ID 170287 (**SR Legacy**, "Bulgur, cooked" — pagina `getfoodfacts.com/food/bulgur-cooked-170287` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 83,0kcal, proteine 3,08g, grassi 0,24g, carboidrati 18,6g, fibra 4,50g, calcio 10,0mg, ferro 0,96mg, magnesio 32,0mg, zinco 0,57mg, rame 0,075mg, vitamina C 0mg esplicito, folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,60µg, vitamina K 0,50µg, beta-carotene 1,00µg.
+- **Analogia usata**: `food_bulgur_raw` (stesso cereale, stato di cottura diverso — crudo vs cotto, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (cereale, vegetariano e vegano sì).
+- **Matrice**: nuova `bulgur_cotto` ("Bulgur (grano spezzato), cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile a un cereale), `carotenoid_matrix_state=cooked_or_disrupted` (a differenza di `food_bulgur_raw` che usa `raw_intact` — qui la matrice è esplicitamente cotta), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=boiled`, `botanical_family=Poaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=170287 --food-id=food_bulgur_cotto \
+  --name-it="Bulgur, cotto" \
+  --matrix-id=bulgur_cotto --matrix-description-it="Bulgur (grano spezzato), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bulgur_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170287 --food-id=food_bulgur_cotto \
+  --name-it="Bulgur, cotto" \
+  --matrix-id=bulgur_cotto --matrix-description-it="Bulgur (grano spezzato), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_bulgur_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Mela, sbucciata, cotta bollita — preparato 2026-11-24 dal task (217° lotto)
+
+- **food_id**: `food_mela_sbucciata_cotta_bollita` (distinto dalle varianti crude già eseguite — `food_apple_with_skin_raw`, cultivar varie — verificato zero occorrenze precedenti con `grep`). FDC ID 173928 (**SR Legacy**, "Apples, raw, without skin, cooked, boiled" — pagina `getfoodfacts.com/food/apples-raw-without-skin-cooked-boiled-173928` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 53,0kcal, proteine 0,26g, grassi 0,36g, carboidrati 13,6g, fibra 2,40g, calcio 5,00mg, ferro 0,19mg, magnesio 3,00mg, zinco 0,040mg, rame 0,035mg, vitamina C 0,20mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,30µg, vitamina K 0,60µg, beta-carotene 19,0µg.
+- **Analogia usata**: `food_apple_with_skin_raw` (stessa specie, già eseguita; nessuna variante "senza buccia cruda" presente nel DB a cui ancorarsi più da vicino).
+- **Categoria dieta**: `plant_non_fruit`, **non** `fresh_fruit` — per coerenza con il precedente già nel DB `food_succo_di_mela_raw` (succo di mela, stesso tipo di analogia dichiarata con `food_apple_with_skin_raw`, classificato `plant_non_fruit`/fruttariano=false): una preparazione cotta/trasformata non rientra nella definizione restrittiva di "frutta fresca" del PRD §4.9, a differenza del frutto crudo intero.
+- **Matrice**: nuova `mela_sbucciata_cotta_bollita` ("Mela, sbucciata, cotta (bollita)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene presente ma nessun precedente di matrice per questo stato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=boiled`, `botanical_family=Rosaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=173928 --food-id=food_mela_sbucciata_cotta_bollita \
+  --name-it="Mela, sbucciata, cotta (bollita)" \
+  --matrix-id=mela_sbucciata_cotta_bollita --matrix-description-it="Mela, sbucciata, cotta (bollita)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173928 --food-id=food_mela_sbucciata_cotta_bollita \
+  --name-it="Mela, sbucciata, cotta (bollita)" \
+  --matrix-id=mela_sbucciata_cotta_bollita --matrix-description-it="Mela, sbucciata, cotta (bollita)" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Formaggio, misto messicano — preparato 2026-11-24 dal task (217° lotto)
+
+- **food_id**: `food_formaggio_messicano_misto` (categoria nuova, verificato zero occorrenze precedenti con `grep`). FDC ID 171288 (**SR Legacy**, "Cheese, Mexican blend" — pagina `getfoodfacts.com/food/cheese-mexican-blend-171288` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 384kcal, proteine 23,5g, grassi 32,1g, carboidrati 0,13g, fibra 0g esplicito, calcio 659mg, ferro 0,59mg, magnesio 25,0mg, zinco 3,01mg, rame 0,025mg, vitamina C 0mg esplicito, folato totale 13,0µg, acido folico 0µg esplicito, vitamina B12 1,23µg, selenio 15,0µg, vitamina K 2,50µg, beta-carotene 56,0µg (oltre: alfa-carotene/beta-criptoxantina/licopene/luteina+zeaxantina 0µg espliciti).
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio semiduro a pasta simile, stessa categoria lattiero-casearia, già eseguito).
+- **Categoria dieta**: `egg_dairy` (formaggio, vegetariano sì, vegano no).
+- **Matrice**: nuova `formaggio_messicano_misto` ("Formaggio, misto messicano (cheddar/monterey jack/asadero/queso quesadilla)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente coerente per formaggi nel DB), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (pronto al consumo).
+
+```
+npm run add-food -- --fdc-id=171288 --food-id=food_formaggio_messicano_misto \
+  --name-it="Formaggio, misto messicano" \
+  --matrix-id=formaggio_messicano_misto --matrix-description-it="Formaggio, misto messicano (cheddar/monterey jack/asadero/queso quesadilla)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171288 --food-id=food_formaggio_messicano_misto \
+  --name-it="Formaggio, misto messicano" \
+  --matrix-id=formaggio_messicano_misto --matrix-description-it="Formaggio, misto messicano (cheddar/monterey jack/asadero/queso quesadilla)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio al carvi — preparato 2026-11-24 dal task (217° lotto)
+
+- **food_id**: `food_formaggio_carvi` (categoria nuova, verificato zero occorrenze precedenti con `grep`). FDC ID 173413 (**SR Legacy**, "Cheese, caraway" — pagina `getfoodfacts.com/food/cheese-caraway-173413` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Nota traduzione: "caraway" = carvi/cumino dei prati (Carum carvi), non il cumino egiziano (Cuminum cyminum).
+- **Nutrienti**: **15/17**. Per 100g: energia 376kcal, proteine 25,2g, grassi 29,2g, carboidrati 3,06g, fibra 0g esplicito, calcio 673mg, ferro 0,64mg, magnesio 22,0mg, zinco 2,94mg, rame 0,024mg, vitamina C 0mg esplicito, folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 0,27µg, selenio 14,5µg. Mancanti: vitamina K, beta-carotene (non riportati in pagina).
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio semiduro a pasta simile con semi aromatici aggiunti, stessa base casearia).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_carvi` ("Formaggio al carvi (semi di cumino dei prati)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=173413 --food-id=food_formaggio_carvi \
+  --name-it="Formaggio al carvi" \
+  --matrix-id=formaggio_carvi --matrix-description-it="Formaggio al carvi (semi di cumino dei prati)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173413 --food-id=food_formaggio_carvi \
+  --name-it="Formaggio al carvi" \
+  --matrix-id=formaggio_carvi --matrix-description-it="Formaggio al carvi (semi di cumino dei prati)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Noci formulate a base di grano, non salate — preparato 2026-11-24 dal task (217° lotto)
+
+- **food_id**: `food_noci_formulate_grano_non_salate` (categoria nuova, verificato zero occorrenze precedenti con `grep`). FDC ID 169411 (**SR Legacy**, "Nuts, formulated, wheat-based, all flavors except macadamia, without salt" — pagina `getfoodfacts.com/food/nuts-formulated-wheat-based-all-flavors-except-macadamia-without-salt-169411` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). **Nota importante**: non sono noci vere — è uno snack formulato a base di farina di grano (e altri ingredienti non specificati dal nome FDC) lavorato a forma/consistenza di frutta a guscio, pratica commerciale nota (es. "nut-like" snack).
+- **Nutrienti**: **14/17**. Per 100g: energia 647kcal, proteine 13,1g, grassi 62,3g, carboidrati 20,8g, fibra 5,20g, calcio 22,0mg, ferro 2,60mg, magnesio 59,0mg, zinco 2,96mg, rame 0,18mg, vitamina C 0,10mg, folato totale 125µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. Mancanti: selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_pane_azzimo` (analogia **funzionale**, non reale di "frutta a guscio" — prodotto formulato a base di farina di grano, stessa famiglia botanica della materia prima dichiarata nel nome FDC; nessun'altra snack-bar/prodotto formulato già nel DB a cui ancorarsi più da vicino).
+- **Categoria dieta**: `plant_non_fruit` (prodotto a base di farina di grano, nessun ingrediente animale dichiarato nel nome FDC).
+- **Matrice**: nuova `noci_formulate_grano` ("Noci formulate a base di grano, non salate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — prodotto formulato, non una matrice vegetale naturale), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (snack pronto al consumo), `botanical_family=Poaceae` (grano, materia prima dichiarata nel nome FDC).
+
+```
+npm run add-food -- --fdc-id=169411 --food-id=food_noci_formulate_grano_non_salate \
+  --name-it="Noci formulate a base di grano, non salate" \
+  --matrix-id=noci_formulate_grano --matrix-description-it="Noci formulate a base di grano, non salate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pane_azzimo \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169411 --food-id=food_noci_formulate_grano_non_salate \
+  --name-it="Noci formulate a base di grano, non salate" \
+  --matrix-id=noci_formulate_grano --matrix-description-it="Noci formulate a base di grano, non salate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pane_azzimo \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Latte di soia, zuccherato, refrigerato — preparato 2026-11-24 dal task (215° lotto)
 
 - **food_id**: `food_latte_di_soia_zuccherato` (distinto da `food_latte_di_soia_raw` già eseguito — quello è "Soymilk, original and vanilla, UNFORTIFIED" FDC 172446; qui versione zuccherata commerciale, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 2257044 (**Foundation Foods**, "Soy milk, sweetened, plain, refrigerated" — pagina `getfoodfacts.com/food/soy-milk-sweetened-plain-refrigerated-2257044` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
