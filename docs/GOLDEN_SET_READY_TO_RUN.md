@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Castagne giapponesi, tostate — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_castagne_giapponesi_tostate` (mai coperto, verificato con `grep` dedicato — distinto da `food_castagne_giapponesi_bollite` (FDC 168589) e `food_castagne_giapponesi_secche_raw` (FDC 169408), entrambe di questo stesso turno: qui tostatura). FDC ID 168590 (**SR Legacy**, "Nuts, chestnuts, japanese, roasted"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/168590/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/168590/nutrients`.
+- **Nutrienti**: **12/18**. **Nota di trasparenza (Regola 6)**: tabella della fonte per porzione da 28g (1 oz), non per 100g; valori convertiti (×100/28), tranne l'energia per cui uso il valore già per-100g indicato dalla stessa pagina (200kcal). Per 100g: energia 200kcal, proteine 3,00g, grassi 0,82g, carboidrati 45,7g, calcio 35,4mg, ferro 2,14mg, magnesio 65,0mg, zinco 1,46mg, rame 0,75mg, vitamina C 28,6mg, folato totale 60,0µg, vitamina B12 0µg, sodio 19,3mg. **Mancano**: fibra, selenio, vitamina K.
+- **Analogia usata**: `food_castagne_giapponesi_bollite` (castagne giapponesi bollite/vapore, preparata nello stesso turno — stessa specie *Castanea crenata*, qui tostata invece che bollita).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio).
+- **Matrice**: nuova `castagne_giapponesi_tostate` ("Castagne giapponesi, tostate").
+- **Attributi**: `botanical_family=Fagaceae` (come l'analogia), `carotenoid_matrix_state=cooked_or_disrupted` (tostatura), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=168590 --food-id=food_castagne_giapponesi_tostate \
+  --name-it="Castagne giapponesi, tostate" \
+  --matrix-id=castagne_giapponesi_tostate --matrix-description-it="Castagne giapponesi, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_giapponesi_bollite \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fagaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168590 --food-id=food_castagne_giapponesi_tostate \
+  --name-it="Castagne giapponesi, tostate" \
+  --matrix-id=castagne_giapponesi_tostate --matrix-description-it="Castagne giapponesi, tostate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_castagne_giapponesi_bollite \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fagaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne giapponesi, secche — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_castagne_giapponesi_secche_raw` (mai coperto, verificato con `grep` dedicato — distinto da `food_castagne_giapponesi_bollite` (bollite/vapore, FDC 168589), preparato oggi stesso nel 209° lotto: qui forma secca). FDC ID 169408 (**SR Legacy**, "Nuts, chestnuts, japanese, dried"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/169408/100g/1`, pagina nativamente per 100g che linka esplicitamente `fdc.nal.usda.gov/food-details/169408/nutrients`.
