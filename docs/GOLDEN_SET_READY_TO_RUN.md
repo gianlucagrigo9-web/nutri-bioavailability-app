@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Tagliatelle all'uovo, non arricchite, cotte senza sale — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_pasta_alluovo_non_arricchita_cotta` (nuovo — categoria "pasta all'uovo" mai coperta in questa pipeline, distinta da `food_pasta_enriched_cooked`/`food_pasta_enriched_dry` già eseguite (pasta di semola senza uovo). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168926 (**SR Legacy**, "Noodles, egg, unenriched, cooked, without added salt" — pagina `getfoodfacts.com/food/noodles-egg-unenriched-cooked-without-added-salt-168926` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 138kcal, proteine 4,54g, grassi 2,07g, carboidrati 25,2g, fibra 1,20g, calcio 12,0mg, ferro 0,60mg, magnesio 21,0mg, zinco 0,65mg, rame 0,098mg, vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito (prodotto "unenriched"), vitamina B12 0,090µg (presente, coerente con il contenuto di uovo), selenio 23,9µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 1,00µg.
+- **Analogia usata**: `food_pasta_enriched_cooked` (stessa categoria funzionale "pasta di grano cotta", già eseguita sul DB reale — qui con uovo come ingrediente aggiuntivo e non arricchita).
+- **Categoria dieta**: `egg_dairy` (contiene uovo come ingrediente — vegetariano sì, vegano no).
+- **Matrice**: nuova `pasta_alluovo_non_arricchita_cotta` ("Tagliatelle all'uovo, non arricchite, cotte senza sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, prodotto da forno/pasta), `carotenoid_matrix_state` omesso (NULL — beta-carotene 1,00µg trascurabile, nessun precedente di categoria per questo prodotto), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, prodotto dichiarato "unenriched").
+
+```
+npm run add-food -- --fdc-id=168926 --food-id=food_pasta_alluovo_non_arricchita_cotta \
+  --name-it="Tagliatelle all'uovo, non arricchite, cotte senza sale" \
+  --matrix-id=pasta_alluovo_non_arricchita_cotta --matrix-description-it="Tagliatelle all'uovo, non arricchite, cotte senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=168926 --food-id=food_pasta_alluovo_non_arricchita_cotta \
+  --name-it="Tagliatelle all'uovo, non arricchite, cotte senza sale" \
+  --matrix-id=pasta_alluovo_non_arricchita_cotta --matrix-description-it="Tagliatelle all'uovo, non arricchite, cotte senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=egg_dairy --apply
+```
+
+### Farina di mais integrale (cornmeal), degermata, arricchita, bianca — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_cornmeal_degermata_bianca_arricchita_raw` (nuovo — distinto da `food_cornmeal_degermata_gialla_raw` appena preparato sopra in questo stesso lotto (giallo, non arricchito, FDC 168929); qui mais bianco e arricchito, con acido folico aggiunto esplicito (180µg, fortificazione reale). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168922 (**SR Legacy**, "Cornmeal, degermed, enriched, white" — pagina `getfoodfacts.com/food/cornmeal-degermed-enriched-white-168922` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 370kcal, proteine 7,11g, grassi 1,75g, carboidrati 79,5g, fibra 3,90g, calcio 3,00mg, ferro 4,36mg, magnesio 32,0mg, zinco 0,66mg, rame 0,076mg, vitamina C 0mg esplicito, folato totale 209µg (folato DFE 335µg), acido folico 180µg (fortificazione esplicita, prodotto "enriched"), vitamina B12 0µg esplicito, selenio 10,5µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 1,00µg (mais bianco, trascurabile rispetto al giallo).
+- **Analogia usata**: `food_cornmeal_degermata_gialla_raw` (stesso prodotto cornmeal degermata, già preparata in questo stesso lotto — qui colore e arricchimento diversi).
+- **Categoria dieta**: `plant_non_fruit` (farina/macinato di cereale).
+- **Matrice**: nuova `cornmeal_degermata_bianca_arricchita` ("Farina di mais integrale, degermata, arricchita, bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — mais bianco, beta-carotene trascurabile 1,00µg, non applicabile come per il giallo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (true — acido folico 180µg esplicito, prodotto dichiarato "enriched").
+
+```
+npm run add-food -- --fdc-id=168922 --food-id=food_cornmeal_degermata_bianca_arricchita_raw \
+  --name-it="Farina di mais integrale (cornmeal), degermata, arricchita, bianca" \
+  --matrix-id=cornmeal_degermata_bianca_arricchita --matrix-description-it="Farina di mais integrale, degermata, arricchita, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cornmeal_degermata_gialla_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168922 --food-id=food_cornmeal_degermata_bianca_arricchita_raw \
+  --name-it="Farina di mais integrale (cornmeal), degermata, arricchita, bianca" \
+  --matrix-id=cornmeal_degermata_bianca_arricchita --matrix-description-it="Farina di mais integrale, degermata, arricchita, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cornmeal_degermata_gialla_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
 ### Farro (spelt), cotto — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_farro_cotto` (nuovo — distinto da `food_farro_raw` già eseguito (chicco crudo), qui stato cotto mai coperto in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169746 (**SR Legacy**, "Spelt, cooked" — pagina `getfoodfacts.com/food/spelt-cooked-169746` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
