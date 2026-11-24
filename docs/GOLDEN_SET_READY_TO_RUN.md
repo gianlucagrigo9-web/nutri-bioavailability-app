@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mandorle, tostate in olio, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_mandorle_tostate_olio_sale` (mai coperto, verificato con `grep` dedicato — distinto da `food_mandorle_tostate` (a secco, con sale, FDC 168596) e `food_mandorle_tostate_olio` (in olio, senza sale, FDC 170159), già eseguite/preparate: qui completa la combinazione tostatura in olio + sale, variabile ancora mancante in questa pipeline). FDC ID 169419 (**SR Legacy**, "Nuts, almonds, oil roasted, with salt added" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **18/18 completo**. Per 100g: energia 607kcal, proteine 21,2g, grassi 55,2g, carboidrati 17,7g, fibra 10,5g, calcio 291mg, ferro 3,68mg, magnesio 274mg, zinco 3,07mg, rame 0,95mg, selenio 4,10µg, beta-carotene 1,00µg, alfa-carotene 0µg (esplicito), beta-criptoxantina 0µg (esplicito), vitamina C 0mg (esplicito), folato totale 27,0µg, vitamina B12 0µg (esplicito), vitamina K 0µg (esplicito), sodio 339mg. **Nota di coerenza**: tutti i valori coincidono esattamente con `food_mandorle_tostate_olio` (FDC 170159, senza sale) tranne il sodio (339mg vs 1,00mg) — coerente con una coppia di record USDA derivati dallo stesso lotto analitico, differenziati solo per l'aggiunta di sale.
+- **Analogia usata**: `food_mandorle_tostate_olio` (mandorle tostate in olio senza sale, già preparata in questa pipeline — stessa specie, stesso metodo di tostatura, qui con sale aggiunto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `mandorle_tostate_olio_sale` ("Mandorle tostate in olio, con sale").
+- **Attributi**: `botanical_family=Rosaceae`, `carotenoid_matrix_state=cooked_or_disrupted` (come l'analogia), `baseline_cooking_state=roasted`.
+
+```
+npm run add-food -- --fdc-id=169419 --food-id=food_mandorle_tostate_olio_sale \
+  --name-it="Mandorle, tostate in olio, con sale aggiunto" \
+  --matrix-id=mandorle_tostate_olio_sale --matrix-description-it="Mandorle tostate in olio, con sale" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate_olio \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169419 --food-id=food_mandorle_tostate_olio_sale \
+  --name-it="Mandorle, tostate in olio, con sale aggiunto" \
+  --matrix-id=mandorle_tostate_olio_sale --matrix-description-it="Mandorle tostate in olio, con sale" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_mandorle_tostate_olio \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Banana, troppo matura, cruda — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_banana_troppo_matura_raw` (mai coperto, verificato con `grep` dedicato — distinta da `food_banana_raw` (matura standard) e `food_platano_non_maturo_raw` (platano acerbo), già eseguite: qui stadio di maturazione specifico "overripe", profilo zuccheri/amido diverso). FDC ID 1105073 (**Foundation Foods**, "Bananas, overripe, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
