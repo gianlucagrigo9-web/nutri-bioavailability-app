@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Latte di cocco, surgelato — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_latte_di_cocco_surgelato` (mai coperto, verificato con `grep` dedicato — distinto da `food_latte_di_cocco_raw` (FDC 170172, liquido spremuto fresco, già eseguito) e `food_latte_di_cocco_in_scatola_raw` (FDC 170173, conserva in scatola, già eseguito): qui terza forma di conservazione, surgelata, FDC distinto da entrambe). FDC ID 169409 (**SR Legacy**, "Nuts, coconut milk, frozen (liquid expressed from grated meat and water)" — pagina `getfoodfacts.com/food/nuts-coconut-milk-frozen-liquid-expressed-from-grated-meat-and-water-169409` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 202kcal, proteine 1,61g, grassi 20,8g, carboidrati 5,58g, calcio 4,00mg, ferro 0,81mg, magnesio 32,0mg, zinco 0,59mg, rame 0,23mg, vitamina C 1,10mg, folato totale 14,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito. **Mancano** (assenti dalla pagina, non assunti zero): fibra (la pagina riporta "not declared" in un punto e "0g" in un riquadro riassuntivo discordante, trattata come mancante per trasparenza), selenio, vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina. Fonte: getfoodfacts.com, pagina che cita esplicitamente FDC ID 169409 e dataType SR Legacy.
+- **Analogia usata**: `food_latte_di_cocco_in_scatola_raw` (latte di cocco in scatola, già eseguito sul DB reale — stesso processo di spremitura della polpa grattugiata, qui surgelato invece che in scatola).
+- **Categoria dieta**: `plant_non_fruit` (derivato di frutta secca).
+- **Matrice**: nuova `latte_di_cocco_surgelato` ("Latte di cocco, surgelato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione delle altre voci cocco), `carotenoid_matrix_state` omesso (NULL — carotenoidi non riportati sulla pagina, non assunti zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Arecaceae` (come le altre voci cocco, *Cocos nucifera*), `baseline_cooking_state=raw` (spremitura a freddo poi surgelazione, nessuna cottura, stessa convenzione delle altre forme di latte di cocco), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169409 --food-id=food_latte_di_cocco_surgelato \
+  --name-it="Latte di cocco, surgelato" \
+  --matrix-id=latte_di_cocco_surgelato --matrix-description-it="Latte di cocco, surgelato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_cocco_in_scatola_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169409 --food-id=food_latte_di_cocco_surgelato \
+  --name-it="Latte di cocco, surgelato" \
+  --matrix-id=latte_di_cocco_surgelato --matrix-description-it="Latte di cocco, surgelato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_latte_di_cocco_in_scatola_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Cocco, polpa essiccata, zuccherata, a fiocchi, confezionata — preparato 2026-11-24 dal task (213° lotto)
 
 - **food_id**: `food_cocco_zuccherato_fiocchi` (mai coperto, verificato con `grep` dedicato — distinto da `food_cocco_disidratato_raw` (non zuccherato, FDC 170170) e `food_cocco_cremoso_essiccato` (forma "creamed", FDC 168585), entrambi già eseguiti: qui forma zuccherata a fiocchi confezionata, tipica per pasticceria, mai tentata). FDC ID 170577 (**SR Legacy**, "Nuts, coconut meat, dried (desiccated), sweetened, flaked, packaged" — pagina `getfoodfacts.com/food/nuts-coconut-meat-dried-desiccated-sweetened-flaked-packaged-170577` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
