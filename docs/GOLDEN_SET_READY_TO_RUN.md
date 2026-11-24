@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Zucca invernale, hubbard, cruda — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_zucca_hubbard_raw` (nuovo — varietà mai coperta in questa pipeline, distinta da `food_zucca_acorn_raw`/`food_zucca_butternut_raw`/`food_zucca_a_fiasco_raw`/`food_zucca_cinese_raw` già eseguite (cultivar diversa, *Cucurbita maxima*, FDC proprio). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168475 (**SR Legacy**, "Squash, winter, hubbard, raw" — pagina `getfoodfacts.com/food/squash-winter-hubbard-raw-168475` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 40,0kcal, proteine 2,00g, grassi 0,50g, carboidrati 8,70g, fibra 3,90g, calcio 14,0mg, ferro 0,40mg, magnesio 19,0mg, zinco 0,13mg, rame 0,064mg, vitamina C 11,0mg, folato totale 16,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,50µg, vitamina K 1,30µg (fillochinone), beta-carotene 820µg (reale e alto).
+- **Analogia usata**: `food_zucca_acorn_raw` (zucca acorn cruda, Golden Set pipeline, già eseguita sul DB reale — stesso genere *Cucurbita*, stesso stato crudo).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio).
+- **Matrice**: nuova `zucca_hubbard` ("Zucca invernale, hubbard, cruda").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e alto, 820µg, ortaggio crudo non alterato da cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae` (stessa delle altre zucche già eseguite), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168475 --food-id=food_zucca_hubbard_raw \
+  --name-it="Zucca invernale, hubbard, cruda" \
+  --matrix-id=zucca_hubbard --matrix-description-it="Zucca invernale, hubbard, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucca_acorn_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168475 --food-id=food_zucca_hubbard_raw \
+  --name-it="Zucca invernale, hubbard, cruda" \
+  --matrix-id=zucca_hubbard --matrix-description-it="Zucca invernale, hubbard, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_zucca_acorn_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Wasabi, radice, crudo — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_wasabi_raw` (nuovo — radice/rizoma mai coperta in questa pipeline, distinta da `food_zenzero_raw` (altro rizoma, già eseguito, famiglia botanica diversa). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168583 (**SR Legacy**, "Wasabi, root, raw" — pagina `getfoodfacts.com/food/wasabi-root-raw-168583` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
