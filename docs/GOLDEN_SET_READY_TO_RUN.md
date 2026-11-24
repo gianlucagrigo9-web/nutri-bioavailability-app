@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Farina di grano, bianca, per tutti gli usi, arricchita — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_farina_bianca_arricchita_raw` (nuovo — farina di grano (frumento) mai coperta in questa pipeline, categoria di base diversa da `food_farina_di_mais_raw`/`food_farina_di_grano_saraceno_raw` (altri cereali/pseudocereali). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168894 (**SR Legacy**, "Wheat flour, white, all-purpose, enriched, bleached" — pagina `getfoodfacts.com/food/wheat-flour-white-all-purpose-enriched-bleached-168894` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 364kcal, proteine 10,3g, grassi 0,98g, carboidrati 76,3g, fibra 2,70g, calcio 15,0mg, ferro 4,64mg, magnesio 22,0mg, zinco 0,70mg, rame 0,14mg, vitamina C 0mg esplicito, folato totale 183µg (DFE 291µg, folato da cibo 29,0µg), acido folico 154µg (fortificazione esplicita, prodotto "enriched"), vitamina B12 0µg esplicito, selenio 33,9µg, vitamina K 0,30µg (fillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_pasta_enriched_dry` (pasta di grano arricchita, già eseguita sul DB reale — stesso cereale *Triticum aestivum*, stesso stato di arricchimento, qui farina invece di pasta trafilata).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_bianca_arricchita` ("Farina di grano, bianca, per tutti gli usi, arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, farina), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (true — acido folico 154µg esplicito, prodotto dichiarato "enriched").
+
+```
+npm run add-food -- --fdc-id=168894 --food-id=food_farina_bianca_arricchita_raw \
+  --name-it="Farina di grano, bianca, per tutti gli usi, arricchita" \
+  --matrix-id=farina_bianca_arricchita --matrix-description-it="Farina di grano, bianca, per tutti gli usi, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168894 --food-id=food_farina_bianca_arricchita_raw \
+  --name-it="Farina di grano, bianca, per tutti gli usi, arricchita" \
+  --matrix-id=farina_bianca_arricchita --matrix-description-it="Farina di grano, bianca, per tutti gli usi, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Farina di grano, integrale — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_farina_integrale_grano_raw` (nuovo — distinta da `food_farina_bianca_arricchita_raw` appena preparata sopra in questo stesso lotto (raffinata e arricchita); qui integrale e non arricchita, FDC diverso, profilo molto diverso (fibra 10,7g contro 2,70g, nessun acido folico aggiunto). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168893 (**SR Legacy**, "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)" — pagina `getfoodfacts.com/food/wheat-flour-whole-grain-includes-foods-for-usdas-food-distribution-program-168893` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 340kcal, proteine 13,2g, grassi 2,50g, carboidrati 72,0g, fibra 10,7g, calcio 34,0mg, ferro 3,60mg, magnesio 137mg, zinco 2,60mg, rame 0,41mg, vitamina C 0mg esplicito, folato totale 44,0µg (tutto da cibo, DFE uguale), acido folico 0µg esplicito (nessuna fortificazione — farina integrale non arricchita), vitamina B12 0µg esplicito, selenio 61,8µg, vitamina K 1,90µg (fillochinone), beta-carotene 5,00µg.
+- **Analogia usata**: `food_farina_bianca_arricchita_raw` (stesso cereale *Triticum aestivum*, appena preparata in questo stesso lotto — qui integrale e non arricchita invece di raffinata e arricchita).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `farina_integrale_grano` ("Farina di grano, integrale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 5,00µg trascurabile, nessun precedente di categoria per questo prodotto), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168893 --food-id=food_farina_integrale_grano_raw \
+  --name-it="Farina di grano, integrale" \
+  --matrix-id=farina_integrale_grano --matrix-description-it="Farina di grano, integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_bianca_arricchita_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168893 --food-id=food_farina_integrale_grano_raw \
+  --name-it="Farina di grano, integrale" \
+  --matrix-id=farina_integrale_grano --matrix-description-it="Farina di grano, integrale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_bianca_arricchita_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Noodles cinesi, chow mein (fritti e croccanti) — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_noodles_chow_mein` (nuovo — categoria "noodles cinesi fritti" mai coperta in questa pipeline, distinta da `food_pasta_enriched_cooked` (pasta bollita, non fritta) e da `food_pasta_alluovo_non_arricchita_cotta` appena preparata sopra in questo stesso lotto (bollita, non fritta). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168905 (**SR Legacy**, "Noodles, chinese, chow mein" — pagina `getfoodfacts.com/food/noodles-chinese-chow-mein-168905` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
