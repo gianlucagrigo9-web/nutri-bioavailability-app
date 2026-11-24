@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Cocco, polpa essiccata (disidratata), cremosa — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_cocco_cremoso_essiccato` (mai coperto, verificato con `grep` dedicato — distinto da `food_cocco_disidratato_raw` (non zuccherato, FDC 170170), già eseguito: qui forma "creamed", macinazione più fine/oleosa tipo burro di cocco, prodotto diverso). FDC ID 168585 (**SR Legacy**, "Nuts, coconut meat, dried (desiccated), creamed"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/print/168585/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/168585/nutrients`.
+- **Nutrienti**: **12/18 verificati**. **Nota di trasparenza (Regola 6)**: tabella della fonte per porzione da 28g (1 oz), non per 100g; valori convertiti (×100/28). Per 100g (convertito): energia 693kcal, proteine 5,36g, grassi 70,0g, carboidrati 21,8g, calcio 26,4mg, ferro 3,39mg, magnesio 93,2mg, zinco 2,07mg, rame 0,82mg, vitamina C 1,54mg, folato totale 9,30µg, vitamina B12 0µg, sodio 37,5mg. **Mancano**: fibra, selenio, vitamina K (assenti dal record secondo questa fonte).
+- **Analogia usata**: `food_cocco_disidratato_raw` (cocco essiccato non zuccherato, già eseguito sul DB reale — stesso frutto/processo di essiccazione, qui macinato più finemente/cremoso).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cocco_cremoso_essiccato` ("Cocco, polpa essiccata, cremosa").
+- **Attributi**: `botanical_family=Arecaceae` (come l'analogia), `baseline_cooking_state=dried`.
+
+```
+npm run add-food -- --fdc-id=168585 --food-id=food_cocco_cremoso_essiccato \
+  --name-it="Cocco, polpa essiccata (disidratata), cremosa" \
+  --matrix-id=cocco_cremoso_essiccato --matrix-description-it="Cocco, polpa essiccata, cremosa" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cocco_disidratato_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168585 --food-id=food_cocco_cremoso_essiccato \
+  --name-it="Cocco, polpa essiccata (disidratata), cremosa" \
+  --matrix-id=cocco_cremoso_essiccato --matrix-description-it="Cocco, polpa essiccata, cremosa" \
+  --baseline-cooking-state=dried --analogy-food-id=food_cocco_disidratato_raw \
+  --botanical-family=Arecaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Avena, integrale, tagliata (steel cut), cruda — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_avena_integrale_tagliata_raw` (mai coperto, verificato con `grep` dedicato — **prima voce di avena in assoluto in questa pipeline**, nessun `food_oats*`/`food_avena*` esistente nonostante sia un alimento molto comune; `food_oats_raw` è un id riservato nell'elenco fornito, qui evitato con un id più descrittivo come richiesto). FDC ID 2346397 (**Foundation Foods**, "Oats, whole grain, steel cut" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
