@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Noci miste, tostate in olio, con arachidi e sale aggiunto — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_noci_miste_tostate_olio_salate` (nuovo — distinto da `food_noci_miste_pistacchio_tostate_salate` già eseguito, FDC 170586, blend commerciale PLANTERS tostato a secco; qui prodotto generico SR Legacy, tostato in olio. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168600 (**SR Legacy**, "Nuts, mixed nuts, oil roasted, with peanuts, with salt added" — pagina `getfoodfacts.com/food/nuts-mixed-nuts-oil-roasted-with-peanuts-with-salt-added-168600` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 607kcal, proteine 20,0g, grassi 54,0g, carboidrati 21,1g, fibra 7,00g, calcio 117mg, ferro 2,61mg, magnesio 229mg, zinco 3,36mg, rame 0,91mg, vitamina C 0,50mg, folato totale 83,0µg, acido folico 0µg esplicito (nessuna fortificazione), vitamina B12 0µg esplicito, selenio 33,9µg, vitamina K 5,70µg (fillochinone), beta-carotene 2,00µg.
+- **Analogia usata**: `food_noci_miste_pistacchio_tostate_salate` (stessa categoria funzionale "noci miste con arachidi, salate", già eseguita sul DB reale — metodo di tostatura diverso, olio invece di secco).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/semi, vegano sì).
+- **Matrice**: nuova `noci_miste_tostate_olio_salate` ("Noci miste, tostate in olio, con arachidi e sale aggiunto").
+- **Attributi**: `botanical_family` omesso (NULL — composito multi-specie, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — nessun precedente di categoria per questo composito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168600 --food-id=food_noci_miste_tostate_olio_salate \
+  --name-it="Noci miste, tostate in olio, con arachidi e sale aggiunto" \
+  --matrix-id=noci_miste_tostate_olio_salate --matrix-description-it="Noci miste, tostate in olio, con arachidi e sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_miste_pistacchio_tostate_salate \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168600 --food-id=food_noci_miste_tostate_olio_salate \
+  --name-it="Noci miste, tostate in olio, con arachidi e sale aggiunto" \
+  --matrix-id=noci_miste_tostate_olio_salate --matrix-description-it="Noci miste, tostate in olio, con arachidi e sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_miste_pistacchio_tostate_salate \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Farina di mais nixtamalizzato (masa harina), arricchita, bianca — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_masa_harina_arricchita_raw` (nuovo — distinto da `food_masa_harina_raw` già eseguito, FDC 2710835, Foundation, "white or yellow, dry, raw", **non arricchita** (nessun dato di fortificazione riportato); qui invece un record SR Legacy distinto, esplicitamente "enriched", con pannello vitaminico completo di acido folico/tiamina/riboflavina/niacina aggiunti. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169694 (**SR Legacy**, "Corn flour, masa, enriched, white" — pagina `getfoodfacts.com/food/corn-flour-masa-enriched-white-169694` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
