@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bottatrice, cotta (calore secco) — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_bottatrice_cotta` (mai coperto, verificato con `grep` dedicato — controparte cotta di `food_bottatrice_raw` FDC 171950, già eseguito). FDC ID 174230 (**SR Legacy**, "Fish, burbot, cooked, dry heat"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/174230/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/174230/nutrients`.
+- **Nutrienti**: **13/18 verificati** (fibra e i 3 carotenoidi non controllati — non applicabili al pesce). **Nota di trasparenza (Regola 6)**: tabella della fonte per porzione da 90g (1 filetto), non per 100g; valori convertiti (×100/90), non dichiarati direttamente per 100g. Per 100g (convertito): energia 116kcal, proteine 24,8g, grassi 1,04g, carboidrati 0g, calcio 64,0mg, ferro 1,11mg, magnesio 41,0mg, zinco 0,97mg, rame 0,26mg, selenio 16,2µg, vitamina C 0mg, folato totale 1,00µg, vitamina B12 0,92µg, sodio 124mg. **Manca**: vitamina K.
+- **Analogia usata**: `food_bottatrice_raw` (bottatrice cruda, stessa specie *Lota lota*, già eseguita sul DB reale — qui cotta invece che cruda).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bottatrice_cotta` ("Bottatrice, cotta").
+- **Attributi**: `baseline_cooking_state=dry heat` → uso `roasted` (convenzione cottura a calore secco senza grasso aggiunto).
+
+```
+npm run add-food -- --fdc-id=174230 --food-id=food_bottatrice_cotta \
+  --name-it="Bottatrice, cotta (calore secco)" \
+  --matrix-id=bottatrice_cotta --matrix-description-it="Bottatrice, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_bottatrice_raw \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174230 --food-id=food_bottatrice_cotta \
+  --name-it="Bottatrice, cotta (calore secco)" \
+  --matrix-id=bottatrice_cotta --matrix-description-it="Bottatrice, cotta" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_bottatrice_raw \
+  --diet-category=meat_fish --apply
+```
+
 ### Beefalo, composto di tagli, cotto (arrosto) — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_beefalo_cotto` (mai coperto, verificato con `grep` dedicato — controparte cotta di `food_beefalo_raw`, preparata nello stesso turno). FDC ID 173848 (**SR Legacy**, "Game meat, beefalo, composite of cuts, cooked, roasted" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
