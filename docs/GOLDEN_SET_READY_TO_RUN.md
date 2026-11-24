@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pesce gatto (catfish) di canale, allevato, cotto — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_pesce_gatto_canale_allevato_cotto` (mai coperto, verificato con `grep` dedicato — prima voce "catfish"/pesce gatto reale in questa pipeline; nota in coda precedente che in passato il gap era colmato con il pangasio come sostituto, qui invece la specie richiesta ha un record proprio). FDC ID 175166 (**SR Legacy**, "Fish, catfish, channel, farmed, cooked, dry heat"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/175166/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/175166/nutrients`.
+- **Nutrienti**: **15/18 verificati** (fibra e i 3 carotenoidi non controllati — non applicabili al pesce). **Nota di trasparenza (Regola 6)**: tabella della fonte per porzione da 143g (1 filetto), non per 100g; valori convertiti (×100/143). Per 100g (convertito): energia 144kcal, proteine 18,5g, grassi 7,20g, carboidrati 0g, calcio 9,02mg, ferro 0,28mg, magnesio 23,0mg, zinco 0,58mg, rame 0,04mg, selenio 9,93µg, vitamina C 0mg, folato totale 12,0µg, vitamina B12 2,80µg, vitamina K 2,52µg, sodio 119mg. Tutti i 15 valori richiesti presenti, nessuno mancante.
+- **Analogia usata**: `food_trota_cotta` (trota iridea d'allevamento, cotta — già eseguita sul DB reale, stesso profilo "pesce d'acqua dolce d'allevamento cotto").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_gatto_canale_allevato_cotto` ("Pesce gatto di canale, allevato, cotto").
+- **Attributi**: `baseline_cooking_state=roasted` (calore secco senza grasso aggiunto).
+
+```
+npm run add-food -- --fdc-id=175166 --food-id=food_pesce_gatto_canale_allevato_cotto \
+  --name-it="Pesce gatto (catfish) di canale, allevato, cotto" \
+  --matrix-id=pesce_gatto_canale_allevato_cotto --matrix-description-it="Pesce gatto di canale, allevato, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_trota_cotta \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175166 --food-id=food_pesce_gatto_canale_allevato_cotto \
+  --name-it="Pesce gatto (catfish) di canale, allevato, cotto" \
+  --matrix-id=pesce_gatto_canale_allevato_cotto --matrix-description-it="Pesce gatto di canale, allevato, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_trota_cotta \
+  --diet-category=meat_fish --apply
+```
+
 ### Pesce burro (butterfish), cotto (calore secco) — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_pesce_burro_cotto` (mai coperto, verificato con `grep` dedicato — prima voce "butterfish"/pesce burro in questa pipeline, specie *Peprilus triacanthus*, distinta da sgombro/merluzzo/altri pesci già coperti). FDC ID 174231 (**SR Legacy**, "Fish, butterfish, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
