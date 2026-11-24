@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Beefalo, composto di tagli, crudo — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_beefalo_raw` (mai coperto, verificato con `grep` dedicato — prima voce "beefalo" in questa pipeline, ibrido bovino-bisonte distinto dal bisonte puro già ampiamente coperto). FDC ID 175296 (**SR Legacy**, "Game meat, beefalo, composite of cuts, raw" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18 verificati** (fibra e i 3 carotenoidi non controllati in questa verifica — tipicamente assenti/non applicabili per la carne). Per 100g: energia 143kcal, proteine 23,3g, grassi 4,80g, carboidrati 0g, calcio 18,0mg, ferro 2,32mg, zinco 4,86mg, selenio 9,80µg, vitamina C 7,00mg, folato totale 15,0µg, vitamina B12 2,42µg, sodio 78,0mg. **Mancano** (assenti dal record, 38 nutrienti totali elencati): magnesio, rame, vitamina K.
+- **Analogia usata**: `food_bisonte_raw` (bisonte, carne magra cruda, già eseguito sul DB reale — stessa famiglia Bovidae, incrocio bovino-bisonte, carne rossa magra cruda, stesso attributo `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `beefalo_crudo` ("Beefalo, composto di tagli, crudo").
+- **Attributi**: `is_heme_iron` (carne rossa), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=175296 --food-id=food_beefalo_raw \
+  --name-it="Beefalo, composto di tagli, crudo" \
+  --matrix-id=beefalo_crudo --matrix-description-it="Beefalo, composto di tagli, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175296 --food-id=food_beefalo_raw \
+  --name-it="Beefalo, composto di tagli, crudo" \
+  --matrix-id=beefalo_crudo --matrix-description-it="Beefalo, composto di tagli, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bisonte_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Bisonte, controfiletto (ribeye), 1" bistecca, cotto alla griglia — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_bisonte_ribeye_cotto` (mai coperto, verificato con `grep` dedicato — distinto dai tagli bisonte già coperti: girello/top round (`food_bisonte_girello_cotto`), spalla (`food_bisonte_spalla_raw`), controfiletto/sirloin (`food_bisonte_controfiletto_raw`), macinato grass-fed (`food_bisonte_macinato_grassfed_raw`/`_cotto`), generico lean only raw (`food_bisonte_raw`): qui il taglio ribeye, mai tracciato, e in forma cotta). FDC ID 172599 (**SR Legacy**, "Game meat, bison, ribeye, separable lean only, 1" steak, cooked, broiled"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/172599/wt1`, che conferma il nome completo e linka `fdc.nal.usda.gov/food-details/172599/nutrients` come fonte USDA.
