@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Ippoglosso (halibut), con pelle, cotto — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_halibut_con_pelle_cotto` (nuovo — distinto da `food_halibut_raw` già eseguito, FDC 174200, "Atlantic and Pacific, raw"; qui forma COTTA con pelle, preparazione Alaska Native. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169812 (**SR Legacy**, "Fish, halibut, cooked, with skin (Alaska Native)" — pagina `getfoodfacts.com/food/fish-halibut-cooked-with-skin-alaska-native-169812` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 113kcal, proteine 22,1g, grassi 2,73g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 33,0mg, ferro 0,36mg, magnesio 29,0mg, zinco 0,75mg, rame 0,041mg, vitamina C non riportato nel record, folato totale 22,0µg, acido folico non riportato nel record (campo assente, non zero esplicito — lasciato `n.d.`), vitamina B12 2,55µg, selenio 60,6µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 0µg esplicito. Manca solo vitamina C (campo assente nel record, non stimato).
+- **Analogia usata**: `food_halibut_raw` (stessa specie, già eseguito sul DB reale — stato di cottura diverso, stesso `is_heme_iron`).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `halibut_con_pelle_cotto` ("Ippoglosso, con pelle, cotto").
+- **Attributi**: `is_heme_iron` attivo (true — pesce), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — carotenoidi espliciti a zero), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (FDC dichiara solo "cooked", metodo non specificato), `is_fortified_folate` omesso (false — acido folico non riportato, nessun segno di fortificazione).
+
+```
+npm run add-food -- --fdc-id=169812 --food-id=food_halibut_con_pelle_cotto \
+  --name-it="Ippoglosso, con pelle, cotto" \
+  --matrix-id=halibut_con_pelle_cotto --matrix-description-it="Ippoglosso, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_halibut_raw --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=169812 --food-id=food_halibut_con_pelle_cotto \
+  --name-it="Ippoglosso, con pelle, cotto" \
+  --matrix-id=halibut_con_pelle_cotto --matrix-description-it="Ippoglosso, con pelle, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_halibut_raw --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
 ### Prosciutto cotto (stinco), cotto (arrosto), con acqua aggiunta — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_prosciutto_stinco_cotto` (nuovo — distinto da `food_prosciutto_stinco_non_riscaldato` già eseguito, FDC 168347, stesso taglio "stinco" ma stato "unheated"; qui invece lo stato "heated, roasted". Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 167917 (**SR Legacy**, "Pork, cured, ham -- water added, shank, bone-in, separable lean only, heated, roasted" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-shank-bone-in-separable-lean-only-heated-roasted-167917` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). Trim "separable lean only" (la controparte "lean and fat" FDC 169165 non ha una fonte primaria verificabile su getfoodfacts.com — solo fonti secondarie — quindi non utilizzata).
