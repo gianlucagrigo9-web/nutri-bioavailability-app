@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Chilchen (bevanda di bacche rosse, Navajo) — preparato 2026-11-24 dal task (212° lotto)
+
+- **food_id**: `food_chilchen_navajo_raw` (mai coperto, verificato con `grep` dedicato su "chilchen" — nessun doppione). FDC ID 167630 (**SR Legacy**, "Chilchen (Red Berry Beverage) (Navajo)" — pagina `getfoodfacts.com/food/chilchen-red-berry-beverage-navajo-167630` dedicata e pulita, FDC ID e dataType citati esplicitamente, con link diretto a `fdc.nal.usda.gov/food-details/167630/nutrients`).
+- **Nutrienti**: **11/17**. Per 100g: energia 44,0kcal, proteine 0,81g, grassi 0,63g, carboidrati 8,68g, calcio 7,00mg, ferro 0,95mg, magnesio 9,00mg, zinco 0,19mg, rame 0,019mg, folato totale 8,00µg, vitamina K 0µg esplicito. **Mancano** (assenti dalla pagina, non zero dichiarato): fibra (il pannello mostra sia "not declared" sia un riquadro "0g" in conflitto — trattato come mancante per sicurezza, non si usa 0), selenio, vitamina C, vitamina B12, beta-carotene, alfa-carotene/beta-criptoxantina.
+- **Analogia usata**: `food_succo_di_mirtillo_rosso_raw` (bevanda a base di bacche, matrice liquida disgregata — stessa categoria funzionale "succo/bevanda di frutti di bosco"; specie botanica della bacca rossa usata nel Chilchen non identificata con certezza in questa ricerca, quindi `botanical_family` e `carotenoid_matrix_state` omessi invece di indovinare).
+- **Categoria dieta**: `plant_non_fruit` (bevanda vegetale trasformata, non frutta fresca — stessa convenzione dei succhi di frutta già in pipeline).
+- **Matrice**: nuova `chilchen_navajo` ("Chilchen, bevanda di bacche rosse, Navajo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non pertinente a una bevanda), `carotenoid_matrix_state` omesso (beta-carotene assente dalla fonte, non un reale 0 dichiarato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (specie della bacca non identificata con certezza), `baseline_cooking_state=raw` (nessuna indicazione di cottura dichiarata dalla fonte, stessa assunzione già usata per gli altri succhi/bevande non riscaldate di questa pipeline), `is_fortified_folate` omesso (false — nessuna firma di arricchimento, folato 8µg coerente con un prodotto non fortificato).
+
+```
+npm run add-food -- --fdc-id=167630 --food-id=food_chilchen_navajo_raw \
+  --name-it="Chilchen (bevanda di bacche rosse, Navajo)" \
+  --matrix-id=chilchen_navajo --matrix-description-it="Chilchen, bevanda di bacche rosse, Navajo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mirtillo_rosso_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=167630 --food-id=food_chilchen_navajo_raw \
+  --name-it="Chilchen (bevanda di bacche rosse, Navajo)" \
+  --matrix-id=chilchen_navajo --matrix-description-it="Chilchen, bevanda di bacche rosse, Navajo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mirtillo_rosso_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Mele disidratate, solforate, cotte in composta (stufate) — preparato 2026-11-24 dal task (211° lotto)
 
 - **food_id**: `food_mele_disidratate_cotte` (mai coperto, verificato con `grep` dedicato — nessuna mela essiccata/disidratata già presente nel DB, distinto da `food_succo_di_mela_raw` già eseguito). FDC ID 171690 (**SR Legacy**, "Apples, dehydrated (low moisture), sulfured, stewed" — pagina `tools.myfooddata.com/print/171690/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/171690/nutrients`).
