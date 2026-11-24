@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Avena, integrale, tagliata (steel cut), cruda — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_avena_integrale_tagliata_raw` (mai coperto, verificato con `grep` dedicato — **prima voce di avena in assoluto in questa pipeline**, nessun `food_oats*`/`food_avena*` esistente nonostante sia un alimento molto comune; `food_oats_raw` è un id riservato nell'elenco fornito, qui evitato con un id più descrittivo come richiesto). FDC ID 2346397 (**Foundation Foods**, "Oats, whole grain, steel cut" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **11/18**. Per 100g: energia 379kcal, proteine 12,5g, grassi 5,80g, carboidrati 69,8g, calcio 51,3mg, ferro 3,80mg, magnesio 129mg, zinco 2,84mg, rame 0,41mg, selenio 29,0µg, folato totale 30,0µg, sodio 0,31mg (praticamente nullo, nessun sale aggiunto — coerente con cereale grezzo non arricchito). **Mancano**: fibra (pagina mostra "not declared" contro uno 0g di riepilogo non usato, stessa convenzione di altre voci), beta-carotene, alfa-carotene, beta-criptoxantina, vitamina C, vitamina B12, vitamina K. Nessuna firma di arricchimento USA rilevata (nessun acido folico separato indicato).
+- **Analogia usata**: `food_orzo_perlato_raw` (orzo perlato crudo, Golden Set, già eseguito sul DB reale — stessa categoria funzionale "cereale integrale crudo poco lavorato").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `avena_integrale_tagliata` ("Avena integrale, tagliata (steel cut)").
+- **Attributi**: `baseline_cooking_state=raw` (cereale crudo, non cotto).
+
+```
+npm run add-food -- --fdc-id=2346397 --food-id=food_avena_integrale_tagliata_raw \
+  --name-it="Avena, integrale, tagliata (steel cut), cruda" \
+  --matrix-id=avena_integrale_tagliata --matrix-description-it="Avena integrale, tagliata (steel cut)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346397 --food-id=food_avena_integrale_tagliata_raw \
+  --name-it="Avena, integrale, tagliata (steel cut), cruda" \
+  --matrix-id=avena_integrale_tagliata --matrix-description-it="Avena integrale, tagliata (steel cut)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_orzo_perlato_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Pesce gatto (catfish) di canale, allevato, cotto — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_pesce_gatto_canale_allevato_cotto` (mai coperto, verificato con `grep` dedicato — prima voce "catfish"/pesce gatto reale in questa pipeline; nota in coda precedente che in passato il gap era colmato con il pangasio come sostituto, qui invece la specie richiesta ha un record proprio). FDC ID 175166 (**SR Legacy**, "Fish, catfish, channel, farmed, cooked, dry heat"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/175166/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/175166/nutrients`.
