@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di mais nixtamalizzato (masa harina), arricchita, bianca — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_masa_harina_arricchita_raw` (nuovo — distinto da `food_masa_harina_raw` già eseguito, FDC 2710835, Foundation, "white or yellow, dry, raw", **non arricchita** (nessun dato di fortificazione riportato); qui invece un record SR Legacy distinto, esplicitamente "enriched", con pannello vitaminico completo di acido folico/tiamina/riboflavina/niacina aggiunti. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169694 (**SR Legacy**, "Corn flour, masa, enriched, white" — pagina `getfoodfacts.com/food/corn-flour-masa-enriched-white-169694` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 363kcal, proteine 8,46g, grassi 3,69g, carboidrati 76,6g, fibra 6,40g, calcio 138mg, ferro 8,50mg, magnesio 93,0mg, zinco 1,80mg, rame 0,21mg, vitamina C 0mg esplicito, folato totale 162µg (folato alimentare 29,0µg + acido folico 133µg aggiunto), acido folico 133µg (fortificazione esplicita, prodotto "enriched"), vitamina B12 0µg esplicito, selenio 10,5µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 2,00µg.
+- **Analogia usata**: `food_masa_harina_raw` (stessa farina nixtamalizzata, già eseguita sul DB reale — qui versione arricchita con vitamine del gruppo B aggiunte, stessa specie *Zea mays*).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `masa_harina_arricchita` ("Farina di mais nixtamalizzato, arricchita, bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene 2,00µg trascurabile, nessun precedente di categoria per questo prodotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (true — acido folico 133µg esplicito, prodotto dichiarato "enriched").
+
+```
+npm run add-food -- --fdc-id=169694 --food-id=food_masa_harina_arricchita_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), arricchita, bianca" \
+  --matrix-id=masa_harina_arricchita --matrix-description-it="Farina di mais nixtamalizzato, arricchita, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169694 --food-id=food_masa_harina_arricchita_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), arricchita, bianca" \
+  --matrix-id=masa_harina_arricchita --matrix-description-it="Farina di mais nixtamalizzato, arricchita, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
 ### Prosciutto cotto (fetta), non riscaldato, con acqua aggiunta — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_prosciutto_fetta_non_riscaldato` (nuovo — taglio "slice/fetta" mai coperto in questa pipeline, distinto da `food_prosciutto_girello_non_riscaldato` (FDC 168348, taglio "rump/girello") e `food_prosciutto_stinco_non_riscaldato` (FDC 168347, taglio "shank/stinco"), già eseguiti. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168346 (**SR Legacy**, "Pork, cured, ham -- water added, slice, bone-in, separable lean and fat, unheated" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-slice-bone-in-separable-lean-and-fat-unheated-168346` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
