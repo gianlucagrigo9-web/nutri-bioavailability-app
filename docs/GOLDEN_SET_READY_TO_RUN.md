@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Farro (spelt), cotto — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_farro_cotto` (nuovo — distinto da `food_farro_raw` già eseguito (chicco crudo), qui stato cotto mai coperto in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169746 (**SR Legacy**, "Spelt, cooked" — pagina `getfoodfacts.com/food/spelt-cooked-169746` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 127kcal, proteine 5,50g, grassi 0,85g, carboidrati 26,4g, fibra 3,90g, calcio 10,0mg, ferro 1,67mg, magnesio 49,0mg, zinco 1,25mg, rame 0,21mg, vitamina C 0mg esplicito, folato totale 13,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 4,00µg. **Mancano** (assenti dalla pagina): vitamina K, beta-carotene.
+- **Analogia usata**: `food_farro_raw` (stesso cereale *Triticum spelta*, già eseguito sul DB reale — stato di cottura diverso).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `farro_cotto` ("Farro (spelt), cotto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=boiled` (cereale cotto, convenzione standard per "cooked" senza ulteriore specifica), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169746 --food-id=food_farro_cotto \
+  --name-it="Farro (spelt), cotto" \
+  --matrix-id=farro_cotto --matrix-description-it="Farro (spelt), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169746 --food-id=food_farro_cotto \
+  --name-it="Farro (spelt), cotto" \
+  --matrix-id=farro_cotto --matrix-description-it="Farro (spelt), cotto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_farro_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di mais integrale (cornmeal), degermata, non arricchita, gialla — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_cornmeal_degermata_gialla_raw` (nuovo — categoria "cornmeal" (macinatura più grossa della farina di mais) mai coperta in questa pipeline, distinta da `food_farina_di_mais_raw`/`food_farina_di_mais_arricchita_raw`/`food_farina_di_mais_blu_raw` già eseguite (farina più fine). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168929 (**SR Legacy**, "Cornmeal, degermed, unenriched, yellow" — pagina `getfoodfacts.com/food/cornmeal-degermed-unenriched-yellow-168929` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 370kcal, proteine 7,11g, grassi 1,75g, carboidrati 79,5g, fibra 3,90g, calcio 3,00mg, ferro 1,10mg, magnesio 32,0mg, zinco 0,66mg, rame 0,076mg, vitamina C 0mg esplicito, folato totale 30,0µg (tutto da cibo, nessun acido folico aggiunto), acido folico 0µg esplicito (prodotto "unenriched"), vitamina B12 0µg esplicito, selenio 10,5µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 97,0µg (reale, mais giallo).
+- **Analogia usata**: `food_farina_di_mais_raw` (stesso cereale *Zea mays*, stessa famiglia di prodotto macinato non trattato, già eseguita sul DB reale — granulometria diversa, cornmeal più grossa della farina).
+- **Categoria dieta**: `plant_non_fruit` (farina/macinato di cereale).
+- **Matrice**: nuova `cornmeal_degermata_gialla` ("Farina di mais integrale, degermata, gialla").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e significativo, prodotto crudo non trattato termicamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, prodotto dichiarato "unenriched").
+
+```
+npm run add-food -- --fdc-id=168929 --food-id=food_cornmeal_degermata_gialla_raw \
+  --name-it="Farina di mais integrale (cornmeal), degermata, non arricchita, gialla" \
+  --matrix-id=cornmeal_degermata_gialla --matrix-description-it="Farina di mais integrale, degermata, gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168929 --food-id=food_cornmeal_degermata_gialla_raw \
+  --name-it="Farina di mais integrale (cornmeal), degermata, non arricchita, gialla" \
+  --matrix-id=cornmeal_degermata_gialla --matrix-description-it="Farina di mais integrale, degermata, gialla" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Farina di mais nixtamalizzato (masa harina), gialla, arricchita — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_masa_harina_arricchita_gialla_raw` (nuovo — distinto da `food_masa_harina_arricchita_raw` appena preparato sopra in questo stesso lotto, FDC 169694, "white"; qui mais giallo, con beta-carotene reale e molto più alto (97,0µg contro 2,00µg del bianco) — differenza nutrizionale reale, non un trim/variante estetica. Distinto anche da `food_masa_harina_raw` già eseguito, FDC 2710835, Foundation, non arricchito. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169749 (**SR Legacy**, "Corn flour, yellow, masa, enriched" — pagina `getfoodfacts.com/food/corn-flour-yellow-masa-enriched-169749` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
