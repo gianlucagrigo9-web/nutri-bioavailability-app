@@ -16,6 +16,78 @@
 
 ## Pronti
 
+### Sgombro, salato — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_sgombro_salato_raw` (mai coperto, verificato con `grep` dedicato sui `food_sgombro_*` esistenti: distinto da `food_sgombro_raw`/`food_sgombro_cotto` (sgombro atlantico crudo/cotto, non salato) e da `food_sgombro_spagnolo_raw`/`_cotto` (specie diversa) — forma di conservazione "salato" mai tentata su questa specie, sulla scia del successo già visto per aringa affumicata/marinata). FDC ID 168149 (**SR Legacy**, "Fish, mackerel, salted" — pagina `getfoodfacts.com/food/fish-mackerel-salted-168149` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 305kcal, proteine 18,5g, grassi 25,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 66,0mg, ferro 1,40mg, magnesio 60,0mg, zinco 1,10mg, rame 0,10mg, selenio 73,4µg (alto, coerente con pesce concentrato dalla salagione), vitamina C 0mg esplicito, vitamina K (fillochinone, unico valore riportato, nessuna riga totale) 7,80µg, folato totale 15,0µg, acido folico 0µg esplicito, vitamina B12 12,0µg (alto, coerente con concentrazione da salagione), beta-carotene 0µg esplicito, alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito. **Nota data-quality**: piccoli scarti fra pannello-etichetta (per porzione 80g, arrotondato) e tabella nutrienti (stesso dato più preciso) su energia/calcio/colesterolo/potassio — stesso tipo di arrotondamento normale fra etichetta e tabella visto su quasi tutte le pagine di questa pipeline, non un conflitto reale di valore come nel caso (diverso, già respinto) del cavolfiore con tre energie diverse NELLA STESSA tabella.
+- **Analogia usata**: `food_sgombro_raw` (sgombro atlantico crudo, già eseguito sul DB reale — stessa specie, forma di conservazione diversa).
+- **Categoria dieta**: `meat_fish` (pesce, non vegetariano/vegano/fruttariano).
+- **Matrice**: nuova `sgombro_salato` ("Sgombro, salato").
+- **Attributi**: `is_heme_iron` attivo (true — pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, pesce), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale, carotenoidi esplicitamente zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=salted` (nessuna cottura, solo salagione, stesso precedente di `pickled` per l'aringa marinata), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168149 --food-id=food_sgombro_salato_raw \
+  --name-it="Sgombro, salato" \
+  --matrix-id=sgombro_salato --matrix-description-it="Sgombro, salato" \
+  --baseline-cooking-state=salted --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168149 --food-id=food_sgombro_salato_raw \
+  --name-it="Sgombro, salato" \
+  --matrix-id=sgombro_salato --matrix-description-it="Sgombro, salato" \
+  --baseline-cooking-state=salted --analogy-food-id=food_sgombro_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Salmone chum, cotto (calore secco) — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_salmone_chum_cotto` (mai coperto, verificato con `grep` dedicato sui `food_salmone_*` esistenti: distinto da `food_salmone_chum_secco` (FDC 168054, essiccato, categoria Alaska Native) — qui cotto a calore secco, forma mai tentata per questa specie). FDC ID 172000 (**SR Legacy**, "Fish, salmon, chum, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-salmon-chum-cooked-dry-heat-172000` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 154kcal, proteine 25,8g, grassi 4,83g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 14,0mg, ferro 0,71mg, magnesio 28,0mg, zinco 0,60mg, rame 0,071mg, selenio 46,8µg, vitamina C 0mg esplicito, folato totale 5,00µg, acido folico 0µg esplicito, vitamina B12 3,46µg. **Mancano** (assenti dalla pagina, non assunti zero): vitamina K, beta-carotene, alfa-carotene/beta-criptoxantina.
+- **Analogia usata**: `food_salmone_coho_cotto` (salmone coho cotto a calore secco, già eseguito sul DB reale — stessa categoria funzionale "salmone di specie Pacifico, cotto").
+- **Categoria dieta**: `meat_fish` (pesce, non vegetariano/vegano/fruttariano).
+- **Matrice**: nuova `salmone_chum_cotto` ("Salmone chum, cotto a calore secco").
+- **Attributi**: `is_heme_iron` attivo (true — pesce, ferro eme), `matrix_category_calcium` omesso (NULL — non applicabile, pesce), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172000 --food-id=food_salmone_chum_cotto \
+  --name-it="Salmone chum, cotto a calore secco" \
+  --matrix-id=salmone_chum_cotto --matrix-description-it="Salmone chum, cotto a calore secco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmone_coho_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172000 --food-id=food_salmone_chum_cotto \
+  --name-it="Salmone chum, cotto a calore secco" \
+  --matrix-id=salmone_chum_cotto --matrix-description-it="Salmone chum, cotto a calore secco" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmone_coho_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Noci (comuni), tostate a secco, con sale aggiunto — preparato 2026-11-24 dal task (213° lotto)
+
+- **food_id**: `food_noci_tostate_salate_raw` (mai coperto, verificato con `grep` dedicato sui `food_noci_*` esistenti: distinto da `food_noci_raw` (crude, già eseguita) — nessuna variante tostata di noci comuni (*Juglans regia*) ancora in coda, a differenza di pecan/macadamia già tostate). FDC ID 170594 (**SR Legacy**, "Nuts, walnuts, dry roasted, with salt added" — pagina `getfoodfacts.com/food/nuts-walnuts-dry-roasted-with-salt-added-170594` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 643kcal, proteine 14,3g, grassi 60,7g, carboidrati 17,9g, fibra 7,10g, calcio 71,0mg, ferro 2,57mg, magnesio 151mg, zinco 2,98mg, rame 1,49mg, selenio 5,00µg, vitamina C 1,40mg, vitamina K (fillochinone, unico valore riportato, nessuna riga totale) 3,30µg, folato totale 91,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, beta-carotene 11,0µg (reale), alfa-carotene 0µg esplicito, beta-criptoxantina 0µg esplicito.
+- **Analogia usata**: `food_noci_pecan_tostate` (noci pecan tostate a secco, già preparata in questo stesso lotto/precedenti — stessa categoria funzionale "frutto a guscio tostato a secco", stesso precedente di famiglia botanica Juglandaceae).
+- **Categoria dieta**: `plant_non_fruit` (frutto a guscio, nessun ingrediente animale; il sale aggiunto non cambia la categoria).
+- **Matrice**: nuova `noci_tostate_salate` ("Noci comuni, tostate a secco, con sale aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente delle altre noci/semi tostati), `carotenoid_matrix_state` omesso (NULL — beta-carotene reale ma non nullo non classificato per questo tipo di matrice, stesso precedente di `food_noci_pecan_tostate`/`food_noci_macadamia_tostate`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Juglandaceae` (come `food_noci_raw`/`food_noci_pecan_tostate`), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170594 --food-id=food_noci_tostate_salate_raw \
+  --name-it="Noci (comuni), tostate a secco, con sale aggiunto" \
+  --matrix-id=noci_tostate_salate --matrix-description-it="Noci comuni, tostate a secco, con sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_tostate \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170594 --food-id=food_noci_tostate_salate_raw \
+  --name-it="Noci (comuni), tostate a secco, con sale aggiunto" \
+  --matrix-id=noci_tostate_salate --matrix-description-it="Noci comuni, tostate a secco, con sale aggiunto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_tostate \
+  --botanical-family=Juglandaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Formaggio "cheese food" americano, processato, pastorizzato, senza vitamina D aggiunta — preparato 2026-11-24 dal task (213° lotto)
 
 - **food_id**: `food_formaggio_food_americano_raw` (mai coperto, verificato con `grep` dedicato: distinto da `food_formaggio_americano_raw` (FDC 171289, standard d'identità "cheese PRODUCT", fortificato vit.D — lotto 96) e da `food_formaggio_spalmabile_americano_raw` (FDC 171254, "cheese SPREAD" da vasetto — lotto 97); questo è un terzo standard d'identità USDA distinto, "cheese FOOD", senza vit.D aggiunta — FDC diverso da entrambi, zero occorrenze su tutti e tre i file prima della ricerca). FDC ID 171291 (**SR Legacy**, "Cheese food, pasteurized process, American, without added vitamin D" — pagina `getfoodfacts.com/food/cheese-food-pasteurized-process-american-without-added-vitamin-d-171291` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
