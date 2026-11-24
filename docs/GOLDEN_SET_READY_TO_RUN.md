@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Noodles cinesi, chow mein (fritti e croccanti) — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_noodles_chow_mein` (nuovo — categoria "noodles cinesi fritti" mai coperta in questa pipeline, distinta da `food_pasta_enriched_cooked` (pasta bollita, non fritta) e da `food_pasta_alluovo_non_arricchita_cotta` appena preparata sopra in questo stesso lotto (bollita, non fritta). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168905 (**SR Legacy**, "Noodles, chinese, chow mein" — pagina `getfoodfacts.com/food/noodles-chinese-chow-mein-168905` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 471kcal, proteine 10,9g, grassi 21,2g (molto più alto della pasta bollita, coerente con la frittura), carboidrati 63,6g, fibra 6,70g, calcio 0mg esplicito, ferro 6,43mg, magnesio 19,0mg, zinco 0,81mg, rame 0,12mg, vitamina C 0mg esplicito, folato totale 125µg, acido folico 90,0µg (fortificazione esplicita), vitamina B12 0µg esplicito, selenio 28,5µg, vitamina K 5,30µg (fillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_pasta_enriched_cooked` (stessa categoria funzionale "pasta di grano", già eseguita sul DB reale — qui fritta anziché bollita, grasso molto più alto).
+- **Categoria dieta**: `plant_non_fruit` (pasta di grano, nessun ingrediente animale dichiarato).
+- **Matrice**: nuova `noodles_chow_mein` ("Noodles cinesi, chow mein, fritti e croccanti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, calcio comunque 0mg esplicito), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=fried` (FDC implica frittura, prodotto "croccante"), `is_fortified_folate` **attivo** (true — acido folico 90,0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168905 --food-id=food_noodles_chow_mein \
+  --name-it="Noodles cinesi, chow mein (fritti e croccanti)" \
+  --matrix-id=noodles_chow_mein --matrix-description-it="Noodles cinesi, chow mein, fritti e croccanti" \
+  --baseline-cooking-state=fried --analogy-food-id=food_pasta_enriched_cooked \
+  --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168905 --food-id=food_noodles_chow_mein \
+  --name-it="Noodles cinesi, chow mein (fritti e croccanti)" \
+  --matrix-id=noodles_chow_mein --matrix-description-it="Noodles cinesi, chow mein, fritti e croccanti" \
+  --baseline-cooking-state=fried --analogy-food-id=food_pasta_enriched_cooked \
+  --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Noodles giapponesi, somen, cotti — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_noodles_somen_cotti` (nuovo — categoria "somen" (noodle giapponese sottile di grano) mai coperta in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168909 (**SR Legacy**, "Noodles, japanese, somen, cooked" — pagina `getfoodfacts.com/food/noodles-japanese-somen-cooked-168909` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 131kcal, proteine 4,00g, grassi 0,18g, carboidrati 27,5g, calcio 8,00mg, ferro 0,52mg, magnesio 2,00mg, zinco 0,22mg, rame 0,025mg, vitamina C 0mg esplicito, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito. **Mancano** (assenti dalla pagina, "non dichiarato" sul pannello): fibra, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_pasta_enriched_cooked` (stessa categoria funzionale "pasta di grano bollita", già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (pasta di grano, nessun ingrediente animale dichiarato).
+- **Matrice**: nuova `noodles_somen_cotti` ("Noodles giapponesi, somen, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168909 --food-id=food_noodles_somen_cotti \
+  --name-it="Noodles giapponesi, somen, cotti" \
+  --matrix-id=noodles_somen_cotti --matrix-description-it="Noodles giapponesi, somen, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168909 --food-id=food_noodles_somen_cotti \
+  --name-it="Noodles giapponesi, somen, cotti" \
+  --matrix-id=noodles_somen_cotti --matrix-description-it="Noodles giapponesi, somen, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Tagliatelle all'uovo, non arricchite, cotte senza sale — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_pasta_alluovo_non_arricchita_cotta` (nuovo — categoria "pasta all'uovo" mai coperta in questa pipeline, distinta da `food_pasta_enriched_cooked`/`food_pasta_enriched_dry` già eseguite (pasta di semola senza uovo). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168926 (**SR Legacy**, "Noodles, egg, unenriched, cooked, without added salt" — pagina `getfoodfacts.com/food/noodles-egg-unenriched-cooked-without-added-salt-168926` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
