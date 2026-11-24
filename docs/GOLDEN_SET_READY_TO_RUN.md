@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio svizzero, nonfat o senza grassi — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_formaggio_svizzero_nonfat_raw` (distinto dal formaggio svizzero naturale già eseguito `food_formaggio_svizzero_raw`, FDC 171251, e dalla versione processata già eseguita `food_formaggio_svizzero_processato_raw`, FDC 170855 — qui versione specificamente "nonfat/senza grassi", FDC diverso, macro profilo molto diverso (0g grassi dichiarato); verificato con `grep` dedicato, zero occorrenze precedenti sui tre file). FDC ID 170897 (**SR Legacy**, "Cheese, swiss, nonfat or fat free" — pagina `getfoodfacts.com/food/cheese-swiss-nonfat-or-fat-free-170897` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 127kcal, proteine 28,4g, grassi 0g esplicito (coerente col nome "nonfat"), carboidrati 3,40g, fibra 0g esplicito, calcio 961mg (molto alto, coerente con formaggio stagionato concentrato), ferro 0,17mg, magnesio 36,0mg, zinco 3,90mg, rame 0,027mg, vitamina C 0mg esplicito, folato totale 6,00µg, acido folico 0µg esplicito (nessuna fortificazione), vitamina B12 1,68µg, selenio 12,7µg, vitamina K 0,50µg, beta-carotene 13,0µg. Record completo, nessun nutriente mancante.
+- **Analogia usata**: `food_formaggio_svizzero_raw` (stesso formaggio di base, già eseguito sul DB reale — qui solo la variante nonfat, stessa famiglia di prodotto, stessa convenzione funzionale "formaggio" già usata per l'intera famiglia cheddar/gruyère/edam/svizzero in questa pipeline).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_svizzero_nonfat` ("Formaggio svizzero, nonfat o senza grassi").
+- **Attributi**: `is_heme_iron` omesso (false — latticino), `matrix_category_calcium` omesso (NULL — non applicabile, formaggio, stesso precedente di tutta la famiglia svizzero/cheddar/capra), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile nonostante il beta-carotene non nullo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (stesso precedente usato per gli altri formaggi non stagionati a lungo), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170897 --food-id=food_formaggio_svizzero_nonfat_raw \
+  --name-it="Formaggio svizzero, nonfat o senza grassi" \
+  --matrix-id=formaggio_svizzero_nonfat --matrix-description-it="Formaggio svizzero, nonfat o senza grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170897 --food-id=food_formaggio_svizzero_nonfat_raw \
+  --name-it="Formaggio svizzero, nonfat o senza grassi" \
+  --matrix-id=formaggio_svizzero_nonfat --matrix-description-it="Formaggio svizzero, nonfat o senza grassi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_svizzero_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Noci miste, tostate a secco, con arachidi e sale, blend pistacchio (PLANTERS) — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_noci_miste_pistacchio_tostate_salate` (categoria interamente nuova per questo DB — nessuna "noci miste" composita preesistente, solo frutta secca singola; verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170586 (**SR Legacy**, "Nuts, mixed nuts, dry roasted, with peanuts, salt added, PLANTERS pistachio blend" — pagina `getfoodfacts.com/food/nuts-mixed-nuts-dry-roasted-with-peanuts-salt-added-planters-pistachio-blend-170586` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
