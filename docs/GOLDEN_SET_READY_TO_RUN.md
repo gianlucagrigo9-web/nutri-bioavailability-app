@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo, corned beef (salato/curato), punta di petto, crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_manzo_corned_beef_raw` (nuovo — categoria "carne bovina curata/salata" mai coperta in questa pipeline, distinta dai tagli freschi di manzo già eseguiti (`food_manzo_spezzatino_raw` ecc.): processo di cura (salamoia/nitrito) altera significativamente il profilo (sodio e vitamina C aggiunta tipici della cura, 27,0mg di vitamina C non naturale nella carne cruda è un segnale di conservante). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170199 (**SR Legacy**, "Beef, cured, corned beef, brisket, raw" — pagina `getfoodfacts.com/food/beef-cured-corned-beef-brisket-raw-170199` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 198kcal, proteine 14,7g, grassi 14,9g, carboidrati 0,14g, fibra 0g esplicito, calcio 7,00mg, ferro 1,69mg, magnesio 14,0mg, zinco 2,85mg, rame 0,11mg, vitamina C 27,0mg (da cura/conservante, non naturale nella carne cruda), folato totale 5,00µg, acido folico 0µg esplicito, vitamina B12 1,78µg, selenio 19,0µg. Mancano: vitamina K, beta-carotene (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_manzo_spezzatino_raw` (manzo crudo, Golden Set pipeline, già eseguito sul DB reale — stessa specie, stesso stato crudo, stesso attributo `is_heme_iron`, qui curato/salato invece di fresco).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `manzo_corned_beef_raw` ("Manzo, corned beef, punta di petto, crudo").
+- **Attributi**: `is_heme_iron` (flag attivo — carne rossa), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — carotenoidi assenti dal record, non verificabile come zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento, il folato basso è tipico della carne).
+
+```
+npm run add-food -- --fdc-id=170199 --food-id=food_manzo_corned_beef_raw \
+  --name-it="Manzo, corned beef (salato/curato), punta di petto, crudo" \
+  --matrix-id=manzo_corned_beef_raw --matrix-description-it="Manzo, corned beef, punta di petto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_manzo_spezzatino_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=170199 --food-id=food_manzo_corned_beef_raw \
+  --name-it="Manzo, corned beef (salato/curato), punta di petto, crudo" \
+  --matrix-id=manzo_corned_beef_raw --matrix-description-it="Manzo, corned beef, punta di petto, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_manzo_spezzatino_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Platano, maturo (giallo), crudo — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_platano_maturo_raw` (nuovo — distinto da `food_platano_non_maturo_raw` (FDC 2710818, Foundation, "underripe") già eseguito: stadio di maturazione diverso (giallo vs verde/acerbo), profilo nutrizionale molto diverso — beta-carotene 457µg reale (contro assente/non riportato nell'acerbo) e vitamina K 28,8µg presente, coerente con la letteratura sulla maturazione del platano. Verificato con `grep` dedicato, nessun `food_platano_maturo*` precedente). FDC ID 169130 (**SR Legacy**, "Plantains, yellow, raw" — pagina `getfoodfacts.com/food/plantains-yellow-raw-169130` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
