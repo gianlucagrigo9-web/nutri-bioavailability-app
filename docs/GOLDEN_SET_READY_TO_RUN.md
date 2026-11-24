@@ -16,6 +16,80 @@
 
 ## Pronti
 
+### Lenticchie, germogliate, crude — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_lenticchie_germogliate_raw` (nuovo — distinto da `food_lenticchie_rosse_raw` già eseguito: germogliazione altera significativamente il profilo (vitamina C 16,5mg reale, assente nel seme secco non germogliato), stessa convenzione già usata per fagioli rossi germogliati in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168427 (**SR Legacy**, "Lentils, sprouted, raw" — pagina `getfoodfacts.com/food/lentils-sprouted-raw-168427` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 106kcal, proteine 8,96g, grassi 0,55g, carboidrati 22,1g, calcio 25,0mg, ferro 3,21mg, magnesio 37,0mg, zinco 1,51mg, rame 0,35mg, vitamina C 16,5mg (reale), folato totale 100µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,60µg. Mancano: fibra, vitamina K, beta-carotene (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_lenticchie_rosse_raw` (lenticchie rosse crude, Golden Set pipeline, già eseguita sul DB reale — stesso genere *Lens*, stessa famiglia botanica Fabaceae).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `lenticchie_germogliate` ("Lenticchie, germogliate, crude").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, legume), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non verificabile come zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168427 --food-id=food_lenticchie_germogliate_raw \
+  --name-it="Lenticchie, germogliate, crude" \
+  --matrix-id=lenticchie_germogliate --matrix-description-it="Lenticchie, germogliate, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lenticchie_rosse_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168427 --food-id=food_lenticchie_germogliate_raw \
+  --name-it="Lenticchie, germogliate, crude" \
+  --matrix-id=lenticchie_germogliate --matrix-description-it="Lenticchie, germogliate, crude" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lenticchie_rosse_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Papad (cialda/galletta di farina di legumi essiccata, tipica indiana) — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_papad_secco` (nuovo — categoria "prodotto da forno/essiccato a base di farina di legumi" mai coperta in questa pipeline, distinto da `food_lenticchie_rosse_raw` (seme intero, non farina trasformata). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168106 (**SR Legacy**, "Papad" — pagina `getfoodfacts.com/food/papad-168106` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30, categoria USDA "Legumes and Legume Products").
+- **Nutrienti**: **17/17**. Per 100g: energia 371kcal, proteine 25,6g, grassi 3,25g, carboidrati 59,9g, fibra 18,6g, calcio 143mg, ferro 7,80mg, magnesio 271mg, zinco 3,40mg, rame 1,0mg, vitamina C 0mg esplicito, folato totale 219µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 8,30µg, vitamina K 0,40µg (fillochinone), beta-carotene 4,00µg.
+- **Analogia usata**: `food_lenticchie_rosse_raw` (lenticchie rosse crude, Golden Set pipeline, già eseguita sul DB reale — stessa famiglia botanica Fabaceae, ingrediente principale farina di legumi, qui essiccato e lavorato invece di seme intero).
+- **Categoria dieta**: `plant_non_fruit` (prodotto a base di legumi).
+- **Matrice**: nuova `papad_secco` ("Papad, essiccato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 4,00µg trascurabile, prodotto essiccato lavorato, nessuna categoria pertinente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (farina di legumi), `baseline_cooking_state=raw` (essiccato, non fritto/cotto in questo record), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168106 --food-id=food_papad_secco \
+  --name-it="Papad (cialda di farina di legumi essiccata)" \
+  --matrix-id=papad_secco --matrix-description-it="Papad, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lenticchie_rosse_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168106 --food-id=food_papad_secco \
+  --name-it="Papad (cialda di farina di legumi essiccata)" \
+  --matrix-id=papad_secco --matrix-description-it="Papad, essiccato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_lenticchie_rosse_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Taccole, bollite e scolate, senza sale (da fresche, non congelate) — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_taccole_bollite_fresche` (nuovo — distinto da `food_taccole_cotte` (FDC 170418, variante congelata poi bollita, già eseguita): questo record NON menziona "frozen" in nessun punto della pagina, categoria USDA "Snow peas", valori diversi (vitamina C 47,9mg contro 22,0mg del congelato, vitamina K 25,0µg contro 30,2µg, energia 42kcal contro 52kcal) — risolve il gap dichiarato nella voce `food_taccole_cotte` ("nessun record FDC generico trovato per la variante fresca cotta", ventottesimo lotto), qui trovato. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 170011 (**SR Legacy**, "Peas, edible-podded, boiled, drained, without salt" — pagina `getfoodfacts.com/food/peas-edible-podded-boiled-drained-without-salt-170011` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 42,0kcal, proteine 3,27g, grassi 0,23g, carboidrati 7,05g, fibra 2,80g, calcio 42,0mg, ferro 1,97mg, magnesio 26,0mg, zinco 0,37mg, rame 0,077mg, vitamina C 47,9mg (reale), folato totale 29,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,70µg, vitamina K 25,0µg (fillochinone), beta-carotene 597µg (reale).
+- **Analogia usata**: `food_taccole_cotte` (taccole bollite, Golden Set pipeline, già eseguita sul DB reale — stessa specie *Pisum sativum* var. *macrocarpon*, stesso stato bollito, qui da fresche invece che da congelate).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio/legume).
+- **Matrice**: nuova `taccole_fresche_cotte` ("Taccole, bollite e scolate, da fresche").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, 597µg, matrice disgregata dalla cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (stessa dell'analogia), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170011 --food-id=food_taccole_bollite_fresche \
+  --name-it="Taccole, bollite e scolate, senza sale (da fresche)" \
+  --matrix-id=taccole_fresche_cotte --matrix-description-it="Taccole, bollite e scolate, da fresche" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taccole_cotte \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170011 --food-id=food_taccole_bollite_fresche \
+  --name-it="Taccole, bollite e scolate, senza sale (da fresche)" \
+  --matrix-id=taccole_fresche_cotte --matrix-description-it="Taccole, bollite e scolate, da fresche" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taccole_cotte \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Fabaceae \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Albume d'uovo, essiccato (in polvere) — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_albume_uovo_secco` (nuovo — distinto da `food_egg_white_raw`/`food_albume_uovo_raw` (liquido crudo, già eseguiti): prodotto essiccato, densità nutrizionale molto più alta per la rimozione dell'acqua (proteine 81,1g contro ~10g del liquido crudo), uso comune in polvere proteica/prodotti da forno. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 172204 (**SR Legacy**, "Egg, white, dried" — pagina `getfoodfacts.com/food/egg-white-dried-172204` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
