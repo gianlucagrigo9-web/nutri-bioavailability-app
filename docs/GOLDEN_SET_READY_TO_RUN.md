@@ -16,6 +16,102 @@
 
 ## Pronti
 
+### Mais in chicco secco, giallo, crudo — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_mais_in_chicco_secco_raw` (distinto da `food_mais_dolce_raw`/granturco dolce fresco già eseguito — specie/varietà diversa, mais da granella vs mais dolce — e da `food_farina_di_mais_raw` già eseguito — chicco intero vs farina macinata; verificato zero occorrenze precedenti con `grep`). FDC ID 170288 (**SR Legacy**, "Corn grain, yellow" — pagina `getfoodfacts.com/food/corn-grain-yellow-170288` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 365kcal, proteine 9,42g, grassi 4,74g, carboidrati 74,3g, fibra 7,30g, calcio 7,00mg, ferro 2,71mg, magnesio 127mg, zinco 2,21mg, rame 0,31mg, vitamina C 0mg esplicito, folato totale 19,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 15,5µg, vitamina K 0,30µg, beta-carotene 97,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta/filiera, chicco intero secco vs farina macinata già eseguita).
+- **Categoria dieta**: `plant_non_fruit` (cereale, vegetariano e vegano sì).
+- **Matrice**: nuova `mais_in_chicco_secco` ("Mais in chicco secco, intero").
+- **Attributi**: `carotenoid_matrix_state=raw_intact` (chicco intero non disgregato, a differenza della farina già eseguita con matrice disgregata), `botanical_family=Poaceae` (stessa famiglia dell'analogia), `zinc_bioaccessibility_bucket` default `none`.
+
+```
+npm run add-food -- --fdc-id=170288 --food-id=food_mais_in_chicco_secco_raw \
+  --name-it="Mais in chicco secco, giallo, crudo" \
+  --matrix-id=mais_in_chicco_secco --matrix-description-it="Mais in chicco secco, intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170288 --food-id=food_mais_in_chicco_secco_raw \
+  --name-it="Mais in chicco secco, giallo, crudo" \
+  --matrix-id=mais_in_chicco_secco --matrix-description-it="Mais in chicco secco, intero" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Gamberi, impanati e fritti — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_gamberi_impanati_fritti` (distinto da `food_gamberi_raw` già eseguito — stato di cottura e preparazione impanata diversi; verificato zero occorrenze precedenti con `grep`). FDC ID 171970 (**SR Legacy**, "Crustaceans, shrimp, mixed species, cooked, breaded and fried" — pagina `getfoodfacts.com/food/crustaceans-shrimp-mixed-species-cooked-breaded-and-fried-171970` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17** — mancano vitamina K come valore totale unico (la pagina riporta solo i singoli componenti fillochinone/menachinone-4/diidrofillochinone separatamente, senza una somma dichiarata — non sommati qui per non inventare un dato non riportato come tale dalla fonte) e beta-carotene (pagina riporta solo vitamina A RAE). Per 100g: energia 242kcal, proteine 21,4g, grassi 12,3g, carboidrati 11,5g, fibra 0,40g, calcio 67,0mg, ferro 1,26mg, magnesio 40,0mg, zinco 1,38mg, rame 0,27mg, vitamina C 1,50mg, folato totale 33,0µg, acido folico 9,00µg, vitamina B12 1,87µg, selenio 41,7µg.
+- **Analogia usata**: `food_gamberi_raw` (stesso animale, stato di cottura/impanatura distinto, già eseguito).
+- **Categoria dieta**: `meat_fish` (crostaceo, vegetariano no — la componente di panatura/frittura non cambia la categoria dell'alimento principale, stesso criterio già usato per il pollo rosticceria BBQ).
+- **Matrice**: nuova `gamberi_impanati_fritti` ("Gamberi, impanati e fritti").
+- **Attributi**: `is_heme_iron` presente (coerente con `food_gamberi_raw`, già impostato così), `baseline_cooking_state=fried`.
+
+```
+npm run add-food -- --fdc-id=171970 --food-id=food_gamberi_impanati_fritti \
+  --name-it="Gamberi, impanati e fritti" \
+  --matrix-id=gamberi_impanati_fritti --matrix-description-it="Gamberi, impanati e fritti" \
+  --baseline-cooking-state=fried --analogy-food-id=food_gamberi_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171970 --food-id=food_gamberi_impanati_fritti \
+  --name-it="Gamberi, impanati e fritti" \
+  --matrix-id=gamberi_impanati_fritti --matrix-description-it="Gamberi, impanati e fritti" \
+  --baseline-cooking-state=fried --analogy-food-id=food_gamberi_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Carciofi surgelati, cotti bolliti — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_carciofi_surgelati_bolliti` (distinto da `food_carciofi_surgelati` già eseguito — quello è "frozen, unprepared"/crudo surgelato FDC 168387, questo è lo stesso prodotto surgelato ma già cotto bollito, record FDC diverso; verificato zero occorrenze precedenti con `grep`). FDC ID 168388 (**SR Legacy**, "Artichokes, (globe or french), frozen, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/artichokes-globe-or-french-frozen-cooked-boiled-drained-without-salt-168388` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 45,0kcal, proteine 3,11g, grassi 0,50g, carboidrati 9,18g, fibra 4,60g, calcio 21,0mg, ferro 0,56mg, magnesio 31,0mg, zinco 0,36mg, rame 0,061mg, vitamina C 5,00mg, folato totale 119µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,20µg, vitamina K 12,6µg, beta-carotene 7,00µg.
+- **Analogia usata**: `food_carciofi_surgelati` (stesso prodotto surgelato, stato di cottura diverso — crudo vs cotto bollito).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `carciofi_surgelati_bolliti` ("Carciofi surgelati, cotti bolliti").
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (a differenza del surgelato crudo che usa `raw_intact`), `botanical_family=Asteraceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=168388 --food-id=food_carciofi_surgelati_bolliti \
+  --name-it="Carciofi surgelati, cotti bolliti" \
+  --matrix-id=carciofi_surgelati_bolliti --matrix-description-it="Carciofi surgelati, cotti bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carciofi_surgelati \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168388 --food-id=food_carciofi_surgelati_bolliti \
+  --name-it="Carciofi surgelati, cotti bolliti" \
+  --matrix-id=carciofi_surgelati_bolliti --matrix-description-it="Carciofi surgelati, cotti bolliti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_carciofi_surgelati \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
+### Succo di mela, da concentrato surgelato, diluito — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_succo_di_mela_da_concentrato_surgelato` (distinto da `food_succo_di_mela_raw` già eseguito — stesso tipo di prodotto ma record FDC e forma di preparazione diversi, da concentrato surgelato diluito con 3 volumi d'acqua vs succo diretto; verificato zero occorrenze precedenti con `grep`). FDC ID 173935 (**SR Legacy**, "Apple juice, frozen concentrate, unsweetened, diluted with 3 volume water without added ascorbic acid" — pagina `getfoodfacts.com/food/apple-juice-frozen-concentrate-unsweetened-diluted-with-3-volume-water-without-a-173935` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 47,0kcal, proteine 0,14g, grassi 0,10g, carboidrati 11,5g, fibra 0,10g, calcio 6,00mg, ferro 0,26mg, magnesio 5,00mg, zinco 0,040mg, rame 0,014mg, vitamina C 0,60mg, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,10µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_succo_di_mela_raw` (stesso prodotto/filiera, forma di preparazione distinta, già eseguito).
+- **Categoria dieta**: `plant_non_fruit` (succo di frutta, non rientra nella definizione restrittiva di frutta fresca del PRD §4.9 — coerente con `food_succo_di_mela_raw` già classificato così con la stessa motivazione).
+- **Matrice**: nuova `succo_di_mela_da_concentrato` ("Succo di mela da concentrato surgelato, diluito").
+- **Attributi**: `botanical_family=Rosaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=173935 --food-id=food_succo_di_mela_da_concentrato_surgelato \
+  --name-it="Succo di mela, da concentrato surgelato, diluito" \
+  --matrix-id=succo_di_mela_da_concentrato --matrix-description-it="Succo di mela da concentrato surgelato, diluito" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173935 --food-id=food_succo_di_mela_da_concentrato_surgelato \
+  --name-it="Succo di mela, da concentrato surgelato, diluito" \
+  --matrix-id=succo_di_mela_da_concentrato --matrix-description-it="Succo di mela da concentrato surgelato, diluito" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Bulgur, cotto — preparato 2026-11-24 dal task (217° lotto)
 
 - **food_id**: `food_bulgur_cotto` (distinto da `food_bulgur_raw` già eseguito, FDC 170688, crudo — qui FDC diverso, stato cotto, verificato zero occorrenze precedenti con `grep`). FDC ID 170287 (**SR Legacy**, "Bulgur, cooked" — pagina `getfoodfacts.com/food/bulgur-cooked-170287` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
