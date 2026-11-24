@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di mais nixtamalizzato (masa harina), gialla, arricchita — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_masa_harina_arricchita_gialla_raw` (nuovo — distinto da `food_masa_harina_arricchita_raw` appena preparato sopra in questo stesso lotto, FDC 169694, "white"; qui mais giallo, con beta-carotene reale e molto più alto (97,0µg contro 2,00µg del bianco) — differenza nutrizionale reale, non un trim/variante estetica. Distinto anche da `food_masa_harina_raw` già eseguito, FDC 2710835, Foundation, non arricchito. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169749 (**SR Legacy**, "Corn flour, yellow, masa, enriched" — pagina `getfoodfacts.com/food/corn-flour-yellow-masa-enriched-169749` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **16/17**. Per 100g: energia 363kcal, proteine 8,46g, grassi 3,69g, carboidrati 76,6g, fibra 6,40g, calcio 138mg, ferro 8,50mg, magnesio 93,0mg, zinco 1,80mg, rame 0,21mg, vitamina C 0mg esplicito, folato totale 162µg (folato DFE 256µg), acido folico 133µg (fortificazione esplicita, prodotto "enriched"), vitamina B12 0µg esplicito, selenio 10,5µg, beta-carotene 97,0µg (reale, mais giallo). **Manca**: vitamina K (nessuna voce nel record, a differenza della versione bianca dove era 0µg esplicito).
+- **Analogia usata**: `food_masa_harina_arricchita_raw` (versione bianca appena preparata in questo stesso lotto — stessa farina nixtamalizzata arricchita, qui solo il colore del mais cambia).
+- **Categoria dieta**: `plant_non_fruit` (farina di cereale).
+- **Matrice**: nuova `masa_harina_arricchita_gialla` ("Farina di mais nixtamalizzato, gialla, arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e significativo, farina cruda non disgregata termicamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (come l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (true — acido folico 133µg esplicito, prodotto dichiarato "enriched").
+
+```
+npm run add-food -- --fdc-id=169749 --food-id=food_masa_harina_arricchita_gialla_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), gialla, arricchita" \
+  --matrix-id=masa_harina_arricchita_gialla --matrix-description-it="Farina di mais nixtamalizzato, gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_arricchita_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169749 --food-id=food_masa_harina_arricchita_gialla_raw \
+  --name-it="Farina di mais nixtamalizzato (masa harina), gialla, arricchita" \
+  --matrix-id=masa_harina_arricchita_gialla --matrix-description-it="Farina di mais nixtamalizzato, gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_arricchita_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
 ### Momordica (melone amaro / bitter gourd), foglie, cotte (bollite senza sale) — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_momordica_foglie_cotte` (nuovo — distinto da `food_momordica_cotta` già eseguito, FDC 168394, parte "pods" (baccelli); qui invece "leafy tips" (cime di foglie), parte della pianta diversa con profilo nutrizionale molto diverso (es. beta-carotene 1.450µg/100g contro 68µg/100g dei baccelli). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168392 (**SR Legacy**, "Balsam-pear (bitter gourd), leafy tips, cooked, boiled, drained, without salt" — pagina `getfoodfacts.com/food/balsam-pear-bitter-gourd-leafy-tips-cooked-boiled-drained-without-salt-168392` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
