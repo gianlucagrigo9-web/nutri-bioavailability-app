@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Yogurt greco alla fragola, magro — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_yogurt_greco_fragola_magro` (mai coperto, verificato con `grep` dedicato — distinto da `food_yogurt_greco_magro` (nonfat, plain, FDC 170894) e `food_yogurt_greco` (whole milk, plain, FDC 171304), già eseguiti: qui gusto fragola, zuccheri aggiunti). FDC ID 330415 (**Foundation Foods**, "Yogurt, Greek, strawberry, nonfat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/18**, manca solo vitamina K. Per 100g: energia 83,0kcal, proteine 8,06g, grassi 0,15g, carboidrati 12,2g, fibra 0,60g, calcio 97,0mg, ferro 0,090mg, magnesio 10,4mg, zinco 0,46mg, rame 0,020mg, selenio 9,80µg, beta-carotene 2,00µg, alfa-carotene 0µg, beta-criptoxantina 0µg, vitamina C 0,20mg, folato totale 20,0µg, vitamina B12 0,45µg, vitamina D 1,00µg, sodio 32,0mg. **Nota di trasparenza**: nessuna lista ingredienti disponibile sulla pagina per confermare esplicitamente latte vaccino/assenza di altri ingredienti animali — nome USDA e profilo (lattosio/colesterolo presenti, zuccheri scomposti in saccarosio/glucosio/fruttosio/lattosio/galattosio) coerenti con yogurt magro zuccherato alla frutta, nessun segnale anomalo.
+- **Analogia usata**: `food_yogurt_greco_magro` (yogurt greco magro semplice, già eseguito sul DB reale — stesso prodotto base, qui con fragola/zucchero aggiunti).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `yogurt_greco_fragola_magro` ("Yogurt greco alla fragola, magro").
+- **Attributi**: resto omesso/default (come `food_yogurt_greco_magro`).
+
+```
+npm run add-food -- --fdc-id=330415 --food-id=food_yogurt_greco_fragola_magro \
+  --name-it="Yogurt greco alla fragola, magro" \
+  --matrix-id=yogurt_greco_fragola_magro --matrix-description-it="Yogurt greco alla fragola, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_greco_magro \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=330415 --food-id=food_yogurt_greco_fragola_magro \
+  --name-it="Yogurt greco alla fragola, magro" \
+  --matrix-id=yogurt_greco_fragola_magro --matrix-description-it="Yogurt greco alla fragola, magro" \
+  --baseline-cooking-state=raw --analogy-food-id=food_yogurt_greco_magro \
+  --diet-category=egg_dairy --apply
+```
+
 ### Castagne giapponesi, bollite e cotte a vapore — preparato 2026-11-23 dal task (209° lotto)
 
 - **food_id**: `food_castagne_giapponesi_bollite` (verificato non coperto per FDC né per nome — specie distinta, *Castanea crenata*, mai tracciata in questa pipeline). FDC ID 168589 (**SR Legacy**, "Nuts, chestnuts, japanese, boiled and steamed" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
