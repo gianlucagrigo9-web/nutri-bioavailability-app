@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Bisonte, controfiletto (ribeye), 1" bistecca, cotto alla griglia — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_bisonte_ribeye_cotto` (mai coperto, verificato con `grep` dedicato — distinto dai tagli bisonte già coperti: girello/top round (`food_bisonte_girello_cotto`), spalla (`food_bisonte_spalla_raw`), controfiletto/sirloin (`food_bisonte_controfiletto_raw`), macinato grass-fed (`food_bisonte_macinato_grassfed_raw`/`_cotto`), generico lean only raw (`food_bisonte_raw`): qui il taglio ribeye, mai tracciato, e in forma cotta). FDC ID 172599 (**SR Legacy**, "Game meat, bison, ribeye, separable lean only, 1" steak, cooked, broiled"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/172599/wt1`, che conferma il nome completo e linka `fdc.nal.usda.gov/food-details/172599/nutrients` come fonte USDA.
+- **Nutrienti**: **13/18 verificati** (fibra e i 3 carotenoidi non controllati in questa verifica — tipicamente assenti/non applicabili per la carne, da confermare in sede di scrittura reale tramite l'API FDC diretta). **Nota di trasparenza**: la tabella della fonte è per porzione da 85g (3 oz, 1 bistecca), non per 100g; valori sotto convertiti (×100/85), non dichiarati direttamente per 100g dalla fonte. Per 100g (convertito): energia 176kcal, proteine 29,4g, grassi 5,6g, carboidrati 0g, calcio 7,1mg, ferro 2,8mg, magnesio 26,0mg, zinco 5,1mg, rame 0,20mg, selenio 42,1µg, vitamina C 0mg, folato totale 18,0µg, vitamina B12 1,3µg, sodio 52,0mg. **Manca**: vitamina K (non presente sulla fonte).
+- **Analogia usata**: `food_bisonte_girello_cotto` (bisonte top round cotto, già eseguito sul DB reale — stessa specie *Bison bison*, stesso stato "carne magra cotta").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `bisonte_ribeye_cotto` ("Bisonte, controfiletto, cotto").
+- **Attributi**: `is_heme_iron` (carne rossa), `botanical_family` non applicabile (animale), `baseline_cooking_state=broiled`.
+
+```
+npm run add-food -- --fdc-id=172599 --food-id=food_bisonte_ribeye_cotto \
+  --name-it="Bisonte, controfiletto (ribeye), 1\" bistecca, cotto alla griglia" \
+  --matrix-id=bisonte_ribeye_cotto --matrix-description-it="Bisonte, controfiletto, cotto" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_bisonte_girello_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172599 --food-id=food_bisonte_ribeye_cotto \
+  --name-it="Bisonte, controfiletto (ribeye), 1\" bistecca, cotto alla griglia" \
+  --matrix-id=bisonte_ribeye_cotto --matrix-description-it="Bisonte, controfiletto, cotto" \
+  --baseline-cooking-state=broiled --analogy-food-id=food_bisonte_girello_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Anacardi, tostati in olio, con sale aggiunto — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_anacardi_tostati_olio_sale` (mai coperto, verificato con `grep` dedicato — distinto da `food_anacardi_tostati` (a secco, con sale, FDC 169421) e `food_anacardi_tostati_olio` (in olio, senza sale, FDC 170572), già eseguiti: qui completa la combinazione tostatura in olio + sale). FDC ID 169422 (**SR Legacy**, "Nuts, cashew nuts, oil roasted, with salt added"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata per questo FDC ID; verificato invece su `tools.myfooddata.com/nutrition-comparison/169422/wt1`, che nomina esplicitamente il prodotto e linka `fdc.nal.usda.gov/food-details/169422` come fonte.
