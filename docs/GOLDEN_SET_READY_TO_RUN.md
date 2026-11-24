@@ -16,6 +16,54 @@
 
 ## Pronti
 
+### Riso bianco, glutinoso (appiccicoso), non arricchito, crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_riso_glutinoso_raw` (nuovo — distinto da `food_riso_bianco_raw`/`food_riso_integrale_raw`/`food_riso_venere_raw`/`food_riso_selvatico_raw` già eseguiti: varietà *Oryza sativa* var. *glutinosa* (riso appiccicoso/"sticky rice", amido quasi tutto amilopectina, uso culinario e profilo diverso dal riso comune), non un trim/grado dello stesso prodotto. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168883 (**SR Legacy**, "Rice, white, glutinous, unenriched, uncooked" — pagina `getfoodfacts.com/food/rice-white-glutinous-unenriched-uncooked-168883` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 370kcal, proteine 6,81g, grassi 0,55g, carboidrati 81,7g, fibra 2,80g, calcio 11,0mg, ferro 1,60mg, magnesio 23,0mg, zinco 1,20mg, rame 0,17mg, vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito (non arricchito), vitamina B12 0µg esplicito, selenio 15,1µg. Mancano: vitamina K, beta-carotene (nessuna riga nel record, non zero esplicito).
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, Golden Set pipeline, già eseguito sul DB reale — stessa specie *Oryza sativa*, stesso stato raw/non arricchito, varietà diversa).
+- **Categoria dieta**: `plant_non_fruit` (cereale in chicchi).
+- **Matrice**: nuova `riso_glutinoso` ("Riso bianco, glutinoso, non arricchito, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, cereale in chicchi), `carotenoid_matrix_state` omesso (NULL — beta-carotene assente dal record, non verificabile come zero esplicito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, prodotto dichiarato "unenriched").
+
+```
+npm run add-food -- --fdc-id=168883 --food-id=food_riso_glutinoso_raw \
+  --name-it="Riso bianco, glutinoso (appiccicoso), non arricchito, crudo" \
+  --matrix-id=riso_glutinoso --matrix-description-it="Riso bianco, glutinoso, non arricchito, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168883 --food-id=food_riso_glutinoso_raw \
+  --name-it="Riso bianco, glutinoso (appiccicoso), non arricchito, crudo" \
+  --matrix-id=riso_glutinoso --matrix-description-it="Riso bianco, glutinoso, non arricchito, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Riso bianco, a chicco lungo, parboiled, arricchito, crudo — preparato 2026-11-24 dal task (220° lotto)
+
+- **food_id**: `food_riso_parboiled_raw` (nuovo — distinto da `food_riso_bianco_raw` (non parboiled, già eseguito): la parboilizzazione è un trattamento idrotermico pre-molitura che sposta micronutrienti dalla crusca all'endosperma, profilo molto diverso (calcio 71,0mg contro valori tipici del bianco regolare, acido folico 249µg da arricchimento esplicito). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169707 (**SR Legacy**, "Rice, white, long-grain, parboiled, enriched, dry" — pagina `getfoodfacts.com/food/rice-white-long-grain-parboiled-enriched-dry-169707` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 374kcal, proteine 7,51g, grassi 1,03g, carboidrati 80,9g, fibra 1,80g, calcio 71,0mg, ferro 3,33mg, magnesio 27,0mg, zinco 1,02mg, rame 0,28mg, vitamina C 0mg esplicito, folato totale 257µg (DFE 431µg), acido folico 249µg (fortificazione esplicita, prodotto "enriched"), vitamina B12 0µg esplicito, selenio 19,9µg, vitamina K 0,10µg (fillochinone), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_riso_bianco_raw` (riso bianco crudo, Golden Set pipeline, già eseguito sul DB reale — stessa specie *Oryza sativa*, qui parboiled e arricchito invece di regolare).
+- **Categoria dieta**: `plant_non_fruit` (cereale in chicchi).
+- **Matrice**: nuova `riso_parboiled` ("Riso bianco, a chicco lungo, parboiled, arricchito, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, cereale in chicchi), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` **attivo** (true — acido folico 249µg esplicito, prodotto dichiarato "enriched").
+
+```
+npm run add-food -- --fdc-id=169707 --food-id=food_riso_parboiled_raw \
+  --name-it="Riso bianco, a chicco lungo, parboiled, arricchito, crudo" \
+  --matrix-id=riso_parboiled --matrix-description-it="Riso bianco, a chicco lungo, parboiled, arricchito, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169707 --food-id=food_riso_parboiled_raw \
+  --name-it="Riso bianco, a chicco lungo, parboiled, arricchito, crudo" \
+  --matrix-id=riso_parboiled --matrix-description-it="Riso bianco, a chicco lungo, parboiled, arricchito, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_riso_bianco_raw \
+  --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
 ### Farina di grano, bianca, per tutti gli usi, arricchita — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_farina_bianca_arricchita_raw` (nuovo — farina di grano (frumento) mai coperta in questa pipeline, categoria di base diversa da `food_farina_di_mais_raw`/`food_farina_di_grano_saraceno_raw` (altri cereali/pseudocereali). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168894 (**SR Legacy**, "Wheat flour, white, all-purpose, enriched, bleached" — pagina `getfoodfacts.com/food/wheat-flour-white-all-purpose-enriched-bleached-168894` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
