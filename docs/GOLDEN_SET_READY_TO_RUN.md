@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Arachidi spagnole, crude — preparato 2026-11-24 dal task (221° lotto)
+
+- **food_id**: `food_arachidi_spagnole_raw` (nuovo — varietà distinta da `food_arachidi_raw` già eseguito (arachidi generiche); verificato con `grep` dedicato, zero occorrenze precedenti per "arachidi spagnole"/"spanish peanut"/FDC 174263). FDC ID 174263 (**SR Legacy**, "Peanuts, spanish, raw" — pagina `getfoodfacts.com/food/peanuts-spanish-raw-174263` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 570kcal, proteine 26,1g, grassi 49,6g, carboidrati 15,8g, fibra 9,50g, calcio 106mg, ferro 3,91mg, magnesio 188mg, zinco 2,12mg, rame 0,90mg, vitamina C 0mg esplicito, folato totale 240µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 7,20µg, vitamina K 0µg esplicito (fillochinone), beta-carotene 0µg esplicito. (Nota: proteine riportate come 26,2g nel pannello etichetta della pagina contro 26,1g nella tabella dettagliata — uso il valore della tabella, discrepanza di arrotondamento, non di sostanza.)
+- **Analogia usata**: `food_arachidi_raw` (arachidi generiche crude, Golden Set pipeline, già eseguito sul DB reale — stessa specie *Arachis hypogaea*, varietà/cultivar "Spanish" invece di generica).
+- **Categoria dieta**: `plant_non_fruit` (legume trattato come frutta secca/seme in questa pipeline, stessa convenzione di `food_arachidi_raw`).
+- **Matrice**: nuova `arachidi_spagnole` ("Arachidi spagnole").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione di `food_arachidi_raw`), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale dell'arachide, come per l'analogia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — nessuna dichiarazione di arricchimento, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174263 --food-id=food_arachidi_spagnole_raw \
+  --name-it="Arachidi spagnole, crude" \
+  --matrix-id=arachidi_spagnole --matrix-description-it="Arachidi spagnole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=174263 --food-id=food_arachidi_spagnole_raw \
+  --name-it="Arachidi spagnole, crude" \
+  --matrix-id=arachidi_spagnole --matrix-description-it="Arachidi spagnole" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae --apply
+```
+
 ### Latte vaccino, scremato, arricchito di calcio — preparato 2026-11-24 dal task (220° lotto)
 
 - **food_id**: `food_latte_scremato_calcio_arricchito_raw` (nuovo — distinto da `food_latte_scremato_raw` (FDC 171269, scremato con vit A/D, già eseguito) e da `food_latte_lowfat_1pct_raw` (FDC 746772, 1%, già eseguito): qui fortificazione specifica di calcio, 204mg/100g contro i ~120-125mg tipici del latte scremato non arricchito (+63-70%), prodotto distinto con proprio FDC. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169868 (**SR Legacy**, "Milk, fluid, nonfat, calcium fortified (fat free or skim)" — pagina `getfoodfacts.com/food/milk-fluid-nonfat-calcium-fortified-fat-free-or-skim-169868` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
