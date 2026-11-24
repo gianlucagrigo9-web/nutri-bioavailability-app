@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Margarina, industriale, a base di olio di soia (parzialmente idrogenato), per pasticceria/dolciaria — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_margarina_industriale_dolciaria` (distinto da `food_margarina_classica_salata` già eseguito, FDC 172346 — qui prodotto industriale per uso dolciario/pasticceria, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 172369 (**SR Legacy**, "Margarine, industrial, soy and partially hydrogenated soy oil, use for baking, sauces and candy" — pagina `getfoodfacts.com/food/margarine-industrial-soy-and-partially-hydrogenated-soy-oil-use-for-baking-sauce-172369` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 714kcal, proteine 0,18g, grassi 80,0g, carboidrati 0,71g, fibra 0g esplicito, calcio 3,00mg, ferro 0,12mg, magnesio 1,00mg, zinco 0,11mg, folato totale 1,00µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0,21µg (valore basso ma esplicito nel record, non assunto), vitamina K 75,0µg (plausibile: grassi vegetali idrogenati fonte nota di fillochinone, coerente con la voce margarina già eseguita). Mancano (non riportati nel record): rame, vitamina C, selenio, beta-carotene.
+- **Analogia usata**: `food_margarina_classica_salata` (stessa categoria merceologica, già eseguita sul DB reale — qui formulazione industriale diversa per uso dolciario).
+- **Categoria dieta**: `plant_non_fruit` (grasso vegetale, vegano sì).
+- **Matrice**: nuova `margarina_industriale_dolciaria` ("Margarina, industriale, a base di olio di soia, per pasticceria/dolciaria").
+- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia.
+
+```
+npm run add-food -- --fdc-id=172369 --food-id=food_margarina_industriale_dolciaria \
+  --name-it="Margarina, industriale, a base di olio di soia (parzialmente idrogenato), per pasticceria/dolciaria" \
+  --matrix-id=margarina_industriale_dolciaria --matrix-description-it="Margarina, industriale, a base di olio di soia, per pasticceria/dolciaria" \
+  --baseline-cooking-state=raw --analogy-food-id=food_margarina_classica_salata \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172369 --food-id=food_margarina_industriale_dolciaria \
+  --name-it="Margarina, industriale, a base di olio di soia (parzialmente idrogenato), per pasticceria/dolciaria" \
+  --matrix-id=margarina_industriale_dolciaria --matrix-description-it="Margarina, industriale, a base di olio di soia, per pasticceria/dolciaria" \
+  --baseline-cooking-state=raw --analogy-food-id=food_margarina_classica_salata \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Succo di mela, da concentrato surgelato, diluito, con acido ascorbico aggiunto — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_succo_di_mela_da_concentrato_surgelato_vitc` (distinto da `food_succo_di_mela_da_concentrato_surgelato` già in "Pronti", FDC 173935 — quello è SENZA acido ascorbico aggiunto, questo è CON, FDC diverso 167775; verificato zero occorrenze precedenti con `grep`). FDC ID 167775 (**SR Legacy**, "Apple juice, frozen concentrate, unsweetened, diluted with 3 volume water, with added ascorbic acid" — pagina `getfoodfacts.com/food/apple-juice-frozen-concentrate-unsweetened-diluted-with-3-volume-water-with-adde-167775` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
