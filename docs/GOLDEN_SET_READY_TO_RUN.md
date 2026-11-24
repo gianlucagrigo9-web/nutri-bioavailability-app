@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mele disidratate, solforate, cotte in composta (stufate) — preparato 2026-11-24 dal task (211° lotto)
+
+- **food_id**: `food_mele_disidratate_cotte` (mai coperto, verificato con `grep` dedicato — nessuna mela essiccata/disidratata già presente nel DB, distinto da `food_succo_di_mela_raw` già eseguito). FDC ID 171690 (**SR Legacy**, "Apples, dehydrated (low moisture), sulfured, stewed" — pagina `tools.myfooddata.com/print/171690/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/171690/nutrients`).
+- **Nutrienti**: **14/17**. Tabella della fonte per porzione da 193g (1 cup); valori convertiti (×100/193). Per 100g: energia 74,1kcal, proteine 0,280g, grassi 0,119g, carboidrati 19,9g, fibra 2,59g, calcio 3,99mg, ferro 0,430mg, magnesio 5,03mg, zinco 0,0622mg, rame 0,0570mg, selenio 0,399µg, vitamina C 0,622mg, folato totale 0µg, vitamina B12 0µg. **Mancano** (pagina mostra esplicitamente "--", dato non misurato, non zero): vitamina K, beta-carotene, alfa-carotene+criptoxantina beta.
+- **Analogia usata**: `food_uva_passa_raw` (frutta disidratata, matrice disgregata dall'essiccazione/cottura — stesso concetto, famiglia botanica diversa: qui la famiglia viene dal fatto diretto *Malus domestica* = Rosaceae, non dall'analogia).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/disidratata, non frutta fresca per la definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `mele_disidratate_cotte` ("Mele disidratate, cotte in composta").
+- **Attributi**: `botanical_family=Rosaceae`, `carotenoid_matrix_state=cooked_or_disrupted` (essiccazione + cottura), `baseline_cooking_state=stewed`, `is_fortified_folate` omesso (false — folato 0µg, nessuna firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=171690 --food-id=food_mele_disidratate_cotte \
+  --name-it="Mele disidratate (essiccate), solforate, cotte in composta (stufate)" \
+  --matrix-id=mele_disidratate_cotte --matrix-description-it="Mele disidratate, cotte in composta" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_uva_passa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171690 --food-id=food_mele_disidratate_cotte \
+  --name-it="Mele disidratate (essiccate), solforate, cotte in composta (stufate)" \
+  --matrix-id=mele_disidratate_cotte --matrix-description-it="Mele disidratate, cotte in composta" \
+  --baseline-cooking-state=stewed --analogy-food-id=food_uva_passa_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Castagne giapponesi, tostate — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_castagne_giapponesi_tostate` (mai coperto, verificato con `grep` dedicato — distinto da `food_castagne_giapponesi_bollite` (FDC 168589) e `food_castagne_giapponesi_secche_raw` (FDC 169408), entrambe di questo stesso turno: qui tostatura). FDC ID 168590 (**SR Legacy**, "Nuts, chestnuts, japanese, roasted"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/168590/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/168590/nutrients`.
