@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Composta di mele, non zuccherata, con vitamina C aggiunta — preparato 2026-11-24 dal task (215° lotto)
+
+- **food_id**: `food_composta_di_mele_vitc` (categoria nuova — verificato, zero occorrenze precedenti). FDC ID 2346414 (**Foundation**, "Applesauce, unsweetened, with added vitamin C" — pagina `getfoodfacts.com/food/applesauce-unsweetened-with-added-vitamin-c-2346414` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30; prima ricerca aveva restituito per errore una pagina con FDC 2263892 per lo stesso nome — scartata, seconda ricerca mirata ha trovato la pagina corretta con il numero giusto).
+- **Nutrienti**: **10/17**. Per 100g: proteine 0,27g, grassi 0,16g, carboidrati 12,3g, calcio 3,82mg, ferro 0,045mg, magnesio 3,94mg, zinco 0,0026mg, rame 0,039mg, vitamina C 43,7mg (coerente col nome "with added vitamin C"). **Energia**: pagina incoerente fra tre valori diversi (45kcal pannello nutrizionale, 46kcal riquadro statistico, 46,4kcal tabella di confronto) — riportato 45kcal (pannello nutrizionale, la fonte più standard) con nota di trasparenza sulla discrepanza. Mancanti (non dichiarati sulla pagina, restano `null`): fibra, folato totale, acido folico, vitamina B12, selenio, vitamina K, beta-carotene e gli altri carotenoidi.
+- **Analogia usata**: `food_apple_with_skin_raw` (FDC 171688, già eseguito) — stessa famiglia botanica Rosaceae, stesso precedente di `food_succo_di_mela_raw` (succo di mela, altro prodotto trasformato dalla stessa mela, già nel DB con la stessa analogia).
+- **Categoria dieta**: `plant_non_fruit` (vegetariano e vegano sì — nessun ingrediente animale; fruttariano no — prodotto cotto/trasformato, non frutta fresca nella definizione restrittiva PRD §4.9, stesso ragionamento già applicato al succo di mela).
+- **Matrice**: nuova `composta_di_mele_vitc` ("Composta di mele, non zuccherata, con vitamina C aggiunta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — nessun carotenoide dichiarato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked` (mele cotte/trasformate in composta, non crude), `is_fortified_folate` omesso (false — nessun folato/acido folico dichiarato).
+
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_composta_di_mele_vitc \
+  --name-it="Composta di mele, non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=composta_di_mele_vitc --matrix-description-it="Composta di mele, non zuccherata, con vitamina C aggiunta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=2346414 --food-id=food_composta_di_mele_vitc \
+  --name-it="Composta di mele, non zuccherata, con vitamina C aggiunta" \
+  --matrix-id=composta_di_mele_vitc --matrix-description-it="Composta di mele, non zuccherata, con vitamina C aggiunta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Margarina, classica (80% grassi), a panetto, salata — preparato 2026-11-24 dal task (214° lotto)
 
 - **food_id**: `food_margarina_classica_salata` (categoria interamente nuova per questo DB — verificato con `grep` dedicato su `food_margarin*`: zero occorrenze precedenti in nessun file). FDC ID 172346 (**SR Legacy**, "Margarine, regular, 80% fat, composite, stick, with salt" — pagina `getfoodfacts.com/food/margarine-regular-80-fat-composite-stick-with-salt-172346` dedicata, FDC ID e dataType citati esplicitamente nel titolo/corpo pagina, release USDA 2026-04-30).
