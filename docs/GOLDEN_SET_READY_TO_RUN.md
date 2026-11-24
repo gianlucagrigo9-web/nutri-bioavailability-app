@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Grano tenero (frumento), chicco intero rosso invernale, crudo — preparato 2026-11-24 dal task (221° lotto)
+
+- **food_id**: `food_grano_rosso_invernale_crudo` (nuovo — chicco di grano intero, categoria distinta da `food_farina_bianca_arricchita_raw`/`food_farina_integrale_grano_raw` (farine già macinate) già eseguite: qui chicco crudo non macinato, prima voce "grano in chicchi" di questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti per "grano rosso invernale"/"wheat hard red winter"/FDC 168890). FDC ID 168890 (**SR Legacy**, "Wheat, hard red winter" — pagina `getfoodfacts.com/food/wheat-hard-red-winter-168890` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 327kcal, proteine 12,6g, grassi 1,54g, carboidrati 71,2g, fibra 12,2g, calcio 29,0mg, ferro 3,19mg, magnesio 126mg, zinco 2,65mg, rame 0,43mg, vitamina C 0mg esplicito, folato totale 38,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 70,7µg, vitamina K 1,90µg (fillochinone), beta-carotene 5,00µg.
+- **Analogia usata**: `food_farina_integrale_grano_raw` (farina di grano integrale, Golden Set pipeline, già eseguita sul DB reale — stessa specie *Triticum aestivum*, qui chicco intero non macinato invece di farina).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `grano_rosso_invernale` ("Grano tenero, chicco intero rosso invernale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene presente ma chicco intero non processato, nessuna analogia interna già classificata con questo attributo per i cereali in chicco), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae` (famiglia reale, come l'analogia), `baseline_cooking_state=raw` (chicco crudo, non cotto/germogliato), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna dicitura "enriched" per il chicco intero non processato).
+
+```
+npm run add-food -- --fdc-id=168890 --food-id=food_grano_rosso_invernale_crudo \
+  --name-it="Grano tenero (frumento), chicco intero rosso invernale, crudo" \
+  --matrix-id=grano_rosso_invernale --matrix-description-it="Grano tenero, chicco intero rosso invernale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_integrale_grano_raw --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae
+```
+```
+npm run add-food -- --fdc-id=168890 --food-id=food_grano_rosso_invernale_crudo \
+  --name-it="Grano tenero (frumento), chicco intero rosso invernale, crudo" \
+  --matrix-id=grano_rosso_invernale --matrix-description-it="Grano tenero, chicco intero rosso invernale" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_integrale_grano_raw --diet-category=plant_non_fruit \
+  --botanical-family=Poaceae --apply
+```
+
 ### Hominy (mais trattato con calce), in scatola, giallo — preparato 2026-11-24 dal task (221° lotto)
 
 - **food_id**: `food_hominy_giallo_in_scatola` (nuovo — distinto da `food_hominy_bianco_in_scatola` già eseguito (FDC 169701, stesso trattamento ma mais bianco): qui mais giallo, colore/varietà diversa con profilo carotenoidi atteso diverso. Verificato con `grep` dedicato, zero occorrenze precedenti per "hominy...giallo"/FDC 169752). FDC ID 169752 (**SR Legacy**, "Hominy, canned, yellow" — pagina `getfoodfacts.com/food/hominy-canned-yellow-169752` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
