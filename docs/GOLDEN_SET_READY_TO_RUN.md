@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pesce burro (butterfish), cotto (calore secco) — preparato 2026-11-24 dal task (210° lotto)
+
+- **food_id**: `food_pesce_burro_cotto` (mai coperto, verificato con `grep` dedicato — prima voce "butterfish"/pesce burro in questa pipeline, specie *Peprilus triacanthus*, distinta da sgombro/merluzzo/altri pesci già coperti). FDC ID 174231 (**SR Legacy**, "Fish, butterfish, cooked, dry heat" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/18 verificati** (fibra e i 3 carotenoidi non controllati — non applicabili al pesce). Per 100g: energia 187kcal, proteine 22,1g, grassi 10,3g, carboidrati 0g, calcio 28,0mg, ferro 0,64mg, magnesio 32,0mg, zinco 0,99mg, rame 0,069mg, selenio 46,8µg, vitamina C 0mg, folato totale 17,0µg, vitamina B12 1,83µg, sodio 114mg. **Manca**: vitamina K (assente dal record di 49 nutrienti).
+- **Analogia usata**: `food_sgombro_spagnolo_cotto` (sgombro spagnolo cotto, già preparato in questa pipeline — stesso profilo "pesce grasso marino cotto").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_burro_cotto` ("Pesce burro, cotto").
+- **Attributi**: `baseline_cooking_state=roasted` (calore secco senza grasso aggiunto).
+
+```
+npm run add-food -- --fdc-id=174231 --food-id=food_pesce_burro_cotto \
+  --name-it="Pesce burro (butterfish), cotto (calore secco)" \
+  --matrix-id=pesce_burro_cotto --matrix-description-it="Pesce burro, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_sgombro_spagnolo_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174231 --food-id=food_pesce_burro_cotto \
+  --name-it="Pesce burro (butterfish), cotto (calore secco)" \
+  --matrix-id=pesce_burro_cotto --matrix-description-it="Pesce burro, cotto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_sgombro_spagnolo_cotto \
+  --diet-category=meat_fish --apply
+```
+
 ### Bottatrice, cotta (calore secco) — preparato 2026-11-24 dal task (210° lotto)
 
 - **food_id**: `food_bottatrice_cotta` (mai coperto, verificato con `grep` dedicato — controparte cotta di `food_bottatrice_raw` FDC 171950, già eseguito). FDC ID 174230 (**SR Legacy**, "Fish, burbot, cooked, dry heat"). **Nota di provenienza**: nessuna pagina getfoodfacts.com trovata; verificato su `tools.myfooddata.com/nutrition-facts/174230/wt1`, che linka esplicitamente `fdc.nal.usda.gov/food-details/174230/nutrients`.
