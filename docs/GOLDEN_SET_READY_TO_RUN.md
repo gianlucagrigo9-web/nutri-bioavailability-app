@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio spalmabile, base crema di formaggio — preparato 2026-11-24 dal task (218° lotto)
+
+- **food_id**: `food_formaggio_spalmabile_base_crema_raw` (distinto da `food_formaggio_spalmabile_americano_raw` già eseguito — quello ha base American/cheddar FDC 171254, questo ha base cream cheese, record FDC e composizione diversi; verificato zero occorrenze precedenti con `grep`). FDC ID 169081 (**SR Legacy**, "Cheese spread, cream cheese base" — pagina `getfoodfacts.com/food/cheese-spread-cream-cheese-base-169081` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 295kcal, proteine 7,10g, grassi 28,6g, carboidrati 3,50g, fibra 0g, calcio 71,0mg, ferro 1,13mg, magnesio 6,00mg, zinco 0,51mg, rame 0,015mg, vitamina C 0mg esplicito, folato totale 12,0µg, acido folico 0µg esplicito, vitamina B12 0,40µg, selenio 2,70µg, vitamina K 2,40µg, beta-carotene 19,0µg.
+- **Analogia usata**: `food_formaggio_spalmabile_americano_raw` (stessa categoria merceologica, base casearia diversa).
+- **Categoria dieta**: `egg_dairy` (latticino, vegetariano sì, vegano no).
+- **Matrice**: nuova `formaggio_spalmabile_base_crema` ("Formaggio spalmabile, base crema di formaggio").
+- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia.
+
+```
+npm run add-food -- --fdc-id=169081 --food-id=food_formaggio_spalmabile_base_crema_raw \
+  --name-it="Formaggio spalmabile, base crema di formaggio" \
+  --matrix-id=formaggio_spalmabile_base_crema --matrix-description-it="Formaggio spalmabile, base crema di formaggio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_spalmabile_americano_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169081 --food-id=food_formaggio_spalmabile_base_crema_raw \
+  --name-it="Formaggio spalmabile, base crema di formaggio" \
+  --matrix-id=formaggio_spalmabile_base_crema --matrix-description-it="Formaggio spalmabile, base crema di formaggio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_spalmabile_americano_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Pollo, schiena, solo carne, cruda — preparato 2026-11-24 dal task (218° lotto)
 
 - **food_id**: `food_pollo_schiena_raw` (taglio mai coperto finora nella pipeline — verificato zero occorrenze precedenti con `grep`, nessun "schiena di pollo" o equivalente). FDC ID 171073 (**SR Legacy**, "Chicken, broilers or fryers, back, meat only, raw" — pagina `getfoodfacts.com/food/chicken-broilers-or-fryers-back-meat-only-raw-171073` dedicata, FDC ID e dataType citati esplicitamente nel corpo pagina, release USDA 2026-04-30).
