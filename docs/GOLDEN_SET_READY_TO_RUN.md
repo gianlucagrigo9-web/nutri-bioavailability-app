@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto — preparato 2026-11-24 dal task (219° lotto)
+
+- **food_id**: `food_succo_di_mela_concentrato_surgelato_non_diluito_vitc` (distinto dalle versioni diluite già pronte/eseguite — qui concentrato non diluito, densità nutrizionale molto maggiore, FDC diverso; verificato zero occorrenze precedenti con `grep`). FDC ID 168188 (**SR Legacy**, "Apple juice, frozen concentrate, unsweetened, undiluted, with added ascorbic acid" — pagina `getfoodfacts.com/food/apple-juice-frozen-concentrate-unsweetened-undiluted-with-added-ascorbic-acid-168188` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 166kcal, proteine 0,51g, grassi 0,37g, carboidrati 41,0g, calcio 20,0mg, ferro 0,91mg, magnesio 17,0mg, zinco 0,13mg, rame 0,050mg, vitamina C 88,9mg (alta — coerente con l'acido ascorbico aggiunto dichiarato nel nome), folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,40µg. Mancano (non riportati nel record): fibra, vitamina K, beta-carotene.
+- **Analogia usata**: `food_succo_di_mela_da_concentrato_surgelato_vitc` (stesso prodotto base con vit.C aggiunta, preparato in questo stesso lotto — qui versione concentrata non diluita).
+- **Categoria dieta**: `plant_non_fruit` (succo/concentrato di frutta trasformato, non frutta fresca nella definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `succo_di_mela_concentrato_non_diluito` ("Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto").
+- **Attributi**: `botanical_family=Rosaceae` (stessa famiglia dell'analogia).
+
+```
+npm run add-food -- --fdc-id=168188 --food-id=food_succo_di_mela_concentrato_surgelato_non_diluito_vitc \
+  --name-it="Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto" \
+  --matrix-id=succo_di_mela_concentrato_non_diluito --matrix-description-it="Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_da_concentrato_surgelato_vitc \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168188 --food-id=food_succo_di_mela_concentrato_surgelato_non_diluito_vitc \
+  --name-it="Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto" \
+  --matrix-id=succo_di_mela_concentrato_non_diluito --matrix-description-it="Succo di mela, concentrato surgelato, non diluito, con acido ascorbico aggiunto" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_da_concentrato_surgelato_vitc \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Margarina, industriale, a base di olio di soia (parzialmente idrogenato), per pasticceria/dolciaria — preparato 2026-11-24 dal task (219° lotto)
 
 - **food_id**: `food_margarina_industriale_dolciaria` (distinto da `food_margarina_classica_salata` già eseguito, FDC 172346 — qui prodotto industriale per uso dolciario/pasticceria, FDC diverso, verificato zero occorrenze precedenti con `grep`). FDC ID 172369 (**SR Legacy**, "Margarine, industrial, soy and partially hydrogenated soy oil, use for baking, sauces and candy" — pagina `getfoodfacts.com/food/margarine-industrial-soy-and-partially-hydrogenated-soy-oil-use-for-baking-sauce-172369` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
