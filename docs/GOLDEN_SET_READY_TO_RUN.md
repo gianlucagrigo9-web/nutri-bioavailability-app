@@ -3387,31 +3387,31 @@ npm run add-food -- --fdc-id=325287 --food-id=food_succo_di_pompelmo_bianco \
   --diet-category=plant_non_fruit --apply
 ```
 
-### Merluzzo del Pacifico, congelato — preparato 2026-11-17 dal task (194° lotto)
+### Merluzzo del Pacifico, crudo — preparato 2026-11-24 dal task (219° lotto, SOSTITUISCE la voce 194° lotto sotto per qualità del dato)
 
-- **food_id**: `food_merluzzo_pacifico_raw` (distinto da `food_merluzzo_raw`, FDC 171955 "Fish, cod, Atlantic, raw" SR Legacy, già eseguito sul DB reale — specie diversa, *Gadus macrocephalus* vs *Gadus morhua*, non un doppione; verificato con grep dedicato, zero collisioni). FDC ID 2747654 (**Foundation Foods**, "Cod, Pacific or Alaskan, frozen, wild caught" — pagina getfoodfacts.com dedicata e pulita, FDC ID e dataType "Foundation" citati esplicitamente nel titolo/intro, release USDA FoodData Central 30-04-2026).
-- **Nutrienti**: **11/17**. Per 100g (dalla tabella dettagliata della fonte): energia ~60kcal (il riepilogo della stessa pagina mostra valori leggermente diversi, 60/61/60,8 — usata la tabella nutrienti dettagliata), proteine 14,2g, grassi 0,22g, carboidrati 0,52g, calcio 9,01mg, ferro 0mg esplicito, magnesio 17,9mg, zinco 0,27mg, rame ~0,0086mg, selenio 22,3µg, vitamina B12 0,59µg. **Mancano** (non riportati sulla pagina, non assunti zero): fibra (la pagina è internamente contraddittoria, "not declared" vs riquadro "0g" — trattata come non riportata), beta-carotene, altro carotenoide provitaminico A, vitamina C, folato totale, vitamina K — gap atteso per un pesce magro (nessun carotenoide/vitamina C nella carne di pesce).
-- **Analogia usata**: `food_merluzzo_raw` (stessa famiglia Gadidae, stesso genere *Gadus*, già eseguito sul DB reale), `is_heme_iron` presente.
+- **food_id**: `food_merluzzo_pacifico_raw` (stesso food_id/matrice della voce "Merluzzo del Pacifico, congelato" del 194° lotto, qui **sostituita** con un record di qualità nettamente superiore: 17/17 nutrienti invece di 11/17, SR Legacy invece di Foundation — stesso precedente già accettato in questa pipeline per rucola baby/matura, un miglioramento netto non un doppione mascherato). FDC ID 174191 (**SR Legacy**, "Fish, cod, Pacific, raw (may have been previously frozen)" — pagina `getfoodfacts.com/food/fish-cod-pacific-raw-may-have-been-previously-frozen-174191` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30). FDC precedente 2747654 (Foundation, "Cod, Pacific or Alaskan, frozen, wild caught", 11/17) **non più usato**.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 69,0kcal, proteine 15,3g, grassi 0,41g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,00mg, ferro 0,16mg, magnesio 20,0mg, zinco 0,31mg, rame 0,019mg, vitamina C 0mg esplicito, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 1,98µg, selenio 22,9µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_merluzzo_raw` (stessa famiglia Gadidae, stesso genere *Gadus*, già eseguito sul DB reale — stessa analogia della voce precedente).
 - **Categoria dieta**: `meat_fish`.
-- **Matrice**: nuova `merluzzo_pacifico`.
-- **Attributi**: `baseline_cooking_state=raw` (congelato ma non cotto), resto omesso/default.
+- **Matrice**: `merluzzo_pacifico` (stessa matrice della voce sostituita).
+- **Attributi**: `is_heme_iron` attivo (pesce, coerente con l'analogia), resto default.
 
 ```
-npm run add-food -- --fdc-id=2747654 --food-id=food_merluzzo_pacifico_raw \
-  --name-it="Merluzzo del Pacifico, congelato" \
+npm run add-food -- --fdc-id=174191 --food-id=food_merluzzo_pacifico_raw \
+  --name-it="Merluzzo del Pacifico, crudo" \
   --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico" \
-  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
-  --is-heme-iron \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw --is-heme-iron \
   --diet-category=meat_fish
 ```
 ```
-npm run add-food -- --fdc-id=2747654 --food-id=food_merluzzo_pacifico_raw \
-  --name-it="Merluzzo del Pacifico, congelato" \
+npm run add-food -- --fdc-id=174191 --food-id=food_merluzzo_pacifico_raw \
+  --name-it="Merluzzo del Pacifico, crudo" \
   --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico" \
-  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw \
-  --is-heme-iron \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_raw --is-heme-iron \
   --diet-category=meat_fish --apply
 ```
+
+### ~~Merluzzo del Pacifico, congelato — preparato 2026-11-17 dal task (194° lotto) — SOSTITUITA dalla voce sopra, non eseguire~~
 
 ### Semi di girasole, tostati, salati — preparato 2026-11-17 dal task (194° lotto)
 
