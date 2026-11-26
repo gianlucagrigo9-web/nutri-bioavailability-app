@@ -14,6 +14,30 @@
 
 ---
 
+### Eggnog (bevanda di uova e latte) — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_eggnog` (nuovo, primo prodotto composito uovo+latte della pipeline). FDC ID 171258 (**SR Legacy**, "Eggnog" — pagina `getfoodfacts.com/food/eggnog-171258` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 88,0kcal, proteine 4,55g, grassi 4,19g, carboidrati 8,05g, fibra 0g esplicito, calcio 130mg, ferro 0,20mg, magnesio 19,0mg, zinco 0,46mg, rame 0,013mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0,45µg, vitamina C 1,50mg, selenio 4,20µg, vitamina K 0,30µg, beta-carotene 7,00µg.
+- **Analogia usata**: `food_milk_whole` (latte intero, Golden Set originale, già eseguito sul DB reale — ingrediente dominante dell'eggnog, nessun'altra analogia più stretta disponibile per un composito uovo+latte).
+- **Categoria dieta**: `egg_dairy` (uovo e latte/panna, entrambi compatibili con la stessa categoria — vegetariano sì, vegano no).
+- **Matrice**: nuova `eggnog` ("Eggnog, bevanda di uova e latte").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene reale ma prodotto composito senza fattore matrice specifico), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, prodotto animale), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171258 --food-id=food_eggnog \
+  --name-it="Eggnog, bevanda di uova e latte" \
+  --matrix-id=eggnog --matrix-description-it="Eggnog, bevanda di uova e latte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171258 --food-id=food_eggnog \
+  --name-it="Eggnog, bevanda di uova e latte" \
+  --matrix-id=eggnog --matrix-description-it="Eggnog, bevanda di uova e latte" \
+  --baseline-cooking-state=raw --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Peperoncino piccante essiccato al sole — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_peperoncino_essiccato_al_sole` (nuovo, forma di conservazione mai tentata — distinta da crudo/in scatola/sott'aceto già in pipeline). FDC ID 168570 (**SR Legacy**, "Peppers, hot chile, sun-dried" — pagina `tools.myfooddata.com/nutrition-facts/168570/wt1`, nome confermato ("Sun-Dried Hot Chile Peppers"), FDC ID solo in URL).
