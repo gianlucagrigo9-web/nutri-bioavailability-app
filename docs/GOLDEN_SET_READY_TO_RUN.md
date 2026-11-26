@@ -16,6 +16,28 @@
 
 ## Pronti
 
+### Noci miste (con arachidi), tostate a secco, salate — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_noci_miste_tostate_salate` (nuovo). FDC ID 170181 (**SR Legacy**, "Nuts, mixed nuts, dry roasted, with peanuts, salt added, CHOSEN ROASTER" — pagina tools.myfooddata.com/print/170181/wt1, nome confermato esattamente, valori derivati da porzione 132g, fattore di scala 1/1,32).
+- **Nutrienti**: **7/17**. Per 100g (derivato): energia 608,3kcal, proteine 18,0g, grassi 53,2g, carboidrati 24,6g, fibra 7,1g, calcio 106,0mg, ferro 3,3mg. **Mancano**: magnesio, zinco, rame, vitamina C, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_noci_pecan_raw` (frutta a guscio già nel DB; prodotto composito con arachidi, nessuna famiglia botanica singola applicabile).
+- **Categoria dieta**: `plant_non_fruit` (frutta a guscio/semi, nessun ingrediente animale).
+- **Matrice**: nuova `noci_miste_tostate` ("Noci miste tostate, salate").
+- **Attributi**: nessuno (prodotto composito multi-specie, botanical_family omesso).
+
+```
+npm run add-food -- --fdc-id=170181 --food-id=food_noci_miste_tostate_salate \
+  --name-it="Noci miste (con arachidi), tostate a secco, salate" \
+  --matrix-id=noci_miste_tostate --matrix-description-it="Noci miste tostate, salate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_raw --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170181 --food-id=food_noci_miste_tostate_salate \
+  --name-it="Noci miste (con arachidi), tostate a secco, salate" \
+  --matrix-id=noci_miste_tostate --matrix-description-it="Noci miste tostate, salate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_noci_pecan_raw --diet-category=plant_non_fruit --apply
+```
+
 ### Mele essiccate, solforate, non cotte — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_mele_essiccate_solforate_raw` (nuovo). FDC ID 173931 (**SR Legacy**, "Apples, dehydrated (low moisture), sulfured, uncooked" — pagina tools.myfooddata.com/print/173931/wt1, nome confermato esattamente, valori derivati da porzione 60g, fattore di scala 1/0,6).
