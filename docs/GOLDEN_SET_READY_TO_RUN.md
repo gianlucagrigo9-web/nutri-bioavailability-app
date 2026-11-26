@@ -14,6 +14,8 @@
 
 ---
 
+## Pronti
+
 ### Salsiccia vegetale senza carne — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_salsiccia_vegetale_senza_carne` (nuovo, quarto prodotto "meatless" di questa pipeline, stessa categoria USDA "Legumes and Legume Products"). FDC ID 174269 (**SR Legacy**, "Sausage, meatless" — pagina `getfoodfacts.com/food/sausage-meatless-174269` dedicata, FDC ID citato esplicitamente in pagina).
