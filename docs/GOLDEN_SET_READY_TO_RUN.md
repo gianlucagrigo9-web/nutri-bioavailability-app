@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Agnello australiano importato, grasso esterno, crudo — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_agnello_grasso_esterno_raw` (nuovo). FDC ID 174892 (**SR Legacy**, "Lamb, Australian, imported, fresh, external fat, raw" — pagina `getfoodfacts.com/food/lamb-australian-imported-fresh-external-fat-raw-174892` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30). Nota: la versione cotta della stessa voce (FDC 174891) non ha una pagina dedicata pulita trovata — vedi coda.
+- **Nutrienti**: **13/17**. Per 100g: energia 487kcal, proteine 12,6g, grassi 48,5g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10,0mg, ferro 1,08mg, magnesio 9,00mg, zinco 1,41mg, rame 0,049mg, selenio 4,70µg, vitamina C 0mg esplicito, beta-carotene 0µg esplicito. Mancano: folato totale, acido folico, vitamina B12, vitamina K (non presenti nel record, non assunti zero).
+- **Analogia usata**: `food_agnello_raw` (agnello generico composito crudo, già eseguito sul DB reale — stessa specie Ovis aries, stesso gap tipico di micronutrienti).
+- **Categoria dieta**: `meat_fish` (grasso animale di mammifero).
+- **Matrice**: nuova `agnello_grasso_esterno_raw` (Agnello australiano importato, grasso esterno, crudo).
+- **Attributi**: `is_heme_iron` presente (tessuto animale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=174892 --food-id=food_agnello_grasso_esterno_raw \
+  --name-it="Agnello australiano importato, grasso esterno, crudo" \
+  --matrix-id=agnello_grasso_esterno_raw --matrix-description-it="Agnello australiano importato, grasso esterno, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174892 --food-id=food_agnello_grasso_esterno_raw \
+  --name-it="Agnello australiano importato, grasso esterno, crudo" \
+  --matrix-id=agnello_grasso_esterno_raw --matrix-description-it="Agnello australiano importato, grasso esterno, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Lingcod, cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_pesce_lingcod_cotto` (nuovo — distinto dal lingcod crudo già in coda, `food_pesce_lingcod_raw` FDC 173671, non ancora eseguito sul DB reale quindi non utilizzabile come analogia). FDC ID 174235 (**SR Legacy**, "Fish, lingcod, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-lingcod-cooked-dry-heat-174235` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30).
