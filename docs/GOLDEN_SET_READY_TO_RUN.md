@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Merluzzo del Pacifico, cotto al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_merluzzo_pacifico_cotto` (nuovo — distinto dal merluzzo Atlantico già nel DB, `food_merluzzo_cotto` FDC 171956). FDC ID 171990 (**SR Legacy**, "Fish, cod, Pacific, cooked, dry heat (may contain additives to retain moisture)" — pagina tools.myfooddata.com/nutrition-facts/171990/wt1, nome FDC non mostrato esplicitamente nel testo estratto ma solo didascalia abbreviata "Cooked Pacific Cod"; URL con FDC ID esatto e stesso dominio già verificato affidabile su altri alimenti di questo lotto).
+- **Nutrienti**: **17/17**. Per 100g: energia 85,6kcal, proteine 18,8g, grassi 0,5g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10mg, ferro 0,2mg, magnesio 24mg, zinco 0,39mg, rame 0,022mg, vitamina C 0mg esplicito, folato totale 8µg, acido folico 0µg esplicito, vitamina B12 2,3µg, selenio 28µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo Atlantico cotto già nel DB, stesso genere Gadus).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `merluzzo_pacifico` ("Merluzzo del Pacifico, cotto").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=171990 --food-id=food_merluzzo_pacifico_cotto \
+  --name-it="Merluzzo del Pacifico, cotto al forno (calore secco)" \
+  --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=171990 --food-id=food_merluzzo_pacifico_cotto \
+  --name-it="Merluzzo del Pacifico, cotto al forno (calore secco)" \
+  --matrix-id=merluzzo_pacifico --matrix-description-it="Merluzzo del Pacifico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Pollo, rosticceria/BBQ, dorso, solo carne, cotto — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_pollo_rosticceria_dorso_cotto` (nuovo). FDC ID 174506 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, back meat only" — pagina tools.myfooddata.com/print/174506/100g/1, nome e valori per 100g confermati esattamente).
