@@ -16,6 +16,222 @@
 
 ## Pronti
 
+### Cornmeal, degermata, bianca, non arricchita, cruda — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_cornmeal_degermata_bianca_non_arricchita_raw` (nuovo, distinto da `food_cornmeal_degermata_bianca_arricchita_raw` già preparato — quella arricchita, questa no — e da `food_cornmeal_degermata_gialla_raw` — colore diverso. Verificato con `grep`, zero occorrenze). FDC ID 172015 (**SR Legacy**, "Cornmeal, degermed, unenriched, white"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cornmeal-degermed-unenriched-white.html`, nome USDA corrispondente esatto, pannello "Per 100g" completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente in pagina (stessa convenzione già accettata in questo turno per farina di mais gialla e pesce sablefish).
+- **Nutrienti**: **17/17** (vitamina K presa dal valore K1/fillochinone riportato dalla pagina, 0µg esplicito — stessa convenzione usata altrove in questa pipeline). Per 100g: energia 370kcal, proteine 7,1g, grassi 1,8g, carboidrati 79,5g, fibra 3,9g, calcio 3,0mg, ferro 1,1mg, magnesio 32,0mg, zinco 0,66mg, rame 0,08mg, folato totale 30,0µg, acido folico 0µg esplicito (non arricchito), vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 10,5µg, vitamina K (K1) 0µg esplicito, beta-carotene 1,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta *Zea mays*, stessa filiera di macinato non trattato, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit` (cereale macinato, vegetariano e vegano sì).
+- **Matrice**: nuova `cornmeal_degermata_bianca_non_arricchita` ("Cornmeal, degermata, bianca, non arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (farina macinata, matrice disgregata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw` (polvere cruda), `is_fortified_folate` omesso (false — acido folico 0µg esplicito, "unenriched" nel nome).
+
+```
+npm run add-food -- --fdc-id=172015 --food-id=food_cornmeal_degermata_bianca_non_arricchita_raw \
+  --name-it="Cornmeal, degermata, bianca, non arricchita, cruda" \
+  --matrix-id=cornmeal_degermata_bianca_non_arricchita --matrix-description-it="Cornmeal, degermata, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172015 --food-id=food_cornmeal_degermata_bianca_non_arricchita_raw \
+  --name-it="Cornmeal, degermata, bianca, non arricchita, cruda" \
+  --matrix-id=cornmeal_degermata_bianca_non_arricchita --matrix-description-it="Cornmeal, degermata, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Cornmeal, degermata, gialla, arricchita, cruda — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_cornmeal_degermata_gialla_arricchita_raw` (nuovo, distinto da `food_cornmeal_degermata_gialla_raw` già preparato — quella non arricchita. Verificato con `grep`, zero occorrenze). FDC ID 168867 (**SR Legacy**, "Cornmeal, degermed, enriched, yellow" — pagina `getfoodfacts.com/food/cornmeal-degermed-enriched-yellow-168867` dedicata, FDC ID e "SR Legacy" citati esplicitamente in pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 370kcal, proteine 7,11g, grassi 1,75g, carboidrati 79,5g, fibra 3,90g, calcio 3,00mg, ferro 4,36mg (elevato, coerente con arricchimento), magnesio 32,0mg, zinco 0,66mg, rame 0,076mg, folato totale 209µg (elevato), acido folico 180µg (fortificazione esplicita), vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 10,5µg, vitamina K 0µg esplicito, beta-carotene 97,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta/filiera, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `cornmeal_degermata_gialla_arricchita` ("Cornmeal, degermata, gialla, arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, **`is_fortified_folate` presente** (acido folico 180µg esplicito, fortificazione reale e dichiarata).
+
+```
+npm run add-food -- --fdc-id=168867 --food-id=food_cornmeal_degermata_gialla_arricchita_raw \
+  --name-it="Cornmeal, degermata, gialla, arricchita, cruda" \
+  --matrix-id=cornmeal_degermata_gialla_arricchita --matrix-description-it="Cornmeal, degermata, gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --is-fortified-folate --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168867 --food-id=food_cornmeal_degermata_gialla_arricchita_raw \
+  --name-it="Cornmeal, degermata, gialla, arricchita, cruda" \
+  --matrix-id=cornmeal_degermata_gialla_arricchita --matrix-description-it="Cornmeal, degermata, gialla, arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --is-fortified-folate --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Farina di mais gialla, degermata, non arricchita, cruda — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_farina_di_mais_gialla_degermata_non_arricchita_raw` (nuovo, distinto da `food_cornmeal_degermata_gialla_raw` — quella è "cornmeal" macinatura più grossa, FDC 168929 — e da `food_farina_di_mais_raw` eseguita — quella è "cornmeal, whole-grain", non degermata. Verificato con `grep`, zero occorrenze). FDC ID 169695 (**SR Legacy**, "Corn flour, yellow, degermed, unenriched"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/corn-flour-yellow-degermed-unenriched.html`, nome USDA corrispondente esatto, pannello completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente (stessa convenzione già accettata questo turno). **Nota di trasparenza (Regola 6)**: questo stesso FDC era già stato valutato ⚠ nel 231° lotto ("farina di mais gialla degermata, convertita da porzione 126g, mancano 9/17 nutrienti inclusi tutti i minerali oltre calcio/ferro") — citazione senza prefisso `FDC` quindi non riconosciuta dallo script di copertura, per questo è ricomparso nei candidati di oggi. La fonte usata allora era evidentemente un'etichetta per porzione meno completa; qui `triagemethod.com` espone il pannello SR Legacy per 100g con tutti i minerali presenti. Valori riportati qui, non quelli (parziali) del 231° lotto.
+- **Nutrienti**: **17/17** (vitamina K dal valore K1 0,30µg). Per 100g: energia 375kcal, proteine 5,6g, grassi 1,4g, carboidrati 82,8g, fibra 1,9g, calcio 2,0mg, ferro 0,91mg, magnesio 18,0mg, zinco 0,37mg, rame 0,14mg, folato totale 48,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 8,0µg, vitamina K (K1) 0,30µg, beta-carotene 97,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta *Zea mays*, stesso trattamento macinato non trattato, granulometria più fine; già eseguita sul DB reale, verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farina_di_mais_gialla_degermata` ("Farina di mais gialla, degermata, non arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — "unenriched").
+
+```
+npm run add-food -- --fdc-id=169695 --food-id=food_farina_di_mais_gialla_degermata_non_arricchita_raw \
+  --name-it="Farina di mais gialla, degermata, non arricchita, cruda" \
+  --matrix-id=farina_di_mais_gialla_degermata --matrix-description-it="Farina di mais gialla, degermata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169695 --food-id=food_farina_di_mais_gialla_degermata_non_arricchita_raw \
+  --name-it="Farina di mais gialla, degermata, non arricchita, cruda" \
+  --matrix-id=farina_di_mais_gialla_degermata --matrix-description-it="Farina di mais gialla, degermata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Pesce sablefish (merluzzo nero), cotto a calore secco — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_pesce_sablefish_cotto` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 174240 (**SR Legacy**, "Fish, sablefish, cooked, dry heat"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/fish-sablefish-cooked-dry-heat.html`, nome USDA corrispondente esatto, pannello completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente (stessa convenzione già accettata questo turno).
+- **Nutrienti**: **15/17** — mancano vitamina K e beta-carotene (assenti dalla tabella della pagina; gap comune e atteso per un pesce, non forzati a zero). Per 100g: energia 250kcal, proteine 17,2g, grassi 19,6g (pesce grasso), carboidrati 0g esplicito, fibra 0g esplicito, calcio 45,0mg, ferro 1,6mg, magnesio 71,0mg, zinco 0,41mg, rame 0,03mg, folato totale 17,0µg, acido folico 0µg esplicito, vitamina B12 1,4µg, vitamina C 0mg esplicito, selenio 46,8µg.
+- **Analogia usata**: `food_salmon_cooked` (pesce grasso cotto, categoria funzionale più vicina — già eseguita sul DB reale, verificato in sezione "Eseguiti").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_sablefish_cotto` ("Pesce sablefish, cotto").
+- **Attributi**: `is_heme_iron` presente (ferro eme da carne di pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non applicabile a un pesce), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174240 --food-id=food_pesce_sablefish_cotto \
+  --name-it="Pesce sablefish (merluzzo nero), cotto a calore secco" \
+  --matrix-id=pesce_sablefish_cotto --matrix-description-it="Pesce sablefish, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174240 --food-id=food_pesce_sablefish_cotto \
+  --name-it="Pesce sablefish (merluzzo nero), cotto a calore secco" \
+  --matrix-id=pesce_sablefish_cotto --matrix-description-it="Pesce sablefish, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Albicocche, in scatola, con succo (juice pack), con buccia — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_in_succo` (nuovo, distinto da `food_albicocche_in_scatola` (sciroppo pesante, FDC 167768), `food_albicocche_sciroppo_leggero_in_scatola` (FDC 173938) e dalle altre varianti in scatola già preparate — qui "juice pack", FDC diverso. Verificato con `grep`, zero occorrenze). FDC ID 173937 (**SR Legacy**, "Apricots, canned, juice pack, with skin, solids and liquids" — pagina `getfoodfacts.com/food/apricots-canned-juice-pack-with-skin-solids-and-liquids-173937` dedicata, FDC ID e "SR Legacy" citati esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 48,0kcal, proteine 0,63g, grassi 0,040g, carboidrati 12,3g, fibra 1,60g, calcio 12,0mg, ferro 0,30mg, magnesio 10,0mg, zinco 0,11mg, rame 0,054mg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 4,90mg, selenio 0,10µg, vitamina K (fillochinone) 2,20µg, beta-carotene 1010µg (elevato, coerente con albicocca con buccia).
+- **Analogia usata**: `food_albicocche_secche_raw` (stesso frutto, conservato/non fresco — già eseguita sul DB reale, verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit` (frutto in scatola/conservato, non frutta fresca secondo la definizione restrittiva PRD §4.9 — stessa logica già applicata alle albicocche secche e alle altre varianti in scatola).
+- **Matrice**: nuova `albicocche_in_succo` ("Albicocche, in scatola, con succo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (processo di inscatolamento), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=cooked` (processo termico di inscatolamento), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173937 --food-id=food_albicocche_in_succo \
+  --name-it="Albicocche, in scatola, con succo, con buccia" \
+  --matrix-id=albicocche_in_succo --matrix-description-it="Albicocche, in scatola, con succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173937 --food-id=food_albicocche_in_succo \
+  --name-it="Albicocche, in scatola, con succo, con buccia" \
+  --matrix-id=albicocche_in_succo --matrix-description-it="Albicocche, in scatola, con succo" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Noci miste, tostate in olio, senza arachidi, leggermente salate — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_noci_miste_senza_arachidi_tostate_olio_leggermente_salate` (nuovo, distinto da `food_noci_miste_tostate_olio_salate` (con arachidi, FDC 168600) e dalle altre varianti mandorle/pistacchio già preparate. Verificato con `grep`, zero occorrenze). FDC ID 169428 (**SR Legacy**, "Nuts, mixed nuts, oil roasted, without peanuts, lightly salted" — pagina `getfoodfacts.com/food/nuts-mixed-nuts-oil-roasted-without-peanuts-lightly-salted-169428` dedicata, FDC ID e "SR Legacy" citati esplicitamente in pagina). **Nota di trasparenza (Regola 6)**: nel 219°/230° lotto questo FDC era stato elencato come "variante di 170587" nel cluster "noci miste oil-roasted" e MAI ricercato individualmente ("nessuna ricerca web spesa", 170587 stesso sotto soglia 6/17). Qui ricercato singolarmente per la prima volta: pagina dedicata getfoodfacts.com con FDC esplicito e 16/17, diversa (migliore) dal cluster non aperto.
+- **Nutrienti**: **16/17** — manca vitamina K (assente dalla tabella). Per 100g: energia 607kcal, proteine 17,9g, grassi 50,0g, carboidrati 25,0g, fibra 7,10g, calcio 130mg, ferro 5,18mg, magnesio 275mg, zinco 4,57mg, rame 1,68mg, folato totale 104µg, acido folico 0µg esplicito (non fortificato), vitamina B12 0µg esplicito, vitamina C 0,60mg, selenio 139µg, beta-carotene 13,0µg.
+- **Analogia usata**: `food_nocciole_tostate` (frutto a guscio tostato, già eseguita sul DB reale, verificato in sezione "Eseguiti" — stesso trattamento di tostatura).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `noci_miste_olio_leggermente_salate` ("Noci miste, tostate in olio, senza arachidi, leggermente salate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted`, `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (miscela di specie diverse, non assegnabile a una sola famiglia), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169428 --food-id=food_noci_miste_senza_arachidi_tostate_olio_leggermente_salate \
+  --name-it="Noci miste, tostate in olio, senza arachidi, leggermente salate" \
+  --matrix-id=noci_miste_olio_leggermente_salate --matrix-description-it="Noci miste, tostate in olio, leggermente salate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169428 --food-id=food_noci_miste_senza_arachidi_tostate_olio_leggermente_salate \
+  --name-it="Noci miste, tostate in olio, senza arachidi, leggermente salate" \
+  --matrix-id=noci_miste_olio_leggermente_salate --matrix-description-it="Noci miste, tostate in olio, leggermente salate" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_nocciole_tostate \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Formaggio cottage, magro (1%), senza lattosio — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cottage_magro_senza_lattosio` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 167703 (**SR Legacy**, "Cheese, cottage, lowfat, 1% milkfat, lactose reduced"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cheese-cottage-lowfat-1-milkfat-lactose-reduced.html`, nome USDA corrispondente esatto, pannello completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente (stessa convenzione già accettata questo turno).
+- **Nutrienti**: **17/17** (vitamina K dal valore K1 0,10µg). Per 100g: energia 74,0kcal, proteine 12,4g, grassi 1,0g, carboidrati 3,2g, fibra 0,60g, calcio 53,0mg, ferro 0,14mg, magnesio 5,0mg, zinco 0,38mg, rame 0,03mg, folato totale 12,0µg, acido folico 0µg esplicito, vitamina B12 0,63µg, vitamina C 0mg esplicito, selenio 9,0µg, vitamina K (K1) 0,10µg, beta-carotene 3,0µg.
+- **Analogia usata**: `food_formaggio_cremoso_raw` (formaggio fresco morbido più vicino già eseguito sul DB reale, verificato in sezione "Eseguiti" — nessun cottage cheese ancora eseguito).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_cottage_magro_senza_lattosio` ("Formaggio cottage, magro, senza lattosio").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, prodotto senza carotenoidi pigmentati da verdure), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw` (prodotto fresco non cotto), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167703 --food-id=food_formaggio_cottage_magro_senza_lattosio \
+  --name-it="Formaggio cottage, magro (1%), senza lattosio" \
+  --matrix-id=formaggio_cottage_magro_senza_lattosio --matrix-description-it="Formaggio cottage, magro, senza lattosio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=167703 --food-id=food_formaggio_cottage_magro_senza_lattosio \
+  --name-it="Formaggio cottage, magro (1%), senza lattosio" \
+  --matrix-id=formaggio_cottage_magro_senza_lattosio --matrix-description-it="Formaggio cottage, magro, senza lattosio" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio cottage, magro (1%), con verdure — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cottage_magro_con_verdure` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 167716 (**SR Legacy**, "Cheese, cottage, lowfat, 1% milkfat, with vegetables" — pagina `getfoodfacts.com/food/cheese-cottage-lowfat-1-milkfat-with-vegetables-167716` dedicata, FDC ID e "SR Legacy" citati esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 67,0kcal, proteine 10,9g, grassi 1,00g, carboidrati 3,00g, fibra 0g esplicito, calcio 56,0mg, ferro 0,10mg, magnesio 4,00mg, zinco 0,29mg, rame 0,028mg, folato totale 10,0µg, acido folico 0µg esplicito, vitamina B12 0,49µg, vitamina C 4,00mg, selenio 4,50µg, vitamina K (fillochinone) 2,60µg, beta-carotene 34,0µg (coerente con le verdure aggiunte).
+- **Analogia usata**: `food_formaggio_cremoso_raw` (formaggio fresco morbido più vicino già eseguito sul DB reale, verificato in sezione "Eseguiti").
+- **Categoria dieta**: `egg_dairy` (formaggio con verdure miste, nessun ingrediente animale diverso dal latte).
+- **Matrice**: nuova `formaggio_cottage_magro_con_verdure` ("Formaggio cottage, magro, con verdure").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stato di cottura delle verdure aggiunte non specificato in pagina, non assunto), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=167716 --food-id=food_formaggio_cottage_magro_con_verdure \
+  --name-it="Formaggio cottage, magro (1%), con verdure" \
+  --matrix-id=formaggio_cottage_magro_con_verdure --matrix-description-it="Formaggio cottage, magro, con verdure" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=167716 --food-id=food_formaggio_cottage_magro_con_verdure \
+  --name-it="Formaggio cottage, magro (1%), con verdure" \
+  --matrix-id=formaggio_cottage_magro_con_verdure --matrix-description-it="Formaggio cottage, magro, con verdure" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Fagioli grandi del nord (great northern), in scatola — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_grandi_del_nord_in_scatola` (nuovo, distinto da `food_fagioli_cannellini_scatola_raw` (FDC 175204, "Beans, white" — varietà diversa) e da `food_fagioli_neri_in_scatola` (FDC 175188, fagioli neri). Verificato con `grep`, zero occorrenze). FDC ID 175192 (**SR Legacy**, "Beans, great northern, mature seeds, canned"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/beans-great-northern-mature-seeds-canned.html`, nome USDA corrispondente esatto, pannello completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente (stessa convenzione già accettata questo turno).
+- **Nutrienti**: **17/17** (vitamina K dal valore K1 3,0µg). Per 100g: energia 114kcal, proteine 7,4g, grassi 0,39g, carboidrati 21,0g, fibra 4,9g, calcio 53,0mg, ferro 1,6mg, magnesio 51,0mg, zinco 0,65mg, rame 0,16mg, folato totale 81,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,3mg, selenio 4,1µg, vitamina K (K1) 3,0µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_fagioli_cannellini_bolliti` (legume bianco bollito/trattato a calore, categoria funzionale più vicina già eseguita sul DB reale, verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_grandi_del_nord_in_scatola` ("Fagioli grandi del nord, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (legume inscatolato/cotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=175192 --food-id=food_fagioli_grandi_del_nord_in_scatola \
+  --name-it="Fagioli grandi del nord (great northern), in scatola" \
+  --matrix-id=fagioli_grandi_del_nord_in_scatola --matrix-description-it="Fagioli grandi del nord, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175192 --food-id=food_fagioli_grandi_del_nord_in_scatola \
+  --name-it="Fagioli grandi del nord (great northern), in scatola" \
+  --matrix-id=fagioli_grandi_del_nord_in_scatola --matrix-description-it="Fagioli grandi del nord, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_bolliti \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
 ### Pesce roughy arancione (orange roughy), cotto a calore secco — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_pesce_roughy_arancione_cotto` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 174251 (**SR Legacy**, "Fish, roughy, orange, cooked, dry heat"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/fish-roughy-orange-cooked-dry-heat.html`, nome USDA corrispondente esatto e pannello "Per 100g" completo (17/17), etichettato "SR Legacy" in pagina ma l'FDC ID 174251 non è mostrato esplicitamente (solo il nome). Stessa convenzione già accettata in questo turno per `food_formaggio_cheddar_deciso_a_fette`; valore selenio 88,3µg coerente con la letteratura (orange roughy è specie nota per selenio molto elevato).
