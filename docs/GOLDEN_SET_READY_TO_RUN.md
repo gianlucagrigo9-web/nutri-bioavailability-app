@@ -14,6 +14,30 @@
 
 ---
 
+### Olio di colza industriale con antischiuma — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_olio_di_colza_industriale_antischiuma_raw` (nuovo, variante industriale con agente antischiuma — record FDC distinto dal 172359 già pronto in questo stesso lotto). FDC ID 172358 (**SR Legacy**, "Oil, industrial, canola with antifoaming agent, principal uses salads, woks and light frying" — pagina `tools.myfooddata.com/nutrition-comparison/172358/100g/1`, nome confermato, FDC ID solo in URL).
+- **Nutrienti**: **17/17** (14 espliciti a zero, grasso puro raffinato — fatto nutrizionale noto, non dato mancante). Per 100g: energia 884kcal, proteine 0g, grassi 100g, carboidrati 0g, fibra 0g, calcio 0mg, ferro 0mg, magnesio 0mg, zinco 0mg, rame 0mg, folato totale 0µg, acido folico 0µg, vitamina B12 0µg, vitamina C 0mg, selenio 0µg, vitamina K 122µg (valore reale, coerente col profilo noto dell'olio di colza), beta-carotene 0µg.
+- **Analogia usata**: `food_olio_di_colza_raw` (stesso olio di base, già eseguito sul DB reale, stessa convenzione dell'altra variante industriale di questo lotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `olio_di_colza_industriale_antischiuma` ("Olio di colza industriale con agente antischiuma, per insalate/wok/frittura leggera").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172358 --food-id=food_olio_di_colza_industriale_antischiuma_raw \
+  --name-it="Olio di colza industriale con agente antischiuma, per insalate/wok/frittura leggera" \
+  --matrix-id=olio_di_colza_industriale_antischiuma --matrix-description-it="Olio di colza industriale con agente antischiuma, per insalate/wok/frittura leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_colza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172358 --food-id=food_olio_di_colza_industriale_antischiuma_raw \
+  --name-it="Olio di colza industriale con agente antischiuma, per insalate/wok/frittura leggera" \
+  --matrix-id=olio_di_colza_industriale_antischiuma --matrix-description-it="Olio di colza industriale con agente antischiuma, per insalate/wok/frittura leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_colza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Uovo, intero, cotto in camicia (affogato) — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_uovo_in_camicia_raw` (nuovo, forma di cottura "in camicia/affogato" mai tentata — distinta da fritto/sodo/omelette già in pipeline). FDC ID 172186 (**SR Legacy**, "Egg, whole, cooked, poached" — pagina `tools.myfooddata.com/nutrition-facts/172186/wt1`, nome confermato ("Poached Eggs"), FDC ID solo in URL).
