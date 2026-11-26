@@ -16,6 +16,222 @@
 
 ## Pronti
 
+### Cavolo kimchi (coreano, fermentato/salato) — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_cavolo_kimchi` (nuovo — distinto dal kimchi coreano crudo già `⚠` dal ventottesimo lotto, FDC 2710077 **USDA Survey/FNDDS**, scartato per tipo di dataset non ammesso: questo è un record **SR Legacy** distinto, FDC diverso, dataset ammesso). FDC ID 170392 (**SR Legacy**, "Cabbage, kimchi" — pagina `getfoodfacts.com/food/cabbage-kimchi-170392` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 15,0kcal, proteine 1,10g, grassi 0,50g, carboidrati 2,40g, fibra 1,60g, calcio 33,0mg, ferro 2,50mg, magnesio 14,0mg, zinco 0,22mg, rame 0,024mg, folato totale 52,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,50µg, vitamina K (fillochinone) 43,6µg, vitamina C 0mg esplicito, beta-carotene 55,0µg.
+- **Analogia usata**: `food_cavolo_rapa_cotto` (cavolo rapa/kohlrabi cotto con sale, già eseguito sul DB reale — stessa famiglia Brassicaceae, stesso stato "disrupted"/salato).
+- **Categoria dieta**: `plant_non_fruit` (verdura fermentata).
+- **Matrice**: nuova `cavolo_kimchi` ("Cavolo kimchi, coreano, fermentato/salato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, prodotto fermentato/disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=fermented`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170392 --food-id=food_cavolo_kimchi \
+  --name-it="Cavolo kimchi (coreano, fermentato/salato)" \
+  --matrix-id=cavolo_kimchi --matrix-description-it="Cavolo kimchi, coreano, fermentato/salato" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_cavolo_rapa_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170392 --food-id=food_cavolo_kimchi \
+  --name-it="Cavolo kimchi (coreano, fermentato/salato)" \
+  --matrix-id=cavolo_kimchi --matrix-description-it="Cavolo kimchi, coreano, fermentato/salato" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_cavolo_rapa_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Cavolo senape, salato — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_cavolo_senape_salato` (nuovo — mai coperto, verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 169891 (**SR Legacy**, "Cabbage, mustard, salted" — pagina `getfoodfacts.com/food/cabbage-mustard-salted-169891` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 28,0kcal, proteine 1,10g, grassi 0,10g, carboidrati 5,63g, fibra 3,10g, calcio 67,0mg, ferro 0,70mg, magnesio 15,0mg, zinco 0,30mg, rame 0,034mg, folato totale 72,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,90µg, vitamina K (fillochinone) 116µg, vitamina C 0mg esplicito, beta-carotene 513µg.
+- **Analogia usata**: `food_cavolo_rapa_cotto` (cavolo rapa/kohlrabi cotto con sale, già eseguito sul DB reale — stessa famiglia Brassicaceae *Brassica*, stesso trattamento con sale).
+- **Categoria dieta**: `plant_non_fruit` (verdura, foglie di senape/mostarda salate).
+- **Matrice**: nuova `cavolo_senape_salato` ("Cavolo senape, salato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e molto alto, 513µg, prodotto salato/disgregato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=salted`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169891 --food-id=food_cavolo_senape_salato \
+  --name-it="Cavolo senape, salato" \
+  --matrix-id=cavolo_senape_salato --matrix-description-it="Cavolo senape, salato" \
+  --baseline-cooking-state=salted --analogy-food-id=food_cavolo_rapa_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169891 --food-id=food_cavolo_senape_salato \
+  --name-it="Cavolo senape, salato" \
+  --matrix-id=cavolo_senape_salato --matrix-description-it="Cavolo senape, salato" \
+  --baseline-cooking-state=salted --analogy-food-id=food_cavolo_rapa_cotto \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Crusca d'avena, cotta — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_crusca_di_avena_cotta` (nuovo — distinta da `food_crusca_di_avena_raw` già eseguita (cruda): qui stato cotto mai coperto in questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168873 (**SR Legacy**, "Oat bran, cooked" — pagina `getfoodfacts.com/food/oat-bran-cooked-168873` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 40,0kcal, proteine 3,21g, grassi 0,86g, carboidrati 11,4g, fibra 2,60g, calcio 10,0mg, ferro 0,88mg, magnesio 40,0mg, zinco 0,53mg, rame 0,066mg, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 7,70µg, vitamina C 0mg esplicito. **Mancano** (assenti dalla pagina): vitamina K, beta-carotene.
+- **Analogia usata**: `food_crusca_di_avena_raw` (crusca d'avena cruda, già eseguita sul DB reale — stesso sottoprodotto di cereale, stato di cottura diverso).
+- **Categoria dieta**: `plant_non_fruit` (derivato di cereale).
+- **Matrice**: nuova `crusca_di_avena_cotta` ("Crusca d'avena, cotta").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168873 --food-id=food_crusca_di_avena_cotta \
+  --name-it="Crusca d'avena, cotta" \
+  --matrix-id=crusca_di_avena_cotta --matrix-description-it="Crusca d'avena, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_crusca_di_avena_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168873 --food-id=food_crusca_di_avena_cotta \
+  --name-it="Crusca d'avena, cotta" \
+  --matrix-id=crusca_di_avena_cotta --matrix-description-it="Crusca d'avena, cotta" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_crusca_di_avena_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Maccheroni alle verdure, arricchiti, cotti — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_maccheroni_verdure_arricchiti_cotti` (nuovo — distinto da `food_pasta_enriched_cooked` già eseguita (pasta semplice di semola): qui pasta con solidi vegetali aggiunti nell'impasto. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168904 (**SR Legacy**, "Macaroni, vegetable, enriched, cooked" — pagina `getfoodfacts.com/food/macaroni-vegetable-enriched-cooked-168904` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 128kcal, proteine 4,53g, grassi 0,11g, carboidrati 26,6g, fibra 4,30g, calcio 11,0mg, ferro 0,49mg, magnesio 19,0mg, zinco 0,44mg, rame 0,092mg, folato totale 65,0µg (106µg DFE), acido folico 59,0µg esplicito (firma di arricchimento, prodotto di grano arricchito), vitamina B12 0µg esplicito, selenio 19,8µg, vitamina K (fillochinone) 0,30µg, vitamina C 0mg esplicito, beta-carotene 55,0µg.
+- **Analogia usata**: `food_pasta_enriched_cooked` (pasta di semola arricchita cotta, già eseguita sul DB reale — stessa categoria funzionale, qui con solidi vegetali aggiunti).
+- **Categoria dieta**: `plant_non_fruit` (pasta di grano con verdura, nessun ingrediente animale).
+- **Matrice**: nuova `maccheroni_verdure_arricchiti_cotti` ("Maccheroni alle verdure, arricchiti, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo, verosimilmente da solidi vegetali nell'impasto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — impasto misto grano+verdura non specificata, non una singola famiglia botanica), `baseline_cooking_state=boiled`, `is_fortified_folate=true` (acido folico 59,0µg esplicito, firma di arricchimento).
+
+```
+npm run add-food -- --fdc-id=168904 --food-id=food_maccheroni_verdure_arricchiti_cotti \
+  --name-it="Maccheroni alle verdure, arricchiti, cotti" \
+  --matrix-id=maccheroni_verdure_arricchiti_cotti --matrix-description-it="Maccheroni alle verdure, arricchiti, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168904 --food-id=food_maccheroni_verdure_arricchiti_cotti \
+  --name-it="Maccheroni alle verdure, arricchiti, cotti" \
+  --matrix-id=maccheroni_verdure_arricchiti_cotti --matrix-description-it="Maccheroni alle verdure, arricchiti, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Spaghetti agli spinaci, cotti — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_spaghetti_spinaci_cotti` (nuovo — distinto da `food_pasta_enriched_cooked` già eseguita: qui pasta con spinaci nell'impasto. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 168912 (**SR Legacy**, "Spaghetti, spinach, cooked" — pagina `getfoodfacts.com/food/spaghetti-spinach-cooked-168912` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 130kcal, proteine 4,58g, grassi 0,63g, carboidrati 26,1g, calcio 30,0mg, ferro 1,04mg, magnesio 62,0mg, zinco 1,08mg, rame 0,20mg, folato totale 12,0µg, acido folico 0µg esplicito (nessuna firma di arricchimento), vitamina B12 0µg esplicito, selenio 22,1µg, vitamina C 0mg esplicito. **Mancano** (non assunti zero, per trasparenza): fibra (pagina con dato interno contraddittorio, "not declared" in un punto e "0g" in un altro — trattata come non dichiarata, non assunta), vitamina K, beta-carotene.
+- **Analogia usata**: `food_pasta_enriched_cooked` (pasta di semola arricchita cotta, già eseguita sul DB reale — stessa categoria funzionale, qui con spinaci aggiunti).
+- **Categoria dieta**: `plant_non_fruit` (pasta di grano con verdura, nessun ingrediente animale).
+- **Matrice**: nuova `spaghetti_spinaci_cotti` ("Spaghetti agli spinaci, cotti").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — impasto misto grano+spinaci, non una singola famiglia), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, nessuna firma di arricchimento nonostante il prodotto citi "enriched" nel record gemello maccheroni; qui non dichiarato).
+
+```
+npm run add-food -- --fdc-id=168912 --food-id=food_spaghetti_spinaci_cotti \
+  --name-it="Spaghetti agli spinaci, cotti" \
+  --matrix-id=spaghetti_spinaci_cotti --matrix-description-it="Spaghetti agli spinaci, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168912 --food-id=food_spaghetti_spinaci_cotti \
+  --name-it="Spaghetti agli spinaci, cotti" \
+  --matrix-id=spaghetti_spinaci_cotti --matrix-description-it="Spaghetti agli spinaci, cotti" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Margarina vegetale light con fitosteroli (tipo BENECOL) — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_margarina_benecol_light` (nuovo — prima margarina/spread con fitosteroli aggiunti di questa pipeline, distinta dalla margarina classica 80% già `🟡`. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 171035 (**SR Legacy**, "Margarine-like spread, BENECOL Light Spread" — pagina `getfoodfacts.com/food/margarine-like-spread-benecol-light-spread-171035` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **10/17** (soglia minima, accettato — vedi Regola 1, nessun valore stimato). Per 100g: energia 357kcal, proteine 0g esplicito, grassi 38,7g, carboidrati 5,71g, calcio 4,00mg, ferro 0mg esplicito, magnesio 1,00mg, zinco 0mg esplicito, rame 0mg esplicito, vitamina K (fillochinone) 56,5µg. **Mancano** (assenti dalla pagina): fibra, folato, acido folico, vitamina B12, selenio, vitamina C, beta-carotene.
+- **Analogia usata**: `food_olio_di_girasole_raw` (olio di semi vegetali, già eseguito sul DB reale — stessa categoria funzionale "grasso vegetale spalmabile/da condimento", nessuna margarina ancora eseguita sul DB reale al momento di questa voce).
+- **Categoria dieta**: `plant_non_fruit` (spread vegetale, nessun ingrediente animale dichiarato).
+- **Matrice**: nuova `margarina_benecol_light` ("Margarina vegetale light con fitosteroli, tipo BENECOL").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — spread industriale, blend non dichiarato di oli), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — folato non riportato, nessuna firma di arricchimento verificabile).
+
+```
+npm run add-food -- --fdc-id=171035 --food-id=food_margarina_benecol_light \
+  --name-it="Margarina vegetale light con fitosteroli (tipo BENECOL)" \
+  --matrix-id=margarina_benecol_light --matrix-description-it="Margarina vegetale light con fitosteroli, tipo BENECOL" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171035 --food-id=food_margarina_benecol_light \
+  --name-it="Margarina vegetale light con fitosteroli (tipo BENECOL)" \
+  --matrix-id=margarina_benecol_light --matrix-description-it="Margarina vegetale light con fitosteroli, tipo BENECOL" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Arachidi Valencia, crude — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_arachidi_valencia_raw` (nuovo — cultivar distinta da `food_arachidi_raw` (generiche, già eseguite) e da `food_arachidi_spagnole_raw` (Spanish, già `🟡`). Verificato con `grep` dedicato, zero occorrenze precedenti per "valencia"/FDC 172432). FDC ID 172432 (**SR Legacy**, "Peanuts, valencia, raw" — pagina `getfoodfacts.com/food/peanuts-valencia-raw-172432` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 570kcal, proteine 25,1g, grassi 47,6g, carboidrati 20,9g, fibra 8,70g, calcio 62,0mg, ferro 2,09mg, magnesio 184mg, zinco 3,34mg, rame 1,17mg, folato totale 246µg (246µg DFE), acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 7,30µg, vitamina C 0mg esplicito. **Mancano** (assenti dalla pagina): vitamina K, beta-carotene.
+- **Analogia usata**: `food_arachidi_raw` (arachidi generiche crude, già eseguite sul DB reale — stessa specie *Arachis hypogaea*, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit` (legume trattato come frutta secca/seme, stessa convenzione delle altre arachidi).
+- **Matrice**: nuova `arachidi_valencia` ("Arachidi Valencia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172432 --food-id=food_arachidi_valencia_raw \
+  --name-it="Arachidi Valencia, crude" \
+  --matrix-id=arachidi_valencia --matrix-description-it="Arachidi Valencia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172432 --food-id=food_arachidi_valencia_raw \
+  --name-it="Arachidi Valencia, crude" \
+  --matrix-id=arachidi_valencia --matrix-description-it="Arachidi Valencia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Arachidi Virginia, crude — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_arachidi_virginia_raw` (nuovo — cultivar distinta da `food_arachidi_raw`/`food_arachidi_spagnole_raw`/`food_arachidi_valencia_raw` di questo stesso lotto. Verificato con `grep` dedicato, zero occorrenze precedenti per "virginia"/FDC 172434). FDC ID 172434 (**SR Legacy**, "Peanuts, virginia, raw" — pagina `getfoodfacts.com/food/peanuts-virginia-raw-172434` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 563kcal, proteine 25,2g, grassi 48,8g, carboidrati 16,5g, fibra 8,50g, calcio 89,0mg, ferro 2,55mg, magnesio 171mg, zinco 4,43mg, rame 1,11mg, folato totale 239µg (239µg DFE), acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 7,10µg, vitamina K 0µg esplicito, vitamina C 0mg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_arachidi_raw` (arachidi generiche crude, già eseguite sul DB reale — stessa specie *Arachis hypogaea*, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit` (legume trattato come frutta secca/seme, stessa convenzione delle altre arachidi).
+- **Matrice**: nuova `arachidi_virginia` ("Arachidi Virginia").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, stessa convenzione dell'analogia), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, nessun carotenoide reale da rappresentare), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172434 --food-id=food_arachidi_virginia_raw \
+  --name-it="Arachidi Virginia, crude" \
+  --matrix-id=arachidi_virginia --matrix-description-it="Arachidi Virginia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172434 --food-id=food_arachidi_virginia_raw \
+  --name-it="Arachidi Virginia, crude" \
+  --matrix-id=arachidi_virginia --matrix-description-it="Arachidi Virginia" \
+  --baseline-cooking-state=raw --analogy-food-id=food_arachidi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Albume d'uovo, crudo, surgelato, pastorizzato — preparato 2026-11-26 dal task (224° lotto)
+
+- **food_id**: `food_albume_uovo_surgelato_pastorizzato` (nuovo — distinto da `food_albume_uovo_raw` (liquido fresco, già eseguito) e `food_albume_uovo_secco` (essiccato, già `🟡`): qui forma liquida surgelata pastorizzata, prodotto industriale distinto. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 172203 (**SR Legacy**, "Egg, white, raw, frozen, pasteurized" — pagina `getfoodfacts.com/food/egg-white-raw-frozen-pasteurized-172203` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 48,0kcal, proteine 10,2g, grassi 0g esplicito, carboidrati 1,04g, fibra 0g esplicito, calcio 8,00mg, ferro 0,040mg, magnesio 11,0mg, zinco 0,070mg, rame 0,032mg, folato totale 10,0µg, acido folico 0µg esplicito, vitamina B12 0,030µg, selenio 9,20µg, vitamina K 0µg esplicito, vitamina C 0mg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_albume_uovo_raw` (albume d'uovo crudo liquido fresco, già eseguito sul DB reale — stesso prodotto base, qui surgelato e pastorizzato invece di fresco).
+- **Categoria dieta**: `egg_dairy` (uovo).
+- **Matrice**: nuova `albume_uovo_surgelato_pastorizzato` ("Albume d'uovo, surgelato, pastorizzato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172203 --food-id=food_albume_uovo_surgelato_pastorizzato \
+  --name-it="Albume d'uovo, crudo, surgelato, pastorizzato" \
+  --matrix-id=albume_uovo_surgelato_pastorizzato --matrix-description-it="Albume d'uovo, surgelato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_albume_uovo_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172203 --food-id=food_albume_uovo_surgelato_pastorizzato \
+  --name-it="Albume d'uovo, crudo, surgelato, pastorizzato" \
+  --matrix-id=albume_uovo_surgelato_pastorizzato --matrix-description-it="Albume d'uovo, surgelato, pastorizzato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_albume_uovo_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Formaggio fuso tipo americano, light (ridotto in grassi), fortificato con vitamina D — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_formaggio_fuso_americano_light` (nuovo). FDC ID 173455 (**SR Legacy**, "Cheese product, pasteurized process, American, reduced fat, fortified with vitamin D" — pagina tools.myfooddata.com/print/173455/wt1/1, nome confermato esattamente, valori derivati da porzione 21g, fattore di scala 1/0,21).
