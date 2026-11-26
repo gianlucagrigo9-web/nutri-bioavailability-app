@@ -16,6 +16,174 @@
 
 ## Pronti
 
+### Bocconcini di salmone, cotti (come acquistati, non riscaldati) — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_nuggets_salmone_cotti` (nuovo). FDC ID 173722 (**SR Legacy**, "Salmon nuggets, cooked as purchased, unheated" — pagina `getfoodfacts.com/food/salmon-nuggets-cooked-as-purchased-unheated-173722` dedicata, FDC ID e dataType citati esplicitamente). Prodotto composito (carboidrati 11,8g/100g indicano una panatura), ma contenendo pesce resta `meat_fish` senza ambiguità, stessa logica già usata per i bastoncini di pesce surgelati (222° lotto).
+- **Nutrienti**: **14/17**. Per 100g: energia 189kcal, proteine 12,0g, grassi 10,4g, carboidrati 11,8g, fibra 0g esplicito, calcio 9,00mg, ferro 1,46mg, magnesio 20,0mg, zinco 0,46mg, rame 0,069mg, folato totale 9,00µg, acido folico 3,00µg esplicito, vitamina B12 2,18µg, vitamina C 0mg esplicito. Mancano: selenio, vitamina K, beta-carotene (non riportati, non assunti zero).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco cotto già nel DB reale, stessa categoria funzionale di prodotto ittico cotto).
+- **Categoria dieta**: `meat_fish` (contiene pesce, non ambiguo nonostante la panatura).
+- **Matrice**: nuova `nuggets_salmone_cotti` (Bocconcini di salmone, cotti).
+- **Attributi**: `is_heme_iron` presente (ferro eme da pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` presente (acido folico 3,00µg esplicito, probabile dalla panatura arricchita).
+
+```
+npm run add-food -- --fdc-id=173722 --food-id=food_nuggets_salmone_cotti \
+  --name-it="Bocconcini di salmone, cotti (come acquistati, non riscaldati)" \
+  --matrix-id=nuggets_salmone_cotti --matrix-description-it="Bocconcini di salmone, cotti" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173722 --food-id=food_nuggets_salmone_cotti \
+  --name-it="Bocconcini di salmone, cotti (come acquistati, non riscaldati)" \
+  --matrix-id=nuggets_salmone_cotti --matrix-description-it="Bocconcini di salmone, cotti" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --is-fortified-folate --diet-category=meat_fish --apply
+```
+
+### Grano, germogliato, crudo — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_grano_germogliato_raw` (nuovo). FDC ID 169725 (**SR Legacy**, "Wheat, sprouted" — pagina `getfoodfacts.com/food/wheat-sprouted-169725` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **15/17**. Per 100g: energia 198kcal, proteine 7,49g, grassi 1,27g, carboidrati 42,5g, fibra 1,10g, calcio 28,0mg, ferro 2,14mg, magnesio 82,0mg, zinco 1,65mg, rame 0,26mg, folato totale 38,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 42,5µg, vitamina C 2,60mg. Mancano: vitamina K, beta-carotene (non riportati, non assunti zero).
+- **Analogia usata**: `food_grano_rosso_invernale_crudo` (chicco di grano intero crudo già nel DB reale, stesso genere *Triticum*, stadio di germinazione diverso).
+- **Categoria dieta**: `plant_non_fruit` (cereale, non ambiguo).
+- **Matrice**: nuova `grano_germogliato` (Grano, germogliato).
+- **Attributi**: `botanical_family=Poaceae`, `is_fortified_folate` assente/false (acido folico 0µg esplicito), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169725 --food-id=food_grano_germogliato_raw \
+  --name-it="Grano, germogliato, crudo" \
+  --matrix-id=grano_germogliato --matrix-description-it="Grano, germogliato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grano_rosso_invernale_crudo \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169725 --food-id=food_grano_germogliato_raw \
+  --name-it="Grano, germogliato, crudo" \
+  --matrix-id=grano_germogliato --matrix-description-it="Grano, germogliato" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grano_rosso_invernale_crudo \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farfaraccio (fuki), in scatola — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_farfaraccio_in_scatola` (nuovo — distinto da `food_farfaraccio_raw` e `food_farfaraccio_cotto` (bollito con sale), entrambi già preparati in lotti precedenti: qui conservazione in scatola). FDC ID 170387 (**SR Legacy**, "Butterbur, canned" — pagina `getfoodfacts.com/food/butterbur-canned-170387` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **14/17**. Per 100g: energia 3,00kcal, proteine 0,11g, grassi 0,13g, carboidrati 0,38g, calcio 34,0mg, ferro 0,63mg, magnesio 2,00mg, zinco 0,060mg, rame 0,037mg, folato totale 3,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,90µg, vitamina C 11,9mg. Mancano: fibra (non dichiarata in modo affidabile sulla pagina), vitamina K, beta-carotene (non riportati, non assunti zero).
+- **Analogia usata**: `food_farfaraccio_cotto` (stessa pianta, *Petasites japonicus*, già nel DB reale, metodo di conservazione/cottura diverso).
+- **Categoria dieta**: `plant_non_fruit` (verdura, non ambigua).
+- **Matrice**: nuova `farfaraccio_in_scatola` (Farfaraccio, in scatola).
+- **Attributi**: `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` assente/false (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170387 --food-id=food_farfaraccio_in_scatola \
+  --name-it="Farfaraccio (fuki), in scatola" \
+  --matrix-id=farfaraccio_in_scatola --matrix-description-it="Farfaraccio, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_farfaraccio_cotto \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170387 --food-id=food_farfaraccio_in_scatola \
+  --name-it="Farfaraccio (fuki), in scatola" \
+  --matrix-id=farfaraccio_in_scatola --matrix-description-it="Farfaraccio, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_farfaraccio_cotto \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Fagiolo dall'occhio, baccelli giovani con semi, crudi — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_fagiolo_occhio_baccelli_raw` (nuovo). FDC ID 168405 (**SR Legacy**, "Cowpeas, young pods with seeds, raw" — pagina `getfoodfacts.com/food/cowpeas-young-pods-with-seeds-raw-168405` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17**. Per 100g: energia 44,0kcal, proteine 3,30g, grassi 0,30g, carboidrati 9,50g, fibra 3,30g, calcio 65,0mg, ferro 1,00mg, magnesio 58,0mg, zinco 0,34mg, rame 0,10mg, folato totale 53,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,90µg, vitamina C 33,0mg, vitamina K 31,5µg, beta-carotene 794µg.
+- **Analogia usata**: `food_fagiolini_raw` (fagiolini verdi crudi già nel DB reale, stessa categoria funzionale di legume consumato come baccello/pod intero immaturo).
+- **Categoria dieta**: `plant_non_fruit` (legume/verdura, non ambigua).
+- **Matrice**: nuova `fagiolo_occhio_baccelli` (Fagiolo dall'occhio, baccelli giovani con semi).
+- **Attributi**: `botanical_family=Fabaceae`, `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, baccello crudo intatto), `matrix_category_calcium` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` assente/false (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168405 --food-id=food_fagiolo_occhio_baccelli_raw \
+  --name-it="Fagiolo dall'occhio, baccelli giovani con semi, crudi" \
+  --matrix-id=fagiolo_occhio_baccelli --matrix-description-it="Fagiolo dall'occhio, baccelli giovani con semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168405 --food-id=food_fagiolo_occhio_baccelli_raw \
+  --name-it="Fagiolo dall'occhio, baccelli giovani con semi, crudi" \
+  --matrix-id=fagiolo_occhio_baccelli --matrix-description-it="Fagiolo dall'occhio, baccelli giovani con semi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagiolini_raw \
+  --botanical-family=Fabaceae --carotenoid-matrix-state=raw_intact --diet-category=plant_non_fruit --apply
+```
+
+### Catsup (ketchup), a basso contenuto di sodio — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_catsup_poco_sodio` (nuovo). FDC ID 169381 (**SR Legacy**, "Catsup, low sodium" — pagina `getfoodfacts.com/food/catsup-low-sodium-169381` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17**. Per 100g: energia 101kcal, proteine 1,04g, grassi 0,10g, carboidrati 27,4g, fibra 0,30g, calcio 15,0mg, ferro 0,35mg, magnesio 13,0mg, zinco 0,17mg, rame 0,085mg, folato totale 9,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,70µg, vitamina C 4,10mg, vitamina K 3,00µg, beta-carotene 316µg.
+- **Analogia usata**: `food_tomato_raw` (pomodoro crudo già nel DB reale, prodotto derivato dallo stesso ortaggio).
+- **Categoria dieta**: `plant_non_fruit` (condimento a base di pomodoro, nessun ingrediente animale, non ambiguo).
+- **Matrice**: nuova `catsup_poco_sodio` (Catsup, a basso contenuto di sodio).
+- **Attributi**: `botanical_family=Solanaceae`, `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, prodotto cotto/concentrato), `matrix_category_calcium` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` assente/false (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169381 --food-id=food_catsup_poco_sodio \
+  --name-it="Catsup (ketchup), a basso contenuto di sodio" \
+  --matrix-id=catsup_poco_sodio --matrix-description-it="Catsup, a basso contenuto di sodio" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --botanical-family=Solanaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169381 --food-id=food_catsup_poco_sodio \
+  --name-it="Catsup (ketchup), a basso contenuto di sodio" \
+  --matrix-id=catsup_poco_sodio --matrix-description-it="Catsup, a basso contenuto di sodio" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_tomato_raw \
+  --botanical-family=Solanaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Melanzane, sott'aceto — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_melanzane_sottaceto` (nuovo). FDC ID 169892 (**SR Legacy**, "Eggplant, pickled" — pagina `getfoodfacts.com/food/eggplant-pickled-169892` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **17/17**. Per 100g: energia 49,0kcal, proteine 0,90g, grassi 0,70g, carboidrati 9,77g, fibra 2,50g, calcio 25,0mg, ferro 0,77mg, magnesio 6,00mg, zinco 0,23mg, rame 0,17mg, folato totale 20,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 0,60µg, vitamina C 0mg esplicito, vitamina K 3,70µg, beta-carotene 30,0µg.
+- **Analogia usata**: `food_melanzane_raw` (melanzana cruda già nel DB reale, stesso ortaggio, conservazione sott'aceto).
+- **Categoria dieta**: `plant_non_fruit` (verdura, non ambigua).
+- **Matrice**: nuova `melanzane_sottaceto` (Melanzane, sott'aceto).
+- **Attributi**: `botanical_family=Solanaceae`, `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale, matrice alterata dalla conservazione), `matrix_category_calcium` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=pickled`, `is_fortified_folate` assente/false (acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169892 --food-id=food_melanzane_sottaceto \
+  --name-it="Melanzane, sott'aceto" \
+  --matrix-id=melanzane_sottaceto --matrix-description-it="Melanzane, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_melanzane_raw \
+  --botanical-family=Solanaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169892 --food-id=food_melanzane_sottaceto \
+  --name-it="Melanzane, sott'aceto" \
+  --matrix-id=melanzane_sottaceto --matrix-description-it="Melanzane, sott'aceto" \
+  --baseline-cooking-state=pickled --analogy-food-id=food_melanzane_raw \
+  --botanical-family=Solanaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Salsa di mirtilli rossi e arancia, in scatola — preparato 2026-11-26 dal task (226° lotto)
+
+- **food_id**: `food_salsa_mirtilli_rossi_arancia_in_scatola` (nuovo). FDC ID 173962 (**SR Legacy**, "Cranberry-orange relish, canned" — pagina `getfoodfacts.com/food/cranberry-orange-relish-canned-173962` dedicata, FDC ID e dataType citati esplicitamente).
+- **Nutrienti**: **11/17** (sopra la soglia minima di 10/17). Per 100g: energia 178kcal, proteine 0,30g, grassi 0,10g, carboidrati 46,2g, fibra 0g esplicito, calcio 11,0mg, ferro 0,20mg, magnesio 4,00mg, rame 0,040mg, vitamina B12 0µg esplicito, vitamina C 18,0mg. Mancano: zinco, folato totale, acido folico, selenio, vitamina K, beta-carotene (non riportati sulla pagina, non assunti zero).
+- **Analogia usata**: `food_mirtilli_rossi_raw` (mirtilli rossi/cranberry crudi già nel DB reale, stesso frutto base, prodotto trasformato con zucchero e arancia aggiunti).
+- **Categoria dieta**: `plant_non_fruit` (prodotto di frutta trasformato con zucchero aggiunto, non frutta fresca per la definizione restrittiva PRD §4.9 — stessa convenzione già usata per le mele sciroppate/composte).
+- **Matrice**: nuova `salsa_mirtilli_rossi_arancia` (Salsa di mirtilli rossi e arancia, in scatola).
+- **Attributi**: `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (acido folico non riportato, non assunto zero).
+
+```
+npm run add-food -- --fdc-id=173962 --food-id=food_salsa_mirtilli_rossi_arancia_in_scatola \
+  --name-it="Salsa di mirtilli rossi e arancia, in scatola" \
+  --matrix-id=salsa_mirtilli_rossi_arancia --matrix-description-it="Salsa di mirtilli rossi e arancia, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mirtilli_rossi_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173962 --food-id=food_salsa_mirtilli_rossi_arancia_in_scatola \
+  --name-it="Salsa di mirtilli rossi e arancia, in scatola" \
+  --matrix-id=salsa_mirtilli_rossi_arancia --matrix-description-it="Salsa di mirtilli rossi e arancia, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_mirtilli_rossi_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Milkfish (pesce latte), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_milkfish_cotto` (nuovo). FDC ID 171995 (**SR Legacy**, "Fish, milkfish, cooked, dry heat" — pagina `tools.myfooddata.com/nutrition-facts/171995/wt1`, nome confermato nelle didascalie, FDC ID non mostrato esplicitamente ma stesso dominio già verificato affidabile più volte in questo progetto).
