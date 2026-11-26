@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Sgombro del Pacifico e jack (specie miste), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_sgombro_pacifico_cotto` (nuovo — distinto dallo sgombro generico già eseguito sul DB reale, `food_sgombro_cotto`). FDC ID 171994 (**SR Legacy**, "Fish, mackerel, Pacific and jack, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-mackerel-pacific-and-jack-mixed-species-cooked-dry-heat-171994` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 201kcal, proteine 25,7g, grassi 10,1g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 29,0mg, ferro 1,49mg, magnesio 36,0mg, zinco 0,86mg, rame 0,12mg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 4,23µg, selenio 46,8µg, vitamina K 0,10µg, vitamina C 2,10mg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_sgombro_cotto` (sgombro cotto già nel DB reale — stesso genere di pesce grasso cotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sgombro_pacifico_cotto` (Sgombro del Pacifico e jack, specie miste, cotto).
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171994 --food-id=food_sgombro_pacifico_cotto \
+  --name-it="Sgombro del Pacifico e jack (specie miste), cotto al forno (calore secco)" \
+  --matrix-id=sgombro_pacifico_cotto --matrix-description-it="Sgombro del Pacifico e jack, specie miste, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171994 --food-id=food_sgombro_pacifico_cotto \
+  --name-it="Sgombro del Pacifico e jack (specie miste), cotto al forno (calore secco)" \
+  --matrix-id=sgombro_pacifico_cotto --matrix-description-it="Sgombro del Pacifico e jack, specie miste, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Agnello australiano importato, grasso esterno, crudo — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_agnello_grasso_esterno_raw` (nuovo). FDC ID 174892 (**SR Legacy**, "Lamb, Australian, imported, fresh, external fat, raw" — pagina `getfoodfacts.com/food/lamb-australian-imported-fresh-external-fat-raw-174892` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30). Nota: la versione cotta della stessa voce (FDC 174891) non ha una pagina dedicata pulita trovata — vedi coda.
