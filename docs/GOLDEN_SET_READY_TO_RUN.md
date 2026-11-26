@@ -16,6 +16,32 @@
 
 ## Pronti
 
+### Albicocche, in scatola, sciroppo pesante, con buccia — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_sciroppo_pesante_con_buccia_in_scatola` (nuovo — distinto da `food_albicocche_sciroppo_pesante_senza_buccia_in_scatola` già eseguita, FDC 171701 "extra heavy syrup... without skin": qui sciroppo pesante normale (non extra), CON buccia. Verificato con `grep`, zero occorrenze). FDC ID 171699 (**SR Legacy**, "Apricots, canned, heavy syrup pack, with skin, solids and liquids" — pagina `getfoodfacts.com/food/apricots-canned-heavy-syrup-pack-with-skin-solids-and-liquids-171699` dedicata, FDC ID e dataType citati esplicitamente in pagina, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 83,0kcal, proteine 0,53g, grassi 0,080g, carboidrati 21,5g, fibra 1,60g, calcio 9,00mg, ferro 0,30mg, magnesio 7,00mg, zinco 0,11mg, rame 0,078mg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 3,10mg, selenio 0,10µg, vitamina K (fillochinone) 2,20µg, beta-carotene 735µg.
+- **Analogia usata**: `food_albicocche_raw` (già eseguita nel DB reale — stessa specie *Prunus armeniaca*, stato di conservazione diverso dichiarato esplicitamente: qui in scatola/sciroppata, non cruda).
+- **Categoria dieta**: `plant_non_fruit` (frutta cotta/conservata in scatola con sciroppo, non rientra nella definizione restrittiva di frutta fresca del PRD §4.9 — stessa logica già applicata a mele sciroppate/cotte).
+- **Matrice**: nuova `albicocche_sciroppo_pesante_con_buccia`.
+- **Attributi**: `botanical_family=Rosaceae`, `baseline_cooking_state=cooked` (sciroppata/sterilizzata in scatola), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene 735µg esplicito, matrice disgregata dal trattamento termico), `matrix_category_calcium` omesso (NULL, non applicabile alla frutta), `zinc_bioaccessibility_bucket` default `none`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171699 --food-id=food_albicocche_sciroppo_pesante_con_buccia_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, con buccia" \
+  --matrix-id=albicocche_sciroppo_pesante_con_buccia --matrix-description-it="Albicocche, sciroppo pesante, con buccia" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171699 --food-id=food_albicocche_sciroppo_pesante_con_buccia_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, con buccia" \
+  --matrix-id=albicocche_sciroppo_pesante_con_buccia --matrix-description-it="Albicocche, sciroppo pesante, con buccia" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli neri comuni, secchi, crudi — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
 
 - **food_id**: `food_fagioli_neri_comuni_raw` (distinto da `food_fagioli_neri_raw` già eseguito — quello è "Beans, black TURTLE, mature seeds, raw" FDC 175186, qui è "Beans, black, mature seeds, raw" FDC diverso, cultivar comune non turtle. Verificato con `grep`, zero occorrenze). FDC ID 173734 (**SR Legacy**).
