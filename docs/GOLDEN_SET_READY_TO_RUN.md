@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Halibut della Groenlandia, cotto al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_halibut_groenlandia_cotto` (nuovo — specie distinta, Reinhardtius hippoglossoides, dall'halibut Atlantico/Pacifico già nel DB `food_halibut_raw` FDC 174200, genere Hippoglossus). FDC ID 174232 (**SR Legacy**, "Fish, halibut, greenland, cooked, dry heat" — pagina tools.myfooddata.com/print/174232/100g, nome e valori per 100g confermati esattamente).
+- **Nutrienti**: **8/17**. Per 100g: energia 239kcal, proteine 18,4g, grassi 17,7g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 4mg, ferro 0,85mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_halibut_raw` (unico halibut già nel DB, famiglia Pleuronectidae).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `halibut_groenlandia` ("Halibut della Groenlandia, cotto").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=174232 --food-id=food_halibut_groenlandia_cotto \
+  --name-it="Halibut della Groenlandia, cotto al forno (calore secco)" \
+  --matrix-id=halibut_groenlandia --matrix-description-it="Halibut della Groenlandia, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_halibut_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174232 --food-id=food_halibut_groenlandia_cotto \
+  --name-it="Halibut della Groenlandia, cotto al forno (calore secco)" \
+  --matrix-id=halibut_groenlandia --matrix-description-it="Halibut della Groenlandia, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_halibut_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Merluzzo del Pacifico, cotto al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_merluzzo_pacifico_cotto` (nuovo — distinto dal merluzzo Atlantico già nel DB, `food_merluzzo_cotto` FDC 171956). FDC ID 171990 (**SR Legacy**, "Fish, cod, Pacific, cooked, dry heat (may contain additives to retain moisture)" — pagina tools.myfooddata.com/nutrition-facts/171990/wt1, nome FDC non mostrato esplicitamente nel testo estratto ma solo didascalia abbreviata "Cooked Pacific Cod"; URL con FDC ID esatto e stesso dominio già verificato affidabile su altri alimenti di questo lotto).
