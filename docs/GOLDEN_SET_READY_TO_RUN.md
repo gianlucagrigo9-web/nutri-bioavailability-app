@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Fagioli roman (cranberry), cotti, bolliti, con sale — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_roman_cotti_con_sale` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 175240 (**SR Legacy**, "Beans, cranberry (roman), mature seeds, cooked, boiled, with salt" — pagina `getfoodfacts.com/food/beans-cranberry-roman-mature-seeds-cooked-boiled-with-salt-175240` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17** (mancano vitamina K e beta-carotene, non riportati in pagina, non assunti zero). Per 100g: energia 136kcal, proteine 9,34g, grassi 0,46g, carboidrati 24,5g, fibra 8,60g, calcio 50,0mg, ferro 2,09mg, magnesio 50,0mg, zinco 1,14mg, rame 0,23mg, folato totale 207µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 1,30µg.
+- **Analogia usata**: `food_fagioli_borlotti_secchi_raw` (già eseguito nel DB reale — "fagioli borlotti" è il nome italiano comune dello stesso fagiolo *Phaseolus vulgaris* varietà cranberry/roman, stato crudo/secco vs qui cotto e salato, dichiarato esplicitamente).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_roman_cotti_sale`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile ai legumi, stesso precedente di `food_kidney_beans_boiled`), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175240 --food-id=food_fagioli_roman_cotti_con_sale \
+  --name-it="Fagioli roman (cranberry), cotti, bolliti, con sale" \
+  --matrix-id=fagioli_roman_cotti_sale --matrix-description-it="Fagioli roman (cranberry), cotti con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_borlotti_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=175240 --food-id=food_fagioli_roman_cotti_con_sale \
+  --name-it="Fagioli roman (cranberry), cotti, bolliti, con sale" \
+  --matrix-id=fagioli_roman_cotti_sale --matrix-description-it="Fagioli roman (cranberry), cotti con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_fagioli_borlotti_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Uova di pesce (roe), specie miste, crude — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_uova_di_pesce_miste_raw` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 175132 (**SR Legacy**, "Fish, roe, mixed species, raw"). **Nota di provenienza**: fonte `tools.myfooddata.com/nutrition-facts/175132/100g`, FDC 175132 presente nell'URL (dominio già ampiamente accettato nei lotti precedenti con questa convenzione), pannello "Per 100g" completo 17/17, valori plausibili (B12 10µg e selenio 40,3µg coerenti con la letteratura su uova di pesce, alimento noto per alta densità di questi nutrienti).
