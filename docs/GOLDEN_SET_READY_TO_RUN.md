@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Farina di malto d'orzo — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_farina_di_malto_d_orzo_raw` (nuovo). FDC ID 169740 (**SR Legacy**, "Barley malt flour" — pagina `tools.myfooddata.com/nutrition-facts/169740/wt1`, nome confermato nelle didascalie dei grafici, FDC ID non mostrato esplicitamente in pagina ma solo in URL: stesso dominio già verificato affidabile su altri alimenti già eseguiti/in coda in questo progetto).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 361kcal, proteine 10,3g, grassi 1,85g, carboidrati 78,3g, fibra 7,1g, calcio 37mg, ferro 4,7mg, magnesio 97mg, zinco 2,0mg, rame 0,27mg, folato totale 38µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 37,7µg, vitamina K 2,2µg, vitamina C 0,60mg, beta-carotene 11µg.
+- **Analogia usata**: `food_farina_di_avena_raw` (farina di cereale cruda, già eseguita sul DB reale — stessa categoria funzionale).
+- **Categoria dieta**: `plant_non_fruit` (cereale).
+- **Matrice**: nuova `farina_di_malto_d_orzo` (Farina di malto d'orzo).
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=raw_intact` (beta-carotene reale e non nullo, prodotto non disgregato oltre la macinazione), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169740 --food-id=food_farina_di_malto_d_orzo_raw \
+  --name-it="Farina di malto d'orzo" \
+  --matrix-id=farina_di_malto_d_orzo --matrix-description-it="Farina di malto d'orzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_avena_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169740 --food-id=food_farina_di_malto_d_orzo_raw \
+  --name-it="Farina di malto d'orzo" \
+  --matrix-id=farina_di_malto_d_orzo --matrix-description-it="Farina di malto d'orzo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_avena_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Pollo, rosticceria/BBQ, pelle, cotto — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_pollo_rosticceria_pelle_cotta` (nuovo). FDC ID 171524 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, skin" — pagina `tools.myfooddata.com/nutrition-facts/171524/100g/1`, nome e valori per 100g confermati, FDC ID non mostrato esplicitamente in pagina ma solo in URL: stesso dominio già verificato affidabile su altri alimenti di questa famiglia, vedi `food_pollo_rosticceria_dorso_cotto` FDC 174506, 223° lotto).
