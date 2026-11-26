@@ -16,6 +16,246 @@
 
 ## Pronti
 
+### Ravanello bianco icicle, crudo — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_ravanello_bianco_icicle_raw` (nuovo, varietà distinta dai ravanelli rossi già eseguiti). FDC ID 170081 (**SR Legacy**, "Radishes, white icicle, raw" — pagina `getfoodfacts.com/food/radishes-white-icicle-raw-170081` dedicata, FDC ID e dataType (SR Legacy) confermati esplicitamente in pagina, con link a `fdc.nal.usda.gov/food-details/170081`).
+- **Nutrienti**: **15/17**. Per 100g: energia 14,0kcal, proteine 1,10g, grassi 0,10g, carboidrati 2,63g, fibra 1,40g, calcio 27,0mg, ferro 0,80mg, magnesio 9,00mg, zinco 0,13mg, rame 0,099mg, folato totale 14,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 29,0mg, selenio 0,70µg. Mancano: vitamina K, beta-carotene (pagina mostra solo vitamina A RAE 0µg).
+- **Analogia usata**: `food_ravanelli_raw` (stessa famiglia *Brassicaceae*, stesso genere *Raphanus*, già eseguito — qui varietà bianca "icicle" invece che rossa).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio radice).
+- **Matrice**: nuova `ravanello_bianco_icicle` ("Ravanello bianco icicle").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170081 --food-id=food_ravanello_bianco_icicle_raw \
+  --name-it="Ravanello bianco icicle, crudo" \
+  --matrix-id=ravanello_bianco_icicle --matrix-description-it="Ravanello bianco icicle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170081 --food-id=food_ravanello_bianco_icicle_raw \
+  --name-it="Ravanello bianco icicle, crudo" \
+  --matrix-id=ravanello_bianco_icicle --matrix-description-it="Ravanello bianco icicle" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ravanelli_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
+
+### Proteina di soia concentrata (estrazione alcolica) — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_proteina_soia_concentrata` (nuovo, primo concentrato proteico di soia della pipeline, distinto dal tofu già eseguito). FDC ID 172447 (**SR Legacy**, "Soy protein concentrate, produced by alcohol extraction" — pagina `getfoodfacts.com/food/soy-protein-concentrate-produced-by-alcohol-extraction-172447` dedicata, FDC ID citato esplicitamente ("FDC 172447") e dataType SR Legacy confermati).
+- **Nutrienti**: **17/17**. Per 100g: energia 328kcal, proteine 63,6g, grassi 0,46g, carboidrati 25,4g, fibra 5,50g, calcio 363mg, ferro 10,8mg, magnesio 315mg, zinco 4,40mg, rame 0,98mg, folato totale 340µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 0,80µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_tofu_raw` (altro derivato proteico della soia *Glycine max* già eseguito).
+- **Categoria dieta**: `plant_non_fruit` (derivato vegetale proteico di legume).
+- **Matrice**: nuova `proteina_soia_concentrata` ("Proteina di soia concentrata").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0 esplicito, prodotto processato non una matrice vegetale intatta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw` (prodotto essiccato/in polvere, non cotto), `is_fortified_folate` omesso (false — folato 340µg è endogeno della soia, non segnale di arricchimento).
+
+```
+npm run add-food -- --fdc-id=172447 --food-id=food_proteina_soia_concentrata \
+  --name-it="Proteina di soia concentrata (estrazione alcolica)" \
+  --matrix-id=proteina_soia_concentrata --matrix-description-it="Proteina di soia concentrata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172447 --food-id=food_proteina_soia_concentrata \
+  --name-it="Proteina di soia concentrata (estrazione alcolica)" \
+  --matrix-id=proteina_soia_concentrata --matrix-description-it="Proteina di soia concentrata" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli asparago (yardlong bean), semi maturi, crudi — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_fagioli_asparago_raw` (nuovo). FDC ID 174281 (**SR Legacy**, "Yardlong beans, mature seeds, raw" — pagina `tools.myfooddata.com/nutrition-facts/174281/wt1`, nome confermato in didascalie, FDC ID presente solo nell'URL non nel testo, dominio già ampiamente accettato nei lotti precedenti).
+- **Nutrienti**: **15/17** (valori per 100g derivati dalla porzione di 1 cup/167g dichiarata in pagina). Per 100g: energia 347kcal, proteine 24,3g, grassi 1,32g, carboidrati 61,9g, fibra 11,0g, calcio 138mg, ferro 8,62mg, magnesio 338mg, zinco 3,47mg, rame 0,90mg, folato totale 658µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,62mg, selenio 8,2µg. Mancano: vitamina K, beta-carotene.
+- **Analogia usata**: `food_fagioli_dall_occhio_raw` (stessa specie *Vigna unguiculata*, sottospecie diversa coltivata per il baccello invece che per il seme — l'analogia più stretta possibile).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_asparago_crudi` ("Fagioli asparago (yardlong bean), semi maturi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174281 --food-id=food_fagioli_asparago_raw \
+  --name-it="Fagioli asparago (yardlong bean), semi maturi, crudi" \
+  --matrix-id=fagioli_asparago_crudi --matrix-description-it="Fagioli asparago (yardlong bean), semi maturi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_dall_occhio_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174281 --food-id=food_fagioli_asparago_raw \
+  --name-it="Fagioli asparago (yardlong bean), semi maturi, crudi" \
+  --matrix-id=fagioli_asparago_crudi --matrix-description-it="Fagioli asparago (yardlong bean), semi maturi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_dall_occhio_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli moth bean, semi maturi, crudi — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_fagioli_moth_raw` (nuovo). FDC ID 172425 (**SR Legacy**, "Mothbeans, mature seeds, raw" — pagina `tools.myfooddata.com/nutrition-facts/172425`, nome confermato in didascalie, FDC ID presente solo nell'URL).
+- **Nutrienti**: **14/17**. Per 100g: energia 343kcal, proteine 22,9g, grassi 1,6g, carboidrati 61,5g, calcio 150mg, ferro 10,9mg, magnesio 381mg, zinco 1,9mg, rame 0,69mg, folato totale 649µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 4mg, selenio 8,2µg. Mancano: fibra (non mostrata in pagina), vitamina K, beta-carotene.
+- **Analogia usata**: `food_fagioli_dall_occhio_raw` (stesso genere *Vigna*, specie diversa — *V. aconitifolia* vs *V. unguiculata*).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_moth_crudi` ("Fagioli moth bean, semi maturi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172425 --food-id=food_fagioli_moth_raw \
+  --name-it="Fagioli moth bean, semi maturi, crudi" \
+  --matrix-id=fagioli_moth_crudi --matrix-description-it="Fagioli moth bean, semi maturi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_dall_occhio_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172425 --food-id=food_fagioli_moth_raw \
+  --name-it="Fagioli moth bean, semi maturi, crudi" \
+  --matrix-id=fagioli_moth_crudi --matrix-description-it="Fagioli moth bean, semi maturi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_dall_occhio_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di fitolacca (poke/pokeberry shoots), crudi — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_fitolacca_germogli_raw` (nuovo — nota: pianta tossica se consumata cruda in quantità, tradizionalmente bollita due volte prima del consumo; il dato USDA è comunque il riferimento nutrizionale standard del crudo, trasparenza dichiarata). FDC ID 170432 (**SR Legacy**, "Pokeberry shoots, (poke), raw" — pagina `getfoodfacts.com/food/pokeberry-shoots-poke-raw-170432` dedicata, FDC ID e nome confermati esplicitamente, dataType SR Legacy).
+- **Nutrienti**: **15/17**. Per 100g: energia 23,0kcal, proteine 2,60g, grassi 0,40g, carboidrati 3,70g, fibra 1,70g, calcio 53,0mg, ferro 1,70mg, magnesio 18,0mg, zinco 0,24mg, rame 0,16mg, folato totale 16,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 136mg. Mancano: vitamina K, beta-carotene (pagina mostra solo vitamina A RAE 435µg).
+- **Analogia usata**: `food_bietole_da_costa_raw` (verdura a foglia cruda generica, già eseguita — famiglia botanica diversa ma stesso tipo funzionale "verdura a foglia selvatica cruda").
+- **Categoria dieta**: `plant_non_fruit` (verdura a foglia).
+- **Matrice**: nuova `fitolacca_germogli` ("Germogli di fitolacca (poke)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato esplicitamente, solo vit.A RAE), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Phytolaccaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170432 --food-id=food_fitolacca_germogli_raw \
+  --name-it="Germogli di fitolacca (poke/pokeberry shoots), crudi" \
+  --matrix-id=fitolacca_germogli --matrix-description-it="Germogli di fitolacca (poke)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bietole_da_costa_raw \
+  --botanical-family=Phytolaccaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170432 --food-id=food_fitolacca_germogli_raw \
+  --name-it="Germogli di fitolacca (poke/pokeberry shoots), crudi" \
+  --matrix-id=fitolacca_germogli --matrix-description-it="Germogli di fitolacca (poke)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bietole_da_costa_raw \
+  --botanical-family=Phytolaccaceae --diet-category=plant_non_fruit --apply
+```
+
+### Poi (pasta di taro fermentata) — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_poi` (nuovo, primo prodotto hawaiano della pipeline). FDC ID 170431 (**SR Legacy**, "Poi" — pagina `getfoodfacts.com/food/poi-170431` dedicata, FDC ID e nome confermati esplicitamente, dataType SR Legacy).
+- **Nutrienti**: **17/17**. Per 100g: energia 112kcal, proteine 0,38g, grassi 0,14g, carboidrati 27,2g, fibra 0,40g, calcio 16,0mg, ferro 0,88mg, magnesio 24,0mg, zinco 0,22mg, rame 0,17mg, folato totale 21,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 4,00mg, selenio 0,70µg, vitamina K 1,00µg, beta-carotene 31,0µg.
+- **Analogia usata**: `food_taro_cotto` (stesso tubero di base, *Colocasia esculenta*, già eseguito — il poi è una pasta fermentata/cotta di taro).
+- **Categoria dieta**: `plant_non_fruit` (tubero/derivato).
+- **Matrice**: nuova `poi` ("Poi, pasta di taro").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale 31µg, prodotto cotto/fermentato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Araceae` (come l'analogia), `baseline_cooking_state=boiled` (come l'analogia taro cotto, essendo poi un derivato cotto), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170431 --food-id=food_poi \
+  --name-it="Poi (pasta di taro fermentata)" \
+  --matrix-id=poi --matrix-description-it="Poi, pasta di taro" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taro_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Araceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170431 --food-id=food_poi \
+  --name-it="Poi (pasta di taro fermentata)" \
+  --matrix-id=poi --matrix-description-it="Poi, pasta di taro" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_taro_cotto \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Araceae --diet-category=plant_non_fruit --apply
+```
+
+### Mammee (mamey/San Domingo apricot), crudo — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_mammee_raw` (nuovo, prima Clusiaceae della pipeline). FDC ID 169909 (**SR Legacy**, "Mammy-apple, (mamey), raw" — pagina `getfoodfacts.com/food/mammy-apple-mamey-raw-169909` dedicata, FDC ID, nome e dataType SR Legacy confermati esplicitamente).
+- **Nutrienti**: **15/17**. Per 100g: energia 51,0kcal, proteine 0,50g, grassi 0,50g, carboidrati 12,5g, fibra 3,00g, calcio 11,0mg, ferro 0,70mg, magnesio 16,0mg, zinco 0,10mg, rame 0,086mg, folato totale 14,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 14,0mg, selenio 0,60µg. Mancano: vitamina K, beta-carotene (pagina mostra solo vitamina A RAE 12,0µg).
+- **Analogia usata**: `food_papaya_raw` (altro frutto tropicale dolce a polpa arancione/gialla già eseguito — nessuna analogia botanica più stretta disponibile nel DB).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco).
+- **Matrice**: nuova `mammee` ("Mammee (mamey)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato esplicitamente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Clusiaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169909 --food-id=food_mammee_raw \
+  --name-it="Mammee (mamey/San Domingo apricot), crudo" \
+  --matrix-id=mammee --matrix-description-it="Mammee (mamey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --botanical-family=Clusiaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169909 --food-id=food_mammee_raw \
+  --name-it="Mammee (mamey/San Domingo apricot), crudo" \
+  --matrix-id=mammee --matrix-description-it="Mammee (mamey)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_papaya_raw \
+  --botanical-family=Clusiaceae --diet-category=fresh_fruit --apply
+```
+
+### Uva muscadine, cruda — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_uva_muscadine_raw` (nuovo, varietà distinta dall'uva europea già eseguita). FDC ID 173040 (**SR Legacy**, "Grapes, muscadine, raw" — pagina `tools.myfooddata.com/nutrition-facts/173040/wt9/2`, nome specie "Muscadine Grapes" confermato nel testo, FDC ID presente solo nell'URL, dominio già ampiamente accettato nei lotti precedenti).
+- **Nutrienti**: **13/17** (valori per 100g derivati dalla porzione "2 x 10 grapes (120g)" dichiarata in pagina). Per 100g: energia 56,7kcal, proteine 0,81g, grassi 0,47g, carboidrati 13,9g, fibra 3,9g, calcio 37,0mg, ferro 0,26mg, magnesio 14,0mg, zinco 0,11mg, rame 0,12mg, folato totale 2,0µg, vitamina C 6,5mg, beta-carotene 39,0µg. Mancano: acido folico, vitamina B12, selenio, vitamina K.
+- **Analogia usata**: `food_grapes_european_raw` (stesso genere *Vitis*, specie diversa — *V. rotundifolia* vs *V. vinifera* — già eseguita).
+- **Categoria dieta**: `fresh_fruit` (frutto fresco).
+- **Matrice**: nuova `uva_muscadine` ("Uva muscadine").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, come l'analogia), `carotenoid_matrix_state=raw_intact` (beta-carotene reale 39,0µg, frutto crudo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Vitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=173040 --food-id=food_uva_muscadine_raw \
+  --name-it="Uva muscadine, cruda" \
+  --matrix-id=uva_muscadine --matrix-description-it="Uva muscadine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Vitaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=173040 --food-id=food_uva_muscadine_raw \
+  --name-it="Uva muscadine, cruda" \
+  --matrix-id=uva_muscadine --matrix-description-it="Uva muscadine" \
+  --baseline-cooking-state=raw --analogy-food-id=food_grapes_european_raw \
+  --carotenoid-matrix-state=raw_intact --botanical-family=Vitaceae --diet-category=fresh_fruit --apply
+```
+
+### Funghi maitake, crudi — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_funghi_maitake_raw` (nuovo). FDC ID 169403 (**SR Legacy**, "Mushrooms, maitake, raw" — pagina `tools.myfooddata.com/nutrition-facts/169403/wt1`, nome "Raw Maitake Mushrooms" confermato (specie coincide), FDC ID presente solo nell'URL).
+- **Nutrienti**: **17/17** (valori per 100g derivati dalla porzione "1 cup diced (70g)" dichiarata in pagina; diversi valori espliciti a zero, coerente con un fungo). Per 100g: energia 31,4kcal, proteine 2,0g, grassi 0,19g, carboidrati 7,0g, fibra 2,7g, calcio 1,0mg, ferro 0,30mg, magnesio 10mg, zinco 0,74mg, rame 0,26mg, folato totale 21,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 2,1µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_funghi_ostrica_raw` (fungo crudo generico già eseguito, stesso precedente di trattamento "fungo" di questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (fungo).
+- **Matrice**: nuova `funghi_maitake` ("Funghi maitake").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — non applicabile, fungo, stesso precedente di `food_funghi_ostrica_raw`), `carotenoid_matrix_state` omesso (NULL — attributo per matrici vegetali, non applicabile a un fungo, stesso precedente), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante, stesso precedente), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169403 --food-id=food_funghi_maitake_raw \
+  --name-it="Funghi maitake, crudi" \
+  --matrix-id=funghi_maitake --matrix-description-it="Funghi maitake" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_ostrica_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169403 --food-id=food_funghi_maitake_raw \
+  --name-it="Funghi maitake, crudi" \
+  --matrix-id=funghi_maitake --matrix-description-it="Funghi maitake" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_ostrica_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
+### Funghi spugnola (morel), crudi — preparato 2026-11-26 dal task (227° lotto)
+
+- **food_id**: `food_funghi_spugnola_raw` (nuovo). FDC ID 168423 (**SR Legacy**, "Mushrooms, morel, raw" — pagina `tools.myfooddata.com/nutrition-comparison/168423/wt1`, nome "Raw Morel Mushrooms" confermato (specie coincide), fonte dati dichiarata "USDA Food Data Central Standard Release", FDC ID presente solo nell'URL).
+- **Nutrienti**: **13/17** (valori per 100g derivati dalla porzione "1 cup (66g)" dichiarata in pagina). Per 100g: energia 30kcal, proteine 3,2g, grassi 0,58g, carboidrati 5,2g, fibra 2,7g, calcio 43mg, ferro 12,1mg, magnesio 18,9mg, zinco 2,0mg, rame 0,62mg, folato totale 8,9µg, acido folico 0µg esplicito, selenio 2,3µg, beta-carotene 0µg esplicito. Mancano: vitamina B12, vitamina C, vitamina K.
+- **Analogia usata**: `food_funghi_ostrica_raw` (fungo crudo generico già eseguito, stesso precedente di trattamento "fungo" di questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` (fungo).
+- **Matrice**: nuova `funghi_spugnola` ("Funghi spugnola (morel)").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — stesso precedente funghi), `carotenoid_matrix_state` omesso (NULL — stesso precedente funghi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — i funghi non sono piante), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168423 --food-id=food_funghi_spugnola_raw \
+  --name-it="Funghi spugnola (morel), crudi" \
+  --matrix-id=funghi_spugnola --matrix-description-it="Funghi spugnola (morel)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_ostrica_raw \
+  --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168423 --food-id=food_funghi_spugnola_raw \
+  --name-it="Funghi spugnola (morel), crudi" \
+  --matrix-id=funghi_spugnola --matrix-description-it="Funghi spugnola (morel)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_funghi_ostrica_raw \
+  --diet-category=plant_non_fruit --apply
+```
+
 ### Bocconcini di salmone, cotti (come acquistati, non riscaldati) — preparato 2026-11-26 dal task (226° lotto)
 
 - **food_id**: `food_nuggets_salmone_cotti` (nuovo). FDC ID 173722 (**SR Legacy**, "Salmon nuggets, cooked as purchased, unheated" — pagina `getfoodfacts.com/food/salmon-nuggets-cooked-as-purchased-unheated-173722` dedicata, FDC ID e dataType citati esplicitamente). Prodotto composito (carboidrati 11,8g/100g indicano una panatura), ma contenendo pesce resta `meat_fish` senza ambiguità, stessa logica già usata per i bastoncini di pesce surgelati (222° lotto).
