@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Prosciutto cotto, girello, con osso, magro, cotto al forno — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_prosciutto_cotto_girello` (nuovo). FDC ID 167915 (**SR Legacy**, "Pork, cured, ham -- water added, rump, bone-in, separable lean only, heated, roasted" — pagina tools.myfooddata.com/print/167915/wt1, nome confermato esattamente, valori derivati da porzione 85g, fattore di scala 1/0,85).
+- **Nutrienti**: **8/17**. Per 100g (derivato): energia ~121kcal, proteine ~21,4g, grassi ~3,5g, carboidrati ~0,87g, fibra 0g esplicito, calcio ~8,0mg, ferro ~0,71mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (carne di maiale cotta già nel DB).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_cotto_girello` ("Prosciutto cotto, girello").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=167915 --food-id=food_prosciutto_cotto_girello \
+  --name-it="Prosciutto cotto, girello, con osso, magro, cotto al forno" \
+  --matrix-id=prosciutto_cotto_girello --matrix-description-it="Prosciutto cotto, girello" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=167915 --food-id=food_prosciutto_cotto_girello \
+  --name-it="Prosciutto cotto, girello, con osso, magro, cotto al forno" \
+  --matrix-id=prosciutto_cotto_girello --matrix-description-it="Prosciutto cotto, girello" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_lonza_di_maiale_cotta --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Noci miste (con arachidi), tostate a secco, salate — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_noci_miste_tostate_salate` (nuovo). FDC ID 170181 (**SR Legacy**, "Nuts, mixed nuts, dry roasted, with peanuts, salt added, CHOSEN ROASTER" — pagina tools.myfooddata.com/print/170181/wt1, nome confermato esattamente, valori derivati da porzione 132g, fattore di scala 1/1,32).
