@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio cottage, cremoso, con frutta — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cottage_con_frutta` (nuovo, primo cottage cheese di questa pipeline, verificato con `grep`, zero occorrenze). FDC ID 172180 (**SR Legacy**, "Cheese, cottage, creamed, with fruit" — pagina `getfoodfacts.com/food/cheese-cottage-creamed-with-fruit-172180` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17**. Per 100g: energia 97,0kcal, proteine 10,7g, grassi 3,85g, carboidrati 4,61g, fibra 0,20g, calcio 53,0mg, ferro 0,16mg, magnesio 7,00mg, zinco 0,33mg, rame 0,040mg, folato totale 11,0µg, acido folico 0µg esplicito, vitamina B12 0,53µg, vitamina C 1,40mg, selenio 7,70µg, vitamina K (fillochinone) 0,40µg, beta-carotene 14,0µg.
+- **Analogia usata**: `food_formaggio_cremoso_raw` (già eseguito nel DB reale — consistenza cremosa più vicina disponibile fra i formaggi già in DB; nessun cottage cheese semplice ancora presente).
+- **Categoria dieta**: `egg_dairy` (prodotto lattiero-caseario; la frutta aggiunta non cambia la categoria, stessa logica di uno yogurt con frutta).
+- **Matrice**: nuova `formaggio_cottage_con_frutta`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 14µg esplicito ma di origine mista frutta/latte, non classificabile con gli enum disponibili), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=fermented`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172180 --food-id=food_formaggio_cottage_con_frutta \
+  --name-it="Formaggio cottage, cremoso, con frutta" \
+  --matrix-id=formaggio_cottage_con_frutta --matrix-description-it="Formaggio cottage, con frutta" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172180 --food-id=food_formaggio_cottage_con_frutta \
+  --name-it="Formaggio cottage, cremoso, con frutta" \
+  --matrix-id=formaggio_cottage_con_frutta --matrix-description-it="Formaggio cottage, con frutta" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Fagioli roman (cranberry), cotti, bolliti, con sale — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_fagioli_roman_cotti_con_sale` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 175240 (**SR Legacy**, "Beans, cranberry (roman), mature seeds, cooked, boiled, with salt" — pagina `getfoodfacts.com/food/beans-cranberry-roman-mature-seeds-cooked-boiled-with-salt-175240` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
