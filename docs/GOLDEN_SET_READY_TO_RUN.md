@@ -16,6 +16,28 @@
 
 ## Pronti
 
+### Formaggio fuso tipo americano, light (ridotto in grassi), fortificato con vitamina D — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_formaggio_fuso_americano_light` (nuovo). FDC ID 173455 (**SR Legacy**, "Cheese product, pasteurized process, American, reduced fat, fortified with vitamin D" — pagina tools.myfooddata.com/print/173455/wt1/1, nome confermato esattamente, valori derivati da porzione 21g, fattore di scala 1/0,21).
+- **Nutrienti**: **8/17**. Per 100g (derivato): energia 238,1kcal, proteine 17,6g, grassi 14,3g, carboidrati 10,5g, fibra 0g esplicito, calcio 529,0mg, ferro 0,19mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (formaggio tipo cheddar già nel DB — il "formaggio tipo americano" processato è a base cheddar).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_fuso_americano_light` ("Formaggio fuso tipo americano, light, fortificato vit. D").
+- **Attributi**: nessuno specifico (prodotto caseario processato, non applicabile heme/carotenoid/botanical).
+
+```
+npm run add-food -- --fdc-id=173455 --food-id=food_formaggio_fuso_americano_light \
+  --name-it="Formaggio fuso tipo americano, light (ridotto in grassi), fortificato con vitamina D" \
+  --matrix-id=formaggio_fuso_americano_light --matrix-description-it="Formaggio fuso tipo americano, light, fortificato vit. D" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=173455 --food-id=food_formaggio_fuso_americano_light \
+  --name-it="Formaggio fuso tipo americano, light (ridotto in grassi), fortificato con vitamina D" \
+  --matrix-id=formaggio_fuso_americano_light --matrix-description-it="Formaggio fuso tipo americano, light, fortificato vit. D" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cheddar_raw --diet-category=egg_dairy --apply
+```
+
 ### Aringa del Pacifico, cotta al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_aringa_pacifico_cotta` (nuovo — specie distinta (Clupea pallasii) e preparazione distinta (cotta) dall'aringa Atlantica cruda già nel DB `food_aringa_raw` FDC 175116). FDC ID 174233 (**SR Legacy**, "Fish, herring, Pacific, cooked, dry heat" — pagina tools.myfooddata.com/nutrition-facts/174233/100g/1, nome FDC non mostrato esplicitamente ma didascalia "Cooked Pacific Herring" coerente, stesso dominio verificato affidabile più volte in questo lotto).
