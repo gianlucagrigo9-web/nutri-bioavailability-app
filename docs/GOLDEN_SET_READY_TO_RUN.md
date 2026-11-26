@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pesce roughy arancione (orange roughy), cotto a calore secco — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_pesce_roughy_arancione_cotto` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 174251 (**SR Legacy**, "Fish, roughy, orange, cooked, dry heat"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/fish-roughy-orange-cooked-dry-heat.html`, nome USDA corrispondente esatto e pannello "Per 100g" completo (17/17), etichettato "SR Legacy" in pagina ma l'FDC ID 174251 non è mostrato esplicitamente (solo il nome). Stessa convenzione già accettata in questo turno per `food_formaggio_cheddar_deciso_a_fette`; valore selenio 88,3µg coerente con la letteratura (orange roughy è specie nota per selenio molto elevato).
+- **Nutrienti**: **17/17**. Per 100g: energia 105kcal, proteine 22,6g, grassi 0,90g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 1,1mg, magnesio 18,0mg, zinco 0,32mg, rame 0,07mg, folato totale 5,0µg, acido folico 0µg esplicito, vitamina B12 0,47µg, vitamina C 0mg esplicito, selenio 88,3µg, vitamina K (fillochinone) 1,1µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_merluzzo_cotto` (già eseguito nel DB reale — pesce bianco magro cotto, stessa categoria funzionale e stesso stato di cottura).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pesce_roughy_arancione_cotto`.
+- **Attributi**: `is_heme_iron` presente (ferro eme da carne di pesce, stessa convenzione dei bocconcini di salmone già pronti), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, non applicabile), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174251 --food-id=food_pesce_roughy_arancione_cotto \
+  --name-it="Pesce roughy arancione (orange roughy), cotto a calore secco" \
+  --matrix-id=pesce_roughy_arancione_cotto --matrix-description-it="Pesce roughy arancione, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174251 --food-id=food_pesce_roughy_arancione_cotto \
+  --name-it="Pesce roughy arancione (orange roughy), cotto a calore secco" \
+  --matrix-id=pesce_roughy_arancione_cotto --matrix-description-it="Pesce roughy arancione, cotto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Formaggio cottage, cremoso, con frutta — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_formaggio_cottage_con_frutta` (nuovo, primo cottage cheese di questa pipeline, verificato con `grep`, zero occorrenze). FDC ID 172180 (**SR Legacy**, "Cheese, cottage, creamed, with fruit" — pagina `getfoodfacts.com/food/cheese-cottage-creamed-with-fruit-172180` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
