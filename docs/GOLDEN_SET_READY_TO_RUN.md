@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Lingcod, cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_pesce_lingcod_cotto` (nuovo — distinto dal lingcod crudo già in coda, `food_pesce_lingcod_raw` FDC 173671, non ancora eseguito sul DB reale quindi non utilizzabile come analogia). FDC ID 174235 (**SR Legacy**, "Fish, lingcod, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-lingcod-cooked-dry-heat-174235` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **15/17**. Per 100g: energia 109kcal, proteine 22,6g, grassi 1,36g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 18,0mg, ferro 0,41mg, magnesio 33,0mg, zinco 0,58mg, rame 0,035mg, folato totale 10,0µg, acido folico 0µg esplicito, vitamina B12 4,15µg, selenio 46,8µg, vitamina C 0mg esplicito. Mancano: vitamina K, beta-carotene (nessuna riga sulla pagina, non assunti zero).
+- **Analogia usata**: `food_merluzzo_cotto` (merluzzo Atlantico cotto, già nel DB reale — pesce bianco magro cotto, stessa categoria funzionale; già usato come analogia in lotti eseguiti).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `lingcod_cotto` ("Lingcod, cotto").
+- **Attributi**: `is_heme_iron` (flag attivo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — non applicabile, prodotto animale), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174235 --food-id=food_pesce_lingcod_cotto \
+  --name-it="Lingcod, cotto al forno (calore secco)" \
+  --matrix-id=lingcod_cotto --matrix-description-it="Lingcod, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174235 --food-id=food_pesce_lingcod_cotto \
+  --name-it="Lingcod, cotto al forno (calore secco)" \
+  --matrix-id=lingcod_cotto --matrix-description-it="Lingcod, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Cavolo kimchi (coreano, fermentato/salato) — preparato 2026-11-26 dal task (224° lotto)
 
 - **food_id**: `food_cavolo_kimchi` (nuovo — distinto dal kimchi coreano crudo già `⚠` dal ventottesimo lotto, FDC 2710077 **USDA Survey/FNDDS**, scartato per tipo di dataset non ammesso: questo è un record **SR Legacy** distinto, FDC diverso, dataset ammesso). FDC ID 170392 (**SR Legacy**, "Cabbage, kimchi" — pagina `getfoodfacts.com/food/cabbage-kimchi-170392` dedicata e pulita, FDC ID e dataType confermati dopo fetch, release USDA 2026-04-30).
