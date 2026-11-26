@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Formaggio cheddar, sapore deciso, a fette — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cheddar_deciso_a_fette` (nuovo — distinto da `food_formaggio_cheddar_raw` già eseguito (cheddar generico) e da `food_formaggio_messicano_misto`/`food_formaggio_carvi` già in coda: qui cheddar "sharp" (stagionato, sapore deciso), a fette. Verificato con `grep`, zero occorrenze). FDC ID 170899 (**SR Legacy**, "Cheese, cheddar, sharp, sliced"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cheese-cheddar-sharp-sliced.html`, nome USDA corrispondente esatto nell'URL e pannello "Per 100g" completo (17/17), ma l'FDC ID 170899 non è mostrato esplicitamente in pagina (solo il nome). Accettato per coerenza con la convenzione già usata in questo stesso turno (fagioli neri comuni, bambù, farina di mais — vedi voci sopra) per pagine triagemethod.com con nome esatto e pannello completo; valori plausibili (calcio 711mg/100g, tipico per cheddar stagionato).
+- **Nutrienti**: **17/17**. Per 100g: energia 410kcal, proteine 24,2g, grassi 33,8g, carboidrati 2,1g, fibra 0g esplicito, calcio 711mg, ferro 0,16mg, magnesio 27,0mg, zinco 3,7mg, rame 0,04mg, folato totale 27,0µg, acido folico 0µg esplicito, vitamina B12 0,88µg, vitamina C 0mg esplicito, selenio 28,3µg, vitamina K (fillochinone) 2,4µg, beta-carotene 85,0µg.
+- **Analogia usata**: `food_formaggio_cheddar_raw` (già eseguito nel DB reale — stesso tipo di formaggio, varietà/stagionatura diversa dichiarata nel nome).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_cheddar_deciso_fette`.
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=fermented` (formaggio, stessa convenzione di `food_cheese_american_nonfat`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=170899 --food-id=food_formaggio_cheddar_deciso_a_fette \
+  --name-it="Formaggio cheddar, sapore deciso, a fette" \
+  --matrix-id=formaggio_cheddar_deciso_fette --matrix-description-it="Formaggio cheddar, sapore deciso" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170899 --food-id=food_formaggio_cheddar_deciso_a_fette \
+  --name-it="Formaggio cheddar, sapore deciso, a fette" \
+  --matrix-id=formaggio_cheddar_deciso_fette --matrix-description-it="Formaggio cheddar, sapore deciso" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_formaggio_cheddar_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Albicocche, in scatola, sciroppo pesante, con buccia — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_albicocche_sciroppo_pesante_con_buccia_in_scatola` (nuovo — distinto da `food_albicocche_sciroppo_pesante_senza_buccia_in_scatola` già eseguita, FDC 171701 "extra heavy syrup... without skin": qui sciroppo pesante normale (non extra), CON buccia. Verificato con `grep`, zero occorrenze). FDC ID 171699 (**SR Legacy**, "Apricots, canned, heavy syrup pack, with skin, solids and liquids" — pagina `getfoodfacts.com/food/apricots-canned-heavy-syrup-pack-with-skin-solids-and-liquids-171699` dedicata, FDC ID e dataType citati esplicitamente in pagina, release USDA 2026-04-30).
