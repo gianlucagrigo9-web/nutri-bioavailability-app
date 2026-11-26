@@ -14,6 +14,30 @@
 
 ---
 
+### Polpette vegetali senza carne — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_polpette_vegetali_senza_carne` (nuovo, stessa categoria USDA "Legumes and Legume Products" dei due prodotti meatless di questo stesso lotto). FDC ID 169067 (**SR Legacy**, "Meatballs, meatless" — pagina `getfoodfacts.com/food/meatballs-meatless-169067` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 197kcal, proteine 21,0g, grassi 9,00g, carboidrati 8,00g, fibra 4,60g, calcio 25,0mg, ferro 2,16mg, magnesio 18,0mg, zinco 1,80mg, rame 0,71mg, folato totale 78,0µg, acido folico 0µg esplicito, vitamina B12 1,50µg, vitamina C 0mg esplicito, selenio 0,80µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito. Colesterolo 0mg esplicito (coerente con prodotto vegetale, nessun ingrediente animale).
+- **Analogia usata**: `food_tofu_raw` (altro derivato proteico vegetale, già eseguito sul DB reale, stessa convenzione usata per gli altri due prodotti "meatless" di questo lotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `polpette_vegetali_senza_carne` ("Polpette vegetali, senza carne").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (base legumi/soia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169067 --food-id=food_polpette_vegetali_senza_carne \
+  --name-it="Polpette vegetali, senza carne" \
+  --matrix-id=polpette_vegetali_senza_carne --matrix-description-it="Polpette vegetali, senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169067 --food-id=food_polpette_vegetali_senza_carne \
+  --name-it="Polpette vegetali, senza carne" \
+  --matrix-id=polpette_vegetali_senza_carne --matrix-description-it="Polpette vegetali, senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Nettare di guava con sucralosio in scatola — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_nettare_di_guava_sucralosio_in_scatola` (nuovo, variante "diet"/senza zucchero distinta dal nettare di guava zuccherato tradizionale, se già presente da verificare in un lotto futuro). FDC ID 168210 (**SR Legacy**, "Guava nectar, with sucralose, canned" — pagina `getfoodfacts.com/food/guava-nectar-with-sucralose-canned-168210` dedicata, FDC ID citato esplicitamente in pagina).
