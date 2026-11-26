@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Affettato vegetale per pranzo (tipo salume senza carne) — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_affettato_vegetale_pranzo` (nuovo, primo "meatless luncheon" della pipeline). FDC ID 169066 (**SR Legacy**, "Luncheon slices, meatless" — pagina `getfoodfacts.com/food/luncheon-slices-meatless-169066` dedicata, FDC ID e dataType (SR Legacy) confermati esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 189kcal, proteine 17,8g, grassi 11,1g, carboidrati 4,44g, fibra 1,10g, calcio 41,0mg, ferro 1,80mg, magnesio 23,0mg, zinco 1,60mg, rame 0,91mg, folato totale 100µg, acido folico 0µg esplicito, vitamina B12 4,00µg, vitamina C 0mg esplicito, selenio 7,40µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_tofu_raw` (altro derivato proteico della soia *Glycine max*, stesso principio già usato per tempeh — già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` — prodotto "meatless" (categoria USDA "Legumes and Legume Products"), colesterolo 0mg esplicito in pagina (coerente con assenza di grassi animali/uovo), B12 presente è fortificazione tipica di questi analoghi della carne a base soia, non segnale di contenuto animale.
+- **Matrice**: nuova `affettato_vegetale_pranzo` ("Affettato vegetale per pranzo, tipo salume senza carne").
+- **Attributi**: `is_heme_iron` omesso (false, prodotto vegetale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (base soia), `baseline_cooking_state=raw` (prodotto pronto al consumo, convenzione già usata per formaggi/margarine processati), `is_fortified_folate` omesso (false — folato naturale, non acido folico).
+
+```
+npm run add-food -- --fdc-id=169066 --food-id=food_affettato_vegetale_pranzo \
+  --name-it="Affettato vegetale per pranzo, tipo salume senza carne" \
+  --matrix-id=affettato_vegetale_pranzo --matrix-description-it="Affettato vegetale per pranzo, tipo salume senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169066 --food-id=food_affettato_vegetale_pranzo \
+  --name-it="Affettato vegetale per pranzo, tipo salume senza carne" \
+  --matrix-id=affettato_vegetale_pranzo --matrix-description-it="Affettato vegetale per pranzo, tipo salume senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Ravanello bianco icicle, crudo — preparato 2026-11-26 dal task (227° lotto)
 
 - **food_id**: `food_ravanello_bianco_icicle_raw` (nuovo, varietà distinta dai ravanelli rossi già eseguiti). FDC ID 170081 (**SR Legacy**, "Radishes, white icicle, raw" — pagina `getfoodfacts.com/food/radishes-white-icicle-raw-170081` dedicata, FDC ID e dataType (SR Legacy) confermati esplicitamente in pagina, con link a `fdc.nal.usda.gov/food-details/170081`).
