@@ -14,6 +14,30 @@
 
 ---
 
+### Uovo, intero, cotto in camicia (affogato) — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_uovo_in_camicia_raw` (nuovo, forma di cottura "in camicia/affogato" mai tentata — distinta da fritto/sodo/omelette già in pipeline). FDC ID 172186 (**SR Legacy**, "Egg, whole, cooked, poached" — pagina `tools.myfooddata.com/nutrition-facts/172186/wt1`, nome confermato ("Poached Eggs"), FDC ID solo in URL).
+- **Nutrienti**: **17/17**. Per 100g (derivato da porzione 50g, fattore x2): energia 144kcal, proteine 12,6g, grassi 9,4g, carboidrati 0,72g, fibra 0g esplicito, calcio 56mg, ferro 1,76mg, magnesio 12mg, zinco 1,3mg, rame 0,08mg, folato totale 35µg, acido folico 0µg esplicito, vitamina B12 0,72µg, vitamina C 0mg esplicito, selenio 30,6µg, vitamina K 0,3µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_egg_hard_boiled` (uovo intero cotto, Golden Set originale, già eseguito sul DB reale — stessa convenzione usata per fritto/omelette).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `uovo_in_camicia` ("Uovo, intero, cotto in camicia/affogato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non vegetale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172186 --food-id=food_uovo_in_camicia_raw \
+  --name-it="Uovo, intero, cotto in camicia (affogato)" \
+  --matrix-id=uovo_in_camicia --matrix-description-it="Uovo, intero, cotto in camicia/affogato" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172186 --food-id=food_uovo_in_camicia_raw \
+  --name-it="Uovo, intero, cotto in camicia (affogato)" \
+  --matrix-id=uovo_in_camicia --matrix-description-it="Uovo, intero, cotto in camicia/affogato" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_egg_hard_boiled \
+  --diet-category=egg_dairy --apply
+```
+
 ### Estensore di carne a base vegetale (meat extender) — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_estensore_vegetale_per_carne` (nuovo, prodotto proteico vegetale secco usato per "allungare" preparati di carne macinata — categoria USDA "Legumes and Legume Products", stesso gruppo di `food_affettato_vegetale_pranzo` di questo stesso lotto). FDC ID 174268 (**SR Legacy**, "Meat extender" — pagina `tools.myfooddata.com/nutrition-facts/174268/wt1`, nome confermato, FDC ID solo in URL).
