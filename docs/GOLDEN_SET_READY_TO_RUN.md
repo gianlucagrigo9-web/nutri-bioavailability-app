@@ -14,6 +14,30 @@
 
 ---
 
+### Olio di soia industriale a basso contenuto di acido linolenico — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_olio_di_soia_basso_linolenico_raw` (nuovo, primo olio di soia della pipeline — nessun olio di soia generico ancora presente nel DB). FDC ID 171438 (**SR Legacy**, "Oil, industrial, soy, low linolenic" — pagina `recipal.com/ingredients/817-nutrition-facts-calories-protein-carbs-fat-oil-industrial-soy-low-linolenic`, nome specifico e lungo confermato esattamente, FDC ID non mostrato in pagina — mostra invece un ID legacy NBD 4699, stesso tipo di accettazione per corrispondenza di nome già usata per altre fonti senza FDC esplicito in questa pipeline).
+- **Nutrienti**: **15/17**. Per 100g: energia 900kcal, proteine 0g, grassi 100g, carboidrati 0g, fibra 0g, calcio 0mg, ferro 0,1mg, magnesio 0mg, zinco 0mg, rame 0mg, folato totale 0µg, vitamina B12 0µg, vitamina C 0mg, selenio 0µg, vitamina K 184µg (valore reale, coerente con l'alto contenuto di vitamina K noto dell'olio di soia). Mancano: acido folico, beta-carotene (pagina mostra solo vitamina A 0µg).
+- **Analogia usata**: `food_olio_di_girasole_raw` (analogia **funzionale**, non botanica: grasso vegetale già eseguito sul DB reale — nessun olio di soia preesistente a cui ancorarsi, stessa convenzione già usata per le margarine di questa pipeline).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `olio_di_soia_basso_linolenico` ("Olio di soia industriale, a basso contenuto di acido linolenico").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (soia), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171438 --food-id=food_olio_di_soia_basso_linolenico_raw \
+  --name-it="Olio di soia industriale, a basso contenuto di acido linolenico" \
+  --matrix-id=olio_di_soia_basso_linolenico --matrix-description-it="Olio di soia industriale, a basso contenuto di acido linolenico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171438 --food-id=food_olio_di_soia_basso_linolenico_raw \
+  --name-it="Olio di soia industriale, a basso contenuto di acido linolenico" \
+  --matrix-id=olio_di_soia_basso_linolenico --matrix-description-it="Olio di soia industriale, a basso contenuto di acido linolenico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Fagioli fritti in scatola, senza grassi — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_fagioli_fritti_in_scatola_senza_grassi` (nuovo). FDC ID 172465 (**SR Legacy**, "Refried beans, canned, fat-free" — pagina `tools.myfooddata.com/nutrition-comparison/172465/wt1/1`, nome confermato, FDC ID solo in URL).
