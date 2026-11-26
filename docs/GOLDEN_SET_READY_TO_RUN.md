@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, rosticceria/BBQ, dorso, solo carne, cotto — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_pollo_rosticceria_dorso_cotto` (nuovo). FDC ID 174506 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, back meat only" — pagina tools.myfooddata.com/print/174506/100g/1, nome e valori per 100g confermati esattamente).
+- **Nutrienti**: **8/17**. Per 100g: energia 212kcal, proteine 21,9g, grassi 13,9g, carboidrati 0,31g, fibra 0g esplicito, calcio 33mg, ferro 0,82mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo cotto già nel DB).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_rosticceria_dorso` ("Pollo, rosticceria, dorso, solo carne").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=174506 --food-id=food_pollo_rosticceria_dorso_cotto \
+  --name-it="Pollo, rosticceria/BBQ, dorso, solo carne, cotto" \
+  --matrix-id=pollo_rosticceria_dorso --matrix-description-it="Pollo, rosticceria, dorso, solo carne" \
+  --baseline-cooking-state=rotisserie --analogy-food-id=food_coscia_di_pollo_cotta --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174506 --food-id=food_pollo_rosticceria_dorso_cotto \
+  --name-it="Pollo, rosticceria/BBQ, dorso, solo carne, cotto" \
+  --matrix-id=pollo_rosticceria_dorso --matrix-description-it="Pollo, rosticceria, dorso, solo carne" \
+  --baseline-cooking-state=rotisserie --analogy-food-id=food_coscia_di_pollo_cotta --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Prosciutto cotto, a fette, con osso, magro e grasso, cotto in padella — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_prosciutto_cotto_fetta` (nuovo). FDC ID 169166 (**SR Legacy**, "Pork, cured, ham -- water added, slice, bone-in, separable lean and fat, heated, pan-broil" — pagina tools.myfooddata.com/print/169166/100g/1, nome e valori per 100g confermati esattamente).
