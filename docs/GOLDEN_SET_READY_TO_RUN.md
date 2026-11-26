@@ -14,6 +14,30 @@
 
 ---
 
+### Nettare di guava con sucralosio in scatola — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_nettare_di_guava_sucralosio_in_scatola` (nuovo, variante "diet"/senza zucchero distinta dal nettare di guava zuccherato tradizionale, se già presente da verificare in un lotto futuro). FDC ID 168210 (**SR Legacy**, "Guava nectar, with sucralose, canned" — pagina `getfoodfacts.com/food/guava-nectar-with-sucralose-canned-168210` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 48,0kcal, proteine 0,30g, grassi 0,070g, carboidrati 13,3g, fibra 1,20g, calcio 8,00mg, ferro 0,54mg, magnesio 2,00mg, zinco 0,020mg, rame 0,025mg, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 21,3mg, selenio 0,10µg, vitamina K 1,00µg, beta-carotene 29,0µg (reale e non nullo).
+- **Analogia usata**: `food_guava_raw` (guava cruda, già eseguita sul DB reale, stessa famiglia botanica Myrtaceae).
+- **Categoria dieta**: `plant_non_fruit` — succo/nettare trasformato, non frutta fresca nella definizione restrittiva PRD §4.9.
+- **Matrice**: nuova `nettare_di_guava_sucralosio` ("Nettare di guava con sucralosio, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (succo in scatola, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Myrtaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168210 --food-id=food_nettare_di_guava_sucralosio_in_scatola \
+  --name-it="Nettare di guava con sucralosio, in scatola" \
+  --matrix-id=nettare_di_guava_sucralosio --matrix-description-it="Nettare di guava con sucralosio, in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Myrtaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168210 --food-id=food_nettare_di_guava_sucralosio_in_scatola \
+  --name-it="Nettare di guava con sucralosio, in scatola" \
+  --matrix-id=nettare_di_guava_sucralosio --matrix-description-it="Nettare di guava con sucralosio, in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_guava_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Myrtaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di colza industriale con antischiuma — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_olio_di_colza_industriale_antischiuma_raw` (nuovo, variante industriale con agente antischiuma — record FDC distinto dal 172359 già pronto in questo stesso lotto). FDC ID 172358 (**SR Legacy**, "Oil, industrial, canola with antifoaming agent, principal uses salads, woks and light frying" — pagina `tools.myfooddata.com/nutrition-comparison/172358/100g/1`, nome confermato, FDC ID solo in URL).
