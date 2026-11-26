@@ -162,6 +162,30 @@ npm run add-food -- --fdc-id=171957 --food-id=food_corvina_atlantica_impanata_fr
   --is-heme-iron --is-fortified-folate --apply
 ```
 
+### Bastoncini di pesce, surgelati, preparati — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_bastoncini_di_pesce_surgelati` (nuovo — prodotto commerciale standard "fish sticks", prima voce di questo tipo in pipeline, nessuna occorrenza precedente per FDC 174195). FDC ID 174195 (**SR Legacy**, "Fish, fish sticks, frozen, prepared" — nome confermato su `tools.myfooddata.com/nutrition-facts/174195`, FDC ID non mostrato esplicitamente ma 17/17 nutrienti coerenti e nome lungo/specifico).
+- **Nutrienti**: **17/17 completo**. Per 100g (valori derivati da porzione di 1 pezzo/57g, fattore di scala ~1,75 — moderato/alto, valori da trattare con cautela): energia 277kcal, proteine 11,05g, grassi 16,3g, carboidrati 21,6g, fibra 1,51g, calcio 15,96mg, ferro 0,84mg, magnesio 24,9mg, zinco 0,42mg, rame 0,05mg, vitamina C 0mg esplicito, folato totale 24,0µg, acido folico 0µg esplicito, vitamina B12 0,96µg, selenio 15,6µg, vitamina K 4,7µg, beta-carotene 2,98µg.
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco cotto già nel DB — ingrediente dominante di un prodotto impanato surgelato tipico).
+- **Categoria dieta**: `meat_fish` (pesce impanato — ingrediente dominante resta il pesce, prodotto commerciale standard non ambiguo).
+- **Matrice**: nuova `bastoncini_di_pesce` ("Bastoncini di pesce, surgelati, preparati").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, beta-carotene presente ma verosimilmente da coloranti/olio di frittura, non riconducibile a una matrice vegetale singola), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto misto pesce+panatura), `baseline_cooking_state=cooked` (surgelato già preparato), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174195 --food-id=food_bastoncini_di_pesce_surgelati \
+  --name-it="Bastoncini di pesce, surgelati, preparati" \
+  --matrix-id=bastoncini_di_pesce --matrix-description-it="Bastoncini di pesce, surgelati, preparati" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174195 --food-id=food_bastoncini_di_pesce_surgelati \
+  --name-it="Bastoncini di pesce, surgelati, preparati" \
+  --matrix-id=bastoncini_di_pesce --matrix-description-it="Bastoncini di pesce, surgelati, preparati" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Grano tenero (frumento), chicco intero rosso invernale, crudo — preparato 2026-11-24 dal task (221° lotto)
 
 - **food_id**: `food_grano_rosso_invernale_crudo` (nuovo — chicco di grano intero, categoria distinta da `food_farina_bianca_arricchita_raw`/`food_farina_integrale_grano_raw` (farine già macinate) già eseguite: qui chicco crudo non macinato, prima voce "grano in chicchi" di questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti per "grano rosso invernale"/"wheat hard red winter"/FDC 168890). FDC ID 168890 (**SR Legacy**, "Wheat, hard red winter" — pagina `getfoodfacts.com/food/wheat-hard-red-winter-168890` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
