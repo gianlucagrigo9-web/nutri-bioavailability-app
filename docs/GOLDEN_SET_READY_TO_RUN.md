@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mele essiccate, solforate, non cotte — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_mele_essiccate_solforate_raw` (nuovo). FDC ID 173931 (**SR Legacy**, "Apples, dehydrated (low moisture), sulfured, uncooked" — pagina tools.myfooddata.com/print/173931/wt1, nome confermato esattamente, valori derivati da porzione 60g, fattore di scala 1/0,6).
+- **Nutrienti**: **8/17**. Per 100g (derivato da porzione 60g): energia 347kcal, proteine 1,32g, grassi 0,58g, carboidrati 93,5g, fibra 12,3g, calcio 19,0mg, ferro 2,0mg, vitamina C 2,17mg. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_succo_di_mela_raw` (stessa specie Malus domestica).
+- **Categoria dieta**: `plant_non_fruit` (frutta essiccata, non frutta fresca — stessa convenzione già usata per datteri/uvetta/albicocche secche/prugne secche/fichi secchi).
+- **Matrice**: nuova `mele_essiccate` ("Mele essiccate, solforate").
+- **Attributi**: `botanical_family=Rosaceae`, `carotenoid_matrix_state=raw_intact` (essiccata ma non cotta, stessa convenzione della frutta secca già in pipeline).
+
+```
+npm run add-food -- --fdc-id=173931 --food-id=food_mele_essiccate_solforate_raw \
+  --name-it="Mele essiccate, solforate, non cotte" \
+  --matrix-id=mele_essiccate --matrix-description-it="Mele essiccate, solforate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_raw --diet-category=plant_non_fruit \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=raw_intact
+```
+```
+npm run add-food -- --fdc-id=173931 --food-id=food_mele_essiccate_solforate_raw \
+  --name-it="Mele essiccate, solforate, non cotte" \
+  --matrix-id=mele_essiccate --matrix-description-it="Mele essiccate, solforate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_succo_di_mela_raw --diet-category=plant_non_fruit \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=raw_intact --apply
+```
+
 ### Mele sciroppate in scatola, a fette, scolate, riscaldate — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_mele_sciroppate_cotte` (nuovo). FDC ID 173930 (**SR Legacy**, "Apples, canned, sweetened, sliced, drained, heated" — pagina tools.myfooddata.com/print/173930/100g, nome confermato esattamente, FDC ID non mostrato sul testo ma presente nell'URL).
