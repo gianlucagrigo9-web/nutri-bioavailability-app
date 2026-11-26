@@ -16,6 +16,150 @@
 
 ## Pronti
 
+### Cornmeal, bianca, self-rising, bolted, arricchita, cruda — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_cornmeal_bianca_self_rising_bolted_arricchita_raw` (nuovo, distinto dai cornmeal degermati/integrali già preparati — "self-rising" = con lievito/sale aggiunti, "bolted" = macinatura a setaccio grosso. Verificato con `grep`, zero occorrenze). FDC ID 168923 (**SR Legacy**, "Cornmeal, white, self-rising, bolted, plain, enriched" — pagina `getfoodfacts.com/food/cornmeal-white-self-rising-bolted-plain-enriched-168923` dedicata, FDC ID esplicito in pagina: "USDA FoodData Central, SR Legacy, FDC 168923").
+- **Nutrienti**: **14/17** (mancano selenio, vitamina K, beta-carotene — nessuna riga in pagina per questi tre). Per 100g: energia 334kcal, proteine 8,28g, grassi 3,40g, carboidrati 70,3g, fibra 6,70g, calcio 361mg, ferro 5,76mg, magnesio 86,0mg, zinco 2,00mg, rame 0,15mg, folato totale 233µg, acido folico 176µg, vitamina B12 0µg esplicito, vitamina C 0mg esplicito. **Nota (Regola 1)**: calcio e sodio elevati sono plausibili e attesi per un prodotto "self-rising" (lievito/sale aggiunti nella macinatura), non un errore di provenienza.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta *Zea mays*, stessa filiera di macinato, già eseguita sul DB reale — verificato in sezione "Eseguiti", usata ripetutamente come analogia per altri cornmeal/farine di mais).
+- **Categoria dieta**: `plant_non_fruit` (cereale macinato, vegetariano e vegano sì).
+- **Matrice**: nuova `cornmeal_bianca_self_rising_bolted` ("Cornmeal, bianca, self-rising, bolted").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — il calcio alto deriva dal lievito aggiunto, non da ossalati della pianta, nessuna base per una categoria ossalati), `carotenoid_matrix_state=cooked_or_disrupted` (macinato, matrice disgregata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw` (farina cruda), `is_fortified_folate` presente (acido folico 176µg esplicito, "enriched" nel nome).
+
+```
+npm run add-food -- --fdc-id=168923 --food-id=food_cornmeal_bianca_self_rising_bolted_arricchita_raw \
+  --name-it="Cornmeal, bianca, self-rising, bolted, arricchita, cruda" \
+  --matrix-id=cornmeal_bianca_self_rising_bolted --matrix-description-it="Cornmeal, bianca, self-rising, bolted" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168923 --food-id=food_cornmeal_bianca_self_rising_bolted_arricchita_raw \
+  --name-it="Cornmeal, bianca, self-rising, bolted, arricchita, cruda" \
+  --matrix-id=cornmeal_bianca_self_rising_bolted --matrix-description-it="Cornmeal, bianca, self-rising, bolted" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Cornmeal, integrale, bianca, cruda — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_cornmeal_integrale_bianca_raw` (nuovo, distinto da `food_farina_di_mais_integrale_bianca_raw` (FDC 169748, "Corn flour" macinatura fine) e da `food_cornmeal_degermata_bianca_non_arricchita_raw`/`_arricchita_raw` (degermati, non integrali). Verificato con `grep`, zero occorrenze). FDC ID 169750 (**SR Legacy**, "Cornmeal, whole-grain, white"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cornmeal-whole-grain-white.html`, nome USDA corrispondente esatto, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente in pagina (stessa convenzione già accettata in lotti precedenti).
+- **Nutrienti**: **17/17**. Per 100g: energia 362kcal, proteine 8,1g, grassi 3,6g, carboidrati 76,9g, fibra 7,3g, calcio 6,0mg, ferro 3,5mg, magnesio 127mg, zinco 1,8mg, rame 0,19mg, folato totale 25,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 15,5µg, vitamina K (K1) 0,30µg, beta-carotene 1,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stessa pianta *Zea mays*, stessa filiera di macinato non trattato, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (cereale macinato, vegetariano e vegano sì).
+- **Matrice**: nuova `cornmeal_integrale_bianca` ("Cornmeal, integrale, bianca").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — calcio molto basso), `carotenoid_matrix_state=cooked_or_disrupted` (macinato, matrice disgregata), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, non arricchito).
+
+```
+npm run add-food -- --fdc-id=169750 --food-id=food_cornmeal_integrale_bianca_raw \
+  --name-it="Cornmeal, integrale, bianca, cruda" \
+  --matrix-id=cornmeal_integrale_bianca --matrix-description-it="Cornmeal, integrale, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169750 --food-id=food_cornmeal_integrale_bianca_raw \
+  --name-it="Cornmeal, integrale, bianca, cruda" \
+  --matrix-id=cornmeal_integrale_bianca --matrix-description-it="Cornmeal, integrale, bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Agnello australiano, coscia inferiore (leg bottom), disossata, magra e grassa, cotta arrosto — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_agnello_coscia_inferiore_cotta` (nuovo — taglio "leg, bottom" mai coperto, distinto da `food_agnello_lombo_cotto`/`food_agnello_spalla_cotta`/`food_agnello_carre_cotta` (altri tagli) e da `food_agnello_australiano_cotto` (composito generico). Verificato con `grep`, zero occorrenze). FDC ID 172658 (**SR Legacy**, "Lamb, Australian, imported, fresh, leg, bottom, boneless, separable lean and fat, trimmed to 1/8\" fat, cooked, roasted" — pagina `tools.myfooddata.com/nutrition-facts/172658/wt1`, FDC solo in URL (dominio ampiamente accettato nei lotti precedenti), nome esatto confermato in pagina).
+- **Nutrienti**: **14/17** (mancano folato totale, acido folico, vitamina K — non mostrati in pagina). Valori per porzione 85g (3oz) scalati a 100g (×100/85): energia 218,8kcal, proteine 27,5g, grassi 12,0g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 3,1mg, ferro 2,0mg, magnesio 23,1mg, zinco 3,5mg, rame 0,12mg, vitamina B12 2,2µg, vitamina C 0mg esplicito, selenio 6,4µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_agnello_cotto` (stessa specie, stato cotto, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `agnello_coscia_inferiore` ("Agnello, coscia inferiore (leg bottom)").
+- **Attributi**: `is_heme_iron` presente (carne rossa), `matrix_category_calcium` non applicabile (prodotto animale), `carotenoid_matrix_state` omesso (NULL, non applicabile a carne), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172658 --food-id=food_agnello_coscia_inferiore_cotta \
+  --name-it="Agnello australiano, coscia inferiore, disossata, magra e grassa, cotta arrosto" \
+  --matrix-id=agnello_coscia_inferiore --matrix-description-it="Agnello, coscia inferiore (leg bottom)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172658 --food-id=food_agnello_coscia_inferiore_cotta \
+  --name-it="Agnello australiano, coscia inferiore, disossata, magra e grassa, cotta arrosto" \
+  --matrix-id=agnello_coscia_inferiore --matrix-description-it="Agnello, coscia inferiore (leg bottom)" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_agnello_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Agnello australiano, coscia inferiore (leg bottom), disossata, magra e grassa, cruda — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_agnello_coscia_inferiore_raw` (nuovo, versione cruda di `food_agnello_coscia_inferiore_cotta` sopra — stesso taglio, stato diverso, non un doppione. Verificato con `grep`, zero occorrenze). FDC ID 172659 (**SR Legacy**, "Lamb, Australian, imported, fresh, leg, bottom, boneless, separable lean and fat, trimmed to 1/8\" fat, raw" — pagina `tools.myfooddata.com/nutrition-comparison/172659/wt1/1`, FDC solo in URL, nome esatto confermato, fonte dichiarata "USDA Food Data Central").
+- **Nutrienti**: **13/17** (mancano folato totale, acido folico, vitamina K). Valori per porzione 114g (4oz) scalati a 100g (÷1,14): energia 186,8kcal, proteine 21,0g, grassi 11,4g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 3,0mg, ferro 1,8mg, magnesio 21mg, zinco 2,8mg, rame 0,10mg, vitamina B12 1,5µg, vitamina C 0mg esplicito, selenio 9,8µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_agnello_raw` (stessa specie, stato crudo, già eseguita sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: `agnello_coscia_inferiore` (condivisa con la voce cotta sopra).
+- **Attributi**: `is_heme_iron` presente, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172659 --food-id=food_agnello_coscia_inferiore_raw \
+  --name-it="Agnello australiano, coscia inferiore, disossata, magra e grassa, cruda" \
+  --matrix-id=agnello_coscia_inferiore --matrix-description-it="Agnello, coscia inferiore (leg bottom)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=172659 --food-id=food_agnello_coscia_inferiore_raw \
+  --name-it="Agnello australiano, coscia inferiore, disossata, magra e grassa, cruda" \
+  --matrix-id=agnello_coscia_inferiore --matrix-description-it="Agnello, coscia inferiore (leg bottom)" \
+  --baseline-cooking-state=raw --analogy-food-id=food_agnello_raw --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, arrosto — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_prosciutto_cotto_acqua_aggiunta_intero` (nuovo — distinto da `food_prosciutto_cotto` (FDC 167872, prosciutto regolare senza "acqua aggiunta") e dalle varianti slice/girello/stinco già preparate. Verificato con `grep`, zero occorrenze). FDC ID 168349 (**SR Legacy**, "Pork, cured, ham -- water added, whole, boneless, separable lean and fat, heated, roasted" — pagina `tools.myfooddata.com/nutrition-facts/168349/wt1`, FDC solo in URL, nome esatto confermato).
+- **Nutrienti**: **17/17**. Valori per porzione 85g (3oz) scalati a 100g (×100/85): energia 125,9kcal, proteine 17,8g, grassi 5,5g, carboidrati 1,5g, fibra 0g esplicito, calcio 9,1mg, ferro 0,82mg, magnesio 19,1mg, zinco 1,76mg, rame 0,094mg, folato totale 1,0µg, acido folico 0µg esplicito, vitamina B12 0,40µg, vitamina C 0mg esplicito, selenio 33,8µg, vitamina K (K1) 0µg esplicito (pagina riporta separatamente una menachinone-4/K2 non tracciata in questa pipeline), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_prosciutto_cotto` (stesso prodotto di base, prosciutto cotto disossato, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_cotto_acqua_aggiunta` ("Prosciutto cotto con acqua aggiunta, intero").
+- **Attributi**: `is_heme_iron` presente, `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168349 --food-id=food_prosciutto_cotto_acqua_aggiunta_intero \
+  --name-it="Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, arrosto" \
+  --matrix-id=prosciutto_cotto_acqua_aggiunta --matrix-description-it="Prosciutto cotto con acqua aggiunta, intero" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto --is-heme-iron \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168349 --food-id=food_prosciutto_cotto_acqua_aggiunta_intero \
+  --name-it="Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, arrosto" \
+  --matrix-id=prosciutto_cotto_acqua_aggiunta --matrix-description-it="Prosciutto cotto con acqua aggiunta, intero" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto --is-heme-iron \
+  --diet-category=meat_fish --apply
+```
+
+### Formaggio cottage, con verdure (grasso pieno) — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cottage_con_verdure` (nuovo, distinto da `food_formaggio_cottage_magro_con_verdure` (FDC 167716, versione lowfat 1% — già preparata ma non ancora eseguita). Verificato con `grep`, zero occorrenze). FDC ID 169078 (**SR Legacy**, "Cheese, cottage, with vegetables" — nessuna qualifica "lowfat", prodotto a grasso pieno/regolare. Pagina `tools.myfooddata.com/nutrition-facts/169078/wt1`, FDC solo in URL, nome esatto confermato).
+- **Nutrienti**: **17/17**. Valori per porzione 113g (4oz) scalati a 100g (÷1,13): energia 94,7kcal, proteine 10,9g, grassi 4,2g, carboidrati 3,0g, fibra 0,10g, calcio 56,0mg, ferro 0,10mg, magnesio 4,0mg, zinco 0,29mg, rame 0,027mg, folato totale 17,0µg, acido folico 0µg esplicito, vitamina B12 0,49µg, vitamina C 4,0mg, selenio 4,5µg, vitamina K (fillochinone) 11,0µg, beta-carotene 142,0µg (coerente con le verdure aggiunte).
+- **Analogia usata**: `food_formaggio_cremoso_raw` (formaggio fresco morbido più vicino già eseguito sul DB reale — stessa analogia già usata per la versione lowfat con verdure).
+- **Categoria dieta**: `egg_dairy` (formaggio con verdure miste, nessun ingrediente animale diverso dal latte).
+- **Matrice**: nuova `formaggio_cottage_con_verdure` ("Formaggio cottage, con verdure").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — stato di cottura delle verdure aggiunte non specificato in pagina, non assunto), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169078 --food-id=food_formaggio_cottage_con_verdure \
+  --name-it="Formaggio cottage, con verdure" \
+  --matrix-id=formaggio_cottage_con_verdure --matrix-description-it="Formaggio cottage, con verdure" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169078 --food-id=food_formaggio_cottage_con_verdure \
+  --name-it="Formaggio cottage, con verdure" \
+  --matrix-id=formaggio_cottage_con_verdure --matrix-description-it="Formaggio cottage, con verdure" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Cornmeal, degermata, bianca, non arricchita, cruda — preparato 2026-11-26 dal task (232° lotto, dalla lista USDA)
 
 - **food_id**: `food_cornmeal_degermata_bianca_non_arricchita_raw` (nuovo, distinto da `food_cornmeal_degermata_bianca_arricchita_raw` già preparato — quella arricchita, questa no — e da `food_cornmeal_degermata_gialla_raw` — colore diverso. Verificato con `grep`, zero occorrenze). FDC ID 172015 (**SR Legacy**, "Cornmeal, degermed, unenriched, white"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cornmeal-degermed-unenriched-white.html`, nome USDA corrispondente esatto, pannello "Per 100g" completo, righe etichettate "SR (USDA Standard Reference Legacy)"; FDC ID non mostrato esplicitamente in pagina (stessa convenzione già accettata in questo turno per farina di mais gialla e pesce sablefish).
