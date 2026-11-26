@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Prosciutto cotto, stinco, con osso, magro, non ancora riscaldato (fase di cura) — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_prosciutto_cotto_stinco_crudo` (nuovo). FDC ID 168336 (**SR Legacy**, "Pork, cured, ham -- water added, shank, bone-in, separable lean only, unheated" — pagina tools.myfooddata.com/print/168336/100g/1, nome e valori per 100g confermati esattamente).
+- **Nutrienti**: **8/17**. Per 100g: energia 91kcal, proteine 18,7g, grassi 1,9g, carboidrati 0,71g, fibra 0g esplicito, calcio 7mg, ferro 0,76mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_lonza_di_maiale_raw` (carne di maiale cruda già nel DB — "unheated" è prosciutto cotto nella salamoia ma non ancora sottoposto al trattamento termico finale, trattato come crudo ai fini dell'analogia).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_cotto_stinco` ("Prosciutto cotto, stinco").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=168336 --food-id=food_prosciutto_cotto_stinco_crudo \
+  --name-it="Prosciutto cotto, stinco, con osso, magro, non ancora riscaldato" \
+  --matrix-id=prosciutto_cotto_stinco --matrix-description-it="Prosciutto cotto, stinco" \
+  --baseline-cooking-state=cured_unheated --analogy-food-id=food_lonza_di_maiale_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=168336 --food-id=food_prosciutto_cotto_stinco_crudo \
+  --name-it="Prosciutto cotto, stinco, con osso, magro, non ancora riscaldato" \
+  --matrix-id=prosciutto_cotto_stinco --matrix-description-it="Prosciutto cotto, stinco" \
+  --baseline-cooking-state=cured_unheated --analogy-food-id=food_lonza_di_maiale_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Prosciutto cotto, girello, con osso, magro, cotto al forno — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_prosciutto_cotto_girello` (nuovo). FDC ID 167915 (**SR Legacy**, "Pork, cured, ham -- water added, rump, bone-in, separable lean only, heated, roasted" — pagina tools.myfooddata.com/print/167915/wt1, nome confermato esattamente, valori derivati da porzione 85g, fattore di scala 1/0,85).
