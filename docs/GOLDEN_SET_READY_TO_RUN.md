@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uova di pesce (roe), specie miste, crude — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
+
+- **food_id**: `food_uova_di_pesce_miste_raw` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 175132 (**SR Legacy**, "Fish, roe, mixed species, raw"). **Nota di provenienza**: fonte `tools.myfooddata.com/nutrition-facts/175132/100g`, FDC 175132 presente nell'URL (dominio già ampiamente accettato nei lotti precedenti con questa convenzione), pannello "Per 100g" completo 17/17, valori plausibili (B12 10µg e selenio 40,3µg coerenti con la letteratura su uova di pesce, alimento noto per alta densità di questi nutrienti).
+- **Nutrienti**: **17/17**. Per 100g: energia 143kcal, proteine 22,3g, grassi 6,4g, carboidrati 1,5g, fibra 0g esplicito, calcio 22mg, ferro 0,6mg, magnesio 20mg, zinco 1mg, rame 0,1mg, folato totale 80µg, acido folico 0µg esplicito, vitamina B12 10µg, vitamina C 16mg, selenio 40,3µg, vitamina K 0,2µg (riga generica, non specificamente fillochinone — dichiarato), beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_merluzzo_cotto` (unico alimento ittico già eseguito nel DB reale in questa pipeline; usato solo come riferimento di categoria generale "prodotto ittico", nessun attributo di stato di cottura preso da esso — le uova di pesce sono un tessuto diverso dalla carne di pesce, non muscolo, quindi `is_heme_iron` non forzato).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `uova_di_pesce_miste`.
+- **Attributi**: `is_heme_iron` omesso (non forzato — ferro delle uova di pesce non è ferro eme muscolare, forma non accertata da questa fonte), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito, nessun pigmento), `zinc_bioaccessibility_bucket` default `none`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=175132 --food-id=food_uova_di_pesce_miste_raw \
+  --name-it="Uova di pesce (roe), specie miste, crude" \
+  --matrix-id=uova_di_pesce_miste --matrix-description-it="Uova di pesce (roe), specie miste" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_cotto \
+  --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=175132 --food-id=food_uova_di_pesce_miste_raw \
+  --name-it="Uova di pesce (roe), specie miste, crude" \
+  --matrix-id=uova_di_pesce_miste --matrix-description-it="Uova di pesce (roe), specie miste" \
+  --baseline-cooking-state=raw --analogy-food-id=food_merluzzo_cotto \
+  --diet-category=meat_fish --apply
+```
+
 ### Formaggio cheddar, sapore deciso, a fette — preparato 2026-11-26 dal task (231° lotto, dalla lista USDA)
 
 - **food_id**: `food_formaggio_cheddar_deciso_a_fette` (nuovo — distinto da `food_formaggio_cheddar_raw` già eseguito (cheddar generico) e da `food_formaggio_messicano_misto`/`food_formaggio_carvi` già in coda: qui cheddar "sharp" (stagionato, sapore deciso), a fette. Verificato con `grep`, zero occorrenze). FDC ID 170899 (**SR Legacy**, "Cheese, cheddar, sharp, sliced"). **Nota di provenienza**: fonte `triagemethod.com/tools/human-nutrition-explorer/food/cheese-cheddar-sharp-sliced.html`, nome USDA corrispondente esatto nell'URL e pannello "Per 100g" completo (17/17), ma l'FDC ID 170899 non è mostrato esplicitamente in pagina (solo il nome). Accettato per coerenza con la convenzione già usata in questo stesso turno (fagioli neri comuni, bambù, farina di mais — vedi voci sopra) per pagine triagemethod.com con nome esatto e pannello completo; valori plausibili (calcio 711mg/100g, tipico per cheddar stagionato).
