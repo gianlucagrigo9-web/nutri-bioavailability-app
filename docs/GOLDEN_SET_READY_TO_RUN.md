@@ -14,6 +14,30 @@
 
 ---
 
+### Olio di girasole industriale mid-oleico — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_olio_di_girasole_mid_oleico_raw` (nuovo, variante industriale "mid-oleic" distinta dal girasole da tavola già eseguito). FDC ID 172357 (**SR Legacy**, "Oil, industrial, mid-oleic, sunflower" — pagina `tools.myfooddata.com/nutrition-comparison/172357/wt1`, nome confermato, FDC ID solo in URL).
+- **Nutrienti**: **15/17** (rame assente sulla pagina, il resto esplicito — gran parte a zero, coerente con un grasso puro raffinato). Per 100g (derivato da porzione 14g, fattore 100/14): energia ~857kcal, proteine 0g, grassi ~97,1g, carboidrati 0g, fibra 0g, calcio 0mg, ferro 0mg, magnesio 0mg, zinco 0mg, folato totale 0µg, acido folico 0µg, vitamina B12 0µg, vitamina C 0mg, selenio 0µg, vitamina K ~5,2µg, beta-carotene 0µg. Mancante: rame.
+- **Analogia usata**: `food_olio_di_girasole_raw` (stesso olio di base, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `olio_di_girasole_mid_oleico` ("Olio di girasole industriale, mid-oleico").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Asteraceae` (girasole), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172357 --food-id=food_olio_di_girasole_mid_oleico_raw \
+  --name-it="Olio di girasole industriale, mid-oleico" \
+  --matrix-id=olio_di_girasole_mid_oleico --matrix-description-it="Olio di girasole industriale, mid-oleico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172357 --food-id=food_olio_di_girasole_mid_oleico_raw \
+  --name-it="Olio di girasole industriale, mid-oleico" \
+  --matrix-id=olio_di_girasole_mid_oleico --matrix-description-it="Olio di girasole industriale, mid-oleico" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_girasole_raw \
+  --botanical-family=Asteraceae --diet-category=plant_non_fruit --apply
+```
+
 ### Eggnog (bevanda di uova e latte) — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_eggnog` (nuovo, primo prodotto composito uovo+latte della pipeline). FDC ID 171258 (**SR Legacy**, "Eggnog" — pagina `getfoodfacts.com/food/eggnog-171258` dedicata, FDC ID citato esplicitamente in pagina).
