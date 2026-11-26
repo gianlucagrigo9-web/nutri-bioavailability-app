@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Milkfish (pesce latte), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_milkfish_cotto` (nuovo). FDC ID 171995 (**SR Legacy**, "Fish, milkfish, cooked, dry heat" — pagina `tools.myfooddata.com/nutrition-facts/171995/wt1`, nome confermato nelle didascalie, FDC ID non mostrato esplicitamente ma stesso dominio già verificato affidabile più volte in questo progetto).
+- **Nutrienti**: **15/17**. Per 100g: energia 190,6kcal, proteine 26,4g, grassi 8,6g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 65,1mg, ferro 0,41mg, magnesio 38,0mg, zinco 1,05mg, rame 0,05mg, folato totale 18,0µg, acido folico 0µg esplicito, vitamina B12 3,3µg, selenio 16,2µg, vitamina C 0mg esplicito. Mancano: vitamina K, beta-carotene (dati mancanti sulla pagina, non assunti zero).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco/magro cotto già nel DB reale, stessa categoria funzionale di pesce cotto a calore secco).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `milkfish_cotto` (Milkfish, pesce latte, cotto).
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171995 --food-id=food_milkfish_cotto \
+  --name-it="Milkfish (pesce latte), cotto al forno (calore secco)" \
+  --matrix-id=milkfish_cotto --matrix-description-it="Milkfish, pesce latte, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171995 --food-id=food_milkfish_cotto \
+  --name-it="Milkfish (pesce latte), cotto al forno (calore secco)" \
+  --matrix-id=milkfish_cotto --matrix-description-it="Milkfish, pesce latte, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_merluzzo_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sgombro reale (king mackerel), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_sgombro_reale_cotto` (nuovo — specie distinta dallo sgombro generico `food_sgombro_cotto` e dal `food_sgombro_pacifico_cotto` preparato in questo stesso lotto: king mackerel, *Scomberomorus cavalla*). FDC ID 174236 (**SR Legacy**, "Fish, mackerel, king, cooked, dry heat" — pagina `tools.myfooddata.com/nutrition-facts/174236/wt1`, nome confermato nelle didascalie, FDC ID non mostrato esplicitamente ma stesso dominio già verificato affidabile più volte in questo progetto).
