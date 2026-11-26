@@ -141,31 +141,6 @@ npm run add-food -- --fdc-id=171701 --food-id=food_albicocche_sciroppo_pesante_s
   --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
 ```
 
-### Formaggio "cheese food" americano, fortificato con vitamina D — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
-
-- **food_id**: `food_cheese_food_americano_vitd_raw` (distinto da `food_formaggio_americano_raw`/FDC 171289 "cheese PRODUCT" e da `food_formaggio_food_americano_raw`/FDC 171291 "cheese food" senza vit D, entrambi già eseguiti/preparati: qui standard d'identità USDA "cheese food" CON vitamina D, FDC diverso da entrambi. Verificato con `grep`, zero occorrenze). FDC ID 171252 (**SR Legacy**, "Cheese food, pasteurized process, American, vitamin D fortified").
-- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/cheese-food-pasteurized-process-american-vitamin-d-fortified.html` (USDA SR Legacy, per 100g, pannello completo).
-- **Nutrienti**: **17/17**. Per 100g: energia 330kcal, proteine 16,9g, grassi 25,6g, carboidrati 8,6g, fibra 0g esplicito, calcio 682mg, ferro 0,26mg, magnesio 27,0mg, zinco 2,3mg, rame 0,03mg, folato totale 7,0µg, acido folico 0µg esplicito, vitamina B12 1,3µg, vitamina C 0mg esplicito, selenio 19,6µg, vitamina K (K1) 3,4µg, beta-carotene 65,0µg.
-- **Analogia usata**: `food_formaggio_americano_raw` (cheese product americano processato, già eseguito sul DB reale — stessa categoria funzionale "formaggio fuso USA da banco").
-- **Categoria dieta**: `egg_dairy`.
-- **Matrice**: nuova `cheese_food_americano_vitd`.
-- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia (non applicabile calcio/carotenoidi a un formaggio processato), `baseline_cooking_state=raw`.
-
-```
-npm run add-food -- --fdc-id=171252 --food-id=food_cheese_food_americano_vitd_raw \
-  --name-it="Formaggio (cheese food) americano, fortificato con vitamina D" \
-  --matrix-id=cheese_food_americano_vitd --matrix-description-it="Cheese food americano fortificato con vitamina D" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
-  --diet-category=egg_dairy
-```
-```
-npm run add-food -- --fdc-id=171252 --food-id=food_cheese_food_americano_vitd_raw \
-  --name-it="Formaggio (cheese food) americano, fortificato con vitamina D" \
-  --matrix-id=cheese_food_americano_vitd --matrix-description-it="Cheese food americano fortificato con vitamina D" \
-  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
-  --diet-category=egg_dairy --apply
-```
-
 ### Salsa al formaggio fatta in casa — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
 
 - **food_id**: `food_salsa_al_formaggio_fatta_in_casa` (distinto da `food_salsa_al_formaggio`/FDC 171191 "sauce, cheese, ready-to-serve" commerciale: qui "prepared from recipe", fatta in casa, FDC diverso. Verificato con `grep`, zero occorrenze). FDC ID 172200 (**SR Legacy**, "Cheese sauce, prepared from recipe").
