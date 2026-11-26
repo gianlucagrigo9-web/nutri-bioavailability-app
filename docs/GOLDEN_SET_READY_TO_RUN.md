@@ -14,6 +14,30 @@
 
 ---
 
+### Nettare di guanabana in scatola — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_nettare_di_guanabana_in_scatola` (nuovo, derivato del frutto `food_graviola_raw` già eseguito). FDC ID 168196 (**SR Legacy**, "Guanabana nectar, canned" — pagina `getfoodfacts.com/food/guanabana-nectar-canned-168196` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 59,0kcal, proteine 0,11g, grassi 0,17g, carboidrati 14,9g, fibra 0,10g, calcio 7,00mg, ferro 0,36mg, magnesio 3,00mg, zinco 0,020mg, rame 0,010mg, folato totale 6,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 11,1mg, selenio 0,40µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_graviola_raw` (stesso frutto, *Annona muricata*, già eseguito — qui prodotto trasformato in nettare).
+- **Categoria dieta**: `plant_non_fruit` — succo/nettare trasformato, non frutta fresca nella definizione restrittiva PRD §4.9 (stessa convenzione già usata per i succhi di mela/lime/mirtillo rosso/acerola).
+- **Matrice**: nuova `nettare_di_guanabana` ("Nettare di guanabana (soursop) in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Annonaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168196 --food-id=food_nettare_di_guanabana_in_scatola \
+  --name-it="Nettare di guanabana (soursop) in scatola" \
+  --matrix-id=nettare_di_guanabana --matrix-description-it="Nettare di guanabana (soursop) in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_graviola_raw \
+  --botanical-family=Annonaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168196 --food-id=food_nettare_di_guanabana_in_scatola \
+  --name-it="Nettare di guanabana (soursop) in scatola" \
+  --matrix-id=nettare_di_guanabana --matrix-description-it="Nettare di guanabana (soursop) in scatola" \
+  --baseline-cooking-state=raw --analogy-food-id=food_graviola_raw \
+  --botanical-family=Annonaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di colza industriale per friggitura leggera — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_olio_di_colza_industriale_raw` (nuovo, variante industriale distinta dal colza da tavola `food_olio_di_colza_raw` già eseguito — composizione in acidi grassi ottimizzata per frittura leggera, record FDC distinto). FDC ID 172359 (**SR Legacy**, "Oil, industrial, canola for salads, woks and light frying" — pagina `tools.myfooddata.com/nutrition-comparison/172359/wt1/1`, nome confermato esplicitamente, FDC ID solo in URL).
