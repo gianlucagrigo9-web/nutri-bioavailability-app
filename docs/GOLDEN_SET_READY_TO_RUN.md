@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Salmone chum (keta), crudo (Alaska Native) — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_salmone_chum_raw` (nuovo). FDC ID 168046 (**SR Legacy**, "Fish, Salmon, Chum, raw (Alaska Native)" — pagina tools.myfooddata.com/nutrition-facts/168046/100g, nome confermato esattamente, FDC ID non mostrato esplicitamente sul testo della pagina ma presente nell'URL e nessun record alternativo plausibile).
+- **Nutrienti**: **17/17**. Per 100g: energia 116kcal, proteine 20,7g, grassi 3,7g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 7mg, ferro 0,56mg, magnesio 26mg, zinco 0,54mg, rame 0,14mg, vitamina C 0mg esplicito, folato totale 18µg, acido folico 0µg esplicito, vitamina B12 8,1µg, selenio 39,7µg, vitamina K 0,3µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_salmone_affumicato_raw` (unico salmone già nel DB, stesso genere Oncorhynchus).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `salmone_chum` ("Salmone chum, crudo").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=168046 --food-id=food_salmone_chum_raw \
+  --name-it="Salmone chum (keta), crudo" \
+  --matrix-id=salmone_chum --matrix-description-it="Salmone chum, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmone_affumicato_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=168046 --food-id=food_salmone_chum_raw \
+  --name-it="Salmone chum (keta), crudo" \
+  --matrix-id=salmone_chum --matrix-description-it="Salmone chum, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_salmone_affumicato_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Carne di cervo, controfiletto (top round), magra, cotta alla griglia — preparato 2026-11-26 dal task (222° lotto)
 
 - **food_id**: `food_cervo_controfiletto_cotto` (nuovo — prima voce di selvaggina "cervo" in pipeline, nessuna occorrenza precedente per "cervo"/"deer"/FDC 174431). FDC ID 174431 (**SR Legacy**, "Game meat, deer, top round, separable lean only, 1\" steak, cooked, broiled" — nome confermato su `tools.myfooddata.com/nutrition-comparison/174431`, FDC ID non mostrato esplicitamente sulla pagina ma nome descrittivo lungo e specifico, nessun record alternativo plausibile trovato).
