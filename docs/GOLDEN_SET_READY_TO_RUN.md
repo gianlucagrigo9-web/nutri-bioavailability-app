@@ -16,6 +16,234 @@
 
 ## Pronti
 
+### Pollock atlantico, cotto (calore secco) — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_pollock_atlantic_cooked` (nuovo — distinto dal Pollock dell'Alaska `food_pollock_raw` FDC 175130 già in coda/eseguito, specie diversa: *Pollachius* atlantico vs *Gadus chalcogrammus*. Verificato con `grep`, zero occorrenze). FDC ID 174237 (**SR Legacy**, "Fish, pollock, Atlantic, cooked, dry heat").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/fish-pollock-atlantic-cooked-dry-heat.html` (dati dichiarati "USDA Standard Reference Legacy", descrizione testuale identica). FDC non mostrato esplicitamente in pagina, ma NDB 15205 confermato tramite `recipetips.com/usda/food-nutrition/t--15205/...` (stesso ndb_number della checklist).
+- **Nutrienti**: **15/17**. Per 100g: energia 118kcal, proteine 24,9g, grassi 1,3g, carboidrati 0g, fibra 0g, calcio 77,0mg, ferro 0,59mg, magnesio 86,0mg, zinco 0,60mg, rame 0,06mg, folato totale 3,0µg, acido folico 0µg esplicito, vitamina B12 3,7µg, vitamina C 0mg esplicito, selenio 46,8µg. Mancano: vitamina K, beta-carotene.
+- **Analogia usata**: `food_salmon_cooked` (altro pesce cotto già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollock_atlantic_cooked` ("Pollock atlantico, cotto").
+- **Attributi**: `is_heme_iron` impostato (true, pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile (pesce), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174237 --food-id=food_pollock_atlantic_cooked \
+  --name-it="Pollock atlantico, cotto (calore secco)" \
+  --matrix-id=pollock_atlantic_cooked --matrix-description-it="Pollock atlantico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174237 --food-id=food_pollock_atlantic_cooked \
+  --name-it="Pollock atlantico, cotto (calore secco)" \
+  --matrix-id=pollock_atlantic_cooked --matrix-description-it="Pollock atlantico, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Pesce, luccioperca, cotto (calore secco) — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_pike_walleye_cooked` (nuovo, mai coperto in questa pipeline, verificato con `grep`). FDC ID 171997 (**SR Legacy**, "Fish, pike, walleye, cooked, dry heat").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/fish-pike-walleye-cooked-dry-heat.html` (USDA SR Legacy, descrizione identica). NDB 15204 confermato via `recipetips.com/usda/food-nutrition/t--15204/...` (stesso ndb_number della checklist, adiacente a quello del pollock sopra — stessa sezione "Finfish and Shellfish Products").
+- **Nutrienti**: **15/17**. Per 100g: energia 119kcal, proteine 24,5g, grassi 1,6g, carboidrati 0g, fibra 0g, calcio 141mg, ferro 1,7mg, magnesio 38,0mg, zinco 0,79mg, rame 0,23mg, folato totale 17,0µg, acido folico 0µg esplicito, vitamina B12 2,3µg, vitamina C 0mg esplicito, selenio 16,2µg. Mancano: vitamina K, beta-carotene.
+- **Analogia usata**: `food_salmon_cooked` (altro pesce cotto già eseguito sul DB reale).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pike_walleye_cooked` ("Luccioperca, cotto").
+- **Attributi**: `is_heme_iron` impostato (true), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171997 --food-id=food_pike_walleye_cooked \
+  --name-it="Pesce, luccioperca, cotto (calore secco)" \
+  --matrix-id=pike_walleye_cooked --matrix-description-it="Luccioperca, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171997 --food-id=food_pike_walleye_cooked \
+  --name-it="Pesce, luccioperca, cotto (calore secco)" \
+  --matrix-id=pike_walleye_cooked --matrix-description-it="Luccioperca, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Farina di mais per masa, bianca, non arricchita, cruda — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_corn_masa_flour_unenriched_raw` (nuovo — distinto da `food_masa_harina_raw` già eseguito (FDC 2710835, **Foundation**, "masa harina, white or yellow, dry, raw") e da `food_masa_harina_arricchita_raw` (FDC 169694, SR Legacy, arricchito): questo è un record **SR Legacy** distinto, non arricchito. Verificato con `grep`, zero occorrenze precedenti). FDC ID 169696 (**SR Legacy**, "Corn flour, masa, unenriched, white").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/corn-flour-masa-unenriched-white.html` (USDA SR Legacy, descrizione identica, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 363kcal, proteine 8,5g, grassi 3,7g, carboidrati 76,6g, fibra 6,4g, calcio 138mg, ferro 1,5mg, magnesio 93,0mg, zinco 1,8mg, rame 0,21mg, folato totale 29,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 10,5µg, vitamina K 0µg esplicito, beta-carotene 2,0µg.
+- **Analogia usata**: `food_masa_harina_raw` (stesso trattamento di nixtamalizzazione, stessa specie *Zea mays*, famiglia Poaceae, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `masa_bianca_non_arricchita` ("Farina di masa, bianca, non arricchita").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Poaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false, acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169696 --food-id=food_corn_masa_flour_unenriched_raw \
+  --name-it="Farina di mais per masa, bianca, non arricchita, cruda" \
+  --matrix-id=masa_bianca_non_arricchita --matrix-description-it="Farina di masa, bianca, non arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169696 --food-id=food_corn_masa_flour_unenriched_raw \
+  --name-it="Farina di mais per masa, bianca, non arricchita, cruda" \
+  --matrix-id=masa_bianca_non_arricchita --matrix-description-it="Farina di masa, bianca, non arricchita" \
+  --baseline-cooking-state=raw --analogy-food-id=food_masa_harina_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Mele essiccate solforate, stufate, senza zucchero aggiunto — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_apples_dried_stewed_unsweetened` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 171692 (**SR Legacy**, "Apples, dried, sulfured, stewed, without added sugar").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/apples-dried-sulfured-stewed-without-added-sugar.html` (USDA SR Legacy, descrizione identica, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 57,0kcal, proteine 0,22g, grassi 0,07g, carboidrati 15,3g, fibra 2,0g, calcio 3,0mg, ferro 0,33mg, magnesio 4,0mg, zinco 0,05mg, rame 0,04mg, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,0mg, selenio 0,30µg, vitamina K 0,70µg, beta-carotene 7,0µg.
+- **Analogia usata**: `food_apple_with_skin_raw` (stessa specie *Malus domestica*, famiglia Rosaceae, già usata come analogia per altre mele in questa pipeline).
+- **Categoria dieta**: `plant_non_fruit` — essiccata/stufata, non frutta fresca nella definizione restrittiva PRD §4.9 (stessa convenzione di `food_litchi_essiccato_raw`).
+- **Matrice**: nuova `mela_essiccata_stufata_senza_zucchero` ("Mela, essiccata e stufata, senza zucchero aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=dried` (processo primario di essiccazione; la fonte riporta valori post-reidratazione/stufatura, nota di trasparenza), `is_fortified_folate` omesso (false).
+- **Nota di trasparenza**: FDC 171693 (stessa preparazione MA con zucchero aggiunto) è una variante dello stesso prodotto — non preparata separatamente in questo lotto (vedi coda).
+
+```
+npm run add-food -- --fdc-id=171692 --food-id=food_apples_dried_stewed_unsweetened \
+  --name-it="Mele essiccate solforate, stufate, senza zucchero aggiunto" \
+  --matrix-id=mela_essiccata_stufata_senza_zucchero --matrix-description-it="Mela, essiccata e stufata, senza zucchero aggiunto" \
+  --baseline-cooking-state=dried --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171692 --food-id=food_apples_dried_stewed_unsweetened \
+  --name-it="Mele essiccate solforate, stufate, senza zucchero aggiunto" \
+  --matrix-id=mela_essiccata_stufata_senza_zucchero --matrix-description-it="Mela, essiccata e stufata, senza zucchero aggiunto" \
+  --baseline-cooking-state=dried --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Pollo, rosticceria BBQ, petto, solo carne — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_chicken_breast_rotisserie_bbq` (nuovo — primo pollo di qualunque tipo in questa pipeline, verificato con `grep`, zero occorrenze). FDC ID 171445 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, breast, meat only").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/chicken-broiler-rotisserie-bbq-breast-meat-only.html` (pagina dichiara esplicitamente "basis: per 100g", USDA SR Legacy, descrizione identica, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 144kcal, proteine 28,0g, grassi 3,6g, carboidrati 0g, fibra 0g, calcio 13,0mg, ferro 0,46mg, magnesio 25,0mg, zinco 0,87mg, rame 0,04mg, folato totale 11,0µg, acido folico 0µg esplicito, vitamina B12 0,27µg, vitamina C 0mg esplicito, selenio 23,1µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_beef_ground_cooked` (altra carne cotta già nel DB reale — nessun pollo disponibile come analogia più stretta, essendo il primo in questa pipeline).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_rosticceria_bbq_petto` ("Pollo, rosticceria BBQ, petto, solo carne").
+- **Attributi**: `is_heme_iron` impostato (true, carne), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=roasted` (rosticceria/BBQ, cottura a calore secco), `is_fortified_folate` omesso (false).
+- **Nota di trasparenza**: prodotto "rosticceria BBQ" con condimento/marinatura — il sodio e alcuni minerali possono differire da un petto di pollo arrosto semplice; dato reale della fonte USDA, non un errore.
+
+```
+npm run add-food -- --fdc-id=171445 --food-id=food_chicken_breast_rotisserie_bbq \
+  --name-it="Pollo, rosticceria BBQ, petto, solo carne" \
+  --matrix-id=pollo_rosticceria_bbq_petto --matrix-description-it="Pollo, rosticceria BBQ, petto, solo carne" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171445 --food-id=food_chicken_breast_rotisserie_bbq \
+  --name-it="Pollo, rosticceria BBQ, petto, solo carne" \
+  --matrix-id=pollo_rosticceria_bbq_petto --matrix-description-it="Pollo, rosticceria BBQ, petto, solo carne" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_beef_ground_cooked \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Fagioli neri, semi maturi, bolliti, senza sale — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_black_beans_boiled` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 173735 (**SR Legacy**, "Beans, black, mature seeds, cooked, boiled, without salt").
+- **Fonte**: `recipal.com/ingredients/4625-...` — NBD ID 16015 confermato esplicitamente in pagina (stesso ndb_number della checklist). Valori energia/proteine/grassi/carboidrati per 100g dalla meta-descrizione della pagina; gli altri nutrienti convertiti dal valore dichiarato per 1 cup (172g, peso esplicito in pagina) a 100g (divisione per 1,72, nessun dato inventato).
+- **Nutrienti**: **15/17**. Per 100g: energia 132kcal, proteine 8,86g, grassi 0,54g, carboidrati 23,71g, fibra 8,7g, calcio 29mg, ferro 2,1mg, magnesio 70mg, zinco 1,1mg, rame 0,23mg, folato totale 148µg DFE, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 1,2µg, vitamina K 3,5µg. Mancano: acido folico (non riportato separatamente), beta-carotene.
+- **Analogia usata**: `food_kidney_beans_boiled` (altro legume bollito già nel golden set originale, stessa famiglia Fabaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `fagioli_neri_bolliti_senza_sale` ("Fagioli neri, bolliti, senza sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+- **Nota di trasparenza**: FDC 175237 (stesso prodotto CON sale) è una variante — non preparata separatamente in questo lotto (vedi coda). FDC 175238 (in scatola, a basso contenuto di sodio) è un prodotto distinto (processo di inscatolamento), non ancora valutato.
+
+```
+npm run add-food -- --fdc-id=173735 --food-id=food_black_beans_boiled \
+  --name-it="Fagioli neri, semi maturi, bolliti, senza sale" \
+  --matrix-id=fagioli_neri_bolliti_senza_sale --matrix-description-it="Fagioli neri, bolliti, senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173735 --food-id=food_black_beans_boiled \
+  --name-it="Fagioli neri, semi maturi, bolliti, senza sale" \
+  --matrix-id=fagioli_neri_bolliti_senza_sale --matrix-description-it="Fagioli neri, bolliti, senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Composta di mele in scatola, zuccherata, senza sale — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_applesauce_canned_sweetened` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 171696 (**SR Legacy**, "Applesauce, canned, sweetened, without salt").
+- **Fonte**: `getfoodfacts.com/food/applesauce-canned-sweetened-without-salt-171696` — FDC ID 171696 citato esplicitamente in pagina ("USDA FoodData Central, SR Legacy, FDC 171696").
+- **Nutrienti**: **17/17**. Per 100g: energia 68,0kcal, proteine 0,16g, grassi 0,17g, carboidrati 17,5g, fibra 1,20g, calcio 3,00mg, ferro 0,12mg, magnesio 3,00mg, zinco 0,030mg, rame 0,032mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,70mg, selenio 0,30µg, vitamina K 0,60µg, beta-carotene 3,00µg.
+- **Analogia usata**: `food_apple_with_skin_raw` (stessa specie *Malus domestica*, famiglia Rosaceae).
+- **Categoria dieta**: `plant_non_fruit` — prodotto trasformato/zuccherato, non frutta fresca nella definizione PRD §4.9.
+- **Matrice**: nuova `composta_di_mele_zuccherata` ("Composta di mele, in scatola, zuccherata, senza sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=canned`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=171696 --food-id=food_applesauce_canned_sweetened \
+  --name-it="Composta di mele in scatola, zuccherata, senza sale" \
+  --matrix-id=composta_di_mele_zuccherata --matrix-description-it="Composta di mele, in scatola, zuccherata, senza sale" \
+  --baseline-cooking-state=canned --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171696 --food-id=food_applesauce_canned_sweetened \
+  --name-it="Composta di mele in scatola, zuccherata, senza sale" \
+  --matrix-id=composta_di_mele_zuccherata --matrix-description-it="Composta di mele, in scatola, zuccherata, senza sale" \
+  --baseline-cooking-state=canned --analogy-food-id=food_apple_with_skin_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Formaggio americano, senza grassi — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_cheese_american_nonfat` (nuovo — primo formaggio di qualunque tipo in questa pipeline, verificato con `grep`, zero occorrenze). FDC ID 170863 (**SR Legacy**, "Cheese, American, nonfat or fat free").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/cheese-american-nonfat-or-fat-free.html` (USDA SR Legacy, descrizione identica, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 126kcal, proteine 21,1g, grassi 0g esplicito, carboidrati 10,5g, fibra 0g esplicito, calcio 789mg, ferro 0mg esplicito, magnesio 115mg, zinco 4,1mg, rame 0,56mg, folato totale 9,0µg, acido folico 0µg esplicito, vitamina B12 1,9µg, vitamina C 0mg esplicito, selenio 14,6µg, vitamina K 0,20µg, beta-carotene 3,0µg.
+- **Analogia usata**: `food_milk_whole` (unico derivato lattiero-caseario già nel DB reale, essendo il primo formaggio in questa pipeline).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_americano_senza_grassi` ("Formaggio americano, senza grassi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun precedente affidabile per i formaggi in questa pipeline, non indovinato), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=fermented` (formaggio), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170863 --food-id=food_cheese_american_nonfat \
+  --name-it="Formaggio americano, senza grassi" \
+  --matrix-id=formaggio_americano_senza_grassi --matrix-description-it="Formaggio americano, senza grassi" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170863 --food-id=food_cheese_american_nonfat \
+  --name-it="Formaggio americano, senza grassi" \
+  --matrix-id=formaggio_americano_senza_grassi --matrix-description-it="Formaggio americano, senza grassi" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
+### Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
+
+- **food_id**: `food_cheese_spread_reduced_fat` (nuovo, verificato con `grep`, zero occorrenze). FDC ID 170896 (**SR Legacy**, "Cheese spread, American or Cheddar cheese base, reduced fat").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/cheese-spread-american-or-cheddar-cheese-base-reduced-fat.html` (USDA SR Legacy, descrizione identica, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 176kcal, proteine 13,4g, grassi 8,9g, carboidrati 10,7g, fibra 0g esplicito, calcio 800mg, ferro 0mg esplicito, magnesio 32,0mg, zinco 3,9mg, rame 0,03mg, folato totale 52,0µg, acido folico 0µg esplicito, vitamina B12 1,9µg, vitamina C 0mg esplicito, selenio 16,9µg, vitamina K 0µg esplicito, beta-carotene 140µg (verosimile per un formaggio spalmabile colorato).
+- **Analogia usata**: `food_milk_whole` (unico derivato lattiero-caseario già nel DB reale; `food_cheese_american_nonfat` preparato in questo stesso lotto non è ancora eseguito sul DB reale, quindi non utilizzabile come analogia).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `formaggio_spalmabile_americano_cheddar_light` ("Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=fermented`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170896 --food-id=food_cheese_spread_reduced_fat \
+  --name-it="Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi" \
+  --matrix-id=formaggio_spalmabile_americano_cheddar_light --matrix-description-it="Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=170896 --food-id=food_cheese_spread_reduced_fat \
+  --name-it="Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi" \
+  --matrix-id=formaggio_spalmabile_americano_cheddar_light --matrix-description-it="Formaggio spalmabile, base americano/cheddar, a ridotto contenuto di grassi" \
+  --baseline-cooking-state=fermented --analogy-food-id=food_milk_whole \
+  --diet-category=egg_dairy --apply
+```
+
 ### Salsiccia vegetale senza carne — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_salsiccia_vegetale_senza_carne` (nuovo, quarto prodotto "meatless" di questa pipeline, stessa categoria USDA "Legumes and Legume Products"). FDC ID 174269 (**SR Legacy**, "Sausage, meatless" — pagina `getfoodfacts.com/food/sausage-meatless-174269` dedicata, FDC ID citato esplicitamente in pagina).
