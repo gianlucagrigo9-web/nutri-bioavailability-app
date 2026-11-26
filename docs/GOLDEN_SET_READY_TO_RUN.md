@@ -14,6 +14,30 @@
 
 ---
 
+### Melone casaba, crudo — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_melone_casaba_raw` (nuovo, cultivar distinta dal melone verde/banana già eseguiti). FDC ID 169093 (**SR Legacy**, "Melons, casaba, raw" — pagina `recipal.com/ingredients/2365-nutrition-facts-calories-protein-carbs-fat-melons-casaba-raw`, nome specifico confermato, FDC ID non mostrato in pagina — mostra NBD ID 9183 legacy, stessa convenzione di accettazione per nome specifico già usata altrove in questo lotto).
+- **Nutrienti**: **15/17**. Per 100g: energia 28,0kcal, proteine 1,11g, grassi 0,1g, carboidrati 6,58g, fibra ~1,2g, calcio ~12mg, ferro ~0,35mg, magnesio ~12mg, zinco ~0,06mg, rame ~0,06mg, folato totale ~8,8µg, vitamina B12 0µg, vitamina C ~22mg, selenio ~0,6µg, vitamina K ~2,4µg. Mancano: acido folico, beta-carotene (pagina mostra solo vitamina A 0µg).
+- **Analogia usata**: `food_melone_verde_raw` (stesso genere *Cucumis melo*, già eseguito sul DB reale, stessa convenzione usata per il melone banana).
+- **Categoria dieta**: `fresh_fruit` (frutta fresca, definizione restrittiva PRD §4.9 — stessa convenzione già usata per le altre cultivar di melone).
+- **Matrice**: nuova `melone_casaba_raw` ("Melone casaba, crudo").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169093 --food-id=food_melone_casaba_raw \
+  --name-it="Melone casaba, crudo" \
+  --matrix-id=melone_casaba_raw --matrix-description-it="Melone casaba, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_verde_raw \
+  --botanical-family=Cucurbitaceae --diet-category=fresh_fruit
+```
+```
+npm run add-food -- --fdc-id=169093 --food-id=food_melone_casaba_raw \
+  --name-it="Melone casaba, crudo" \
+  --matrix-id=melone_casaba_raw --matrix-description-it="Melone casaba, crudo" \
+  --baseline-cooking-state=raw --analogy-food-id=food_melone_verde_raw \
+  --botanical-family=Cucurbitaceae --diet-category=fresh_fruit --apply
+```
+
 ### Relish di cetriolini per hamburger — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_relish_di_cetriolini_hamburger` (nuovo, condimento a base di cetriolo mai tentato in questa pipeline). FDC ID 169386 (**SR Legacy**, "Pickle relish, hamburger" — pagina `getfoodfacts.com/food/pickle-relish-hamburger-169386` dedicata, FDC ID citato esplicitamente in pagina).
