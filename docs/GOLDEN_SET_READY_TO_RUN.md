@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Pollo, rosticceria/BBQ, pelle, cotto — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_pollo_rosticceria_pelle_cotta` (nuovo). FDC ID 171524 (**SR Legacy**, "Chicken, broiler, rotisserie, BBQ, skin" — pagina `tools.myfooddata.com/nutrition-facts/171524/100g/1`, nome e valori per 100g confermati, FDC ID non mostrato esplicitamente in pagina ma solo in URL: stesso dominio già verificato affidabile su altri alimenti di questa famiglia, vedi `food_pollo_rosticceria_dorso_cotto` FDC 174506, 223° lotto).
+- **Nutrienti**: **17/17** (completo). Per 100g: energia 378kcal, proteine 15,2g, grassi 35,2g, carboidrati 0,7g, fibra 0g esplicito, calcio 34mg, ferro 0,86mg, magnesio 22mg, zinco 0,76mg, rame 0,04mg, folato totale 9µg, acido folico 0µg esplicito, vitamina B12 0,55µg, selenio 16,6µg, vitamina K 0µg esplicito, vitamina C 0mg esplicito, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_coscia_di_pollo_cotta` (pollo cotto già nel DB reale, stessa convenzione usata per `food_pollo_rosticceria_dorso_cotto` nel 223° lotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `pollo_rosticceria_pelle` ("Pollo, rosticceria, pelle").
+- **Attributi**: `is_heme_iron` presente (tessuto animale, stessa convenzione usata per il grasso esterno di agnello in questo stesso lotto), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=rotisserie` (stessa convenzione di `food_pollo_rosticceria_dorso_cotto`), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171524 --food-id=food_pollo_rosticceria_pelle_cotta \
+  --name-it="Pollo, rosticceria/BBQ, pelle, cotto" \
+  --matrix-id=pollo_rosticceria_pelle --matrix-description-it="Pollo, rosticceria, pelle" \
+  --baseline-cooking-state=rotisserie --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=171524 --food-id=food_pollo_rosticceria_pelle_cotta \
+  --name-it="Pollo, rosticceria/BBQ, pelle, cotto" \
+  --matrix-id=pollo_rosticceria_pelle --matrix-description-it="Pollo, rosticceria, pelle" \
+  --baseline-cooking-state=rotisserie --analogy-food-id=food_coscia_di_pollo_cotta \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
 ### Sgombro del Pacifico e jack (specie miste), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_sgombro_pacifico_cotto` (nuovo — distinto dallo sgombro generico già eseguito sul DB reale, `food_sgombro_cotto`). FDC ID 171994 (**SR Legacy**, "Fish, mackerel, Pacific and jack, mixed species, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-mackerel-pacific-and-jack-mixed-species-cooked-dry-heat-171994` dedicata e pulita, FDC ID e dataType confermati esplicitamente, release USDA 2026-04-30).
