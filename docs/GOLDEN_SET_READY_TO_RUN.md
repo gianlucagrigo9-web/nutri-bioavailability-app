@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Manzo australiano, lombata (top loin), magra, cruda — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_manzo_lombata_raw` (nuovo). FDC ID 173970 (**SR Legacy**, "Beef, Australian, imported, grass-fed, loin, top loin steak/roast, boneless, separable lean only, raw" — pagina tools.myfooddata.com/print/173970/100g, nome confermato esattamente, FDC ID non mostrato sul testo ma presente nell'URL).
+- **Nutrienti**: **8/17**. Per 100g: energia 131kcal, proteine 21,8g, grassi 4,9g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 5mg, ferro 1,6mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K (non riportati dalla fonte; beta-carotene non applicabile, prodotto animale).
+- **Analogia usata**: `food_bistecca_di_manzo_raw` (bistecca di manzo generica già nel DB).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `manzo_lombata` ("Manzo, lombata, cruda").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=173970 --food-id=food_manzo_lombata_raw \
+  --name-it="Manzo australiano, lombata (top loin), magra, cruda" \
+  --matrix-id=manzo_lombata --matrix-description-it="Manzo, lombata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=173970 --food-id=food_manzo_lombata_raw \
+  --name-it="Manzo australiano, lombata (top loin), magra, cruda" \
+  --matrix-id=manzo_lombata --matrix-description-it="Manzo, lombata, cruda" \
+  --baseline-cooking-state=raw --analogy-food-id=food_bistecca_di_manzo_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Salmone chum (keta), crudo (Alaska Native) — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_salmone_chum_raw` (nuovo). FDC ID 168046 (**SR Legacy**, "Fish, Salmon, Chum, raw (Alaska Native)" — pagina tools.myfooddata.com/nutrition-facts/168046/100g, nome confermato esattamente, FDC ID non mostrato esplicitamente sul testo della pagina ma presente nell'URL e nessun record alternativo plausibile).
