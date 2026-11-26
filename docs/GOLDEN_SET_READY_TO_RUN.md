@@ -16,6 +16,181 @@
 
 ## Pronti
 
+### Fagioli neri comuni, secchi, crudi — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_neri_comuni_raw` (distinto da `food_fagioli_neri_raw` già eseguito — quello è "Beans, black TURTLE, mature seeds, raw" FDC 175186, qui è "Beans, black, mature seeds, raw" FDC diverso, cultivar comune non turtle. Verificato con `grep`, zero occorrenze). FDC ID 173734 (**SR Legacy**).
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/beans-black-mature-seeds-raw.html` (dati USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 341kcal, proteine 21,6g, grassi 1,4g, carboidrati 62,4g, fibra 15,5g, calcio 123mg, ferro 5,0mg, magnesio 171mg, zinco 3,6mg, rame 0,84mg, folato totale 444µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 3,2µg, vitamina K (K1) 5,6µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_fagioli_neri_raw` (già eseguita — stessa specie *Phaseolus vulgaris*, famiglia Fabaceae, cultivar diversa).
+- **Categoria dieta**: `plant_non_fruit` (legume secco).
+- **Matrice**: nuova `fagioli_neri_comuni`.
+- **Attributi**: `botanical_family=Fabaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=173734 --food-id=food_fagioli_neri_comuni_raw \
+  --name-it="Fagioli neri comuni, secchi, crudi" \
+  --matrix-id=fagioli_neri_comuni --matrix-description-it="Fagioli neri comuni" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_neri_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173734 --food-id=food_fagioli_neri_comuni_raw \
+  --name-it="Fagioli neri comuni, secchi, crudi" \
+  --matrix-id=fagioli_neri_comuni --matrix-description-it="Fagioli neri comuni" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_neri_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Germogli di bambù, in scatola, sgocciolati — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_germogli_di_bambu_in_scatola` (mai coperto in questa pipeline, verificato con `grep`, zero occorrenze). FDC ID 169212 (**SR Legacy**, "Bamboo shoots, canned, drained solids").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/bamboo-shoots-canned-drained-solids.html` (USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 19,0kcal, proteine 1,7g, grassi 0,40g, carboidrati 3,2g, fibra 1,4g, calcio 8,0mg, ferro 0,32mg, magnesio 4,0mg, zinco 0,65mg, rame 0,11mg, folato totale 3,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,1mg, selenio 0,50µg, vitamina K (K1) 0µg esplicito, beta-carotene 8,0µg.
+- **Analogia usata**: `food_asparagi_in_scatola` (ortaggio in scatola sgocciolato, già eseguito sul DB reale — stesso processo di conservazione; famiglia botanica diversa, nota esplicitamente: bambù è Poaceae, asparago è Asparagaceae).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `germogli_di_bambu_scatola`.
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (conserva sterilizzata, beta-carotene reale non nullo, stesso precedente dell'analogia), `botanical_family=Poaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=169212 --food-id=food_germogli_di_bambu_in_scatola \
+  --name-it="Germogli di bambù, in scatola, sgocciolati" \
+  --matrix-id=germogli_di_bambu_scatola --matrix-description-it="Germogli di bambù in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169212 --food-id=food_germogli_di_bambu_in_scatola \
+  --name-it="Germogli di bambù, in scatola, sgocciolati" \
+  --matrix-id=germogli_di_bambu_scatola --matrix-description-it="Germogli di bambù in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_asparagi_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Farina di mais integrale, bianca, cruda — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_farina_di_mais_integrale_bianca_raw` (distinto da `food_farina_di_mais_raw`/`food_farina_di_mais_arricchita_raw`/`food_farina_di_mais_blu_raw` già eseguite e da `food_cornmeal_degermata_bianca_arricchita_raw` (cornmeal, macinatura più grossa): qui farina integrale bianca non arricchita. Verificato con `grep`, zero occorrenze). FDC ID 169748 (**SR Legacy**, "Corn flour, whole-grain, white").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/corn-flour-whole-grain-white.html` (USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 361kcal, proteine 6,9g, grassi 3,9g, carboidrati 76,8g, fibra 7,3g, calcio 7,0mg, ferro 2,4mg, magnesio 93,0mg, zinco 1,7mg, rame 0,23mg, folato totale 25,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 15,4µg, vitamina K (K1) 0,30µg, beta-carotene 1,0µg.
+- **Analogia usata**: `food_farina_di_mais_raw` (stesso cereale *Zea mays*, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `farina_di_mais_integrale_bianca`.
+- **Attributi**: `botanical_family=Poaceae`, `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=169748 --food-id=food_farina_di_mais_integrale_bianca_raw \
+  --name-it="Farina di mais integrale, bianca, cruda" \
+  --matrix-id=farina_di_mais_integrale_bianca --matrix-description-it="Farina di mais integrale bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169748 --food-id=food_farina_di_mais_integrale_bianca_raw \
+  --name-it="Farina di mais integrale, bianca, cruda" \
+  --matrix-id=farina_di_mais_integrale_bianca --matrix-description-it="Farina di mais integrale bianca" \
+  --baseline-cooking-state=raw --analogy-food-id=food_farina_di_mais_raw \
+  --botanical-family=Poaceae --diet-category=plant_non_fruit --apply
+```
+
+### Nettare di albicocca, in scatola, con acido ascorbico aggiunto — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_nettare_in_scatola` (mai coperto, verificato con `grep`, zero occorrenze). FDC ID 171704 (**SR Legacy**, "Apricot nectar, canned, with added ascorbic acid").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/apricot-nectar-canned-with-added-ascorbic-acid.html` (USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 56,0kcal, proteine 0,17g, grassi 0,45g, carboidrati 13,6g, fibra 0,10g, calcio 11,0mg, ferro 0,10mg, magnesio 5,0mg, zinco 0,03mg, rame 0,02mg, folato totale 1,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 29,7mg (acido ascorbico aggiunto, coerente col nome), selenio 0µg esplicito, vitamina K (K1) 1,2µg, beta-carotene 189µg.
+- **Analogia usata**: `food_albicocche_in_scatola` (stesso frutto conservato, già eseguita sul DB reale — qui nettare/succo invece di frutto intero).
+- **Categoria dieta**: `plant_non_fruit` (nettare/succo in scatola, non rientra nella definizione restrittiva di frutta fresca del PRD §4.9).
+- **Matrice**: nuova `albicocche_nettare`.
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted` (succo pastorizzato/filtrato), `botanical_family=Rosaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=171704 --food-id=food_albicocche_nettare_in_scatola \
+  --name-it="Nettare di albicocca, in scatola, con acido ascorbico aggiunto" \
+  --matrix-id=albicocche_nettare --matrix-description-it="Nettare di albicocca in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171704 --food-id=food_albicocche_nettare_in_scatola \
+  --name-it="Nettare di albicocca, in scatola, con acido ascorbico aggiunto" \
+  --matrix-id=albicocche_nettare --matrix-description-it="Nettare di albicocca in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Albicocche, in scatola, sciroppo pesante, senza buccia — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_sciroppo_pesante_senza_buccia_in_scatola` (distinto da `food_albicocche_in_scatola` già eseguito — quello è "heavy syrup, drained" FDC 167768 senza indicazione buccia/liquido, e da `food_albicocche_sciroppo_leggero_in_scatola` FDC 173938 — sciroppo leggero, con buccia: qui sciroppo EXTRA pesante, senza buccia, con liquido di governo. Verificato con `grep`, zero occorrenze). FDC ID 171701 (**SR Legacy**, "Apricots, canned, extra heavy syrup pack, without skin, solids and liquids").
+- **Fonte**: `getfoodfacts.com/food/apricots-canned-extra-heavy-syrup-pack-without-skin-solids-and-liquids-171701` — FDC ID 171701 citato esplicitamente in pagina.
+- **Nutrienti**: **14/17** — mancano selenio, vitamina K, beta-carotene (nessuna riga in pagina). Per 100g: energia 96,0kcal, proteine 0,55g, grassi 0,040g, carboidrati 24,9g, fibra 1,60g, calcio 8,00mg, ferro 0,62mg, magnesio 8,00mg, zinco 0,10mg, rame 0,064mg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 2,40mg.
+- **Analogia usata**: `food_albicocche_in_scatola` (stessa conserva di frutto in sciroppo pesante, già eseguita sul DB reale — qui senza buccia invece di sgocciolate).
+- **Categoria dieta**: `plant_non_fruit` (frutta in scatola/sciroppo, non frutta fresca).
+- **Matrice**: nuova `albicocche_sciroppo_pesante_senza_buccia`.
+- **Attributi**: `carotenoid_matrix_state=cooked_or_disrupted`, `botanical_family=Rosaceae`, `baseline_cooking_state=cooked`.
+
+```
+npm run add-food -- --fdc-id=171701 --food-id=food_albicocche_sciroppo_pesante_senza_buccia_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, senza buccia" \
+  --matrix-id=albicocche_sciroppo_pesante_senza_buccia --matrix-description-it="Albicocche in scatola, sciroppo pesante, senza buccia" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171701 --food-id=food_albicocche_sciroppo_pesante_senza_buccia_in_scatola \
+  --name-it="Albicocche, in scatola, sciroppo pesante, senza buccia" \
+  --matrix-id=albicocche_sciroppo_pesante_senza_buccia --matrix-description-it="Albicocche in scatola, sciroppo pesante, senza buccia" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_in_scatola \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Formaggio "cheese food" americano, fortificato con vitamina D — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_cheese_food_americano_vitd_raw` (distinto da `food_formaggio_americano_raw`/FDC 171289 "cheese PRODUCT" e da `food_formaggio_food_americano_raw`/FDC 171291 "cheese food" senza vit D, entrambi già eseguiti/preparati: qui standard d'identità USDA "cheese food" CON vitamina D, FDC diverso da entrambi. Verificato con `grep`, zero occorrenze). FDC ID 171252 (**SR Legacy**, "Cheese food, pasteurized process, American, vitamin D fortified").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/cheese-food-pasteurized-process-american-vitamin-d-fortified.html` (USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 330kcal, proteine 16,9g, grassi 25,6g, carboidrati 8,6g, fibra 0g esplicito, calcio 682mg, ferro 0,26mg, magnesio 27,0mg, zinco 2,3mg, rame 0,03mg, folato totale 7,0µg, acido folico 0µg esplicito, vitamina B12 1,3µg, vitamina C 0mg esplicito, selenio 19,6µg, vitamina K (K1) 3,4µg, beta-carotene 65,0µg.
+- **Analogia usata**: `food_formaggio_americano_raw` (cheese product americano processato, già eseguito sul DB reale — stessa categoria funzionale "formaggio fuso USA da banco").
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `cheese_food_americano_vitd`.
+- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia (non applicabile calcio/carotenoidi a un formaggio processato), `baseline_cooking_state=raw`.
+
+```
+npm run add-food -- --fdc-id=171252 --food-id=food_cheese_food_americano_vitd_raw \
+  --name-it="Formaggio (cheese food) americano, fortificato con vitamina D" \
+  --matrix-id=cheese_food_americano_vitd --matrix-description-it="Cheese food americano fortificato con vitamina D" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=171252 --food-id=food_cheese_food_americano_vitd_raw \
+  --name-it="Formaggio (cheese food) americano, fortificato con vitamina D" \
+  --matrix-id=cheese_food_americano_vitd --matrix-description-it="Cheese food americano fortificato con vitamina D" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy --apply
+```
+
+### Salsa al formaggio fatta in casa — preparato 2026-11-26 dal task (230° lotto, dalla lista USDA)
+
+- **food_id**: `food_salsa_al_formaggio_fatta_in_casa` (distinto da `food_salsa_al_formaggio`/FDC 171191 "sauce, cheese, ready-to-serve" commerciale: qui "prepared from recipe", fatta in casa, FDC diverso. Verificato con `grep`, zero occorrenze). FDC ID 172200 (**SR Legacy**, "Cheese sauce, prepared from recipe").
+- **Fonte**: `triagemethod.com/tools/human-nutrition-explorer/food/cheese-sauce-prepared-from-recipe.html` (USDA SR Legacy, per 100g, pannello completo).
+- **Nutrienti**: **17/17**. Per 100g: energia 197kcal, proteine 10,3g, grassi 14,9g, carboidrati 5,5g, fibra 0,10g, calcio 311mg, ferro 0,35mg, magnesio 19,0mg, zinco 1,3mg, rame 0,02mg, folato totale 10,0µg, acido folico 2,0µg, vitamina B12 0,35µg, vitamina C 0,60mg, selenio 6,6µg, vitamina K (K1) 0,90µg, beta-carotene 26,0µg.
+- **Analogia usata**: `food_formaggio_americano_raw` (prodotto caseario processato, già eseguito sul DB reale — stessa categoria funzionale, nessun'altra salsa al formaggio già eseguita disponibile come analogia più stretta).
+- **Categoria dieta**: `egg_dairy`.
+- **Matrice**: nuova `salsa_formaggio_casalinga`.
+- **Attributi**: nessun attributo categorico aggiuntivo oltre a quelli dell'analogia, `baseline_cooking_state=cooked` (ricetta preparata/cotta).
+
+```
+npm run add-food -- --fdc-id=172200 --food-id=food_salsa_al_formaggio_fatta_in_casa \
+  --name-it="Salsa al formaggio, fatta in casa" \
+  --matrix-id=salsa_formaggio_casalinga --matrix-description-it="Salsa al formaggio fatta in casa" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172200 --food-id=food_salsa_al_formaggio_fatta_in_casa \
+  --name-it="Salsa al formaggio, fatta in casa" \
+  --matrix-id=salsa_formaggio_casalinga --matrix-description-it="Salsa al formaggio fatta in casa" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_formaggio_americano_raw \
+  --diet-category=egg_dairy --apply
+```
+
 ### Pollock atlantico, cotto (calore secco) — preparato 2026-11-26 dal task (229° lotto, dalla lista USDA)
 
 - **food_id**: `food_pollock_atlantic_cooked` (nuovo — distinto dal Pollock dell'Alaska `food_pollock_raw` FDC 175130 già in coda/eseguito, specie diversa: *Pollachius* atlantico vs *Gadus chalcogrammus*. Verificato con `grep`, zero occorrenze). FDC ID 174237 (**SR Legacy**, "Fish, pollock, Atlantic, cooked, dry heat").
