@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Mele sciroppate in scatola, a fette, scolate, riscaldate — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_mele_sciroppate_cotte` (nuovo). FDC ID 173930 (**SR Legacy**, "Apples, canned, sweetened, sliced, drained, heated" — pagina tools.myfooddata.com/print/173930/100g, nome confermato esattamente, FDC ID non mostrato sul testo ma presente nell'URL).
+- **Nutrienti**: **8/17**. Per 100g: energia 67kcal, proteine 0,18g, grassi 0,43g, carboidrati 16,8g, fibra 2g, calcio 4mg, ferro 0,24mg, vitamina C 0,2mg. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_succo_di_mela_raw` (unico alimento da mela già nel DB, stessa specie Malus domestica).
+- **Categoria dieta**: `plant_non_fruit` (frutta trasformata/conservata, non frutta fresca per la definizione restrittiva PRD §4.9).
+- **Matrice**: nuova `mele_sciroppate` ("Mele sciroppate in scatola").
+- **Attributi**: `botanical_family=Rosaceae`, `carotenoid_matrix_state=cooked_or_disrupted` (prodotto riscaldato/cotto).
+
+```
+npm run add-food -- --fdc-id=173930 --food-id=food_mele_sciroppate_cotte \
+  --name-it="Mele sciroppate in scatola, a fette, scolate, riscaldate" \
+  --matrix-id=mele_sciroppate --matrix-description-it="Mele sciroppate in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_succo_di_mela_raw --diet-category=plant_non_fruit \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted
+```
+```
+npm run add-food -- --fdc-id=173930 --food-id=food_mele_sciroppate_cotte \
+  --name-it="Mele sciroppate in scatola, a fette, scolate, riscaldate" \
+  --matrix-id=mele_sciroppate --matrix-description-it="Mele sciroppate in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_succo_di_mela_raw --diet-category=plant_non_fruit \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted --apply
+```
+
 ### Manzo australiano, lombata (top loin), magra, cruda — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_manzo_lombata_raw` (nuovo). FDC ID 173970 (**SR Legacy**, "Beef, Australian, imported, grass-fed, loin, top loin steak/roast, boneless, separable lean only, raw" — pagina tools.myfooddata.com/print/173970/100g, nome confermato esattamente, FDC ID non mostrato sul testo ma presente nell'URL).
