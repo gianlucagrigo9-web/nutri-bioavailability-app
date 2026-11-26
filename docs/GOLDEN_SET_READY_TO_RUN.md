@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Aringa del Pacifico, cotta al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_aringa_pacifico_cotta` (nuovo — specie distinta (Clupea pallasii) e preparazione distinta (cotta) dall'aringa Atlantica cruda già nel DB `food_aringa_raw` FDC 175116). FDC ID 174233 (**SR Legacy**, "Fish, herring, Pacific, cooked, dry heat" — pagina tools.myfooddata.com/nutrition-facts/174233/100g/1, nome FDC non mostrato esplicitamente ma didascalia "Cooked Pacific Herring" coerente, stesso dominio verificato affidabile più volte in questo lotto).
+- **Nutrienti**: **15/17**. Per 100g: energia 250kcal, proteine 21g, grassi 17,8g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 106mg, ferro 1,4mg, magnesio 41mg, zinco 0,68mg, rame 0,1mg, vitamina C 0mg esplicito, folato totale 6µg, acido folico 0µg esplicito, vitamina B12 9,6µg, selenio 46,8µg. **Mancano**: vitamina K, beta-carotene (non riportati dalla fonte).
+- **Analogia usata**: `food_aringa_raw` (stesso genere Clupea).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `aringa_pacifico` ("Aringa del Pacifico, cotta").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=174233 --food-id=food_aringa_pacifico_cotta \
+  --name-it="Aringa del Pacifico, cotta al forno (calore secco)" \
+  --matrix-id=aringa_pacifico --matrix-description-it="Aringa del Pacifico, cotta" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_aringa_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174233 --food-id=food_aringa_pacifico_cotta \
+  --name-it="Aringa del Pacifico, cotta al forno (calore secco)" \
+  --matrix-id=aringa_pacifico --matrix-description-it="Aringa del Pacifico, cotta" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_aringa_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Halibut della Groenlandia, cotto al forno (calore secco) — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_halibut_groenlandia_cotto` (nuovo — specie distinta, Reinhardtius hippoglossoides, dall'halibut Atlantico/Pacifico già nel DB `food_halibut_raw` FDC 174200, genere Hippoglossus). FDC ID 174232 (**SR Legacy**, "Fish, halibut, greenland, cooked, dry heat" — pagina tools.myfooddata.com/print/174232/100g, nome e valori per 100g confermati esattamente).
