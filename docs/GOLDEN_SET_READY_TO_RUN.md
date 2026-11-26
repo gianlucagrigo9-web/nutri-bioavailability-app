@@ -14,6 +14,30 @@
 
 ---
 
+### Fagioli fritti in scatola, senza grassi — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_fagioli_fritti_in_scatola_senza_grassi` (nuovo). FDC ID 172465 (**SR Legacy**, "Refried beans, canned, fat-free" — pagina `tools.myfooddata.com/nutrition-comparison/172465/wt1/1`, nome confermato, FDC ID solo in URL).
+- **Nutrienti**: **17/17**. Per 100g: energia 79kcal, proteine 5,3g, grassi 0,43g, carboidrati 13,5g, fibra 4,7g, calcio 34mg, ferro 1,6mg, magnesio 38mg, zinco 0,65mg, rame 0,16mg, folato totale 57µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0,9mg, selenio 5,7µg, vitamina K 2,0µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_kidney_beans_raw` (stessa specie *Phaseolus vulgaris*, Golden Set originale, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` — prodotto etichettato "fat-free", nessun grasso animale (0,43g grassi coerente con legumi puri, non con lardo/strutto tradizionale della ricetta classica).
+- **Matrice**: nuova `fagioli_fritti_senza_grassi` ("Fagioli fritti (refried), in scatola, senza grassi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=cooked` (prodotto in scatola già cotto/schiacciato), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172465 --food-id=food_fagioli_fritti_in_scatola_senza_grassi \
+  --name-it="Fagioli fritti (refried), in scatola, senza grassi" \
+  --matrix-id=fagioli_fritti_senza_grassi --matrix-description-it="Fagioli fritti (refried), in scatola, senza grassi" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172465 --food-id=food_fagioli_fritti_in_scatola_senza_grassi \
+  --name-it="Fagioli fritti (refried), in scatola, senza grassi" \
+  --matrix-id=fagioli_fritti_senza_grassi --matrix-description-it="Fagioli fritti (refried), in scatola, senza grassi" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_kidney_beans_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di girasole industriale mid-oleico — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_olio_di_girasole_mid_oleico_raw` (nuovo, variante industriale "mid-oleic" distinta dal girasole da tavola già eseguito). FDC ID 172357 (**SR Legacy**, "Oil, industrial, mid-oleic, sunflower" — pagina `tools.myfooddata.com/nutrition-comparison/172357/wt1`, nome confermato, FDC ID solo in URL).
