@@ -14,6 +14,30 @@
 
 ---
 
+### Estensore di carne a base vegetale (meat extender) — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_estensore_vegetale_per_carne` (nuovo, prodotto proteico vegetale secco usato per "allungare" preparati di carne macinata — categoria USDA "Legumes and Legume Products", stesso gruppo di `food_affettato_vegetale_pranzo` di questo stesso lotto). FDC ID 174268 (**SR Legacy**, "Meat extender" — pagina `tools.myfooddata.com/nutrition-facts/174268/wt1`, nome confermato, FDC ID solo in URL).
+- **Nutrienti**: **15/17**. Per 100g (derivato da porzione 88g, fattore 100/88): energia 311kcal, proteine 41,7g, grassi 2,95g, carboidrati 34,7g, fibra 17,5g, calcio 204mg, ferro 12,0mg, magnesio 216mg, zinco 2,16mg, rame 0,31mg, folato totale 198µg, acido folico 0µg esplicito, vitamina B12 6,0µg, vitamina C 0mg esplicito, selenio 7,4µg. Mancano: vitamina K, beta-carotene. Colesterolo 0mg esplicito in pagina, coerente con prodotto di proteina vegetale (tipicamente soia testurizzata) — B12 presente è fortificazione tipica di questi analoghi, non segnale di contenuto animale.
+- **Analogia usata**: `food_tofu_raw` (altro derivato proteico della soia *Glycine max*, già eseguito sul DB reale, stessa convenzione usata per l'affettato vegetale di questo lotto).
+- **Categoria dieta**: `plant_non_fruit` — prodotto proteico vegetale puro (0g colesterolo, nessun ingrediente animale dichiarato), non un alimento composito con carne reale.
+- **Matrice**: nuova `estensore_vegetale_per_carne` ("Estensore di carne a base vegetale, secco").
+- **Attributi**: `is_heme_iron` omesso (false, prodotto vegetale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (base soia), `baseline_cooking_state=raw` (prodotto secco come acquistato), `is_fortified_folate` omesso (false, acido folico esplicito 0).
+
+```
+npm run add-food -- --fdc-id=174268 --food-id=food_estensore_vegetale_per_carne \
+  --name-it="Estensore di carne a base vegetale, secco" \
+  --matrix-id=estensore_vegetale_per_carne --matrix-description-it="Estensore di carne a base vegetale, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174268 --food-id=food_estensore_vegetale_per_carne \
+  --name-it="Estensore di carne a base vegetale, secco" \
+  --matrix-id=estensore_vegetale_per_carne --matrix-description-it="Estensore di carne a base vegetale, secco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Nettare di guanabana in scatola — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_nettare_di_guanabana_in_scatola` (nuovo, derivato del frutto `food_graviola_raw` già eseguito). FDC ID 168196 (**SR Legacy**, "Guanabana nectar, canned" — pagina `getfoodfacts.com/food/guanabana-nectar-canned-168196` dedicata, FDC ID citato esplicitamente in pagina).
