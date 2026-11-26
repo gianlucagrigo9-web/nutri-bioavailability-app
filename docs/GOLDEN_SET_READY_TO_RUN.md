@@ -14,7 +14,29 @@
 
 ---
 
-## Pronti
+### Olio di colza industriale per friggitura leggera — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_olio_di_colza_industriale_raw` (nuovo, variante industriale distinta dal colza da tavola `food_olio_di_colza_raw` già eseguito — composizione in acidi grassi ottimizzata per frittura leggera, record FDC distinto). FDC ID 172359 (**SR Legacy**, "Oil, industrial, canola for salads, woks and light frying" — pagina `tools.myfooddata.com/nutrition-comparison/172359/wt1/1`, nome confermato esplicitamente, FDC ID solo in URL).
+- **Nutrienti**: **17/17** (tutti i 17 esplicitamente riportati, 14 a zero esplicito coerente con un grasso puro raffinato — nessuna proteina/carboidrato/minerale/vitamina idrosolubile in un olio, fatto nutrizionale noto non un dato mancante). Per 100g (derivato da porzione 14g = 1 cucchiaio, fattore 100/14): energia ~857kcal, proteine 0g, grassi ~97,1g, carboidrati 0g, fibra 0g, calcio 0mg, ferro 0mg, magnesio 0mg, zinco 0mg, rame 0mg, folato totale 0µg, acido folico 0µg, vitamina B12 0µg, vitamina C 0mg, selenio 0µg, vitamina K ~69,3µg (valore reale, coerente con il profilo noto dell'olio di colza), beta-carotene 0µg.
+- **Analogia usata**: `food_olio_di_colza_raw` (stesso olio di base, varietà "industriale" per uso professionale, già eseguito sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (olio vegetale puro, stessa convenzione di ogni altro olio in questa pipeline).
+- **Matrice**: nuova `olio_di_colza_industriale` ("Olio di colza industriale, per insalate/wok/frittura leggera").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Brassicaceae` (colza/canola), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=172359 --food-id=food_olio_di_colza_industriale_raw \
+  --name-it="Olio di colza industriale, per insalate/wok/frittura leggera" \
+  --matrix-id=olio_di_colza_industriale --matrix-description-it="Olio di colza industriale, per insalate/wok/frittura leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_colza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=172359 --food-id=food_olio_di_colza_industriale_raw \
+  --name-it="Olio di colza industriale, per insalate/wok/frittura leggera" \
+  --matrix-id=olio_di_colza_industriale --matrix-description-it="Olio di colza industriale, per insalate/wok/frittura leggera" \
+  --baseline-cooking-state=raw --analogy-food-id=food_olio_di_colza_raw \
+  --botanical-family=Brassicaceae --diet-category=plant_non_fruit --apply
+```
 
 ### Uovo, intero, cotto a omelette — preparato 2026-11-26 dal task (228° lotto)
 
