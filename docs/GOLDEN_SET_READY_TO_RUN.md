@@ -14,6 +14,30 @@
 
 ---
 
+### Salsiccia vegetale senza carne — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_salsiccia_vegetale_senza_carne` (nuovo, quarto prodotto "meatless" di questa pipeline, stessa categoria USDA "Legumes and Legume Products"). FDC ID 174269 (**SR Legacy**, "Sausage, meatless" — pagina `getfoodfacts.com/food/sausage-meatless-174269` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 255kcal, proteine 20,3g, grassi 18,2g, carboidrati 8,09g, fibra 2,80g, calcio 63,0mg, ferro 3,72mg, magnesio 36,0mg, zinco 1,46mg, rame 0,25mg, folato totale 26,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0mg esplicito, selenio 7,40µg, vitamina K 0µg esplicito, beta-carotene 0µg esplicito. Colesterolo 0mg esplicito (coerente con prodotto vegetale).
+- **Analogia usata**: `food_tofu_raw` (altro derivato proteico vegetale, già eseguito sul DB reale, stessa convenzione degli altri tre prodotti "meatless" di questo lotto).
+- **Categoria dieta**: `plant_non_fruit`.
+- **Matrice**: nuova `salsiccia_vegetale_senza_carne` ("Salsiccia vegetale, senza carne").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=174269 --food-id=food_salsiccia_vegetale_senza_carne \
+  --name-it="Salsiccia vegetale, senza carne" \
+  --matrix-id=salsiccia_vegetale_senza_carne --matrix-description-it="Salsiccia vegetale, senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=174269 --food-id=food_salsiccia_vegetale_senza_carne \
+  --name-it="Salsiccia vegetale, senza carne" \
+  --matrix-id=salsiccia_vegetale_senza_carne --matrix-description-it="Salsiccia vegetale, senza carne" \
+  --baseline-cooking-state=raw --analogy-food-id=food_tofu_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Melone casaba, crudo — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_melone_casaba_raw` (nuovo, cultivar distinta dal melone verde/banana già eseguiti). FDC ID 169093 (**SR Legacy**, "Melons, casaba, raw" — pagina `recipal.com/ingredients/2365-nutrition-facts-calories-protein-carbs-fat-melons-casaba-raw`, nome specifico confermato, FDC ID non mostrato in pagina — mostra NBD ID 9183 legacy, stessa convenzione di accettazione per nome specifico già usata altrove in questo lotto).
