@@ -14,6 +14,30 @@
 
 ---
 
+### Relish di cetriolini per hamburger — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_relish_di_cetriolini_hamburger` (nuovo, condimento a base di cetriolo mai tentato in questa pipeline). FDC ID 169386 (**SR Legacy**, "Pickle relish, hamburger" — pagina `getfoodfacts.com/food/pickle-relish-hamburger-169386` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **15/17**. Per 100g: energia 129kcal, proteine 0,63g, grassi 0,54g, carboidrati 34,5g, fibra 3,20g, calcio 4,00mg, ferro 1,14mg, magnesio 7,00mg, zinco 0,11mg, rame 0,083mg, folato totale 1,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 2,30mg, selenio 0µg. Mancano: vitamina K, beta-carotene (pagina mostra solo vitamina A RAE 13,0µg).
+- **Analogia usata**: `food_cetrioli_raw` (cetriolo fresco, Golden Set originale, già eseguito sul DB reale — stesso ortaggio di base, qui conservato/condito).
+- **Categoria dieta**: `plant_non_fruit` (condimento a base di cetriolo, nessun ingrediente animale).
+- **Matrice**: nuova `relish_di_cetriolini_hamburger` ("Relish di cetriolini per hamburger").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Cucurbitaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169386 --food-id=food_relish_di_cetriolini_hamburger \
+  --name-it="Relish di cetriolini per hamburger" \
+  --matrix-id=relish_di_cetriolini_hamburger --matrix-description-it="Relish di cetriolini per hamburger" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cetrioli_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169386 --food-id=food_relish_di_cetriolini_hamburger \
+  --name-it="Relish di cetriolini per hamburger" \
+  --matrix-id=relish_di_cetriolini_hamburger --matrix-description-it="Relish di cetriolini per hamburger" \
+  --baseline-cooking-state=raw --analogy-food-id=food_cetrioli_raw \
+  --botanical-family=Cucurbitaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Litchi essiccato — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_litchi_essiccato_raw` (nuovo, forma essiccata distinta dal litchi fresco `food_litchi_raw` già eseguito). FDC ID 169087 (**SR Legacy**, "Litchis, dried" — pagina `getfoodfacts.com/food/litchis-dried-169087` dedicata, FDC ID citato esplicitamente in pagina).
