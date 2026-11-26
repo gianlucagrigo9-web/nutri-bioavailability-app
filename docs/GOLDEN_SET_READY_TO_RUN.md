@@ -16,7 +16,31 @@
 
 ## Pronti
 
-### Farina di malto d'orzo — preparato 2026-11-26 dal task (225° lotto)
+### Sgombro reale (king mackerel), cotto al forno (calore secco) — preparato 2026-11-26 dal task (225° lotto)
+
+- **food_id**: `food_sgombro_reale_cotto` (nuovo — specie distinta dallo sgombro generico `food_sgombro_cotto` e dal `food_sgombro_pacifico_cotto` preparato in questo stesso lotto: king mackerel, *Scomberomorus cavalla*). FDC ID 174236 (**SR Legacy**, "Fish, mackerel, king, cooked, dry heat" — pagina `tools.myfooddata.com/nutrition-facts/174236/wt1`, nome confermato nelle didascalie, FDC ID non mostrato esplicitamente ma stesso dominio già verificato affidabile più volte in questo progetto).
+- **Nutrienti**: **15/17**. Per 100g: energia 134kcal, proteine 26,0g, grassi 2,6g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 40mg, ferro 2,2mg, magnesio 41mg, zinco 0,72mg, rame 0,035mg, folato totale 9,1µg, acido folico 0µg esplicito, vitamina B12 18,0µg, selenio 47µg, vitamina C 1,6mg. Mancano: vitamina K, beta-carotene (dati mancanti sulla pagina, non assunti zero).
+- **Analogia usata**: `food_sgombro_cotto` (sgombro cotto già nel DB reale — stesso genere di pesce grasso cotto).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `sgombro_reale_cotto` (Sgombro reale, king mackerel, cotto).
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` non applicabile, `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174236 --food-id=food_sgombro_reale_cotto \
+  --name-it="Sgombro reale (king mackerel), cotto al forno (calore secco)" \
+  --matrix-id=sgombro_reale_cotto --matrix-description-it="Sgombro reale, king mackerel, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=174236 --food-id=food_sgombro_reale_cotto \
+  --name-it="Sgombro reale (king mackerel), cotto al forno (calore secco)" \
+  --matrix-id=sgombro_reale_cotto --matrix-description-it="Sgombro reale, king mackerel, cotto" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_sgombro_cotto \
+  --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Pollo, rosticceria/BBQ, pelle, cotto — preparato 2026-11-26 dal task (225° lotto)
 
 - **food_id**: `food_farina_di_malto_d_orzo_raw` (nuovo). FDC ID 169740 (**SR Legacy**, "Barley malt flour" — pagina `tools.myfooddata.com/nutrition-facts/169740/wt1`, nome confermato nelle didascalie dei grafici, FDC ID non mostrato esplicitamente in pagina ma solo in URL: stesso dominio già verificato affidabile su altri alimenti già eseguiti/in coda in questo progetto).
 - **Nutrienti**: **17/17** (completo). Per 100g: energia 361kcal, proteine 10,3g, grassi 1,85g, carboidrati 78,3g, fibra 7,1g, calcio 37mg, ferro 4,7mg, magnesio 97mg, zinco 2,0mg, rame 0,27mg, folato totale 38µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, selenio 37,7µg, vitamina K 2,2µg, vitamina C 0,60mg, beta-carotene 11µg.
