@@ -14,6 +14,30 @@
 
 ---
 
+### Peperoncino piccante essiccato al sole — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_peperoncino_essiccato_al_sole` (nuovo, forma di conservazione mai tentata — distinta da crudo/in scatola/sott'aceto già in pipeline). FDC ID 168570 (**SR Legacy**, "Peppers, hot chile, sun-dried" — pagina `tools.myfooddata.com/nutrition-facts/168570/wt1`, nome confermato ("Sun-Dried Hot Chile Peppers"), FDC ID solo in URL).
+- **Nutrienti**: **17/17**. Per 100g (derivato da porzione 37g, fattore 100/37): energia 324kcal, proteine 10,5g, grassi 5,7g, carboidrati 69,7g, fibra 28,6g, calcio 45mg, ferro 5,9mg, magnesio 88mg, zinco 1,03mg, rame 0,22mg, folato totale 51µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 31,4mg, selenio 3,5µg, vitamina K 108µg, beta-carotene ~14.844µg (concentrazione da essiccazione, coerente con l'alto contenuto di vitamina A tipico del peperoncino essiccato).
+- **Analogia usata**: `food_peperoncino_verde_raw` (stessa specie *Capsicum*, già eseguito sul DB reale — qui forma essiccata al sole).
+- **Categoria dieta**: `plant_non_fruit` (ortaggio-frutto, peperone/peperoncino, stessa convenzione già usata per tutta la famiglia *Capsicum* in questa pipeline).
+- **Matrice**: nuova `peperoncino_essiccato_al_sole` ("Peperoncino piccante, essiccato al sole").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (essiccazione concentra/altera la matrice, beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Solanaceae`, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=168570 --food-id=food_peperoncino_essiccato_al_sole \
+  --name-it="Peperoncino piccante, essiccato al sole" \
+  --matrix-id=peperoncino_essiccato_al_sole --matrix-description-it="Peperoncino piccante, essiccato al sole" \
+  --baseline-cooking-state=dried --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168570 --food-id=food_peperoncino_essiccato_al_sole \
+  --name-it="Peperoncino piccante, essiccato al sole" \
+  --matrix-id=peperoncino_essiccato_al_sole --matrix-description-it="Peperoncino piccante, essiccato al sole" \
+  --baseline-cooking-state=dried --analogy-food-id=food_peperoncino_verde_raw \
+  --carotenoid-matrix-state=cooked_or_disrupted --botanical-family=Solanaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Polpette vegetali senza carne — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_polpette_vegetali_senza_carne` (nuovo, stessa categoria USDA "Legumes and Legume Products" dei due prodotti meatless di questo stesso lotto). FDC ID 169067 (**SR Legacy**, "Meatballs, meatless" — pagina `getfoodfacts.com/food/meatballs-meatless-169067` dedicata, FDC ID citato esplicitamente in pagina).
