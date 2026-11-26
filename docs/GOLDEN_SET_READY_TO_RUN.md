@@ -16,6 +16,152 @@
 
 ## Pronti
 
+### Carne di cervo, controfiletto (top round), magra, cotta alla griglia — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_cervo_controfiletto_cotto` (nuovo — prima voce di selvaggina "cervo" in pipeline, nessuna occorrenza precedente per "cervo"/"deer"/FDC 174431). FDC ID 174431 (**SR Legacy**, "Game meat, deer, top round, separable lean only, 1\" steak, cooked, broiled" — nome confermato su `tools.myfooddata.com/nutrition-comparison/174431`, FDC ID non mostrato esplicitamente sulla pagina ma nome descrittivo lungo e specifico, nessun record alternativo plausibile trovato).
+- **Nutrienti**: **16/17**. Per 100g (valori derivati da porzione di 102g, fattore di scala ~1,02 — minimo): energia 152kcal, proteine 31,5g, grassi 2,0g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 4,0mg, ferro 4,2mg, magnesio 30mg, zinco 3,6mg, rame 0,27mg, vitamina C 0mg esplicito, folato totale 10µg, acido folico 0µg esplicito, vitamina B12 2,3µg, selenio 11,3µg, beta-carotene 0µg esplicito. Manca: vitamina K (non riportata sulla fonte).
+- **Analogia usata**: `food_cavallo_raw` (unica carne di selvaggina/esotica già nel DB — stesso principio "carne magra di grosso mammide non comune", per gli attributi categorici).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cervo_controfiletto` ("Carne di cervo, controfiletto, cotta").
+- **Attributi**: `is_heme_iron=true` (analogia con carne rossa), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=cooked` (alla griglia), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174431 --food-id=food_cervo_controfiletto_cotto \
+  --name-it="Carne di cervo, controfiletto (top round), magra, cotta alla griglia" \
+  --matrix-id=cervo_controfiletto --matrix-description-it="Carne di cervo, controfiletto, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174431 --food-id=food_cervo_controfiletto_cotto \
+  --name-it="Carne di cervo, controfiletto (top round), magra, cotta alla griglia" \
+  --matrix-id=cervo_controfiletto --matrix-description-it="Carne di cervo, controfiletto, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
+### Carne di alce, macinata, cotta in padella — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_alce_macinata_cotta` (nuovo — prima voce "alce"/elk in pipeline, nessuna occorrenza precedente per "alce"/"elk"/FDC 174426). FDC ID 174426 (**SR Legacy**, "Game meat, elk, ground (minced), cooked, pan-broiled" — nome confermato su `tools.myfooddata.com/nutrition-facts/174426`, FDC ID non mostrato esplicitamente ma nome lungo e specifico).
+- **Nutrienti**: **16/17**. Per 100g (valori derivati da porzione di 95g, fattore di scala ~1,05 — minimo): energia 193kcal, proteine 26,6g, grassi 8,7g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 10,0mg, ferro 3,4mg, magnesio 24,0mg, zinco 6,5mg, rame 0,14mg, vitamina C 0mg esplicito, folato totale 8,0µg, acido folico 0µg esplicito, vitamina B12 2,5µg, selenio 8,9µg, beta-carotene 0µg (riportato come 0, non necessariamente misurato). Manca: vitamina K (non riportata sulla fonte).
+- **Analogia usata**: `food_cavallo_raw` (stessa logica della voce cervo sopra — unica carne di selvaggina/esotica già nel DB).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `alce_macinata` ("Carne di alce, macinata, cotta").
+- **Attributi**: `is_heme_iron=true` (analogia con carne rossa), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=cooked` (in padella), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=174426 --food-id=food_alce_macinata_cotta \
+  --name-it="Carne di alce, macinata, cotta in padella" \
+  --matrix-id=alce_macinata --matrix-description-it="Carne di alce, macinata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=174426 --food-id=food_alce_macinata_cotta \
+  --name-it="Carne di alce, macinata, cotta in padella" \
+  --matrix-id=alce_macinata --matrix-description-it="Carne di alce, macinata, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
+### Carne di cavallo, cotta al forno (arrosto) — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_cavallo_cotto` (nuovo — versione cotta di `food_cavallo_raw` già nel DB, stesso animale. Verificato con `grep` dedicato, zero occorrenze precedenti per FDC 175087). FDC ID 175087 (**SR Legacy**, "Game meat, horse, cooked, roasted" — nome confermato su `tools.myfooddata.com/nutrition-facts/175087`, FDC ID non mostrato esplicitamente ma nome specifico e coerente con `food_cavallo_raw` già verificato in un lotto precedente).
+- **Nutrienti**: **13/17**. Per 100g (valori derivati da porzione di 85g/3oz, fattore di scala ~1,18 — moderato): energia 175kcal, proteine 28,1g, grassi 6,0g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 8,0mg, ferro 5,1mg, magnesio 25,1mg, zinco 3,8mg, rame 0,18mg, vitamina C 2,0mg, vitamina B12 3,2µg, selenio 13,5µg. Mancano: folato totale, acido folico, vitamina K, beta-carotene (non riportati sulla fonte).
+- **Analogia usata**: `food_cavallo_raw` (stesso identico animale, già nel DB — unica differenza lo stato di cottura).
+- **Categoria dieta**: `meat_fish` (carne).
+- **Matrice**: nuova `cavallo_cotto` ("Carne di cavallo, cotta").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con `food_cavallo_raw`), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — animale), `baseline_cooking_state=cooked` (arrosto), `is_fortified_folate` omesso (false — nessun dato folato disponibile, non dichiarabile).
+
+```
+npm run add-food -- --fdc-id=175087 --food-id=food_cavallo_cotto \
+  --name-it="Carne di cavallo, cotta al forno (arrosto)" \
+  --matrix-id=cavallo_cotto --matrix-description-it="Carne di cavallo, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=175087 --food-id=food_cavallo_cotto \
+  --name-it="Carne di cavallo, cotta al forno (arrosto)" \
+  --matrix-id=cavallo_cotto --matrix-description-it="Carne di cavallo, cotta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_cavallo_raw --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
+### Fagioli rossi chiari (light red kidney), in scatola, scolati e sciacquati — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_fagioli_rossi_chiari_in_scatola` (nuovo — distinto da `food_fagioli_cannellini_secchi_raw`/altri fagioli già eseguiti: qui varietà "kidney rossi chiari" in scatola, non ancora coperta. Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 2644290 (**Foundation Foods**, "Beans, kidney, light red, canned, sodium added, sugar added, drained and rinsed" — pagina `getfoodfacts.com/food/beans-kidney-light-red-canned-sodium-added-sugar-added-drained-and-rinsed-2644290` dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **9/17**. Per 100g: energia 124kcal, proteine 7,31g, grassi 1,30g, carboidrati 21,4g, calcio 60,3mg, ferro 1,30mg, magnesio 25,5mg, zinco 0,53mg, rame 0,27mg. Mancano: fibra, vitamina C, folato totale, acido folico, vitamina B12, selenio, vitamina K, beta-carotene (non riportati nel record Foundation Foods — profilo parziale, non un problema di identità del record: FDC ID confermato esplicitamente sulla pagina).
+- **Analogia usata**: `food_fagioli_cannellini_secchi_raw` (stessa specie *Phaseolus vulgaris*, già nel DB — differisce solo per varietà/colore e lavorazione in scatola).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_rossi_chiari_in_scatola` ("Fagioli rossi chiari (kidney), in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL — nessun dato ossalati specifico), `carotenoid_matrix_state` omesso (NULL — non applicabile, legume non fonte significativa di carotenoidi), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, come l'analogia), `baseline_cooking_state=cooked` (in scatola, pronto da mangiare), `is_fortified_folate` omesso (false — nessun dato folato disponibile, non dichiarabile).
+
+```
+npm run add-food -- --fdc-id=2644290 --food-id=food_fagioli_rossi_chiari_in_scatola \
+  --name-it="Fagioli rossi chiari (kidney), in scatola, scolati e sciacquati" \
+  --matrix-id=fagioli_rossi_chiari_in_scatola --matrix-description-it="Fagioli rossi chiari (kidney), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_secchi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=2644290 --food-id=food_fagioli_rossi_chiari_in_scatola \
+  --name-it="Fagioli rossi chiari (kidney), in scatola, scolati e sciacquati" \
+  --matrix-id=fagioli_rossi_chiari_in_scatola --matrix-description-it="Fagioli rossi chiari (kidney), in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_secchi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae --apply
+```
+
+(⚠ FDC 2644289 "Beans, kidney, dark red, canned, sodium added, sugar added, drained and rinsed" — variante di colore/varietà dello stesso prodotto, nessuna pagina dedicata trovata in questo turno; non duplicare la ricerca, eventualmente riprendere in un turno futuro se serve anche la variante scura.)
+
+### Fagioli navy (cannellini piccoli), in scatola, scolati e sciacquati — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_fagioli_navy_in_scatola` (nuovo — varietà "navy" distinta dai cannellini già eseguiti (taglia più piccola, prodotto in scatola invece che secco). Verificato con `grep` dedicato, zero occorrenze precedenti). FDC ID 2644286 (**Foundation Foods**, "Beans, navy, canned, sodium added, drained and rinsed" — pagina `getfoodfacts.com/food/beans-navy-canned-sodium-added-drained-and-rinsed-2644286` dedicata, FDC ID citato esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **9/17**. Per 100g: energia 116kcal, proteine 6,57g, grassi 1,40g, carboidrati 20,0g, calcio 63,9mg, ferro 1,60mg, magnesio 29,6mg, zinco 0,63mg, rame 0,29mg. Mancano: fibra, vitamina C, folato totale, acido folico, vitamina B12, selenio, vitamina K, beta-carotene (profilo Foundation Foods parziale, FDC ID comunque confermato esplicitamente).
+- **Analogia usata**: `food_fagioli_cannellini_secchi_raw` (stessa specie *Phaseolus vulgaris*, già nel DB).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_navy_in_scatola` ("Fagioli navy, in scatola").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae` (famiglia reale, come l'analogia), `baseline_cooking_state=cooked` (in scatola, pronto da mangiare), `is_fortified_folate` omesso (false — nessun dato folato disponibile).
+
+```
+npm run add-food -- --fdc-id=2644286 --food-id=food_fagioli_navy_in_scatola \
+  --name-it="Fagioli navy (cannellini piccoli), in scatola, scolati e sciacquati" \
+  --matrix-id=fagioli_navy_in_scatola --matrix-description-it="Fagioli navy, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_secchi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae
+```
+```
+npm run add-food -- --fdc-id=2644286 --food-id=food_fagioli_navy_in_scatola \
+  --name-it="Fagioli navy (cannellini piccoli), in scatola, scolati e sciacquati" \
+  --matrix-id=fagioli_navy_in_scatola --matrix-description-it="Fagioli navy, in scatola" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_fagioli_cannellini_secchi_raw --diet-category=plant_non_fruit \
+  --botanical-family=Fabaceae --apply
+```
+
+### Pesce corvina (croaker) atlantica, impanata e fritta — preparato 2026-11-26 dal task (222° lotto)
+
+- **food_id**: `food_corvina_atlantica_impanata_fritta` (nuovo — prima voce "corvina/croaker" in pipeline, nessuna occorrenza precedente per FDC 171957). FDC ID 171957 (**SR Legacy**, "Fish, croaker, Atlantic, cooked, breaded and fried" — nome confermato su `tools.myfooddata.com/nutrition-facts/171957`, FDC ID non mostrato esplicitamente ma nome lungo e specifico, 15/17 nutrienti coerenti con un profilo pesce impanato).
+- **Nutrienti**: **15/17**. Per 100g (valori derivati da porzione di 87g, fattore di scala ~1,15 — moderato): energia 221kcal, proteine 18,2g, grassi 12,6g, carboidrati 7,6g, fibra 0,40g, calcio 32,0mg, ferro 0,86mg, magnesio 42,0mg, zinco 0,52mg, rame 0,07mg, vitamina C 0mg esplicito, folato totale 34,0µg, acido folico 16,0µg, vitamina B12 2,07µg, selenio 38,9µg. Mancano: vitamina K, beta-carotene (non riportati sulla fonte).
+- **Analogia usata**: `food_merluzzo_cotto` (pesce bianco magro già nel DB, stessa categoria generale di pesce cotto).
+- **Categoria dieta**: `meat_fish` (pesce, nonostante la panatura: ingrediente dominante resta il pesce).
+- **Matrice**: nuova `corvina_atlantica_impanata_fritta` ("Pesce corvina atlantica, impanata e fritta").
+- **Attributi**: `is_heme_iron=true` (analogia diretta con il pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — non applicabile), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale impanato), `baseline_cooking_state=cooked` (fritta), `is_fortified_folate=true` (acido folico 16,0µg esplicito, verosimilmente dalla panatura arricchita — nota di trasparenza).
+
+```
+npm run add-food -- --fdc-id=171957 --food-id=food_corvina_atlantica_impanata_fritta \
+  --name-it="Pesce corvina (croaker) atlantica, impanata e fritta" \
+  --matrix-id=corvina_atlantica_impanata_fritta --matrix-description-it="Pesce corvina atlantica, impanata e fritta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron --is-fortified-folate
+```
+```
+npm run add-food -- --fdc-id=171957 --food-id=food_corvina_atlantica_impanata_fritta \
+  --name-it="Pesce corvina (croaker) atlantica, impanata e fritta" \
+  --matrix-id=corvina_atlantica_impanata_fritta --matrix-description-it="Pesce corvina atlantica, impanata e fritta" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_merluzzo_cotto --diet-category=meat_fish \
+  --is-heme-iron --is-fortified-folate --apply
+```
+
 ### Grano tenero (frumento), chicco intero rosso invernale, crudo — preparato 2026-11-24 dal task (221° lotto)
 
 - **food_id**: `food_grano_rosso_invernale_crudo` (nuovo — chicco di grano intero, categoria distinta da `food_farina_bianca_arricchita_raw`/`food_farina_integrale_grano_raw` (farine già macinate) già eseguite: qui chicco crudo non macinato, prima voce "grano in chicchi" di questa pipeline. Verificato con `grep` dedicato, zero occorrenze precedenti per "grano rosso invernale"/"wheat hard red winter"/FDC 168890). FDC ID 168890 (**SR Legacy**, "Wheat, hard red winter" — pagina `getfoodfacts.com/food/wheat-hard-red-winter-168890` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
