@@ -14,6 +14,30 @@
 
 ---
 
+### Litchi essiccato — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_litchi_essiccato_raw` (nuovo, forma essiccata distinta dal litchi fresco `food_litchi_raw` già eseguito). FDC ID 169087 (**SR Legacy**, "Litchis, dried" — pagina `getfoodfacts.com/food/litchis-dried-169087` dedicata, FDC ID citato esplicitamente in pagina).
+- **Nutrienti**: **17/17**. Per 100g: energia 277kcal, proteine 3,8g, grassi 1,2g, carboidrati 70,7g, fibra 4,6g, calcio 33,0mg, ferro 1,70mg, magnesio 42,0mg, zinco 0,28mg, rame 0,63mg, folato totale 12,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 183mg, selenio 1,30µg, vitamina K 1,60µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_litchi_raw` (litchi fresco, già eseguito sul DB reale, stessa famiglia botanica Sapindaceae).
+- **Categoria dieta**: `plant_non_fruit` — frutta essiccata, non frutta fresca nella definizione restrittiva PRD §4.9.
+- **Matrice**: nuova `litchi_essiccato` ("Litchi, essiccato").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0 esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Sapindaceae`, `baseline_cooking_state=dried`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169087 --food-id=food_litchi_essiccato_raw \
+  --name-it="Litchi, essiccato" \
+  --matrix-id=litchi_essiccato --matrix-description-it="Litchi, essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapindaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169087 --food-id=food_litchi_essiccato_raw \
+  --name-it="Litchi, essiccato" \
+  --matrix-id=litchi_essiccato --matrix-description-it="Litchi, essiccato" \
+  --baseline-cooking-state=dried --analogy-food-id=food_litchi_raw \
+  --botanical-family=Sapindaceae --diet-category=plant_non_fruit --apply
+```
+
 ### Olio di soia industriale a basso contenuto di acido linolenico — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_olio_di_soia_basso_linolenico_raw` (nuovo, primo olio di soia della pipeline — nessun olio di soia generico ancora presente nel DB). FDC ID 171438 (**SR Legacy**, "Oil, industrial, soy, low linolenic" — pagina `recipal.com/ingredients/817-nutrition-facts-calories-protein-carbs-fat-oil-industrial-soy-low-linolenic`, nome specifico e lungo confermato esattamente, FDC ID non mostrato in pagina — mostra invece un ID legacy NBD 4699, stesso tipo di accettazione per corrispondenza di nome già usata per altre fonti senza FDC esplicito in questa pipeline).
