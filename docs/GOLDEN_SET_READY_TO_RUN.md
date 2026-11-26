@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Prosciutto cotto, a fette, con osso, magro e grasso, cotto in padella — preparato 2026-11-26 dal task (223° lotto)
+
+- **food_id**: `food_prosciutto_cotto_fetta` (nuovo). FDC ID 169166 (**SR Legacy**, "Pork, cured, ham -- water added, slice, bone-in, separable lean and fat, heated, pan-broil" — pagina tools.myfooddata.com/print/169166/100g/1, nome e valori per 100g confermati esattamente).
+- **Nutrienti**: **8/17**. Per 100g: energia 166kcal, proteine 20,8g, grassi 8,7g, carboidrati 1,5g, fibra 0g esplicito, calcio 11mg, ferro 1,1mg, vitamina C 0mg esplicito. **Mancano**: magnesio, zinco, rame, folato, acido folico, vitamina B12, selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_lonza_di_maiale_cotta` (carne di maiale cotta già nel DB).
+- **Categoria dieta**: `meat_fish`.
+- **Matrice**: nuova `prosciutto_cotto_fetta` ("Prosciutto cotto, a fette, magro e grasso").
+- **Attributi**: `is_heme_iron=true`.
+
+```
+npm run add-food -- --fdc-id=169166 --food-id=food_prosciutto_cotto_fetta \
+  --name-it="Prosciutto cotto, a fette, con osso, magro e grasso, cotto in padella" \
+  --matrix-id=prosciutto_cotto_fetta --matrix-description-it="Prosciutto cotto, a fette, magro e grasso" \
+  --baseline-cooking-state=pan_broiled --analogy-food-id=food_lonza_di_maiale_cotta --diet-category=meat_fish \
+  --is-heme-iron
+```
+```
+npm run add-food -- --fdc-id=169166 --food-id=food_prosciutto_cotto_fetta \
+  --name-it="Prosciutto cotto, a fette, con osso, magro e grasso, cotto in padella" \
+  --matrix-id=prosciutto_cotto_fetta --matrix-description-it="Prosciutto cotto, a fette, magro e grasso" \
+  --baseline-cooking-state=pan_broiled --analogy-food-id=food_lonza_di_maiale_cotta --diet-category=meat_fish \
+  --is-heme-iron --apply
+```
+
 ### Prosciutto cotto, stinco, con osso, magro, non ancora riscaldato (fase di cura) — preparato 2026-11-26 dal task (223° lotto)
 
 - **food_id**: `food_prosciutto_cotto_stinco_crudo` (nuovo). FDC ID 168336 (**SR Legacy**, "Pork, cured, ham -- water added, shank, bone-in, separable lean only, unheated" — pagina tools.myfooddata.com/print/168336/100g/1, nome e valori per 100g confermati esattamente).
