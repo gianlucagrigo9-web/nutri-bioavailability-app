@@ -16,6 +16,30 @@
 
 ## Pronti
 
+### Uovo, intero, cotto a omelette — preparato 2026-11-26 dal task (228° lotto)
+
+- **food_id**: `food_uovo_omelette_raw` (nuovo, forma di cottura "omelette" mai tentata — distinta da fritto/sodo già in pipeline). FDC ID 172185 (**SR Legacy**, "Egg, whole, cooked, omelet" — pagina `tools.myfooddata.com/nutrition-facts/172185/wt2`, nome confermato, FDC ID solo in URL — dominio già ampiamente accettato in questo progetto).
+- **Nutrienti**: **17/17**. Per 100g (derivato da porzione 61g, fattore 100/61): energia 154kcal, proteine 10,5g, grassi 11,6g, carboidrati 0,64g, fibra 0g esplicito, calcio 48,0mg, ferro 1,47mg, magnesio 11,0mg, zinco 1,08mg, rame 0,07mg, folato totale 39,0µg, acido folico 0µg esplicito, vitamina B12 0,75µg, vitamina C 0mg esplicito, selenio 25,7µg, vitamina K 4,4µg, beta-carotene 28,0µg (reale e non nullo).
+- **Analogia usata**: `food_egg_hard_boiled` (uovo intero cotto, Golden Set originale, già eseguito sul DB reale — stesso alimento di base, differisce solo per metodo di cottura, stessa convenzione usata per `food_uovo_fritto_raw`).
+- **Categoria dieta**: `egg_dairy` (uovo, nessun altro ingrediente dichiarato).
+- **Matrice**: nuova `uovo_omelette` ("Uovo, intero, cotto a omelette").
+- **Attributi**: `is_heme_iron` omesso (false, ferro non-eme dell'uovo), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e non nullo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL, non vegetale), `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false, folato coerente con uovo).
+
+```
+npm run add-food -- --fdc-id=172185 --food-id=food_uovo_omelette_raw \
+  --name-it="Uovo, intero, cotto a omelette" \
+  --matrix-id=uovo_omelette --matrix-description-it="Uovo, intero, cotto a omelette" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172185 --food-id=food_uovo_omelette_raw \
+  --name-it="Uovo, intero, cotto a omelette" \
+  --matrix-id=uovo_omelette --matrix-description-it="Uovo, intero, cotto a omelette" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_egg_hard_boiled \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy --apply
+```
+
 ### Affettato vegetale per pranzo (tipo salume senza carne) — preparato 2026-11-26 dal task (228° lotto)
 
 - **food_id**: `food_affettato_vegetale_pranzo` (nuovo, primo "meatless luncheon" della pipeline). FDC ID 169066 (**SR Legacy**, "Luncheon slices, meatless" — pagina `getfoodfacts.com/food/luncheon-slices-meatless-169066` dedicata, FDC ID e dataType (SR Legacy) confermati esplicitamente in pagina).
