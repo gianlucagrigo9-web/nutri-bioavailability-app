@@ -16,6 +16,377 @@
 
 ## Pronti
 
+### Formaggio cremoso/spalmabile, fat free, fresco — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cremoso_fatfree_raw` (nuovo, distinto da `food_formaggio_cremoso_raw` (FDC 173418, versione normale, già eseguita sul DB reale). Verificato con `grep`, zero occorrenze). FDC ID 172207 (**SR Legacy**, "Cheese, cream, fat free" — pagina `getfoodfacts.com/food/cheese-cream-fat-free-172207` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 105kcal, proteine 15,7g, grassi 1,00g, carboidrati 7,66g, fibra 0g esplicito, calcio 351mg, ferro 0,19mg, magnesio 22,0mg, zinco 1,50mg, rame 0,036mg, selenio 4,90µg, folato totale 35,0µg, acido folico 0µg esplicito, vitamina B12 0,95µg, vitamina C 0mg esplicito, vitamina K (fillochinone) 0,20µg, beta-carotene 11,0µg.
+- **Analogia usata**: `food_formaggio_cremoso_raw` (stesso prodotto base, versione normale, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_cremoso_fatfree` ("Formaggio cremoso/spalmabile, fat free").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile — latticino), `carotenoid_matrix_state` omesso (NULL, non applicabile a un prodotto animale nonostante beta-carotene reale non nullo — stessa convenzione di `food_formaggio_cremoso_raw`), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — prodotto animale), `baseline_cooking_state=raw` (formaggio fresco, non cotto), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172207 --food-id=food_formaggio_cremoso_fatfree_raw \
+  --name-it="Formaggio cremoso/spalmabile, fat free, fresco" \
+  --matrix-id=formaggio_cremoso_fatfree --matrix-description-it="Formaggio cremoso/spalmabile, fat free" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172207 --food-id=food_formaggio_cremoso_fatfree_raw \
+  --name-it="Formaggio cremoso/spalmabile, fat free, fresco" \
+  --matrix-id=formaggio_cremoso_fatfree --matrix-description-it="Formaggio cremoso/spalmabile, fat free" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw --diet-category=egg_dairy --apply
+```
+
+### Formaggio cremoso/spalmabile, low fat, fresco — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_cremoso_lowfat_raw` (nuovo, distinto sia da `food_formaggio_cremoso_raw` (normale, FDC 173418) sia da `food_formaggio_cremoso_fatfree_raw` (fat free, sopra in questo stesso lotto, FDC 172207) — terza variante di grasso dello stesso prodotto base. Verificato con `grep`, zero occorrenze). FDC ID 169079 (**SR Legacy**, "Cheese, cream, low fat" — pagina `tools.myfooddata.com/nutrition-facts/169079/wt1`, FDC solo in URL, dominio ampiamente accettato nei lotti precedenti per questa convenzione, nome esatto confermato). **Nota di trasparenza**: la fonte mostra solo valori per porzione (1 tbsp=15g); i valori per 100g sotto sono ottenuti per scala (x100/15), quindi approssimati — non la tabella USDA diretta.
+- **Nutrienti**: **17/17** (tutti presenti, valori scalati da porzione — vedi nota sopra). Per 100g (circa): energia 207kcal, proteine 8,0g, grassi 16,7g, carboidrati 6,7g, fibra 0g, calcio 148mg, ferro 0,2mg (impreciso, pagina mostra 0 per porzione), magnesio 8mg, zinco 0,6mg, rame ~0mg (sotto 0,05mg per porzione, non preciso), selenio 4,0µg, folato totale 19µg, acido folico 0µg esplicito, vitamina B12 0,93µg, vitamina C 0mg esplicito, vitamina K ~5,4µg (da menachinone-4 scalato), beta-carotene 11µg.
+- **Analogia usata**: `food_formaggio_cremoso_raw` (stesso prodotto base, versione normale, già eseguita sul DB reale).
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_cremoso_lowfat` ("Formaggio cremoso/spalmabile, low fat").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, stessa convenzione delle altre varianti di questo prodotto), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=169079 --food-id=food_formaggio_cremoso_lowfat_raw \
+  --name-it="Formaggio cremoso/spalmabile, low fat, fresco" \
+  --matrix-id=formaggio_cremoso_lowfat --matrix-description-it="Formaggio cremoso/spalmabile, low fat" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169079 --food-id=food_formaggio_cremoso_lowfat_raw \
+  --name-it="Formaggio cremoso/spalmabile, low fat, fresco" \
+  --matrix-id=formaggio_cremoso_lowfat --matrix-description-it="Formaggio cremoso/spalmabile, low fat" \
+  --baseline-cooking-state=raw --analogy-food-id=food_formaggio_cremoso_raw --diet-category=egg_dairy --apply
+```
+
+### Formaggio queso fresco — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_formaggio_queso_fresco_raw` (nuovo, formaggio messicano fresco mai coperto in questa pipeline. Verificato con `grep`, zero occorrenze). FDC ID 172223 (**SR Legacy**, "Cheese, fresh, queso fresco" — pagina `triagemethod.com/tools/human-nutrition-explorer/food/cheese-fresh-queso-fresco.html`, righe etichettate "SR (USDA Standard Reference Legacy)", nome USDA corrispondente esatto, FDC ID non mostrato esplicitamente in pagina — stessa convenzione già accettata in lotti precedenti). **Nota di trasparenza (Regola 6)**: la ricerca web per questo nome restituisce come risultato getfoodfacts.com un FDC DIVERSO (2647442, "Cheese, queso fresco, solid", Foundation) per un record probabilmente simile ma non identico — non usato per evitare un mismatch, preferita la fonte che corrisponde esattamente al nome e all'FDC della checklist USDA.
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 299kcal, proteine 18,1g, grassi 23,8g, carboidrati 3,0g, fibra 0g, calcio 566mg, ferro 0,20mg, magnesio 24,0mg, zinco 2,6mg, rame 0,03mg, selenio 19,3µg, folato totale 7,0µg, acido folico 0µg esplicito, vitamina B12 1,7µg, vitamina C 0mg esplicito, vitamina K1 1,0µg, beta-carotene 41,0µg.
+- **Analogia usata**: `food_ricotta` (formaggio fresco non stagionato, già eseguito sul DB reale — stessa categoria funzionale "formaggio fresco").
+- **Categoria dieta**: `egg_dairy` (latticino).
+- **Matrice**: nuova `formaggio_queso_fresco` ("Formaggio queso fresco").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile — latticino, calcio alto da coagulazione del latte non da ossalati), `carotenoid_matrix_state` omesso (NULL, prodotto animale), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=raw` (formaggio fresco), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=172223 --food-id=food_formaggio_queso_fresco_raw \
+  --name-it="Formaggio queso fresco" \
+  --matrix-id=formaggio_queso_fresco --matrix-description-it="Formaggio queso fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=172223 --food-id=food_formaggio_queso_fresco_raw \
+  --name-it="Formaggio queso fresco" \
+  --matrix-id=formaggio_queso_fresco --matrix-description-it="Formaggio queso fresco" \
+  --baseline-cooking-state=raw --analogy-food-id=food_ricotta --diet-category=egg_dairy --apply
+```
+
+### Fagioli francesi, crudi — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_francesi_raw` (nuovo, versione cruda di `food_fagioli_francesi_bolliti` (FDC 175241, già "Pronto" ma NON ancora eseguito sul DB reale — non utilizzabile come analogia, vedi sotto). Verificato con `grep`, zero occorrenze). FDC ID 173738 (**SR Legacy**, "Beans, french, mature seeds, raw" — pagina `triagemethod.com/tools/human-nutrition-explorer/food/beans-french-mature-seeds-raw.html`, righe etichettate "SR (USDA Standard Reference Legacy)", nome USDA corrispondente esatto). **Nota di trasparenza (Regola 6)**: questo stesso FDC era già stato scartato ⚠ due volte in lotti precedenti (170° e 218°) per assenza di una pagina getfoodfacts.com dedicata con FDC esplicito — qui si usa la fonte triagemethod.com (SR-labeled, senza FDC esplicito), convenzione nel frattempo accettata altrove in questa pipeline (es. fagioli great northern, 233° lotto) per record con nome USDA corrispondente esatto e pannello nutrienti completo.
+- **Nutrienti**: **15/17**. Per 100g: energia 343kcal, proteine 18,8g, grassi 2,0g, carboidrati 64,1g, fibra 25,2g, calcio 186mg, ferro 3,4mg, magnesio 188mg, zinco 1,9mg, rame 0,44mg, selenio 12,9µg, folato totale 399µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 4,6mg. **Mancano**: vitamina K, beta-carotene (non riportati dal record, non assunti zero).
+- **Analogia usata**: `food_fagioli_cannellini_secchi_raw` (altro fagiolo secco crudo dello stesso genere *Phaseolus*, già eseguito sul DB reale — verificato in sezione "Eseguiti"; **non** usata l'analogia col cotto "francesi" perché solo "Pronto", non ancora nel DB reale, regola esplicita del compito).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_francesi_secchi` ("Fagioli francesi, crudi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato, non assunto zero), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=raw`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173738 --food-id=food_fagioli_francesi_raw \
+  --name-it="Fagioli francesi, crudi" \
+  --matrix-id=fagioli_francesi_secchi --matrix-description-it="Fagioli francesi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173738 --food-id=food_fagioli_francesi_raw \
+  --name-it="Fagioli francesi, crudi" \
+  --matrix-id=fagioli_francesi_secchi --matrix-description-it="Fagioli francesi, crudi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_fagioli_cannellini_secchi_raw \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli navy, germogliati, cotti bolliti, con sale — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_navy_germogliati_bolliti` (nuovo, stato germogliato mai coperto per il fagiolo navy in questa pipeline — distinto da `food_fagioli_navy_bolliti`/`food_fagioli_navy_in_scatola` (non germogliati, solo "Pronti"). Verificato con `grep`, zero occorrenze). FDC ID 168500 (**SR Legacy**, "Beans, navy, mature seeds, sprouted, cooked, boiled, drained, with salt" — pagina `getfoodfacts.com/food/beans-navy-mature-seeds-sprouted-cooked-boiled-drained-with-salt-168500` dedicata, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 78,0kcal, proteine 7,07g, grassi 0,81g, carboidrati 15,0g, calcio 16,0mg, ferro 2,11mg, magnesio 111mg, zinco 0,97mg, rame 0,39mg, selenio 0,60µg, folato totale 106µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 17,3mg, sodio 250mg (coerente con "with salt"). **Mancano**: fibra (pagina con dato interno contraddittorio, "not declared" in un punto, non assunta), vitamina K, beta-carotene.
+- **Analogia usata**: `food_kidney_beans_boiled` (Golden Set originale, legume cotto bollito, già eseguito sul DB reale — stessa famiglia Fabaceae, stesso stato cotto).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_navy_germogliati_bolliti` ("Fagioli navy, germogliati, cotti bolliti, con sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168500 --food-id=food_fagioli_navy_germogliati_bolliti \
+  --name-it="Fagioli navy, germogliati, cotti bolliti, con sale" \
+  --matrix-id=fagioli_navy_germogliati_bolliti --matrix-description-it="Fagioli navy, germogliati, cotti bolliti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168500 --food-id=food_fagioli_navy_germogliati_bolliti \
+  --name-it="Fagioli navy, germogliati, cotti bolliti, con sale" \
+  --matrix-id=fagioli_navy_germogliati_bolliti --matrix-description-it="Fagioli navy, germogliati, cotti bolliti, con sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Fagioli navy, germogliati, cotti bolliti, senza sale — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_fagioli_navy_germogliati_bolliti_senza_sale` (nuovo, variante senza sale della voce precedente in questo stesso lotto — FDC diverso, non un doppione. Verificato con `grep`, zero occorrenze). FDC ID 169140 (**SR Legacy**, "Beans, navy, mature seeds, sprouted, cooked, boiled, drained, without salt" — pagina `tools.myfooddata.com/nutrition-facts/169140/100g`, FDC solo in URL, nessun FDC esplicito in pagina). **Nota di trasparenza (Regola 6)**: i valori di calcio/magnesio/zinco/rame/selenio/folato/vitamina C su questa pagina sono numericamente identici a quelli della voce "con sale" sopra (FDC 168500, verificata con FDC esplicito su getfoodfacts.com) — coerente con l'attesa (le due preparazioni differiscono solo per il sale aggiunto, quindi per il sodio, non per gli altri nutrienti), usato come controllo incrociato di plausibilità a favore dell'uso di questa fonte nonostante l'assenza di FDC esplicito.
+- **Nutrienti**: **13/17** (stessa composizione della voce "con sale", differisce per sodio non riportato qui/assunto basso). Per 100g: energia 78kcal, proteine 7,1g, grassi 0,81g, carboidrati 15g, calcio 16mg, ferro 2,1mg, magnesio 111mg, zinco 0,97mg, rame 0,39mg, selenio 0,6µg, folato totale 106µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 17,3mg. **Mancano**: fibra, vitamina K, beta-carotene.
+- **Analogia usata**: `food_kidney_beans_boiled` (stessa analogia della voce "con sale" sopra, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (legume).
+- **Matrice**: nuova `fagioli_navy_germogliati_bolliti_senza_sale` ("Fagioli navy, germogliati, cotti bolliti, senza sale").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Fabaceae`, `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=169140 --food-id=food_fagioli_navy_germogliati_bolliti_senza_sale \
+  --name-it="Fagioli navy, germogliati, cotti bolliti, senza sale" \
+  --matrix-id=fagioli_navy_germogliati_bolliti_senza_sale --matrix-description-it="Fagioli navy, germogliati, cotti bolliti, senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=169140 --food-id=food_fagioli_navy_germogliati_bolliti_senza_sale \
+  --name-it="Fagioli navy, germogliati, cotti bolliti, senza sale" \
+  --matrix-id=fagioli_navy_germogliati_bolliti_senza_sale --matrix-description-it="Fagioli navy, germogliati, cotti bolliti, senza sale" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_kidney_beans_boiled \
+  --botanical-family=Fabaceae --diet-category=plant_non_fruit --apply
+```
+
+### Maccheroni alle verdure, arricchiti, secchi — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_maccheroni_verdure_arricchiti_secchi` (nuovo, versione secca/cruda di `food_maccheroni_verdure_arricchiti_cotti` (FDC 168904, cotto, preparato nel 224° lotto) — stesso prodotto, stato diverso. Verificato con `grep`, zero occorrenze). FDC ID 168903 (**SR Legacy**, "Macaroni, vegetable, enriched, dry" — pagina `getfoodfacts.com/food/macaroni-vegetable-enriched-dry-168903` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **14/17**. Per 100g: energia 367kcal, proteine 13,1g, grassi 1,04g, carboidrati 74,9g, fibra 4,30g, calcio 34,0mg, ferro 4,28mg, magnesio 46,0mg, zinco 0,76mg, rame 0,20mg, folato totale 278µg (460µg DFE), acido folico 261µg esplicito (forte firma di arricchimento), vitamina B12 0µg esplicito, vitamina C 0mg esplicito. **Mancano** (non riportati dal record, non assunti zero): selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_pasta_enriched_dry` (pasta di semola arricchita cruda, già eseguita sul DB reale — stessa categoria funzionale, qui con solidi vegetali aggiunti; stessa analogia già usata per `food_pasta_integrale_raw`).
+- **Categoria dieta**: `plant_non_fruit` (pasta di grano con verdura, nessun ingrediente animale).
+- **Matrice**: nuova `maccheroni_verdure_arricchiti_secchi` ("Maccheroni alle verdure, arricchiti, secchi").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record, a differenza del gemello cotto che lo riportava non-zero; non assunto per trasparenza), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — impasto misto grano+verdura, non una singola famiglia), `baseline_cooking_state=raw` (secco, non cotto), `is_fortified_folate=true` (acido folico 261µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168903 --food-id=food_maccheroni_verdure_arricchiti_secchi \
+  --name-it="Maccheroni alle verdure, arricchiti, secchi" \
+  --matrix-id=maccheroni_verdure_arricchiti_secchi --matrix-description-it="Maccheroni alle verdure, arricchiti, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --is-fortified-folate --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=168903 --food-id=food_maccheroni_verdure_arricchiti_secchi \
+  --name-it="Maccheroni alle verdure, arricchiti, secchi" \
+  --matrix-id=maccheroni_verdure_arricchiti_secchi --matrix-description-it="Maccheroni alle verdure, arricchiti, secchi" \
+  --baseline-cooking-state=raw --analogy-food-id=food_pasta_enriched_dry \
+  --is-fortified-folate --diet-category=plant_non_fruit --apply
+```
+
+### Pasta all'uovo, cotta, arricchita, con sale aggiunto — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_pasta_uovo_cotta` (nuovo, pasta all'uovo mai coperta in questa pipeline — distinta da `food_pasta_enriched_cooked` (pasta di semola, senza uovo). Verificato con `grep`, zero occorrenze). FDC ID 168919 (**SR Legacy**, "Noodles, egg, cooked, enriched, with added salt" — pagina `getfoodfacts.com/food/noodles-egg-cooked-enriched-with-added-salt-168919` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 138kcal, proteine 4,54g, grassi 2,07g, carboidrati 25,2g, fibra 1,20g, calcio 12,0mg, ferro 1,47mg, magnesio 21,0mg, zinco 0,65mg, rame 0,098mg, selenio 23,9µg, folato totale 84,0µg (138µg DFE), acido folico 77,0µg esplicito (firma di arricchimento), vitamina B12 0,090µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, beta-carotene 1,00µg.
+- **Analogia usata**: `food_pasta_enriched_cooked` (pasta di semola arricchita cotta, già eseguita sul DB reale — stessa categoria funzionale "pasta di grano cotta arricchita").
+- **Categoria dieta**: `egg_dairy` (contiene uovo — non vegana, vegetariana sì).
+- **Matrice**: nuova `pasta_uovo_cotta` ("Pasta all'uovo, cotta, arricchita, con sale aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale non nullo da tuorlo d'uovo, matrice cotta), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — impasto misto grano+uovo, non una singola famiglia botanica), `baseline_cooking_state=boiled`, `is_fortified_folate=true` (acido folico 77,0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168919 --food-id=food_pasta_uovo_cotta \
+  --name-it="Pasta all'uovo, cotta, arricchita, con sale aggiunto" \
+  --matrix-id=pasta_uovo_cotta --matrix-description-it="Pasta all'uovo, cotta, arricchita, con sale aggiunto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --carotenoid-matrix-state=cooked_or_disrupted --is-fortified-folate --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=168919 --food-id=food_pasta_uovo_cotta \
+  --name-it="Pasta all'uovo, cotta, arricchita, con sale aggiunto" \
+  --matrix-id=pasta_uovo_cotta --matrix-description-it="Pasta all'uovo, cotta, arricchita, con sale aggiunto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --carotenoid-matrix-state=cooked_or_disrupted --is-fortified-folate --diet-category=egg_dairy --apply
+```
+
+### Pasta all'uovo, cotta, non arricchita, con sale aggiunto — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_pasta_uovo_non_arricchita_cotta` (nuovo, distinta dalla voce precedente in questo stesso lotto (arricchita, FDC diverso) — qui versione NON arricchita. Verificato con `grep`, zero occorrenze). FDC ID 169762 (**SR Legacy**, "Noodles, egg, cooked, unenriched, with added salt" — pagina `getfoodfacts.com/food/noodles-egg-cooked-unenriched-with-added-salt-169762` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 138kcal, proteine 4,54g, grassi 2,07g, carboidrati 25,2g, fibra 1,20g, calcio 12,0mg, ferro 0,60mg (nota: più basso dell'arricchita, 1,47mg — coerente, l'arricchimento aggiunge ferro), magnesio 21,0mg, zinco 0,65mg, rame 0,098mg, selenio 23,9µg, folato totale 7,00µg (molto più basso dell'arricchita, 84µg — coerente), acido folico 0µg esplicito (nessuna firma di arricchimento, come atteso dal nome "unenriched"), vitamina B12 0,090µg, vitamina C 0mg esplicito, vitamina K 0µg esplicito, beta-carotene 1,00µg.
+- **Analogia usata**: `food_pasta_enriched_cooked` (pasta di semola cotta, già eseguita sul DB reale — stessa categoria funzionale; l'analogia riguarda gli attributi categorici, non lo stato di arricchimento che è dichiarato a parte per questo alimento specifico).
+- **Categoria dieta**: `egg_dairy` (contiene uovo).
+- **Matrice**: nuova `pasta_uovo_non_arricchita_cotta` ("Pasta all'uovo, cotta, non arricchita, con sale aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale non nullo da tuorlo d'uovo), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=boiled`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito, coerente con "unenriched").
+
+```
+npm run add-food -- --fdc-id=169762 --food-id=food_pasta_uovo_non_arricchita_cotta \
+  --name-it="Pasta all'uovo, cotta, non arricchita, con sale aggiunto" \
+  --matrix-id=pasta_uovo_non_arricchita_cotta --matrix-description-it="Pasta all'uovo, cotta, non arricchita, con sale aggiunto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy
+```
+```
+npm run add-food -- --fdc-id=169762 --food-id=food_pasta_uovo_non_arricchita_cotta \
+  --name-it="Pasta all'uovo, cotta, non arricchita, con sale aggiunto" \
+  --matrix-id=pasta_uovo_non_arricchita_cotta --matrix-description-it="Pasta all'uovo, cotta, non arricchita, con sale aggiunto" \
+  --baseline-cooking-state=boiled --analogy-food-id=food_pasta_enriched_cooked \
+  --carotenoid-matrix-state=cooked_or_disrupted --diet-category=egg_dairy --apply
+```
+
+### Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, crudo (non riscaldato) — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato` (nuovo — versione cruda/non riscaldata di `food_prosciutto_cotto_acqua_aggiunta_intero` (FDC 168349, cotta/arrostita, preparata nel 233° lotto, solo "Pronta" non ancora eseguita). Verificato con `grep`, zero occorrenze). FDC ID 168345 (**SR Legacy**, "Pork, cured, ham -- water added, whole, boneless, separable lean and fat, unheated" — pagina `getfoodfacts.com/food/pork-cured-ham-water-added-whole-boneless-separable-lean-and-fat-unheated-168345` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 121kcal, proteine 17,1g, grassi 5,38g, carboidrati 1,42g, fibra 0g esplicito, calcio 8,00mg, ferro 0,85mg, magnesio 19,0mg, zinco 1,77mg, rame 0,10mg, selenio 34,6µg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0,46µg, vitamina C 0mg esplicito, vitamina K (menachinone-4) 3,40µg, beta-carotene 0µg esplicito. Sodio 1126mg/100g (alto, coerente con un prodotto salmistrato "water added", stesso ordine di grandezza già accettato per altri prosciutti di questa pipeline).
+- **Analogia usata**: `food_prosciutto_cotto` (FDC 167872, prosciutto cotto generico, già eseguito sul DB reale — verificato in sezione "Eseguiti" — stessa convenzione già usata per altre varianti "prosciutto cotto con acqua aggiunta" di questa pipeline, es. girello/stinco "non riscaldato").
+- **Categoria dieta**: `meat_fish` (salume di maiale).
+- **Matrice**: nuova `prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato` ("Prosciutto cotto con acqua aggiunta, intero, crudo/non riscaldato").
+- **Attributi**: `is_heme_iron` presente (ferro eme, carne di maiale), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, prodotto animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=unheated`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+- **Nota variante (regola "non moltiplicare")**: la variante "separable lean only" dello stesso identico prodotto (FDC 169149) non viene aperta come voce separata in questo lotto — vedi coda per la riga ⚠ di rimando a questa voce rappresentativa (lean+fat).
+
+```
+npm run add-food -- --fdc-id=168345 --food-id=food_prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato \
+  --name-it="Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, crudo (non riscaldato)" \
+  --matrix-id=prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato --matrix-description-it="Prosciutto cotto con acqua aggiunta, intero, crudo/non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168345 --food-id=food_prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato \
+  --name-it="Prosciutto cotto con acqua aggiunta, intero, disossato, magro e grasso, crudo (non riscaldato)" \
+  --matrix-id=prosciutto_cotto_acqua_aggiunta_intero_non_riscaldato --matrix-description-it="Prosciutto cotto con acqua aggiunta, intero, crudo/non riscaldato" \
+  --baseline-cooking-state=unheated --analogy-food-id=food_prosciutto_cotto --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Prosciutto (ham and water product), girello, con osso, magro e grasso, arrosto — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_prosciutto_girello_prodotto_acqua_cotto` (nuovo — categoria USDA "ham AND WATER PRODUCT" (più acqua aggiunta della categoria "ham -- water added" già usata per `food_prosciutto_cotto_girello`, FDC 169164), distinta da quella. Verificato con `grep`, zero occorrenze). FDC ID 168350 (**SR Legacy**, "Pork, cured, ham and water product, rump, bone-in, separable lean and fat, heated, roasted" — pagina `getfoodfacts.com/food/pork-cured-ham-and-water-product-rump-bone-in-separable-lean-and-fat-heated-roas-168350` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 186kcal, proteine 19,5g, grassi 11,5g, carboidrati 1,15g, fibra 0g esplicito, calcio 10,0mg, ferro 0,82mg, magnesio 18,0mg, zinco 1,95mg, rame 0,12mg, selenio 39,4µg, folato totale 2,00µg, acido folico 0µg esplicito, vitamina B12 0,47µg, vitamina C 0mg esplicito, vitamina K (menachinone-4) 5,20µg, beta-carotene 0µg esplicito. Sodio 1181mg/100g (alto, coerente con "ham and water product", categoria con più acqua/sale aggiunti della norma).
+- **Analogia usata**: `food_prosciutto_cotto` (FDC 167872, già eseguito sul DB reale — stessa convenzione usata per le altre varianti "prosciutto cotto" di questa pipeline).
+- **Categoria dieta**: `meat_fish` (salume di maiale).
+- **Matrice**: nuova `prosciutto_girello_prodotto_acqua_cotto` ("Prosciutto ham and water product, girello, arrosto").
+- **Attributi**: `is_heme_iron` presente, `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=roasted`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=168350 --food-id=food_prosciutto_girello_prodotto_acqua_cotto \
+  --name-it="Prosciutto (ham and water product), girello, con osso, magro e grasso, arrosto" \
+  --matrix-id=prosciutto_girello_prodotto_acqua_cotto --matrix-description-it="Prosciutto ham and water product, girello, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=168350 --food-id=food_prosciutto_girello_prodotto_acqua_cotto \
+  --name-it="Prosciutto (ham and water product), girello, con osso, magro e grasso, arrosto" \
+  --matrix-id=prosciutto_girello_prodotto_acqua_cotto --matrix-description-it="Prosciutto ham and water product, girello, arrosto" \
+  --baseline-cooking-state=roasted --analogy-food-id=food_prosciutto_cotto --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Salmone sockeye (red), cotto a calore secco — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_salmone_sockeye_cotto` (nuovo, prima volta sockeye cotto non in scatola in questa pipeline — distinto da `food_salmone_sockeye_in_scatola` (FDC 173693, in scatola) e `food_salmone_sockeye_affumicato_in_scatola` (affumicato). Verificato con `grep`, zero occorrenze). FDC ID 173692 (**SR Legacy**, "Fish, salmon, sockeye, cooked, dry heat" — pagina `getfoodfacts.com/food/fish-salmon-sockeye-cooked-dry-heat-173692` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 156kcal, proteine 26,5g, grassi 5,57g, carboidrati 0g esplicito, fibra 0g esplicito, calcio 11,0mg, ferro 0,52mg, magnesio 36,0mg, zinco 0,55mg, rame 0,076mg, selenio 35,5µg, folato totale 7,00µg, acido folico 0µg esplicito, vitamina B12 4,47µg, vitamina C 0mg esplicito, vitamina K (menachinone-4) 0,40µg, beta-carotene 0µg esplicito.
+- **Analogia usata**: `food_salmon_cooked` (Golden Set originale, pesce grasso cotto, già eseguito sul DB reale — stessa categoria funzionale, stessa convenzione già usata per altre specie di salmone cotto).
+- **Categoria dieta**: `meat_fish` (pesce).
+- **Matrice**: nuova `salmone_sockeye_cotto` ("Salmone sockeye, cotto a calore secco").
+- **Attributi**: `is_heme_iron` presente (ferro eme da carne di pesce), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL, prodotto animale, beta-carotene 0µg esplicito), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL), `baseline_cooking_state=dry_heat_cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173692 --food-id=food_salmone_sockeye_cotto \
+  --name-it="Salmone sockeye (red), cotto a calore secco" \
+  --matrix-id=salmone_sockeye_cotto --matrix-description-it="Salmone sockeye, cotto a calore secco" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked --is-heme-iron --diet-category=meat_fish
+```
+```
+npm run add-food -- --fdc-id=173692 --food-id=food_salmone_sockeye_cotto \
+  --name-it="Salmone sockeye (red), cotto a calore secco" \
+  --matrix-id=salmone_sockeye_cotto --matrix-description-it="Salmone sockeye, cotto a calore secco" \
+  --baseline-cooking-state=dry_heat_cooked --analogy-food-id=food_salmon_cooked --is-heme-iron --diet-category=meat_fish --apply
+```
+
+### Albicocche disidratate (low-moisture), solfitate, non cotte — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_disidratate_raw` (nuovo, distinto da `food_albicocche_secche_raw` (FDC 173941, "dried", già eseguita sul DB reale) — qui "dehydrated (low-moisture)", processo di disidratazione diverso/più spinto, FDC diverso. Verificato con `grep`, zero occorrenze). FDC ID 171702 (**SR Legacy**, "Apricots, dehydrated (low-moisture), sulfured, uncooked" — pagina `getfoodfacts.com/food/apricots-dehydrated-low-moisture-sulfured-uncooked-171702` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 320kcal, proteine 4,90g, grassi 0,62g, carboidrati 82,9g, calcio 61,0mg, ferro 6,31mg, magnesio 63,0mg, zinco 1,00mg, rame 0,58mg, folato totale 4,00µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 9,50mg. **Mancano**: fibra (dato interno contraddittorio sulla pagina, non assunta), selenio, vitamina K, beta-carotene.
+- **Analogia usata**: `food_albicocche_secche_raw` (stesso frutto, altra forma di conservazione disidratata, già eseguita sul DB reale — verificato in sezione "Eseguiti").
+- **Categoria dieta**: `plant_non_fruit` (frutta secca/disidratata — non rientra nella definizione restrittiva PRD §4.9 di "frutta fresca").
+- **Matrice**: nuova `albicocche_disidratate` ("Albicocche disidratate (low-moisture), solfitate").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL, non applicabile), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato dal record), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=raw` (non cotte, solo disidratate — stessa convenzione già usata per uvetta/fichi secchi/prugne secche), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=171702 --food-id=food_albicocche_disidratate_raw \
+  --name-it="Albicocche disidratate (low-moisture), solfitate, non cotte" \
+  --matrix-id=albicocche_disidratate --matrix-description-it="Albicocche disidratate (low-moisture), solfitate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=171702 --food-id=food_albicocche_disidratate_raw \
+  --name-it="Albicocche disidratate (low-moisture), solfitate, non cotte" \
+  --matrix-id=albicocche_disidratate --matrix-description-it="Albicocche disidratate (low-moisture), solfitate" \
+  --baseline-cooking-state=raw --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --diet-category=plant_non_fruit --apply
+```
+
+### Albicocche secche, stufate, con zucchero aggiunto — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_secche_stufate_zuccherate` (nuovo, distinto da `food_albicocche_secche_raw` (secche non cotte, già eseguita) e dalle altre varianti in scatola/sciroppate già preparate — qui secche STUFATE (reidratate e cotte) con zucchero aggiunto. Verificato con `grep`, zero occorrenze). FDC ID 173943 (**SR Legacy**, "Apricots, dried, sulfured, stewed, with added sugar" — pagina `getfoodfacts.com/food/apricots-dried-sulfured-stewed-with-added-sugar-173943` dedicata e pulita, FDC ID e dataType citati esplicitamente, release USDA 2026-04-30).
+- **Nutrienti**: **13/17**. Per 100g: energia 113kcal, proteine 1,17g, grassi 0,15g, carboidrati 29,3g, fibra 4,10g, calcio 15,0mg, ferro 1,52mg, magnesio 15,0mg, zinco 0,24mg, rame 0,14mg, folato totale 0µg esplicito, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 1,40mg. **Mancano**: selenio, vitamina K, beta-carotene (non riportati dal record).
+- **Analogia usata**: `food_albicocche_secche_raw` (stesso frutto, forma conservata, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca cotta — non rientra nella definizione di "frutta fresca" del PRD §4.9).
+- **Matrice**: nuova `albicocche_secche_stufate_zuccherate` ("Albicocche secche, stufate, con zucchero aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (frutto stufato/cotto, matrice disgregata — anche se beta-carotene non riportato dal record, lo stato di cottura è dichiarato nel nome stesso), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=cooked` (stufate), `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173943 --food-id=food_albicocche_secche_stufate_zuccherate \
+  --name-it="Albicocche secche, stufate, con zucchero aggiunto" \
+  --matrix-id=albicocche_secche_stufate_zuccherate --matrix-description-it="Albicocche secche, stufate, con zucchero aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173943 --food-id=food_albicocche_secche_stufate_zuccherate \
+  --name-it="Albicocche secche, stufate, con zucchero aggiunto" \
+  --matrix-id=albicocche_secche_stufate_zuccherate --matrix-description-it="Albicocche secche, stufate, con zucchero aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Albicocche secche, stufate, senza zucchero aggiunto — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_albicocche_secche_stufate_senza_zucchero` (nuovo, variante senza zucchero della voce precedente in questo stesso lotto — FDC diverso. Verificato con `grep`, zero occorrenze). FDC ID 173942 (**SR Legacy**, "Apricots, dried, sulfured, stewed, without added sugar" — pagina `triagemethod.com/tools/human-nutrition-explorer/food/apricots-dried-sulfured-stewed-without-added-sugar.html`, righe etichettate "SR (USDA Standard Reference Legacy)", nome USDA corrispondente esatto).
+- **Nutrienti**: **17/17 completo**. Per 100g: energia 85,0kcal, proteine 1,2g, grassi 0,18g, carboidrati 22,1g, fibra 2,6g, calcio 19,0mg, ferro 0,94mg, magnesio 11,0mg, zinco 0,14mg, rame 0,12mg, selenio 0,80µg, folato totale 3,0µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 0,30mg, vitamina K1 1,1µg, beta-carotene 765µg (alto, coerente con albicocca cotta/stufata — matrice carotenoide disgregata dalla cottura rende il beta-carotene più biodisponibile/misurabile).
+- **Analogia usata**: `food_albicocche_secche_raw` (stesso frutto, già eseguita sul DB reale).
+- **Categoria dieta**: `plant_non_fruit` (frutta secca cotta).
+- **Matrice**: nuova `albicocche_secche_stufate_senza_zucchero` ("Albicocche secche, stufate, senza zucchero aggiunto").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state=cooked_or_disrupted` (beta-carotene reale e alto, 765µg, matrice disgregata dalla cottura), `zinc_bioaccessibility_bucket` default `none`, `botanical_family=Rosaceae`, `baseline_cooking_state=cooked`, `is_fortified_folate` omesso (false — acido folico 0µg esplicito).
+
+```
+npm run add-food -- --fdc-id=173942 --food-id=food_albicocche_secche_stufate_senza_zucchero \
+  --name-it="Albicocche secche, stufate, senza zucchero aggiunto" \
+  --matrix-id=albicocche_secche_stufate_senza_zucchero --matrix-description-it="Albicocche secche, stufate, senza zucchero aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=173942 --food-id=food_albicocche_secche_stufate_senza_zucchero \
+  --name-it="Albicocche secche, stufate, senza zucchero aggiunto" \
+  --matrix-id=albicocche_secche_stufate_senza_zucchero --matrix-description-it="Albicocche secche, stufate, senza zucchero aggiunto" \
+  --baseline-cooking-state=cooked --analogy-food-id=food_albicocche_secche_raw \
+  --botanical-family=Rosaceae --carotenoid-matrix-state=cooked_or_disrupted --diet-category=plant_non_fruit --apply
+```
+
+### Semi di albero del pane (breadnut tree seeds), essiccati — preparato 2026-11-27 dal task (235° lotto, dalla lista USDA)
+
+- **food_id**: `food_semi_breadnut_essiccati` (nuovo, seme mai coperto in questa pipeline — distinto da `food_semi_frutto_del_pane_raw` (breadfruit seeds, *Artocarpus altilis*, specie diversa dal breadnut *Artocarpus camansi*/*Brosimum alicastrum* a seconda della fonte, comunque record FDC distinto). Verificato con `grep`, zero occorrenze). FDC ID 170553 (**SR Legacy**, "Seeds, breadnut tree seeds, dried" — pagina `triagemethod.com/tools/human-nutrition-explorer/food/seeds-breadnut-tree-seeds-dried.html`, righe etichettate "SR (USDA Standard Reference Legacy)", nome USDA corrispondente esatto).
+- **Nutrienti**: **15/17**. Per 100g: energia 367kcal, proteine 8,6g, grassi 1,7g, carboidrati 79,4g, fibra 14,9g, calcio 94,0mg, ferro 4,6mg, magnesio 115mg, zinco 1,9mg, rame 2,5mg, selenio 1,9µg, folato totale 113µg, acido folico 0µg esplicito, vitamina B12 0µg esplicito, vitamina C 46,6mg. **Mancano**: vitamina K, beta-carotene (non riportati dal record).
+- **Analogia usata**: `food_noci_raw` (Golden Set originale, seme/frutto a guscio crudo, già eseguito sul DB reale — stessa analogia già usata per `food_semi_frutto_del_pane_raw`).
+- **Categoria dieta**: `plant_non_fruit` (seme).
+- **Matrice**: nuova `semi_breadnut_essiccati` ("Semi di albero del pane, essiccati").
+- **Attributi**: `is_heme_iron` omesso (false), `matrix_category_calcium` omesso (NULL), `carotenoid_matrix_state` omesso (NULL — beta-carotene non riportato), `zinc_bioaccessibility_bucket` default `none`, `botanical_family` omesso (NULL — specie botanica del "breadnut" ambigua fra fonti, non dichiarata con certezza, a differenza del breadfruit già coperto dove la famiglia Moraceae era nota con certezza), `baseline_cooking_state=dried` (essiccati, non cotti), `is_fortified_folate` omesso (false).
+
+```
+npm run add-food -- --fdc-id=170553 --food-id=food_semi_breadnut_essiccati \
+  --name-it="Semi di albero del pane (breadnut tree seeds), essiccati" \
+  --matrix-id=semi_breadnut_essiccati --matrix-description-it="Semi di albero del pane, essiccati" \
+  --baseline-cooking-state=dried --analogy-food-id=food_noci_raw --diet-category=plant_non_fruit
+```
+```
+npm run add-food -- --fdc-id=170553 --food-id=food_semi_breadnut_essiccati \
+  --name-it="Semi di albero del pane (breadnut tree seeds), essiccati" \
+  --matrix-id=semi_breadnut_essiccati --matrix-description-it="Semi di albero del pane, essiccati" \
+  --baseline-cooking-state=dried --analogy-food-id=food_noci_raw --diet-category=plant_non_fruit --apply
+```
+
 ### Cornmeal, bianca, self-rising, bolted, arricchita, cruda — preparato 2026-11-26 dal task (233° lotto, dalla lista USDA)
 
 - **food_id**: `food_cornmeal_bianca_self_rising_bolted_arricchita_raw` (nuovo, distinto dai cornmeal degermati/integrali già preparati — "self-rising" = con lievito/sale aggiunti, "bolted" = macinatura a setaccio grosso. Verificato con `grep`, zero occorrenze). FDC ID 168923 (**SR Legacy**, "Cornmeal, white, self-rising, bolted, plain, enriched" — pagina `getfoodfacts.com/food/cornmeal-white-self-rising-bolted-plain-enriched-168923` dedicata, FDC ID esplicito in pagina: "USDA FoodData Central, SR Legacy, FDC 168923").
